@@ -1,4 +1,11 @@
-# Application Note: Field Presence
+---
+title: "Application Note: Field Presence"
+weight: 85
+toc_hide: false
+linkTitle: "Field Presence"
+no_list: "true"
+type: docs
+---
 
 This application note explains the various presence tracking disciplines for
 protobuf fields. It also explains the behaviour of explicit presence tracking
