@@ -5,6 +5,7 @@ toc_hide: false
 linkTitle: "Encoding"
 no_list: "true"
 type: docs
+description: "This topic explains how Protocol Buffers encodes data to files or to the wire."
 ---
 
 This document describes the protocol buffer *wire format*, which defines the

@@ -5,6 +5,7 @@ toc_hide: false
 linkTitle: "Downloads"
 no_list: "true"
 type: docs
+description: "The downloads page for protocol buffers."
 ---
 
 ## Release Packages

@@ -5,6 +5,7 @@ toc_hide: false
 linkTitle: "Add-ons"
 no_list: "true"
 type: docs
+description: "This topic links out to many open source projects that seek to add useful functionality on top of Protocol Buffers."
 ---
 
 Many open source projects seek to add useful functionality on top of Protocol

@@ -1,4 +1,4 @@
+*   [Home](/docs/)
 *   [Programming Guides](/docs/programming-guides)
-*   [Codelabs](/docs/codelabs)
-*   [Reference](/docs/reference/reference-guides)
-*   [Support](/docs/support)
+*   [Codelabs](/docs/getting-started/codelabs)
+*   [Reference](/docs/reference/)

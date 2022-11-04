@@ -5,6 +5,7 @@ toc_hide: false
 linkTitle: "Language Guide (proto 2)"
 no_list: "true"
 type: docs
+description: "This topic covers how to use the version 2 of Protocol Buffers in your project. It contains language-agnostic content. For information specific to the language you're using, see the corresponding documentation for your language."
 ---
 
 This guide describes how to use the protocol buffer language to structure your
@@ -532,9 +533,9 @@ message SearchRequest {
 
 You can define aliases by assigning the same value to different enum constants.
 To do this you need to set the `allow_alias` option to `true`. Otherwise, the
-protocol buffer compiler generates
-a warning message
-when aliases are found.
+protocol buffer compiler generates a warning message when aliases are
+found. Though all alias values are valid during deserialization, the first value
+is always used when serializing.
 
 ```proto
 enum EnumAllowingAlias {
@@ -1665,6 +1666,24 @@ protoc --proto_path=IMPORT_PATH --cpp_out=DST_DIR --java_out=DST_DIR --python_ou
     files can be specified at once. Although the files are named relative to the
     current directory, each file must reside in one of the `IMPORT_PATH`s so
     that the compiler can determine its canonical name.
+
+## File location {#location}
+
+Prefer not to put `.proto` files in the same
+directory as other language sources. Consider
+creating a subpackage `proto` for `.proto` files, under the root package for
+your project.
+
+### Location Should be Language-agnostic {#location-language-agnostic}
+
+When working with Java code, it's handy to put related `.proto` files in the
+same directory as the Java source. However, if any non-Java code ever uses the
+same protos, the path prefix will no longer make sense. So in
+general, put the protos in a related language-agnostic directory such as
+`//myteam/mypackage`.
+
+The exception to this rule is when it's clear that the protos will be used only
+in a Java context, such as for testing.
 
 ## Supported Platforms {#platforms}
 

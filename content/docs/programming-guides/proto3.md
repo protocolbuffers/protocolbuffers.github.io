@@ -5,6 +5,7 @@ toc_hide: false
 linkTitle: "Language Guide (proto 3)"
 no_list: "true"
 type: docs
+description: "This topic covers how to use the version 3 of Protocol Buffers in your project. It contains language-agnostic content. For information specific to the language you're using, see the corresponding documentation for your language."
 ---
 
 This guide describes how to use the protocol buffer language to structure your
@@ -36,8 +37,8 @@ message SearchRequest {
 
 *   The first line of the file specifies that you're using `proto3` syntax: if
     you don't do this the protocol buffer compiler will assume you are using
-    [proto2](/docs/programming-guides/proto). This must be the first
-    non-empty, non-comment line of the file.
+    [proto2](/docs/programming-guides/proto). This must be the
+    first non-empty, non-comment line of the file.
 *   The `SearchRequest` message definition specifies three fields (name/value
     pairs), one for each piece of data that you want to include in this type of
     message. Each field has a name and a type.
@@ -53,10 +54,10 @@ and other message types.
 
 As you can see, each field in the message definition has a **unique number**.
 These field numbers are used to identify your fields in the
-[message binary format](/docs/programming-guides/encoding), and should not
-be changed once your message type is in use. Note that field numbers in the
-range 1 through 15 take one byte to encode, including the field number and the
-field's type (you can find out more about this in
+[message binary format](/docs/programming-guides/encoding),
+and should not be changed once your message type is in use. Note that field
+numbers in the range 1 through 15 take one byte to encode, including the field
+number and the field's type (you can find out more about this in
 [Protocol Buffer Encoding](/docs/programming-guides/encoding#structure)).
 Field numbers in the range 16 through 2047 take two bytes. So you should reserve
 the numbers 1 through 15 for very frequently occurring message elements.
@@ -189,8 +190,8 @@ from an input stream.
 You can find out more about using the APIs for each language by following the
 tutorial for your chosen language (proto3 versions coming soon). For even more
 API details, see the relevant
-[API reference](/docs/reference/) (proto3
-versions also coming soon).
+[API reference](/docs/reference/) (proto3 versions also coming
+soon).
 
 ## Scalar Value Types {#scalar}
 
@@ -603,7 +604,8 @@ be longer than 2<sup>32</sup>.</td>
 </div>
 
 You can find out more about how these types are encoded when you serialize your
-message in [Protocol Buffer Encoding](/docs/programming-guides/encoding).
+message in
+[Protocol Buffer Encoding](/docs/programming-guides/encoding).
 
 <sup>[1]</sup> Kotlin uses the corresponding types from Java, even for unsigned
 types, to ensure compatibility in mixed Java/Kotlin codebases.
@@ -639,8 +641,7 @@ default value for that field. These defaults are type-specific:
     which must be 0.
 *   For message fields, the field is not set. Its exact value is
     language-dependent. See the
-    [generated code guide](/docs/reference/) for
-    details.
+    [generated code guide](/docs/reference/) for details.
 
 The default value for repeated fields is empty (generally an empty list in the
 appropriate language).
@@ -653,9 +654,8 @@ that switches on some behavior when set to `false` if you don't want that
 behavior to also happen by default. Also note that if a scalar message field
 **is** set to its default, the value will not be serialized on the wire.
 
-See the [generated code guide](/docs/reference/)
-for your chosen language for more details about how defaults work in generated
-code.
+See the [generated code guide](/docs/reference/) for your
+chosen language for more details about how defaults work in generated code.
 
 ## Enumerations {#enum}
 
@@ -689,7 +689,6 @@ message SearchRequest {
 }
 ```
 
-
 As you can see, the `Corpus` enum's first constant maps to zero: every enum
 definition **must** contain a constant that maps to zero as its first element.
 This is because:
@@ -697,13 +696,14 @@ This is because:
 *   There must be a zero value, so that we can use 0 as a numeric
     [default value](#default).
 *   The zero value needs to be the first element, for compatibility with the
-    [proto2](/docs/programming-guides/proto) semantics where the first enum
-    value is always the default.
+    [proto2](/docs/programming-guides/proto) semantics where
+    the first enum value is always the default.
 
 You can define aliases by assigning the same value to different enum constants.
 To do this you need to set the `allow_alias` option to `true`, otherwise the
-protocol compiler generates
-a warning message when aliases are found.
+protocol compiler generates a warning message when aliases are found.
+Though all alias values are valid during deserialization, the first value is
+always used when serializing.
 
 ```proto
 enum EnumAllowingAlias {
@@ -722,25 +722,24 @@ enum EnumNotAllowingAlias {
 }
 ```
 
-
 Enumerator constants must be in the range of a 32-bit integer. Since `enum`
-values use [varint encoding](/docs/programming-guides/encoding) on the wire,
-negative values are inefficient and thus not recommended. You can define `enum`s
-within a message definition, as in the above example, or outside – these `enum`s
-can be reused in any message definition in your `.proto` file. You can also use
-an `enum` type declared in one message as the type of a field in a different
-message, using the syntax `_MessageType_._EnumType_`.
+values use
+[varint encoding](/docs/programming-guides/encoding) on the
+wire, negative values are inefficient and thus not recommended. You can define
+`enum`s within a message definition, as in the above example, or outside – these
+`enum`s can be reused in any message definition in your `.proto` file. You can
+also use an `enum` type declared in one message as the type of a field in a
+different message, using the syntax `_MessageType_._EnumType_`.
 
 When you run the protocol buffer compiler on a `.proto` that uses an `enum`, the
 generated code will have a corresponding `enum` for Java, Kotlin, or C++, or a
 special `EnumDescriptor` class for Python that's used to create a set of
 symbolic constants with integer values in the runtime-generated class.
 
-{{% alert title="Important" color="warning" %}}
-The generated code may be subject to language-specific
-limitations on the number of enumerators (low thousands for one language).
-Review the limitations for the languages you plan to use.
-{{% /alert %}}
+{{% alert title="Important" color="warning" %}} The
+generated code may be subject to language-specific limitations on the number of
+enumerators (low thousands for one language). Review the limitations for the
+languages you plan to use. {{% /alert %}}
 
 During deserialization, unrecognized enum values will be preserved in the
 message, though how this is represented when the message is deserialized is
@@ -753,9 +752,8 @@ accessors. In either case, if the message is serialized the unrecognized value
 will still be serialized with the message.
 
 For more information about how to work with message `enum`s in your
-applications, see the
-[generated code guide](/docs/reference/) for your
-chosen language.
+applications, see the [generated code guide](/docs/reference/)
+for your chosen language.
 
 ### Reserved Values
 
@@ -850,10 +848,11 @@ project and use fully qualified names for all imports.
 
 ### Using proto2 Message Types
 
-It's possible to import [proto2](/docs/programming-guides/proto) message
-types and use them in your proto3 messages, and vice versa. However, proto2
-enums cannot be used directly in proto3 syntax (it's okay if an imported proto2
-message uses them).
+It's possible to import
+[proto2](/docs/programming-guides/proto) message types and use
+them in your proto3 messages, and vice versa. However, proto2 enums cannot be
+used directly in proto3 syntax (it's okay if an imported proto2 message uses
+them).
 
 ## Nested Types {#nested}
 
@@ -939,8 +938,8 @@ following rules:
     primitive type field or merge all input elements if it's a message type
     field. Note that this is **not** generally safe for numeric types, including
     bools and enums. Repeated fields of numeric types can be serialized in the
-    [packed](/docs/programming-guides/encoding#packed) format, which will
-    not be parsed correctly when an `optional` field is expected.
+    [packed](/docs/programming-guides/encoding#packed) format,
+    which will not be parsed correctly when an `optional` field is expected.
 *   `enum` is compatible with `int32`, `uint32`, `int64`, and `uint64` in terms
     of wire format (note that values will be truncated if they don't fit).
     However be aware that client code may treat them differently when the
@@ -999,7 +998,7 @@ status.add_details()->PackFrom(details);
 
 // Reading an arbitrary message from Any.
 ErrorStatus status = ...;
-for (const Any& detail : status.details()) {
+for (const google::protobuf::Any& detail : status.details()) {
   if (detail.Is<NetworkErrorDetails>()) {
     NetworkErrorDetails network_error;
     detail.UnpackTo(&network_error);
@@ -1012,8 +1011,8 @@ for (const Any& detail : status.details()) {
 development**.
 
 If you are already familiar with
-[proto2 syntax](/docs/programming-guides/proto), the `Any` can hold
-arbitrary proto3 messages, similar to proto2 messages which can allow
+[proto2 syntax](/docs/programming-guides/proto), the `Any` can
+hold arbitrary proto3 messages, similar to proto2 messages which can allow
 [extensions](/docs/programming-guides/proto#extensions).
 
 ## Oneof {#oneof}
@@ -1051,8 +1050,7 @@ any type, except `map` fields and `repeated` fields.
 In your generated code, oneof fields have the same getters and setters as
 regular fields. You also get a special method for checking which value (if any)
 in the oneof is set. You can find out more about the oneof API for your chosen
-language in the relevant
-[API reference](/docs/reference/).
+language in the relevant [API reference](/docs/reference/).
 
 ### Oneof Features
 
@@ -1576,10 +1574,10 @@ Here are a few of the most commonly used options:
 Protocol Buffers also allows you to define and use your own options. This is an
 **advanced feature** which most people don't need. If you do think you need to
 create your own options, see the
-[Proto2 Language Guide](/docs/programming-guides/proto#customoptions) for
-details. Note that creating custom options uses
-[extensions](/docs/programming-guides/proto#extensions), which are permitted
-only for custom options in proto3.
+[Proto2 Language Guide](/docs/programming-guides/proto#customoptions)
+for details. Note that creating custom options uses
+[extensions](/docs/programming-guides/proto#extensions), which
+are permitted only for custom options in proto3.
 
 ## Generating Your Classes {#generating}
 
@@ -1644,6 +1642,24 @@ protoc --proto_path=IMPORT_PATH --cpp_out=DST_DIR --java_out=DST_DIR --python_ou
     files can be specified at once. Although the files are named relative to the
     current directory, each file must reside in one of the `IMPORT_PATH`s so
     that the compiler can determine its canonical name.
+
+## File location {#location}
+
+Prefer not to put `.proto` files in the same
+directory as other language sources. Consider
+creating a subpackage `proto` for `.proto` files, under the root package for
+your project.
+
+### Location Should be Language-agnostic {#location-language-agnostic}
+
+When working with Java code, it's handy to put related `.proto` files in the
+same directory as the Java source. However, if any non-Java code ever uses the
+same protos, the path prefix will no longer make sense. So in
+general, put the protos in a related language-agnostic directory such as
+`//myteam/mypackage`.
+
+The exception to this rule is when it's clear that the protos will be used only
+in a Java context, such as for testing.
 
 ## Supported Platforms {#platforms}
 

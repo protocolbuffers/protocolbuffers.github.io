@@ -5,8 +5,9 @@ toc_hide: false
 linkTitle: "Generated Code Guide"
 no_list: "true"
 type: docs
+description: "This topic describes exactly what C# code the protocol buffer compiler generates for protocol definitions using proto3 syntax."
 ---
-
+    
 
 This page describes exactly what C\# code the protocol buffer compiler generates
 for protocol definitions using `proto3` syntax. You should read the
@@ -67,11 +68,17 @@ You can provide further C\# options to the protocol buffer compiler using the
     all, the generated files are simply written into the directory specified by
     `--csharp_out` without any hierarchy being created.
 
+-   **internal\_access**: When this option is specified, the generator creates
+    types with the `internal` access modifier instead of `public`.
+
+-   **serializable**: When this option is specified, the generator adds the
+    `[Serializable]` attribute to generated message classes.
+
 Multiple options can be specified by separating them with commas, as in the
 following example:
 
 ```shell
-protoc --proto_path=src --csharp_out=build/gen --csharp_opt=file_extension=.g.cs,base_namespace=Example src/foo.proto
+protoc --proto_path=src --csharp_out=build/gen --csharp_opt=file_extension=.g.cs,base_namespace=Example,internal_access src/foo.proto
 ```
 
 ## File structure {#structure}

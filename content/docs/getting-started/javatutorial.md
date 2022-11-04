@@ -5,6 +5,7 @@ toc_hide: false
 linkTitle: "Java"
 no_list: "true"
 type: docs
+description: "This tutorial provides a basic Java programmers introduction to working with protocol buffers."
 ---
 
 This tutorial provides a basic Java programmer's introduction to working with

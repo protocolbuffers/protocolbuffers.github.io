@@ -5,8 +5,9 @@ toc_hide: false
 linkTitle: "Arena Allocation Guide"
 no_list: "true"
 type: docs
+description: "Arena allocation is a C++-only feature that helps you optimize your memory usage and improve performance when working with protocol buffers."
 ---
-
+    
 
 Arena allocation is a C++-only feature that helps you optimize your memory usage
 and improve performance when working with protocol buffers. This page describes

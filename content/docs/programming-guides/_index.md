@@ -5,8 +5,9 @@ toc_hide: false
 linkTitle: "Programming Guides"
 no_list: "true"
 type: docs
+description: "Learn how to use Protocol Buffers in your projects."
 ---
-
+    
 
 *   [Language Guide (proto2)](/docs/programming-guides/proto)
 *   [Language Guide (proto3)](/docs/programming-guides/proto3)

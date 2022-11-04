@@ -5,6 +5,7 @@ toc_hide: false
 linkTitle: "History"
 no_list: "true"
 type: docs
+description: "A brief history behind the creation of protocol buffers."
 ---
 
 This is a brief history of protocol buffers. Understanding why it was created

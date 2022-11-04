@@ -5,8 +5,9 @@ toc_hide: false
 linkTitle: "Version 3 Language Specification"
 no_list: "true"
 type: docs
+description: "This topic is a language specification reference for version 3 of the Protocol Buffers language (proto3)."
 ---
-
+    
 
 This is a language specification reference for version 3 of the Protocol Buffers
 language (proto3). The syntax is specified using
@@ -243,11 +244,11 @@ reserved "foo", "bar";
 ### Enum Definition {#enum_definition}
 
 The enum definition consists of a name and an enum body. The enum body can have
-options and enum fields. Enum definitions must start with enum value zero.
+options, enum fields, and reserved statements.
 
 ```
 enum = "enum" enumName enumBody
-enumBody = "{" { option | enumField | emptyStatement } "}"
+enumBody = "{" { option | enumField | emptyStatement | reserved } "}"
 enumField = ident "=" [ "-" ] intLit [ "[" enumValueOption { ","  enumValueOption } "]" ]";"
 enumValueOption = optionName "=" constant
 ```

@@ -5,8 +5,9 @@ toc_hide: true
 linkTitle: "Protocol Buffers"
 no_list: "true"
 type: docs
+description: "Protocol Buffers are a language-neutral, platform-neutral extensible mechanism for serializing structured data."
 ---
-
+    
 
 
 
