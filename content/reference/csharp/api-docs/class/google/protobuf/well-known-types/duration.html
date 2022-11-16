@@ -1,0 +1,738 @@
+<!DOCTYPE html>
+<html devsite>
+<head>
+  <title>Google.Protobuf.WellKnownTypes.Duration Class Reference</title>
+  <link rel="stylesheet" href="/reference/csharp/api-docs/includes/stylesheet.css">
+</head>
+<body><div id="top"><!-- do not remove this div --></div><h1>Google.<wbr/>Protobuf.<wbr/>WellKnownTypes.<wbr/>Duration</h1><p>A <a href="/reference/csharp/api-docs/class/google/protobuf/well-known-types/duration.html#class_google_1_1_protobuf_1_1_well_known_types_1_1_duration">Duration</a> represents a signed, fixed-length span of time represented as a count of seconds and fractions of seconds at nanosecond resolution. </p><h2>Summary</h2><p>It is independent of any calendar and concepts like "day" or "month". It is related to <a href="/reference/csharp/api-docs/class/google/protobuf/well-known-types/timestamp.html#class_google_1_1_protobuf_1_1_well_known_types_1_1_timestamp">Timestamp</a> in that the difference between two <a href="/reference/csharp/api-docs/class/google/protobuf/well-known-types/timestamp.html#class_google_1_1_protobuf_1_1_well_known_types_1_1_timestamp">Timestamp</a> values is a <a href="/reference/csharp/api-docs/class/google/protobuf/well-known-types/duration.html#class_google_1_1_protobuf_1_1_well_known_types_1_1_duration">Duration</a> and it can be added or subtracted from a <a href="/reference/csharp/api-docs/class/google/protobuf/well-known-types/timestamp.html#class_google_1_1_protobuf_1_1_well_known_types_1_1_timestamp">Timestamp</a>. Range is approximately +-10,000 years.</p><p>Example 1: Compute <a href="/reference/csharp/api-docs/class/google/protobuf/well-known-types/duration.html#class_google_1_1_protobuf_1_1_well_known_types_1_1_duration">Duration</a> from two Timestamps in pseudo code. <pre class="prettyprint">Timestamp start = ...;
+Timestamp end = ...;
+Duration duration = ...;
+
+duration.seconds = end.seconds - start.seconds;
+duration.nanos = end.nanos - start.nanos;
+
+if (duration.seconds &lt; 0 &amp;&amp; duration.nanos > 0) {
+  duration.seconds += 1;
+  duration.nanos -= 1000000000;
+} else if (durations.seconds > 0 &amp;&amp; duration.nanos &lt; 0) {
+  duration.seconds -= 1;
+  duration.nanos += 1000000000;
+}
+</pre></p><p>Example 2: Compute <a href="/reference/csharp/api-docs/class/google/protobuf/well-known-types/timestamp.html#class_google_1_1_protobuf_1_1_well_known_types_1_1_timestamp">Timestamp</a> from <a href="/reference/csharp/api-docs/class/google/protobuf/well-known-types/timestamp.html#class_google_1_1_protobuf_1_1_well_known_types_1_1_timestamp">Timestamp</a> + <a href="/reference/csharp/api-docs/class/google/protobuf/well-known-types/duration.html#class_google_1_1_protobuf_1_1_well_known_types_1_1_duration">Duration</a> in pseudo code. <pre class="prettyprint">Timestamp start = ...;
+Duration duration = ...;
+Timestamp end = ...;
+
+end.seconds = start.seconds + duration.seconds;
+end.nanos = start.nanos + duration.nanos;
+
+if (end.nanos &lt; 0) {
+  end.seconds -= 1;
+  end.nanos += 1000000000;
+} else if (end.nanos >= 1000000000) {
+  end.seconds += 1;
+  end.nanos -= 1000000000;
+}
+</pre></p><p>Example 3: Compute <a href="/reference/csharp/api-docs/class/google/protobuf/well-known-types/duration.html#class_google_1_1_protobuf_1_1_well_known_types_1_1_duration">Duration</a> from datetime.timedelta in Python. <pre class="prettyprint">td = datetime.timedelta(days=3, minutes=10)
+duration = Duration()
+duration.FromTimedelta(td)
+</pre></p><h3>Inheritance</h3>Inherits from: <a href="/reference/csharp/api-docs/interface/google/protobuf/i-custom-diagnostic-message">Google.Protobuf.ICustomDiagnosticMessage</a>, pb::IMessage< Duration ><table class="constructors responsive">
+    <tr>
+      <th colspan="2">
+        <h3>Constructors and Destructors</h3>
+      </th>
+    </tr>
+    <tr>
+      <td colspan="2">
+        <code><a href="#class_google_1_1_protobuf_1_1_well_known_types_1_1_duration_1a0fa1a4f590d1aa94a046e29e4dc3bbb1">Duration</a>()</code>
+        <br />
+      </td>
+    </tr>
+    <tr>
+      <td colspan="2">
+        <code><a href="#class_google_1_1_protobuf_1_1_well_known_types_1_1_duration_1a1f19c5cd2d2e6836bba531cd3156e3f8">Duration</a>(<a href="/reference/csharp/api-docs/class/google/protobuf/well-known-types/duration.html#class_google_1_1_protobuf_1_1_well_known_types_1_1_duration">Duration</a> other)</code>
+        <br />
+      </td>
+    </tr>
+  </table><table class="properties responsive">
+    <tr>
+      <th colspan="2">
+        <h3>Properties</h3>
+      </th>
+    </tr>
+    <tr>
+      <td>
+        <code><a href="#class_google_1_1_protobuf_1_1_well_known_types_1_1_duration_1a9483a7c1bb92d2407c7bcb0530310805">Descriptor</a></code>
+      </td>
+      <td>
+        <div>
+          <code>pbr::MessageDescriptor</code>
+        </div>
+      </td>
+    </tr>
+    <tr>
+      <td>
+        <code><a href="#class_google_1_1_protobuf_1_1_well_known_types_1_1_duration_1a9b3c34f786fcaf99fd7603ea06d4c63d">Descriptor</a></code>
+      </td>
+      <td>
+        <div>
+          <code>pbr::MessageDescriptor pb::IMessage.</code>
+        </div>
+      </td>
+    </tr>
+    <tr>
+      <td>
+        <code><a href="#class_google_1_1_protobuf_1_1_well_known_types_1_1_duration_1a4d5e70341ef0aa82efff8020f016137b">Nanos</a></code>
+      </td>
+      <td>
+        <div>
+          <code>int</code>
+        </div>
+        <div>Signed fractions of a second at nanosecond resolution of the span of time. </div>
+      </td>
+    </tr>
+    <tr>
+      <td>
+        <code><a href="#class_google_1_1_protobuf_1_1_well_known_types_1_1_duration_1afe44c9fe173478a4d513586b587e4f1e">Parser</a></code>
+      </td>
+      <td>
+        <div>
+          <code>pb::MessageParser< <a href="/reference/csharp/api-docs/class/google/protobuf/well-known-types/duration.html#class_google_1_1_protobuf_1_1_well_known_types_1_1_duration">Duration</a> ></code>
+        </div>
+      </td>
+    </tr>
+    <tr>
+      <td>
+        <code><a href="#class_google_1_1_protobuf_1_1_well_known_types_1_1_duration_1a01d05b1f114e14f65a808a20ebb0e078">Seconds</a></code>
+      </td>
+      <td>
+        <div>
+          <code>long</code>
+        </div>
+        <div>Signed seconds of the span of time. </div>
+      </td>
+    </tr>
+  </table><table class="properties responsive">
+    <tr>
+      <th colspan="2">
+        <h3>Public attributes</h3>
+      </th>
+    </tr>
+    <tr>
+      <td>
+        <code><a href="#class_google_1_1_protobuf_1_1_well_known_types_1_1_duration_1a37a096e8611ee52135422813db78ab23">MaxSeconds</a> = 315576000000L</code>
+      </td>
+      <td>
+        <div>
+          <code>const long</code>
+        </div>
+        <div>The maximum permitted number of seconds. </div>
+      </td>
+    </tr>
+    <tr>
+      <td>
+        <code><a href="#class_google_1_1_protobuf_1_1_well_known_types_1_1_duration_1a17a4688093655659520a470e29c47e78">MinSeconds</a> = -315576000000L</code>
+      </td>
+      <td>
+        <div>
+          <code>const long</code>
+        </div>
+        <div>The minimum permitted number of seconds. </div>
+      </td>
+    </tr>
+    <tr>
+      <td>
+        <code><a href="#class_google_1_1_protobuf_1_1_well_known_types_1_1_duration_1ad53de0ab105e0e16676c741a000b708e">NanosFieldNumber</a> = 2</code>
+      </td>
+      <td>
+        <div>
+          <code>const int</code>
+        </div>
+        <div><a href="/reference/csharp/api-docs/class/google/protobuf/well-known-types/field.html#class_google_1_1_protobuf_1_1_well_known_types_1_1_field">Field</a> number for the "nanos" field.</div>
+      </td>
+    </tr>
+    <tr>
+      <td>
+        <code><a href="#class_google_1_1_protobuf_1_1_well_known_types_1_1_duration_1abbaa3aca2b3dd6b6eda5270d17012e59">NanosecondsPerSecond</a> = 1000000000</code>
+      </td>
+      <td>
+        <div>
+          <code>const int</code>
+        </div>
+        <div>The number of nanoseconds in a second. </div>
+      </td>
+    </tr>
+    <tr>
+      <td>
+        <code><a href="#class_google_1_1_protobuf_1_1_well_known_types_1_1_duration_1a9c014241e4ac0da9708ea8e2d6153538">NanosecondsPerTick</a> = 100</code>
+      </td>
+      <td>
+        <div>
+          <code>const int</code>
+        </div>
+        <div>The number of nanoseconds in a BCL tick (as used by TimeSpan and DateTime). </div>
+      </td>
+    </tr>
+    <tr>
+      <td>
+        <code><a href="#class_google_1_1_protobuf_1_1_well_known_types_1_1_duration_1aa8c6350946a1c60a2d6f90c4b16fe527">SecondsFieldNumber</a> = 1</code>
+      </td>
+      <td>
+        <div>
+          <code>const int</code>
+        </div>
+        <div><a href="/reference/csharp/api-docs/class/google/protobuf/well-known-types/field.html#class_google_1_1_protobuf_1_1_well_known_types_1_1_field">Field</a> number for the "seconds" field.</div>
+      </td>
+    </tr>
+  </table><table class="methods responsive">
+    <tr>
+      <th colspan="2">
+        <h3>Public functions</h3>
+      </th>
+    </tr>
+    <tr>
+      <td>
+        <code><a href="#class_google_1_1_protobuf_1_1_well_known_types_1_1_duration_1a11fb10ddaa717f1ed74fe17b94fdcb2e">CalculateSize</a>()</code>
+      </td>
+      <td>
+        <div>
+          <code>int</code>
+        </div>
+        <div>Calculates the size of this message in Protocol Buffer wire format, in bytes. </div>
+      </td>
+    </tr>
+    <tr>
+      <td>
+        <code><a href="#class_google_1_1_protobuf_1_1_well_known_types_1_1_duration_1a69e92d60b02a5baf58fd55763ac381e3">Clone</a>()</code>
+      </td>
+      <td>
+        <div>
+          <code><a href="/reference/csharp/api-docs/class/google/protobuf/well-known-types/duration.html#class_google_1_1_protobuf_1_1_well_known_types_1_1_duration">Duration</a></code>
+        </div>
+      </td>
+    </tr>
+    <tr>
+      <td>
+        <code><a href="#class_google_1_1_protobuf_1_1_well_known_types_1_1_duration_1a038d8d55b2e974bc1c98e477e044601d">Equals</a>(object other)</code>
+      </td>
+      <td>
+        <div>
+          <code>override bool</code>
+        </div>
+      </td>
+    </tr>
+    <tr>
+      <td>
+        <code><a href="#class_google_1_1_protobuf_1_1_well_known_types_1_1_duration_1ace7c9c2a79dee076313c085fcf52b450">Equals</a>(<a href="/reference/csharp/api-docs/class/google/protobuf/well-known-types/duration.html#class_google_1_1_protobuf_1_1_well_known_types_1_1_duration">Duration</a> other)</code>
+      </td>
+      <td>
+        <div>
+          <code>bool</code>
+        </div>
+      </td>
+    </tr>
+    <tr>
+      <td>
+        <code><a href="#class_google_1_1_protobuf_1_1_well_known_types_1_1_duration_1a9c320de516c93ba60bf6dac0a7391b95">GetHashCode</a>()</code>
+      </td>
+      <td>
+        <div>
+          <code>override int</code>
+        </div>
+      </td>
+    </tr>
+    <tr>
+      <td>
+        <code><a href="#class_google_1_1_protobuf_1_1_well_known_types_1_1_duration_1a276136968429d24964f93057baa1ff28">MergeFrom</a>(<a href="/reference/csharp/api-docs/class/google/protobuf/well-known-types/duration.html#class_google_1_1_protobuf_1_1_well_known_types_1_1_duration">Duration</a> other)</code>
+      </td>
+      <td>
+        <div>
+          <code>void</code>
+        </div>
+      </td>
+    </tr>
+    <tr>
+      <td>
+        <code><a href="#class_google_1_1_protobuf_1_1_well_known_types_1_1_duration_1a852cdb672a9c22c5a779beb94f9656c7">MergeFrom</a>(pb::CodedInputStream input)</code>
+      </td>
+      <td>
+        <div>
+          <code>void</code>
+        </div>
+      </td>
+    </tr>
+    <tr>
+      <td>
+        <code><a href="#class_google_1_1_protobuf_1_1_well_known_types_1_1_duration_1a7ae46cbc6a51638c4886f12f31d4eff1">ToDiagnosticString</a>()</code>
+      </td>
+      <td>
+        <div>
+          <code>string</code>
+        </div>
+        <div>Returns a string representation of this <a href="/reference/csharp/api-docs/class/google/protobuf/well-known-types/duration.html#class_google_1_1_protobuf_1_1_well_known_types_1_1_duration">Duration</a> for diagnostic purposes. </div>
+      </td>
+    </tr>
+    <tr>
+      <td>
+        <code><a href="#class_google_1_1_protobuf_1_1_well_known_types_1_1_duration_1a7ce6d5cdbff5c301c9dbb835e392bcb4">ToString</a>()</code>
+      </td>
+      <td>
+        <div>
+          <code>override string</code>
+        </div>
+      </td>
+    </tr>
+    <tr>
+      <td>
+        <code><a href="#class_google_1_1_protobuf_1_1_well_known_types_1_1_duration_1aeb7f2367ac44bfbcecffc351c84a67e7">ToTimeSpan</a>()</code>
+      </td>
+      <td>
+        <div>
+          <code>TimeSpan</code>
+        </div>
+        <div>Converts this <a href="/reference/csharp/api-docs/class/google/protobuf/well-known-types/duration.html#class_google_1_1_protobuf_1_1_well_known_types_1_1_duration">Duration</a> to a TimeSpan. </div>
+      </td>
+    </tr>
+    <tr>
+      <td>
+        <code><a href="#class_google_1_1_protobuf_1_1_well_known_types_1_1_duration_1a58e8640cb7471d058ae4bc466d053056">WriteTo</a>(pb::CodedOutputStream output)</code>
+      </td>
+      <td>
+        <div>
+          <code>void</code>
+        </div>
+      </td>
+    </tr>
+  </table><table class="methods responsive">
+    <tr>
+      <th colspan="2">
+        <h3>Public static functions</h3>
+      </th>
+    </tr>
+    <tr>
+      <td>
+        <code><a href="#class_google_1_1_protobuf_1_1_well_known_types_1_1_duration_1ae84f52830f9e929efedc0014b6bba9ce">FromTimeSpan</a>(TimeSpan timeSpan)</code>
+      </td>
+      <td>
+        <div>
+          <code><a href="/reference/csharp/api-docs/class/google/protobuf/well-known-types/duration.html#class_google_1_1_protobuf_1_1_well_known_types_1_1_duration">Duration</a></code>
+        </div>
+        <div>Converts the given TimeSpan to a <a href="/reference/csharp/api-docs/class/google/protobuf/well-known-types/duration.html#class_google_1_1_protobuf_1_1_well_known_types_1_1_duration">Duration</a>. </div>
+      </td>
+    </tr>
+    <tr>
+      <td>
+        <code><a href="#class_google_1_1_protobuf_1_1_well_known_types_1_1_duration_1a240363afd1f23f986b11d9f0f009a9ef">operator+</a>(<a href="/reference/csharp/api-docs/class/google/protobuf/well-known-types/duration.html#class_google_1_1_protobuf_1_1_well_known_types_1_1_duration">Duration</a> lhs, <a href="/reference/csharp/api-docs/class/google/protobuf/well-known-types/duration.html#class_google_1_1_protobuf_1_1_well_known_types_1_1_duration">Duration</a> rhs)</code>
+      </td>
+      <td>
+        <div>
+          <code><a href="/reference/csharp/api-docs/class/google/protobuf/well-known-types/duration.html#class_google_1_1_protobuf_1_1_well_known_types_1_1_duration">Duration</a></code>
+        </div>
+        <div>Adds the two specified <a href="/reference/csharp/api-docs/class/google/protobuf/well-known-types/duration.html#class_google_1_1_protobuf_1_1_well_known_types_1_1_duration">Duration</a> values together. </div>
+      </td>
+    </tr>
+    <tr>
+      <td>
+        <code><a href="#class_google_1_1_protobuf_1_1_well_known_types_1_1_duration_1a2ff1f50640eb6bdb4887daddf92ec965">operator-</a>(<a href="/reference/csharp/api-docs/class/google/protobuf/well-known-types/duration.html#class_google_1_1_protobuf_1_1_well_known_types_1_1_duration">Duration</a> value)</code>
+      </td>
+      <td>
+        <div>
+          <code><a href="/reference/csharp/api-docs/class/google/protobuf/well-known-types/duration.html#class_google_1_1_protobuf_1_1_well_known_types_1_1_duration">Duration</a></code>
+        </div>
+        <div>Returns the result of negating the duration. </div>
+      </td>
+    </tr>
+    <tr>
+      <td>
+        <code><a href="#class_google_1_1_protobuf_1_1_well_known_types_1_1_duration_1a80bc1faf8d27eefc47e24086f532df3f">operator-</a>(<a href="/reference/csharp/api-docs/class/google/protobuf/well-known-types/duration.html#class_google_1_1_protobuf_1_1_well_known_types_1_1_duration">Duration</a> lhs, <a href="/reference/csharp/api-docs/class/google/protobuf/well-known-types/duration.html#class_google_1_1_protobuf_1_1_well_known_types_1_1_duration">Duration</a> rhs)</code>
+      </td>
+      <td>
+        <div>
+          <code><a href="/reference/csharp/api-docs/class/google/protobuf/well-known-types/duration.html#class_google_1_1_protobuf_1_1_well_known_types_1_1_duration">Duration</a></code>
+        </div>
+        <div>Subtracts one <a href="/reference/csharp/api-docs/class/google/protobuf/well-known-types/duration.html#class_google_1_1_protobuf_1_1_well_known_types_1_1_duration">Duration</a> from another. </div>
+      </td>
+    </tr>
+  </table><h2>Properties</h2><div id="class_google_1_1_protobuf_1_1_well_known_types_1_1_duration_1a9483a7c1bb92d2407c7bcb0530310805">
+    <h3>Descriptor</h3>
+    <pre class="prettyprint">pbr::MessageDescriptor Descriptor</pre>
+    <div />
+  </div><div id="class_google_1_1_protobuf_1_1_well_known_types_1_1_duration_1a9b3c34f786fcaf99fd7603ea06d4c63d">
+    <h3>Descriptor</h3>
+    <pre class="prettyprint">pbr::MessageDescriptor pb::IMessage. Descriptor</pre>
+    <div />
+  </div><div id="class_google_1_1_protobuf_1_1_well_known_types_1_1_duration_1a4d5e70341ef0aa82efff8020f016137b">
+    <h3>Nanos</h3>
+    <pre class="prettyprint">int Nanos</pre>
+    <div>
+      <p>Signed fractions of a second at nanosecond resolution of the span of time. </p>
+      <p>Durations less than one second are represented with a 0 <code>seconds</code> field and a positive or negative <code>nanos</code> field. For durations of one second or more, a non-zero value for the <code>nanos</code> field must be of the same sign as the <code>seconds</code> field. Must be from -999,999,999 to +999,999,999 inclusive. </p>
+    </div>
+  </div><div id="class_google_1_1_protobuf_1_1_well_known_types_1_1_duration_1afe44c9fe173478a4d513586b587e4f1e">
+    <h3>Parser</h3>
+    <pre class="prettyprint">pb::MessageParser< <a href="/reference/csharp/api-docs/class/google/protobuf/well-known-types/duration.html#class_google_1_1_protobuf_1_1_well_known_types_1_1_duration">Duration</a> > Parser</pre>
+    <div />
+  </div><div id="class_google_1_1_protobuf_1_1_well_known_types_1_1_duration_1a01d05b1f114e14f65a808a20ebb0e078">
+    <h3>Seconds</h3>
+    <pre class="prettyprint">long Seconds</pre>
+    <div>
+      <p>Signed seconds of the span of time. </p>
+      <p>Must be from -315,576,000,000 to +315,576,000,000 inclusive. </p>
+    </div>
+  </div><h2>Public attributes</h2><div id="class_google_1_1_protobuf_1_1_well_known_types_1_1_duration_1a37a096e8611ee52135422813db78ab23">
+    <h3>MaxSeconds</h3>
+    <pre class="prettyprint">const long MaxSeconds = 315576000000L</pre>
+    <div>
+      <p>The maximum permitted number of seconds. </p>
+    </div>
+  </div><div id="class_google_1_1_protobuf_1_1_well_known_types_1_1_duration_1a17a4688093655659520a470e29c47e78">
+    <h3>MinSeconds</h3>
+    <pre class="prettyprint">const long MinSeconds = -315576000000L</pre>
+    <div>
+      <p>The minimum permitted number of seconds. </p>
+    </div>
+  </div><div id="class_google_1_1_protobuf_1_1_well_known_types_1_1_duration_1ad53de0ab105e0e16676c741a000b708e">
+    <h3>NanosFieldNumber</h3>
+    <pre class="prettyprint">const int NanosFieldNumber = 2</pre>
+    <div>
+      <p><a href="/reference/csharp/api-docs/class/google/protobuf/well-known-types/field.html#class_google_1_1_protobuf_1_1_well_known_types_1_1_field">Field</a> number for the "nanos" field.</p>
+    </div>
+  </div><div id="class_google_1_1_protobuf_1_1_well_known_types_1_1_duration_1abbaa3aca2b3dd6b6eda5270d17012e59">
+    <h3>NanosecondsPerSecond</h3>
+    <pre class="prettyprint">const int NanosecondsPerSecond = 1000000000</pre>
+    <div>
+      <p>The number of nanoseconds in a second. </p>
+    </div>
+  </div><div id="class_google_1_1_protobuf_1_1_well_known_types_1_1_duration_1a9c014241e4ac0da9708ea8e2d6153538">
+    <h3>NanosecondsPerTick</h3>
+    <pre class="prettyprint">const int NanosecondsPerTick = 100</pre>
+    <div>
+      <p>The number of nanoseconds in a BCL tick (as used by TimeSpan and DateTime). </p>
+    </div>
+  </div><div id="class_google_1_1_protobuf_1_1_well_known_types_1_1_duration_1aa8c6350946a1c60a2d6f90c4b16fe527">
+    <h3>SecondsFieldNumber</h3>
+    <pre class="prettyprint">const int SecondsFieldNumber = 1</pre>
+    <div>
+      <p><a href="/reference/csharp/api-docs/class/google/protobuf/well-known-types/field.html#class_google_1_1_protobuf_1_1_well_known_types_1_1_field">Field</a> number for the "seconds" field.</p>
+    </div>
+  </div><h2>Public functions</h2><div id="class_google_1_1_protobuf_1_1_well_known_types_1_1_duration_1a11fb10ddaa717f1ed74fe17b94fdcb2e">
+    <h3>CalculateSize</h3>
+    <pre class="prettyprint">int CalculateSize()</pre>
+    <div>
+      <p>Calculates the size of this message in Protocol Buffer wire format, in bytes. </p>
+      <p />
+      <table class="details responsive">
+        <thead>
+          <th colspan="2">Details</th>
+        </thead>
+        <tbody>
+          <tr>
+            <td>
+              <b>Returns</b>
+            </td>
+            <td>
+              <div>The number of bytes required to write this message to a coded output stream.</div>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div><div id="class_google_1_1_protobuf_1_1_well_known_types_1_1_duration_1a69e92d60b02a5baf58fd55763ac381e3">
+    <h3>Clone</h3>
+    <pre class="prettyprint"><a href="/reference/csharp/api-docs/class/google/protobuf/well-known-types/duration.html#class_google_1_1_protobuf_1_1_well_known_types_1_1_duration">Duration</a> Clone()</pre>
+    <div />
+  </div><div id="class_google_1_1_protobuf_1_1_well_known_types_1_1_duration_1a0fa1a4f590d1aa94a046e29e4dc3bbb1">
+    <h3>Duration</h3>
+    <pre class="prettyprint"> Duration()</pre>
+    <div />
+  </div><div id="class_google_1_1_protobuf_1_1_well_known_types_1_1_duration_1a1f19c5cd2d2e6836bba531cd3156e3f8">
+    <h3>Duration</h3>
+    <pre class="prettyprint"> Duration(
+  <a href="/reference/csharp/api-docs/class/google/protobuf/well-known-types/duration.html#class_google_1_1_protobuf_1_1_well_known_types_1_1_duration">Duration</a> other
+)</pre>
+    <div />
+  </div><div id="class_google_1_1_protobuf_1_1_well_known_types_1_1_duration_1a038d8d55b2e974bc1c98e477e044601d">
+    <h3>Equals</h3>
+    <pre class="prettyprint">override bool Equals(
+  object other
+)</pre>
+    <div />
+  </div><div id="class_google_1_1_protobuf_1_1_well_known_types_1_1_duration_1ace7c9c2a79dee076313c085fcf52b450">
+    <h3>Equals</h3>
+    <pre class="prettyprint">bool Equals(
+  <a href="/reference/csharp/api-docs/class/google/protobuf/well-known-types/duration.html#class_google_1_1_protobuf_1_1_well_known_types_1_1_duration">Duration</a> other
+)</pre>
+    <div />
+  </div><div id="class_google_1_1_protobuf_1_1_well_known_types_1_1_duration_1a9c320de516c93ba60bf6dac0a7391b95">
+    <h3>GetHashCode</h3>
+    <pre class="prettyprint">override int GetHashCode()</pre>
+    <div />
+  </div><div id="class_google_1_1_protobuf_1_1_well_known_types_1_1_duration_1a276136968429d24964f93057baa1ff28">
+    <h3>MergeFrom</h3>
+    <pre class="prettyprint">void MergeFrom(
+  <a href="/reference/csharp/api-docs/class/google/protobuf/well-known-types/duration.html#class_google_1_1_protobuf_1_1_well_known_types_1_1_duration">Duration</a> other
+)</pre>
+    <div />
+  </div><div id="class_google_1_1_protobuf_1_1_well_known_types_1_1_duration_1a852cdb672a9c22c5a779beb94f9656c7">
+    <h3>MergeFrom</h3>
+    <pre class="prettyprint">void MergeFrom(
+  pb::CodedInputStream input
+)</pre>
+    <div />
+  </div><div id="class_google_1_1_protobuf_1_1_well_known_types_1_1_duration_1a7ae46cbc6a51638c4886f12f31d4eff1">
+    <h3>ToDiagnosticString</h3>
+    <pre class="prettyprint">string ToDiagnosticString()</pre>
+    <div>
+      <p>Returns a string representation of this <a href="/reference/csharp/api-docs/class/google/protobuf/well-known-types/duration.html#class_google_1_1_protobuf_1_1_well_known_types_1_1_duration">Duration</a> for diagnostic purposes. </p>
+      <p>Normally the returned value will be a JSON string value (including leading and trailing quotes) but when the value is non-normalized or out of range, a JSON object representation will be returned instead, including a warning. This is to avoid exceptions being thrown when trying to diagnose problems - the regular JSON formatter will still throw an exception for non-normalized values. </p>
+      <p />
+      <table class="details responsive">
+        <thead>
+          <th colspan="2">Details</th>
+        </thead>
+        <tbody>
+          <tr>
+            <td>
+              <b>Returns</b>
+            </td>
+            <td>
+              <div>A string representation of this value.</div>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div><div id="class_google_1_1_protobuf_1_1_well_known_types_1_1_duration_1a7ce6d5cdbff5c301c9dbb835e392bcb4">
+    <h3>ToString</h3>
+    <pre class="prettyprint">override string ToString()</pre>
+    <div />
+  </div><div id="class_google_1_1_protobuf_1_1_well_known_types_1_1_duration_1aeb7f2367ac44bfbcecffc351c84a67e7">
+    <h3>ToTimeSpan</h3>
+    <pre class="prettyprint">TimeSpan ToTimeSpan()</pre>
+    <div>
+      <p>Converts this <a href="/reference/csharp/api-docs/class/google/protobuf/well-known-types/duration.html#class_google_1_1_protobuf_1_1_well_known_types_1_1_duration">Duration</a> to a TimeSpan. </p>
+      <p>If the duration is not a precise number of ticks, it is truncated towards 0.</p>
+      <p />
+      <table class="details responsive">
+        <thead>
+          <th colspan="2">Details</th>
+        </thead>
+        <tbody>
+          <tr>
+            <td>Exceptions</td>
+            <td>
+              <table class="function param responsive">
+                <tbody>
+                  <tr>
+                    <td>
+                      <code>InvalidOperationException</code>
+                    </td>
+                    <td>
+                      <div>This value isn't a valid normalized duration, as described in the documentation.</div>
+                    </td>
+                  </tr>
+                </tbody>
+              </table>
+            </td>
+          </tr>
+          <tr>
+            <td>
+              <b>Returns</b>
+            </td>
+            <td>
+              <div>The value of this duration, as a <code>TimeSpan</code>.</div>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div><div id="class_google_1_1_protobuf_1_1_well_known_types_1_1_duration_1a58e8640cb7471d058ae4bc466d053056">
+    <h3>WriteTo</h3>
+    <pre class="prettyprint">void WriteTo(
+  pb::CodedOutputStream output
+)</pre>
+    <div />
+  </div><h2>Public static functions</h2><div id="class_google_1_1_protobuf_1_1_well_known_types_1_1_duration_1ae84f52830f9e929efedc0014b6bba9ce">
+    <h3>FromTimeSpan</h3>
+    <pre class="prettyprint"><a href="/reference/csharp/api-docs/class/google/protobuf/well-known-types/duration.html#class_google_1_1_protobuf_1_1_well_known_types_1_1_duration">Duration</a> FromTimeSpan(
+  TimeSpan timeSpan
+)</pre>
+    <div>
+      <p>Converts the given TimeSpan to a <a href="/reference/csharp/api-docs/class/google/protobuf/well-known-types/duration.html#class_google_1_1_protobuf_1_1_well_known_types_1_1_duration">Duration</a>. </p>
+      <p />
+      <table class="details responsive">
+        <thead>
+          <th colspan="2">Details</th>
+        </thead>
+        <tbody>
+          <tr>
+            <td>Parameters</td>
+            <td>
+              <table class="function param responsive">
+                <tbody>
+                  <tr>
+                    <td>
+                      <code>timeSpan</code>
+                    </td>
+                    <td>
+                      <div>The <code>TimeSpan</code> to convert.</div>
+                    </td>
+                  </tr>
+                </tbody>
+              </table>
+            </td>
+          </tr>
+          <tr>
+            <td>
+              <b>Returns</b>
+            </td>
+            <td>
+              <div>The value of the given <code>TimeSpan</code>, as a <code><a href="/reference/csharp/api-docs/class/google/protobuf/well-known-types/duration.html#class_google_1_1_protobuf_1_1_well_known_types_1_1_duration">Duration</a></code>.</div>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div><div id="class_google_1_1_protobuf_1_1_well_known_types_1_1_duration_1a240363afd1f23f986b11d9f0f009a9ef">
+    <h3>operator+</h3>
+    <pre class="prettyprint"><a href="/reference/csharp/api-docs/class/google/protobuf/well-known-types/duration.html#class_google_1_1_protobuf_1_1_well_known_types_1_1_duration">Duration</a> operator+(
+  <a href="/reference/csharp/api-docs/class/google/protobuf/well-known-types/duration.html#class_google_1_1_protobuf_1_1_well_known_types_1_1_duration">Duration</a> lhs,
+  <a href="/reference/csharp/api-docs/class/google/protobuf/well-known-types/duration.html#class_google_1_1_protobuf_1_1_well_known_types_1_1_duration">Duration</a> rhs
+)</pre>
+    <div>
+      <p>Adds the two specified <a href="/reference/csharp/api-docs/class/google/protobuf/well-known-types/duration.html#class_google_1_1_protobuf_1_1_well_known_types_1_1_duration">Duration</a> values together. </p>
+      <p />
+      <table class="details responsive">
+        <thead>
+          <th colspan="2">Details</th>
+        </thead>
+        <tbody>
+          <tr>
+            <td>Parameters</td>
+            <td>
+              <table class="function param responsive">
+                <tbody>
+                  <tr>
+                    <td>
+                      <code>lhs</code>
+                    </td>
+                    <td>
+                      <div>The first value to add. Must not be null.</div>
+                    </td>
+                  </tr>
+                  <tr>
+                    <td>
+                      <code>rhs</code>
+                    </td>
+                    <td>
+                      <div>The second value to add. Must not be null.</div>
+                    </td>
+                  </tr>
+                </tbody>
+              </table>
+            </td>
+          </tr>
+          <tr>
+            <td>
+              <b>Returns</b>
+            </td>
+            <td>
+              <div />
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div><div id="class_google_1_1_protobuf_1_1_well_known_types_1_1_duration_1a2ff1f50640eb6bdb4887daddf92ec965">
+    <h3>operator-</h3>
+    <pre class="prettyprint"><a href="/reference/csharp/api-docs/class/google/protobuf/well-known-types/duration.html#class_google_1_1_protobuf_1_1_well_known_types_1_1_duration">Duration</a> operator-(
+  <a href="/reference/csharp/api-docs/class/google/protobuf/well-known-types/duration.html#class_google_1_1_protobuf_1_1_well_known_types_1_1_duration">Duration</a> value
+)</pre>
+    <div>
+      <p>Returns the result of negating the duration. </p>
+      <p>For example, the negation of 5 minutes is -5 minutes. </p>
+      <p />
+      <table class="details responsive">
+        <thead>
+          <th colspan="2">Details</th>
+        </thead>
+        <tbody>
+          <tr>
+            <td>Parameters</td>
+            <td>
+              <table class="function param responsive">
+                <tbody>
+                  <tr>
+                    <td>
+                      <code>value</code>
+                    </td>
+                    <td>
+                      <div>The duration to negate. Must not be null.</div>
+                    </td>
+                  </tr>
+                </tbody>
+              </table>
+            </td>
+          </tr>
+          <tr>
+            <td>
+              <b>Returns</b>
+            </td>
+            <td>
+              <div>The negated value of this duration.</div>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div><div id="class_google_1_1_protobuf_1_1_well_known_types_1_1_duration_1a80bc1faf8d27eefc47e24086f532df3f">
+    <h3>operator-</h3>
+    <pre class="prettyprint"><a href="/reference/csharp/api-docs/class/google/protobuf/well-known-types/duration.html#class_google_1_1_protobuf_1_1_well_known_types_1_1_duration">Duration</a> operator-(
+  <a href="/reference/csharp/api-docs/class/google/protobuf/well-known-types/duration.html#class_google_1_1_protobuf_1_1_well_known_types_1_1_duration">Duration</a> lhs,
+  <a href="/reference/csharp/api-docs/class/google/protobuf/well-known-types/duration.html#class_google_1_1_protobuf_1_1_well_known_types_1_1_duration">Duration</a> rhs
+)</pre>
+    <div>
+      <p>Subtracts one <a href="/reference/csharp/api-docs/class/google/protobuf/well-known-types/duration.html#class_google_1_1_protobuf_1_1_well_known_types_1_1_duration">Duration</a> from another. </p>
+      <p />
+      <table class="details responsive">
+        <thead>
+          <th colspan="2">Details</th>
+        </thead>
+        <tbody>
+          <tr>
+            <td>Parameters</td>
+            <td>
+              <table class="function param responsive">
+                <tbody>
+                  <tr>
+                    <td>
+                      <code>lhs</code>
+                    </td>
+                    <td>
+                      <div>The duration to subtract from. Must not be null.</div>
+                    </td>
+                  </tr>
+                  <tr>
+                    <td>
+                      <code>rhs</code>
+                    </td>
+                    <td>
+                      <div>The duration to subtract. Must not be null.</div>
+                    </td>
+                  </tr>
+                </tbody>
+              </table>
+            </td>
+          </tr>
+          <tr>
+            <td>
+              <b>Returns</b>
+            </td>
+            <td>
+              <div>The difference between the two specified durations.</div>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div></body>
+</html>

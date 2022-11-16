@@ -1,0 +1,86 @@
+toc:
+- title: Kotlin API
+  path: /reference/kotlin/
+  section:
+  - title: Namespaces
+    section:
+    - title: com.google.protobuf.kotlin
+      path: /reference/kotlin/protobuf-kotlin/com.google.protobuf.kotlin/
+      section:
+      - title: DslList
+        path: /reference/kotlin/protobuf-kotlin/com.google.protobuf.kotlin/-dsl-list/
+        section:
+        - title: DslList
+          path: /reference/kotlin/protobuf-kotlin/com.google.protobuf.kotlin/-dsl-list/-dsl-list
+        - title: equals
+          path: /reference/kotlin/protobuf-kotlin/com.google.protobuf.kotlin/-dsl-list/equals
+        - title: hashCode
+          path: /reference/kotlin/protobuf-kotlin/com.google.protobuf.kotlin/-dsl-list/hash-code
+        - title: iterator
+          path: /reference/kotlin/protobuf-kotlin/com.google.protobuf.kotlin/-dsl-list/iterator
+        - title: listIterator
+          path: /reference/kotlin/protobuf-kotlin/com.google.protobuf.kotlin/-dsl-list/list-iterator
+        - title: toString
+          path: /reference/kotlin/protobuf-kotlin/com.google.protobuf.kotlin/-dsl-list/to-string
+      - title: DslMap
+        path: /reference/kotlin/protobuf-kotlin/com.google.protobuf.kotlin/-dsl-map/
+        section:
+        - title: DslMap
+          path: /reference/kotlin/protobuf-kotlin/com.google.protobuf.kotlin/-dsl-map/-dsl-map
+        - title: entries
+          path: /reference/kotlin/protobuf-kotlin/com.google.protobuf.kotlin/-dsl-map/entries
+        - title: equals
+          path: /reference/kotlin/protobuf-kotlin/com.google.protobuf.kotlin/-dsl-map/equals
+        - title: hashCode
+          path: /reference/kotlin/protobuf-kotlin/com.google.protobuf.kotlin/-dsl-map/hash-code
+        - title: keys
+          path: /reference/kotlin/protobuf-kotlin/com.google.protobuf.kotlin/-dsl-map/keys
+        - title: toString
+          path: /reference/kotlin/protobuf-kotlin/com.google.protobuf.kotlin/-dsl-map/to-string
+        - title: values
+          path: /reference/kotlin/protobuf-kotlin/com.google.protobuf.kotlin/-dsl-map/values
+      - title: DslProxy
+        path: /reference/kotlin/protobuf-kotlin/com.google.protobuf.kotlin/-dsl-proxy/
+      - title: ExtensionList
+        path: /reference/kotlin/protobuf-kotlin/com.google.protobuf.kotlin/-extension-list/
+        section:
+        - title: ExtensionList
+          path: /reference/kotlin/protobuf-kotlin/com.google.protobuf.kotlin/-extension-list/-extension-list
+        - title: equals
+          path: /reference/kotlin/protobuf-kotlin/com.google.protobuf.kotlin/-extension-list/equals
+        - title: extension
+          path: /reference/kotlin/protobuf-kotlin/com.google.protobuf.kotlin/-extension-list/extension
+        - title: hashCode
+          path: /reference/kotlin/protobuf-kotlin/com.google.protobuf.kotlin/-extension-list/hash-code
+        - title: iterator
+          path: /reference/kotlin/protobuf-kotlin/com.google.protobuf.kotlin/-extension-list/iterator
+        - title: listIterator
+          path: /reference/kotlin/protobuf-kotlin/com.google.protobuf.kotlin/-extension-list/list-iterator
+        - title: toString
+          path: /reference/kotlin/protobuf-kotlin/com.google.protobuf.kotlin/-extension-list/to-string
+      - title: OnlyForUseByGeneratedProtoCode
+        path: /reference/kotlin/protobuf-kotlin/com.google.protobuf.kotlin/-only-for-use-by-generated-proto-code/
+        section:
+        - title: OnlyForUseByGeneratedProtoCode
+          path: /reference/kotlin/protobuf-kotlin/com.google.protobuf.kotlin/-only-for-use-by-generated-proto-code/-only-for-use-by-generated-proto-code
+      - title: ProtoDslMarker
+        path: /reference/kotlin/protobuf-kotlin/com.google.protobuf.kotlin/-proto-dsl-marker/
+        section:
+        - title: ProtoDslMarker
+          path: /reference/kotlin/protobuf-kotlin/com.google.protobuf.kotlin/-proto-dsl-marker/-proto-dsl-marker
+      - title: contains
+        path: /reference/kotlin/protobuf-kotlin/com.google.protobuf.kotlin/contains
+      - title: get
+        path: /reference/kotlin/protobuf-kotlin/com.google.protobuf.kotlin/get
+      - title: isA
+        path: /reference/kotlin/protobuf-kotlin/com.google.protobuf.kotlin/is-a
+      - title: plus
+        path: /reference/kotlin/protobuf-kotlin/com.google.protobuf.kotlin/plus
+      - title: set
+        path: /reference/kotlin/protobuf-kotlin/com.google.protobuf.kotlin/set
+      - title: toByteStringUtf8
+        path: /reference/kotlin/protobuf-kotlin/com.google.protobuf.kotlin/to-byte-string-utf8
+      - title: toByteString
+        path: /reference/kotlin/protobuf-kotlin/com.google.protobuf.kotlin/to-byte-string
+      - title: unpack
+        path: /reference/kotlin/protobuf-kotlin/com.google.protobuf.kotlin/unpack

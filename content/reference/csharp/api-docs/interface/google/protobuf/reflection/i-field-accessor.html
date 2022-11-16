@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html devsite>
+<head>
+  <title>Google.Protobuf.Reflection.IFieldAccessor Interface Reference</title>
+  <link rel="stylesheet" href="/reference/csharp/api-docs/includes/stylesheet.css">
+</head>
+<body><div id="top"><!-- do not remove this div --></div><h1>Google.<wbr/>Protobuf.<wbr/>Reflection.<wbr/>IFieldAccessor</h1><p>Allows fields to be reflectively accessed. </p><h2>Summary</h2><h3>Inheritance</h3>Direct Known Subclasses:<a href="/reference/csharp/api-docs/class/google/protobuf/reflection/field-accessor-base.html">Google.Protobuf.Reflection.FieldAccessorBase</a><table class="properties responsive">
+    <tr>
+      <th colspan="2">
+        <h3>Properties</h3>
+      </th>
+    </tr>
+    <tr>
+      <td>
+        <code><a href="#interface_google_1_1_protobuf_1_1_reflection_1_1_i_field_accessor_1a6c4b0b513b076df7c7a2af43c77dae9f">Descriptor</a></code>
+      </td>
+      <td>
+        <div>
+          <code><a href="/reference/csharp/api-docs/class/google/protobuf/reflection/field-descriptor.html#class_google_1_1_protobuf_1_1_reflection_1_1_field_descriptor">FieldDescriptor</a></code>
+        </div>
+        <div>Returns the descriptor associated with this field. </div>
+      </td>
+    </tr>
+  </table><table class="methods responsive">
+    <tr>
+      <th colspan="2">
+        <h3>Public functions</h3>
+      </th>
+    </tr>
+    <tr>
+      <td>
+        <code><a href="#interface_google_1_1_protobuf_1_1_reflection_1_1_i_field_accessor_1a58f79769cbd5678ef01bc0f5ece128bd">Clear</a>(<a href="/reference/csharp/api-docs/interface/google/protobuf/i-message.html#interface_google_1_1_protobuf_1_1_i_message">IMessage</a> message)</code>
+      </td>
+      <td>
+        <div>
+          <code>void</code>
+        </div>
+        <div>Clears the field in the specified message. </div>
+      </td>
+    </tr>
+    <tr>
+      <td>
+        <code><a href="#interface_google_1_1_protobuf_1_1_reflection_1_1_i_field_accessor_1aab2955a070151c7f136e66cf21097afd">GetValue</a>(<a href="/reference/csharp/api-docs/interface/google/protobuf/i-message.html#interface_google_1_1_protobuf_1_1_i_message">IMessage</a> message)</code>
+      </td>
+      <td>
+        <div>
+          <code>object</code>
+        </div>
+        <div>Fetches the field value. </div>
+      </td>
+    </tr>
+    <tr>
+      <td>
+        <code><a href="#interface_google_1_1_protobuf_1_1_reflection_1_1_i_field_accessor_1ac25b287be468da6ed0d2457ebb82c2e1">SetValue</a>(<a href="/reference/csharp/api-docs/interface/google/protobuf/i-message.html#interface_google_1_1_protobuf_1_1_i_message">IMessage</a> message, object value)</code>
+      </td>
+      <td>
+        <div>
+          <code>void</code>
+        </div>
+        <div>Mutator for single "simple" fields only. </div>
+      </td>
+    </tr>
+  </table><h2>Properties</h2><div id="interface_google_1_1_protobuf_1_1_reflection_1_1_i_field_accessor_1a6c4b0b513b076df7c7a2af43c77dae9f">
+    <h3>Descriptor</h3>
+    <pre class="prettyprint"><a href="/reference/csharp/api-docs/class/google/protobuf/reflection/field-descriptor.html#class_google_1_1_protobuf_1_1_reflection_1_1_field_descriptor">FieldDescriptor</a> Descriptor</pre>
+    <div>
+      <p>Returns the descriptor associated with this field. </p>
+    </div>
+  </div><h2>Public functions</h2><div id="interface_google_1_1_protobuf_1_1_reflection_1_1_i_field_accessor_1a58f79769cbd5678ef01bc0f5ece128bd">
+    <h3>Clear</h3>
+    <pre class="prettyprint">void Clear(
+  <a href="/reference/csharp/api-docs/interface/google/protobuf/i-message.html#interface_google_1_1_protobuf_1_1_i_message">IMessage</a> message
+)</pre>
+    <div>
+      <p>Clears the field in the specified message. </p>
+      <p>(For repeated fields, this clears the list.) </p>
+    </div>
+  </div><div id="interface_google_1_1_protobuf_1_1_reflection_1_1_i_field_accessor_1aab2955a070151c7f136e66cf21097afd">
+    <h3>GetValue</h3>
+    <pre class="prettyprint">object GetValue(
+  <a href="/reference/csharp/api-docs/interface/google/protobuf/i-message.html#interface_google_1_1_protobuf_1_1_i_message">IMessage</a> message
+)</pre>
+    <div>
+      <p>Fetches the field value. </p>
+      <p>For repeated values, this will be an IList implementation. For map values, this will be an IDictionary implementation. </p>
+    </div>
+  </div><div id="interface_google_1_1_protobuf_1_1_reflection_1_1_i_field_accessor_1ac25b287be468da6ed0d2457ebb82c2e1">
+    <h3>SetValue</h3>
+    <pre class="prettyprint">void SetValue(
+  <a href="/reference/csharp/api-docs/interface/google/protobuf/i-message.html#interface_google_1_1_protobuf_1_1_i_message">IMessage</a> message,
+  object value
+)</pre>
+    <div>
+      <p>Mutator for single "simple" fields only. </p>
+      <p>Repeated fields are mutated by fetching the value and manipulating it as a list. Map fields are mutated by fetching the value and manipulating it as a dictionary. </p>
+      <p />
+      <table class="details responsive">
+        <thead>
+          <th colspan="2">Details</th>
+        </thead>
+        <tbody>
+          <tr>
+            <td>Exceptions</td>
+            <td>
+              <table class="function param responsive">
+                <tbody>
+                  <tr>
+                    <td>
+                      <code>InvalidOperationException</code>
+                    </td>
+                    <td>
+                      <div>The field is not a "simple" field.</div>
+                    </td>
+                  </tr>
+                </tbody>
+              </table>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div></body>
+</html>

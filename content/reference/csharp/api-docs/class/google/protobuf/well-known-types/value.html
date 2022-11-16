@@ -1,0 +1,749 @@
+<!DOCTYPE html>
+<html devsite>
+<head>
+  <title>Google.Protobuf.WellKnownTypes.Value Class Reference</title>
+  <link rel="stylesheet" href="/reference/csharp/api-docs/includes/stylesheet.css">
+</head>
+<body><div id="top"><!-- do not remove this div --></div><h1>Google.<wbr/>Protobuf.<wbr/>WellKnownTypes.<wbr/>Value</h1><p><code><a href="/reference/csharp/api-docs/class/google/protobuf/well-known-types/value.html#class_google_1_1_protobuf_1_1_well_known_types_1_1_value">Value</a></code> represents a dynamically typed value which can be either null, a number, a string, a boolean, a recursive struct value, or a list of values. </p><h2>Summary</h2><p>A producer of value is expected to set one of that variants, absence of any variant indicates an error.</p><p>The JSON representation for <code><a href="/reference/csharp/api-docs/class/google/protobuf/well-known-types/value.html#class_google_1_1_protobuf_1_1_well_known_types_1_1_value">Value</a></code> is JSON value. </p><h3>Inheritance</h3>Inherits from: pb::IMessage< Value ><table class="constructors responsive">
+    <tr>
+      <th colspan="2">
+        <h3>Constructors and Destructors</h3>
+      </th>
+    </tr>
+    <tr>
+      <td colspan="2">
+        <code><a href="#class_google_1_1_protobuf_1_1_well_known_types_1_1_value_1a0c7048fe3558e254a2e477dd46ad8c34">Value</a>()</code>
+        <br />
+      </td>
+    </tr>
+    <tr>
+      <td colspan="2">
+        <code><a href="#class_google_1_1_protobuf_1_1_well_known_types_1_1_value_1a69e46a52eae570fcf533325696c84b37">Value</a>(<a href="/reference/csharp/api-docs/class/google/protobuf/well-known-types/value.html#class_google_1_1_protobuf_1_1_well_known_types_1_1_value">Value</a> other)</code>
+        <br />
+      </td>
+    </tr>
+  </table><table class="constants responsive">
+    <tr>
+      <th colspan="2">
+        <h3>Public types</h3>
+      </th>
+    </tr>
+    <tr>
+      <td>
+        <code><a href="#class_google_1_1_protobuf_1_1_well_known_types_1_1_value_1a591bbbc599c0fc94e6411c449fac0656">KindOneofCase</a></code>
+      </td>
+      <td>enum<div><a href="/reference/csharp/api-docs/class/google/protobuf/well-known-types/enum.html#class_google_1_1_protobuf_1_1_well_known_types_1_1_enum">Enum</a> of possible cases for the "kind" oneof.</div></td>
+    </tr>
+  </table><table class="properties responsive">
+    <tr>
+      <th colspan="2">
+        <h3>Properties</h3>
+      </th>
+    </tr>
+    <tr>
+      <td>
+        <code><a href="#class_google_1_1_protobuf_1_1_well_known_types_1_1_value_1a7101aab68459212e6d27cd74fb4eb3de">BoolValue</a></code>
+      </td>
+      <td>
+        <div>
+          <code>bool</code>
+        </div>
+        <div>Represents a boolean value. </div>
+      </td>
+    </tr>
+    <tr>
+      <td>
+        <code><a href="#class_google_1_1_protobuf_1_1_well_known_types_1_1_value_1a32faf2d2cd1839b9ad54675736ffe7d9">Descriptor</a></code>
+      </td>
+      <td>
+        <div>
+          <code>pbr::MessageDescriptor</code>
+        </div>
+      </td>
+    </tr>
+    <tr>
+      <td>
+        <code><a href="#class_google_1_1_protobuf_1_1_well_known_types_1_1_value_1a9a6bfec6d3412ae5c389482e7e517c1d">Descriptor</a></code>
+      </td>
+      <td>
+        <div>
+          <code>pbr::MessageDescriptor pb::IMessage.</code>
+        </div>
+      </td>
+    </tr>
+    <tr>
+      <td>
+        <code><a href="#class_google_1_1_protobuf_1_1_well_known_types_1_1_value_1a79fda3a8ee4aa6edc519371d01e8e6a8">KindCase</a></code>
+      </td>
+      <td>
+        <div>
+          <code><a href="/reference/csharp/api-docs/class/google/protobuf/well-known-types/value.html#class_google_1_1_protobuf_1_1_well_known_types_1_1_value_1a591bbbc599c0fc94e6411c449fac0656">KindOneofCase</a></code>
+        </div>
+      </td>
+    </tr>
+    <tr>
+      <td>
+        <code><a href="#class_google_1_1_protobuf_1_1_well_known_types_1_1_value_1aae78bd90308e3f02048f0314794394cd">ListValue</a></code>
+      </td>
+      <td>
+        <div>
+          <code>global::Google.Protobuf.WellKnownTypes.ListValue</code>
+        </div>
+        <div>Represents a repeated <code><a href="/reference/csharp/api-docs/class/google/protobuf/well-known-types/value.html#class_google_1_1_protobuf_1_1_well_known_types_1_1_value">Value</a></code>. </div>
+      </td>
+    </tr>
+    <tr>
+      <td>
+        <code><a href="#class_google_1_1_protobuf_1_1_well_known_types_1_1_value_1ab1bdc96acb201cabb7108327bce3bb92">NullValue</a></code>
+      </td>
+      <td>
+        <div>
+          <code>global::Google.Protobuf.WellKnownTypes.NullValue</code>
+        </div>
+        <div>Represents a null value. </div>
+      </td>
+    </tr>
+    <tr>
+      <td>
+        <code><a href="#class_google_1_1_protobuf_1_1_well_known_types_1_1_value_1a43182157632394e4903f99dd1101921b">NumberValue</a></code>
+      </td>
+      <td>
+        <div>
+          <code>double</code>
+        </div>
+        <div>Represents a double value. </div>
+      </td>
+    </tr>
+    <tr>
+      <td>
+        <code><a href="#class_google_1_1_protobuf_1_1_well_known_types_1_1_value_1a6b15a4f004f3541a67a34b1661dff775">Parser</a></code>
+      </td>
+      <td>
+        <div>
+          <code>pb::MessageParser< <a href="/reference/csharp/api-docs/class/google/protobuf/well-known-types/value.html#class_google_1_1_protobuf_1_1_well_known_types_1_1_value">Value</a> ></code>
+        </div>
+      </td>
+    </tr>
+    <tr>
+      <td>
+        <code><a href="#class_google_1_1_protobuf_1_1_well_known_types_1_1_value_1a9d4799a4112753560ed92b61ec18f808">StringValue</a></code>
+      </td>
+      <td>
+        <div>
+          <code>string</code>
+        </div>
+        <div>Represents a string value. </div>
+      </td>
+    </tr>
+    <tr>
+      <td>
+        <code><a href="#class_google_1_1_protobuf_1_1_well_known_types_1_1_value_1a92e5b4d60f94ead20ad0fcb836410ee0">StructValue</a></code>
+      </td>
+      <td>
+        <div>
+          <code>global::Google.Protobuf.WellKnownTypes.Struct</code>
+        </div>
+        <div>Represents a structured value. </div>
+      </td>
+    </tr>
+  </table><table class="properties responsive">
+    <tr>
+      <th colspan="2">
+        <h3>Public attributes</h3>
+      </th>
+    </tr>
+    <tr>
+      <td>
+        <code><a href="#class_google_1_1_protobuf_1_1_well_known_types_1_1_value_1ab2d349c65c75735cc467f1f9e7235d56">BoolValueFieldNumber</a> = 4</code>
+      </td>
+      <td>
+        <div>
+          <code>const int</code>
+        </div>
+        <div><a href="/reference/csharp/api-docs/class/google/protobuf/well-known-types/field.html#class_google_1_1_protobuf_1_1_well_known_types_1_1_field">Field</a> number for the "bool_value" field.</div>
+      </td>
+    </tr>
+    <tr>
+      <td>
+        <code><a href="#class_google_1_1_protobuf_1_1_well_known_types_1_1_value_1a21fcddc33877c8f1b97c7d8fb03da8a2">ListValueFieldNumber</a> = 6</code>
+      </td>
+      <td>
+        <div>
+          <code>const int</code>
+        </div>
+        <div><a href="/reference/csharp/api-docs/class/google/protobuf/well-known-types/field.html#class_google_1_1_protobuf_1_1_well_known_types_1_1_field">Field</a> number for the "list_value" field.</div>
+      </td>
+    </tr>
+    <tr>
+      <td>
+        <code><a href="#class_google_1_1_protobuf_1_1_well_known_types_1_1_value_1ac547998f57b4f0db6c73107d6f77cb5c">NullValueFieldNumber</a> = 1</code>
+      </td>
+      <td>
+        <div>
+          <code>const int</code>
+        </div>
+        <div><a href="/reference/csharp/api-docs/class/google/protobuf/well-known-types/field.html#class_google_1_1_protobuf_1_1_well_known_types_1_1_field">Field</a> number for the "null_value" field.</div>
+      </td>
+    </tr>
+    <tr>
+      <td>
+        <code><a href="#class_google_1_1_protobuf_1_1_well_known_types_1_1_value_1a4094cae6e519fcc4d0aaeaf3398559ea">NumberValueFieldNumber</a> = 2</code>
+      </td>
+      <td>
+        <div>
+          <code>const int</code>
+        </div>
+        <div><a href="/reference/csharp/api-docs/class/google/protobuf/well-known-types/field.html#class_google_1_1_protobuf_1_1_well_known_types_1_1_field">Field</a> number for the "number_value" field.</div>
+      </td>
+    </tr>
+    <tr>
+      <td>
+        <code><a href="#class_google_1_1_protobuf_1_1_well_known_types_1_1_value_1ae81fe68a67bf062d5ca766b0d525de94">StringValueFieldNumber</a> = 3</code>
+      </td>
+      <td>
+        <div>
+          <code>const int</code>
+        </div>
+        <div><a href="/reference/csharp/api-docs/class/google/protobuf/well-known-types/field.html#class_google_1_1_protobuf_1_1_well_known_types_1_1_field">Field</a> number for the "string_value" field.</div>
+      </td>
+    </tr>
+    <tr>
+      <td>
+        <code><a href="#class_google_1_1_protobuf_1_1_well_known_types_1_1_value_1a619c7903845dd1895081703c094797c2">StructValueFieldNumber</a> = 5</code>
+      </td>
+      <td>
+        <div>
+          <code>const int</code>
+        </div>
+        <div><a href="/reference/csharp/api-docs/class/google/protobuf/well-known-types/field.html#class_google_1_1_protobuf_1_1_well_known_types_1_1_field">Field</a> number for the "struct_value" field.</div>
+      </td>
+    </tr>
+  </table><table class="methods responsive">
+    <tr>
+      <th colspan="2">
+        <h3>Public functions</h3>
+      </th>
+    </tr>
+    <tr>
+      <td>
+        <code><a href="#class_google_1_1_protobuf_1_1_well_known_types_1_1_value_1ab82ae6595853c547f87358733029f622">CalculateSize</a>()</code>
+      </td>
+      <td>
+        <div>
+          <code>int</code>
+        </div>
+      </td>
+    </tr>
+    <tr>
+      <td>
+        <code><a href="#class_google_1_1_protobuf_1_1_well_known_types_1_1_value_1a4414ac680a1fc5e539d1675193061150">ClearKind</a>()</code>
+      </td>
+      <td>
+        <div>
+          <code>void</code>
+        </div>
+      </td>
+    </tr>
+    <tr>
+      <td>
+        <code><a href="#class_google_1_1_protobuf_1_1_well_known_types_1_1_value_1a8d56ca03ef50df1bc0b813ae05c49c75">Clone</a>()</code>
+      </td>
+      <td>
+        <div>
+          <code><a href="/reference/csharp/api-docs/class/google/protobuf/well-known-types/value.html#class_google_1_1_protobuf_1_1_well_known_types_1_1_value">Value</a></code>
+        </div>
+      </td>
+    </tr>
+    <tr>
+      <td>
+        <code><a href="#class_google_1_1_protobuf_1_1_well_known_types_1_1_value_1a59c2b5032b7c10d066920fd52fce26c9">Equals</a>(object other)</code>
+      </td>
+      <td>
+        <div>
+          <code>override bool</code>
+        </div>
+      </td>
+    </tr>
+    <tr>
+      <td>
+        <code><a href="#class_google_1_1_protobuf_1_1_well_known_types_1_1_value_1a72533ad7c3c41c50edfd2251983dbed0">Equals</a>(<a href="/reference/csharp/api-docs/class/google/protobuf/well-known-types/value.html#class_google_1_1_protobuf_1_1_well_known_types_1_1_value">Value</a> other)</code>
+      </td>
+      <td>
+        <div>
+          <code>bool</code>
+        </div>
+      </td>
+    </tr>
+    <tr>
+      <td>
+        <code><a href="#class_google_1_1_protobuf_1_1_well_known_types_1_1_value_1a1dc39b416bf075a05377c0e295153fe3">GetHashCode</a>()</code>
+      </td>
+      <td>
+        <div>
+          <code>override int</code>
+        </div>
+      </td>
+    </tr>
+    <tr>
+      <td>
+        <code><a href="#class_google_1_1_protobuf_1_1_well_known_types_1_1_value_1a0f885fc2a414c2cbd58f5a100d845e4d">MergeFrom</a>(<a href="/reference/csharp/api-docs/class/google/protobuf/well-known-types/value.html#class_google_1_1_protobuf_1_1_well_known_types_1_1_value">Value</a> other)</code>
+      </td>
+      <td>
+        <div>
+          <code>void</code>
+        </div>
+      </td>
+    </tr>
+    <tr>
+      <td>
+        <code><a href="#class_google_1_1_protobuf_1_1_well_known_types_1_1_value_1a70155721277a5b648eab9b77588eeb6e">MergeFrom</a>(pb::CodedInputStream input)</code>
+      </td>
+      <td>
+        <div>
+          <code>void</code>
+        </div>
+      </td>
+    </tr>
+    <tr>
+      <td>
+        <code><a href="#class_google_1_1_protobuf_1_1_well_known_types_1_1_value_1aa00e406b0919ec084ef4352c3b1a6a7a">ToString</a>()</code>
+      </td>
+      <td>
+        <div>
+          <code>override string</code>
+        </div>
+      </td>
+    </tr>
+    <tr>
+      <td>
+        <code><a href="#class_google_1_1_protobuf_1_1_well_known_types_1_1_value_1a3de1a5cb4cd0f9f8f4177faae9a2dd7a">WriteTo</a>(pb::CodedOutputStream output)</code>
+      </td>
+      <td>
+        <div>
+          <code>void</code>
+        </div>
+      </td>
+    </tr>
+  </table><table class="methods responsive">
+    <tr>
+      <th colspan="2">
+        <h3>Public static functions</h3>
+      </th>
+    </tr>
+    <tr>
+      <td>
+        <code><a href="#class_google_1_1_protobuf_1_1_well_known_types_1_1_value_1a8518927cafc7a5480df24e1d1e6bee97">ForBool</a>(bool value)</code>
+      </td>
+      <td>
+        <div>
+          <code><a href="/reference/csharp/api-docs/class/google/protobuf/well-known-types/value.html#class_google_1_1_protobuf_1_1_well_known_types_1_1_value">Value</a></code>
+        </div>
+        <div>Convenience method to create a <a href="/reference/csharp/api-docs/class/google/protobuf/well-known-types/value.html#class_google_1_1_protobuf_1_1_well_known_types_1_1_value">Value</a> message with a Boolean value. </div>
+      </td>
+    </tr>
+    <tr>
+      <td>
+        <code><a href="#class_google_1_1_protobuf_1_1_well_known_types_1_1_value_1add23dc0cc5282577e7407030a22806da">ForList</a>(params <a href="/reference/csharp/api-docs/class/google/protobuf/well-known-types/value.html#class_google_1_1_protobuf_1_1_well_known_types_1_1_value">Value</a>[] values)</code>
+      </td>
+      <td>
+        <div>
+          <code><a href="/reference/csharp/api-docs/class/google/protobuf/well-known-types/value.html#class_google_1_1_protobuf_1_1_well_known_types_1_1_value">Value</a></code>
+        </div>
+        <div>Convenience method to create a <a href="/reference/csharp/api-docs/class/google/protobuf/well-known-types/value.html#class_google_1_1_protobuf_1_1_well_known_types_1_1_value">Value</a> message with an initial list of values. </div>
+      </td>
+    </tr>
+    <tr>
+      <td>
+        <code><a href="#class_google_1_1_protobuf_1_1_well_known_types_1_1_value_1a93de33a1cce1be6b88c079ca9ccaf7fe">ForNull</a>()</code>
+      </td>
+      <td>
+        <div>
+          <code><a href="/reference/csharp/api-docs/class/google/protobuf/well-known-types/value.html#class_google_1_1_protobuf_1_1_well_known_types_1_1_value">Value</a></code>
+        </div>
+        <div>Convenience method to create a <a href="/reference/csharp/api-docs/class/google/protobuf/well-known-types/value.html#class_google_1_1_protobuf_1_1_well_known_types_1_1_value">Value</a> message with a null initial value. </div>
+      </td>
+    </tr>
+    <tr>
+      <td>
+        <code><a href="#class_google_1_1_protobuf_1_1_well_known_types_1_1_value_1a8b276d9934f7e100ccd3cd6fc83999d5">ForNumber</a>(double value)</code>
+      </td>
+      <td>
+        <div>
+          <code><a href="/reference/csharp/api-docs/class/google/protobuf/well-known-types/value.html#class_google_1_1_protobuf_1_1_well_known_types_1_1_value">Value</a></code>
+        </div>
+        <div>Convenience method to create a <a href="/reference/csharp/api-docs/class/google/protobuf/well-known-types/value.html#class_google_1_1_protobuf_1_1_well_known_types_1_1_value">Value</a> message with a number value. </div>
+      </td>
+    </tr>
+    <tr>
+      <td>
+        <code><a href="#class_google_1_1_protobuf_1_1_well_known_types_1_1_value_1a8eae27cb6de5939a8743d4c0a4898364">ForString</a>(string value)</code>
+      </td>
+      <td>
+        <div>
+          <code><a href="/reference/csharp/api-docs/class/google/protobuf/well-known-types/value.html#class_google_1_1_protobuf_1_1_well_known_types_1_1_value">Value</a></code>
+        </div>
+        <div>Convenience method to create a <a href="/reference/csharp/api-docs/class/google/protobuf/well-known-types/value.html#class_google_1_1_protobuf_1_1_well_known_types_1_1_value">Value</a> message with a string value. </div>
+      </td>
+    </tr>
+    <tr>
+      <td>
+        <code><a href="#class_google_1_1_protobuf_1_1_well_known_types_1_1_value_1acad2d7b4057e76853878195bd55c04ea">ForStruct</a>(<a href="/reference/csharp/api-docs/class/google/protobuf/well-known-types/struct.html#class_google_1_1_protobuf_1_1_well_known_types_1_1_struct">Struct</a> value)</code>
+      </td>
+      <td>
+        <div>
+          <code><a href="/reference/csharp/api-docs/class/google/protobuf/well-known-types/value.html#class_google_1_1_protobuf_1_1_well_known_types_1_1_value">Value</a></code>
+        </div>
+        <div>Convenience method to create a <a href="/reference/csharp/api-docs/class/google/protobuf/well-known-types/value.html#class_google_1_1_protobuf_1_1_well_known_types_1_1_value">Value</a> message with an initial struct value </div>
+      </td>
+    </tr>
+  </table><h2>Public types</h2><div id="class_google_1_1_protobuf_1_1_well_known_types_1_1_value_1a591bbbc599c0fc94e6411c449fac0656">
+    <h3>KindOneofCase</h3>
+    <pre class="prettyprint"> KindOneofCase</pre>
+    <div>
+      <p><a href="/reference/csharp/api-docs/class/google/protobuf/well-known-types/enum.html#class_google_1_1_protobuf_1_1_well_known_types_1_1_enum">Enum</a> of possible cases for the "kind" oneof.</p>
+    </div>
+  </div><h2>Properties</h2><div id="class_google_1_1_protobuf_1_1_well_known_types_1_1_value_1a7101aab68459212e6d27cd74fb4eb3de">
+    <h3>BoolValue</h3>
+    <pre class="prettyprint">bool BoolValue</pre>
+    <div>
+      <p>Represents a boolean value. </p>
+    </div>
+  </div><div id="class_google_1_1_protobuf_1_1_well_known_types_1_1_value_1a32faf2d2cd1839b9ad54675736ffe7d9">
+    <h3>Descriptor</h3>
+    <pre class="prettyprint">pbr::MessageDescriptor Descriptor</pre>
+    <div />
+  </div><div id="class_google_1_1_protobuf_1_1_well_known_types_1_1_value_1a9a6bfec6d3412ae5c389482e7e517c1d">
+    <h3>Descriptor</h3>
+    <pre class="prettyprint">pbr::MessageDescriptor pb::IMessage. Descriptor</pre>
+    <div />
+  </div><div id="class_google_1_1_protobuf_1_1_well_known_types_1_1_value_1a79fda3a8ee4aa6edc519371d01e8e6a8">
+    <h3>KindCase</h3>
+    <pre class="prettyprint"><a href="/reference/csharp/api-docs/class/google/protobuf/well-known-types/value.html#class_google_1_1_protobuf_1_1_well_known_types_1_1_value_1a591bbbc599c0fc94e6411c449fac0656">KindOneofCase</a> KindCase</pre>
+    <div />
+  </div><div id="class_google_1_1_protobuf_1_1_well_known_types_1_1_value_1aae78bd90308e3f02048f0314794394cd">
+    <h3>ListValue</h3>
+    <pre class="prettyprint">global::Google.Protobuf.WellKnownTypes.ListValue ListValue</pre>
+    <div>
+      <p>Represents a repeated <code><a href="/reference/csharp/api-docs/class/google/protobuf/well-known-types/value.html#class_google_1_1_protobuf_1_1_well_known_types_1_1_value">Value</a></code>. </p>
+    </div>
+  </div><div id="class_google_1_1_protobuf_1_1_well_known_types_1_1_value_1ab1bdc96acb201cabb7108327bce3bb92">
+    <h3>NullValue</h3>
+    <pre class="prettyprint">global::Google.Protobuf.WellKnownTypes.NullValue NullValue</pre>
+    <div>
+      <p>Represents a null value. </p>
+    </div>
+  </div><div id="class_google_1_1_protobuf_1_1_well_known_types_1_1_value_1a43182157632394e4903f99dd1101921b">
+    <h3>NumberValue</h3>
+    <pre class="prettyprint">double NumberValue</pre>
+    <div>
+      <p>Represents a double value. </p>
+    </div>
+  </div><div id="class_google_1_1_protobuf_1_1_well_known_types_1_1_value_1a6b15a4f004f3541a67a34b1661dff775">
+    <h3>Parser</h3>
+    <pre class="prettyprint">pb::MessageParser< <a href="/reference/csharp/api-docs/class/google/protobuf/well-known-types/value.html#class_google_1_1_protobuf_1_1_well_known_types_1_1_value">Value</a> > Parser</pre>
+    <div />
+  </div><div id="class_google_1_1_protobuf_1_1_well_known_types_1_1_value_1a9d4799a4112753560ed92b61ec18f808">
+    <h3>StringValue</h3>
+    <pre class="prettyprint">string StringValue</pre>
+    <div>
+      <p>Represents a string value. </p>
+    </div>
+  </div><div id="class_google_1_1_protobuf_1_1_well_known_types_1_1_value_1a92e5b4d60f94ead20ad0fcb836410ee0">
+    <h3>StructValue</h3>
+    <pre class="prettyprint">global::Google.Protobuf.WellKnownTypes.Struct StructValue</pre>
+    <div>
+      <p>Represents a structured value. </p>
+    </div>
+  </div><h2>Public attributes</h2><div id="class_google_1_1_protobuf_1_1_well_known_types_1_1_value_1ab2d349c65c75735cc467f1f9e7235d56">
+    <h3>BoolValueFieldNumber</h3>
+    <pre class="prettyprint">const int BoolValueFieldNumber = 4</pre>
+    <div>
+      <p><a href="/reference/csharp/api-docs/class/google/protobuf/well-known-types/field.html#class_google_1_1_protobuf_1_1_well_known_types_1_1_field">Field</a> number for the "bool_value" field.</p>
+    </div>
+  </div><div id="class_google_1_1_protobuf_1_1_well_known_types_1_1_value_1a21fcddc33877c8f1b97c7d8fb03da8a2">
+    <h3>ListValueFieldNumber</h3>
+    <pre class="prettyprint">const int ListValueFieldNumber = 6</pre>
+    <div>
+      <p><a href="/reference/csharp/api-docs/class/google/protobuf/well-known-types/field.html#class_google_1_1_protobuf_1_1_well_known_types_1_1_field">Field</a> number for the "list_value" field.</p>
+    </div>
+  </div><div id="class_google_1_1_protobuf_1_1_well_known_types_1_1_value_1ac547998f57b4f0db6c73107d6f77cb5c">
+    <h3>NullValueFieldNumber</h3>
+    <pre class="prettyprint">const int NullValueFieldNumber = 1</pre>
+    <div>
+      <p><a href="/reference/csharp/api-docs/class/google/protobuf/well-known-types/field.html#class_google_1_1_protobuf_1_1_well_known_types_1_1_field">Field</a> number for the "null_value" field.</p>
+    </div>
+  </div><div id="class_google_1_1_protobuf_1_1_well_known_types_1_1_value_1a4094cae6e519fcc4d0aaeaf3398559ea">
+    <h3>NumberValueFieldNumber</h3>
+    <pre class="prettyprint">const int NumberValueFieldNumber = 2</pre>
+    <div>
+      <p><a href="/reference/csharp/api-docs/class/google/protobuf/well-known-types/field.html#class_google_1_1_protobuf_1_1_well_known_types_1_1_field">Field</a> number for the "number_value" field.</p>
+    </div>
+  </div><div id="class_google_1_1_protobuf_1_1_well_known_types_1_1_value_1ae81fe68a67bf062d5ca766b0d525de94">
+    <h3>StringValueFieldNumber</h3>
+    <pre class="prettyprint">const int StringValueFieldNumber = 3</pre>
+    <div>
+      <p><a href="/reference/csharp/api-docs/class/google/protobuf/well-known-types/field.html#class_google_1_1_protobuf_1_1_well_known_types_1_1_field">Field</a> number for the "string_value" field.</p>
+    </div>
+  </div><div id="class_google_1_1_protobuf_1_1_well_known_types_1_1_value_1a619c7903845dd1895081703c094797c2">
+    <h3>StructValueFieldNumber</h3>
+    <pre class="prettyprint">const int StructValueFieldNumber = 5</pre>
+    <div>
+      <p><a href="/reference/csharp/api-docs/class/google/protobuf/well-known-types/field.html#class_google_1_1_protobuf_1_1_well_known_types_1_1_field">Field</a> number for the "struct_value" field.</p>
+    </div>
+  </div><h2>Public functions</h2><div id="class_google_1_1_protobuf_1_1_well_known_types_1_1_value_1ab82ae6595853c547f87358733029f622">
+    <h3>CalculateSize</h3>
+    <pre class="prettyprint">int CalculateSize()</pre>
+    <div />
+  </div><div id="class_google_1_1_protobuf_1_1_well_known_types_1_1_value_1a4414ac680a1fc5e539d1675193061150">
+    <h3>ClearKind</h3>
+    <pre class="prettyprint">void ClearKind()</pre>
+    <div />
+  </div><div id="class_google_1_1_protobuf_1_1_well_known_types_1_1_value_1a8d56ca03ef50df1bc0b813ae05c49c75">
+    <h3>Clone</h3>
+    <pre class="prettyprint"><a href="/reference/csharp/api-docs/class/google/protobuf/well-known-types/value.html#class_google_1_1_protobuf_1_1_well_known_types_1_1_value">Value</a> Clone()</pre>
+    <div />
+  </div><div id="class_google_1_1_protobuf_1_1_well_known_types_1_1_value_1a59c2b5032b7c10d066920fd52fce26c9">
+    <h3>Equals</h3>
+    <pre class="prettyprint">override bool Equals(
+  object other
+)</pre>
+    <div />
+  </div><div id="class_google_1_1_protobuf_1_1_well_known_types_1_1_value_1a72533ad7c3c41c50edfd2251983dbed0">
+    <h3>Equals</h3>
+    <pre class="prettyprint">bool Equals(
+  <a href="/reference/csharp/api-docs/class/google/protobuf/well-known-types/value.html#class_google_1_1_protobuf_1_1_well_known_types_1_1_value">Value</a> other
+)</pre>
+    <div />
+  </div><div id="class_google_1_1_protobuf_1_1_well_known_types_1_1_value_1a1dc39b416bf075a05377c0e295153fe3">
+    <h3>GetHashCode</h3>
+    <pre class="prettyprint">override int GetHashCode()</pre>
+    <div />
+  </div><div id="class_google_1_1_protobuf_1_1_well_known_types_1_1_value_1a0f885fc2a414c2cbd58f5a100d845e4d">
+    <h3>MergeFrom</h3>
+    <pre class="prettyprint">void MergeFrom(
+  <a href="/reference/csharp/api-docs/class/google/protobuf/well-known-types/value.html#class_google_1_1_protobuf_1_1_well_known_types_1_1_value">Value</a> other
+)</pre>
+    <div />
+  </div><div id="class_google_1_1_protobuf_1_1_well_known_types_1_1_value_1a70155721277a5b648eab9b77588eeb6e">
+    <h3>MergeFrom</h3>
+    <pre class="prettyprint">void MergeFrom(
+  pb::CodedInputStream input
+)</pre>
+    <div />
+  </div><div id="class_google_1_1_protobuf_1_1_well_known_types_1_1_value_1aa00e406b0919ec084ef4352c3b1a6a7a">
+    <h3>ToString</h3>
+    <pre class="prettyprint">override string ToString()</pre>
+    <div />
+  </div><div id="class_google_1_1_protobuf_1_1_well_known_types_1_1_value_1a0c7048fe3558e254a2e477dd46ad8c34">
+    <h3>Value</h3>
+    <pre class="prettyprint"> Value()</pre>
+    <div />
+  </div><div id="class_google_1_1_protobuf_1_1_well_known_types_1_1_value_1a69e46a52eae570fcf533325696c84b37">
+    <h3>Value</h3>
+    <pre class="prettyprint"> Value(
+  <a href="/reference/csharp/api-docs/class/google/protobuf/well-known-types/value.html#class_google_1_1_protobuf_1_1_well_known_types_1_1_value">Value</a> other
+)</pre>
+    <div />
+  </div><div id="class_google_1_1_protobuf_1_1_well_known_types_1_1_value_1a3de1a5cb4cd0f9f8f4177faae9a2dd7a">
+    <h3>WriteTo</h3>
+    <pre class="prettyprint">void WriteTo(
+  pb::CodedOutputStream output
+)</pre>
+    <div />
+  </div><h2>Public static functions</h2><div id="class_google_1_1_protobuf_1_1_well_known_types_1_1_value_1a8518927cafc7a5480df24e1d1e6bee97">
+    <h3>ForBool</h3>
+    <pre class="prettyprint"><a href="/reference/csharp/api-docs/class/google/protobuf/well-known-types/value.html#class_google_1_1_protobuf_1_1_well_known_types_1_1_value">Value</a> ForBool(
+  bool value
+)</pre>
+    <div>
+      <p>Convenience method to create a <a href="/reference/csharp/api-docs/class/google/protobuf/well-known-types/value.html#class_google_1_1_protobuf_1_1_well_known_types_1_1_value">Value</a> message with a Boolean value. </p>
+      <p />
+      <table class="details responsive">
+        <thead>
+          <th colspan="2">Details</th>
+        </thead>
+        <tbody>
+          <tr>
+            <td>Parameters</td>
+            <td>
+              <table class="function param responsive">
+                <tbody>
+                  <tr>
+                    <td>
+                      <code>value</code>
+                    </td>
+                    <td>
+                      <div><a href="/reference/csharp/api-docs/class/google/protobuf/well-known-types/value.html#class_google_1_1_protobuf_1_1_well_known_types_1_1_value">Value</a> to set for the <a href="/reference/csharp/api-docs/class/google/protobuf/well-known-types/bool-value.html#class_google_1_1_protobuf_1_1_well_known_types_1_1_bool_value">BoolValue</a> property.</div>
+                    </td>
+                  </tr>
+                </tbody>
+              </table>
+            </td>
+          </tr>
+          <tr>
+            <td>
+              <b>Returns</b>
+            </td>
+            <td>
+              <div>A newly-created <a href="/reference/csharp/api-docs/class/google/protobuf/well-known-types/value.html#class_google_1_1_protobuf_1_1_well_known_types_1_1_value">Value</a> message with the given value.</div>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div><div id="class_google_1_1_protobuf_1_1_well_known_types_1_1_value_1add23dc0cc5282577e7407030a22806da">
+    <h3>ForList</h3>
+    <pre class="prettyprint"><a href="/reference/csharp/api-docs/class/google/protobuf/well-known-types/value.html#class_google_1_1_protobuf_1_1_well_known_types_1_1_value">Value</a> ForList(
+  params <a href="/reference/csharp/api-docs/class/google/protobuf/well-known-types/value.html#class_google_1_1_protobuf_1_1_well_known_types_1_1_value">Value</a>[] values
+)</pre>
+    <div>
+      <p>Convenience method to create a <a href="/reference/csharp/api-docs/class/google/protobuf/well-known-types/value.html#class_google_1_1_protobuf_1_1_well_known_types_1_1_value">Value</a> message with an initial list of values. </p>
+      <p>The values provided are not cloned; the references are copied directly.</p>
+      <p />
+      <table class="details responsive">
+        <thead>
+          <th colspan="2">Details</th>
+        </thead>
+        <tbody>
+          <tr>
+            <td>
+              <b>Returns</b>
+            </td>
+            <td>
+              <div>A newly-created <a href="/reference/csharp/api-docs/class/google/protobuf/well-known-types/value.html#class_google_1_1_protobuf_1_1_well_known_types_1_1_value">Value</a> message an initial list value.</div>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div><div id="class_google_1_1_protobuf_1_1_well_known_types_1_1_value_1a93de33a1cce1be6b88c079ca9ccaf7fe">
+    <h3>ForNull</h3>
+    <pre class="prettyprint"><a href="/reference/csharp/api-docs/class/google/protobuf/well-known-types/value.html#class_google_1_1_protobuf_1_1_well_known_types_1_1_value">Value</a> ForNull()</pre>
+    <div>
+      <p>Convenience method to create a <a href="/reference/csharp/api-docs/class/google/protobuf/well-known-types/value.html#class_google_1_1_protobuf_1_1_well_known_types_1_1_value">Value</a> message with a null initial value. </p>
+      <p />
+      <table class="details responsive">
+        <thead>
+          <th colspan="2">Details</th>
+        </thead>
+        <tbody>
+          <tr>
+            <td>
+              <b>Returns</b>
+            </td>
+            <td>
+              <div>A newly-created <a href="/reference/csharp/api-docs/class/google/protobuf/well-known-types/value.html#class_google_1_1_protobuf_1_1_well_known_types_1_1_value">Value</a> message a null initial value.</div>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div><div id="class_google_1_1_protobuf_1_1_well_known_types_1_1_value_1a8b276d9934f7e100ccd3cd6fc83999d5">
+    <h3>ForNumber</h3>
+    <pre class="prettyprint"><a href="/reference/csharp/api-docs/class/google/protobuf/well-known-types/value.html#class_google_1_1_protobuf_1_1_well_known_types_1_1_value">Value</a> ForNumber(
+  double value
+)</pre>
+    <div>
+      <p>Convenience method to create a <a href="/reference/csharp/api-docs/class/google/protobuf/well-known-types/value.html#class_google_1_1_protobuf_1_1_well_known_types_1_1_value">Value</a> message with a number value. </p>
+      <p />
+      <table class="details responsive">
+        <thead>
+          <th colspan="2">Details</th>
+        </thead>
+        <tbody>
+          <tr>
+            <td>Parameters</td>
+            <td>
+              <table class="function param responsive">
+                <tbody>
+                  <tr>
+                    <td>
+                      <code>value</code>
+                    </td>
+                    <td>
+                      <div><a href="/reference/csharp/api-docs/class/google/protobuf/well-known-types/value.html#class_google_1_1_protobuf_1_1_well_known_types_1_1_value">Value</a> to set for the NumberValue property.</div>
+                    </td>
+                  </tr>
+                </tbody>
+              </table>
+            </td>
+          </tr>
+          <tr>
+            <td>
+              <b>Returns</b>
+            </td>
+            <td>
+              <div>A newly-created <a href="/reference/csharp/api-docs/class/google/protobuf/well-known-types/value.html#class_google_1_1_protobuf_1_1_well_known_types_1_1_value">Value</a> message with the given value.</div>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div><div id="class_google_1_1_protobuf_1_1_well_known_types_1_1_value_1a8eae27cb6de5939a8743d4c0a4898364">
+    <h3>ForString</h3>
+    <pre class="prettyprint"><a href="/reference/csharp/api-docs/class/google/protobuf/well-known-types/value.html#class_google_1_1_protobuf_1_1_well_known_types_1_1_value">Value</a> ForString(
+  string value
+)</pre>
+    <div>
+      <p>Convenience method to create a <a href="/reference/csharp/api-docs/class/google/protobuf/well-known-types/value.html#class_google_1_1_protobuf_1_1_well_known_types_1_1_value">Value</a> message with a string value. </p>
+      <p />
+      <table class="details responsive">
+        <thead>
+          <th colspan="2">Details</th>
+        </thead>
+        <tbody>
+          <tr>
+            <td>Parameters</td>
+            <td>
+              <table class="function param responsive">
+                <tbody>
+                  <tr>
+                    <td>
+                      <code>value</code>
+                    </td>
+                    <td>
+                      <div><a href="/reference/csharp/api-docs/class/google/protobuf/well-known-types/value.html#class_google_1_1_protobuf_1_1_well_known_types_1_1_value">Value</a> to set for the <a href="/reference/csharp/api-docs/class/google/protobuf/well-known-types/string-value.html#class_google_1_1_protobuf_1_1_well_known_types_1_1_string_value">StringValue</a> property.</div>
+                    </td>
+                  </tr>
+                </tbody>
+              </table>
+            </td>
+          </tr>
+          <tr>
+            <td>
+              <b>Returns</b>
+            </td>
+            <td>
+              <div>A newly-created <a href="/reference/csharp/api-docs/class/google/protobuf/well-known-types/value.html#class_google_1_1_protobuf_1_1_well_known_types_1_1_value">Value</a> message with the given value.</div>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div><div id="class_google_1_1_protobuf_1_1_well_known_types_1_1_value_1acad2d7b4057e76853878195bd55c04ea">
+    <h3>ForStruct</h3>
+    <pre class="prettyprint"><a href="/reference/csharp/api-docs/class/google/protobuf/well-known-types/value.html#class_google_1_1_protobuf_1_1_well_known_types_1_1_value">Value</a> ForStruct(
+  <a href="/reference/csharp/api-docs/class/google/protobuf/well-known-types/struct.html#class_google_1_1_protobuf_1_1_well_known_types_1_1_struct">Struct</a> value
+)</pre>
+    <div>
+      <p>Convenience method to create a <a href="/reference/csharp/api-docs/class/google/protobuf/well-known-types/value.html#class_google_1_1_protobuf_1_1_well_known_types_1_1_value">Value</a> message with an initial struct value </p>
+      <p>The value provided is not cloned; the reference is copied directly.</p>
+      <p />
+      <table class="details responsive">
+        <thead>
+          <th colspan="2">Details</th>
+        </thead>
+        <tbody>
+          <tr>
+            <td>
+              <b>Returns</b>
+            </td>
+            <td>
+              <div>A newly-created <a href="/reference/csharp/api-docs/class/google/protobuf/well-known-types/value.html#class_google_1_1_protobuf_1_1_well_known_types_1_1_value">Value</a> message an initial struct value.</div>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div></body>
+</html>

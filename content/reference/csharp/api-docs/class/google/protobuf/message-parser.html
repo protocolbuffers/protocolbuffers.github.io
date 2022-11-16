@@ -1,0 +1,352 @@
+<!DOCTYPE html>
+<html devsite>
+<head>
+  <title>Google.Protobuf.MessageParser Class Reference</title>
+  <link rel="stylesheet" href="/reference/csharp/api-docs/includes/stylesheet.css">
+</head>
+<body><div id="top"><!-- do not remove this div --></div><h1>Google.<wbr/>Protobuf.<wbr/>MessageParser</h1><p>A general message parser, typically used by reflection-based code as all the methods return simple <a href="/reference/csharp/api-docs/interface/google/protobuf/i-message.html#interface_google_1_1_protobuf_1_1_i_message">IMessage</a>. </p><h2>Summary</h2><h3>Inheritance</h3>Direct Known Subclasses:<a href="/reference/csharp/api-docs/class/google/protobuf/message-parser-t-.html">Google.Protobuf.MessageParser< T ></a><table class="methods responsive">
+    <tr>
+      <th colspan="2">
+        <h3>Public functions</h3>
+      </th>
+    </tr>
+    <tr>
+      <td>
+        <code><a href="#class_google_1_1_protobuf_1_1_message_parser_1a47e94dd6d35594250a54858f99bc5b28">ParseDelimitedFrom</a>(Stream input)</code>
+      </td>
+      <td>
+        <div>
+          <code><a href="/reference/csharp/api-docs/interface/google/protobuf/i-message.html#interface_google_1_1_protobuf_1_1_i_message">IMessage</a></code>
+        </div>
+        <div>Parses a length-delimited message from the given stream. </div>
+      </td>
+    </tr>
+    <tr>
+      <td>
+        <code><a href="#class_google_1_1_protobuf_1_1_message_parser_1ad8b5adc3366c4d6b6f9b9cc88f616760">ParseFrom</a>(byte[] data)</code>
+      </td>
+      <td>
+        <div>
+          <code><a href="/reference/csharp/api-docs/interface/google/protobuf/i-message.html#interface_google_1_1_protobuf_1_1_i_message">IMessage</a></code>
+        </div>
+        <div>Parses a message from a byte array. </div>
+      </td>
+    </tr>
+    <tr>
+      <td>
+        <code><a href="#class_google_1_1_protobuf_1_1_message_parser_1a7f542c28156fc2f0d409ecd2a700c10a">ParseFrom</a>(<a href="/reference/csharp/api-docs/class/google/protobuf/byte-string.html#class_google_1_1_protobuf_1_1_byte_string">ByteString</a> data)</code>
+      </td>
+      <td>
+        <div>
+          <code><a href="/reference/csharp/api-docs/interface/google/protobuf/i-message.html#interface_google_1_1_protobuf_1_1_i_message">IMessage</a></code>
+        </div>
+        <div>Parses a message from the given byte string. </div>
+      </td>
+    </tr>
+    <tr>
+      <td>
+        <code><a href="#class_google_1_1_protobuf_1_1_message_parser_1a0d6dd59d95463e0884cc7e168e12246f">ParseFrom</a>(Stream input)</code>
+      </td>
+      <td>
+        <div>
+          <code><a href="/reference/csharp/api-docs/interface/google/protobuf/i-message.html#interface_google_1_1_protobuf_1_1_i_message">IMessage</a></code>
+        </div>
+        <div>Parses a message from the given stream. </div>
+      </td>
+    </tr>
+    <tr>
+      <td>
+        <code><a href="#class_google_1_1_protobuf_1_1_message_parser_1a110e5d9bc61837e369e5deb093f59161">ParseFrom</a>(<a href="/reference/csharp/api-docs/class/google/protobuf/coded-input-stream.html#class_google_1_1_protobuf_1_1_coded_input_stream">CodedInputStream</a> input)</code>
+      </td>
+      <td>
+        <div>
+          <code><a href="/reference/csharp/api-docs/interface/google/protobuf/i-message.html#interface_google_1_1_protobuf_1_1_i_message">IMessage</a></code>
+        </div>
+        <div>Parses a message from the given coded input stream. </div>
+      </td>
+    </tr>
+    <tr>
+      <td>
+        <code><a href="#class_google_1_1_protobuf_1_1_message_parser_1a36b576ae020311bc662ce28e47f07d39">ParseJson</a>(string json)</code>
+      </td>
+      <td>
+        <div>
+          <code><a href="/reference/csharp/api-docs/interface/google/protobuf/i-message.html#interface_google_1_1_protobuf_1_1_i_message">IMessage</a></code>
+        </div>
+        <div>Parses a message from the given JSON. </div>
+      </td>
+    </tr>
+  </table><h2>Public functions</h2><div id="class_google_1_1_protobuf_1_1_message_parser_1a47e94dd6d35594250a54858f99bc5b28">
+    <h3>ParseDelimitedFrom</h3>
+    <pre class="prettyprint"><a href="/reference/csharp/api-docs/interface/google/protobuf/i-message.html#interface_google_1_1_protobuf_1_1_i_message">IMessage</a> ParseDelimitedFrom(
+  Stream input
+)</pre>
+    <div>
+      <p>Parses a length-delimited message from the given stream. </p>
+      <p>The stream is expected to contain a length and then the data. Only the amount of data specified by the length will be consumed. </p>
+      <p />
+      <table class="details responsive">
+        <thead>
+          <th colspan="2">Details</th>
+        </thead>
+        <tbody>
+          <tr>
+            <td>Parameters</td>
+            <td>
+              <table class="function param responsive">
+                <tbody>
+                  <tr>
+                    <td>
+                      <code>input</code>
+                    </td>
+                    <td>
+                      <div>The stream to parse.</div>
+                    </td>
+                  </tr>
+                </tbody>
+              </table>
+            </td>
+          </tr>
+          <tr>
+            <td>
+              <b>Returns</b>
+            </td>
+            <td>
+              <div>The parsed message.</div>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div><div id="class_google_1_1_protobuf_1_1_message_parser_1ad8b5adc3366c4d6b6f9b9cc88f616760">
+    <h3>ParseFrom</h3>
+    <pre class="prettyprint"><a href="/reference/csharp/api-docs/interface/google/protobuf/i-message.html#interface_google_1_1_protobuf_1_1_i_message">IMessage</a> ParseFrom(
+  byte[] data
+)</pre>
+    <div>
+      <p>Parses a message from a byte array. </p>
+      <p />
+      <table class="details responsive">
+        <thead>
+          <th colspan="2">Details</th>
+        </thead>
+        <tbody>
+          <tr>
+            <td>Parameters</td>
+            <td>
+              <table class="function param responsive">
+                <tbody>
+                  <tr>
+                    <td>
+                      <code>data</code>
+                    </td>
+                    <td>
+                      <div>The byte array containing the message. Must not be null.</div>
+                    </td>
+                  </tr>
+                </tbody>
+              </table>
+            </td>
+          </tr>
+          <tr>
+            <td>
+              <b>Returns</b>
+            </td>
+            <td>
+              <div>The newly parsed message.</div>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div><div id="class_google_1_1_protobuf_1_1_message_parser_1a7f542c28156fc2f0d409ecd2a700c10a">
+    <h3>ParseFrom</h3>
+    <pre class="prettyprint"><a href="/reference/csharp/api-docs/interface/google/protobuf/i-message.html#interface_google_1_1_protobuf_1_1_i_message">IMessage</a> ParseFrom(
+  <a href="/reference/csharp/api-docs/class/google/protobuf/byte-string.html#class_google_1_1_protobuf_1_1_byte_string">ByteString</a> data
+)</pre>
+    <div>
+      <p>Parses a message from the given byte string. </p>
+      <p />
+      <table class="details responsive">
+        <thead>
+          <th colspan="2">Details</th>
+        </thead>
+        <tbody>
+          <tr>
+            <td>Parameters</td>
+            <td>
+              <table class="function param responsive">
+                <tbody>
+                  <tr>
+                    <td>
+                      <code>data</code>
+                    </td>
+                    <td>
+                      <div>The data to parse.</div>
+                    </td>
+                  </tr>
+                </tbody>
+              </table>
+            </td>
+          </tr>
+          <tr>
+            <td>
+              <b>Returns</b>
+            </td>
+            <td>
+              <div>The parsed message.</div>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div><div id="class_google_1_1_protobuf_1_1_message_parser_1a0d6dd59d95463e0884cc7e168e12246f">
+    <h3>ParseFrom</h3>
+    <pre class="prettyprint"><a href="/reference/csharp/api-docs/interface/google/protobuf/i-message.html#interface_google_1_1_protobuf_1_1_i_message">IMessage</a> ParseFrom(
+  Stream input
+)</pre>
+    <div>
+      <p>Parses a message from the given stream. </p>
+      <p />
+      <table class="details responsive">
+        <thead>
+          <th colspan="2">Details</th>
+        </thead>
+        <tbody>
+          <tr>
+            <td>Parameters</td>
+            <td>
+              <table class="function param responsive">
+                <tbody>
+                  <tr>
+                    <td>
+                      <code>input</code>
+                    </td>
+                    <td>
+                      <div>The stream to parse.</div>
+                    </td>
+                  </tr>
+                </tbody>
+              </table>
+            </td>
+          </tr>
+          <tr>
+            <td>
+              <b>Returns</b>
+            </td>
+            <td>
+              <div>The parsed message.</div>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div><div id="class_google_1_1_protobuf_1_1_message_parser_1a110e5d9bc61837e369e5deb093f59161">
+    <h3>ParseFrom</h3>
+    <pre class="prettyprint"><a href="/reference/csharp/api-docs/interface/google/protobuf/i-message.html#interface_google_1_1_protobuf_1_1_i_message">IMessage</a> ParseFrom(
+  <a href="/reference/csharp/api-docs/class/google/protobuf/coded-input-stream.html#class_google_1_1_protobuf_1_1_coded_input_stream">CodedInputStream</a> input
+)</pre>
+    <div>
+      <p>Parses a message from the given coded input stream. </p>
+      <p />
+      <table class="details responsive">
+        <thead>
+          <th colspan="2">Details</th>
+        </thead>
+        <tbody>
+          <tr>
+            <td>Parameters</td>
+            <td>
+              <table class="function param responsive">
+                <tbody>
+                  <tr>
+                    <td>
+                      <code>input</code>
+                    </td>
+                    <td>
+                      <div>The stream to parse.</div>
+                    </td>
+                  </tr>
+                </tbody>
+              </table>
+            </td>
+          </tr>
+          <tr>
+            <td>
+              <b>Returns</b>
+            </td>
+            <td>
+              <div>The parsed message.</div>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div><div id="class_google_1_1_protobuf_1_1_message_parser_1a36b576ae020311bc662ce28e47f07d39">
+    <h3>ParseJson</h3>
+    <pre class="prettyprint"><a href="/reference/csharp/api-docs/interface/google/protobuf/i-message.html#interface_google_1_1_protobuf_1_1_i_message">IMessage</a> ParseJson(
+  string json
+)</pre>
+    <div>
+      <p>Parses a message from the given JSON. </p>
+      <p />
+      <table class="details responsive">
+        <thead>
+          <th colspan="2">Details</th>
+        </thead>
+        <tbody>
+          <tr>
+            <td>Parameters</td>
+            <td>
+              <table class="function param responsive">
+                <tbody>
+                  <tr>
+                    <td>
+                      <code>json</code>
+                    </td>
+                    <td>
+                      <div>The JSON to parse.</div>
+                    </td>
+                  </tr>
+                </tbody>
+              </table>
+            </td>
+          </tr>
+          <tr>
+            <td>Exceptions</td>
+            <td>
+              <table class="function param responsive">
+                <tbody>
+                  <tr>
+                    <td>
+                      <code>InvalidJsonException</code>
+                    </td>
+                    <td>
+                      <div>The JSON does not comply with RFC 7159</div>
+                    </td>
+                  </tr>
+                  <tr>
+                    <td>
+                      <code>InvalidProtocolBufferException</code>
+                    </td>
+                    <td>
+                      <div>The JSON does not represent a Protocol Buffers message correctly</div>
+                    </td>
+                  </tr>
+                </tbody>
+              </table>
+            </td>
+          </tr>
+          <tr>
+            <td>
+              <b>Returns</b>
+            </td>
+            <td>
+              <div>The parsed message.</div>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div></body>
+</html>

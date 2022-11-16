@@ -1,0 +1,552 @@
+<!DOCTYPE html>
+<html devsite>
+<head>
+  <title>Protocol Buffers .NET Runtime Library API Reference</title>
+  <link rel="stylesheet" href="/reference/csharp/api-docs/includes/stylesheet.css">
+</head>
+<body>
+  <div id="top"><!-- do not remove this div --></div>
+  <h1>Protocol Buffers .NET Runtime Library API Reference</h1>
+  <div>Protocol Buffers .NET Runtime Library</div>
+  <h2>
+    <a href="/reference/csharp/api-docs/namespace/google/protobuf.html">Google.<wbr/>Protobuf</a>
+  </h2>
+  <table class="nested-classes responsive">
+    <tbody>
+      <tr>
+        <th colspan="2">
+          <h3>Classes</h3>
+        </th>
+      </tr>
+      <tr>
+        <td>
+          <a href="/reference/csharp/api-docs/class/google/protobuf/byte-string.html">ByteString</a>
+        </td>
+        <td>Immutable array of bytes. </td>
+      </tr>
+      <tr>
+        <td>
+          <a href="/reference/csharp/api-docs/class/google/protobuf/coded-input-stream.html">CodedInputStream</a>
+        </td>
+        <td>Reads and decodes protocol message fields. </td>
+      </tr>
+      <tr>
+        <td>
+          <a href="/reference/csharp/api-docs/class/google/protobuf/coded-output-stream.html">CodedOutputStream</a>
+        </td>
+        <td>Encodes and writes protocol message fields. </td>
+      </tr>
+      <tr>
+        <td>
+          <a href="/reference/csharp/api-docs/class/google/protobuf/coded-output-stream/out-of-space-exception.html">CodedOutputStream.OutOfSpaceException</a>
+        </td>
+        <td>Indicates that a <a href="/reference/csharp/api-docs/class/google/protobuf/coded-output-stream.html#class_google_1_1_protobuf_1_1_coded_output_stream">CodedOutputStream</a> wrapping a flat byte array ran out of space. </td>
+      </tr>
+      <tr>
+        <td>
+          <a href="/reference/csharp/api-docs/class/google/protobuf/field-codec.html">FieldCodec</a>
+        </td>
+        <td>Factory methods for FieldCodec{T}. </td>
+      </tr>
+      <tr>
+        <td>
+          <a href="/reference/csharp/api-docs/class/google/protobuf/field-codec-t-.html">FieldCodec< T ></a>
+        </td>
+        <td />
+      </tr>
+      <tr>
+        <td>
+          <a href="/reference/csharp/api-docs/class/google/protobuf/invalid-json-exception.html">InvalidJsonException</a>
+        </td>
+        <td>Thrown when an attempt is made to parse invalid JSON, e.g. </td>
+      </tr>
+      <tr>
+        <td>
+          <a href="/reference/csharp/api-docs/class/google/protobuf/invalid-protocol-buffer-exception.html">InvalidProtocolBufferException</a>
+        </td>
+        <td>Thrown when a protocol message being parsed is invalid in some way, e.g. </td>
+      </tr>
+      <tr>
+        <td>
+          <a href="/reference/csharp/api-docs/class/google/protobuf/json-formatter.html">JsonFormatter</a>
+        </td>
+        <td>Reflection-based converter from messages to JSON. </td>
+      </tr>
+      <tr>
+        <td>
+          <a href="/reference/csharp/api-docs/class/google/protobuf/json-formatter/settings.html">JsonFormatter.Settings</a>
+        </td>
+        <td><a href="/reference/csharp/api-docs/class/google/protobuf/json-formatter/settings.html#class_google_1_1_protobuf_1_1_json_formatter_1_1_settings">Settings</a> controlling JSON formatting. </td>
+      </tr>
+      <tr>
+        <td>
+          <a href="/reference/csharp/api-docs/class/google/protobuf/json-parser.html">JsonParser</a>
+        </td>
+        <td>Reflection-based converter from JSON to messages. </td>
+      </tr>
+      <tr>
+        <td>
+          <a href="/reference/csharp/api-docs/class/google/protobuf/json-parser/settings.html">JsonParser.Settings</a>
+        </td>
+        <td><a href="/reference/csharp/api-docs/class/google/protobuf/json-parser/settings.html#class_google_1_1_protobuf_1_1_json_parser_1_1_settings">Settings</a> controlling JSON parsing. </td>
+      </tr>
+      <tr>
+        <td>
+          <a href="/reference/csharp/api-docs/class/google/protobuf/message-extensions.html">MessageExtensions</a>
+        </td>
+        <td>Extension methods on <a href="/reference/csharp/api-docs/interface/google/protobuf/i-message.html#interface_google_1_1_protobuf_1_1_i_message">IMessage</a> and IMessage{T}. </td>
+      </tr>
+      <tr>
+        <td>
+          <a href="/reference/csharp/api-docs/class/google/protobuf/message-parser.html">MessageParser</a>
+        </td>
+        <td>A general message parser, typically used by reflection-based code as all the methods return simple <a href="/reference/csharp/api-docs/interface/google/protobuf/i-message.html#interface_google_1_1_protobuf_1_1_i_message">IMessage</a>. </td>
+      </tr>
+      <tr>
+        <td>
+          <a href="/reference/csharp/api-docs/class/google/protobuf/message-parser-t-.html">MessageParser< T ></a>
+        </td>
+        <td>A parser for a specific message type. </td>
+      </tr>
+      <tr>
+        <td>
+          <a href="/reference/csharp/api-docs/class/google/protobuf/proto-preconditions.html">ProtoPreconditions</a>
+        </td>
+        <td>Helper methods for throwing exceptions when preconditions are not met. </td>
+      </tr>
+      <tr>
+        <td>
+          <a href="/reference/csharp/api-docs/class/google/protobuf/wire-format.html">WireFormat</a>
+        </td>
+        <td>This class is used internally by the Protocol Buffer Library and generated message implementations. </td>
+      </tr>
+    </tbody>
+  </table>
+  <table class="constructors responsive">
+    <tbody>
+      <tr>
+        <th colspan="2">
+          <h3>Interfaces</h3>
+        </th>
+      </tr>
+      <tr>
+        <td>
+          <a href="/reference/csharp/api-docs/interface/google/protobuf/i-custom-diagnostic-message.html">ICustomDiagnosticMessage</a>
+        </td>
+        <td>A message type that has a custom string format for diagnostic purposes. </td>
+      </tr>
+      <tr>
+        <td>
+          <a href="/reference/csharp/api-docs/interface/google/protobuf/i-deep-cloneable-t-.html">IDeepCloneable< T ></a>
+        </td>
+        <td>Generic interface for a deeply cloneable type. </td>
+      </tr>
+      <tr>
+        <td>
+          <a href="/reference/csharp/api-docs/interface/google/protobuf/i-message.html">IMessage</a>
+        </td>
+        <td>Interface for a Protocol Buffers message, supporting basic operations required for serialization. </td>
+      </tr>
+      <tr>
+        <td>
+          <a href="/reference/csharp/api-docs/interface/google/protobuf/i-message-t-.html">IMessage< T ></a>
+        </td>
+        <td>Generic interface for a Protocol Buffers message, where the type parameter is expected to be the same type as the implementation class. </td>
+      </tr>
+    </tbody>
+  </table>
+  <h2>
+    <a href="/reference/csharp/api-docs/namespace/google/protobuf/collections.html">Google.<wbr/>Protobuf.<wbr/>Collections</a>
+  </h2>
+  <table class="nested-classes responsive">
+    <tbody>
+      <tr>
+        <th colspan="2">
+          <h3>Classes</h3>
+        </th>
+      </tr>
+      <tr>
+        <td>
+          <a href="/reference/csharp/api-docs/class/google/protobuf/collections/map-field-t-key-t-value-.html">MapField< TKey, TValue ></a>
+        </td>
+        <td>Representation of a map field in a Protocol Buffer message. </td>
+      </tr>
+      <tr>
+        <td>
+          <a href="/reference/csharp/api-docs/class/google/protobuf/collections/map-field-t-key-t-value-/codec.html">MapField< TKey, TValue >.Codec</a>
+        </td>
+        <td>A codec for a specific map field. </td>
+      </tr>
+      <tr>
+        <td>
+          <a href="/reference/csharp/api-docs/class/google/protobuf/collections/repeated-field-t-.html">RepeatedField< T ></a>
+        </td>
+        <td>The contents of a repeated field: essentially, a collection with some extra restrictions (no null values) and capabilities (deep cloning). </td>
+      </tr>
+    </tbody>
+  </table>
+  <h2>
+    <a href="/reference/csharp/api-docs/namespace/google/protobuf/reflection.html">Google.<wbr/>Protobuf.<wbr/>Reflection</a>
+  </h2>
+  <table class="nested-classes responsive">
+    <tbody>
+      <tr>
+        <th colspan="2">
+          <h3>Classes</h3>
+        </th>
+      </tr>
+      <tr>
+        <td>
+          <a href="/reference/csharp/api-docs/class/google/protobuf/reflection/descriptor-base.html">DescriptorBase</a>
+        </td>
+        <td>Base class for nearly all descriptors, providing common functionality. </td>
+      </tr>
+      <tr>
+        <td>
+          <a href="/reference/csharp/api-docs/class/google/protobuf/reflection/descriptor-validation-exception.html">DescriptorValidationException</a>
+        </td>
+        <td>Thrown when building descriptors fails because the source DescriptorProtos are not valid. </td>
+      </tr>
+      <tr>
+        <td>
+          <a href="/reference/csharp/api-docs/class/google/protobuf/reflection/enum-descriptor.html">EnumDescriptor</a>
+        </td>
+        <td>Descriptor for an enum type in a .proto file. </td>
+      </tr>
+      <tr>
+        <td>
+          <a href="/reference/csharp/api-docs/class/google/protobuf/reflection/enum-value-descriptor.html">EnumValueDescriptor</a>
+        </td>
+        <td>Descriptor for a single enum value within an enum in a .proto file. </td>
+      </tr>
+      <tr>
+        <td>
+          <a href="/reference/csharp/api-docs/class/google/protobuf/reflection/field-descriptor.html">FieldDescriptor</a>
+        </td>
+        <td>Descriptor for a field or extension within a message in a .proto file. </td>
+      </tr>
+      <tr>
+        <td>
+          <a href="/reference/csharp/api-docs/class/google/protobuf/reflection/file-descriptor.html">FileDescriptor</a>
+        </td>
+        <td>Describes a .proto file, including everything defined within. </td>
+      </tr>
+      <tr>
+        <td>
+          <a href="/reference/csharp/api-docs/class/google/protobuf/reflection/generated-clr-type-info.html">GeneratedClrTypeInfo</a>
+        </td>
+        <td>Extra information provided by generated code when initializing a message or file descriptor. </td>
+      </tr>
+      <tr>
+        <td>
+          <a href="/reference/csharp/api-docs/class/google/protobuf/reflection/message-descriptor.html">MessageDescriptor</a>
+        </td>
+        <td>Describes a message type. </td>
+      </tr>
+      <tr>
+        <td>
+          <a href="/reference/csharp/api-docs/class/google/protobuf/reflection/message-descriptor/field-collection.html">MessageDescriptor.FieldCollection</a>
+        </td>
+        <td>A collection to simplify retrieving the field accessor for a particular field. </td>
+      </tr>
+      <tr>
+        <td>
+          <a href="/reference/csharp/api-docs/class/google/protobuf/reflection/method-descriptor.html">MethodDescriptor</a>
+        </td>
+        <td>Describes a single method in a service. </td>
+      </tr>
+      <tr>
+        <td>
+          <a href="/reference/csharp/api-docs/class/google/protobuf/reflection/oneof-accessor.html">OneofAccessor</a>
+        </td>
+        <td><a href="/reference/csharp/api-docs/namespace/google/protobuf/reflection.html#namespace_google_1_1_protobuf_1_1_reflection">Reflection</a> access for a oneof, allowing clear and "get case" actions. </td>
+      </tr>
+      <tr>
+        <td>
+          <a href="/reference/csharp/api-docs/class/google/protobuf/reflection/oneof-descriptor.html">OneofDescriptor</a>
+        </td>
+        <td>Describes a "oneof" field collection in a message type: a set of fields of which at most one can be set in any particular message. </td>
+      </tr>
+      <tr>
+        <td>
+          <a href="/reference/csharp/api-docs/class/google/protobuf/reflection/original-name-attribute.html">OriginalNameAttribute</a>
+        </td>
+        <td>Specifies the original name (in the .proto file) of a named element, such as an enum value. </td>
+      </tr>
+      <tr>
+        <td>
+          <a href="/reference/csharp/api-docs/class/google/protobuf/reflection/service-descriptor.html">ServiceDescriptor</a>
+        </td>
+        <td>Describes a service type. </td>
+      </tr>
+      <tr>
+        <td>
+          <a href="/reference/csharp/api-docs/class/google/protobuf/reflection/type-registry.html">TypeRegistry</a>
+        </td>
+        <td>An immutable registry of types which can be looked up by their full name. </td>
+      </tr>
+    </tbody>
+  </table>
+  <table class="constructors responsive">
+    <tbody>
+      <tr>
+        <th colspan="2">
+          <h3>Interfaces</h3>
+        </th>
+      </tr>
+      <tr>
+        <td>
+          <a href="/reference/csharp/api-docs/interface/google/protobuf/reflection/i-descriptor.html">IDescriptor</a>
+        </td>
+        <td>Interface implemented by all descriptor types. </td>
+      </tr>
+      <tr>
+        <td>
+          <a href="/reference/csharp/api-docs/interface/google/protobuf/reflection/i-field-accessor.html">IFieldAccessor</a>
+        </td>
+        <td>Allows fields to be reflectively accessed. </td>
+      </tr>
+    </tbody>
+  </table>
+  <h2>
+    <a href="/reference/csharp/api-docs/namespace/google/protobuf/well-known-types.html">Google.<wbr/>Protobuf.<wbr/>WellKnownTypes</a>
+  </h2>
+  <table class="nested-classes responsive">
+    <tbody>
+      <tr>
+        <th colspan="2">
+          <h3>Classes</h3>
+        </th>
+      </tr>
+      <tr>
+        <td>
+          <a href="/reference/csharp/api-docs/class/google/protobuf/well-known-types/any.html">Any</a>
+        </td>
+        <td><code><a href="/reference/csharp/api-docs/class/google/protobuf/well-known-types/any.html#class_google_1_1_protobuf_1_1_well_known_types_1_1_any">Any</a></code> contains an arbitrary serialized protocol buffer message along with a URL that describes the type of the serialized message. </td>
+      </tr>
+      <tr>
+        <td>
+          <a href="/reference/csharp/api-docs/class/google/protobuf/well-known-types/any-reflection.html">AnyReflection</a>
+        </td>
+        <td>Holder for reflection information generated from google/protobuf/any.proto</td>
+      </tr>
+      <tr>
+        <td>
+          <a href="/reference/csharp/api-docs/class/google/protobuf/well-known-types/api.html">Api</a>
+        </td>
+        <td><a href="/reference/csharp/api-docs/class/google/protobuf/well-known-types/api.html#class_google_1_1_protobuf_1_1_well_known_types_1_1_api">Api</a> is a light-weight descriptor for a protocol buffer service. </td>
+      </tr>
+      <tr>
+        <td>
+          <a href="/reference/csharp/api-docs/class/google/protobuf/well-known-types/api-reflection.html">ApiReflection</a>
+        </td>
+        <td>Holder for reflection information generated from google/protobuf/api.proto</td>
+      </tr>
+      <tr>
+        <td>
+          <a href="/reference/csharp/api-docs/class/google/protobuf/well-known-types/bool-value.html">BoolValue</a>
+        </td>
+        <td>Wrapper message for <code>bool</code>. </td>
+      </tr>
+      <tr>
+        <td>
+          <a href="/reference/csharp/api-docs/class/google/protobuf/well-known-types/bytes-value.html">BytesValue</a>
+        </td>
+        <td>Wrapper message for <code>bytes</code>. </td>
+      </tr>
+      <tr>
+        <td>
+          <a href="/reference/csharp/api-docs/class/google/protobuf/well-known-types/double-value.html">DoubleValue</a>
+        </td>
+        <td>Wrapper message for <code>double</code>. </td>
+      </tr>
+      <tr>
+        <td>
+          <a href="/reference/csharp/api-docs/class/google/protobuf/well-known-types/duration.html">Duration</a>
+        </td>
+        <td>A <a href="/reference/csharp/api-docs/class/google/protobuf/well-known-types/duration.html#class_google_1_1_protobuf_1_1_well_known_types_1_1_duration">Duration</a> represents a signed, fixed-length span of time represented as a count of seconds and fractions of seconds at nanosecond resolution. </td>
+      </tr>
+      <tr>
+        <td>
+          <a href="/reference/csharp/api-docs/class/google/protobuf/well-known-types/duration-reflection.html">DurationReflection</a>
+        </td>
+        <td>Holder for reflection information generated from google/protobuf/duration.proto</td>
+      </tr>
+      <tr>
+        <td>
+          <a href="/reference/csharp/api-docs/class/google/protobuf/well-known-types/empty.html">Empty</a>
+        </td>
+        <td>A generic empty message that you can re-use to avoid defining duplicated empty messages in your APIs. </td>
+      </tr>
+      <tr>
+        <td>
+          <a href="/reference/csharp/api-docs/class/google/protobuf/well-known-types/empty-reflection.html">EmptyReflection</a>
+        </td>
+        <td>Holder for reflection information generated from google/protobuf/empty.proto</td>
+      </tr>
+      <tr>
+        <td>
+          <a href="/reference/csharp/api-docs/class/google/protobuf/well-known-types/enum.html">Enum</a>
+        </td>
+        <td><a href="/reference/csharp/api-docs/class/google/protobuf/well-known-types/enum.html#class_google_1_1_protobuf_1_1_well_known_types_1_1_enum">Enum</a> type definition. </td>
+      </tr>
+      <tr>
+        <td>
+          <a href="/reference/csharp/api-docs/class/google/protobuf/well-known-types/enum-value.html">EnumValue</a>
+        </td>
+        <td><a href="/reference/csharp/api-docs/class/google/protobuf/well-known-types/enum.html#class_google_1_1_protobuf_1_1_well_known_types_1_1_enum">Enum</a> value definition. </td>
+      </tr>
+      <tr>
+        <td>
+          <a href="/reference/csharp/api-docs/class/google/protobuf/well-known-types/field.html">Field</a>
+        </td>
+        <td>A single field of a message type. </td>
+      </tr>
+      <tr>
+        <td>
+          <a href="/reference/csharp/api-docs/class/google/protobuf/well-known-types/field/types.html">Field.Types</a>
+        </td>
+        <td>Container for nested types declared in the <a href="/reference/csharp/api-docs/class/google/protobuf/well-known-types/field.html#class_google_1_1_protobuf_1_1_well_known_types_1_1_field">Field</a> message type.</td>
+      </tr>
+      <tr>
+        <td>
+          <a href="/reference/csharp/api-docs/class/google/protobuf/well-known-types/field-mask.html">FieldMask</a>
+        </td>
+        <td><code><a href="/reference/csharp/api-docs/class/google/protobuf/well-known-types/field-mask.html#class_google_1_1_protobuf_1_1_well_known_types_1_1_field_mask">FieldMask</a></code> represents a set of symbolic field paths, for example: </td>
+      </tr>
+      <tr>
+        <td>
+          <a href="/reference/csharp/api-docs/class/google/protobuf/well-known-types/field-mask-reflection.html">FieldMaskReflection</a>
+        </td>
+        <td>Holder for reflection information generated from google/protobuf/field_mask.proto</td>
+      </tr>
+      <tr>
+        <td>
+          <a href="/reference/csharp/api-docs/class/google/protobuf/well-known-types/float-value.html">FloatValue</a>
+        </td>
+        <td>Wrapper message for <code>float</code>. </td>
+      </tr>
+      <tr>
+        <td>
+          <a href="/reference/csharp/api-docs/class/google/protobuf/well-known-types/int32-value.html">Int32Value</a>
+        </td>
+        <td>Wrapper message for <code>int32</code>. </td>
+      </tr>
+      <tr>
+        <td>
+          <a href="/reference/csharp/api-docs/class/google/protobuf/well-known-types/int64-value.html">Int64Value</a>
+        </td>
+        <td>Wrapper message for <code>int64</code>. </td>
+      </tr>
+      <tr>
+        <td>
+          <a href="/reference/csharp/api-docs/class/google/protobuf/well-known-types/list-value.html">ListValue</a>
+        </td>
+        <td><code><a href="/reference/csharp/api-docs/class/google/protobuf/well-known-types/list-value.html#class_google_1_1_protobuf_1_1_well_known_types_1_1_list_value">ListValue</a></code> is a wrapper around a repeated field of values. </td>
+      </tr>
+      <tr>
+        <td>
+          <a href="/reference/csharp/api-docs/class/google/protobuf/well-known-types/method.html">Method</a>
+        </td>
+        <td><a href="/reference/csharp/api-docs/class/google/protobuf/well-known-types/method.html#class_google_1_1_protobuf_1_1_well_known_types_1_1_method">Method</a> represents a method of an api. </td>
+      </tr>
+      <tr>
+        <td>
+          <a href="/reference/csharp/api-docs/class/google/protobuf/well-known-types/mixin.html">Mixin</a>
+        </td>
+        <td>Declares an API to be included in this API. </td>
+      </tr>
+      <tr>
+        <td>
+          <a href="/reference/csharp/api-docs/class/google/protobuf/well-known-types/option.html">Option</a>
+        </td>
+        <td>A protocol buffer option, which can be attached to a message, field, enumeration, etc. </td>
+      </tr>
+      <tr>
+        <td>
+          <a href="/reference/csharp/api-docs/class/google/protobuf/well-known-types/source-context.html">SourceContext</a>
+        </td>
+        <td><code><a href="/reference/csharp/api-docs/class/google/protobuf/well-known-types/source-context.html#class_google_1_1_protobuf_1_1_well_known_types_1_1_source_context">SourceContext</a></code> represents information about the source of a protobuf element, like the file in which it is defined. </td>
+      </tr>
+      <tr>
+        <td>
+          <a href="/reference/csharp/api-docs/class/google/protobuf/well-known-types/source-context-reflection.html">SourceContextReflection</a>
+        </td>
+        <td>Holder for reflection information generated from google/protobuf/source_context.proto</td>
+      </tr>
+      <tr>
+        <td>
+          <a href="/reference/csharp/api-docs/class/google/protobuf/well-known-types/string-value.html">StringValue</a>
+        </td>
+        <td>Wrapper message for <code>string</code>. </td>
+      </tr>
+      <tr>
+        <td>
+          <a href="/reference/csharp/api-docs/class/google/protobuf/well-known-types/struct.html">Struct</a>
+        </td>
+        <td><code><a href="/reference/csharp/api-docs/class/google/protobuf/well-known-types/struct.html#class_google_1_1_protobuf_1_1_well_known_types_1_1_struct">Struct</a></code> represents a structured data value, consisting of fields which map to dynamically typed values. </td>
+      </tr>
+      <tr>
+        <td>
+          <a href="/reference/csharp/api-docs/class/google/protobuf/well-known-types/struct-reflection.html">StructReflection</a>
+        </td>
+        <td>Holder for reflection information generated from google/protobuf/struct.proto</td>
+      </tr>
+      <tr>
+        <td>
+          <a href="/reference/csharp/api-docs/class/google/protobuf/well-known-types/time-extensions.html">TimeExtensions</a>
+        </td>
+        <td>Extension methods on BCL time-related types, converting to protobuf types. </td>
+      </tr>
+      <tr>
+        <td>
+          <a href="/reference/csharp/api-docs/class/google/protobuf/well-known-types/timestamp.html">Timestamp</a>
+        </td>
+        <td>A <a href="/reference/csharp/api-docs/class/google/protobuf/well-known-types/timestamp.html#class_google_1_1_protobuf_1_1_well_known_types_1_1_timestamp">Timestamp</a> represents a point in time independent of any time zone or calendar, represented as seconds and fractions of seconds at nanosecond resolution in UTC Epoch time. </td>
+      </tr>
+      <tr>
+        <td>
+          <a href="/reference/csharp/api-docs/class/google/protobuf/well-known-types/timestamp-reflection.html">TimestampReflection</a>
+        </td>
+        <td>Holder for reflection information generated from google/protobuf/timestamp.proto</td>
+      </tr>
+      <tr>
+        <td>
+          <a href="/reference/csharp/api-docs/class/google/protobuf/well-known-types/type.html">Type</a>
+        </td>
+        <td>A protocol buffer message type. </td>
+      </tr>
+      <tr>
+        <td>
+          <a href="/reference/csharp/api-docs/class/google/protobuf/well-known-types/type-reflection.html">TypeReflection</a>
+        </td>
+        <td>Holder for reflection information generated from google/protobuf/type.proto</td>
+      </tr>
+      <tr>
+        <td>
+          <a href="/reference/csharp/api-docs/class/google/protobuf/well-known-types/u-int32-value.html">UInt32Value</a>
+        </td>
+        <td>Wrapper message for <code>uint32</code>. </td>
+      </tr>
+      <tr>
+        <td>
+          <a href="/reference/csharp/api-docs/class/google/protobuf/well-known-types/u-int64-value.html">UInt64Value</a>
+        </td>
+        <td>Wrapper message for <code>uint64</code>. </td>
+      </tr>
+      <tr>
+        <td>
+          <a href="/reference/csharp/api-docs/class/google/protobuf/well-known-types/value.html">Value</a>
+        </td>
+        <td><code><a href="/reference/csharp/api-docs/class/google/protobuf/well-known-types/value.html#class_google_1_1_protobuf_1_1_well_known_types_1_1_value">Value</a></code> represents a dynamically typed value which can be either null, a number, a string, a boolean, a recursive struct value, or a list of values. </td>
+      </tr>
+      <tr>
+        <td>
+          <a href="/reference/csharp/api-docs/class/google/protobuf/well-known-types/wrappers-reflection.html">WrappersReflection</a>
+        </td>
+        <td>Holder for reflection information generated from google/protobuf/wrappers.proto</td>
+      </tr>
+    </tbody>
+  </table>
+</body>
+</html>

@@ -1,0 +1,352 @@
+<!DOCTYPE html>
+<html devsite>
+<head>
+  <title>Google.Protobuf.Reflection.MessageDescriptor Class Reference</title>
+  <link rel="stylesheet" href="/reference/csharp/api-docs/includes/stylesheet.css">
+</head>
+<body><div id="top"><!-- do not remove this div --></div><h1>Google.<wbr/>Protobuf.<wbr/>Reflection.<wbr/>MessageDescriptor</h1><p>Describes a message type. </p><h2>Summary</h2><h3>Inheritance</h3>Inherits from: <a href="/reference/csharp/api-docs/class/google/protobuf/reflection/descriptor-base.html">Google.Protobuf.Reflection.DescriptorBase</a><table class="properties responsive">
+    <tr>
+      <th colspan="2">
+        <h3>Public attributes</h3>
+      </th>
+    </tr>
+    <tr>
+      <td>
+        <code><a href="#class_google_1_1_protobuf_1_1_reflection_1_1_message_descriptor_1a5fa27dffde05eb074797803226dce684">Name</a> => Proto.Name</code>
+      </td>
+      <td>
+        <div>
+          <code>override string</code>
+        </div>
+        <div>The brief name of the descriptor's target. </div>
+      </td>
+    </tr>
+  </table><table class="properties responsive">
+    <tr>
+      <th colspan="2">
+        <h3>Properties</h3>
+      </th>
+    </tr>
+    <tr>
+      <td>
+        <code><a href="#class_google_1_1_protobuf_1_1_reflection_1_1_message_descriptor_1ac8061cfc6031418e4b226c1a5e42b036">ClrType</a></code>
+      </td>
+      <td>
+        <div>
+          <code>Type</code>
+        </div>
+        <div>The CLR type used to represent message instances from this descriptor. </div>
+      </td>
+    </tr>
+    <tr>
+      <td>
+        <code><a href="#class_google_1_1_protobuf_1_1_reflection_1_1_message_descriptor_1a5e53f307640d128708f5d302f5558219">ContainingType</a></code>
+      </td>
+      <td>
+        <div>
+          <code><a href="/reference/csharp/api-docs/class/google/protobuf/reflection/message-descriptor.html#class_google_1_1_protobuf_1_1_reflection_1_1_message_descriptor">MessageDescriptor</a></code>
+        </div>
+        <div>If this is a nested type, get the outer descriptor, otherwise null. </div>
+      </td>
+    </tr>
+    <tr>
+      <td>
+        <code><a href="#class_google_1_1_protobuf_1_1_reflection_1_1_message_descriptor_1a23af5947036de920ae88a3eafe92ca42">EnumTypes</a></code>
+      </td>
+      <td>
+        <div>
+          <code>IList< <a href="/reference/csharp/api-docs/class/google/protobuf/reflection/enum-descriptor.html#class_google_1_1_protobuf_1_1_reflection_1_1_enum_descriptor">EnumDescriptor</a> ></code>
+        </div>
+        <div>An unmodifiable list of this message type's enum types. </div>
+      </td>
+    </tr>
+    <tr>
+      <td>
+        <code><a href="#class_google_1_1_protobuf_1_1_reflection_1_1_message_descriptor_1aa28ef28aa397201e6f30d85c47dea492">Fields</a></code>
+      </td>
+      <td>
+        <div>
+          <code><a href="/reference/csharp/api-docs/class/google/protobuf/reflection/message-descriptor/field-collection.html#class_google_1_1_protobuf_1_1_reflection_1_1_message_descriptor_1_1_field_collection">FieldCollection</a></code>
+        </div>
+        <div>A collection of fields, which can be retrieved by name or field number. </div>
+      </td>
+    </tr>
+    <tr>
+      <td>
+        <code><a href="#class_google_1_1_protobuf_1_1_reflection_1_1_message_descriptor_1ad1c4e95e574530e0411aaeb25c8f255d">NestedTypes</a></code>
+      </td>
+      <td>
+        <div>
+          <code>IList< <a href="/reference/csharp/api-docs/class/google/protobuf/reflection/message-descriptor.html#class_google_1_1_protobuf_1_1_reflection_1_1_message_descriptor">MessageDescriptor</a> ></code>
+        </div>
+        <div>An unmodifiable list of this message type's nested types. </div>
+      </td>
+    </tr>
+    <tr>
+      <td>
+        <code><a href="#class_google_1_1_protobuf_1_1_reflection_1_1_message_descriptor_1a5c3f83d38c50b3b492c93ba2c9492640">Oneofs</a></code>
+      </td>
+      <td>
+        <div>
+          <code>IList< <a href="/reference/csharp/api-docs/class/google/protobuf/reflection/oneof-descriptor.html#class_google_1_1_protobuf_1_1_reflection_1_1_oneof_descriptor">OneofDescriptor</a> ></code>
+        </div>
+        <div>An unmodifiable list of the "oneof" field collections in this message type. </div>
+      </td>
+    </tr>
+    <tr>
+      <td>
+        <code><a href="#class_google_1_1_protobuf_1_1_reflection_1_1_message_descriptor_1a91daf0cfef7c7dadd77b080774d683bc">Parser</a></code>
+      </td>
+      <td>
+        <div>
+          <code><a href="/reference/csharp/api-docs/class/google/protobuf/message-parser.html#class_google_1_1_protobuf_1_1_message_parser">MessageParser</a></code>
+        </div>
+        <div>A parser for this message type. </div>
+      </td>
+    </tr>
+    <tr>
+      <td>
+        <code><a href="#class_google_1_1_protobuf_1_1_reflection_1_1_message_descriptor_1a43d532cf6cdc9d739d4559af2b31da94">Proto</a></code>
+      </td>
+      <td>
+        <div>
+          <code>DescriptorProto</code>
+        </div>
+      </td>
+    </tr>
+  </table><table class="methods responsive">
+    <tr>
+      <th colspan="2">
+        <h3>Public functions</h3>
+      </th>
+    </tr>
+    <tr>
+      <td>
+        <code><a href="#class_google_1_1_protobuf_1_1_reflection_1_1_message_descriptor_1a99392817d55340b2954988fa79090b7d">FindDescriptor< T ></a>(string name)</code>
+      </td>
+      <td>
+        <div>
+          <code>T</code>
+        </div>
+        <div>Finds a nested descriptor by name. </div>
+      </td>
+    </tr>
+    <tr>
+      <td>
+        <code><a href="#class_google_1_1_protobuf_1_1_reflection_1_1_message_descriptor_1aee013146e15a4e075e85fce8811c9a03">FindFieldByName</a>(<a href="/reference/csharp/api-docs/namespace/google/protobuf/reflection.html#namespace_google_1_1_protobuf_1_1_reflection_1a876322e8bb522484f05e4ec542dd7904a27118326006d3829667a400ad23d5d98">String</a> name)</code>
+      </td>
+      <td>
+        <div>
+          <code><a href="/reference/csharp/api-docs/class/google/protobuf/reflection/field-descriptor.html#class_google_1_1_protobuf_1_1_reflection_1_1_field_descriptor">FieldDescriptor</a></code>
+        </div>
+        <div>Finds a field by field name. </div>
+      </td>
+    </tr>
+    <tr>
+      <td>
+        <code><a href="#class_google_1_1_protobuf_1_1_reflection_1_1_message_descriptor_1a40dd0fbe7ce324ae48b7e5e2c26c8845">FindFieldByNumber</a>(int number)</code>
+      </td>
+      <td>
+        <div>
+          <code><a href="/reference/csharp/api-docs/class/google/protobuf/reflection/field-descriptor.html#class_google_1_1_protobuf_1_1_reflection_1_1_field_descriptor">FieldDescriptor</a></code>
+        </div>
+        <div>Finds a field by field number. </div>
+      </td>
+    </tr>
+  </table><table class="nested-classes responsive">
+    <tr>
+      <th colspan="2">
+        <h3>Classes</h3>
+      </th>
+    </tr>
+    <tr>
+      <td>
+        <a href="/reference/csharp/api-docs/class/google/protobuf/reflection/message-descriptor/field-collection.html">Google.<wbr/>Protobuf.<wbr/>Reflection.<wbr/>MessageDescriptor.<wbr/>FieldCollection</a>
+      </td>
+      <td>
+        <p>A collection to simplify retrieving the field accessor for a particular field. </p>
+      </td>
+    </tr>
+  </table><h2>Public attributes</h2><div id="class_google_1_1_protobuf_1_1_reflection_1_1_message_descriptor_1a5fa27dffde05eb074797803226dce684">
+    <h3>Name</h3>
+    <pre class="prettyprint">override string Name => Proto.Name</pre>
+    <div>
+      <p>The brief name of the descriptor's target. </p>
+    </div>
+  </div><h2>Properties</h2><div id="class_google_1_1_protobuf_1_1_reflection_1_1_message_descriptor_1ac8061cfc6031418e4b226c1a5e42b036">
+    <h3>ClrType</h3>
+    <pre class="prettyprint">Type ClrType</pre>
+    <div>
+      <p>The CLR type used to represent message instances from this descriptor. </p>
+      <p>The value returned by this property will be non-null for all regular fields. However, if a message containing a map field is introspected, the list of nested messages will include an auto-generated nested key/value pair message for the field. This is not represented in any generated type, so this property will return null in such cases. </p>
+      <p>For wrapper types (<a href="/reference/csharp/api-docs/class/google/protobuf/well-known-types/string-value.html#class_google_1_1_protobuf_1_1_well_known_types_1_1_string_value">Google.Protobuf.WellKnownTypes.StringValue</a> and the like), the type returned here will be the generated message type, not the native type used by reflection for fields of those types. Code using reflection should call IsWrapperType to determine whether a message descriptor represents a wrapper type, and handle the result appropriately. </p>
+    </div>
+  </div><div id="class_google_1_1_protobuf_1_1_reflection_1_1_message_descriptor_1a5e53f307640d128708f5d302f5558219">
+    <h3>ContainingType</h3>
+    <pre class="prettyprint"><a href="/reference/csharp/api-docs/class/google/protobuf/reflection/message-descriptor.html#class_google_1_1_protobuf_1_1_reflection_1_1_message_descriptor">MessageDescriptor</a> ContainingType</pre>
+    <div>
+      <p>If this is a nested type, get the outer descriptor, otherwise null. </p>
+    </div>
+  </div><div id="class_google_1_1_protobuf_1_1_reflection_1_1_message_descriptor_1a23af5947036de920ae88a3eafe92ca42">
+    <h3>EnumTypes</h3>
+    <pre class="prettyprint">IList< <a href="/reference/csharp/api-docs/class/google/protobuf/reflection/enum-descriptor.html#class_google_1_1_protobuf_1_1_reflection_1_1_enum_descriptor">EnumDescriptor</a> > EnumTypes</pre>
+    <div>
+      <p>An unmodifiable list of this message type's enum types. </p>
+    </div>
+  </div><div id="class_google_1_1_protobuf_1_1_reflection_1_1_message_descriptor_1aa28ef28aa397201e6f30d85c47dea492">
+    <h3>Fields</h3>
+    <pre class="prettyprint"><a href="/reference/csharp/api-docs/class/google/protobuf/reflection/message-descriptor/field-collection.html#class_google_1_1_protobuf_1_1_reflection_1_1_message_descriptor_1_1_field_collection">FieldCollection</a> Fields</pre>
+    <div>
+      <p>A collection of fields, which can be retrieved by name or field number. </p>
+    </div>
+  </div><div id="class_google_1_1_protobuf_1_1_reflection_1_1_message_descriptor_1ad1c4e95e574530e0411aaeb25c8f255d">
+    <h3>NestedTypes</h3>
+    <pre class="prettyprint">IList< <a href="/reference/csharp/api-docs/class/google/protobuf/reflection/message-descriptor.html#class_google_1_1_protobuf_1_1_reflection_1_1_message_descriptor">MessageDescriptor</a> > NestedTypes</pre>
+    <div>
+      <p>An unmodifiable list of this message type's nested types. </p>
+    </div>
+  </div><div id="class_google_1_1_protobuf_1_1_reflection_1_1_message_descriptor_1a5c3f83d38c50b3b492c93ba2c9492640">
+    <h3>Oneofs</h3>
+    <pre class="prettyprint">IList< <a href="/reference/csharp/api-docs/class/google/protobuf/reflection/oneof-descriptor.html#class_google_1_1_protobuf_1_1_reflection_1_1_oneof_descriptor">OneofDescriptor</a> > Oneofs</pre>
+    <div>
+      <p>An unmodifiable list of the "oneof" field collections in this message type. </p>
+    </div>
+  </div><div id="class_google_1_1_protobuf_1_1_reflection_1_1_message_descriptor_1a91daf0cfef7c7dadd77b080774d683bc">
+    <h3>Parser</h3>
+    <pre class="prettyprint"><a href="/reference/csharp/api-docs/class/google/protobuf/message-parser.html#class_google_1_1_protobuf_1_1_message_parser">MessageParser</a> Parser</pre>
+    <div>
+      <p>A parser for this message type. </p>
+      <p>As <a href="/reference/csharp/api-docs/class/google/protobuf/reflection/message-descriptor.html#class_google_1_1_protobuf_1_1_reflection_1_1_message_descriptor">MessageDescriptor</a> is not generic, this cannot be statically typed to the relevant type, but it should produce objects of a type compatible with <a href="/reference/csharp/api-docs/class/google/protobuf/reflection/message-descriptor.html#class_google_1_1_protobuf_1_1_reflection_1_1_message_descriptor_1ac8061cfc6031418e4b226c1a5e42b036">ClrType</a>. </p>
+      <p>The value returned by this property will be non-null for all regular fields. However, if a message containing a map field is introspected, the list of nested messages will include an auto-generated nested key/value pair message for the field. No message parser object is created for such messages, so this property will return null in such cases. </p>
+      <p>For wrapper types (<a href="/reference/csharp/api-docs/class/google/protobuf/well-known-types/string-value.html#class_google_1_1_protobuf_1_1_well_known_types_1_1_string_value">Google.Protobuf.WellKnownTypes.StringValue</a> and the like), the parser returned here will be the generated message type, not the native type used by reflection for fields of those types. Code using reflection should call IsWrapperType to determine whether a message descriptor represents a wrapper type, and handle the result appropriately. </p>
+    </div>
+  </div><div id="class_google_1_1_protobuf_1_1_reflection_1_1_message_descriptor_1a43d532cf6cdc9d739d4559af2b31da94">
+    <h3>Proto</h3>
+    <pre class="prettyprint">DescriptorProto Proto</pre>
+    <div />
+  </div><h2>Public functions</h2><div id="class_google_1_1_protobuf_1_1_reflection_1_1_message_descriptor_1a99392817d55340b2954988fa79090b7d">
+    <h3>FindDescriptor< T ></h3>
+    <pre class="prettyprint">T FindDescriptor< T >(
+  string name
+)</pre>
+    <div>
+      <p>Finds a nested descriptor by name. </p>
+      <p>The is valid for fields, nested message types, oneofs and enums. </p>
+      <p />
+      <table class="details responsive">
+        <thead>
+          <th colspan="2">Details</th>
+        </thead>
+        <tbody>
+          <tr>
+            <td>Parameters</td>
+            <td>
+              <table class="function param responsive">
+                <tbody>
+                  <tr>
+                    <td>
+                      <code>name</code>
+                    </td>
+                    <td>
+                      <div>The unqualified name of the descriptor, e.g. "Foo"</div>
+                    </td>
+                  </tr>
+                </tbody>
+              </table>
+            </td>
+          </tr>
+          <tr>
+            <td>
+              <b>Returns</b>
+            </td>
+            <td>
+              <div>The descriptor, or null if not found.</div>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div><div id="class_google_1_1_protobuf_1_1_reflection_1_1_message_descriptor_1aee013146e15a4e075e85fce8811c9a03">
+    <h3>FindFieldByName</h3>
+    <pre class="prettyprint"><a href="/reference/csharp/api-docs/class/google/protobuf/reflection/field-descriptor.html#class_google_1_1_protobuf_1_1_reflection_1_1_field_descriptor">FieldDescriptor</a> FindFieldByName(
+  <a href="/reference/csharp/api-docs/namespace/google/protobuf/reflection.html#namespace_google_1_1_protobuf_1_1_reflection_1a876322e8bb522484f05e4ec542dd7904a27118326006d3829667a400ad23d5d98">String</a> name
+)</pre>
+    <div>
+      <p>Finds a field by field name. </p>
+      <p />
+      <table class="details responsive">
+        <thead>
+          <th colspan="2">Details</th>
+        </thead>
+        <tbody>
+          <tr>
+            <td>Parameters</td>
+            <td>
+              <table class="function param responsive">
+                <tbody>
+                  <tr>
+                    <td>
+                      <code>name</code>
+                    </td>
+                    <td>
+                      <div>The unqualified name of the field (e.g. "foo").</div>
+                    </td>
+                  </tr>
+                </tbody>
+              </table>
+            </td>
+          </tr>
+          <tr>
+            <td>
+              <b>Returns</b>
+            </td>
+            <td>
+              <div>The field's descriptor, or null if not found.</div>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div><div id="class_google_1_1_protobuf_1_1_reflection_1_1_message_descriptor_1a40dd0fbe7ce324ae48b7e5e2c26c8845">
+    <h3>FindFieldByNumber</h3>
+    <pre class="prettyprint"><a href="/reference/csharp/api-docs/class/google/protobuf/reflection/field-descriptor.html#class_google_1_1_protobuf_1_1_reflection_1_1_field_descriptor">FieldDescriptor</a> FindFieldByNumber(
+  int number
+)</pre>
+    <div>
+      <p>Finds a field by field number. </p>
+      <p />
+      <table class="details responsive">
+        <thead>
+          <th colspan="2">Details</th>
+        </thead>
+        <tbody>
+          <tr>
+            <td>Parameters</td>
+            <td>
+              <table class="function param responsive">
+                <tbody>
+                  <tr>
+                    <td>
+                      <code>number</code>
+                    </td>
+                    <td>
+                      <div>The field number within this message type.</div>
+                    </td>
+                  </tr>
+                </tbody>
+              </table>
+            </td>
+          </tr>
+          <tr>
+            <td>
+              <b>Returns</b>
+            </td>
+            <td>
+              <div>The field's descriptor, or null if not found.</div>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div></body>
+</html>
