@@ -5,6 +5,7 @@ toc_hide: false
 linkTitle: "API Best Practices"
 no_list: "true"
 type: docs
+description: "A future-proof API is surprisingly hard to get right. The suggestions in this document make trade-offs to favor long-term, bug-free evolution."
 ---
 
 Updated for proto3. Patches welcome!
@@ -103,7 +104,7 @@ tag-for-tag identical with an automatic translation layer (think: byte copying
 or proto reflection). Proto annotations can also power an automatic translation
 layer.
 
-A couple of exceptions to the rule:
+The following are exceptions to the rule:
 
 *   If the proto field is one of a common type, such as `google.type` or
     `google.protobuf`, then using that type both as storage and API is
@@ -112,6 +113,21 @@ A couple of exceptions to the rule:
     flexibility for execution speed. If your service
     doesn't have millions of QPS with millisecond latency,
     you're probably not the exception.
+*   If all of the following are true:
+
+    *   your service *is* the storage system
+    *   your system doesn't make decisions based on your clients' structured
+        data
+    *   your system simply stores, loads, and perhaps provides queries at your
+        client's request
+
+    Note that if you are implementing something like a logging system or a
+    proto-based wrapper around a generic storages system, then you probably want
+    to aim to have your clients' messages transit into your storage backend as
+    opaquely as possible so that you don't create a dependency nexus. Consider
+    using extensions or [Encode Opaque Data in Strings by Web-safe Encoding
+    Binary Proto
+    Serialization](/docs/programming-guides/api#encode-opaque-data-in-strings).
 
 ## For Mutations, Support Partial Updates or Append-Only Updates, Not Full Replaces {#support-partial-updates}
 

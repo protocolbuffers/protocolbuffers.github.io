@@ -5,6 +5,7 @@ toc_hide: false
 linkTitle: "Dart"
 no_list: "true"
 type: docs
+description: "This tutorial provides a basic Dart programmers introduction to working with protocol buffers."
 ---
 
 This tutorial provides a basic Dart programmer's introduction to working with

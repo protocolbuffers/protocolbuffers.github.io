@@ -5,6 +5,7 @@ toc_hide: false
 linkTitle: "Proto Best Practices"
 no_list: "true"
 type: docs
+description: "This topic contains vetted best practices for authoring Protocol Buffers."
 ---
 
 Clients and servers are never updated at exactly the same time - even when you
@@ -33,11 +34,11 @@ you change a field’s message type (for example, going from a `Foo` message to 
 
 Never add a required field, instead add `// required` to document the API
 contract. Required fields are considered harmful by so many they were
-removed from proto3 completely . Make all fields
+removed from proto3 completely. Make all fields
 optional or repeated. You never know how long a message type is going to last
 and whether someone will be forced to fill in your required field with an empty
 string or zero in four years when it’s no longer logically required but the
-proto still says it is .
+proto still says it is.
 
 ## **Don't** Make a Message with Lots of Fields
 
@@ -78,7 +79,6 @@ when a perfectly suitable common type already exists!
 ### Well-Known Types:
 
 *   [duration](https://github.com/protocolbuffers/protobuf/blob/main/src/google/protobuf/duration.proto)
-    \
     is a signed, fixed-length span of time (for example, 42s).
 *   [timestamp](https://github.com/protocolbuffers/protobuf/blob/main/src/google/protobuf/timestamp.proto)
     is a point in time independent of any time zone or calendar (for example,
@@ -129,11 +129,19 @@ recycling now-deleted field names: `reserved "foo", "bar";`.
 When you delete an enum value that's no longer used, reserve its number so that
 no one accidentally re-uses it in the future. Just `reserved 2, 3;` is enough.
 You can also reserve names to avoid recycling now-deleted value names: `reserved
-"FOO", "BAR";`.`build_test` rule.
+"FOO", "BAR";`.
+
+## **Don't** Change the Default Value of a Field
+
+Almost never change the default value of a proto field. This causes version skew
+between clients and servers. A client reading an unset value will see a
+different result than a server reading the same unset value when their builds
+straddle the proto change. Proto3 removed the ability to
+`build_test` rule.
 
 With a `build_test` rule, errors in the file are caught when the test fails.
 Otherwise, typos and errors can persist and lead to hard-to-diagnose
-problems . Adding this `build_test` to
+problems. Adding this `build_test` to
 your build script is also highly recommended, so you
 can be notified of future breakages.
 

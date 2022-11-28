@@ -5,8 +5,9 @@ toc_hide: false
 linkTitle: "Generated Code Guide"
 no_list: "true"
 type: docs
+description: "This topic describes exactly what Java code the protocol buffer compiler generates for any given protocol definition."
 ---
-
+    
 
 This page describes exactly what Java code the protocol buffer compiler
 generates for any given protocol definition. Any differences between proto2 and
@@ -469,8 +470,9 @@ both the message class and its builder for message types, allowing you to access
 the relevant sub-builders:
 
 -   `FooOrBuilder getFooOrBuilder(int index)`: Returns the builder for the
-    specified element, if it already exists, or the element if not. If this is
-    called from a message class, it will always return a message rather than a
+    specified element, if it already exists, or throws
+    `IndexOutOfBoundsException` if not. If this is called from a message class,
+    it will always return a message (or throw an exception) rather than a
     builder. Calling this method on builders will not create a sub-builder for
     the field.
 -   `List<FooOrBuilder> getFooOrBuilderList()`: Returns the entire field as an
@@ -481,7 +483,8 @@ the relevant sub-builders:
 The compiler will generate the following methods only in the message's builder:
 
 -   `Builder getFooBuilder(int index)`: Returns the builder for the element at
-    the specified index.
+    the specified index, or throws `IndexOutOfBoundsException` if the index is
+    out of bounds.
 -   `Builder addFooBuilder(int index)`: Inserts and returns a builder for a
     default message instance at the specified index. The existing entries are
     shifted to higher indices to make room for the inserted builder.

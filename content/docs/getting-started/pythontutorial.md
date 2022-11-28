@@ -5,6 +5,7 @@ toc_hide: false
 linkTitle: "Python"
 no_list: "true"
 type: docs
+description: "This tutorial provides a basic Python programmers introduction to working with protocol buffers."
 ---
 
 This tutorial provides a basic Python programmer's introduction to working with

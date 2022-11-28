@@ -5,8 +5,9 @@ toc_hide: false
 linkTitle: "Reference Guides"
 no_list: "true"
 type: docs
+description: "This section contains reference documentation for working with protocol buffer classes in C++, Java, Python, Go, C#, Objective-C, Ruby, PHP, and Dart, as well as some reference documentation for Protocol Buffers itself."
 ---
-
+    
 
 This section contains reference documentation for working with protocol buffer
 classes in C++, Java, Python, Go, C\#, Objective-C, Ruby, PHP, and Dart, as well

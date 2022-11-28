@@ -5,6 +5,7 @@ toc_hide: false
 linkTitle: "Go"
 no_list: "true"
 type: docs
+description: "This tutorial provides a basic Go programmers introduction to working with protocol buffers."
 ---
 
 This tutorial provides a basic Go programmer's introduction to working with

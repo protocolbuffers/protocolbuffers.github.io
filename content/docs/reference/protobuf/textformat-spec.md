@@ -5,6 +5,7 @@ toc_hide: false
 linkTitle: "Text Format Language Specification"
 no_list: "true"
 type: docs
+description: "The protocol buffer Text Format Language specifies a syntax for representation of protobuf data in text form, which is often useful for configurations or tests."
 ---
 
 The protocol buffer Text Format Language specifies a syntax for representation

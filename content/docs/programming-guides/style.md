@@ -5,6 +5,7 @@ toc_hide: false
 linkTitle: "Style Guide"
 no_list: "true"
 type: docs
+description: "This topic provides direction for how best to stucture your proto definitions."
 ---
 
 This document provides a style guide for `.proto` files. By following these

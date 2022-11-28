@@ -5,8 +5,9 @@ toc_hide: false
 linkTitle: "Version 2 Language Specification"
 no_list: "true"
 type: docs
+description: "This topic is a language specification reference for version 2 of the Protocol Buffers language (proto2)."
 ---
-
+    
 
 This is a language specification reference for version 2 of the Protocol Buffers
 language (proto2). The syntax is specified using
@@ -289,11 +290,11 @@ reserved "foo", "bar";
 ### Enum definition {#enum_definition}
 
 The enum definition consists of a name and an enum body. The enum body can have
-options and enum fields.
+options, enum fields, and reserved statements.
 
 ```
 enum = "enum" enumName enumBody
-enumBody = "{" { option | enumField | emptyStatement } "}"
+enumBody = "{" { option | enumField | emptyStatement | reserved } "}"
 enumField = ident "=" [ "-" ] intLit [ "[" enumValueOption { ","  enumValueOption } "]" ]";"
 enumValueOption = optionName "=" constant
 ```

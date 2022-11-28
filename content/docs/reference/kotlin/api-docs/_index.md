@@ -5,8 +5,9 @@ toc_hide: false
 linkTitle: "Kotlin API"
 no_list: "true"
 type: docs
+description: "The API docs for Kotlin."
 ---
-
+    
 
 //[protobuf-kotlin](./)
 

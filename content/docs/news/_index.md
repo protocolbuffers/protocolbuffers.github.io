@@ -5,8 +5,9 @@ toc_hide: false
 linkTitle: "News"
 no_list: "true"
 type: docs
+description: "Get the latest news about Protocol Buffers."
 ---
-
+    
 
 News topics provide information about past events and changes with Protocol
 Buffers, and plans for upcoming changes.

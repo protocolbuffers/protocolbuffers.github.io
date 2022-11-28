@@ -5,6 +5,7 @@ toc_hide: false
 linkTitle: "Techniques"
 no_list: "true"
 type: docs
+description: "This topic describes some commonly-used design patterns for dealing with Protocol Buffers."
 ---
 
 This page describes some commonly-used design patterns for dealing with Protocol

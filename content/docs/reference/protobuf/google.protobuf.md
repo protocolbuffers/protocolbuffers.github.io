@@ -5,8 +5,9 @@ toc_hide: false
 linkTitle: "Well-Known Types"
 no_list: "true"
 type: docs
+description: "API documentation for the google.protobuf package."
 ---
-
+    
 
 ## Index
 
