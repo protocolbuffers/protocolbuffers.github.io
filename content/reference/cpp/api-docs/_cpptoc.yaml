@@ -1,0 +1,98 @@
+toc:
+  - title: "C++ API"
+    path: /reference/cpp/index
+    section:
+    - title: "protobuf"
+      path: /reference/cpp/index#google.protobuf
+      section:
+      - title: "arena.h"
+        path: /reference/cpp/google.protobuf.arena
+      - title: "descriptor.h"
+        path: /reference/cpp/google.protobuf.descriptor
+      - title: "descriptor.pb.h"
+        path: /reference/cpp/google.protobuf.descriptor.pb
+      - title: "descriptor_database.h"
+        path: /reference/cpp/google.protobuf.descriptor_database
+      - title: "dynamic_message.h"
+        path: /reference/cpp/google.protobuf.dynamic_message
+      - title: "map.h"
+        path: /reference/cpp/google.protobuf.map
+      - title: "message.h"
+        path: /reference/cpp/google.protobuf.message
+      - title: "message_lite.h"
+        path: /reference/cpp/google.protobuf.message_lite
+      - title: "repeated_field.h"
+        path: /reference/cpp/google.protobuf.repeated_field
+      - title: "service.h"
+        path: /reference/cpp/google.protobuf.service
+      - title: "text_format.h"
+        path: /reference/cpp/google.protobuf.text_format
+      - title: "unknown_field_set.h"
+        path: /reference/cpp/google.protobuf.unknown_field_set
+    - title: "protobuf::io"
+      path: /reference/cpp/index#google.protobuf.io
+      section:
+      - title: "coded_stream.h"
+        path: /reference/cpp/google.protobuf.io.coded_stream
+      - title: "printer.h"
+        path: /reference/cpp/google.protobuf.io.printer
+      - title: "tokenizer.h"
+        path: /reference/cpp/google.protobuf.io.tokenizer
+      - title: "zero_copy_stream.h"
+        path: /reference/cpp/google.protobuf.io.zero_copy_stream
+      - title: "zero_copy_stream_impl.h"
+        path: /reference/cpp/google.protobuf.io.zero_copy_stream_impl
+      - title: "zero_copy_stream_impl_lite.h"
+        path: /reference/cpp/google.protobuf.io.zero_copy_stream_impl_lite
+    - title: "protobuf::util"
+      path: /reference/cpp/index#google.protobuf.util
+      section:
+      - title: "field_comparator.h"
+        path: /reference/cpp/google.protobuf.util.field_comparator
+      - title: "field_mask_util.h"
+        path: /reference/cpp/google.protobuf.util.field_mask_util
+      - title: "json_util.h"
+        path: /reference/cpp/google.protobuf.util.json_util
+      - title: "message_differencer.h"
+        path: /reference/cpp/google.protobuf.util.message_differencer
+      - title: "time_util.h"
+        path: /reference/cpp/google.protobuf.util.time_util
+      - title: "type_resolver.h"
+        path: /reference/cpp/google.protobuf.util.type_resolver
+      - title: "type_resolver_util.h"
+        path: /reference/cpp/google.protobuf.util.type_resolver_util
+    - title: "protobuf::compiler"
+      path: /reference/cpp/index#google.protobuf.compiler
+      section:
+      - title: "code_generator.h"
+        path: /reference/cpp/google.protobuf.compiler.code_generator
+      - title: "command_line_interface.h"
+        path: /reference/cpp/google.protobuf.compiler.command_line_interface
+      - title: "importer.h"
+        path: /reference/cpp/google.protobuf.compiler.importer
+      - title: "parser.h"
+        path: /reference/cpp/google.protobuf.compiler.parser
+      - title: "plugin.h"
+        path: /reference/cpp/google.protobuf.compiler.plugin
+      - title: "plugin.pb.h"
+        path: /reference/cpp/google.protobuf.compiler.plugin.pb
+      - title: "cpp_generator.h"
+        path: /reference/cpp/google.protobuf.compiler.cpp_generator
+      - title: "csharp_generator.h"
+        path: /reference/cpp/google.protobuf.compiler.csharp_generator
+      - title: "csharp_names.h"
+        path: /reference/cpp/google.protobuf.compiler.csharp_names
+      - title: "java_generator.h"
+        path: /reference/cpp/google.protobuf.compiler.java_generator
+      - title: "java_names.h"
+        path: /reference/cpp/google.protobuf.compiler.java_names
+      - title: "js_generator.h"
+        path: /reference/cpp/google.protobuf.compiler.js_generator
+      - title: "objectivec_generator.h"
+        path: /reference/cpp/google.protobuf.compiler.objectivec_generator
+      - title: "objectivec_helpers.h"
+        path: /reference/cpp/google.protobuf.compiler.objectivec_helpers
+      - title: "python_generator.h"
+        path: /reference/cpp/google.protobuf.compiler.python_generator
+      - title: "ruby_generator.h"
+        path: /reference/cpp/google.protobuf.compiler.ruby_generator

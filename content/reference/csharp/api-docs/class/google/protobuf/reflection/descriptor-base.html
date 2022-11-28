@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html devsite>
+<head>
+  <title>Google.Protobuf.Reflection.DescriptorBase Class Reference</title>
+  <link rel="stylesheet" href="/reference/csharp/api-docs/includes/stylesheet.css">
+</head>
+<body><div id="top"><!-- do not remove this div --></div><h1>Google.<wbr/>Protobuf.<wbr/>Reflection.<wbr/>DescriptorBase</h1><p>Base class for nearly all descriptors, providing common functionality. </p><h2>Summary</h2><h3>Inheritance</h3>Inherits from: <a href="/reference/csharp/api-docs/interface/google/protobuf/reflection/i-descriptor.html">Google.Protobuf.Reflection.IDescriptor</a><br />Direct Known Subclasses:<a href="/reference/csharp/api-docs/class/google/protobuf/reflection/enum-descriptor.html">Google.Protobuf.Reflection.EnumDescriptor</a>, <a href="/reference/csharp/api-docs/class/google/protobuf/reflection/enum-value-descriptor.html">Google.Protobuf.Reflection.EnumValueDescriptor</a>, <a href="/reference/csharp/api-docs/class/google/protobuf/reflection/field-descriptor.html">Google.Protobuf.Reflection.FieldDescriptor</a>, <a href="/reference/csharp/api-docs/class/google/protobuf/reflection/message-descriptor.html">Google.Protobuf.Reflection.MessageDescriptor</a>, <a href="/reference/csharp/api-docs/class/google/protobuf/reflection/method-descriptor.html">Google.Protobuf.Reflection.MethodDescriptor</a>, <a href="/reference/csharp/api-docs/class/google/protobuf/reflection/oneof-descriptor.html">Google.Protobuf.Reflection.OneofDescriptor</a>, <a href="/reference/csharp/api-docs/class/google/protobuf/reflection/service-descriptor.html">Google.Protobuf.Reflection.ServiceDescriptor</a><table class="properties responsive">
+    <tr>
+      <th colspan="2">
+        <h3>Properties</h3>
+      </th>
+    </tr>
+    <tr>
+      <td>
+        <code><a href="#class_google_1_1_protobuf_1_1_reflection_1_1_descriptor_base_1aab94de2cd7402cf3729c67a774b12070">File</a></code>
+      </td>
+      <td>
+        <div>
+          <code><a href="/reference/csharp/api-docs/class/google/protobuf/reflection/file-descriptor.html#class_google_1_1_protobuf_1_1_reflection_1_1_file_descriptor">FileDescriptor</a></code>
+        </div>
+        <div>The file this descriptor was declared in. </div>
+      </td>
+    </tr>
+    <tr>
+      <td>
+        <code><a href="#class_google_1_1_protobuf_1_1_reflection_1_1_descriptor_base_1a2f83f98a48d8995bc94dd23b06852efa">FullName</a></code>
+      </td>
+      <td>
+        <div>
+          <code>string</code>
+        </div>
+        <div>The fully qualified name of the descriptor's target. </div>
+      </td>
+    </tr>
+    <tr>
+      <td>
+        <code><a href="#class_google_1_1_protobuf_1_1_reflection_1_1_descriptor_base_1a59cf3f62e2d78c76e857af4ac1d581ab">Index</a></code>
+      </td>
+      <td>
+        <div>
+          <code>int</code>
+        </div>
+        <div>The index of this descriptor within its parent descriptor. </div>
+      </td>
+    </tr>
+    <tr>
+      <td>
+        <code><a href="#class_google_1_1_protobuf_1_1_reflection_1_1_descriptor_base_1a6a066b0b3a2fbc11f8a0ec5032df6f0e">Name</a></code>
+      </td>
+      <td>
+        <div>
+          <code>abstract string</code>
+        </div>
+        <div>Returns the name of the entity (field, message etc) being described. </div>
+      </td>
+    </tr>
+  </table><h2>Properties</h2><div id="class_google_1_1_protobuf_1_1_reflection_1_1_descriptor_base_1aab94de2cd7402cf3729c67a774b12070">
+    <h3>File</h3>
+    <pre class="prettyprint"><a href="/reference/csharp/api-docs/class/google/protobuf/reflection/file-descriptor.html#class_google_1_1_protobuf_1_1_reflection_1_1_file_descriptor">FileDescriptor</a> File</pre>
+    <div>
+      <p>The file this descriptor was declared in. </p>
+    </div>
+  </div><div id="class_google_1_1_protobuf_1_1_reflection_1_1_descriptor_base_1a2f83f98a48d8995bc94dd23b06852efa">
+    <h3>FullName</h3>
+    <pre class="prettyprint">string FullName</pre>
+    <div>
+      <p>The fully qualified name of the descriptor's target. </p>
+    </div>
+  </div><div id="class_google_1_1_protobuf_1_1_reflection_1_1_descriptor_base_1a59cf3f62e2d78c76e857af4ac1d581ab">
+    <h3>Index</h3>
+    <pre class="prettyprint">int Index</pre>
+    <div>
+      <p>The index of this descriptor within its parent descriptor. </p>
+      <p>This returns the index of this descriptor within its parent, for this descriptor's type. (There can be duplicate values for different types, e.g. one enum type with index 0 and one message type with index 0.) </p>
+    </div>
+  </div><div id="class_google_1_1_protobuf_1_1_reflection_1_1_descriptor_base_1a6a066b0b3a2fbc11f8a0ec5032df6f0e">
+    <h3>Name</h3>
+    <pre class="prettyprint">abstract string Name</pre>
+    <div>
+      <p>Returns the name of the entity (field, message etc) being described. </p>
+    </div>
+  </div></body>
+</html>

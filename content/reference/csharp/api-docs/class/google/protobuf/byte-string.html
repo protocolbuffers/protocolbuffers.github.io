@@ -1,0 +1,696 @@
+<!DOCTYPE html>
+<html devsite>
+<head>
+  <title>Google.Protobuf.ByteString Class Reference</title>
+  <link rel="stylesheet" href="/reference/csharp/api-docs/includes/stylesheet.css">
+</head>
+<body><div id="top"><!-- do not remove this div --></div><h1>Google.<wbr/>Protobuf.<wbr/>ByteString</h1><p>Immutable array of bytes. </p><h2>Summary</h2><h3>Inheritance</h3>Inherits from: IEnumerable< byte >, IEquatable< ByteString ><table class="properties responsive">
+    <tr>
+      <th colspan="2">
+        <h3>Properties</h3>
+      </th>
+    </tr>
+    <tr>
+      <td>
+        <code><a href="#class_google_1_1_protobuf_1_1_byte_string_1a13aee24e3f133eecf45c3cfe74cca067">Empty</a></code>
+      </td>
+      <td>
+        <div>
+          <code><a href="/reference/csharp/api-docs/class/google/protobuf/byte-string.html#class_google_1_1_protobuf_1_1_byte_string">ByteString</a></code>
+        </div>
+        <div>Returns an empty <a href="/reference/csharp/api-docs/class/google/protobuf/byte-string.html#class_google_1_1_protobuf_1_1_byte_string">ByteString</a>. </div>
+      </td>
+    </tr>
+    <tr>
+      <td>
+        <code><a href="#class_google_1_1_protobuf_1_1_byte_string_1ab33a63cd9dd9212100de5f61d1cdecf4">IsEmpty</a></code>
+      </td>
+      <td>
+        <div>
+          <code>bool</code>
+        </div>
+        <div>Returns <code>true</code> if this byte string is empty, <code>false</code> otherwise. </div>
+      </td>
+    </tr>
+    <tr>
+      <td>
+        <code><a href="#class_google_1_1_protobuf_1_1_byte_string_1a68c573fdb98442fde03392e1ada52464">Length</a></code>
+      </td>
+      <td>
+        <div>
+          <code>int</code>
+        </div>
+        <div>Returns the length of this <a href="/reference/csharp/api-docs/class/google/protobuf/byte-string.html#class_google_1_1_protobuf_1_1_byte_string">ByteString</a> in bytes. </div>
+      </td>
+    </tr>
+    <tr>
+      <td>
+        <code><a href="#class_google_1_1_protobuf_1_1_byte_string_1ae415baf53dc5d4aeb30b37dd1dcc74cc">this[int index]</a></code>
+      </td>
+      <td>
+        <div>
+          <code>byte</code>
+        </div>
+        <div>Retuns the byte at the given index. </div>
+      </td>
+    </tr>
+  </table><table class="methods responsive">
+    <tr>
+      <th colspan="2">
+        <h3>Public functions</h3>
+      </th>
+    </tr>
+    <tr>
+      <td>
+        <code><a href="#class_google_1_1_protobuf_1_1_byte_string_1a0847e0eac17c980dc8df303fd5292130">CopyTo</a>(byte[] array, int position)</code>
+      </td>
+      <td>
+        <div>
+          <code>void</code>
+        </div>
+        <div>Copies the entire byte array to the destination array provided at the offset specified. </div>
+      </td>
+    </tr>
+    <tr>
+      <td>
+        <code><a href="#class_google_1_1_protobuf_1_1_byte_string_1a6d609210cbe20b932841e5bc33f12612">CreateCodedInput</a>()</code>
+      </td>
+      <td>
+        <div>
+          <code><a href="/reference/csharp/api-docs/class/google/protobuf/coded-input-stream.html#class_google_1_1_protobuf_1_1_coded_input_stream">CodedInputStream</a></code>
+        </div>
+        <div>Creates a <a href="/reference/csharp/api-docs/class/google/protobuf/coded-input-stream.html#class_google_1_1_protobuf_1_1_coded_input_stream">CodedInputStream</a> from this <a href="/reference/csharp/api-docs/class/google/protobuf/byte-string.html#class_google_1_1_protobuf_1_1_byte_string">ByteString</a>'s data. </div>
+      </td>
+    </tr>
+    <tr>
+      <td>
+        <code><a href="#class_google_1_1_protobuf_1_1_byte_string_1afa834ba1be1e731df5fb756d792ecea0">Equals</a>(object obj)</code>
+      </td>
+      <td>
+        <div>
+          <code>override bool</code>
+        </div>
+        <div>Compares this byte string with another object. </div>
+      </td>
+    </tr>
+    <tr>
+      <td>
+        <code><a href="#class_google_1_1_protobuf_1_1_byte_string_1a34dec7c1fc119af073f24e26402947f1">Equals</a>(<a href="/reference/csharp/api-docs/class/google/protobuf/byte-string.html#class_google_1_1_protobuf_1_1_byte_string">ByteString</a> other)</code>
+      </td>
+      <td>
+        <div>
+          <code>bool</code>
+        </div>
+        <div>Compares this byte string with another. </div>
+      </td>
+    </tr>
+    <tr>
+      <td>
+        <code><a href="#class_google_1_1_protobuf_1_1_byte_string_1adbe3842d4749d8f88cfd582121e2bd6d">GetEnumerator</a>()</code>
+      </td>
+      <td>
+        <div>
+          <code>IEnumerator< byte ></code>
+        </div>
+        <div>Returns an iterator over the bytes in this <a href="/reference/csharp/api-docs/class/google/protobuf/byte-string.html#class_google_1_1_protobuf_1_1_byte_string">ByteString</a>. </div>
+      </td>
+    </tr>
+    <tr>
+      <td>
+        <code><a href="#class_google_1_1_protobuf_1_1_byte_string_1a9db46657d41b58aff6899b5b6226c7ee">GetHashCode</a>()</code>
+      </td>
+      <td>
+        <div>
+          <code>override int</code>
+        </div>
+        <div>Returns a hash code for this object. </div>
+      </td>
+    </tr>
+    <tr>
+      <td>
+        <code><a href="#class_google_1_1_protobuf_1_1_byte_string_1a7338ed9e339fb6af2a1dcd46565f1f90">ToBase64</a>()</code>
+      </td>
+      <td>
+        <div>
+          <code>string</code>
+        </div>
+        <div>Converts this <a href="/reference/csharp/api-docs/class/google/protobuf/byte-string.html#class_google_1_1_protobuf_1_1_byte_string">ByteString</a> into a standard base64 representation. </div>
+      </td>
+    </tr>
+    <tr>
+      <td>
+        <code><a href="#class_google_1_1_protobuf_1_1_byte_string_1a20f88ee06c9b66f9e065297f62f92edd">ToByteArray</a>()</code>
+      </td>
+      <td>
+        <div>
+          <code>byte[]</code>
+        </div>
+        <div>Converts this <a href="/reference/csharp/api-docs/class/google/protobuf/byte-string.html#class_google_1_1_protobuf_1_1_byte_string">ByteString</a> into a byte array. </div>
+      </td>
+    </tr>
+    <tr>
+      <td>
+        <code><a href="#class_google_1_1_protobuf_1_1_byte_string_1a34312693c1a26482efd2aea46d8d4902">ToString</a>(Encoding encoding)</code>
+      </td>
+      <td>
+        <div>
+          <code>string</code>
+        </div>
+        <div>Converts this <a href="/reference/csharp/api-docs/class/google/protobuf/byte-string.html#class_google_1_1_protobuf_1_1_byte_string">ByteString</a> into a string by applying the given encoding. </div>
+      </td>
+    </tr>
+    <tr>
+      <td>
+        <code><a href="#class_google_1_1_protobuf_1_1_byte_string_1a9414bf3aaa03c17ead51660c83dd3391">ToStringUtf8</a>()</code>
+      </td>
+      <td>
+        <div>
+          <code>string</code>
+        </div>
+        <div>Converts this <a href="/reference/csharp/api-docs/class/google/protobuf/byte-string.html#class_google_1_1_protobuf_1_1_byte_string">ByteString</a> into a string by applying the UTF-8 encoding. </div>
+      </td>
+    </tr>
+    <tr>
+      <td>
+        <code><a href="#class_google_1_1_protobuf_1_1_byte_string_1aa3f5eb280621a32874edeb97eab7e9e6">WriteTo</a>(Stream outputStream)</code>
+      </td>
+      <td>
+        <div>
+          <code>void</code>
+        </div>
+        <div>Writes the entire byte array to the provided stream </div>
+      </td>
+    </tr>
+  </table><table class="methods responsive">
+    <tr>
+      <th colspan="2">
+        <h3>Public static functions</h3>
+      </th>
+    </tr>
+    <tr>
+      <td>
+        <code><a href="#class_google_1_1_protobuf_1_1_byte_string_1a57d1846ff6028fdf31bc7b2982ff68ca">CopyFrom</a>(params byte[] bytes)</code>
+      </td>
+      <td>
+        <div>
+          <code><a href="/reference/csharp/api-docs/class/google/protobuf/byte-string.html#class_google_1_1_protobuf_1_1_byte_string">ByteString</a></code>
+        </div>
+        <div>Constructs a <a href="/reference/csharp/api-docs/class/google/protobuf/byte-string.html#class_google_1_1_protobuf_1_1_byte_string">ByteString</a> from the given array. </div>
+      </td>
+    </tr>
+    <tr>
+      <td>
+        <code><a href="#class_google_1_1_protobuf_1_1_byte_string_1a072efaae98aab8c8477ff6fa766e70f6">CopyFrom</a>(byte[] bytes, int offset, int count)</code>
+      </td>
+      <td>
+        <div>
+          <code><a href="/reference/csharp/api-docs/class/google/protobuf/byte-string.html#class_google_1_1_protobuf_1_1_byte_string">ByteString</a></code>
+        </div>
+        <div>Constructs a <a href="/reference/csharp/api-docs/class/google/protobuf/byte-string.html#class_google_1_1_protobuf_1_1_byte_string">ByteString</a> from a portion of a byte array. </div>
+      </td>
+    </tr>
+    <tr>
+      <td>
+        <code><a href="#class_google_1_1_protobuf_1_1_byte_string_1af17ef465c0ea170acbbd1ca69da8f014">CopyFrom</a>(string text, Encoding encoding)</code>
+      </td>
+      <td>
+        <div>
+          <code><a href="/reference/csharp/api-docs/class/google/protobuf/byte-string.html#class_google_1_1_protobuf_1_1_byte_string">ByteString</a></code>
+        </div>
+        <div>Creates a new <a href="/reference/csharp/api-docs/class/google/protobuf/byte-string.html#class_google_1_1_protobuf_1_1_byte_string">ByteString</a> by encoding the specified text with the given encoding. </div>
+      </td>
+    </tr>
+    <tr>
+      <td>
+        <code><a href="#class_google_1_1_protobuf_1_1_byte_string_1a7ab506f4dc838dd89fd2c54a24dccc74">CopyFromUtf8</a>(string text)</code>
+      </td>
+      <td>
+        <div>
+          <code><a href="/reference/csharp/api-docs/class/google/protobuf/byte-string.html#class_google_1_1_protobuf_1_1_byte_string">ByteString</a></code>
+        </div>
+        <div>Creates a new <a href="/reference/csharp/api-docs/class/google/protobuf/byte-string.html#class_google_1_1_protobuf_1_1_byte_string">ByteString</a> by encoding the specified text in UTF-8. </div>
+      </td>
+    </tr>
+    <tr>
+      <td>
+        <code><a href="#class_google_1_1_protobuf_1_1_byte_string_1a9c26cae42b01d53c9f30c05e8428da50">FromBase64</a>(string bytes)</code>
+      </td>
+      <td>
+        <div>
+          <code><a href="/reference/csharp/api-docs/class/google/protobuf/byte-string.html#class_google_1_1_protobuf_1_1_byte_string">ByteString</a></code>
+        </div>
+        <div>Constructs a <a href="/reference/csharp/api-docs/class/google/protobuf/byte-string.html#class_google_1_1_protobuf_1_1_byte_string">ByteString</a> from the Base64 Encoded String. </div>
+      </td>
+    </tr>
+    <tr>
+      <td>
+        <code><a href="#class_google_1_1_protobuf_1_1_byte_string_1a4c5835b21377e1cd63735ffe26bdb509">operator!=</a>(<a href="/reference/csharp/api-docs/class/google/protobuf/byte-string.html#class_google_1_1_protobuf_1_1_byte_string">ByteString</a> lhs, <a href="/reference/csharp/api-docs/class/google/protobuf/byte-string.html#class_google_1_1_protobuf_1_1_byte_string">ByteString</a> rhs)</code>
+      </td>
+      <td>
+        <div>
+          <code>bool</code>
+        </div>
+        <div>Compares two byte strings for inequality. </div>
+      </td>
+    </tr>
+    <tr>
+      <td>
+        <code><a href="#class_google_1_1_protobuf_1_1_byte_string_1a95efc955f6a7e3f0dfc14e5b3288700e">operator==</a>(<a href="/reference/csharp/api-docs/class/google/protobuf/byte-string.html#class_google_1_1_protobuf_1_1_byte_string">ByteString</a> lhs, <a href="/reference/csharp/api-docs/class/google/protobuf/byte-string.html#class_google_1_1_protobuf_1_1_byte_string">ByteString</a> rhs)</code>
+      </td>
+      <td>
+        <div>
+          <code>bool</code>
+        </div>
+        <div>Compares two byte strings for equality. </div>
+      </td>
+    </tr>
+  </table><h2>Properties</h2><div id="class_google_1_1_protobuf_1_1_byte_string_1a13aee24e3f133eecf45c3cfe74cca067">
+    <h3>Empty</h3>
+    <pre class="prettyprint"><a href="/reference/csharp/api-docs/class/google/protobuf/byte-string.html#class_google_1_1_protobuf_1_1_byte_string">ByteString</a> Empty</pre>
+    <div>
+      <p>Returns an empty <a href="/reference/csharp/api-docs/class/google/protobuf/byte-string.html#class_google_1_1_protobuf_1_1_byte_string">ByteString</a>. </p>
+    </div>
+  </div><div id="class_google_1_1_protobuf_1_1_byte_string_1ab33a63cd9dd9212100de5f61d1cdecf4">
+    <h3>IsEmpty</h3>
+    <pre class="prettyprint">bool IsEmpty</pre>
+    <div>
+      <p>Returns <code>true</code> if this byte string is empty, <code>false</code> otherwise. </p>
+    </div>
+  </div><div id="class_google_1_1_protobuf_1_1_byte_string_1a68c573fdb98442fde03392e1ada52464">
+    <h3>Length</h3>
+    <pre class="prettyprint">int Length</pre>
+    <div>
+      <p>Returns the length of this <a href="/reference/csharp/api-docs/class/google/protobuf/byte-string.html#class_google_1_1_protobuf_1_1_byte_string">ByteString</a> in bytes. </p>
+    </div>
+  </div><div id="class_google_1_1_protobuf_1_1_byte_string_1ae415baf53dc5d4aeb30b37dd1dcc74cc">
+    <h3>this[int index]</h3>
+    <pre class="prettyprint">byte this[int index]</pre>
+    <div>
+      <p>Retuns the byte at the given index. </p>
+    </div>
+  </div><h2>Public functions</h2><div id="class_google_1_1_protobuf_1_1_byte_string_1a0847e0eac17c980dc8df303fd5292130">
+    <h3>CopyTo</h3>
+    <pre class="prettyprint">void CopyTo(
+  byte[] array,
+  int position
+)</pre>
+    <div>
+      <p>Copies the entire byte array to the destination array provided at the offset specified. </p>
+    </div>
+  </div><div id="class_google_1_1_protobuf_1_1_byte_string_1a6d609210cbe20b932841e5bc33f12612">
+    <h3>CreateCodedInput</h3>
+    <pre class="prettyprint"><a href="/reference/csharp/api-docs/class/google/protobuf/coded-input-stream.html#class_google_1_1_protobuf_1_1_coded_input_stream">CodedInputStream</a> CreateCodedInput()</pre>
+    <div>
+      <p>Creates a <a href="/reference/csharp/api-docs/class/google/protobuf/coded-input-stream.html#class_google_1_1_protobuf_1_1_coded_input_stream">CodedInputStream</a> from this <a href="/reference/csharp/api-docs/class/google/protobuf/byte-string.html#class_google_1_1_protobuf_1_1_byte_string">ByteString</a>'s data. </p>
+    </div>
+  </div><div id="class_google_1_1_protobuf_1_1_byte_string_1afa834ba1be1e731df5fb756d792ecea0">
+    <h3>Equals</h3>
+    <pre class="prettyprint">override bool Equals(
+  object obj
+)</pre>
+    <div>
+      <p>Compares this byte string with another object. </p>
+      <p />
+      <table class="details responsive">
+        <thead>
+          <th colspan="2">Details</th>
+        </thead>
+        <tbody>
+          <tr>
+            <td>Parameters</td>
+            <td>
+              <table class="function param responsive">
+                <tbody>
+                  <tr>
+                    <td>
+                      <code>obj</code>
+                    </td>
+                    <td>
+                      <div>The object to compare this with.</div>
+                    </td>
+                  </tr>
+                </tbody>
+              </table>
+            </td>
+          </tr>
+          <tr>
+            <td>
+              <b>Returns</b>
+            </td>
+            <td>
+              <div><code>true</code> if <i>obj</i>  refers to an equal <a href="/reference/csharp/api-docs/class/google/protobuf/byte-string.html#class_google_1_1_protobuf_1_1_byte_string">ByteString</a>; <code>false</code> otherwise.</div>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div><div id="class_google_1_1_protobuf_1_1_byte_string_1a34dec7c1fc119af073f24e26402947f1">
+    <h3>Equals</h3>
+    <pre class="prettyprint">bool Equals(
+  <a href="/reference/csharp/api-docs/class/google/protobuf/byte-string.html#class_google_1_1_protobuf_1_1_byte_string">ByteString</a> other
+)</pre>
+    <div>
+      <p>Compares this byte string with another. </p>
+      <p />
+      <table class="details responsive">
+        <thead>
+          <th colspan="2">Details</th>
+        </thead>
+        <tbody>
+          <tr>
+            <td>Parameters</td>
+            <td>
+              <table class="function param responsive">
+                <tbody>
+                  <tr>
+                    <td>
+                      <code>other</code>
+                    </td>
+                    <td>
+                      <div>The <a href="/reference/csharp/api-docs/class/google/protobuf/byte-string.html#class_google_1_1_protobuf_1_1_byte_string">ByteString</a> to compare this with.</div>
+                    </td>
+                  </tr>
+                </tbody>
+              </table>
+            </td>
+          </tr>
+          <tr>
+            <td>
+              <b>Returns</b>
+            </td>
+            <td>
+              <div><code>true</code> if <i>other</i>  refers to an equal byte string; <code>false</code> otherwise.</div>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div><div id="class_google_1_1_protobuf_1_1_byte_string_1adbe3842d4749d8f88cfd582121e2bd6d">
+    <h3>GetEnumerator</h3>
+    <pre class="prettyprint">IEnumerator< byte > GetEnumerator()</pre>
+    <div>
+      <p>Returns an iterator over the bytes in this <a href="/reference/csharp/api-docs/class/google/protobuf/byte-string.html#class_google_1_1_protobuf_1_1_byte_string">ByteString</a>. </p>
+      <p />
+      <table class="details responsive">
+        <thead>
+          <th colspan="2">Details</th>
+        </thead>
+        <tbody>
+          <tr>
+            <td>
+              <b>Returns</b>
+            </td>
+            <td>
+              <div>An iterator over the bytes in this object.</div>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div><div id="class_google_1_1_protobuf_1_1_byte_string_1a9db46657d41b58aff6899b5b6226c7ee">
+    <h3>GetHashCode</h3>
+    <pre class="prettyprint">override int GetHashCode()</pre>
+    <div>
+      <p>Returns a hash code for this object. </p>
+      <p>Two equal byte strings will return the same hash code. </p>
+      <p />
+      <table class="details responsive">
+        <thead>
+          <th colspan="2">Details</th>
+        </thead>
+        <tbody>
+          <tr>
+            <td>
+              <b>Returns</b>
+            </td>
+            <td>
+              <div>A hash code for this object.</div>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div><div id="class_google_1_1_protobuf_1_1_byte_string_1a7338ed9e339fb6af2a1dcd46565f1f90">
+    <h3>ToBase64</h3>
+    <pre class="prettyprint">string ToBase64()</pre>
+    <div>
+      <p>Converts this <a href="/reference/csharp/api-docs/class/google/protobuf/byte-string.html#class_google_1_1_protobuf_1_1_byte_string">ByteString</a> into a standard base64 representation. </p>
+      <p />
+      <table class="details responsive">
+        <thead>
+          <th colspan="2">Details</th>
+        </thead>
+        <tbody>
+          <tr>
+            <td>
+              <b>Returns</b>
+            </td>
+            <td>
+              <div>A base64 representation of this <code><a href="/reference/csharp/api-docs/class/google/protobuf/byte-string.html#class_google_1_1_protobuf_1_1_byte_string">ByteString</a></code>.</div>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div><div id="class_google_1_1_protobuf_1_1_byte_string_1a20f88ee06c9b66f9e065297f62f92edd">
+    <h3>ToByteArray</h3>
+    <pre class="prettyprint">byte[] ToByteArray()</pre>
+    <div>
+      <p>Converts this <a href="/reference/csharp/api-docs/class/google/protobuf/byte-string.html#class_google_1_1_protobuf_1_1_byte_string">ByteString</a> into a byte array. </p>
+      <p>The data is copied - changes to the returned array will not be reflected in this <code><a href="/reference/csharp/api-docs/class/google/protobuf/byte-string.html#class_google_1_1_protobuf_1_1_byte_string">ByteString</a></code>.</p>
+      <p />
+      <table class="details responsive">
+        <thead>
+          <th colspan="2">Details</th>
+        </thead>
+        <tbody>
+          <tr>
+            <td>
+              <b>Returns</b>
+            </td>
+            <td>
+              <div>A byte array with the same data as this <code><a href="/reference/csharp/api-docs/class/google/protobuf/byte-string.html#class_google_1_1_protobuf_1_1_byte_string">ByteString</a></code>.</div>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div><div id="class_google_1_1_protobuf_1_1_byte_string_1a34312693c1a26482efd2aea46d8d4902">
+    <h3>ToString</h3>
+    <pre class="prettyprint">string ToString(
+  Encoding encoding
+)</pre>
+    <div>
+      <p>Converts this <a href="/reference/csharp/api-docs/class/google/protobuf/byte-string.html#class_google_1_1_protobuf_1_1_byte_string">ByteString</a> into a string by applying the given encoding. </p>
+      <p>This method should only be used to convert binary data which was the result of encoding text with the given encoding. </p>
+      <p />
+      <table class="details responsive">
+        <thead>
+          <th colspan="2">Details</th>
+        </thead>
+        <tbody>
+          <tr>
+            <td>Parameters</td>
+            <td>
+              <table class="function param responsive">
+                <tbody>
+                  <tr>
+                    <td>
+                      <code>encoding</code>
+                    </td>
+                    <td>
+                      <div>The encoding to use to decode the binary data into text.</div>
+                    </td>
+                  </tr>
+                </tbody>
+              </table>
+            </td>
+          </tr>
+          <tr>
+            <td>
+              <b>Returns</b>
+            </td>
+            <td>
+              <div>The result of decoding the binary data with the given decoding.</div>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div><div id="class_google_1_1_protobuf_1_1_byte_string_1a9414bf3aaa03c17ead51660c83dd3391">
+    <h3>ToStringUtf8</h3>
+    <pre class="prettyprint">string ToStringUtf8()</pre>
+    <div>
+      <p>Converts this <a href="/reference/csharp/api-docs/class/google/protobuf/byte-string.html#class_google_1_1_protobuf_1_1_byte_string">ByteString</a> into a string by applying the UTF-8 encoding. </p>
+      <p>This method should only be used to convert binary data which was the result of encoding text with UTF-8. </p>
+      <p />
+      <table class="details responsive">
+        <thead>
+          <th colspan="2">Details</th>
+        </thead>
+        <tbody>
+          <tr>
+            <td>
+              <b>Returns</b>
+            </td>
+            <td>
+              <div>The result of decoding the binary data with the given decoding.</div>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div><div id="class_google_1_1_protobuf_1_1_byte_string_1aa3f5eb280621a32874edeb97eab7e9e6">
+    <h3>WriteTo</h3>
+    <pre class="prettyprint">void WriteTo(
+  Stream outputStream
+)</pre>
+    <div>
+      <p>Writes the entire byte array to the provided stream </p>
+    </div>
+  </div><h2>Public static functions</h2><div id="class_google_1_1_protobuf_1_1_byte_string_1a57d1846ff6028fdf31bc7b2982ff68ca">
+    <h3>CopyFrom</h3>
+    <pre class="prettyprint"><a href="/reference/csharp/api-docs/class/google/protobuf/byte-string.html#class_google_1_1_protobuf_1_1_byte_string">ByteString</a> CopyFrom(
+  params byte[] bytes
+)</pre>
+    <div>
+      <p>Constructs a <a href="/reference/csharp/api-docs/class/google/protobuf/byte-string.html#class_google_1_1_protobuf_1_1_byte_string">ByteString</a> from the given array. </p>
+      <p>The contents are copied, so further modifications to the array will not be reflected in the returned <a href="/reference/csharp/api-docs/class/google/protobuf/byte-string.html#class_google_1_1_protobuf_1_1_byte_string">ByteString</a>. This method can also be invoked in <code><a href="/reference/csharp/api-docs/class/google/protobuf/byte-string.html#class_google_1_1_protobuf_1_1_byte_string_1a57d1846ff6028fdf31bc7b2982ff68ca">ByteString.CopyFrom</a>(0xaa, 0xbb, ...)</code> form which is primarily useful for testing. </p>
+    </div>
+  </div><div id="class_google_1_1_protobuf_1_1_byte_string_1a072efaae98aab8c8477ff6fa766e70f6">
+    <h3>CopyFrom</h3>
+    <pre class="prettyprint"><a href="/reference/csharp/api-docs/class/google/protobuf/byte-string.html#class_google_1_1_protobuf_1_1_byte_string">ByteString</a> CopyFrom(
+  byte[] bytes,
+  int offset,
+  int count
+)</pre>
+    <div>
+      <p>Constructs a <a href="/reference/csharp/api-docs/class/google/protobuf/byte-string.html#class_google_1_1_protobuf_1_1_byte_string">ByteString</a> from a portion of a byte array. </p>
+    </div>
+  </div><div id="class_google_1_1_protobuf_1_1_byte_string_1af17ef465c0ea170acbbd1ca69da8f014">
+    <h3>CopyFrom</h3>
+    <pre class="prettyprint"><a href="/reference/csharp/api-docs/class/google/protobuf/byte-string.html#class_google_1_1_protobuf_1_1_byte_string">ByteString</a> CopyFrom(
+  string text,
+  Encoding encoding
+)</pre>
+    <div>
+      <p>Creates a new <a href="/reference/csharp/api-docs/class/google/protobuf/byte-string.html#class_google_1_1_protobuf_1_1_byte_string">ByteString</a> by encoding the specified text with the given encoding. </p>
+    </div>
+  </div><div id="class_google_1_1_protobuf_1_1_byte_string_1a7ab506f4dc838dd89fd2c54a24dccc74">
+    <h3>CopyFromUtf8</h3>
+    <pre class="prettyprint"><a href="/reference/csharp/api-docs/class/google/protobuf/byte-string.html#class_google_1_1_protobuf_1_1_byte_string">ByteString</a> CopyFromUtf8(
+  string text
+)</pre>
+    <div>
+      <p>Creates a new <a href="/reference/csharp/api-docs/class/google/protobuf/byte-string.html#class_google_1_1_protobuf_1_1_byte_string">ByteString</a> by encoding the specified text in UTF-8. </p>
+    </div>
+  </div><div id="class_google_1_1_protobuf_1_1_byte_string_1a9c26cae42b01d53c9f30c05e8428da50">
+    <h3>FromBase64</h3>
+    <pre class="prettyprint"><a href="/reference/csharp/api-docs/class/google/protobuf/byte-string.html#class_google_1_1_protobuf_1_1_byte_string">ByteString</a> FromBase64(
+  string bytes
+)</pre>
+    <div>
+      <p>Constructs a <a href="/reference/csharp/api-docs/class/google/protobuf/byte-string.html#class_google_1_1_protobuf_1_1_byte_string">ByteString</a> from the Base64 Encoded String. </p>
+    </div>
+  </div><div id="class_google_1_1_protobuf_1_1_byte_string_1a4c5835b21377e1cd63735ffe26bdb509">
+    <h3>operator!=</h3>
+    <pre class="prettyprint">bool operator!=(
+  <a href="/reference/csharp/api-docs/class/google/protobuf/byte-string.html#class_google_1_1_protobuf_1_1_byte_string">ByteString</a> lhs,
+  <a href="/reference/csharp/api-docs/class/google/protobuf/byte-string.html#class_google_1_1_protobuf_1_1_byte_string">ByteString</a> rhs
+)</pre>
+    <div>
+      <p>Compares two byte strings for inequality. </p>
+      <p />
+      <table class="details responsive">
+        <thead>
+          <th colspan="2">Details</th>
+        </thead>
+        <tbody>
+          <tr>
+            <td>Parameters</td>
+            <td>
+              <table class="function param responsive">
+                <tbody>
+                  <tr>
+                    <td>
+                      <code>lhs</code>
+                    </td>
+                    <td>
+                      <div>The first byte string to compare.</div>
+                    </td>
+                  </tr>
+                  <tr>
+                    <td>
+                      <code>rhs</code>
+                    </td>
+                    <td>
+                      <div>The second byte string to compare.</div>
+                    </td>
+                  </tr>
+                </tbody>
+              </table>
+            </td>
+          </tr>
+          <tr>
+            <td>
+              <b>Returns</b>
+            </td>
+            <td>
+              <div><code>false</code> if the byte strings are equal; true otherwise.</div>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div><div id="class_google_1_1_protobuf_1_1_byte_string_1a95efc955f6a7e3f0dfc14e5b3288700e">
+    <h3>operator==</h3>
+    <pre class="prettyprint">bool operator==(
+  <a href="/reference/csharp/api-docs/class/google/protobuf/byte-string.html#class_google_1_1_protobuf_1_1_byte_string">ByteString</a> lhs,
+  <a href="/reference/csharp/api-docs/class/google/protobuf/byte-string.html#class_google_1_1_protobuf_1_1_byte_string">ByteString</a> rhs
+)</pre>
+    <div>
+      <p>Compares two byte strings for equality. </p>
+      <p />
+      <table class="details responsive">
+        <thead>
+          <th colspan="2">Details</th>
+        </thead>
+        <tbody>
+          <tr>
+            <td>Parameters</td>
+            <td>
+              <table class="function param responsive">
+                <tbody>
+                  <tr>
+                    <td>
+                      <code>lhs</code>
+                    </td>
+                    <td>
+                      <div>The first byte string to compare.</div>
+                    </td>
+                  </tr>
+                  <tr>
+                    <td>
+                      <code>rhs</code>
+                    </td>
+                    <td>
+                      <div>The second byte string to compare.</div>
+                    </td>
+                  </tr>
+                </tbody>
+              </table>
+            </td>
+          </tr>
+          <tr>
+            <td>
+              <b>Returns</b>
+            </td>
+            <td>
+              <div><code>true</code> if the byte strings are equal; false otherwise.</div>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div></body>
+</html>

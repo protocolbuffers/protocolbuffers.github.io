@@ -1,0 +1,252 @@
+<!DOCTYPE html>
+<html devsite>
+<head>
+  <title>Google.Protobuf.FieldCodec< T > Class Reference</title>
+  <link rel="stylesheet" href="/reference/csharp/api-docs/includes/stylesheet.css">
+</head>
+<body>
+  <div id="top"><!-- do not remove this div --></div>
+  <h1>Google.<wbr/>Protobuf.<wbr/>FieldCodec< T ></h1>
+  <h2>Summary</h2>
+  <p>An encode/decode pair for a single field. This effectively encapsulates all the information needed to read or write the field value from/to a coded stream. </p>
+  <p>This class is public and has to be as it is used by generated code, but its public API is very limited - just what the generated code needs to call directly. </p>
+  <p>This never writes default values to the stream, and does not address "packedness" in repeated fields itself, other than to know whether or not the field <i>should</i> be packed. </p>
+  <table class="properties responsive">
+    <tr>
+      <th colspan="2">
+        <h3>Properties</h3>
+      </th>
+    </tr>
+    <tr>
+      <td>
+        <code><a href="#class_google_1_1_protobuf_1_1_field_codec_3_01_t_01_4_1a8623f6304ccada3c00442a9135190c6c">DefaultValue</a></code>
+      </td>
+      <td>
+        <div>
+          <code>T</code>
+        </div>
+        <div>Default value for this codec. </div>
+      </td>
+    </tr>
+    <tr>
+      <td>
+        <code><a href="#class_google_1_1_protobuf_1_1_field_codec_3_01_t_01_4_1a7b5ffd4db6e718f8d87a249979db0a7f">FixedSize</a></code>
+      </td>
+      <td>
+        <div>
+          <code>int</code>
+        </div>
+        <div>Returns the fixed size for an entry, or 0 if sizes vary. </div>
+      </td>
+    </tr>
+    <tr>
+      <td>
+        <code><a href="#class_google_1_1_protobuf_1_1_field_codec_3_01_t_01_4_1ad2e5d0a3e095862cacd1888cf614c40c">PackedRepeatedField</a></code>
+      </td>
+      <td>
+        <div>
+          <code>bool</code>
+        </div>
+      </td>
+    </tr>
+    <tr>
+      <td>
+        <code><a href="#class_google_1_1_protobuf_1_1_field_codec_3_01_t_01_4_1a6d3920609c52f439d439f1b0eaf48a84">Tag</a></code>
+      </td>
+      <td>
+        <div>
+          <code>uint</code>
+        </div>
+        <div>Gets the tag of the codec. </div>
+      </td>
+    </tr>
+    <tr>
+      <td>
+        <code><a href="#class_google_1_1_protobuf_1_1_field_codec_3_01_t_01_4_1acdf1f07264d0eaae6392a17714fff223">ValueReader</a></code>
+      </td>
+      <td>
+        <div>
+          <code>Func< <a href="/reference/csharp/api-docs/class/google/protobuf/coded-input-stream.html#class_google_1_1_protobuf_1_1_coded_input_stream">CodedInputStream</a>, T ></code>
+        </div>
+        <div>Returns a delegate to read a value from a coded input stream. </div>
+      </td>
+    </tr>
+    <tr>
+      <td>
+        <code><a href="#class_google_1_1_protobuf_1_1_field_codec_3_01_t_01_4_1adba359da0b0c5acb28424a1ae36fa248">ValueSizeCalculator</a></code>
+      </td>
+      <td>
+        <div>
+          <code>Func< T, int ></code>
+        </div>
+        <div>Returns the size calculator for just a value. </div>
+      </td>
+    </tr>
+    <tr>
+      <td>
+        <code><a href="#class_google_1_1_protobuf_1_1_field_codec_3_01_t_01_4_1a4d8a774dd52689b76148d80a42d9a4ff">ValueWriter</a></code>
+      </td>
+      <td>
+        <div>
+          <code>Action< <a href="/reference/csharp/api-docs/class/google/protobuf/coded-output-stream.html#class_google_1_1_protobuf_1_1_coded_output_stream">CodedOutputStream</a>, T ></code>
+        </div>
+        <div>Returns a delegate to write a value (unconditionally) to a coded output stream. </div>
+      </td>
+    </tr>
+  </table>
+  <table class="methods responsive">
+    <tr>
+      <th colspan="2">
+        <h3>Public functions</h3>
+      </th>
+    </tr>
+    <tr>
+      <td>
+        <code><a href="#class_google_1_1_protobuf_1_1_field_codec_3_01_t_01_4_1a9262dc2092ac70cba3e06daca49e500a">CalculateSizeWithTag</a>(T value)</code>
+      </td>
+      <td>
+        <div>
+          <code>int</code>
+        </div>
+        <div>Calculates the size required to write the given value, with a tag, if the value is not the default. </div>
+      </td>
+    </tr>
+    <tr>
+      <td>
+        <code><a href="#class_google_1_1_protobuf_1_1_field_codec_3_01_t_01_4_1a76016727b45d3c0d07fc977d0be4dd85">Read</a>(<a href="/reference/csharp/api-docs/class/google/protobuf/coded-input-stream.html#class_google_1_1_protobuf_1_1_coded_input_stream">CodedInputStream</a> input)</code>
+      </td>
+      <td>
+        <div>
+          <code>T</code>
+        </div>
+        <div>Reads a value of the codec type from the given <a href="/reference/csharp/api-docs/class/google/protobuf/coded-input-stream.html#class_google_1_1_protobuf_1_1_coded_input_stream">CodedInputStream</a>. </div>
+      </td>
+    </tr>
+    <tr>
+      <td>
+        <code><a href="#class_google_1_1_protobuf_1_1_field_codec_3_01_t_01_4_1a5d0f0177e33cd8081e91d191a8de4c6c">WriteTagAndValue</a>(<a href="/reference/csharp/api-docs/class/google/protobuf/coded-output-stream.html#class_google_1_1_protobuf_1_1_coded_output_stream">CodedOutputStream</a> output, T value)</code>
+      </td>
+      <td>
+        <div>
+          <code>void</code>
+        </div>
+        <div>Write a tag and the given value, <i>if</i> the value is not the default. </div>
+      </td>
+    </tr>
+  </table>
+  <h2>Properties</h2>
+  <div id="class_google_1_1_protobuf_1_1_field_codec_3_01_t_01_4_1a8623f6304ccada3c00442a9135190c6c">
+    <h3>DefaultValue</h3>
+    <pre class="prettyprint">T DefaultValue</pre>
+    <div>
+      <p>Default value for this codec. </p>
+      <p>Usually the same for every instance of the same type, but for string/ByteString wrapper fields the codec's default value is null, whereas for other string/ByteString fields it's "" or <a href="/reference/csharp/api-docs/class/google/protobuf/byte-string.html#class_google_1_1_protobuf_1_1_byte_string_1a13aee24e3f133eecf45c3cfe74cca067">ByteString.Empty</a>. </p>
+      <p>The default value of the codec's type. </p>
+    </div>
+  </div>
+  <div id="class_google_1_1_protobuf_1_1_field_codec_3_01_t_01_4_1a7b5ffd4db6e718f8d87a249979db0a7f">
+    <h3>FixedSize</h3>
+    <pre class="prettyprint">int FixedSize</pre>
+    <div>
+      <p>Returns the fixed size for an entry, or 0 if sizes vary. </p>
+    </div>
+  </div>
+  <div id="class_google_1_1_protobuf_1_1_field_codec_3_01_t_01_4_1ad2e5d0a3e095862cacd1888cf614c40c">
+    <h3>PackedRepeatedField</h3>
+    <pre class="prettyprint">bool PackedRepeatedField</pre>
+    <div />
+  </div>
+  <div id="class_google_1_1_protobuf_1_1_field_codec_3_01_t_01_4_1a6d3920609c52f439d439f1b0eaf48a84">
+    <h3>Tag</h3>
+    <pre class="prettyprint">uint Tag</pre>
+    <div>
+      <p>Gets the tag of the codec. </p>
+      <p>The tag of the codec. </p>
+    </div>
+  </div>
+  <div id="class_google_1_1_protobuf_1_1_field_codec_3_01_t_01_4_1acdf1f07264d0eaae6392a17714fff223">
+    <h3>ValueReader</h3>
+    <pre class="prettyprint">Func< <a href="/reference/csharp/api-docs/class/google/protobuf/coded-input-stream.html#class_google_1_1_protobuf_1_1_coded_input_stream">CodedInputStream</a>, T > ValueReader</pre>
+    <div>
+      <p>Returns a delegate to read a value from a coded input stream. </p>
+      <p>It is assumed that the stream is already positioned on the appropriate tag. </p>
+    </div>
+  </div>
+  <div id="class_google_1_1_protobuf_1_1_field_codec_3_01_t_01_4_1adba359da0b0c5acb28424a1ae36fa248">
+    <h3>ValueSizeCalculator</h3>
+    <pre class="prettyprint">Func< T, int > ValueSizeCalculator</pre>
+    <div>
+      <p>Returns the size calculator for just a value. </p>
+    </div>
+  </div>
+  <div id="class_google_1_1_protobuf_1_1_field_codec_3_01_t_01_4_1a4d8a774dd52689b76148d80a42d9a4ff">
+    <h3>ValueWriter</h3>
+    <pre class="prettyprint">Action< <a href="/reference/csharp/api-docs/class/google/protobuf/coded-output-stream.html#class_google_1_1_protobuf_1_1_coded_output_stream">CodedOutputStream</a>, T > ValueWriter</pre>
+    <div>
+      <p>Returns a delegate to write a value (unconditionally) to a coded output stream. </p>
+    </div>
+  </div>
+  <h2>Public functions</h2>
+  <div id="class_google_1_1_protobuf_1_1_field_codec_3_01_t_01_4_1a9262dc2092ac70cba3e06daca49e500a">
+    <h3>CalculateSizeWithTag</h3>
+    <pre class="prettyprint">int CalculateSizeWithTag(
+  T value
+)</pre>
+    <div>
+      <p>Calculates the size required to write the given value, with a tag, if the value is not the default. </p>
+    </div>
+  </div>
+  <div id="class_google_1_1_protobuf_1_1_field_codec_3_01_t_01_4_1a76016727b45d3c0d07fc977d0be4dd85">
+    <h3>Read</h3>
+    <pre class="prettyprint">T Read(
+  <a href="/reference/csharp/api-docs/class/google/protobuf/coded-input-stream.html#class_google_1_1_protobuf_1_1_coded_input_stream">CodedInputStream</a> input
+)</pre>
+    <div>
+      <p>Reads a value of the codec type from the given <a href="/reference/csharp/api-docs/class/google/protobuf/coded-input-stream.html#class_google_1_1_protobuf_1_1_coded_input_stream">CodedInputStream</a>. </p>
+      <p />
+      <table class="details responsive">
+        <thead>
+          <th colspan="2">Details</th>
+        </thead>
+        <tbody>
+          <tr>
+            <td>Parameters</td>
+            <td>
+              <table class="function param responsive">
+                <tbody>
+                  <tr>
+                    <td>
+                      <code>input</code>
+                    </td>
+                    <td>
+                      <div>The input stream to read from.</div>
+                    </td>
+                  </tr>
+                </tbody>
+              </table>
+            </td>
+          </tr>
+          <tr>
+            <td>
+              <b>Returns</b>
+            </td>
+            <td>
+              <div>The value read from the stream.</div>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+  <div id="class_google_1_1_protobuf_1_1_field_codec_3_01_t_01_4_1a5d0f0177e33cd8081e91d191a8de4c6c">
+    <h3>WriteTagAndValue</h3>
+    <pre class="prettyprint">void WriteTagAndValue(
+  <a href="/reference/csharp/api-docs/class/google/protobuf/coded-output-stream.html#class_google_1_1_protobuf_1_1_coded_output_stream">CodedOutputStream</a> output,
+  T value
+)</pre>
+    <div>
+      <p>Write a tag and the given value, <i>if</i> the value is not the default. </p>
+    </div>
+  </div>
+</body>
+</html>

@@ -1,0 +1,176 @@
+<!DOCTYPE html>
+<html devsite>
+<head>
+  <title>Google.Protobuf.JsonParser.Settings Class Reference</title>
+  <link rel="stylesheet" href="/reference/csharp/api-docs/includes/stylesheet.css">
+</head>
+<body>
+  <div id="top"><!-- do not remove this div --></div>
+  <h1>Google.<wbr/>Protobuf.<wbr/>JsonParser.<wbr/>Settings</h1>
+  <p><a href="/reference/csharp/api-docs/class/google/protobuf/json-parser/settings.html#class_google_1_1_protobuf_1_1_json_parser_1_1_settings">Settings</a> controlling JSON parsing. </p>
+  <h2>Summary</h2>
+  <table class="constructors responsive">
+    <tr>
+      <th colspan="2">
+        <h3>Constructors and Destructors</h3>
+      </th>
+    </tr>
+    <tr>
+      <td colspan="2">
+        <code><a href="#class_google_1_1_protobuf_1_1_json_parser_1_1_settings_1afeea365da5d7dd1cfa7b7f10cb18a7f2">Settings</a>(int recursionLimit)</code>
+        <br />
+        <div>Creates a new <a href="/reference/csharp/api-docs/class/google/protobuf/json-parser/settings.html#class_google_1_1_protobuf_1_1_json_parser_1_1_settings">Settings</a> object with the specified recursion limit. </div>
+      </td>
+    </tr>
+    <tr>
+      <td colspan="2">
+        <code><a href="#class_google_1_1_protobuf_1_1_json_parser_1_1_settings_1a702ea9c52f3bd4b27b9608e1decf7309">Settings</a>(int recursionLimit, <a href="/reference/csharp/api-docs/class/google/protobuf/reflection/type-registry.html#class_google_1_1_protobuf_1_1_reflection_1_1_type_registry">TypeRegistry</a> typeRegistry)</code>
+        <br />
+        <div>Creates a new <a href="/reference/csharp/api-docs/class/google/protobuf/json-parser/settings.html#class_google_1_1_protobuf_1_1_json_parser_1_1_settings">Settings</a> object with the specified recursion limit and type registry. </div>
+      </td>
+    </tr>
+  </table>
+  <table class="properties responsive">
+    <tr>
+      <th colspan="2">
+        <h3>Properties</h3>
+      </th>
+    </tr>
+    <tr>
+      <td>
+        <code><a href="#class_google_1_1_protobuf_1_1_json_parser_1_1_settings_1af4fd9372cbc28f49f941a70e7f5f8821">Default</a></code>
+      </td>
+      <td>
+        <div>
+          <code><a href="/reference/csharp/api-docs/class/google/protobuf/json-parser/settings.html#class_google_1_1_protobuf_1_1_json_parser_1_1_settings">Settings</a></code>
+        </div>
+        <div>Default settings, as used by <a href="/reference/csharp/api-docs/class/google/protobuf/json-parser.html#class_google_1_1_protobuf_1_1_json_parser_1a6040d292c9a219ec5e02c2bea8648abf">JsonParser.Default</a>. </div>
+      </td>
+    </tr>
+    <tr>
+      <td>
+        <code><a href="#class_google_1_1_protobuf_1_1_json_parser_1_1_settings_1ad685544f8b6c0fd6f83cef0238467080">RecursionLimit</a></code>
+      </td>
+      <td>
+        <div>
+          <code>int</code>
+        </div>
+        <div>The maximum depth of messages to parse. </div>
+      </td>
+    </tr>
+    <tr>
+      <td>
+        <code><a href="#class_google_1_1_protobuf_1_1_json_parser_1_1_settings_1acb8211ac59ca01ad87d9f9a44d997ecd">TypeRegistry</a></code>
+      </td>
+      <td>
+        <div>
+          <code><a href="/reference/csharp/api-docs/class/google/protobuf/reflection/type-registry.html#class_google_1_1_protobuf_1_1_reflection_1_1_type_registry">TypeRegistry</a></code>
+        </div>
+        <div>The type registry used to parse Any messages. </div>
+      </td>
+    </tr>
+  </table>
+  <h2>Properties</h2>
+  <div id="class_google_1_1_protobuf_1_1_json_parser_1_1_settings_1af4fd9372cbc28f49f941a70e7f5f8821">
+    <h3>Default</h3>
+    <pre class="prettyprint"><a href="/reference/csharp/api-docs/class/google/protobuf/json-parser/settings.html#class_google_1_1_protobuf_1_1_json_parser_1_1_settings">Settings</a> Default</pre>
+    <div>
+      <p>Default settings, as used by <a href="/reference/csharp/api-docs/class/google/protobuf/json-parser.html#class_google_1_1_protobuf_1_1_json_parser_1a6040d292c9a219ec5e02c2bea8648abf">JsonParser.Default</a>. </p>
+      <p>This has the same default recursion limit as <a href="/reference/csharp/api-docs/class/google/protobuf/coded-input-stream.html#class_google_1_1_protobuf_1_1_coded_input_stream">CodedInputStream</a>, and an empty type registry. </p>
+    </div>
+  </div>
+  <div id="class_google_1_1_protobuf_1_1_json_parser_1_1_settings_1ad685544f8b6c0fd6f83cef0238467080">
+    <h3>RecursionLimit</h3>
+    <pre class="prettyprint">int RecursionLimit</pre>
+    <div>
+      <p>The maximum depth of messages to parse. </p>
+      <p>Note that this limit only applies to parsing messages, not collections - so a message within a collection within a message only counts as depth 2, not 3. </p>
+    </div>
+  </div>
+  <div id="class_google_1_1_protobuf_1_1_json_parser_1_1_settings_1acb8211ac59ca01ad87d9f9a44d997ecd">
+    <h3>TypeRegistry</h3>
+    <pre class="prettyprint"><a href="/reference/csharp/api-docs/class/google/protobuf/reflection/type-registry.html#class_google_1_1_protobuf_1_1_reflection_1_1_type_registry">TypeRegistry</a> TypeRegistry</pre>
+    <div>
+      <p>The type registry used to parse Any messages. </p>
+    </div>
+  </div>
+  <h2>Public functions</h2>
+  <div id="class_google_1_1_protobuf_1_1_json_parser_1_1_settings_1afeea365da5d7dd1cfa7b7f10cb18a7f2">
+    <h3>Settings</h3>
+    <pre class="prettyprint"> Settings(
+  int recursionLimit
+)</pre>
+    <div>
+      <p>Creates a new <a href="/reference/csharp/api-docs/class/google/protobuf/json-parser/settings.html#class_google_1_1_protobuf_1_1_json_parser_1_1_settings">Settings</a> object with the specified recursion limit. </p>
+      <p />
+      <table class="details responsive">
+        <thead>
+          <th colspan="2">Details</th>
+        </thead>
+        <tbody>
+          <tr>
+            <td>Parameters</td>
+            <td>
+              <table class="function param responsive">
+                <tbody>
+                  <tr>
+                    <td>
+                      <code>recursionLimit</code>
+                    </td>
+                    <td>
+                      <div>The maximum depth of messages to parse</div>
+                    </td>
+                  </tr>
+                </tbody>
+              </table>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+  <div id="class_google_1_1_protobuf_1_1_json_parser_1_1_settings_1a702ea9c52f3bd4b27b9608e1decf7309">
+    <h3>Settings</h3>
+    <pre class="prettyprint"> Settings(
+  int recursionLimit,
+  <a href="/reference/csharp/api-docs/class/google/protobuf/reflection/type-registry.html#class_google_1_1_protobuf_1_1_reflection_1_1_type_registry">TypeRegistry</a> typeRegistry
+)</pre>
+    <div>
+      <p>Creates a new <a href="/reference/csharp/api-docs/class/google/protobuf/json-parser/settings.html#class_google_1_1_protobuf_1_1_json_parser_1_1_settings">Settings</a> object with the specified recursion limit and type registry. </p>
+      <p />
+      <table class="details responsive">
+        <thead>
+          <th colspan="2">Details</th>
+        </thead>
+        <tbody>
+          <tr>
+            <td>Parameters</td>
+            <td>
+              <table class="function param responsive">
+                <tbody>
+                  <tr>
+                    <td>
+                      <code>recursionLimit</code>
+                    </td>
+                    <td>
+                      <div>The maximum depth of messages to parse</div>
+                    </td>
+                  </tr>
+                  <tr>
+                    <td>
+                      <code>typeRegistry</code>
+                    </td>
+                    <td>
+                      <div>The type registry used to parse Any messages</div>
+                    </td>
+                  </tr>
+                </tbody>
+              </table>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</body>
+</html>

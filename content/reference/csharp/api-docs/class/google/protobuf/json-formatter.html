@@ -1,0 +1,345 @@
+<!DOCTYPE html>
+<html devsite>
+<head>
+  <title>Google.Protobuf.JsonFormatter Class Reference</title>
+  <link rel="stylesheet" href="/reference/csharp/api-docs/includes/stylesheet.css">
+</head>
+<body>
+  <div id="top"><!-- do not remove this div --></div>
+  <h1>Google.<wbr/>Protobuf.<wbr/>JsonFormatter</h1>
+  <p>Reflection-based converter from messages to JSON. </p>
+  <h2>Summary</h2>
+  <p>Instances of this class are thread-safe, with no mutable state. </p>
+  <p>This is a simple start to get JSON formatting working. As it's reflection-based, it's not as quick as baking calls into generated messages - but is a simpler implementation. (This code is generally not heavily optimized.) </p>
+  <table class="constructors responsive">
+    <tr>
+      <th colspan="2">
+        <h3>Constructors and Destructors</h3>
+      </th>
+    </tr>
+    <tr>
+      <td colspan="2">
+        <code><a href="#class_google_1_1_protobuf_1_1_json_formatter_1a0adcd2dca61cf6da0fcf419eeef826af">JsonFormatter</a>(<a href="/reference/csharp/api-docs/class/google/protobuf/json-formatter/settings.html#class_google_1_1_protobuf_1_1_json_formatter_1_1_settings">Settings</a> settings)</code>
+        <br />
+        <div>Creates a new formatted with the given settings. </div>
+      </td>
+    </tr>
+  </table>
+  <table class="properties responsive">
+    <tr>
+      <th colspan="2">
+        <h3>Properties</h3>
+      </th>
+    </tr>
+    <tr>
+      <td>
+        <code><a href="#class_google_1_1_protobuf_1_1_json_formatter_1a26ebbabaf87968985e21099a3e624ee9">Default</a></code>
+      </td>
+      <td>
+        <div>
+          <code><a href="/reference/csharp/api-docs/class/google/protobuf/json-formatter.html#class_google_1_1_protobuf_1_1_json_formatter">JsonFormatter</a></code>
+        </div>
+        <div>Returns a formatter using the default settings. </div>
+      </td>
+    </tr>
+  </table>
+  <table class="methods responsive">
+    <tr>
+      <th colspan="2">
+        <h3>Public functions</h3>
+      </th>
+    </tr>
+    <tr>
+      <td>
+        <code><a href="#class_google_1_1_protobuf_1_1_json_formatter_1a0319c88603d7be37cf677abd023872a8">Format</a>(<a href="/reference/csharp/api-docs/interface/google/protobuf/i-message.html#interface_google_1_1_protobuf_1_1_i_message">IMessage</a> message)</code>
+      </td>
+      <td>
+        <div>
+          <code>string</code>
+        </div>
+        <div>Formats the specified message as JSON. </div>
+      </td>
+    </tr>
+    <tr>
+      <td>
+        <code><a href="#class_google_1_1_protobuf_1_1_json_formatter_1a6d36fc1ba4af8ca119b50b8dfb1df8f8">Format</a>(<a href="/reference/csharp/api-docs/interface/google/protobuf/i-message.html#interface_google_1_1_protobuf_1_1_i_message">IMessage</a> message, TextWriter writer)</code>
+      </td>
+      <td>
+        <div>
+          <code>void</code>
+        </div>
+        <div>Formats the specified message as JSON. </div>
+      </td>
+    </tr>
+    <tr>
+      <td>
+        <code><a href="#class_google_1_1_protobuf_1_1_json_formatter_1a8fa8b8aced55e6d561cc2690fb81ac0f">WriteValue</a>(TextWriter writer, object value)</code>
+      </td>
+      <td>
+        <div>
+          <code>void</code>
+        </div>
+        <div>Writes a single value to the given writer as JSON. </div>
+      </td>
+    </tr>
+  </table>
+  <table class="methods responsive">
+    <tr>
+      <th colspan="2">
+        <h3>Public static functions</h3>
+      </th>
+    </tr>
+    <tr>
+      <td>
+        <code><a href="#class_google_1_1_protobuf_1_1_json_formatter_1a504ed720aadede8f3a37bffae1587a3e">ToDiagnosticString</a>(<a href="/reference/csharp/api-docs/interface/google/protobuf/i-message.html#interface_google_1_1_protobuf_1_1_i_message">IMessage</a> message)</code>
+      </td>
+      <td>
+        <div>
+          <code>string</code>
+        </div>
+        <div>Converts a message to JSON for diagnostic purposes with no extra context. </div>
+      </td>
+    </tr>
+  </table>
+  <table class="nested-classes responsive">
+    <tr>
+      <th colspan="2">
+        <h3>Classes</h3>
+      </th>
+    </tr>
+    <tr>
+      <td>
+        <a href="/reference/csharp/api-docs/class/google/protobuf/json-formatter/settings">Google.<wbr/>Protobuf.<wbr/>JsonFormatter.<wbr/>Settings</a>
+      </td>
+      <td>
+        <p><a href="/reference/csharp/api-docs/class/google/protobuf/json-formatter/settings.html#class_google_1_1_protobuf_1_1_json_formatter_1_1_settings">Settings</a> controlling JSON formatting. </p>
+      </td>
+    </tr>
+  </table>
+  <h2>Properties</h2>
+  <div id="class_google_1_1_protobuf_1_1_json_formatter_1a26ebbabaf87968985e21099a3e624ee9">
+    <h3>Default</h3>
+    <pre class="prettyprint"><a href="/reference/csharp/api-docs/class/google/protobuf/json-formatter.html#class_google_1_1_protobuf_1_1_json_formatter">JsonFormatter</a> Default</pre>
+    <div>
+      <p>Returns a formatter using the default settings. </p>
+    </div>
+  </div>
+  <h2>Public functions</h2>
+  <div id="class_google_1_1_protobuf_1_1_json_formatter_1a0319c88603d7be37cf677abd023872a8">
+    <h3>Format</h3>
+    <pre class="prettyprint">string Format(
+  <a href="/reference/csharp/api-docs/interface/google/protobuf/i-message.html#interface_google_1_1_protobuf_1_1_i_message">IMessage</a> message
+)</pre>
+    <div>
+      <p>Formats the specified message as JSON. </p>
+      <p />
+      <table class="details responsive">
+        <thead>
+          <th colspan="2">Details</th>
+        </thead>
+        <tbody>
+          <tr>
+            <td>Parameters</td>
+            <td>
+              <table class="function param responsive">
+                <tbody>
+                  <tr>
+                    <td>
+                      <code>message</code>
+                    </td>
+                    <td>
+                      <div>The message to format.</div>
+                    </td>
+                  </tr>
+                </tbody>
+              </table>
+            </td>
+          </tr>
+          <tr>
+            <td>
+              <b>Returns</b>
+            </td>
+            <td>
+              <div>The formatted message.</div>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+  <div id="class_google_1_1_protobuf_1_1_json_formatter_1a6d36fc1ba4af8ca119b50b8dfb1df8f8">
+    <h3>Format</h3>
+    <pre class="prettyprint">void Format(
+  <a href="/reference/csharp/api-docs/interface/google/protobuf/i-message.html#interface_google_1_1_protobuf_1_1_i_message">IMessage</a> message,
+  TextWriter writer
+)</pre>
+    <div>
+      <p>Formats the specified message as JSON. </p>
+      <p />
+      <table class="details responsive">
+        <thead>
+          <th colspan="2">Details</th>
+        </thead>
+        <tbody>
+          <tr>
+            <td>Parameters</td>
+            <td>
+              <table class="function param responsive">
+                <tbody>
+                  <tr>
+                    <td>
+                      <code>message</code>
+                    </td>
+                    <td>
+                      <div>The message to format.</div>
+                    </td>
+                  </tr>
+                  <tr>
+                    <td>
+                      <code>writer</code>
+                    </td>
+                    <td>
+                      <div>The TextWriter to write the formatted message to.</div>
+                    </td>
+                  </tr>
+                </tbody>
+              </table>
+            </td>
+          </tr>
+          <tr>
+            <td>
+              <b>Returns</b>
+            </td>
+            <td>
+              <div>The formatted message.</div>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+  <div id="class_google_1_1_protobuf_1_1_json_formatter_1a0adcd2dca61cf6da0fcf419eeef826af">
+    <h3>JsonFormatter</h3>
+    <pre class="prettyprint"> JsonFormatter(
+  <a href="/reference/csharp/api-docs/class/google/protobuf/json-formatter/settings.html#class_google_1_1_protobuf_1_1_json_formatter_1_1_settings">Settings</a> settings
+)</pre>
+    <div>
+      <p>Creates a new formatted with the given settings. </p>
+      <p />
+      <table class="details responsive">
+        <thead>
+          <th colspan="2">Details</th>
+        </thead>
+        <tbody>
+          <tr>
+            <td>Parameters</td>
+            <td>
+              <table class="function param responsive">
+                <tbody>
+                  <tr>
+                    <td>
+                      <code>settings</code>
+                    </td>
+                    <td>
+                      <div>The settings.</div>
+                    </td>
+                  </tr>
+                </tbody>
+              </table>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+  <div id="class_google_1_1_protobuf_1_1_json_formatter_1a8fa8b8aced55e6d561cc2690fb81ac0f">
+    <h3>WriteValue</h3>
+    <pre class="prettyprint">void WriteValue(
+  TextWriter writer,
+  object value
+)</pre>
+    <div>
+      <p>Writes a single value to the given writer as JSON. </p>
+      <p>Only types understood by Protocol Buffers can be written in this way. This method is only exposed for advanced use cases; most users should be using <a href="/reference/csharp/api-docs/class/google/protobuf/json-formatter.html#class_google_1_1_protobuf_1_1_json_formatter_1a0319c88603d7be37cf677abd023872a8">Format(IMessage)</a> or <a href="/reference/csharp/api-docs/class/google/protobuf/json-formatter.html#class_google_1_1_protobuf_1_1_json_formatter_1a6d36fc1ba4af8ca119b50b8dfb1df8f8">Format(IMessage, TextWriter)</a>. </p>
+      <p />
+      <table class="details responsive">
+        <thead>
+          <th colspan="2">Details</th>
+        </thead>
+        <tbody>
+          <tr>
+            <td>Parameters</td>
+            <td>
+              <table class="function param responsive">
+                <tbody>
+                  <tr>
+                    <td>
+                      <code>writer</code>
+                    </td>
+                    <td>
+                      <div>The writer to write the value to. Must not be null.</div>
+                    </td>
+                  </tr>
+                  <tr>
+                    <td>
+                      <code>value</code>
+                    </td>
+                    <td>
+                      <div>The value to write. May be null.</div>
+                    </td>
+                  </tr>
+                </tbody>
+              </table>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+  <h2>Public static functions</h2>
+  <div id="class_google_1_1_protobuf_1_1_json_formatter_1a504ed720aadede8f3a37bffae1587a3e">
+    <h3>ToDiagnosticString</h3>
+    <pre class="prettyprint">string ToDiagnosticString(
+  <a href="/reference/csharp/api-docs/interface/google/protobuf/i-message.html#interface_google_1_1_protobuf_1_1_i_message">IMessage</a> message
+)</pre>
+    <div>
+      <p>Converts a message to JSON for diagnostic purposes with no extra context. </p>
+      <p>This differs from calling <a href="/reference/csharp/api-docs/class/google/protobuf/json-formatter.html#class_google_1_1_protobuf_1_1_json_formatter_1a0319c88603d7be37cf677abd023872a8">Format(IMessage)</a> on the default JSON formatter in its handling of Any. As no type registry is available in object.ToString calls, the normal way of resolving the type of an <code>Any</code> message cannot be applied. Instead, a JSON property named <code /> is included with the base64 data from the Any.Value property of the message. </p>
+      <p>The value returned by this method is only designed to be used for diagnostic purposes. It may not be parsable by <a href="/reference/csharp/api-docs/class/google/protobuf/json-parser.html#class_google_1_1_protobuf_1_1_json_parser">JsonParser</a>, and may not be parsable by other Protocol Buffer implementations.</p>
+      <p />
+      <table class="details responsive">
+        <thead>
+          <th colspan="2">Details</th>
+        </thead>
+        <tbody>
+          <tr>
+            <td>Parameters</td>
+            <td>
+              <table class="function param responsive">
+                <tbody>
+                  <tr>
+                    <td>
+                      <code>message</code>
+                    </td>
+                    <td>
+                      <div>The message to format for diagnostic purposes.</div>
+                    </td>
+                  </tr>
+                </tbody>
+              </table>
+            </td>
+          </tr>
+          <tr>
+            <td>
+              <b>Returns</b>
+            </td>
+            <td>
+              <div>The diagnostic-only JSON representation of the message</div>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</body>
+</html>

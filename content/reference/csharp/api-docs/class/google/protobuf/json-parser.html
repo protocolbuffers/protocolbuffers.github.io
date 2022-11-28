@@ -1,0 +1,444 @@
+<!DOCTYPE html>
+<html devsite>
+<head>
+  <title>Google.Protobuf.JsonParser Class Reference</title>
+  <link rel="stylesheet" href="/reference/csharp/api-docs/includes/stylesheet.css">
+</head>
+<body>
+  <div id="top"><!-- do not remove this div --></div>
+  <h1>Google.<wbr/>Protobuf.<wbr/>JsonParser</h1>
+  <p>Reflection-based converter from JSON to messages. </p>
+  <h2>Summary</h2>
+  <p>Instances of this class are thread-safe, with no mutable state. </p>
+  <p>This is a simple start to get JSON parsing working. As it's reflection-based, it's not as quick as baking calls into generated messages - but is a simpler implementation. (This code is generally not heavily optimized.) </p>
+  <table class="constructors responsive">
+    <tr>
+      <th colspan="2">
+        <h3>Constructors and Destructors</h3>
+      </th>
+    </tr>
+    <tr>
+      <td colspan="2">
+        <code><a href="#class_google_1_1_protobuf_1_1_json_parser_1ac7efcebafcc2e7d34eca02da15ef28a1">JsonParser</a>(<a href="/reference/csharp/api-docs/class/google/protobuf/json-parser/settings.html#class_google_1_1_protobuf_1_1_json_parser_1_1_settings">Settings</a> settings)</code>
+        <br />
+        <div>Creates a new formatted with the given settings. </div>
+      </td>
+    </tr>
+  </table>
+  <table class="properties responsive">
+    <tr>
+      <th colspan="2">
+        <h3>Properties</h3>
+      </th>
+    </tr>
+    <tr>
+      <td>
+        <code><a href="#class_google_1_1_protobuf_1_1_json_parser_1a6040d292c9a219ec5e02c2bea8648abf">Default</a></code>
+      </td>
+      <td>
+        <div>
+          <code><a href="/reference/csharp/api-docs/class/google/protobuf/json-parser.html#class_google_1_1_protobuf_1_1_json_parser">JsonParser</a></code>
+        </div>
+        <div>Returns a formatter using the default settings. </div>
+      </td>
+    </tr>
+  </table>
+  <table class="methods responsive">
+    <tr>
+      <th colspan="2">
+        <h3>Public functions</h3>
+      </th>
+    </tr>
+    <tr>
+      <td>
+        <code><a href="#class_google_1_1_protobuf_1_1_json_parser_1a0c1b1583781272ebaebf0dfb0abd035a">Parse</a>(string json, <a href="/reference/csharp/api-docs/class/google/protobuf/reflection/message-descriptor.html#class_google_1_1_protobuf_1_1_reflection_1_1_message_descriptor">MessageDescriptor</a> descriptor)</code>
+      </td>
+      <td>
+        <div>
+          <code><a href="/reference/csharp/api-docs/interface/google/protobuf/i-message.html#interface_google_1_1_protobuf_1_1_i_message">IMessage</a></code>
+        </div>
+        <div>Parses <i>json</i>  into a new message. </div>
+      </td>
+    </tr>
+    <tr>
+      <td>
+        <code><a href="#class_google_1_1_protobuf_1_1_json_parser_1a055c8327fe20072584753b94c4dc11cf">Parse</a>(TextReader jsonReader, <a href="/reference/csharp/api-docs/class/google/protobuf/reflection/message-descriptor.html#class_google_1_1_protobuf_1_1_reflection_1_1_message_descriptor">MessageDescriptor</a> descriptor)</code>
+      </td>
+      <td>
+        <div>
+          <code><a href="/reference/csharp/api-docs/interface/google/protobuf/i-message.html#interface_google_1_1_protobuf_1_1_i_message">IMessage</a></code>
+        </div>
+        <div>Parses JSON read from <i>jsonReader</i>  into a new message. </div>
+      </td>
+    </tr>
+    <tr>
+      <td>
+        <code><a href="#class_google_1_1_protobuf_1_1_json_parser_1acd9dcffa0b4f209f106106968902afed">Parse< T ></a>(string json)</code>
+      </td>
+      <td>
+        <div>
+          <code>T</code>
+        </div>
+        <div>Parses <i>json</i>  into a new message. </div>
+      </td>
+    </tr>
+    <tr>
+      <td>
+        <code><a href="#class_google_1_1_protobuf_1_1_json_parser_1a055557941449481e1ba55be20e876cd7">Parse< T ></a>(TextReader jsonReader)</code>
+      </td>
+      <td>
+        <div>
+          <code>T</code>
+        </div>
+        <div>Parses JSON read from <i>jsonReader</i>  into a new message. </div>
+      </td>
+    </tr>
+  </table>
+  <table class="nested-classes responsive">
+    <tr>
+      <th colspan="2">
+        <h3>Classes</h3>
+      </th>
+    </tr>
+    <tr>
+      <td>
+        <a href="/reference/csharp/api-docs/class/google/protobuf/json-parser/settings.html">Google.<wbr/>Protobuf.<wbr/>JsonParser.<wbr/>Settings</a>
+      </td>
+      <td>
+        <p><a href="/reference/csharp/api-docs/class/google/protobuf/json-parser/settings.html#class_google_1_1_protobuf_1_1_json_parser_1_1_settings">Settings</a> controlling JSON parsing. </p>
+      </td>
+    </tr>
+  </table>
+  <h2>Properties</h2>
+  <div id="class_google_1_1_protobuf_1_1_json_parser_1a6040d292c9a219ec5e02c2bea8648abf">
+    <h3>Default</h3>
+    <pre class="prettyprint"><a href="/reference/csharp/api-docs/class/google/protobuf/json-parser.html#class_google_1_1_protobuf_1_1_json_parser">JsonParser</a> Default</pre>
+    <div>
+      <p>Returns a formatter using the default settings. </p>
+    </div>
+  </div>
+  <h2>Public functions</h2>
+  <div id="class_google_1_1_protobuf_1_1_json_parser_1ac7efcebafcc2e7d34eca02da15ef28a1">
+    <h3>JsonParser</h3>
+    <pre class="prettyprint"> JsonParser(
+  <a href="/reference/csharp/api-docs/class/google/protobuf/json-parser/settings.html#class_google_1_1_protobuf_1_1_json_parser_1_1_settings">Settings</a> settings
+)</pre>
+    <div>
+      <p>Creates a new formatted with the given settings. </p>
+      <p />
+      <table class="details responsive">
+        <thead>
+          <th colspan="2">Details</th>
+        </thead>
+        <tbody>
+          <tr>
+            <td>Parameters</td>
+            <td>
+              <table class="function param responsive">
+                <tbody>
+                  <tr>
+                    <td>
+                      <code>settings</code>
+                    </td>
+                    <td>
+                      <div>The settings.</div>
+                    </td>
+                  </tr>
+                </tbody>
+              </table>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+  <div id="class_google_1_1_protobuf_1_1_json_parser_1a0c1b1583781272ebaebf0dfb0abd035a">
+    <h3>Parse</h3>
+    <pre class="prettyprint"><a href="/reference/csharp/api-docs/interface/google/protobuf/i-message.html#interface_google_1_1_protobuf_1_1_i_message">IMessage</a> Parse(
+  string json,
+  <a href="/reference/csharp/api-docs/class/google/protobuf/reflection/message-descriptor.html#class_google_1_1_protobuf_1_1_reflection_1_1_message_descriptor">MessageDescriptor</a> descriptor
+)</pre>
+    <div>
+      <p>Parses <i>json</i>  into a new message. </p>
+      <p />
+      <table class="details responsive">
+        <thead>
+          <th colspan="2">Details</th>
+        </thead>
+        <tbody>
+          <tr>
+            <td>Parameters</td>
+            <td>
+              <table class="function param responsive">
+                <tbody>
+                  <tr>
+                    <td>
+                      <code>json</code>
+                    </td>
+                    <td>
+                      <div>The JSON to parse.</div>
+                    </td>
+                  </tr>
+                  <tr>
+                    <td>
+                      <code>descriptor</code>
+                    </td>
+                    <td>
+                      <div>Descriptor of message type to parse.</div>
+                    </td>
+                  </tr>
+                </tbody>
+              </table>
+            </td>
+          </tr>
+          <tr>
+            <td>Exceptions</td>
+            <td>
+              <table class="function param responsive">
+                <tbody>
+                  <tr>
+                    <td>
+                      <code>InvalidJsonException</code>
+                    </td>
+                    <td>
+                      <div>The JSON does not comply with RFC 7159</div>
+                    </td>
+                  </tr>
+                  <tr>
+                    <td>
+                      <code>InvalidProtocolBufferException</code>
+                    </td>
+                    <td>
+                      <div>The JSON does not represent a Protocol Buffers message correctly</div>
+                    </td>
+                  </tr>
+                </tbody>
+              </table>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+  <div id="class_google_1_1_protobuf_1_1_json_parser_1a055c8327fe20072584753b94c4dc11cf">
+    <h3>Parse</h3>
+    <pre class="prettyprint"><a href="/reference/csharp/api-docs/interface/google/protobuf/i-message.html#interface_google_1_1_protobuf_1_1_i_message">IMessage</a> Parse(
+  TextReader jsonReader,
+  <a href="/reference/csharp/api-docs/class/google/protobuf/reflection/message-descriptor.html#class_google_1_1_protobuf_1_1_reflection_1_1_message_descriptor">MessageDescriptor</a> descriptor
+)</pre>
+    <div>
+      <p>Parses JSON read from <i>jsonReader</i>  into a new message. </p>
+      <p />
+      <table class="details responsive">
+        <thead>
+          <th colspan="2">Details</th>
+        </thead>
+        <tbody>
+          <tr>
+            <td>Parameters</td>
+            <td>
+              <table class="function param responsive">
+                <tbody>
+                  <tr>
+                    <td>
+                      <code>jsonReader</code>
+                    </td>
+                    <td>
+                      <div>Reader providing the JSON to parse.</div>
+                    </td>
+                  </tr>
+                  <tr>
+                    <td>
+                      <code>descriptor</code>
+                    </td>
+                    <td>
+                      <div>Descriptor of message type to parse.</div>
+                    </td>
+                  </tr>
+                </tbody>
+              </table>
+            </td>
+          </tr>
+          <tr>
+            <td>Exceptions</td>
+            <td>
+              <table class="function param responsive">
+                <tbody>
+                  <tr>
+                    <td>
+                      <code>InvalidJsonException</code>
+                    </td>
+                    <td>
+                      <div>The JSON does not comply with RFC 7159</div>
+                    </td>
+                  </tr>
+                  <tr>
+                    <td>
+                      <code>InvalidProtocolBufferException</code>
+                    </td>
+                    <td>
+                      <div>The JSON does not represent a Protocol Buffers message correctly</div>
+                    </td>
+                  </tr>
+                </tbody>
+              </table>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+  <div id="class_google_1_1_protobuf_1_1_json_parser_1acd9dcffa0b4f209f106106968902afed">
+    <h3>Parse< T ></h3>
+    <pre class="prettyprint">T Parse< T >(
+  string json
+)</pre>
+    <div>
+      <p>Parses <i>json</i>  into a new message. </p>
+      <p />
+      <table class="details responsive">
+        <thead>
+          <th colspan="2">Details</th>
+        </thead>
+        <tbody>
+          <tr>
+            <td>Template Parameters</td>
+            <td>
+              <table class="function param responsive">
+                <tbody>
+                  <tr>
+                    <td>
+                      <code>T</code>
+                    </td>
+                    <td>
+                      <div>The type of message to create.</div>
+                    </td>
+                  </tr>
+                </tbody>
+              </table>
+            </td>
+          </tr>
+          <tr>
+            <td>Parameters</td>
+            <td>
+              <table class="function param responsive">
+                <tbody>
+                  <tr>
+                    <td>
+                      <code>json</code>
+                    </td>
+                    <td>
+                      <div>The JSON to parse.</div>
+                    </td>
+                  </tr>
+                </tbody>
+              </table>
+            </td>
+          </tr>
+          <tr>
+            <td>Exceptions</td>
+            <td>
+              <table class="function param responsive">
+                <tbody>
+                  <tr>
+                    <td>
+                      <code>InvalidJsonException</code>
+                    </td>
+                    <td>
+                      <div>The JSON does not comply with RFC 7159</div>
+                    </td>
+                  </tr>
+                  <tr>
+                    <td>
+                      <code>InvalidProtocolBufferException</code>
+                    </td>
+                    <td>
+                      <div>The JSON does not represent a Protocol Buffers message correctly</div>
+                    </td>
+                  </tr>
+                </tbody>
+              </table>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+  <div id="class_google_1_1_protobuf_1_1_json_parser_1a055557941449481e1ba55be20e876cd7">
+    <h3>Parse< T ></h3>
+    <pre class="prettyprint">T Parse< T >(
+  TextReader jsonReader
+)</pre>
+    <div>
+      <p>Parses JSON read from <i>jsonReader</i>  into a new message. </p>
+      <p />
+      <table class="details responsive">
+        <thead>
+          <th colspan="2">Details</th>
+        </thead>
+        <tbody>
+          <tr>
+            <td>Template Parameters</td>
+            <td>
+              <table class="function param responsive">
+                <tbody>
+                  <tr>
+                    <td>
+                      <code>T</code>
+                    </td>
+                    <td>
+                      <div>The type of message to create.</div>
+                    </td>
+                  </tr>
+                </tbody>
+              </table>
+            </td>
+          </tr>
+          <tr>
+            <td>Parameters</td>
+            <td>
+              <table class="function param responsive">
+                <tbody>
+                  <tr>
+                    <td>
+                      <code>jsonReader</code>
+                    </td>
+                    <td>
+                      <div>Reader providing the JSON to parse.</div>
+                    </td>
+                  </tr>
+                </tbody>
+              </table>
+            </td>
+          </tr>
+          <tr>
+            <td>Exceptions</td>
+            <td>
+              <table class="function param responsive">
+                <tbody>
+                  <tr>
+                    <td>
+                      <code>InvalidJsonException</code>
+                    </td>
+                    <td>
+                      <div>The JSON does not comply with RFC 7159</div>
+                    </td>
+                  </tr>
+                  <tr>
+                    <td>
+                      <code>InvalidProtocolBufferException</code>
+                    </td>
+                    <td>
+                      <div>The JSON does not represent a Protocol Buffers message correctly</div>
+                    </td>
+                  </tr>
+                </tbody>
+              </table>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</body>
+</html>
