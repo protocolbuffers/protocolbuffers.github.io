@@ -1,8 +1,13 @@
 # baseURL = 'https://protobuf.dev'
 languageCode = 'en-us'
 title = 'Protocol Buffers Documentation'
-theme = ["docsy"]
 sidebar_search_disable = true
+
+# Theme
+[module]
+replacements = "github.com/FortAwesome/Font-Awesome -> ., github.com/twbs/bootstrap -> ."
+[[module.imports]]
+path = "docsy"
 
 # Language settings
 contentDir = "content"
