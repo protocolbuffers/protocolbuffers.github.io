@@ -137,6 +137,24 @@ Almost never change the default value of a proto field. This causes version skew
 between clients and servers. A client reading an unset value will see a
 different result than a server reading the same unset value when their builds
 straddle the proto change. Proto3 removed the ability to
+set default values.
+
+## **Don't** Go from Repeated to Scalar
+
+Although it won't cause crashes, you'll lose data. For JSON, a mismatch in
+repeatedness will lose the whole *message*. For numeric proto3 fields and proto2
+`packed` fields, going from repeated to scalar will lose all data in that
+*field*. For non-numeric proto3 fields and un-annotated proto2 fields, going
+from repeated to scalar will result in the last deserialized value "winning."
+
+Going from scalar to repeated is OK in proto2 and in proto3 with
+`[packed=false]` because for binary serialization the scalar value becomes a
+one-element list .
+
+## **Always** Create a Build Rule for Your Proto Files
+
+If your proto is only used by a script that doesn't require a build rule, create
+a `proto_library` rule with an associated
 `build_test` rule.
 
 With a `build_test` rule, errors in the file are caught when the test fails.
