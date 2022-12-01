@@ -1,4 +1,4 @@
-# baseURL = 'https://protobuf.dev'
+baseURL = 'https://protobuf.dev'
 languageCode = 'en-us'
 title = 'Protocol Buffers Documentation'
 sidebar_search_disable = true
