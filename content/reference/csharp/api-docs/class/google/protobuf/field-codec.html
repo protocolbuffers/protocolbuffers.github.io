@@ -1,0 +1,989 @@
+<!DOCTYPE html>
+<html devsite>
+<head>
+  <title>Google.Protobuf.FieldCodec Class Reference</title>
+  <link rel="stylesheet" href="/reference/csharp/api-docs/includes/stylesheet.css">
+</head>
+<body>
+  <div id="top"><!-- do not remove this div --></div>
+  <h1>Google.<wbr/>Protobuf.<wbr/>FieldCodec</h1>
+  <p>Factory methods for FieldCodec{T}. </p>
+  <h2>Summary</h2>
+  <table class="methods responsive">
+    <tr>
+      <th colspan="2">
+        <h3>Public static functions</h3>
+      </th>
+    </tr>
+    <tr>
+      <td>
+        <code><a href="#class_google_1_1_protobuf_1_1_field_codec_1a9d183941f46d6c73bbaed858868c37cd">ForBool</a>(uint tag)</code>
+      </td>
+      <td>
+        <div>
+          <code>FieldCodec< bool ></code>
+        </div>
+        <div>Retrieves a codec suitable for a bool field with the given tag. </div>
+      </td>
+    </tr>
+    <tr>
+      <td>
+        <code><a href="#class_google_1_1_protobuf_1_1_field_codec_1aedaecf91cabf3b1335f59a4054fa3337">ForBytes</a>(uint tag)</code>
+      </td>
+      <td>
+        <div>
+          <code>FieldCodec< <a href="/reference/csharp/api-docs/class/google/protobuf/byte-string.html#class_google_1_1_protobuf_1_1_byte_string">ByteString</a> ></code>
+        </div>
+        <div>Retrieves a codec suitable for a bytes field with the given tag. </div>
+      </td>
+    </tr>
+    <tr>
+      <td>
+        <code><a href="#class_google_1_1_protobuf_1_1_field_codec_1aa737ad5fb6637ce515c280ca3d849b39">ForClassWrapper< T ></a>(uint tag)</code>
+      </td>
+      <td>
+        <div>
+          <code>FieldCodec< T ></code>
+        </div>
+        <div>Creates a codec for a wrapper type of a class - which must be string or <a href="/reference/csharp/api-docs/class/google/protobuf/byte-string.html#class_google_1_1_protobuf_1_1_byte_string">ByteString</a>. </div>
+      </td>
+    </tr>
+    <tr>
+      <td>
+        <code><a href="#class_google_1_1_protobuf_1_1_field_codec_1a68d11eab6d2f1f691ffe66aeac37a822">ForDouble</a>(uint tag)</code>
+      </td>
+      <td>
+        <div>
+          <code>FieldCodec< double ></code>
+        </div>
+        <div>Retrieves a codec suitable for a double field with the given tag. </div>
+      </td>
+    </tr>
+    <tr>
+      <td>
+        <code><a href="#class_google_1_1_protobuf_1_1_field_codec_1ac0368057a350a316331b0c6e37ed1f2c">ForEnum< T ></a>(uint tag, Func< T, int > toInt32, Func< int, T > fromInt32)</code>
+      </td>
+      <td>
+        <div>
+          <code>FieldCodec< T ></code>
+        </div>
+        <div>Retrieves a codec suitable for an enum field with the given tag. </div>
+      </td>
+    </tr>
+    <tr>
+      <td>
+        <code><a href="#class_google_1_1_protobuf_1_1_field_codec_1aaf31699f49ad98693a8622be1fcbeb93">ForFixed32</a>(uint tag)</code>
+      </td>
+      <td>
+        <div>
+          <code>FieldCodec< uint ></code>
+        </div>
+        <div>Retrieves a codec suitable for a fixed32 field with the given tag. </div>
+      </td>
+    </tr>
+    <tr>
+      <td>
+        <code><a href="#class_google_1_1_protobuf_1_1_field_codec_1aa3944043f285a14cc510ccf997dbf144">ForFixed64</a>(uint tag)</code>
+      </td>
+      <td>
+        <div>
+          <code>FieldCodec< ulong ></code>
+        </div>
+        <div>Retrieves a codec suitable for a fixed64 field with the given tag. </div>
+      </td>
+    </tr>
+    <tr>
+      <td>
+        <code><a href="#class_google_1_1_protobuf_1_1_field_codec_1a02921121f51ee78bdeacd0d9aafd1614">ForFloat</a>(uint tag)</code>
+      </td>
+      <td>
+        <div>
+          <code>FieldCodec< float ></code>
+        </div>
+        <div>Retrieves a codec suitable for a float field with the given tag. </div>
+      </td>
+    </tr>
+    <tr>
+      <td>
+        <code><a href="#class_google_1_1_protobuf_1_1_field_codec_1ab331188cca6d50a5a7f72efd1395b6d9">ForInt32</a>(uint tag)</code>
+      </td>
+      <td>
+        <div>
+          <code>FieldCodec< int ></code>
+        </div>
+        <div>Retrieves a codec suitable for an int32 field with the given tag. </div>
+      </td>
+    </tr>
+    <tr>
+      <td>
+        <code><a href="#class_google_1_1_protobuf_1_1_field_codec_1a8fe7f59d06ce7f4c95284c3c8df1aa7b">ForInt64</a>(uint tag)</code>
+      </td>
+      <td>
+        <div>
+          <code>FieldCodec< long ></code>
+        </div>
+        <div>Retrieves a codec suitable for an int64 field with the given tag. </div>
+      </td>
+    </tr>
+    <tr>
+      <td>
+        <code><a href="#class_google_1_1_protobuf_1_1_field_codec_1a4d5357d604e58cf0f0c662be17700970">ForMessage< T ></a>(uint tag, <a href="/reference/csharp/api-docs/class/google/protobuf/message-parser.html#class_google_1_1_protobuf_1_1_message_parser">MessageParser</a>< T > parser)</code>
+      </td>
+      <td>
+        <div>
+          <code>FieldCodec< T ></code>
+        </div>
+        <div>Retrieves a codec suitable for a message field with the given tag. </div>
+      </td>
+    </tr>
+    <tr>
+      <td>
+        <code><a href="#class_google_1_1_protobuf_1_1_field_codec_1a1613b1b0728f9f29c41f41e46b310e38">ForSFixed32</a>(uint tag)</code>
+      </td>
+      <td>
+        <div>
+          <code>FieldCodec< int ></code>
+        </div>
+        <div>Retrieves a codec suitable for an sfixed32 field with the given tag. </div>
+      </td>
+    </tr>
+    <tr>
+      <td>
+        <code><a href="#class_google_1_1_protobuf_1_1_field_codec_1a52ed67524ba5661bbb20284e82218207">ForSFixed64</a>(uint tag)</code>
+      </td>
+      <td>
+        <div>
+          <code>FieldCodec< long ></code>
+        </div>
+        <div>Retrieves a codec suitable for an sfixed64 field with the given tag. </div>
+      </td>
+    </tr>
+    <tr>
+      <td>
+        <code><a href="#class_google_1_1_protobuf_1_1_field_codec_1a977de435484fdd74123da26670587fe8">ForSInt32</a>(uint tag)</code>
+      </td>
+      <td>
+        <div>
+          <code>FieldCodec< int ></code>
+        </div>
+        <div>Retrieves a codec suitable for an sint32 field with the given tag. </div>
+      </td>
+    </tr>
+    <tr>
+      <td>
+        <code><a href="#class_google_1_1_protobuf_1_1_field_codec_1a66f5a8c6044b73bc9f04bd79329fdc06">ForSInt64</a>(uint tag)</code>
+      </td>
+      <td>
+        <div>
+          <code>FieldCodec< long ></code>
+        </div>
+        <div>Retrieves a codec suitable for an sint64 field with the given tag. </div>
+      </td>
+    </tr>
+    <tr>
+      <td>
+        <code><a href="#class_google_1_1_protobuf_1_1_field_codec_1aacd972fd94ced949ba80aedeaaa8ff78">ForString</a>(uint tag)</code>
+      </td>
+      <td>
+        <div>
+          <code>FieldCodec< string ></code>
+        </div>
+        <div>Retrieves a codec suitable for a string field with the given tag. </div>
+      </td>
+    </tr>
+    <tr>
+      <td>
+        <code><a href="#class_google_1_1_protobuf_1_1_field_codec_1a9b83a7f0cab1f7ab2e191b6b6df5cc56">ForStructWrapper< T ></a>(uint tag)</code>
+      </td>
+      <td>
+        <div>
+          <code>FieldCodec< T?></code>
+        </div>
+        <div>Creates a codec for a wrapper type of a struct - which must be Int32, Int64, UInt32, UInt64, Bool, Single or Double. </div>
+      </td>
+    </tr>
+    <tr>
+      <td>
+        <code><a href="#class_google_1_1_protobuf_1_1_field_codec_1af456df2b63cc40b244c30dc8c023ff36">ForUInt32</a>(uint tag)</code>
+      </td>
+      <td>
+        <div>
+          <code>FieldCodec< uint ></code>
+        </div>
+        <div>Retrieves a codec suitable for a uint32 field with the given tag. </div>
+      </td>
+    </tr>
+    <tr>
+      <td>
+        <code><a href="#class_google_1_1_protobuf_1_1_field_codec_1a4eb6142ac60193a2366026b055698ebb">ForUInt64</a>(uint tag)</code>
+      </td>
+      <td>
+        <div>
+          <code>FieldCodec< ulong ></code>
+        </div>
+        <div>Retrieves a codec suitable for a uint64 field with the given tag. </div>
+      </td>
+    </tr>
+  </table>
+  <h2>Public static functions</h2>
+  <div id="class_google_1_1_protobuf_1_1_field_codec_1a9d183941f46d6c73bbaed858868c37cd">
+    <h3>ForBool</h3>
+    <pre class="prettyprint">FieldCodec< bool > ForBool(
+  uint tag
+)</pre>
+    <div>
+      <p>Retrieves a codec suitable for a bool field with the given tag. </p>
+      <p />
+      <table class="details responsive">
+        <thead>
+          <th colspan="2">Details</th>
+        </thead>
+        <tbody>
+          <tr>
+            <td>Parameters</td>
+            <td>
+              <table class="function param responsive">
+                <tbody>
+                  <tr>
+                    <td>
+                      <code>tag</code>
+                    </td>
+                    <td>
+                      <div>The tag.</div>
+                    </td>
+                  </tr>
+                </tbody>
+              </table>
+            </td>
+          </tr>
+          <tr>
+            <td>
+              <b>Returns</b>
+            </td>
+            <td>
+              <div>A codec for the given tag.</div>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+  <div id="class_google_1_1_protobuf_1_1_field_codec_1aedaecf91cabf3b1335f59a4054fa3337">
+    <h3>ForBytes</h3>
+    <pre class="prettyprint">FieldCodec< <a href="/reference/csharp/api-docs/class/google/protobuf/byte-string.html#class_google_1_1_protobuf_1_1_byte_string">ByteString</a> > ForBytes(
+  uint tag
+)</pre>
+    <div>
+      <p>Retrieves a codec suitable for a bytes field with the given tag. </p>
+      <p />
+      <table class="details responsive">
+        <thead>
+          <th colspan="2">Details</th>
+        </thead>
+        <tbody>
+          <tr>
+            <td>Parameters</td>
+            <td>
+              <table class="function param responsive">
+                <tbody>
+                  <tr>
+                    <td>
+                      <code>tag</code>
+                    </td>
+                    <td>
+                      <div>The tag.</div>
+                    </td>
+                  </tr>
+                </tbody>
+              </table>
+            </td>
+          </tr>
+          <tr>
+            <td>
+              <b>Returns</b>
+            </td>
+            <td>
+              <div>A codec for the given tag.</div>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+  <div id="class_google_1_1_protobuf_1_1_field_codec_1aa737ad5fb6637ce515c280ca3d849b39">
+    <h3>ForClassWrapper< T ></h3>
+    <pre class="prettyprint">FieldCodec< T > ForClassWrapper< T >(
+  uint tag
+)</pre>
+    <div>
+      <p>Creates a codec for a wrapper type of a class - which must be string or <a href="/reference/csharp/api-docs/class/google/protobuf/byte-string.html#class_google_1_1_protobuf_1_1_byte_string">ByteString</a>. </p>
+    </div>
+  </div>
+  <div id="class_google_1_1_protobuf_1_1_field_codec_1a68d11eab6d2f1f691ffe66aeac37a822">
+    <h3>ForDouble</h3>
+    <pre class="prettyprint">FieldCodec< double > ForDouble(
+  uint tag
+)</pre>
+    <div>
+      <p>Retrieves a codec suitable for a double field with the given tag. </p>
+      <p />
+      <table class="details responsive">
+        <thead>
+          <th colspan="2">Details</th>
+        </thead>
+        <tbody>
+          <tr>
+            <td>Parameters</td>
+            <td>
+              <table class="function param responsive">
+                <tbody>
+                  <tr>
+                    <td>
+                      <code>tag</code>
+                    </td>
+                    <td>
+                      <div>The tag.</div>
+                    </td>
+                  </tr>
+                </tbody>
+              </table>
+            </td>
+          </tr>
+          <tr>
+            <td>
+              <b>Returns</b>
+            </td>
+            <td>
+              <div>A codec for the given tag.</div>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+  <div id="class_google_1_1_protobuf_1_1_field_codec_1ac0368057a350a316331b0c6e37ed1f2c">
+    <h3>ForEnum< T ></h3>
+    <pre class="prettyprint">FieldCodec< T > ForEnum< T >(
+  uint tag,
+  Func< T, int > toInt32,
+  Func< int, T > fromInt32
+)</pre>
+    <div>
+      <p>Retrieves a codec suitable for an enum field with the given tag. </p>
+      <p />
+      <table class="details responsive">
+        <thead>
+          <th colspan="2">Details</th>
+        </thead>
+        <tbody>
+          <tr>
+            <td>Parameters</td>
+            <td>
+              <table class="function param responsive">
+                <tbody>
+                  <tr>
+                    <td>
+                      <code>tag</code>
+                    </td>
+                    <td>
+                      <div>The tag.</div>
+                    </td>
+                  </tr>
+                  <tr>
+                    <td>
+                      <code>toInt32</code>
+                    </td>
+                    <td>
+                      <div>A conversion function from Int32 to the enum type.</div>
+                    </td>
+                  </tr>
+                  <tr>
+                    <td>
+                      <code>fromInt32</code>
+                    </td>
+                    <td>
+                      <div>A conversion function from the enum type to Int32.</div>
+                    </td>
+                  </tr>
+                </tbody>
+              </table>
+            </td>
+          </tr>
+          <tr>
+            <td>
+              <b>Returns</b>
+            </td>
+            <td>
+              <div>A codec for the given tag.</div>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+  <div id="class_google_1_1_protobuf_1_1_field_codec_1aaf31699f49ad98693a8622be1fcbeb93">
+    <h3>ForFixed32</h3>
+    <pre class="prettyprint">FieldCodec< uint > ForFixed32(
+  uint tag
+)</pre>
+    <div>
+      <p>Retrieves a codec suitable for a fixed32 field with the given tag. </p>
+      <p />
+      <table class="details responsive">
+        <thead>
+          <th colspan="2">Details</th>
+        </thead>
+        <tbody>
+          <tr>
+            <td>Parameters</td>
+            <td>
+              <table class="function param responsive">
+                <tbody>
+                  <tr>
+                    <td>
+                      <code>tag</code>
+                    </td>
+                    <td>
+                      <div>The tag.</div>
+                    </td>
+                  </tr>
+                </tbody>
+              </table>
+            </td>
+          </tr>
+          <tr>
+            <td>
+              <b>Returns</b>
+            </td>
+            <td>
+              <div>A codec for the given tag.</div>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+  <div id="class_google_1_1_protobuf_1_1_field_codec_1aa3944043f285a14cc510ccf997dbf144">
+    <h3>ForFixed64</h3>
+    <pre class="prettyprint">FieldCodec< ulong > ForFixed64(
+  uint tag
+)</pre>
+    <div>
+      <p>Retrieves a codec suitable for a fixed64 field with the given tag. </p>
+      <p />
+      <table class="details responsive">
+        <thead>
+          <th colspan="2">Details</th>
+        </thead>
+        <tbody>
+          <tr>
+            <td>Parameters</td>
+            <td>
+              <table class="function param responsive">
+                <tbody>
+                  <tr>
+                    <td>
+                      <code>tag</code>
+                    </td>
+                    <td>
+                      <div>The tag.</div>
+                    </td>
+                  </tr>
+                </tbody>
+              </table>
+            </td>
+          </tr>
+          <tr>
+            <td>
+              <b>Returns</b>
+            </td>
+            <td>
+              <div>A codec for the given tag.</div>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+  <div id="class_google_1_1_protobuf_1_1_field_codec_1a02921121f51ee78bdeacd0d9aafd1614">
+    <h3>ForFloat</h3>
+    <pre class="prettyprint">FieldCodec< float > ForFloat(
+  uint tag
+)</pre>
+    <div>
+      <p>Retrieves a codec suitable for a float field with the given tag. </p>
+      <p />
+      <table class="details responsive">
+        <thead>
+          <th colspan="2">Details</th>
+        </thead>
+        <tbody>
+          <tr>
+            <td>Parameters</td>
+            <td>
+              <table class="function param responsive">
+                <tbody>
+                  <tr>
+                    <td>
+                      <code>tag</code>
+                    </td>
+                    <td>
+                      <div>The tag.</div>
+                    </td>
+                  </tr>
+                </tbody>
+              </table>
+            </td>
+          </tr>
+          <tr>
+            <td>
+              <b>Returns</b>
+            </td>
+            <td>
+              <div>A codec for the given tag.</div>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+  <div id="class_google_1_1_protobuf_1_1_field_codec_1ab331188cca6d50a5a7f72efd1395b6d9">
+    <h3>ForInt32</h3>
+    <pre class="prettyprint">FieldCodec< int > ForInt32(
+  uint tag
+)</pre>
+    <div>
+      <p>Retrieves a codec suitable for an int32 field with the given tag. </p>
+      <p />
+      <table class="details responsive">
+        <thead>
+          <th colspan="2">Details</th>
+        </thead>
+        <tbody>
+          <tr>
+            <td>Parameters</td>
+            <td>
+              <table class="function param responsive">
+                <tbody>
+                  <tr>
+                    <td>
+                      <code>tag</code>
+                    </td>
+                    <td>
+                      <div>The tag.</div>
+                    </td>
+                  </tr>
+                </tbody>
+              </table>
+            </td>
+          </tr>
+          <tr>
+            <td>
+              <b>Returns</b>
+            </td>
+            <td>
+              <div>A codec for the given tag.</div>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+  <div id="class_google_1_1_protobuf_1_1_field_codec_1a8fe7f59d06ce7f4c95284c3c8df1aa7b">
+    <h3>ForInt64</h3>
+    <pre class="prettyprint">FieldCodec< long > ForInt64(
+  uint tag
+)</pre>
+    <div>
+      <p>Retrieves a codec suitable for an int64 field with the given tag. </p>
+      <p />
+      <table class="details responsive">
+        <thead>
+          <th colspan="2">Details</th>
+        </thead>
+        <tbody>
+          <tr>
+            <td>Parameters</td>
+            <td>
+              <table class="function param responsive">
+                <tbody>
+                  <tr>
+                    <td>
+                      <code>tag</code>
+                    </td>
+                    <td>
+                      <div>The tag.</div>
+                    </td>
+                  </tr>
+                </tbody>
+              </table>
+            </td>
+          </tr>
+          <tr>
+            <td>
+              <b>Returns</b>
+            </td>
+            <td>
+              <div>A codec for the given tag.</div>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+  <div id="class_google_1_1_protobuf_1_1_field_codec_1a4d5357d604e58cf0f0c662be17700970">
+    <h3>ForMessage< T ></h3>
+    <pre class="prettyprint">FieldCodec< T > ForMessage< T >(
+  uint tag,
+  <a href="/reference/csharp/api-docs/class/google/protobuf/message-parser.html#class_google_1_1_protobuf_1_1_message_parser">MessageParser</a>< T > parser
+)</pre>
+    <div>
+      <p>Retrieves a codec suitable for a message field with the given tag. </p>
+      <p />
+      <table class="details responsive">
+        <thead>
+          <th colspan="2">Details</th>
+        </thead>
+        <tbody>
+          <tr>
+            <td>Parameters</td>
+            <td>
+              <table class="function param responsive">
+                <tbody>
+                  <tr>
+                    <td>
+                      <code>tag</code>
+                    </td>
+                    <td>
+                      <div>The tag.</div>
+                    </td>
+                  </tr>
+                  <tr>
+                    <td>
+                      <code>parser</code>
+                    </td>
+                    <td>
+                      <div>A parser to use for the message type.</div>
+                    </td>
+                  </tr>
+                </tbody>
+              </table>
+            </td>
+          </tr>
+          <tr>
+            <td>
+              <b>Returns</b>
+            </td>
+            <td>
+              <div>A codec for the given tag.</div>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+  <div id="class_google_1_1_protobuf_1_1_field_codec_1a1613b1b0728f9f29c41f41e46b310e38">
+    <h3>ForSFixed32</h3>
+    <pre class="prettyprint">FieldCodec< int > ForSFixed32(
+  uint tag
+)</pre>
+    <div>
+      <p>Retrieves a codec suitable for an sfixed32 field with the given tag. </p>
+      <p />
+      <table class="details responsive">
+        <thead>
+          <th colspan="2">Details</th>
+        </thead>
+        <tbody>
+          <tr>
+            <td>Parameters</td>
+            <td>
+              <table class="function param responsive">
+                <tbody>
+                  <tr>
+                    <td>
+                      <code>tag</code>
+                    </td>
+                    <td>
+                      <div>The tag.</div>
+                    </td>
+                  </tr>
+                </tbody>
+              </table>
+            </td>
+          </tr>
+          <tr>
+            <td>
+              <b>Returns</b>
+            </td>
+            <td>
+              <div>A codec for the given tag.</div>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+  <div id="class_google_1_1_protobuf_1_1_field_codec_1a52ed67524ba5661bbb20284e82218207">
+    <h3>ForSFixed64</h3>
+    <pre class="prettyprint">FieldCodec< long > ForSFixed64(
+  uint tag
+)</pre>
+    <div>
+      <p>Retrieves a codec suitable for an sfixed64 field with the given tag. </p>
+      <p />
+      <table class="details responsive">
+        <thead>
+          <th colspan="2">Details</th>
+        </thead>
+        <tbody>
+          <tr>
+            <td>Parameters</td>
+            <td>
+              <table class="function param responsive">
+                <tbody>
+                  <tr>
+                    <td>
+                      <code>tag</code>
+                    </td>
+                    <td>
+                      <div>The tag.</div>
+                    </td>
+                  </tr>
+                </tbody>
+              </table>
+            </td>
+          </tr>
+          <tr>
+            <td>
+              <b>Returns</b>
+            </td>
+            <td>
+              <div>A codec for the given tag.</div>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+  <div id="class_google_1_1_protobuf_1_1_field_codec_1a977de435484fdd74123da26670587fe8">
+    <h3>ForSInt32</h3>
+    <pre class="prettyprint">FieldCodec< int > ForSInt32(
+  uint tag
+)</pre>
+    <div>
+      <p>Retrieves a codec suitable for an sint32 field with the given tag. </p>
+      <p />
+      <table class="details responsive">
+        <thead>
+          <th colspan="2">Details</th>
+        </thead>
+        <tbody>
+          <tr>
+            <td>Parameters</td>
+            <td>
+              <table class="function param responsive">
+                <tbody>
+                  <tr>
+                    <td>
+                      <code>tag</code>
+                    </td>
+                    <td>
+                      <div>The tag.</div>
+                    </td>
+                  </tr>
+                </tbody>
+              </table>
+            </td>
+          </tr>
+          <tr>
+            <td>
+              <b>Returns</b>
+            </td>
+            <td>
+              <div>A codec for the given tag.</div>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+  <div id="class_google_1_1_protobuf_1_1_field_codec_1a66f5a8c6044b73bc9f04bd79329fdc06">
+    <h3>ForSInt64</h3>
+    <pre class="prettyprint">FieldCodec< long > ForSInt64(
+  uint tag
+)</pre>
+    <div>
+      <p>Retrieves a codec suitable for an sint64 field with the given tag. </p>
+      <p />
+      <table class="details responsive">
+        <thead>
+          <th colspan="2">Details</th>
+        </thead>
+        <tbody>
+          <tr>
+            <td>Parameters</td>
+            <td>
+              <table class="function param responsive">
+                <tbody>
+                  <tr>
+                    <td>
+                      <code>tag</code>
+                    </td>
+                    <td>
+                      <div>The tag.</div>
+                    </td>
+                  </tr>
+                </tbody>
+              </table>
+            </td>
+          </tr>
+          <tr>
+            <td>
+              <b>Returns</b>
+            </td>
+            <td>
+              <div>A codec for the given tag.</div>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+  <div id="class_google_1_1_protobuf_1_1_field_codec_1aacd972fd94ced949ba80aedeaaa8ff78">
+    <h3>ForString</h3>
+    <pre class="prettyprint">FieldCodec< string > ForString(
+  uint tag
+)</pre>
+    <div>
+      <p>Retrieves a codec suitable for a string field with the given tag. </p>
+      <p />
+      <table class="details responsive">
+        <thead>
+          <th colspan="2">Details</th>
+        </thead>
+        <tbody>
+          <tr>
+            <td>Parameters</td>
+            <td>
+              <table class="function param responsive">
+                <tbody>
+                  <tr>
+                    <td>
+                      <code>tag</code>
+                    </td>
+                    <td>
+                      <div>The tag.</div>
+                    </td>
+                  </tr>
+                </tbody>
+              </table>
+            </td>
+          </tr>
+          <tr>
+            <td>
+              <b>Returns</b>
+            </td>
+            <td>
+              <div>A codec for the given tag.</div>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+  <div id="class_google_1_1_protobuf_1_1_field_codec_1a9b83a7f0cab1f7ab2e191b6b6df5cc56">
+    <h3>ForStructWrapper< T ></h3>
+    <pre class="prettyprint">FieldCodec< T?> ForStructWrapper< T >(
+  uint tag
+)</pre>
+    <div>
+      <p>Creates a codec for a wrapper type of a struct - which must be Int32, Int64, UInt32, UInt64, Bool, Single or Double. </p>
+    </div>
+  </div>
+  <div id="class_google_1_1_protobuf_1_1_field_codec_1af456df2b63cc40b244c30dc8c023ff36">
+    <h3>ForUInt32</h3>
+    <pre class="prettyprint">FieldCodec< uint > ForUInt32(
+  uint tag
+)</pre>
+    <div>
+      <p>Retrieves a codec suitable for a uint32 field with the given tag. </p>
+      <p />
+      <table class="details responsive">
+        <thead>
+          <th colspan="2">Details</th>
+        </thead>
+        <tbody>
+          <tr>
+            <td>Parameters</td>
+            <td>
+              <table class="function param responsive">
+                <tbody>
+                  <tr>
+                    <td>
+                      <code>tag</code>
+                    </td>
+                    <td>
+                      <div>The tag.</div>
+                    </td>
+                  </tr>
+                </tbody>
+              </table>
+            </td>
+          </tr>
+          <tr>
+            <td>
+              <b>Returns</b>
+            </td>
+            <td>
+              <div>A codec for the given tag.</div>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+  <div id="class_google_1_1_protobuf_1_1_field_codec_1a4eb6142ac60193a2366026b055698ebb">
+    <h3>ForUInt64</h3>
+    <pre class="prettyprint">FieldCodec< ulong > ForUInt64(
+  uint tag
+)</pre>
+    <div>
+      <p>Retrieves a codec suitable for a uint64 field with the given tag. </p>
+      <p />
+      <table class="details responsive">
+        <thead>
+          <th colspan="2">Details</th>
+        </thead>
+        <tbody>
+          <tr>
+            <td>Parameters</td>
+            <td>
+              <table class="function param responsive">
+                <tbody>
+                  <tr>
+                    <td>
+                      <code>tag</code>
+                    </td>
+                    <td>
+                      <div>The tag.</div>
+                    </td>
+                  </tr>
+                </tbody>
+              </table>
+            </td>
+          </tr>
+          <tr>
+            <td>
+              <b>Returns</b>
+            </td>
+            <td>
+              <div>A codec for the given tag.</div>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</body>
+</html>

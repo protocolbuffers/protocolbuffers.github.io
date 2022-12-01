@@ -1,0 +1,7 @@
+.g3doc-sitemap-content {
+  display: none;
+}
+
+.g3doc-sitemap-content+main {
+  flex-basis: 100%;
+}
