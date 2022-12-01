@@ -1,11 +1,11 @@
-<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Protocol Buffers Documentation – Python Reference</title><link>/reference/python/</link><description>Recent content in Python Reference on Protocol Buffers Documentation</description><generator>Hugo -- gohugo.io</generator><language>en-us</language><atom:link href="/reference/python/index.xml" rel="self" type="application/rss+xml"/><item><title>Reference: Python Generated Code Guide</title><link>/reference/python/python-generated/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>/reference/python/python-generated/</guid><description>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Protocol Buffers Documentation – Python Reference</title><link>https://protobuf.dev/reference/python/</link><description>Recent content in Python Reference on Protocol Buffers Documentation</description><generator>Hugo -- gohugo.io</generator><language>en-us</language><atom:link href="https://protobuf.dev/reference/python/index.xml" rel="self" type="application/rss+xml"/><item><title>Reference: Python Generated Code Guide</title><link>https://protobuf.dev/reference/python/python-generated/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://protobuf.dev/reference/python/python-generated/</guid><description>
 &lt;p>This page describes exactly what Python definitions the protocol buffer compiler
 generates for any given protocol definition. Any differences between proto2 and
 proto3 generated code are highlighted - note that these differences are in the
 generated code as described in this document, not the base message
 classes/interfaces, which are the same in both versions. You should read the
-&lt;a href="/programming-guides/proto">proto2 language guide&lt;/a> and/or
-&lt;a href="/programming-guides/proto3">proto3 language guide&lt;/a>
+&lt;a href="https://protobuf.dev/programming-guides/proto">proto2 language guide&lt;/a> and/or
+&lt;a href="https://protobuf.dev/programming-guides/proto3">proto3 language guide&lt;/a>
 before reading this document.&lt;/p>
 &lt;p>The Python Protocol Buffers implementation is a little different from C++ and
 Java. In Python, the compiler only outputs code to build descriptors for the
@@ -98,7 +98,7 @@ message.&lt;/p>
 can refer to it as &lt;code>Foo.Bar&lt;/code>.&lt;/p>
 &lt;h2 id="wkt">Well Known Types&lt;/h2>
 &lt;p>Protocol buffers provides a number of
-&lt;a href="/reference/protobuf/google.protobuf">well-known types&lt;/a> that you
+&lt;a href="https://protobuf.dev/reference/protobuf/google.protobuf">well-known types&lt;/a> that you
 can use in your .proto files along with your own message types. Some WKT
 messages have special methods in addition to the usual protocol buffer message
 methods, as they subclass both
@@ -380,7 +380,7 @@ For example:&lt;/p>
 message types &amp;ndash; use nested message types instead.&lt;/strong>&lt;/p>
 &lt;p>A group combines a nested message type and a field into a single declaration,
 and uses a different
-&lt;a href="/programming-guides/encoding">wire format&lt;/a> for the
+&lt;a href="https://protobuf.dev/programming-guides/encoding">wire format&lt;/a> for the
 message. The generated message has the same name as the group. The generated
 field&amp;rsquo;s name is the &lt;strong>lowercased&lt;/strong> name of the group.&lt;/p>
 &lt;p>For example, except for wire format, the following two message definitions are
@@ -647,7 +647,7 @@ system. If you do NOT want this code to be generated, add this line to the file:
 generic services are deprecated. (Note that prior to 2.4.0, the option defaults
 to &lt;code>true&lt;/code>)&lt;/p>
 &lt;p>RPC systems based on &lt;code>.proto&lt;/code>-language service definitions should provide
-&lt;a href="/reference/cpp/api-docs/google.protobuf.compiler.plugin.pb">plugins&lt;/a>
+&lt;a href="https://protobuf.dev/reference/cpp/api-docs/google.protobuf.compiler.plugin.pb">plugins&lt;/a>
 to generate code appropriate for the system. These plugins are likely to require
 that abstract services are disabled, so that they can generate their own classes
 of the same names. Plugins are new in version 2.3.0 (January 2010).&lt;/p>
@@ -696,7 +696,7 @@ arbitrary RPC implementation of your choice. You need only provide
 implementations of &lt;code>RpcChannel&lt;/code> and
 &lt;a href="https://googleapis.dev/python/protobuf/latest/google/protobuf/service.html#google.protobuf.service.RpcController">&lt;code>RpcController&lt;/code>&lt;/a>.&lt;/p>
 &lt;h2 id="plugins">Plugin Insertion Points&lt;/h2>
-&lt;p>&lt;a href="/reference/cpp/api-docs/google.protobuf.compiler.plugin.pb">Code generator plugins&lt;/a>
+&lt;p>&lt;a href="https://protobuf.dev/reference/cpp/api-docs/google.protobuf.compiler.plugin.pb">Code generator plugins&lt;/a>
 which want to extend the output of the Python code generator may insert code of
 the following types using the given insertion point names.&lt;/p>
 &lt;ul>
@@ -716,4 +716,4 @@ extension. Starting in Python 4.21.0, sharing messages between Python and C++ is
 not supported by the default install. To enable this capability when working
 with 4.x and later versions of the Python API, define the environment variable,
 &lt;code>PROTOCOL_BUFFERS_PYTHON_IMPLEMENTATION=cpp&lt;/code>, and ensure that the Python/C++
-extension is installed.&lt;/p></description></item><item><title>Reference: Python API</title><link>/reference/python/api-docs-link/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>/reference/python/api-docs-link/</guid><description/></item></channel></rss>
+extension is installed.&lt;/p></description></item><item><title>Reference: Python API</title><link>https://protobuf.dev/reference/python/api-docs-link/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://protobuf.dev/reference/python/api-docs-link/</guid><description/></item></channel></rss>

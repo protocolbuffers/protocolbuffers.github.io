@@ -1,11 +1,11 @@
-<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Protocol Buffers Documentation – Dart Reference</title><link>/reference/dart/</link><description>Recent content in Dart Reference on Protocol Buffers Documentation</description><generator>Hugo -- gohugo.io</generator><language>en-us</language><atom:link href="/reference/dart/index.xml" rel="self" type="application/rss+xml"/><item><title>Reference: Dart Generated Code Guide</title><link>/reference/dart/dart-generated/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>/reference/dart/dart-generated/</guid><description>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Protocol Buffers Documentation – Dart Reference</title><link>https://protobuf.dev/reference/dart/</link><description>Recent content in Dart Reference on Protocol Buffers Documentation</description><generator>Hugo -- gohugo.io</generator><language>en-us</language><atom:link href="https://protobuf.dev/reference/dart/index.xml" rel="self" type="application/rss+xml"/><item><title>Reference: Dart Generated Code Guide</title><link>https://protobuf.dev/reference/dart/dart-generated/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://protobuf.dev/reference/dart/dart-generated/</guid><description>
 &lt;p>This page describes what Dart code the protocol buffer compiler generates for
 any given protocol definition. Any differences between proto2 and proto3
 generated code are highlighted - note that these differences are in the
 generated code as described in this document, not the base API, which are the
 same in both versions. You should read the
-&lt;a href="/programming-guides/proto">proto2 language guide&lt;/a> and/or the
-&lt;a href="/programming-guides/proto3">proto3 language guide&lt;/a> before reading this
+&lt;a href="https://protobuf.dev/programming-guides/proto">proto2 language guide&lt;/a> and/or the
+&lt;a href="https://protobuf.dev/programming-guides/proto3">proto3 language guide&lt;/a> before reading this
 document.&lt;/p>
 &lt;h2 id="invocation">Compiler Invocation&lt;/h2>
 &lt;p>The protocol buffer compiler requires a
@@ -69,7 +69,7 @@ buffer compiler generates accessor methods for each field defined within the
 message in the &lt;code>.proto&lt;/code> file.&lt;/p>
 &lt;p>Note that the generated names always use camel-case naming, even if the field
 name in the &lt;code>.proto&lt;/code> file uses lower-case with underscores
-(&lt;a href="/programming-guides/style">as it should&lt;/a>). The case-conversion works
+(&lt;a href="https://protobuf.dev/programming-guides/style">as it should&lt;/a>). The case-conversion works
 as follows:&lt;/p>
 &lt;ol>
 &lt;li>For each underscore in the name, the underscore is removed, and the
@@ -94,7 +94,7 @@ set, returns the default value.&lt;/li>
 &lt;code>hasFoo()&lt;/code> will return &lt;code>false&lt;/code> and &lt;code>get foo&lt;/code> will return the default value.&lt;/li>
 &lt;/ul>
 &lt;p>For other simple field types, the corresponding Dart type is chosen according to
-the &lt;a href="/programming-guides/proto#scalar">scalar value types table&lt;/a>.
+the &lt;a href="https://protobuf.dev/programming-guides/proto#scalar">scalar value types table&lt;/a>.
 For message and enum types, the value type is replaced with the message or enum
 class.&lt;/p>
 &lt;h3 id="singular-primitive-fields-proto3">Singular Primitive Fields (proto3)&lt;/h3>
@@ -158,7 +158,7 @@ field.&lt;/li>
 objects, you may need to import the Dart &lt;code>fixnum&lt;/code> library:&lt;/p>
 &lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-dart" data-lang="dart">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#204a87;font-weight:bold">import&lt;/span> &lt;span style="color:#4e9a06">&amp;#39;package:fixnum/fixnum.dart&amp;#39;&lt;/span>&lt;span style="color:#000;font-weight:bold">;&lt;/span>
 &lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h3 id="map-fields">Map Fields&lt;/h3>
-&lt;p>Given a &lt;a href="/programming-guides/proto3#maps">&lt;code>map&lt;/code>&lt;/a> field definition like this:&lt;/p>
+&lt;p>Given a &lt;a href="https://protobuf.dev/programming-guides/proto3#maps">&lt;code>map&lt;/code>&lt;/a> field definition like this:&lt;/p>
 &lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-proto" data-lang="proto">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#000">map&lt;/span>&lt;span style="color:#000;font-weight:bold">&amp;lt;&lt;/span>&lt;span style="color:#204a87;font-weight:bold">int32&lt;/span>&lt;span style="color:#000;font-weight:bold">,&lt;/span> &lt;span style="color:#204a87;font-weight:bold">int32&lt;/span>&lt;span style="color:#000;font-weight:bold">&amp;gt;&lt;/span> &lt;span style="color:#000">map_field&lt;/span> &lt;span style="color:#ce5c00;font-weight:bold">=&lt;/span> &lt;span style="color:#0000cf;font-weight:bold">1&lt;/span>&lt;span style="color:#000;font-weight:bold">;&lt;/span>&lt;span style="color:#a40000">
 &lt;/span>&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>The compiler will generate the following getter:&lt;/p>
 &lt;ul>
@@ -167,7 +167,7 @@ field is not set, returns an empty map. Modifications to the map are
 reflected in the field.&lt;/li>
 &lt;/ul>
 &lt;h2 id="any">Any&lt;/h2>
-&lt;p>Given an &lt;a href="/programming-guides/proto3#any">&lt;code>Any&lt;/code>&lt;/a> field like this:&lt;/p>
+&lt;p>Given an &lt;a href="https://protobuf.dev/programming-guides/proto3#any">&lt;code>Any&lt;/code>&lt;/a> field like this:&lt;/p>
 &lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-proto" data-lang="proto">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#204a87;font-weight:bold">import&lt;/span> &lt;span style="color:#4e9a06">&amp;#34;google/protobuf/any.proto&amp;#34;&lt;/span>&lt;span style="color:#000;font-weight:bold">;&lt;/span>&lt;span style="color:#a40000">
 &lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#a40000">
 &lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#a40000">&lt;/span>&lt;span style="color:#204a87;font-weight:bold">message&lt;/span> &lt;span style="color:#000">ErrorStatus&lt;/span> &lt;span style="color:#000;font-weight:bold">{&lt;/span>&lt;span style="color:#a40000">
@@ -201,7 +201,7 @@ and unpack the &lt;code>Any&lt;/code>&amp;rsquo;s values:&lt;/p>
 &lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#8f5902;font-style:italic">&lt;/span> &lt;span style="color:#204a87;font-weight:bold">static&lt;/span> &lt;span style="color:#000">Any&lt;/span> &lt;span style="color:#000">pack&lt;/span>&lt;span style="color:#000;font-weight:bold">(&lt;/span>&lt;span style="color:#000">GeneratedMessage&lt;/span> &lt;span style="color:#000">message&lt;/span>&lt;span style="color:#000;font-weight:bold">,&lt;/span>
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#000;font-weight:bold">{&lt;/span>&lt;span style="color:#204a87;font-weight:bold">String&lt;/span> &lt;span style="color:#000">typeUrlPrefix&lt;/span> &lt;span style="color:#ce5c00;font-weight:bold">=&lt;/span> &lt;span style="color:#4e9a06">&amp;#39;type.googleapis.com&amp;#39;&lt;/span>&lt;span style="color:#000;font-weight:bold">});&lt;/span>
 &lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h2 id="oneof">Oneof&lt;/h2>
-&lt;p>Given a &lt;a href="/programming-guides/proto3#oneof">&lt;code>oneof&lt;/code>&lt;/a> definition like this:&lt;/p>
+&lt;p>Given a &lt;a href="https://protobuf.dev/programming-guides/proto3#oneof">&lt;code>oneof&lt;/code>&lt;/a> definition like this:&lt;/p>
 &lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-proto" data-lang="proto">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#204a87;font-weight:bold">message&lt;/span> &lt;span style="color:#000">Foo&lt;/span> &lt;span style="color:#000;font-weight:bold">{&lt;/span>&lt;span style="color:#a40000">
 &lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#a40000">&lt;/span> &lt;span style="color:#204a87;font-weight:bold">oneof&lt;/span> &lt;span style="color:#000">test&lt;/span> &lt;span style="color:#000;font-weight:bold">{&lt;/span>&lt;span style="color:#a40000">
 &lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#a40000">&lt;/span> &lt;span style="color:#204a87;font-weight:bold">string&lt;/span> &lt;span style="color:#000">name&lt;/span> &lt;span style="color:#ce5c00;font-weight:bold">=&lt;/span> &lt;span style="color:#0000cf;font-weight:bold">1&lt;/span>&lt;span style="color:#000;font-weight:bold">;&lt;/span>&lt;span style="color:#a40000">
@@ -272,7 +272,7 @@ definition like:&lt;/p>
 &lt;code>ProtobufEnum&lt;/code>.&lt;/p>
 &lt;h2 id="extension">Extensions (proto2 only)&lt;/h2>
 &lt;p>Given a file &lt;code>foo_test.proto&lt;/code> including a message with an
-&lt;a href="/programming-guides/proto#extensions">extension range&lt;/a> and a top-level
+&lt;a href="https://protobuf.dev/programming-guides/proto#extensions">extension range&lt;/a> and a top-level
 extension definition:&lt;/p>
 &lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-proto" data-lang="proto">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#204a87;font-weight:bold">message&lt;/span> &lt;span style="color:#000">Foo&lt;/span> &lt;span style="color:#000;font-weight:bold">{&lt;/span>&lt;span style="color:#a40000">
 &lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#a40000">&lt;/span> &lt;span style="color:#204a87;font-weight:bold">extensions&lt;/span> &lt;span style="color:#0000cf;font-weight:bold">100&lt;/span> &lt;span style="color:#204a87;font-weight:bold">to&lt;/span> &lt;span style="color:#0000cf;font-weight:bold">199&lt;/span>&lt;span style="color:#000;font-weight:bold">;&lt;/span>&lt;span style="color:#a40000">
@@ -331,4 +331,4 @@ extensions when doing &lt;code>GeneratedMessage.fromBuffer&lt;/code>.&lt;/p>
 &lt;code>--dart_out=grpc:output_folder&lt;/code>), in which case it will generate code to support
 &lt;a href="//www.grpc.io/">gRPC&lt;/a>. See the
 &lt;a href="https://grpc.io/docs/quickstart/dart.html">gRPC Dart Quickstart guide&lt;/a>
-for more details.&lt;/p></description></item><item><title>Reference: Dart API</title><link>/reference/dart/api-docs-link/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>/reference/dart/api-docs-link/</guid><description/></item></channel></rss>
+for more details.&lt;/p></description></item><item><title>Reference: Dart API</title><link>https://protobuf.dev/reference/dart/api-docs-link/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://protobuf.dev/reference/dart/api-docs-link/</guid><description/></item></channel></rss>

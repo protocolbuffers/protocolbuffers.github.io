@@ -1,13 +1,13 @@
-<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Protocol Buffers Documentation – C# Reference</title><link>/reference/csharp/</link><description>Recent content in C# Reference on Protocol Buffers Documentation</description><generator>Hugo -- gohugo.io</generator><language>en-us</language><atom:link href="/reference/csharp/index.xml" rel="self" type="application/rss+xml"/><item><title>Reference: C# Generated Code Guide</title><link>/reference/csharp/csharp-generated/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>/reference/csharp/csharp-generated/</guid><description>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Protocol Buffers Documentation – C# Reference</title><link>https://protobuf.dev/reference/csharp/</link><description>Recent content in C# Reference on Protocol Buffers Documentation</description><generator>Hugo -- gohugo.io</generator><language>en-us</language><atom:link href="https://protobuf.dev/reference/csharp/index.xml" rel="self" type="application/rss+xml"/><item><title>Reference: C# Generated Code Guide</title><link>https://protobuf.dev/reference/csharp/csharp-generated/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://protobuf.dev/reference/csharp/csharp-generated/</guid><description>
 &lt;p>This page describes exactly what C# code the protocol buffer compiler generates
 for protocol definitions using &lt;code>proto3&lt;/code> syntax. You should read the
-&lt;a href="/programming-guides/proto3">proto3 language guide&lt;/a> before reading this
+&lt;a href="https://protobuf.dev/programming-guides/proto3">proto3 language guide&lt;/a> before reading this
 document.&lt;/p>
 &lt;div class="alert alert-note" role="alert">
 &lt;h4 class="alert-heading">Note&lt;/h4>
 The protobuf compiler can generate C# interfaces for definitions
 using &lt;code>proto2&lt;/code> syntax starting from release 3.10. Refer to the
-&lt;a href="/programming-guides/proto">proto2 language guide&lt;/a> for details of the
+&lt;a href="https://protobuf.dev/programming-guides/proto">proto2 language guide&lt;/a> for details of the
 semantics of &lt;code>proto2&lt;/code> definitions, and see &lt;code>docs/csharp/proto2.md&lt;/code>
 (&lt;a href="https://github.com/protocolbuffers/protobuf/blob/master/docs/csharp/proto2.md">view on GitHub&lt;/a>)
 for details on the generated C# code for proto2.
@@ -82,7 +82,7 @@ implementation is not shown here.)&lt;/p>
 conversion rules as the file name. For example, a proto package of
 &lt;code>example.high_score&lt;/code> would result in a namespace of &lt;code>Example.HighScore&lt;/code>. You can
 override the default generated namespace for a particular .proto using the
-&lt;code>csharp_namespace&lt;/code> &lt;a href="/programming-guides/proto3#options">file option&lt;/a>.&lt;/p>
+&lt;code>csharp_namespace&lt;/code> &lt;a href="https://protobuf.dev/programming-guides/proto3#options">file option&lt;/a>.&lt;/p>
 &lt;p>Each top-level enum and message results in an enum or class being declared as
 members of the namespace. Additionally, a single static partial class is always
 generated for the file descriptor. This is used for reflection-based operations.
@@ -299,4 +299,4 @@ member being generated; a nested enumeration lead to a C# enum being generated
 in the &lt;code>Types&lt;/code> nested class within the class corresponding to the message the
 enumeration is nested within.&lt;/p>
 &lt;h2 id="service">Services&lt;/h2>
-&lt;p>The C# code generator ignores services entirely.&lt;/p></description></item><item><title>Reference: C# API</title><link>/reference/csharp/api-docs-link/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>/reference/csharp/api-docs-link/</guid><description/></item></channel></rss>
+&lt;p>The C# code generator ignores services entirely.&lt;/p></description></item><item><title>Reference: C# API</title><link>https://protobuf.dev/reference/csharp/api-docs-link/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://protobuf.dev/reference/csharp/api-docs-link/</guid><description/></item></channel></rss>

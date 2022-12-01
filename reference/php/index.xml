@@ -1,7 +1,7 @@
-<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Protocol Buffers Documentation – PHP Reference</title><link>/reference/php/</link><description>Recent content in PHP Reference on Protocol Buffers Documentation</description><generator>Hugo -- gohugo.io</generator><language>en-us</language><atom:link href="/reference/php/index.xml" rel="self" type="application/rss+xml"/><item><title>Reference: PHP Generated Code Guide</title><link>/reference/php/php-generated/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>/reference/php/php-generated/</guid><description>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Protocol Buffers Documentation – PHP Reference</title><link>https://protobuf.dev/reference/php/</link><description>Recent content in PHP Reference on Protocol Buffers Documentation</description><generator>Hugo -- gohugo.io</generator><language>en-us</language><atom:link href="https://protobuf.dev/reference/php/index.xml" rel="self" type="application/rss+xml"/><item><title>Reference: PHP Generated Code Guide</title><link>https://protobuf.dev/reference/php/php-generated/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://protobuf.dev/reference/php/php-generated/</guid><description>
 &lt;p>This page describes the PHP code that the protocol buffer compiler generates for
 any given protocol definition. You should read the
-&lt;a href="/programming-guides/proto3">proto3 language guide&lt;/a> before reading this
+&lt;a href="https://protobuf.dev/programming-guides/proto3">proto3 language guide&lt;/a> before reading this
 document. Note that the protocol buffer compiler currently only supports proto3
 code generation for PHP.&lt;/p>
 &lt;h2 id="invocation">Compiler Invocation&lt;/h2>
@@ -94,7 +94,7 @@ integer, float, and numeric strings. Conversions that are not permitted include
 all conversions to/from arrays or objects. Float to integer overflow conversions
 are undefined.&lt;/p>
 &lt;p>You can see the corresponding PHP type for each scalar protocol buffers type in
-the &lt;a href="/programming-guides/proto3#scalar">scalar value types table&lt;/a>.&lt;/p>
+the &lt;a href="https://protobuf.dev/programming-guides/proto3#scalar">scalar value types table&lt;/a>.&lt;/p>
 &lt;h3 id="embedded_message">Singular Message Fields&lt;/h3>
 &lt;p>A field with a message type defaults to nil, and is not automatically created
 when the field is accessed. Thus you need to explicitly create sub messages, as
@@ -146,7 +146,7 @@ does not support nested classes.&lt;/p>
 &lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>We have also provided the file level option &lt;code>php_class_prefix&lt;/code>. If this is
 specified, it is prepended to all generated enum classes.&lt;/p>
 &lt;h2 id="oneof">Oneof&lt;/h2>
-&lt;p>For a &lt;a href="/programming-guides/proto3#oneof">oneof&lt;/a>s, the protocol
+&lt;p>For a &lt;a href="https://protobuf.dev/programming-guides/proto3#oneof">oneof&lt;/a>s, the protocol
 buffer compiler generates the same code as it would for regular singular fields,
 but also adds a special accessor method that lets you find out which oneof field
 (if any) is set. So, given this message:&lt;/p>

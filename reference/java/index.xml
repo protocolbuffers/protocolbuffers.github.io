@@ -1,11 +1,11 @@
-<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Protocol Buffers Documentation – Java Reference</title><link>/reference/java/</link><description>Recent content in Java Reference on Protocol Buffers Documentation</description><generator>Hugo -- gohugo.io</generator><language>en-us</language><atom:link href="/reference/java/index.xml" rel="self" type="application/rss+xml"/><item><title>Reference: Java Generated Code Guide</title><link>/reference/java/java-generated/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>/reference/java/java-generated/</guid><description>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Protocol Buffers Documentation – Java Reference</title><link>https://protobuf.dev/reference/java/</link><description>Recent content in Java Reference on Protocol Buffers Documentation</description><generator>Hugo -- gohugo.io</generator><language>en-us</language><atom:link href="https://protobuf.dev/reference/java/index.xml" rel="self" type="application/rss+xml"/><item><title>Reference: Java Generated Code Guide</title><link>https://protobuf.dev/reference/java/java-generated/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://protobuf.dev/reference/java/java-generated/</guid><description>
 &lt;p>This page describes exactly what Java code the protocol buffer compiler
 generates for any given protocol definition. Any differences between proto2 and
 proto3 generated code are highlighted—note that these differences are in
 the generated code as described in this document, not the base message
 classes/interfaces, which are the same in both versions. You should read the
-&lt;a href="/programming-guides/proto">proto2 language guide&lt;/a> and/or
-&lt;a href="/programming-guides/proto3">proto3 language guide&lt;/a> before reading this
+&lt;a href="https://protobuf.dev/programming-guides/proto">proto2 language guide&lt;/a> and/or
+&lt;a href="https://protobuf.dev/programming-guides/proto3">proto3 language guide&lt;/a> before reading this
 document.&lt;/p>
 &lt;p>Note that no Java protocol buffer methods accept or return nulls unless
 otherwise specified.&lt;/p>
@@ -200,7 +200,7 @@ are defined both in the message class and its corresponding builder; the methods
 that modify the value are defined in the builder only.&lt;/p>
 &lt;p>Note that method names always use camel-case naming, even if the field name in
 the &lt;code>.proto&lt;/code> file uses lower-case with underscores
-(&lt;a href="/programming-guides/style">as it should&lt;/a>). The case-conversion works
+(&lt;a href="https://protobuf.dev/programming-guides/style">as it should&lt;/a>). The case-conversion works
 as follows:&lt;/p>
 &lt;ol>
 &lt;li>For each underscore in the name, the underscore is removed, and the
@@ -233,7 +233,7 @@ this, &lt;code>hasFoo()&lt;/code> will return &lt;code>true&lt;/code> and &lt;co
 &lt;code>hasFoo()&lt;/code> will return &lt;code>false&lt;/code> and &lt;code>getFoo()&lt;/code> will return the default value.&lt;/li>
 &lt;/ul>
 &lt;p>For other simple field types, the corresponding Java type is chosen according to
-the &lt;a href="/programming-guides/proto#scalar">scalar value types table&lt;/a>.
+the &lt;a href="https://protobuf.dev/programming-guides/proto#scalar">scalar value types table&lt;/a>.
 For message and enum types, the value type is replaced with the message or enum
 class.&lt;/p>
 &lt;h4 id="embedded-message-fields">Embedded Message Fields&lt;/h4>
@@ -271,7 +271,7 @@ this, &lt;code>getFoo()&lt;/code> will return &lt;code>value&lt;/code>.&lt;/li>
 &lt;code>getFoo()&lt;/code> will return the default value for the field&amp;rsquo;s type.&lt;/li>
 &lt;/ul>
 &lt;p>For other simple field types, the corresponding Java type is chosen according to
-the &lt;a href="/programming-guides/proto#scalar">scalar value types table&lt;/a>.
+the &lt;a href="https://protobuf.dev/programming-guides/proto#scalar">scalar value types table&lt;/a>.
 For message and enum types, the value type is replaced with the message or enum
 class.&lt;/p>
 &lt;h4 id="embedded-message-fields-1">Embedded Message Fields&lt;/h4>
@@ -335,7 +335,7 @@ in the given &lt;code>Iterable&lt;/code> to the field.&lt;/li>
 this, &lt;code>getFooCount()&lt;/code> will return zero.&lt;/li>
 &lt;/ul>
 &lt;p>For other simple field types, the corresponding Java type is chosen according to
-the &lt;a href="/programming-guides/proto#scalar">scalar value types table&lt;/a>.
+the &lt;a href="https://protobuf.dev/programming-guides/proto#scalar">scalar value types table&lt;/a>.
 For message and enum types, the type is the message or enum class.&lt;/p>
 &lt;h4 id="repeated-embedded-message-fields">Repeated Embedded Message Fields&lt;/h4>
 &lt;p>For message types, &lt;code>setFoo()&lt;/code> and &lt;code>addFoo()&lt;/code> also accept an instance of the
@@ -432,7 +432,7 @@ return &lt;code>false&lt;/code>, &lt;code>getFoo()&lt;/code> will return the def
 &lt;/li>
 &lt;/ul>
 &lt;p>For other simple field types, the corresponding Java type is chosen according to
-the &lt;a href="/programming-guides/proto#scalar">scalar value types table&lt;/a>.
+the &lt;a href="https://protobuf.dev/programming-guides/proto#scalar">scalar value types table&lt;/a>.
 For message and enum types, the value type is replaced with the message or enum
 class.&lt;/p>
 &lt;h3 id="map-fields">Map Fields&lt;/h3>
@@ -463,7 +463,7 @@ instances. The returned map reference may be invalidated by any subsequent
 method calls to the Builder.&lt;/li>
 &lt;/ul>
 &lt;h2 id="any">Any&lt;/h2>
-&lt;p>Given an &lt;a href="/programming-guides/proto3#any">&lt;code>Any&lt;/code>&lt;/a> field like this:&lt;/p>
+&lt;p>Given an &lt;a href="https://protobuf.dev/programming-guides/proto3#any">&lt;code>Any&lt;/code>&lt;/a> field like this:&lt;/p>
 &lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-proto" data-lang="proto">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#204a87;font-weight:bold">import&lt;/span> &lt;span style="color:#4e9a06">&amp;#34;google/protobuf/any.proto&amp;#34;&lt;/span>&lt;span style="color:#000;font-weight:bold">;&lt;/span>&lt;span style="color:#a40000">
 &lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#a40000">
 &lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#a40000">&lt;/span>&lt;span style="color:#204a87;font-weight:bold">message&lt;/span> &lt;span style="color:#000">ErrorStatus&lt;/span> &lt;span style="color:#000;font-weight:bold">{&lt;/span>&lt;span style="color:#a40000">
@@ -641,7 +641,7 @@ addition of a &lt;code>Baz.&lt;/code> prefix:&lt;/p>
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#204a87;font-weight:bold">assert&lt;/span> &lt;span style="color:#000">foo&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">.&lt;/span>&lt;span style="color:#c4a000">hasExtension&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">(&lt;/span>&lt;span style="color:#000">Baz&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">.&lt;/span>&lt;span style="color:#c4a000">fooExt&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">);&lt;/span>
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#204a87;font-weight:bold">assert&lt;/span> &lt;span style="color:#000">foo&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">.&lt;/span>&lt;span style="color:#c4a000">getExtension&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">(&lt;/span>&lt;span style="color:#000">Baz&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">.&lt;/span>&lt;span style="color:#c4a000">fooExt&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">)&lt;/span> &lt;span style="color:#ce5c00;font-weight:bold">==&lt;/span> &lt;span style="color:#000">baz&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">;&lt;/span>
 &lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>When parsing a message that might have extensions, you must provide an
-&lt;a href="/reference/java/api-docs/com/google/protobuf/ExtensionRegistry.html">&lt;code>ExtensionRegistry&lt;/code>&lt;/a>
+&lt;a href="https://protobuf.dev/reference/java/api-docs/com/google/protobuf/ExtensionRegistry.html">&lt;code>ExtensionRegistry&lt;/code>&lt;/a>
 in which you have registered any extensions that you want to be able to parse.
 Otherwise, those extensions will be treated like unknown fields and the methods
 observing extensions will behave as if they don&amp;rsquo;t exist.&lt;/p>
@@ -665,7 +665,7 @@ system. If you do NOT want this code to be generated, add this line to the file:
 generic services are deprecated. (Note that prior to 2.4.0, the option defaults
 to &lt;code>true&lt;/code>)&lt;/p>
 &lt;p>RPC systems based on &lt;code>.proto&lt;/code>-language service definitions should provide
-&lt;a href="/reference/cpp/api-docs/google.protobuf.compiler.plugin.pb">plugins&lt;/a>
+&lt;a href="https://protobuf.dev/reference/cpp/api-docs/google.protobuf.compiler.plugin.pb">plugins&lt;/a>
 to generate code approriate for the system. These plugins are likely to require
 that abstract services are disabled, so that they can generate their own classes
 of the same names. Plugins are new in version 2.3.0 (January 2010).&lt;/p>
@@ -754,7 +754,7 @@ call a callback. So, for example, &lt;code>bar&lt;/code> is defined as:&lt;/p>
 &lt;code>Foo.BlockingStub&lt;/code> returns a stub implementation of &lt;code>Foo.BlockingInterface&lt;/code> that
 sends requests to a particular &lt;code>BlockingRpcChannel&lt;/code>.&lt;/p>
 &lt;h2 id="plugins">Plugin Insertion Points&lt;/h2>
-&lt;p>&lt;a href="/reference/cpp/api-docs/google.protobuf.compiler.plugin.pb">Code generator plugins&lt;/a>
+&lt;p>&lt;a href="https://protobuf.dev/reference/cpp/api-docs/google.protobuf.compiler.plugin.pb">Code generator plugins&lt;/a>
 that want to extend the output of the Java code generator may insert code of
 the following types using the given insertion point names.&lt;/p>
 &lt;ul>
@@ -785,9 +785,9 @@ standard code generator, as these implementation details may change in future
 versions of Protocol Buffers.&lt;/p>
 &lt;h2 id="utility-classes">Utility Classes&lt;/h2>
 &lt;p>Protocol buffer provides
-&lt;a href="/reference/java/api-docs/com/google/protobuf/util/package-summary.html">utility classes&lt;/a>
+&lt;a href="https://protobuf.dev/reference/java/api-docs/com/google/protobuf/util/package-summary.html">utility classes&lt;/a>
 for message comparison, JSON conversion and working with
-&lt;a href="/reference/protobuf/google.protobuf">well-known types (predefined protocol buffer messages for common use-cases).&lt;/a>&lt;/p></description></item><item><title>Reference: Java API</title><link>/reference/java/api-docs-link/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>/reference/java/api-docs-link/</guid><description/></item><item><title>Reference:</title><link>/reference/java/java-proto-names/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>/reference/java/java-proto-names/</guid><description>
+&lt;a href="https://protobuf.dev/reference/protobuf/google.protobuf">well-known types (predefined protocol buffer messages for common use-cases).&lt;/a>&lt;/p></description></item><item><title>Reference: Java API</title><link>https://protobuf.dev/reference/java/api-docs-link/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://protobuf.dev/reference/java/api-docs-link/</guid><description/></item><item><title>Reference:</title><link>https://protobuf.dev/reference/java/java-proto-names/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://protobuf.dev/reference/java/java-proto-names/</guid><description>
 &lt;h1 id="java-proto-names">Java Proto Names&lt;/h1>
 &lt;h2 id="immutable-api-message-names">Immutable API Message Names&lt;/h2>
 &lt;p>The names for protos generated by the immutable API (&lt;code>java_proto_library&lt;/code> BUILD

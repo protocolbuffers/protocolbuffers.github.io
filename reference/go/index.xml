@@ -1,11 +1,11 @@
-<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Protocol Buffers Documentation – Go Reference</title><link>/reference/go/</link><description>Recent content in Go Reference on Protocol Buffers Documentation</description><generator>Hugo -- gohugo.io</generator><language>en-us</language><atom:link href="/reference/go/index.xml" rel="self" type="application/rss+xml"/><item><title>Reference: Go Generated Code Guide</title><link>/reference/go/go-generated/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>/reference/go/go-generated/</guid><description>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Protocol Buffers Documentation – Go Reference</title><link>https://protobuf.dev/reference/go/</link><description>Recent content in Go Reference on Protocol Buffers Documentation</description><generator>Hugo -- gohugo.io</generator><language>en-us</language><atom:link href="https://protobuf.dev/reference/go/index.xml" rel="self" type="application/rss+xml"/><item><title>Reference: Go Generated Code Guide</title><link>https://protobuf.dev/reference/go/go-generated/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://protobuf.dev/reference/go/go-generated/</guid><description>
 &lt;p>This page describes exactly what Go code the protocol buffer compiler generates
 for any given protocol definition. Any differences between proto2 and proto3
 generated code are highlighted - note that these differences are in the
 generated code as described in this document, not the base API, which are the
 same in both versions. You should read the
-&lt;a href="/programming-guides/proto">proto2 language guide&lt;/a> and/or the
-&lt;a href="/programming-guides/proto3">proto3 language guide&lt;/a> before reading this
+&lt;a href="https://protobuf.dev/programming-guides/proto">proto2 language guide&lt;/a> and/or the
+&lt;a href="https://protobuf.dev/programming-guides/proto3">proto3 language guide&lt;/a> before reading this
 document.&lt;/p>
 &lt;h2 id="invocation">Compiler Invocation&lt;/h2>
 &lt;p>The protocol buffer compiler requires a plugin to generate Go code. Install it
@@ -88,7 +88,7 @@ package which contains the generated &lt;code>b.pb.go&lt;/code> file (unless bot
 the same package). The import path is also used to construct output filenames.
 See the &amp;quot;Compiler Invocation&amp;quot; section above for details.&lt;/p>
 &lt;p>There is no correlation between the Go import path and the
-&lt;a href="/programming-guides/proto3#packages">&lt;code>package&lt;/code> specifier&lt;/a> in the &lt;code>.proto&lt;/code>
+&lt;a href="https://protobuf.dev/programming-guides/proto3#packages">&lt;code>package&lt;/code> specifier&lt;/a> in the &lt;code>.proto&lt;/code>
 file. The latter is only relevant to the protobuf namespace, while the former is
 only relevant to the Go namespace. Also, there is no correlation between the Go
 import path and the &lt;code>.proto&lt;/code> import path.&lt;/p>
@@ -121,7 +121,7 @@ within a message. The exact nature of this field depends on its type and whether
 it is a singular, repeated, map, or oneof field.&lt;/p>
 &lt;p>Note that the generated Go field names always use camel-case naming, even if the
 field name in the &lt;code>.proto&lt;/code> file uses lower-case with underscores
-(&lt;a href="/programming-guides/style">as it should&lt;/a>). The case-conversion works as
+(&lt;a href="https://protobuf.dev/programming-guides/style">as it should&lt;/a>). The case-conversion works as
 follows:&lt;/p>
 &lt;ol>
 &lt;li>The first letter is capitalized for export. If the first character is an
@@ -142,7 +142,7 @@ default value if the field is unset. If the default is not explicitly set, the
 is used instead (&lt;code>0&lt;/code> for numbers, the empty string for strings).&lt;/p>
 &lt;p>For other scalar field types (including &lt;code>bool&lt;/code>, &lt;code>bytes&lt;/code>, and &lt;code>string&lt;/code>), &lt;code>*int32&lt;/code>
 is replaced with the corresponding Go type according to the
-&lt;a href="/programming-guides/proto#scalar">scalar value types table&lt;/a>.&lt;/p>
+&lt;a href="https://protobuf.dev/programming-guides/proto#scalar">scalar value types table&lt;/a>.&lt;/p>
 &lt;h3 id="singular-scalar-proto3">Singular Scalar Fields (proto3)&lt;/h3>
 &lt;p>For this field definition:&lt;/p>
 &lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-proto" data-lang="proto">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#204a87;font-weight:bold">int32&lt;/span> &lt;span style="color:#000">foo&lt;/span> &lt;span style="color:#ce5c00;font-weight:bold">=&lt;/span> &lt;span style="color:#0000cf;font-weight:bold">1&lt;/span>&lt;span style="color:#000;font-weight:bold">;&lt;/span>&lt;span style="color:#a40000">
@@ -152,7 +152,7 @@ accessor method &lt;code>GetFoo()&lt;/code> which returns the &lt;code>int32&lt;
 if the field is unset (&lt;code>0&lt;/code> for numbers, the empty string for strings).&lt;/p>
 &lt;p>For other scalar field types (including &lt;code>bool&lt;/code>, &lt;code>bytes&lt;/code>, and &lt;code>string&lt;/code>), &lt;code>int32&lt;/code>
 is replaced with the corresponding Go type according to the
-&lt;a href="/programming-guides/proto3#scalar">scalar value types table&lt;/a>. Unset values
+&lt;a href="https://protobuf.dev/programming-guides/proto3#scalar">scalar value types table&lt;/a>. Unset values
 in the proto will be represented as the
 &lt;a href="https://golang.org/ref/spec#The_zero_value">zero value&lt;/a> of that type
 (&lt;code>0&lt;/code> for numbers, the empty string for strings).&lt;/p>
@@ -358,7 +358,7 @@ functions to access an extension in a message. The &lt;code>GetExtension&lt;/cod
 containing the extension value type.&lt;/p>
 &lt;p>For singular scalar extension fields, the extension value type is the
 corresponding Go type from the
-&lt;a href="/programming-guides/proto3#scalar">scalar value types table&lt;/a>.&lt;/p>
+&lt;a href="https://protobuf.dev/programming-guides/proto3#scalar">scalar value types table&lt;/a>.&lt;/p>
 &lt;p>For singular embedded message extension fields, the extension value type is
 &lt;code>*M&lt;/code>, where &lt;code>M&lt;/code> is the field message type.&lt;/p>
 &lt;p>For repeated extension fields, the extension value type is a slice of the
@@ -390,7 +390,7 @@ pattern is to do something like this:&lt;/p>
 &lt;p>The Go code generator does not produce output for services by default. If you
 enable the &lt;a href="https://www.grpc.io/">gRPC&lt;/a> plugin (see the
 &lt;a href="https://github.com/grpc/grpc-go/tree/master/examples">gRPC Go Quickstart guide&lt;/a>)
-then code will be generated to support gRPC.&lt;/p></description></item><item><title>Reference: Go FAQ</title><link>/reference/go/faq/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>/reference/go/faq/</guid><description>
+then code will be generated to support gRPC.&lt;/p></description></item><item><title>Reference: Go FAQ</title><link>https://protobuf.dev/reference/go/faq/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://protobuf.dev/reference/go/faq/</guid><description>
 &lt;h2 id="versions">Versions&lt;/h2>
 &lt;h3 id="modules">What&amp;rsquo;s the difference between &lt;code>github.com/golang/protobuf&lt;/code> and &lt;code>google.golang.org/protobuf&lt;/code>?&lt;/h3>
 &lt;p>The
@@ -480,7 +480,7 @@ specifying an explicit version: &lt;code>go install google.golang.org/protobuf/c
 global registry.&lt;/p>
 &lt;p>Every protobuf declaration (for example, enums, enum values, or messages) has an
 absolute name, which is the concatenation of the
-&lt;a href="/programming-guides/proto#packages">package name&lt;/a> with
+&lt;a href="https://protobuf.dev/programming-guides/proto#packages">package name&lt;/a> with
 the relative name of the declaration in the &lt;code>.proto&lt;/code> source file (for example,
 &lt;code>my.proto.package.MyMessage.NestedMessage&lt;/code>). The protobuf language assumes that
 all declarations are universally unique.&lt;/p>
@@ -586,7 +586,7 @@ guarantee that all errors will match
 according to &lt;a href="https://pkg.go.dev/errors?tab=doc#Is">&lt;code>errors.Is&lt;/code>&lt;/a>.&lt;/p>
 &lt;h3 id="unstable-json">Why does the output of &lt;a href="https://pkg.go.dev/google.golang.org/protobuf/encoding/protojson">&lt;code>protojson&lt;/code>&lt;/a> keep changing?&lt;/h3>
 &lt;p>We make no promises about the long-term stability of Go&amp;rsquo;s implementation of the
-&lt;a href="/programming-guides/proto3#json">JSON format for protocol buffers&lt;/a>.
+&lt;a href="https://protobuf.dev/programming-guides/proto3#json">JSON format for protocol buffers&lt;/a>.
 The specification only specifies what is valid JSON, but provides no
 specification for a &lt;em>canonical&lt;/em> format for how a marshaler ought to &lt;em>exactly&lt;/em>
 format a given message. To avoid giving the illusion that the output is stable,
@@ -636,4 +636,4 @@ option exist in at least one other supported implementation.&lt;/p>
 &lt;h3 id="custom-code">Can I customize the code generated by &lt;code>protoc-gen-go&lt;/code>?&lt;/h3>
 &lt;p>In general, no. Protocol buffers are intended to be a language-agnostic data
 interchange format, and implementation-specific customizations run counter to
-that intent.&lt;/p></description></item><item><title>Reference: Go API</title><link>/reference/go/api-docs-link/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>/reference/go/api-docs-link/</guid><description/></item></channel></rss>
+that intent.&lt;/p></description></item><item><title>Reference: Go API</title><link>https://protobuf.dev/reference/go/api-docs-link/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://protobuf.dev/reference/go/api-docs-link/</guid><description/></item></channel></rss>

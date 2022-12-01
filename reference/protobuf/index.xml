@@ -1,4 +1,4 @@
-<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Protocol Buffers Documentation – Protocol Buffers Reference</title><link>/reference/protobuf/</link><description>Recent content in Protocol Buffers Reference on Protocol Buffers Documentation</description><generator>Hugo -- gohugo.io</generator><language>en-us</language><atom:link href="/reference/protobuf/index.xml" rel="self" type="application/rss+xml"/><item><title>Reference: Protocol Buffers Version 2 Language Specification</title><link>/reference/protobuf/proto2-spec/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>/reference/protobuf/proto2-spec/</guid><description>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Protocol Buffers Documentation – Protocol Buffers Reference</title><link>https://protobuf.dev/reference/protobuf/</link><description>Recent content in Protocol Buffers Reference on Protocol Buffers Documentation</description><generator>Hugo -- gohugo.io</generator><language>en-us</language><atom:link href="https://protobuf.dev/reference/protobuf/index.xml" rel="self" type="application/rss+xml"/><item><title>Reference: Protocol Buffers Version 2 Language Specification</title><link>https://protobuf.dev/reference/protobuf/proto2-spec/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://protobuf.dev/reference/protobuf/proto2-spec/</guid><description>
 &lt;p>This is a language specification reference for version 2 of the Protocol Buffers
 language (proto2). The syntax is specified using
 &lt;a href="https://en.wikipedia.org/wiki/Extended_Backus%E2%80%93Naur_Form">Extended Backus-Naur Form (EBNF)&lt;/a>:&lt;/p>
@@ -7,7 +7,7 @@ language (proto2). The syntax is specified using
 [] option (zero or one time)
 {} repetition (any number of times)
 &lt;/code>&lt;/pre>&lt;p>For more information about using proto2, see the
-&lt;a href="/programming-guides/proto">language guide&lt;/a>.&lt;/p>
+&lt;a href="https://protobuf.dev/programming-guides/proto">language guide&lt;/a>.&lt;/p>
 &lt;h2 id="lexical_elements">Lexical Elements&lt;/h2>
 &lt;h3 id="letters_and_digits">Letters and Digits&lt;/h3>
 &lt;pre tabindex="0">&lt;code>letter = &amp;#34;A&amp;#34; … &amp;#34;Z&amp;#34; | &amp;#34;a&amp;#34; … &amp;#34;z&amp;#34;
@@ -68,7 +68,7 @@ message types.&lt;/p>
 &lt;/span>&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h2 id="option">Option&lt;/h2>
 &lt;p>Options can be used in proto files, messages, enums and services. An option can
 be a protobuf defined option or a custom option. For more information, see
-&lt;a href="/programming-guides/proto#options">Options&lt;/a> in the language guide.&lt;/p>
+&lt;a href="https://protobuf.dev/programming-guides/proto#options">Options&lt;/a> in the language guide.&lt;/p>
 &lt;pre tabindex="0">&lt;code>option = &amp;#34;option&amp;#34; optionName &amp;#34;=&amp;#34; constant &amp;#34;;&amp;#34;
 optionName = ( ident | &amp;#34;(&amp;#34; fullIdent &amp;#34;)&amp;#34; ) { &amp;#34;.&amp;#34; ident }
 &lt;/code>&lt;/pre>&lt;p>For examples:&lt;/p>
@@ -222,7 +222,7 @@ topLevelDef = message | enum | extend | service
 &lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#a40000">&lt;/span> &lt;span style="color:#204a87;font-weight:bold">optional&lt;/span> &lt;span style="color:#204a87;font-weight:bold">bool&lt;/span> &lt;span style="color:#000">a&lt;/span> &lt;span style="color:#ce5c00;font-weight:bold">=&lt;/span> &lt;span style="color:#0000cf;font-weight:bold">1&lt;/span>&lt;span style="color:#000;font-weight:bold">;&lt;/span>&lt;span style="color:#a40000">
 &lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#a40000">&lt;/span> &lt;span style="color:#000;font-weight:bold">}&lt;/span>&lt;span style="color:#a40000">
 &lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#a40000">&lt;/span>&lt;span style="color:#000;font-weight:bold">}&lt;/span>&lt;span style="color:#a40000">
-&lt;/span>&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div></description></item><item><title>Reference: Protocol Buffers Version 3 Language Specification</title><link>/reference/protobuf/proto3-spec/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>/reference/protobuf/proto3-spec/</guid><description>
+&lt;/span>&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div></description></item><item><title>Reference: Protocol Buffers Version 3 Language Specification</title><link>https://protobuf.dev/reference/protobuf/proto3-spec/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://protobuf.dev/reference/protobuf/proto3-spec/</guid><description>
 &lt;p>This is a language specification reference for version 3 of the Protocol Buffers
 language (proto3). The syntax is specified using
 &lt;a href="https://en.wikipedia.org/wiki/Extended_Backus%E2%80%93Naur_Form">Extended Backus-Naur Form (EBNF)&lt;/a>:&lt;/p>
@@ -231,7 +231,7 @@ language (proto3). The syntax is specified using
 [] option (zero or one time)
 {} repetition (any number of times)
 &lt;/code>&lt;/pre>&lt;p>For more information about using proto3, see the
-&lt;a href="/programming-guides/proto3">language guide&lt;/a>.&lt;/p>
+&lt;a href="https://protobuf.dev/programming-guides/proto3">language guide&lt;/a>.&lt;/p>
 &lt;h2 id="lexical_elements">Lexical Elements&lt;/h2>
 &lt;h3 id="letters_and_digits">Letters and Digits&lt;/h3>
 &lt;pre tabindex="0">&lt;code>letter = &amp;#34;A&amp;#34; … &amp;#34;Z&amp;#34; | &amp;#34;a&amp;#34; … &amp;#34;z&amp;#34;
@@ -290,7 +290,7 @@ message types.&lt;/p>
 &lt;/span>&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h2 id="option">Option&lt;/h2>
 &lt;p>Options can be used in proto files, messages, enums and services. An option can
 be a protobuf defined option or a custom option. For more information, see
-&lt;a href="/programming-guides/proto3#options">Options&lt;/a> in the language guide.&lt;/p>
+&lt;a href="https://protobuf.dev/programming-guides/proto3#options">Options&lt;/a> in the language guide.&lt;/p>
 &lt;pre tabindex="0">&lt;code>option = &amp;#34;option&amp;#34; optionName &amp;#34;=&amp;#34; constant &amp;#34;;&amp;#34;
 optionName = ( ident | &amp;#34;(&amp;#34; fullIdent &amp;#34;)&amp;#34; ) { &amp;#34;.&amp;#34; ident }
 &lt;/code>&lt;/pre>&lt;p>Example:&lt;/p>
@@ -399,7 +399,7 @@ topLevelDef = message | enum | service
 &lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#a40000">&lt;/span> &lt;span style="color:#000">EnumAllowingAlias&lt;/span> &lt;span style="color:#000">enum_field&lt;/span> &lt;span style="color:#ce5c00;font-weight:bold">=&lt;/span> &lt;span style="color:#0000cf;font-weight:bold">3&lt;/span>&lt;span style="color:#000;font-weight:bold">;&lt;/span>&lt;span style="color:#a40000">
 &lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#a40000">&lt;/span> &lt;span style="color:#000">map&lt;/span>&lt;span style="color:#000;font-weight:bold">&amp;lt;&lt;/span>&lt;span style="color:#204a87;font-weight:bold">int32&lt;/span>&lt;span style="color:#000;font-weight:bold">,&lt;/span> &lt;span style="color:#204a87;font-weight:bold">string&lt;/span>&lt;span style="color:#000;font-weight:bold">&amp;gt;&lt;/span> &lt;span style="color:#000">my_map&lt;/span> &lt;span style="color:#ce5c00;font-weight:bold">=&lt;/span> &lt;span style="color:#0000cf;font-weight:bold">4&lt;/span>&lt;span style="color:#000;font-weight:bold">;&lt;/span>&lt;span style="color:#a40000">
 &lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#a40000">&lt;/span>&lt;span style="color:#000;font-weight:bold">}&lt;/span>&lt;span style="color:#a40000">
-&lt;/span>&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div></description></item><item><title>Reference: Text Format Language Specification</title><link>/reference/protobuf/textformat-spec/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>/reference/protobuf/textformat-spec/</guid><description>
+&lt;/span>&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div></description></item><item><title>Reference: Text Format Language Specification</title><link>https://protobuf.dev/reference/protobuf/textformat-spec/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://protobuf.dev/reference/protobuf/textformat-spec/</guid><description>
 &lt;p>The protocol buffer Text Format Language specifies a syntax for representation
 of protobuf &lt;em>data&lt;/em> in text form, which is often useful for configurations or
 tests. This format is distinct from the format of text within a &lt;code>.proto&lt;/code> schema,
@@ -552,8 +552,8 @@ no_whitespace: &amp;#34;first&amp;#34;&amp;#34;second&amp;#34;&amp;#39;third&amp
 &lt;/code>&lt;/pre>&lt;h3 id="field-names">Field Names&lt;/h3>
 &lt;p>Fields that are part of the containing message use simple &lt;code>Identifiers&lt;/code> as
 names.
-&lt;a href="/programming-guides/proto#extensions">&lt;code>Extension&lt;/code>&lt;/a> and
-&lt;a href="/programming-guides/proto3#any">&lt;code>Any&lt;/code>&lt;/a> field names are
+&lt;a href="https://protobuf.dev/programming-guides/proto#extensions">&lt;code>Extension&lt;/code>&lt;/a> and
+&lt;a href="https://protobuf.dev/programming-guides/proto3#any">&lt;code>Any&lt;/code>&lt;/a> field names are
 wrapped in square brackets and fully-qualified. &lt;code>Any&lt;/code> field names are prefixed
 with a qualifying domain name, such as &lt;code>type.googleapis.com/&lt;/code>.&lt;/p>
 &lt;pre tabindex="0">&lt;code>FieldName = ExtensionName | AnyName | IDENT ;
@@ -762,7 +762,7 @@ define extension fields; instead, the parser must have prior knowledge of their
 locations.&lt;/p>
 &lt;h2 id="any">&lt;code>Any&lt;/code> Fields&lt;/h2>
 &lt;p>Text format supports an expanded form of the
-&lt;a href="/programming-guides/proto3#any">&lt;code>google.protobuf.Any&lt;/code>&lt;/a>
+&lt;a href="https://protobuf.dev/programming-guides/proto3#any">&lt;code>google.protobuf.Any&lt;/code>&lt;/a>
 well-known type using a special syntax resembling extension fields. Example:&lt;/p>
 &lt;pre tabindex="0">&lt;code class="language-textproto" data-lang="textproto">local_field: 10
 # An Any value using regular fields.
@@ -796,7 +796,7 @@ my_value: 1
 optional.&lt;/p>
 &lt;h2 id="map">&lt;code>map&lt;/code> Fields&lt;/h2>
 &lt;p>Text format does not provide a custom syntax for specifying map field entries.
-When a &lt;a href="/programming-guides/proto#maps">&lt;code>map&lt;/code>&lt;/a> field is
+When a &lt;a href="https://protobuf.dev/programming-guides/proto#maps">&lt;code>map&lt;/code>&lt;/a> field is
 defined in a &lt;em>.proto&lt;/em> file, an implicit &lt;code>Entry&lt;/code> message is defined containing
 &lt;code>key&lt;/code> and &lt;code>value&lt;/code> fields. Map fields are always repeated, accepting multiple
 key/value entries. Example:&lt;/p>
@@ -879,7 +879,7 @@ repeated_values: [ &amp;#34;one&amp;#34;, &amp;#34;two&amp;#34;, &amp;#34;three&
 the schema, so they may provide various features.&lt;/p>
 &lt;pre tabindex="0">&lt;code class="language-textproto" data-lang="textproto"># proto-file: some/proto/my_file.proto
 # proto-message: MyMessage
-&lt;/code>&lt;/pre></description></item><item><title>Reference: Protocol Buffers Well-Known Types</title><link>/reference/protobuf/google.protobuf/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>/reference/protobuf/google.protobuf/</guid><description>
+&lt;/code>&lt;/pre></description></item><item><title>Reference: Protocol Buffers Well-Known Types</title><link>https://protobuf.dev/reference/protobuf/google.protobuf/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://protobuf.dev/reference/protobuf/google.protobuf/</guid><description>
 &lt;h2 id="index">Index&lt;/h2>
 &lt;ul>
 &lt;li>&lt;a href="#any">&lt;code>Any&lt;/code>&lt;/a> (message)&lt;/li>

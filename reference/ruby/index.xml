@@ -1,8 +1,8 @@
-<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Protocol Buffers Documentation – Ruby Reference</title><link>/reference/ruby/</link><description>Recent content in Ruby Reference on Protocol Buffers Documentation</description><generator>Hugo -- gohugo.io</generator><language>en-us</language><atom:link href="/reference/ruby/index.xml" rel="self" type="application/rss+xml"/><item><title>Reference: Ruby Generated Code Guide</title><link>/reference/ruby/ruby-generated/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>/reference/ruby/ruby-generated/</guid><description>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Protocol Buffers Documentation – Ruby Reference</title><link>https://protobuf.dev/reference/ruby/</link><description>Recent content in Ruby Reference on Protocol Buffers Documentation</description><generator>Hugo -- gohugo.io</generator><language>en-us</language><atom:link href="https://protobuf.dev/reference/ruby/index.xml" rel="self" type="application/rss+xml"/><item><title>Reference: Ruby Generated Code Guide</title><link>https://protobuf.dev/reference/ruby/ruby-generated/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://protobuf.dev/reference/ruby/ruby-generated/</guid><description>
 &lt;p>This page describes the API of message objects that the protocol buffer compiler
 generates for any given protocol definition. You should read the language guides
-for &lt;a href="/programming-guides/proto">proto2&lt;/a> or
-&lt;a href="/programming-guides/proto3">proto3&lt;/a> before reading this document.&lt;/p>
+for &lt;a href="https://protobuf.dev/programming-guides/proto">proto2&lt;/a> or
+&lt;a href="https://protobuf.dev/programming-guides/proto3">proto3&lt;/a> before reading this document.&lt;/p>
 &lt;p>The protocol compiler for Ruby emits Ruby source files that use a DSL to define
 the message schema. However the DSL is still subject to change. In this guide we
 only describe the API of the generated messages, and not the DSL.&lt;/p>

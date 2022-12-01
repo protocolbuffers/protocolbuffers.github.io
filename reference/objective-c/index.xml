@@ -1,9 +1,9 @@
-<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Protocol Buffers Documentation – Objective-C Reference</title><link>/reference/objective-c/</link><description>Recent content in Objective-C Reference on Protocol Buffers Documentation</description><generator>Hugo -- gohugo.io</generator><language>en-us</language><atom:link href="/reference/objective-c/index.xml" rel="self" type="application/rss+xml"/><item><title>Reference: Objective-C Generated Code Guide</title><link>/reference/objective-c/objective-c-generated/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>/reference/objective-c/objective-c-generated/</guid><description>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Protocol Buffers Documentation – Objective-C Reference</title><link>https://protobuf.dev/reference/objective-c/</link><description>Recent content in Objective-C Reference on Protocol Buffers Documentation</description><generator>Hugo -- gohugo.io</generator><language>en-us</language><atom:link href="https://protobuf.dev/reference/objective-c/index.xml" rel="self" type="application/rss+xml"/><item><title>Reference: Objective-C Generated Code Guide</title><link>https://protobuf.dev/reference/objective-c/objective-c-generated/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://protobuf.dev/reference/objective-c/objective-c-generated/</guid><description>
 &lt;p>This page describes exactly what Objective-C code the protocol buffer compiler
 generates for any given protocol definition. Any differences between proto2 and
 proto3 generated code are highlighted. You should read the
-&lt;a href="/programming-guides/proto">proto2 language guide&lt;/a> and/or
-&lt;a href="/programming-guides/proto3">proto3 language guide&lt;/a> before reading this
+&lt;a href="https://protobuf.dev/programming-guides/proto">proto2 language guide&lt;/a> and/or
+&lt;a href="https://protobuf.dev/programming-guides/proto3">proto3 language guide&lt;/a> before reading this
 document.&lt;/p>
 &lt;h2 id="invocation">Compiler invocation&lt;/h2>
 &lt;p>The protocol buffer compiler produces Objective-C output when invoked with the
@@ -35,7 +35,7 @@ no language-enforced namespacing. Instead, Objective-C class names are
 distinguished using prefixes, which you can find out about in the next section.&lt;/p>
 &lt;h2 id="prefix">Class prefix&lt;/h2>
 &lt;p>Given the following
-&lt;a href="/programming-guides/proto3#options">file option&lt;/a>:&lt;/p>
+&lt;a href="https://protobuf.dev/programming-guides/proto3#options">file option&lt;/a>:&lt;/p>
 &lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-proto" data-lang="proto">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#204a87;font-weight:bold">option&lt;/span> &lt;span style="color:#000">objc_class_prefix&lt;/span> &lt;span style="color:#ce5c00;font-weight:bold">=&lt;/span> &lt;span style="color:#4e9a06">&amp;#34;CGOOP&amp;#34;&lt;/span>&lt;span style="color:#000;font-weight:bold">;&lt;/span>&lt;span style="color:#a40000">
 &lt;/span>&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>The specified string - in this case, &lt;code>CGOOP&lt;/code> - is prefixed in front of all
 Objective-C classes generated for this &lt;code>.proto&lt;/code> file. Use prefixes that are 3 or
@@ -105,7 +105,7 @@ to support a superset of the following interface:&lt;/p>
 &lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#8f5902;font-style:italic">&lt;/span>&lt;span style="color:#000;font-weight:bold">-&lt;/span> &lt;span style="color:#000;font-weight:bold">(&lt;/span>&lt;span style="color:#204a87;font-weight:bold">BOOL&lt;/span>&lt;span style="color:#000;font-weight:bold">)&lt;/span>&lt;span style="color:#000">isEqual:&lt;/span>&lt;span style="color:#000;font-weight:bold">(&lt;/span>&lt;span style="color:#204a87;font-weight:bold">id&lt;/span>&lt;span style="color:#000;font-weight:bold">)&lt;/span>&lt;span style="color:#000">value&lt;/span>&lt;span style="color:#000;font-weight:bold">;&lt;/span>
 &lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h3 id="unknown-fields-proto2-only">Unknown fields (proto2 only)&lt;/h3>
 &lt;p>If a message created with an
-&lt;a href="/programming-guides/proto#updating">older version&lt;/a> of your .proto
+&lt;a href="https://protobuf.dev/programming-guides/proto#updating">older version&lt;/a> of your .proto
 definition is parsed with code generated from a newer version (or vice versa),
 the message may contain optional or repeated fields that the &amp;quot;new&amp;quot; code does
 not recognize. In proto2 generated code, these fields are not discarded and are
@@ -196,7 +196,7 @@ unique, and stands for &amp;quot;property&amp;quot;).&lt;/p>
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#204a87;font-weight:bold">@property&lt;/span>&lt;span style="color:#000;font-weight:bold">(&lt;/span>&lt;span style="color:#204a87;font-weight:bold">nonatomic&lt;/span>&lt;span style="color:#000;font-weight:bold">,&lt;/span> &lt;span style="color:#204a87;font-weight:bold">readwrite&lt;/span>&lt;span style="color:#000;font-weight:bold">)&lt;/span> &lt;span style="color:#000">int32_t&lt;/span> &lt;span style="color:#000">id_p&lt;/span>&lt;span style="color:#000;font-weight:bold">;&lt;/span>
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#204a87;font-weight:bold">@end&lt;/span>
 &lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h4 id="default">Default values&lt;/h4>
-&lt;p>The &lt;a href="/programming-guides/proto3#default">default value&lt;/a> for
+&lt;p>The &lt;a href="https://protobuf.dev/programming-guides/proto3#default">default value&lt;/a> for
 numeric types is &lt;code>0&lt;/code>.&lt;/p>
 &lt;p>The default value for strings is &lt;code>@&amp;quot;&amp;quot;&lt;/code>, and the default value for bytes is
 &lt;code>[NSData data]&lt;/code>.&lt;/p>
@@ -318,7 +318,7 @@ unique, and stands for &amp;quot;property&amp;quot;).&lt;/p>
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#204a87;font-weight:bold">@property&lt;/span>&lt;span style="color:#000;font-weight:bold">(&lt;/span>&lt;span style="color:#204a87;font-weight:bold">nonatomic&lt;/span>&lt;span style="color:#000;font-weight:bold">,&lt;/span> &lt;span style="color:#204a87;font-weight:bold">readwrite&lt;/span>&lt;span style="color:#000;font-weight:bold">)&lt;/span> &lt;span style="color:#000">int32_t&lt;/span> &lt;span style="color:#000">id_p&lt;/span>&lt;span style="color:#000;font-weight:bold">;&lt;/span>
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#204a87;font-weight:bold">@end&lt;/span>
 &lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h4 id="default">Default values (optional fields only)&lt;/h4>
-&lt;p>The &lt;a href="/programming-guides/proto#optional">default value&lt;/a> for
+&lt;p>The &lt;a href="https://protobuf.dev/programming-guides/proto#optional">default value&lt;/a> for
 numeric types, if no explicit default was specified by the user, is &lt;code>0&lt;/code>.&lt;/p>
 &lt;p>The default value for strings is &lt;code>@&amp;quot;&amp;quot;&lt;/code>, and the default value for bytes is
 &lt;code>[NSData data]&lt;/code>.&lt;/p>
@@ -393,7 +393,7 @@ to support in the compiler.&lt;/p>
 &lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>For string, bytes and message fields, elements of the array are &lt;code>NSString*&lt;/code>,
 &lt;code>NSData*&lt;/code> and pointers to subclasses of &lt;code>GPBMessage&lt;/code> respectively.&lt;/p>
 &lt;h4 id="repeateddefault">Default values&lt;/h4>
-&lt;p>The &lt;a href="/programming-guides/proto3#default">default value&lt;/a> for a
+&lt;p>The &lt;a href="https://protobuf.dev/programming-guides/proto3#default">default value&lt;/a> for a
 repeated field is to be empty. In Objective-C generated code, this is an empty
 &lt;code>GPB&amp;lt;VALUE&amp;gt;Array&lt;/code>. If you access an empty repeated field, you&amp;rsquo;ll get back an
 empty array that you can update like any other repeated field array.&lt;/p>
@@ -510,7 +510,7 @@ function and to access raw values.&lt;/p>
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#204a87;font-weight:bold">@end&lt;/span>
 &lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h3 id="oneof">Oneof fields&lt;/h3>
-&lt;p>Given a message with &lt;a href="/programming-guides/proto3#oneof">oneof&lt;/a>
+&lt;p>Given a message with &lt;a href="https://protobuf.dev/programming-guides/proto3#oneof">oneof&lt;/a>
 field definitions:&lt;/p>
 &lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-proto" data-lang="proto">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#204a87;font-weight:bold">message&lt;/span> &lt;span style="color:#000">Order&lt;/span> &lt;span style="color:#000;font-weight:bold">{&lt;/span>&lt;span style="color:#a40000">
 &lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#a40000">&lt;/span> &lt;span style="color:#204a87;font-weight:bold">oneof&lt;/span> &lt;span style="color:#000">OrderID&lt;/span> &lt;span style="color:#000;font-weight:bold">{&lt;/span>&lt;span style="color:#a40000">
@@ -577,7 +577,7 @@ cut down on the number of classes and is in line with how Objective-C works
 with &lt;code>NSMutableDictionary&lt;/code>.&lt;/li>
 &lt;/ul>
 &lt;h4 id="repeateddefault">Default values&lt;/h4>
-&lt;p>The &lt;a href="/programming-guides/proto3#default">default value&lt;/a> for a map
+&lt;p>The &lt;a href="https://protobuf.dev/programming-guides/proto3#default">default value&lt;/a> for a map
 field is empty. In Objective-C generated code, this is an empty
 &lt;code>GBP&amp;lt;KEY&amp;gt;&amp;lt;VALUE&amp;gt;Dictionary&lt;/code>. If you access an empty map field, you&amp;rsquo;ll get back
 an empty dictionary that you can update like any other map field.&lt;/p>
@@ -838,7 +838,7 @@ Protocol buffer-generated enumerations support Objective-C to Swift conversions.
 just use their proto definitions in generated Objective-C code, though we supply
 some basic conversion methods in categories to make using them simpler. Note
 that we do not have special APIs for all well-known types yet, including
-&lt;a href="/programming-guides/proto3#any">&lt;code>Any&lt;/code>&lt;/a> (there is currently no
+&lt;a href="https://protobuf.dev/programming-guides/proto3#any">&lt;code>Any&lt;/code>&lt;/a> (there is currently no
 helper method to convert an &lt;code>Any&lt;/code>&amp;rsquo;s message value into a message of the
 appropriate type).&lt;/p>
 &lt;h3 id="time-stamps">Time Stamps&lt;/h3>
@@ -857,7 +857,7 @@ appropriate type).&lt;/p>
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#204a87;font-weight:bold">@end&lt;/span>
 &lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h2 id="extensions">Extensions (proto2 only)&lt;/h2>
 &lt;p>Given a message with an
-&lt;a href="/programming-guides/proto#extensions">extension range&lt;/a>:&lt;/p>
+&lt;a href="https://protobuf.dev/programming-guides/proto#extensions">extension range&lt;/a>:&lt;/p>
 &lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-proto" data-lang="proto">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#204a87;font-weight:bold">message&lt;/span> &lt;span style="color:#000">Foo&lt;/span> &lt;span style="color:#000;font-weight:bold">{&lt;/span>&lt;span style="color:#a40000">
 &lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#a40000">&lt;/span> &lt;span style="color:#204a87;font-weight:bold">extensions&lt;/span> &lt;span style="color:#0000cf;font-weight:bold">100&lt;/span> &lt;span style="color:#204a87;font-weight:bold">to&lt;/span> &lt;span style="color:#0000cf;font-weight:bold">199&lt;/span>&lt;span style="color:#000;font-weight:bold">;&lt;/span>&lt;span style="color:#a40000">
 &lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#a40000">&lt;/span>&lt;span style="color:#000;font-weight:bold">}&lt;/span>&lt;span style="color:#a40000">
