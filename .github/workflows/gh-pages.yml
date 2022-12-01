@@ -20,6 +20,9 @@ jobs:
         with:
           hugo-version: 'latest'
           extended: true
+          
+      - name: Install Dependencies
+        run: npm install -g postcss postcss-cli
 
       - name: Build
         run: hugo --minify
