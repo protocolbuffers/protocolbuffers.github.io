@@ -22,7 +22,7 @@ jobs:
           extended: true
           
       - name: Install Dependencies
-        run: npm install -g postcss postcss-cli
+        run: npm install autoprefixer postcss postcss-cli
 
       - name: Build
         run: hugo --minify
