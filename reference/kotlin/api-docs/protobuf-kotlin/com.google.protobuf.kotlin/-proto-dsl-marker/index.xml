@@ -1,0 +1,6 @@
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Protocol Buffers Documentation –</title><link>/reference/kotlin/api-docs/protobuf-kotlin/com.google.protobuf.kotlin/-proto-dsl-marker/</link><description>Recent content on Protocol Buffers Documentation</description><generator>Hugo -- gohugo.io</generator><language>en-us</language><atom:link href="/reference/kotlin/api-docs/protobuf-kotlin/com.google.protobuf.kotlin/-proto-dsl-marker/index.xml" rel="self" type="application/rss+xml"/><item><title>Reference:</title><link>/reference/kotlin/api-docs/protobuf-kotlin/com.google.protobuf.kotlin/-proto-dsl-marker/-proto-dsl-marker/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>/reference/kotlin/api-docs/protobuf-kotlin/com.google.protobuf.kotlin/-proto-dsl-marker/-proto-dsl-marker/</guid><description>
+&lt;p>//&lt;a href="/reference/kotlin/api-docs/">protobuf-kotlin&lt;/a>/&lt;a href="/reference/kotlin/api-docs/protobuf-kotlin/com.google.protobuf.kotlin/">com.google.protobuf.kotlin&lt;/a>/&lt;a href="">ProtoDslMarker&lt;/a>/&lt;a href="">ProtoDslMarker&lt;/a>&lt;/p>
+&lt;h1 id="protodslmarker">ProtoDslMarker&lt;/h1>
+&lt;p>[JVM] &lt;br>
+Content &lt;br>
+fun &lt;a href="">ProtoDslMarker&lt;/a>()&lt;/p></description></item></channel></rss>

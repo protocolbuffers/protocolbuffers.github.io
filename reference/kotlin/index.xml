@@ -1,0 +1,275 @@
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Protocol Buffers Documentation – Kotlin Reference</title><link>/reference/kotlin/</link><description>Recent content in Kotlin Reference on Protocol Buffers Documentation</description><generator>Hugo -- gohugo.io</generator><language>en-us</language><atom:link href="/reference/kotlin/index.xml" rel="self" type="application/rss+xml"/><item><title>Reference: Kotlin Generated Code Guide</title><link>/reference/kotlin/kotlin-generated/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>/reference/kotlin/kotlin-generated/</guid><description>
+&lt;p>This page describes exactly what Kotlin code the protocol buffer compiler
+generates for any given protocol definition, in addition to the code generated
+for &lt;a href="/reference/java/java-generated">Java&lt;/a>. Any differences
+between proto2 and proto3 generated code are highlighted—note that these
+differences are in the generated code as described in this document, not the
+base message classes/interfaces, which are the same in both versions. You should
+read the &lt;a href="/programming-guides/proto">proto2 language guide&lt;/a> and/or
+&lt;a href="/programming-guides/proto3">proto3 language guide&lt;/a> before reading this
+document.&lt;/p>
+&lt;h2 id="invocation">Compiler Invocation&lt;/h2>
+&lt;p>The protocol buffer compiler produces Kotlin code that builds on top of Java
+code. As a result, it must be invoked with two command-line flags, &lt;code>--java_out=&lt;/code>
+and &lt;code>--kotlin_out=&lt;/code>. The parameter to the &lt;code>--java_out=&lt;/code> option is the directory
+where you want the compiler to write your Java output, and the same for the
+&lt;code>--kotlin_out=&lt;/code>. For each &lt;code>.proto&lt;/code> file input, the compiler creates a wrapper
+&lt;code>.java&lt;/code> file containing a Java class which represents the &lt;code>.proto&lt;/code> file itself.&lt;/p>
+&lt;p>&lt;strong>Regardless&lt;/strong> of whether or not your &lt;code>.proto&lt;/code> file contains a line like the
+following:&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-proto" data-lang="proto">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#204a87;font-weight:bold">option&lt;/span> &lt;span style="color:#000">java_multiple_files&lt;/span> &lt;span style="color:#ce5c00;font-weight:bold">=&lt;/span> &lt;span style="color:#204a87;font-weight:bold">true&lt;/span>&lt;span style="color:#000;font-weight:bold">;&lt;/span>&lt;span style="color:#a40000">
+&lt;/span>&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>The compiler will create separate &lt;code>.kt&lt;/code> files for each of the classes and
+factory methods which it will generate for each top-level message declared in
+the &lt;code>.proto&lt;/code> file.&lt;/p>
+&lt;p>The Java package name for each file is the same as that used by the generated
+Java code as described in the
+&lt;a href="/reference/java/java-generated#package">Java generated code reference&lt;/a>.&lt;/p>
+&lt;p>The output file is chosen by concatenating the parameter to &lt;code>--kotlin_out=&lt;/code>, the
+package name (with &lt;code>.&lt;/code>s replaced with &lt;code>/&lt;/code>s), and the suffix &lt;code>Kt.kt&lt;/code> file name.&lt;/p>
+&lt;p>So, for example, let&amp;rsquo;s say you invoke the compiler as follows:&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-shell" data-lang="shell">&lt;span style="display:flex;">&lt;span>protoc --proto_path&lt;span style="color:#ce5c00;font-weight:bold">=&lt;/span>src --java_out&lt;span style="color:#ce5c00;font-weight:bold">=&lt;/span>build/gen/java --kotlin_out&lt;span style="color:#ce5c00;font-weight:bold">=&lt;/span>build/gen/kotlin src/foo.proto
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>If &lt;code>foo.proto&lt;/code>&amp;rsquo;s Java package is &lt;code>com.example&lt;/code> and it contains a message named
+&lt;code>Bar&lt;/code>, then the protocol buffer compiler will generate the file
+&lt;code>build/gen/kotlin/com/example/BarKt.kt&lt;/code>. The protocol buffer compiler will
+automatically create the &lt;code>build/gen/kotlin/com&lt;/code> and
+&lt;code>build/gen/kotlin/com/example&lt;/code> directories if needed. However, it will not
+create &lt;code>build/gen/kotlin&lt;/code>, &lt;code>build/gen&lt;/code>, or &lt;code>build&lt;/code>; they must already exist. You
+can specify multiple &lt;code>.proto&lt;/code> files in a single invocation; all output files
+will be generated at once.&lt;/p>
+&lt;h2 id="message">Messages&lt;/h2>
+&lt;p>Given a simple message declaration:&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-proto" data-lang="proto">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#204a87;font-weight:bold">message&lt;/span> &lt;span style="color:#000">FooBar&lt;/span> &lt;span style="color:#000;font-weight:bold">{}&lt;/span>&lt;span style="color:#a40000">
+&lt;/span>&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>The protocol buffer compiler generates—in addition to the generated Java
+code—an object called &lt;code>FooBarKt&lt;/code>, as well as two top-level functions,
+having the following structure:&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-kotlin" data-lang="kotlin">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#204a87;font-weight:bold">object&lt;/span> &lt;span style="color:#000">FooBarKt&lt;/span> &lt;span style="color:#000;font-weight:bold">{&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#204a87;font-weight:bold">class&lt;/span> &lt;span style="color:#000">Dsl&lt;/span> &lt;span style="color:#204a87;font-weight:bold">private&lt;/span> &lt;span style="color:#204a87;font-weight:bold">constructor&lt;/span> &lt;span style="color:#000;font-weight:bold">{&lt;/span> &lt;span style="color:#ce5c00;font-weight:bold">..&lt;/span>&lt;span style="color:#000;font-weight:bold">.&lt;/span> &lt;span style="color:#000;font-weight:bold">}&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#000;font-weight:bold">}&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#204a87;font-weight:bold">inline&lt;/span> &lt;span style="color:#204a87;font-weight:bold">fun&lt;/span> &lt;span style="color:#000">fooBar&lt;/span>&lt;span style="color:#000;font-weight:bold">(&lt;/span>&lt;span style="color:#000">block&lt;/span>&lt;span style="color:#000;font-weight:bold">:&lt;/span> &lt;span style="color:#000">FooBarKt&lt;/span>&lt;span style="color:#000;font-weight:bold">.&lt;/span>&lt;span style="color:#000">Dsl&lt;/span>&lt;span style="color:#000;font-weight:bold">.()&lt;/span> &lt;span style="color:#ce5c00;font-weight:bold">-&amp;gt;&lt;/span> &lt;span style="color:#000">Unit&lt;/span>&lt;span style="color:#000;font-weight:bold">):&lt;/span> &lt;span style="color:#000">FooBar&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#204a87;font-weight:bold">inline&lt;/span> &lt;span style="color:#204a87;font-weight:bold">fun&lt;/span> &lt;span style="color:#000">FooBar&lt;/span>&lt;span style="color:#000;font-weight:bold">.&lt;/span>&lt;span style="color:#000">copy&lt;/span>&lt;span style="color:#000;font-weight:bold">(&lt;/span>&lt;span style="color:#000">block&lt;/span>&lt;span style="color:#000;font-weight:bold">:&lt;/span> &lt;span style="color:#000">FooBarKt&lt;/span>&lt;span style="color:#000;font-weight:bold">.&lt;/span>&lt;span style="color:#000">Dsl&lt;/span>&lt;span style="color:#000;font-weight:bold">.()&lt;/span> &lt;span style="color:#ce5c00;font-weight:bold">-&amp;gt;&lt;/span> &lt;span style="color:#000">Unit&lt;/span>&lt;span style="color:#000;font-weight:bold">):&lt;/span> &lt;span style="color:#000">FooBar&lt;/span>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h3 id="nested-types">Nested Types&lt;/h3>
+&lt;p>A message can be declared inside another message. For example:&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-proto" data-lang="proto">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#204a87;font-weight:bold">message&lt;/span> &lt;span style="color:#000">Foo&lt;/span> &lt;span style="color:#000;font-weight:bold">{&lt;/span>&lt;span style="color:#a40000">
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#a40000">&lt;/span> &lt;span style="color:#204a87;font-weight:bold">message&lt;/span> &lt;span style="color:#000">Bar&lt;/span> &lt;span style="color:#000;font-weight:bold">{&lt;/span> &lt;span style="color:#000;font-weight:bold">}&lt;/span>&lt;span style="color:#a40000">
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#a40000">&lt;/span>&lt;span style="color:#000;font-weight:bold">}&lt;/span>&lt;span style="color:#a40000">
+&lt;/span>&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>In this case, the compiler nests the &lt;code>BarKt&lt;/code> object and the &lt;code>bar&lt;/code> factory method
+inside &lt;code>FooKt&lt;/code>, though the &lt;code>copy&lt;/code> method remains top-level:&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-kotlin" data-lang="kotlin">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#204a87;font-weight:bold">object&lt;/span> &lt;span style="color:#000">FooKt&lt;/span> &lt;span style="color:#000;font-weight:bold">{&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#204a87;font-weight:bold">class&lt;/span> &lt;span style="color:#000">Dsl&lt;/span> &lt;span style="color:#000;font-weight:bold">{&lt;/span> &lt;span style="color:#ce5c00;font-weight:bold">..&lt;/span>&lt;span style="color:#000;font-weight:bold">.&lt;/span> &lt;span style="color:#000;font-weight:bold">}&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#204a87;font-weight:bold">object&lt;/span> &lt;span style="color:#000">BarKt&lt;/span> &lt;span style="color:#000;font-weight:bold">{&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#204a87;font-weight:bold">class&lt;/span> &lt;span style="color:#000">Dsl&lt;/span> &lt;span style="color:#204a87;font-weight:bold">private&lt;/span> &lt;span style="color:#204a87;font-weight:bold">constructor&lt;/span> &lt;span style="color:#000;font-weight:bold">{&lt;/span> &lt;span style="color:#ce5c00;font-weight:bold">..&lt;/span>&lt;span style="color:#000;font-weight:bold">.&lt;/span> &lt;span style="color:#000;font-weight:bold">}&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#000;font-weight:bold">}&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#204a87;font-weight:bold">inline&lt;/span> &lt;span style="color:#204a87;font-weight:bold">fun&lt;/span> &lt;span style="color:#000">bar&lt;/span>&lt;span style="color:#000;font-weight:bold">(&lt;/span>&lt;span style="color:#000">block&lt;/span>&lt;span style="color:#000;font-weight:bold">:&lt;/span> &lt;span style="color:#000">FooKt&lt;/span>&lt;span style="color:#000;font-weight:bold">.&lt;/span>&lt;span style="color:#000">BarKt&lt;/span>&lt;span style="color:#000;font-weight:bold">.&lt;/span>&lt;span style="color:#000">Dsl&lt;/span>&lt;span style="color:#000;font-weight:bold">.()&lt;/span> &lt;span style="color:#ce5c00;font-weight:bold">-&amp;gt;&lt;/span> &lt;span style="color:#000">Unit&lt;/span>&lt;span style="color:#000;font-weight:bold">):&lt;/span> &lt;span style="color:#000">Foo&lt;/span>&lt;span style="color:#000;font-weight:bold">.&lt;/span>&lt;span style="color:#000">Bar&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#000;font-weight:bold">}&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#204a87;font-weight:bold">inline&lt;/span> &lt;span style="color:#204a87;font-weight:bold">fun&lt;/span> &lt;span style="color:#000">foo&lt;/span>&lt;span style="color:#000;font-weight:bold">(&lt;/span>&lt;span style="color:#000">block&lt;/span>&lt;span style="color:#000;font-weight:bold">:&lt;/span> &lt;span style="color:#000">FooKt&lt;/span>&lt;span style="color:#000;font-weight:bold">.&lt;/span>&lt;span style="color:#000">Dsl&lt;/span>&lt;span style="color:#000;font-weight:bold">.()&lt;/span> &lt;span style="color:#ce5c00;font-weight:bold">-&amp;gt;&lt;/span> &lt;span style="color:#000">Unit&lt;/span>&lt;span style="color:#000;font-weight:bold">):&lt;/span> &lt;span style="color:#000">Foo&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#204a87;font-weight:bold">inline&lt;/span> &lt;span style="color:#204a87;font-weight:bold">fun&lt;/span> &lt;span style="color:#000">Foo&lt;/span>&lt;span style="color:#000;font-weight:bold">.&lt;/span>&lt;span style="color:#000">copy&lt;/span>&lt;span style="color:#000;font-weight:bold">(&lt;/span>&lt;span style="color:#000">block&lt;/span>&lt;span style="color:#000;font-weight:bold">:&lt;/span> &lt;span style="color:#000">FooKt&lt;/span>&lt;span style="color:#000;font-weight:bold">.&lt;/span>&lt;span style="color:#000">Dsl&lt;/span>&lt;span style="color:#000;font-weight:bold">.()&lt;/span> &lt;span style="color:#ce5c00;font-weight:bold">-&amp;gt;&lt;/span> &lt;span style="color:#000">Unit&lt;/span>&lt;span style="color:#000;font-weight:bold">):&lt;/span> &lt;span style="color:#000">Foo&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#204a87;font-weight:bold">inline&lt;/span> &lt;span style="color:#204a87;font-weight:bold">fun&lt;/span> &lt;span style="color:#000">Foo&lt;/span>&lt;span style="color:#000;font-weight:bold">.&lt;/span>&lt;span style="color:#000">Bar&lt;/span>&lt;span style="color:#000;font-weight:bold">.&lt;/span>&lt;span style="color:#000">copy&lt;/span>&lt;span style="color:#000;font-weight:bold">(&lt;/span>&lt;span style="color:#000">block&lt;/span>&lt;span style="color:#000;font-weight:bold">:&lt;/span> &lt;span style="color:#000">FooKt&lt;/span>&lt;span style="color:#000;font-weight:bold">.&lt;/span>&lt;span style="color:#000">BarKt&lt;/span>&lt;span style="color:#000;font-weight:bold">.&lt;/span>&lt;span style="color:#000">Dsl&lt;/span>&lt;span style="color:#000;font-weight:bold">.()&lt;/span> &lt;span style="color:#ce5c00;font-weight:bold">-&amp;gt;&lt;/span> &lt;span style="color:#000">Unit&lt;/span>&lt;span style="color:#000;font-weight:bold">):&lt;/span> &lt;span style="color:#000">Foo&lt;/span>&lt;span style="color:#000;font-weight:bold">.&lt;/span>&lt;span style="color:#000">Bar&lt;/span>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h2 id="fields">Fields&lt;/h2>
+&lt;p>In addition to the methods described in the previous section, the protocol
+buffer compiler generates mutable properties in the DSL for each field defined
+within the message in the &lt;code>.proto&lt;/code> file. (Kotlin already infers read-only
+properties on the message object from the getters generated by Java.)&lt;/p>
+&lt;p>Note that properties always use camel-case naming, even if the field name in the
+&lt;code>.proto&lt;/code> file uses lower-case with underscores
+(&lt;a href="/programming-guides/style">as it should&lt;/a>). The case-conversion works
+as follows:&lt;/p>
+&lt;ol>
+&lt;li>For each underscore in the name, the underscore is removed, and the
+following letter is capitalized.&lt;/li>
+&lt;li>If the name will have a prefix attached (for example, &amp;ldquo;clear&amp;rdquo;), the first
+letter is capitalized. Otherwise, it is lower-cased.&lt;/li>
+&lt;/ol>
+&lt;p>Thus, the field &lt;code>foo_bar_baz&lt;/code> becomes &lt;code>fooBarBaz&lt;/code>.&lt;/p>
+&lt;p>In a few special cases in which a field name conflicts with reserved words in
+Kotlin or methods already defined in the protobuf library, an extra underscore
+is appended. For instance, the clearer for a field named &lt;code>in&lt;/code> is &lt;code>clearIn_()&lt;/code>.&lt;/p>
+&lt;h3 id="singular-fields-proto2">Singular Fields (proto2)&lt;/h3>
+&lt;p>For any of these field definitions:&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-proto" data-lang="proto">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#204a87;font-weight:bold">optional&lt;/span> &lt;span style="color:#204a87;font-weight:bold">int32&lt;/span> &lt;span style="color:#000">foo&lt;/span> &lt;span style="color:#ce5c00;font-weight:bold">=&lt;/span> &lt;span style="color:#0000cf;font-weight:bold">1&lt;/span>&lt;span style="color:#000;font-weight:bold">;&lt;/span>&lt;span style="color:#a40000">
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#a40000">&lt;/span>&lt;span style="color:#204a87;font-weight:bold">required&lt;/span> &lt;span style="color:#204a87;font-weight:bold">int32&lt;/span> &lt;span style="color:#000">foo&lt;/span> &lt;span style="color:#ce5c00;font-weight:bold">=&lt;/span> &lt;span style="color:#0000cf;font-weight:bold">1&lt;/span>&lt;span style="color:#000;font-weight:bold">;&lt;/span>&lt;span style="color:#a40000">
+&lt;/span>&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>The compiler will generate the following accessors in the DSL:&lt;/p>
+&lt;ul>
+&lt;li>&lt;code>fun hasFoo(): Boolean&lt;/code>: Returns &lt;code>true&lt;/code> if the field is set.&lt;/li>
+&lt;li>&lt;code>var foo: Int&lt;/code>: The current value of the field. If the field is not set,
+returns the default value.&lt;/li>
+&lt;li>&lt;code>fun clearFoo()&lt;/code>: Clears the value of the field. After calling this,
+&lt;code>hasFoo()&lt;/code> will return &lt;code>false&lt;/code> and &lt;code>getFoo()&lt;/code> will return the default value.&lt;/li>
+&lt;/ul>
+&lt;p>For other simple field types, the corresponding Java type is chosen according to
+the &lt;a href="/programming-guides/proto#scalar">scalar value types table&lt;/a>.
+For message and enum types, the value type is replaced with the message or enum
+class. As the message type is still defined in Java, unsigned types in the
+message are represented using the standard corresponding signed types in the
+DSL, for compatibility with Java and older versions of Kotlin.&lt;/p>
+&lt;h4 id="embedded-message-fields">Embedded Message Fields&lt;/h4>
+&lt;p>Note that there is no special handling of submessages. For example, if you have
+a field&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-proto" data-lang="proto">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#204a87;font-weight:bold">optional&lt;/span> &lt;span style="color:#000">Foo&lt;/span> &lt;span style="color:#000">my_foo&lt;/span> &lt;span style="color:#ce5c00;font-weight:bold">=&lt;/span> &lt;span style="color:#0000cf;font-weight:bold">1&lt;/span>&lt;span style="color:#000;font-weight:bold">;&lt;/span>&lt;span style="color:#a40000">
+&lt;/span>&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>you must write&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-kotlin" data-lang="kotlin">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#000">myFoo&lt;/span> &lt;span style="color:#000;font-weight:bold">=&lt;/span> &lt;span style="color:#000">foo&lt;/span> &lt;span style="color:#000;font-weight:bold">{&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#ce5c00;font-weight:bold">..&lt;/span>&lt;span style="color:#000;font-weight:bold">.&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#000;font-weight:bold">}&lt;/span>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>In general, this is because the compiler does not know whether &lt;code>Foo&lt;/code> has a
+Kotlin DSL at all, or e.g. only has the Java APIs generated. This means that you
+do not have to wait for messages you depend on to add Kotlin code generation.&lt;/p>
+&lt;h3 id="singular-fields-proto3">Singular Fields (proto3)&lt;/h3>
+&lt;p>For this field definition:&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-proto" data-lang="proto">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#204a87;font-weight:bold">int32&lt;/span> &lt;span style="color:#000">foo&lt;/span> &lt;span style="color:#ce5c00;font-weight:bold">=&lt;/span> &lt;span style="color:#0000cf;font-weight:bold">1&lt;/span>&lt;span style="color:#000;font-weight:bold">;&lt;/span>&lt;span style="color:#a40000">
+&lt;/span>&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>The compiler will generate the following property in the DSL:&lt;/p>
+&lt;ul>
+&lt;li>&lt;code>var foo: Int&lt;/code>: Returns the current value of the field. If the field is not
+set, returns the default value for the field&amp;rsquo;s type.&lt;/li>
+&lt;li>&lt;code>fun clearFoo()&lt;/code>: Clears the value of the field. After calling this,
+&lt;code>getFoo()&lt;/code> will return the default value for the field&amp;rsquo;s type.&lt;/li>
+&lt;/ul>
+&lt;p>For other simple field types, the corresponding Java type is chosen according to
+the &lt;a href="/programming-guides/proto#scalar">scalar value types table&lt;/a>.
+For message and enum types, the value type is replaced with the message or enum
+class. As the message type is still defined in Java, unsigned types in the
+message are represented using the standard corresponding signed types in the
+DSL, for compatibility with Java and older versions of Kotlin.&lt;/p>
+&lt;h4 id="embedded-message-fields-1">Embedded Message Fields&lt;/h4>
+&lt;p>For message field types, an additional accessor method is generated in the DSL:&lt;/p>
+&lt;ul>
+&lt;li>&lt;code>boolean hasFoo()&lt;/code>: Returns &lt;code>true&lt;/code> if the field has been set.&lt;/li>
+&lt;/ul>
+&lt;p>Note that there is no shortcut for setting a submessage based on a DSL. For
+example, if you have a field&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-proto" data-lang="proto">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#000">Foo&lt;/span> &lt;span style="color:#000">my_foo&lt;/span> &lt;span style="color:#ce5c00;font-weight:bold">=&lt;/span> &lt;span style="color:#0000cf;font-weight:bold">1&lt;/span>&lt;span style="color:#000;font-weight:bold">;&lt;/span>&lt;span style="color:#a40000">
+&lt;/span>&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>you must write&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-kotlin" data-lang="kotlin">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#000">myFoo&lt;/span> &lt;span style="color:#000;font-weight:bold">=&lt;/span> &lt;span style="color:#000">foo&lt;/span> &lt;span style="color:#000;font-weight:bold">{&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#ce5c00;font-weight:bold">..&lt;/span>&lt;span style="color:#000;font-weight:bold">.&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#000;font-weight:bold">}&lt;/span>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>In general, this is because the compiler does not know whether &lt;code>Foo&lt;/code> has a
+Kotlin DSL at all, or e.g. only has the Java APIs generated. This means that you
+do not have to wait for messages you depend on to add Kotlin code generation.&lt;/p>
+&lt;h3 id="repeated">Repeated Fields&lt;/h3>
+&lt;p>For this field definition:&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-proto" data-lang="proto">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#204a87;font-weight:bold">repeated&lt;/span> &lt;span style="color:#204a87;font-weight:bold">string&lt;/span> &lt;span style="color:#000">foo&lt;/span> &lt;span style="color:#ce5c00;font-weight:bold">=&lt;/span> &lt;span style="color:#0000cf;font-weight:bold">1&lt;/span>&lt;span style="color:#000;font-weight:bold">;&lt;/span>&lt;span style="color:#a40000">
+&lt;/span>&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>The compiler will generate the following members in the DSL:&lt;/p>
+&lt;ul>
+&lt;li>&lt;code>class FooProxy: DslProxy&lt;/code>, an unconstructable type used only in generics&lt;/li>
+&lt;li>&lt;code>val fooList: DslList&amp;lt;String, FooProxy&amp;gt;&lt;/code>, a read-only view of the list of
+current elements in the repeated field&lt;/li>
+&lt;li>&lt;code>fun DslList&amp;lt;String, FooProxy&amp;gt;.add(value: String)&lt;/code>, an extension function
+allowing elements to be added to the repeated field&lt;/li>
+&lt;li>&lt;code>operator fun DslList&amp;lt;String, FooProxy&amp;gt;.plusAssign(value: String)&lt;/code>, an alias
+for &lt;code>add&lt;/code>&lt;/li>
+&lt;li>&lt;code>fun DslList&amp;lt;String, FooProxy&amp;gt;.addAll(values: Iterable&amp;lt;String&amp;gt;)&lt;/code>, an
+extension function allowing an &lt;code>Iterable&lt;/code> of elements to be added to the
+repeated field&lt;/li>
+&lt;li>&lt;code>operator fun DslList&amp;lt;String, FooProxy&amp;gt;.plusAssign(values: Iterable&amp;lt;String&amp;gt;)&lt;/code>, an alias for &lt;code>addAll&lt;/code>&lt;/li>
+&lt;li>&lt;code>operator fun DslList&amp;lt;String, FooProxy&amp;gt;.set(index: Int, value: String)&lt;/code>, an
+extension function setting the value of the element at the given zero-based
+inde&lt;/li>
+&lt;li>&lt;code>fun DslList&amp;lt;String, FooProxy&amp;gt;.clear()&lt;/code>, an extension function clearing the
+contents of the repeated field&lt;/li>
+&lt;/ul>
+&lt;p>This unusual construction allows &lt;code>fooList&lt;/code> to &amp;quot;behave like&amp;quot; a mutable list
+within the scope of the DSL, supporting only the methods supported by the
+underlying builder, while preventing mutability from &amp;quot;escaping&amp;quot; the DSL, which
+could cause confusing side effects.&lt;/p>
+&lt;p>For other simple field types, the corresponding Java type is chosen according to
+the &lt;a href="/programming-guides/proto#scalar">scalar value types table&lt;/a>.
+For message and enum types, the type is the message or enum class.&lt;/p>
+&lt;h3 id="oneof-fields">Oneof Fields&lt;/h3>
+&lt;p>For this oneof field definition:&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-proto" data-lang="proto">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#204a87;font-weight:bold">oneof&lt;/span> &lt;span style="color:#000">oneof_name&lt;/span> &lt;span style="color:#000;font-weight:bold">{&lt;/span>&lt;span style="color:#a40000">
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#a40000">&lt;/span> &lt;span style="color:#204a87;font-weight:bold">int32&lt;/span> &lt;span style="color:#000">foo&lt;/span> &lt;span style="color:#ce5c00;font-weight:bold">=&lt;/span> &lt;span style="color:#0000cf;font-weight:bold">1&lt;/span>&lt;span style="color:#000;font-weight:bold">;&lt;/span>&lt;span style="color:#a40000">
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#a40000">&lt;/span> &lt;span style="color:#ce5c00;font-weight:bold">...&lt;/span>&lt;span style="color:#a40000">
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#a40000">&lt;/span>&lt;span style="color:#000;font-weight:bold">}&lt;/span>&lt;span style="color:#a40000">
+&lt;/span>&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>The compiler will generate the following accessor methods in the DSL:&lt;/p>
+&lt;ul>
+&lt;li>&lt;code>val oneofNameCase: OneofNameCase&lt;/code>: gets which, if any, of the &lt;code>oneof_name&lt;/code>
+fields are set; see the
+&lt;a href="/reference/java/java-generated#oneof">Java code reference&lt;/a>
+for the return type&lt;/li>
+&lt;li>&lt;code>fun hasFoo(): Boolean&lt;/code> (proto2 only): Returns &lt;code>true&lt;/code> if the oneof case is
+&lt;code>FOO&lt;/code>.&lt;/li>
+&lt;li>&lt;code>val foo: Int&lt;/code>: Returns the current value of &lt;code>oneof_name&lt;/code> if the oneof case
+is &lt;code>FOO&lt;/code>. Otherwise, returns the default value of this field.&lt;/li>
+&lt;/ul>
+&lt;p>For other simple field types, the corresponding Java type is chosen according to
+the &lt;a href="/programming-guides/proto#scalar">scalar value types table&lt;/a>.
+For message and enum types, the value type is replaced with the message or enum
+class.&lt;/p>
+&lt;h3 id="map-fields">Map Fields&lt;/h3>
+&lt;p>For this map field definition:&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-proto" data-lang="proto">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#000">map&lt;/span>&lt;span style="color:#000;font-weight:bold">&amp;lt;&lt;/span>&lt;span style="color:#204a87;font-weight:bold">int32&lt;/span>&lt;span style="color:#000;font-weight:bold">,&lt;/span> &lt;span style="color:#204a87;font-weight:bold">int32&lt;/span>&lt;span style="color:#000;font-weight:bold">&amp;gt;&lt;/span> &lt;span style="color:#000">weight&lt;/span> &lt;span style="color:#ce5c00;font-weight:bold">=&lt;/span> &lt;span style="color:#0000cf;font-weight:bold">1&lt;/span>&lt;span style="color:#000;font-weight:bold">;&lt;/span>&lt;span style="color:#a40000">
+&lt;/span>&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>The compiler will generate the following members in the DSL class:&lt;/p>
+&lt;ul>
+&lt;li>&lt;code>class WeightProxy private constructor(): DslProxy()&lt;/code>, an unconstructable
+type used only in generics&lt;/li>
+&lt;li>&lt;code>val weight: DslMap&amp;lt;Int, Int, WeightProxy&amp;gt;&lt;/code>, a read-only view of the current
+entries in the map field&lt;/li>
+&lt;li>&lt;code>fun DslMap&amp;lt;Int, Int, WeightProxy&amp;gt;.put(key: Int, value: Int)&lt;/code>: add the entry
+to this map field&lt;/li>
+&lt;li>&lt;code>operator fun DslMap&amp;lt;Int, Int, WeightProxy&amp;gt;.put(key: Int, value: Int)&lt;/code>:
+alias for &lt;code>put&lt;/code> using operator syntax&lt;/li>
+&lt;li>&lt;code>fun DslMap&amp;lt;Int, Int, WeightProxy&amp;gt;.remove(key: Int)&lt;/code>: removes the entry
+associated with &lt;code>key&lt;/code>, if present&lt;/li>
+&lt;li>&lt;code>fun DslMap&amp;lt;Int, Int, WeightProxy&amp;gt;.putAll(map: Map&amp;lt;Int, Int&amp;gt;)&lt;/code>: adds all
+entries from the specified map to this map field, overwriting prior values
+for already present keys&lt;/li>
+&lt;li>&lt;code>fun DslMap&amp;lt;Int, Int, WeightProxy&amp;gt;.clear()&lt;/code>: clears all entries from this
+map field&lt;/li>
+&lt;/ul>
+&lt;h2 id="extension">Extensions (proto2 only)&lt;/h2>
+&lt;p>Given a message with an extension range:&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-proto" data-lang="proto">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#204a87;font-weight:bold">message&lt;/span> &lt;span style="color:#000">Foo&lt;/span> &lt;span style="color:#000;font-weight:bold">{&lt;/span>&lt;span style="color:#a40000">
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#a40000">&lt;/span> &lt;span style="color:#204a87;font-weight:bold">extensions&lt;/span> &lt;span style="color:#0000cf;font-weight:bold">100&lt;/span> &lt;span style="color:#204a87;font-weight:bold">to&lt;/span> &lt;span style="color:#0000cf;font-weight:bold">199&lt;/span>&lt;span style="color:#000;font-weight:bold">;&lt;/span>&lt;span style="color:#a40000">
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#a40000">&lt;/span>&lt;span style="color:#000;font-weight:bold">}&lt;/span>&lt;span style="color:#a40000">
+&lt;/span>&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>The protocol buffer compiler will add the following methods to &lt;code>FooKt.Dsl&lt;/code>:&lt;/p>
+&lt;ul>
+&lt;li>&lt;code>operator fun &amp;lt;T&amp;gt; get(extension: ExtensionLite&amp;lt;Foo, T&amp;gt;): T&lt;/code>: gets the
+current value of the extension field in the DSL&lt;/li>
+&lt;li>&lt;code>operator fun &amp;lt;T&amp;gt; get(extension: ExtensionLite&amp;lt;Foo, List&amp;lt;T&amp;gt;&amp;gt;): ExtensionList&amp;lt;T, Foo&amp;gt;&lt;/code>: gets the current value of the repeated extension
+field in the DSL as a read-only &lt;code>List&lt;/code>&lt;/li>
+&lt;li>&lt;code>operator fun &amp;lt;T : Comparable&amp;lt;T&amp;gt;&amp;gt; set(extension: ExtensionLite&amp;lt;Foo, T&amp;gt;)&lt;/code>:
+sets the current value of the extension field in the DSL (for &lt;code>Comparable&lt;/code>
+field types)&lt;/li>
+&lt;li>&lt;code>operator fun &amp;lt;T : MessageLite&amp;lt;T&amp;gt;&amp;gt; set(extension: ExtensionLite&amp;lt;Foo, T&amp;gt;)&lt;/code>:
+sets the current value of the extension field in the DSL (for message field
+types)&lt;/li>
+&lt;li>&lt;code>operator fun set(extension: ExtensionLite&amp;lt;Foo, ByteString&amp;gt;)&lt;/code>: sets the
+current value of the extension field in the DSL (for &lt;code>bytes&lt;/code> fields)&lt;/li>
+&lt;li>&lt;code>operator fun contains(extension: ExtensionLite&amp;lt;Foo, *&amp;gt;): Boolean&lt;/code>: returns
+true if the extension field has a value&lt;/li>
+&lt;li>&lt;code>fun clear(extension: ExtensionLite&amp;lt;Foo, *&amp;gt;)&lt;/code>: clears the extension field&lt;/li>
+&lt;li>&lt;code>fun &amp;lt;E&amp;gt; ExtensionList&amp;lt;Foo, E&amp;gt;.add(value: E)&lt;/code>: adds a value to the repeated
+extension field&lt;/li>
+&lt;li>&lt;code>operator fun &amp;lt;E&amp;gt; ExtensionList&amp;lt;Foo, E&amp;gt;.plusAssign(value: E)&lt;/code>: alias for
+&lt;code>add&lt;/code> using operator syntax&lt;/li>
+&lt;li>&lt;code>operator fun &amp;lt;E&amp;gt; ExtensionList&amp;lt;Foo, E&amp;gt;.addAll(values: Iterable&amp;lt;E&amp;gt;)&lt;/code>: adds
+multiple values to the repeated extension field&lt;/li>
+&lt;li>&lt;code>operator fun &amp;lt;E&amp;gt; ExtensionList&amp;lt;Foo, E&amp;gt;.plusAssign(values: Iterable&amp;lt;E&amp;gt;)&lt;/code>:
+alias for &lt;code>addAll&lt;/code> using operator syntax&lt;/li>
+&lt;li>&lt;code>operator fun &amp;lt;E&amp;gt; ExtensionList&amp;lt;Foo, E&amp;gt;.set(index: Int, value: E)&lt;/code>: sets the
+element of the repeated extension field at the specified index&lt;/li>
+&lt;li>&lt;code>operator fun ExtensionList&amp;lt;Foo, *&amp;gt;.clear()&lt;/code>: clears the elements of the
+repeated extension field&lt;/li>
+&lt;/ul>
+&lt;p>The generics here are complex, but the effect is that &lt;code>this[extension] = value&lt;/code>
+works for every extension type except repeated extensions, and repeated
+extensions have &amp;quot;natural&amp;quot; list syntax that works similarly to
+&lt;a href="#repeated">non-extension repeated fields&lt;/a>.&lt;/p>
+&lt;p>Given an extension definition:&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-proto" data-lang="proto">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#204a87;font-weight:bold">extend&lt;/span> &lt;span style="color:#000">Foo&lt;/span> &lt;span style="color:#000;font-weight:bold">{&lt;/span>&lt;span style="color:#a40000">
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#a40000">&lt;/span> &lt;span style="color:#204a87;font-weight:bold">optional&lt;/span> &lt;span style="color:#204a87;font-weight:bold">int32&lt;/span> &lt;span style="color:#000">bar&lt;/span> &lt;span style="color:#ce5c00;font-weight:bold">=&lt;/span> &lt;span style="color:#0000cf;font-weight:bold">123&lt;/span>&lt;span style="color:#000;font-weight:bold">;&lt;/span>&lt;span style="color:#a40000">
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#a40000">&lt;/span>&lt;span style="color:#000;font-weight:bold">}&lt;/span>&lt;span style="color:#a40000">
+&lt;/span>&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>Java generates the &amp;quot;extension identifier&amp;quot; &lt;code>bar&lt;/code>, which is used to &amp;quot;key&amp;quot;
+extension operations above.&lt;/p></description></item><item><title>Reference: Kotlin API</title><link>/reference/kotlin/api-docs/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>/reference/kotlin/api-docs/</guid><description>
+&lt;p>//&lt;a href="./">protobuf-kotlin&lt;/a>&lt;/p>
+&lt;h2 id="packages">Packages&lt;/h2>
+&lt;table>
+&lt;thead>
+&lt;tr>
+&lt;th>Name&lt;/th>
+&lt;/tr>
+&lt;/thead>
+&lt;tbody>
+&lt;tr>
+&lt;td>&lt;a name="com.google.protobuf.kotlin////PointingToDeclaration/">&lt;/a>&lt;a href="protobuf-kotlin/com.google.protobuf.kotlin/">com.google.protobuf.kotlin&lt;/a>&lt;/td>
+&lt;/tr>
+&lt;/tbody>
+&lt;/table></description></item></channel></rss>

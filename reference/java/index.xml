@@ -1,0 +1,1310 @@
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Protocol Buffers Documentation – Java Reference</title><link>/reference/java/</link><description>Recent content in Java Reference on Protocol Buffers Documentation</description><generator>Hugo -- gohugo.io</generator><language>en-us</language><atom:link href="/reference/java/index.xml" rel="self" type="application/rss+xml"/><item><title>Reference: Java Generated Code Guide</title><link>/reference/java/java-generated/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>/reference/java/java-generated/</guid><description>
+&lt;p>This page describes exactly what Java code the protocol buffer compiler
+generates for any given protocol definition. Any differences between proto2 and
+proto3 generated code are highlighted—note that these differences are in
+the generated code as described in this document, not the base message
+classes/interfaces, which are the same in both versions. You should read the
+&lt;a href="/programming-guides/proto">proto2 language guide&lt;/a> and/or
+&lt;a href="/programming-guides/proto3">proto3 language guide&lt;/a> before reading this
+document.&lt;/p>
+&lt;p>Note that no Java protocol buffer methods accept or return nulls unless
+otherwise specified.&lt;/p>
+&lt;h2 id="invocation">Compiler Invocation&lt;/h2>
+&lt;p>The protocol buffer compiler produces Java output when invoked with the
+&lt;code>--java_out=&lt;/code> command-line flag. The parameter to the &lt;code>--java_out=&lt;/code> option is
+the directory where you want the compiler to write your Java output. For each
+&lt;code>.proto&lt;/code> file input, the compiler creates a wrapper &lt;code>.java&lt;/code> file containing a
+Java class which represents the &lt;code>.proto&lt;/code> file itself.&lt;/p>
+&lt;p>If the &lt;code>.proto&lt;/code> file contains a line like the following:&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-proto" data-lang="proto">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#204a87;font-weight:bold">option&lt;/span> &lt;span style="color:#000">java_multiple_files&lt;/span> &lt;span style="color:#ce5c00;font-weight:bold">=&lt;/span> &lt;span style="color:#204a87;font-weight:bold">true&lt;/span>&lt;span style="color:#000;font-weight:bold">;&lt;/span>&lt;span style="color:#a40000">
+&lt;/span>&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>Then the compiler will also create separate &lt;code>.java&lt;/code> files for each of the
+classes/enums which it will generate for each top-level message, enumeration,
+and service declared in the &lt;code>.proto&lt;/code> file.&lt;/p>
+&lt;p>Otherwise (i.e. when the &lt;code>java_multiple_files&lt;/code> option is disabled; which is the
+default), the aforementioned wrapper class will also be used as an outer class,
+and the generated classes/enums for each top-level message, enumeration, and
+service declared in the &lt;code>.proto&lt;/code> file will all be nested within the outer
+wrapper class. Thus the compiler will only generate a single &lt;code>.java&lt;/code> file for
+the entire &lt;code>.proto&lt;/code> file.&lt;/p>
+&lt;p>The wrapper class&amp;rsquo;s name is chosen as follows: If the &lt;code>.proto&lt;/code> file contains a
+line like the following:&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-proto" data-lang="proto">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#204a87;font-weight:bold">option&lt;/span> &lt;span style="color:#000">java_outer_classname&lt;/span> &lt;span style="color:#ce5c00;font-weight:bold">=&lt;/span> &lt;span style="color:#4e9a06">&amp;#34;Foo&amp;#34;&lt;/span>&lt;span style="color:#000;font-weight:bold">;&lt;/span>&lt;span style="color:#a40000">
+&lt;/span>&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>Then the wrapper class name will be &lt;code>Foo&lt;/code>. Otherwise, the wrapper class name is
+determined by converting the &lt;code>.proto&lt;/code> file base name to camel case. For example,
+&lt;code>foo_bar.proto&lt;/code> will generate a class name of &lt;code>FooBar&lt;/code>. If there&amp;rsquo;s a service,
+enum, or message (including nested types) in the file with the same name,
+&amp;ldquo;OuterClass&amp;rdquo; will be appended to the wrapper class&amp;rsquo;s name. Examples:&lt;/p>
+&lt;ul>
+&lt;li>If &lt;code>foo_bar.proto&lt;/code> contains a message called &lt;code>FooBar&lt;/code>, the wrapper class
+will generate a class name of &lt;code>FooBarOuterClass&lt;/code>.&lt;/li>
+&lt;li>If &lt;code>foo_bar.proto&lt;/code> contains a service called &lt;code>FooService&lt;/code>, and
+&lt;code>java_outer_classname&lt;/code> is also set to the string &lt;code>FooService&lt;/code>, then the
+wrapper class will generate a class name of &lt;code>FooServiceOuterClass&lt;/code>.&lt;/li>
+&lt;/ul>
+&lt;p>In addition to any nested classes, the wrapper class itself will have the
+following API (assuming the wrapper class is named &lt;code>Foo&lt;/code> and was generated from
+&lt;code>foo.proto&lt;/code>):&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-java" data-lang="java">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#204a87;font-weight:bold">public&lt;/span> &lt;span style="color:#204a87;font-weight:bold">final&lt;/span> &lt;span style="color:#204a87;font-weight:bold">class&lt;/span> &lt;span style="color:#000">Foo&lt;/span> &lt;span style="color:#ce5c00;font-weight:bold">{&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#204a87;font-weight:bold">private&lt;/span> &lt;span style="color:#000">Foo&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">()&lt;/span> &lt;span style="color:#ce5c00;font-weight:bold">{}&lt;/span> &lt;span style="color:#8f5902;font-style:italic">// Not instantiable.
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#8f5902;font-style:italic">&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#8f5902;font-style:italic">/** Returns a FileDescriptor message describing the contents of {@code foo.proto}. */&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#204a87;font-weight:bold">public&lt;/span> &lt;span style="color:#204a87;font-weight:bold">static&lt;/span> &lt;span style="color:#000">com&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">.&lt;/span>&lt;span style="color:#c4a000">google&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">.&lt;/span>&lt;span style="color:#c4a000">protobuf&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">.&lt;/span>&lt;span style="color:#c4a000">Descriptors&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">.&lt;/span>&lt;span style="color:#c4a000">FileDescriptor&lt;/span> &lt;span style="color:#000">getDescriptor&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">();&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#8f5902;font-style:italic">/** Adds all extensions defined in {@code foo.proto} to the given registry. */&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#204a87;font-weight:bold">public&lt;/span> &lt;span style="color:#204a87;font-weight:bold">static&lt;/span> &lt;span style="color:#204a87;font-weight:bold">void&lt;/span> &lt;span style="color:#000">registerAllExtensions&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">(&lt;/span>&lt;span style="color:#000">com&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">.&lt;/span>&lt;span style="color:#c4a000">google&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">.&lt;/span>&lt;span style="color:#c4a000">protobuf&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">.&lt;/span>&lt;span style="color:#c4a000">ExtensionRegistry&lt;/span> &lt;span style="color:#000">registry&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">);&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#204a87;font-weight:bold">public&lt;/span> &lt;span style="color:#204a87;font-weight:bold">static&lt;/span> &lt;span style="color:#204a87;font-weight:bold">void&lt;/span> &lt;span style="color:#000">registerAllExtensions&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">(&lt;/span>&lt;span style="color:#000">com&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">.&lt;/span>&lt;span style="color:#c4a000">google&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">.&lt;/span>&lt;span style="color:#c4a000">protobuf&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">.&lt;/span>&lt;span style="color:#c4a000">ExtensionRegistryLite&lt;/span> &lt;span style="color:#000">registry&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">);&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#8f5902;font-style:italic">// (Nested classes omitted)
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#8f5902;font-style:italic">&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">}&lt;/span>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>The Java package name is chosen as described under &lt;a href="#package">Packages&lt;/a>, below.&lt;/p>
+&lt;p>The output file is chosen by concatenating the parameter to &lt;code>--java_out=&lt;/code>, the
+package name (with &lt;code>.&lt;/code>s replaced with &lt;code>/&lt;/code>s), and the &lt;code>.java&lt;/code> file name.&lt;/p>
+&lt;p>So, for example, let&amp;rsquo;s say you invoke the compiler as follows:&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-shell" data-lang="shell">&lt;span style="display:flex;">&lt;span>protoc --proto_path&lt;span style="color:#ce5c00;font-weight:bold">=&lt;/span>src --java_out&lt;span style="color:#ce5c00;font-weight:bold">=&lt;/span>build/gen src/foo.proto
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>If &lt;code>foo.proto&lt;/code>&amp;rsquo;s Java package is &lt;code>com.example&lt;/code> and it doesn&amp;rsquo;t enable
+&lt;code>java_multiple_files&lt;/code> and its outer classname is &lt;code>FooProtos&lt;/code>, then the protocol
+buffer compiler will generate the file &lt;code>build/gen/com/example/FooProtos.java&lt;/code>.
+The protocol buffer compiler will automatically create the &lt;code>build/gen/com&lt;/code> and
+&lt;code>build/gen/com/example&lt;/code> directories if needed. However, it will not create
+&lt;code>build/gen&lt;/code> or &lt;code>build&lt;/code>; they must already exist. You can specify multiple
+&lt;code>.proto&lt;/code> files in a single invocation; all output files will be generated at
+once.&lt;/p>
+&lt;p>When outputting Java code, the protocol buffer compiler&amp;rsquo;s ability to output
+directly to JAR archives is particularly convenient, as many Java tools are able
+to read source code directly from JAR files. To output to a JAR file, simply
+provide an output location ending in &lt;code>.jar&lt;/code>. Note that only the Java source code
+is placed in the archive; you must still compile it separately to produce Java
+class files.&lt;/p>
+&lt;h2 id="package">Packages&lt;/h2>
+&lt;p>The generated class is placed in a Java package based on the &lt;code>java_package&lt;/code>
+option. If the option is omitted, the &lt;code>package&lt;/code> declaration is used instead.&lt;/p>
+&lt;p>For example, if the &lt;code>.proto&lt;/code> file contains:&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-proto" data-lang="proto">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#204a87;font-weight:bold">package&lt;/span> &lt;span style="color:#000">foo&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">.&lt;/span>&lt;span style="color:#000">bar&lt;/span>&lt;span style="color:#000;font-weight:bold">;&lt;/span>&lt;span style="color:#a40000">
+&lt;/span>&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>Then the resulting Java class will be placed in Java package &lt;code>foo.bar&lt;/code>. However,
+if the &lt;code>.proto&lt;/code> file also contains a &lt;code>java_package&lt;/code> option, like so:&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-proto" data-lang="proto">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#204a87;font-weight:bold">package&lt;/span> &lt;span style="color:#000">foo&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">.&lt;/span>&lt;span style="color:#000">bar&lt;/span>&lt;span style="color:#000;font-weight:bold">;&lt;/span>&lt;span style="color:#a40000">
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#a40000">&lt;/span>&lt;span style="color:#204a87;font-weight:bold">option&lt;/span> &lt;span style="color:#000">java_package&lt;/span> &lt;span style="color:#ce5c00;font-weight:bold">=&lt;/span> &lt;span style="color:#4e9a06">&amp;#34;com.example.foo.bar&amp;#34;&lt;/span>&lt;span style="color:#000;font-weight:bold">;&lt;/span>&lt;span style="color:#a40000">
+&lt;/span>&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>Then the class is placed in the &lt;code>com.example.foo.bar&lt;/code> package instead. The
+&lt;code>java_package&lt;/code> option is provided because normal &lt;code>.proto&lt;/code> &lt;code>package&lt;/code> declarations
+are not expected to start with a backwards domain name.&lt;/p>
+&lt;h2 id="message">Messages&lt;/h2>
+&lt;p>Given a simple message declaration:&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-proto" data-lang="proto">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#204a87;font-weight:bold">message&lt;/span> &lt;span style="color:#000">Foo&lt;/span> &lt;span style="color:#000;font-weight:bold">{}&lt;/span>&lt;span style="color:#a40000">
+&lt;/span>&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>The protocol buffer compiler generates a class called &lt;code>Foo&lt;/code>, which implements
+the &lt;code>Message&lt;/code> interface. The class is declared &lt;code>final&lt;/code>; no further subclassing
+is allowed. &lt;code>Foo&lt;/code> extends &lt;code>GeneratedMessage&lt;/code>, but this should be considered an
+implementation detail. By default, &lt;code>Foo&lt;/code> overrides many methods of
+&lt;code>GeneratedMessage&lt;/code> with specialized versions for maximum speed. However, if the
+&lt;code>.proto&lt;/code> file contains the line:&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-proto" data-lang="proto">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#204a87;font-weight:bold">option&lt;/span> &lt;span style="color:#000">optimize_for&lt;/span> &lt;span style="color:#ce5c00;font-weight:bold">=&lt;/span> &lt;span style="color:#000">CODE_SIZE&lt;/span>&lt;span style="color:#000;font-weight:bold">;&lt;/span>&lt;span style="color:#a40000">
+&lt;/span>&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>then &lt;code>Foo&lt;/code> will override only the minimum set of methods necessary to function
+and rely on &lt;code>GeneratedMessage&lt;/code>&amp;rsquo;s reflection-based implementations of the rest.
+This significantly reduces the size of the generated code, but also reduces
+performance. Alternatively, if the &lt;code>.proto&lt;/code> file contains:&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-proto" data-lang="proto">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#204a87;font-weight:bold">option&lt;/span> &lt;span style="color:#000">optimize_for&lt;/span> &lt;span style="color:#ce5c00;font-weight:bold">=&lt;/span> &lt;span style="color:#000">LITE_RUNTIME&lt;/span>&lt;span style="color:#000;font-weight:bold">;&lt;/span>&lt;span style="color:#a40000">
+&lt;/span>&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>then &lt;code>Foo&lt;/code> will include fast implementations of all methods, but will implement
+the &lt;code>MessageLite&lt;/code> interface, which only contains a subset of the methods of
+&lt;code>Message&lt;/code>. In particular, it does not support descriptors or reflection.
+However, in this mode, the generated code only needs to link against
+&lt;code>libprotobuf-lite.jar&lt;/code> instead of &lt;code>libprotobuf.jar&lt;/code>. The &amp;ldquo;lite&amp;rdquo; library is
+much smaller than the full library, and is more appropriate for
+resource-constrained systems such as mobile phones.&lt;/p>
+&lt;p>The &lt;code>Message&lt;/code> interface defines methods that let you check, manipulate, read, or
+write the entire message. In addition to these methods, the &lt;code>Foo&lt;/code> class defines
+the following static methods:&lt;/p>
+&lt;ul>
+&lt;li>&lt;code>static Foo getDefaultInstance()&lt;/code>: Returns the &lt;em>singleton&lt;/em> instance of
+&lt;code>Foo&lt;/code>. This instance&amp;rsquo;s contents are identical to what you&amp;rsquo;d get if you
+called &lt;code>Foo.newBuilder().build()&lt;/code> (so all singular fields are unset and all
+repeated fields are empty). Note that the default instance of a message can
+be used as a factory by calling its &lt;code>newBuilderForType()&lt;/code> method.&lt;/li>
+&lt;li>&lt;code>static Descriptor getDescriptor()&lt;/code>: Returns the type&amp;rsquo;s descriptor. This
+contains information about the type, including what fields it has and what
+their types are. This can be used with the reflection methods of the
+&lt;code>Message&lt;/code>, such as &lt;code>getField()&lt;/code>.&lt;/li>
+&lt;li>&lt;code>static Foo parseFrom(...)&lt;/code>: Parses a message of type &lt;code>Foo&lt;/code> from the given
+source and returns it. There is one &lt;code>parseFrom&lt;/code> method corresponding to each
+variant of &lt;code>mergeFrom()&lt;/code> in the &lt;code>Message.Builder&lt;/code> interface. Note that
+&lt;code>parseFrom()&lt;/code> never throws &lt;code>UninitializedMessageException&lt;/code>; it throws
+&lt;code>InvalidProtocolBufferException&lt;/code> if the parsed message is missing required
+fields. This makes it subtly different from calling
+&lt;code>Foo.newBuilder().mergeFrom(...).build()&lt;/code>.&lt;/li>
+&lt;li>&lt;code>static Parser parser()&lt;/code>: Returns an instance of the &lt;code>Parser&lt;/code>, which
+implements various &lt;code>parseFrom()&lt;/code> methods.&lt;/li>
+&lt;li>&lt;code>Foo.Builder newBuilder()&lt;/code>: Creates a new builder (described below).&lt;/li>
+&lt;li>&lt;code>Foo.Builder newBuilder(Foo prototype)&lt;/code>: Creates a new builder with all
+fields initialized to the same values that they have in &lt;code>prototype&lt;/code>. Since
+embedded message and string objects are immutable, they are shared between
+the original and the copy.&lt;/li>
+&lt;/ul>
+&lt;h3 id="builders">Builders&lt;/h3>
+&lt;p>Message objects—such as instances of the &lt;code>Foo&lt;/code> class described
+above—are immutable, just like a Java &lt;code>String&lt;/code>. To construct a message
+object, you need to use a &lt;em>builder&lt;/em>. Each message class has its own builder
+class—so in our &lt;code>Foo&lt;/code> example, the protocol buffer compiler generates a
+nested class &lt;code>Foo.Builder&lt;/code> which can be used to build a &lt;code>Foo&lt;/code>. &lt;code>Foo.Builder&lt;/code>
+implements the &lt;code>Message.Builder&lt;/code> interface. It extends the
+&lt;code>GeneratedMessage.Builder&lt;/code> class, but, again, this should be considered an
+implementation detail. Like &lt;code>Foo&lt;/code>, &lt;code>Foo.Builder&lt;/code> may rely on generic method
+implementations in &lt;code>GeneratedMessage.Builder&lt;/code> or, when the &lt;code>optimize_for&lt;/code> option
+is used, generated custom code that is much faster.&lt;/p>
+&lt;p>&lt;code>Foo.Builder&lt;/code> does not define any static methods. Its interface is exactly as
+defined by the &lt;code>Message.Builder&lt;/code> interface, with the exception that return types
+are more specific: methods of &lt;code>Foo.Builder&lt;/code> that modify the builder return type
+&lt;code>Foo.Builder&lt;/code>, and &lt;code>build()&lt;/code> returns type &lt;code>Foo&lt;/code>.&lt;/p>
+&lt;p>Methods that modify the contents of a builder—including field
+setters—always return a reference to the builder (i.e. they &amp;ldquo;&lt;code>return this;&lt;/code>&amp;rdquo;). This allows multiple method calls to be chained together in one line.
+For example: &lt;code>builder.mergeFrom(obj).setFoo(1).setBar(&amp;quot;abc&amp;quot;).clearBaz();&lt;/code>&lt;/p>
+&lt;p>Note that builders are not thread-safe, so Java synchronization should be used
+whenever it is necessary for multiple different threads to be modifying the
+contents of a single builder.&lt;/p>
+&lt;h3 id="sub-builders">Sub-Builders&lt;/h3>
+&lt;p>For messages containing sub-messages, the compiler also generates sub-builders.
+This allows you to repeatedly modify deep-nested sub-messages without rebuilding
+them. For example:&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-proto" data-lang="proto">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#204a87;font-weight:bold">message&lt;/span> &lt;span style="color:#000">Foo&lt;/span> &lt;span style="color:#000;font-weight:bold">{&lt;/span>&lt;span style="color:#a40000">
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#a40000">&lt;/span> &lt;span style="color:#204a87;font-weight:bold">optional&lt;/span> &lt;span style="color:#204a87;font-weight:bold">int32&lt;/span> &lt;span style="color:#000">val&lt;/span> &lt;span style="color:#ce5c00;font-weight:bold">=&lt;/span> &lt;span style="color:#0000cf;font-weight:bold">1&lt;/span>&lt;span style="color:#000;font-weight:bold">;&lt;/span>&lt;span style="color:#a40000">
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#a40000">&lt;/span> &lt;span style="color:#8f5902;font-style:italic">// some other fields.
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#8f5902;font-style:italic">&lt;/span>&lt;span style="color:#000;font-weight:bold">}&lt;/span>&lt;span style="color:#a40000">
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#a40000">
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#a40000">&lt;/span>&lt;span style="color:#204a87;font-weight:bold">message&lt;/span> &lt;span style="color:#000">Bar&lt;/span> &lt;span style="color:#000;font-weight:bold">{&lt;/span>&lt;span style="color:#a40000">
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#a40000">&lt;/span> &lt;span style="color:#204a87;font-weight:bold">optional&lt;/span> &lt;span style="color:#000">Foo&lt;/span> &lt;span style="color:#000">foo&lt;/span> &lt;span style="color:#ce5c00;font-weight:bold">=&lt;/span> &lt;span style="color:#0000cf;font-weight:bold">1&lt;/span>&lt;span style="color:#000;font-weight:bold">;&lt;/span>&lt;span style="color:#a40000">
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#a40000">&lt;/span> &lt;span style="color:#8f5902;font-style:italic">// some other fields.
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#8f5902;font-style:italic">&lt;/span>&lt;span style="color:#000;font-weight:bold">}&lt;/span>&lt;span style="color:#a40000">
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#a40000">
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#a40000">&lt;/span>&lt;span style="color:#204a87;font-weight:bold">message&lt;/span> &lt;span style="color:#000">Baz&lt;/span> &lt;span style="color:#000;font-weight:bold">{&lt;/span>&lt;span style="color:#a40000">
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#a40000">&lt;/span> &lt;span style="color:#204a87;font-weight:bold">optional&lt;/span> &lt;span style="color:#000">Bar&lt;/span> &lt;span style="color:#000">bar&lt;/span> &lt;span style="color:#ce5c00;font-weight:bold">=&lt;/span> &lt;span style="color:#0000cf;font-weight:bold">1&lt;/span>&lt;span style="color:#000;font-weight:bold">;&lt;/span>&lt;span style="color:#a40000">
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#a40000">&lt;/span> &lt;span style="color:#8f5902;font-style:italic">// some other fields.
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#8f5902;font-style:italic">&lt;/span>&lt;span style="color:#000;font-weight:bold">}&lt;/span>&lt;span style="color:#a40000">
+&lt;/span>&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>If you have a &lt;code>Baz&lt;/code> message already, and want to change the deeply nested &lt;code>val&lt;/code>
+in &lt;code>Foo&lt;/code>. Instead of:&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-java" data-lang="java">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#000">baz&lt;/span> &lt;span style="color:#ce5c00;font-weight:bold">=&lt;/span> &lt;span style="color:#000">baz&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">.&lt;/span>&lt;span style="color:#c4a000">toBuilder&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">().&lt;/span>&lt;span style="color:#c4a000">setBar&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">(&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#000">baz&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">.&lt;/span>&lt;span style="color:#c4a000">getBar&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">().&lt;/span>&lt;span style="color:#c4a000">toBuilder&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">().&lt;/span>&lt;span style="color:#c4a000">setFoo&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">(&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#000">baz&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">.&lt;/span>&lt;span style="color:#c4a000">getBar&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">().&lt;/span>&lt;span style="color:#c4a000">getFoo&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">().&lt;/span>&lt;span style="color:#c4a000">toBuilder&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">().&lt;/span>&lt;span style="color:#c4a000">setVal&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">(&lt;/span>&lt;span style="color:#0000cf;font-weight:bold">10&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">).&lt;/span>&lt;span style="color:#c4a000">build&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">()&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#ce5c00;font-weight:bold">).&lt;/span>&lt;span style="color:#c4a000">build&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">()).&lt;/span>&lt;span style="color:#c4a000">build&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">();&lt;/span>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>You can write:&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-java" data-lang="java">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#000">Baz&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">.&lt;/span>&lt;span style="color:#c4a000">Builder&lt;/span> &lt;span style="color:#000">builder&lt;/span> &lt;span style="color:#ce5c00;font-weight:bold">=&lt;/span> &lt;span style="color:#000">baz&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">.&lt;/span>&lt;span style="color:#c4a000">toBuilder&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">();&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#000">builder&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">.&lt;/span>&lt;span style="color:#c4a000">getBarBuilder&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">().&lt;/span>&lt;span style="color:#c4a000">getFooBuilder&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">().&lt;/span>&lt;span style="color:#c4a000">setVal&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">(&lt;/span>&lt;span style="color:#0000cf;font-weight:bold">10&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">);&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#000">baz&lt;/span> &lt;span style="color:#ce5c00;font-weight:bold">=&lt;/span> &lt;span style="color:#000">builder&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">.&lt;/span>&lt;span style="color:#c4a000">build&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">();&lt;/span>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h3 id="nested-types">Nested Types&lt;/h3>
+&lt;p>A message can be declared inside another message. For example:&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-proto" data-lang="proto">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#204a87;font-weight:bold">message&lt;/span> &lt;span style="color:#000">Foo&lt;/span> &lt;span style="color:#000;font-weight:bold">{&lt;/span>&lt;span style="color:#a40000">
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#a40000">&lt;/span> &lt;span style="color:#204a87;font-weight:bold">message&lt;/span> &lt;span style="color:#000">Bar&lt;/span> &lt;span style="color:#000;font-weight:bold">{&lt;/span> &lt;span style="color:#000;font-weight:bold">}&lt;/span>&lt;span style="color:#a40000">
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#a40000">&lt;/span>&lt;span style="color:#000;font-weight:bold">}&lt;/span>&lt;span style="color:#a40000">
+&lt;/span>&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>In this case, the compiler simply generates &lt;code>Bar&lt;/code> as an inner class nested
+inside &lt;code>Foo&lt;/code>.&lt;/p>
+&lt;h2 id="fields">Fields&lt;/h2>
+&lt;p>In addition to the methods described in the previous section, the protocol
+buffer compiler generates a set of accessor methods for each field defined
+within the message in the &lt;code>.proto&lt;/code> file. The methods that read the field value
+are defined both in the message class and its corresponding builder; the methods
+that modify the value are defined in the builder only.&lt;/p>
+&lt;p>Note that method names always use camel-case naming, even if the field name in
+the &lt;code>.proto&lt;/code> file uses lower-case with underscores
+(&lt;a href="/programming-guides/style">as it should&lt;/a>). The case-conversion works
+as follows:&lt;/p>
+&lt;ol>
+&lt;li>For each underscore in the name, the underscore is removed, and the
+following letter is capitalized.&lt;/li>
+&lt;li>If the name will have a prefix attached (e.g. &amp;ldquo;get&amp;rdquo;), the first letter is
+capitalized. Otherwise, it is lower-cased.&lt;/li>
+&lt;/ol>
+&lt;p>Thus, the field &lt;code>foo_bar_baz&lt;/code> becomes &lt;code>fooBarBaz&lt;/code>. If prefixed with &lt;code>get&lt;/code>, it
+would be &lt;code>getFooBarBaz&lt;/code>.&lt;/p>
+&lt;p>As well as accessor methods, the compiler generates an integer constant for each
+field containing its field number. The constant name is the field name converted
+to upper-case followed by &lt;code>_FIELD_NUMBER&lt;/code>. For example, given the field
+&lt;code>optional int32 foo_bar = 5;&lt;/code>, the compiler will generate the constant &lt;code>public static final int FOO_BAR_FIELD_NUMBER = 5;&lt;/code>.&lt;/p>
+&lt;h3 id="singular-fields-proto2">Singular Fields (proto2)&lt;/h3>
+&lt;p>For any of these field definitions:&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-proto" data-lang="proto">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#204a87;font-weight:bold">optional&lt;/span> &lt;span style="color:#204a87;font-weight:bold">int32&lt;/span> &lt;span style="color:#000">foo&lt;/span> &lt;span style="color:#ce5c00;font-weight:bold">=&lt;/span> &lt;span style="color:#0000cf;font-weight:bold">1&lt;/span>&lt;span style="color:#000;font-weight:bold">;&lt;/span>&lt;span style="color:#a40000">
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#a40000">&lt;/span>&lt;span style="color:#204a87;font-weight:bold">required&lt;/span> &lt;span style="color:#204a87;font-weight:bold">int32&lt;/span> &lt;span style="color:#000">foo&lt;/span> &lt;span style="color:#ce5c00;font-weight:bold">=&lt;/span> &lt;span style="color:#0000cf;font-weight:bold">1&lt;/span>&lt;span style="color:#000;font-weight:bold">;&lt;/span>&lt;span style="color:#a40000">
+&lt;/span>&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>The compiler will generate the following accessor methods in both the message
+class and its builder:&lt;/p>
+&lt;ul>
+&lt;li>&lt;code>boolean hasFoo()&lt;/code>: Returns &lt;code>true&lt;/code> if the field is set.&lt;/li>
+&lt;li>&lt;code>int getFoo()&lt;/code>: Returns the current value of the field. If the field is not
+set, returns the default value.&lt;/li>
+&lt;/ul>
+&lt;p>The compiler will generate the following methods only in the message&amp;rsquo;s builder:&lt;/p>
+&lt;ul>
+&lt;li>&lt;code>Builder setFoo(int value)&lt;/code>: Sets the value of the field. After calling
+this, &lt;code>hasFoo()&lt;/code> will return &lt;code>true&lt;/code> and &lt;code>getFoo()&lt;/code> will return &lt;code>value&lt;/code>.&lt;/li>
+&lt;li>&lt;code>Builder clearFoo()&lt;/code>: Clears the value of the field. After calling this,
+&lt;code>hasFoo()&lt;/code> will return &lt;code>false&lt;/code> and &lt;code>getFoo()&lt;/code> will return the default value.&lt;/li>
+&lt;/ul>
+&lt;p>For other simple field types, the corresponding Java type is chosen according to
+the &lt;a href="/programming-guides/proto#scalar">scalar value types table&lt;/a>.
+For message and enum types, the value type is replaced with the message or enum
+class.&lt;/p>
+&lt;h4 id="embedded-message-fields">Embedded Message Fields&lt;/h4>
+&lt;p>For message types, &lt;code>setFoo()&lt;/code> also accepts an instance of the message&amp;rsquo;s builder
+type as the parameter. This is just a shortcut which is equivalent to calling
+&lt;code>.build()&lt;/code> on the builder and passing the result to the method.&lt;/p>
+&lt;p>If the field is not set, &lt;code>getFoo()&lt;/code> will return a Foo instance with none of its
+fields set (possibly the instance returned by &lt;code>Foo.getDefaultInstance()&lt;/code>).&lt;/p>
+&lt;p>In addition, the compiler generates two accessor methods that allow you to
+access the relevant sub-builders for message types. The following method is
+generated in both the message class and its builder:&lt;/p>
+&lt;ul>
+&lt;li>&lt;code>FooOrBuilder getFooOrBuilder()&lt;/code>: Returns the builder for the field, if it
+already exists, or the message if not. Calling this method on builders will
+not create a sub-builder for the field.&lt;/li>
+&lt;/ul>
+&lt;p>The compiler generates the following method only in the message&amp;rsquo;s builder.&lt;/p>
+&lt;ul>
+&lt;li>&lt;code>Builder getFooBuilder()&lt;/code>: Returns the builder for the field.&lt;/li>
+&lt;/ul>
+&lt;h3 id="singular-fields-proto3">Singular Fields (proto3)&lt;/h3>
+&lt;p>For this field definition:&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-proto" data-lang="proto">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#204a87;font-weight:bold">int32&lt;/span> &lt;span style="color:#000">foo&lt;/span> &lt;span style="color:#ce5c00;font-weight:bold">=&lt;/span> &lt;span style="color:#0000cf;font-weight:bold">1&lt;/span>&lt;span style="color:#000;font-weight:bold">;&lt;/span>&lt;span style="color:#a40000">
+&lt;/span>&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>The compiler will generate the following accessor method in both the message
+class and its builder:&lt;/p>
+&lt;ul>
+&lt;li>&lt;code>int getFoo()&lt;/code>: Returns the current value of the field. If the field is not
+set, returns the default value for the field&amp;rsquo;s type.&lt;/li>
+&lt;/ul>
+&lt;p>The compiler will generate the following methods only in the message&amp;rsquo;s builder:&lt;/p>
+&lt;ul>
+&lt;li>&lt;code>Builder setFoo(int value)&lt;/code>: Sets the value of the field. After calling
+this, &lt;code>getFoo()&lt;/code> will return &lt;code>value&lt;/code>.&lt;/li>
+&lt;li>&lt;code>Builder clearFoo()&lt;/code>: Clears the value of the field. After calling this,
+&lt;code>getFoo()&lt;/code> will return the default value for the field&amp;rsquo;s type.&lt;/li>
+&lt;/ul>
+&lt;p>For other simple field types, the corresponding Java type is chosen according to
+the &lt;a href="/programming-guides/proto#scalar">scalar value types table&lt;/a>.
+For message and enum types, the value type is replaced with the message or enum
+class.&lt;/p>
+&lt;h4 id="embedded-message-fields-1">Embedded Message Fields&lt;/h4>
+&lt;p>For message field types, an additional accessor method is generated in both the
+message class and its builder:&lt;/p>
+&lt;ul>
+&lt;li>&lt;code>boolean hasFoo()&lt;/code>: Returns &lt;code>true&lt;/code> if the field has been set.&lt;/li>
+&lt;/ul>
+&lt;p>&lt;code>setFoo()&lt;/code> also accepts an instance of the message&amp;rsquo;s builder type as the
+parameter. This is just a shortcut which is equivalent to calling &lt;code>.build()&lt;/code> on
+the builder and passing the result to the method.&lt;/p>
+&lt;p>If the field is not set, &lt;code>getFoo()&lt;/code> will return a Foo instance with none of its
+fields set (possibly the instance returned by &lt;code>Foo.getDefaultInstance()&lt;/code>).&lt;/p>
+&lt;p>In addition, the compiler generates two accessor methods that allow you to
+access the relevant sub-builders for message types. The following method is
+generated in both the message class and its builder:&lt;/p>
+&lt;ul>
+&lt;li>&lt;code>FooOrBuilder getFooOrBuilder()&lt;/code>: Returns the builder for the field, if it
+already exists, or the message if not. Calling this method on builders will
+not create a sub-builder for the field.&lt;/li>
+&lt;/ul>
+&lt;p>The compiler generates the following method only in the message&amp;rsquo;s builder.&lt;/p>
+&lt;ul>
+&lt;li>&lt;code>Builder getFooBuilder()&lt;/code>: Returns the builder for the field.&lt;/li>
+&lt;/ul>
+&lt;h4 id="enum-fields">Enum Fields&lt;/h4>
+&lt;p>For enum field types, an additional accessor method is generated in both the
+message class and its builder:&lt;/p>
+&lt;ul>
+&lt;li>&lt;code>int getFooValue()&lt;/code>: Returns the integer value of the enum.&lt;/li>
+&lt;/ul>
+&lt;p>The compiler will generate the following additional method only in the message&amp;rsquo;s
+builder:&lt;/p>
+&lt;ul>
+&lt;li>&lt;code>Builder setFooValue(int value)&lt;/code>: Sets the integer value of the enum.&lt;/li>
+&lt;/ul>
+&lt;p>In addition, &lt;code>getFoo()&lt;/code> will return &lt;code>UNRECOGNIZED&lt;/code> if the enum value is
+unknown—this is a special additional value added by the proto3 compiler to
+the generated &lt;a href="#enum">enum type&lt;/a>.&lt;/p>
+&lt;h3 id="repeated-fields">Repeated Fields&lt;/h3>
+&lt;p>For this field definition:&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-proto" data-lang="proto">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#204a87;font-weight:bold">repeated&lt;/span> &lt;span style="color:#204a87;font-weight:bold">string&lt;/span> &lt;span style="color:#000">foo&lt;/span> &lt;span style="color:#ce5c00;font-weight:bold">=&lt;/span> &lt;span style="color:#0000cf;font-weight:bold">1&lt;/span>&lt;span style="color:#000;font-weight:bold">;&lt;/span>&lt;span style="color:#a40000">
+&lt;/span>&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>The compiler will generate the following accessor methods in both the message
+class and its builder:&lt;/p>
+&lt;ul>
+&lt;li>&lt;code>int getFooCount()&lt;/code>: Returns the number of elements currently in the field.&lt;/li>
+&lt;li>&lt;code>String getFoo(int index)&lt;/code>: Returns the element at the given zero-based
+index.&lt;/li>
+&lt;li>&lt;code>ProtocolStringList getFooList()&lt;/code>: Returns the entire field as a
+&lt;code>ProtocolStringList&lt;/code>. If the field is not set, returns an empty list.&lt;/li>
+&lt;/ul>
+&lt;p>The compiler will generate the following methods only in the message&amp;rsquo;s builder:&lt;/p>
+&lt;ul>
+&lt;li>&lt;code>Builder setFoo(int index, String value)&lt;/code>: Sets the value of the element at
+the given zero-based index.&lt;/li>
+&lt;li>&lt;code>Builder addFoo(String value)&lt;/code>: Appends a new element to the field with the
+given value.&lt;/li>
+&lt;li>&lt;code>Builder addAllFoo(Iterable&amp;lt;? extends String&amp;gt; value)&lt;/code>: Appends all elements
+in the given &lt;code>Iterable&lt;/code> to the field.&lt;/li>
+&lt;li>&lt;code>Builder clearFoo()&lt;/code>: Removes all elements from the field. After calling
+this, &lt;code>getFooCount()&lt;/code> will return zero.&lt;/li>
+&lt;/ul>
+&lt;p>For other simple field types, the corresponding Java type is chosen according to
+the &lt;a href="/programming-guides/proto#scalar">scalar value types table&lt;/a>.
+For message and enum types, the type is the message or enum class.&lt;/p>
+&lt;h4 id="repeated-embedded-message-fields">Repeated Embedded Message Fields&lt;/h4>
+&lt;p>For message types, &lt;code>setFoo()&lt;/code> and &lt;code>addFoo()&lt;/code> also accept an instance of the
+message&amp;rsquo;s builder type as the parameter. This is just a shortcut which is
+equivalent to calling &lt;code>.build()&lt;/code> on the builder and passing the result to the
+method. There is also an additional generated method:&lt;/p>
+&lt;ul>
+&lt;li>&lt;code>Builder addFoo(int index, Field value)&lt;/code>: Inserts a new element at the given
+zero-based index. Shifts the element currently at that position (if any) and
+any subsequent elements to the right (adds one to their indices).&lt;/li>
+&lt;/ul>
+&lt;p>In addition, the compiler generates the following additional accessor methods in
+both the message class and its builder for message types, allowing you to access
+the relevant sub-builders:&lt;/p>
+&lt;ul>
+&lt;li>&lt;code>FooOrBuilder getFooOrBuilder(int index)&lt;/code>: Returns the builder for the
+specified element, if it already exists, or throws
+&lt;code>IndexOutOfBoundsException&lt;/code> if not. If this is called from a message class,
+it will always return a message (or throw an exception) rather than a
+builder. Calling this method on builders will not create a sub-builder for
+the field.&lt;/li>
+&lt;li>&lt;code>List&amp;lt;FooOrBuilder&amp;gt; getFooOrBuilderList()&lt;/code>: Returns the entire field as an
+unmodifiable list of builders (if available) or messages if not. If this is
+called from a message class, it will always return an immutable list of
+messages rather than an unmodifiable list of builders.&lt;/li>
+&lt;/ul>
+&lt;p>The compiler will generate the following methods only in the message&amp;rsquo;s builder:&lt;/p>
+&lt;ul>
+&lt;li>&lt;code>Builder getFooBuilder(int index)&lt;/code>: Returns the builder for the element at
+the specified index, or throws &lt;code>IndexOutOfBoundsException&lt;/code> if the index is
+out of bounds.&lt;/li>
+&lt;li>&lt;code>Builder addFooBuilder(int index)&lt;/code>: Inserts and returns a builder for a
+default message instance at the specified index. The existing entries are
+shifted to higher indices to make room for the inserted builder.&lt;/li>
+&lt;li>&lt;code>Builder addFooBuilder()&lt;/code>: Appends and returns a builder for a default
+message instance.&lt;/li>
+&lt;li>&lt;code>Builder removeFoo(int index)&lt;/code>: Removes the element at the given zero-based
+index.&lt;/li>
+&lt;li>&lt;code>List&amp;lt;Builder&amp;gt; getFooBuilderList()&lt;/code>: Returns the entire field as an
+unmodifiable list of builders.&lt;/li>
+&lt;/ul>
+&lt;h4 id="repeated-enum-fields-proto3-only">Repeated Enum Fields (proto3 only)&lt;/h4>
+&lt;p>The compiler will generate the following additional methods in both the message
+class and its builder:&lt;/p>
+&lt;ul>
+&lt;li>&lt;code>int getFooValue(int index)&lt;/code>: Returns the integer value of the enum at the
+specified index.&lt;/li>
+&lt;li>&lt;code>List&amp;lt;java.lang.Integer&amp;gt; getFooValueList()&lt;/code>: Returns the entire field as a
+list of Integers.&lt;/li>
+&lt;/ul>
+&lt;p>The compiler will generate the following additional method only in the message&amp;rsquo;s
+builder:&lt;/p>
+&lt;ul>
+&lt;li>&lt;code>Builder setFooValue(int index, int value)&lt;/code>: Sets the integer value of the
+enum at the specified index.&lt;/li>
+&lt;/ul>
+&lt;h4 id="name-conflicts">Name Conflicts&lt;/h4>
+&lt;p>If another non-repeated field has a name that conflicts with one of the repeated
+field&amp;rsquo;s generated methods, then both field names will have their protobuf field
+number appended to the end.&lt;/p>
+&lt;p>For these field definitions:&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-proto" data-lang="proto">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#204a87;font-weight:bold">int32&lt;/span> &lt;span style="color:#000">foo_count&lt;/span> &lt;span style="color:#ce5c00;font-weight:bold">=&lt;/span> &lt;span style="color:#0000cf;font-weight:bold">1&lt;/span>&lt;span style="color:#000;font-weight:bold">;&lt;/span>&lt;span style="color:#a40000">
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#a40000">&lt;/span>&lt;span style="color:#204a87;font-weight:bold">repeated&lt;/span> &lt;span style="color:#204a87;font-weight:bold">string&lt;/span> &lt;span style="color:#000">foo&lt;/span> &lt;span style="color:#ce5c00;font-weight:bold">=&lt;/span> &lt;span style="color:#0000cf;font-weight:bold">2&lt;/span>&lt;span style="color:#000;font-weight:bold">;&lt;/span>&lt;span style="color:#a40000">
+&lt;/span>&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>The compiler will first rename them to the following:&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-proto" data-lang="proto">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#204a87;font-weight:bold">int32&lt;/span> &lt;span style="color:#000">foo_count_1&lt;/span> &lt;span style="color:#ce5c00;font-weight:bold">=&lt;/span> &lt;span style="color:#0000cf;font-weight:bold">1&lt;/span>&lt;span style="color:#000;font-weight:bold">;&lt;/span>&lt;span style="color:#a40000">
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#a40000">&lt;/span>&lt;span style="color:#204a87;font-weight:bold">repeated&lt;/span> &lt;span style="color:#204a87;font-weight:bold">string&lt;/span> &lt;span style="color:#000">foo_2&lt;/span> &lt;span style="color:#ce5c00;font-weight:bold">=&lt;/span> &lt;span style="color:#0000cf;font-weight:bold">2&lt;/span>&lt;span style="color:#000;font-weight:bold">;&lt;/span>&lt;span style="color:#a40000">
+&lt;/span>&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>The accessor methods will subsequently be generated as described above.&lt;/p>
+&lt;h3 id="oneof-fields">Oneof Fields&lt;/h3>
+&lt;p>For this oneof field definition:&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-proto" data-lang="proto">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#204a87;font-weight:bold">oneof&lt;/span> &lt;span style="color:#000">example_name&lt;/span> &lt;span style="color:#000;font-weight:bold">{&lt;/span>&lt;span style="color:#a40000">
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#a40000">&lt;/span> &lt;span style="color:#204a87;font-weight:bold">int32&lt;/span> &lt;span style="color:#000">foo&lt;/span> &lt;span style="color:#ce5c00;font-weight:bold">=&lt;/span> &lt;span style="color:#0000cf;font-weight:bold">1&lt;/span>&lt;span style="color:#000;font-weight:bold">;&lt;/span>&lt;span style="color:#a40000">
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#a40000">&lt;/span> &lt;span style="color:#ce5c00;font-weight:bold">...&lt;/span>&lt;span style="color:#a40000">
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#a40000">&lt;/span>&lt;span style="color:#000;font-weight:bold">}&lt;/span>&lt;span style="color:#a40000">
+&lt;/span>&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>The compiler will generate the following accessor methods in both the message
+class and its builder:&lt;/p>
+&lt;ul>
+&lt;li>&lt;code>boolean hasFoo()&lt;/code> (proto2 only): Returns &lt;code>true&lt;/code> if the oneof case is &lt;code>FOO&lt;/code>.&lt;/li>
+&lt;li>&lt;code>int getFoo()&lt;/code>: Returns the current value of &lt;code>example_name&lt;/code> if the oneof
+case is &lt;code>FOO&lt;/code>. Otherwise, returns the default value of this field.&lt;/li>
+&lt;/ul>
+&lt;p>The compiler will generate the following methods only in the message&amp;rsquo;s builder:&lt;/p>
+&lt;ul>
+&lt;li>&lt;code>Builder setFoo(int value)&lt;/code>: Sets &lt;code>example_name&lt;/code> to this value and sets the
+oneof case to &lt;code>FOO&lt;/code>. After calling this, &lt;code>hasFoo()&lt;/code> will return &lt;code>true&lt;/code>,
+&lt;code>getFoo()&lt;/code> will return &lt;code>value&lt;/code> and &lt;code>getExampleNameCase()&lt;/code> will return &lt;code>FOO&lt;/code>.&lt;/li>
+&lt;li>&lt;code>Builder clearFoo()&lt;/code>:
+&lt;ul>
+&lt;li>Nothing will be changed if the oneof case is not &lt;code>FOO&lt;/code>.&lt;/li>
+&lt;li>If the oneof case is &lt;code>FOO&lt;/code>, sets &lt;code>example_name&lt;/code> to null and the oneof
+case to &lt;code>EXAMPLENAME_NOT_SET&lt;/code>. After calling this, &lt;code>hasFoo()&lt;/code> will
+return &lt;code>false&lt;/code>, &lt;code>getFoo()&lt;/code> will return the default value and
+&lt;code>getExampleNameCase()&lt;/code> will return &lt;code>EXAMPLENAME_NOT_SET&lt;/code>.&lt;/li>
+&lt;/ul>
+&lt;/li>
+&lt;/ul>
+&lt;p>For other simple field types, the corresponding Java type is chosen according to
+the &lt;a href="/programming-guides/proto#scalar">scalar value types table&lt;/a>.
+For message and enum types, the value type is replaced with the message or enum
+class.&lt;/p>
+&lt;h3 id="map-fields">Map Fields&lt;/h3>
+&lt;p>For this map field definition:&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-proto" data-lang="proto">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#000">map&lt;/span>&lt;span style="color:#000;font-weight:bold">&amp;lt;&lt;/span>&lt;span style="color:#204a87;font-weight:bold">int32&lt;/span>&lt;span style="color:#000;font-weight:bold">,&lt;/span> &lt;span style="color:#204a87;font-weight:bold">int32&lt;/span>&lt;span style="color:#000;font-weight:bold">&amp;gt;&lt;/span> &lt;span style="color:#000">weight&lt;/span> &lt;span style="color:#ce5c00;font-weight:bold">=&lt;/span> &lt;span style="color:#0000cf;font-weight:bold">1&lt;/span>&lt;span style="color:#000;font-weight:bold">;&lt;/span>&lt;span style="color:#a40000">
+&lt;/span>&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>The compiler will generate the following accessor methods in both the message
+class and its builder:&lt;/p>
+&lt;ul>
+&lt;li>&lt;code>Map&amp;lt;Integer, Integer&amp;gt; getWeightMap();&lt;/code>: Returns an unmodifiable &lt;code>Map&lt;/code>.&lt;/li>
+&lt;li>&lt;code>int getWeightOrDefault(int key, int default);&lt;/code>: Returns the value for key
+or the default value if not present.&lt;/li>
+&lt;li>&lt;code>int getWeightOrThrow(int key);&lt;/code>: Returns the value for key or throws
+IllegalArgumentException if not present.&lt;/li>
+&lt;li>&lt;code>boolean containsWeight(int key);&lt;/code>: Indicates if the key is present in this
+field.&lt;/li>
+&lt;li>&lt;code>int getWeightCount();&lt;/code>: Returns the number of elements in the map.&lt;/li>
+&lt;/ul>
+&lt;p>The compiler will generate the following methods only in the message&amp;rsquo;s builder:&lt;/p>
+&lt;ul>
+&lt;li>&lt;code>Builder putWeight(int key, int value);&lt;/code>: Add the weight to this field.&lt;/li>
+&lt;li>&lt;code>Builder putAllWeight(Map&amp;lt;Integer, Integer&amp;gt; value);&lt;/code>: Adds all entries in
+the given map to this field.&lt;/li>
+&lt;li>&lt;code>Builder removeWeight(int key);&lt;/code>: Removes the weight from this field.&lt;/li>
+&lt;li>&lt;code>Builder clearWeight();&lt;/code>: Removes all weights from this field.&lt;/li>
+&lt;li>&lt;code>@Deprecated Map&amp;lt;Integer, Integer&amp;gt; getMutableWeight();&lt;/code>: Returns a mutable
+&lt;code>Map&lt;/code>. Note that multiple calls to this method may return different map
+instances. The returned map reference may be invalidated by any subsequent
+method calls to the Builder.&lt;/li>
+&lt;/ul>
+&lt;h2 id="any">Any&lt;/h2>
+&lt;p>Given an &lt;a href="/programming-guides/proto3#any">&lt;code>Any&lt;/code>&lt;/a> field like this:&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-proto" data-lang="proto">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#204a87;font-weight:bold">import&lt;/span> &lt;span style="color:#4e9a06">&amp;#34;google/protobuf/any.proto&amp;#34;&lt;/span>&lt;span style="color:#000;font-weight:bold">;&lt;/span>&lt;span style="color:#a40000">
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#a40000">
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#a40000">&lt;/span>&lt;span style="color:#204a87;font-weight:bold">message&lt;/span> &lt;span style="color:#000">ErrorStatus&lt;/span> &lt;span style="color:#000;font-weight:bold">{&lt;/span>&lt;span style="color:#a40000">
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#a40000">&lt;/span> &lt;span style="color:#204a87;font-weight:bold">string&lt;/span> &lt;span style="color:#204a87;font-weight:bold">message&lt;/span> &lt;span style="color:#ce5c00;font-weight:bold">=&lt;/span> &lt;span style="color:#0000cf;font-weight:bold">1&lt;/span>&lt;span style="color:#000;font-weight:bold">;&lt;/span>&lt;span style="color:#a40000">
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#a40000">&lt;/span> &lt;span style="color:#000">google.protobuf.Any&lt;/span> &lt;span style="color:#000">details&lt;/span> &lt;span style="color:#ce5c00;font-weight:bold">=&lt;/span> &lt;span style="color:#0000cf;font-weight:bold">2&lt;/span>&lt;span style="color:#000;font-weight:bold">;&lt;/span>&lt;span style="color:#a40000">
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#a40000">&lt;/span>&lt;span style="color:#000;font-weight:bold">}&lt;/span>&lt;span style="color:#a40000">
+&lt;/span>&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>In our generated code, the getter for the &lt;code>details&lt;/code> field returns an instance of
+&lt;code>com.google.protobuf.Any&lt;/code>. This provides the following special methods to pack
+and unpack the &lt;code>Any&lt;/code>&amp;rsquo;s values:&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-java" data-lang="java">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#204a87;font-weight:bold">class&lt;/span> &lt;span style="color:#000">Any&lt;/span> &lt;span style="color:#ce5c00;font-weight:bold">{&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#8f5902;font-style:italic">// Packs the given message into an Any using the default type URL
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#8f5902;font-style:italic">&lt;/span> &lt;span style="color:#8f5902;font-style:italic">// prefix “type.googleapis.com”.
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#8f5902;font-style:italic">&lt;/span> &lt;span style="color:#204a87;font-weight:bold">public&lt;/span> &lt;span style="color:#204a87;font-weight:bold">static&lt;/span> &lt;span style="color:#000">Any&lt;/span> &lt;span style="color:#000">pack&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">(&lt;/span>&lt;span style="color:#000">Message&lt;/span> &lt;span style="color:#000">message&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">);&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#8f5902;font-style:italic">// Packs the given message into an Any using the given type URL
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#8f5902;font-style:italic">&lt;/span> &lt;span style="color:#8f5902;font-style:italic">// prefix.
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#8f5902;font-style:italic">&lt;/span> &lt;span style="color:#204a87;font-weight:bold">public&lt;/span> &lt;span style="color:#204a87;font-weight:bold">static&lt;/span> &lt;span style="color:#000">Any&lt;/span> &lt;span style="color:#000">pack&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">(&lt;/span>&lt;span style="color:#000">Message&lt;/span> &lt;span style="color:#000">message&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">,&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#000">String&lt;/span> &lt;span style="color:#000">typeUrlPrefix&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">);&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#8f5902;font-style:italic">// Checks whether this Any message’s payload is the given type.
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#8f5902;font-style:italic">&lt;/span> &lt;span style="color:#204a87;font-weight:bold">public&lt;/span> &lt;span style="color:#ce5c00;font-weight:bold">&amp;lt;&lt;/span>&lt;span style="color:#000">T&lt;/span> &lt;span style="color:#204a87;font-weight:bold">extends&lt;/span> &lt;span style="color:#000">Message&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">&amp;gt;&lt;/span> &lt;span style="color:#204a87;font-weight:bold">boolean&lt;/span> &lt;span style="color:#000">is&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">(&lt;/span>&lt;span style="color:#000">class&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">&amp;lt;&lt;/span>&lt;span style="color:#000">T&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">&amp;gt;&lt;/span> &lt;span style="color:#000">clazz&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">);&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#8f5902;font-style:italic">// Unpacks Any into the given message type. Throws exception if
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#8f5902;font-style:italic">&lt;/span> &lt;span style="color:#8f5902;font-style:italic">// the type doesn’t match or parsing the payload has failed.
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#8f5902;font-style:italic">&lt;/span> &lt;span style="color:#204a87;font-weight:bold">public&lt;/span> &lt;span style="color:#ce5c00;font-weight:bold">&amp;lt;&lt;/span>&lt;span style="color:#000">T&lt;/span> &lt;span style="color:#204a87;font-weight:bold">extends&lt;/span> &lt;span style="color:#000">Message&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">&amp;gt;&lt;/span> &lt;span style="color:#000">T&lt;/span> &lt;span style="color:#000">unpack&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">(&lt;/span>&lt;span style="color:#000">class&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">&amp;lt;&lt;/span>&lt;span style="color:#000">T&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">&amp;gt;&lt;/span> &lt;span style="color:#000">clazz&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">)&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#204a87;font-weight:bold">throws&lt;/span> &lt;span style="color:#000">InvalidProtocolBufferException&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">;&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#ce5c00;font-weight:bold">}&lt;/span>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h2 id="oneof">Oneofs&lt;/h2>
+&lt;p>Given a oneof definition like this:&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-proto" data-lang="proto">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#204a87;font-weight:bold">oneof&lt;/span> &lt;span style="color:#000">example_name&lt;/span> &lt;span style="color:#000;font-weight:bold">{&lt;/span>&lt;span style="color:#a40000">
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#a40000">&lt;/span> &lt;span style="color:#204a87;font-weight:bold">int32&lt;/span> &lt;span style="color:#000">foo_int&lt;/span> &lt;span style="color:#ce5c00;font-weight:bold">=&lt;/span> &lt;span style="color:#0000cf;font-weight:bold">4&lt;/span>&lt;span style="color:#000;font-weight:bold">;&lt;/span>&lt;span style="color:#a40000">
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#a40000">&lt;/span> &lt;span style="color:#204a87;font-weight:bold">string&lt;/span> &lt;span style="color:#000">foo_string&lt;/span> &lt;span style="color:#ce5c00;font-weight:bold">=&lt;/span> &lt;span style="color:#0000cf;font-weight:bold">9&lt;/span>&lt;span style="color:#000;font-weight:bold">;&lt;/span>&lt;span style="color:#a40000">
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#a40000">&lt;/span> &lt;span style="color:#ce5c00;font-weight:bold">...&lt;/span>&lt;span style="color:#a40000">
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#a40000">&lt;/span>&lt;span style="color:#000;font-weight:bold">}&lt;/span>&lt;span style="color:#a40000">
+&lt;/span>&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>All the fields in the &lt;code>example_name&lt;/code> oneof will use a single private field for
+their value. In addition, the protocol buffer compiler will generate a Java enum
+type for the oneof case, as follows:&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-java" data-lang="java">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#204a87;font-weight:bold">public&lt;/span> &lt;span style="color:#204a87;font-weight:bold">enum&lt;/span> &lt;span style="color:#000">ExampleNameCase&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#204a87;font-weight:bold">implements&lt;/span> &lt;span style="color:#000">com&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">.&lt;/span>&lt;span style="color:#c4a000">google&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">.&lt;/span>&lt;span style="color:#c4a000">protobuf&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">.&lt;/span>&lt;span style="color:#c4a000">Internal&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">.&lt;/span>&lt;span style="color:#c4a000">EnumLite&lt;/span> &lt;span style="color:#ce5c00;font-weight:bold">{&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#000">FOO_INT&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">(&lt;/span>&lt;span style="color:#0000cf;font-weight:bold">4&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">),&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#000">FOO_STRING&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">(&lt;/span>&lt;span style="color:#0000cf;font-weight:bold">9&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">),&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#ce5c00;font-weight:bold">...&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#000">EXAMPLENAME_NOT_SET&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">(&lt;/span>&lt;span style="color:#0000cf;font-weight:bold">0&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">);&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#ce5c00;font-weight:bold">...&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#ce5c00;font-weight:bold">};&lt;/span>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>The values of this enum type have the following special methods:&lt;/p>
+&lt;ul>
+&lt;li>&lt;code>int getNumber()&lt;/code>: Returns the object&amp;rsquo;s numeric value as defined in the
+.proto file.&lt;/li>
+&lt;li>&lt;code>static ExampleNameCase forNumber(int value)&lt;/code>: Returns the enum object
+corresponding to the given numeric value (or &lt;code>null&lt;/code> for other numeric
+values).&lt;/li>
+&lt;/ul>
+&lt;p>The compiler will also generate the following accessor method in both the
+message class and its builder:&lt;/p>
+&lt;ul>
+&lt;li>&lt;code>ExampleNameCase getExampleNameCase()&lt;/code>: Returns the enum indicating which
+field is set. Returns &lt;code>EXAMPLENAME_NOT_SET&lt;/code> if none of them is set.&lt;/li>
+&lt;/ul>
+&lt;p>The compiler will generate the following method only in the message&amp;rsquo;s builder:&lt;/p>
+&lt;ul>
+&lt;li>&lt;code>Builder clearExampleName()&lt;/code>: Resets the oneof&amp;rsquo;s private field to null, and
+sets the oneof case to &lt;code>EXAMPLENAME_NOT_SET&lt;/code>.&lt;/li>
+&lt;/ul>
+&lt;h2 id="enum">Enumerations&lt;/h2>
+&lt;p>Given an enum definition like:&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-proto" data-lang="proto">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#204a87;font-weight:bold">enum&lt;/span> &lt;span style="color:#000">Foo&lt;/span> &lt;span style="color:#000;font-weight:bold">{&lt;/span>&lt;span style="color:#a40000">
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#a40000">&lt;/span> &lt;span style="color:#000">VALUE_A&lt;/span> &lt;span style="color:#ce5c00;font-weight:bold">=&lt;/span> &lt;span style="color:#0000cf;font-weight:bold">0&lt;/span>&lt;span style="color:#000;font-weight:bold">;&lt;/span>&lt;span style="color:#a40000">
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#a40000">&lt;/span> &lt;span style="color:#000">VALUE_B&lt;/span> &lt;span style="color:#ce5c00;font-weight:bold">=&lt;/span> &lt;span style="color:#0000cf;font-weight:bold">5&lt;/span>&lt;span style="color:#000;font-weight:bold">;&lt;/span>&lt;span style="color:#a40000">
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#a40000">&lt;/span> &lt;span style="color:#000">VALUE_C&lt;/span> &lt;span style="color:#ce5c00;font-weight:bold">=&lt;/span> &lt;span style="color:#0000cf;font-weight:bold">1234&lt;/span>&lt;span style="color:#000;font-weight:bold">;&lt;/span>&lt;span style="color:#a40000">
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#a40000">&lt;/span>&lt;span style="color:#000;font-weight:bold">}&lt;/span>&lt;span style="color:#a40000">
+&lt;/span>&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>The protocol buffer compiler will generate a Java enum type called &lt;code>Foo&lt;/code> with
+the same set of values. If you are using proto3, it also adds the special value
+&lt;code>UNRECOGNIZED&lt;/code> to the enum type. The values of the generated enum type have the
+following special methods:&lt;/p>
+&lt;ul>
+&lt;li>&lt;code>int getNumber()&lt;/code>: Returns the object&amp;rsquo;s numeric value as defined in the
+&lt;code>.proto&lt;/code> file.&lt;/li>
+&lt;li>&lt;code>EnumValueDescriptor getValueDescriptor()&lt;/code>: Returns the value&amp;rsquo;s descriptor,
+which contains information about the value&amp;rsquo;s name, number, and type.&lt;/li>
+&lt;li>&lt;code>EnumDescriptor getDescriptorForType()&lt;/code>: Returns the enum type&amp;rsquo;s descriptor,
+which contains e.g. information about each defined value.&lt;/li>
+&lt;/ul>
+&lt;p>Additionally, the &lt;code>Foo&lt;/code> enum type contains the following static methods:&lt;/p>
+&lt;ul>
+&lt;li>&lt;code>static Foo forNumber(int value)&lt;/code>: Returns the enum object corresponding to
+the given numeric value. Returns null when there is no corresponding enum
+object.&lt;/li>
+&lt;li>&lt;code>static Foo valueOf(int value)&lt;/code>: Returns the enum object corresponding to
+the given numeric value. This method is deprecated in favor of
+&lt;code>forNumber(int value)&lt;/code> and will be removed in an upcoming release.&lt;/li>
+&lt;li>&lt;code>static Foo valueOf(EnumValueDescriptor descriptor)&lt;/code>: Returns the enum
+object corresponding to the given value descriptor. May be faster than
+&lt;code>valueOf(int)&lt;/code>. In proto3 returns &lt;code>UNRECOGNIZED&lt;/code> if passed an unknown value
+descriptor.&lt;/li>
+&lt;li>&lt;code>EnumDescriptor getDescriptor()&lt;/code>: Returns the enum type&amp;rsquo;s descriptor, which
+contains e.g. information about each defined value. (This differs from
+&lt;code>getDescriptorForType()&lt;/code> only in that it is a static method.)&lt;/li>
+&lt;/ul>
+&lt;p>An integer constant is also generated with the suffix _VALUE for each enum
+value.&lt;/p>
+&lt;p>Note that the &lt;code>.proto&lt;/code> language allows multiple enum symbols to have the same
+numeric value. Symbols with the same numeric value are synonyms. For example:&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-proto" data-lang="proto">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#204a87;font-weight:bold">enum&lt;/span> &lt;span style="color:#000">Foo&lt;/span> &lt;span style="color:#000;font-weight:bold">{&lt;/span>&lt;span style="color:#a40000">
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#a40000">&lt;/span> &lt;span style="color:#000">BAR&lt;/span> &lt;span style="color:#ce5c00;font-weight:bold">=&lt;/span> &lt;span style="color:#0000cf;font-weight:bold">0&lt;/span>&lt;span style="color:#000;font-weight:bold">;&lt;/span>&lt;span style="color:#a40000">
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#a40000">&lt;/span> &lt;span style="color:#000">BAZ&lt;/span> &lt;span style="color:#ce5c00;font-weight:bold">=&lt;/span> &lt;span style="color:#0000cf;font-weight:bold">0&lt;/span>&lt;span style="color:#000;font-weight:bold">;&lt;/span>&lt;span style="color:#a40000">
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#a40000">&lt;/span>&lt;span style="color:#000;font-weight:bold">}&lt;/span>&lt;span style="color:#a40000">
+&lt;/span>&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>In this case, &lt;code>BAZ&lt;/code> is a synonym for &lt;code>BAR&lt;/code>. In Java, &lt;code>BAZ&lt;/code> will be defined as a
+static final field like so:&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-java" data-lang="java">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#204a87;font-weight:bold">static&lt;/span> &lt;span style="color:#204a87;font-weight:bold">final&lt;/span> &lt;span style="color:#000">Foo&lt;/span> &lt;span style="color:#000">BAZ&lt;/span> &lt;span style="color:#ce5c00;font-weight:bold">=&lt;/span> &lt;span style="color:#000">BAR&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">;&lt;/span>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>Thus, &lt;code>BAR&lt;/code> and &lt;code>BAZ&lt;/code> compare equal, and &lt;code>BAZ&lt;/code> should never appear in switch
+statements. The compiler always chooses the first symbol defined with a given
+numeric value to be the &amp;ldquo;canonical&amp;rdquo; version of that symbol; all subsequent
+symbols with the same number are just aliases.&lt;/p>
+&lt;p>An enum can be defined nested within a message type. The compiler generates the
+Java enum definition nested within that message type&amp;rsquo;s class.&lt;/p>
+&lt;p>&lt;strong>Caution: when generating Java code, the maximum number of values in a protobuf
+enum may be surprisingly low&lt;/strong>—in the worst case, the maximum is slightly
+over 1,700 values. This limit is due to per-method size limits for Java
+bytecode, and it varies across Java implementations, different versions of the
+protobuf suite, and any options set on the enum in the &lt;code>.proto&lt;/code> file.&lt;/p>
+&lt;h2 id="extension">Extensions (proto2 only)&lt;/h2>
+&lt;p>Given a message with an extension range:&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-proto" data-lang="proto">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#204a87;font-weight:bold">message&lt;/span> &lt;span style="color:#000">Foo&lt;/span> &lt;span style="color:#000;font-weight:bold">{&lt;/span>&lt;span style="color:#a40000">
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#a40000">&lt;/span> &lt;span style="color:#204a87;font-weight:bold">extensions&lt;/span> &lt;span style="color:#0000cf;font-weight:bold">100&lt;/span> &lt;span style="color:#204a87;font-weight:bold">to&lt;/span> &lt;span style="color:#0000cf;font-weight:bold">199&lt;/span>&lt;span style="color:#000;font-weight:bold">;&lt;/span>&lt;span style="color:#a40000">
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#a40000">&lt;/span>&lt;span style="color:#000;font-weight:bold">}&lt;/span>&lt;span style="color:#a40000">
+&lt;/span>&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>The protocol buffer compiler will make &lt;code>Foo&lt;/code> extend
+&lt;code>GeneratedMessage.ExtendableMessage&lt;/code> instead of the usual &lt;code>GeneratedMessage&lt;/code>.
+Similarly, &lt;code>Foo&lt;/code>&amp;rsquo;s builder will extend &lt;code>GeneratedMessage.ExtendableBuilder&lt;/code>. You
+should never refer to these base types by name (&lt;code>GeneratedMessage&lt;/code> is considered
+an implementation detail). However, these superclasses define a number of
+additional methods that you can use to manipulate extensions.&lt;/p>
+&lt;p>In particular &lt;code>Foo&lt;/code> and &lt;code>Foo.Builder&lt;/code> will inherit the methods &lt;code>hasExtension()&lt;/code>,
+&lt;code>getExtension()&lt;/code>, and &lt;code>getExtensionCount()&lt;/code>. Additionally, &lt;code>Foo.Builder&lt;/code> will
+inherit methods &lt;code>setExtension()&lt;/code> and &lt;code>clearExtension()&lt;/code>. Each of these methods
+takes, as its first parameter, an extension identifier (described below), which
+identifies an extension field. The remaining parameters and the return value are
+exactly the same as those for the corresponding accessor methods that would be
+generated for a normal (non-extension) field of the same type as the extension
+identifier.&lt;/p>
+&lt;p>Given an extension definition:&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-proto" data-lang="proto">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#204a87;font-weight:bold">extend&lt;/span> &lt;span style="color:#000">Foo&lt;/span> &lt;span style="color:#000;font-weight:bold">{&lt;/span>&lt;span style="color:#a40000">
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#a40000">&lt;/span> &lt;span style="color:#204a87;font-weight:bold">optional&lt;/span> &lt;span style="color:#204a87;font-weight:bold">int32&lt;/span> &lt;span style="color:#000">bar&lt;/span> &lt;span style="color:#ce5c00;font-weight:bold">=&lt;/span> &lt;span style="color:#0000cf;font-weight:bold">123&lt;/span>&lt;span style="color:#000;font-weight:bold">;&lt;/span>&lt;span style="color:#a40000">
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#a40000">&lt;/span>&lt;span style="color:#000;font-weight:bold">}&lt;/span>&lt;span style="color:#a40000">
+&lt;/span>&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>The protocol buffer compiler generates an &amp;ldquo;extension identifier&amp;rdquo; called &lt;code>bar&lt;/code>,
+which you can use with &lt;code>Foo&lt;/code>&amp;rsquo;s extension accessors to access this extension,
+like so:&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-java" data-lang="java">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#000">Foo&lt;/span> &lt;span style="color:#000">foo&lt;/span> &lt;span style="color:#ce5c00;font-weight:bold">=&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#000">Foo&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">.&lt;/span>&lt;span style="color:#c4a000">newBuilder&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">()&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#ce5c00;font-weight:bold">.&lt;/span>&lt;span style="color:#c4a000">setExtension&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">(&lt;/span>&lt;span style="color:#000">bar&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">,&lt;/span> &lt;span style="color:#0000cf;font-weight:bold">1&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">)&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#ce5c00;font-weight:bold">.&lt;/span>&lt;span style="color:#c4a000">build&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">();&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#204a87;font-weight:bold">assert&lt;/span> &lt;span style="color:#000">foo&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">.&lt;/span>&lt;span style="color:#c4a000">hasExtension&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">(&lt;/span>&lt;span style="color:#000">bar&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">);&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#204a87;font-weight:bold">assert&lt;/span> &lt;span style="color:#000">foo&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">.&lt;/span>&lt;span style="color:#c4a000">getExtension&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">(&lt;/span>&lt;span style="color:#000">bar&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">)&lt;/span> &lt;span style="color:#ce5c00;font-weight:bold">==&lt;/span> &lt;span style="color:#0000cf;font-weight:bold">1&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">;&lt;/span>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>(The exact implementation of extension identifiers is complicated and involves
+magical use of generics—however, you don&amp;rsquo;t need to worry about how
+extension identifiers work to use them.)&lt;/p>
+&lt;p>Note that &lt;code>bar&lt;/code> would be declared as a static field of the wrapper class for the
+&lt;code>.proto&lt;/code> file, as described above; we have omitted the wrapper class name in the
+example.&lt;/p>
+&lt;p>Extensions can be declared inside the scope of another type to prefix their
+generated symbol names. For example, a common pattern is to extend a message by
+a field &lt;em>inside&lt;/em> the declaration of the field&amp;rsquo;s type:&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-proto" data-lang="proto">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#204a87;font-weight:bold">message&lt;/span> &lt;span style="color:#000">Baz&lt;/span> &lt;span style="color:#000;font-weight:bold">{&lt;/span>&lt;span style="color:#a40000">
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#a40000">&lt;/span> &lt;span style="color:#204a87;font-weight:bold">extend&lt;/span> &lt;span style="color:#000">Foo&lt;/span> &lt;span style="color:#000;font-weight:bold">{&lt;/span>&lt;span style="color:#a40000">
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#a40000">&lt;/span> &lt;span style="color:#204a87;font-weight:bold">optional&lt;/span> &lt;span style="color:#000">Baz&lt;/span> &lt;span style="color:#000">foo_ext&lt;/span> &lt;span style="color:#ce5c00;font-weight:bold">=&lt;/span> &lt;span style="color:#0000cf;font-weight:bold">124&lt;/span>&lt;span style="color:#000;font-weight:bold">;&lt;/span>&lt;span style="color:#a40000">
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#a40000">&lt;/span> &lt;span style="color:#000;font-weight:bold">}&lt;/span>&lt;span style="color:#a40000">
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#a40000">&lt;/span>&lt;span style="color:#000;font-weight:bold">}&lt;/span>&lt;span style="color:#a40000">
+&lt;/span>&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>In this case, an extension with identifier &lt;code>foo_ext&lt;/code> and type &lt;code>Baz&lt;/code> is declared
+inside the declaration of &lt;code>Baz&lt;/code>, and referring to &lt;code>foo_ext&lt;/code> requires the
+addition of a &lt;code>Baz.&lt;/code> prefix:&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-java" data-lang="java">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#000">Baz&lt;/span> &lt;span style="color:#000">baz&lt;/span> &lt;span style="color:#ce5c00;font-weight:bold">=&lt;/span> &lt;span style="color:#000">createMyBaz&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">();&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#000">Foo&lt;/span> &lt;span style="color:#000">foo&lt;/span> &lt;span style="color:#ce5c00;font-weight:bold">=&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#000">Foo&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">.&lt;/span>&lt;span style="color:#c4a000">newBuilder&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">()&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#ce5c00;font-weight:bold">.&lt;/span>&lt;span style="color:#c4a000">setExtension&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">(&lt;/span>&lt;span style="color:#000">Baz&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">.&lt;/span>&lt;span style="color:#c4a000">fooExt&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">,&lt;/span> &lt;span style="color:#000">baz&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">)&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#ce5c00;font-weight:bold">.&lt;/span>&lt;span style="color:#c4a000">build&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">();&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#204a87;font-weight:bold">assert&lt;/span> &lt;span style="color:#000">foo&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">.&lt;/span>&lt;span style="color:#c4a000">hasExtension&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">(&lt;/span>&lt;span style="color:#000">Baz&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">.&lt;/span>&lt;span style="color:#c4a000">fooExt&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">);&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#204a87;font-weight:bold">assert&lt;/span> &lt;span style="color:#000">foo&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">.&lt;/span>&lt;span style="color:#c4a000">getExtension&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">(&lt;/span>&lt;span style="color:#000">Baz&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">.&lt;/span>&lt;span style="color:#c4a000">fooExt&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">)&lt;/span> &lt;span style="color:#ce5c00;font-weight:bold">==&lt;/span> &lt;span style="color:#000">baz&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">;&lt;/span>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>When parsing a message that might have extensions, you must provide an
+&lt;a href="/reference/java/api-docs/com/google/protobuf/ExtensionRegistry.html">&lt;code>ExtensionRegistry&lt;/code>&lt;/a>
+in which you have registered any extensions that you want to be able to parse.
+Otherwise, those extensions will be treated like unknown fields and the methods
+observing extensions will behave as if they don&amp;rsquo;t exist.&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-java" data-lang="java">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#000">ExtensionRegistry&lt;/span> &lt;span style="color:#000">registry&lt;/span> &lt;span style="color:#ce5c00;font-weight:bold">=&lt;/span> &lt;span style="color:#000">ExtensionRegistry&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">.&lt;/span>&lt;span style="color:#c4a000">newInstance&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">();&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#000">registry&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">.&lt;/span>&lt;span style="color:#c4a000">add&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">(&lt;/span>&lt;span style="color:#000">Baz&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">.&lt;/span>&lt;span style="color:#c4a000">fooExt&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">);&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#000">Foo&lt;/span> &lt;span style="color:#000">foo&lt;/span> &lt;span style="color:#ce5c00;font-weight:bold">=&lt;/span> &lt;span style="color:#000">Foo&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">.&lt;/span>&lt;span style="color:#c4a000">parseFrom&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">(&lt;/span>&lt;span style="color:#000">input&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">,&lt;/span> &lt;span style="color:#000">registry&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">);&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#204a87;font-weight:bold">assert&lt;/span> &lt;span style="color:#000">foo&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">.&lt;/span>&lt;span style="color:#c4a000">hasExtension&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">(&lt;/span>&lt;span style="color:#000">Baz&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">.&lt;/span>&lt;span style="color:#c4a000">fooExt&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">);&lt;/span>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-java" data-lang="java">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#000">ExtensionRegistry&lt;/span> &lt;span style="color:#000">registry&lt;/span> &lt;span style="color:#ce5c00;font-weight:bold">=&lt;/span> &lt;span style="color:#000">ExtensionRegistry&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">.&lt;/span>&lt;span style="color:#c4a000">newInstance&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">();&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#000">Foo&lt;/span> &lt;span style="color:#000">foo&lt;/span> &lt;span style="color:#ce5c00;font-weight:bold">=&lt;/span> &lt;span style="color:#000">Foo&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">.&lt;/span>&lt;span style="color:#c4a000">parseFrom&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">(&lt;/span>&lt;span style="color:#000">input&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">,&lt;/span> &lt;span style="color:#000">registry&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">);&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#204a87;font-weight:bold">assert&lt;/span> &lt;span style="color:#000">foo&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">.&lt;/span>&lt;span style="color:#c4a000">hasExtension&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">(&lt;/span>&lt;span style="color:#000">Baz&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">.&lt;/span>&lt;span style="color:#c4a000">fooExt&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">)&lt;/span> &lt;span style="color:#ce5c00;font-weight:bold">==&lt;/span> &lt;span style="color:#204a87;font-weight:bold">false&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">;&lt;/span>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h2 id="service">Services&lt;/h2>
+&lt;p>If the &lt;code>.proto&lt;/code> file contains the following line:&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-proto" data-lang="proto">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#204a87;font-weight:bold">option&lt;/span> &lt;span style="color:#000">java_generic_services&lt;/span> &lt;span style="color:#ce5c00;font-weight:bold">=&lt;/span> &lt;span style="color:#204a87;font-weight:bold">true&lt;/span>&lt;span style="color:#000;font-weight:bold">;&lt;/span>&lt;span style="color:#a40000">
+&lt;/span>&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>Then the protocol buffer compiler will generate code based on the service
+definitions found in the file as described in this section. However, the
+generated code may be undesirable as it is not tied to any particular RPC
+system, and thus requires more levels of indirection than code tailored to one
+system. If you do NOT want this code to be generated, add this line to the file:&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-proto" data-lang="proto">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#204a87;font-weight:bold">option&lt;/span> &lt;span style="color:#000">java_generic_services&lt;/span> &lt;span style="color:#ce5c00;font-weight:bold">=&lt;/span> &lt;span style="color:#204a87;font-weight:bold">false&lt;/span>&lt;span style="color:#000;font-weight:bold">;&lt;/span>&lt;span style="color:#a40000">
+&lt;/span>&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>If neither of the above lines are given, the option defaults to &lt;code>false&lt;/code>, as
+generic services are deprecated. (Note that prior to 2.4.0, the option defaults
+to &lt;code>true&lt;/code>)&lt;/p>
+&lt;p>RPC systems based on &lt;code>.proto&lt;/code>-language service definitions should provide
+&lt;a href="/reference/cpp/api-docs/google.protobuf.compiler.plugin.pb">plugins&lt;/a>
+to generate code approriate for the system. These plugins are likely to require
+that abstract services are disabled, so that they can generate their own classes
+of the same names. Plugins are new in version 2.3.0 (January 2010).&lt;/p>
+&lt;p>The remainder of this section describes what the protocol buffer compiler
+generates when abstract services are enabled.&lt;/p>
+&lt;h3 id="interface">Interface&lt;/h3>
+&lt;p>Given a service definition:&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-proto" data-lang="proto">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#204a87;font-weight:bold">service&lt;/span> &lt;span style="color:#000">Foo&lt;/span> &lt;span style="color:#000;font-weight:bold">{&lt;/span>&lt;span style="color:#a40000">
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#a40000">&lt;/span> &lt;span style="color:#204a87;font-weight:bold">rpc&lt;/span> &lt;span style="color:#000">Bar&lt;/span>&lt;span style="color:#000;font-weight:bold">(&lt;/span>&lt;span style="color:#000">FooRequest&lt;/span>&lt;span style="color:#000;font-weight:bold">)&lt;/span> &lt;span style="color:#204a87;font-weight:bold">returns&lt;/span>&lt;span style="color:#000;font-weight:bold">(&lt;/span>&lt;span style="color:#000">FooResponse&lt;/span>&lt;span style="color:#000;font-weight:bold">);&lt;/span>&lt;span style="color:#a40000">
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#a40000">&lt;/span>&lt;span style="color:#000;font-weight:bold">}&lt;/span>&lt;span style="color:#a40000">
+&lt;/span>&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>The protocol buffer compiler will generate an abstract class &lt;code>Foo&lt;/code> to represent
+this service. &lt;code>Foo&lt;/code> will have an abstract method for each method defined in the
+service definition. In this case, the method &lt;code>Bar&lt;/code> is defined as:&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-java" data-lang="java">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#204a87;font-weight:bold">abstract&lt;/span> &lt;span style="color:#204a87;font-weight:bold">void&lt;/span> &lt;span style="color:#000">bar&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">(&lt;/span>&lt;span style="color:#000">RpcController&lt;/span> &lt;span style="color:#000">controller&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">,&lt;/span> &lt;span style="color:#000">FooRequest&lt;/span> &lt;span style="color:#000">request&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">,&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#000">RpcCallback&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">&amp;lt;&lt;/span>&lt;span style="color:#000">FooResponse&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">&amp;gt;&lt;/span> &lt;span style="color:#000">done&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">);&lt;/span>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>The parameters are equivalent to the parameters of &lt;code>Service.CallMethod()&lt;/code>,
+except that the &lt;code>method&lt;/code> argument is implied and &lt;code>request&lt;/code> and &lt;code>done&lt;/code> specify
+their exact type.&lt;/p>
+&lt;p>&lt;code>Foo&lt;/code> subclasses the &lt;code>Service&lt;/code> interface. The protocol buffer compiler
+automatically generates implementations of the methods of &lt;code>Service&lt;/code> as follows:&lt;/p>
+&lt;ul>
+&lt;li>&lt;code>getDescriptorForType&lt;/code>: Returns the service&amp;rsquo;s &lt;code>ServiceDescriptor&lt;/code>.&lt;/li>
+&lt;li>&lt;code>callMethod&lt;/code>: Determines which method is being called based on the provided
+method descriptor and calls it directly, down-casting the request message
+and callback to the correct types.&lt;/li>
+&lt;li>&lt;code>getRequestPrototype&lt;/code> and &lt;code>getResponsePrototype&lt;/code>: Returns the default
+instance of the request or response of the correct type for the given
+method.&lt;/li>
+&lt;/ul>
+&lt;p>The following static method is also generated:&lt;/p>
+&lt;ul>
+&lt;li>&lt;code>static ServiceDescriptor getServiceDescriptor()&lt;/code>: Returns the type&amp;rsquo;s
+descriptor, which contains information about what methods this service has
+and what their input and output types are.&lt;/li>
+&lt;/ul>
+&lt;p>&lt;code>Foo&lt;/code> will also contain a nested interface &lt;code>Foo.Interface&lt;/code>. This is a pure
+interface that again contains methods corresponding to each method in your
+service definition. However, this interface does not extend the &lt;code>Service&lt;/code>
+interface. This is a problem because RPC server implementations are usually
+written to use abstract &lt;code>Service&lt;/code> objects, not your particular service. To solve
+this problem, if you have an object &lt;code>impl&lt;/code> implementing &lt;code>Foo.Interface&lt;/code>, you can
+call &lt;code>Foo.newReflectiveService(impl)&lt;/code> to construct an instance of &lt;code>Foo&lt;/code> that
+simply delegates to &lt;code>impl&lt;/code>, and implements &lt;code>Service&lt;/code>.&lt;/p>
+&lt;p>To recap, when implementing your own service, you have two options:&lt;/p>
+&lt;ul>
+&lt;li>Subclass &lt;code>Foo&lt;/code> and implement its methods as appropriate, then hand instances
+of your subclass directly to the RPC server implementation. This is usually
+easiest, but some consider it less &amp;ldquo;pure&amp;rdquo;.&lt;/li>
+&lt;li>Implement &lt;code>Foo.Interface&lt;/code> and use &lt;code>Foo.newReflectiveService(Foo.Interface)&lt;/code>
+to construct a &lt;code>Service&lt;/code> wrapping it, then pass the wrapper to your RPC
+implementation.&lt;/li>
+&lt;/ul>
+&lt;h3 id="stub">Stub&lt;/h3>
+&lt;p>The protocol buffer compiler also generates a &amp;ldquo;stub&amp;rdquo; implementation of every
+service interface, which is used by clients wishing to send requests to servers
+implementing the service. For the &lt;code>Foo&lt;/code> service (above), the stub implementation
+&lt;code>Foo.Stub&lt;/code> will be defined as a nested class.&lt;/p>
+&lt;p>&lt;code>Foo.Stub&lt;/code> is a subclass of &lt;code>Foo&lt;/code> which also implements the following methods:&lt;/p>
+&lt;ul>
+&lt;li>&lt;code>Foo.Stub(RpcChannel channel)&lt;/code>: Constructs a new stub which sends requests
+on the given channel.&lt;/li>
+&lt;li>&lt;code>RpcChannel getChannel()&lt;/code>: Returns this stub&amp;rsquo;s channel, as passed to the
+constructor.&lt;/li>
+&lt;/ul>
+&lt;p>The stub additionally implements each of the service&amp;rsquo;s methods as a wrapper
+around the channel. Calling one of the methods simply calls
+&lt;code>channel.callMethod()&lt;/code>.&lt;/p>
+&lt;p>The Protocol Buffer library does not include an RPC implementation. However, it
+includes all of the tools you need to hook up a generated service class to any
+arbitrary RPC implementation of your choice. You need only provide
+implementations of &lt;code>RpcChannel&lt;/code> and &lt;code>RpcController&lt;/code>.&lt;/p>
+&lt;h3 id="blocking-interfaces">Blocking Interfaces&lt;/h3>
+&lt;p>The RPC classes described above all have non-blocking semantics: when you call a
+method, you provide a callback object which will be invoked once the method
+completes. Often it is easier (though possibly less scalable) to write code
+using blocking semantics, where the method simply doesn&amp;rsquo;t return until it is
+done. To accomodate this, the protocol buffer compiler also generates blocking
+versions of your service class. &lt;code>Foo.BlockingInterface&lt;/code> is equivalent to
+&lt;code>Foo.Interface&lt;/code> except that each method simply returns the result rather than
+call a callback. So, for example, &lt;code>bar&lt;/code> is defined as:&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-java" data-lang="java">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#204a87;font-weight:bold">abstract&lt;/span> &lt;span style="color:#000">FooResponse&lt;/span> &lt;span style="color:#000">bar&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">(&lt;/span>&lt;span style="color:#000">RpcController&lt;/span> &lt;span style="color:#000">controller&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">,&lt;/span> &lt;span style="color:#000">FooRequest&lt;/span> &lt;span style="color:#000">request&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">)&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#204a87;font-weight:bold">throws&lt;/span> &lt;span style="color:#000">ServiceException&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">;&lt;/span>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>Analogous to non-blocking services,
+&lt;code>Foo.newReflectiveBlockingService(Foo.BlockingInterface)&lt;/code> returns a
+&lt;code>BlockingService&lt;/code> wrapping some &lt;code>Foo.BlockingInterface&lt;/code>. Finally,
+&lt;code>Foo.BlockingStub&lt;/code> returns a stub implementation of &lt;code>Foo.BlockingInterface&lt;/code> that
+sends requests to a particular &lt;code>BlockingRpcChannel&lt;/code>.&lt;/p>
+&lt;h2 id="plugins">Plugin Insertion Points&lt;/h2>
+&lt;p>&lt;a href="/reference/cpp/api-docs/google.protobuf.compiler.plugin.pb">Code generator plugins&lt;/a>
+that want to extend the output of the Java code generator may insert code of
+the following types using the given insertion point names.&lt;/p>
+&lt;ul>
+&lt;li>&lt;code>outer_class_scope&lt;/code>: Member declarations that belong in the file&amp;rsquo;s wrapper
+class.&lt;/li>
+&lt;li>&lt;code>class_scope:TYPENAME&lt;/code>: Member declarations that belong in a message class.
+&lt;code>TYPENAME&lt;/code> is the full proto name, e.g. &lt;code>package.MessageType&lt;/code>.&lt;/li>
+&lt;li>&lt;code>builder_scope:TYPENAME&lt;/code>: Member declarations that belong in a message&amp;rsquo;s
+builder class. &lt;code>TYPENAME&lt;/code> is the full proto name, e.g.
+&lt;code>package.MessageType&lt;/code>.&lt;/li>
+&lt;li>&lt;code>enum_scope:TYPENAME&lt;/code>: Member declarations that belong in an enum class.
+&lt;code>TYPENAME&lt;/code> is the full proto enum name, e.g. &lt;code>package.EnumType&lt;/code>.&lt;/li>
+&lt;li>&lt;code>message_implements:TYPENAME&lt;/code>: Class implementation declarations for a
+message class. &lt;code>TYPENAME&lt;/code> is the full proto name, e.g.
+&lt;code>package.MessageType&lt;/code>.&lt;/li>
+&lt;li>&lt;code>builder_implements:TYPENAME&lt;/code>: Class implementation declarations for a
+builder class. &lt;code>TYPENAME&lt;/code> is the full proto name, e.g.
+&lt;code>package.MessageType&lt;/code>.&lt;/li>
+&lt;/ul>
+&lt;p>Generated code cannot contain import statements, as these are prone to conflict
+with type names defined within the generated code itself. Instead, when
+referring to an external class, you must always use its fully-qualified name.&lt;/p>
+&lt;p>The logic for determining output file names in the Java code generator is fairly
+complicated. You should probably look at the &lt;code>protoc&lt;/code> source code, particularly
+&lt;code>java_headers.cc&lt;/code>, to make sure you have covered all cases.&lt;/p>
+&lt;p>Do not generate code which relies on private class members declared by the
+standard code generator, as these implementation details may change in future
+versions of Protocol Buffers.&lt;/p>
+&lt;h2 id="utility-classes">Utility Classes&lt;/h2>
+&lt;p>Protocol buffer provides
+&lt;a href="/reference/java/api-docs/com/google/protobuf/util/package-summary.html">utility classes&lt;/a>
+for message comparison, JSON conversion and working with
+&lt;a href="/reference/protobuf/google.protobuf">well-known types (predefined protocol buffer messages for common use-cases).&lt;/a>&lt;/p></description></item><item><title>Reference: Java API</title><link>/reference/java/api-docs-link/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>/reference/java/api-docs-link/</guid><description/></item><item><title>Reference:</title><link>/reference/java/java-proto-names/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>/reference/java/java-proto-names/</guid><description>
+&lt;h1 id="java-proto-names">Java Proto Names&lt;/h1>
+&lt;h2 id="immutable-api-message-names">Immutable API Message Names&lt;/h2>
+&lt;p>The names for protos generated by the immutable API (&lt;code>java_proto_library&lt;/code> BUILD
+target) are listed in the following table.&lt;/p>
+&lt;table>
+&lt;thead>
+&lt;tr>
+&lt;th style="text-align:center">java_api_version&lt;/th>
+&lt;th style="text-align:center">java_multiple_files&lt;/th>
+&lt;th>java_alt_api_package&lt;/th>
+&lt;th>java_package&lt;/th>
+&lt;th>java_outer_classname&lt;/th>
+&lt;th>Generated full message name&lt;/th>
+&lt;/tr>
+&lt;/thead>
+&lt;tbody>
+&lt;tr>
+&lt;td style="text-align:center">1&lt;/td>
+&lt;td style="text-align:center">true&lt;/td>
+&lt;td>Defined&lt;/td>
+&lt;td>-&lt;/td>
+&lt;td>&lt;/td>
+&lt;td>&lt;code>$java_alt_api_package.$message&lt;/code>&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td style="text-align:center">1&lt;/td>
+&lt;td style="text-align:center">true&lt;/td>
+&lt;td>Not defined&lt;/td>
+&lt;td>Not defined&lt;/td>
+&lt;td>&lt;/td>
+&lt;td>&lt;code>com.google.protos.$package.proto2api.$message&lt;/code>&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td style="text-align:center">1&lt;/td>
+&lt;td style="text-align:center">true&lt;/td>
+&lt;td>Not defined&lt;/td>
+&lt;td>Defined&lt;/td>
+&lt;td>&lt;/td>
+&lt;td>&lt;code>$java_package.proto2api.$message&lt;/code>&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td style="text-align:center">1&lt;/td>
+&lt;td style="text-align:center">false&lt;/td>
+&lt;td>Defined&lt;/td>
+&lt;td>-&lt;/td>
+&lt;td>Not defined&lt;/td>
+&lt;td>&lt;code>$java_alt_api_package.$derived_outer_class.$message&lt;/code>&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td style="text-align:center">1&lt;/td>
+&lt;td style="text-align:center">false&lt;/td>
+&lt;td>Defined&lt;/td>
+&lt;td>-&lt;/td>
+&lt;td>Defined&lt;/td>
+&lt;td>&lt;code>$java_alt_api_package.$java_outer_classname.$message&lt;/code>&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td style="text-align:center">1&lt;/td>
+&lt;td style="text-align:center">false&lt;/td>
+&lt;td>Not defined&lt;/td>
+&lt;td>Not defined&lt;/td>
+&lt;td>Not defined&lt;/td>
+&lt;td>&lt;code>com.google.protos.$package.proto2api.$derived_outer_class.$message&lt;/code>&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td style="text-align:center">1&lt;/td>
+&lt;td style="text-align:center">false&lt;/td>
+&lt;td>Not defined&lt;/td>
+&lt;td>Not defined&lt;/td>
+&lt;td>Defined&lt;/td>
+&lt;td>&lt;code>com.google.protos.$package.proto2api.$java_outer_classname.$message&lt;/code>&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td style="text-align:center">1&lt;/td>
+&lt;td style="text-align:center">false&lt;/td>
+&lt;td>Not defined&lt;/td>
+&lt;td>Defined&lt;/td>
+&lt;td>Not defined&lt;/td>
+&lt;td>&lt;code>$java_package.proto2api.$derived_outer_class.$message&lt;/code>&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td style="text-align:center">1&lt;/td>
+&lt;td style="text-align:center">false&lt;/td>
+&lt;td>Not defined&lt;/td>
+&lt;td>Defined&lt;/td>
+&lt;td>Defined&lt;/td>
+&lt;td>&lt;code>$java_package.proto2api.$java_outer_classname.$message&lt;/code>&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td style="text-align:center">2&lt;/td>
+&lt;td style="text-align:center">true&lt;/td>
+&lt;td>-&lt;/td>
+&lt;td>Not defined&lt;/td>
+&lt;td>-&lt;/td>
+&lt;td>&lt;code>com.google.protos.$package.$message&lt;/code>&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td style="text-align:center">2&lt;/td>
+&lt;td style="text-align:center">true&lt;/td>
+&lt;td>-&lt;/td>
+&lt;td>Defined&lt;/td>
+&lt;td>-&lt;/td>
+&lt;td>&lt;code>$java_package.$message&lt;/code>&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td style="text-align:center">2&lt;/td>
+&lt;td style="text-align:center">false&lt;/td>
+&lt;td>-&lt;/td>
+&lt;td>Not defined&lt;/td>
+&lt;td>Not defined&lt;/td>
+&lt;td>&lt;code>com.google.protos.$package.$derived_outer_class.$message&lt;/code>&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td style="text-align:center">2&lt;/td>
+&lt;td style="text-align:center">false&lt;/td>
+&lt;td>-&lt;/td>
+&lt;td>Not defined&lt;/td>
+&lt;td>Defined&lt;/td>
+&lt;td>&lt;code>com.google.protos.$package.$java_outer_classname.$message&lt;/code>&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td style="text-align:center">2&lt;/td>
+&lt;td style="text-align:center">false&lt;/td>
+&lt;td>-&lt;/td>
+&lt;td>Defined&lt;/td>
+&lt;td>Not defined&lt;/td>
+&lt;td>&lt;code>$java_package.$derived_outer_class.$message&lt;/code>&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td style="text-align:center">2&lt;/td>
+&lt;td style="text-align:center">false&lt;/td>
+&lt;td>-&lt;/td>
+&lt;td>Defined&lt;/td>
+&lt;td>Defined&lt;/td>
+&lt;td>&lt;code>$java_package.$java_outer_classname.$message&lt;/code>&lt;/td>
+&lt;/tr>
+&lt;/tbody>
+&lt;/table>
+&lt;p>&lt;strong>Legend&lt;/strong>&lt;/p>
+&lt;ul>
+&lt;li>
+&lt;p>- means either setting or not setting the option will not change the
+generated full message name.&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>&lt;code>$message&lt;/code> is the actual name of the proto message.&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>&lt;code>$package&lt;/code> is the name of the proto package. This is the name specified by
+the &lt;code>package&lt;/code> directive in the proto file, which is usually at the top of
+the file.&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>&lt;code>$derived_outer_class&lt;/code> is a name generated from the proto file name.
+Generally it&amp;rsquo;s computed by removing punctuation from the file name and
+converting it to CamelCase. For example, if the proto is &lt;code>foo_bar.proto&lt;/code>,
+the &lt;code>$derived_outer_class&lt;/code> value is &lt;code>FooBar&lt;/code>.&lt;/p>
+&lt;p>If the generated class name would be the same as one of the messages defined
+in the proto file, &lt;code>derived_outer_class&lt;/code> has &lt;code>OuterClass&lt;/code> appended to it.
+For example, if the proto is &lt;code>foo_bar.proto&lt;/code> and contains a &lt;code>FooBar&lt;/code>
+message, the &lt;code>$derived_outer_class&lt;/code> value is &lt;code>FooBarOuterClass&lt;/code>.&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>All other &lt;code>$names&lt;/code> are the values of the corresponding proto2 file options
+defined in the proto file.&lt;/p>
+&lt;/li>
+&lt;/ul>
+&lt;p>The recommended set of options is:&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-proto" data-lang="proto">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#204a87;font-weight:bold">option&lt;/span> &lt;span style="color:#000">java_multiple_files&lt;/span> &lt;span style="color:#ce5c00;font-weight:bold">=&lt;/span> &lt;span style="color:#204a87;font-weight:bold">true&lt;/span>&lt;span style="color:#000;font-weight:bold">;&lt;/span>&lt;span style="color:#a40000">
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#a40000">&lt;/span>&lt;span style="color:#204a87;font-weight:bold">option&lt;/span> &lt;span style="color:#000">java_outer_classname&lt;/span> &lt;span style="color:#ce5c00;font-weight:bold">=&lt;/span> &lt;span style="color:#4e9a06">&amp;#34;{UpperCamelCaseFilename}Proto&amp;#34;&lt;/span>&lt;span style="color:#000;font-weight:bold">;&lt;/span>&lt;span style="color:#a40000">
+&lt;/span>&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h2 id="mutable-api-message-names">Mutable API Message Names&lt;/h2>
+&lt;p>The names for protos generated by the mutable API are outlined in the following
+sections.&lt;/p>
+&lt;div class="alert alert-note" role="alert">
+&lt;h4 class="alert-heading">Note&lt;/h4>
+Java mutable API names will be generated only when the
+&lt;code>java_mutable_proto_library&lt;/code> target is built.
+&lt;/div>
+&lt;h3 id="generated-proto-api-version">Generated Proto API Version&lt;/h3>
+&lt;div class="alert alert-warning" role="alert">
+&lt;h4 class="alert-heading">Warning&lt;/h4>
+Java
+proto1 is deprecated. Avoid any settings that will generate that version.
+&lt;/div>
+&lt;table>
+&lt;thead>
+&lt;tr>
+&lt;th>java_api_version&lt;/th>
+&lt;th>java_mutable_api&lt;/th>
+&lt;th>java_enable_dual_generate_mutable_api&lt;/th>
+&lt;th>API version&lt;/th>
+&lt;/tr>
+&lt;/thead>
+&lt;tbody>
+&lt;tr>
+&lt;td>-&lt;/td>
+&lt;td>-&lt;/td>
+&lt;td>true&lt;/td>
+&lt;td>proto1, proto2 mutable&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>1&lt;/td>
+&lt;td>-&lt;/td>
+&lt;td>false&lt;/td>
+&lt;td>proto1&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>2&lt;/td>
+&lt;td>true&lt;/td>
+&lt;td>false&lt;/td>
+&lt;td>proto2 mutable&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>2&lt;/td>
+&lt;td>false&lt;/td>
+&lt;td>false&lt;/td>
+&lt;td>proto1&lt;/td>
+&lt;/tr>
+&lt;/tbody>
+&lt;/table>
+&lt;h3 id="proto2-message-names">Proto2 Message Names&lt;/h3>
+&lt;table>
+&lt;thead>
+&lt;tr>
+&lt;th style="text-align:center">java_api_version&lt;/th>
+&lt;th style="text-align:center">(java_multiple_files, java_multiple_files_mutable_package)&lt;/th>
+&lt;th>java_package&lt;/th>
+&lt;th>java_outer_classname&lt;/th>
+&lt;th>java_alt_api_package&lt;/th>
+&lt;th>Proto2 Mutable message name&lt;/th>
+&lt;/tr>
+&lt;/thead>
+&lt;tbody>
+&lt;tr>
+&lt;td style="text-align:center">-&lt;/td>
+&lt;td style="text-align:center">(true, defined)&lt;/td>
+&lt;td>-&lt;/td>
+&lt;td>-&lt;/td>
+&lt;td>-&lt;/td>
+&lt;td>&lt;code>$java_multiple_files_mutable_package.$message&lt;/code>&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td style="text-align:center">1&lt;/td>
+&lt;td style="text-align:center">!(true, defined)&lt;/td>
+&lt;td>Undefined&lt;/td>
+&lt;td>Undefined&lt;/td>
+&lt;td>Undefined&lt;/td>
+&lt;td>&lt;code>com.google.protos.$package.proto2api.Mutable$Filename.$message&lt;/code>&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td style="text-align:center">1&lt;/td>
+&lt;td style="text-align:center">!(true, defined)&lt;/td>
+&lt;td>Undefined&lt;/td>
+&lt;td>Undefined&lt;/td>
+&lt;td>Defined&lt;/td>
+&lt;td>&lt;code>$java_alt_api_package.Mutable$Filename.$message&lt;/code>&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td style="text-align:center">1&lt;/td>
+&lt;td style="text-align:center">!(true, defined)&lt;/td>
+&lt;td>Undefined&lt;/td>
+&lt;td>Defined&lt;/td>
+&lt;td>Undefined&lt;/td>
+&lt;td>&lt;code>com.google.protos.$package.proto2api.Mutable$java_outer_classname.$message&lt;/code>&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td style="text-align:center">1&lt;/td>
+&lt;td style="text-align:center">!(true, defined)&lt;/td>
+&lt;td>Undefined&lt;/td>
+&lt;td>Defined&lt;/td>
+&lt;td>Defined&lt;/td>
+&lt;td>&lt;code>$java_alt_api_package.Mutable$java_outer_classname.$message&lt;/code>&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td style="text-align:center">1&lt;/td>
+&lt;td style="text-align:center">!(true, defined)&lt;/td>
+&lt;td>Defined&lt;/td>
+&lt;td>Undefined&lt;/td>
+&lt;td>Undefined&lt;/td>
+&lt;td>&lt;code>$java_package.proto2api.Mutable$Filename.$message&lt;/code>&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td style="text-align:center">1&lt;/td>
+&lt;td style="text-align:center">!(true, defined)&lt;/td>
+&lt;td>Defined&lt;/td>
+&lt;td>Undefined&lt;/td>
+&lt;td>Defined&lt;/td>
+&lt;td>&lt;code>$java_alt_api_package.Mutable$Filename.$message&lt;/code>&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td style="text-align:center">1&lt;/td>
+&lt;td style="text-align:center">!(true, defined)&lt;/td>
+&lt;td>Defined&lt;/td>
+&lt;td>Defined&lt;/td>
+&lt;td>Undefined&lt;/td>
+&lt;td>&lt;code>$java_package.proto2api.Mutable$java_outer_classname.$message&lt;/code>&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td style="text-align:center">1&lt;/td>
+&lt;td style="text-align:center">!(true, defined)&lt;/td>
+&lt;td>Defined&lt;/td>
+&lt;td>Defined&lt;/td>
+&lt;td>Defined&lt;/td>
+&lt;td>&lt;code>$java_alt_api_package.Mutable$java_outer_classname.$message&lt;/code>&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td style="text-align:center">2&lt;/td>
+&lt;td style="text-align:center">!(true, defined)&lt;/td>
+&lt;td>Undefined&lt;/td>
+&lt;td>Undefined&lt;/td>
+&lt;td>-&lt;/td>
+&lt;td>&lt;code>com.google.protos.$package.Mutable$Filename.$message&lt;/code>&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td style="text-align:center">2&lt;/td>
+&lt;td style="text-align:center">!(true, defined)&lt;/td>
+&lt;td>Undefined&lt;/td>
+&lt;td>Defined&lt;/td>
+&lt;td>-&lt;/td>
+&lt;td>&lt;code>com.google.protos.$package..Mutable$java_outer_classname.$message&lt;/code>&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td style="text-align:center">2&lt;/td>
+&lt;td style="text-align:center">!(true, defined)&lt;/td>
+&lt;td>Defined&lt;/td>
+&lt;td>Undefined&lt;/td>
+&lt;td>-&lt;/td>
+&lt;td>&lt;code>$java_package.Mutable$Filename.$message&lt;/code>&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td style="text-align:center">2&lt;/td>
+&lt;td style="text-align:center">!(true, defined)&lt;/td>
+&lt;td>Defined&lt;/td>
+&lt;td>Defined&lt;/td>
+&lt;td>-&lt;/td>
+&lt;td>&lt;code>$java_package.Mutable$java_outer_classname.$message&lt;/code>&lt;/td>
+&lt;/tr>
+&lt;/tbody>
+&lt;/table>
+&lt;p>&lt;strong>Legend&lt;/strong>&lt;/p>
+&lt;ul>
+&lt;li>- means either setting or not setting the option will not change the
+generated full message name.&lt;/li>
+&lt;li>&lt;code>$message&lt;/code> is the actual name of the proto message.&lt;/li>
+&lt;li>All other &lt;code>$names&lt;/code> are the values of the corresponding proto2 file options
+defined in the proto file.&lt;/li>
+&lt;/ul>
+&lt;h3 id="proto1-message-names">Proto1 Message Names&lt;/h3>
+&lt;div class="alert alert-warning" role="alert">
+&lt;h4 class="alert-heading">Warning&lt;/h4>
+Java
+proto1 is deprecated. The following table is provided for informational purposes
+only.
+&lt;/div>
+&lt;table>
+&lt;thead>
+&lt;tr>
+&lt;th style="text-align:center">java_api_version&lt;/th>
+&lt;th style="text-align:center">java_multiple_files&lt;/th>
+&lt;th>java_package&lt;/th>
+&lt;th>java_outer_classname&lt;/th>
+&lt;th>java_alt_api_package&lt;/th>
+&lt;th>Proto1 message name&lt;/th>
+&lt;/tr>
+&lt;/thead>
+&lt;tbody>
+&lt;tr>
+&lt;td style="text-align:center">1&lt;/td>
+&lt;td style="text-align:center">true&lt;/td>
+&lt;td>Undefined&lt;/td>
+&lt;td>-&lt;/td>
+&lt;td>-&lt;/td>
+&lt;td>&lt;code>com.google.protos.$package.$message&lt;/code>&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td style="text-align:center">1&lt;/td>
+&lt;td style="text-align:center">true&lt;/td>
+&lt;td>Defined&lt;/td>
+&lt;td>-&lt;/td>
+&lt;td>-&lt;/td>
+&lt;td>&lt;code>$java_package.$message&lt;/code>&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td style="text-align:center">1&lt;/td>
+&lt;td style="text-align:center">false&lt;/td>
+&lt;td>Undefined&lt;/td>
+&lt;td>Defined&lt;/td>
+&lt;td>-&lt;/td>
+&lt;td>&lt;code>com.google.protos.$package.$java_outer_class.$message&lt;/code>&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td style="text-align:center">1&lt;/td>
+&lt;td style="text-align:center">false&lt;/td>
+&lt;td>Undefined&lt;/td>
+&lt;td>Undefined&lt;/td>
+&lt;td>-&lt;/td>
+&lt;td>&lt;code>com.google.protos.$package.$message&lt;/code>&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td style="text-align:center">1&lt;/td>
+&lt;td style="text-align:center">false&lt;/td>
+&lt;td>Defined&lt;/td>
+&lt;td>Defined&lt;/td>
+&lt;td>-&lt;/td>
+&lt;td>&lt;code>$java_package.$java_outer_class.$message&lt;/code>&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td style="text-align:center">1&lt;/td>
+&lt;td style="text-align:center">false&lt;/td>
+&lt;td>Defined&lt;/td>
+&lt;td>Undefined&lt;/td>
+&lt;td>-&lt;/td>
+&lt;td>&lt;code>$java_package.$message&lt;/code>&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td style="text-align:center">2&lt;/td>
+&lt;td style="text-align:center">true&lt;/td>
+&lt;td>Undefined&lt;/td>
+&lt;td>-&lt;/td>
+&lt;td>Undefined&lt;/td>
+&lt;td>&lt;code>com.google.protos.$package.proto1api.$message&lt;/code>&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td style="text-align:center">2&lt;/td>
+&lt;td style="text-align:center">true&lt;/td>
+&lt;td>Defined&lt;/td>
+&lt;td>-&lt;/td>
+&lt;td>Undefined&lt;/td>
+&lt;td>&lt;code>$java_package.proto1api.$message&lt;/code>&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td style="text-align:center">2&lt;/td>
+&lt;td style="text-align:center">false&lt;/td>
+&lt;td>Undefined&lt;/td>
+&lt;td>Defined&lt;/td>
+&lt;td>Undefined&lt;/td>
+&lt;td>&lt;code>com.google.protos.$package.proto1api.$java_outer_class.$message&lt;/code>&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td style="text-align:center">2&lt;/td>
+&lt;td style="text-align:center">false&lt;/td>
+&lt;td>Undefined&lt;/td>
+&lt;td>Undefined&lt;/td>
+&lt;td>Undefined&lt;/td>
+&lt;td>&lt;code>com.google.protos.$package.proto1api.$message&lt;/code>&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td style="text-align:center">2&lt;/td>
+&lt;td style="text-align:center">false&lt;/td>
+&lt;td>Defined&lt;/td>
+&lt;td>Defined&lt;/td>
+&lt;td>Undefined&lt;/td>
+&lt;td>&lt;code>$java_package.proto1api.$java_outer_class.$message&lt;/code>&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td style="text-align:center">2&lt;/td>
+&lt;td style="text-align:center">false&lt;/td>
+&lt;td>Defined&lt;/td>
+&lt;td>Undefined&lt;/td>
+&lt;td>Undefined&lt;/td>
+&lt;td>&lt;code>$java_package.proto1api.$message&lt;/code>&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td style="text-align:center">2&lt;/td>
+&lt;td style="text-align:center">true&lt;/td>
+&lt;td>Undefined&lt;/td>
+&lt;td>-&lt;/td>
+&lt;td>Defined&lt;/td>
+&lt;td>&lt;code>com.google.protos.$package.$java_alt_api_package.$message&lt;/code>&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td style="text-align:center">2&lt;/td>
+&lt;td style="text-align:center">true&lt;/td>
+&lt;td>Defined&lt;/td>
+&lt;td>-&lt;/td>
+&lt;td>Defined&lt;/td>
+&lt;td>&lt;code>$java_package.$java_alt_api_package.$message&lt;/code>&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td style="text-align:center">2&lt;/td>
+&lt;td style="text-align:center">false&lt;/td>
+&lt;td>Undefined&lt;/td>
+&lt;td>Defined&lt;/td>
+&lt;td>Defined&lt;/td>
+&lt;td>&lt;code>com.google.protos.$package.$java_alt_api_package.$java_outer_class.$message&lt;/code>&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td style="text-align:center">2&lt;/td>
+&lt;td style="text-align:center">false&lt;/td>
+&lt;td>Undefined&lt;/td>
+&lt;td>Undefined&lt;/td>
+&lt;td>Defined&lt;/td>
+&lt;td>&lt;code>com.google.protos.$package.$java_alt_api_package.$message&lt;/code>&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td style="text-align:center">2&lt;/td>
+&lt;td style="text-align:center">false&lt;/td>
+&lt;td>Defined&lt;/td>
+&lt;td>Defined&lt;/td>
+&lt;td>Defined&lt;/td>
+&lt;td>&lt;code>$java_package.$java_alt_api_package.$java_outer_class.$message&lt;/code>&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td style="text-align:center">2&lt;/td>
+&lt;td style="text-align:center">false&lt;/td>
+&lt;td>Defined&lt;/td>
+&lt;td>Undefined&lt;/td>
+&lt;td>Defined&lt;/td>
+&lt;td>&lt;code>$java_package.$java_alt_api_package.$message&lt;/code>&lt;/td>
+&lt;/tr>
+&lt;/tbody>
+&lt;/table>
+&lt;p>&lt;strong>Legend&lt;/strong>&lt;/p>
+&lt;ul>
+&lt;li>- means either setting or not setting the option will not change the
+generated full message name.&lt;/li>
+&lt;li>&lt;code>$message&lt;/code> is the actual name of the proto message.&lt;/li>
+&lt;li>All other &lt;code>$names&lt;/code> are the values of the corresponding proto2 file options
+defined in the proto file.&lt;/li>
+&lt;/ul></description></item></channel></rss>

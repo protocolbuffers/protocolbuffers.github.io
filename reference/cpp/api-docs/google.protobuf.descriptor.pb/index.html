@@ -1,0 +1,697 @@
+<!doctype html><html itemscope itemtype=http://schema.org/WebPage lang=en class=no-js><head><meta charset=utf-8><meta name=viewport content="width=device-width,initial-scale=1,shrink-to-fit=no"><meta name=generator content="Hugo 0.107.0"><meta name=robots content="index, follow"><link rel="shortcut icon" href=/favicons/favicon.ico><link rel=apple-touch-icon href=/favicons/apple-touch-icon-180x180.png sizes=180x180><link rel=icon type=image/png href=/favicons/favicon-16x16.png sizes=16x16><link rel=icon type=image/png href=/favicons/favicon-32x32.png sizes=32x32><link rel=icon type=image/png href=/favicons/android-36x36.png sizes=36x36><link rel=icon type=image/png href=/favicons/android-48x48.png sizes=48x48><link rel=icon type=image/png href=/favicons/android-72x72.png sizes=72x72><link rel=icon type=image/png href=/favicons/android-96x96.png sizes=96x96><link rel=icon type=image/png href=/favicons/android-144x144.png sizes=144x144><link rel=icon type=image/png href=/favicons/android-192x192.png sizes=192x192><title>Protocol Buffers Documentation</title><meta name=description content="descriptor.pb.hdescriptor.pb.h#include &amp;lt;google/protobuf/descriptor.pb.h&amp;gt;
+namespace google::protobuf
+Protocol buffer representations of descriptors.
+This file defines a set of protocol message classes which represent the same information represented by the classes defined in descriptor.h. You can convert a FileDescriptorProto to a FileDescriptor using the DescriptorPool class. Thus, the classes in this file allow protocol type definitions to be communicated efficiently between processes.
+The protocol compiler currently doesn't support auto-generated documentation, hence this page contains no descriptions."><meta property="og:title" content><meta property="og:description" content="descriptor.pb.hdescriptor.pb.h#include <google/protobuf/descriptor.pb.h>
+namespace google::protobuf
+Protocol buffer representations of descriptors.
+This file defines a set of protocol message classes which represent the same information represented by the classes defined in descriptor.h. You can convert a FileDescriptorProto to a FileDescriptor using the DescriptorPool class. Thus, the classes in this file allow protocol type definitions to be communicated efficiently between processes.
+The protocol compiler currently doesn't support auto-generated documentation, hence this page contains no descriptions."><meta property="og:type" content="article"><meta property="og:url" content="/reference/cpp/api-docs/google.protobuf.descriptor.pb/"><meta property="article:section" content="reference"><meta property="og:site_name" content="Protocol Buffers Documentation"><meta itemprop=name content><meta itemprop=description content="descriptor.pb.hdescriptor.pb.h#include <google/protobuf/descriptor.pb.h>
+namespace google::protobuf
+Protocol buffer representations of descriptors.
+This file defines a set of protocol message classes which represent the same information represented by the classes defined in descriptor.h. You can convert a FileDescriptorProto to a FileDescriptor using the DescriptorPool class. Thus, the classes in this file allow protocol type definitions to be communicated efficiently between processes.
+The protocol compiler currently doesn't support auto-generated documentation, hence this page contains no descriptions."><meta itemprop=wordCount content="6754"><meta itemprop=keywords content><meta name=twitter:card content="summary"><meta name=twitter:title content><meta name=twitter:description content="descriptor.pb.hdescriptor.pb.h#include <google/protobuf/descriptor.pb.h>
+namespace google::protobuf
+Protocol buffer representations of descriptors.
+This file defines a set of protocol message classes which represent the same information represented by the classes defined in descriptor.h. You can convert a FileDescriptorProto to a FileDescriptor using the DescriptorPool class. Thus, the classes in this file allow protocol type definitions to be communicated efficiently between processes.
+The protocol compiler currently doesn't support auto-generated documentation, hence this page contains no descriptions."><link rel=preload href=/scss/main.min.def2cdda5cfcd95d9660c969a68946395435ad5fc75402be473d9995c7e926b3.css as=style><link href=/scss/main.min.def2cdda5cfcd95d9660c969a68946395435ad5fc75402be473d9995c7e926b3.css rel=stylesheet integrity><script src=https://code.jquery.com/jquery-3.6.0.min.js integrity=sha384-vtXRMe3mGCbOeY7l30aIg8H9p3GdeSe4IFlP6G8JMa7o7lXvnz3GFKzPxzJdPfGK crossorigin=anonymous></script>
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-5L8P8GRN4Y"></script>
+<script>var doNotTrack=!1;if(!doNotTrack){window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments)}gtag("js",new Date),gtag("config","G-5L8P8GRN4Y")}</script></head><body class=td-page><header><nav class="js-navbar-scroll navbar navbar-expand navbar-dark flex-column flex-md-row td-navbar"><a class=navbar-brand href=/><span class="navbar-brand__logo navbar-logo"><svg id="Layer_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 0 500 500" style="enable-background:new 0 0 500 500"><g><path style="fill:#fff" d="M116.8525 421.9722c-5.7041.0-10.3442-4.3127-10.3442-9.6129V88.183c0-5.3002 4.6401-9.6117 10.3442-9.6117H320.858c3.0347.0 9.3959.5498 11.7506 2.6302l.3545.3442 58.905 63.2912c2.3101 2.491 2.9202 8.4928 2.9202 11.3184v256.2039c0 5.3002-4.6407 9.6129-10.3436 9.6129H116.8525z"/><g><g><g><path style="fill:#767676" d="M384.4445 423.2066H116.852c-6.3839.0-11.5786-4.8658-11.5786-10.8474V88.1831c0-5.9804 5.1947-10.8461 11.5786-10.8461h204.0062c.377.0 9.2786.0329 12.568 2.9389l.3947.3833 58.9508 63.337c3.2135 3.4652 3.2514 11.7924 3.2514 12.1593v256.2036C396.0231 418.3408 390.8284 423.2066 384.4445 423.2066zM116.5079 411.9189c.0848.0278.1999.0531.3441.0531h267.5925c.1442.0.2581-.0253.3441-.0531V156.1556c-.0076-.9033-.3593-3.7347-.7034-5.0037l-57.6527-61.9416c-1.4651-.3176-4.4533-.6389-5.5742-.6389H116.852c-.143.0-.2594.024-.3441.0531V411.9189zm267.4533-261.149zM327.0321 89.371v.0013V89.371z"/></g></g></g><g><g><path style="fill:#5b7fc0" d="M189.0874 210.1754l.0012-.0012c7.7751.0012 15.0295 4.1862 18.932 10.9234 1.9177 3.3159 2.9305 7.1011 2.9293 10.9378.0 5.8394-2.2733 11.3304-6.4032 15.4604-4.1288 4.1288-9.6186 6.4032-15.458 6.4032s-11.328-2.2733-15.458-6.4032-6.4032-9.6186-6.4056-15.4628c.0012-6.025 2.454-11.4897 6.4116-15.4473C177.5953 212.627 183.0601 210.1742 189.0874 210.1754zm7.993 21.8576c.0012-1.4042-.3687-2.7868-1.063-3.9887-1.4293-2.4684-4.0833-3.9995-6.9299-4.0019-4.4077.0024-7.993 3.5877-7.993 7.993.0 2.1356.832 4.1431 2.3427 5.6539 1.5083 1.5083 3.5159 2.3403 5.6503 2.3415 2.1356.0 4.1443-.8308 5.6539-2.3403S197.0816 234.1722 197.0804 232.033z"/><path style="opacity:.3;fill:#fff" d="M189.0898 210.176c7.7763.0 15.0283 4.1826 18.926 10.9151 1.9201 3.3136 2.9377 7.0988 2.9353 10.9462.0024 12.0643-9.8065 21.8636-21.8613 21.8613-12.0547.0024-21.8636-9.8066-21.8612-21.8613.0-6.0285 2.4516-11.4921 6.4116-15.452C177.5977 212.6276 183.0612 210.176 189.0898 210.176zm7.9941 21.8612c0-1.4078-.3711-2.7892-1.0702-3.9959-1.4269-2.466-4.0797-3.9983-6.924-3.9983-4.4005-.0048-7.9918 3.5817-7.9942 7.9942.0024 4.4077 3.5865 7.9918 7.9942 7.9942 2.2027.0 4.2018-.8978 5.6479-2.3439C196.1861 236.239 197.0839 234.2399 197.0839 232.0372z"/><g><defs><path id="SVGID_1_" d="M194.7376 237.6875c-1.4461 1.4461-3.4452 2.3439-5.6479 2.3439-4.4077-.0024-7.9918-3.5865-7.9942-7.9942.0024-4.4125 3.5937-7.999 7.9942-7.9942 2.8443.0 5.497 1.5323 6.924 3.9983.6991 1.2067 1.0702 2.5881 1.0702 3.9959C197.0839 234.2399 196.1861 236.239 194.7376 237.6875z"/></defs><clipPath id="SVGID_2_"><use xlink:href="#SVGID_1_" style="overflow:visible"/></clipPath><path style="clip-path:url(#SVGID_2_);fill:#fff" d="M190.0704 225.0237c-4.4005-.0048-7.9918 3.5817-7.9942 7.9942.0011 1.9546.7088 3.7452 1.8782 5.1354-1.7447-1.4674-2.8575-3.663-2.8588-6.116.0024-4.4125 3.5936-7.999 7.9942-7.9942 2.3802-1e-4 4.616 1.0833 6.1218 2.8788C193.7885 225.7247 191.9774 225.0237 190.0704 225.0237z"/><path style="opacity:.13;clip-path:url(#SVGID_2_);fill:#020202" d="M190.0704 225.0237c-4.4005-.0048-7.9918 3.5817-7.9942 7.9942.0011 1.9546.7088 3.7452 1.8782 5.1354-1.7447-1.4674-2.8575-3.663-2.8588-6.116.0024-4.4125 3.5936-7.999 7.9942-7.9942 2.3802-1e-4 4.616 1.0833 6.1218 2.8788C193.7885 225.7247 191.9774 225.0237 190.0704 225.0237z"/></g><g><defs><path id="SVGID_3_" d="M189.0898 210.176c7.7763.0 15.0283 4.1826 18.926 10.9151 1.9201 3.3136 2.9377 7.0988 2.9353 10.9462.0024 12.0643-9.8065 21.8636-21.8613 21.8613-12.0547.0024-21.8636-9.8066-21.8612-21.8613.0-6.0285 2.4516-11.4921 6.4116-15.452C177.5977 212.6276 183.0612 210.176 189.0898 210.176zm7.9941 21.8612c0-1.4078-.3711-2.7892-1.0702-3.9959-1.4269-2.466-4.0797-3.9983-6.924-3.9983-4.4005-.0048-7.9918 3.5817-7.9942 7.9942.0024 4.4077 3.5865 7.9918 7.9942 7.9942 2.2027.0 4.2018-.8978 5.6479-2.3439C196.1861 236.239 197.0839 234.2399 197.0839 232.0372z"/></defs><clipPath id="SVGID_4_"><use xlink:href="#SVGID_3_" style="overflow:visible"/></clipPath><path style="clip-path:url(#SVGID_4_);fill:#5b7fc0" d="M172.6595 215.6045c-3.96 3.96-6.4116 9.4235-6.4116 15.452-.0024 12.0547 9.8066 21.8636 21.8613 21.8612 12.0547.0024 21.8636-9.797 21.8613-21.8612.0024-3.8475-1.0151-7.6326-2.9353-10.9462-3.8977-6.7324-11.1497-10.9151-18.926-10.9151C182.0806 209.1953 176.6171 211.647 172.6595 215.6045z"/></g></g><rect x="198.8952" y="225.1043" style="fill:#5b7fc0" width="122.6266" height="13.8671"/></g><g><path style="fill:#d95140" d="M189.0874 155.7611l.0012-.0012c7.7751.0012 15.0295 4.1862 18.932 10.9234 1.9177 3.3159 2.9305 7.1011 2.9293 10.9378.0 5.8394-2.2733 11.3304-6.4032 15.4604-4.1288 4.1288-9.6186 6.4032-15.458 6.4032s-11.328-2.2733-15.458-6.4032-6.4032-9.6186-6.4056-15.4628c.0012-6.0249 2.454-11.4897 6.4116-15.4473C177.5953 158.2128 183.0601 155.7599 189.0874 155.7611zm7.993 21.8577c.0012-1.4042-.3687-2.7868-1.063-3.9887-1.4293-2.4684-4.0833-3.9995-6.9299-4.0019-4.4077.0024-7.993 3.5877-7.993 7.993.0 2.1356.832 4.1431 2.3427 5.6539 1.5083 1.5083 3.5159 2.3403 5.6503 2.3415 2.1356.0 4.1443-.8308 5.6539-2.3403C196.2508 181.7667 197.0816 179.758 197.0804 177.6188z"/><path style="opacity:.3;fill:#fff" d="M189.0898 155.7617c7.7763.0 15.0283 4.1826 18.926 10.9151 1.9201 3.3135 2.9377 7.0987 2.9353 10.9462.0024 12.0643-9.8065 21.8636-21.8613 21.8613-12.0547.0024-21.8636-9.8066-21.8612-21.8613.0-6.0285 2.4516-11.4921 6.4116-15.452C177.5977 158.2134 183.0612 155.7617 189.0898 155.7617zm7.9941 21.8613c0-1.4078-.3711-2.7892-1.0702-3.9959-1.4269-2.466-4.0797-3.9983-6.924-3.9983-4.4005-.0048-7.9918 3.5817-7.9942 7.9942.0024 4.4077 3.5865 7.9918 7.9942 7.9942 2.2027.0 4.2018-.8978 5.6479-2.3439C196.1861 181.8248 197.0839 179.8256 197.0839 177.623z"/><g><defs><path id="SVGID_5_" d="M194.7376 183.2733c-1.4461 1.4461-3.4452 2.3439-5.6479 2.3439-4.4077-.0024-7.9918-3.5865-7.9942-7.9942.0024-4.4125 3.5937-7.9989 7.9942-7.9942 2.8443.0 5.497 1.5323 6.924 3.9983.6991 1.2067 1.0702 2.5881 1.0702 3.9959C197.0839 179.8256 196.1861 181.8248 194.7376 183.2733z"/></defs><clipPath id="SVGID_6_"><use xlink:href="#SVGID_5_" style="overflow:visible"/></clipPath><path style="clip-path:url(#SVGID_6_);fill:#fff" d="M190.0704 170.6095c-4.4005-.0048-7.9918 3.5817-7.9942 7.9942.0011 1.9546.7088 3.7452 1.8782 5.1354-1.7447-1.4674-2.8575-3.663-2.8588-6.116.0024-4.4125 3.5936-7.999 7.9942-7.9942 2.3802-1e-4 4.616 1.0833 6.1218 2.8788C193.7885 171.3104 191.9774 170.6095 190.0704 170.6095z"/><path style="opacity:.13;clip-path:url(#SVGID_6_);fill:#020202" d="M190.0704 170.6095c-4.4005-.0048-7.9918 3.5817-7.9942 7.9942.0011 1.9546.7088 3.7452 1.8782 5.1354-1.7447-1.4674-2.8575-3.663-2.8588-6.116.0024-4.4125 3.5936-7.999 7.9942-7.9942 2.3802-1e-4 4.616 1.0833 6.1218 2.8788C193.7885 171.3104 191.9774 170.6095 190.0704 170.6095z"/></g><g><defs><path id="SVGID_7_" d="M189.0898 155.7617c7.7763.0 15.0283 4.1826 18.926 10.9151 1.9201 3.3135 2.9377 7.0987 2.9353 10.9462.0024 12.0643-9.8065 21.8636-21.8613 21.8613-12.0547.0024-21.8636-9.8066-21.8612-21.8613.0-6.0285 2.4516-11.4921 6.4116-15.452C177.5977 158.2134 183.0612 155.7617 189.0898 155.7617zm7.9941 21.8613c0-1.4078-.3711-2.7892-1.0702-3.9959-1.4269-2.466-4.0797-3.9983-6.924-3.9983-4.4005-.0048-7.9918 3.5817-7.9942 7.9942.0024 4.4077 3.5865 7.9918 7.9942 7.9942 2.2027.0 4.2018-.8978 5.6479-2.3439C196.1861 181.8248 197.0839 179.8256 197.0839 177.623z"/></defs><clipPath id="SVGID_8_"><use xlink:href="#SVGID_7_" style="overflow:visible"/></clipPath><path style="clip-path:url(#SVGID_8_);fill:#d95140" d="M172.6595 161.1903c-3.96 3.96-6.4116 9.4235-6.4116 15.452-.0024 12.0547 9.8066 21.8636 21.8613 21.8613 12.0547.0024 21.8636-9.797 21.8613-21.8613.0024-3.8474-1.0151-7.6326-2.9353-10.9462-3.8977-6.7324-11.1497-10.9151-18.926-10.9151C182.0806 154.7811 176.6171 157.2327 172.6595 161.1903z"/></g><rect x="198.8952" y="170.69" style="fill:#d95140" width="122.6266" height="13.8671"/></g><g><g><path style="fill:#56a55c" d="M189.5379 264.6147l.0012-.0012c7.7751.0012 15.0294 4.1862 18.932 10.9235 1.9177 3.3159 2.9305 7.1011 2.9293 10.9378.0 5.8394-2.2733 11.3304-6.4032 15.4604-4.1288 4.1288-9.6186 6.4032-15.458 6.4032-5.8394.0-11.3281-2.2733-15.458-6.4032-4.13-4.13-6.4032-9.6186-6.4056-15.4628.0012-6.0249 2.454-11.4897 6.4116-15.4472C178.0458 267.0663 183.5105 264.6135 189.5379 264.6147zm7.993 21.8576c.0012-1.4042-.3687-2.7868-1.063-3.9887-1.4293-2.4684-4.0833-3.9995-6.9299-4.0019-4.4077.0024-7.993 3.5877-7.993 7.993.0 2.1356.832 4.1431 2.3427 5.6538 1.5083 1.5083 3.5159 2.3403 5.6503 2.3415 2.1356.0 4.1443-.8308 5.6539-2.3403C196.7013 290.6202 197.5321 288.6115 197.5309 286.4723z"/><path style="opacity:.3;fill:#fff" d="M189.5403 264.6153c7.7763.0 15.0283 4.1826 18.926 10.9151 1.9201 3.3135 2.9377 7.0987 2.9353 10.9462.0024 12.0643-9.8065 21.8636-21.8613 21.8613-12.0547.0024-21.8636-9.8065-21.8612-21.8613.0-6.0285 2.4516-11.492 6.4116-15.452C178.0482 267.0669 183.5117 264.6153 189.5403 264.6153zm7.9941 21.8612c0-1.4078-.3711-2.7892-1.0702-3.9959-1.4269-2.466-4.0797-3.9983-6.924-3.9983-4.4005-.0048-7.9918 3.5817-7.9942 7.9941.0024 4.4077 3.5865 7.9918 7.9942 7.9942 2.2027.0 4.2018-.8978 5.6479-2.3439C196.6366 290.6783 197.5344 288.6792 197.5344 286.4765z"/><g><defs><path id="SVGID_9_" d="M195.1881 292.1268c-1.4461 1.4461-3.4452 2.3439-5.6479 2.3439-4.4077-.0024-7.9918-3.5865-7.9942-7.9942.0024-4.4125 3.5937-7.9989 7.9942-7.9941 2.8443.0 5.497 1.5323 6.924 3.9983.6991 1.2067 1.0702 2.5881 1.0702 3.9959C197.5344 288.6792 196.6366 290.6783 195.1881 292.1268z"/></defs><clipPath id="SVGID_10_"><use xlink:href="#SVGID_9_" style="overflow:visible"/></clipPath><path style="clip-path:url(#SVGID_10_);fill:#fff" d="M190.5209 279.463c-4.4005-.0048-7.9918 3.5817-7.9942 7.9941.0011 1.9547.7088 3.7452 1.8782 5.1354-1.7446-1.4674-2.8575-3.6631-2.8588-6.1161.0024-4.4125 3.5936-7.999 7.9942-7.9941 2.3802-1e-4 4.616 1.0833 6.1218 2.8788C194.239 280.164 192.4279 279.463 190.5209 279.463z"/><path style="opacity:.13;clip-path:url(#SVGID_10_);fill:#020202" d="M190.5209 279.463c-4.4005-.0048-7.9918 3.5817-7.9942 7.9941.0011 1.9547.7088 3.7452 1.8782 5.1354-1.7446-1.4674-2.8575-3.6631-2.8588-6.1161.0024-4.4125 3.5936-7.999 7.9942-7.9941 2.3802-1e-4 4.616 1.0833 6.1218 2.8788C194.239 280.164 192.4279 279.463 190.5209 279.463z"/></g><g><defs><path id="SVGID_11_" d="M189.5403 264.6153c7.7763.0 15.0283 4.1826 18.926 10.9151 1.9201 3.3135 2.9377 7.0987 2.9353 10.9462.0024 12.0643-9.8065 21.8636-21.8613 21.8613-12.0547.0024-21.8636-9.8065-21.8612-21.8613.0-6.0285 2.4516-11.492 6.4116-15.452C178.0482 267.0669 183.5117 264.6153 189.5403 264.6153zm7.9941 21.8612c0-1.4078-.3711-2.7892-1.0702-3.9959-1.4269-2.466-4.0797-3.9983-6.924-3.9983-4.4005-.0048-7.9918 3.5817-7.9942 7.9941.0024 4.4077 3.5865 7.9918 7.9942 7.9942 2.2027.0 4.2018-.8978 5.6479-2.3439C196.6366 290.6783 197.5344 288.6792 197.5344 286.4765z"/></defs><clipPath id="SVGID_12_"><use xlink:href="#SVGID_11_" style="overflow:visible"/></clipPath><path style="clip-path:url(#SVGID_12_);fill:#56a55c" d="M173.11 270.0439c-3.96 3.96-6.4116 9.4235-6.4116 15.452-.0024 12.0547 9.8066 21.8636 21.8613 21.8613 12.0547.0024 21.8636-9.797 21.8613-21.8613.0024-3.8474-1.0151-7.6326-2.9353-10.9462-3.8977-6.7325-11.1497-10.9151-18.926-10.9151C182.5311 263.6346 177.0676 266.0863 173.11 270.0439z"/></g></g><rect x="199.3456" y="279.5436" style="fill:#56a55c" width="122.6266" height="13.8671"/></g><g><g><path style="fill:#f1bc42" d="M189.0874 318.7208l.0012-.0012c7.7751.0012 15.0295 4.1862 18.932 10.9234 1.9177 3.3159 2.9305 7.1011 2.9293 10.9378.0 5.8394-2.2733 11.3305-6.4032 15.4604-4.1288 4.1288-9.6186 6.4032-15.458 6.4032s-11.328-2.2733-15.458-6.4032-6.4032-9.6186-6.4056-15.4628c.0012-6.025 2.454-11.4897 6.4116-15.4472C177.5953 321.1724 183.0601 318.7196 189.0874 318.7208zm7.993 21.8576c.0012-1.4042-.3687-2.7868-1.063-3.9887-1.4293-2.4684-4.0833-3.9995-6.9299-4.0019-4.4077.0024-7.993 3.5877-7.993 7.993.0 2.1356.832 4.1431 2.3427 5.6539 1.5083 1.5083 3.5159 2.3403 5.6503 2.3415 2.1356.0 4.1443-.8308 5.6539-2.3403S197.0816 342.7176 197.0804 340.5784z"/><path style="opacity:.3;fill:#fff" d="M189.0898 318.7214c7.7763.0 15.0283 4.1826 18.926 10.915 1.9201 3.3136 2.9377 7.0988 2.9353 10.9462.0024 12.0643-9.8065 21.8636-21.8613 21.8612-12.0547.0024-21.8636-9.8065-21.8612-21.8612.0-6.0285 2.4516-11.4921 6.4116-15.452C177.5977 321.173 183.0612 318.7214 189.0898 318.7214zm7.9941 21.8612c0-1.4078-.3711-2.7892-1.0702-3.9959-1.4269-2.466-4.0797-3.9983-6.924-3.9983-4.4005-.0048-7.9918 3.5817-7.9942 7.9942.0024 4.4077 3.5865 7.9918 7.9942 7.9942 2.2027.0 4.2018-.8978 5.6479-2.3439C196.1861 344.7844 197.0839 342.7853 197.0839 340.5826z"/><g><defs><path id="SVGID_13_" d="M194.7376 346.2329c-1.4461 1.4461-3.4452 2.3439-5.6479 2.3439-4.4077-.0024-7.9918-3.5865-7.9942-7.9942.0024-4.4125 3.5937-7.999 7.9942-7.9942 2.8443.0 5.497 1.5323 6.924 3.9983.6991 1.2067 1.0702 2.5881 1.0702 3.9959C197.0839 342.7853 196.1861 344.7844 194.7376 346.2329z"/></defs><clipPath id="SVGID_14_"><use xlink:href="#SVGID_13_" style="overflow:visible"/></clipPath><path style="clip-path:url(#SVGID_14_);fill:#fff" d="M190.0704 333.5691c-4.4005-.0048-7.9918 3.5817-7.9942 7.9942.0011 1.9547.7088 3.7452 1.8782 5.1354-1.7447-1.4674-2.8575-3.6631-2.8588-6.1161.0024-4.4125 3.5936-7.999 7.9942-7.9942 2.3802-1e-4 4.616 1.0834 6.1218 2.8788C193.7885 334.2701 191.9774 333.5691 190.0704 333.5691z"/><path style="opacity:.13;clip-path:url(#SVGID_14_);fill:#020202" d="M190.0704 333.5691c-4.4005-.0048-7.9918 3.5817-7.9942 7.9942.0011 1.9547.7088 3.7452 1.8782 5.1354-1.7447-1.4674-2.8575-3.6631-2.8588-6.1161.0024-4.4125 3.5936-7.999 7.9942-7.9942 2.3802-1e-4 4.616 1.0834 6.1218 2.8788C193.7885 334.2701 191.9774 333.5691 190.0704 333.5691z"/></g><g><defs><path id="SVGID_15_" d="M189.0898 318.7214c7.7763.0 15.0283 4.1826 18.926 10.915 1.9201 3.3136 2.9377 7.0988 2.9353 10.9462.0024 12.0643-9.8065 21.8636-21.8613 21.8612-12.0547.0024-21.8636-9.8065-21.8612-21.8612.0-6.0285 2.4516-11.4921 6.4116-15.452C177.5977 321.173 183.0612 318.7214 189.0898 318.7214zm7.9941 21.8612c0-1.4078-.3711-2.7892-1.0702-3.9959-1.4269-2.466-4.0797-3.9983-6.924-3.9983-4.4005-.0048-7.9918 3.5817-7.9942 7.9942.0024 4.4077 3.5865 7.9918 7.9942 7.9942 2.2027.0 4.2018-.8978 5.6479-2.3439C196.1861 344.7844 197.0839 342.7853 197.0839 340.5826z"/></defs><clipPath id="SVGID_16_"><use xlink:href="#SVGID_15_" style="overflow:visible"/></clipPath><path style="clip-path:url(#SVGID_16_);fill:#f1bc42" d="M172.6595 324.15c-3.96 3.96-6.4116 9.4235-6.4116 15.452-.0024 12.0547 9.8066 21.8636 21.8613 21.8612 12.0547.0024 21.8636-9.797 21.8613-21.8612.0024-3.8474-1.0151-7.6327-2.9353-10.9462-3.8977-6.7324-11.1497-10.9151-18.926-10.9151C182.0806 317.7407 176.6171 320.1924 172.6595 324.15z"/></g></g><rect x="198.8952" y="333.6497" style="fill:#f1bc42" width="122.6266" height="13.8671"/></g></g></svg></span><span class=navbar-brand__name>Protocol Buffers Documentation</span></a><div class="td-navbar-nav-scroll ml-md-auto" id=main_navbar><ul class="navbar-nav mt-2 mt-lg-0"></ul></div><div class="navbar-nav d-none d-lg-block"><div class=td-search><div class=td-search__icon></div><input type=search class="td-search__input form-control td-search-input" placeholder="Search this site…" aria-label="Search this site…" autocomplete=off></div></div></nav></header><div class="container-fluid td-default td-outer"><main role=main class=td-main><html devsite><head><title>descriptor.pb.h</title></head><body><h1>descriptor.pb.h</h1><p><code>#include &lt;google/protobuf/descriptor.pb.h><br>namespace <a href=#google.protobuf>google::protobuf</a></code></p><p>Protocol buffer representations of descriptors.</p><p>This file defines a set of protocol message classes which represent the same information represented by the classes defined in <a href=google.protobuf.descriptor>descriptor.h</a>. You can convert a <a href=#FileDescriptorProto>FileDescriptorProto</a> to a <a href=google.protobuf.descriptor#FileDescriptor>FileDescriptor</a> using the <a href=google.protobuf.descriptor#DescriptorPool>DescriptorPool</a> class. Thus, the classes in this file allow protocol type definitions to be communicated efficiently between processes.</p><p>The protocol compiler currently doesn't support auto-generated documentation, hence this page contains no descriptions. This file was generated by the protocol compiler from <code>descriptor.proto</code>, whose contents are as follows:</p><pre>// Protocol Buffers - Google's data interchange format
+// Copyright 2008 Google Inc.  All rights reserved.
+// https://developers.google.com/protocol-buffers/
+//
+// Redistribution and use in source and binary forms, with or without
+// modification, are permitted provided that the following conditions are
+// met:
+//
+//     * Redistributions of source code must retain the above copyright
+// notice, this list of conditions and the following disclaimer.
+//     * Redistributions in binary form must reproduce the above
+// copyright notice, this list of conditions and the following disclaimer
+// in the documentation and/or other materials provided with the
+// distribution.
+//     * Neither the name of Google Inc. nor the names of its
+// contributors may be used to endorse or promote products derived from
+// this software without specific prior written permission.
+//
+// THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS
+// "AS IS" AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT
+// LIMITED TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR
+// A PARTICULAR PURPOSE ARE DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT
+// OWNER OR CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL,
+// SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT
+// LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE,
+// DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON ANY
+// THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT
+// (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE
+// OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
+<p>// Author: <a href=mailto:kenton@google.com>kenton@google.com</a> (Kenton Varda)
+//  Based on original Protocol Buffers design by
+//  Sanjay Ghemawat, Jeff Dean, and others.
+//
+// The messages in this file describe the definitions found in .proto files.
+// A valid .proto file can be translated directly to a FileDescriptorProto
+// without any other information (e.g. without reading its imports).</p>
+<p>syntax = &ldquo;proto2&rdquo;;</p>
+<p>package google.protobuf;</p>
+<p>option go_package = &ldquo;google.golang.org/protobuf/types/descriptorpb&rdquo;;
+option java_package = &ldquo;com.google.protobuf&rdquo;;
+option java_outer_classname = &ldquo;DescriptorProtos&rdquo;;
+option csharp_namespace = &ldquo;Google.Protobuf.Reflection&rdquo;;
+option objc_class_prefix = &ldquo;GPB&rdquo;;
+option cc_enable_arenas = true;</p>
+<p>// descriptor.proto must be optimized for speed because reflection-based
+// algorithms don&rsquo;t work during bootstrapping.
+option optimize_for = SPEED;</p>
+<p>// The protocol compiler can output a FileDescriptorSet containing the .proto
+// files it parses.
+message FileDescriptorSet {
+repeated FileDescriptorProto file = 1;
+}</p>
+<p>// Describes a complete .proto file.
+message FileDescriptorProto {
+optional string name = 1;     // file name, relative to root of source tree
+optional string package = 2;  // e.g. &ldquo;foo&rdquo;, &ldquo;foo.bar&rdquo;, etc.</p>
+<p>// Names of files imported by this file.
+repeated string dependency = 3;
+// Indexes of the public imported files in the dependency list above.
+repeated int32 public_dependency = 10;
+// Indexes of the weak imported files in the dependency list.
+// For Google-internal migration only. Do not use.
+repeated int32 weak_dependency = 11;</p>
+<p>// All top-level definitions in this file.
+repeated DescriptorProto message_type = 4;
+repeated EnumDescriptorProto enum_type = 5;
+repeated ServiceDescriptorProto service = 6;
+repeated FieldDescriptorProto extension = 7;</p>
+<p>optional FileOptions options = 8;</p>
+<p>// This field contains optional information about the original source code.
+// You may safely remove this entire field without harming runtime
+// functionality of the descriptors &ndash; the information is needed only by
+// development tools.
+optional SourceCodeInfo source_code_info = 9;</p>
+<p>// The syntax of the proto file.
+// The supported values are &ldquo;proto2&rdquo; and &ldquo;proto3&rdquo;.
+optional string syntax = 12;
+}</p>
+<p>// Describes a message type.
+message DescriptorProto {
+optional string name = 1;</p>
+<p>repeated FieldDescriptorProto field = 2;
+repeated FieldDescriptorProto extension = 6;</p>
+<p>repeated DescriptorProto nested_type = 3;
+repeated EnumDescriptorProto enum_type = 4;</p>
+<p>message ExtensionRange {
+optional int32 start = 1;  // Inclusive.
+optional int32 end = 2;    // Exclusive.</p>
+<pre><code>optional ExtensionRangeOptions options = 3;
+</code></pre><p>}
+repeated ExtensionRange extension_range = 5;</p><p>repeated OneofDescriptorProto oneof_decl = 8;</p><p>optional MessageOptions options = 7;</p><p>// Range of reserved tag numbers. Reserved tag numbers may not be used by
+// fields or extension ranges in the same message. Reserved ranges may
+// not overlap.
+message ReservedRange {
+optional int32 start = 1; // Inclusive.
+optional int32 end = 2; // Exclusive.
+}
+repeated ReservedRange reserved_range = 9;
+// Reserved field names, which may not be used by fields in the same message.
+// A given name may only be reserved once.
+repeated string reserved_name = 10;
+}</p><p>message ExtensionRangeOptions {
+// The parser stores options it doesn&rsquo;t recognize here. See above.
+repeated UninterpretedOption uninterpreted_option = 999;</p><p>// Clients can define custom options in extensions of this message. See above.
+extensions 1000 to max;
+}</p><p>// Describes a field within a message.
+message FieldDescriptorProto {
+enum Type {
+// 0 is reserved for errors.
+// Order is weird for historical reasons.
+TYPE_DOUBLE = 1;
+TYPE_FLOAT = 2;
+// Not ZigZag encoded. Negative numbers take 10 bytes. Use TYPE_SINT64 if
+// negative values are likely.
+TYPE_INT64 = 3;
+TYPE_UINT64 = 4;
+// Not ZigZag encoded. Negative numbers take 10 bytes. Use TYPE_SINT32 if
+// negative values are likely.
+TYPE_INT32 = 5;
+TYPE_FIXED64 = 6;
+TYPE_FIXED32 = 7;
+TYPE_BOOL = 8;
+TYPE_STRING = 9;
+// Tag-delimited aggregate.
+// Group type is deprecated and not supported in proto3. However, Proto3
+// implementations should still be able to parse the group wire format and
+// treat group fields as unknown fields.
+TYPE_GROUP = 10;
+TYPE_MESSAGE = 11; // Length-delimited aggregate.</p><pre><code>// New in version 2.
+TYPE_BYTES = 12;
+TYPE_UINT32 = 13;
+TYPE_ENUM = 14;
+TYPE_SFIXED32 = 15;
+TYPE_SFIXED64 = 16;
+TYPE_SINT32 = 17;  // Uses ZigZag encoding.
+TYPE_SINT64 = 18;  // Uses ZigZag encoding.
+</code></pre><p>}</p><p>enum Label {
+// 0 is reserved for errors
+LABEL_OPTIONAL = 1;
+LABEL_REQUIRED = 2;
+LABEL_REPEATED = 3;
+}</p><p>optional string name = 1;
+optional int32 number = 3;
+optional Label label = 4;</p><p>// If type_name is set, this need not be set. If both this and type_name
+// are set, this must be one of TYPE_ENUM, TYPE_MESSAGE or TYPE_GROUP.
+optional Type type = 5;</p><p>// For message and enum types, this is the name of the type. If the name
+// starts with a &lsquo;.&rsquo;, it is fully-qualified. Otherwise, C++-like scoping
+// rules are used to find the type (i.e. first the nested types within this
+// message are searched, then within the parent, on up to the root
+// namespace).
+optional string type_name = 6;</p><p>// For extensions, this is the name of the type being extended. It is
+// resolved in the same manner as type_name.
+optional string extendee = 2;</p><p>// For numeric types, contains the original text representation of the value.
+// For booleans, &ldquo;true&rdquo; or &ldquo;false&rdquo;.
+// For strings, contains the default text contents (not escaped in any way).
+// For bytes, contains the C escaped value. All bytes >= 128 are escaped.
+optional string default_value = 7;</p><p>// If set, gives the index of a oneof in the containing type&rsquo;s oneof_decl
+// list. This field is a member of that oneof.
+optional int32 oneof_index = 9;</p><p>// JSON name of this field. The value is set by protocol compiler. If the
+// user has set a &ldquo;json_name&rdquo; option on this field, that option&rsquo;s value
+// will be used. Otherwise, it&rsquo;s deduced from the field&rsquo;s name by converting
+// it to camelCase.
+optional string json_name = 10;</p><p>optional FieldOptions options = 8;</p><p>// If true, this is a proto3 &ldquo;optional&rdquo;. When a proto3 field is optional, it
+// tracks presence regardless of field type.
+//
+// When proto3_optional is true, this field must be belong to a oneof to
+// signal to old proto3 clients that presence is tracked for this field. This
+// oneof is known as a &ldquo;synthetic&rdquo; oneof, and this field must be its sole
+// member (each proto3 optional field gets its own synthetic oneof). Synthetic
+// oneofs exist in the descriptor only, and do not generate any API. Synthetic
+// oneofs must be ordered after all &ldquo;real&rdquo; oneofs.
+//
+// For message fields, proto3_optional doesn&rsquo;t create any semantic change,
+// since non-repeated message fields always track presence. However it still
+// indicates the semantic detail of whether the user wrote &ldquo;optional&rdquo; or not.
+// This can be useful for round-tripping the .proto file. For consistency we
+// give message fields a synthetic oneof also, even though it is not required
+// to track presence. This is especially important because the parser can&rsquo;t
+// tell if a field is a message or an enum, so it must always create a
+// synthetic oneof.
+//
+// Proto2 optional fields do not set this flag, because they already indicate
+// optional with <code>LABEL_OPTIONAL</code>.
+optional bool proto3_optional = 17;
+}</p><p>// Describes a oneof.
+message OneofDescriptorProto {
+optional string name = 1;
+optional OneofOptions options = 2;
+}</p><p>// Describes an enum type.
+message EnumDescriptorProto {
+optional string name = 1;</p><p>repeated EnumValueDescriptorProto value = 2;</p><p>optional EnumOptions options = 3;</p><p>// Range of reserved numeric values. Reserved values may not be used by
+// entries in the same enum. Reserved ranges may not overlap.
+//
+// Note that this is distinct from DescriptorProto.ReservedRange in that it
+// is inclusive such that it can appropriately represent the entire int32
+// domain.
+message EnumReservedRange {
+optional int32 start = 1; // Inclusive.
+optional int32 end = 2; // Inclusive.
+}</p><p>// Range of reserved numeric values. Reserved numeric values may not be used
+// by enum values in the same enum declaration. Reserved ranges may not
+// overlap.
+repeated EnumReservedRange reserved_range = 4;</p><p>// Reserved enum value names, which may not be reused. A given name may only
+// be reserved once.
+repeated string reserved_name = 5;
+}</p><p>// Describes a value within an enum.
+message EnumValueDescriptorProto {
+optional string name = 1;
+optional int32 number = 2;</p><p>optional EnumValueOptions options = 3;
+}</p><p>// Describes a service.
+message ServiceDescriptorProto {
+optional string name = 1;
+repeated MethodDescriptorProto method = 2;</p><p>optional ServiceOptions options = 3;
+}</p><p>// Describes a method of a service.
+message MethodDescriptorProto {
+optional string name = 1;</p><p>// Input and output type names. These are resolved in the same way as
+// FieldDescriptorProto.type_name, but must refer to a message type.
+optional string input_type = 2;
+optional string output_type = 3;</p><p>optional MethodOptions options = 4;</p><p>// Identifies if client streams multiple client messages
+optional bool client_streaming = 5 [[]default = false];
+// Identifies if server streams multiple server messages
+optional bool server_streaming = 6 [[]default = false];
+}</p><p>// ===================================================================
+// Options</p><p>// Each of the definitions above may have &ldquo;options&rdquo; attached. These are
+// just annotations which may cause code to be generated slightly differently
+// or may contain hints for code that manipulates protocol messages.
+//
+// Clients may define custom options as extensions of the *Options messages.
+// These extensions may not yet be known at parsing time, so the parser cannot
+// store the values in them. Instead it stores them in a field in the *Options
+// message called uninterpreted_option. This field must have the same name
+// across all *Options messages. We then use this field to populate the
+// extensions when we build a descriptor, at which point all protos have been
+// parsed and so all extensions are known.
+//
+// Extension numbers for custom options may be chosen as follows:
+// * For options which will only be used within a single application or
+// organization, or for experimental options, use field numbers 50000
+// through 99999. It is up to you to ensure that you do not use the
+// same number for multiple options.
+// * For options which will be published and used publicly by multiple
+// independent entities, e-mail <a href=mailto:protobuf-global-extension-registry@google.com>protobuf-global-extension-registry@google.com</a>
+// to reserve extension numbers. Simply provide your project name (e.g.
+// Objective-C plugin) and your project website (if available) &ndash; there&rsquo;s no
+// need to explain how you intend to use them. Usually you only need one
+// extension number. You can declare multiple options with only one extension
+// number by putting them in a sub-message. See the Custom Options section of
+// the docs for examples:
+// /programming-guides/proto#options
+// If this turns out to be popular, a web service will be set up
+// to automatically assign option numbers.</p><p>message FileOptions {</p><p>// Sets the Java package where classes generated from this .proto will be
+// placed. By default, the proto package is used, but this is often
+// inappropriate because proto packages do not normally start with backwards
+// domain names.
+optional string java_package = 1;</p><p>// Controls the name of the wrapper Java class generated for the .proto file.
+// That class will always contain the .proto file&rsquo;s getDescriptor() method as
+// well as any top-level extensions defined in the .proto file.
+// If java_multiple_files is disabled, then all the other classes from the
+// .proto file will be nested inside the single wrapper outer class.
+optional string java_outer_classname = 8;</p><p>// If enabled, then the Java code generator will generate a separate .java
+// file for each top-level message, enum, and service defined in the .proto
+// file. Thus, these types will <em>not</em> be nested inside the wrapper class
+// named by java_outer_classname. However, the wrapper class will still be
+// generated to contain the file&rsquo;s getDescriptor() method as well as any
+// top-level extensions defined in the file.
+optional bool java_multiple_files = 10 [[]default = false];</p><p>// This option does nothing.
+optional bool java_generate_equals_and_hash = 20 [[]deprecated=true];</p><p>// If set true, then the Java2 code generator will generate code that
+// throws an exception whenever an attempt is made to assign a non-UTF-8
+// byte sequence to a string field.
+// Message reflection will do the same.
+// However, an extension field still accepts non-UTF-8 byte sequences.
+// This option has no effect on when used with the lite runtime.
+optional bool java_string_check_utf8 = 27 [[]default = false];</p><p>// Generated classes can be optimized for speed or code size.
+enum OptimizeMode {
+SPEED = 1; // Generate complete code for parsing, serialization,
+// etc.
+CODE_SIZE = 2; // Use ReflectionOps to implement these methods.
+LITE_RUNTIME = 3; // Generate code using MessageLite and the lite runtime.
+}
+optional OptimizeMode optimize_for = 9 [[]default = SPEED];</p><p>// Sets the Go package where structs generated from this .proto will be
+// placed. If omitted, the Go package will be derived from the following:
+// - The basename of the package import path, if provided.
+// - Otherwise, the package statement in the .proto file, if present.
+// - Otherwise, the basename of the .proto file, without extension.
+optional string go_package = 11;</p><p>// Should generic services be generated in each language? &ldquo;Generic&rdquo; services
+// are not specific to any particular RPC system. They are generated by the
+// main code generators in each language (without additional plugins).
+// Generic services were the only kind of service generation supported by
+// early versions of google.protobuf.
+//
+// Generic services are now considered deprecated in favor of using plugins
+// that generate code specific to your particular RPC system. Therefore,
+// these default to false. Old code which depends on generic services should
+// explicitly set them to true.
+optional bool cc_generic_services = 16 [[]default = false];
+optional bool java_generic_services = 17 [[]default = false];
+optional bool py_generic_services = 18 [[]default = false];
+optional bool php_generic_services = 42 [[]default = false];</p><p>// Is this file deprecated?
+// Depending on the target platform, this can emit Deprecated annotations
+// for everything in the file, or it will be completely ignored; in the very
+// least, this is a formalization for deprecating files.
+optional bool deprecated = 23 [[]default = false];</p><p>// Enables the use of arenas for the proto messages in this file. This applies
+// only to generated classes for C++.
+optional bool cc_enable_arenas = 31 [[]default = true];</p><p>// Sets the objective c class prefix which is prepended to all objective c
+// generated classes from this .proto. There is no default.
+optional string objc_class_prefix = 36;</p><p>// Namespace for generated classes; defaults to the package.
+optional string csharp_namespace = 37;</p><p>// By default Swift generators will take the proto package and CamelCase it
+// replacing &lsquo;.&rsquo; with underscore and use that to prefix the types/symbols
+// defined. When this options is provided, they will use this value instead
+// to prefix the types/symbols defined.
+optional string swift_prefix = 39;</p><p>// Sets the php class prefix which is prepended to all php generated classes
+// from this .proto. Default is empty.
+optional string php_class_prefix = 40;</p><p>// Use this option to change the namespace of php generated classes. Default
+// is empty. When this option is empty, the package name will be used for
+// determining the namespace.
+optional string php_namespace = 41;</p><p>// Use this option to change the namespace of php generated metadata classes.
+// Default is empty. When this option is empty, the proto file name will be
+// used for determining the namespace.
+optional string php_metadata_namespace = 44;</p><p>// Use this option to change the package of ruby generated classes. Default
+// is empty. When this option is not set, the package name will be used for
+// determining the ruby package.
+optional string ruby_package = 45;</p><p>// The parser stores options it doesn&rsquo;t recognize here.
+// See the documentation for the &ldquo;Options&rdquo; section above.
+repeated UninterpretedOption uninterpreted_option = 999;</p><p>// Clients can define custom options in extensions of this message.
+// See the documentation for the &ldquo;Options&rdquo; section above.
+extensions 1000 to max;</p><p>reserved 38;
+}</p><p>message MessageOptions {
+// Set true to use the old proto1 MessageSet wire format for extensions.
+// This is provided for backwards-compatibility with the MessageSet wire
+// format. You should not use this for any other reason: It&rsquo;s less
+// efficient, has fewer features, and is more complicated.
+//
+// The message must be defined exactly as follows:
+// message Foo {
+// option message_set_wire_format = true;
+// extensions 4 to max;
+// }
+// Note that the message cannot have any defined fields; MessageSets only
+// have extensions.
+//
+// All extensions of your type must be singular messages; e.g. they cannot
+// be int32s, enums, or repeated messages.
+//
+// Because this is an option, the above two restrictions are not enforced by
+// the protocol compiler.
+optional bool message_set_wire_format = 1 [[]default = false];</p><p>// Disables the generation of the standard &ldquo;descriptor()&rdquo; accessor, which can
+// conflict with a field of the same name. This is meant to make migration
+// from proto1 easier; new code should avoid fields named &ldquo;descriptor&rdquo;.
+optional bool no_standard_descriptor_accessor = 2 [[]default = false];</p><p>// Is this message deprecated?
+// Depending on the target platform, this can emit Deprecated annotations
+// for the message, or it will be completely ignored; in the very least,
+// this is a formalization for deprecating messages.
+optional bool deprecated = 3 [[]default = false];</p><p>reserved 4, 5, 6;</p><p>// Whether the message is an automatically generated map entry type for the
+// maps field.
+//
+// For maps fields:
+// map&lt;KeyType, ValueType> map_field = 1;
+// The parsed descriptor looks like:
+// message MapFieldEntry {
+// option map_entry = true;
+// optional KeyType key = 1;
+// optional ValueType value = 2;
+// }
+// repeated MapFieldEntry map_field = 1;
+//
+// Implementations may choose not to generate the map_entry=true message, but
+// use a native map in the target language to hold the keys and values.
+// The reflection APIs in such implementations still need to work as
+// if the field is a repeated message field.
+//
+// NOTE: Do not set the option in .proto files. Always use the maps syntax
+// instead. The option should only be implicitly set by the proto compiler
+// parser.
+optional bool map_entry = 7;</p><p>reserved 8; // javalite_serializable
+reserved 9; // javanano_as_lite</p><p>// The parser stores options it doesn&rsquo;t recognize here. See above.
+repeated UninterpretedOption uninterpreted_option = 999;</p><p>// Clients can define custom options in extensions of this message. See above.
+extensions 1000 to max;
+}</p><p>message FieldOptions {
+// The ctype option instructs the C++ code generator to use a different
+// representation of the field than it normally would. See the specific
+// options below. This option is not yet implemented in the open source
+// release &ndash; sorry, we&rsquo;ll try to include it in a future version!
+optional CType ctype = 1 [[]default = STRING];
+enum CType {
+// Default mode.
+STRING = 0;</p><pre><code>CORD = 1;
+
+STRING_PIECE = 2;
+</code></pre><p>}
+// The packed option can be enabled for repeated primitive fields to enable
+// a more efficient representation on the wire. Rather than repeatedly
+// writing the tag and type for each element, the entire array is encoded as
+// a single length-delimited blob. In proto3, only explicit setting it to
+// false will avoid using packed encoding.
+optional bool packed = 2;</p><p>// The jstype option determines the JavaScript type used for values of the
+// field. The option is permitted only for 64 bit integral and fixed types
+// (int64, uint64, sint64, fixed64, sfixed64). A field with jstype JS_STRING
+// is represented as JavaScript string, which avoids loss of precision that
+// can happen when a large value is converted to a floating point JavaScript.
+// Specifying JS_NUMBER for the jstype causes the generated JavaScript code to
+// use the JavaScript &ldquo;number&rdquo; type. The behavior of the default option
+// JS_NORMAL is implementation dependent.
+//
+// This option is an enum to permit additional types to be added, e.g.
+// goog.math.Integer.
+optional JSType jstype = 6 [[]default = JS_NORMAL];
+enum JSType {
+// Use the default type.
+JS_NORMAL = 0;</p><pre><code>// Use JavaScript strings.
+JS_STRING = 1;
+
+// Use JavaScript numbers.
+JS_NUMBER = 2;
+</code></pre><p>}</p><p>// Should this field be parsed lazily? Lazy applies only to message-type
+// fields. It means that when the outer message is initially parsed, the
+// inner message&rsquo;s contents will not be parsed but instead stored in encoded
+// form. The inner message will actually be parsed when it is first accessed.
+//
+// This is only a hint. Implementations are free to choose whether to use
+// eager or lazy parsing regardless of the value of this option. However,
+// setting this option true suggests that the protocol author believes that
+// using lazy parsing on this field is worth the additional bookkeeping
+// overhead typically needed to implement it.
+//
+// This option does not affect the public interface of any generated code;
+// all method signatures remain the same. Furthermore, thread-safety of the
+// interface is not affected by this option; const methods remain safe to
+// call from multiple threads concurrently, while non-const methods continue
+// to require exclusive access.
+//
+//
+// Note that implementations may choose not to check required fields within
+// a lazy sub-message. That is, calling IsInitialized() on the outer message
+// may return true even if the inner message has missing required fields.
+// This is necessary because otherwise the inner message would have to be
+// parsed in order to perform the check, defeating the purpose of lazy
+// parsing. An implementation which chooses not to check required fields
+// must be consistent about it. That is, for any particular sub-message, the
+// implementation must either <em>always</em> check its required fields, or <em>never</em>
+// check its required fields, regardless of whether or not the message has
+// been parsed.
+optional bool lazy = 5 [[]default = false];</p><p>// Is this field deprecated?
+// Depending on the target platform, this can emit Deprecated annotations
+// for accessors, or it will be completely ignored; in the very least, this
+// is a formalization for deprecating fields.
+optional bool deprecated = 3 [[]default = false];</p><p>// For Google-internal migration only. Do not use.
+optional bool weak = 10 [[]default = false];</p><p>// The parser stores options it doesn&rsquo;t recognize here. See above.
+repeated UninterpretedOption uninterpreted_option = 999;</p><p>// Clients can define custom options in extensions of this message. See above.
+extensions 1000 to max;</p><p>reserved 4; // removed jtype
+}</p><p>message OneofOptions {
+// The parser stores options it doesn&rsquo;t recognize here. See above.
+repeated UninterpretedOption uninterpreted_option = 999;</p><p>// Clients can define custom options in extensions of this message. See above.
+extensions 1000 to max;
+}</p><p>message EnumOptions {</p><p>// Set this option to true to allow mapping different tag names to the same
+// value.
+optional bool allow_alias = 2;</p><p>// Is this enum deprecated?
+// Depending on the target platform, this can emit Deprecated annotations
+// for the enum, or it will be completely ignored; in the very least, this
+// is a formalization for deprecating enums.
+optional bool deprecated = 3 [[]default = false];</p><p>reserved 5; // javanano_as_lite</p><p>// The parser stores options it doesn&rsquo;t recognize here. See above.
+repeated UninterpretedOption uninterpreted_option = 999;</p><p>// Clients can define custom options in extensions of this message. See above.
+extensions 1000 to max;
+}</p><p>message EnumValueOptions {
+// Is this enum value deprecated?
+// Depending on the target platform, this can emit Deprecated annotations
+// for the enum value, or it will be completely ignored; in the very least,
+// this is a formalization for deprecating enum values.
+optional bool deprecated = 1 [[]default = false];</p><p>// The parser stores options it doesn&rsquo;t recognize here. See above.
+repeated UninterpretedOption uninterpreted_option = 999;</p><p>// Clients can define custom options in extensions of this message. See above.
+extensions 1000 to max;
+}</p><p>message ServiceOptions {</p><p>// Note: Field numbers 1 through 32 are reserved for Google&rsquo;s internal RPC
+// framework. We apologize for hoarding these numbers to ourselves, but
+// we were already using them long before we decided to release Protocol
+// Buffers.</p><p>// Is this service deprecated?
+// Depending on the target platform, this can emit Deprecated annotations
+// for the service, or it will be completely ignored; in the very least,
+// this is a formalization for deprecating services.
+optional bool deprecated = 33 [[]default = false];</p><p>// The parser stores options it doesn&rsquo;t recognize here. See above.
+repeated UninterpretedOption uninterpreted_option = 999;</p><p>// Clients can define custom options in extensions of this message. See above.
+extensions 1000 to max;
+}</p><p>message MethodOptions {</p><p>// Note: Field numbers 1 through 32 are reserved for Google&rsquo;s internal RPC
+// framework. We apologize for hoarding these numbers to ourselves, but
+// we were already using them long before we decided to release Protocol
+// Buffers.</p><p>// Is this method deprecated?
+// Depending on the target platform, this can emit Deprecated annotations
+// for the method, or it will be completely ignored; in the very least,
+// this is a formalization for deprecating methods.
+optional bool deprecated = 33 [[]default = false];</p><p>// Is this method side-effect-free (or safe in HTTP parlance), or idempotent,
+// or neither? HTTP based RPC implementation may choose GET verb for safe
+// methods, and PUT verb for idempotent methods instead of the default POST.
+enum IdempotencyLevel {
+IDEMPOTENCY_UNKNOWN = 0;
+NO_SIDE_EFFECTS = 1; // implies idempotent
+IDEMPOTENT = 2; // idempotent, but may have side effects
+}
+optional IdempotencyLevel idempotency_level = 34
+[[]default = IDEMPOTENCY_UNKNOWN];</p><p>// The parser stores options it doesn&rsquo;t recognize here. See above.
+repeated UninterpretedOption uninterpreted_option = 999;</p><p>// Clients can define custom options in extensions of this message. See above.
+extensions 1000 to max;
+}</p><p>// A message representing a option the parser does not recognize. This only
+// appears in options protos created by the compiler::Parser class.
+// DescriptorPool resolves these when building Descriptor objects. Therefore,
+// options protos in descriptor objects (e.g. returned by Descriptor::options(),
+// or produced by Descriptor::CopyTo()) will never have UninterpretedOptions
+// in them.
+message UninterpretedOption {
+// The name of the uninterpreted option. Each string represents a segment in
+// a dot-separated name. is_extension is true iff a segment represents an
+// extension (denoted with parentheses in options specs in .proto files).
+// E.g.,{ [[]&ldquo;foo&rdquo;, false], [[]&ldquo;bar.baz&rdquo;, true], [[]&ldquo;qux&rdquo;, false] } represents
+// &ldquo;foo.(bar.baz).qux&rdquo;.
+message NamePart {
+required string name_part = 1;
+required bool is_extension = 2;
+}
+repeated NamePart name = 2;</p><p>// The value of the uninterpreted option, in whatever type the tokenizer
+// identified it as during parsing. Exactly one of these should be set.
+optional string identifier_value = 3;
+optional uint64 positive_int_value = 4;
+optional int64 negative_int_value = 5;
+optional double double_value = 6;
+optional bytes string_value = 7;
+optional string aggregate_value = 8;
+}</p><p>// ===================================================================
+// Optional source code info</p><p>// Encapsulates information about the original source file from which a
+// FileDescriptorProto was generated.
+message SourceCodeInfo {
+// A Location identifies a piece of source code in a .proto file which
+// corresponds to a particular definition. This information is intended
+// to be useful to IDEs, code indexers, documentation generators, and similar
+// tools.
+//
+// For example, say we have a file like:
+// message Foo {
+// optional string foo = 1;
+// }
+// Let&rsquo;s look at just the field definition:
+// optional string foo = 1;
+// ^ ^^ ^^ ^ ^^^
+// a bc de f ghi
+// We have the following locations:
+// span path represents
+// [[]a,i) [[] 4, 0, 2, 0 ] The whole field definition.
+// [[]a,b) [[] 4, 0, 2, 0, 4 ] The label (optional).
+// [[]c,d) [[] 4, 0, 2, 0, 5 ] The type (string).
+// [[]e,f) [[] 4, 0, 2, 0, 1 ] The name (foo).
+// [[]g,h) [[] 4, 0, 2, 0, 3 ] The number (1).
+//
+// Notes:
+// - A location may refer to a repeated field itself (i.e. not to any
+// particular index within it). This is used whenever a set of elements are
+// logically enclosed in a single code segment. For example, an entire
+// extend block (possibly containing multiple extension definitions) will
+// have an outer location whose path refers to the &ldquo;extensions&rdquo; repeated
+// field without an index.
+// - Multiple locations may have the same path. This happens when a single
+// logical declaration is spread out across multiple places. The most
+// obvious example is the &ldquo;extend&rdquo; block again &ndash; there may be multiple
+// extend blocks in the same scope, each of which will have the same path.
+// - A location&rsquo;s span is not always a subset of its parent&rsquo;s span. For
+// example, the &ldquo;extendee&rdquo; of an extension declaration appears at the
+// beginning of the &ldquo;extend&rdquo; block and is shared by all extensions within
+// the block.
+// - Just because a location&rsquo;s span is a subset of some other location&rsquo;s span
+// does not mean that it is a descendant. For example, a &ldquo;group&rdquo; defines
+// both a type and a field in a single declaration. Thus, the locations
+// corresponding to the type and field and their components will overlap.
+// - Code which tries to interpret locations should probably be designed to
+// ignore those that it doesn&rsquo;t understand, as more types of locations could
+// be recorded in the future.
+repeated Location location = 1;
+message Location {
+// Identifies which part of the FileDescriptorProto was defined at this
+// location.
+//
+// Each element is a field number or an index. They form a path from
+// the root FileDescriptorProto to the place where the definition. For
+// example, this path:
+// [[] 4, 3, 2, 7, 1 ]
+// refers to:
+// file.message_type(3) // 4, 3
+// .field(7) // 2, 7
+// .name() // 1
+// This is because FileDescriptorProto.message_type has field number 4:
+// repeated DescriptorProto message_type = 4;
+// and DescriptorProto.field has field number 2:
+// repeated FieldDescriptorProto field = 2;
+// and FieldDescriptorProto.name has field number 1:
+// optional string name = 1;
+//
+// Thus, the above path gives the location of a field name. If we removed
+// the last element:
+// [[] 4, 3, 2, 7 ]
+// this path refers to the whole field declaration (from the beginning
+// of the label to the terminating semicolon).
+repeated int32 path = 1 [[]packed = true];</p><pre><code>// Always has exactly three or four elements: start line, start column,
+// end line (optional, otherwise assumed same as start line), end column.
+// These are packed into a single field for efficiency.  Note that line
+// and column numbers are zero-based -- typically you will want to add
+// 1 to each before displaying to a user.
+repeated int32 span = 2 [[]packed = true];
+
+// If this SourceCodeInfo represents a complete declaration, these are any
+// comments appearing before and after the declaration which appear to be
+// attached to the declaration.
+//
+// A series of line comments appearing on consecutive lines, with no other
+// tokens appearing on those lines, will be treated as a single comment.
+//
+// leading_detached_comments will keep paragraphs of comments that appear
+// before (but not connected to) the current element. Each paragraph,
+// separated by empty lines, will be one comment element in the repeated
+// field.
+//
+// Only the comment content is provided; comment markers (e.g. //) are
+// stripped out.  For block comments, leading whitespace and an asterisk
+// will be stripped from the beginning of each line other than the first.
+// Newlines are included in the output.
+//
+// Examples:
+//
+//   optional int32 foo = 1;  // Comment attached to foo.
+//   // Comment attached to bar.
+//   optional int32 bar = 2;
+//
+//   optional string baz = 3;
+//   // Comment attached to baz.
+//   // Another line attached to baz.
+//
+//   // Comment attached to qux.
+//   //
+//   // Another line attached to qux.
+//   optional double qux = 4;
+//
+//   // Detached comment for corge. This is not leading or trailing comments
+//   // to qux or corge because there are blank lines separating it from
+//   // both.
+//
+//   // Detached comment for corge paragraph 2.
+//
+//   optional string corge = 5;
+//   /* Block comment attached
+//    * to corge.  Leading asterisks
+//    * will be removed. */
+//   /* Block comment attached to
+//    * grault. */
+//   optional int32 grault = 6;
+//
+//   // ignored detached comments.
+optional string leading_comments = 3;
+optional string trailing_comments = 4;
+repeated string leading_detached_comments = 6;
+</code></pre><p>}
+}</p><p>// Describes the relationship between generated code and its original source
+// file. A GeneratedCodeInfo message is associated with only one generated
+// source file, but may contain references to different source .proto files.
+message GeneratedCodeInfo {
+// An Annotation connects some span of text in generated code to an element
+// of its generating .proto file.
+repeated Annotation annotation = 1;
+message Annotation {
+// Identifies the element in the original source .proto file. This field
+// is formatted the same as SourceCodeInfo.Location.path.
+repeated int32 path = 1 [[]packed = true];</p><pre><code>// Identifies the filesystem path to the original source .proto.
+optional string source_file = 2;
+
+// Identifies the starting offset in bytes in the generated code
+// that relates to the identified object.
+optional int32 begin = 3;
+
+// Identifies the ending offset in bytes in the generated code that
+// relates to the identified offset. The end offset should be one past
+// the last relevant byte (so the length of the text = end - begin).
+optional int32 end = 4;
+</code></pre><p>}
+}</pre><table width=100%><tr><th colspan=2><h3 style=margin-top:4px>Classes in this file</h3></th></tr></table><table><tr><th colspan=2><h3 style=margin-top:4px>File Members</h3><div style=font-style:italic;font-weight:400>These definitions are not part of any class.</div></th></tr><tr><td style=border-right-width:0;text-align:right><code>enum</code></td>&lt;td style=&ldquo;border-left-width: 0px"id=&ldquo;FieldDescriptorProto_Type&rdquo;><div style=padding-left:16px;text-indent:-16px><code><b>FieldDescriptorProto_Type</b></code></div><div style=font-style:italic;margin-top:4px;margin-left:16px><a href=#FieldDescriptorProto_Type.details>more&mldr;</a></div></td></tr><tr><td style=border-right-width:0;text-align:right><code>enum</code></td>&lt;td style=&ldquo;border-left-width: 0px"id=&ldquo;FieldDescriptorProto_Label&rdquo;><div style=padding-left:16px;text-indent:-16px><code><b>FieldDescriptorProto_Label</b></code></div><div style=font-style:italic;margin-top:4px;margin-left:16px><a href=#FieldDescriptorProto_Label.details>more&mldr;</a></div></td></tr><tr><td style=border-right-width:0;text-align:right><code>enum</code></td>&lt;td style=&ldquo;border-left-width: 0px"id=&ldquo;FileOptions_OptimizeMode&rdquo;><div style=padding-left:16px;text-indent:-16px><code><b>FileOptions_OptimizeMode</b></code></div><div style=font-style:italic;margin-top:4px;margin-left:16px><a href=#FileOptions_OptimizeMode.details>more&mldr;</a></div></td></tr><tr><td style=border-right-width:0;text-align:right><code>enum</code></td>&lt;td style=&ldquo;border-left-width: 0px"id=&ldquo;FieldOptions_CType&rdquo;><div style=padding-left:16px;text-indent:-16px><code><b>FieldOptions_CType</b></code></div><div style=font-style:italic;margin-top:4px;margin-left:16px><a href=#FieldOptions_CType.details>more&mldr;</a></div></td></tr><tr><td style=border-right-width:0;text-align:right><code>enum</code></td>&lt;td style=&ldquo;border-left-width: 0px"id=&ldquo;FieldOptions_JSType&rdquo;><div style=padding-left:16px;text-indent:-16px><code><b>FieldOptions_JSType</b></code></div><div style=font-style:italic;margin-top:4px;margin-left:16px><a href=#FieldOptions_JSType.details>more&mldr;</a></div></td></tr><tr><td style=border-right-width:0;text-align:right><code>enum</code></td>&lt;td style=&ldquo;border-left-width: 0px"id=&ldquo;MethodOptions_IdempotencyLevel&rdquo;><div style=padding-left:16px;text-indent:-16px><code><b>MethodOptions_IdempotencyLevel</b></code></div><div style=font-style:italic;margin-top:4px;margin-left:16px><a href=#MethodOptions_IdempotencyLevel.details>more&mldr;</a></div></td></tr><tr><td style=border-right-width:0;text-align:right><code>const ::protobuf::internal::DescriptorTable</code></td>&lt;td style=&ldquo;border-left-width: 0px"id=&ldquo;descriptor_table_google_2fprotobuf_2fdescriptor_2eproto&rdquo;><div style=padding-left:16px;text-indent:-16px><code><b>descriptor_table_google_2fprotobuf_2fdescriptor_2eproto</b></code></div></td></tr><tr><td style=border-right-width:0;text-align:right><code>DescriptorProtoDefaultTypeInternal</code></td>&lt;td style=&ldquo;border-left-width: 0px"id="<em>DescriptorProto_default_instance</em>"><div style=padding-left:16px;text-indent:-16px><code><b><em>DescriptorProto_default_instance</em></b></code></div></td></tr><tr><td style=border-right-width:0;text-align:right><code>DescriptorProto_ExtensionRangeDefaultTypeInternal</code></td>&lt;td style=&ldquo;border-left-width: 0px"id="<em>DescriptorProto_ExtensionRange_default_instance</em>"><div style=padding-left:16px;text-indent:-16px><code><b><em>DescriptorProto_ExtensionRange_default_instance</em></b></code></div></td></tr><tr><td style=border-right-width:0;text-align:right><code>DescriptorProto_ReservedRangeDefaultTypeInternal</code></td>&lt;td style=&ldquo;border-left-width: 0px"id="<em>DescriptorProto_ReservedRange_default_instance</em>"><div style=padding-left:16px;text-indent:-16px><code><b><em>DescriptorProto_ReservedRange_default_instance</em></b></code></div></td></tr><tr><td style=border-right-width:0;text-align:right><code>EnumDescriptorProtoDefaultTypeInternal</code></td>&lt;td style=&ldquo;border-left-width: 0px"id="<em>EnumDescriptorProto_default_instance</em>"><div style=padding-left:16px;text-indent:-16px><code><b><em>EnumDescriptorProto_default_instance</em></b></code></div></td></tr><tr><td style=border-right-width:0;text-align:right><code>EnumDescriptorProto_EnumReservedRangeDefaultTypeInternal</code></td>&lt;td style=&ldquo;border-left-width: 0px"id="<em>EnumDescriptorProto_EnumReservedRange_default_instance</em>"><div style=padding-left:16px;text-indent:-16px><code><b><em>EnumDescriptorProto_EnumReservedRange_default_instance</em></b></code></div></td></tr><tr><td style=border-right-width:0;text-align:right><code>EnumOptionsDefaultTypeInternal</code></td>&lt;td style=&ldquo;border-left-width: 0px"id="<em>EnumOptions_default_instance</em>"><div style=padding-left:16px;text-indent:-16px><code><b><em>EnumOptions_default_instance</em></b></code></div></td></tr><tr><td style=border-right-width:0;text-align:right><code>EnumValueDescriptorProtoDefaultTypeInternal</code></td>&lt;td style=&ldquo;border-left-width: 0px"id="<em>EnumValueDescriptorProto_default_instance</em>"><div style=padding-left:16px;text-indent:-16px><code><b><em>EnumValueDescriptorProto_default_instance</em></b></code></div></td></tr><tr><td style=border-right-width:0;text-align:right><code>EnumValueOptionsDefaultTypeInternal</code></td>&lt;td style=&ldquo;border-left-width: 0px"id="<em>EnumValueOptions_default_instance</em>"><div style=padding-left:16px;text-indent:-16px><code><b><em>EnumValueOptions_default_instance</em></b></code></div></td></tr><tr><td style=border-right-width:0;text-align:right><code>ExtensionRangeOptionsDefaultTypeInternal</code></td>&lt;td style=&ldquo;border-left-width: 0px"id="<em>ExtensionRangeOptions_default_instance</em>"><div style=padding-left:16px;text-indent:-16px><code><b><em>ExtensionRangeOptions_default_instance</em></b></code></div></td></tr><tr><td style=border-right-width:0;text-align:right><code>FieldDescriptorProtoDefaultTypeInternal</code></td>&lt;td style=&ldquo;border-left-width: 0px"id="<em>FieldDescriptorProto_default_instance</em>"><div style=padding-left:16px;text-indent:-16px><code><b><em>FieldDescriptorProto_default_instance</em></b></code></div></td></tr><tr><td style=border-right-width:0;text-align:right><code>FieldOptionsDefaultTypeInternal</code></td>&lt;td style=&ldquo;border-left-width: 0px"id="<em>FieldOptions_default_instance</em>"><div style=padding-left:16px;text-indent:-16px><code><b><em>FieldOptions_default_instance</em></b></code></div></td></tr><tr><td style=border-right-width:0;text-align:right><code>FileDescriptorProtoDefaultTypeInternal</code></td>&lt;td style=&ldquo;border-left-width: 0px"id="<em>FileDescriptorProto_default_instance</em>"><div style=padding-left:16px;text-indent:-16px><code><b><em>FileDescriptorProto_default_instance</em></b></code></div></td></tr><tr><td style=border-right-width:0;text-align:right><code>FileDescriptorSetDefaultTypeInternal</code></td>&lt;td style=&ldquo;border-left-width: 0px"id="<em>FileDescriptorSet_default_instance</em>"><div style=padding-left:16px;text-indent:-16px><code><b><em>FileDescriptorSet_default_instance</em></b></code></div></td></tr><tr><td style=border-right-width:0;text-align:right><code>FileOptionsDefaultTypeInternal</code></td>&lt;td style=&ldquo;border-left-width: 0px"id="<em>FileOptions_default_instance</em>"><div style=padding-left:16px;text-indent:-16px><code><b><em>FileOptions_default_instance</em></b></code></div></td></tr><tr><td style=border-right-width:0;text-align:right><code>GeneratedCodeInfoDefaultTypeInternal</code></td>&lt;td style=&ldquo;border-left-width: 0px"id="<em>GeneratedCodeInfo_default_instance</em>"><div style=padding-left:16px;text-indent:-16px><code><b><em>GeneratedCodeInfo_default_instance</em></b></code></div></td></tr><tr><td style=border-right-width:0;text-align:right><code>GeneratedCodeInfo_AnnotationDefaultTypeInternal</code></td>&lt;td style=&ldquo;border-left-width: 0px"id="<em>GeneratedCodeInfo_Annotation_default_instance</em>"><div style=padding-left:16px;text-indent:-16px><code><b><em>GeneratedCodeInfo_Annotation_default_instance</em></b></code></div></td></tr><tr><td style=border-right-width:0;text-align:right><code>MessageOptionsDefaultTypeInternal</code></td>&lt;td style=&ldquo;border-left-width: 0px"id="<em>MessageOptions_default_instance</em>"><div style=padding-left:16px;text-indent:-16px><code><b><em>MessageOptions_default_instance</em></b></code></div></td></tr><tr><td style=border-right-width:0;text-align:right><code>MethodDescriptorProtoDefaultTypeInternal</code></td>&lt;td style=&ldquo;border-left-width: 0px"id="<em>MethodDescriptorProto_default_instance</em>"><div style=padding-left:16px;text-indent:-16px><code><b><em>MethodDescriptorProto_default_instance</em></b></code></div></td></tr><tr><td style=border-right-width:0;text-align:right><code>MethodOptionsDefaultTypeInternal</code></td>&lt;td style=&ldquo;border-left-width: 0px"id="<em>MethodOptions_default_instance</em>"><div style=padding-left:16px;text-indent:-16px><code><b><em>MethodOptions_default_instance</em></b></code></div></td></tr><tr><td style=border-right-width:0;text-align:right><code>OneofDescriptorProtoDefaultTypeInternal</code></td>&lt;td style=&ldquo;border-left-width: 0px"id="<em>OneofDescriptorProto_default_instance</em>"><div style=padding-left:16px;text-indent:-16px><code><b><em>OneofDescriptorProto_default_instance</em></b></code></div></td></tr><tr><td style=border-right-width:0;text-align:right><code>OneofOptionsDefaultTypeInternal</code></td>&lt;td style=&ldquo;border-left-width: 0px"id="<em>OneofOptions_default_instance</em>"><div style=padding-left:16px;text-indent:-16px><code><b><em>OneofOptions_default_instance</em></b></code></div></td></tr><tr><td style=border-right-width:0;text-align:right><code>ServiceDescriptorProtoDefaultTypeInternal</code></td>&lt;td style=&ldquo;border-left-width: 0px"id="<em>ServiceDescriptorProto_default_instance</em>"><div style=padding-left:16px;text-indent:-16px><code><b><em>ServiceDescriptorProto_default_instance</em></b></code></div></td></tr><tr><td style=border-right-width:0;text-align:right><code>ServiceOptionsDefaultTypeInternal</code></td>&lt;td style=&ldquo;border-left-width: 0px"id="<em>ServiceOptions_default_instance</em>"><div style=padding-left:16px;text-indent:-16px><code><b><em>ServiceOptions_default_instance</em></b></code></div></td></tr><tr><td style=border-right-width:0;text-align:right><code>SourceCodeInfoDefaultTypeInternal</code></td>&lt;td style=&ldquo;border-left-width: 0px"id="<em>SourceCodeInfo_default_instance</em>"><div style=padding-left:16px;text-indent:-16px><code><b><em>SourceCodeInfo_default_instance</em></b></code></div></td></tr><tr><td style=border-right-width:0;text-align:right><code>SourceCodeInfo_LocationDefaultTypeInternal</code></td>&lt;td style=&ldquo;border-left-width: 0px"id="<em>SourceCodeInfo_Location_default_instance</em>"><div style=padding-left:16px;text-indent:-16px><code><b><em>SourceCodeInfo_Location_default_instance</em></b></code></div></td></tr><tr><td style=border-right-width:0;text-align:right><code>UninterpretedOptionDefaultTypeInternal</code></td>&lt;td style=&ldquo;border-left-width: 0px"id="<em>UninterpretedOption_default_instance</em>"><div style=padding-left:16px;text-indent:-16px><code><b><em>UninterpretedOption_default_instance</em></b></code></div></td></tr><tr><td style=border-right-width:0;text-align:right><code>UninterpretedOption_NamePartDefaultTypeInternal</code></td>&lt;td style=&ldquo;border-left-width: 0px"id="<em>UninterpretedOption_NamePart_default_instance</em>"><div style=padding-left:16px;text-indent:-16px><code><b><em>UninterpretedOption_NamePart_default_instance</em></b></code></div></td></tr><tr><td style=border-right-width:0;text-align:right><code>constexpr FieldDescriptorProto_Type</code></td>&lt;td style=&ldquo;border-left-width: 0px"id=&ldquo;FieldDescriptorProto_Type_Type_MIN&rdquo;><div style=padding-left:16px;text-indent:-16px><code><b>FieldDescriptorProto_Type_Type_MIN</b> = = FieldDescriptorProto_Type_TYPE_DOUBLE</code></div></td></tr><tr><td style=border-right-width:0;text-align:right><code>constexpr FieldDescriptorProto_Type</code></td>&lt;td style=&ldquo;border-left-width: 0px"id=&ldquo;FieldDescriptorProto_Type_Type_MAX&rdquo;><div style=padding-left:16px;text-indent:-16px><code><b>FieldDescriptorProto_Type_Type_MAX</b> = = FieldDescriptorProto_Type_TYPE_SINT64</code></div></td></tr><tr><td style=border-right-width:0;text-align:right><code>constexpr int</code></td>&lt;td style=&ldquo;border-left-width: 0px"id=&ldquo;FieldDescriptorProto_Type_Type_ARRAYSIZE&rdquo;><div style=padding-left:16px;text-indent:-16px><code><b>FieldDescriptorProto_Type_Type_ARRAYSIZE</b> = = FieldDescriptorProto_Type_Type_MAX + 1</code></div></td></tr><tr><td style=border-right-width:0;text-align:right><code>constexpr FieldDescriptorProto_Label</code></td>&lt;td style=&ldquo;border-left-width: 0px"id=&ldquo;FieldDescriptorProto_Label_Label_MIN&rdquo;><div style=padding-left:16px;text-indent:-16px><code><b>FieldDescriptorProto_Label_Label_MIN</b> = = FieldDescriptorProto_Label_LABEL_OPTIONAL</code></div></td></tr><tr><td style=border-right-width:0;text-align:right><code>constexpr FieldDescriptorProto_Label</code></td>&lt;td style=&ldquo;border-left-width: 0px"id=&ldquo;FieldDescriptorProto_Label_Label_MAX&rdquo;><div style=padding-left:16px;text-indent:-16px><code><b>FieldDescriptorProto_Label_Label_MAX</b> = = FieldDescriptorProto_Label_LABEL_REPEATED</code></div></td></tr><tr><td style=border-right-width:0;text-align:right><code>constexpr int</code></td>&lt;td style=&ldquo;border-left-width: 0px"id=&ldquo;FieldDescriptorProto_Label_Label_ARRAYSIZE&rdquo;><div style=padding-left:16px;text-indent:-16px><code><b>FieldDescriptorProto_Label_Label_ARRAYSIZE</b> = = FieldDescriptorProto_Label_Label_MAX + 1</code></div></td></tr><tr><td style=border-right-width:0;text-align:right><code>constexpr FileOptions_OptimizeMode</code></td>&lt;td style=&ldquo;border-left-width: 0px"id=&ldquo;FileOptions_OptimizeMode_OptimizeMode_MIN&rdquo;><div style=padding-left:16px;text-indent:-16px><code><b>FileOptions_OptimizeMode_OptimizeMode_MIN</b> = = FileOptions_OptimizeMode_SPEED</code></div></td></tr><tr><td style=border-right-width:0;text-align:right><code>constexpr FileOptions_OptimizeMode</code></td>&lt;td style=&ldquo;border-left-width: 0px"id=&ldquo;FileOptions_OptimizeMode_OptimizeMode_MAX&rdquo;><div style=padding-left:16px;text-indent:-16px><code><b>FileOptions_OptimizeMode_OptimizeMode_MAX</b> = = FileOptions_OptimizeMode_LITE_RUNTIME</code></div></td></tr><tr><td style=border-right-width:0;text-align:right><code>constexpr int</code></td>&lt;td style=&ldquo;border-left-width: 0px"id=&ldquo;FileOptions_OptimizeMode_OptimizeMode_ARRAYSIZE&rdquo;><div style=padding-left:16px;text-indent:-16px><code><b>FileOptions_OptimizeMode_OptimizeMode_ARRAYSIZE</b> = = FileOptions_OptimizeMode_OptimizeMode_MAX + 1</code></div></td></tr><tr><td style=border-right-width:0;text-align:right><code>constexpr FieldOptions_CType</code></td>&lt;td style=&ldquo;border-left-width: 0px"id=&ldquo;FieldOptions_CType_CType_MIN&rdquo;><div style=padding-left:16px;text-indent:-16px><code><b>FieldOptions_CType_CType_MIN</b> = = FieldOptions_CType_STRING</code></div></td></tr><tr><td style=border-right-width:0;text-align:right><code>constexpr FieldOptions_CType</code></td>&lt;td style=&ldquo;border-left-width: 0px"id=&ldquo;FieldOptions_CType_CType_MAX&rdquo;><div style=padding-left:16px;text-indent:-16px><code><b>FieldOptions_CType_CType_MAX</b> = = FieldOptions_CType_STRING_PIECE</code></div></td></tr><tr><td style=border-right-width:0;text-align:right><code>constexpr int</code></td>&lt;td style=&ldquo;border-left-width: 0px"id=&ldquo;FieldOptions_CType_CType_ARRAYSIZE&rdquo;><div style=padding-left:16px;text-indent:-16px><code><b>FieldOptions_CType_CType_ARRAYSIZE</b> = = FieldOptions_CType_CType_MAX + 1</code></div></td></tr><tr><td style=border-right-width:0;text-align:right><code>constexpr FieldOptions_JSType</code></td>&lt;td style=&ldquo;border-left-width: 0px"id=&ldquo;FieldOptions_JSType_JSType_MIN&rdquo;><div style=padding-left:16px;text-indent:-16px><code><b>FieldOptions_JSType_JSType_MIN</b> = = FieldOptions_JSType_JS_NORMAL</code></div></td></tr><tr><td style=border-right-width:0;text-align:right><code>constexpr FieldOptions_JSType</code></td>&lt;td style=&ldquo;border-left-width: 0px"id=&ldquo;FieldOptions_JSType_JSType_MAX&rdquo;><div style=padding-left:16px;text-indent:-16px><code><b>FieldOptions_JSType_JSType_MAX</b> = = FieldOptions_JSType_JS_NUMBER</code></div></td></tr><tr><td style=border-right-width:0;text-align:right><code>constexpr int</code></td>&lt;td style=&ldquo;border-left-width: 0px"id=&ldquo;FieldOptions_JSType_JSType_ARRAYSIZE&rdquo;><div style=padding-left:16px;text-indent:-16px><code><b>FieldOptions_JSType_JSType_ARRAYSIZE</b> = = FieldOptions_JSType_JSType_MAX + 1</code></div></td></tr><tr><td style=border-right-width:0;text-align:right><code>constexpr MethodOptions_IdempotencyLevel</code></td>&lt;td style=&ldquo;border-left-width: 0px"id=&ldquo;MethodOptions_IdempotencyLevel_IdempotencyLevel_MIN&rdquo;><div style=padding-left:16px;text-indent:-16px><code><b>MethodOptions_IdempotencyLevel_IdempotencyLevel_MIN</b> = = MethodOptions_IdempotencyLevel_IDEMPOTENCY_UNKNOWN</code></div></td></tr><tr><td style=border-right-width:0;text-align:right><code>constexpr MethodOptions_IdempotencyLevel</code></td>&lt;td style=&ldquo;border-left-width: 0px"id=&ldquo;MethodOptions_IdempotencyLevel_IdempotencyLevel_MAX&rdquo;><div style=padding-left:16px;text-indent:-16px><code><b>MethodOptions_IdempotencyLevel_IdempotencyLevel_MAX</b> = = MethodOptions_IdempotencyLevel_IDEMPOTENT</code></div></td></tr><tr><td style=border-right-width:0;text-align:right><code>constexpr int</code></td>&lt;td style=&ldquo;border-left-width: 0px"id=&ldquo;MethodOptions_IdempotencyLevel_IdempotencyLevel_ARRAYSIZE&rdquo;><div style=padding-left:16px;text-indent:-16px><code><b>MethodOptions_IdempotencyLevel_IdempotencyLevel_ARRAYSIZE</b> = = MethodOptions_IdempotencyLevel_IdempotencyLevel_MAX + 1</code></div></td></tr><tr><td style=border-right-width:0;text-align:right><code>PROTOBUF_NAMESPACE_CLOSE PROTOBUF_NAMESPACE_OPEN protobuf::DescriptorProto *</code></td>&lt;td style=&ldquo;border-left-width: 0px"id=&ldquo;Arena::CreateMaybeMessage&lt; protobuf::DescriptorProto >"><div style=padding-left:16px;text-indent:-16px><code><b>Arena::CreateMaybeMessage&lt; protobuf::DescriptorProto ></b>(Arena * )</code></div></td></tr><tr><td style=border-right-width:0;text-align:right><code>protobuf::DescriptorProto_ExtensionRange *</code></td>&lt;td style=&ldquo;border-left-width: 0px"id=&ldquo;Arena::CreateMaybeMessage&lt; protobuf::DescriptorProto_ExtensionRange >"><div style=padding-left:16px;text-indent:-16px><code><b>Arena::CreateMaybeMessage&lt; protobuf::DescriptorProto_ExtensionRange ></b>(Arena * )</code></div></td></tr><tr><td style=border-right-width:0;text-align:right><code>protobuf::DescriptorProto_ReservedRange *</code></td>&lt;td style=&ldquo;border-left-width: 0px"id=&ldquo;Arena::CreateMaybeMessage&lt; protobuf::DescriptorProto_ReservedRange >"><div style=padding-left:16px;text-indent:-16px><code><b>Arena::CreateMaybeMessage&lt; protobuf::DescriptorProto_ReservedRange ></b>(Arena * )</code></div></td></tr><tr><td style=border-right-width:0;text-align:right><code>protobuf::EnumDescriptorProto *</code></td>&lt;td style=&ldquo;border-left-width: 0px"id=&ldquo;Arena::CreateMaybeMessage&lt; protobuf::EnumDescriptorProto >"><div style=padding-left:16px;text-indent:-16px><code><b>Arena::CreateMaybeMessage&lt; protobuf::EnumDescriptorProto ></b>(Arena * )</code></div></td></tr><tr><td style=border-right-width:0;text-align:right><code>protobuf::EnumDescriptorProto_EnumReservedRange *</code></td>&lt;td style=&ldquo;border-left-width: 0px"id=&ldquo;Arena::CreateMaybeMessage&lt; protobuf::EnumDescriptorProto_EnumReservedRange >"><div style=padding-left:16px;text-indent:-16px><code><b>Arena::CreateMaybeMessage&lt; protobuf::EnumDescriptorProto_EnumReservedRange ></b>(Arena * )</code></div></td></tr><tr><td style=border-right-width:0;text-align:right><code>protobuf::EnumOptions *</code></td>&lt;td style=&ldquo;border-left-width: 0px"id=&ldquo;Arena::CreateMaybeMessage&lt; protobuf::EnumOptions >"><div style=padding-left:16px;text-indent:-16px><code><b>Arena::CreateMaybeMessage&lt; protobuf::EnumOptions ></b>(Arena * )</code></div></td></tr><tr><td style=border-right-width:0;text-align:right><code>protobuf::EnumValueDescriptorProto *</code></td>&lt;td style=&ldquo;border-left-width: 0px"id=&ldquo;Arena::CreateMaybeMessage&lt; protobuf::EnumValueDescriptorProto >"><div style=padding-left:16px;text-indent:-16px><code><b>Arena::CreateMaybeMessage&lt; protobuf::EnumValueDescriptorProto ></b>(Arena * )</code></div></td></tr><tr><td style=border-right-width:0;text-align:right><code>protobuf::EnumValueOptions *</code></td>&lt;td style=&ldquo;border-left-width: 0px"id=&ldquo;Arena::CreateMaybeMessage&lt; protobuf::EnumValueOptions >"><div style=padding-left:16px;text-indent:-16px><code><b>Arena::CreateMaybeMessage&lt; protobuf::EnumValueOptions ></b>(Arena * )</code></div></td></tr><tr><td style=border-right-width:0;text-align:right><code>protobuf::ExtensionRangeOptions *</code></td>&lt;td style=&ldquo;border-left-width: 0px"id=&ldquo;Arena::CreateMaybeMessage&lt; protobuf::ExtensionRangeOptions >"><div style=padding-left:16px;text-indent:-16px><code><b>Arena::CreateMaybeMessage&lt; protobuf::ExtensionRangeOptions ></b>(Arena * )</code></div></td></tr><tr><td style=border-right-width:0;text-align:right><code>protobuf::FieldDescriptorProto *</code></td>&lt;td style=&ldquo;border-left-width: 0px"id=&ldquo;Arena::CreateMaybeMessage&lt; protobuf::FieldDescriptorProto >"><div style=padding-left:16px;text-indent:-16px><code><b>Arena::CreateMaybeMessage&lt; protobuf::FieldDescriptorProto ></b>(Arena * )</code></div></td></tr><tr><td style=border-right-width:0;text-align:right><code>protobuf::FieldOptions *</code></td>&lt;td style=&ldquo;border-left-width: 0px"id=&ldquo;Arena::CreateMaybeMessage&lt; protobuf::FieldOptions >"><div style=padding-left:16px;text-indent:-16px><code><b>Arena::CreateMaybeMessage&lt; protobuf::FieldOptions ></b>(Arena * )</code></div></td></tr><tr><td style=border-right-width:0;text-align:right><code>protobuf::FileDescriptorProto *</code></td>&lt;td style=&ldquo;border-left-width: 0px"id=&ldquo;Arena::CreateMaybeMessage&lt; protobuf::FileDescriptorProto >"><div style=padding-left:16px;text-indent:-16px><code><b>Arena::CreateMaybeMessage&lt; protobuf::FileDescriptorProto ></b>(Arena * )</code></div></td></tr><tr><td style=border-right-width:0;text-align:right><code>protobuf::FileDescriptorSet *</code></td>&lt;td style=&ldquo;border-left-width: 0px"id=&ldquo;Arena::CreateMaybeMessage&lt; protobuf::FileDescriptorSet >"><div style=padding-left:16px;text-indent:-16px><code><b>Arena::CreateMaybeMessage&lt; protobuf::FileDescriptorSet ></b>(Arena * )</code></div></td></tr><tr><td style=border-right-width:0;text-align:right><code>protobuf::FileOptions *</code></td>&lt;td style=&ldquo;border-left-width: 0px"id=&ldquo;Arena::CreateMaybeMessage&lt; protobuf::FileOptions >"><div style=padding-left:16px;text-indent:-16px><code><b>Arena::CreateMaybeMessage&lt; protobuf::FileOptions ></b>(Arena * )</code></div></td></tr><tr><td style=border-right-width:0;text-align:right><code>protobuf::GeneratedCodeInfo *</code></td>&lt;td style=&ldquo;border-left-width: 0px"id=&ldquo;Arena::CreateMaybeMessage&lt; protobuf::GeneratedCodeInfo >"><div style=padding-left:16px;text-indent:-16px><code><b>Arena::CreateMaybeMessage&lt; protobuf::GeneratedCodeInfo ></b>(Arena * )</code></div></td></tr><tr><td style=border-right-width:0;text-align:right><code>protobuf::GeneratedCodeInfo_Annotation *</code></td>&lt;td style=&ldquo;border-left-width: 0px"id=&ldquo;Arena::CreateMaybeMessage&lt; protobuf::GeneratedCodeInfo_Annotation >"><div style=padding-left:16px;text-indent:-16px><code><b>Arena::CreateMaybeMessage&lt; protobuf::GeneratedCodeInfo_Annotation ></b>(Arena * )</code></div></td></tr><tr><td style=border-right-width:0;text-align:right><code>protobuf::MessageOptions *</code></td>&lt;td style=&ldquo;border-left-width: 0px"id=&ldquo;Arena::CreateMaybeMessage&lt; protobuf::MessageOptions >"><div style=padding-left:16px;text-indent:-16px><code><b>Arena::CreateMaybeMessage&lt; protobuf::MessageOptions ></b>(Arena * )</code></div></td></tr><tr><td style=border-right-width:0;text-align:right><code>protobuf::MethodDescriptorProto *</code></td>&lt;td style=&ldquo;border-left-width: 0px"id=&ldquo;Arena::CreateMaybeMessage&lt; protobuf::MethodDescriptorProto >"><div style=padding-left:16px;text-indent:-16px><code><b>Arena::CreateMaybeMessage&lt; protobuf::MethodDescriptorProto ></b>(Arena * )</code></div></td></tr><tr><td style=border-right-width:0;text-align:right><code>protobuf::MethodOptions *</code></td>&lt;td style=&ldquo;border-left-width: 0px"id=&ldquo;Arena::CreateMaybeMessage&lt; protobuf::MethodOptions >"><div style=padding-left:16px;text-indent:-16px><code><b>Arena::CreateMaybeMessage&lt; protobuf::MethodOptions ></b>(Arena * )</code></div></td></tr><tr><td style=border-right-width:0;text-align:right><code>protobuf::OneofDescriptorProto *</code></td>&lt;td style=&ldquo;border-left-width: 0px"id=&ldquo;Arena::CreateMaybeMessage&lt; protobuf::OneofDescriptorProto >"><div style=padding-left:16px;text-indent:-16px><code><b>Arena::CreateMaybeMessage&lt; protobuf::OneofDescriptorProto ></b>(Arena * )</code></div></td></tr><tr><td style=border-right-width:0;text-align:right><code>protobuf::OneofOptions *</code></td>&lt;td style=&ldquo;border-left-width: 0px"id=&ldquo;Arena::CreateMaybeMessage&lt; protobuf::OneofOptions >"><div style=padding-left:16px;text-indent:-16px><code><b>Arena::CreateMaybeMessage&lt; protobuf::OneofOptions ></b>(Arena * )</code></div></td></tr><tr><td style=border-right-width:0;text-align:right><code>protobuf::ServiceDescriptorProto *</code></td>&lt;td style=&ldquo;border-left-width: 0px"id=&ldquo;Arena::CreateMaybeMessage&lt; protobuf::ServiceDescriptorProto >"><div style=padding-left:16px;text-indent:-16px><code><b>Arena::CreateMaybeMessage&lt; protobuf::ServiceDescriptorProto ></b>(Arena * )</code></div></td></tr><tr><td style=border-right-width:0;text-align:right><code>protobuf::ServiceOptions *</code></td>&lt;td style=&ldquo;border-left-width: 0px"id=&ldquo;Arena::CreateMaybeMessage&lt; protobuf::ServiceOptions >"><div style=padding-left:16px;text-indent:-16px><code><b>Arena::CreateMaybeMessage&lt; protobuf::ServiceOptions ></b>(Arena * )</code></div></td></tr><tr><td style=border-right-width:0;text-align:right><code>protobuf::SourceCodeInfo *</code></td>&lt;td style=&ldquo;border-left-width: 0px"id=&ldquo;Arena::CreateMaybeMessage&lt; protobuf::SourceCodeInfo >"><div style=padding-left:16px;text-indent:-16px><code><b>Arena::CreateMaybeMessage&lt; protobuf::SourceCodeInfo ></b>(Arena * )</code></div></td></tr><tr><td style=border-right-width:0;text-align:right><code>protobuf::SourceCodeInfo_Location *</code></td>&lt;td style=&ldquo;border-left-width: 0px"id=&ldquo;Arena::CreateMaybeMessage&lt; protobuf::SourceCodeInfo_Location >"><div style=padding-left:16px;text-indent:-16px><code><b>Arena::CreateMaybeMessage&lt; protobuf::SourceCodeInfo_Location ></b>(Arena * )</code></div></td></tr><tr><td style=border-right-width:0;text-align:right><code>protobuf::UninterpretedOption *</code></td>&lt;td style=&ldquo;border-left-width: 0px"id=&ldquo;Arena::CreateMaybeMessage&lt; protobuf::UninterpretedOption >"><div style=padding-left:16px;text-indent:-16px><code><b>Arena::CreateMaybeMessage&lt; protobuf::UninterpretedOption ></b>(Arena * )</code></div></td></tr><tr><td style=border-right-width:0;text-align:right><code>protobuf::UninterpretedOption_NamePart *</code></td>&lt;td style=&ldquo;border-left-width: 0px"id=&ldquo;Arena::CreateMaybeMessage&lt; protobuf::UninterpretedOption_NamePart >"><div style=padding-left:16px;text-indent:-16px><code><b>Arena::CreateMaybeMessage&lt; protobuf::UninterpretedOption_NamePart ></b>(Arena * )</code></div></td></tr><tr><td style=border-right-width:0;text-align:right><code>bool</code></td>&lt;td style=&ldquo;border-left-width: 0px"id=&ldquo;FieldDescriptorProto_Type_IsValid&rdquo;><div style=padding-left:16px;text-indent:-16px><code><b>FieldDescriptorProto_Type_IsValid</b>(int value)</code></div></td></tr><tr><td style=border-right-width:0;text-align:right><code>const ::protobuf::EnumDescriptor *</code></td>&lt;td style=&ldquo;border-left-width: 0px"id=&ldquo;FieldDescriptorProto_Type_descriptor&rdquo;><div style=padding-left:16px;text-indent:-16px><code><b>FieldDescriptorProto_Type_descriptor</b>()</code></div></td></tr><tr><td style=border-right-width:0;text-align:right><code>template const std::string &</code></td>&lt;td style=&ldquo;border-left-width: 0px"id=&ldquo;FieldDescriptorProto_Type_Name&rdquo;><div style=padding-left:16px;text-indent:-16px><code><b>FieldDescriptorProto_Type_Name</b>(T enum_t_value)</code></div></td></tr><tr><td style=border-right-width:0;text-align:right><code>bool</code></td>&lt;td style=&ldquo;border-left-width: 0px"id=&ldquo;FieldDescriptorProto_Type_Parse&rdquo;><div style=padding-left:16px;text-indent:-16px><code><b>FieldDescriptorProto_Type_Parse</b>(::protobuf::ConstStringParam name, FieldDescriptorProto_Type * value)</code></div></td></tr><tr><td style=border-right-width:0;text-align:right><code>bool</code></td>&lt;td style=&ldquo;border-left-width: 0px"id=&ldquo;FieldDescriptorProto_Label_IsValid&rdquo;><div style=padding-left:16px;text-indent:-16px><code><b>FieldDescriptorProto_Label_IsValid</b>(int value)</code></div></td></tr><tr><td style=border-right-width:0;text-align:right><code>const ::protobuf::EnumDescriptor *</code></td>&lt;td style=&ldquo;border-left-width: 0px"id=&ldquo;FieldDescriptorProto_Label_descriptor&rdquo;><div style=padding-left:16px;text-indent:-16px><code><b>FieldDescriptorProto_Label_descriptor</b>()</code></div></td></tr><tr><td style=border-right-width:0;text-align:right><code>template const std::string &</code></td>&lt;td style=&ldquo;border-left-width: 0px"id=&ldquo;FieldDescriptorProto_Label_Name&rdquo;><div style=padding-left:16px;text-indent:-16px><code><b>FieldDescriptorProto_Label_Name</b>(T enum_t_value)</code></div></td></tr><tr><td style=border-right-width:0;text-align:right><code>bool</code></td>&lt;td style=&ldquo;border-left-width: 0px"id=&ldquo;FieldDescriptorProto_Label_Parse&rdquo;><div style=padding-left:16px;text-indent:-16px><code><b>FieldDescriptorProto_Label_Parse</b>(::protobuf::ConstStringParam name, FieldDescriptorProto_Label * value)</code></div></td></tr><tr><td style=border-right-width:0;text-align:right><code>bool</code></td>&lt;td style=&ldquo;border-left-width: 0px"id=&ldquo;FileOptions_OptimizeMode_IsValid&rdquo;><div style=padding-left:16px;text-indent:-16px><code><b>FileOptions_OptimizeMode_IsValid</b>(int value)</code></div></td></tr><tr><td style=border-right-width:0;text-align:right><code>const ::protobuf::EnumDescriptor *</code></td>&lt;td style=&ldquo;border-left-width: 0px"id=&ldquo;FileOptions_OptimizeMode_descriptor&rdquo;><div style=padding-left:16px;text-indent:-16px><code><b>FileOptions_OptimizeMode_descriptor</b>()</code></div></td></tr><tr><td style=border-right-width:0;text-align:right><code>template const std::string &</code></td>&lt;td style=&ldquo;border-left-width: 0px"id=&ldquo;FileOptions_OptimizeMode_Name&rdquo;><div style=padding-left:16px;text-indent:-16px><code><b>FileOptions_OptimizeMode_Name</b>(T enum_t_value)</code></div></td></tr><tr><td style=border-right-width:0;text-align:right><code>bool</code></td>&lt;td style=&ldquo;border-left-width: 0px"id=&ldquo;FileOptions_OptimizeMode_Parse&rdquo;><div style=padding-left:16px;text-indent:-16px><code><b>FileOptions_OptimizeMode_Parse</b>(::protobuf::ConstStringParam name, FileOptions_OptimizeMode * value)</code></div></td></tr><tr><td style=border-right-width:0;text-align:right><code>bool</code></td>&lt;td style=&ldquo;border-left-width: 0px"id=&ldquo;FieldOptions_CType_IsValid&rdquo;><div style=padding-left:16px;text-indent:-16px><code><b>FieldOptions_CType_IsValid</b>(int value)</code></div></td></tr><tr><td style=border-right-width:0;text-align:right><code>const ::protobuf::EnumDescriptor *</code></td>&lt;td style=&ldquo;border-left-width: 0px"id=&ldquo;FieldOptions_CType_descriptor&rdquo;><div style=padding-left:16px;text-indent:-16px><code><b>FieldOptions_CType_descriptor</b>()</code></div></td></tr><tr><td style=border-right-width:0;text-align:right><code>template const std::string &</code></td>&lt;td style=&ldquo;border-left-width: 0px"id=&ldquo;FieldOptions_CType_Name&rdquo;><div style=padding-left:16px;text-indent:-16px><code><b>FieldOptions_CType_Name</b>(T enum_t_value)</code></div></td></tr><tr><td style=border-right-width:0;text-align:right><code>bool</code></td>&lt;td style=&ldquo;border-left-width: 0px"id=&ldquo;FieldOptions_CType_Parse&rdquo;><div style=padding-left:16px;text-indent:-16px><code><b>FieldOptions_CType_Parse</b>(::protobuf::ConstStringParam name, FieldOptions_CType * value)</code></div></td></tr><tr><td style=border-right-width:0;text-align:right><code>bool</code></td>&lt;td style=&ldquo;border-left-width: 0px"id=&ldquo;FieldOptions_JSType_IsValid&rdquo;><div style=padding-left:16px;text-indent:-16px><code><b>FieldOptions_JSType_IsValid</b>(int value)</code></div></td></tr><tr><td style=border-right-width:0;text-align:right><code>const ::protobuf::EnumDescriptor *</code></td>&lt;td style=&ldquo;border-left-width: 0px"id=&ldquo;FieldOptions_JSType_descriptor&rdquo;><div style=padding-left:16px;text-indent:-16px><code><b>FieldOptions_JSType_descriptor</b>()</code></div></td></tr><tr><td style=border-right-width:0;text-align:right><code>template const std::string &</code></td>&lt;td style=&ldquo;border-left-width: 0px"id=&ldquo;FieldOptions_JSType_Name&rdquo;><div style=padding-left:16px;text-indent:-16px><code><b>FieldOptions_JSType_Name</b>(T enum_t_value)</code></div></td></tr><tr><td style=border-right-width:0;text-align:right><code>bool</code></td>&lt;td style=&ldquo;border-left-width: 0px"id=&ldquo;FieldOptions_JSType_Parse&rdquo;><div style=padding-left:16px;text-indent:-16px><code><b>FieldOptions_JSType_Parse</b>(::protobuf::ConstStringParam name, FieldOptions_JSType * value)</code></div></td></tr><tr><td style=border-right-width:0;text-align:right><code>bool</code></td>&lt;td style=&ldquo;border-left-width: 0px"id=&ldquo;MethodOptions_IdempotencyLevel_IsValid&rdquo;><div style=padding-left:16px;text-indent:-16px><code><b>MethodOptions_IdempotencyLevel_IsValid</b>(int value)</code></div></td></tr><tr><td style=border-right-width:0;text-align:right><code>const ::protobuf::EnumDescriptor *</code></td>&lt;td style=&ldquo;border-left-width: 0px"id=&ldquo;MethodOptions_IdempotencyLevel_descriptor&rdquo;><div style=padding-left:16px;text-indent:-16px><code><b>MethodOptions_IdempotencyLevel_descriptor</b>()</code></div></td></tr><tr><td style=border-right-width:0;text-align:right><code>template const std::string &</code></td>&lt;td style=&ldquo;border-left-width: 0px"id=&ldquo;MethodOptions_IdempotencyLevel_Name&rdquo;><div style=padding-left:16px;text-indent:-16px><code><b>MethodOptions_IdempotencyLevel_Name</b>(T enum_t_value)</code></div></td></tr><tr><td style=border-right-width:0;text-align:right><code>bool</code></td>&lt;td style=&ldquo;border-left-width: 0px"id=&ldquo;MethodOptions_IdempotencyLevel_Parse&rdquo;><div style=padding-left:16px;text-indent:-16px><code><b>MethodOptions_IdempotencyLevel_Parse</b>(::protobuf::ConstStringParam name, MethodOptions_IdempotencyLevel * value)</code></div></td></tr><tr><td style=border-right-width:0;text-align:right><code>const EnumDescriptor *</code></td>&lt;td style=&ldquo;border-left-width: 0px"id=&ldquo;GetEnumDescriptor&lt; protobuf::FieldDescriptorProto_Type >"><div style=padding-left:16px;text-indent:-16px><code><b>GetEnumDescriptor&lt; protobuf::FieldDescriptorProto_Type ></b>()</code></div></td></tr><tr><td style=border-right-width:0;text-align:right><code>const EnumDescriptor *</code></td>&lt;td style=&ldquo;border-left-width: 0px"id=&ldquo;GetEnumDescriptor&lt; protobuf::FieldDescriptorProto_Label >"><div style=padding-left:16px;text-indent:-16px><code><b>GetEnumDescriptor&lt; protobuf::FieldDescriptorProto_Label ></b>()</code></div></td></tr><tr><td style=border-right-width:0;text-align:right><code>const EnumDescriptor *</code></td>&lt;td style=&ldquo;border-left-width: 0px"id=&ldquo;GetEnumDescriptor&lt; protobuf::FileOptions_OptimizeMode >"><div style=padding-left:16px;text-indent:-16px><code><b>GetEnumDescriptor&lt; protobuf::FileOptions_OptimizeMode ></b>()</code></div></td></tr><tr><td style=border-right-width:0;text-align:right><code>const EnumDescriptor *</code></td>&lt;td style=&ldquo;border-left-width: 0px"id=&ldquo;GetEnumDescriptor&lt; protobuf::FieldOptions_CType >"><div style=padding-left:16px;text-indent:-16px><code><b>GetEnumDescriptor&lt; protobuf::FieldOptions_CType ></b>()</code></div></td></tr><tr><td style=border-right-width:0;text-align:right><code>const EnumDescriptor *</code></td>&lt;td style=&ldquo;border-left-width: 0px"id=&ldquo;GetEnumDescriptor&lt; protobuf::FieldOptions_JSType >"><div style=padding-left:16px;text-indent:-16px><code><b>GetEnumDescriptor&lt; protobuf::FieldOptions_JSType ></b>()</code></div></td></tr><tr><td style=border-right-width:0;text-align:right><code>const EnumDescriptor *</code></td>&lt;td style=&ldquo;border-left-width: 0px"id=&ldquo;GetEnumDescriptor&lt; protobuf::MethodOptions_IdempotencyLevel >"><div style=padding-left:16px;text-indent:-16px><code><b>GetEnumDescriptor&lt; protobuf::MethodOptions_IdempotencyLevel ></b>()</code></div></td></tr></table><hr><h3 id=FieldDescriptorProto_Type.details><code>enum protobuf::FieldDescriptorProto_Type {<br>  FieldDescriptorProto_Type_TYPE_DOUBLE = = 1,<br>  FieldDescriptorProto_Type_TYPE_FLOAT = = 2,<br>  FieldDescriptorProto_Type_TYPE_INT64 = = 3,<br>  FieldDescriptorProto_Type_TYPE_UINT64 = = 4,<br>  FieldDescriptorProto_Type_TYPE_INT32 = = 5,<br>  FieldDescriptorProto_Type_TYPE_FIXED64 = = 6,<br>  FieldDescriptorProto_Type_TYPE_FIXED32 = = 7,<br>  FieldDescriptorProto_Type_TYPE_BOOL = = 8,<br>  FieldDescriptorProto_Type_TYPE_STRING = = 9,<br>  FieldDescriptorProto_Type_TYPE_GROUP = = 10,<br>  FieldDescriptorProto_Type_TYPE_MESSAGE = = 11,<br>  FieldDescriptorProto_Type_TYPE_BYTES = = 12,<br>  FieldDescriptorProto_Type_TYPE_UINT32 = = 13,<br>  FieldDescriptorProto_Type_TYPE_ENUM = = 14,<br>  FieldDescriptorProto_Type_TYPE_SFIXED32 = = 15,<br>  FieldDescriptorProto_Type_TYPE_SFIXED64 = = 16,<br>  FieldDescriptorProto_Type_TYPE_SINT32 = = 17,<br>  FieldDescriptorProto_Type_TYPE_SINT64 = = 18<br>}</code></h3><div style=margin-left:16px><p></p><table><tr><td>FieldDescriptorProto_Type_TYPE_DOUBLE</td><td></td></tr><tr><td>FieldDescriptorProto_Type_TYPE_FLOAT</td><td></td></tr><tr><td>FieldDescriptorProto_Type_TYPE_INT64</td><td></td></tr><tr><td>FieldDescriptorProto_Type_TYPE_UINT64</td><td></td></tr><tr><td>FieldDescriptorProto_Type_TYPE_INT32</td><td></td></tr><tr><td>FieldDescriptorProto_Type_TYPE_FIXED64</td><td></td></tr><tr><td>FieldDescriptorProto_Type_TYPE_FIXED32</td><td></td></tr><tr><td>FieldDescriptorProto_Type_TYPE_BOOL</td><td></td></tr><tr><td>FieldDescriptorProto_Type_TYPE_STRING</td><td></td></tr><tr><td>FieldDescriptorProto_Type_TYPE_GROUP</td><td></td></tr><tr><td>FieldDescriptorProto_Type_TYPE_MESSAGE</td><td></td></tr><tr><td>FieldDescriptorProto_Type_TYPE_BYTES</td><td></td></tr><tr><td>FieldDescriptorProto_Type_TYPE_UINT32</td><td></td></tr><tr><td>FieldDescriptorProto_Type_TYPE_ENUM</td><td></td></tr><tr><td>FieldDescriptorProto_Type_TYPE_SFIXED32</td><td></td></tr><tr><td>FieldDescriptorProto_Type_TYPE_SFIXED64</td><td></td></tr><tr><td>FieldDescriptorProto_Type_TYPE_SINT32</td><td></td></tr><tr><td>FieldDescriptorProto_Type_TYPE_SINT64</td><td></td></tr></table></div><hr><h3 id=FieldDescriptorProto_Label.details><code>enum protobuf::FieldDescriptorProto_Label {<br>  FieldDescriptorProto_Label_LABEL_OPTIONAL = = 1,<br>  FieldDescriptorProto_Label_LABEL_REQUIRED = = 2,<br>  FieldDescriptorProto_Label_LABEL_REPEATED = = 3<br>}</code></h3><div style=margin-left:16px><p></p><table><tr><td>FieldDescriptorProto_Label_LABEL_OPTIONAL</td><td></td></tr><tr><td>FieldDescriptorProto_Label_LABEL_REQUIRED</td><td></td></tr><tr><td>FieldDescriptorProto_Label_LABEL_REPEATED</td><td></td></tr></table></div><hr><h3 id=FileOptions_OptimizeMode.details><code>enum protobuf::FileOptions_OptimizeMode {<br>  FileOptions_OptimizeMode_SPEED = = 1,<br>  FileOptions_OptimizeMode_CODE_SIZE = = 2,<br>  FileOptions_OptimizeMode_LITE_RUNTIME = = 3<br>}</code></h3><div style=margin-left:16px><p></p><table><tr><td>FileOptions_OptimizeMode_SPEED</td><td></td></tr><tr><td>FileOptions_OptimizeMode_CODE_SIZE</td><td></td></tr><tr><td>FileOptions_OptimizeMode_LITE_RUNTIME</td><td></td></tr></table></div><hr><h3 id=FieldOptions_CType.details><code>enum protobuf::FieldOptions_CType {<br>  FieldOptions_CType_STRING = = 0,<br>  FieldOptions_CType_CORD = = 1,<br>  FieldOptions_CType_STRING_PIECE = = 2<br>}</code></h3><div style=margin-left:16px><p></p><table><tr><td>FieldOptions_CType_STRING</td><td></td></tr><tr><td>FieldOptions_CType_CORD</td><td></td></tr><tr><td>FieldOptions_CType_STRING_PIECE</td><td></td></tr></table></div><hr><h3 id=FieldOptions_JSType.details><code>enum protobuf::FieldOptions_JSType {<br>  FieldOptions_JSType_JS_NORMAL = = 0,<br>  FieldOptions_JSType_JS_STRING = = 1,<br>  FieldOptions_JSType_JS_NUMBER = = 2<br>}</code></h3><div style=margin-left:16px><p></p><table><tr><td>FieldOptions_JSType_JS_NORMAL</td><td></td></tr><tr><td>FieldOptions_JSType_JS_STRING</td><td></td></tr><tr><td>FieldOptions_JSType_JS_NUMBER</td><td></td></tr></table></div><hr><h3 id=MethodOptions_IdempotencyLevel.details><code>enum protobuf::MethodOptions_IdempotencyLevel {<br>  MethodOptions_IdempotencyLevel_IDEMPOTENCY_UNKNOWN = = 0,<br>  MethodOptions_IdempotencyLevel_NO_SIDE_EFFECTS = = 1,<br>  MethodOptions_IdempotencyLevel_IDEMPOTENT = = 2<br>}</code></h3><div style=margin-left:16px><p></p><table><tr><td>MethodOptions_IdempotencyLevel_IDEMPOTENCY_UNKNOWN</td><td></td></tr><tr><td>MethodOptions_IdempotencyLevel_NO_SIDE_EFFECTS</td><td></td></tr><tr><td>MethodOptions_IdempotencyLevel_IDEMPOTENT</td><td></td></tr></table></div></body></html></p></main><footer class="bg-dark py-5 row d-print-none"><div class="container-fluid mx-sm-5"><div class=row><div class="col-6 col-sm-4 text-xs-center order-sm-2"><ul class="list-inline mb-0"><li class="list-inline-item mx-2 h3" data-toggle=tooltip data-placement=top title="Stack Overflow" aria-label="Stack Overflow"><a class=text-white target=_blank rel=noopener href=https://stackoverflow.com/questions/tagged/protocol-buffers aria-label="Stack Overflow"><i class="fab fa-stack-overflow"></i></a></li></ul><script type=text/javascript id=cookiebanner src=https://cdn.jsdelivr.net/gh/dobarkod/cookie-banner@1.2.2/dist/cookiebanner.min.js data-height=40px data-message="Protobuf.dev uses cookies from Google to deliver and enhance the quality of its services and to analyze traffic." data-bg=#fff data-fg=#000 data-position=bottom data-padding=16px data-close-text="OK, got it" data-font-size=18px data-moreinfo=https://policies.google.com/technologies/cookies></script></div><div class="col-6 col-sm-4 text-right text-xs-center order-sm-3"><ul class="list-inline mb-0"><li class="list-inline-item mx-2 h3" data-toggle=tooltip data-placement=top title=GitHub aria-label=GitHub><a class=text-white target=_blank rel=noopener href=https://github.com/protocolbuffers/protobuf aria-label=GitHub><i class="fab fa-github"></i></a></li><li class="list-inline-item mx-2 h3" data-toggle=tooltip data-placement=top title="Developer mailing list" aria-label="Developer mailing list"><a class=text-white target=_blank rel=noopener href=https://groups.google.com/g/protobuf aria-label="Developer mailing list"><i class="fa fa-envelope"></i></a></li></ul><script type=text/javascript id=cookiebanner src=https://cdn.jsdelivr.net/gh/dobarkod/cookie-banner@1.2.2/dist/cookiebanner.min.js data-height=40px data-message="Protobuf.dev uses cookies from Google to deliver and enhance the quality of its services and to analyze traffic." data-bg=#fff data-fg=#000 data-position=bottom data-padding=16px data-close-text="OK, got it" data-font-size=18px data-moreinfo=https://policies.google.com/technologies/cookies></script></div><div class="col-12 col-sm-4 text-center py-2 order-sm-2"><small class=text-white>&copy; 2022 Google LLC All Rights Reserved</small>
+<small class=ml-1><a href=https://policies.google.com/privacy target=_blank rel=noopener>Privacy Policy</a></small>
+<span class=text-white>Hosted by GitHub Pages.</span> <a href=https://docs.github.com/en/site-policy/privacy-policies/github-privacy-statement target=_blank>GitHub Privacy Statement</a></div></div></div></footer></div><script src=/js/main.min.48a7d138dd257f31c8ab8ac8a2922a6911189eae9f353439163ad3316421ea99.js integrity="sha256-SKfRON0lfzHIq4rIopIqaREYnq6fNTQ5FjrTMWQh6pk=" crossorigin=anonymous></script>
+<script src=/js/tabpane-persist.js></script></body></html>

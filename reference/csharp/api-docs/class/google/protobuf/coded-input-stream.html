@@ -1,0 +1,799 @@
+<!DOCTYPE html>
+<html devsite>
+<head>
+  <title>Google.Protobuf.CodedInputStream Class Reference</title>
+  <link rel="stylesheet" href="/reference/csharp/api-docs/includes/stylesheet.css">
+</head>
+<body><div id="top"><!-- do not remove this div --></div><h1>Google.<wbr/>Protobuf.<wbr/>CodedInputStream</h1><p>Reads and decodes protocol message fields. </p><h2>Summary</h2><p>This class is generally used by generated code to read appropriate primitives from the stream. It effectively encapsulates the lowest levels of protocol buffer format. </p><p>Repeated fields and map fields are not handled by this class; use RepeatedField{T} and MapField{TKey, TValue} to serialize such fields. </p><h3>Inheritance</h3>Inherits from: IDisposable<table class="constructors responsive">
+    <tr>
+      <th colspan="2">
+        <h3>Constructors and Destructors</h3>
+      </th>
+    </tr>
+    <tr>
+      <td colspan="2">
+        <code><a href="#class_google_1_1_protobuf_1_1_coded_input_stream_1a616b4ac2b8f725762fe3868a20562dce">CodedInputStream</a>(byte[] buffer)</code>
+        <br />
+        <div>Creates a new <a href="/reference/csharp/api-docs/class/google/protobuf/coded-input-stream.html#class_google_1_1_protobuf_1_1_coded_input_stream">CodedInputStream</a> reading data from the given byte array. </div>
+      </td>
+    </tr>
+    <tr>
+      <td colspan="2">
+        <code><a href="#class_google_1_1_protobuf_1_1_coded_input_stream_1a0d701763b8eddc16997b216da6a02d7f">CodedInputStream</a>(byte[] buffer, int offset, int length)</code>
+        <br />
+        <div>Creates a new <a href="/reference/csharp/api-docs/class/google/protobuf/coded-input-stream.html#class_google_1_1_protobuf_1_1_coded_input_stream">CodedInputStream</a> that reads from the given byte array slice. </div>
+      </td>
+    </tr>
+    <tr>
+      <td colspan="2">
+        <code><a href="#class_google_1_1_protobuf_1_1_coded_input_stream_1a6b4a0f1ad2f8f83fa4d092448d7f39b6">CodedInputStream</a>(Stream input)</code>
+        <br />
+        <div>Creates a new <a href="/reference/csharp/api-docs/class/google/protobuf/coded-input-stream.html#class_google_1_1_protobuf_1_1_coded_input_stream">CodedInputStream</a> reading data from the given stream, which will be disposed when the returned object is disposed. </div>
+      </td>
+    </tr>
+    <tr>
+      <td colspan="2">
+        <code><a href="#class_google_1_1_protobuf_1_1_coded_input_stream_1a60d827251c993bfd1f1bf2e82613f8c9">CodedInputStream</a>(Stream input, bool leaveOpen)</code>
+        <br />
+        <div>Creates a new <a href="/reference/csharp/api-docs/class/google/protobuf/coded-input-stream.html#class_google_1_1_protobuf_1_1_coded_input_stream">CodedInputStream</a> reading data from the given stream. </div>
+      </td>
+    </tr>
+  </table><table class="properties responsive">
+    <tr>
+      <th colspan="2">
+        <h3>Properties</h3>
+      </th>
+    </tr>
+    <tr>
+      <td>
+        <code><a href="#class_google_1_1_protobuf_1_1_coded_input_stream_1a77ee9031a600e5a1f7e12084cfd82f2f">IsAtEnd</a></code>
+      </td>
+      <td>
+        <div>
+          <code>bool</code>
+        </div>
+        <div>Returns true if the stream has reached the end of the input. </div>
+      </td>
+    </tr>
+    <tr>
+      <td>
+        <code><a href="#class_google_1_1_protobuf_1_1_coded_input_stream_1ac26b7023c686865cd8d0201cae20764b">LastTag</a></code>
+      </td>
+      <td>
+        <div>
+          <code>uint</code>
+        </div>
+        <div>Returns the last tag read, or 0 if no tags have been read or we've read beyond the end of the stream. </div>
+      </td>
+    </tr>
+    <tr>
+      <td>
+        <code><a href="#class_google_1_1_protobuf_1_1_coded_input_stream_1a1f003a6789b23503120de526c79bac56">Position</a></code>
+      </td>
+      <td>
+        <div>
+          <code>long</code>
+        </div>
+        <div>Returns the current position in the input stream, or the position in the input buffer </div>
+      </td>
+    </tr>
+    <tr>
+      <td>
+        <code><a href="#class_google_1_1_protobuf_1_1_coded_input_stream_1a06d546df5cef28d322cd4aa4336938b1">ReachedLimit</a></code>
+      </td>
+      <td>
+        <div>
+          <code>bool</code>
+        </div>
+        <div>Returns whether or not all the data before the limit has been read. </div>
+      </td>
+    </tr>
+    <tr>
+      <td>
+        <code><a href="#class_google_1_1_protobuf_1_1_coded_input_stream_1a7b02805d44a63f667e32c8b957dbf1b0">RecursionLimit</a></code>
+      </td>
+      <td>
+        <div>
+          <code>int</code>
+        </div>
+        <div>Returns the recursion limit for this stream. </div>
+      </td>
+    </tr>
+    <tr>
+      <td>
+        <code><a href="#class_google_1_1_protobuf_1_1_coded_input_stream_1a965a554066f53dda224749a2f169d42b">SizeLimit</a></code>
+      </td>
+      <td>
+        <div>
+          <code>int</code>
+        </div>
+        <div>Returns the size limit for this stream. </div>
+      </td>
+    </tr>
+  </table><table class="methods responsive">
+    <tr>
+      <th colspan="2">
+        <h3>Public functions</h3>
+      </th>
+    </tr>
+    <tr>
+      <td>
+        <code><a href="#class_google_1_1_protobuf_1_1_coded_input_stream_1a71e7c8149e7cfc691d80f1c5c418f81c">Dispose</a>()</code>
+      </td>
+      <td>
+        <div>
+          <code>void</code>
+        </div>
+        <div>Disposes of this instance, potentially closing any underlying stream. </div>
+      </td>
+    </tr>
+    <tr>
+      <td>
+        <code><a href="#class_google_1_1_protobuf_1_1_coded_input_stream_1aa270f362832bcaa6e1f388a86b87f6a7">MaybeConsumeTag</a>(uint tag)</code>
+      </td>
+      <td>
+        <div>
+          <code>bool</code>
+        </div>
+        <div>Peeks at the next tag in the stream. </div>
+      </td>
+    </tr>
+    <tr>
+      <td>
+        <code><a href="#class_google_1_1_protobuf_1_1_coded_input_stream_1a597a5760962fb204d856a78c1acac2e8">PeekTag</a>()</code>
+      </td>
+      <td>
+        <div>
+          <code>uint</code>
+        </div>
+        <div>Peeks at the next field tag. </div>
+      </td>
+    </tr>
+    <tr>
+      <td>
+        <code><a href="#class_google_1_1_protobuf_1_1_coded_input_stream_1a79347e252cda70f3bfba8e7a297ae31f">ReadBool</a>()</code>
+      </td>
+      <td>
+        <div>
+          <code>bool</code>
+        </div>
+        <div>Reads a bool field from the stream. </div>
+      </td>
+    </tr>
+    <tr>
+      <td>
+        <code><a href="#class_google_1_1_protobuf_1_1_coded_input_stream_1a98e6d1b115c163e30c98784c58bcad46">ReadBytes</a>()</code>
+      </td>
+      <td>
+        <div>
+          <code><a href="/reference/csharp/api-docs/class/google/protobuf/byte-string.html#class_google_1_1_protobuf_1_1_byte_string">ByteString</a></code>
+        </div>
+        <div>Reads a bytes field value from the stream. </div>
+      </td>
+    </tr>
+    <tr>
+      <td>
+        <code><a href="#class_google_1_1_protobuf_1_1_coded_input_stream_1a56bb695cfabef94bf2989307f8b66ea2">ReadDouble</a>()</code>
+      </td>
+      <td>
+        <div>
+          <code>double</code>
+        </div>
+        <div>Reads a double field from the stream. </div>
+      </td>
+    </tr>
+    <tr>
+      <td>
+        <code><a href="#class_google_1_1_protobuf_1_1_coded_input_stream_1aa19dd8fd4512490866888733ad06ef9a">ReadEnum</a>()</code>
+      </td>
+      <td>
+        <div>
+          <code>int</code>
+        </div>
+        <div>Reads an enum field value from the stream. </div>
+      </td>
+    </tr>
+    <tr>
+      <td>
+        <code><a href="#class_google_1_1_protobuf_1_1_coded_input_stream_1ac3e4f3f61fbb52b396d669a5358e4e3f">ReadFixed32</a>()</code>
+      </td>
+      <td>
+        <div>
+          <code>uint</code>
+        </div>
+        <div>Reads a fixed32 field from the stream. </div>
+      </td>
+    </tr>
+    <tr>
+      <td>
+        <code><a href="#class_google_1_1_protobuf_1_1_coded_input_stream_1aef2d97648279cea22a020f326363c91a">ReadFixed64</a>()</code>
+      </td>
+      <td>
+        <div>
+          <code>ulong</code>
+        </div>
+        <div>Reads a fixed64 field from the stream. </div>
+      </td>
+    </tr>
+    <tr>
+      <td>
+        <code><a href="#class_google_1_1_protobuf_1_1_coded_input_stream_1a1159e861d50b1e28676f3f935c15ae65">ReadFloat</a>()</code>
+      </td>
+      <td>
+        <div>
+          <code>float</code>
+        </div>
+        <div>Reads a float field from the stream. </div>
+      </td>
+    </tr>
+    <tr>
+      <td>
+        <code><a href="#class_google_1_1_protobuf_1_1_coded_input_stream_1ab8226800621aa3762a20d12544e7a799">ReadInt32</a>()</code>
+      </td>
+      <td>
+        <div>
+          <code>int</code>
+        </div>
+        <div>Reads an int32 field from the stream. </div>
+      </td>
+    </tr>
+    <tr>
+      <td>
+        <code><a href="#class_google_1_1_protobuf_1_1_coded_input_stream_1a1fbc87d450f9050ac93ebdd21bdfc970">ReadInt64</a>()</code>
+      </td>
+      <td>
+        <div>
+          <code>long</code>
+        </div>
+        <div>Reads an int64 field from the stream. </div>
+      </td>
+    </tr>
+    <tr>
+      <td>
+        <code><a href="#class_google_1_1_protobuf_1_1_coded_input_stream_1a525f14fb58ffba40ebbf437acd41c4f6">ReadLength</a>()</code>
+      </td>
+      <td>
+        <div>
+          <code>int</code>
+        </div>
+        <div>Reads a length for length-delimited data. </div>
+      </td>
+    </tr>
+    <tr>
+      <td>
+        <code><a href="#class_google_1_1_protobuf_1_1_coded_input_stream_1afad4c8f6e265274121948029cbbb1059">ReadMessage</a>(<a href="/reference/csharp/api-docs/interface/google/protobuf/i-message.html#interface_google_1_1_protobuf_1_1_i_message">IMessage</a> builder)</code>
+      </td>
+      <td>
+        <div>
+          <code>void</code>
+        </div>
+        <div>Reads an embedded message field value from the stream. </div>
+      </td>
+    </tr>
+    <tr>
+      <td>
+        <code><a href="#class_google_1_1_protobuf_1_1_coded_input_stream_1a05332bbcb52057cad84e794680ee6fd0">ReadSFixed32</a>()</code>
+      </td>
+      <td>
+        <div>
+          <code>int</code>
+        </div>
+        <div>Reads an sfixed32 field value from the stream. </div>
+      </td>
+    </tr>
+    <tr>
+      <td>
+        <code><a href="#class_google_1_1_protobuf_1_1_coded_input_stream_1a9607e5bb6999156d81787f28eabf2e20">ReadSFixed64</a>()</code>
+      </td>
+      <td>
+        <div>
+          <code>long</code>
+        </div>
+        <div>Reads an sfixed64 field value from the stream. </div>
+      </td>
+    </tr>
+    <tr>
+      <td>
+        <code><a href="#class_google_1_1_protobuf_1_1_coded_input_stream_1a19ad7240d41696447abf7c1d82317d7b">ReadSInt32</a>()</code>
+      </td>
+      <td>
+        <div>
+          <code>int</code>
+        </div>
+        <div>Reads an sint32 field value from the stream. </div>
+      </td>
+    </tr>
+    <tr>
+      <td>
+        <code><a href="#class_google_1_1_protobuf_1_1_coded_input_stream_1ae1871bb3a196ffdedcafe544b64e399a">ReadSInt64</a>()</code>
+      </td>
+      <td>
+        <div>
+          <code>long</code>
+        </div>
+        <div>Reads an sint64 field value from the stream. </div>
+      </td>
+    </tr>
+    <tr>
+      <td>
+        <code><a href="#class_google_1_1_protobuf_1_1_coded_input_stream_1a8b0108a0ad22051b3667523e02d36631">ReadString</a>()</code>
+      </td>
+      <td>
+        <div>
+          <code>string</code>
+        </div>
+        <div>Reads a string field from the stream. </div>
+      </td>
+    </tr>
+    <tr>
+      <td>
+        <code><a href="#class_google_1_1_protobuf_1_1_coded_input_stream_1ac56467395c12be2dd040625d431be593">ReadTag</a>()</code>
+      </td>
+      <td>
+        <div>
+          <code>uint</code>
+        </div>
+        <div>Reads a field tag, returning the tag of 0 for "end of stream". </div>
+      </td>
+    </tr>
+    <tr>
+      <td>
+        <code><a href="#class_google_1_1_protobuf_1_1_coded_input_stream_1a724f939804c853d7cf984a49c5fb8a8e">ReadUInt32</a>()</code>
+      </td>
+      <td>
+        <div>
+          <code>uint</code>
+        </div>
+        <div>Reads a uint32 field value from the stream. </div>
+      </td>
+    </tr>
+    <tr>
+      <td>
+        <code><a href="#class_google_1_1_protobuf_1_1_coded_input_stream_1a49784831c61e8ae05ec7b561c0e7546e">ReadUInt64</a>()</code>
+      </td>
+      <td>
+        <div>
+          <code>ulong</code>
+        </div>
+        <div>Reads a uint64 field from the stream. </div>
+      </td>
+    </tr>
+    <tr>
+      <td>
+        <code><a href="#class_google_1_1_protobuf_1_1_coded_input_stream_1aeb908a67663faccfa2f129fcfde296d6">SkipLastField</a>()</code>
+      </td>
+      <td>
+        <div>
+          <code>void</code>
+        </div>
+        <div>Skips the data for the field with the tag we've just read. </div>
+      </td>
+    </tr>
+  </table><table class="methods responsive">
+    <tr>
+      <th colspan="2">
+        <h3>Public static functions</h3>
+      </th>
+    </tr>
+    <tr>
+      <td>
+        <code><a href="#class_google_1_1_protobuf_1_1_coded_input_stream_1a2fd51d5864aa7bb1cf153200143b0a3f">CreateWithLimits</a>(Stream input, int sizeLimit, int recursionLimit)</code>
+      </td>
+      <td>
+        <div>
+          <code><a href="/reference/csharp/api-docs/class/google/protobuf/coded-input-stream.html#class_google_1_1_protobuf_1_1_coded_input_stream">CodedInputStream</a></code>
+        </div>
+        <div>Creates a <a href="/reference/csharp/api-docs/class/google/protobuf/coded-input-stream.html#class_google_1_1_protobuf_1_1_coded_input_stream">CodedInputStream</a> with the specified size and recursion limits, reading from an input stream. </div>
+      </td>
+    </tr>
+  </table><h2>Properties</h2><div id="class_google_1_1_protobuf_1_1_coded_input_stream_1a77ee9031a600e5a1f7e12084cfd82f2f">
+    <h3>IsAtEnd</h3>
+    <pre class="prettyprint">bool IsAtEnd</pre>
+    <div>
+      <p>Returns true if the stream has reached the end of the input. </p>
+      <p>This is the case if either the end of the underlying input source has been reached or the stream has reached a limit created using PushLimit. </p>
+    </div>
+  </div><div id="class_google_1_1_protobuf_1_1_coded_input_stream_1ac26b7023c686865cd8d0201cae20764b">
+    <h3>LastTag</h3>
+    <pre class="prettyprint">uint LastTag</pre>
+    <div>
+      <p>Returns the last tag read, or 0 if no tags have been read or we've read beyond the end of the stream. </p>
+    </div>
+  </div><div id="class_google_1_1_protobuf_1_1_coded_input_stream_1a1f003a6789b23503120de526c79bac56">
+    <h3>Position</h3>
+    <pre class="prettyprint">long Position</pre>
+    <div>
+      <p>Returns the current position in the input stream, or the position in the input buffer </p>
+    </div>
+  </div><div id="class_google_1_1_protobuf_1_1_coded_input_stream_1a06d546df5cef28d322cd4aa4336938b1">
+    <h3>ReachedLimit</h3>
+    <pre class="prettyprint">bool ReachedLimit</pre>
+    <div>
+      <p>Returns whether or not all the data before the limit has been read. </p>
+      <p />
+      <table class="details responsive">
+        <thead>
+          <th colspan="2">Details</th>
+        </thead>
+        <tbody>
+          <tr>
+            <td>
+              <b>Returns</b>
+            </td>
+            <td>
+              <div />
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div><div id="class_google_1_1_protobuf_1_1_coded_input_stream_1a7b02805d44a63f667e32c8b957dbf1b0">
+    <h3>RecursionLimit</h3>
+    <pre class="prettyprint">int RecursionLimit</pre>
+    <div>
+      <p>Returns the recursion limit for this stream. </p>
+      <p>This limit is applied whilst reading messages, to avoid maliciously-recursive data. </p>
+      <p>The default limit is 64. </p>
+      <p>The recursion limit for this stream. </p>
+    </div>
+  </div><div id="class_google_1_1_protobuf_1_1_coded_input_stream_1a965a554066f53dda224749a2f169d42b">
+    <h3>SizeLimit</h3>
+    <pre class="prettyprint">int SizeLimit</pre>
+    <div>
+      <p>Returns the size limit for this stream. </p>
+      <p>This limit is applied when reading from the underlying stream, as a sanity check. It is not applied when reading from a byte array data source without an underlying stream. The default value is 64MB. </p>
+      <p>The size limit. </p>
+    </div>
+  </div><h2>Public functions</h2><div id="class_google_1_1_protobuf_1_1_coded_input_stream_1a616b4ac2b8f725762fe3868a20562dce">
+    <h3>CodedInputStream</h3>
+    <pre class="prettyprint"> CodedInputStream(
+  byte[] buffer
+)</pre>
+    <div>
+      <p>Creates a new <a href="/reference/csharp/api-docs/class/google/protobuf/coded-input-stream.html#class_google_1_1_protobuf_1_1_coded_input_stream">CodedInputStream</a> reading data from the given byte array. </p>
+    </div>
+  </div><div id="class_google_1_1_protobuf_1_1_coded_input_stream_1a0d701763b8eddc16997b216da6a02d7f">
+    <h3>CodedInputStream</h3>
+    <pre class="prettyprint"> CodedInputStream(
+  byte[] buffer,
+  int offset,
+  int length
+)</pre>
+    <div>
+      <p>Creates a new <a href="/reference/csharp/api-docs/class/google/protobuf/coded-input-stream.html#class_google_1_1_protobuf_1_1_coded_input_stream">CodedInputStream</a> that reads from the given byte array slice. </p>
+    </div>
+  </div><div id="class_google_1_1_protobuf_1_1_coded_input_stream_1a6b4a0f1ad2f8f83fa4d092448d7f39b6">
+    <h3>CodedInputStream</h3>
+    <pre class="prettyprint"> CodedInputStream(
+  Stream input
+)</pre>
+    <div>
+      <p>Creates a new <a href="/reference/csharp/api-docs/class/google/protobuf/coded-input-stream.html#class_google_1_1_protobuf_1_1_coded_input_stream">CodedInputStream</a> reading data from the given stream, which will be disposed when the returned object is disposed. </p>
+      <p />
+      <table class="details responsive">
+        <thead>
+          <th colspan="2">Details</th>
+        </thead>
+        <tbody>
+          <tr>
+            <td>Parameters</td>
+            <td>
+              <table class="function param responsive">
+                <tbody>
+                  <tr>
+                    <td>
+                      <code>input</code>
+                    </td>
+                    <td>
+                      <div>The stream to read from.</div>
+                    </td>
+                  </tr>
+                </tbody>
+              </table>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div><div id="class_google_1_1_protobuf_1_1_coded_input_stream_1a60d827251c993bfd1f1bf2e82613f8c9">
+    <h3>CodedInputStream</h3>
+    <pre class="prettyprint"> CodedInputStream(
+  Stream input,
+  bool leaveOpen
+)</pre>
+    <div>
+      <p>Creates a new <a href="/reference/csharp/api-docs/class/google/protobuf/coded-input-stream.html#class_google_1_1_protobuf_1_1_coded_input_stream">CodedInputStream</a> reading data from the given stream. </p>
+      <p />
+      <table class="details responsive">
+        <thead>
+          <th colspan="2">Details</th>
+        </thead>
+        <tbody>
+          <tr>
+            <td>Parameters</td>
+            <td>
+              <table class="function param responsive">
+                <tbody>
+                  <tr>
+                    <td>
+                      <code>input</code>
+                    </td>
+                    <td>
+                      <div>The stream to read from.</div>
+                    </td>
+                  </tr>
+                  <tr>
+                    <td>
+                      <code>leaveOpen</code>
+                    </td>
+                    <td>
+                      <div><code>true</code> to leave <i>input</i>  open when the returned <code> is disposed; <code>false</code> to dispose of the given stream when the returned object is disposed.</code></div>
+                    </td>
+                  </tr>
+                </tbody>
+              </table>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div><div id="class_google_1_1_protobuf_1_1_coded_input_stream_1a71e7c8149e7cfc691d80f1c5c418f81c">
+    <h3>Dispose</h3>
+    <pre class="prettyprint">void Dispose()</pre>
+    <div>
+      <p>Disposes of this instance, potentially closing any underlying stream. </p>
+      <p>As there is no flushing to perform here, disposing of a <a href="/reference/csharp/api-docs/class/google/protobuf/coded-input-stream.html#class_google_1_1_protobuf_1_1_coded_input_stream">CodedInputStream</a> which was constructed with the <code>leaveOpen</code> option parameter set to <code>true</code> (or one which was constructed to read from a byte array) has no effect. </p>
+    </div>
+  </div><div id="class_google_1_1_protobuf_1_1_coded_input_stream_1aa270f362832bcaa6e1f388a86b87f6a7">
+    <h3>MaybeConsumeTag</h3>
+    <pre class="prettyprint">bool MaybeConsumeTag(
+  uint tag
+)</pre>
+    <div>
+      <p>Peeks at the next tag in the stream. </p>
+      <p>If it matches <i>tag</i> , the tag is consumed and the method returns <code>true</code>; otherwise, the stream is left in the original position and the method returns <code>false</code>. </p>
+    </div>
+  </div><div id="class_google_1_1_protobuf_1_1_coded_input_stream_1a597a5760962fb204d856a78c1acac2e8">
+    <h3>PeekTag</h3>
+    <pre class="prettyprint">uint PeekTag()</pre>
+    <div>
+      <p>Peeks at the next field tag. </p>
+      <p>This is like calling <a href="/reference/csharp/api-docs/class/google/protobuf/coded-input-stream.html#class_google_1_1_protobuf_1_1_coded_input_stream_1ac56467395c12be2dd040625d431be593">ReadTag</a>, but the tag is not consumed. (So a subsequent call to <a href="/reference/csharp/api-docs/class/google/protobuf/coded-input-stream.html#class_google_1_1_protobuf_1_1_coded_input_stream_1ac56467395c12be2dd040625d431be593">ReadTag</a> will return the same value.) </p>
+    </div>
+  </div><div id="class_google_1_1_protobuf_1_1_coded_input_stream_1a79347e252cda70f3bfba8e7a297ae31f">
+    <h3>ReadBool</h3>
+    <pre class="prettyprint">bool ReadBool()</pre>
+    <div>
+      <p>Reads a bool field from the stream. </p>
+    </div>
+  </div><div id="class_google_1_1_protobuf_1_1_coded_input_stream_1a98e6d1b115c163e30c98784c58bcad46">
+    <h3>ReadBytes</h3>
+    <pre class="prettyprint"><a href="/reference/csharp/api-docs/class/google/protobuf/byte-string.html#class_google_1_1_protobuf_1_1_byte_string">ByteString</a> ReadBytes()</pre>
+    <div>
+      <p>Reads a bytes field value from the stream. </p>
+    </div>
+  </div><div id="class_google_1_1_protobuf_1_1_coded_input_stream_1a56bb695cfabef94bf2989307f8b66ea2">
+    <h3>ReadDouble</h3>
+    <pre class="prettyprint">double ReadDouble()</pre>
+    <div>
+      <p>Reads a double field from the stream. </p>
+    </div>
+  </div><div id="class_google_1_1_protobuf_1_1_coded_input_stream_1aa19dd8fd4512490866888733ad06ef9a">
+    <h3>ReadEnum</h3>
+    <pre class="prettyprint">int ReadEnum()</pre>
+    <div>
+      <p>Reads an enum field value from the stream. </p>
+    </div>
+  </div><div id="class_google_1_1_protobuf_1_1_coded_input_stream_1ac3e4f3f61fbb52b396d669a5358e4e3f">
+    <h3>ReadFixed32</h3>
+    <pre class="prettyprint">uint ReadFixed32()</pre>
+    <div>
+      <p>Reads a fixed32 field from the stream. </p>
+    </div>
+  </div><div id="class_google_1_1_protobuf_1_1_coded_input_stream_1aef2d97648279cea22a020f326363c91a">
+    <h3>ReadFixed64</h3>
+    <pre class="prettyprint">ulong ReadFixed64()</pre>
+    <div>
+      <p>Reads a fixed64 field from the stream. </p>
+    </div>
+  </div><div id="class_google_1_1_protobuf_1_1_coded_input_stream_1a1159e861d50b1e28676f3f935c15ae65">
+    <h3>ReadFloat</h3>
+    <pre class="prettyprint">float ReadFloat()</pre>
+    <div>
+      <p>Reads a float field from the stream. </p>
+    </div>
+  </div><div id="class_google_1_1_protobuf_1_1_coded_input_stream_1ab8226800621aa3762a20d12544e7a799">
+    <h3>ReadInt32</h3>
+    <pre class="prettyprint">int ReadInt32()</pre>
+    <div>
+      <p>Reads an int32 field from the stream. </p>
+    </div>
+  </div><div id="class_google_1_1_protobuf_1_1_coded_input_stream_1a1fbc87d450f9050ac93ebdd21bdfc970">
+    <h3>ReadInt64</h3>
+    <pre class="prettyprint">long ReadInt64()</pre>
+    <div>
+      <p>Reads an int64 field from the stream. </p>
+    </div>
+  </div><div id="class_google_1_1_protobuf_1_1_coded_input_stream_1a525f14fb58ffba40ebbf437acd41c4f6">
+    <h3>ReadLength</h3>
+    <pre class="prettyprint">int ReadLength()</pre>
+    <div>
+      <p>Reads a length for length-delimited data. </p>
+      <p>This is internally just reading a varint, but this method exists to make the calling code clearer. </p>
+    </div>
+  </div><div id="class_google_1_1_protobuf_1_1_coded_input_stream_1afad4c8f6e265274121948029cbbb1059">
+    <h3>ReadMessage</h3>
+    <pre class="prettyprint">void ReadMessage(
+  <a href="/reference/csharp/api-docs/interface/google/protobuf/i-message.html#interface_google_1_1_protobuf_1_1_i_message">IMessage</a> builder
+)</pre>
+    <div>
+      <p>Reads an embedded message field value from the stream. </p>
+    </div>
+  </div><div id="class_google_1_1_protobuf_1_1_coded_input_stream_1a05332bbcb52057cad84e794680ee6fd0">
+    <h3>ReadSFixed32</h3>
+    <pre class="prettyprint">int ReadSFixed32()</pre>
+    <div>
+      <p>Reads an sfixed32 field value from the stream. </p>
+    </div>
+  </div><div id="class_google_1_1_protobuf_1_1_coded_input_stream_1a9607e5bb6999156d81787f28eabf2e20">
+    <h3>ReadSFixed64</h3>
+    <pre class="prettyprint">long ReadSFixed64()</pre>
+    <div>
+      <p>Reads an sfixed64 field value from the stream. </p>
+    </div>
+  </div><div id="class_google_1_1_protobuf_1_1_coded_input_stream_1a19ad7240d41696447abf7c1d82317d7b">
+    <h3>ReadSInt32</h3>
+    <pre class="prettyprint">int ReadSInt32()</pre>
+    <div>
+      <p>Reads an sint32 field value from the stream. </p>
+    </div>
+  </div><div id="class_google_1_1_protobuf_1_1_coded_input_stream_1ae1871bb3a196ffdedcafe544b64e399a">
+    <h3>ReadSInt64</h3>
+    <pre class="prettyprint">long ReadSInt64()</pre>
+    <div>
+      <p>Reads an sint64 field value from the stream. </p>
+    </div>
+  </div><div id="class_google_1_1_protobuf_1_1_coded_input_stream_1a8b0108a0ad22051b3667523e02d36631">
+    <h3>ReadString</h3>
+    <pre class="prettyprint">string ReadString()</pre>
+    <div>
+      <p>Reads a string field from the stream. </p>
+    </div>
+  </div><div id="class_google_1_1_protobuf_1_1_coded_input_stream_1ac56467395c12be2dd040625d431be593">
+    <h3>ReadTag</h3>
+    <pre class="prettyprint">uint ReadTag()</pre>
+    <div>
+      <p>Reads a field tag, returning the tag of 0 for "end of stream". </p>
+      <p>If this method returns 0, it doesn't necessarily mean the end of all the data in this <a href="/reference/csharp/api-docs/class/google/protobuf/coded-input-stream.html#class_google_1_1_protobuf_1_1_coded_input_stream">CodedInputStream</a>; it may be the end of the logical stream for an embedded message, for example. </p>
+      <p />
+      <table class="details responsive">
+        <thead>
+          <th colspan="2">Details</th>
+        </thead>
+        <tbody>
+          <tr>
+            <td>
+              <b>Returns</b>
+            </td>
+            <td>
+              <div>The next field tag, or 0 for end of stream. (0 is never a valid tag.)</div>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div><div id="class_google_1_1_protobuf_1_1_coded_input_stream_1a724f939804c853d7cf984a49c5fb8a8e">
+    <h3>ReadUInt32</h3>
+    <pre class="prettyprint">uint ReadUInt32()</pre>
+    <div>
+      <p>Reads a uint32 field value from the stream. </p>
+    </div>
+  </div><div id="class_google_1_1_protobuf_1_1_coded_input_stream_1a49784831c61e8ae05ec7b561c0e7546e">
+    <h3>ReadUInt64</h3>
+    <pre class="prettyprint">ulong ReadUInt64()</pre>
+    <div>
+      <p>Reads a uint64 field from the stream. </p>
+    </div>
+  </div><div id="class_google_1_1_protobuf_1_1_coded_input_stream_1aeb908a67663faccfa2f129fcfde296d6">
+    <h3>SkipLastField</h3>
+    <pre class="prettyprint">void SkipLastField()</pre>
+    <div>
+      <p>Skips the data for the field with the tag we've just read. </p>
+      <p>This should be called directly after <a href="/reference/csharp/api-docs/class/google/protobuf/coded-input-stream.html#class_google_1_1_protobuf_1_1_coded_input_stream_1ac56467395c12be2dd040625d431be593">ReadTag</a>, when the caller wishes to skip an unknown field. </p>
+      <p>This method throws <a href="/reference/csharp/api-docs/class/google/protobuf/invalid-protocol-buffer-exception.html#class_google_1_1_protobuf_1_1_invalid_protocol_buffer_exception">InvalidProtocolBufferException</a> if the last-read tag was an end-group tag. If a caller wishes to skip a group, they should skip the whole group, by calling this method after reading the start-group tag. This behavior allows callers to call this method on any field they don't understand, correctly resulting in an error if an end-group tag has not been paired with an earlier start-group tag. </p>
+      <p />
+      <table class="details responsive">
+        <thead>
+          <th colspan="2">Details</th>
+        </thead>
+        <tbody>
+          <tr>
+            <td>Exceptions</td>
+            <td>
+              <table class="function param responsive">
+                <tbody>
+                  <tr>
+                    <td>
+                      <code>InvalidProtocolBufferException</code>
+                    </td>
+                    <td>
+                      <div>The last tag was an end-group tag</div>
+                    </td>
+                  </tr>
+                  <tr>
+                    <td>
+                      <code>InvalidOperationException</code>
+                    </td>
+                    <td>
+                      <div>The last read operation read to the end of the logical stream</div>
+                    </td>
+                  </tr>
+                </tbody>
+              </table>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div><h2>Public static functions</h2><div id="class_google_1_1_protobuf_1_1_coded_input_stream_1a2fd51d5864aa7bb1cf153200143b0a3f">
+    <h3>CreateWithLimits</h3>
+    <pre class="prettyprint"><a href="/reference/csharp/api-docs/class/google/protobuf/coded-input-stream.html#class_google_1_1_protobuf_1_1_coded_input_stream">CodedInputStream</a> CreateWithLimits(
+  Stream input,
+  int sizeLimit,
+  int recursionLimit
+)</pre>
+    <div>
+      <p>Creates a <a href="/reference/csharp/api-docs/class/google/protobuf/coded-input-stream.html#class_google_1_1_protobuf_1_1_coded_input_stream">CodedInputStream</a> with the specified size and recursion limits, reading from an input stream. </p>
+      <p>This method exists separately from the constructor to reduce the number of constructor overloads. It is likely to be used considerably less frequently than the constructors, as the default limits are suitable for most use cases. </p>
+      <p />
+      <table class="details responsive">
+        <thead>
+          <th colspan="2">Details</th>
+        </thead>
+        <tbody>
+          <tr>
+            <td>Parameters</td>
+            <td>
+              <table class="function param responsive">
+                <tbody>
+                  <tr>
+                    <td>
+                      <code>input</code>
+                    </td>
+                    <td>
+                      <div>The input stream to read from</div>
+                    </td>
+                  </tr>
+                  <tr>
+                    <td>
+                      <code>sizeLimit</code>
+                    </td>
+                    <td>
+                      <div>The total limit of data to read from the stream.</div>
+                    </td>
+                  </tr>
+                  <tr>
+                    <td>
+                      <code>recursionLimit</code>
+                    </td>
+                    <td>
+                      <div>The maximum recursion depth to allow while reading.</div>
+                    </td>
+                  </tr>
+                </tbody>
+              </table>
+            </td>
+          </tr>
+          <tr>
+            <td>
+              <b>Returns</b>
+            </td>
+            <td>
+              <div>A <code><a href="/reference/csharp/api-docs/class/google/protobuf/coded-input-stream.html#class_google_1_1_protobuf_1_1_coded_input_stream">CodedInputStream</a></code> reading from <i>input</i>  with the specified size and recursion limits.</div>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div></body>
+</html>

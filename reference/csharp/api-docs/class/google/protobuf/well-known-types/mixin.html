@@ -1,0 +1,346 @@
+<!DOCTYPE html>
+<html devsite>
+<head>
+  <title>Google.Protobuf.WellKnownTypes.Mixin Class Reference</title>
+  <link rel="stylesheet" href="/reference/csharp/api-docs/includes/stylesheet.css">
+</head>
+<body><div id="top"><!-- do not remove this div --></div><h1>Google.<wbr/>Protobuf.<wbr/>WellKnownTypes.<wbr/>Mixin</h1><p>Declares an API to be included in this API. </p><h2>Summary</h2><p>The including API must redeclare all the methods from the included API, but documentation and options are inherited as follows:</p><p>
+    <ul>
+      <li>If after comment and whitespace stripping, the documentation string of the redeclared method is empty, it will be inherited from the original method.</li>
+      <li>Each annotation belonging to the service config (http, visibility) which is not set in the redeclared method will be inherited.</li>
+      <li>If an http annotation is inherited, the path pattern will be modified as follows. <a href="/reference/csharp/api-docs/class/google/protobuf/well-known-types/any.html#class_google_1_1_protobuf_1_1_well_known_types_1_1_any">Any</a> version prefix will be replaced by the version of the including API plus the root path if specified.</li>
+    </ul>
+  </p><p>Example of a simple mixin: <pre class="prettyprint">package google.acl.v1;
+service AccessControl {
+  // Get the underlying ACL object.
+  rpc GetAcl(GetAclRequest) returns (Acl) {
+    option (google.api.http).get = "/v1/{resource=**}:getAcl";
+  }
+}
+
+package google.storage.v2;
+service Storage {
+  rpc GetAcl(GetAclRequest) returns (Acl);
+
+  // Get a data record.
+  rpc GetData(GetDataRequest) returns (Data) {
+    option (google.api.http).get = "/v2/{resource=**}";
+  }
+}
+</pre></p><p>Example of a mixin configuration: <pre class="prettyprint">apis:
+- name: google.storage.v2.Storage
+  mixins:
+  - name: google.acl.v1.AccessControl
+</pre></p><p>The mixin construct implies that all methods in <code>AccessControl</code> are also declared with same name and request/response types in <code>Storage</code>. A documentation generator or annotation processor will see the effective <code>Storage.GetAcl</code> method after inherting documentation and annotations as follows: <pre class="prettyprint">service Storage {
+  // Get the underlying ACL object.
+  rpc GetAcl(GetAclRequest) returns (Acl) {
+    option (google.api.http).get = "/v2/{resource=**}:getAcl";
+  }
+  ...
+}
+</pre></p><p>Note how the version in the path pattern changed from <code>v1</code> to <code>v2</code>.</p><p>If the <code>root</code> field in the mixin is specified, it should be a relative path under which inherited HTTP paths are placed. Example: <pre class="prettyprint">apis:
+- name: google.storage.v2.Storage
+  mixins:
+  - name: google.acl.v1.AccessControl
+    root: acls
+</pre></p><p>This implies the following inherited HTTP annotation: <pre class="prettyprint">service Storage {
+  // Get the underlying ACL object.
+  rpc GetAcl(GetAclRequest) returns (Acl) {
+    option (google.api.http).get = "/v2/acls/{resource=**}:getAcl";
+  }
+  ...
+}
+</pre></p><h3>Inheritance</h3>Inherits from: pb::IMessage< Mixin ><table class="constructors responsive">
+    <tr>
+      <th colspan="2">
+        <h3>Constructors and Destructors</h3>
+      </th>
+    </tr>
+    <tr>
+      <td colspan="2">
+        <code><a href="#class_google_1_1_protobuf_1_1_well_known_types_1_1_mixin_1ae019fb502eea9a854c2f12289e428157">Mixin</a>()</code>
+        <br />
+      </td>
+    </tr>
+    <tr>
+      <td colspan="2">
+        <code><a href="#class_google_1_1_protobuf_1_1_well_known_types_1_1_mixin_1a1d1cf91faf42cd5a76e6ffbbdfcb405d">Mixin</a>(<a href="/reference/csharp/api-docs/class/google/protobuf/well-known-types/mixin.html#class_google_1_1_protobuf_1_1_well_known_types_1_1_mixin">Mixin</a> other)</code>
+        <br />
+      </td>
+    </tr>
+  </table><table class="properties responsive">
+    <tr>
+      <th colspan="2">
+        <h3>Properties</h3>
+      </th>
+    </tr>
+    <tr>
+      <td>
+        <code><a href="#class_google_1_1_protobuf_1_1_well_known_types_1_1_mixin_1a4b079b3935f02b93956d844045f4c5a6">Descriptor</a></code>
+      </td>
+      <td>
+        <div>
+          <code>pbr::MessageDescriptor</code>
+        </div>
+      </td>
+    </tr>
+    <tr>
+      <td>
+        <code><a href="#class_google_1_1_protobuf_1_1_well_known_types_1_1_mixin_1aeb847af2027793ef09a1a46b0c4b2d16">Descriptor</a></code>
+      </td>
+      <td>
+        <div>
+          <code>pbr::MessageDescriptor pb::IMessage.</code>
+        </div>
+      </td>
+    </tr>
+    <tr>
+      <td>
+        <code><a href="#class_google_1_1_protobuf_1_1_well_known_types_1_1_mixin_1a0295c5ac0a8dd15c6b5518ead9d29400">Name</a></code>
+      </td>
+      <td>
+        <div>
+          <code>string</code>
+        </div>
+        <div>The fully qualified name of the API which is included. </div>
+      </td>
+    </tr>
+    <tr>
+      <td>
+        <code><a href="#class_google_1_1_protobuf_1_1_well_known_types_1_1_mixin_1a548d2a65ab1692975b98ae4b49b9aafd">Parser</a></code>
+      </td>
+      <td>
+        <div>
+          <code>pb::MessageParser< <a href="/reference/csharp/api-docs/class/google/protobuf/well-known-types/mixin.html#class_google_1_1_protobuf_1_1_well_known_types_1_1_mixin">Mixin</a> ></code>
+        </div>
+      </td>
+    </tr>
+    <tr>
+      <td>
+        <code><a href="#class_google_1_1_protobuf_1_1_well_known_types_1_1_mixin_1a2afb6cceee46bc12972e2c25f82b1cf6">Root</a></code>
+      </td>
+      <td>
+        <div>
+          <code>string</code>
+        </div>
+        <div>If non-empty specifies a path under which inherited HTTP paths are rooted. </div>
+      </td>
+    </tr>
+  </table><table class="properties responsive">
+    <tr>
+      <th colspan="2">
+        <h3>Public attributes</h3>
+      </th>
+    </tr>
+    <tr>
+      <td>
+        <code><a href="#class_google_1_1_protobuf_1_1_well_known_types_1_1_mixin_1aea3f2828a86021ee9ca87460a6472905">NameFieldNumber</a> = 1</code>
+      </td>
+      <td>
+        <div>
+          <code>const int</code>
+        </div>
+        <div><a href="/reference/csharp/api-docs/class/google/protobuf/well-known-types/field.html#class_google_1_1_protobuf_1_1_well_known_types_1_1_field">Field</a> number for the "name" field.</div>
+      </td>
+    </tr>
+    <tr>
+      <td>
+        <code><a href="#class_google_1_1_protobuf_1_1_well_known_types_1_1_mixin_1a2fa9f9710380679c83e42d3d03f8457a">RootFieldNumber</a> = 2</code>
+      </td>
+      <td>
+        <div>
+          <code>const int</code>
+        </div>
+        <div><a href="/reference/csharp/api-docs/class/google/protobuf/well-known-types/field.html#class_google_1_1_protobuf_1_1_well_known_types_1_1_field">Field</a> number for the "root" field.</div>
+      </td>
+    </tr>
+  </table><table class="methods responsive">
+    <tr>
+      <th colspan="2">
+        <h3>Public functions</h3>
+      </th>
+    </tr>
+    <tr>
+      <td>
+        <code><a href="#class_google_1_1_protobuf_1_1_well_known_types_1_1_mixin_1a4a0da17dc97ed1e5d2d21a0ddf8bf2ff">CalculateSize</a>()</code>
+      </td>
+      <td>
+        <div>
+          <code>int</code>
+        </div>
+      </td>
+    </tr>
+    <tr>
+      <td>
+        <code><a href="#class_google_1_1_protobuf_1_1_well_known_types_1_1_mixin_1a2b31b02b0685f5ce7db906d3eb7d3816">Clone</a>()</code>
+      </td>
+      <td>
+        <div>
+          <code><a href="/reference/csharp/api-docs/class/google/protobuf/well-known-types/mixin.html#class_google_1_1_protobuf_1_1_well_known_types_1_1_mixin">Mixin</a></code>
+        </div>
+      </td>
+    </tr>
+    <tr>
+      <td>
+        <code><a href="#class_google_1_1_protobuf_1_1_well_known_types_1_1_mixin_1a7e227eb3c8d3085b45b5b8b3e9b9e7ce">Equals</a>(object other)</code>
+      </td>
+      <td>
+        <div>
+          <code>override bool</code>
+        </div>
+      </td>
+    </tr>
+    <tr>
+      <td>
+        <code><a href="#class_google_1_1_protobuf_1_1_well_known_types_1_1_mixin_1afcf10603fa46cb60b71995deb316ad0f">Equals</a>(<a href="/reference/csharp/api-docs/class/google/protobuf/well-known-types/mixin.html#class_google_1_1_protobuf_1_1_well_known_types_1_1_mixin">Mixin</a> other)</code>
+      </td>
+      <td>
+        <div>
+          <code>bool</code>
+        </div>
+      </td>
+    </tr>
+    <tr>
+      <td>
+        <code><a href="#class_google_1_1_protobuf_1_1_well_known_types_1_1_mixin_1ae20da6044633e2177246a12dfec13fee">GetHashCode</a>()</code>
+      </td>
+      <td>
+        <div>
+          <code>override int</code>
+        </div>
+      </td>
+    </tr>
+    <tr>
+      <td>
+        <code><a href="#class_google_1_1_protobuf_1_1_well_known_types_1_1_mixin_1ad18303e4da741ad854742744587ca2dd">MergeFrom</a>(<a href="/reference/csharp/api-docs/class/google/protobuf/well-known-types/mixin.html#class_google_1_1_protobuf_1_1_well_known_types_1_1_mixin">Mixin</a> other)</code>
+      </td>
+      <td>
+        <div>
+          <code>void</code>
+        </div>
+      </td>
+    </tr>
+    <tr>
+      <td>
+        <code><a href="#class_google_1_1_protobuf_1_1_well_known_types_1_1_mixin_1ace3be0a6084437d5eba9f9263194e2da">MergeFrom</a>(pb::CodedInputStream input)</code>
+      </td>
+      <td>
+        <div>
+          <code>void</code>
+        </div>
+      </td>
+    </tr>
+    <tr>
+      <td>
+        <code><a href="#class_google_1_1_protobuf_1_1_well_known_types_1_1_mixin_1a2230343a45b327479c1ea01cf09cc32e">ToString</a>()</code>
+      </td>
+      <td>
+        <div>
+          <code>override string</code>
+        </div>
+      </td>
+    </tr>
+    <tr>
+      <td>
+        <code><a href="#class_google_1_1_protobuf_1_1_well_known_types_1_1_mixin_1a5dd03736967a05d8c84d71519e610ecf">WriteTo</a>(pb::CodedOutputStream output)</code>
+      </td>
+      <td>
+        <div>
+          <code>void</code>
+        </div>
+      </td>
+    </tr>
+  </table><h2>Properties</h2><div id="class_google_1_1_protobuf_1_1_well_known_types_1_1_mixin_1a4b079b3935f02b93956d844045f4c5a6">
+    <h3>Descriptor</h3>
+    <pre class="prettyprint">pbr::MessageDescriptor Descriptor</pre>
+    <div />
+  </div><div id="class_google_1_1_protobuf_1_1_well_known_types_1_1_mixin_1aeb847af2027793ef09a1a46b0c4b2d16">
+    <h3>Descriptor</h3>
+    <pre class="prettyprint">pbr::MessageDescriptor pb::IMessage. Descriptor</pre>
+    <div />
+  </div><div id="class_google_1_1_protobuf_1_1_well_known_types_1_1_mixin_1a0295c5ac0a8dd15c6b5518ead9d29400">
+    <h3>Name</h3>
+    <pre class="prettyprint">string Name</pre>
+    <div>
+      <p>The fully qualified name of the API which is included. </p>
+    </div>
+  </div><div id="class_google_1_1_protobuf_1_1_well_known_types_1_1_mixin_1a548d2a65ab1692975b98ae4b49b9aafd">
+    <h3>Parser</h3>
+    <pre class="prettyprint">pb::MessageParser< <a href="/reference/csharp/api-docs/class/google/protobuf/well-known-types/mixin.html#class_google_1_1_protobuf_1_1_well_known_types_1_1_mixin">Mixin</a> > Parser</pre>
+    <div />
+  </div><div id="class_google_1_1_protobuf_1_1_well_known_types_1_1_mixin_1a2afb6cceee46bc12972e2c25f82b1cf6">
+    <h3>Root</h3>
+    <pre class="prettyprint">string Root</pre>
+    <div>
+      <p>If non-empty specifies a path under which inherited HTTP paths are rooted. </p>
+    </div>
+  </div><h2>Public attributes</h2><div id="class_google_1_1_protobuf_1_1_well_known_types_1_1_mixin_1aea3f2828a86021ee9ca87460a6472905">
+    <h3>NameFieldNumber</h3>
+    <pre class="prettyprint">const int NameFieldNumber = 1</pre>
+    <div>
+      <p><a href="/reference/csharp/api-docs/class/google/protobuf/well-known-types/field.html#class_google_1_1_protobuf_1_1_well_known_types_1_1_field">Field</a> number for the "name" field.</p>
+    </div>
+  </div><div id="class_google_1_1_protobuf_1_1_well_known_types_1_1_mixin_1a2fa9f9710380679c83e42d3d03f8457a">
+    <h3>RootFieldNumber</h3>
+    <pre class="prettyprint">const int RootFieldNumber = 2</pre>
+    <div>
+      <p><a href="/reference/csharp/api-docs/class/google/protobuf/well-known-types/field.html#class_google_1_1_protobuf_1_1_well_known_types_1_1_field">Field</a> number for the "root" field.</p>
+    </div>
+  </div><h2>Public functions</h2><div id="class_google_1_1_protobuf_1_1_well_known_types_1_1_mixin_1a4a0da17dc97ed1e5d2d21a0ddf8bf2ff">
+    <h3>CalculateSize</h3>
+    <pre class="prettyprint">int CalculateSize()</pre>
+    <div />
+  </div><div id="class_google_1_1_protobuf_1_1_well_known_types_1_1_mixin_1a2b31b02b0685f5ce7db906d3eb7d3816">
+    <h3>Clone</h3>
+    <pre class="prettyprint"><a href="/reference/csharp/api-docs/class/google/protobuf/well-known-types/mixin.html#class_google_1_1_protobuf_1_1_well_known_types_1_1_mixin">Mixin</a> Clone()</pre>
+    <div />
+  </div><div id="class_google_1_1_protobuf_1_1_well_known_types_1_1_mixin_1a7e227eb3c8d3085b45b5b8b3e9b9e7ce">
+    <h3>Equals</h3>
+    <pre class="prettyprint">override bool Equals(
+  object other
+)</pre>
+    <div />
+  </div><div id="class_google_1_1_protobuf_1_1_well_known_types_1_1_mixin_1afcf10603fa46cb60b71995deb316ad0f">
+    <h3>Equals</h3>
+    <pre class="prettyprint">bool Equals(
+  <a href="/reference/csharp/api-docs/class/google/protobuf/well-known-types/mixin.html#class_google_1_1_protobuf_1_1_well_known_types_1_1_mixin">Mixin</a> other
+)</pre>
+    <div />
+  </div><div id="class_google_1_1_protobuf_1_1_well_known_types_1_1_mixin_1ae20da6044633e2177246a12dfec13fee">
+    <h3>GetHashCode</h3>
+    <pre class="prettyprint">override int GetHashCode()</pre>
+    <div />
+  </div><div id="class_google_1_1_protobuf_1_1_well_known_types_1_1_mixin_1ad18303e4da741ad854742744587ca2dd">
+    <h3>MergeFrom</h3>
+    <pre class="prettyprint">void MergeFrom(
+  <a href="/reference/csharp/api-docs/class/google/protobuf/well-known-types/mixin.html#class_google_1_1_protobuf_1_1_well_known_types_1_1_mixin">Mixin</a> other
+)</pre>
+    <div />
+  </div><div id="class_google_1_1_protobuf_1_1_well_known_types_1_1_mixin_1ace3be0a6084437d5eba9f9263194e2da">
+    <h3>MergeFrom</h3>
+    <pre class="prettyprint">void MergeFrom(
+  pb::CodedInputStream input
+)</pre>
+    <div />
+  </div><div id="class_google_1_1_protobuf_1_1_well_known_types_1_1_mixin_1ae019fb502eea9a854c2f12289e428157">
+    <h3>Mixin</h3>
+    <pre class="prettyprint"> Mixin()</pre>
+    <div />
+  </div><div id="class_google_1_1_protobuf_1_1_well_known_types_1_1_mixin_1a1d1cf91faf42cd5a76e6ffbbdfcb405d">
+    <h3>Mixin</h3>
+    <pre class="prettyprint"> Mixin(
+  <a href="/reference/csharp/api-docs/class/google/protobuf/well-known-types/mixin.html#class_google_1_1_protobuf_1_1_well_known_types_1_1_mixin">Mixin</a> other
+)</pre>
+    <div />
+  </div><div id="class_google_1_1_protobuf_1_1_well_known_types_1_1_mixin_1a2230343a45b327479c1ea01cf09cc32e">
+    <h3>ToString</h3>
+    <pre class="prettyprint">override string ToString()</pre>
+    <div />
+  </div><div id="class_google_1_1_protobuf_1_1_well_known_types_1_1_mixin_1a5dd03736967a05d8c84d71519e610ecf">
+    <h3>WriteTo</h3>
+    <pre class="prettyprint">void WriteTo(
+  pb::CodedOutputStream output
+)</pre>
+    <div />
+  </div></body>
+</html>

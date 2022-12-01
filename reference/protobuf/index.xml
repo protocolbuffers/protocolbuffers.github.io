@@ -1,0 +1,2147 @@
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Protocol Buffers Documentation – Protocol Buffers Reference</title><link>/reference/protobuf/</link><description>Recent content in Protocol Buffers Reference on Protocol Buffers Documentation</description><generator>Hugo -- gohugo.io</generator><language>en-us</language><atom:link href="/reference/protobuf/index.xml" rel="self" type="application/rss+xml"/><item><title>Reference: Protocol Buffers Version 2 Language Specification</title><link>/reference/protobuf/proto2-spec/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>/reference/protobuf/proto2-spec/</guid><description>
+&lt;p>This is a language specification reference for version 2 of the Protocol Buffers
+language (proto2). The syntax is specified using
+&lt;a href="https://en.wikipedia.org/wiki/Extended_Backus%E2%80%93Naur_Form">Extended Backus-Naur Form (EBNF)&lt;/a>:&lt;/p>
+&lt;pre tabindex="0">&lt;code>| alternation
+() grouping
+[] option (zero or one time)
+{} repetition (any number of times)
+&lt;/code>&lt;/pre>&lt;p>For more information about using proto2, see the
+&lt;a href="/programming-guides/proto">language guide&lt;/a>.&lt;/p>
+&lt;h2 id="lexical_elements">Lexical Elements&lt;/h2>
+&lt;h3 id="letters_and_digits">Letters and Digits&lt;/h3>
+&lt;pre tabindex="0">&lt;code>letter = &amp;#34;A&amp;#34; … &amp;#34;Z&amp;#34; | &amp;#34;a&amp;#34; … &amp;#34;z&amp;#34;
+capitalLetter = &amp;#34;A&amp;#34; … &amp;#34;Z&amp;#34;
+decimalDigit = &amp;#34;0&amp;#34; … &amp;#34;9&amp;#34;
+octalDigit = &amp;#34;0&amp;#34; … &amp;#34;7&amp;#34;
+hexDigit = &amp;#34;0&amp;#34; … &amp;#34;9&amp;#34; | &amp;#34;A&amp;#34; … &amp;#34;F&amp;#34; | &amp;#34;a&amp;#34; … &amp;#34;f&amp;#34;
+&lt;/code>&lt;/pre>&lt;h3 id="identifiers">Identifiers&lt;/h3>
+&lt;pre tabindex="0">&lt;code>ident = letter { letter | decimalDigit | &amp;#34;_&amp;#34; }
+fullIdent = ident { &amp;#34;.&amp;#34; ident }
+messageName = ident
+enumName = ident
+fieldName = ident
+oneofName = ident
+mapName = ident
+serviceName = ident
+rpcName = ident
+streamName = ident
+messageType = [ &amp;#34;.&amp;#34; ] { ident &amp;#34;.&amp;#34; } messageName
+enumType = [ &amp;#34;.&amp;#34; ] { ident &amp;#34;.&amp;#34; } enumName
+groupName = capitalLetter { letter | decimalDigit | &amp;#34;_&amp;#34; }
+&lt;/code>&lt;/pre>&lt;h3 id="integer_literals">Integer Literals&lt;/h3>
+&lt;pre tabindex="0">&lt;code>intLit = decimalLit | octalLit | hexLit
+decimalLit = ( &amp;#34;1&amp;#34; … &amp;#34;9&amp;#34; ) { decimalDigit }
+octalLit = &amp;#34;0&amp;#34; { octalDigit }
+hexLit = &amp;#34;0&amp;#34; ( &amp;#34;x&amp;#34; | &amp;#34;X&amp;#34; ) hexDigit { hexDigit }
+&lt;/code>&lt;/pre>&lt;h3 id="floating-point-literals">Floating-point Literals&lt;/h3>
+&lt;pre tabindex="0">&lt;code>floatLit = ( decimals &amp;#34;.&amp;#34; [ decimals ] [ exponent ] | decimals exponent | &amp;#34;.&amp;#34;decimals [ exponent ] ) | &amp;#34;inf&amp;#34; | &amp;#34;nan&amp;#34;
+decimals = decimalDigit { decimalDigit }
+exponent = ( &amp;#34;e&amp;#34; | &amp;#34;E&amp;#34; ) [ &amp;#34;+&amp;#34; | &amp;#34;-&amp;#34; ] decimals
+&lt;/code>&lt;/pre>&lt;h3 id="boolean">Boolean&lt;/h3>
+&lt;pre tabindex="0">&lt;code>boolLit = &amp;#34;true&amp;#34; | &amp;#34;false&amp;#34;
+&lt;/code>&lt;/pre>&lt;h3 id="string_literals">String Literals&lt;/h3>
+&lt;pre tabindex="0">&lt;code>strLit = ( &amp;#34;&amp;#39;&amp;#34; { charValue } &amp;#34;&amp;#39;&amp;#34; ) | ( &amp;#39;&amp;#34;&amp;#39; { charValue } &amp;#39;&amp;#34;&amp;#39; )
+charValue = hexEscape | octEscape | charEscape | /[^\0\n\\]/
+hexEscape = &amp;#39;\&amp;#39; ( &amp;#34;x&amp;#34; | &amp;#34;X&amp;#34; ) hexDigit hexDigit
+octEscape = &amp;#39;\&amp;#39; octalDigit octalDigit octalDigit
+charEscape = &amp;#39;\&amp;#39; ( &amp;#34;a&amp;#34; | &amp;#34;b&amp;#34; | &amp;#34;f&amp;#34; | &amp;#34;n&amp;#34; | &amp;#34;r&amp;#34; | &amp;#34;t&amp;#34; | &amp;#34;v&amp;#34; | &amp;#39;\&amp;#39; | &amp;#34;&amp;#39;&amp;#34; | &amp;#39;&amp;#34;&amp;#39; )
+&lt;/code>&lt;/pre>&lt;h3 id="emptystatement">EmptyStatement&lt;/h3>
+&lt;pre tabindex="0">&lt;code>emptyStatement = &amp;#34;;&amp;#34;
+&lt;/code>&lt;/pre>&lt;h3 id="constant">Constant&lt;/h3>
+&lt;pre tabindex="0">&lt;code>constant = fullIdent | ( [ &amp;#34;-&amp;#34; | &amp;#34;+&amp;#34; ] intLit ) | ( [ &amp;#34;-&amp;#34; | &amp;#34;+&amp;#34; ] floatLit ) |
+strLit | boolLit
+&lt;/code>&lt;/pre>&lt;h2 id="syntax">Syntax&lt;/h2>
+&lt;p>The syntax statement is used to define the protobuf version.&lt;/p>
+&lt;pre tabindex="0">&lt;code>syntax = &amp;#34;syntax&amp;#34; &amp;#34;=&amp;#34; (&amp;#34;&amp;#39;&amp;#34; &amp;#34;proto2&amp;#34; &amp;#34;&amp;#39;&amp;#34; | &amp;#39;&amp;#34;&amp;#39; &amp;#34;proto2&amp;#34; &amp;#39;&amp;#34;&amp;#39;) &amp;#34;;&amp;#34;
+&lt;/code>&lt;/pre>&lt;h2 id="import_statement">Import Statement&lt;/h2>
+&lt;p>The import statement is used to import another .proto&amp;rsquo;s definitions.&lt;/p>
+&lt;pre tabindex="0">&lt;code>import = &amp;#34;import&amp;#34; [ &amp;#34;weak&amp;#34; | &amp;#34;public&amp;#34; ] strLit &amp;#34;;&amp;#34;
+&lt;/code>&lt;/pre>&lt;p>Example:&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-proto" data-lang="proto">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#204a87;font-weight:bold">import&lt;/span> &lt;span style="color:#000">public&lt;/span> &lt;span style="color:#4e9a06">&amp;#34;other.proto&amp;#34;&lt;/span>&lt;span style="color:#000;font-weight:bold">;&lt;/span>&lt;span style="color:#a40000">
+&lt;/span>&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h2 id="package">Package&lt;/h2>
+&lt;p>The package specifier can be used to prevent name clashes between protocol
+message types.&lt;/p>
+&lt;pre tabindex="0">&lt;code>package = &amp;#34;package&amp;#34; fullIdent &amp;#34;;&amp;#34;
+&lt;/code>&lt;/pre>&lt;p>Example:&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-proto" data-lang="proto">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#204a87;font-weight:bold">package&lt;/span> &lt;span style="color:#000">foo&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">.&lt;/span>&lt;span style="color:#000">bar&lt;/span>&lt;span style="color:#000;font-weight:bold">;&lt;/span>&lt;span style="color:#a40000">
+&lt;/span>&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h2 id="option">Option&lt;/h2>
+&lt;p>Options can be used in proto files, messages, enums and services. An option can
+be a protobuf defined option or a custom option. For more information, see
+&lt;a href="/programming-guides/proto#options">Options&lt;/a> in the language guide.&lt;/p>
+&lt;pre tabindex="0">&lt;code>option = &amp;#34;option&amp;#34; optionName &amp;#34;=&amp;#34; constant &amp;#34;;&amp;#34;
+optionName = ( ident | &amp;#34;(&amp;#34; fullIdent &amp;#34;)&amp;#34; ) { &amp;#34;.&amp;#34; ident }
+&lt;/code>&lt;/pre>&lt;p>For examples:&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-proto" data-lang="proto">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#204a87;font-weight:bold">option&lt;/span> &lt;span style="color:#000">java_package&lt;/span> &lt;span style="color:#ce5c00;font-weight:bold">=&lt;/span> &lt;span style="color:#4e9a06">&amp;#34;com.example.foo&amp;#34;&lt;/span>&lt;span style="color:#000;font-weight:bold">;&lt;/span>&lt;span style="color:#a40000">
+&lt;/span>&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h2 id="fields">Fields&lt;/h2>
+&lt;p>Fields are the basic elements of a protocol buffer message. Fields can be normal
+fields, group fields, oneof fields, or map fields. A field has a label, type and
+field number.&lt;/p>
+&lt;pre tabindex="0">&lt;code>label = &amp;#34;required&amp;#34; | &amp;#34;optional&amp;#34; | &amp;#34;repeated&amp;#34;
+type = &amp;#34;double&amp;#34; | &amp;#34;float&amp;#34; | &amp;#34;int32&amp;#34; | &amp;#34;int64&amp;#34; | &amp;#34;uint32&amp;#34; | &amp;#34;uint64&amp;#34;
+| &amp;#34;sint32&amp;#34; | &amp;#34;sint64&amp;#34; | &amp;#34;fixed32&amp;#34; | &amp;#34;fixed64&amp;#34; | &amp;#34;sfixed32&amp;#34; | &amp;#34;sfixed64&amp;#34;
+| &amp;#34;bool&amp;#34; | &amp;#34;string&amp;#34; | &amp;#34;bytes&amp;#34; | messageType | enumType
+fieldNumber = intLit;
+&lt;/code>&lt;/pre>&lt;h3 id="normal_field">Normal field&lt;/h3>
+&lt;p>Each field has label, type, name and field number. It may have field options.&lt;/p>
+&lt;pre tabindex="0">&lt;code>field = label type fieldName &amp;#34;=&amp;#34; fieldNumber [ &amp;#34;[&amp;#34; fieldOptions &amp;#34;]&amp;#34; ] &amp;#34;;&amp;#34;
+fieldOptions = fieldOption { &amp;#34;,&amp;#34; fieldOption }
+fieldOption = optionName &amp;#34;=&amp;#34; constant
+&lt;/code>&lt;/pre>&lt;p>Examples:&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-proto" data-lang="proto">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#204a87;font-weight:bold">optional&lt;/span> &lt;span style="color:#000">foo.bar&lt;/span> &lt;span style="color:#000">nested_message&lt;/span> &lt;span style="color:#ce5c00;font-weight:bold">=&lt;/span> &lt;span style="color:#0000cf;font-weight:bold">2&lt;/span>&lt;span style="color:#000;font-weight:bold">;&lt;/span>&lt;span style="color:#a40000">
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#a40000">&lt;/span>&lt;span style="color:#204a87;font-weight:bold">repeated&lt;/span> &lt;span style="color:#204a87;font-weight:bold">int32&lt;/span> &lt;span style="color:#000">samples&lt;/span> &lt;span style="color:#ce5c00;font-weight:bold">=&lt;/span> &lt;span style="color:#0000cf;font-weight:bold">4&lt;/span> &lt;span style="color:#000;font-weight:bold">[&lt;/span>&lt;span style="color:#204a87;font-weight:bold">packed&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">=&lt;/span>&lt;span style="color:#204a87;font-weight:bold">true&lt;/span>&lt;span style="color:#000;font-weight:bold">];&lt;/span>&lt;span style="color:#a40000">
+&lt;/span>&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h3 id="group_field">Group field&lt;/h3>
+&lt;p>&lt;strong>Note that this feature is deprecated and should not be used when creating new
+message types &amp;ndash; use nested message types instead.&lt;/strong>&lt;/p>
+&lt;p>Groups are one way to nest information in message definitions. The group name
+must begin with capital letter.&lt;/p>
+&lt;pre tabindex="0">&lt;code>group = label &amp;#34;group&amp;#34; groupName &amp;#34;=&amp;#34; fieldNumber messageBody
+&lt;/code>&lt;/pre>&lt;p>Example:&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-proto" data-lang="proto">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#204a87;font-weight:bold">repeated&lt;/span> &lt;span style="color:#204a87;font-weight:bold">group&lt;/span> &lt;span style="color:#000">Result&lt;/span> &lt;span style="color:#ce5c00;font-weight:bold">=&lt;/span> &lt;span style="color:#0000cf;font-weight:bold">1&lt;/span> &lt;span style="color:#000;font-weight:bold">{&lt;/span>&lt;span style="color:#a40000">
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#a40000">&lt;/span> &lt;span style="color:#204a87;font-weight:bold">required&lt;/span> &lt;span style="color:#204a87;font-weight:bold">string&lt;/span> &lt;span style="color:#000">url&lt;/span> &lt;span style="color:#ce5c00;font-weight:bold">=&lt;/span> &lt;span style="color:#0000cf;font-weight:bold">2&lt;/span>&lt;span style="color:#000;font-weight:bold">;&lt;/span>&lt;span style="color:#a40000">
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#a40000">&lt;/span> &lt;span style="color:#204a87;font-weight:bold">optional&lt;/span> &lt;span style="color:#204a87;font-weight:bold">string&lt;/span> &lt;span style="color:#000">title&lt;/span> &lt;span style="color:#ce5c00;font-weight:bold">=&lt;/span> &lt;span style="color:#0000cf;font-weight:bold">3&lt;/span>&lt;span style="color:#000;font-weight:bold">;&lt;/span>&lt;span style="color:#a40000">
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#a40000">&lt;/span> &lt;span style="color:#204a87;font-weight:bold">repeated&lt;/span> &lt;span style="color:#204a87;font-weight:bold">string&lt;/span> &lt;span style="color:#000">snippets&lt;/span> &lt;span style="color:#ce5c00;font-weight:bold">=&lt;/span> &lt;span style="color:#0000cf;font-weight:bold">4&lt;/span>&lt;span style="color:#000;font-weight:bold">;&lt;/span>&lt;span style="color:#a40000">
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#a40000">&lt;/span>&lt;span style="color:#000;font-weight:bold">}&lt;/span>&lt;span style="color:#a40000">
+&lt;/span>&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h3 id="oneof_and_oneof_field">Oneof and oneof field&lt;/h3>
+&lt;p>A oneof consists of oneof fields and a oneof name. Oneof fields do not have
+labels.&lt;/p>
+&lt;pre tabindex="0">&lt;code>oneof = &amp;#34;oneof&amp;#34; oneofName &amp;#34;{&amp;#34; { option | oneofField | emptyStatement } &amp;#34;}&amp;#34;
+oneofField = type fieldName &amp;#34;=&amp;#34; fieldNumber [ &amp;#34;[&amp;#34; fieldOptions &amp;#34;]&amp;#34; ] &amp;#34;;&amp;#34;
+&lt;/code>&lt;/pre>&lt;p>Example:&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-proto" data-lang="proto">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#204a87;font-weight:bold">oneof&lt;/span> &lt;span style="color:#000">foo&lt;/span> &lt;span style="color:#000;font-weight:bold">{&lt;/span>&lt;span style="color:#a40000">
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#a40000">&lt;/span> &lt;span style="color:#204a87;font-weight:bold">string&lt;/span> &lt;span style="color:#000">name&lt;/span> &lt;span style="color:#ce5c00;font-weight:bold">=&lt;/span> &lt;span style="color:#0000cf;font-weight:bold">4&lt;/span>&lt;span style="color:#000;font-weight:bold">;&lt;/span>&lt;span style="color:#a40000">
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#a40000">&lt;/span> &lt;span style="color:#000">SubMessage&lt;/span> &lt;span style="color:#000">sub_message&lt;/span> &lt;span style="color:#ce5c00;font-weight:bold">=&lt;/span> &lt;span style="color:#0000cf;font-weight:bold">9&lt;/span>&lt;span style="color:#000;font-weight:bold">;&lt;/span>&lt;span style="color:#a40000">
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#a40000">&lt;/span>&lt;span style="color:#000;font-weight:bold">}&lt;/span>&lt;span style="color:#a40000">
+&lt;/span>&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h3 id="map_field">Map field&lt;/h3>
+&lt;p>A map field has a key type, value type, name, and field number. The key type can
+be any integral or string type. Note, the key type may not be an enum.&lt;/p>
+&lt;pre tabindex="0">&lt;code>mapField = &amp;#34;map&amp;#34; &amp;#34;&amp;lt;&amp;#34; keyType &amp;#34;,&amp;#34; type &amp;#34;&amp;gt;&amp;#34; mapName &amp;#34;=&amp;#34; fieldNumber [ &amp;#34;[&amp;#34; fieldOptions &amp;#34;]&amp;#34; ] &amp;#34;;&amp;#34;
+keyType = &amp;#34;int32&amp;#34; | &amp;#34;int64&amp;#34; | &amp;#34;uint32&amp;#34; | &amp;#34;uint64&amp;#34; | &amp;#34;sint32&amp;#34; | &amp;#34;sint64&amp;#34; |
+&amp;#34;fixed32&amp;#34; | &amp;#34;fixed64&amp;#34; | &amp;#34;sfixed32&amp;#34; | &amp;#34;sfixed64&amp;#34; | &amp;#34;bool&amp;#34; | &amp;#34;string&amp;#34;
+&lt;/code>&lt;/pre>&lt;p>Example:&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-proto" data-lang="proto">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#000">map&lt;/span>&lt;span style="color:#000;font-weight:bold">&amp;lt;&lt;/span>&lt;span style="color:#204a87;font-weight:bold">string&lt;/span>&lt;span style="color:#000;font-weight:bold">,&lt;/span> &lt;span style="color:#000">Project&lt;/span>&lt;span style="color:#000;font-weight:bold">&amp;gt;&lt;/span> &lt;span style="color:#000">projects&lt;/span> &lt;span style="color:#ce5c00;font-weight:bold">=&lt;/span> &lt;span style="color:#0000cf;font-weight:bold">3&lt;/span>&lt;span style="color:#000;font-weight:bold">;&lt;/span>&lt;span style="color:#a40000">
+&lt;/span>&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h2 id="extensions_and_reserved">Extensions and Reserved&lt;/h2>
+&lt;p>Extensions and reserved are message elements that declare a range of field
+numbers or field names.&lt;/p>
+&lt;h3 id="extensions">Extensions&lt;/h3>
+&lt;p>Extensions declare that a range of field numbers in a message are available for
+third-party extensions. Other people can declare new fields for your message
+type with those numeric tags in their own .proto files without having to edit
+the original file.&lt;/p>
+&lt;pre tabindex="0">&lt;code>extensions = &amp;#34;extensions&amp;#34; ranges &amp;#34;;&amp;#34;
+ranges = range { &amp;#34;,&amp;#34; range }
+range = intLit [ &amp;#34;to&amp;#34; ( intLit | &amp;#34;max&amp;#34; ) ]
+&lt;/code>&lt;/pre>&lt;p>Examples:&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-proto" data-lang="proto">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#204a87;font-weight:bold">extensions&lt;/span> &lt;span style="color:#0000cf;font-weight:bold">100&lt;/span> &lt;span style="color:#204a87;font-weight:bold">to&lt;/span> &lt;span style="color:#0000cf;font-weight:bold">199&lt;/span>&lt;span style="color:#000;font-weight:bold">;&lt;/span>&lt;span style="color:#a40000">
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#a40000">&lt;/span>&lt;span style="color:#204a87;font-weight:bold">extensions&lt;/span> &lt;span style="color:#0000cf;font-weight:bold">4&lt;/span>&lt;span style="color:#000;font-weight:bold">,&lt;/span> &lt;span style="color:#0000cf;font-weight:bold">20&lt;/span> &lt;span style="color:#204a87;font-weight:bold">to&lt;/span> &lt;span style="color:#204a87;font-weight:bold">max&lt;/span>&lt;span style="color:#000;font-weight:bold">;&lt;/span>&lt;span style="color:#a40000">
+&lt;/span>&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h3 id="reserved">Reserved&lt;/h3>
+&lt;p>Reserved declares a range of field numbers or field names in a message that can
+not be used.&lt;/p>
+&lt;pre tabindex="0">&lt;code>reserved = &amp;#34;reserved&amp;#34; ( ranges | strFieldNames ) &amp;#34;;&amp;#34;
+strFieldNames = strFieldName { &amp;#34;,&amp;#34; strFieldName }
+strFieldName = &amp;#34;&amp;#39;&amp;#34; fieldName &amp;#34;&amp;#39;&amp;#34; | &amp;#39;&amp;#34;&amp;#39; fieldName &amp;#39;&amp;#34;&amp;#39;
+&lt;/code>&lt;/pre>&lt;p>Examples:&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-proto" data-lang="proto">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#000">reserved&lt;/span> &lt;span style="color:#0000cf;font-weight:bold">2&lt;/span>&lt;span style="color:#000;font-weight:bold">,&lt;/span> &lt;span style="color:#0000cf;font-weight:bold">15&lt;/span>&lt;span style="color:#000;font-weight:bold">,&lt;/span> &lt;span style="color:#0000cf;font-weight:bold">9&lt;/span> &lt;span style="color:#204a87;font-weight:bold">to&lt;/span> &lt;span style="color:#0000cf;font-weight:bold">11&lt;/span>&lt;span style="color:#000;font-weight:bold">;&lt;/span>&lt;span style="color:#a40000">
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#a40000">&lt;/span>&lt;span style="color:#000">reserved&lt;/span> &lt;span style="color:#4e9a06">&amp;#34;foo&amp;#34;&lt;/span>&lt;span style="color:#000;font-weight:bold">,&lt;/span> &lt;span style="color:#4e9a06">&amp;#34;bar&amp;#34;&lt;/span>&lt;span style="color:#000;font-weight:bold">;&lt;/span>&lt;span style="color:#a40000">
+&lt;/span>&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h2 id="top_level_definitions">Top Level definitions&lt;/h2>
+&lt;h3 id="enum_definition">Enum definition&lt;/h3>
+&lt;p>The enum definition consists of a name and an enum body. The enum body can have
+options, enum fields, and reserved statements.&lt;/p>
+&lt;pre tabindex="0">&lt;code>enum = &amp;#34;enum&amp;#34; enumName enumBody
+enumBody = &amp;#34;{&amp;#34; { option | enumField | emptyStatement | reserved } &amp;#34;}&amp;#34;
+enumField = ident &amp;#34;=&amp;#34; [ &amp;#34;-&amp;#34; ] intLit [ &amp;#34;[&amp;#34; enumValueOption { &amp;#34;,&amp;#34; enumValueOption } &amp;#34;]&amp;#34; ]&amp;#34;;&amp;#34;
+enumValueOption = optionName &amp;#34;=&amp;#34; constant
+&lt;/code>&lt;/pre>&lt;p>Example:&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-proto" data-lang="proto">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#204a87;font-weight:bold">enum&lt;/span> &lt;span style="color:#000">EnumAllowingAlias&lt;/span> &lt;span style="color:#000;font-weight:bold">{&lt;/span>&lt;span style="color:#a40000">
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#a40000">&lt;/span> &lt;span style="color:#204a87;font-weight:bold">option&lt;/span> &lt;span style="color:#000">allow_alias&lt;/span> &lt;span style="color:#ce5c00;font-weight:bold">=&lt;/span> &lt;span style="color:#204a87;font-weight:bold">true&lt;/span>&lt;span style="color:#000;font-weight:bold">;&lt;/span>&lt;span style="color:#a40000">
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#a40000">&lt;/span> &lt;span style="color:#000">EAA_UNSPECIFIED&lt;/span> &lt;span style="color:#ce5c00;font-weight:bold">=&lt;/span> &lt;span style="color:#0000cf;font-weight:bold">0&lt;/span>&lt;span style="color:#000;font-weight:bold">;&lt;/span>&lt;span style="color:#a40000">
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#a40000">&lt;/span> &lt;span style="color:#000">EAA_STARTED&lt;/span> &lt;span style="color:#ce5c00;font-weight:bold">=&lt;/span> &lt;span style="color:#0000cf;font-weight:bold">1&lt;/span>&lt;span style="color:#000;font-weight:bold">;&lt;/span>&lt;span style="color:#a40000">
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#a40000">&lt;/span> &lt;span style="color:#000">EAA_RUNNING&lt;/span> &lt;span style="color:#ce5c00;font-weight:bold">=&lt;/span> &lt;span style="color:#0000cf;font-weight:bold">2&lt;/span> &lt;span style="color:#000;font-weight:bold">[(&lt;/span>&lt;span style="color:#000">custom_option&lt;/span>&lt;span style="color:#000;font-weight:bold">)&lt;/span> &lt;span style="color:#ce5c00;font-weight:bold">=&lt;/span> &lt;span style="color:#4e9a06">&amp;#34;hello world&amp;#34;&lt;/span>&lt;span style="color:#000;font-weight:bold">];&lt;/span>&lt;span style="color:#a40000">
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#a40000">&lt;/span>&lt;span style="color:#000;font-weight:bold">}&lt;/span>&lt;span style="color:#a40000">
+&lt;/span>&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h3 id="message_definition">Message definition&lt;/h3>
+&lt;p>A message consists of a message name and a message body. The message body can
+have fields, nested enum definitions, nested message definitions, extend
+statements, extensions, groups, options, oneofs, map fields, and reserved
+statements.&lt;/p>
+&lt;pre tabindex="0">&lt;code>message = &amp;#34;message&amp;#34; messageName messageBody
+messageBody = &amp;#34;{&amp;#34; { field | enum | message | extend | extensions | group |
+option | oneof | mapField | reserved | emptyStatement } &amp;#34;}&amp;#34;
+&lt;/code>&lt;/pre>&lt;p>Example:&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-proto" data-lang="proto">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#204a87;font-weight:bold">message&lt;/span> &lt;span style="color:#000">Outer&lt;/span> &lt;span style="color:#000;font-weight:bold">{&lt;/span>&lt;span style="color:#a40000">
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#a40000">&lt;/span> &lt;span style="color:#204a87;font-weight:bold">option&lt;/span> &lt;span style="color:#000;font-weight:bold">(&lt;/span>&lt;span style="color:#000">my_option&lt;/span>&lt;span style="color:#000;font-weight:bold">)&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">.&lt;/span>&lt;span style="color:#000">a&lt;/span> &lt;span style="color:#ce5c00;font-weight:bold">=&lt;/span> &lt;span style="color:#204a87;font-weight:bold">true&lt;/span>&lt;span style="color:#000;font-weight:bold">;&lt;/span>&lt;span style="color:#a40000">
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#a40000">&lt;/span> &lt;span style="color:#204a87;font-weight:bold">message&lt;/span> &lt;span style="color:#000">Inner&lt;/span> &lt;span style="color:#000;font-weight:bold">{&lt;/span> &lt;span style="color:#8f5902;font-style:italic">// Level 2
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#8f5902;font-style:italic">&lt;/span> &lt;span style="color:#204a87;font-weight:bold">required&lt;/span> &lt;span style="color:#204a87;font-weight:bold">int64&lt;/span> &lt;span style="color:#000">ival&lt;/span> &lt;span style="color:#ce5c00;font-weight:bold">=&lt;/span> &lt;span style="color:#0000cf;font-weight:bold">1&lt;/span>&lt;span style="color:#000;font-weight:bold">;&lt;/span>&lt;span style="color:#a40000">
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#a40000">&lt;/span> &lt;span style="color:#000;font-weight:bold">}&lt;/span>&lt;span style="color:#a40000">
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#a40000">&lt;/span> &lt;span style="color:#000">map&lt;/span>&lt;span style="color:#000;font-weight:bold">&amp;lt;&lt;/span>&lt;span style="color:#204a87;font-weight:bold">int32&lt;/span>&lt;span style="color:#000;font-weight:bold">,&lt;/span> &lt;span style="color:#204a87;font-weight:bold">string&lt;/span>&lt;span style="color:#000;font-weight:bold">&amp;gt;&lt;/span> &lt;span style="color:#000">my_map&lt;/span> &lt;span style="color:#ce5c00;font-weight:bold">=&lt;/span> &lt;span style="color:#0000cf;font-weight:bold">2&lt;/span>&lt;span style="color:#000;font-weight:bold">;&lt;/span>&lt;span style="color:#a40000">
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#a40000">&lt;/span> &lt;span style="color:#204a87;font-weight:bold">extensions&lt;/span> &lt;span style="color:#0000cf;font-weight:bold">20&lt;/span> &lt;span style="color:#204a87;font-weight:bold">to&lt;/span> &lt;span style="color:#0000cf;font-weight:bold">30&lt;/span>&lt;span style="color:#000;font-weight:bold">;&lt;/span>&lt;span style="color:#a40000">
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#a40000">&lt;/span>&lt;span style="color:#000;font-weight:bold">}&lt;/span>&lt;span style="color:#a40000">
+&lt;/span>&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h3 id="extend">Extend&lt;/h3>
+&lt;p>If a message in the same or imported .proto file has reserved a range for
+extensions, the message can be extended.&lt;/p>
+&lt;pre tabindex="0">&lt;code>extend = &amp;#34;extend&amp;#34; messageType &amp;#34;{&amp;#34; {field | group | emptyStatement} &amp;#34;}&amp;#34;
+&lt;/code>&lt;/pre>&lt;p>Example:&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-proto" data-lang="proto">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#204a87;font-weight:bold">extend&lt;/span> &lt;span style="color:#000">Foo&lt;/span> &lt;span style="color:#000;font-weight:bold">{&lt;/span>&lt;span style="color:#a40000">
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#a40000">&lt;/span> &lt;span style="color:#204a87;font-weight:bold">optional&lt;/span> &lt;span style="color:#204a87;font-weight:bold">int32&lt;/span> &lt;span style="color:#000">bar&lt;/span> &lt;span style="color:#ce5c00;font-weight:bold">=&lt;/span> &lt;span style="color:#0000cf;font-weight:bold">126&lt;/span>&lt;span style="color:#000;font-weight:bold">;&lt;/span>&lt;span style="color:#a40000">
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#a40000">&lt;/span>&lt;span style="color:#000;font-weight:bold">}&lt;/span>&lt;span style="color:#a40000">
+&lt;/span>&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h3 id="service_definition">Service definition&lt;/h3>
+&lt;pre tabindex="0">&lt;code>service = &amp;#34;service&amp;#34; serviceName &amp;#34;{&amp;#34; { option | rpc | stream | emptyStatement } &amp;#34;}&amp;#34;
+rpc = &amp;#34;rpc&amp;#34; rpcName &amp;#34;(&amp;#34; [ &amp;#34;stream&amp;#34; ] messageType &amp;#34;)&amp;#34; &amp;#34;returns&amp;#34; &amp;#34;(&amp;#34; [ &amp;#34;stream&amp;#34; ]
+messageType &amp;#34;)&amp;#34; (( &amp;#34;{&amp;#34; { option | emptyStatement } &amp;#34;}&amp;#34; ) | &amp;#34;;&amp;#34; )
+stream = &amp;#34;stream&amp;#34; streamName &amp;#34;(&amp;#34; messageType &amp;#34;,&amp;#34; messageType &amp;#34;)&amp;#34; (( &amp;#34;{&amp;#34;
+{ option | emptyStatement } &amp;#34;}&amp;#34;) | &amp;#34;;&amp;#34; )
+&lt;/code>&lt;/pre>&lt;p>Example:&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-proto" data-lang="proto">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#204a87;font-weight:bold">service&lt;/span> &lt;span style="color:#000">SearchService&lt;/span> &lt;span style="color:#000;font-weight:bold">{&lt;/span>&lt;span style="color:#a40000">
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#a40000">&lt;/span> &lt;span style="color:#204a87;font-weight:bold">rpc&lt;/span> &lt;span style="color:#000">Search&lt;/span> &lt;span style="color:#000;font-weight:bold">(&lt;/span>&lt;span style="color:#000">SearchRequest&lt;/span>&lt;span style="color:#000;font-weight:bold">)&lt;/span> &lt;span style="color:#204a87;font-weight:bold">returns&lt;/span> &lt;span style="color:#000;font-weight:bold">(&lt;/span>&lt;span style="color:#000">SearchResponse&lt;/span>&lt;span style="color:#000;font-weight:bold">);&lt;/span>&lt;span style="color:#a40000">
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#a40000">&lt;/span>&lt;span style="color:#000;font-weight:bold">}&lt;/span>&lt;span style="color:#a40000">
+&lt;/span>&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h2 id="proto_file">Proto file&lt;/h2>
+&lt;pre tabindex="0">&lt;code>proto = syntax { import | package | option | topLevelDef | emptyStatement }
+topLevelDef = message | enum | extend | service
+&lt;/code>&lt;/pre>&lt;p>An example .proto file:&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-proto" data-lang="proto">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#000">syntax&lt;/span> &lt;span style="color:#ce5c00;font-weight:bold">=&lt;/span> &lt;span style="color:#4e9a06">&amp;#34;proto2&amp;#34;&lt;/span>&lt;span style="color:#000;font-weight:bold">;&lt;/span>&lt;span style="color:#a40000">
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#a40000">&lt;/span>&lt;span style="color:#204a87;font-weight:bold">import&lt;/span> &lt;span style="color:#000">public&lt;/span> &lt;span style="color:#4e9a06">&amp;#34;other.proto&amp;#34;&lt;/span>&lt;span style="color:#000;font-weight:bold">;&lt;/span>&lt;span style="color:#a40000">
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#a40000">&lt;/span>&lt;span style="color:#204a87;font-weight:bold">option&lt;/span> &lt;span style="color:#000">java_package&lt;/span> &lt;span style="color:#ce5c00;font-weight:bold">=&lt;/span> &lt;span style="color:#4e9a06">&amp;#34;com.example.foo&amp;#34;&lt;/span>&lt;span style="color:#000;font-weight:bold">;&lt;/span>&lt;span style="color:#a40000">
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#a40000">&lt;/span>&lt;span style="color:#204a87;font-weight:bold">enum&lt;/span> &lt;span style="color:#000">EnumAllowingAlias&lt;/span> &lt;span style="color:#000;font-weight:bold">{&lt;/span>&lt;span style="color:#a40000">
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#a40000">&lt;/span> &lt;span style="color:#204a87;font-weight:bold">option&lt;/span> &lt;span style="color:#000">allow_alias&lt;/span> &lt;span style="color:#ce5c00;font-weight:bold">=&lt;/span> &lt;span style="color:#204a87;font-weight:bold">true&lt;/span>&lt;span style="color:#000;font-weight:bold">;&lt;/span>&lt;span style="color:#a40000">
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#a40000">&lt;/span> &lt;span style="color:#000">EAA_UNSPECIFIED&lt;/span> &lt;span style="color:#ce5c00;font-weight:bold">=&lt;/span> &lt;span style="color:#0000cf;font-weight:bold">0&lt;/span>&lt;span style="color:#000;font-weight:bold">;&lt;/span>&lt;span style="color:#a40000">
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#a40000">&lt;/span> &lt;span style="color:#000">EAA_STARTED&lt;/span> &lt;span style="color:#ce5c00;font-weight:bold">=&lt;/span> &lt;span style="color:#0000cf;font-weight:bold">1&lt;/span>&lt;span style="color:#000;font-weight:bold">;&lt;/span>&lt;span style="color:#a40000">
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#a40000">&lt;/span> &lt;span style="color:#000">EAA_RUNNING&lt;/span> &lt;span style="color:#ce5c00;font-weight:bold">=&lt;/span> &lt;span style="color:#0000cf;font-weight:bold">1&lt;/span>&lt;span style="color:#000;font-weight:bold">;&lt;/span>&lt;span style="color:#a40000">
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#a40000">&lt;/span> &lt;span style="color:#000">EAA_FINISHED&lt;/span> &lt;span style="color:#ce5c00;font-weight:bold">=&lt;/span> &lt;span style="color:#0000cf;font-weight:bold">2&lt;/span> &lt;span style="color:#000;font-weight:bold">[(&lt;/span>&lt;span style="color:#000">custom_option&lt;/span>&lt;span style="color:#000;font-weight:bold">)&lt;/span> &lt;span style="color:#ce5c00;font-weight:bold">=&lt;/span> &lt;span style="color:#4e9a06">&amp;#34;hello world&amp;#34;&lt;/span>&lt;span style="color:#000;font-weight:bold">];&lt;/span>&lt;span style="color:#a40000">
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#a40000">&lt;/span>&lt;span style="color:#000;font-weight:bold">}&lt;/span>&lt;span style="color:#a40000">
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#a40000">&lt;/span>&lt;span style="color:#204a87;font-weight:bold">message&lt;/span> &lt;span style="color:#000">Outer&lt;/span> &lt;span style="color:#000;font-weight:bold">{&lt;/span>&lt;span style="color:#a40000">
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#a40000">&lt;/span> &lt;span style="color:#204a87;font-weight:bold">option&lt;/span> &lt;span style="color:#000;font-weight:bold">(&lt;/span>&lt;span style="color:#000">my_option&lt;/span>&lt;span style="color:#000;font-weight:bold">)&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">.&lt;/span>&lt;span style="color:#000">a&lt;/span> &lt;span style="color:#ce5c00;font-weight:bold">=&lt;/span> &lt;span style="color:#204a87;font-weight:bold">true&lt;/span>&lt;span style="color:#000;font-weight:bold">;&lt;/span>&lt;span style="color:#a40000">
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#a40000">&lt;/span> &lt;span style="color:#204a87;font-weight:bold">message&lt;/span> &lt;span style="color:#000">Inner&lt;/span> &lt;span style="color:#000;font-weight:bold">{&lt;/span> &lt;span style="color:#8f5902;font-style:italic">// Level 2
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#8f5902;font-style:italic">&lt;/span> &lt;span style="color:#204a87;font-weight:bold">required&lt;/span> &lt;span style="color:#204a87;font-weight:bold">int64&lt;/span> &lt;span style="color:#000">ival&lt;/span> &lt;span style="color:#ce5c00;font-weight:bold">=&lt;/span> &lt;span style="color:#0000cf;font-weight:bold">1&lt;/span>&lt;span style="color:#000;font-weight:bold">;&lt;/span>&lt;span style="color:#a40000">
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#a40000">&lt;/span> &lt;span style="color:#000;font-weight:bold">}&lt;/span>&lt;span style="color:#a40000">
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#a40000">&lt;/span> &lt;span style="color:#204a87;font-weight:bold">repeated&lt;/span> &lt;span style="color:#000">Inner&lt;/span> &lt;span style="color:#000">inner_message&lt;/span> &lt;span style="color:#ce5c00;font-weight:bold">=&lt;/span> &lt;span style="color:#0000cf;font-weight:bold">2&lt;/span>&lt;span style="color:#000;font-weight:bold">;&lt;/span>&lt;span style="color:#a40000">
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#a40000">&lt;/span> &lt;span style="color:#204a87;font-weight:bold">optional&lt;/span> &lt;span style="color:#000">EnumAllowingAlias&lt;/span> &lt;span style="color:#000">enum_field&lt;/span> &lt;span style="color:#ce5c00;font-weight:bold">=&lt;/span> &lt;span style="color:#0000cf;font-weight:bold">3&lt;/span>&lt;span style="color:#000;font-weight:bold">;&lt;/span>&lt;span style="color:#a40000">
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#a40000">&lt;/span> &lt;span style="color:#000">map&lt;/span>&lt;span style="color:#000;font-weight:bold">&amp;lt;&lt;/span>&lt;span style="color:#204a87;font-weight:bold">int32&lt;/span>&lt;span style="color:#000;font-weight:bold">,&lt;/span> &lt;span style="color:#204a87;font-weight:bold">string&lt;/span>&lt;span style="color:#000;font-weight:bold">&amp;gt;&lt;/span> &lt;span style="color:#000">my_map&lt;/span> &lt;span style="color:#ce5c00;font-weight:bold">=&lt;/span> &lt;span style="color:#0000cf;font-weight:bold">4&lt;/span>&lt;span style="color:#000;font-weight:bold">;&lt;/span>&lt;span style="color:#a40000">
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#a40000">&lt;/span> &lt;span style="color:#204a87;font-weight:bold">extensions&lt;/span> &lt;span style="color:#0000cf;font-weight:bold">20&lt;/span> &lt;span style="color:#204a87;font-weight:bold">to&lt;/span> &lt;span style="color:#0000cf;font-weight:bold">30&lt;/span>&lt;span style="color:#000;font-weight:bold">;&lt;/span>&lt;span style="color:#a40000">
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#a40000">&lt;/span>&lt;span style="color:#000;font-weight:bold">}&lt;/span>&lt;span style="color:#a40000">
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#a40000">&lt;/span>&lt;span style="color:#204a87;font-weight:bold">message&lt;/span> &lt;span style="color:#000">Foo&lt;/span> &lt;span style="color:#000;font-weight:bold">{&lt;/span>&lt;span style="color:#a40000">
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#a40000">&lt;/span> &lt;span style="color:#204a87;font-weight:bold">optional&lt;/span> &lt;span style="color:#204a87;font-weight:bold">group&lt;/span> &lt;span style="color:#000">GroupMessage&lt;/span> &lt;span style="color:#ce5c00;font-weight:bold">=&lt;/span> &lt;span style="color:#0000cf;font-weight:bold">1&lt;/span> &lt;span style="color:#000;font-weight:bold">{&lt;/span>&lt;span style="color:#a40000">
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#a40000">&lt;/span> &lt;span style="color:#204a87;font-weight:bold">optional&lt;/span> &lt;span style="color:#204a87;font-weight:bold">bool&lt;/span> &lt;span style="color:#000">a&lt;/span> &lt;span style="color:#ce5c00;font-weight:bold">=&lt;/span> &lt;span style="color:#0000cf;font-weight:bold">1&lt;/span>&lt;span style="color:#000;font-weight:bold">;&lt;/span>&lt;span style="color:#a40000">
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#a40000">&lt;/span> &lt;span style="color:#000;font-weight:bold">}&lt;/span>&lt;span style="color:#a40000">
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#a40000">&lt;/span>&lt;span style="color:#000;font-weight:bold">}&lt;/span>&lt;span style="color:#a40000">
+&lt;/span>&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div></description></item><item><title>Reference: Protocol Buffers Version 3 Language Specification</title><link>/reference/protobuf/proto3-spec/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>/reference/protobuf/proto3-spec/</guid><description>
+&lt;p>This is a language specification reference for version 3 of the Protocol Buffers
+language (proto3). The syntax is specified using
+&lt;a href="https://en.wikipedia.org/wiki/Extended_Backus%E2%80%93Naur_Form">Extended Backus-Naur Form (EBNF)&lt;/a>:&lt;/p>
+&lt;pre tabindex="0">&lt;code>| alternation
+() grouping
+[] option (zero or one time)
+{} repetition (any number of times)
+&lt;/code>&lt;/pre>&lt;p>For more information about using proto3, see the
+&lt;a href="/programming-guides/proto3">language guide&lt;/a>.&lt;/p>
+&lt;h2 id="lexical_elements">Lexical Elements&lt;/h2>
+&lt;h3 id="letters_and_digits">Letters and Digits&lt;/h3>
+&lt;pre tabindex="0">&lt;code>letter = &amp;#34;A&amp;#34; … &amp;#34;Z&amp;#34; | &amp;#34;a&amp;#34; … &amp;#34;z&amp;#34;
+decimalDigit = &amp;#34;0&amp;#34; … &amp;#34;9&amp;#34;
+octalDigit = &amp;#34;0&amp;#34; … &amp;#34;7&amp;#34;
+hexDigit = &amp;#34;0&amp;#34; … &amp;#34;9&amp;#34; | &amp;#34;A&amp;#34; … &amp;#34;F&amp;#34; | &amp;#34;a&amp;#34; … &amp;#34;f&amp;#34;
+&lt;/code>&lt;/pre>&lt;h3 id="identifiers">Identifiers&lt;/h3>
+&lt;pre tabindex="0">&lt;code>ident = letter { letter | decimalDigit | &amp;#34;_&amp;#34; }
+fullIdent = ident { &amp;#34;.&amp;#34; ident }
+messageName = ident
+enumName = ident
+fieldName = ident
+oneofName = ident
+mapName = ident
+serviceName = ident
+rpcName = ident
+messageType = [ &amp;#34;.&amp;#34; ] { ident &amp;#34;.&amp;#34; } messageName
+enumType = [ &amp;#34;.&amp;#34; ] { ident &amp;#34;.&amp;#34; } enumName
+&lt;/code>&lt;/pre>&lt;h3 id="integer_literals">Integer Literals&lt;/h3>
+&lt;pre tabindex="0">&lt;code>intLit = decimalLit | octalLit | hexLit
+decimalLit = ( &amp;#34;1&amp;#34; … &amp;#34;9&amp;#34; ) { decimalDigit }
+octalLit = &amp;#34;0&amp;#34; { octalDigit }
+hexLit = &amp;#34;0&amp;#34; ( &amp;#34;x&amp;#34; | &amp;#34;X&amp;#34; ) hexDigit { hexDigit }
+&lt;/code>&lt;/pre>&lt;h3 id="floating-point-literals">Floating-point Literals&lt;/h3>
+&lt;pre tabindex="0">&lt;code>floatLit = ( decimals &amp;#34;.&amp;#34; [ decimals ] [ exponent ] | decimals exponent | &amp;#34;.&amp;#34;decimals [ exponent ] ) | &amp;#34;inf&amp;#34; | &amp;#34;nan&amp;#34;
+decimals = decimalDigit { decimalDigit }
+exponent = ( &amp;#34;e&amp;#34; | &amp;#34;E&amp;#34; ) [ &amp;#34;+&amp;#34; | &amp;#34;-&amp;#34; ] decimals
+&lt;/code>&lt;/pre>&lt;h3 id="boolean">Boolean&lt;/h3>
+&lt;pre tabindex="0">&lt;code>boolLit = &amp;#34;true&amp;#34; | &amp;#34;false&amp;#34;
+&lt;/code>&lt;/pre>&lt;h3 id="string_literals">String Literals&lt;/h3>
+&lt;pre tabindex="0">&lt;code>strLit = ( &amp;#34;&amp;#39;&amp;#34; { charValue } &amp;#34;&amp;#39;&amp;#34; ) | ( &amp;#39;&amp;#34;&amp;#39; { charValue } &amp;#39;&amp;#34;&amp;#39; )
+charValue = hexEscape | octEscape | charEscape | /[^\0\n\\]/
+hexEscape = &amp;#39;\&amp;#39; ( &amp;#34;x&amp;#34; | &amp;#34;X&amp;#34; ) hexDigit hexDigit
+octEscape = &amp;#39;\&amp;#39; octalDigit octalDigit octalDigit
+charEscape = &amp;#39;\&amp;#39; ( &amp;#34;a&amp;#34; | &amp;#34;b&amp;#34; | &amp;#34;f&amp;#34; | &amp;#34;n&amp;#34; | &amp;#34;r&amp;#34; | &amp;#34;t&amp;#34; | &amp;#34;v&amp;#34; | &amp;#39;\&amp;#39; | &amp;#34;&amp;#39;&amp;#34; | &amp;#39;&amp;#34;&amp;#39; )
+&lt;/code>&lt;/pre>&lt;h3 id="emptystatement">EmptyStatement&lt;/h3>
+&lt;pre tabindex="0">&lt;code>emptyStatement = &amp;#34;;&amp;#34;
+&lt;/code>&lt;/pre>&lt;h3 id="constant">Constant&lt;/h3>
+&lt;pre tabindex="0">&lt;code>constant = fullIdent | ( [ &amp;#34;-&amp;#34; | &amp;#34;+&amp;#34; ] intLit ) | ( [ &amp;#34;-&amp;#34; | &amp;#34;+&amp;#34; ] floatLit ) | strLit | boolLit
+&lt;/code>&lt;/pre>&lt;h2 id="syntax">Syntax&lt;/h2>
+&lt;p>The syntax statement is used to define the protobuf version.&lt;/p>
+&lt;pre tabindex="0">&lt;code>syntax = &amp;#34;syntax&amp;#34; &amp;#34;=&amp;#34; (&amp;#34;&amp;#39;&amp;#34; &amp;#34;proto3&amp;#34; &amp;#34;&amp;#39;&amp;#34; | &amp;#39;&amp;#34;&amp;#39; &amp;#34;proto3&amp;#34; &amp;#39;&amp;#34;&amp;#39;) &amp;#34;;&amp;#34;
+&lt;/code>&lt;/pre>&lt;p>Example:&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-proto" data-lang="proto">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#000">syntax&lt;/span> &lt;span style="color:#ce5c00;font-weight:bold">=&lt;/span> &lt;span style="color:#4e9a06">&amp;#34;proto3&amp;#34;&lt;/span>&lt;span style="color:#000;font-weight:bold">;&lt;/span>&lt;span style="color:#a40000">
+&lt;/span>&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h2 id="import_statement">Import Statement&lt;/h2>
+&lt;p>The import statement is used to import another .proto&amp;rsquo;s definitions.&lt;/p>
+&lt;pre tabindex="0">&lt;code>import = &amp;#34;import&amp;#34; [ &amp;#34;weak&amp;#34; | &amp;#34;public&amp;#34; ] strLit &amp;#34;;&amp;#34;
+&lt;/code>&lt;/pre>&lt;p>Example:&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-proto" data-lang="proto">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#204a87;font-weight:bold">import&lt;/span> &lt;span style="color:#000">public&lt;/span> &lt;span style="color:#4e9a06">&amp;#34;other.proto&amp;#34;&lt;/span>&lt;span style="color:#000;font-weight:bold">;&lt;/span>&lt;span style="color:#a40000">
+&lt;/span>&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h2 id="package">Package&lt;/h2>
+&lt;p>The package specifier can be used to prevent name clashes between protocol
+message types.&lt;/p>
+&lt;pre tabindex="0">&lt;code>package = &amp;#34;package&amp;#34; fullIdent &amp;#34;;&amp;#34;
+&lt;/code>&lt;/pre>&lt;p>Example:&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-proto" data-lang="proto">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#204a87;font-weight:bold">package&lt;/span> &lt;span style="color:#000">foo&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">.&lt;/span>&lt;span style="color:#000">bar&lt;/span>&lt;span style="color:#000;font-weight:bold">;&lt;/span>&lt;span style="color:#a40000">
+&lt;/span>&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h2 id="option">Option&lt;/h2>
+&lt;p>Options can be used in proto files, messages, enums and services. An option can
+be a protobuf defined option or a custom option. For more information, see
+&lt;a href="/programming-guides/proto3#options">Options&lt;/a> in the language guide.&lt;/p>
+&lt;pre tabindex="0">&lt;code>option = &amp;#34;option&amp;#34; optionName &amp;#34;=&amp;#34; constant &amp;#34;;&amp;#34;
+optionName = ( ident | &amp;#34;(&amp;#34; fullIdent &amp;#34;)&amp;#34; ) { &amp;#34;.&amp;#34; ident }
+&lt;/code>&lt;/pre>&lt;p>Example:&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-proto" data-lang="proto">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#204a87;font-weight:bold">option&lt;/span> &lt;span style="color:#000">java_package&lt;/span> &lt;span style="color:#ce5c00;font-weight:bold">=&lt;/span> &lt;span style="color:#4e9a06">&amp;#34;com.example.foo&amp;#34;&lt;/span>&lt;span style="color:#000;font-weight:bold">;&lt;/span>&lt;span style="color:#a40000">
+&lt;/span>&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h2 id="fields">Fields&lt;/h2>
+&lt;p>Fields are the basic elements of a protocol buffer message. Fields can be normal
+fields, oneof fields, or map fields. A field has a type and field number.&lt;/p>
+&lt;pre tabindex="0">&lt;code>type = &amp;#34;double&amp;#34; | &amp;#34;float&amp;#34; | &amp;#34;int32&amp;#34; | &amp;#34;int64&amp;#34; | &amp;#34;uint32&amp;#34; | &amp;#34;uint64&amp;#34;
+| &amp;#34;sint32&amp;#34; | &amp;#34;sint64&amp;#34; | &amp;#34;fixed32&amp;#34; | &amp;#34;fixed64&amp;#34; | &amp;#34;sfixed32&amp;#34; | &amp;#34;sfixed64&amp;#34;
+| &amp;#34;bool&amp;#34; | &amp;#34;string&amp;#34; | &amp;#34;bytes&amp;#34; | messageType | enumType
+fieldNumber = intLit;
+&lt;/code>&lt;/pre>&lt;h3 id="normal_field">Normal Field&lt;/h3>
+&lt;p>Each field has type, name and field number. It may have field options.&lt;/p>
+&lt;pre tabindex="0">&lt;code>field = [ &amp;#34;repeated&amp;#34; ] type fieldName &amp;#34;=&amp;#34; fieldNumber [ &amp;#34;[&amp;#34; fieldOptions &amp;#34;]&amp;#34; ] &amp;#34;;&amp;#34;
+fieldOptions = fieldOption { &amp;#34;,&amp;#34; fieldOption }
+fieldOption = optionName &amp;#34;=&amp;#34; constant
+&lt;/code>&lt;/pre>&lt;p>Examples:&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-proto" data-lang="proto">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#000">foo.Bar&lt;/span> &lt;span style="color:#000">nested_message&lt;/span> &lt;span style="color:#ce5c00;font-weight:bold">=&lt;/span> &lt;span style="color:#0000cf;font-weight:bold">2&lt;/span>&lt;span style="color:#000;font-weight:bold">;&lt;/span>&lt;span style="color:#a40000">
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#a40000">&lt;/span>&lt;span style="color:#204a87;font-weight:bold">repeated&lt;/span> &lt;span style="color:#204a87;font-weight:bold">int32&lt;/span> &lt;span style="color:#000">samples&lt;/span> &lt;span style="color:#ce5c00;font-weight:bold">=&lt;/span> &lt;span style="color:#0000cf;font-weight:bold">4&lt;/span> &lt;span style="color:#000;font-weight:bold">[&lt;/span>&lt;span style="color:#204a87;font-weight:bold">packed&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">=&lt;/span>&lt;span style="color:#204a87;font-weight:bold">true&lt;/span>&lt;span style="color:#000;font-weight:bold">];&lt;/span>&lt;span style="color:#a40000">
+&lt;/span>&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h3 id="oneof_and_oneof_field">Oneof and Oneof Field&lt;/h3>
+&lt;p>A oneof consists of oneof fields and a oneof name.&lt;/p>
+&lt;pre tabindex="0">&lt;code>oneof = &amp;#34;oneof&amp;#34; oneofName &amp;#34;{&amp;#34; { option | oneofField | emptyStatement } &amp;#34;}&amp;#34;
+oneofField = type fieldName &amp;#34;=&amp;#34; fieldNumber [ &amp;#34;[&amp;#34; fieldOptions &amp;#34;]&amp;#34; ] &amp;#34;;&amp;#34;
+&lt;/code>&lt;/pre>&lt;p>Example:&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-proto" data-lang="proto">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#204a87;font-weight:bold">oneof&lt;/span> &lt;span style="color:#000">foo&lt;/span> &lt;span style="color:#000;font-weight:bold">{&lt;/span>&lt;span style="color:#a40000">
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#a40000">&lt;/span> &lt;span style="color:#204a87;font-weight:bold">string&lt;/span> &lt;span style="color:#000">name&lt;/span> &lt;span style="color:#ce5c00;font-weight:bold">=&lt;/span> &lt;span style="color:#0000cf;font-weight:bold">4&lt;/span>&lt;span style="color:#000;font-weight:bold">;&lt;/span>&lt;span style="color:#a40000">
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#a40000">&lt;/span> &lt;span style="color:#000">SubMessage&lt;/span> &lt;span style="color:#000">sub_message&lt;/span> &lt;span style="color:#ce5c00;font-weight:bold">=&lt;/span> &lt;span style="color:#0000cf;font-weight:bold">9&lt;/span>&lt;span style="color:#000;font-weight:bold">;&lt;/span>&lt;span style="color:#a40000">
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#a40000">&lt;/span>&lt;span style="color:#000;font-weight:bold">}&lt;/span>&lt;span style="color:#a40000">
+&lt;/span>&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h3 id="map_field">Map Field&lt;/h3>
+&lt;p>A map field has a key type, value type, name, and field number. The key type can
+be any integral or string type.&lt;/p>
+&lt;pre tabindex="0">&lt;code>mapField = &amp;#34;map&amp;#34; &amp;#34;&amp;lt;&amp;#34; keyType &amp;#34;,&amp;#34; type &amp;#34;&amp;gt;&amp;#34; mapName &amp;#34;=&amp;#34; fieldNumber [ &amp;#34;[&amp;#34; fieldOptions &amp;#34;]&amp;#34; ] &amp;#34;;&amp;#34;
+keyType = &amp;#34;int32&amp;#34; | &amp;#34;int64&amp;#34; | &amp;#34;uint32&amp;#34; | &amp;#34;uint64&amp;#34; | &amp;#34;sint32&amp;#34; | &amp;#34;sint64&amp;#34; |
+&amp;#34;fixed32&amp;#34; | &amp;#34;fixed64&amp;#34; | &amp;#34;sfixed32&amp;#34; | &amp;#34;sfixed64&amp;#34; | &amp;#34;bool&amp;#34; | &amp;#34;string&amp;#34;
+&lt;/code>&lt;/pre>&lt;p>Example:&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-proto" data-lang="proto">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#000">map&lt;/span>&lt;span style="color:#000;font-weight:bold">&amp;lt;&lt;/span>&lt;span style="color:#204a87;font-weight:bold">string&lt;/span>&lt;span style="color:#000;font-weight:bold">,&lt;/span> &lt;span style="color:#000">Project&lt;/span>&lt;span style="color:#000;font-weight:bold">&amp;gt;&lt;/span> &lt;span style="color:#000">projects&lt;/span> &lt;span style="color:#ce5c00;font-weight:bold">=&lt;/span> &lt;span style="color:#0000cf;font-weight:bold">3&lt;/span>&lt;span style="color:#000;font-weight:bold">;&lt;/span>&lt;span style="color:#a40000">
+&lt;/span>&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h2 id="reserved">Reserved&lt;/h2>
+&lt;p>Reserved statements declare a range of field numbers or field names that cannot
+be used in this message.&lt;/p>
+&lt;pre tabindex="0">&lt;code>reserved = &amp;#34;reserved&amp;#34; ( ranges | strFieldNames ) &amp;#34;;&amp;#34;
+ranges = range { &amp;#34;,&amp;#34; range }
+range = intLit [ &amp;#34;to&amp;#34; ( intLit | &amp;#34;max&amp;#34; ) ]
+strFieldNames = strFieldName { &amp;#34;,&amp;#34; strFieldName }
+strFieldName = &amp;#34;&amp;#39;&amp;#34; fieldName &amp;#34;&amp;#39;&amp;#34; | &amp;#39;&amp;#34;&amp;#39; fieldName &amp;#39;&amp;#34;&amp;#39;
+&lt;/code>&lt;/pre>&lt;p>Examples:&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-proto" data-lang="proto">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#000">reserved&lt;/span> &lt;span style="color:#0000cf;font-weight:bold">2&lt;/span>&lt;span style="color:#000;font-weight:bold">,&lt;/span> &lt;span style="color:#0000cf;font-weight:bold">15&lt;/span>&lt;span style="color:#000;font-weight:bold">,&lt;/span> &lt;span style="color:#0000cf;font-weight:bold">9&lt;/span> &lt;span style="color:#204a87;font-weight:bold">to&lt;/span> &lt;span style="color:#0000cf;font-weight:bold">11&lt;/span>&lt;span style="color:#000;font-weight:bold">;&lt;/span>&lt;span style="color:#a40000">
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#a40000">&lt;/span>&lt;span style="color:#000">reserved&lt;/span> &lt;span style="color:#4e9a06">&amp;#34;foo&amp;#34;&lt;/span>&lt;span style="color:#000;font-weight:bold">,&lt;/span> &lt;span style="color:#4e9a06">&amp;#34;bar&amp;#34;&lt;/span>&lt;span style="color:#000;font-weight:bold">;&lt;/span>&lt;span style="color:#a40000">
+&lt;/span>&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h2 id="top_level_definitions">Top Level Definitions&lt;/h2>
+&lt;h3 id="enum_definition">Enum Definition&lt;/h3>
+&lt;p>The enum definition consists of a name and an enum body. The enum body can have
+options, enum fields, and reserved statements.&lt;/p>
+&lt;pre tabindex="0">&lt;code>enum = &amp;#34;enum&amp;#34; enumName enumBody
+enumBody = &amp;#34;{&amp;#34; { option | enumField | emptyStatement | reserved } &amp;#34;}&amp;#34;
+enumField = ident &amp;#34;=&amp;#34; [ &amp;#34;-&amp;#34; ] intLit [ &amp;#34;[&amp;#34; enumValueOption { &amp;#34;,&amp;#34; enumValueOption } &amp;#34;]&amp;#34; ]&amp;#34;;&amp;#34;
+enumValueOption = optionName &amp;#34;=&amp;#34; constant
+&lt;/code>&lt;/pre>&lt;p>Example:&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-proto" data-lang="proto">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#204a87;font-weight:bold">enum&lt;/span> &lt;span style="color:#000">EnumAllowingAlias&lt;/span> &lt;span style="color:#000;font-weight:bold">{&lt;/span>&lt;span style="color:#a40000">
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#a40000">&lt;/span> &lt;span style="color:#204a87;font-weight:bold">option&lt;/span> &lt;span style="color:#000">allow_alias&lt;/span> &lt;span style="color:#ce5c00;font-weight:bold">=&lt;/span> &lt;span style="color:#204a87;font-weight:bold">true&lt;/span>&lt;span style="color:#000;font-weight:bold">;&lt;/span>&lt;span style="color:#a40000">
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#a40000">&lt;/span> &lt;span style="color:#000">EAA_UNSPECIFIED&lt;/span> &lt;span style="color:#ce5c00;font-weight:bold">=&lt;/span> &lt;span style="color:#0000cf;font-weight:bold">0&lt;/span>&lt;span style="color:#000;font-weight:bold">;&lt;/span>&lt;span style="color:#a40000">
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#a40000">&lt;/span> &lt;span style="color:#000">EAA_STARTED&lt;/span> &lt;span style="color:#ce5c00;font-weight:bold">=&lt;/span> &lt;span style="color:#0000cf;font-weight:bold">1&lt;/span>&lt;span style="color:#000;font-weight:bold">;&lt;/span>&lt;span style="color:#a40000">
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#a40000">&lt;/span> &lt;span style="color:#000">EAA_RUNNING&lt;/span> &lt;span style="color:#ce5c00;font-weight:bold">=&lt;/span> &lt;span style="color:#0000cf;font-weight:bold">2&lt;/span> &lt;span style="color:#000;font-weight:bold">[(&lt;/span>&lt;span style="color:#000">custom_option&lt;/span>&lt;span style="color:#000;font-weight:bold">)&lt;/span> &lt;span style="color:#ce5c00;font-weight:bold">=&lt;/span> &lt;span style="color:#4e9a06">&amp;#34;hello world&amp;#34;&lt;/span>&lt;span style="color:#000;font-weight:bold">];&lt;/span>&lt;span style="color:#a40000">
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#a40000">&lt;/span>&lt;span style="color:#000;font-weight:bold">}&lt;/span>&lt;span style="color:#a40000">
+&lt;/span>&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h3 id="message_definition">Message Definition&lt;/h3>
+&lt;p>A message consists of a message name and a message body. The message body can
+have fields, nested enum definitions, nested message definitions, options,
+oneofs, map fields, and reserved statements.&lt;/p>
+&lt;pre tabindex="0">&lt;code>message = &amp;#34;message&amp;#34; messageName messageBody
+messageBody = &amp;#34;{&amp;#34; { field | enum | message | option | oneof | mapField |
+reserved | emptyStatement } &amp;#34;}&amp;#34;
+&lt;/code>&lt;/pre>&lt;p>Example:&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-proto" data-lang="proto">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#204a87;font-weight:bold">message&lt;/span> &lt;span style="color:#000">Outer&lt;/span> &lt;span style="color:#000;font-weight:bold">{&lt;/span>&lt;span style="color:#a40000">
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#a40000">&lt;/span> &lt;span style="color:#204a87;font-weight:bold">option&lt;/span> &lt;span style="color:#000;font-weight:bold">(&lt;/span>&lt;span style="color:#000">my_option&lt;/span>&lt;span style="color:#000;font-weight:bold">)&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">.&lt;/span>&lt;span style="color:#000">a&lt;/span> &lt;span style="color:#ce5c00;font-weight:bold">=&lt;/span> &lt;span style="color:#204a87;font-weight:bold">true&lt;/span>&lt;span style="color:#000;font-weight:bold">;&lt;/span>&lt;span style="color:#a40000">
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#a40000">&lt;/span> &lt;span style="color:#204a87;font-weight:bold">message&lt;/span> &lt;span style="color:#000">Inner&lt;/span> &lt;span style="color:#000;font-weight:bold">{&lt;/span> &lt;span style="color:#8f5902;font-style:italic">// Level 2
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#8f5902;font-style:italic">&lt;/span> &lt;span style="color:#204a87;font-weight:bold">int64&lt;/span> &lt;span style="color:#000">ival&lt;/span> &lt;span style="color:#ce5c00;font-weight:bold">=&lt;/span> &lt;span style="color:#0000cf;font-weight:bold">1&lt;/span>&lt;span style="color:#000;font-weight:bold">;&lt;/span>&lt;span style="color:#a40000">
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#a40000">&lt;/span> &lt;span style="color:#000;font-weight:bold">}&lt;/span>&lt;span style="color:#a40000">
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#a40000">&lt;/span> &lt;span style="color:#000">map&lt;/span>&lt;span style="color:#000;font-weight:bold">&amp;lt;&lt;/span>&lt;span style="color:#204a87;font-weight:bold">int32&lt;/span>&lt;span style="color:#000;font-weight:bold">,&lt;/span> &lt;span style="color:#204a87;font-weight:bold">string&lt;/span>&lt;span style="color:#000;font-weight:bold">&amp;gt;&lt;/span> &lt;span style="color:#000">my_map&lt;/span> &lt;span style="color:#ce5c00;font-weight:bold">=&lt;/span> &lt;span style="color:#0000cf;font-weight:bold">2&lt;/span>&lt;span style="color:#000;font-weight:bold">;&lt;/span>&lt;span style="color:#a40000">
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#a40000">&lt;/span>&lt;span style="color:#000;font-weight:bold">}&lt;/span>&lt;span style="color:#a40000">
+&lt;/span>&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h3 id="service_definition">Service Definition&lt;/h3>
+&lt;pre tabindex="0">&lt;code>service = &amp;#34;service&amp;#34; serviceName &amp;#34;{&amp;#34; { option | rpc | emptyStatement } &amp;#34;}&amp;#34;
+rpc = &amp;#34;rpc&amp;#34; rpcName &amp;#34;(&amp;#34; [ &amp;#34;stream&amp;#34; ] messageType &amp;#34;)&amp;#34; &amp;#34;returns&amp;#34; &amp;#34;(&amp;#34; [ &amp;#34;stream&amp;#34; ]
+messageType &amp;#34;)&amp;#34; (( &amp;#34;{&amp;#34; {option | emptyStatement } &amp;#34;}&amp;#34; ) | &amp;#34;;&amp;#34;)
+&lt;/code>&lt;/pre>&lt;p>Example:&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-proto" data-lang="proto">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#204a87;font-weight:bold">service&lt;/span> &lt;span style="color:#000">SearchService&lt;/span> &lt;span style="color:#000;font-weight:bold">{&lt;/span>&lt;span style="color:#a40000">
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#a40000">&lt;/span> &lt;span style="color:#204a87;font-weight:bold">rpc&lt;/span> &lt;span style="color:#000">Search&lt;/span> &lt;span style="color:#000;font-weight:bold">(&lt;/span>&lt;span style="color:#000">SearchRequest&lt;/span>&lt;span style="color:#000;font-weight:bold">)&lt;/span> &lt;span style="color:#204a87;font-weight:bold">returns&lt;/span> &lt;span style="color:#000;font-weight:bold">(&lt;/span>&lt;span style="color:#000">SearchResponse&lt;/span>&lt;span style="color:#000;font-weight:bold">);&lt;/span>&lt;span style="color:#a40000">
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#a40000">&lt;/span>&lt;span style="color:#000;font-weight:bold">}&lt;/span>&lt;span style="color:#a40000">
+&lt;/span>&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h2 id="proto_file">Proto File&lt;/h2>
+&lt;pre tabindex="0">&lt;code>proto = syntax { import | package | option | topLevelDef | emptyStatement }
+topLevelDef = message | enum | service
+&lt;/code>&lt;/pre>&lt;p>An example .proto file:&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-proto" data-lang="proto">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#000">syntax&lt;/span> &lt;span style="color:#ce5c00;font-weight:bold">=&lt;/span> &lt;span style="color:#4e9a06">&amp;#34;proto3&amp;#34;&lt;/span>&lt;span style="color:#000;font-weight:bold">;&lt;/span>&lt;span style="color:#a40000">
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#a40000">&lt;/span>&lt;span style="color:#204a87;font-weight:bold">import&lt;/span> &lt;span style="color:#000">public&lt;/span> &lt;span style="color:#4e9a06">&amp;#34;other.proto&amp;#34;&lt;/span>&lt;span style="color:#000;font-weight:bold">;&lt;/span>&lt;span style="color:#a40000">
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#a40000">&lt;/span>&lt;span style="color:#204a87;font-weight:bold">option&lt;/span> &lt;span style="color:#000">java_package&lt;/span> &lt;span style="color:#ce5c00;font-weight:bold">=&lt;/span> &lt;span style="color:#4e9a06">&amp;#34;com.example.foo&amp;#34;&lt;/span>&lt;span style="color:#000;font-weight:bold">;&lt;/span>&lt;span style="color:#a40000">
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#a40000">&lt;/span>&lt;span style="color:#204a87;font-weight:bold">enum&lt;/span> &lt;span style="color:#000">EnumAllowingAlias&lt;/span> &lt;span style="color:#000;font-weight:bold">{&lt;/span>&lt;span style="color:#a40000">
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#a40000">&lt;/span> &lt;span style="color:#204a87;font-weight:bold">option&lt;/span> &lt;span style="color:#000">allow_alias&lt;/span> &lt;span style="color:#ce5c00;font-weight:bold">=&lt;/span> &lt;span style="color:#204a87;font-weight:bold">true&lt;/span>&lt;span style="color:#000;font-weight:bold">;&lt;/span>&lt;span style="color:#a40000">
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#a40000">&lt;/span> &lt;span style="color:#000">EAA_UNSPECIFIED&lt;/span> &lt;span style="color:#ce5c00;font-weight:bold">=&lt;/span> &lt;span style="color:#0000cf;font-weight:bold">0&lt;/span>&lt;span style="color:#000;font-weight:bold">;&lt;/span>&lt;span style="color:#a40000">
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#a40000">&lt;/span> &lt;span style="color:#000">EAA_STARTED&lt;/span> &lt;span style="color:#ce5c00;font-weight:bold">=&lt;/span> &lt;span style="color:#0000cf;font-weight:bold">1&lt;/span>&lt;span style="color:#000;font-weight:bold">;&lt;/span>&lt;span style="color:#a40000">
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#a40000">&lt;/span> &lt;span style="color:#000">EAA_RUNNING&lt;/span> &lt;span style="color:#ce5c00;font-weight:bold">=&lt;/span> &lt;span style="color:#0000cf;font-weight:bold">1&lt;/span>&lt;span style="color:#000;font-weight:bold">;&lt;/span>&lt;span style="color:#a40000">
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#a40000">&lt;/span> &lt;span style="color:#000">EAA_FINISHED&lt;/span> &lt;span style="color:#ce5c00;font-weight:bold">=&lt;/span> &lt;span style="color:#0000cf;font-weight:bold">2&lt;/span> &lt;span style="color:#000;font-weight:bold">[(&lt;/span>&lt;span style="color:#000">custom_option&lt;/span>&lt;span style="color:#000;font-weight:bold">)&lt;/span> &lt;span style="color:#ce5c00;font-weight:bold">=&lt;/span> &lt;span style="color:#4e9a06">&amp;#34;hello world&amp;#34;&lt;/span>&lt;span style="color:#000;font-weight:bold">];&lt;/span>&lt;span style="color:#a40000">
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#a40000">&lt;/span>&lt;span style="color:#000;font-weight:bold">}&lt;/span>&lt;span style="color:#a40000">
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#a40000">&lt;/span>&lt;span style="color:#204a87;font-weight:bold">message&lt;/span> &lt;span style="color:#000">Outer&lt;/span> &lt;span style="color:#000;font-weight:bold">{&lt;/span>&lt;span style="color:#a40000">
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#a40000">&lt;/span> &lt;span style="color:#204a87;font-weight:bold">option&lt;/span> &lt;span style="color:#000;font-weight:bold">(&lt;/span>&lt;span style="color:#000">my_option&lt;/span>&lt;span style="color:#000;font-weight:bold">)&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">.&lt;/span>&lt;span style="color:#000">a&lt;/span> &lt;span style="color:#ce5c00;font-weight:bold">=&lt;/span> &lt;span style="color:#204a87;font-weight:bold">true&lt;/span>&lt;span style="color:#000;font-weight:bold">;&lt;/span>&lt;span style="color:#a40000">
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#a40000">&lt;/span> &lt;span style="color:#204a87;font-weight:bold">message&lt;/span> &lt;span style="color:#000">Inner&lt;/span> &lt;span style="color:#000;font-weight:bold">{&lt;/span> &lt;span style="color:#8f5902;font-style:italic">// Level 2
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#8f5902;font-style:italic">&lt;/span> &lt;span style="color:#204a87;font-weight:bold">int64&lt;/span> &lt;span style="color:#000">ival&lt;/span> &lt;span style="color:#ce5c00;font-weight:bold">=&lt;/span> &lt;span style="color:#0000cf;font-weight:bold">1&lt;/span>&lt;span style="color:#000;font-weight:bold">;&lt;/span>&lt;span style="color:#a40000">
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#a40000">&lt;/span> &lt;span style="color:#000;font-weight:bold">}&lt;/span>&lt;span style="color:#a40000">
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#a40000">&lt;/span> &lt;span style="color:#204a87;font-weight:bold">repeated&lt;/span> &lt;span style="color:#000">Inner&lt;/span> &lt;span style="color:#000">inner_message&lt;/span> &lt;span style="color:#ce5c00;font-weight:bold">=&lt;/span> &lt;span style="color:#0000cf;font-weight:bold">2&lt;/span>&lt;span style="color:#000;font-weight:bold">;&lt;/span>&lt;span style="color:#a40000">
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#a40000">&lt;/span> &lt;span style="color:#000">EnumAllowingAlias&lt;/span> &lt;span style="color:#000">enum_field&lt;/span> &lt;span style="color:#ce5c00;font-weight:bold">=&lt;/span> &lt;span style="color:#0000cf;font-weight:bold">3&lt;/span>&lt;span style="color:#000;font-weight:bold">;&lt;/span>&lt;span style="color:#a40000">
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#a40000">&lt;/span> &lt;span style="color:#000">map&lt;/span>&lt;span style="color:#000;font-weight:bold">&amp;lt;&lt;/span>&lt;span style="color:#204a87;font-weight:bold">int32&lt;/span>&lt;span style="color:#000;font-weight:bold">,&lt;/span> &lt;span style="color:#204a87;font-weight:bold">string&lt;/span>&lt;span style="color:#000;font-weight:bold">&amp;gt;&lt;/span> &lt;span style="color:#000">my_map&lt;/span> &lt;span style="color:#ce5c00;font-weight:bold">=&lt;/span> &lt;span style="color:#0000cf;font-weight:bold">4&lt;/span>&lt;span style="color:#000;font-weight:bold">;&lt;/span>&lt;span style="color:#a40000">
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#a40000">&lt;/span>&lt;span style="color:#000;font-weight:bold">}&lt;/span>&lt;span style="color:#a40000">
+&lt;/span>&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div></description></item><item><title>Reference: Text Format Language Specification</title><link>/reference/protobuf/textformat-spec/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>/reference/protobuf/textformat-spec/</guid><description>
+&lt;p>The protocol buffer Text Format Language specifies a syntax for representation
+of protobuf &lt;em>data&lt;/em> in text form, which is often useful for configurations or
+tests. This format is distinct from the format of text within a &lt;code>.proto&lt;/code> schema,
+for example. This document contains reference documentation using the syntax
+specified in
+&lt;a href="https://en.wikipedia.org/wiki/Extended_Backus%E2%80%93Naur_Form">ISO/IEC 14977 EBNF&lt;/a>.&lt;/p>
+&lt;div class="alert alert-note" role="alert">
+&lt;h4 class="alert-heading">Note&lt;/h4>
+This is a draft spec reverse-engineered from the C++ text format
+&lt;a href="https://github.com/protocolbuffers/protobuf/blob/master/src/google/protobuf/text_format.cc">implementation&lt;/a>
+and may change based on further discussion and review. While an effort has been
+made to keep text formats consistent across supported languages,
+incompatibilities are likely to exist.
+&lt;/div>
+&lt;h2 id="parsing">Parsing Overview&lt;/h2>
+&lt;p>The language elements in this spec are split into lexical and syntactic
+categories. Lexical elements must match the input text exactly as described, but
+syntactic elements may be separated by optional &lt;code>WHITESPACE&lt;/code> and &lt;code>COMMENT&lt;/code>
+tokens.&lt;/p>
+&lt;p>For example, a signed floating point value comprises two syntactic elements: the
+sign (&lt;code>-&lt;/code>) and the &lt;code>FLOAT&lt;/code> literal. Optional whitespace and comments may exist
+between the sign and the number, but not within the number. Example:&lt;/p>
+&lt;pre tabindex="0">&lt;code class="language-textproto" data-lang="textproto">value: -2.0 # Valid: no additional whitespace.
+value: - 2.0 # Valid: whitespace between &amp;#39;-&amp;#39; and &amp;#39;2.0&amp;#39;.
+value: -
+# comment
+2.0 # Valid: whitespace and comments between &amp;#39;-&amp;#39; and &amp;#39;2.0&amp;#39;.
+value: 2 . 0 # Invalid: the floating point period is part of the lexical
+# element, so no additional whitespace is allowed.
+&lt;/code>&lt;/pre>&lt;p>There is one edge case that requires special attention: a number token (&lt;code>FLOAT&lt;/code>,
+&lt;code>DEC_INT&lt;/code>, &lt;code>OCT_INT&lt;/code>, or &lt;code>HEX_INT&lt;/code>) may not be immediately followed by an
+&lt;code>IDENT&lt;/code> token. Example:&lt;/p>
+&lt;pre tabindex="0">&lt;code class="language-textproto" data-lang="textproto">foo: 10 bar: 20 # Valid: whitespace separates &amp;#39;10&amp;#39; and &amp;#39;bar&amp;#39;
+foo: 10,bar: 20 # Valid: &amp;#39;,&amp;#39; separates &amp;#39;10&amp;#39; and &amp;#39;bar&amp;#39;
+foo: 10[com.foo.ext]: 20 # Valid: &amp;#39;10&amp;#39; is followed immediately by &amp;#39;[&amp;#39;, which is
+# not an identifier.
+foo: 10bar: 20 # Invalid: no space between &amp;#39;10&amp;#39; and identifier &amp;#39;bar&amp;#39;.
+&lt;/code>&lt;/pre>&lt;h2 id="lexical">Lexical Elements&lt;/h2>
+&lt;p>The lexical elements described below fall into two categories: uppercase primary
+elements and lowercase fragments. Only primary elements are included in the
+output stream of tokens used during syntactic analysis; fragments exist only to
+simplify construction of primary elements.&lt;/p>
+&lt;p>When parsing input text, the longest matching primary element wins. Example:&lt;/p>
+&lt;pre tabindex="0">&lt;code class="language-textproto" data-lang="textproto">value: 10 # &amp;#39;10&amp;#39; is parsed as a DEC_INT token.
+value: 10f # &amp;#39;10f&amp;#39; is parsed as a FLOAT token, despite containing &amp;#39;10&amp;#39; which
+# would also match DEC_INT. In this case, FLOAT matches a longer
+# subsequence of the input.
+&lt;/code>&lt;/pre>&lt;h3 id="characters">Characters&lt;/h3>
+&lt;pre tabindex="0">&lt;code>char = ? Any non-NUL unicode character ? ;
+newline = ? ASCII #10 (line feed) ? ;
+letter = &amp;#34;A&amp;#34; | &amp;#34;B&amp;#34; | &amp;#34;C&amp;#34; | &amp;#34;D&amp;#34; | &amp;#34;E&amp;#34; | &amp;#34;F&amp;#34; | &amp;#34;G&amp;#34; | &amp;#34;H&amp;#34; | &amp;#34;I&amp;#34; | &amp;#34;J&amp;#34; | &amp;#34;K&amp;#34; | &amp;#34;L&amp;#34; | &amp;#34;M&amp;#34;
+| &amp;#34;N&amp;#34; | &amp;#34;O&amp;#34; | &amp;#34;P&amp;#34; | &amp;#34;Q&amp;#34; | &amp;#34;R&amp;#34; | &amp;#34;S&amp;#34; | &amp;#34;T&amp;#34; | &amp;#34;U&amp;#34; | &amp;#34;V&amp;#34; | &amp;#34;W&amp;#34; | &amp;#34;X&amp;#34; | &amp;#34;Y&amp;#34; | &amp;#34;Z&amp;#34;
+| &amp;#34;a&amp;#34; | &amp;#34;b&amp;#34; | &amp;#34;c&amp;#34; | &amp;#34;d&amp;#34; | &amp;#34;e&amp;#34; | &amp;#34;f&amp;#34; | &amp;#34;g&amp;#34; | &amp;#34;h&amp;#34; | &amp;#34;i&amp;#34; | &amp;#34;j&amp;#34; | &amp;#34;k&amp;#34; | &amp;#34;l&amp;#34; | &amp;#34;m&amp;#34;
+| &amp;#34;n&amp;#34; | &amp;#34;o&amp;#34; | &amp;#34;p&amp;#34; | &amp;#34;q&amp;#34; | &amp;#34;r&amp;#34; | &amp;#34;s&amp;#34; | &amp;#34;t&amp;#34; | &amp;#34;u&amp;#34; | &amp;#34;v&amp;#34; | &amp;#34;w&amp;#34; | &amp;#34;x&amp;#34; | &amp;#34;y&amp;#34; | &amp;#34;z&amp;#34;
+| &amp;#34;_&amp;#34; ;
+oct = &amp;#34;0&amp;#34; | &amp;#34;1&amp;#34; | &amp;#34;2&amp;#34; | &amp;#34;3&amp;#34; | &amp;#34;4&amp;#34; | &amp;#34;5&amp;#34; | &amp;#34;6&amp;#34; | &amp;#34;7&amp;#34; ;
+dec = &amp;#34;0&amp;#34; | &amp;#34;1&amp;#34; | &amp;#34;2&amp;#34; | &amp;#34;3&amp;#34; | &amp;#34;4&amp;#34; | &amp;#34;5&amp;#34; | &amp;#34;6&amp;#34; | &amp;#34;7&amp;#34; | &amp;#34;8&amp;#34; | &amp;#34;9&amp;#34; ;
+hex = &amp;#34;0&amp;#34; | &amp;#34;1&amp;#34; | &amp;#34;2&amp;#34; | &amp;#34;3&amp;#34; | &amp;#34;4&amp;#34; | &amp;#34;5&amp;#34; | &amp;#34;6&amp;#34; | &amp;#34;7&amp;#34; | &amp;#34;8&amp;#34; | &amp;#34;9&amp;#34;
+| &amp;#34;A&amp;#34; | &amp;#34;B&amp;#34; | &amp;#34;C&amp;#34; | &amp;#34;D&amp;#34; | &amp;#34;E&amp;#34; | &amp;#34;F&amp;#34;
+| &amp;#34;a&amp;#34; | &amp;#34;b&amp;#34; | &amp;#34;c&amp;#34; | &amp;#34;d&amp;#34; | &amp;#34;e&amp;#34; | &amp;#34;f&amp;#34; ;
+&lt;/code>&lt;/pre>&lt;h3 id="whitespace">Whitespace and Comments&lt;/h3>
+&lt;pre tabindex="0">&lt;code>COMMENT = &amp;#34;#&amp;#34;, { char - newline }, [ newline ] ;
+WHITESPACE = &amp;#34; &amp;#34;
+| newline
+| ? ASCII #9 (horizontal tab) ?
+| ? ASCII #11 (vertical tab) ?
+| ? ASCII #12 (form feed) ?
+| ? ASCII #13 (carriage return) ? ;
+&lt;/code>&lt;/pre>&lt;h3 id="identifiers">Identifiers&lt;/h3>
+&lt;pre tabindex="0">&lt;code>IDENT = letter, { letter | dec } ;
+&lt;/code>&lt;/pre>&lt;h3 id="numeric">Numeric Literals&lt;/h3>
+&lt;pre tabindex="0">&lt;code>dec_lit = &amp;#34;0&amp;#34;
+| ( dec - &amp;#34;0&amp;#34; ), { dec } ;
+float_lit = &amp;#34;.&amp;#34;, dec, { dec }, [ exp ]
+| dec_lit, &amp;#34;.&amp;#34;, { dec }, [ exp ]
+| dec_lit, exp ;
+exp = ( &amp;#34;E&amp;#34; | &amp;#34;e&amp;#34; ), [ &amp;#34;+&amp;#34; | &amp;#34;-&amp;#34; ], dec, { dec } ;
+DEC_INT = dec_lit
+OCT_INT = &amp;#34;0&amp;#34;, oct, { oct } ;
+HEX_INT = &amp;#34;0&amp;#34;, ( &amp;#34;X&amp;#34; | &amp;#34;x&amp;#34; ), hex, { hex } ;
+FLOAT = float_lit, [ &amp;#34;F&amp;#34; | &amp;#34;f&amp;#34; ]
+| dec_lit, ( &amp;#34;F&amp;#34; | &amp;#34;f&amp;#34; ) ;
+&lt;/code>&lt;/pre>&lt;p>Decimal integers can be cast as floating-point values by using the &lt;code>F&lt;/code> and &lt;code>f&lt;/code>
+suffixes. Example:&lt;/p>
+&lt;pre tabindex="0">&lt;code class="language-textproto" data-lang="textproto">foo: 10 # This is an integer value.
+foo: 10f # This is a floating-point value.
+foo: 1.0f # Also optional for floating-point literals.
+&lt;/code>&lt;/pre>&lt;h3 id="string">String Literals&lt;/h3>
+&lt;pre tabindex="0">&lt;code>STRING = single_string | double_string ;
+single_string = &amp;#34;&amp;#39;&amp;#34;, { escape | char - &amp;#34;&amp;#39;&amp;#34; - newline - &amp;#34;\&amp;#34; }, &amp;#34;&amp;#39;&amp;#34; ;
+double_string = &amp;#39;&amp;#34;&amp;#39;, { escape | char - &amp;#39;&amp;#34;&amp;#39; - newline - &amp;#34;\&amp;#34; }, &amp;#39;&amp;#34;&amp;#39; ;
+escape = &amp;#34;\a&amp;#34; (* ASCII #7 (bell) *)
+| &amp;#34;\b&amp;#34; (* ASCII #8 (backspace) *)
+| &amp;#34;\f&amp;#34; (* ASCII #12 (form feed) *)
+| &amp;#34;\n&amp;#34; (* ASCII #10 (line feed) *)
+| &amp;#34;\r&amp;#34; (* ASCII #13 (carriage return) *)
+| &amp;#34;\t&amp;#34; (* ASCII #9 (horizontal tab) *)
+| &amp;#34;\v&amp;#34; (* ASCII #11 (vertical tab) *)
+| &amp;#34;\?&amp;#34; (* ASCII #63 (question mark) *)
+| &amp;#34;\\&amp;#34; (* ASCII #92 (backslash) *)
+| &amp;#34;\&amp;#39;&amp;#34; (* ASCII #39 (apostrophe) *)
+| &amp;#39;\&amp;#34;&amp;#39; (* ASCII #34 (quote) *)
+| &amp;#34;\&amp;#34;, oct, [ oct, [ oct ] ] (* UTF-8 byte in octal *)
+| &amp;#34;\x&amp;#34;, hex, [ hex ] (* UTF-8 byte in hexadecimal *)
+| &amp;#34;\u&amp;#34;, hex, hex, hex, hex (* Unicode code point up to 0xffff *)
+| &amp;#34;\U000&amp;#34;,
+hex, hex, hex, hex, hex (* Unicode code point up to 0xfffff *)
+| &amp;#34;\U0010&amp;#34;,
+hex, hex, hex, hex ; (* Unicode code point between 0x100000 and 0x10ffff *)
+&lt;/code>&lt;/pre>&lt;p>Longer strings can be broken into several quoted strings on successive lines.
+For example:&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-proto" data-lang="proto">&lt;span style="display:flex;">&lt;span> &lt;span style="color:#000">quote&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">:&lt;/span>&lt;span style="color:#a40000">
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#a40000">&lt;/span> &lt;span style="color:#4e9a06">&amp;#34;When we got into office, the thing that surprised me most was to find &amp;#34;&lt;/span>&lt;span style="color:#a40000">
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#a40000">&lt;/span> &lt;span style="color:#4e9a06">&amp;#34;that things were just as bad as we&amp;#39;d been saying they were.\n\n&amp;#34;&lt;/span>&lt;span style="color:#a40000">
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#a40000">&lt;/span> &lt;span style="color:#4e9a06">&amp;#34; -- John F. Kennedy&amp;#34;&lt;/span>&lt;span style="color:#a40000">
+&lt;/span>&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>Unicode code points are interpreted per
+&lt;a href="https://www.unicode.org/versions/Unicode13.0.0/appA.pdf#page=5">Unicode 13 Table A-1 Extended BNF&lt;/a>
+and are encoded as UTF-8.&lt;/p>
+&lt;div class="alert alert-warning" role="alert">
+&lt;h4 class="alert-heading">Warning&lt;/h4>
+The C++ implementation currently interprets escaped high-surrogate
+code points as UTF-16 code units, and expects a &lt;code>\uHHHH&lt;/code> low-surrogate code
+point to immediately follow, without any split across separate quoted strings.
+In addition, unpaired surrogates will be rendered directly into also-invalid
+UTF-8. These are both non-conforming behaviors[^surrogates] and should not be
+relied on.
+&lt;/div>
+&lt;h2 id="syntax">Syntax Elements&lt;/h2>
+&lt;h3 id="message">Message&lt;/h3>
+&lt;p>A message is a collection of fields. A text format file is a single Message.&lt;/p>
+&lt;pre tabindex="0">&lt;code>Message = { Field } ;
+&lt;/code>&lt;/pre>&lt;h3 id="literals">Literals&lt;/h3>
+&lt;p>Field literal values can be numbers, strings, or identifiers such as &lt;code>true&lt;/code> or
+enum values.&lt;/p>
+&lt;pre tabindex="0">&lt;code>String = STRING, { STRING } ;
+Float = [ &amp;#34;-&amp;#34; ], FLOAT ;
+Identifier = IDENT ;
+SignedIdentifier = &amp;#34;-&amp;#34;, IDENT ; (* For example, &amp;#34;-inf&amp;#34; *)
+DecSignedInteger = &amp;#34;-&amp;#34;, DEC_INT ;
+OctSignedInteger = &amp;#34;-&amp;#34;, OCT_INT ;
+HexSignedInteger = &amp;#34;-&amp;#34;, HEX_INT ;
+DecUnsignedInteger = DEC_INT ;
+OctUnsignedInteger = OCT_INT ;
+HexUnsignedInteger = HEX_INT ;
+&lt;/code>&lt;/pre>&lt;p>A single string value can comprise multiple quoted parts separated by optional
+whitespace. Example:&lt;/p>
+&lt;pre tabindex="0">&lt;code class="language-textproto" data-lang="textproto">a_string: &amp;#34;first part&amp;#34; &amp;#39;second part&amp;#39;
+&amp;#34;third part&amp;#34;
+no_whitespace: &amp;#34;first&amp;#34;&amp;#34;second&amp;#34;&amp;#39;third&amp;#39;&amp;#39;fourth&amp;#39;
+&lt;/code>&lt;/pre>&lt;h3 id="field-names">Field Names&lt;/h3>
+&lt;p>Fields that are part of the containing message use simple &lt;code>Identifiers&lt;/code> as
+names.
+&lt;a href="/programming-guides/proto#extensions">&lt;code>Extension&lt;/code>&lt;/a> and
+&lt;a href="/programming-guides/proto3#any">&lt;code>Any&lt;/code>&lt;/a> field names are
+wrapped in square brackets and fully-qualified. &lt;code>Any&lt;/code> field names are prefixed
+with a qualifying domain name, such as &lt;code>type.googleapis.com/&lt;/code>.&lt;/p>
+&lt;pre tabindex="0">&lt;code>FieldName = ExtensionName | AnyName | IDENT ;
+ExtensionName = &amp;#34;[&amp;#34;, TypeName, &amp;#34;]&amp;#34; ;
+AnyName = &amp;#34;[&amp;#34;, Domain, &amp;#34;/&amp;#34;, TypeName, &amp;#34;]&amp;#34; ;
+TypeName = IDENT, { &amp;#34;.&amp;#34;, IDENT } ;
+Domain = IDENT, { &amp;#34;.&amp;#34;, IDENT } ;
+&lt;/code>&lt;/pre>&lt;p>Regular fields and extension fields can have scalar or message values. &lt;code>Any&lt;/code>
+fields are always messages. Example:&lt;/p>
+&lt;pre tabindex="0">&lt;code class="language-textproto" data-lang="textproto">reg_scalar: 10
+reg_message { foo: &amp;#34;bar&amp;#34; }
+[com.foo.ext.scalar]​: 10
+[com.foo.ext.message] { foo: &amp;#34;bar&amp;#34; }
+any_value {
+[type.googleapis.com/com.foo.any] { foo: &amp;#34;bar&amp;#34; }
+}
+&lt;/code>&lt;/pre>&lt;h3 id="fields">Fields&lt;/h3>
+&lt;p>Field values can be literals (strings, numbers, or identifiers), or nested
+messages.&lt;/p>
+&lt;pre tabindex="0">&lt;code>Field = ScalarField | MessageField ;
+MessageField = FieldName, [ &amp;#34;:&amp;#34; ], ( MessageValue | MessageList ) [ &amp;#34;;&amp;#34; | &amp;#34;,&amp;#34; ];
+ScalarField = FieldName, &amp;#34;:&amp;#34;, ( ScalarValue | ScalarList ) [ &amp;#34;;&amp;#34; | &amp;#34;,&amp;#34; ];
+MessageList = &amp;#34;[&amp;#34;, [ MessageValue, { &amp;#34;,&amp;#34;, MessageValue } ], &amp;#34;]&amp;#34; ;
+ScalarList = &amp;#34;[&amp;#34;, [ ScalarValue, { &amp;#34;,&amp;#34;, ScalarValue } ], &amp;#34;]&amp;#34; ;
+MessageValue = &amp;#34;{&amp;#34;, Message, &amp;#34;}&amp;#34; | &amp;#34;&amp;lt;&amp;#34;, Message, &amp;#34;&amp;gt;&amp;#34; ;
+ScalarValue = String
+| Float
+| Identifier
+| SignedIdentifier
+| DecSignedInteger
+| OctSignedInteger
+| HexSignedInteger
+| DecUnsignedInteger
+| OctUnsignedInteger
+| HexUnsignedInteger ;
+&lt;/code>&lt;/pre>&lt;p>The &lt;code>:&lt;/code> delimiter between the field name and value is required for scalar fields
+but optional for message fields (including lists). Example:&lt;/p>
+&lt;pre tabindex="0">&lt;code class="language-textproto" data-lang="textproto">scalar: 10 # Valid
+scalar 10 # Invalid
+scalars: [1, 2, 3] # Valid
+scalars [1, 2, 3] # Invalid
+message: {} # Valid
+message {} # Valid
+messages: [{}, {}] # Valid
+messages [{}, {}] # Valid
+&lt;/code>&lt;/pre>&lt;p>Values of message fields can be surrounded by curly brackets
+or angle brackets:&lt;/p>
+&lt;pre tabindex="0">&lt;code class="language-textproto" data-lang="textproto">message: { foo: &amp;#34;bar&amp;#34; }
+message: &amp;lt; foo: &amp;#34;bar&amp;#34; &amp;gt;
+&lt;/code>&lt;/pre>&lt;p>Fields marked &lt;code>repeated&lt;/code> can have multiple values specified by repeating the
+field, using the special &lt;code>[]&lt;/code> list syntax, or some combination of both. The
+order of values is maintained. Example:&lt;/p>
+&lt;pre tabindex="0">&lt;code class="language-textproto" data-lang="textproto">repeated_field: 1
+repeated_field: 2
+repeated_field: [3, 4, 5]
+repeated_field: 6
+repeated_field: [7, 8, 9]
+&lt;/code>&lt;/pre>&lt;p>Non-&lt;code>repeated&lt;/code> fields cannot use the list syntax. For example, &lt;code>[0]&lt;/code> is not
+valid for &lt;code>optional&lt;/code> or &lt;code>required&lt;/code> fields. Fields marked &lt;code>optional&lt;/code> can be
+omitted or specified once. Fields marked &lt;code>required&lt;/code> must be specified exactly
+once.&lt;/p>
+&lt;p>Fields not specified in the associated &lt;em>.proto&lt;/em> message are not allowed unless
+the field name is present in the message&amp;rsquo;s &lt;code>reserved&lt;/code> field list. &lt;code>reserved&lt;/code>
+fields, if present in any form (scalar, list, message), are simply ignored by
+text format.&lt;/p>
+&lt;h2 id="value">Value Types&lt;/h2>
+&lt;p>When a field&amp;rsquo;s associated &lt;em>.proto&lt;/em> value type is known, the following value
+descriptions and constraints apply. For the purposes of this section, we declare
+the following container elements:&lt;/p>
+&lt;pre tabindex="0">&lt;code>signedInteger = DecSignedInteger | OctSignedInteger | HexSignedInteger ;
+unsignedInteger = DecUnsignedInteger | OctUnsignedInteger | HexUnsignedInteger ;
+integer = signedInteger | unsignedInteger ;
+&lt;/code>&lt;/pre>&lt;table>
+&lt;thead>
+&lt;tr>
+&lt;th style="text-align:center">&lt;strong>.proto Type&lt;/strong>&lt;/th>
+&lt;th style="text-align:center">&lt;strong>Values&lt;/strong>&lt;/th>
+&lt;/tr>
+&lt;/thead>
+&lt;tbody>
+&lt;tr>
+&lt;td style="text-align:center">
+&lt;code>float&lt;/code>, &lt;code>double&lt;/code>
+&lt;/td>
+&lt;td style="text-align:left">
+A &lt;code>Float&lt;/code>, &lt;code>DecSignedInteger&lt;/code>, or
+&lt;code>DecUnsignedInteger&lt;/code> element, or an &lt;code>Identifier&lt;/code>
+or &lt;code>SignedIdentifier&lt;/code> element whose &lt;code>IDENT&lt;/code>
+portion is equal to &lt;em>"inf"&lt;/em>, &lt;em>"infinity"&lt;/em>, or
+&lt;em>"nan"&lt;/em> (case-insensitive). Overflows are treated as infinity or
+-infinity. Octal and hexadecimal values are not valid.
+&lt;p>
+Note: &lt;em>"nan"&lt;/em> should be interpreted as &lt;a href="https://en.wikipedia.org/wiki/NaN#Quiet_NaN">Quiet NaN&lt;/a>
+&lt;/p>
+&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td style="text-align:center">
+&lt;code>int32&lt;/code>, &lt;code>sint32&lt;/code>, &lt;code>sfixed32&lt;/code>
+&lt;/td>
+&lt;td style="text-align:left">
+Any of the &lt;code>integer&lt;/code> elements in the range
+&lt;em>-0x80000000&lt;/em> to &lt;em>0x7FFFFFFF&lt;/em>.
+&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td style="text-align:center">
+&lt;code>int64&lt;/code>, &lt;code>sint64&lt;/code>, &lt;code>sfixed64&lt;/code>
+&lt;/td>
+&lt;td style="text-align:left">
+Any of the &lt;code>integer&lt;/code> elements in the range
+&lt;em>-0x8000000000000000&lt;/em> to &lt;em>0x7FFFFFFFFFFFFFFF&lt;/em>.
+&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td style="text-align:center">
+&lt;code>uint32&lt;/code>, &lt;code>fixed32&lt;/code>
+&lt;/td>
+&lt;td style="text-align:left">
+Any of the &lt;code>unsignedInteger&lt;/code> elements in the range
+&lt;em>0&lt;/em> to &lt;em>0xFFFFFFFF&lt;/em>. Note that signed values
+(&lt;em>-0&lt;/em>) are not valid.
+&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td style="text-align:center">
+&lt;code>uint64&lt;/code>, &lt;code>fixed64&lt;/code>
+&lt;/td>
+&lt;td style="text-align:left">
+Any of the &lt;code>unsignedInteger&lt;/code> elements in the range
+&lt;em>0&lt;/em> to &lt;em>0xFFFFFFFFFFFFFFFF&lt;/em>. Note that signed
+values (&lt;em>-0&lt;/em>) are not valid.
+&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td style="text-align:center">
+&lt;code>string&lt;/code>
+&lt;/td>
+&lt;td style="text-align:left">
+A &lt;code>String&lt;/code> element containing valid UTF-8 data. Any escape
+sequences must form valid UTF-8 byte sequences when unescaped.
+&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td style="text-align:center">
+&lt;code>bytes&lt;/code>
+&lt;/td>
+&lt;td style="text-align:left">
+A &lt;code>String&lt;/code> element, possibly including invalid UTF-8 escape
+sequences.
+&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td style="text-align:center">
+&lt;code>bool&lt;/code>
+&lt;/td>
+&lt;td style="text-align:left">
+An &lt;code>Identifier&lt;/code> element or any of the
+&lt;code>unsignedInteger&lt;/code> elements matching one of the following
+values.&lt;br/>
+&lt;strong>True values:&lt;/strong> &lt;em>"True"&lt;/em>, &lt;em>"true"&lt;/em>,
+&lt;em>"t"&lt;/em>, &lt;em>1&lt;/em>&lt;br/>
+&lt;strong>False values:&lt;/strong> &lt;em>"False"&lt;/em>, &lt;em>"false"&lt;/em>,
+&lt;em>"f"&lt;/em>, &lt;em>0&lt;/em>&lt;br/>
+Any unsigned integer representation of &lt;em>0&lt;/em> or &lt;em>1&lt;/em>
+is permitted: &lt;em>00&lt;/em>, &lt;em>0x0&lt;/em>, &lt;em>01&lt;/em>,
+&lt;em>0x1&lt;/em>, etc.
+&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td style="text-align:center">
+&lt;em>enum values&lt;/em>
+&lt;/td>
+&lt;td style="text-align:left">
+An &lt;code>Identifier&lt;/code> element containing an enum value name, or any
+of the &lt;code>integer&lt;/code> elements in the range
+&lt;em>-0x80000000&lt;/em> to &lt;em>0x7FFFFFFF&lt;/em> containing an enum
+value number. It is not valid to specify a name that is not a
+member of the field's &lt;code>enum&lt;/code> type definition. Depending on
+the particular protobuf runtime implementation, it may or may not be
+valid to specify a number that is not a member of the field's
+&lt;code>enum&lt;/code> type definition. Text format processors not tied to a
+particular runtime implementation (such as IDE support) may choose to
+issue a warning when a provided number value is not a valid member. Note
+that certain names that are valid keywords in other contexts, such as
+&lt;em>"true"&lt;/em> or &lt;em>"infinity"&lt;/em>, are also valid enum value names.
+&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td style="text-align:center">
+&lt;em>message values&lt;/em>
+&lt;/td>
+&lt;td style="text-align:left">
+A &lt;code>MessageValue&lt;/code> element.
+&lt;/td>
+&lt;/tr>
+&lt;/tbody>
+&lt;/table>
+&lt;h2 id="extension">Extension Fields&lt;/h2>
+&lt;p>Extension fields are specified using their qualified names. Example:&lt;/p>
+&lt;pre tabindex="0">&lt;code class="language-textproto" data-lang="textproto">local_field: 10
+[com.example.ext_field]​: 20
+&lt;/code>&lt;/pre>&lt;p>Extension fields are generally defined in other &lt;em>.proto&lt;/em> files. The text format
+language does not provide a mechanism for specifying the locations of files that
+define extension fields; instead, the parser must have prior knowledge of their
+locations.&lt;/p>
+&lt;h2 id="any">&lt;code>Any&lt;/code> Fields&lt;/h2>
+&lt;p>Text format supports an expanded form of the
+&lt;a href="/programming-guides/proto3#any">&lt;code>google.protobuf.Any&lt;/code>&lt;/a>
+well-known type using a special syntax resembling extension fields. Example:&lt;/p>
+&lt;pre tabindex="0">&lt;code class="language-textproto" data-lang="textproto">local_field: 10
+# An Any value using regular fields.
+any_value {
+type_url: &amp;#34;type.googleapis.com/com.example.SomeType&amp;#34;
+value: &amp;#34;\x0a\x05hello&amp;#34; # serialized bytes of com.example.SomeType
+}
+# The same value using Any expansion
+any_value {
+[type.googleapis.com/com.example.SomeType] {
+field1: &amp;#34;hello&amp;#34;
+}
+}
+&lt;/code>&lt;/pre>&lt;p>In this example, &lt;code>any_value&lt;/code> is a field of type &lt;code>google.protobuf.Any&lt;/code>, and it
+stores a serialized &lt;code>com.example.SomeType&lt;/code> message containing &lt;code>field1: hello&lt;/code>.&lt;/p>
+&lt;h2 id="group">&lt;code>group&lt;/code> Fields&lt;/h2>
+&lt;p>In text format, a &lt;code>group&lt;/code> field uses a normal &lt;code>MessageValue&lt;/code> element as its
+value, but is specified using the capitalized group name rather than the
+implicit lowercased field name. Example:&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-proto" data-lang="proto">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#204a87;font-weight:bold">message&lt;/span> &lt;span style="color:#000">MessageWithGroup&lt;/span> &lt;span style="color:#000;font-weight:bold">{&lt;/span>&lt;span style="color:#a40000">
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#a40000">&lt;/span> &lt;span style="color:#204a87;font-weight:bold">optional&lt;/span> &lt;span style="color:#204a87;font-weight:bold">group&lt;/span> &lt;span style="color:#000">MyGroup&lt;/span> &lt;span style="color:#ce5c00;font-weight:bold">=&lt;/span> &lt;span style="color:#0000cf;font-weight:bold">1&lt;/span> &lt;span style="color:#000;font-weight:bold">{&lt;/span>&lt;span style="color:#a40000">
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#a40000">&lt;/span> &lt;span style="color:#204a87;font-weight:bold">optional&lt;/span> &lt;span style="color:#204a87;font-weight:bold">int32&lt;/span> &lt;span style="color:#000">my_value&lt;/span> &lt;span style="color:#ce5c00;font-weight:bold">=&lt;/span> &lt;span style="color:#0000cf;font-weight:bold">1&lt;/span>&lt;span style="color:#000;font-weight:bold">;&lt;/span>&lt;span style="color:#a40000">
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#a40000">&lt;/span> &lt;span style="color:#000;font-weight:bold">}&lt;/span>&lt;span style="color:#a40000">
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#a40000">&lt;/span>&lt;span style="color:#000;font-weight:bold">}&lt;/span>&lt;span style="color:#a40000">
+&lt;/span>&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>With the above &lt;em>.proto&lt;/em> definition, the following text format is a valid
+&lt;code>MessageWithGroup&lt;/code>:&lt;/p>
+&lt;pre tabindex="0">&lt;code class="language-textproto" data-lang="textproto">MyGroup {
+my_value: 1
+}
+&lt;/code>&lt;/pre>&lt;p>Similar to Message fields, the &lt;code>:&lt;/code> delimiter between the group name and value is
+optional.&lt;/p>
+&lt;h2 id="map">&lt;code>map&lt;/code> Fields&lt;/h2>
+&lt;p>Text format does not provide a custom syntax for specifying map field entries.
+When a &lt;a href="/programming-guides/proto#maps">&lt;code>map&lt;/code>&lt;/a> field is
+defined in a &lt;em>.proto&lt;/em> file, an implicit &lt;code>Entry&lt;/code> message is defined containing
+&lt;code>key&lt;/code> and &lt;code>value&lt;/code> fields. Map fields are always repeated, accepting multiple
+key/value entries. Example:&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-proto" data-lang="proto">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#204a87;font-weight:bold">message&lt;/span> &lt;span style="color:#000">MessageWithMap&lt;/span> &lt;span style="color:#000;font-weight:bold">{&lt;/span>&lt;span style="color:#a40000">
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#a40000">&lt;/span> &lt;span style="color:#000">map&lt;/span>&lt;span style="color:#000;font-weight:bold">&amp;lt;&lt;/span>&lt;span style="color:#204a87;font-weight:bold">string&lt;/span>&lt;span style="color:#000;font-weight:bold">,&lt;/span> &lt;span style="color:#204a87;font-weight:bold">int32&lt;/span>&lt;span style="color:#000;font-weight:bold">&amp;gt;&lt;/span> &lt;span style="color:#000">my_map&lt;/span> &lt;span style="color:#ce5c00;font-weight:bold">=&lt;/span> &lt;span style="color:#0000cf;font-weight:bold">1&lt;/span>&lt;span style="color:#000;font-weight:bold">;&lt;/span>&lt;span style="color:#a40000">
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#a40000">&lt;/span>&lt;span style="color:#000;font-weight:bold">}&lt;/span>&lt;span style="color:#a40000">
+&lt;/span>&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>With the above &lt;em>.proto&lt;/em> definition, the following text format is a valid
+&lt;code>MessageWithMap&lt;/code>:&lt;/p>
+&lt;pre tabindex="0">&lt;code class="language-textproto" data-lang="textproto">my_map { key: &amp;#34;entry1&amp;#34;, value: 1 }
+my_map { key: &amp;#34;entry2&amp;#34;, value: 2 }
+# Alternatively the list syntax may be used.
+my_map: [
+{ key: &amp;#34;entry3&amp;#34;, value: 3 },
+{ key: &amp;#34;entry4&amp;#34;, value: 4 }
+]
+&lt;/code>&lt;/pre>&lt;p>Both the &lt;code>key&lt;/code> and &lt;code>value&lt;/code> fields are optional and default to the zero value of
+their respective types if unspecified. If a key is duplicated, only the
+last-specified value will be retained in a parsed map.&lt;/p>
+&lt;h2 id="oneof">&lt;code>oneof&lt;/code> Fields&lt;/h2>
+&lt;p>While there is no special syntax related to &lt;code>oneof&lt;/code> fields in text format, only
+one &lt;code>oneof&lt;/code> member may be specified at a time. Specifying multiple members
+concurrently is not valid. Example:&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-proto" data-lang="proto">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#204a87;font-weight:bold">message&lt;/span> &lt;span style="color:#000">OneofExample&lt;/span> &lt;span style="color:#000;font-weight:bold">{&lt;/span>&lt;span style="color:#a40000">
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#a40000">&lt;/span> &lt;span style="color:#204a87;font-weight:bold">message&lt;/span> &lt;span style="color:#000">MessageWithOneof&lt;/span> &lt;span style="color:#000;font-weight:bold">{&lt;/span>&lt;span style="color:#a40000">
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#a40000">&lt;/span> &lt;span style="color:#204a87;font-weight:bold">optional&lt;/span> &lt;span style="color:#204a87;font-weight:bold">string&lt;/span> &lt;span style="color:#000">not_part_of_oneof&lt;/span> &lt;span style="color:#ce5c00;font-weight:bold">=&lt;/span> &lt;span style="color:#0000cf;font-weight:bold">1&lt;/span>&lt;span style="color:#000;font-weight:bold">;&lt;/span>&lt;span style="color:#a40000">
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#a40000">&lt;/span> &lt;span style="color:#204a87;font-weight:bold">oneof&lt;/span> &lt;span style="color:#000">Example&lt;/span> &lt;span style="color:#000;font-weight:bold">{&lt;/span>&lt;span style="color:#a40000">
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#a40000">&lt;/span> &lt;span style="color:#204a87;font-weight:bold">string&lt;/span> &lt;span style="color:#000">first_oneof_field&lt;/span> &lt;span style="color:#ce5c00;font-weight:bold">=&lt;/span> &lt;span style="color:#0000cf;font-weight:bold">2&lt;/span>&lt;span style="color:#000;font-weight:bold">;&lt;/span>&lt;span style="color:#a40000">
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#a40000">&lt;/span> &lt;span style="color:#204a87;font-weight:bold">string&lt;/span> &lt;span style="color:#000">second_oneof_field&lt;/span> &lt;span style="color:#ce5c00;font-weight:bold">=&lt;/span> &lt;span style="color:#0000cf;font-weight:bold">3&lt;/span>&lt;span style="color:#000;font-weight:bold">;&lt;/span>&lt;span style="color:#a40000">
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#a40000">&lt;/span> &lt;span style="color:#000;font-weight:bold">}&lt;/span>&lt;span style="color:#a40000">
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#a40000">&lt;/span> &lt;span style="color:#000;font-weight:bold">}&lt;/span>&lt;span style="color:#a40000">
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#a40000">&lt;/span> &lt;span style="color:#204a87;font-weight:bold">repeated&lt;/span> &lt;span style="color:#000">MessageWithOneof&lt;/span> &lt;span style="color:#204a87;font-weight:bold">message&lt;/span> &lt;span style="color:#ce5c00;font-weight:bold">=&lt;/span> &lt;span style="color:#0000cf;font-weight:bold">1&lt;/span>&lt;span style="color:#000;font-weight:bold">;&lt;/span>&lt;span style="color:#a40000">
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#a40000">&lt;/span>&lt;span style="color:#000;font-weight:bold">}&lt;/span>&lt;span style="color:#a40000">
+&lt;/span>&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>The above &lt;em>.proto&lt;/em> definition results in the following text format behavior:&lt;/p>
+&lt;pre tabindex="0">&lt;code class="language-textproto" data-lang="textproto"># Valid: only one field from the Example oneof is set.
+message {
+not_part_of_oneof: &amp;#34;always valid&amp;#34;
+first_oneof_field: &amp;#34;valid by itself&amp;#34;
+}
+# Valid: the other oneof field is set.
+message {
+not_part_of_oneof: &amp;#34;always valid&amp;#34;
+second_oneof_field: &amp;#34;valid by itself&amp;#34;
+}
+# Invalid: multiple fields from the Example oneof are set.
+message {
+not_part_of_oneof: &amp;#34;always valid&amp;#34;
+first_oneof_field: &amp;#34;not valid&amp;#34;
+second_oneof_field: &amp;#34;not valid&amp;#34;
+}
+&lt;/code>&lt;/pre>&lt;h2 id="text-format-files">Text Format Files&lt;/h2>
+&lt;p>A text format file uses the &lt;code>.textproto&lt;/code> filename suffix and contains a single
+&lt;code>Message&lt;/code>. Text format files are UTF-8 encoded. An example textproto file is
+provided below.&lt;/p>
+&lt;div class="alert alert-warning" role="alert">
+&lt;h4 class="alert-heading">Important&lt;/h4>
+&lt;code>.textproto&lt;/code> is the canonical text format file extension and should be preferred
+to the alternatives, although some tools also recognize the legacy extensions
+&lt;code>.textpb&lt;/code> and &lt;code>.pbtxt&lt;/code> (METADATA files are also an exception). All other
+extensions are &lt;strong>strongly&lt;/strong> discouraged; in particular, extensions such as
+&lt;code>.protoascii&lt;/code> wrongly imply that text format is ascii-only, and others like
+&lt;code>.pb.txt&lt;/code> are not recognized by common tooling.
+&lt;/div>
+&lt;pre tabindex="0">&lt;code class="language-textproto" data-lang="textproto"># This is an example of Protocol Buffer&amp;#39;s text format.
+# Unlike .proto files, only shell-style line comments are supported.
+name: &amp;#34;John Smith&amp;#34;
+pet {
+kind: DOG
+name: &amp;#34;Fluffy&amp;#34;
+tail_wagginess: 0.65f
+}
+pet &amp;lt;
+kind: LIZARD
+name: &amp;#34;Lizzy&amp;#34;
+legs: 4
+&amp;gt;
+string_value_with_escape: &amp;#34;valid \n escape&amp;#34;
+repeated_values: [ &amp;#34;one&amp;#34;, &amp;#34;two&amp;#34;, &amp;#34;three&amp;#34; ]
+&lt;/code>&lt;/pre>&lt;h3 id="header">Header&lt;/h3>
+&lt;p>The header comments &lt;code>proto-file&lt;/code> and &lt;code>proto-message&lt;/code> inform developer tools of
+the schema, so they may provide various features.&lt;/p>
+&lt;pre tabindex="0">&lt;code class="language-textproto" data-lang="textproto"># proto-file: some/proto/my_file.proto
+# proto-message: MyMessage
+&lt;/code>&lt;/pre></description></item><item><title>Reference: Protocol Buffers Well-Known Types</title><link>/reference/protobuf/google.protobuf/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>/reference/protobuf/google.protobuf/</guid><description>
+&lt;h2 id="index">Index&lt;/h2>
+&lt;ul>
+&lt;li>&lt;a href="#any">&lt;code>Any&lt;/code>&lt;/a> (message)&lt;/li>
+&lt;li>&lt;a href="#api">&lt;code>Api&lt;/code>&lt;/a> (message)&lt;/li>
+&lt;li>&lt;a href="#bool-value">&lt;code>BoolValue&lt;/code>&lt;/a> (message)&lt;/li>
+&lt;li>&lt;a href="#bytes-value">&lt;code>BytesValue&lt;/code>&lt;/a> (message)&lt;/li>
+&lt;li>&lt;a href="#double-value">&lt;code>DoubleValue&lt;/code>&lt;/a> (message)&lt;/li>
+&lt;li>&lt;a href="#duration">&lt;code>Duration&lt;/code>&lt;/a> (message)&lt;/li>
+&lt;li>&lt;a href="#empty">&lt;code>Empty&lt;/code>&lt;/a> (message)&lt;/li>
+&lt;li>&lt;a href="#enum">&lt;code>Enum&lt;/code>&lt;/a> (message)&lt;/li>
+&lt;li>&lt;a href="#enum-value">&lt;code>EnumValue&lt;/code>&lt;/a> (message)&lt;/li>
+&lt;li>&lt;a href="#field">&lt;code>Field&lt;/code>&lt;/a> (message)&lt;/li>
+&lt;li>&lt;a href="#field-cardinality">&lt;code>Field.Cardinality&lt;/code>&lt;/a> (enum)&lt;/li>
+&lt;li>&lt;a href="#field-kind">&lt;code>Field.Kind&lt;/code>&lt;/a> (enum)&lt;/li>
+&lt;li>&lt;a href="#field-mask">&lt;code>FieldMask&lt;/code>&lt;/a> (message)&lt;/li>
+&lt;li>&lt;a href="#float-value">&lt;code>FloatValue&lt;/code>&lt;/a> (message)&lt;/li>
+&lt;li>&lt;a href="#int32-value">&lt;code>Int32Value&lt;/code>&lt;/a> (message)&lt;/li>
+&lt;li>&lt;a href="#int64-value">&lt;code>Int64Value&lt;/code>&lt;/a> (message)&lt;/li>
+&lt;li>&lt;a href="#list-value">&lt;code>ListValue&lt;/code>&lt;/a> (message)&lt;/li>
+&lt;li>&lt;a href="#method">&lt;code>Method&lt;/code>&lt;/a> (message)&lt;/li>
+&lt;li>&lt;a href="#mixin">&lt;code>Mixin&lt;/code>&lt;/a> (message)&lt;/li>
+&lt;li>&lt;a href="#null-value">&lt;code>NullValue&lt;/code>&lt;/a> (enum)&lt;/li>
+&lt;li>&lt;a href="#option">&lt;code>Option&lt;/code>&lt;/a> (message)&lt;/li>
+&lt;li>&lt;a href="#source-context">&lt;code>SourceContext&lt;/code>&lt;/a> (message)&lt;/li>
+&lt;li>&lt;a href="#string-value">&lt;code>StringValue&lt;/code>&lt;/a> (message)&lt;/li>
+&lt;li>&lt;a href="#struct">&lt;code>Struct&lt;/code>&lt;/a> (message)&lt;/li>
+&lt;li>&lt;a href="#syntax">&lt;code>Syntax&lt;/code>&lt;/a> (enum)&lt;/li>
+&lt;li>&lt;a href="#timestamp">&lt;code>Timestamp&lt;/code>&lt;/a> (message)&lt;/li>
+&lt;li>&lt;a href="#type">&lt;code>Type&lt;/code>&lt;/a> (message)&lt;/li>
+&lt;li>&lt;a href="#uint32-value">&lt;code>UInt32Value&lt;/code>&lt;/a> (message)&lt;/li>
+&lt;li>&lt;a href="#uint64-value">&lt;code>UInt64Value&lt;/code>&lt;/a> (message)&lt;/li>
+&lt;li>&lt;a href="#value">&lt;code>Value&lt;/code>&lt;/a> (message)&lt;/li>
+&lt;/ul>
+&lt;h2 id="any">Any&lt;/h2>
+&lt;p>&lt;code>Any&lt;/code> contains an arbitrary serialized message along with a URL that describes
+the type of the serialized message.&lt;/p>
+&lt;h4 id="json">JSON&lt;/h4>
+&lt;p>The JSON representation of an &lt;code>Any&lt;/code> value uses the regular representation of the
+deserialized, embedded message, with an additional field &lt;code>@type&lt;/code> which contains
+the type URL. Example:&lt;/p>
+&lt;pre tabindex="0">&lt;code>package google.profile;
+message Person {
+string first_name = 1;
+string last_name = 2;
+}
+{
+&amp;#34;@type&amp;#34;: &amp;#34;type.googleapis.com/google.profile.Person&amp;#34;,
+&amp;#34;firstName&amp;#34;: &amp;lt;string&amp;gt;,
+&amp;#34;lastName&amp;#34;: &amp;lt;string&amp;gt;
+}
+&lt;/code>&lt;/pre>&lt;p>If the embedded message type is well-known and has a custom JSON representation,
+that representation will be embedded adding a field &lt;code>value&lt;/code> which holds the
+custom JSON in addition to the &lt;code>@type&lt;/code> field. Example (for message
+&lt;code>google.protobuf.Duration&lt;/code>):&lt;/p>
+&lt;pre tabindex="0">&lt;code>{
+&amp;#34;@type&amp;#34;: &amp;#34;type.googleapis.com/google.protobuf.Duration&amp;#34;,
+&amp;#34;value&amp;#34;: &amp;#34;1.212s&amp;#34;
+}
+&lt;/code>&lt;/pre>&lt;table id="google.protobuf.Any.FIELDS">
+&lt;thead>
+&lt;tr>
+&lt;th>Field name&lt;/th>
+&lt;th>Type&lt;/th>
+&lt;th>Description&lt;/th>
+&lt;/tr>
+&lt;/thead>
+&lt;tbody>
+&lt;tr>
+&lt;td>&lt;code>type_url&lt;/code>&lt;/td>
+&lt;td>&lt;code class="apitype">string&lt;/code>&lt;/td>
+&lt;td>&lt;p>A URL/resource name whose content describes the type of the serialized message.&lt;/p>&lt;p>For URLs which use the schema &lt;code>http&lt;/code>, &lt;code>https&lt;/code>, or no schema, the following restrictions and interpretations apply:&lt;/p>
+&lt;ul>
+&lt;li>If no schema is provided, &lt;code>https&lt;/code> is assumed.&lt;/li>
+&lt;li>The last segment of the URL's path must represent the fully qualified name of the type (as in &lt;code>path/google.protobuf.Duration&lt;/code>).&lt;/li>
+&lt;li>An HTTP GET on the URL must yield a &lt;code>&lt;a href="#type">google.protobuf.Type&lt;/a>&lt;/code> value in binary format, or produce an error.&lt;/li>
+&lt;li>Applications are allowed to cache lookup results based on the URL, or have them precompiled into a binary to avoid any lookup. Therefore, binary compatibility needs to be preserved on changes to types. (Use versioned type names to manage breaking changes.)&lt;/li>
+&lt;/ul>&lt;p>Schemas other than &lt;code>http&lt;/code>, &lt;code>https&lt;/code> (or the empty schema) might be used with implementation specific semantics.&lt;/p>&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>&lt;code>value&lt;/code>&lt;/td>
+&lt;td>&lt;code class="apitype">bytes&lt;/code>&lt;/td>
+&lt;td>Must be valid serialized data of the above specified type.&lt;/td>
+&lt;/tr>
+&lt;/tbody>
+&lt;/table>
+&lt;h2 id="api">Api&lt;/h2>
+&lt;p>Api is a light-weight descriptor for a protocol buffer service.&lt;/p>
+&lt;table>
+&lt;thead>
+&lt;tr>
+&lt;th>Field name&lt;/th>
+&lt;th>Type&lt;/th>
+&lt;th>Description&lt;/th>
+&lt;/tr>
+&lt;/thead>
+&lt;tbody>
+&lt;tr>
+&lt;td>&lt;code>name&lt;/code>&lt;/td>
+&lt;td>&lt;code>string&lt;/code>&lt;/td>
+&lt;td>
+The fully qualified name of this api, including package name followed by
+the api's simple name.
+&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>&lt;code>methods&lt;/code>&lt;/td>
+&lt;td>
+&lt;code>&lt;a href="#method">Method&lt;/a>&lt;/code>
+&lt;/td>
+&lt;td>The methods of this api, in unspecified order.&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>&lt;code>options&lt;/code>&lt;/td>
+&lt;td>
+&lt;code>&lt;a href="#option">Option&lt;/a>&lt;/code>
+&lt;/td>
+&lt;td>Any metadata attached to the API.&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>&lt;code>version&lt;/code>&lt;/td>
+&lt;td>&lt;code>string&lt;/code>&lt;/td>
+&lt;td>
+&lt;p>
+A version string for this api. If specified, must have the form
+&lt;code>major-version.minor-version&lt;/code>, as in &lt;code>1.10&lt;/code>. If
+the minor version is omitted, it defaults to zero. If the entire
+version field is empty, the major version is derived from the package
+name, as outlined below. If the field is not empty, the version in the
+package name will be verified to be consistent with what is provided
+here.
+&lt;/p>
+&lt;p>
+The versioning schema uses
+&lt;a href="http://semver.org">semantic versioning&lt;/a> where the major
+version number indicates a breaking change and the minor version an
+additive, non-breaking change. Both version numbers are signals to
+users what to expect from different versions, and should be carefully
+chosen based on the product plan.
+&lt;/p>
+&lt;p>
+The major version is also reflected in the package name of the API,
+which must end in &lt;code>v&amp;lt;major-version&amp;gt;&lt;/code>, as in
+&lt;code>google.feature.v1&lt;/code>. For major versions 0 and 1, the suffix
+can be omitted. Zero major versions must only be used for
+experimental, none-GA apis.
+&lt;/p>
+&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>&lt;code>source_context&lt;/code>&lt;/td>
+&lt;td>
+&lt;code
+>&lt;code
+>&lt;a href="#source-context">SourceContext&lt;/a>&lt;/code
+>&lt;/code
+>
+&lt;/td>
+&lt;td>
+Source context for the protocol buffer service represented by this
+message.
+&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>&lt;code>mixins&lt;/code>&lt;/td>
+&lt;td>
+&lt;code
+>&lt;code>&lt;a href="#mixin">Mixin&lt;/a>&lt;/code>&lt;/code
+>
+&lt;/td>
+&lt;td>
+Included APIs. See
+&lt;code>&lt;a href="#mixin">Mixin&lt;/a>&lt;/code>.
+&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>&lt;code>syntax&lt;/code>&lt;/td>
+&lt;td>
+&lt;code>&lt;a href="#syntax">Syntax&lt;/a>&lt;/code>
+&lt;/td>
+&lt;td>The source syntax of the service.&lt;/td>
+&lt;/tr>
+&lt;/tbody>
+&lt;/table>
+&lt;h2 id="bool-value">BoolValue&lt;/h2>
+&lt;p>Wrapper message for &lt;code>bool&lt;/code>.&lt;/p>
+&lt;p>The JSON representation for &lt;code>BoolValue&lt;/code> is JSON &lt;code>true&lt;/code> and &lt;code>false&lt;/code>.&lt;/p>
+&lt;table>
+&lt;thead>
+&lt;tr>
+&lt;th>Field name&lt;/th>
+&lt;th>Type&lt;/th>
+&lt;th>Description&lt;/th>
+&lt;/tr>
+&lt;/thead>
+&lt;tbody>
+&lt;tr>
+&lt;td>&lt;code>value&lt;/code>&lt;/td>
+&lt;td>&lt;code class="apitype">bool&lt;/code>&lt;/td>
+&lt;td>The bool value.&lt;/td>
+&lt;/tr>
+&lt;/tbody>
+&lt;/table>
+&lt;h2 id="bytes-value">BytesValue&lt;/h2>
+&lt;p>Wrapper message for &lt;code>bytes&lt;/code>.&lt;/p>
+&lt;p>The JSON representation for &lt;code>BytesValue&lt;/code> is JSON string.&lt;/p>
+&lt;table>
+&lt;thead>
+&lt;tr>
+&lt;th>Field name&lt;/th>
+&lt;th>Type&lt;/th>
+&lt;th>Description&lt;/th>
+&lt;/tr>
+&lt;/thead>
+&lt;tbody>
+&lt;tr>
+&lt;td>&lt;code>value&lt;/code>&lt;/td>
+&lt;td>&lt;code>bytes&lt;/code>&lt;/td>
+&lt;td>The bytes value.&lt;/td>
+&lt;/tr>
+&lt;/tbody>
+&lt;/table>
+&lt;h2 id="double-value">DoubleValue&lt;/h2>
+&lt;p>Wrapper message for &lt;code>double&lt;/code>.&lt;/p>
+&lt;p>The JSON representation for &lt;code>DoubleValue&lt;/code> is JSON number.&lt;/p>
+&lt;table>
+&lt;thead>
+&lt;tr>
+&lt;th>Field name&lt;/th>
+&lt;th>Type&lt;/th>
+&lt;th>Description&lt;/th>
+&lt;/tr>
+&lt;/thead>
+&lt;tbody>
+&lt;tr>
+&lt;td>&lt;code>value&lt;/code>&lt;/td>
+&lt;td>&lt;code>double&lt;/code>&lt;/td>
+&lt;td>The double value.&lt;/td>
+&lt;/tr>
+&lt;/tbody>
+&lt;/table>
+&lt;h2 id="duration">Duration&lt;/h2>
+&lt;p>A Duration represents a signed, fixed-length span of time represented as a count
+of seconds and fractions of seconds at nanosecond resolution. It is independent
+of any calendar and concepts like &amp;quot;day&amp;quot; or &amp;quot;month&amp;quot;. It is related to
+Timestamp in that the difference between two Timestamp values is a Duration and
+it can be added or subtracted from a Timestamp. Range is approximately +-10,000
+years.&lt;/p>
+&lt;p>Example 1: Compute Duration from two Timestamps in pseudo code.&lt;/p>
+&lt;pre tabindex="0">&lt;code>Timestamp start = ...;
+Timestamp end = ...;
+Duration duration = ...;
+duration.seconds = end.seconds - start.seconds;
+duration.nanos = end.nanos - start.nanos;
+if (duration.seconds &amp;lt; 0 &amp;amp;&amp;amp; duration.nanos &amp;gt; 0) {
+duration.seconds += 1;
+duration.nanos -= 1000000000;
+} else if (duration.seconds &amp;gt; 0 &amp;amp;&amp;amp; duration.nanos &amp;lt; 0) {
+duration.seconds -= 1;
+duration.nanos += 1000000000;
+}
+&lt;/code>&lt;/pre>&lt;p>Example 2: Compute Timestamp from Timestamp + Duration in pseudo code.&lt;/p>
+&lt;pre tabindex="0">&lt;code>Timestamp start = ...;
+Duration duration = ...;
+Timestamp end = ...;
+end.seconds = start.seconds + duration.seconds;
+end.nanos = start.nanos + duration.nanos;
+if (end.nanos &amp;lt; 0) {
+end.seconds -= 1;
+end.nanos += 1000000000;
+} else if (end.nanos &amp;gt;= 1000000000) {
+end.seconds += 1;
+end.nanos -= 1000000000;
+}
+&lt;/code>&lt;/pre>&lt;p>The JSON representation for &lt;code>Duration&lt;/code> is a &lt;code>String&lt;/code> that ends in &lt;code>s&lt;/code> to
+indicate seconds and is preceded by the number of seconds, with nanoseconds
+expressed as fractional seconds.&lt;/p>
+&lt;table>
+&lt;thead>
+&lt;tr>
+&lt;th>Field name&lt;/th>
+&lt;th>Type&lt;/th>
+&lt;th>Description&lt;/th>
+&lt;/tr>
+&lt;/thead>
+&lt;tbody>
+&lt;tr>
+&lt;td>&lt;code>seconds&lt;/code>&lt;/td>
+&lt;td>&lt;code>int64&lt;/code>&lt;/td>
+&lt;td>
+Signed seconds of the span of time. Must be from -315,576,000,000 to
++315,576,000,000 inclusive.
+&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>&lt;code>nanos&lt;/code>&lt;/td>
+&lt;td>&lt;code>int32&lt;/code>&lt;/td>
+&lt;td>
+Signed fractions of a second at nanosecond resolution of the span of
+time. Durations less than one second are represented with a 0
+&lt;code>seconds&lt;/code> field and a positive or negative
+&lt;code>nanos&lt;/code> field. For durations of one second or more, a
+non-zero value for the &lt;code>nanos&lt;/code> field must be of the same sign
+as the &lt;code>seconds&lt;/code> field. Must be from -999,999,999 to
++999,999,999 inclusive.
+&lt;/td>
+&lt;/tr>
+&lt;/tbody>
+&lt;/table>
+&lt;h2 id="empty">Empty&lt;/h2>
+&lt;p>A generic empty message that you can re-use to avoid defining duplicated empty
+messages in your APIs. A typical example is to use it as the request or the
+response type of an API method. For instance:&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-proto" data-lang="proto">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#204a87;font-weight:bold">service&lt;/span> &lt;span style="color:#000">Foo&lt;/span> &lt;span style="color:#000;font-weight:bold">{&lt;/span>&lt;span style="color:#a40000">
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#a40000">&lt;/span> &lt;span style="color:#204a87;font-weight:bold">rpc&lt;/span> &lt;span style="color:#000">Bar&lt;/span>&lt;span style="color:#000;font-weight:bold">(&lt;/span>&lt;span style="color:#000">google.protobuf.Empty&lt;/span>&lt;span style="color:#000;font-weight:bold">)&lt;/span> &lt;span style="color:#204a87;font-weight:bold">returns&lt;/span> &lt;span style="color:#000;font-weight:bold">(&lt;/span>&lt;span style="color:#000">google.protobuf.Empty&lt;/span>&lt;span style="color:#000;font-weight:bold">);&lt;/span>&lt;span style="color:#a40000">
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#a40000">&lt;/span>&lt;span style="color:#000;font-weight:bold">}&lt;/span>&lt;span style="color:#a40000">
+&lt;/span>&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>The JSON representation for &lt;code>Empty&lt;/code> is empty JSON object &lt;code>{}&lt;/code>.&lt;/p>
+&lt;h2 id="enum">Enum&lt;/h2>
+&lt;p>Enum type definition&lt;/p>
+&lt;table>
+&lt;thead>
+&lt;tr>
+&lt;th>Field name&lt;/th>
+&lt;th>Type&lt;/th>
+&lt;th>Description&lt;/th>
+&lt;/tr>
+&lt;/thead>
+&lt;tbody>
+&lt;tr>
+&lt;td>&lt;code>name&lt;/code>&lt;/td>
+&lt;td>&lt;code>string&lt;/code>&lt;/td>
+&lt;td>Enum type name.&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>&lt;code>enumvalue&lt;/code>&lt;/td>
+&lt;td>
+&lt;code>&lt;a href="#enum-value">EnumValue&lt;/a>&lt;/code>
+&lt;/td>
+&lt;td>Enum value definitions.&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>&lt;code>options&lt;/code>&lt;/td>
+&lt;td>
+&lt;code>&lt;a href="#option">Option&lt;/a>&lt;/code>
+&lt;/td>
+&lt;td>Protocol buffer options.&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>&lt;code>source_context&lt;/code>&lt;/td>
+&lt;td>
+&lt;code>&lt;a href="#source-context">SourceContext&lt;/a>&lt;/code>
+&lt;/td>
+&lt;td>The source context.&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>&lt;code>syntax&lt;/code>&lt;/td>
+&lt;td>
+&lt;code>&lt;a href="#syntax">Syntax&lt;/a>&lt;/code>
+&lt;/td>
+&lt;td>The source syntax.&lt;/td>
+&lt;/tr>
+&lt;/tbody>
+&lt;/table>
+&lt;h2 id="enum-value">EnumValue&lt;/h2>
+&lt;p>Enum value definition.&lt;/p>
+&lt;table>
+&lt;thead>
+&lt;tr>
+&lt;th>Field name&lt;/th>
+&lt;th>Type&lt;/th>
+&lt;th>Description&lt;/th>
+&lt;/tr>
+&lt;/thead>
+&lt;tbody>
+&lt;tr>
+&lt;td>&lt;code>name&lt;/code>&lt;/td>
+&lt;td>&lt;code>string&lt;/code>&lt;/td>
+&lt;td>Enum value name.&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>&lt;code>number&lt;/code>&lt;/td>
+&lt;td>&lt;code>int32&lt;/code>&lt;/td>
+&lt;td>Enum value number.&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>&lt;code>options&lt;/code>&lt;/td>
+&lt;td>
+&lt;code>&lt;a href="#option">Option&lt;/a>&lt;/code>
+&lt;/td>
+&lt;td>Protocol buffer options.&lt;/td>
+&lt;/tr>
+&lt;/tbody>
+&lt;/table>
+&lt;h2 id="field">Field&lt;/h2>
+&lt;p>A single field of a message type.&lt;/p>
+&lt;table>
+&lt;thead>
+&lt;tr>
+&lt;th>Field name&lt;/th>
+&lt;th>Type&lt;/th>
+&lt;th>Description&lt;/th>
+&lt;/tr>
+&lt;/thead>
+&lt;tbody>
+&lt;tr>
+&lt;td>&lt;code>kind&lt;/code>&lt;/td>
+&lt;td>
+&lt;code>&lt;a href="#field-kind">Kind&lt;/a>&lt;/code>
+&lt;/td>
+&lt;td>The field type.&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>&lt;code>cardinality&lt;/code>&lt;/td>
+&lt;td>
+&lt;code>&lt;a href="#field-cardinality">Cardinality&lt;/a>&lt;/code>
+&lt;/td>
+&lt;td>The field cardinality.&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>&lt;code>number&lt;/code>&lt;/td>
+&lt;td>&lt;code>int32&lt;/code>&lt;/td>
+&lt;td>The field number.&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>&lt;code>name&lt;/code>&lt;/td>
+&lt;td>&lt;code>string&lt;/code>&lt;/td>
+&lt;td>The field name.&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>&lt;code>type_url&lt;/code>&lt;/td>
+&lt;td>&lt;code>string&lt;/code>&lt;/td>
+&lt;td>
+The field type URL, without the scheme, for message or enumeration
+types. Example:
+&lt;code>&amp;quot;type.googleapis.com/google.protobuf.Timestamp&amp;quot;&lt;/code>.
+&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>&lt;code>oneof_index&lt;/code>&lt;/td>
+&lt;td>&lt;code>int32&lt;/code>&lt;/td>
+&lt;td>
+The index of the field type in &lt;code>Type.oneofs&lt;/code>, for message or
+enumeration types. The first type has index 1; zero means the type is
+not in the list.
+&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>&lt;code>packed&lt;/code>&lt;/td>
+&lt;td>&lt;code>bool&lt;/code>&lt;/td>
+&lt;td>Whether to use alternative packed wire representation.&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>&lt;code>options&lt;/code>&lt;/td>
+&lt;td>
+&lt;code>&lt;a href="#option">Option&lt;/a>&lt;/code>
+&lt;/td>
+&lt;td>The protocol buffer options.&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>&lt;code>json_name&lt;/code>&lt;/td>
+&lt;td>&lt;code>string&lt;/code>&lt;/td>
+&lt;td>The field JSON name.&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>&lt;code>default_value&lt;/code>&lt;/td>
+&lt;td>&lt;code>string&lt;/code>&lt;/td>
+&lt;td>
+The string value of the default value of this field. Proto2 syntax only.
+&lt;/td>
+&lt;/tr>
+&lt;/tbody>
+&lt;/table>
+&lt;h2 id="field-cardinality">Cardinality&lt;/h2>
+&lt;p>Whether a field is optional, required, or repeated.&lt;/p>
+&lt;table>
+&lt;thead>
+&lt;tr>
+&lt;th>Enum value&lt;/th>
+&lt;th>Description&lt;/th>
+&lt;/tr>
+&lt;/thead>
+&lt;tbody>
+&lt;tr>
+&lt;td>&lt;code>CARDINALITY_UNKNOWN&lt;/code>&lt;/td>
+&lt;td>For fields with unknown cardinality.&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>&lt;code>CARDINALITY_OPTIONAL&lt;/code>&lt;/td>
+&lt;td>For optional fields.&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>&lt;code>CARDINALITY_REQUIRED&lt;/code>&lt;/td>
+&lt;td>For required fields. Proto2 syntax only.&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>&lt;code>CARDINALITY_REPEATED&lt;/code>&lt;/td>
+&lt;td>For repeated fields.&lt;/td>
+&lt;/tr>
+&lt;/tbody>
+&lt;/table>
+&lt;h2 id="field-kind">Kind&lt;/h2>
+&lt;p>Basic field types.&lt;/p>
+&lt;table class="matchpre">
+&lt;thead>
+&lt;tr>
+&lt;th>Enum value&lt;/th>
+&lt;th>Description&lt;/th>
+&lt;/tr>
+&lt;/thead>
+&lt;tbody>
+&lt;tr>
+&lt;td>&lt;code>TYPE_UNKNOWN&lt;/code>&lt;/td>
+&lt;td>Field type unknown.&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>&lt;code>TYPE_DOUBLE&lt;/code>&lt;/td>
+&lt;td>Field type double.&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>&lt;code>TYPE_FLOAT&lt;/code>&lt;/td>
+&lt;td>Field type float.&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>&lt;code>TYPE_INT64&lt;/code>&lt;/td>
+&lt;td>Field type int64.&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>&lt;code>TYPE_UINT64&lt;/code>&lt;/td>
+&lt;td>Field type uint64.&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>&lt;code>TYPE_INT32&lt;/code>&lt;/td>
+&lt;td>Field type int32.&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>&lt;code>TYPE_FIXED64&lt;/code>&lt;/td>
+&lt;td>Field type fixed64.&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>&lt;code>TYPE_FIXED32&lt;/code>&lt;/td>
+&lt;td>Field type fixed32.&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>&lt;code>TYPE_BOOL&lt;/code>&lt;/td>
+&lt;td>Field type bool.&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>&lt;code>TYPE_STRING&lt;/code>&lt;/td>
+&lt;td>Field type string.&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>&lt;code>TYPE_GROUP&lt;/code>&lt;/td>
+&lt;td>Field type group. Proto2 syntax only, and deprecated.&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>&lt;code>TYPE_MESSAGE&lt;/code>&lt;/td>
+&lt;td>Field type message.&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>&lt;code>TYPE_BYTES&lt;/code>&lt;/td>
+&lt;td>Field type bytes.&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>&lt;code>TYPE_UINT32&lt;/code>&lt;/td>
+&lt;td>Field type uint32.&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>&lt;code>TYPE_ENUM&lt;/code>&lt;/td>
+&lt;td>Field type enum.&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>&lt;code>TYPE_SFIXED32&lt;/code>&lt;/td>
+&lt;td>Field type sfixed32.&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>&lt;code>TYPE_SFIXED64&lt;/code>&lt;/td>
+&lt;td>Field type sfixed64.&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>&lt;code>TYPE_SINT32&lt;/code>&lt;/td>
+&lt;td>Field type sint32.&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>&lt;code>TYPE_SINT64&lt;/code>&lt;/td>
+&lt;td>Field type sint64.&lt;/td>
+&lt;/tr>
+&lt;/tbody>
+&lt;/table>
+&lt;h2 id="field-mask">FieldMask&lt;/h2>
+&lt;p>&lt;code>FieldMask&lt;/code> represents a set of symbolic field paths, for example:&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-proto" data-lang="proto">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#000">paths&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">:&lt;/span> &lt;span style="color:#4e9a06">&amp;#34;f.a&amp;#34;&lt;/span>&lt;span style="color:#a40000">
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#a40000">&lt;/span>&lt;span style="color:#000">paths&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">:&lt;/span> &lt;span style="color:#4e9a06">&amp;#34;f.b.d&amp;#34;&lt;/span>&lt;span style="color:#a40000">
+&lt;/span>&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>Here &lt;code>f&lt;/code> represents a field in some root message, &lt;code>a&lt;/code> and &lt;code>b&lt;/code> fields in the
+message found in &lt;code>f&lt;/code>, and &lt;code>d&lt;/code> a field found in the message in &lt;code>f.b&lt;/code>.&lt;/p>
+&lt;p>Field masks are used to specify a subset of fields that should be returned by a
+get operation (a &lt;em>projection&lt;/em>), or modified by an update operation. Field masks
+also have a custom JSON encoding (see below).&lt;/p>
+&lt;h4 id="field-masks-projections">Field Masks in Projections&lt;/h4>
+&lt;p>When a &lt;code>FieldMask&lt;/code> specifies a &lt;em>projection&lt;/em>, the API will filter the response
+message (or sub-message) to contain only those fields specified in the mask. For
+example, consider this &amp;quot;pre-masking&amp;quot; response message:&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-proto" data-lang="proto">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#000">f&lt;/span> &lt;span style="color:#000;font-weight:bold">{&lt;/span>&lt;span style="color:#a40000">
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#a40000">&lt;/span> &lt;span style="color:#000">a&lt;/span> &lt;span style="color:#ce5c00;font-weight:bold">:&lt;/span> &lt;span style="color:#0000cf;font-weight:bold">22&lt;/span>&lt;span style="color:#a40000">
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#a40000">&lt;/span> &lt;span style="color:#000">b&lt;/span> &lt;span style="color:#000;font-weight:bold">{&lt;/span>&lt;span style="color:#a40000">
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#a40000">&lt;/span> &lt;span style="color:#000">d&lt;/span> &lt;span style="color:#ce5c00;font-weight:bold">:&lt;/span> &lt;span style="color:#0000cf;font-weight:bold">1&lt;/span>&lt;span style="color:#a40000">
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#a40000">&lt;/span> &lt;span style="color:#000">x&lt;/span> &lt;span style="color:#ce5c00;font-weight:bold">:&lt;/span> &lt;span style="color:#0000cf;font-weight:bold">2&lt;/span>&lt;span style="color:#a40000">
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#a40000">&lt;/span> &lt;span style="color:#000;font-weight:bold">}&lt;/span>&lt;span style="color:#a40000">
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#a40000">&lt;/span> &lt;span style="color:#000">y&lt;/span> &lt;span style="color:#ce5c00;font-weight:bold">:&lt;/span> &lt;span style="color:#0000cf;font-weight:bold">13&lt;/span>&lt;span style="color:#a40000">
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#a40000">&lt;/span>&lt;span style="color:#000;font-weight:bold">}&lt;/span>&lt;span style="color:#a40000">
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#a40000">&lt;/span>&lt;span style="color:#000">z&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">:&lt;/span> &lt;span style="color:#0000cf;font-weight:bold">8&lt;/span>&lt;span style="color:#a40000">
+&lt;/span>&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>After applying the mask in the previous example, the API response will not
+contain specific values for fields x, y, or z (their value will be set to the
+default, and omitted in proto text output):&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-proto" data-lang="proto">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#000">f&lt;/span> &lt;span style="color:#000;font-weight:bold">{&lt;/span>&lt;span style="color:#a40000">
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#a40000">&lt;/span> &lt;span style="color:#000">a&lt;/span> &lt;span style="color:#ce5c00;font-weight:bold">:&lt;/span> &lt;span style="color:#0000cf;font-weight:bold">22&lt;/span>&lt;span style="color:#a40000">
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#a40000">&lt;/span> &lt;span style="color:#000">b&lt;/span> &lt;span style="color:#000;font-weight:bold">{&lt;/span>&lt;span style="color:#a40000">
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#a40000">&lt;/span> &lt;span style="color:#000">d&lt;/span> &lt;span style="color:#ce5c00;font-weight:bold">:&lt;/span> &lt;span style="color:#0000cf;font-weight:bold">1&lt;/span>&lt;span style="color:#a40000">
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#a40000">&lt;/span> &lt;span style="color:#000;font-weight:bold">}&lt;/span>&lt;span style="color:#a40000">
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#a40000">&lt;/span>&lt;span style="color:#000;font-weight:bold">}&lt;/span>&lt;span style="color:#a40000">
+&lt;/span>&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>A repeated field is not allowed except at the last position of a field mask.&lt;/p>
+&lt;p>If a &lt;code>FieldMask&lt;/code> object is not present in a get operation, the operation applies
+to all fields (as if a FieldMask of all fields had been specified).&lt;/p>
+&lt;p>Note that a field mask does not necessarily apply to the top-level response
+message. In case of a REST get operation, the field mask applies directly to the
+response, but in case of a REST list operation, the mask instead applies to each
+individual message in the returned resource list. In case of a REST custom
+method, other definitions may be used. Where the mask applies will be clearly
+documented together with its declaration in the API. In any case, the effect on
+the returned resource/resources is required behavior for APIs.&lt;/p>
+&lt;h4 id="field-masks-updates">Field Masks in Update Operations&lt;/h4>
+&lt;p>A field mask in update operations specifies which fields of the targeted
+resource are going to be updated. The API is required to only change the values
+of the fields as specified in the mask and leave the others untouched. If a
+resource is passed in to describe the updated values, the API ignores the values
+of all fields not covered by the mask.&lt;/p>
+&lt;p>In order to reset a field&amp;rsquo;s value to the default, the field must be in the mask
+and set to the default value in the provided resource. Hence, in order to reset
+all fields of a resource, provide a default instance of the resource and set all
+fields in the mask, or do not provide a mask as described below.&lt;/p>
+&lt;p>If a field mask is not present on update, the operation applies to all fields
+(as if a field mask of all fields has been specified). Note that in the presence
+of schema evolution, this may mean that fields the client does not know and has
+therefore not filled into the request will be reset to their default. If this is
+unwanted behavior, a specific service may require a client to always specify a
+field mask, producing an error if not.&lt;/p>
+&lt;p>As with get operations, the location of the resource which describes the updated
+values in the request message depends on the operation kind. In any case, the
+effect of the field mask is required to be honored by the API.&lt;/p>
+&lt;h5 id="http-rest">Considerations for HTTP REST&lt;/h5>
+&lt;p>The HTTP kind of an update operation which uses a field mask must be set to
+PATCH instead of PUT in order to satisfy HTTP semantics (PUT must only be used
+for full updates).&lt;/p>
+&lt;h4 id="json-encoding-field-masks">JSON Encoding of Field Masks&lt;/h4>
+&lt;p>In JSON, a field mask is encoded as a single string where paths are separated by
+a comma. Fields name in each path are converted to/from lower-camel naming
+conventions.&lt;/p>
+&lt;p>As an example, consider the following message declarations:&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-proto" data-lang="proto">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#204a87;font-weight:bold">message&lt;/span> &lt;span style="color:#000">Profile&lt;/span> &lt;span style="color:#000;font-weight:bold">{&lt;/span>&lt;span style="color:#a40000">
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#a40000">&lt;/span> &lt;span style="color:#000">User&lt;/span> &lt;span style="color:#000">user&lt;/span> &lt;span style="color:#ce5c00;font-weight:bold">=&lt;/span> &lt;span style="color:#0000cf;font-weight:bold">1&lt;/span>&lt;span style="color:#000;font-weight:bold">;&lt;/span>&lt;span style="color:#a40000">
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#a40000">&lt;/span> &lt;span style="color:#000">Photo&lt;/span> &lt;span style="color:#000">photo&lt;/span> &lt;span style="color:#ce5c00;font-weight:bold">=&lt;/span> &lt;span style="color:#0000cf;font-weight:bold">2&lt;/span>&lt;span style="color:#000;font-weight:bold">;&lt;/span>&lt;span style="color:#a40000">
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#a40000">&lt;/span>&lt;span style="color:#000;font-weight:bold">}&lt;/span>&lt;span style="color:#a40000">
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#a40000">&lt;/span>&lt;span style="color:#204a87;font-weight:bold">message&lt;/span> &lt;span style="color:#000">User&lt;/span> &lt;span style="color:#000;font-weight:bold">{&lt;/span>&lt;span style="color:#a40000">
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#a40000">&lt;/span> &lt;span style="color:#204a87;font-weight:bold">string&lt;/span> &lt;span style="color:#000">display_name&lt;/span> &lt;span style="color:#ce5c00;font-weight:bold">=&lt;/span> &lt;span style="color:#0000cf;font-weight:bold">1&lt;/span>&lt;span style="color:#000;font-weight:bold">;&lt;/span>&lt;span style="color:#a40000">
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#a40000">&lt;/span> &lt;span style="color:#204a87;font-weight:bold">string&lt;/span> &lt;span style="color:#000">address&lt;/span> &lt;span style="color:#ce5c00;font-weight:bold">=&lt;/span> &lt;span style="color:#0000cf;font-weight:bold">2&lt;/span>&lt;span style="color:#000;font-weight:bold">;&lt;/span>&lt;span style="color:#a40000">
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#a40000">&lt;/span>&lt;span style="color:#000;font-weight:bold">}&lt;/span>&lt;span style="color:#a40000">
+&lt;/span>&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>In proto a field mask for &lt;code>Profile&lt;/code> may look as such:&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-proto" data-lang="proto">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#000">mask&lt;/span> &lt;span style="color:#000;font-weight:bold">{&lt;/span>&lt;span style="color:#a40000">
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#a40000">&lt;/span> &lt;span style="color:#000">paths&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">:&lt;/span> &lt;span style="color:#4e9a06">&amp;#34;user.display_name&amp;#34;&lt;/span>&lt;span style="color:#a40000">
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#a40000">&lt;/span> &lt;span style="color:#000">paths&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">:&lt;/span> &lt;span style="color:#4e9a06">&amp;#34;photo&amp;#34;&lt;/span>&lt;span style="color:#a40000">
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#a40000">&lt;/span>&lt;span style="color:#000;font-weight:bold">}&lt;/span>&lt;span style="color:#a40000">
+&lt;/span>&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>In JSON, the same mask is represented as below:&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-json" data-lang="json">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#000;font-weight:bold">{&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#a40000">mask:&lt;/span> &lt;span style="color:#204a87;font-weight:bold">&amp;#34;user.displayName,photo&amp;#34;&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#000;font-weight:bold">}&lt;/span>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;table>
+&lt;thead>
+&lt;tr>
+&lt;th>Field name&lt;/th>
+&lt;th>Type&lt;/th>
+&lt;th>Description&lt;/th>
+&lt;/tr>
+&lt;/thead>
+&lt;tbody>
+&lt;tr>
+&lt;td>&lt;code>paths&lt;/code>&lt;/td>
+&lt;td>&lt;code>string&lt;/code>&lt;/td>
+&lt;td>The set of field mask paths.&lt;/td>
+&lt;/tr>
+&lt;/tbody>
+&lt;/table>
+&lt;h2 id="float-value">FloatValue&lt;/h2>
+&lt;p>Wrapper message for &lt;code>float&lt;/code>.&lt;/p>
+&lt;p>The JSON representation for &lt;code>FloatValue&lt;/code> is JSON number.&lt;/p>
+&lt;table>
+&lt;thead>
+&lt;tr>
+&lt;th>Field name&lt;/th>
+&lt;th>Type&lt;/th>
+&lt;th>Description&lt;/th>
+&lt;/tr>
+&lt;/thead>
+&lt;tbody>
+&lt;tr>
+&lt;td>&lt;code>value&lt;/code>&lt;/td>
+&lt;td>&lt;code>float&lt;/code>&lt;/td>
+&lt;td>The float value.&lt;/td>
+&lt;/tr>
+&lt;/tbody>
+&lt;/table>
+&lt;h2 id="int32-value">Int32Value&lt;/h2>
+&lt;p>Wrapper message for &lt;code>int32&lt;/code>.&lt;/p>
+&lt;p>The JSON representation for &lt;code>Int32Value&lt;/code> is JSON number.&lt;/p>
+&lt;table>
+&lt;thead>
+&lt;tr>
+&lt;th>Field name&lt;/th>
+&lt;th>Type&lt;/th>
+&lt;th>Description&lt;/th>
+&lt;/tr>
+&lt;/thead>
+&lt;tbody>
+&lt;tr>
+&lt;td>&lt;code>value&lt;/code>&lt;/td>
+&lt;td>&lt;code>int32&lt;/code>&lt;/td>
+&lt;td>The int32 value.&lt;/td>
+&lt;/tr>
+&lt;/tbody>
+&lt;/table>
+&lt;h2 id="int64-value">Int64Value&lt;/h2>
+&lt;p>Wrapper message for &lt;code>int64&lt;/code>.&lt;/p>
+&lt;p>The JSON representation for &lt;code>Int64Value&lt;/code> is JSON string.&lt;/p>
+&lt;table>
+&lt;thead>
+&lt;tr>
+&lt;th>Field name&lt;/th>
+&lt;th>Type&lt;/th>
+&lt;th>Description&lt;/th>
+&lt;/tr>
+&lt;/thead>
+&lt;tbody>
+&lt;tr>
+&lt;td>&lt;code>value&lt;/code>&lt;/td>
+&lt;td>&lt;code>int64&lt;/code>&lt;/td>
+&lt;td>The int64 value.&lt;/td>
+&lt;/tr>
+&lt;/tbody>
+&lt;/table>
+&lt;h2 id="list-value">ListValue&lt;/h2>
+&lt;p>&lt;code>ListValue&lt;/code> is a wrapper around a repeated field of values.&lt;/p>
+&lt;p>The JSON representation for &lt;code>ListValue&lt;/code> is JSON array.&lt;/p>
+&lt;table>
+&lt;thead>
+&lt;tr>
+&lt;th>Field name&lt;/th>
+&lt;th>Type&lt;/th>
+&lt;th>Description&lt;/th>
+&lt;/tr>
+&lt;/thead>
+&lt;tbody>
+&lt;tr>
+&lt;td>&lt;code>values&lt;/code>&lt;/td>
+&lt;td>
+&lt;code>&lt;a href="#value">Value&lt;/a>&lt;/code>
+&lt;/td>
+&lt;td>Repeated field of dynamically typed values.&lt;/td>
+&lt;/tr>
+&lt;/tbody>
+&lt;/table>
+&lt;h2 id="method">Method&lt;/h2>
+&lt;p>Method represents a method of an api.&lt;/p>
+&lt;table>
+&lt;thead>
+&lt;tr>
+&lt;th>Field name&lt;/th>
+&lt;th>Type&lt;/th>
+&lt;th>Description&lt;/th>
+&lt;/tr>
+&lt;/thead>
+&lt;tbody>
+&lt;tr>
+&lt;td>&lt;code>name&lt;/code>&lt;/td>
+&lt;td>&lt;code>string&lt;/code>&lt;/td>
+&lt;td>The simple name of this method.&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>&lt;code>request_type_url&lt;/code>&lt;/td>
+&lt;td>&lt;code>string&lt;/code>&lt;/td>
+&lt;td>A URL of the input message type.&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>&lt;code>request_streaming&lt;/code>&lt;/td>
+&lt;td>&lt;code>bool&lt;/code>&lt;/td>
+&lt;td>If true, the request is streamed.&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>&lt;code>response_type_url&lt;/code>&lt;/td>
+&lt;td>&lt;code>string&lt;/code>&lt;/td>
+&lt;td>The URL of the output message type.&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>&lt;code>response_streaming&lt;/code>&lt;/td>
+&lt;td>&lt;code>bool&lt;/code>&lt;/td>
+&lt;td>If true, the response is streamed.&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>&lt;code>options&lt;/code>&lt;/td>
+&lt;td>
+&lt;code>&lt;a href="#option">Option&lt;/a>&lt;/code>
+&lt;/td>
+&lt;td>Any metadata attached to the method.&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>&lt;code>syntax&lt;/code>&lt;/td>
+&lt;td>
+&lt;code>&lt;a href="#syntax">Syntax&lt;/a>&lt;/code>
+&lt;/td>
+&lt;td>The source syntax of this method.&lt;/td>
+&lt;/tr>
+&lt;/tbody>
+&lt;/table>
+&lt;h2 id="mixin">Mixin&lt;/h2>
+&lt;p>Declares an API to be included in this API. The including API must redeclare all
+the methods from the included API, but documentation and options are inherited
+as follows:&lt;/p>
+&lt;ul>
+&lt;li>
+&lt;p>If after comment and whitespace stripping, the documentation string of the
+redeclared method is empty, it will be inherited from the original method.&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>Each annotation belonging to the service config (http, visibility) which is
+not set in the redeclared method will be inherited.&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>If an http annotation is inherited, the path pattern will be modified as
+follows. Any version prefix will be replaced by the version of the including
+API plus the &lt;code>root&lt;/code> path if specified.&lt;/p>
+&lt;/li>
+&lt;/ul>
+&lt;p>Example of a simple mixin:&lt;/p>
+&lt;pre tabindex="0">&lt;code>package google.acl.v1;
+service AccessControl {
+// Get the underlying ACL object.
+rpc GetAcl(GetAclRequest) returns (Acl) {
+option (google.api.http).get = &amp;#34;/v1/{resource=**}:getAcl&amp;#34;;
+}
+}
+package google.storage.v2;
+service Storage {
+// rpc GetAcl(GetAclRequest) returns (Acl);
+// Get a data record.
+rpc GetData(GetDataRequest) returns (Data) {
+option (google.api.http).get = &amp;#34;/v2/{resource=**}&amp;#34;;
+}
+}
+&lt;/code>&lt;/pre>&lt;p>Example of a mixin configuration:&lt;/p>
+&lt;pre tabindex="0">&lt;code>apis:
+- name: google.storage.v2.Storage
+mixins:
+- name: google.acl.v1.AccessControl
+&lt;/code>&lt;/pre>&lt;p>The mixin construct implies that all methods in &lt;code>AccessControl&lt;/code> are also
+declared with same name and request/response types in &lt;code>Storage&lt;/code>. A documentation
+generator or annotation processor will see the effective &lt;code>Storage.GetAcl&lt;/code> method
+after inherting documentation and annotations as follows:&lt;/p>
+&lt;pre tabindex="0">&lt;code>service Storage {
+// Get the underlying ACL object.
+rpc GetAcl(GetAclRequest) returns (Acl) {
+option (google.api.http).get = &amp;#34;/v2/{resource=**}:getAcl&amp;#34;;
+}
+...
+}
+&lt;/code>&lt;/pre>&lt;p>Note how the version in the path pattern changed from &lt;code>v1&lt;/code> to &lt;code>v2&lt;/code>.&lt;/p>
+&lt;p>If the &lt;code>root&lt;/code> field in the mixin is specified, it should be a relative path
+under which inherited HTTP paths are placed. Example:&lt;/p>
+&lt;pre tabindex="0">&lt;code>apis:
+- name: google.storage.v2.Storage
+mixins:
+- name: google.acl.v1.AccessControl
+root: acls
+&lt;/code>&lt;/pre>&lt;p>This implies the following inherited HTTP annotation:&lt;/p>
+&lt;pre tabindex="0">&lt;code>service Storage {
+// Get the underlying ACL object.
+rpc GetAcl(GetAclRequest) returns (Acl) {
+option (google.api.http).get = &amp;#34;/v2/acls/{resource=**}:getAcl&amp;#34;;
+}
+...
+}
+&lt;/code>&lt;/pre>&lt;table>
+&lt;thead>
+&lt;tr>
+&lt;th>Field name&lt;/th>
+&lt;th>Type&lt;/th>
+&lt;th>Description&lt;/th>
+&lt;/tr>
+&lt;/thead>
+&lt;tbody>
+&lt;tr>
+&lt;td>&lt;code>name&lt;/code>&lt;/td>
+&lt;td>&lt;code>string&lt;/code>&lt;/td>
+&lt;td>The fully qualified name of the API which is included.&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>&lt;code>root&lt;/code>&lt;/td>
+&lt;td>&lt;code>string&lt;/code>&lt;/td>
+&lt;td>
+If non-empty specifies a path under which inherited HTTP paths are
+rooted.
+&lt;/td>
+&lt;/tr>
+&lt;/tbody>
+&lt;/table>
+&lt;h2 id="null-value">NullValue&lt;/h2>
+&lt;p>&lt;code>NullValue&lt;/code> is a singleton enumeration to represent the null value for the
+&lt;code>Value&lt;/code> type union.&lt;/p>
+&lt;p>The JSON representation for &lt;code>NullValue&lt;/code> is JSON &lt;code>null&lt;/code>.&lt;/p>
+&lt;table>
+&lt;thead>
+&lt;tr>
+&lt;th>Enum value&lt;/th>
+&lt;th>Description&lt;/th>
+&lt;/tr>
+&lt;/thead>
+&lt;tbody>
+&lt;tr>
+&lt;td>&lt;code>NULL_VALUE&lt;/code>&lt;/td>
+&lt;td>Null value.&lt;/td>
+&lt;/tr>
+&lt;/tbody>
+&lt;/table>
+&lt;h2 id="option">Option&lt;/h2>
+&lt;p>A protocol buffer option, which can be attached to a message, field,
+enumeration, etc.&lt;/p>
+&lt;table>
+&lt;thead>
+&lt;tr>
+&lt;th>Field name&lt;/th>
+&lt;th>Type&lt;/th>
+&lt;th>Description&lt;/th>
+&lt;/tr>
+&lt;/thead>
+&lt;tbody>
+&lt;tr>
+&lt;td>&lt;code>name&lt;/code>&lt;/td>
+&lt;td>&lt;code>string&lt;/code>&lt;/td>
+&lt;td>
+The option's name. For example, &lt;code>&amp;quot;java_package&amp;quot;&lt;/code>.
+&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>&lt;code>value&lt;/code>&lt;/td>
+&lt;td>
+&lt;code>&lt;a href="#any">Any&lt;/a>&lt;/code>
+&lt;/td>
+&lt;td>
+The option's value. For example,
+&lt;code>&amp;quot;com.google.protobuf&amp;quot;&lt;/code>.
+&lt;/td>
+&lt;/tr>
+&lt;/tbody>
+&lt;/table>
+&lt;h2 id="source-context">SourceContext&lt;/h2>
+&lt;p>&lt;code>SourceContext&lt;/code> represents information about the source of a protobuf element,
+like the file in which it is defined.&lt;/p>
+&lt;table>
+&lt;thead>
+&lt;tr>
+&lt;th>Field name&lt;/th>
+&lt;th>Type&lt;/th>
+&lt;th>Description&lt;/th>
+&lt;/tr>
+&lt;/thead>
+&lt;tbody>
+&lt;tr>
+&lt;td>&lt;code>file_name&lt;/code>&lt;/td>
+&lt;td>&lt;code>string&lt;/code>&lt;/td>
+&lt;td>
+The path-qualified name of the .proto file that contained the associated
+protobuf element. For example:
+&lt;code>&amp;quot;google/protobuf/source.proto&amp;quot;&lt;/code>.
+&lt;/td>
+&lt;/tr>
+&lt;/tbody>
+&lt;/table>
+&lt;h2 id="string-value">StringValue&lt;/h2>
+&lt;p>Wrapper message for &lt;code>string&lt;/code>.&lt;/p>
+&lt;p>The JSON representation for &lt;code>StringValue&lt;/code> is JSON string.&lt;/p>
+&lt;table>
+&lt;thead>
+&lt;tr>
+&lt;th>Field name&lt;/th>
+&lt;th>Type&lt;/th>
+&lt;th>Description&lt;/th>
+&lt;/tr>
+&lt;/thead>
+&lt;tbody>
+&lt;tr>
+&lt;td>&lt;code>value&lt;/code>&lt;/td>
+&lt;td>&lt;code>string&lt;/code>&lt;/td>
+&lt;td>The string value.&lt;/td>
+&lt;/tr>
+&lt;/tbody>
+&lt;/table>
+&lt;h2 id="struct">Struct&lt;/h2>
+&lt;p>&lt;code>Struct&lt;/code> represents a structured data value, consisting of fields which map to
+dynamically typed values. In some languages, &lt;code>Struct&lt;/code> might be supported by a
+native representation. For example, in scripting languages like JS a struct is
+represented as an object. The details of that representation are described
+together with the proto support for the language.&lt;/p>
+&lt;p>The JSON representation for &lt;code>Struct&lt;/code> is JSON object.&lt;/p>
+&lt;table>
+&lt;thead>
+&lt;tr>
+&lt;th>Field name&lt;/th>
+&lt;th>Type&lt;/th>
+&lt;th>Description&lt;/th>
+&lt;/tr>
+&lt;/thead>
+&lt;tbody>
+&lt;tr>
+&lt;td>&lt;code>fields&lt;/code>&lt;/td>
+&lt;td>
+&lt;code>map&amp;lt;string, &lt;a href="#value">Value&lt;/a>&amp;gt;&lt;/code>
+&lt;/td>
+&lt;td>Map of dynamically typed values.&lt;/td>
+&lt;/tr>
+&lt;/tbody>
+&lt;/table>
+&lt;h2 id="syntax">Syntax&lt;/h2>
+&lt;p>The syntax in which a protocol buffer element is defined.&lt;/p>
+&lt;table>
+&lt;thead>
+&lt;tr>
+&lt;th>Enum value&lt;/th>
+&lt;th>Description&lt;/th>
+&lt;/tr>
+&lt;/thead>
+&lt;tbody>
+&lt;tr>
+&lt;td>&lt;code>SYNTAX_PROTO2&lt;/code>&lt;/td>
+&lt;td>Syntax &lt;code>proto2&lt;/code>.&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>&lt;code>SYNTAX_PROTO3&lt;/code>&lt;/td>
+&lt;td>Syntax &lt;code>proto3&lt;/code>.&lt;/td>
+&lt;/tr>
+&lt;/tbody>
+&lt;/table>
+&lt;h2 id="timestamp">Timestamp&lt;/h2>
+&lt;p>A Timestamp represents a point in time independent of any time zone or calendar,
+represented as seconds and fractions of seconds at nanosecond resolution in UTC
+Epoch time. It is encoded using the Proleptic Gregorian Calendar which extends
+the Gregorian calendar backwards to year one. It is encoded assuming all minutes
+are 60 seconds long, i.e. leap seconds are &amp;quot;smeared&amp;quot; so that no leap second
+table is needed for interpretation. Range is from 0001-01-01T00:00:00Z to
+9999-12-31T23:59:59.999999999Z. By restricting to that range, we ensure that we
+can convert to and from RFC 3339 date strings. See
+&lt;a href="https://www.ietf.org/rfc/rfc3339.txt">https://www.ietf.org/rfc/rfc3339.txt&lt;/a>.&lt;/p>
+&lt;p>Example 1: Compute Timestamp from POSIX &lt;code>time()&lt;/code>.&lt;/p>
+&lt;pre tabindex="0">&lt;code>Timestamp timestamp;
+timestamp.set_seconds(time(NULL));
+timestamp.set_nanos(0);
+&lt;/code>&lt;/pre>&lt;p>Example 2: Compute Timestamp from POSIX &lt;code>gettimeofday()&lt;/code>.&lt;/p>
+&lt;pre tabindex="0">&lt;code>struct timeval tv;
+gettimeofday(&amp;amp;tv, NULL);
+Timestamp timestamp;
+timestamp.set_seconds(tv.tv_sec);
+timestamp.set_nanos(tv.tv_usec * 1000);
+&lt;/code>&lt;/pre>&lt;p>Example 3: Compute Timestamp from Win32 &lt;code>GetSystemTimeAsFileTime()&lt;/code>.&lt;/p>
+&lt;pre tabindex="0">&lt;code>FILETIME ft;
+GetSystemTimeAsFileTime(&amp;amp;ft);
+UINT64 ticks = (((UINT64)ft.dwHighDateTime) &amp;lt;&amp;lt; 32) | ft.dwLowDateTime;
+// A Windows tick is 100 nanoseconds. Windows epoch 1601-01-01T00:00:00Z
+// is 11644473600 seconds before Unix epoch 1970-01-01T00:00:00Z.
+Timestamp timestamp;
+timestamp.set_seconds((INT64) ((ticks / 10000000) - 11644473600LL));
+timestamp.set_nanos((INT32) ((ticks % 10000000) * 100));
+&lt;/code>&lt;/pre>&lt;p>Example 4: Compute Timestamp from Java &lt;code>System.currentTimeMillis()&lt;/code>.&lt;/p>
+&lt;pre tabindex="0">&lt;code>long millis = System.currentTimeMillis();
+Timestamp timestamp = Timestamp.newBuilder().setSeconds(millis / 1000)
+.setNanos((int) ((millis % 1000) * 1000000)).build();
+&lt;/code>&lt;/pre>&lt;p>Example 5: Compute Timestamp from current time in Python.&lt;/p>
+&lt;pre tabindex="0">&lt;code>now = time.time()
+seconds = int(now)
+nanos = int((now - seconds) * 10**9)
+timestamp = Timestamp(seconds=seconds, nanos=nanos)
+&lt;/code>&lt;/pre>&lt;table>
+&lt;thead>
+&lt;tr>
+&lt;th>Field name&lt;/th>
+&lt;th>Type&lt;/th>
+&lt;th>Description&lt;/th>
+&lt;/tr>
+&lt;/thead>
+&lt;tbody>
+&lt;tr>
+&lt;td>&lt;code>seconds&lt;/code>&lt;/td>
+&lt;td>&lt;code>int64&lt;/code>&lt;/td>
+&lt;td>
+Represents seconds of UTC time since Unix epoch 1970-01-01T00:00:00Z.
+Must be from 0001-01-01T00:00:00Z to 9999-12-31T23:59:59Z inclusive.
+&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>&lt;code>nanos&lt;/code>&lt;/td>
+&lt;td>&lt;code>int32&lt;/code>&lt;/td>
+&lt;td>
+Non-negative fractions of a second at nanosecond resolution. Negative
+second values with fractions must still have non-negative nanos values
+that count forward in time. Must be from 0 to 999,999,999 inclusive.
+&lt;/td>
+&lt;/tr>
+&lt;/tbody>
+&lt;/table>
+&lt;h2 id="type">Type&lt;/h2>
+&lt;p>A protocol buffer message type.&lt;/p>
+&lt;table>
+&lt;thead>
+&lt;tr>
+&lt;th>Field name&lt;/th>
+&lt;th>Type&lt;/th>
+&lt;th>Description&lt;/th>
+&lt;/tr>
+&lt;/thead>
+&lt;tbody>
+&lt;tr>
+&lt;td>&lt;code>name&lt;/code>&lt;/td>
+&lt;td>&lt;code>string&lt;/code>&lt;/td>
+&lt;td>The fully qualified message name.&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>&lt;code>fields&lt;/code>&lt;/td>
+&lt;td>
+&lt;code>&lt;a href="#field">Field&lt;/a>&lt;/code>
+&lt;/td>
+&lt;td>The list of fields.&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>&lt;code>oneofs&lt;/code>&lt;/td>
+&lt;td>&lt;code>string&lt;/code>&lt;/td>
+&lt;td>
+The list of types appearing in &lt;code>oneof&lt;/code> definitions in this
+type.
+&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>&lt;code>options&lt;/code>&lt;/td>
+&lt;td>
+&lt;code>&lt;a href="#option">Option&lt;/a>&lt;/code>
+&lt;/td>
+&lt;td>The protocol buffer options.&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>&lt;code>source_context&lt;/code>&lt;/td>
+&lt;td>
+&lt;code>&lt;a href="#source-context">SourceContext&lt;/a>&lt;/code>
+&lt;/td>
+&lt;td>The source context.&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>&lt;code>syntax&lt;/code>&lt;/td>
+&lt;td>
+&lt;code>&lt;a href="#syntax">Syntax&lt;/a>&lt;/code>
+&lt;/td>
+&lt;td>The source syntax.&lt;/td>
+&lt;/tr>
+&lt;/tbody>
+&lt;/table>
+&lt;h2 id="uint32-value">UInt32Value&lt;/h2>
+&lt;p>Wrapper message for &lt;code>uint32&lt;/code>.&lt;/p>
+&lt;p>The JSON representation for &lt;code>UInt32Value&lt;/code> is JSON number.&lt;/p>
+&lt;table>
+&lt;thead>
+&lt;tr>
+&lt;th>Field name&lt;/th>
+&lt;th>Type&lt;/th>
+&lt;th>Description&lt;/th>
+&lt;/tr>
+&lt;/thead>
+&lt;tbody>
+&lt;tr>
+&lt;td>&lt;code>value&lt;/code>&lt;/td>
+&lt;td>&lt;code>uint32&lt;/code>&lt;/td>
+&lt;td>The uint32 value.&lt;/td>
+&lt;/tr>
+&lt;/tbody>
+&lt;/table>
+&lt;h2 id="uint64-value">UInt64Value&lt;/h2>
+&lt;p>Wrapper message for &lt;code>uint64&lt;/code>.&lt;/p>
+&lt;p>The JSON representation for &lt;code>UInt64Value&lt;/code> is JSON string.&lt;/p>
+&lt;table>
+&lt;thead>
+&lt;tr>
+&lt;th>Field name&lt;/th>
+&lt;th>Type&lt;/th>
+&lt;th>Description&lt;/th>
+&lt;/tr>
+&lt;/thead>
+&lt;tbody>
+&lt;tr>
+&lt;td>&lt;code>value&lt;/code>&lt;/td>
+&lt;td>&lt;code>uint64&lt;/code>&lt;/td>
+&lt;td>The uint64 value.&lt;/td>
+&lt;/tr>
+&lt;/tbody>
+&lt;/table>
+&lt;h2 id="value">Value&lt;/h2>
+&lt;p>&lt;code>Value&lt;/code> represents a dynamically typed value which can be either null, a number,
+a string, a boolean, a recursive struct value, or a list of values. A producer
+of value is expected to set one of that variants, absence of any variant
+indicates an error.&lt;/p>
+&lt;p>The JSON representation for &lt;code>Value&lt;/code> is JSON value.&lt;/p>
+&lt;table>
+&lt;thead>
+&lt;tr>
+&lt;th>Field name&lt;/th>
+&lt;th>Type&lt;/th>
+&lt;th>Description&lt;/th>
+&lt;/tr>
+&lt;/thead>
+&lt;tbody>
+&lt;tr>
+&lt;td colspan="3">Union field, only one of the following:&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>&lt;code>null_value&lt;/code>&lt;/td>
+&lt;td>
+&lt;code>&lt;a href="#null-value">NullValue&lt;/a>&lt;/code>
+&lt;/td>
+&lt;td>Represents a null value.&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>&lt;code>number_value&lt;/code>&lt;/td>
+&lt;td>&lt;code>double&lt;/code>&lt;/td>
+&lt;td>
+Represents a double value. Note that attempting to serialize NaN or
+Infinity results in error. (We can't serialize these as string "NaN" or
+"Infinity" values like we do for regular fields, because they would
+parse as string_value, not number_value).
+&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>&lt;code>string_value&lt;/code>&lt;/td>
+&lt;td>&lt;code>string&lt;/code>&lt;/td>
+&lt;td>Represents a string value.&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>&lt;code>bool_value&lt;/code>&lt;/td>
+&lt;td>&lt;code>bool&lt;/code>&lt;/td>
+&lt;td>Represents a boolean value.&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>&lt;code>struct_value&lt;/code>&lt;/td>
+&lt;td>
+&lt;code>&lt;a href="#struct">Struct&lt;/a>&lt;/code>
+&lt;/td>
+&lt;td>Represents a structured value.&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>&lt;code>list_value&lt;/code>&lt;/td>
+&lt;td>
+&lt;code>&lt;a href="#list-value">ListValue&lt;/a>&lt;/code>
+&lt;/td>
+&lt;td>Represents a repeated &lt;code>Value&lt;/code>.&lt;/td>
+&lt;/tr>
+&lt;/tbody>
+&lt;/table></description></item></channel></rss>

@@ -1,0 +1,202 @@
+<!DOCTYPE html>
+<html devsite>
+<head>
+  <title>Google.Protobuf.Reflection.MessageDescriptor.FieldCollection Class Reference</title>
+  <link rel="stylesheet" href="/reference/csharp/api-docs/includes/stylesheet.css">
+</head>
+<body>
+  <div id="top"><!-- do not remove this div --></div>
+  <h1>Google.<wbr/>Protobuf.<wbr/>Reflection.<wbr/>MessageDescriptor.<wbr/>FieldCollection</h1>
+  <p>A collection to simplify retrieving the field accessor for a particular field. </p>
+  <h2>Summary</h2>
+  <table class="properties responsive">
+    <tr>
+      <th colspan="2">
+        <h3>Properties</h3>
+      </th>
+    </tr>
+    <tr>
+      <td>
+        <code><a href="#class_google_1_1_protobuf_1_1_reflection_1_1_message_descriptor_1_1_field_collection_1ac212cb8f13ece6aac7bd436be68eac0d">this[int number]</a></code>
+      </td>
+      <td>
+        <div>
+          <code><a href="/reference/csharp/api-docs/class/google/protobuf/reflection/field-descriptor.html#class_google_1_1_protobuf_1_1_reflection_1_1_field_descriptor">FieldDescriptor</a></code>
+        </div>
+        <div>Retrieves the descriptor for the field with the given number. </div>
+      </td>
+    </tr>
+    <tr>
+      <td>
+        <code><a href="#class_google_1_1_protobuf_1_1_reflection_1_1_message_descriptor_1_1_field_collection_1a5150e7db5c73e09072b4d324e8d15584">this[string name]</a></code>
+      </td>
+      <td>
+        <div>
+          <code><a href="/reference/csharp/api-docs/class/google/protobuf/reflection/field-descriptor.html#class_google_1_1_protobuf_1_1_reflection_1_1_field_descriptor">FieldDescriptor</a></code>
+        </div>
+        <div>Retrieves the descriptor for the field with the given name. </div>
+      </td>
+    </tr>
+  </table>
+  <table class="methods responsive">
+    <tr>
+      <th colspan="2">
+        <h3>Public functions</h3>
+      </th>
+    </tr>
+    <tr>
+      <td>
+        <code><a href="#class_google_1_1_protobuf_1_1_reflection_1_1_message_descriptor_1_1_field_collection_1a8a74bd1cfc1a88dce5123773bc494450">InDeclarationOrder</a>()</code>
+      </td>
+      <td>
+        <div>
+          <code>IList< <a href="/reference/csharp/api-docs/class/google/protobuf/reflection/field-descriptor.html#class_google_1_1_protobuf_1_1_reflection_1_1_field_descriptor">FieldDescriptor</a> ></code>
+        </div>
+        <div>Returns the fields in the message as an immutable list, in the order in which they are declared in the source .proto file. </div>
+      </td>
+    </tr>
+    <tr>
+      <td>
+        <code><a href="#class_google_1_1_protobuf_1_1_reflection_1_1_message_descriptor_1_1_field_collection_1a7d86b0b9de2e5a71837be744d83d7d83">InFieldNumberOrder</a>()</code>
+      </td>
+      <td>
+        <div>
+          <code>IList< <a href="/reference/csharp/api-docs/class/google/protobuf/reflection/field-descriptor.html#class_google_1_1_protobuf_1_1_reflection_1_1_field_descriptor">FieldDescriptor</a> ></code>
+        </div>
+        <div>Returns the fields in the message as an immutable list, in ascending field number order. </div>
+      </td>
+    </tr>
+  </table>
+  <h2>Properties</h2>
+  <div id="class_google_1_1_protobuf_1_1_reflection_1_1_message_descriptor_1_1_field_collection_1ac212cb8f13ece6aac7bd436be68eac0d">
+    <h3>this[int number]</h3>
+    <pre class="prettyprint"><a href="/reference/csharp/api-docs/class/google/protobuf/reflection/field-descriptor.html#class_google_1_1_protobuf_1_1_reflection_1_1_field_descriptor">FieldDescriptor</a> this[int number]</pre>
+    <div>
+      <p>Retrieves the descriptor for the field with the given number. </p>
+      <p />
+      <table class="details responsive">
+        <thead>
+          <th colspan="2">Details</th>
+        </thead>
+        <tbody>
+          <tr>
+            <td>Parameters</td>
+            <td>
+              <table class="function param responsive">
+                <tbody>
+                  <tr>
+                    <td>
+                      <code>number</code>
+                    </td>
+                    <td>
+                      <div>Number of the field to retrieve the descriptor for</div>
+                    </td>
+                  </tr>
+                </tbody>
+              </table>
+            </td>
+          </tr>
+          <tr>
+            <td>Exceptions</td>
+            <td>
+              <table class="function param responsive">
+                <tbody>
+                  <tr>
+                    <td>
+                      <code>KeyNotFoundException</code>
+                    </td>
+                    <td>
+                      <div>The message descriptor does not contain a field with the given number</div>
+                    </td>
+                  </tr>
+                </tbody>
+              </table>
+            </td>
+          </tr>
+          <tr>
+            <td>
+              <b>Returns</b>
+            </td>
+            <td>
+              <div>The accessor for the given field</div>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+  <div id="class_google_1_1_protobuf_1_1_reflection_1_1_message_descriptor_1_1_field_collection_1a5150e7db5c73e09072b4d324e8d15584">
+    <h3>this[string name]</h3>
+    <pre class="prettyprint"><a href="/reference/csharp/api-docs/class/google/protobuf/reflection/field-descriptor.html#class_google_1_1_protobuf_1_1_reflection_1_1_field_descriptor">FieldDescriptor</a> this[string name]</pre>
+    <div>
+      <p>Retrieves the descriptor for the field with the given name. </p>
+      <p />
+      <table class="details responsive">
+        <thead>
+          <th colspan="2">Details</th>
+        </thead>
+        <tbody>
+          <tr>
+            <td>Parameters</td>
+            <td>
+              <table class="function param responsive">
+                <tbody>
+                  <tr>
+                    <td>
+                      <code>name</code>
+                    </td>
+                    <td>
+                      <div>Name of the field to retrieve the descriptor for</div>
+                    </td>
+                  </tr>
+                </tbody>
+              </table>
+            </td>
+          </tr>
+          <tr>
+            <td>Exceptions</td>
+            <td>
+              <table class="function param responsive">
+                <tbody>
+                  <tr>
+                    <td>
+                      <code>KeyNotFoundException</code>
+                    </td>
+                    <td>
+                      <div>The message descriptor does not contain a field with the given name</div>
+                    </td>
+                  </tr>
+                </tbody>
+              </table>
+            </td>
+          </tr>
+          <tr>
+            <td>
+              <b>Returns</b>
+            </td>
+            <td>
+              <div>The descriptor for the given field</div>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+  <h2>Public functions</h2>
+  <div id="class_google_1_1_protobuf_1_1_reflection_1_1_message_descriptor_1_1_field_collection_1a8a74bd1cfc1a88dce5123773bc494450">
+    <h3>InDeclarationOrder</h3>
+    <pre class="prettyprint">IList< <a href="/reference/csharp/api-docs/class/google/protobuf/reflection/field-descriptor.html#class_google_1_1_protobuf_1_1_reflection_1_1_field_descriptor">FieldDescriptor</a> > InDeclarationOrder()</pre>
+    <div>
+      <p>Returns the fields in the message as an immutable list, in the order in which they are declared in the source .proto file. </p>
+    </div>
+  </div>
+  <div id="class_google_1_1_protobuf_1_1_reflection_1_1_message_descriptor_1_1_field_collection_1a7d86b0b9de2e5a71837be744d83d7d83">
+    <h3>InFieldNumberOrder</h3>
+    <pre class="prettyprint">IList< <a href="/reference/csharp/api-docs/class/google/protobuf/reflection/field-descriptor.html#class_google_1_1_protobuf_1_1_reflection_1_1_field_descriptor">FieldDescriptor</a> > InFieldNumberOrder()</pre>
+    <div>
+      <p>Returns the fields in the message as an immutable list, in ascending field number order. </p>
+      <p>Field numbers need not be contiguous, so there is no direct mapping from the index in the list to the field number; to retrieve a field by field number, it is better to use the <a href="/reference/csharp/api-docs/class/google/protobuf/reflection/message-descriptor/field-collection.html#class_google_1_1_protobuf_1_1_reflection_1_1_message_descriptor_1_1_field_collection">FieldCollection</a> indexer. </p>
+    </div>
+  </div>
+</body>
+</html>

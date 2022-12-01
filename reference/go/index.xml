@@ -1,0 +1,639 @@
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Protocol Buffers Documentation – Go Reference</title><link>/reference/go/</link><description>Recent content in Go Reference on Protocol Buffers Documentation</description><generator>Hugo -- gohugo.io</generator><language>en-us</language><atom:link href="/reference/go/index.xml" rel="self" type="application/rss+xml"/><item><title>Reference: Go Generated Code Guide</title><link>/reference/go/go-generated/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>/reference/go/go-generated/</guid><description>
+&lt;p>This page describes exactly what Go code the protocol buffer compiler generates
+for any given protocol definition. Any differences between proto2 and proto3
+generated code are highlighted - note that these differences are in the
+generated code as described in this document, not the base API, which are the
+same in both versions. You should read the
+&lt;a href="/programming-guides/proto">proto2 language guide&lt;/a> and/or the
+&lt;a href="/programming-guides/proto3">proto3 language guide&lt;/a> before reading this
+document.&lt;/p>
+&lt;h2 id="invocation">Compiler Invocation&lt;/h2>
+&lt;p>The protocol buffer compiler requires a plugin to generate Go code. Install it
+using Go 1.16 or higher by running:&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-shell" data-lang="shell">&lt;span style="display:flex;">&lt;span>go install google.golang.org/protobuf/cmd/protoc-gen-go@latest
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>This will install a &lt;code>protoc-gen-go&lt;/code> binary in &lt;code>$GOBIN&lt;/code>. Set the &lt;code>$GOBIN&lt;/code>
+environment variable to change the installation location. It must be in your
+&lt;code>$PATH&lt;/code> for the protocol buffer compiler to find it.&lt;/p>
+&lt;p>The protocol buffer compiler produces Go output when invoked with the &lt;code>go_out&lt;/code>
+flag. The argument to the &lt;code>go_out&lt;/code> flag is the directory where you want the
+compiler to write your Go output. The compiler creates a single source file for
+each &lt;code>.proto&lt;/code> file input. The name of the output file is created by replacing
+the &lt;code>.proto&lt;/code> extension with &lt;code>.pb.go&lt;/code>.&lt;/p>
+&lt;p>Where in the output directory the generated &lt;code>.pb.go&lt;/code> file is placed depends on
+the compiler flags. There are several output modes:&lt;/p>
+&lt;ul>
+&lt;li>If the &lt;code>paths=import&lt;/code> flag is specified, the output file is placed in a
+directory named after the Go package&amp;rsquo;s import path. For example, an input
+file &lt;code>protos/buzz.proto&lt;/code> with a Go import path of
+&lt;code>example.com/project/protos/fizz&lt;/code> results in an output file at
+&lt;code>example.com/project/protos/fizz/buzz.pb.go&lt;/code>. This is the default output
+mode if a &lt;code>paths&lt;/code> flag is not specified.&lt;/li>
+&lt;li>If the &lt;code>module=$PREFIX&lt;/code> flag is specified, the output file is placed in a
+directory named after the Go package&amp;rsquo;s import path, but with the specified
+directory prefix removed from the output filename. For example, an input
+file &lt;code>protos/buzz.proto&lt;/code> with a Go import path of
+&lt;code>example.com/project/protos/fizz&lt;/code> and &lt;code>example.com/project&lt;/code> specified as the
+&lt;code>module&lt;/code> prefix results in an output file at &lt;code>protos/fizz/buzz.pb.go&lt;/code>.
+Generating any Go packages outside the module path results in an error. This
+mode is useful for outputting generated files directly into a Go module.&lt;/li>
+&lt;li>If the &lt;code>paths=source_relative&lt;/code> flag is specified, the output file is placed
+in the same relative directory as the input file. For example, an input file
+&lt;code>protos/buzz.proto&lt;/code> results in an output file at &lt;code>protos/buzz.pb.go&lt;/code>.&lt;/li>
+&lt;/ul>
+&lt;p>Flags specific to &lt;code>protoc-gen-go&lt;/code> are provided by passing a &lt;code>go_opt&lt;/code> flag when
+invoking &lt;code>protoc&lt;/code>. Multiple &lt;code>go_opt&lt;/code> flags may be passed. For example, when
+running:&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-shell" data-lang="shell">&lt;span style="display:flex;">&lt;span>protoc --proto_path&lt;span style="color:#ce5c00;font-weight:bold">=&lt;/span>src --go_out&lt;span style="color:#ce5c00;font-weight:bold">=&lt;/span>out --go_opt&lt;span style="color:#ce5c00;font-weight:bold">=&lt;/span>&lt;span style="color:#000">paths&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">=&lt;/span>source_relative foo.proto bar/baz.proto
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>the compiler will read input files &lt;code>foo.proto&lt;/code> and &lt;code>bar/baz.proto&lt;/code> from within
+the &lt;code>src&lt;/code> directory, and write output files &lt;code>foo.pb.go&lt;/code> and &lt;code>bar/baz.pb.go&lt;/code> to
+the &lt;code>out&lt;/code> directory. The compiler automatically creates nested output
+sub-directories if necessary, but will not create the output directory itself.&lt;/p>
+&lt;h2 id="package">Packages&lt;/h2>
+&lt;p>In order to generate Go code, the Go package&amp;rsquo;s import path must be provided for
+every &lt;code>.proto&lt;/code> file (including those transitively depended upon by the &lt;code>.proto&lt;/code>
+files being generated). There are two ways to specify the Go import path:&lt;/p>
+&lt;ul>
+&lt;li>by declaring it within the &lt;code>.proto&lt;/code> file, or&lt;/li>
+&lt;li>by declaring it on the command line when invoking &lt;code>protoc&lt;/code>.&lt;/li>
+&lt;/ul>
+&lt;p>We recommend declaring it within the &lt;code>.proto&lt;/code> file so that the Go packages for
+&lt;code>.proto&lt;/code> files can be centrally identified with the &lt;code>.proto&lt;/code> files themselves
+and to simplify the set of flags passed when invoking &lt;code>protoc&lt;/code>. If the Go import
+path for a given &lt;code>.proto&lt;/code> file is provided by both the &lt;code>.proto&lt;/code> file itself and
+on the command line, then the latter takes precedence over the former.&lt;/p>
+&lt;p>The Go import path is locally specified in a &lt;code>.proto&lt;/code> file by declaring a
+&lt;code>go_package&lt;/code> option with the full import path of the Go package. Example usage:&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-proto" data-lang="proto">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#204a87;font-weight:bold">option&lt;/span> &lt;span style="color:#000">go_package&lt;/span> &lt;span style="color:#ce5c00;font-weight:bold">=&lt;/span> &lt;span style="color:#4e9a06">&amp;#34;example.com/project/protos/fizz&amp;#34;&lt;/span>&lt;span style="color:#000;font-weight:bold">;&lt;/span>&lt;span style="color:#a40000">
+&lt;/span>&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>The Go import path may be specified on the command line when invoking the
+compiler, by passing one or more &lt;code>M${PROTO_FILE}=${GO_IMPORT_PATH}&lt;/code> flags.
+Example usage:&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-shell" data-lang="shell">&lt;span style="display:flex;">&lt;span>protoc --proto_path&lt;span style="color:#ce5c00;font-weight:bold">=&lt;/span>src &lt;span style="color:#4e9a06">\
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#4e9a06">&lt;/span> --go_opt&lt;span style="color:#ce5c00;font-weight:bold">=&lt;/span>Mprotos/buzz.proto&lt;span style="color:#ce5c00;font-weight:bold">=&lt;/span>example.com/project/protos/fizz &lt;span style="color:#4e9a06">\
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#4e9a06">&lt;/span> --go_opt&lt;span style="color:#ce5c00;font-weight:bold">=&lt;/span>Mprotos/bar.proto&lt;span style="color:#ce5c00;font-weight:bold">=&lt;/span>example.com/project/protos/foo &lt;span style="color:#4e9a06">\
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#4e9a06">&lt;/span> protos/buzz.proto protos/bar.proto
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>Since the mapping of all &lt;code>.proto&lt;/code> files to their Go import paths can be quite
+large, this mode of specifying the Go import paths is generally performed by
+some build tool (e.g., &lt;a href="https://bazel.build/">Bazel&lt;/a>) that has
+control over the entire dependency tree. If there are duplicate entries for a
+given &lt;code>.proto&lt;/code> file, then the last one specified takes precedence.&lt;/p>
+&lt;p>For both the &lt;code>go_package&lt;/code> option and the &lt;code>M&lt;/code> flag, the value may include an
+explicit package name separated from the import path by a semicolon. For
+example: &lt;code>&amp;quot;example.com/protos/foo;package_name&amp;quot;&lt;/code>. This usage is discouraged
+since the package name will be derived by default from the import path in a
+reasonable manner.&lt;/p>
+&lt;p>The import path is used to determine which import statements must be generated
+when one &lt;code>.proto&lt;/code> file imports another &lt;code>.proto&lt;/code> file. For example, if &lt;code>a.proto&lt;/code>
+imports &lt;code>b.proto&lt;/code>, then the generated &lt;code>a.pb.go&lt;/code> file needs to import the Go
+package which contains the generated &lt;code>b.pb.go&lt;/code> file (unless both files are in
+the same package). The import path is also used to construct output filenames.
+See the &amp;quot;Compiler Invocation&amp;quot; section above for details.&lt;/p>
+&lt;p>There is no correlation between the Go import path and the
+&lt;a href="/programming-guides/proto3#packages">&lt;code>package&lt;/code> specifier&lt;/a> in the &lt;code>.proto&lt;/code>
+file. The latter is only relevant to the protobuf namespace, while the former is
+only relevant to the Go namespace. Also, there is no correlation between the Go
+import path and the &lt;code>.proto&lt;/code> import path.&lt;/p>
+&lt;h2 id="message">Messages&lt;/h2>
+&lt;p>Given a simple message declaration:&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-proto" data-lang="proto">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#204a87;font-weight:bold">message&lt;/span> &lt;span style="color:#000">Foo&lt;/span> &lt;span style="color:#000;font-weight:bold">{}&lt;/span>&lt;span style="color:#a40000">
+&lt;/span>&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>the protocol buffer compiler generates a struct called &lt;code>Foo&lt;/code>. A &lt;code>*Foo&lt;/code>
+implements the
+&lt;a href="https://pkg.go.dev/google.golang.org/protobuf/proto?tab=doc#Message">&lt;code>proto.Message&lt;/code>&lt;/a>
+interface.&lt;/p>
+&lt;p>The
+&lt;a href="https://pkg.go.dev/google.golang.org/protobuf/proto?tab=doc">&lt;code>proto&lt;/code> package&lt;/a>
+provides functions which operate on messages, including conversion to and from
+binary format.&lt;/p>
+&lt;p>The &lt;code>proto.Message&lt;/code> interface defines a &lt;code>ProtoReflect&lt;/code> method. This method
+returns a
+&lt;a href="https://pkg.go.dev/google.golang.org/protobuf/reflect/protoreflect?tab=doc#Message">&lt;code>protoreflect.Message&lt;/code>&lt;/a>
+which provides a reflection-based view of the message.&lt;/p>
+&lt;p>The &lt;code>optimize_for&lt;/code> option does not affect the output of the Go code generator.&lt;/p>
+&lt;h3 id="nested-types">Nested Types&lt;/h3>
+&lt;p>A message can be declared inside another message. For example:&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-proto" data-lang="proto">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#204a87;font-weight:bold">message&lt;/span> &lt;span style="color:#000">Foo&lt;/span> &lt;span style="color:#000;font-weight:bold">{&lt;/span>&lt;span style="color:#a40000">
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#a40000">&lt;/span> &lt;span style="color:#204a87;font-weight:bold">message&lt;/span> &lt;span style="color:#000">Bar&lt;/span> &lt;span style="color:#000;font-weight:bold">{&lt;/span>&lt;span style="color:#a40000">
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#a40000">&lt;/span> &lt;span style="color:#000;font-weight:bold">}&lt;/span>&lt;span style="color:#a40000">
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#a40000">&lt;/span>&lt;span style="color:#000;font-weight:bold">}&lt;/span>&lt;span style="color:#a40000">
+&lt;/span>&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>In this case, the compiler generates two structs: &lt;code>Foo&lt;/code> and &lt;code>Foo_Bar&lt;/code>.&lt;/p>
+&lt;h2 id="fields">Fields&lt;/h2>
+&lt;p>The protocol buffer compiler generates a struct field for each field defined
+within a message. The exact nature of this field depends on its type and whether
+it is a singular, repeated, map, or oneof field.&lt;/p>
+&lt;p>Note that the generated Go field names always use camel-case naming, even if the
+field name in the &lt;code>.proto&lt;/code> file uses lower-case with underscores
+(&lt;a href="/programming-guides/style">as it should&lt;/a>). The case-conversion works as
+follows:&lt;/p>
+&lt;ol>
+&lt;li>The first letter is capitalized for export. If the first character is an
+underscore, it is removed and a capital X is prepended.&lt;/li>
+&lt;li>If an interior underscore is followed by a lower-case letter, the underscore
+is removed, and the following letter is capitalized.&lt;/li>
+&lt;/ol>
+&lt;p>Thus, the proto field &lt;code>foo_bar_baz&lt;/code> becomes &lt;code>FooBarBaz&lt;/code> in Go, and
+&lt;code>_my_field_name_2&lt;/code> becomes &lt;code>XMyFieldName_2&lt;/code>.&lt;/p>
+&lt;h3 id="singular-scalar-proto2">Singular Scalar Fields (proto2)&lt;/h3>
+&lt;p>For either of these field definitions:&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-proto" data-lang="proto">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#204a87;font-weight:bold">optional&lt;/span> &lt;span style="color:#204a87;font-weight:bold">int32&lt;/span> &lt;span style="color:#000">foo&lt;/span> &lt;span style="color:#ce5c00;font-weight:bold">=&lt;/span> &lt;span style="color:#0000cf;font-weight:bold">1&lt;/span>&lt;span style="color:#000;font-weight:bold">;&lt;/span>&lt;span style="color:#a40000">
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#a40000">&lt;/span>&lt;span style="color:#204a87;font-weight:bold">required&lt;/span> &lt;span style="color:#204a87;font-weight:bold">int32&lt;/span> &lt;span style="color:#000">foo&lt;/span> &lt;span style="color:#ce5c00;font-weight:bold">=&lt;/span> &lt;span style="color:#0000cf;font-weight:bold">1&lt;/span>&lt;span style="color:#000;font-weight:bold">;&lt;/span>&lt;span style="color:#a40000">
+&lt;/span>&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>the compiler generates a struct with an &lt;code>*int32&lt;/code> field named &lt;code>Foo&lt;/code> and an
+accessor method &lt;code>GetFoo()&lt;/code> which returns the &lt;code>int32&lt;/code> value in &lt;code>Foo&lt;/code> or the
+default value if the field is unset. If the default is not explicitly set, the
+&lt;a href="https://golang.org/ref/spec#The_zero_value">zero value&lt;/a> of that type
+is used instead (&lt;code>0&lt;/code> for numbers, the empty string for strings).&lt;/p>
+&lt;p>For other scalar field types (including &lt;code>bool&lt;/code>, &lt;code>bytes&lt;/code>, and &lt;code>string&lt;/code>), &lt;code>*int32&lt;/code>
+is replaced with the corresponding Go type according to the
+&lt;a href="/programming-guides/proto#scalar">scalar value types table&lt;/a>.&lt;/p>
+&lt;h3 id="singular-scalar-proto3">Singular Scalar Fields (proto3)&lt;/h3>
+&lt;p>For this field definition:&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-proto" data-lang="proto">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#204a87;font-weight:bold">int32&lt;/span> &lt;span style="color:#000">foo&lt;/span> &lt;span style="color:#ce5c00;font-weight:bold">=&lt;/span> &lt;span style="color:#0000cf;font-weight:bold">1&lt;/span>&lt;span style="color:#000;font-weight:bold">;&lt;/span>&lt;span style="color:#a40000">
+&lt;/span>&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>The compiler will generate a struct with an &lt;code>int32&lt;/code> field named &lt;code>Foo&lt;/code> and an
+accessor method &lt;code>GetFoo()&lt;/code> which returns the &lt;code>int32&lt;/code> value in &lt;code>Foo&lt;/code> or the
+&lt;a href="https://golang.org/ref/spec#The_zero_value">zero value&lt;/a> of that type
+if the field is unset (&lt;code>0&lt;/code> for numbers, the empty string for strings).&lt;/p>
+&lt;p>For other scalar field types (including &lt;code>bool&lt;/code>, &lt;code>bytes&lt;/code>, and &lt;code>string&lt;/code>), &lt;code>int32&lt;/code>
+is replaced with the corresponding Go type according to the
+&lt;a href="/programming-guides/proto3#scalar">scalar value types table&lt;/a>. Unset values
+in the proto will be represented as the
+&lt;a href="https://golang.org/ref/spec#The_zero_value">zero value&lt;/a> of that type
+(&lt;code>0&lt;/code> for numbers, the empty string for strings).&lt;/p>
+&lt;h3 id="singular-message">Singular Message Fields&lt;/h3>
+&lt;p>Given the message type:&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-proto" data-lang="proto">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#204a87;font-weight:bold">message&lt;/span> &lt;span style="color:#000">Bar&lt;/span> &lt;span style="color:#000;font-weight:bold">{}&lt;/span>&lt;span style="color:#a40000">
+&lt;/span>&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>For a message with a &lt;code>Bar&lt;/code> field:&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-proto" data-lang="proto">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#8f5902;font-style:italic">// proto2
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#8f5902;font-style:italic">&lt;/span>&lt;span style="color:#204a87;font-weight:bold">message&lt;/span> &lt;span style="color:#000">Baz&lt;/span> &lt;span style="color:#000;font-weight:bold">{&lt;/span>&lt;span style="color:#a40000">
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#a40000">&lt;/span> &lt;span style="color:#204a87;font-weight:bold">optional&lt;/span> &lt;span style="color:#000">Bar&lt;/span> &lt;span style="color:#000">foo&lt;/span> &lt;span style="color:#ce5c00;font-weight:bold">=&lt;/span> &lt;span style="color:#0000cf;font-weight:bold">1&lt;/span>&lt;span style="color:#000;font-weight:bold">;&lt;/span>&lt;span style="color:#a40000">
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#a40000">&lt;/span> &lt;span style="color:#8f5902;font-style:italic">// The generated code is the same result if required instead of optional.
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#8f5902;font-style:italic">&lt;/span>&lt;span style="color:#000;font-weight:bold">}&lt;/span>&lt;span style="color:#a40000">
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#a40000">
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#a40000">&lt;/span>&lt;span style="color:#8f5902;font-style:italic">// proto3
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#8f5902;font-style:italic">&lt;/span>&lt;span style="color:#204a87;font-weight:bold">message&lt;/span> &lt;span style="color:#000">Baz&lt;/span> &lt;span style="color:#000;font-weight:bold">{&lt;/span>&lt;span style="color:#a40000">
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#a40000">&lt;/span> &lt;span style="color:#000">Bar&lt;/span> &lt;span style="color:#000">foo&lt;/span> &lt;span style="color:#ce5c00;font-weight:bold">=&lt;/span> &lt;span style="color:#0000cf;font-weight:bold">1&lt;/span>&lt;span style="color:#000;font-weight:bold">;&lt;/span>&lt;span style="color:#a40000">
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#a40000">&lt;/span>&lt;span style="color:#000;font-weight:bold">}&lt;/span>&lt;span style="color:#a40000">
+&lt;/span>&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>The compiler will generate a Go struct&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-go" data-lang="go">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#204a87;font-weight:bold">type&lt;/span> &lt;span style="color:#000">Baz&lt;/span> &lt;span style="color:#204a87;font-weight:bold">struct&lt;/span> &lt;span style="color:#000;font-weight:bold">{&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#000">Foo&lt;/span> &lt;span style="color:#ce5c00;font-weight:bold">*&lt;/span>&lt;span style="color:#000">Bar&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#000;font-weight:bold">}&lt;/span>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>Message fields can be set to &lt;code>nil&lt;/code>, which means that the field is unset,
+effectively clearing the field. This is not equivalent to setting the value to
+an &amp;quot;empty&amp;quot; instance of the message struct.&lt;/p>
+&lt;p>The compiler also generates a &lt;code>func (m *Baz) GetFoo() *Bar&lt;/code> helper function.
+This function returns a &lt;code>nil&lt;/code> &lt;code>*Bar&lt;/code> if &lt;code>m&lt;/code> is nil or &lt;code>foo&lt;/code> is unset. This makes
+it possible to chain get calls without intermediate &lt;code>nil&lt;/code> checks.&lt;/p>
+&lt;h3 id="repeated">Repeated Fields&lt;/h3>
+&lt;p>Each repeated field generates a slice of &lt;code>T&lt;/code> field in the struct in Go, where
+&lt;code>T&lt;/code> is the field&amp;rsquo;s element type. For this message with a repeated field:&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-proto" data-lang="proto">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#204a87;font-weight:bold">message&lt;/span> &lt;span style="color:#000">Baz&lt;/span> &lt;span style="color:#000;font-weight:bold">{&lt;/span>&lt;span style="color:#a40000">
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#a40000">&lt;/span> &lt;span style="color:#204a87;font-weight:bold">repeated&lt;/span> &lt;span style="color:#000">Bar&lt;/span> &lt;span style="color:#000">foo&lt;/span> &lt;span style="color:#ce5c00;font-weight:bold">=&lt;/span> &lt;span style="color:#0000cf;font-weight:bold">1&lt;/span>&lt;span style="color:#000;font-weight:bold">;&lt;/span>&lt;span style="color:#a40000">
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#a40000">&lt;/span>&lt;span style="color:#000;font-weight:bold">}&lt;/span>&lt;span style="color:#a40000">
+&lt;/span>&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>the compiler generates the Go struct:&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-go" data-lang="go">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#204a87;font-weight:bold">type&lt;/span> &lt;span style="color:#000">Baz&lt;/span> &lt;span style="color:#204a87;font-weight:bold">struct&lt;/span> &lt;span style="color:#000;font-weight:bold">{&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#000">Foo&lt;/span> &lt;span style="color:#000;font-weight:bold">[]&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">*&lt;/span>&lt;span style="color:#000">Bar&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#000;font-weight:bold">}&lt;/span>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>Likewise, for the field definition &lt;code>repeated bytes foo = 1;&lt;/code> the compiler will
+generate a Go struct with a &lt;code>[][]byte&lt;/code> field named &lt;code>Foo&lt;/code>. For a repeated
+&lt;a href="#enum">enumeration&lt;/a> &lt;code>repeated MyEnum bar = 2;&lt;/code>, the compiler generates a struct
+with a &lt;code>[]MyEnum&lt;/code> field called &lt;code>Bar&lt;/code>.&lt;/p>
+&lt;p>The following example shows how to set the field:&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-go" data-lang="go">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#000">baz&lt;/span> &lt;span style="color:#ce5c00;font-weight:bold">:=&lt;/span> &lt;span style="color:#ce5c00;font-weight:bold">&amp;amp;&lt;/span>&lt;span style="color:#000">Baz&lt;/span>&lt;span style="color:#000;font-weight:bold">{&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#000">Foo&lt;/span>&lt;span style="color:#000;font-weight:bold">:&lt;/span> &lt;span style="color:#000;font-weight:bold">[]&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">*&lt;/span>&lt;span style="color:#000">Bar&lt;/span>&lt;span style="color:#000;font-weight:bold">{&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#000;font-weight:bold">{},&lt;/span> &lt;span style="color:#8f5902;font-style:italic">// First element.
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#8f5902;font-style:italic">&lt;/span> &lt;span style="color:#000;font-weight:bold">{},&lt;/span> &lt;span style="color:#8f5902;font-style:italic">// Second element.
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#8f5902;font-style:italic">&lt;/span> &lt;span style="color:#000;font-weight:bold">},&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#000;font-weight:bold">}&lt;/span>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>To access the field, you can do the following:&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-go" data-lang="go">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#000">foo&lt;/span> &lt;span style="color:#ce5c00;font-weight:bold">:=&lt;/span> &lt;span style="color:#000">baz&lt;/span>&lt;span style="color:#000;font-weight:bold">.&lt;/span>&lt;span style="color:#000">GetFoo&lt;/span>&lt;span style="color:#000;font-weight:bold">()&lt;/span> &lt;span style="color:#8f5902;font-style:italic">// foo type is []*Bar.
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#8f5902;font-style:italic">&lt;/span>&lt;span style="color:#000">b1&lt;/span> &lt;span style="color:#ce5c00;font-weight:bold">:=&lt;/span> &lt;span style="color:#000">foo&lt;/span>&lt;span style="color:#000;font-weight:bold">[&lt;/span>&lt;span style="color:#0000cf;font-weight:bold">0&lt;/span>&lt;span style="color:#000;font-weight:bold">]&lt;/span> &lt;span style="color:#8f5902;font-style:italic">// b1 type is *Bar, the first element in foo.
+&lt;/span>&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h3 id="map">Map Fields&lt;/h3>
+&lt;p>Each map field generates a field in the struct of type &lt;code>map[TKey]TValue&lt;/code> where
+&lt;code>TKey&lt;/code> is the field&amp;rsquo;s key type and &lt;code>TValue&lt;/code> is the field&amp;rsquo;s value type. For this
+message with a map field:&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-proto" data-lang="proto">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#204a87;font-weight:bold">message&lt;/span> &lt;span style="color:#000">Bar&lt;/span> &lt;span style="color:#000;font-weight:bold">{}&lt;/span>&lt;span style="color:#a40000">
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#a40000">
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#a40000">&lt;/span>&lt;span style="color:#204a87;font-weight:bold">message&lt;/span> &lt;span style="color:#000">Baz&lt;/span> &lt;span style="color:#000;font-weight:bold">{&lt;/span>&lt;span style="color:#a40000">
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#a40000">&lt;/span> &lt;span style="color:#000">map&lt;/span>&lt;span style="color:#000;font-weight:bold">&amp;lt;&lt;/span>&lt;span style="color:#204a87;font-weight:bold">string&lt;/span>&lt;span style="color:#000;font-weight:bold">,&lt;/span> &lt;span style="color:#000">Bar&lt;/span>&lt;span style="color:#000;font-weight:bold">&amp;gt;&lt;/span> &lt;span style="color:#000">foo&lt;/span> &lt;span style="color:#ce5c00;font-weight:bold">=&lt;/span> &lt;span style="color:#0000cf;font-weight:bold">1&lt;/span>&lt;span style="color:#000;font-weight:bold">;&lt;/span>&lt;span style="color:#a40000">
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#a40000">&lt;/span>&lt;span style="color:#000;font-weight:bold">}&lt;/span>&lt;span style="color:#a40000">
+&lt;/span>&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>the compiler generates the Go struct:&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-go" data-lang="go">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#204a87;font-weight:bold">type&lt;/span> &lt;span style="color:#000">Baz&lt;/span> &lt;span style="color:#204a87;font-weight:bold">struct&lt;/span> &lt;span style="color:#000;font-weight:bold">{&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#000">Foo&lt;/span> &lt;span style="color:#204a87;font-weight:bold">map&lt;/span>&lt;span style="color:#000;font-weight:bold">[&lt;/span>&lt;span style="color:#204a87;font-weight:bold">string&lt;/span>&lt;span style="color:#000;font-weight:bold">]&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">*&lt;/span>&lt;span style="color:#000">Bar&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#000;font-weight:bold">}&lt;/span>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h3 id="oneof">Oneof Fields&lt;/h3>
+&lt;p>For a oneof field, the protobuf compiler generates a single field with an
+interface type &lt;code>isMessageName_MyField&lt;/code>. It also generates a struct for each of
+the &lt;a href="#singular-scalar-proto2">singular fields&lt;/a> within the oneof. These all
+implement this &lt;code>isMessageName_MyField&lt;/code> interface.&lt;/p>
+&lt;p>For this message with a oneof field:&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-proto" data-lang="proto">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#204a87;font-weight:bold">package&lt;/span> &lt;span style="color:#000">account&lt;/span>&lt;span style="color:#000;font-weight:bold">;&lt;/span>&lt;span style="color:#a40000">
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#a40000">&lt;/span>&lt;span style="color:#204a87;font-weight:bold">message&lt;/span> &lt;span style="color:#000">Profile&lt;/span> &lt;span style="color:#000;font-weight:bold">{&lt;/span>&lt;span style="color:#a40000">
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#a40000">&lt;/span> &lt;span style="color:#204a87;font-weight:bold">oneof&lt;/span> &lt;span style="color:#000">avatar&lt;/span> &lt;span style="color:#000;font-weight:bold">{&lt;/span>&lt;span style="color:#a40000">
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#a40000">&lt;/span> &lt;span style="color:#204a87;font-weight:bold">string&lt;/span> &lt;span style="color:#000">image_url&lt;/span> &lt;span style="color:#ce5c00;font-weight:bold">=&lt;/span> &lt;span style="color:#0000cf;font-weight:bold">1&lt;/span>&lt;span style="color:#000;font-weight:bold">;&lt;/span>&lt;span style="color:#a40000">
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#a40000">&lt;/span> &lt;span style="color:#204a87;font-weight:bold">bytes&lt;/span> &lt;span style="color:#000">image_data&lt;/span> &lt;span style="color:#ce5c00;font-weight:bold">=&lt;/span> &lt;span style="color:#0000cf;font-weight:bold">2&lt;/span>&lt;span style="color:#000;font-weight:bold">;&lt;/span>&lt;span style="color:#a40000">
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#a40000">&lt;/span> &lt;span style="color:#000;font-weight:bold">}&lt;/span>&lt;span style="color:#a40000">
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#a40000">&lt;/span>&lt;span style="color:#000;font-weight:bold">}&lt;/span>&lt;span style="color:#a40000">
+&lt;/span>&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>the compiler generates the structs:&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-go" data-lang="go">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#204a87;font-weight:bold">type&lt;/span> &lt;span style="color:#000">Profile&lt;/span> &lt;span style="color:#204a87;font-weight:bold">struct&lt;/span> &lt;span style="color:#000;font-weight:bold">{&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#8f5902;font-style:italic">// Types that are valid to be assigned to Avatar:
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#8f5902;font-style:italic">&lt;/span> &lt;span style="color:#8f5902;font-style:italic">// *Profile_ImageUrl
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#8f5902;font-style:italic">&lt;/span> &lt;span style="color:#8f5902;font-style:italic">// *Profile_ImageData
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#8f5902;font-style:italic">&lt;/span> &lt;span style="color:#000">Avatar&lt;/span> &lt;span style="color:#000">isProfile_Avatar&lt;/span> &lt;span style="color:#4e9a06">`protobuf_oneof:&amp;#34;avatar&amp;#34;`&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#000;font-weight:bold">}&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#204a87;font-weight:bold">type&lt;/span> &lt;span style="color:#000">Profile_ImageUrl&lt;/span> &lt;span style="color:#204a87;font-weight:bold">struct&lt;/span> &lt;span style="color:#000;font-weight:bold">{&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#000">ImageUrl&lt;/span> &lt;span style="color:#204a87;font-weight:bold">string&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#000;font-weight:bold">}&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#204a87;font-weight:bold">type&lt;/span> &lt;span style="color:#000">Profile_ImageData&lt;/span> &lt;span style="color:#204a87;font-weight:bold">struct&lt;/span> &lt;span style="color:#000;font-weight:bold">{&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#000">ImageData&lt;/span> &lt;span style="color:#000;font-weight:bold">[]&lt;/span>&lt;span style="color:#204a87;font-weight:bold">byte&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#000;font-weight:bold">}&lt;/span>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>Both &lt;code>*Profile_ImageUrl&lt;/code> and &lt;code>*Profile_ImageData&lt;/code> implement &lt;code>isProfile_Avatar&lt;/code>
+by providing an empty &lt;code>isProfile_Avatar()&lt;/code> method.&lt;/p>
+&lt;p>The following example shows how to set the field:&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-go" data-lang="go">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#000">p1&lt;/span> &lt;span style="color:#ce5c00;font-weight:bold">:=&lt;/span> &lt;span style="color:#ce5c00;font-weight:bold">&amp;amp;&lt;/span>&lt;span style="color:#000">account&lt;/span>&lt;span style="color:#000;font-weight:bold">.&lt;/span>&lt;span style="color:#000">Profile&lt;/span>&lt;span style="color:#000;font-weight:bold">{&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#000">Avatar&lt;/span>&lt;span style="color:#000;font-weight:bold">:&lt;/span> &lt;span style="color:#ce5c00;font-weight:bold">&amp;amp;&lt;/span>&lt;span style="color:#000">account&lt;/span>&lt;span style="color:#000;font-weight:bold">.&lt;/span>&lt;span style="color:#000">Profile_ImageUrl&lt;/span>&lt;span style="color:#000;font-weight:bold">{&lt;/span>&lt;span style="color:#4e9a06">&amp;#34;http://example.com/image.png&amp;#34;&lt;/span>&lt;span style="color:#000;font-weight:bold">},&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#000;font-weight:bold">}&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#8f5902;font-style:italic">// imageData is []byte
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#8f5902;font-style:italic">&lt;/span>&lt;span style="color:#000">imageData&lt;/span> &lt;span style="color:#ce5c00;font-weight:bold">:=&lt;/span> &lt;span style="color:#000">getImageData&lt;/span>&lt;span style="color:#000;font-weight:bold">()&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#000">p2&lt;/span> &lt;span style="color:#ce5c00;font-weight:bold">:=&lt;/span> &lt;span style="color:#ce5c00;font-weight:bold">&amp;amp;&lt;/span>&lt;span style="color:#000">account&lt;/span>&lt;span style="color:#000;font-weight:bold">.&lt;/span>&lt;span style="color:#000">Profile&lt;/span>&lt;span style="color:#000;font-weight:bold">{&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#000">Avatar&lt;/span>&lt;span style="color:#000;font-weight:bold">:&lt;/span> &lt;span style="color:#ce5c00;font-weight:bold">&amp;amp;&lt;/span>&lt;span style="color:#000">account&lt;/span>&lt;span style="color:#000;font-weight:bold">.&lt;/span>&lt;span style="color:#000">Profile_ImageData&lt;/span>&lt;span style="color:#000;font-weight:bold">{&lt;/span>&lt;span style="color:#000">imageData&lt;/span>&lt;span style="color:#000;font-weight:bold">},&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#000;font-weight:bold">}&lt;/span>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>To access the field, you can use a type switch on the value to handle the
+different message types.&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-go" data-lang="go">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#204a87;font-weight:bold">switch&lt;/span> &lt;span style="color:#000">x&lt;/span> &lt;span style="color:#ce5c00;font-weight:bold">:=&lt;/span> &lt;span style="color:#000">m&lt;/span>&lt;span style="color:#000;font-weight:bold">.&lt;/span>&lt;span style="color:#000">Avatar&lt;/span>&lt;span style="color:#000;font-weight:bold">.(&lt;/span>&lt;span style="color:#204a87;font-weight:bold">type&lt;/span>&lt;span style="color:#000;font-weight:bold">)&lt;/span> &lt;span style="color:#000;font-weight:bold">{&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#204a87;font-weight:bold">case&lt;/span> &lt;span style="color:#ce5c00;font-weight:bold">*&lt;/span>&lt;span style="color:#000">account&lt;/span>&lt;span style="color:#000;font-weight:bold">.&lt;/span>&lt;span style="color:#000">Profile_ImageUrl&lt;/span>&lt;span style="color:#000;font-weight:bold">:&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#8f5902;font-style:italic">// Load profile image based on URL
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#8f5902;font-style:italic">&lt;/span> &lt;span style="color:#8f5902;font-style:italic">// using x.ImageUrl
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#8f5902;font-style:italic">&lt;/span>&lt;span style="color:#204a87;font-weight:bold">case&lt;/span> &lt;span style="color:#ce5c00;font-weight:bold">*&lt;/span>&lt;span style="color:#000">account&lt;/span>&lt;span style="color:#000;font-weight:bold">.&lt;/span>&lt;span style="color:#000">Profile_ImageData&lt;/span>&lt;span style="color:#000;font-weight:bold">:&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#8f5902;font-style:italic">// Load profile image based on bytes
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#8f5902;font-style:italic">&lt;/span> &lt;span style="color:#8f5902;font-style:italic">// using x.ImageData
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#8f5902;font-style:italic">&lt;/span>&lt;span style="color:#204a87;font-weight:bold">case&lt;/span> &lt;span style="color:#204a87;font-weight:bold">nil&lt;/span>&lt;span style="color:#000;font-weight:bold">:&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#8f5902;font-style:italic">// The field is not set.
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#8f5902;font-style:italic">&lt;/span>&lt;span style="color:#204a87;font-weight:bold">default&lt;/span>&lt;span style="color:#000;font-weight:bold">:&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#204a87;font-weight:bold">return&lt;/span> &lt;span style="color:#000">fmt&lt;/span>&lt;span style="color:#000;font-weight:bold">.&lt;/span>&lt;span style="color:#000">Errorf&lt;/span>&lt;span style="color:#000;font-weight:bold">(&lt;/span>&lt;span style="color:#4e9a06">&amp;#34;Profile.Avatar has unexpected type %T&amp;#34;&lt;/span>&lt;span style="color:#000;font-weight:bold">,&lt;/span> &lt;span style="color:#000">x&lt;/span>&lt;span style="color:#000;font-weight:bold">)&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#000;font-weight:bold">}&lt;/span>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>The compiler also generates get methods &lt;code>func (m *Profile) GetImageUrl() string&lt;/code>
+and &lt;code>func (m *Profile) GetImageData() []byte&lt;/code>. Each get function returns the
+value for that field or the zero value if it is not set.&lt;/p>
+&lt;h2 id="enum">Enumerations&lt;/h2>
+&lt;p>Given an enumeration like:&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-proto" data-lang="proto">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#204a87;font-weight:bold">message&lt;/span> &lt;span style="color:#000">SearchRequest&lt;/span> &lt;span style="color:#000;font-weight:bold">{&lt;/span>&lt;span style="color:#a40000">
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#a40000">&lt;/span> &lt;span style="color:#204a87;font-weight:bold">enum&lt;/span> &lt;span style="color:#000">Corpus&lt;/span> &lt;span style="color:#000;font-weight:bold">{&lt;/span>&lt;span style="color:#a40000">
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#a40000">&lt;/span> &lt;span style="color:#000">UNIVERSAL&lt;/span> &lt;span style="color:#ce5c00;font-weight:bold">=&lt;/span> &lt;span style="color:#0000cf;font-weight:bold">0&lt;/span>&lt;span style="color:#000;font-weight:bold">;&lt;/span>&lt;span style="color:#a40000">
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#a40000">&lt;/span> &lt;span style="color:#000">WEB&lt;/span> &lt;span style="color:#ce5c00;font-weight:bold">=&lt;/span> &lt;span style="color:#0000cf;font-weight:bold">1&lt;/span>&lt;span style="color:#000;font-weight:bold">;&lt;/span>&lt;span style="color:#a40000">
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#a40000">&lt;/span> &lt;span style="color:#000">IMAGES&lt;/span> &lt;span style="color:#ce5c00;font-weight:bold">=&lt;/span> &lt;span style="color:#0000cf;font-weight:bold">2&lt;/span>&lt;span style="color:#000;font-weight:bold">;&lt;/span>&lt;span style="color:#a40000">
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#a40000">&lt;/span> &lt;span style="color:#000">LOCAL&lt;/span> &lt;span style="color:#ce5c00;font-weight:bold">=&lt;/span> &lt;span style="color:#0000cf;font-weight:bold">3&lt;/span>&lt;span style="color:#000;font-weight:bold">;&lt;/span>&lt;span style="color:#a40000">
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#a40000">&lt;/span> &lt;span style="color:#000">NEWS&lt;/span> &lt;span style="color:#ce5c00;font-weight:bold">=&lt;/span> &lt;span style="color:#0000cf;font-weight:bold">4&lt;/span>&lt;span style="color:#000;font-weight:bold">;&lt;/span>&lt;span style="color:#a40000">
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#a40000">&lt;/span> &lt;span style="color:#000">PRODUCTS&lt;/span> &lt;span style="color:#ce5c00;font-weight:bold">=&lt;/span> &lt;span style="color:#0000cf;font-weight:bold">5&lt;/span>&lt;span style="color:#000;font-weight:bold">;&lt;/span>&lt;span style="color:#a40000">
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#a40000">&lt;/span> &lt;span style="color:#000">VIDEO&lt;/span> &lt;span style="color:#ce5c00;font-weight:bold">=&lt;/span> &lt;span style="color:#0000cf;font-weight:bold">6&lt;/span>&lt;span style="color:#000;font-weight:bold">;&lt;/span>&lt;span style="color:#a40000">
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#a40000">&lt;/span> &lt;span style="color:#000;font-weight:bold">}&lt;/span>&lt;span style="color:#a40000">
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#a40000">&lt;/span> &lt;span style="color:#000">Corpus&lt;/span> &lt;span style="color:#000">corpus&lt;/span> &lt;span style="color:#ce5c00;font-weight:bold">=&lt;/span> &lt;span style="color:#0000cf;font-weight:bold">1&lt;/span>&lt;span style="color:#000;font-weight:bold">;&lt;/span>&lt;span style="color:#a40000">
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#a40000">&lt;/span> &lt;span style="color:#ce5c00;font-weight:bold">...&lt;/span>&lt;span style="color:#a40000">
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#a40000">&lt;/span>&lt;span style="color:#000;font-weight:bold">}&lt;/span>&lt;span style="color:#a40000">
+&lt;/span>&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>the protocol buffer compiler generates a type and a series of constants with
+that type.&lt;/p>
+&lt;p>For enums within a message (like the one above), the type name begins with the
+message name:&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-go" data-lang="go">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#204a87;font-weight:bold">type&lt;/span> &lt;span style="color:#000">SearchRequest_Corpus&lt;/span> &lt;span style="color:#204a87;font-weight:bold">int32&lt;/span>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>For a package-level enum:&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-proto" data-lang="proto">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#204a87;font-weight:bold">enum&lt;/span> &lt;span style="color:#000">Foo&lt;/span> &lt;span style="color:#000;font-weight:bold">{&lt;/span>&lt;span style="color:#a40000">
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#a40000">&lt;/span> &lt;span style="color:#000">DEFAULT_BAR&lt;/span> &lt;span style="color:#ce5c00;font-weight:bold">=&lt;/span> &lt;span style="color:#0000cf;font-weight:bold">0&lt;/span>&lt;span style="color:#000;font-weight:bold">;&lt;/span>&lt;span style="color:#a40000">
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#a40000">&lt;/span> &lt;span style="color:#000">BAR_BELLS&lt;/span> &lt;span style="color:#ce5c00;font-weight:bold">=&lt;/span> &lt;span style="color:#0000cf;font-weight:bold">1&lt;/span>&lt;span style="color:#000;font-weight:bold">;&lt;/span>&lt;span style="color:#a40000">
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#a40000">&lt;/span> &lt;span style="color:#000">BAR_B_CUE&lt;/span> &lt;span style="color:#ce5c00;font-weight:bold">=&lt;/span> &lt;span style="color:#0000cf;font-weight:bold">2&lt;/span>&lt;span style="color:#000;font-weight:bold">;&lt;/span>&lt;span style="color:#a40000">
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#a40000">&lt;/span>&lt;span style="color:#000;font-weight:bold">}&lt;/span>&lt;span style="color:#a40000">
+&lt;/span>&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>the Go type name is unmodified from the proto enum name:&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-go" data-lang="go">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#204a87;font-weight:bold">type&lt;/span> &lt;span style="color:#000">Foo&lt;/span> &lt;span style="color:#204a87;font-weight:bold">int32&lt;/span>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>This type has a &lt;code>String()&lt;/code> method that returns the name of a given value.&lt;/p>
+&lt;p>The &lt;code>Enum()&lt;/code> method initializes freshly allocated memory with a given value and
+returns the corresponding pointer:&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-go" data-lang="go">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#204a87;font-weight:bold">func&lt;/span> &lt;span style="color:#000;font-weight:bold">(&lt;/span>&lt;span style="color:#000">Foo&lt;/span>&lt;span style="color:#000;font-weight:bold">)&lt;/span> &lt;span style="color:#000">Enum&lt;/span>&lt;span style="color:#000;font-weight:bold">()&lt;/span> &lt;span style="color:#ce5c00;font-weight:bold">*&lt;/span>&lt;span style="color:#000">Foo&lt;/span>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>The protocol buffer compiler generates a constant for each value in the enum.
+For enums within a message, the constants begin with the enclosing message&amp;rsquo;s
+name:&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-go" data-lang="go">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#204a87;font-weight:bold">const&lt;/span> &lt;span style="color:#000;font-weight:bold">(&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#000">SearchRequest_UNIVERSAL&lt;/span> &lt;span style="color:#000">SearchRequest_Corpus&lt;/span> &lt;span style="color:#000;font-weight:bold">=&lt;/span> &lt;span style="color:#0000cf;font-weight:bold">0&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#000">SearchRequest_WEB&lt;/span> &lt;span style="color:#000">SearchRequest_Corpus&lt;/span> &lt;span style="color:#000;font-weight:bold">=&lt;/span> &lt;span style="color:#0000cf;font-weight:bold">1&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#000">SearchRequest_IMAGES&lt;/span> &lt;span style="color:#000">SearchRequest_Corpus&lt;/span> &lt;span style="color:#000;font-weight:bold">=&lt;/span> &lt;span style="color:#0000cf;font-weight:bold">2&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#000">SearchRequest_LOCAL&lt;/span> &lt;span style="color:#000">SearchRequest_Corpus&lt;/span> &lt;span style="color:#000;font-weight:bold">=&lt;/span> &lt;span style="color:#0000cf;font-weight:bold">3&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#000">SearchRequest_NEWS&lt;/span> &lt;span style="color:#000">SearchRequest_Corpus&lt;/span> &lt;span style="color:#000;font-weight:bold">=&lt;/span> &lt;span style="color:#0000cf;font-weight:bold">4&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#000">SearchRequest_PRODUCTS&lt;/span> &lt;span style="color:#000">SearchRequest_Corpus&lt;/span> &lt;span style="color:#000;font-weight:bold">=&lt;/span> &lt;span style="color:#0000cf;font-weight:bold">5&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#000">SearchRequest_VIDEO&lt;/span> &lt;span style="color:#000">SearchRequest_Corpus&lt;/span> &lt;span style="color:#000;font-weight:bold">=&lt;/span> &lt;span style="color:#0000cf;font-weight:bold">6&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#000;font-weight:bold">)&lt;/span>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>For a package-level enum, the constants begin with the enum name instead:&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-go" data-lang="go">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#204a87;font-weight:bold">const&lt;/span> &lt;span style="color:#000;font-weight:bold">(&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#000">Foo_DEFAULT_BAR&lt;/span> &lt;span style="color:#000">Foo&lt;/span> &lt;span style="color:#000;font-weight:bold">=&lt;/span> &lt;span style="color:#0000cf;font-weight:bold">0&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#000">Foo_BAR_BELLS&lt;/span> &lt;span style="color:#000">Foo&lt;/span> &lt;span style="color:#000;font-weight:bold">=&lt;/span> &lt;span style="color:#0000cf;font-weight:bold">1&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#000">Foo_BAR_B_CUE&lt;/span> &lt;span style="color:#000">Foo&lt;/span> &lt;span style="color:#000;font-weight:bold">=&lt;/span> &lt;span style="color:#0000cf;font-weight:bold">2&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#000;font-weight:bold">)&lt;/span>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>The protobuf compiler also generates a map from integer values to the string
+names and a map from the names to the values:&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-go" data-lang="go">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#204a87;font-weight:bold">var&lt;/span> &lt;span style="color:#000">Foo_name&lt;/span> &lt;span style="color:#000;font-weight:bold">=&lt;/span> &lt;span style="color:#204a87;font-weight:bold">map&lt;/span>&lt;span style="color:#000;font-weight:bold">[&lt;/span>&lt;span style="color:#204a87;font-weight:bold">int32&lt;/span>&lt;span style="color:#000;font-weight:bold">]&lt;/span>&lt;span style="color:#204a87;font-weight:bold">string&lt;/span>&lt;span style="color:#000;font-weight:bold">{&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#0000cf;font-weight:bold">0&lt;/span>&lt;span style="color:#000;font-weight:bold">:&lt;/span> &lt;span style="color:#4e9a06">&amp;#34;DEFAULT_BAR&amp;#34;&lt;/span>&lt;span style="color:#000;font-weight:bold">,&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#0000cf;font-weight:bold">1&lt;/span>&lt;span style="color:#000;font-weight:bold">:&lt;/span> &lt;span style="color:#4e9a06">&amp;#34;BAR_BELLS&amp;#34;&lt;/span>&lt;span style="color:#000;font-weight:bold">,&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#0000cf;font-weight:bold">2&lt;/span>&lt;span style="color:#000;font-weight:bold">:&lt;/span> &lt;span style="color:#4e9a06">&amp;#34;BAR_B_CUE&amp;#34;&lt;/span>&lt;span style="color:#000;font-weight:bold">,&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#000;font-weight:bold">}&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#204a87;font-weight:bold">var&lt;/span> &lt;span style="color:#000">Foo_value&lt;/span> &lt;span style="color:#000;font-weight:bold">=&lt;/span> &lt;span style="color:#204a87;font-weight:bold">map&lt;/span>&lt;span style="color:#000;font-weight:bold">[&lt;/span>&lt;span style="color:#204a87;font-weight:bold">string&lt;/span>&lt;span style="color:#000;font-weight:bold">]&lt;/span>&lt;span style="color:#204a87;font-weight:bold">int32&lt;/span>&lt;span style="color:#000;font-weight:bold">{&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#4e9a06">&amp;#34;DEFAULT_BAR&amp;#34;&lt;/span>&lt;span style="color:#000;font-weight:bold">:&lt;/span> &lt;span style="color:#0000cf;font-weight:bold">0&lt;/span>&lt;span style="color:#000;font-weight:bold">,&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#4e9a06">&amp;#34;BAR_BELLS&amp;#34;&lt;/span>&lt;span style="color:#000;font-weight:bold">:&lt;/span> &lt;span style="color:#0000cf;font-weight:bold">1&lt;/span>&lt;span style="color:#000;font-weight:bold">,&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#4e9a06">&amp;#34;BAR_B_CUE&amp;#34;&lt;/span>&lt;span style="color:#000;font-weight:bold">:&lt;/span> &lt;span style="color:#0000cf;font-weight:bold">2&lt;/span>&lt;span style="color:#000;font-weight:bold">,&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#000;font-weight:bold">}&lt;/span>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>Note that the &lt;code>.proto&lt;/code> language allows multiple enum symbols to have the same
+numeric value. Symbols with the same numeric value are synonyms. These are
+represented in Go in exactly the same way, with multiple names corresponding to
+the same numeric value. The reverse mapping contains a single entry for the
+numeric value to the name which appears first in the .proto file.&lt;/p>
+&lt;h2 id="extensions">Extensions (proto2)&lt;/h2>
+&lt;p>Given an extension definition:&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-proto" data-lang="proto">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#204a87;font-weight:bold">extend&lt;/span> &lt;span style="color:#000">Foo&lt;/span> &lt;span style="color:#000;font-weight:bold">{&lt;/span>&lt;span style="color:#a40000">
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#a40000">&lt;/span> &lt;span style="color:#204a87;font-weight:bold">optional&lt;/span> &lt;span style="color:#204a87;font-weight:bold">int32&lt;/span> &lt;span style="color:#000">bar&lt;/span> &lt;span style="color:#ce5c00;font-weight:bold">=&lt;/span> &lt;span style="color:#0000cf;font-weight:bold">123&lt;/span>&lt;span style="color:#000;font-weight:bold">;&lt;/span>&lt;span style="color:#a40000">
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#a40000">&lt;/span>&lt;span style="color:#000;font-weight:bold">}&lt;/span>&lt;span style="color:#a40000">
+&lt;/span>&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>The protocol buffer compiler will generate a
+&lt;a href="https://pkg.go.dev/google.golang.org/protobuf/reflect/protoreflect?tab=doc#ExtensionType">&lt;code>protoreflect.ExtensionType&lt;/code>&lt;/a>
+value named &lt;code>E_Bar&lt;/code>. This value may be used with the
+&lt;a href="https://pkg.go.dev/google.golang.org/protobuf/proto?tab=doc#GetExtension">&lt;code>proto.GetExtension&lt;/code>&lt;/a>,
+&lt;a href="https://pkg.go.dev/google.golang.org/protobuf/proto?tab=doc#SetExtension">&lt;code>proto.SetExtension&lt;/code>&lt;/a>,
+&lt;a href="https://pkg.go.dev/google.golang.org/protobuf/proto?tab=doc#HasExtension">&lt;code>proto.HasExtension&lt;/code>&lt;/a>,
+and
+&lt;a href="https://pkg.go.dev/google.golang.org/protobuf/proto?tab=doc#ClearExtension">&lt;code>proto.ClearExtension&lt;/code>&lt;/a>
+functions to access an extension in a message. The &lt;code>GetExtension&lt;/code> function and
+&lt;code>SetExtension&lt;/code> functions respectively accept and return an &lt;code>interface{}&lt;/code> value
+containing the extension value type.&lt;/p>
+&lt;p>For singular scalar extension fields, the extension value type is the
+corresponding Go type from the
+&lt;a href="/programming-guides/proto3#scalar">scalar value types table&lt;/a>.&lt;/p>
+&lt;p>For singular embedded message extension fields, the extension value type is
+&lt;code>*M&lt;/code>, where &lt;code>M&lt;/code> is the field message type.&lt;/p>
+&lt;p>For repeated extension fields, the extension value type is a slice of the
+singular type.&lt;/p>
+&lt;p>For example, given the following definition:&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-proto" data-lang="proto">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#204a87;font-weight:bold">extend&lt;/span> &lt;span style="color:#000">Foo&lt;/span> &lt;span style="color:#000;font-weight:bold">{&lt;/span>&lt;span style="color:#a40000">
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#a40000">&lt;/span> &lt;span style="color:#204a87;font-weight:bold">optional&lt;/span> &lt;span style="color:#204a87;font-weight:bold">int32&lt;/span> &lt;span style="color:#000">singular_int32&lt;/span> &lt;span style="color:#ce5c00;font-weight:bold">=&lt;/span> &lt;span style="color:#0000cf;font-weight:bold">1&lt;/span>&lt;span style="color:#000;font-weight:bold">;&lt;/span>&lt;span style="color:#a40000">
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#a40000">&lt;/span> &lt;span style="color:#204a87;font-weight:bold">repeated&lt;/span> &lt;span style="color:#204a87;font-weight:bold">bytes&lt;/span> &lt;span style="color:#000">repeated_string&lt;/span> &lt;span style="color:#ce5c00;font-weight:bold">=&lt;/span> &lt;span style="color:#0000cf;font-weight:bold">2&lt;/span>&lt;span style="color:#000;font-weight:bold">;&lt;/span>&lt;span style="color:#a40000">
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#a40000">&lt;/span> &lt;span style="color:#204a87;font-weight:bold">optional&lt;/span> &lt;span style="color:#000">Bar&lt;/span> &lt;span style="color:#000">singular_message&lt;/span> &lt;span style="color:#ce5c00;font-weight:bold">=&lt;/span> &lt;span style="color:#0000cf;font-weight:bold">3&lt;/span>&lt;span style="color:#000;font-weight:bold">;&lt;/span>&lt;span style="color:#a40000">
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#a40000">&lt;/span>&lt;span style="color:#000;font-weight:bold">}&lt;/span>&lt;span style="color:#a40000">
+&lt;/span>&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>Extension values may be accessed as:&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-go" data-lang="go">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#000">m&lt;/span> &lt;span style="color:#ce5c00;font-weight:bold">:=&lt;/span> &lt;span style="color:#ce5c00;font-weight:bold">&amp;amp;&lt;/span>&lt;span style="color:#000">somepb&lt;/span>&lt;span style="color:#000;font-weight:bold">.&lt;/span>&lt;span style="color:#000">Foo&lt;/span>&lt;span style="color:#000;font-weight:bold">{}&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#000">proto&lt;/span>&lt;span style="color:#000;font-weight:bold">.&lt;/span>&lt;span style="color:#000">SetExtension&lt;/span>&lt;span style="color:#000;font-weight:bold">(&lt;/span>&lt;span style="color:#000">m&lt;/span>&lt;span style="color:#000;font-weight:bold">,&lt;/span> &lt;span style="color:#000">extpb&lt;/span>&lt;span style="color:#000;font-weight:bold">.&lt;/span>&lt;span style="color:#000">E_SingularInt32&lt;/span>&lt;span style="color:#000;font-weight:bold">,&lt;/span> &lt;span style="color:#204a87">int32&lt;/span>&lt;span style="color:#000;font-weight:bold">(&lt;/span>&lt;span style="color:#0000cf;font-weight:bold">1&lt;/span>&lt;span style="color:#000;font-weight:bold">))&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#000">proto&lt;/span>&lt;span style="color:#000;font-weight:bold">.&lt;/span>&lt;span style="color:#000">SetExtension&lt;/span>&lt;span style="color:#000;font-weight:bold">(&lt;/span>&lt;span style="color:#000">m&lt;/span>&lt;span style="color:#000;font-weight:bold">,&lt;/span> &lt;span style="color:#000">extpb&lt;/span>&lt;span style="color:#000;font-weight:bold">.&lt;/span>&lt;span style="color:#000">E_RepeatedString&lt;/span>&lt;span style="color:#000;font-weight:bold">,&lt;/span> &lt;span style="color:#000;font-weight:bold">[]&lt;/span>&lt;span style="color:#204a87;font-weight:bold">string&lt;/span>&lt;span style="color:#000;font-weight:bold">{&lt;/span>&lt;span style="color:#4e9a06">&amp;#34;a&amp;#34;&lt;/span>&lt;span style="color:#000;font-weight:bold">,&lt;/span> &lt;span style="color:#4e9a06">&amp;#34;b&amp;#34;&lt;/span>&lt;span style="color:#000;font-weight:bold">,&lt;/span> &lt;span style="color:#4e9a06">&amp;#34;c&amp;#34;&lt;/span>&lt;span style="color:#000;font-weight:bold">})&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#000">proto&lt;/span>&lt;span style="color:#000;font-weight:bold">.&lt;/span>&lt;span style="color:#000">SetExtension&lt;/span>&lt;span style="color:#000;font-weight:bold">(&lt;/span>&lt;span style="color:#000">m&lt;/span>&lt;span style="color:#000;font-weight:bold">,&lt;/span> &lt;span style="color:#000">extpb&lt;/span>&lt;span style="color:#000;font-weight:bold">.&lt;/span>&lt;span style="color:#000">E_SingularMessage&lt;/span>&lt;span style="color:#000;font-weight:bold">,&lt;/span> &lt;span style="color:#ce5c00;font-weight:bold">&amp;amp;&lt;/span>&lt;span style="color:#000">extpb&lt;/span>&lt;span style="color:#000;font-weight:bold">.&lt;/span>&lt;span style="color:#000">Bar&lt;/span>&lt;span style="color:#000;font-weight:bold">{})&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#000">v1&lt;/span> &lt;span style="color:#ce5c00;font-weight:bold">:=&lt;/span> &lt;span style="color:#000">proto&lt;/span>&lt;span style="color:#000;font-weight:bold">.&lt;/span>&lt;span style="color:#000">GetExtension&lt;/span>&lt;span style="color:#000;font-weight:bold">(&lt;/span>&lt;span style="color:#000">m&lt;/span>&lt;span style="color:#000;font-weight:bold">,&lt;/span> &lt;span style="color:#000">extpb&lt;/span>&lt;span style="color:#000;font-weight:bold">.&lt;/span>&lt;span style="color:#000">E_SingularInt32&lt;/span>&lt;span style="color:#000;font-weight:bold">).(&lt;/span>&lt;span style="color:#204a87;font-weight:bold">int32&lt;/span>&lt;span style="color:#000;font-weight:bold">)&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#000">v2&lt;/span> &lt;span style="color:#ce5c00;font-weight:bold">:=&lt;/span> &lt;span style="color:#000">proto&lt;/span>&lt;span style="color:#000;font-weight:bold">.&lt;/span>&lt;span style="color:#000">GetExtension&lt;/span>&lt;span style="color:#000;font-weight:bold">(&lt;/span>&lt;span style="color:#000">m&lt;/span>&lt;span style="color:#000;font-weight:bold">,&lt;/span> &lt;span style="color:#000">extpb&lt;/span>&lt;span style="color:#000;font-weight:bold">.&lt;/span>&lt;span style="color:#000">E_RepeatedString&lt;/span>&lt;span style="color:#000;font-weight:bold">).([][]&lt;/span>&lt;span style="color:#204a87;font-weight:bold">byte&lt;/span>&lt;span style="color:#000;font-weight:bold">)&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#000">v3&lt;/span> &lt;span style="color:#ce5c00;font-weight:bold">:=&lt;/span> &lt;span style="color:#000">proto&lt;/span>&lt;span style="color:#000;font-weight:bold">.&lt;/span>&lt;span style="color:#000">GetExtension&lt;/span>&lt;span style="color:#000;font-weight:bold">(&lt;/span>&lt;span style="color:#000">m&lt;/span>&lt;span style="color:#000;font-weight:bold">,&lt;/span> &lt;span style="color:#000">extpb&lt;/span>&lt;span style="color:#000;font-weight:bold">.&lt;/span>&lt;span style="color:#000">E_SingularMessage&lt;/span>&lt;span style="color:#000;font-weight:bold">).(&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">*&lt;/span>&lt;span style="color:#000">extpb&lt;/span>&lt;span style="color:#000;font-weight:bold">.&lt;/span>&lt;span style="color:#000">Bar&lt;/span>&lt;span style="color:#000;font-weight:bold">)&lt;/span>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>Extensions can be declared nested inside of another type. For example, a common
+pattern is to do something like this:&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-proto" data-lang="proto">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#204a87;font-weight:bold">message&lt;/span> &lt;span style="color:#000">Baz&lt;/span> &lt;span style="color:#000;font-weight:bold">{&lt;/span>&lt;span style="color:#a40000">
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#a40000">&lt;/span> &lt;span style="color:#204a87;font-weight:bold">extend&lt;/span> &lt;span style="color:#000">Foo&lt;/span> &lt;span style="color:#000;font-weight:bold">{&lt;/span>&lt;span style="color:#a40000">
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#a40000">&lt;/span> &lt;span style="color:#204a87;font-weight:bold">optional&lt;/span> &lt;span style="color:#000">Baz&lt;/span> &lt;span style="color:#000">foo_ext&lt;/span> &lt;span style="color:#ce5c00;font-weight:bold">=&lt;/span> &lt;span style="color:#0000cf;font-weight:bold">124&lt;/span>&lt;span style="color:#000;font-weight:bold">;&lt;/span>&lt;span style="color:#a40000">
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#a40000">&lt;/span> &lt;span style="color:#000;font-weight:bold">}&lt;/span>&lt;span style="color:#a40000">
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#a40000">&lt;/span>&lt;span style="color:#000;font-weight:bold">}&lt;/span>&lt;span style="color:#a40000">
+&lt;/span>&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>In this case, the &lt;code>ExtensionType&lt;/code> value is named &lt;code>E_Baz_Foo&lt;/code>.&lt;/p>
+&lt;h2 id="service">Services&lt;/h2>
+&lt;p>The Go code generator does not produce output for services by default. If you
+enable the &lt;a href="https://www.grpc.io/">gRPC&lt;/a> plugin (see the
+&lt;a href="https://github.com/grpc/grpc-go/tree/master/examples">gRPC Go Quickstart guide&lt;/a>)
+then code will be generated to support gRPC.&lt;/p></description></item><item><title>Reference: Go FAQ</title><link>/reference/go/faq/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>/reference/go/faq/</guid><description>
+&lt;h2 id="versions">Versions&lt;/h2>
+&lt;h3 id="modules">What&amp;rsquo;s the difference between &lt;code>github.com/golang/protobuf&lt;/code> and &lt;code>google.golang.org/protobuf&lt;/code>?&lt;/h3>
+&lt;p>The
+&lt;a href="https://pkg.go.dev/github.com/golang/protobuf?tab=overview">&lt;code>github.com/golang/protobuf&lt;/code>&lt;/a>
+module is the original Go protocol buffer API.&lt;/p>
+&lt;p>The
+&lt;a href="https://pkg.go.dev/google.golang.org/protobuf?tab=overview">&lt;code>google.golang.org/protobuf&lt;/code>&lt;/a>
+module is an updated version of this API designed for simplicity, ease of use,
+and safety. The flagship features of the updated API are support for reflection
+and a separation of the user-facing API from the underlying implementation.&lt;/p>
+&lt;p>We recommend that you use &lt;code>google.golang.org/protobuf&lt;/code> in new code.&lt;/p>
+&lt;p>Version &lt;code>v1.4.0&lt;/code> and higher of &lt;code>github.com/golang/protobuf&lt;/code> wrap the new
+implementation and permit programs to adopt the new API incrementally. For
+example, the well-known types defined in &lt;code>github.com/golang/protobuf/ptypes&lt;/code> are
+simply aliases of those defined in the newer module. Thus,
+&lt;a href="https://pkg.go.dev/google.golang.org/protobuf/types/known/emptypb">&lt;code>google.golang.org/protobuf/types/known/emptypb&lt;/code>&lt;/a>
+and
+&lt;a href="https://pkg.go.dev/github.com/golang/protobuf/ptypes/empty">&lt;code>github.com/golang/protobuf/ptypes/empty&lt;/code>&lt;/a>
+may be used interchangeably.&lt;/p>
+&lt;h3 id="proto-versions">What are &lt;code>proto1&lt;/code>, &lt;code>proto2&lt;/code>, and &lt;code>proto3&lt;/code>?&lt;/h3>
+&lt;p>These are revisions of the protocol buffer &lt;em>language&lt;/em>. It is different from the
+Go &lt;em>implementation&lt;/em> of protobufs.&lt;/p>
+&lt;ul>
+&lt;li>
+&lt;p>&lt;code>proto3&lt;/code> is the current version of the language. This is the most commonly
+used version of the language. We encourage new code to use proto3.&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>&lt;code>proto2&lt;/code> is an older version of the language. Despite being superseded by
+proto3, proto2 is still fully supported.&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>&lt;code>proto1&lt;/code> is an obsolete version of the language. It was never released as
+open source.&lt;/p>
+&lt;/li>
+&lt;/ul>
+&lt;h3 id="message-types">There are several different &lt;code>Message&lt;/code> types. Which should I use?&lt;/h3>
+&lt;ul>
+&lt;li>
+&lt;p>&lt;a href="https://pkg.go.dev/google.golang.org/protobuf/proto?tab=doc#Message">&lt;code>&amp;quot;google.golang.org/protobuf/proto&amp;quot;.Message&lt;/code>&lt;/a>
+is an interface type implemented by all messages generated by the current
+version of the protocol buffer compiler. Functions that operate on arbitrary
+messages, such as
+&lt;a href="https://pkg.go.dev/google.golang.org/protobuf/proto?tab=doc#Marshal">&lt;code>proto.Marshal&lt;/code>&lt;/a>
+or
+&lt;a href="https://pkg.go.dev/google.golang.org/protobuf/proto?tab=doc#Clone">&lt;code>proto.Clone&lt;/code>&lt;/a>,
+accept or return this type.&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>&lt;a href="https://pkg.go.dev/google.golang.org/protobuf/reflect/protoreflect?tab=doc#Message">&lt;code>&amp;quot;google.golang.org/protobuf/reflect/protoreflect&amp;quot;.Message&lt;/code>&lt;/a>
+is an interface type describing a reflection view of a message.&lt;/p>
+&lt;p>Call the &lt;code>ProtoReflect&lt;/code> method on a &lt;code>proto.Message&lt;/code> to get a
+&lt;code>protoreflect.Message&lt;/code>.&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>&lt;a href="https://pkg.go.dev/google.golang.org/protobuf/reflect/protoreflect?tab=doc#ProtoMessage">&lt;code>&amp;quot;google.golang.org/protobuf/reflect/protoreflect&amp;quot;.ProtoMessage&lt;/code>&lt;/a>
+is an alias of &lt;code>&amp;quot;google.golang.org/protobuf/proto&amp;quot;.Message&lt;/code>. The two types
+are interchangeable.&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>&lt;a href="https://pkg.go.dev/github.com/golang/protobuf/proto?tab=doc#Message">&lt;code>&amp;quot;github.com/golang/protobuf/proto&amp;quot;.Message&lt;/code>&lt;/a>
+is an interface type defined by the legacy Go protocol buffer API. All
+generated message types implement this interface, but the interface does not
+describe the behavior expected from these messages. New code should avoid
+using this type.&lt;/p>
+&lt;/li>
+&lt;/ul>
+&lt;h2 id="common-problems">Common problems&lt;/h2>
+&lt;h3 id="working-directory">&amp;ldquo;&lt;code>go install&lt;/code>&amp;rdquo;: &lt;code>working directory is not part of a module&lt;/code>&lt;/h3>
+&lt;p>On Go 1.15 and below, you have set the environment variable &lt;code>GO111MODULE=on&lt;/code> and
+are running the &lt;code>go install&lt;/code> command outside of a module directory. Set
+&lt;code>GO111MODULE=auto&lt;/code>, or unset the environment variable.&lt;/p>
+&lt;p>On Go 1.16 and above, &lt;code>go install&lt;/code> can be invoked outside of a module by
+specifying an explicit version: &lt;code>go install google.golang.org/protobuf/cmd/protoc-gen-go@latest&lt;/code>&lt;/p>
+&lt;h3 id="enforce-version">&lt;code>constant -1 overflows protoimpl.EnforceVersion&lt;/code>&lt;/h3>
+&lt;p>You are using a generated &lt;code>.pb.go&lt;/code> file which requires a newer version of the
+&lt;code>&amp;quot;google.golang.org/protobuf&amp;quot;&lt;/code> module.&lt;/p>
+&lt;p>Update to a newer version with:&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-shell" data-lang="shell">&lt;span style="display:flex;">&lt;span>go get -u google.golang.org/protobuf/proto
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h3 id="enforce-version-apiv1">&lt;code>undefined: &amp;quot;github.com/golang/protobuf/proto&amp;quot;.ProtoPackageIsVersion4&lt;/code>&lt;/h3>
+&lt;p>You are using a generated &lt;code>.pb.go&lt;/code> file which requires a newer version of the
+&lt;code>&amp;quot;github.com/golang/protobuf&amp;quot;&lt;/code> module.&lt;/p>
+&lt;p>Update to a newer version with:&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-shell" data-lang="shell">&lt;span style="display:flex;">&lt;span>go get -u github.com/golang/protobuf/proto
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h3 id="namespace-conflict">What is a protocol buffer namespace conflict?&lt;/h3>
+&lt;p>All protocol buffers declarations linked into a Go binary are inserted into a
+global registry.&lt;/p>
+&lt;p>Every protobuf declaration (for example, enums, enum values, or messages) has an
+absolute name, which is the concatenation of the
+&lt;a href="/programming-guides/proto#packages">package name&lt;/a> with
+the relative name of the declaration in the &lt;code>.proto&lt;/code> source file (for example,
+&lt;code>my.proto.package.MyMessage.NestedMessage&lt;/code>). The protobuf language assumes that
+all declarations are universally unique.&lt;/p>
+&lt;p>If two protobuf declarations linked into a Go binary have the same name, then
+this leads to a namespace conflict, and it is impossible for the registry to
+properly resolve that declaration by name. Depending on which version of Go
+protobufs is being used, this will either panic at init-time or silently drop
+the conflict and lead to a potential bug later during runtime.&lt;/p>
+&lt;h3 id="fix-namespace-conflict">How do I fix a protocol buffer namespace conflict?&lt;/h3>
+&lt;p>The way to best fix a namespace conflict depends on the reason why a conflict is
+occurring.&lt;/p>
+&lt;p>Common ways that namespace conflicts occur:&lt;/p>
+&lt;ul>
+&lt;li>
+&lt;p>&lt;strong>Vendored .proto files.&lt;/strong> When a single &lt;code>.proto&lt;/code> file is generated into two
+or more Go packages and linked into the same Go binary, it conflicts on
+every protobuf declaration in the generated Go packages. This typically
+occurs when a &lt;code>.proto&lt;/code> file is vendored and a Go package is generated from
+it, or the generated Go package itself is vendored. Users should avoid
+vendoring and instead depend on a centralized Go package for that &lt;code>.proto&lt;/code>
+file.&lt;/p>
+&lt;ul>
+&lt;li>If a &lt;code>.proto&lt;/code> file is owned by an external party and is lacking a
+&lt;code>go_package&lt;/code> option, then you should coordinate with the owner of that
+&lt;code>.proto&lt;/code> file to specify a centralized Go package that a plurality of
+users can all depend on.&lt;/li>
+&lt;/ul>
+&lt;/li>
+&lt;li>
+&lt;p>&lt;strong>Missing or generic proto package names.&lt;/strong> If a &lt;code>.proto&lt;/code> file does not
+specify a package name or uses an overly generic package name (for example,
+&amp;ldquo;my_service&amp;rdquo;), then there is a high probability that declarations within
+that file will conflict with other declarations elsewhere in the universe.
+We recommend that every &lt;code>.proto&lt;/code> file have a package name that is
+deliberately chosen to be universally unique (for example, prefixed with the
+name of a company).&lt;/p>
+&lt;ul>
+&lt;li>Warning: Retroactively changing the package name on a &lt;code>.proto&lt;/code> file can
+potentially cause the use of extension fields or messages stored in
+&lt;code>google.protobuf.Any&lt;/code> to stop working properly.&lt;/li>
+&lt;/ul>
+&lt;/li>
+&lt;/ul>
+&lt;p>Starting with v1.26.0 of the &lt;code>google.golang.org/protobuf&lt;/code> module, a hard error
+will be reported when a Go program starts up that has multiple conflicting
+protobuf names linked into it. While it is preferable that the source of the
+conflict be fixed, the fatal error can be immediately worked around in one of
+two ways:&lt;/p>
+&lt;ol>
+&lt;li>
+&lt;p>&lt;strong>At compile time.&lt;/strong> The default behavior for handling conflicts can be
+specified at compile time with a linker-initialized variable: &lt;code>go build -ldflags &amp;quot;-X google.golang.org/protobuf/reflect/protoregistry.conflictPolicy=warn&amp;quot;&lt;/code>&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>&lt;strong>At program execution.&lt;/strong> The behavior for handling conflicts when executing
+a particular Go binary can be set with an environment variable:
+&lt;code>GOLANG_PROTOBUF_REGISTRATION_CONFLICT=warn ./main&lt;/code>&lt;/p>
+&lt;/li>
+&lt;/ol>
+&lt;h3 id="deepequal">Why does &lt;code>reflect.DeepEqual&lt;/code> behave unexpectedly with protobuf messages?&lt;/h3>
+&lt;p>Generated protocol buffer message types include internal state which can vary
+even between equivalent messages.&lt;/p>
+&lt;p>In addition, the &lt;code>reflect.DeepEqual&lt;/code> function is not aware of the semantics of
+protocol buffer messages, and can report differences where none exist. For
+example, a map field containing a &lt;code>nil&lt;/code> map and one containing a zero-length,
+non-&lt;code>nil&lt;/code> map are semantically equivalent, but will be reported as unequal by
+&lt;code>reflect.DeepEqual&lt;/code>.&lt;/p>
+&lt;p>Use the
+&lt;a href="https://pkg.go.dev/google.golang.org/protobuf/proto#Equal">&lt;code>proto.Equal&lt;/code>&lt;/a>
+function to compare message values.&lt;/p>
+&lt;p>In tests, you can also use the
+&lt;a href="https://pkg.go.dev/github.com/google/go-cmp/cmp?tab=doc">&lt;code>&amp;quot;github.com/google/go-cmp/cmp&amp;quot;&lt;/code>&lt;/a>
+package with the
+&lt;a href="https://pkg.go.dev/google.golang.org/protobuf/testing/protocmp#Transform">&lt;code>protocmp.Transform()&lt;/code>&lt;/a>
+option. The &lt;code>cmp&lt;/code> package can compare arbitrary data structures, and
+&lt;a href="https://pkg.go.dev/github.com/google/go-cmp/cmp#Diff">&lt;code>cmp.Diff&lt;/code>&lt;/a> produces
+human-readable reports of the differences between values.&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-go" data-lang="go">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#204a87;font-weight:bold">if&lt;/span> &lt;span style="color:#000">diff&lt;/span> &lt;span style="color:#ce5c00;font-weight:bold">:=&lt;/span> &lt;span style="color:#000">cmp&lt;/span>&lt;span style="color:#000;font-weight:bold">.&lt;/span>&lt;span style="color:#000">Diff&lt;/span>&lt;span style="color:#000;font-weight:bold">(&lt;/span>&lt;span style="color:#000">a&lt;/span>&lt;span style="color:#000;font-weight:bold">,&lt;/span> &lt;span style="color:#000">b&lt;/span>&lt;span style="color:#000;font-weight:bold">,&lt;/span> &lt;span style="color:#000">protocmp&lt;/span>&lt;span style="color:#000;font-weight:bold">.&lt;/span>&lt;span style="color:#000">Transform&lt;/span>&lt;span style="color:#000;font-weight:bold">());&lt;/span> &lt;span style="color:#000">diff&lt;/span> &lt;span style="color:#ce5c00;font-weight:bold">!=&lt;/span> &lt;span style="color:#4e9a06">&amp;#34;&amp;#34;&lt;/span> &lt;span style="color:#000;font-weight:bold">{&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#000">t&lt;/span>&lt;span style="color:#000;font-weight:bold">.&lt;/span>&lt;span style="color:#000">Errorf&lt;/span>&lt;span style="color:#000;font-weight:bold">(&lt;/span>&lt;span style="color:#4e9a06">&amp;#34;unexpected difference:\n%v&amp;#34;&lt;/span>&lt;span style="color:#000;font-weight:bold">,&lt;/span> &lt;span style="color:#000">diff&lt;/span>&lt;span style="color:#000;font-weight:bold">)&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#000;font-weight:bold">}&lt;/span>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h2 id="hyrums-law">Hyrum&amp;rsquo;s Law&lt;/h2>
+&lt;h3 id="hyrums-law">What is Hyrum&amp;rsquo;s Law, and why is it in this FAQ?&lt;/h3>
+&lt;p>&lt;a href="https://www.hyrumslaw.com/">Hyrum&amp;rsquo;s Law&lt;/a> states:&lt;/p>
+&lt;blockquote>
+&lt;p>With a sufficient number of users of an API, it does not matter what you
+promise in the contract: all observable behaviors of your system will be
+depended on by somebody.&lt;/p>
+&lt;/blockquote>
+&lt;p>A design goal of the latest version of the Go protocol buffer API is to avoid,
+where possible, providing observable behaviors that we cannot promise to keep
+stable in the future. It is our philosophy that deliberate instability in areas
+where we make no promises is better than giving the illusion of stability, only
+for that to change in the future after a project has potentially been long
+depending on that false assumption.&lt;/p>
+&lt;h3 id="unstable-errors">Why does the text of errors keep changing?&lt;/h3>
+&lt;p>Tests depending on the exact text of errors are brittle and break often when
+that text changes. To discourage unsafe use of error text in tests, the text of
+errors produced by this module is deliberately unstable.&lt;/p>
+&lt;p>If you need to identify whether an error is produced by the
+&lt;a href="https://pkg.go.dev/mod/google.golang.org/protobuf">&lt;code>protobuf&lt;/code>&lt;/a> module, we
+guarantee that all errors will match
+&lt;a href="https://pkg.go.dev/google.golang.org/protobuf/proto?tab=doc#Error">&lt;code>proto.Error&lt;/code>&lt;/a>
+according to &lt;a href="https://pkg.go.dev/errors?tab=doc#Is">&lt;code>errors.Is&lt;/code>&lt;/a>.&lt;/p>
+&lt;h3 id="unstable-json">Why does the output of &lt;a href="https://pkg.go.dev/google.golang.org/protobuf/encoding/protojson">&lt;code>protojson&lt;/code>&lt;/a> keep changing?&lt;/h3>
+&lt;p>We make no promises about the long-term stability of Go&amp;rsquo;s implementation of the
+&lt;a href="/programming-guides/proto3#json">JSON format for protocol buffers&lt;/a>.
+The specification only specifies what is valid JSON, but provides no
+specification for a &lt;em>canonical&lt;/em> format for how a marshaler ought to &lt;em>exactly&lt;/em>
+format a given message. To avoid giving the illusion that the output is stable,
+we deliberately introduce minor differences so that byte-for-byte comparisons
+are likely to fail.&lt;/p>
+&lt;p>To gain some degree of output stability, we recommend running the output through
+a JSON formatter.&lt;/p>
+&lt;h3 id="unstable-text">Why does the output of &lt;a href="https://pkg.go.dev/google.golang.org/protobuf/encoding/prototext">&lt;code>prototext&lt;/code>&lt;/a> keep changing?&lt;/h3>
+&lt;p>We make no promises about the long-term stability of Go&amp;rsquo;s implementation of the
+text format. There is no canonical specification of the protobuf text format,
+and we would like to preserve the ability to make improvements in the
+&lt;code>prototext&lt;/code> package output in the future. Since we don&amp;rsquo;t promise stability in
+the package&amp;rsquo;s output, we&amp;rsquo;ve deliberately introduced instability to discourage
+users from depending on it.&lt;/p>
+&lt;p>To obtain some degree of stability, we recommend passing the output of
+&lt;code>prototext&lt;/code> through the
+&lt;a href="https://github.com/protocolbuffers/txtpbfmt">&lt;code>txtpbfmt&lt;/code>&lt;/a> program. The formatter
+can be directly invoked in Go using
+&lt;a href="https://pkg.go.dev/github.com/protocolbuffers/txtpbfmt/parser?tab=doc#Format">&lt;code>parser.Format&lt;/code>&lt;/a>.&lt;/p>
+&lt;h2 id="miscellaneous">Miscellaneous&lt;/h2>
+&lt;h3 id="hash">How do I use a protocol buffer message as a hash key?&lt;/h3>
+&lt;p>You need canonical serialization, where the marshaled output of a protocol
+buffer message is guaranteed to be stable over time. Unfortunately, no
+specification for canonical serialization exists at this time. You&amp;rsquo;ll need to
+write your own or find a way to avoid needing one.&lt;/p>
+&lt;h3 id="new-feature">Can I add a new feature to the Go protocol buffer implementation?&lt;/h3>
+&lt;p>Maybe. We always like suggestions, but we&amp;rsquo;re very cautious about adding new
+things.&lt;/p>
+&lt;p>The Go implementation of protocol buffers strives to be consistent with the
+other language implementations. As such, we tend to shy away from feature that
+are overly specialized to just Go. Go-specific features hinder the goal of
+protocol buffers being a language-neutral data interchange format.&lt;/p>
+&lt;p>Unless your idea is specific to the Go implementation, you should join the
+&lt;a href="http://groups.google.com/group/protobuf">protobuf discussion group&lt;/a> and suggest
+it there.&lt;/p>
+&lt;p>If you have an idea for the Go implementation, file an issue on our issue
+tracker:
+&lt;a href="https://github.com/golang/protobuf/issues">https://github.com/golang/protobuf/issues&lt;/a>&lt;/p>
+&lt;h3 id="new-marshal-option">Can I add an option to &lt;code>Marshal&lt;/code> or &lt;code>Unmarshal&lt;/code> to customize it?&lt;/h3>
+&lt;p>Only if that option exists in other implementations (e.g., C++, Java). The
+encoding of protocol buffers (binary, JSON, and text) must be consistent across
+implementations, so a program written in one language is able to read messages
+written by another one.&lt;/p>
+&lt;p>We will not add any options to the Go implementation that affect the data output
+by &lt;code>Marshal&lt;/code> functions or read by &lt;code>Unmarshal&lt;/code> functions unless an equivalent
+option exist in at least one other supported implementation.&lt;/p>
+&lt;h3 id="custom-code">Can I customize the code generated by &lt;code>protoc-gen-go&lt;/code>?&lt;/h3>
+&lt;p>In general, no. Protocol buffers are intended to be a language-agnostic data
+interchange format, and implementation-specific customizations run counter to
+that intent.&lt;/p></description></item><item><title>Reference: Go API</title><link>/reference/go/api-docs-link/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>/reference/go/api-docs-link/</guid><description/></item></channel></rss>

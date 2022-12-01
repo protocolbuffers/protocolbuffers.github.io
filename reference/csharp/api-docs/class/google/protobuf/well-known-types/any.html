@@ -1,0 +1,530 @@
+<!DOCTYPE html>
+<html devsite>
+<head>
+  <title>Google.Protobuf.WellKnownTypes.Any Class Reference</title>
+  <link rel="stylesheet" href="/reference/csharp/api-docs/includes/stylesheet.css">
+</head>
+<body><div id="top"><!-- do not remove this div --></div><h1>Google.<wbr/>Protobuf.<wbr/>WellKnownTypes.<wbr/>Any</h1><p><code><a href="/reference/csharp/api-docs/class/google/protobuf/well-known-types/any.html#class_google_1_1_protobuf_1_1_well_known_types_1_1_any">Any</a></code> contains an arbitrary serialized protocol buffer message along with a URL that describes the type of the serialized message. </p><h2>Summary</h2><p><a href="/reference/csharp/api-docs/namespace/google/protobuf.html#namespace_google_1_1_protobuf">Protobuf</a> library provides support to pack/unpack <a href="/reference/csharp/api-docs/class/google/protobuf/well-known-types/any.html#class_google_1_1_protobuf_1_1_well_known_types_1_1_any">Any</a> values in the form of utility functions or additional generated methods of the <a href="/reference/csharp/api-docs/class/google/protobuf/well-known-types/any.html#class_google_1_1_protobuf_1_1_well_known_types_1_1_any">Any</a> type.</p><p>Example 1: Pack and unpack a message in C++. <pre class="prettyprint">Foo foo = ...;
+Any any;
+any.PackFrom(foo);
+...
+if (any.UnpackTo(&amp;foo)) {
+  ...
+}
+</pre></p><p>Example 2: Pack and unpack a message in Java. <pre class="prettyprint">Foo foo = ...;
+Any any = Any.pack(foo);
+...
+if (any.is(Foo.class)) {
+  foo = any.unpack(Foo.class);
+}
+</pre></p><p>Example 3: Pack and unpack a message in Python.</p><pre class="prettyprint">foo = Foo(...)
+any = Any()
+any.Pack(foo)
+...
+if any.Is(Foo.DESCRIPTOR):
+  any.Unpack(foo)
+  ...</pre><p>The pack methods provided by protobuf library will by default use 'type.googleapis.com/full.type.name' as the type URL and the unpack methods only use the fully qualified type name after the last '/' in the type URL, for example "foo.bar.com/x/y.z" will yield type name "y.z".</p><p>JSON </p><p>The JSON representation of an <code><a href="/reference/csharp/class/google/protobuf/well-known-types/any.html#class_google_1_1_protobuf_1_1_well_known_types_1_1_any">Any</a></code> value uses the regular representation of the deserialized, embedded message, with an additional field <code>@type</code> which contains the type URL. Example: <pre class="prettyprint">package google.profile;
+message Person {
+  string first_name = 1;
+  string last_name = 2;
+}
+
+{
+  "@type": "type.googleapis.com/google.profile.Person",
+  "firstName": &lt;string>,
+  "lastName": &lt;string>
+}
+</pre></p><p>If the embedded message type is well-known and has a custom JSON representation, that representation will be embedded adding a field <code>value</code> which holds the custom JSON in addition to the <code>@type</code> field. Example (for message [google.protobuf.Duration][]): <pre class="prettyprint">{
+  "@type": "type.googleapis.com/google.protobuf.Duration",
+  "value": "1.212s"
+}
+</pre></p><h3>Inheritance</h3>Inherits from: pb::IMessage< Any ><table class="constructors responsive">
+    <tr>
+      <th colspan="2">
+        <h3>Constructors and Destructors</h3>
+      </th>
+    </tr>
+    <tr>
+      <td colspan="2">
+        <code><a href="#class_google_1_1_protobuf_1_1_well_known_types_1_1_any_1a3de4adc756a34d0a724119d310d49fc0">Any</a>()</code>
+        <br />
+      </td>
+    </tr>
+    <tr>
+      <td colspan="2">
+        <code><a href="#class_google_1_1_protobuf_1_1_well_known_types_1_1_any_1a2389c27355e5327aef77a7cc1c253f1e">Any</a>(<a href="/reference/csharp/api-docs/class/google/protobuf/well-known-types/any.html#class_google_1_1_protobuf_1_1_well_known_types_1_1_any">Any</a> other)</code>
+        <br />
+      </td>
+    </tr>
+  </table><table class="properties responsive">
+    <tr>
+      <th colspan="2">
+        <h3>Properties</h3>
+      </th>
+    </tr>
+    <tr>
+      <td>
+        <code><a href="#class_google_1_1_protobuf_1_1_well_known_types_1_1_any_1ae52cfabfb08d73ff8be70a37ae0c9c68">Descriptor</a></code>
+      </td>
+      <td>
+        <div>
+          <code>pbr::MessageDescriptor</code>
+        </div>
+      </td>
+    </tr>
+    <tr>
+      <td>
+        <code><a href="#class_google_1_1_protobuf_1_1_well_known_types_1_1_any_1a3461c7d130042a4390b61ee0cc82eae5">Descriptor</a></code>
+      </td>
+      <td>
+        <div>
+          <code>pbr::MessageDescriptor pb::IMessage.</code>
+        </div>
+      </td>
+    </tr>
+    <tr>
+      <td>
+        <code><a href="#class_google_1_1_protobuf_1_1_well_known_types_1_1_any_1ab86e00f1a97a5ea7fbf7e33194e2e35b">Parser</a></code>
+      </td>
+      <td>
+        <div>
+          <code>pb::MessageParser< <a href="/reference/csharp/api-docs/class/google/protobuf/well-known-types/any.html#class_google_1_1_protobuf_1_1_well_known_types_1_1_any">Any</a> ></code>
+        </div>
+      </td>
+    </tr>
+    <tr>
+      <td>
+        <code><a href="#class_google_1_1_protobuf_1_1_well_known_types_1_1_any_1a208490ab1bc965273f59fe5dfb27754b">TypeUrl</a></code>
+      </td>
+      <td>
+        <div>
+          <code>string</code>
+        </div>
+        <div>A URL/resource name whose content describes the type of the serialized protocol buffer message. </div>
+      </td>
+    </tr>
+    <tr>
+      <td>
+        <code><a href="#class_google_1_1_protobuf_1_1_well_known_types_1_1_any_1a339fc8ccaeb0b0a64e6599a8aae8f3af">Value</a></code>
+      </td>
+      <td>
+        <div>
+          <code>pb::ByteString</code>
+        </div>
+        <div>Must be a valid serialized protocol buffer of the above specified type. </div>
+      </td>
+    </tr>
+  </table><table class="properties responsive">
+    <tr>
+      <th colspan="2">
+        <h3>Public attributes</h3>
+      </th>
+    </tr>
+    <tr>
+      <td>
+        <code><a href="#class_google_1_1_protobuf_1_1_well_known_types_1_1_any_1ab46382d33de9af9baa33dbb968f5f857">TypeUrlFieldNumber</a> = 1</code>
+      </td>
+      <td>
+        <div>
+          <code>const int</code>
+        </div>
+        <div><a href="/reference/csharp/api-docs/class/google/protobuf/well-known-types/field.html#class_google_1_1_protobuf_1_1_well_known_types_1_1_field">Field</a> number for the "type_url" field.</div>
+      </td>
+    </tr>
+    <tr>
+      <td>
+        <code><a href="#class_google_1_1_protobuf_1_1_well_known_types_1_1_any_1a35ee07223ca0ac90fc8e65bf472467e9">ValueFieldNumber</a> = 2</code>
+      </td>
+      <td>
+        <div>
+          <code>const int</code>
+        </div>
+        <div><a href="/reference/csharp/api-docs/class/google/protobuf/well-known-types/field.html#class_google_1_1_protobuf_1_1_well_known_types_1_1_field">Field</a> number for the "value" field.</div>
+      </td>
+    </tr>
+  </table><table class="methods responsive">
+    <tr>
+      <th colspan="2">
+        <h3>Public functions</h3>
+      </th>
+    </tr>
+    <tr>
+      <td>
+        <code><a href="#class_google_1_1_protobuf_1_1_well_known_types_1_1_any_1a8c96ccd50831e0088e74b63ebea0fc5e">CalculateSize</a>()</code>
+      </td>
+      <td>
+        <div>
+          <code>int</code>
+        </div>
+      </td>
+    </tr>
+    <tr>
+      <td>
+        <code><a href="#class_google_1_1_protobuf_1_1_well_known_types_1_1_any_1a50fad7f05bb2eaf772a3a2e866c4cf2b">Clone</a>()</code>
+      </td>
+      <td>
+        <div>
+          <code><a href="/reference/csharp/api-docs/class/google/protobuf/well-known-types/any.html#class_google_1_1_protobuf_1_1_well_known_types_1_1_any">Any</a></code>
+        </div>
+      </td>
+    </tr>
+    <tr>
+      <td>
+        <code><a href="#class_google_1_1_protobuf_1_1_well_known_types_1_1_any_1a258a7e1627e13fa312d958bb64b9dc2f">Equals</a>(object other)</code>
+      </td>
+      <td>
+        <div>
+          <code>override bool</code>
+        </div>
+      </td>
+    </tr>
+    <tr>
+      <td>
+        <code><a href="#class_google_1_1_protobuf_1_1_well_known_types_1_1_any_1a5d66513c182a9cea075f8f07f455514c">Equals</a>(<a href="/reference/csharp/api-docs/class/google/protobuf/well-known-types/any.html#class_google_1_1_protobuf_1_1_well_known_types_1_1_any">Any</a> other)</code>
+      </td>
+      <td>
+        <div>
+          <code>bool</code>
+        </div>
+      </td>
+    </tr>
+    <tr>
+      <td>
+        <code><a href="#class_google_1_1_protobuf_1_1_well_known_types_1_1_any_1a603d2c8b230e3338673da532138283c8">GetHashCode</a>()</code>
+      </td>
+      <td>
+        <div>
+          <code>override int</code>
+        </div>
+      </td>
+    </tr>
+    <tr>
+      <td>
+        <code><a href="#class_google_1_1_protobuf_1_1_well_known_types_1_1_any_1ad00723f2eb51d92907a8fdda3d5732b7">MergeFrom</a>(<a href="/reference/csharp/api-docs/class/google/protobuf/well-known-types/any.html#class_google_1_1_protobuf_1_1_well_known_types_1_1_any">Any</a> other)</code>
+      </td>
+      <td>
+        <div>
+          <code>void</code>
+        </div>
+      </td>
+    </tr>
+    <tr>
+      <td>
+        <code><a href="#class_google_1_1_protobuf_1_1_well_known_types_1_1_any_1ac28fa3fe5b358476f70a26e1d3cc47f6">MergeFrom</a>(pb::CodedInputStream input)</code>
+      </td>
+      <td>
+        <div>
+          <code>void</code>
+        </div>
+      </td>
+    </tr>
+    <tr>
+      <td>
+        <code><a href="#class_google_1_1_protobuf_1_1_well_known_types_1_1_any_1a0f652371761191ad77721fc28bf0e3db">ToString</a>()</code>
+      </td>
+      <td>
+        <div>
+          <code>override string</code>
+        </div>
+      </td>
+    </tr>
+    <tr>
+      <td>
+        <code><a href="#class_google_1_1_protobuf_1_1_well_known_types_1_1_any_1a282cea5c3a57148b942d5231305979fc">Unpack< T ></a>()</code>
+      </td>
+      <td>
+        <div>
+          <code>T</code>
+        </div>
+        <div>Unpacks the content of this <a href="/reference/csharp/api-docs/class/google/protobuf/well-known-types/any.html#class_google_1_1_protobuf_1_1_well_known_types_1_1_any">Any</a> message into the target message type, which must match the type URL within this <a href="/reference/csharp/api-docs/class/google/protobuf/well-known-types/any.html#class_google_1_1_protobuf_1_1_well_known_types_1_1_any">Any</a> message. </div>
+      </td>
+    </tr>
+    <tr>
+      <td>
+        <code><a href="#class_google_1_1_protobuf_1_1_well_known_types_1_1_any_1a60a64c2076c3bb5db907c11151d908b8">WriteTo</a>(pb::CodedOutputStream output)</code>
+      </td>
+      <td>
+        <div>
+          <code>void</code>
+        </div>
+      </td>
+    </tr>
+  </table><table class="methods responsive">
+    <tr>
+      <th colspan="2">
+        <h3>Public static functions</h3>
+      </th>
+    </tr>
+    <tr>
+      <td>
+        <code><a href="#class_google_1_1_protobuf_1_1_well_known_types_1_1_any_1a04fd0355d6274a79deb53f83f73cf38e">Pack</a>(<a href="/reference/csharp/api-docs/interface/google/protobuf/i-message.html#interface_google_1_1_protobuf_1_1_i_message">IMessage</a> message)</code>
+      </td>
+      <td>
+        <div>
+          <code><a href="/reference/csharp/api-docs/class/google/protobuf/well-known-types/any.html#class_google_1_1_protobuf_1_1_well_known_types_1_1_any">Any</a></code>
+        </div>
+        <div>Packs the specified message into an <a href="/reference/csharp/api-docs/class/google/protobuf/well-known-types/any.html#class_google_1_1_protobuf_1_1_well_known_types_1_1_any">Any</a> message using a type URL prefix of "type.googleapis.com". </div>
+      </td>
+    </tr>
+    <tr>
+      <td>
+        <code><a href="#class_google_1_1_protobuf_1_1_well_known_types_1_1_any_1a02ef54c77283793454d147bdc77dca2c">Pack</a>(<a href="/reference/csharp/api-docs/interface/google/protobuf/i-message.html#interface_google_1_1_protobuf_1_1_i_message">IMessage</a> message, string typeUrlPrefix)</code>
+      </td>
+      <td>
+        <div>
+          <code><a href="/reference/csharp/api-docs/class/google/protobuf/well-known-types/any.html#class_google_1_1_protobuf_1_1_well_known_types_1_1_any">Any</a></code>
+        </div>
+        <div>Packs the specified message into an <a href="/reference/csharp/api-docs/class/google/protobuf/well-known-types/any.html#class_google_1_1_protobuf_1_1_well_known_types_1_1_any">Any</a> message using the specified type URL prefix. </div>
+      </td>
+    </tr>
+  </table><h2>Properties</h2><div id="class_google_1_1_protobuf_1_1_well_known_types_1_1_any_1ae52cfabfb08d73ff8be70a37ae0c9c68">
+    <h3>Descriptor</h3>
+    <pre class="prettyprint">pbr::MessageDescriptor Descriptor</pre>
+    <div />
+  </div><div id="class_google_1_1_protobuf_1_1_well_known_types_1_1_any_1a3461c7d130042a4390b61ee0cc82eae5">
+    <h3>Descriptor</h3>
+    <pre class="prettyprint">pbr::MessageDescriptor pb::IMessage. Descriptor</pre>
+    <div />
+  </div><div id="class_google_1_1_protobuf_1_1_well_known_types_1_1_any_1ab86e00f1a97a5ea7fbf7e33194e2e35b">
+    <h3>Parser</h3>
+    <pre class="prettyprint">pb::MessageParser< <a href="/reference/csharp/api-docs/class/google/protobuf/well-known-types/any.html#class_google_1_1_protobuf_1_1_well_known_types_1_1_any">Any</a> > Parser</pre>
+    <div />
+  </div><div id="class_google_1_1_protobuf_1_1_well_known_types_1_1_any_1a208490ab1bc965273f59fe5dfb27754b">
+    <h3>TypeUrl</h3>
+    <pre class="prettyprint">string TypeUrl</pre>
+    <div>
+      <p>A URL/resource name whose content describes the type of the serialized protocol buffer message. </p>
+      <p>For URLs which use the scheme <code>http</code>, <code>https</code>, or no scheme, the following restrictions and interpretations apply:</p>
+      <p>
+        <ul>
+          <li>If no scheme is provided, <code>https</code> is assumed.</li>
+          <li>The last segment of the URL's path must represent the fully qualified name of the type (as in <code>path/google.protobuf.Duration</code>). The name should be in a canonical form (e.g., leading "." is not accepted).</li>
+          <li>An HTTP GET on the URL must yield a [google.protobuf.Type][] value in binary format, or produce an error.</li>
+          <li>Applications are allowed to cache lookup results based on the URL, or have them precompiled into a binary to avoid any lookup. Therefore, binary compatibility needs to be preserved on changes to types. (Use versioned type names to manage breaking changes.)</li>
+        </ul>
+      </p>
+      <p>Schemes other than <code>http</code>, <code>https</code> (or the empty scheme) might be used with implementation specific semantics. </p>
+    </div>
+  </div><div id="class_google_1_1_protobuf_1_1_well_known_types_1_1_any_1a339fc8ccaeb0b0a64e6599a8aae8f3af">
+    <h3>Value</h3>
+    <pre class="prettyprint">pb::ByteString Value</pre>
+    <div>
+      <p>Must be a valid serialized protocol buffer of the above specified type. </p>
+    </div>
+  </div><h2>Public attributes</h2><div id="class_google_1_1_protobuf_1_1_well_known_types_1_1_any_1ab46382d33de9af9baa33dbb968f5f857">
+    <h3>TypeUrlFieldNumber</h3>
+    <pre class="prettyprint">const int TypeUrlFieldNumber = 1</pre>
+    <div>
+      <p><a href="/reference/csharp/api-docs/class/google/protobuf/well-known-types/field.html#class_google_1_1_protobuf_1_1_well_known_types_1_1_field">Field</a> number for the "type_url" field.</p>
+    </div>
+  </div><div id="class_google_1_1_protobuf_1_1_well_known_types_1_1_any_1a35ee07223ca0ac90fc8e65bf472467e9">
+    <h3>ValueFieldNumber</h3>
+    <pre class="prettyprint">const int ValueFieldNumber = 2</pre>
+    <div>
+      <p><a href="/reference/csharp/api-docs/class/google/protobuf/well-known-types/field.html#class_google_1_1_protobuf_1_1_well_known_types_1_1_field">Field</a> number for the "value" field.</p>
+    </div>
+  </div><h2>Public functions</h2><div id="class_google_1_1_protobuf_1_1_well_known_types_1_1_any_1a3de4adc756a34d0a724119d310d49fc0">
+    <h3>Any</h3>
+    <pre class="prettyprint"> Any()</pre>
+    <div />
+  </div><div id="class_google_1_1_protobuf_1_1_well_known_types_1_1_any_1a2389c27355e5327aef77a7cc1c253f1e">
+    <h3>Any</h3>
+    <pre class="prettyprint"> Any(
+  <a href="/reference/csharp/api-docs/class/google/protobuf/well-known-types/any.html#class_google_1_1_protobuf_1_1_well_known_types_1_1_any">Any</a> other
+)</pre>
+    <div />
+  </div><div id="class_google_1_1_protobuf_1_1_well_known_types_1_1_any_1a8c96ccd50831e0088e74b63ebea0fc5e">
+    <h3>CalculateSize</h3>
+    <pre class="prettyprint">int CalculateSize()</pre>
+    <div />
+  </div><div id="class_google_1_1_protobuf_1_1_well_known_types_1_1_any_1a50fad7f05bb2eaf772a3a2e866c4cf2b">
+    <h3>Clone</h3>
+    <pre class="prettyprint"><a href="/reference/csharp/api-docs/class/google/protobuf/well-known-types/any.html#class_google_1_1_protobuf_1_1_well_known_types_1_1_any">Any</a> Clone()</pre>
+    <div />
+  </div><div id="class_google_1_1_protobuf_1_1_well_known_types_1_1_any_1a258a7e1627e13fa312d958bb64b9dc2f">
+    <h3>Equals</h3>
+    <pre class="prettyprint">override bool Equals(
+  object other
+)</pre>
+    <div />
+  </div><div id="class_google_1_1_protobuf_1_1_well_known_types_1_1_any_1a5d66513c182a9cea075f8f07f455514c">
+    <h3>Equals</h3>
+    <pre class="prettyprint">bool Equals(
+  <a href="/reference/csharp/api-docs/class/google/protobuf/well-known-types/any.html#class_google_1_1_protobuf_1_1_well_known_types_1_1_any">Any</a> other
+)</pre>
+    <div />
+  </div><div id="class_google_1_1_protobuf_1_1_well_known_types_1_1_any_1a603d2c8b230e3338673da532138283c8">
+    <h3>GetHashCode</h3>
+    <pre class="prettyprint">override int GetHashCode()</pre>
+    <div />
+  </div><div id="class_google_1_1_protobuf_1_1_well_known_types_1_1_any_1ad00723f2eb51d92907a8fdda3d5732b7">
+    <h3>MergeFrom</h3>
+    <pre class="prettyprint">void MergeFrom(
+  <a href="/reference/csharp/api-docs/class/google/protobuf/well-known-types/any.html#class_google_1_1_protobuf_1_1_well_known_types_1_1_any">Any</a> other
+)</pre>
+    <div />
+  </div><div id="class_google_1_1_protobuf_1_1_well_known_types_1_1_any_1ac28fa3fe5b358476f70a26e1d3cc47f6">
+    <h3>MergeFrom</h3>
+    <pre class="prettyprint">void MergeFrom(
+  pb::CodedInputStream input
+)</pre>
+    <div />
+  </div><div id="class_google_1_1_protobuf_1_1_well_known_types_1_1_any_1a0f652371761191ad77721fc28bf0e3db">
+    <h3>ToString</h3>
+    <pre class="prettyprint">override string ToString()</pre>
+    <div />
+  </div><div id="class_google_1_1_protobuf_1_1_well_known_types_1_1_any_1a282cea5c3a57148b942d5231305979fc">
+    <h3>Unpack< T ></h3>
+    <pre class="prettyprint">T Unpack< T >()</pre>
+    <div>
+      <p>Unpacks the content of this <a href="/reference/csharp/api-docs/class/google/protobuf/well-known-types/any.html#class_google_1_1_protobuf_1_1_well_known_types_1_1_any">Any</a> message into the target message type, which must match the type URL within this <a href="/reference/csharp/api-docs/class/google/protobuf/well-known-types/any.html#class_google_1_1_protobuf_1_1_well_known_types_1_1_any">Any</a> message. </p>
+      <p />
+      <table class="details responsive">
+        <thead>
+          <th colspan="2">Details</th>
+        </thead>
+        <tbody>
+          <tr>
+            <td>Template Parameters</td>
+            <td>
+              <table class="function param responsive">
+                <tbody>
+                  <tr>
+                    <td>
+                      <code>T</code>
+                    </td>
+                    <td>
+                      <div>The type of message to unpack the content into.</div>
+                    </td>
+                  </tr>
+                </tbody>
+              </table>
+            </td>
+          </tr>
+          <tr>
+            <td>Exceptions</td>
+            <td>
+              <table class="function param responsive">
+                <tbody>
+                  <tr>
+                    <td>
+                      <code>InvalidProtocolBufferException</code>
+                    </td>
+                    <td>
+                      <div>The target message type doesn't match the type URL in this message</div>
+                    </td>
+                  </tr>
+                </tbody>
+              </table>
+            </td>
+          </tr>
+          <tr>
+            <td>
+              <b>Returns</b>
+            </td>
+            <td>
+              <div>The unpacked message.</div>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div><div id="class_google_1_1_protobuf_1_1_well_known_types_1_1_any_1a60a64c2076c3bb5db907c11151d908b8">
+    <h3>WriteTo</h3>
+    <pre class="prettyprint">void WriteTo(
+  pb::CodedOutputStream output
+)</pre>
+    <div />
+  </div><h2>Public static functions</h2><div id="class_google_1_1_protobuf_1_1_well_known_types_1_1_any_1a04fd0355d6274a79deb53f83f73cf38e">
+    <h3>Pack</h3>
+    <pre class="prettyprint"><a href="/reference/csharp/api-docs/class/google/protobuf/well-known-types/any.html#class_google_1_1_protobuf_1_1_well_known_types_1_1_any">Any</a> Pack(
+  <a href="/reference/csharp/api-docs/interface/google/protobuf/i-message.html#interface_google_1_1_protobuf_1_1_i_message">IMessage</a> message
+)</pre>
+    <div>
+      <p>Packs the specified message into an <a href="/reference/csharp/api-docs/class/google/protobuf/well-known-types/any.html#class_google_1_1_protobuf_1_1_well_known_types_1_1_any">Any</a> message using a type URL prefix of "type.googleapis.com". </p>
+      <p />
+      <table class="details responsive">
+        <thead>
+          <th colspan="2">Details</th>
+        </thead>
+        <tbody>
+          <tr>
+            <td>Parameters</td>
+            <td>
+              <table class="function param responsive">
+                <tbody>
+                  <tr>
+                    <td>
+                      <code>message</code>
+                    </td>
+                    <td>
+                      <div>The message to pack.</div>
+                    </td>
+                  </tr>
+                </tbody>
+              </table>
+            </td>
+          </tr>
+          <tr>
+            <td>
+              <b>Returns</b>
+            </td>
+            <td>
+              <div>An <a href="/reference/csharp/api-docs/class/google/protobuf/well-known-types/any.html#class_google_1_1_protobuf_1_1_well_known_types_1_1_any">Any</a> message with the content and type URL of <i>message</i> .</div>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div><div id="class_google_1_1_protobuf_1_1_well_known_types_1_1_any_1a02ef54c77283793454d147bdc77dca2c">
+    <h3>Pack</h3>
+    <pre class="prettyprint"><a href="/reference/csharp/api-docs/class/google/protobuf/well-known-types/any.html#class_google_1_1_protobuf_1_1_well_known_types_1_1_any">Any</a> Pack(
+  <a href="/reference/csharp/api-docs/interface/google/protobuf/i-message.html#interface_google_1_1_protobuf_1_1_i_message">IMessage</a> message,
+  string typeUrlPrefix
+)</pre>
+    <div>
+      <p>Packs the specified message into an <a href="/reference/csharp/api-docs/class/google/protobuf/well-known-types/any.html#class_google_1_1_protobuf_1_1_well_known_types_1_1_any">Any</a> message using the specified type URL prefix. </p>
+      <p />
+      <table class="details responsive">
+        <thead>
+          <th colspan="2">Details</th>
+        </thead>
+        <tbody>
+          <tr>
+            <td>Parameters</td>
+            <td>
+              <table class="function param responsive">
+                <tbody>
+                  <tr>
+                    <td>
+                      <code>message</code>
+                    </td>
+                    <td>
+                      <div>The message to pack.</div>
+                    </td>
+                  </tr>
+                  <tr>
+                    <td>
+                      <code>typeUrlPrefix</code>
+                    </td>
+                    <td>
+                      <div>The prefix for the type URL.</div>
+                    </td>
+                  </tr>
+                </tbody>
+              </table>
+            </td>
+          </tr>
+          <tr>
+            <td>
+              <b>Returns</b>
+            </td>
+            <td>
+              <div>An <a href="/reference/csharp/api-docs/class/google/protobuf/well-known-types/any.html#class_google_1_1_protobuf_1_1_well_known_types_1_1_any">Any</a> message with the content and type URL of <i>message</i> .</div>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div></body>
+</html>

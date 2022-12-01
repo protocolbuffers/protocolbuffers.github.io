@@ -1,0 +1,302 @@
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Protocol Buffers Documentation – C# Reference</title><link>/reference/csharp/</link><description>Recent content in C# Reference on Protocol Buffers Documentation</description><generator>Hugo -- gohugo.io</generator><language>en-us</language><atom:link href="/reference/csharp/index.xml" rel="self" type="application/rss+xml"/><item><title>Reference: C# Generated Code Guide</title><link>/reference/csharp/csharp-generated/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>/reference/csharp/csharp-generated/</guid><description>
+&lt;p>This page describes exactly what C# code the protocol buffer compiler generates
+for protocol definitions using &lt;code>proto3&lt;/code> syntax. You should read the
+&lt;a href="/programming-guides/proto3">proto3 language guide&lt;/a> before reading this
+document.&lt;/p>
+&lt;div class="alert alert-note" role="alert">
+&lt;h4 class="alert-heading">Note&lt;/h4>
+The protobuf compiler can generate C# interfaces for definitions
+using &lt;code>proto2&lt;/code> syntax starting from release 3.10. Refer to the
+&lt;a href="/programming-guides/proto">proto2 language guide&lt;/a> for details of the
+semantics of &lt;code>proto2&lt;/code> definitions, and see &lt;code>docs/csharp/proto2.md&lt;/code>
+(&lt;a href="https://github.com/protocolbuffers/protobuf/blob/master/docs/csharp/proto2.md">view on GitHub&lt;/a>)
+for details on the generated C# code for proto2.
+&lt;/div>
+&lt;h2 id="invocation">Compiler Invocation&lt;/h2>
+&lt;p>The protocol buffer compiler produces C# output when invoked with the
+&lt;code>--csharp_out&lt;/code> command-line flag. The parameter to the &lt;code>--csharp_out&lt;/code> option is
+the directory where you want the compiler to write your C# output, although
+depending on &lt;a href="#compiler_options">other options&lt;/a> the compiler may create
+subdirectories of the specified directory. The compiler creates a single source
+file for each &lt;code>.proto&lt;/code> file input, defaulting to an extension of &lt;code>.cs&lt;/code> but
+configurable via compiler options.&lt;/p>
+&lt;p>Only &lt;code>proto3&lt;/code> messages are supported by the C# code generator. Ensure that each
+&lt;code>.proto&lt;/code> file begins with a declaration of:&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-proto" data-lang="proto">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#000">syntax&lt;/span> &lt;span style="color:#ce5c00;font-weight:bold">=&lt;/span> &lt;span style="color:#4e9a06">&amp;#34;proto3&amp;#34;&lt;/span>&lt;span style="color:#000;font-weight:bold">;&lt;/span>&lt;span style="color:#a40000">
+&lt;/span>&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h3 id="compiler_options">C#-specific Options&lt;/h3>
+&lt;p>You can provide further C# options to the protocol buffer compiler using the
+&lt;code>--csharp_opt&lt;/code> command-line flag. The supported options are:&lt;/p>
+&lt;ul>
+&lt;li>
+&lt;p>&lt;strong>file_extension&lt;/strong>: Sets the file extension for generated code. This
+defaults to &lt;code>.cs&lt;/code>, but a common alternative is &lt;code>.g.cs&lt;/code> to indicate that the
+file contains generated code.&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>&lt;strong>base_namespace&lt;/strong>: When this option is specified, the generator creates a
+directory hierarchy for generated source code corresponding to the
+namespaces of the generated classes, using the value of the option to
+indicate which part of the namespace should be considered as the &amp;quot;base&amp;quot;
+for the output directory. For example, with the following command-line:&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-shell" data-lang="shell">&lt;span style="display:flex;">&lt;span>protoc --proto_path&lt;span style="color:#ce5c00;font-weight:bold">=&lt;/span>bar --csharp_out&lt;span style="color:#ce5c00;font-weight:bold">=&lt;/span>src --csharp_opt&lt;span style="color:#ce5c00;font-weight:bold">=&lt;/span>&lt;span style="color:#000">base_namespace&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">=&lt;/span>Example player.proto
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>where &lt;code>player.proto&lt;/code> has a &lt;code>csharp_namespace&lt;/code> option of &lt;code>Example.Game&lt;/code> the
+protocol buffer compiler generates a file &lt;code>src/Game/Player.cs&lt;/code> being
+created. This option would usually correspond with the &lt;strong>default namespace&lt;/strong>
+option in a C# project in Visual Studio. If the option is specified but
+with an empty value, the full C# namespace as used in the generated file
+will be used for the directory hierarchy. If the option is not specified at
+all, the generated files are simply written into the directory specified by
+&lt;code>--csharp_out&lt;/code> without any hierarchy being created.&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>&lt;strong>internal_access&lt;/strong>: When this option is specified, the generator creates
+types with the &lt;code>internal&lt;/code> access modifier instead of &lt;code>public&lt;/code>.&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>&lt;strong>serializable&lt;/strong>: When this option is specified, the generator adds the
+&lt;code>[Serializable]&lt;/code> attribute to generated message classes.&lt;/p>
+&lt;/li>
+&lt;/ul>
+&lt;p>Multiple options can be specified by separating them with commas, as in the
+following example:&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-shell" data-lang="shell">&lt;span style="display:flex;">&lt;span>protoc --proto_path&lt;span style="color:#ce5c00;font-weight:bold">=&lt;/span>src --csharp_out&lt;span style="color:#ce5c00;font-weight:bold">=&lt;/span>build/gen --csharp_opt&lt;span style="color:#ce5c00;font-weight:bold">=&lt;/span>&lt;span style="color:#000">file_extension&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">=&lt;/span>.g.cs,base_namespace&lt;span style="color:#ce5c00;font-weight:bold">=&lt;/span>Example,internal_access src/foo.proto
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h2 id="structure">File structure&lt;/h2>
+&lt;p>The name of the output file is derived from the &lt;code>.proto&lt;/code> filename by converting
+it to Pascal-case, treating underscores as word separators. So, for example, a
+file called &lt;code>player_record.proto&lt;/code> will result in an output file called
+&lt;code>PlayerRecord.cs&lt;/code> (where the file extension can be specified using
+&lt;code>--csharp_opt&lt;/code>, &lt;a href="#compiler_options">as shown above&lt;/a>).&lt;/p>
+&lt;p>Each generated file takes the following form, in terms of public members. (The
+implementation is not shown here.)&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-csharp" data-lang="csharp">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#204a87;font-weight:bold">namespace&lt;/span> &lt;span style="color:#a40000">[&lt;/span>&lt;span style="color:#000">...&lt;/span>&lt;span style="color:#000;font-weight:bold">]&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#000;font-weight:bold">{&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#204a87;font-weight:bold">public&lt;/span> &lt;span style="color:#204a87;font-weight:bold">static&lt;/span> &lt;span style="color:#204a87;font-weight:bold">partial&lt;/span> &lt;span style="color:#204a87;font-weight:bold">class&lt;/span> &lt;span style="color:#000;font-weight:bold">[...&lt;/span> &lt;span style="color:#000">descriptor&lt;/span> &lt;span style="color:#204a87;font-weight:bold">class&lt;/span> &lt;span style="color:#000">name&lt;/span> &lt;span style="color:#000;font-weight:bold">...]&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#000;font-weight:bold">{&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#204a87;font-weight:bold">public&lt;/span> &lt;span style="color:#204a87;font-weight:bold">static&lt;/span> &lt;span style="color:#000">FileDescriptor&lt;/span> &lt;span style="color:#000">Descriptor&lt;/span> &lt;span style="color:#000;font-weight:bold">{&lt;/span> &lt;span style="color:#204a87;font-weight:bold">get&lt;/span>&lt;span style="color:#000;font-weight:bold">;&lt;/span> &lt;span style="color:#000;font-weight:bold">}&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#000;font-weight:bold">}&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#c4a000">
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#c4a000"> [... Enums ...]&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#c4a000"> [... Message classes ...]&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#000;font-weight:bold">}&lt;/span>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>The &lt;code>namespace&lt;/code> is inferred from the proto&amp;rsquo;s &lt;code>package&lt;/code>, using the same
+conversion rules as the file name. For example, a proto package of
+&lt;code>example.high_score&lt;/code> would result in a namespace of &lt;code>Example.HighScore&lt;/code>. You can
+override the default generated namespace for a particular .proto using the
+&lt;code>csharp_namespace&lt;/code> &lt;a href="/programming-guides/proto3#options">file option&lt;/a>.&lt;/p>
+&lt;p>Each top-level enum and message results in an enum or class being declared as
+members of the namespace. Additionally, a single static partial class is always
+generated for the file descriptor. This is used for reflection-based operations.
+The descriptor class is given the same name as the file, without the extension.
+However, if there is a message with the same name (as is quite common), the
+descriptor class is placed in a nested &lt;code>Proto&lt;/code> namespace to avoid colliding with
+the message.&lt;/p>
+&lt;p>As an example of all of these rules, consider the &lt;code>timestamp.proto&lt;/code> file which
+is provided as part of Protocol Buffers. A cut down version of &lt;code>timestamp.proto&lt;/code>
+looks like this:&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-proto" data-lang="proto">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#000">syntax&lt;/span> &lt;span style="color:#ce5c00;font-weight:bold">=&lt;/span> &lt;span style="color:#4e9a06">&amp;#34;proto3&amp;#34;&lt;/span>&lt;span style="color:#000;font-weight:bold">;&lt;/span>&lt;span style="color:#a40000">
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#a40000">&lt;/span>&lt;span style="color:#204a87;font-weight:bold">package&lt;/span> &lt;span style="color:#000">google&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">.&lt;/span>&lt;span style="color:#000">protobuf&lt;/span>&lt;span style="color:#000;font-weight:bold">;&lt;/span>&lt;span style="color:#a40000">
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#a40000">&lt;/span>&lt;span style="color:#204a87;font-weight:bold">option&lt;/span> &lt;span style="color:#000">csharp_namespace&lt;/span> &lt;span style="color:#ce5c00;font-weight:bold">=&lt;/span> &lt;span style="color:#4e9a06">&amp;#34;Google.Protobuf.WellKnownTypes&amp;#34;&lt;/span>&lt;span style="color:#000;font-weight:bold">;&lt;/span>&lt;span style="color:#a40000">
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#a40000">
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#a40000">&lt;/span>&lt;span style="color:#204a87;font-weight:bold">message&lt;/span> &lt;span style="color:#000">Timestamp&lt;/span> &lt;span style="color:#000;font-weight:bold">{&lt;/span> &lt;span style="color:#ce5c00;font-weight:bold">...&lt;/span> &lt;span style="color:#000;font-weight:bold">}&lt;/span>&lt;span style="color:#a40000">
+&lt;/span>&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>The generated &lt;code>Timestamp.cs&lt;/code> file has the following structure:&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-csharp" data-lang="csharp">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#204a87;font-weight:bold">namespace&lt;/span> &lt;span style="color:#000">Google.Protobuf.WellKnownTypes&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#000;font-weight:bold">{&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#204a87;font-weight:bold">namespace&lt;/span> &lt;span style="color:#000">Proto&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#000;font-weight:bold">{&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#204a87;font-weight:bold">public&lt;/span> &lt;span style="color:#204a87;font-weight:bold">static&lt;/span> &lt;span style="color:#204a87;font-weight:bold">partial&lt;/span> &lt;span style="color:#204a87;font-weight:bold">class&lt;/span> &lt;span style="color:#000">Timestamp&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#000;font-weight:bold">{&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#204a87;font-weight:bold">public&lt;/span> &lt;span style="color:#204a87;font-weight:bold">static&lt;/span> &lt;span style="color:#000">FileDescriptor&lt;/span> &lt;span style="color:#000">Descriptor&lt;/span> &lt;span style="color:#000;font-weight:bold">{&lt;/span> &lt;span style="color:#204a87;font-weight:bold">get&lt;/span>&lt;span style="color:#000;font-weight:bold">;&lt;/span> &lt;span style="color:#000;font-weight:bold">}&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#000;font-weight:bold">}&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#000;font-weight:bold">}&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#204a87;font-weight:bold">public&lt;/span> &lt;span style="color:#204a87;font-weight:bold">sealed&lt;/span> &lt;span style="color:#204a87;font-weight:bold">partial&lt;/span> &lt;span style="color:#204a87;font-weight:bold">class&lt;/span> &lt;span style="color:#000">Timestamp&lt;/span> &lt;span style="color:#000;font-weight:bold">:&lt;/span> &lt;span style="color:#000">IMessage&lt;/span>&lt;span style="color:#000;font-weight:bold">&amp;lt;&lt;/span>&lt;span style="color:#000">Timestamp&lt;/span>&lt;span style="color:#000;font-weight:bold">&amp;gt;&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#000;font-weight:bold">{&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#c4a000"> [...]&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#000;font-weight:bold">}&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#000;font-weight:bold">}&lt;/span>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h2 id="message">Messages&lt;/h2>
+&lt;p>Given a simple message declaration:&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-proto" data-lang="proto">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#204a87;font-weight:bold">message&lt;/span> &lt;span style="color:#000">Foo&lt;/span> &lt;span style="color:#000;font-weight:bold">{}&lt;/span>&lt;span style="color:#a40000">
+&lt;/span>&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>The protocol buffer compiler generates a sealed, partial class called &lt;code>Foo&lt;/code>,
+which implements the &lt;code>IMessage&amp;lt;Foo&amp;gt;&lt;/code> interface, as shown below with member
+declarations. See the inline comments for more information.&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-csharp" data-lang="csharp">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#204a87;font-weight:bold">public&lt;/span> &lt;span style="color:#204a87;font-weight:bold">sealed&lt;/span> &lt;span style="color:#204a87;font-weight:bold">partial&lt;/span> &lt;span style="color:#204a87;font-weight:bold">class&lt;/span> &lt;span style="color:#000">Foo&lt;/span> &lt;span style="color:#000;font-weight:bold">:&lt;/span> &lt;span style="color:#000">IMessage&lt;/span>&lt;span style="color:#000;font-weight:bold">&amp;lt;&lt;/span>&lt;span style="color:#000">Foo&lt;/span>&lt;span style="color:#000;font-weight:bold">&amp;gt;&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#000;font-weight:bold">{&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#8f5902;font-style:italic">// Static properties for parsing and reflection&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#204a87;font-weight:bold">public&lt;/span> &lt;span style="color:#204a87;font-weight:bold">static&lt;/span> &lt;span style="color:#000">MessageParser&lt;/span>&lt;span style="color:#000;font-weight:bold">&amp;lt;&lt;/span>&lt;span style="color:#000">Foo&lt;/span>&lt;span style="color:#000;font-weight:bold">&amp;gt;&lt;/span> &lt;span style="color:#000">Parser&lt;/span> &lt;span style="color:#000;font-weight:bold">{&lt;/span> &lt;span style="color:#204a87;font-weight:bold">get&lt;/span>&lt;span style="color:#000;font-weight:bold">;&lt;/span> &lt;span style="color:#000;font-weight:bold">}&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#204a87;font-weight:bold">public&lt;/span> &lt;span style="color:#204a87;font-weight:bold">static&lt;/span> &lt;span style="color:#000">MessageDescriptor&lt;/span> &lt;span style="color:#000">Descriptor&lt;/span> &lt;span style="color:#000;font-weight:bold">{&lt;/span> &lt;span style="color:#204a87;font-weight:bold">get&lt;/span>&lt;span style="color:#000;font-weight:bold">;&lt;/span> &lt;span style="color:#000;font-weight:bold">}&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#8f5902;font-style:italic">// Explicit implementation of IMessage.Descriptor, to avoid conflicting with&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#8f5902;font-style:italic">// the static Descriptor property. Typically the static property is used when&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#8f5902;font-style:italic">// referring to a type known at compile time, and the instance property is used&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#8f5902;font-style:italic">// when referring to an arbitrary message, such as during JSON serialization.&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#000">MessageDescriptor&lt;/span> &lt;span style="color:#000">IMessage&lt;/span>&lt;span style="color:#000;font-weight:bold">.&lt;/span>&lt;span style="color:#000">Descriptor&lt;/span> &lt;span style="color:#000;font-weight:bold">{&lt;/span> &lt;span style="color:#204a87;font-weight:bold">get&lt;/span>&lt;span style="color:#000;font-weight:bold">;&lt;/span> &lt;span style="color:#000;font-weight:bold">}&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#8f5902;font-style:italic">// Parameterless constructor which calls the OnConstruction partial method if provided.&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#204a87;font-weight:bold">public&lt;/span> &lt;span style="color:#000">Foo&lt;/span>&lt;span style="color:#000;font-weight:bold">();&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#8f5902;font-style:italic">// Deep-cloning constructor&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#204a87;font-weight:bold">public&lt;/span> &lt;span style="color:#000">Foo&lt;/span>&lt;span style="color:#000;font-weight:bold">(&lt;/span>&lt;span style="color:#000">Foo&lt;/span>&lt;span style="color:#000;font-weight:bold">);&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#8f5902;font-style:italic">// Partial method which can be implemented in manually-written code for the same class, to provide&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#8f5902;font-style:italic">// a hook for code which should be run whenever an instance is constructed.&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#204a87;font-weight:bold">partial&lt;/span> &lt;span style="color:#204a87;font-weight:bold">void&lt;/span> &lt;span style="color:#000">OnConstruction&lt;/span>&lt;span style="color:#000;font-weight:bold">();&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#8f5902;font-style:italic">// Implementation of IDeepCloneable&amp;lt;T&amp;gt;.Clone(); creates a deep clone of this message.&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#204a87;font-weight:bold">public&lt;/span> &lt;span style="color:#000">Foo&lt;/span> &lt;span style="color:#000">Clone&lt;/span>&lt;span style="color:#000;font-weight:bold">();&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#8f5902;font-style:italic">// Standard equality handling; note that IMessage&amp;lt;T&amp;gt; extends IEquatable&amp;lt;T&amp;gt;&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#204a87;font-weight:bold">public&lt;/span> &lt;span style="color:#204a87;font-weight:bold">override&lt;/span> &lt;span style="color:#204a87;font-weight:bold">bool&lt;/span> &lt;span style="color:#000">Equals&lt;/span>&lt;span style="color:#000;font-weight:bold">(&lt;/span>&lt;span style="color:#204a87;font-weight:bold">object&lt;/span> &lt;span style="color:#000">other&lt;/span>&lt;span style="color:#000;font-weight:bold">);&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#204a87;font-weight:bold">public&lt;/span> &lt;span style="color:#204a87;font-weight:bold">bool&lt;/span> &lt;span style="color:#000">Equals&lt;/span>&lt;span style="color:#000;font-weight:bold">(&lt;/span>&lt;span style="color:#000">Foo&lt;/span> &lt;span style="color:#000">other&lt;/span>&lt;span style="color:#000;font-weight:bold">);&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#204a87;font-weight:bold">public&lt;/span> &lt;span style="color:#204a87;font-weight:bold">override&lt;/span> &lt;span style="color:#204a87;font-weight:bold">int&lt;/span> &lt;span style="color:#000">GetHashCode&lt;/span>&lt;span style="color:#000;font-weight:bold">();&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#8f5902;font-style:italic">// Converts the message to a JSON representation&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#204a87;font-weight:bold">public&lt;/span> &lt;span style="color:#204a87;font-weight:bold">override&lt;/span> &lt;span style="color:#204a87;font-weight:bold">string&lt;/span> &lt;span style="color:#000">ToString&lt;/span>&lt;span style="color:#000;font-weight:bold">();&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#8f5902;font-style:italic">// Serializes the message to the protobuf binary format&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#204a87;font-weight:bold">public&lt;/span> &lt;span style="color:#204a87;font-weight:bold">void&lt;/span> &lt;span style="color:#000">WriteTo&lt;/span>&lt;span style="color:#000;font-weight:bold">(&lt;/span>&lt;span style="color:#000">CodedOutputStream&lt;/span> &lt;span style="color:#000">output&lt;/span>&lt;span style="color:#000;font-weight:bold">);&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#8f5902;font-style:italic">// Calculates the size of the message in protobuf binary format&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#204a87;font-weight:bold">public&lt;/span> &lt;span style="color:#204a87;font-weight:bold">int&lt;/span> &lt;span style="color:#000">CalculateSize&lt;/span>&lt;span style="color:#000;font-weight:bold">();&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#8f5902;font-style:italic">// Merges the contents of the given message into this one. Typically&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#8f5902;font-style:italic">// used by generated code and message parsers.&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#204a87;font-weight:bold">public&lt;/span> &lt;span style="color:#204a87;font-weight:bold">void&lt;/span> &lt;span style="color:#000">MergeFrom&lt;/span>&lt;span style="color:#000;font-weight:bold">(&lt;/span>&lt;span style="color:#000">Foo&lt;/span> &lt;span style="color:#000">other&lt;/span>&lt;span style="color:#000;font-weight:bold">);&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#8f5902;font-style:italic">// Merges the contents of the given protobuf binary format stream&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#8f5902;font-style:italic">// into this message. Typically used by generated code and message parsers.&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#204a87;font-weight:bold">public&lt;/span> &lt;span style="color:#204a87;font-weight:bold">void&lt;/span> &lt;span style="color:#000">MergeFrom&lt;/span>&lt;span style="color:#000;font-weight:bold">(&lt;/span>&lt;span style="color:#000">CodedInputStream&lt;/span> &lt;span style="color:#000">input&lt;/span>&lt;span style="color:#000;font-weight:bold">);&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#000;font-weight:bold">}&lt;/span>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>Note that all of these members are always present; the &lt;code>optimize_for&lt;/code> option
+does not affect the output of the C# code generator.&lt;/p>
+&lt;h3 id="nested-types">Nested Types&lt;/h3>
+&lt;p>A message can be declared inside another message. For example:&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-proto" data-lang="proto">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#204a87;font-weight:bold">message&lt;/span> &lt;span style="color:#000">Foo&lt;/span> &lt;span style="color:#000;font-weight:bold">{&lt;/span>&lt;span style="color:#a40000">
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#a40000">&lt;/span> &lt;span style="color:#204a87;font-weight:bold">message&lt;/span> &lt;span style="color:#000">Bar&lt;/span> &lt;span style="color:#000;font-weight:bold">{&lt;/span>&lt;span style="color:#a40000">
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#a40000">&lt;/span> &lt;span style="color:#000;font-weight:bold">}&lt;/span>&lt;span style="color:#a40000">
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#a40000">&lt;/span>&lt;span style="color:#000;font-weight:bold">}&lt;/span>&lt;span style="color:#a40000">
+&lt;/span>&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>In this case—or if a message contains a nested enum—the compiler
+generates a nested &lt;code>Types&lt;/code> class, and then a &lt;code>Bar&lt;/code> class within the &lt;code>Types&lt;/code>
+class, so the full generated code would be:&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-csharp" data-lang="csharp">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#204a87;font-weight:bold">namespace&lt;/span> &lt;span style="color:#a40000">[&lt;/span>&lt;span style="color:#000">...&lt;/span>&lt;span style="color:#000;font-weight:bold">]&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#000;font-weight:bold">{&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#204a87;font-weight:bold">public&lt;/span> &lt;span style="color:#204a87;font-weight:bold">sealed&lt;/span> &lt;span style="color:#204a87;font-weight:bold">partial&lt;/span> &lt;span style="color:#204a87;font-weight:bold">class&lt;/span> &lt;span style="color:#000">Foo&lt;/span> &lt;span style="color:#000;font-weight:bold">:&lt;/span> &lt;span style="color:#000">IMessage&lt;/span>&lt;span style="color:#000;font-weight:bold">&amp;lt;&lt;/span>&lt;span style="color:#000">Foo&lt;/span>&lt;span style="color:#000;font-weight:bold">&amp;gt;&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#000;font-weight:bold">{&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#204a87;font-weight:bold">public&lt;/span> &lt;span style="color:#204a87;font-weight:bold">static&lt;/span> &lt;span style="color:#204a87;font-weight:bold">partial&lt;/span> &lt;span style="color:#204a87;font-weight:bold">class&lt;/span> &lt;span style="color:#000">Types&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#000;font-weight:bold">{&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#204a87;font-weight:bold">public&lt;/span> &lt;span style="color:#204a87;font-weight:bold">sealed&lt;/span> &lt;span style="color:#204a87;font-weight:bold">partial&lt;/span> &lt;span style="color:#204a87;font-weight:bold">class&lt;/span> &lt;span style="color:#000">Bar&lt;/span> &lt;span style="color:#000;font-weight:bold">:&lt;/span> &lt;span style="color:#000">IMessage&lt;/span>&lt;span style="color:#000;font-weight:bold">&amp;lt;&lt;/span>&lt;span style="color:#000">Bar&lt;/span>&lt;span style="color:#000;font-weight:bold">&amp;gt;&lt;/span> &lt;span style="color:#000;font-weight:bold">{&lt;/span> &lt;span style="color:#000;font-weight:bold">...&lt;/span> &lt;span style="color:#000;font-weight:bold">}&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#000;font-weight:bold">}&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#000;font-weight:bold">}&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#000;font-weight:bold">}&lt;/span>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>Although the intermediate &lt;code>Types&lt;/code> class is inconvenient, it is required to deal
+with the common scenario of a nested type having a corresponding field in the
+message. You would otherwise end up with both a property and a type with the
+same name nested within the same class—and that would be invalid C#.&lt;/p>
+&lt;h2 id="fields">Fields&lt;/h2>
+&lt;p>The protocol buffer compiler generates a C# property for each field defined
+within a message. The exact nature of the property depends on the nature of the
+field: its type, and whether it is singular, repeated, or a map field.&lt;/p>
+&lt;h3 id="singular">Singular Fields&lt;/h3>
+&lt;p>Any singular field generates a read/write property. A &lt;code>string&lt;/code> or &lt;code>bytes&lt;/code> field
+will generate an &lt;code>ArgumentNullException&lt;/code> if a null value is specified; fetching
+a value from a field which hasn&amp;rsquo;t been explicitly set will return an empty
+string or &lt;code>ByteString&lt;/code>. Message fields can be set to null values, which is
+effectively clearing the field. This is not equivalent to setting the value to
+an &amp;quot;empty&amp;quot; instance of the message type.&lt;/p>
+&lt;h3 id="repeated">Repeated Fields&lt;/h3>
+&lt;p>Each repeated field generates a read-only property of type
+&lt;code>Google.Protobuf.Collections.RepeatedField&amp;lt;T&amp;gt;&lt;/code> where &lt;code>T&lt;/code> is the field&amp;rsquo;s element
+type. For the most part, this acts like &lt;code>List&amp;lt;T&amp;gt;&lt;/code>, but it has an additional
+&lt;code>Add&lt;/code> overload to allow a collection of items to be added in one go. This is
+convenient when populating a repeated field in an object initializer.
+Additionally, &lt;code>RepeatedField&amp;lt;T&amp;gt;&lt;/code> has direct support for serialization,
+deserialization and cloning, but this is usually used by generated code instead
+of manually-written application code.&lt;/p>
+&lt;p>Repeated fields cannot contain null values, even of message types, except for
+the nullable wrapper types &lt;a href="#wrapper_types">explained below&lt;/a>.&lt;/p>
+&lt;h3 id="map">Map Fields&lt;/h3>
+&lt;p>Each map field generates a read-only property of type
+&lt;code>Google.Protobuf.Collections.MapField&amp;lt;TKey, TValue&amp;gt;&lt;/code> where &lt;code>TKey&lt;/code> is the field&amp;rsquo;s
+key type and &lt;code>TValue&lt;/code> is the field&amp;rsquo;s value type. For the most part, this acts
+like &lt;code>Dictionary&amp;lt;TKey, TValue&amp;gt;&lt;/code>, but it has an additional &lt;code>Add&lt;/code> overload to
+allow another dictionary to be added in one go. This is convenient when
+populating a repeated field in an object initializer. Additionally,
+&lt;code>MapField&amp;lt;TKey, TValue&amp;gt;&lt;/code> has direct support for serialization, deserialization
+and cloning, but this is usually used by generated code instead of
+manually-written application code. Keys in the map are not permitted to be null;
+values may be if the corresponding singular field type would support null
+values.&lt;/p>
+&lt;h3 id="oneof">Oneof Fields&lt;/h3>
+&lt;p>Each field within a oneof has a separate property, like a regular
+&lt;a href="#singular">singular field&lt;/a>. However, the compiler also generates an additional
+property to determine which field in the enum has been set, along with an enum
+and a method to clear the oneof. For example, for this oneof field definition&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-proto" data-lang="proto">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#204a87;font-weight:bold">oneof&lt;/span> &lt;span style="color:#000">avatar&lt;/span> &lt;span style="color:#000;font-weight:bold">{&lt;/span>&lt;span style="color:#a40000">
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#a40000">&lt;/span> &lt;span style="color:#204a87;font-weight:bold">string&lt;/span> &lt;span style="color:#000">image_url&lt;/span> &lt;span style="color:#ce5c00;font-weight:bold">=&lt;/span> &lt;span style="color:#0000cf;font-weight:bold">1&lt;/span>&lt;span style="color:#000;font-weight:bold">;&lt;/span>&lt;span style="color:#a40000">
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#a40000">&lt;/span> &lt;span style="color:#204a87;font-weight:bold">bytes&lt;/span> &lt;span style="color:#000">image_data&lt;/span> &lt;span style="color:#ce5c00;font-weight:bold">=&lt;/span> &lt;span style="color:#0000cf;font-weight:bold">2&lt;/span>&lt;span style="color:#000;font-weight:bold">;&lt;/span>&lt;span style="color:#a40000">
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#a40000">&lt;/span>&lt;span style="color:#000;font-weight:bold">}&lt;/span>&lt;span style="color:#a40000">
+&lt;/span>&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>The compiler will generate these public members:&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-csharp" data-lang="csharp">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#204a87;font-weight:bold">enum&lt;/span> &lt;span style="color:#000">AvatarOneofCase&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#000;font-weight:bold">{&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#000">None&lt;/span> &lt;span style="color:#000;font-weight:bold">=&lt;/span> &lt;span style="color:#0000cf;font-weight:bold">0&lt;/span>&lt;span style="color:#000;font-weight:bold">,&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#000">ImageUrl&lt;/span> &lt;span style="color:#000;font-weight:bold">=&lt;/span> &lt;span style="color:#0000cf;font-weight:bold">1&lt;/span>&lt;span style="color:#000;font-weight:bold">,&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#000">ImageData&lt;/span> &lt;span style="color:#000;font-weight:bold">=&lt;/span> &lt;span style="color:#0000cf;font-weight:bold">2&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#000;font-weight:bold">}&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#204a87;font-weight:bold">public&lt;/span> &lt;span style="color:#000">AvatarOneofCase&lt;/span> &lt;span style="color:#000">AvatarCase&lt;/span> &lt;span style="color:#000;font-weight:bold">{&lt;/span> &lt;span style="color:#204a87;font-weight:bold">get&lt;/span>&lt;span style="color:#000;font-weight:bold">;&lt;/span> &lt;span style="color:#000;font-weight:bold">}&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#204a87;font-weight:bold">public&lt;/span> &lt;span style="color:#204a87;font-weight:bold">void&lt;/span> &lt;span style="color:#000">ClearAvatar&lt;/span>&lt;span style="color:#000;font-weight:bold">();&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#204a87;font-weight:bold">public&lt;/span> &lt;span style="color:#204a87;font-weight:bold">string&lt;/span> &lt;span style="color:#000">ImageUrl&lt;/span> &lt;span style="color:#000;font-weight:bold">{&lt;/span> &lt;span style="color:#204a87;font-weight:bold">get&lt;/span>&lt;span style="color:#000;font-weight:bold">;&lt;/span> &lt;span style="color:#204a87;font-weight:bold">set&lt;/span>&lt;span style="color:#000;font-weight:bold">;&lt;/span> &lt;span style="color:#000;font-weight:bold">}&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#204a87;font-weight:bold">public&lt;/span> &lt;span style="color:#000">ByteString&lt;/span> &lt;span style="color:#000">ImageData&lt;/span> &lt;span style="color:#000;font-weight:bold">{&lt;/span> &lt;span style="color:#204a87;font-weight:bold">get&lt;/span>&lt;span style="color:#000;font-weight:bold">;&lt;/span> &lt;span style="color:#204a87;font-weight:bold">set&lt;/span>&lt;span style="color:#000;font-weight:bold">;&lt;/span> &lt;span style="color:#000;font-weight:bold">}&lt;/span>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>If a property is the current oneof &amp;quot;case&amp;quot;, fetching that property will return
+the value set for that property. Otherwise, fetching the property will return
+the default value for the property&amp;rsquo;s type—only one member of a oneof can
+be set at a time.&lt;/p>
+&lt;p>Setting any constituent property of the oneof will change the reported &amp;quot;case&amp;quot;
+of the oneof. As with a regular &lt;a href="#singular">singular field&lt;/a>, you cannot set a
+oneof field with a &lt;code>string&lt;/code> or &lt;code>bytes&lt;/code> type to a null value. Setting a
+message-type field to null is equivalent to calling the oneof-specific &lt;code>Clear&lt;/code>
+method.&lt;/p>
+&lt;h3 id="wrapper_types">Wrapper Type Fields&lt;/h3>
+&lt;p>Most of the well-known types in proto3 do not affect code generation, but the
+wrapper types (&lt;code>StringWrapper&lt;/code>, &lt;code>Int32Wrapper&lt;/code> etc) change the type and
+behaviour of the properties.&lt;/p>
+&lt;p>All of the wrapper types that correspond to C# value types (&lt;code>Int32Wrapper&lt;/code>,
+&lt;code>DoubleWrapper&lt;/code>, &lt;code>BoolWrapper&lt;/code> etc) are mapped to &lt;code>Nullable&amp;lt;T&amp;gt;&lt;/code> where &lt;code>T&lt;/code> is the
+corresponding non-nullable type. For example, a field of type &lt;code>DoubleValue&lt;/code>
+results in a C# property of type &lt;code>Nullable&amp;lt;double&amp;gt;&lt;/code>.&lt;/p>
+&lt;p>Fields of type &lt;code>StringWrapper&lt;/code> or &lt;code>BytesWrapper&lt;/code> result in C# properties of
+type &lt;code>string&lt;/code> and &lt;code>ByteString&lt;/code> being generated, but with a default value of
+null, and allowing null to be set as the property value.&lt;/p>
+&lt;p>For all wrapper types, null values are not permitted in a repeated field, but
+are permitted as the values for map entries.&lt;/p>
+&lt;h2 id="enum">Enumerations&lt;/h2>
+&lt;p>Given an enumeration definition like:&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-proto" data-lang="proto">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#204a87;font-weight:bold">enum&lt;/span> &lt;span style="color:#000">Color&lt;/span> &lt;span style="color:#000;font-weight:bold">{&lt;/span>&lt;span style="color:#a40000">
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#a40000">&lt;/span> &lt;span style="color:#000">COLOR_RED&lt;/span> &lt;span style="color:#ce5c00;font-weight:bold">=&lt;/span> &lt;span style="color:#0000cf;font-weight:bold">0&lt;/span>&lt;span style="color:#000;font-weight:bold">;&lt;/span>&lt;span style="color:#a40000">
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#a40000">&lt;/span> &lt;span style="color:#000">COLOR_GREEN&lt;/span> &lt;span style="color:#ce5c00;font-weight:bold">=&lt;/span> &lt;span style="color:#0000cf;font-weight:bold">5&lt;/span>&lt;span style="color:#000;font-weight:bold">;&lt;/span>&lt;span style="color:#a40000">
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#a40000">&lt;/span> &lt;span style="color:#000">COLOR_BLUE&lt;/span> &lt;span style="color:#ce5c00;font-weight:bold">=&lt;/span> &lt;span style="color:#0000cf;font-weight:bold">1234&lt;/span>&lt;span style="color:#000;font-weight:bold">;&lt;/span>&lt;span style="color:#a40000">
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#a40000">&lt;/span>&lt;span style="color:#000;font-weight:bold">}&lt;/span>&lt;span style="color:#a40000">
+&lt;/span>&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>The protocol buffer compiler will generate a C# enum type called &lt;code>Color&lt;/code> with
+the same set of values. The names of the enum values are converted to make them
+more idiomatic for C# developers:&lt;/p>
+&lt;ul>
+&lt;li>If the original name starts with the upper-cased form of the enum name
+itself, that is removed&lt;/li>
+&lt;li>The result is converted into Pascal case&lt;/li>
+&lt;/ul>
+&lt;p>The &lt;code>Color&lt;/code> proto enum above would therefore become the following C# code:&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-csharp" data-lang="csharp">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#204a87;font-weight:bold">enum&lt;/span> &lt;span style="color:#000">Color&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#000;font-weight:bold">{&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#000">Red&lt;/span> &lt;span style="color:#000;font-weight:bold">=&lt;/span> &lt;span style="color:#0000cf;font-weight:bold">0&lt;/span>&lt;span style="color:#000;font-weight:bold">,&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#000">Green&lt;/span> &lt;span style="color:#000;font-weight:bold">=&lt;/span> &lt;span style="color:#0000cf;font-weight:bold">5&lt;/span>&lt;span style="color:#000;font-weight:bold">,&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#000">Blue&lt;/span> &lt;span style="color:#000;font-weight:bold">=&lt;/span> &lt;span style="color:#0000cf;font-weight:bold">1234&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#000;font-weight:bold">}&lt;/span>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>This name transformation does not affect the text used within the JSON
+representation of messages.&lt;/p>
+&lt;p>Note that the &lt;code>.proto&lt;/code> language allows multiple enum symbols to have the same
+numeric value. Symbols with the same numeric value are synonyms. These are
+represented in C# in exactly the same way, with multiple names corresponding to
+the same numeric value.&lt;/p>
+&lt;p>A non-nested enumeration leads to a C# enum being generated as a new namespace
+member being generated; a nested enumeration lead to a C# enum being generated
+in the &lt;code>Types&lt;/code> nested class within the class corresponding to the message the
+enumeration is nested within.&lt;/p>
+&lt;h2 id="service">Services&lt;/h2>
+&lt;p>The C# code generator ignores services entirely.&lt;/p></description></item><item><title>Reference: C# API</title><link>/reference/csharp/api-docs-link/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>/reference/csharp/api-docs-link/</guid><description/></item></channel></rss>

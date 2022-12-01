@@ -1,0 +1,45 @@
+$dokka.format:gfm-v1
+$dokka.linkExtension:md
+$dokka.location:com.google.protobuf.kotlin////PointingToDeclaration/protobuf-kotlin/com.google.protobuf.kotlin/
+$dokka.location:com.google.protobuf.kotlin//contains/TypeParam(bounds=[com.google.protobuf.GeneratedMessageV3.ExtendableMessageOrBuilder[TypeParam(bounds=[com.google.protobuf.GeneratedMessageV3.ExtendableMessage[^^]])]])#com.google.protobuf.ExtensionLite[TypeParam(bounds=[com.google.protobuf.GeneratedMessageV3.ExtendableMessage[^]]),*]/PointingToDeclaration/protobuf-kotlin/com.google.protobuf.kotlin/contains
+$dokka.location:com.google.protobuf.kotlin//get/TypeParam(bounds=[com.google.protobuf.GeneratedMessageV3.ExtendableMessageOrBuilder[TypeParam(bounds=[com.google.protobuf.GeneratedMessageV3.ExtendableMessage[^^]])]])#com.google.protobuf.ExtensionLite[TypeParam(bounds=[com.google.protobuf.GeneratedMessageV3.ExtendableMessage[^]]),TypeParam(bounds=[kotlin.Any])]/PointingToDeclaration/protobuf-kotlin/com.google.protobuf.kotlin/get
+$dokka.location:com.google.protobuf.kotlin//get/com.google.protobuf.ByteString#kotlin.Int/PointingToDeclaration/protobuf-kotlin/com.google.protobuf.kotlin/get
+$dokka.location:com.google.protobuf.kotlin//isA/com.google.protobuf.Any#/PointingToDeclaration/protobuf-kotlin/com.google.protobuf.kotlin/is-a
+$dokka.location:com.google.protobuf.kotlin//plus/com.google.protobuf.ByteString#com.google.protobuf.ByteString/PointingToDeclaration/protobuf-kotlin/com.google.protobuf.kotlin/plus
+$dokka.location:com.google.protobuf.kotlin//set/TypeParam(bounds=[com.google.protobuf.GeneratedMessageV3.ExtendableBuilder[TypeParam(bounds=[com.google.protobuf.GeneratedMessageV3.ExtendableMessage[^^]]),^]])#com.google.protobuf.ExtensionLite[TypeParam(bounds=[com.google.protobuf.GeneratedMessageV3.ExtendableMessage[^]]),TypeParam(bounds=[kotlin.Any])]#TypeParam(bounds=[kotlin.Any])/PointingToDeclaration/protobuf-kotlin/com.google.protobuf.kotlin/set
+$dokka.location:com.google.protobuf.kotlin//toByteString/java.nio.ByteBuffer#/PointingToDeclaration/protobuf-kotlin/com.google.protobuf.kotlin/to-byte-string
+$dokka.location:com.google.protobuf.kotlin//toByteString/kotlin.ByteArray#/PointingToDeclaration/protobuf-kotlin/com.google.protobuf.kotlin/to-byte-string
+$dokka.location:com.google.protobuf.kotlin//toByteStringUtf8/kotlin.String#/PointingToDeclaration/protobuf-kotlin/com.google.protobuf.kotlin/to-byte-string-utf8
+$dokka.location:com.google.protobuf.kotlin//unpack/com.google.protobuf.Any#/PointingToDeclaration/protobuf-kotlin/com.google.protobuf.kotlin/unpack
+$dokka.location:com.google.protobuf.kotlin/DslList///PointingToDeclaration/protobuf-kotlin/com.google.protobuf.kotlin/-dsl-list/
+$dokka.location:com.google.protobuf.kotlin/DslList/DslList/#kotlin.collections.List[TypeParam(bounds=[kotlin.Any?])]/PointingToDeclaration/protobuf-kotlin/com.google.protobuf.kotlin/-dsl-list/-dsl-list
+$dokka.location:com.google.protobuf.kotlin/DslList/equals/#kotlin.Any?/PointingToDeclaration/protobuf-kotlin/com.google.protobuf.kotlin/-dsl-list/equals
+$dokka.location:com.google.protobuf.kotlin/DslList/hashCode/#/PointingToDeclaration/protobuf-kotlin/com.google.protobuf.kotlin/-dsl-list/hash-code
+$dokka.location:com.google.protobuf.kotlin/DslList/iterator/#/PointingToDeclaration/protobuf-kotlin/com.google.protobuf.kotlin/-dsl-list/iterator
+$dokka.location:com.google.protobuf.kotlin/DslList/listIterator/#/PointingToDeclaration/protobuf-kotlin/com.google.protobuf.kotlin/-dsl-list/list-iterator
+$dokka.location:com.google.protobuf.kotlin/DslList/listIterator/#kotlin.Int/PointingToDeclaration/protobuf-kotlin/com.google.protobuf.kotlin/-dsl-list/list-iterator
+$dokka.location:com.google.protobuf.kotlin/DslList/toString/#/PointingToDeclaration/protobuf-kotlin/com.google.protobuf.kotlin/-dsl-list/to-string
+$dokka.location:com.google.protobuf.kotlin/DslMap///PointingToDeclaration/protobuf-kotlin/com.google.protobuf.kotlin/-dsl-map/
+$dokka.location:com.google.protobuf.kotlin/DslMap/DslMap/#kotlin.collections.Map[TypeParam(bounds=[kotlin.Any?]),TypeParam(bounds=[kotlin.Any?])]/PointingToDeclaration/protobuf-kotlin/com.google.protobuf.kotlin/-dsl-map/-dsl-map
+$dokka.location:com.google.protobuf.kotlin/DslMap/entries/#/PointingToDeclaration/protobuf-kotlin/com.google.protobuf.kotlin/-dsl-map/entries
+$dokka.location:com.google.protobuf.kotlin/DslMap/equals/#kotlin.Any?/PointingToDeclaration/protobuf-kotlin/com.google.protobuf.kotlin/-dsl-map/equals
+$dokka.location:com.google.protobuf.kotlin/DslMap/hashCode/#/PointingToDeclaration/protobuf-kotlin/com.google.protobuf.kotlin/-dsl-map/hash-code
+$dokka.location:com.google.protobuf.kotlin/DslMap/keys/#/PointingToDeclaration/protobuf-kotlin/com.google.protobuf.kotlin/-dsl-map/keys
+$dokka.location:com.google.protobuf.kotlin/DslMap/toString/#/PointingToDeclaration/protobuf-kotlin/com.google.protobuf.kotlin/-dsl-map/to-string
+$dokka.location:com.google.protobuf.kotlin/DslMap/values/#/PointingToDeclaration/protobuf-kotlin/com.google.protobuf.kotlin/-dsl-map/values
+$dokka.location:com.google.protobuf.kotlin/DslProxy///PointingToDeclaration/protobuf-kotlin/com.google.protobuf.kotlin/-dsl-proxy/
+$dokka.location:com.google.protobuf.kotlin/ExtensionList///PointingToDeclaration/protobuf-kotlin/com.google.protobuf.kotlin/-extension-list/
+$dokka.location:com.google.protobuf.kotlin/ExtensionList/ExtensionList/#com.google.protobuf.ExtensionLite[TypeParam(bounds=[com.google.protobuf.MessageLite]),kotlin.collections.List[TypeParam(bounds=[kotlin.Any?])]]#kotlin.collections.List[TypeParam(bounds=[kotlin.Any?])]/PointingToDeclaration/protobuf-kotlin/com.google.protobuf.kotlin/-extension-list/-extension-list
+$dokka.location:com.google.protobuf.kotlin/ExtensionList/equals/#kotlin.Any?/PointingToDeclaration/protobuf-kotlin/com.google.protobuf.kotlin/-extension-list/equals
+$dokka.location:com.google.protobuf.kotlin/ExtensionList/extension/#/PointingToDeclaration/protobuf-kotlin/com.google.protobuf.kotlin/-extension-list/extension
+$dokka.location:com.google.protobuf.kotlin/ExtensionList/hashCode/#/PointingToDeclaration/protobuf-kotlin/com.google.protobuf.kotlin/-extension-list/hash-code
+$dokka.location:com.google.protobuf.kotlin/ExtensionList/iterator/#/PointingToDeclaration/protobuf-kotlin/com.google.protobuf.kotlin/-extension-list/iterator
+$dokka.location:com.google.protobuf.kotlin/ExtensionList/listIterator/#/PointingToDeclaration/protobuf-kotlin/com.google.protobuf.kotlin/-extension-list/list-iterator
+$dokka.location:com.google.protobuf.kotlin/ExtensionList/listIterator/#kotlin.Int/PointingToDeclaration/protobuf-kotlin/com.google.protobuf.kotlin/-extension-list/list-iterator
+$dokka.location:com.google.protobuf.kotlin/ExtensionList/toString/#/PointingToDeclaration/protobuf-kotlin/com.google.protobuf.kotlin/-extension-list/to-string
+$dokka.location:com.google.protobuf.kotlin/OnlyForUseByGeneratedProtoCode///PointingToDeclaration/protobuf-kotlin/com.google.protobuf.kotlin/-only-for-use-by-generated-proto-code/
+$dokka.location:com.google.protobuf.kotlin/OnlyForUseByGeneratedProtoCode/OnlyForUseByGeneratedProtoCode/#/PointingToDeclaration/protobuf-kotlin/com.google.protobuf.kotlin/-only-for-use-by-generated-proto-code/-only-for-use-by-generated-proto-code
+$dokka.location:com.google.protobuf.kotlin/ProtoDslMarker///PointingToDeclaration/protobuf-kotlin/com.google.protobuf.kotlin/-proto-dsl-marker/
+$dokka.location:com.google.protobuf.kotlin/ProtoDslMarker/ProtoDslMarker/#/PointingToDeclaration/protobuf-kotlin/com.google.protobuf.kotlin/-proto-dsl-marker/-proto-dsl-marker
+com.google.protobuf.kotlin
+

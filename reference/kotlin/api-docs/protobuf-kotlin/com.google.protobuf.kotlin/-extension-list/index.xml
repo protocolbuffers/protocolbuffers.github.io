@@ -1,0 +1,54 @@
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Protocol Buffers Documentation –</title><link>/reference/kotlin/api-docs/protobuf-kotlin/com.google.protobuf.kotlin/-extension-list/</link><description>Recent content on Protocol Buffers Documentation</description><generator>Hugo -- gohugo.io</generator><language>en-us</language><atom:link href="/reference/kotlin/api-docs/protobuf-kotlin/com.google.protobuf.kotlin/-extension-list/index.xml" rel="self" type="application/rss+xml"/><item><title>Reference:</title><link>/reference/kotlin/api-docs/protobuf-kotlin/com.google.protobuf.kotlin/-extension-list/-extension-list/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>/reference/kotlin/api-docs/protobuf-kotlin/com.google.protobuf.kotlin/-extension-list/-extension-list/</guid><description>
+&lt;p>//&lt;a href="/reference/kotlin/api-docs/">protobuf-kotlin&lt;/a>/&lt;a href="/reference/kotlin/api-docs/protobuf-kotlin/com.google.protobuf.kotlin/">com.google.protobuf.kotlin&lt;/a>/&lt;a href="">ExtensionList&lt;/a>/ExtensionList&lt;/p>
+&lt;h1 id="extensionlist">ExtensionList&lt;/h1>
+&lt;p>[JVM] &lt;br>
+Content &lt;br>
+fun &amp;lt;&lt;a href="">E&lt;/a>, &lt;a href="">M&lt;/a> :
+&lt;a href="/reference/java/api-docs/com/google/protobuf/MessageLite.html">MessageLite&lt;/a>&amp;gt;
+&lt;a href="">ExtensionList&lt;/a>(extension:
+&lt;a href="/reference/java/api-docs/com/google/protobuf/ExtensionLite.html">ExtensionLite&lt;/a>&amp;lt;&lt;a href="">M&lt;/a>,
+&lt;a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin.collections/-list/index.html">List&lt;/a>&amp;lt;&lt;a href="">E&lt;/a>&amp;raquo;,
+delegate:
+&lt;a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin.collections/-list/index.html">List&lt;/a>&amp;lt;&lt;a href="">E&lt;/a>&amp;gt;)&lt;/p></description></item><item><title>Reference:</title><link>/reference/kotlin/api-docs/protobuf-kotlin/com.google.protobuf.kotlin/-extension-list/equals/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>/reference/kotlin/api-docs/protobuf-kotlin/com.google.protobuf.kotlin/-extension-list/equals/</guid><description>
+&lt;p>//&lt;a href="/reference/kotlin/api-docs/">protobuf-kotlin&lt;/a>/&lt;a href="/reference/kotlin/api-docs/protobuf-kotlin/com.google.protobuf.kotlin/">com.google.protobuf.kotlin&lt;/a>/&lt;a href="">ExtensionList&lt;/a>/equals&lt;/p>
+&lt;h1 id="equals">equals&lt;/h1>
+&lt;p>[JVM] &lt;br>
+Content &lt;br>
+open operator override fun &lt;a href="">equals&lt;/a>(other:
+&lt;a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-any/index.html">Any&lt;/a>?):
+&lt;a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-boolean/index.html">Boolean&lt;/a>&lt;/p></description></item><item><title>Reference:</title><link>/reference/kotlin/api-docs/protobuf-kotlin/com.google.protobuf.kotlin/-extension-list/extension/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>/reference/kotlin/api-docs/protobuf-kotlin/com.google.protobuf.kotlin/-extension-list/extension/</guid><description>
+&lt;p>//&lt;a href="/reference/kotlin/api-docs/">protobuf-kotlin&lt;/a>/&lt;a href="/reference/kotlin/api-docs/protobuf-kotlin/com.google.protobuf.kotlin/">com.google.protobuf.kotlin&lt;/a>/&lt;a href="">ExtensionList&lt;/a>/extension&lt;/p>
+&lt;h1 id="extension">extension&lt;/h1>
+&lt;p>[JVM] &lt;br>
+Content &lt;br>
+val &lt;a href="">extension&lt;/a>:
+&lt;a href="/reference/java/api-docs/com/google/protobuf/ExtensionLite.html">ExtensionLite&lt;/a>&amp;lt;&lt;a href="">M&lt;/a>,
+&lt;a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin.collections/-list/index.html">List&lt;/a>&amp;lt;&lt;a href="">E&lt;/a>&amp;raquo;&lt;/p></description></item><item><title>Reference:</title><link>/reference/kotlin/api-docs/protobuf-kotlin/com.google.protobuf.kotlin/-extension-list/hash-code/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>/reference/kotlin/api-docs/protobuf-kotlin/com.google.protobuf.kotlin/-extension-list/hash-code/</guid><description>
+&lt;p>//&lt;a href="/reference/kotlin/api-docs/">protobuf-kotlin&lt;/a>/&lt;a href="/reference/kotlin/api-docs/protobuf-kotlin/com.google.protobuf.kotlin/">com.google.protobuf.kotlin&lt;/a>/&lt;a href="">ExtensionList&lt;/a>/hashCode&lt;/p>
+&lt;h1 id="hashcode">hashCode&lt;/h1>
+&lt;p>[JVM] &lt;br>
+Content &lt;br>
+open override fun &lt;a href="">hashCode&lt;/a>():
+&lt;a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-int/index.html">Int&lt;/a>&lt;/p></description></item><item><title>Reference:</title><link>/reference/kotlin/api-docs/protobuf-kotlin/com.google.protobuf.kotlin/-extension-list/iterator/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>/reference/kotlin/api-docs/protobuf-kotlin/com.google.protobuf.kotlin/-extension-list/iterator/</guid><description>
+&lt;p>//&lt;a href="/reference/kotlin/api-docs/">protobuf-kotlin&lt;/a>/&lt;a href="/reference/kotlin/api-docs/protobuf-kotlin/com.google.protobuf.kotlin/">com.google.protobuf.kotlin&lt;/a>/&lt;a href="">ExtensionList&lt;/a>/iterator&lt;/p>
+&lt;h1 id="iterator">iterator&lt;/h1>
+&lt;p>[JVM] &lt;br>
+Content &lt;br>
+open operator override fun iterator():
+&lt;a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin.collections/-iterator/index.html">Iterator&lt;/a>&amp;lt;&lt;a href="">E&lt;/a>&amp;gt;&lt;/p></description></item><item><title>Reference:</title><link>/reference/kotlin/api-docs/protobuf-kotlin/com.google.protobuf.kotlin/-extension-list/list-iterator/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>/reference/kotlin/api-docs/protobuf-kotlin/com.google.protobuf.kotlin/-extension-list/list-iterator/</guid><description>
+&lt;p>//&lt;a href="/reference/kotlin/api-docs/">protobuf-kotlin&lt;/a>/&lt;a href="/reference/kotlin/api-docs/protobuf-kotlin/com.google.protobuf.kotlin/">com.google.protobuf.kotlin&lt;/a>/&lt;a href="">ExtensionList&lt;/a>/listIterator&lt;/p>
+&lt;h1 id="listiterator">listIterator&lt;/h1>
+&lt;p>[JVM] &lt;br>
+Content &lt;br>
+open override fun &lt;a href="">listIterator&lt;/a>():
+&lt;a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin.collections/-list-iterator/index.html">ListIterator&lt;/a>&amp;lt;&lt;a href="">E&lt;/a>&amp;gt;
+&lt;br>
+open override fun &lt;a href="">listIterator&lt;/a>(index:
+&lt;a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-int/index.html">Int&lt;/a>):
+&lt;a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin.collections/-list-iterator/index.html">ListIterator&lt;/a>&amp;lt;&lt;a href="">E&lt;/a>&amp;gt;&lt;/p></description></item><item><title>Reference:</title><link>/reference/kotlin/api-docs/protobuf-kotlin/com.google.protobuf.kotlin/-extension-list/to-string/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>/reference/kotlin/api-docs/protobuf-kotlin/com.google.protobuf.kotlin/-extension-list/to-string/</guid><description>
+&lt;p>//&lt;a href="/reference/kotlin/api-docs/">protobuf-kotlin&lt;/a>/&lt;a href="/reference/kotlin/api-docs/protobuf-kotlin/com.google.protobuf.kotlin/">com.google.protobuf.kotlin&lt;/a>/&lt;a href="">ExtensionList&lt;/a>/toString&lt;/p>
+&lt;h1 id="tostring">toString&lt;/h1>
+&lt;p>[JVM] &lt;br>
+Content &lt;br>
+open override fun &lt;a href="">toString&lt;/a>():
+&lt;a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-string/index.html">String&lt;/a>&lt;/p></description></item></channel></rss>

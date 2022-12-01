@@ -1,0 +1,524 @@
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Protocol Buffers Documentation –</title><link>/reference/kotlin/api-docs/protobuf-kotlin/com.google.protobuf.kotlin/</link><description>Recent content on Protocol Buffers Documentation</description><generator>Hugo -- gohugo.io</generator><language>en-us</language><atom:link href="/reference/kotlin/api-docs/protobuf-kotlin/com.google.protobuf.kotlin/index.xml" rel="self" type="application/rss+xml"/><item><title>Reference:</title><link>/reference/kotlin/api-docs/protobuf-kotlin/com.google.protobuf.kotlin/-dsl-list/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>/reference/kotlin/api-docs/protobuf-kotlin/com.google.protobuf.kotlin/-dsl-list/</guid><description>
+&lt;p>//&lt;a href="/reference/kotlin/api-docs/">protobuf-kotlin&lt;/a>/&lt;a href="/reference/kotlin/api-docs/protobuf-kotlin/com.google.protobuf.kotlin/">com.google.protobuf.kotlin&lt;/a>/DslList&lt;/p>
+&lt;h1 id="dsllist">DslList&lt;/h1>
+&lt;p>[JVM] class &lt;a href="">DslList&lt;/a>&amp;lt;&lt;a href="">E&lt;/a>, &lt;a href="">P&lt;/a> :
+&lt;a href="../-dsl-proxy">DslProxy&lt;/a>&amp;gt;constructor(&lt;strong>delegate&lt;/strong>:
+&lt;a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin.collections/-list/index.html">List&lt;/a>&amp;lt;&lt;a href="">E&lt;/a>&amp;gt;) :
+&lt;a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin.collections/-list/index.html">List&lt;/a>&amp;lt;&lt;a href="">E&lt;/a>&amp;gt;&lt;/p>
+&lt;p>A simple wrapper around a
+&lt;a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin.collections/-list/index.html">List&lt;/a>
+with an extra generic parameter that can be used to disambiguate extension
+methods.&lt;/p>
+&lt;p>This class is used by Kotlin protocol buffer extensions, and its constructor
+is public only because generated message code is in a different compilation
+unit. Others should not use this class directly in any way.
+&lt;h2 id="constructors">Constructors&lt;/h2>
+&lt;table>
+&lt;thead>
+&lt;tr>
+&lt;th>Name&lt;/th>
+&lt;th>Summary&lt;/th>
+&lt;/tr>
+&lt;/thead>
+&lt;tbody>
+&lt;tr>
+&lt;td>&lt;a href="">DslList&lt;/a>&lt;/td>
+&lt;td>[JVM] fun &amp;lt;&lt;a href="">E&lt;/a>&amp;gt; &lt;a href="">DslList&lt;/a>(delegate: &lt;a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin.collections/-list/index.html">List&lt;/a>&amp;lt;&lt;a href="">E&lt;/a>&amp;gt;)&lt;/td>
+&lt;/tr>
+&lt;/tbody>
+&lt;/table>
+&lt;h2 id="functions">Functions&lt;/h2>
+&lt;table>
+&lt;thead>
+&lt;tr>
+&lt;th>Name&lt;/th>
+&lt;th>Summary&lt;/th>
+&lt;/tr>
+&lt;/thead>
+&lt;tbody>
+&lt;tr>
+&lt;td>&lt;a name="kotlin.collections/List/contains/#TypeParam(bounds=[kotlin.Any?])/PointingToDeclaration/">&lt;/a>&lt;a href="../-extension-list/#765883978%2FFunctions%2F-246181541">contains&lt;/a>&lt;/td>
+&lt;td>&lt;a name="kotlin.collections/List/contains/#TypeParam(bounds=[kotlin.Any?])/PointingToDeclaration/">&lt;/a>[JVM] &lt;br>Content &lt;br>open operator override fun &lt;a href="../-extension-list/#765883978%2FFunctions%2F-246181541">contains&lt;/a>(element: &lt;a href="">E&lt;/a>): &lt;a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-boolean/index.html">Boolean&lt;/a> &lt;br>&lt;br>&lt;br>&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>&lt;a name="kotlin.collections/List/containsAll/#kotlin.collections.Collection[TypeParam(bounds=[kotlin.Any?])]/PointingToDeclaration/">&lt;/a>&lt;a href="../-extension-list/#-225903147%2FFunctions%2F-246181541">containsAll&lt;/a>&lt;/td>
+&lt;td>&lt;a name="kotlin.collections/List/containsAll/#kotlin.collections.Collection[TypeParam(bounds=[kotlin.Any?])]/PointingToDeclaration/">&lt;/a>[JVM] &lt;br>Content &lt;br>open override fun &lt;a href="../-extension-list/#-225903147%2FFunctions%2F-246181541">containsAll&lt;/a>(elements: &lt;a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin.collections/-collection/index.html">Collection&lt;/a>&amp;lt;&lt;a href="">E&lt;/a>&amp;gt;): &lt;a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-boolean/index.html">Boolean&lt;/a> &lt;br>&lt;br>&lt;br>&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>&lt;a name="com.google.protobuf.kotlin/DslList/equals/#kotlin.Any?/PointingToDeclaration/">&lt;/a>&lt;a href="equals">equals&lt;/a>&lt;/td>
+&lt;td>&lt;a name="com.google.protobuf.kotlin/DslList/equals/#kotlin.Any?/PointingToDeclaration/">&lt;/a>[JVM] &lt;br>Content &lt;br>open operator override fun &lt;a href="equals">equals&lt;/a>(other: &lt;a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-any/index.html">Any&lt;/a>?): &lt;a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-boolean/index.html">Boolean&lt;/a> &lt;br>&lt;br>&lt;br>&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>&lt;a name="kotlin.collections/Iterable/forEach/#java.util.function.Consumer[TypeParam(bounds=[kotlin.Any?])]/PointingToDeclaration/">&lt;/a>&lt;a href="../-extension-list/#1532301601%2FFunctions%2F-246181541">forEach&lt;/a>&lt;/td>
+&lt;td>&lt;a name="kotlin.collections/Iterable/forEach/#java.util.function.Consumer[TypeParam(bounds=[kotlin.Any?])]/PointingToDeclaration/">&lt;/a>[JVM] &lt;br>Content &lt;br>open fun &lt;a href="../-extension-list/#1532301601%2FFunctions%2F-246181541">forEach&lt;/a>(p0: &lt;a href="https://docs.oracle.com/javase/8/docs/api/java/util/function/Consumer.html">Consumer&lt;/a>&amp;lt;in &lt;a href="">E&lt;/a>&amp;gt;) &lt;br>&lt;br>&lt;br>&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>&lt;a name="kotlin.collections/List/get/#kotlin.Int/PointingToDeclaration/">&lt;/a>&lt;a href="../-extension-list/#961975567%2FFunctions%2F-246181541">get&lt;/a>&lt;/td>
+&lt;td>&lt;a name="kotlin.collections/List/get/#kotlin.Int/PointingToDeclaration/">&lt;/a>[JVM] &lt;br>Content &lt;br>open operator override fun &lt;a href="../-extension-list/#961975567%2FFunctions%2F-246181541">get&lt;/a>(index: &lt;a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-int/index.html">Int&lt;/a>): &lt;a href="">E&lt;/a> &lt;br>&lt;br>&lt;br>&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>&lt;a name="com.google.protobuf.kotlin/DslList/hashCode/#/PointingToDeclaration/">&lt;/a>&lt;a href="hash-code">hashCode&lt;/a>&lt;/td>
+&lt;td>&lt;a name="com.google.protobuf.kotlin/DslList/hashCode/#/PointingToDeclaration/">&lt;/a>[JVM] &lt;br>Content &lt;br>open override fun &lt;a href="hash-code">hashCode&lt;/a>(): &lt;a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-int/index.html">Int&lt;/a> &lt;br>&lt;br>&lt;br>&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>&lt;a name="kotlin.collections/List/indexOf/#TypeParam(bounds=[kotlin.Any?])/PointingToDeclaration/">&lt;/a>&lt;a href="../-extension-list/#-407930336%2FFunctions%2F-246181541">indexOf&lt;/a>&lt;/td>
+&lt;td>&lt;a name="kotlin.collections/List/indexOf/#TypeParam(bounds=[kotlin.Any?])/PointingToDeclaration/">&lt;/a>[JVM] &lt;br>Content &lt;br>open override fun &lt;a href="../-extension-list/#-407930336%2FFunctions%2F-246181541">indexOf&lt;/a>(element: &lt;a href="">E&lt;/a>): &lt;a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-int/index.html">Int&lt;/a> &lt;br>&lt;br>&lt;br>&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>&lt;a name="kotlin.collections/List/isEmpty/#/PointingToDeclaration/">&lt;/a>&lt;a href="../-extension-list/#-1000881820%2FFunctions%2F-246181541">isEmpty&lt;/a>&lt;/td>
+&lt;td>&lt;a name="kotlin.collections/List/isEmpty/#/PointingToDeclaration/">&lt;/a>[JVM] &lt;br>Content &lt;br>open override fun &lt;a href="../-extension-list/#-1000881820%2FFunctions%2F-246181541">isEmpty&lt;/a>(): &lt;a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-boolean/index.html">Boolean&lt;/a> &lt;br>&lt;br>&lt;br>&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>&lt;a name="com.google.protobuf.kotlin/DslList/iterator/#/PointingToDeclaration/">&lt;/a>&lt;a href="iterator">iterator&lt;/a>&lt;/td>
+&lt;td>&lt;a name="com.google.protobuf.kotlin/DslList/iterator/#/PointingToDeclaration/">&lt;/a>[JVM] &lt;br>Content &lt;br>open operator override fun &lt;a href="iterator">iterator&lt;/a>(): &lt;a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin.collections/-iterator/index.html">Iterator&lt;/a>&amp;lt;&lt;a href="">E&lt;/a>&amp;gt; &lt;br>&lt;br>&lt;br>&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>&lt;a name="kotlin.collections/List/lastIndexOf/#TypeParam(bounds=[kotlin.Any?])/PointingToDeclaration/">&lt;/a>&lt;a href="../-extension-list/#1327716778%2FFunctions%2F-246181541">lastIndexOf&lt;/a>&lt;/td>
+&lt;td>&lt;a name="kotlin.collections/List/lastIndexOf/#TypeParam(bounds=[kotlin.Any?])/PointingToDeclaration/">&lt;/a>[JVM] &lt;br>Content &lt;br>open override fun &lt;a href="../-extension-list/#1327716778%2FFunctions%2F-246181541">lastIndexOf&lt;/a>(element: &lt;a href="">E&lt;/a>): &lt;a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-int/index.html">Int&lt;/a> &lt;br>&lt;br>&lt;br>&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>&lt;a name="com.google.protobuf.kotlin/DslList/listIterator/#/PointingToDeclaration/">&lt;/a>&lt;a href="list-iterator">listIterator&lt;/a>&lt;/td>
+&lt;td>&lt;a name="com.google.protobuf.kotlin/DslList/listIterator/#/PointingToDeclaration/">&lt;/a>[JVM] &lt;br>Content &lt;br>open override fun &lt;a href="list-iterator">listIterator&lt;/a>(): &lt;a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin.collections/-list-iterator/index.html">ListIterator&lt;/a>&amp;lt;&lt;a href="">E&lt;/a>&amp;gt; &lt;br>open override fun &lt;a href="list-iterator">listIterator&lt;/a>(index: &lt;a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-int/index.html">Int&lt;/a>): &lt;a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin.collections/-list-iterator/index.html">ListIterator&lt;/a>&amp;lt;&lt;a href="">E&lt;/a>&amp;gt; &lt;br>&lt;br>&lt;br>&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>&lt;a name="kotlin.collections/Collection/parallelStream/#/PointingToDeclaration/">&lt;/a>&lt;a href="../-extension-list/#-1592339412%2FFunctions%2F-246181541">parallelStream&lt;/a>&lt;/td>
+&lt;td>&lt;a name="kotlin.collections/Collection/parallelStream/#/PointingToDeclaration/">&lt;/a>[JVM] &lt;br>Content &lt;br>open fun &lt;a href="../-extension-list/#-1592339412%2FFunctions%2F-246181541">parallelStream&lt;/a>(): &lt;a href="https://docs.oracle.com/javase/8/docs/api/java/util/stream/Stream.html">Stream&lt;/a>&amp;lt;&lt;a href="">E&lt;/a>&amp;gt; &lt;br>&lt;br>&lt;br>&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>&lt;a name="kotlin.collections/List/spliterator/#/PointingToDeclaration/">&lt;/a>&lt;a href="../-extension-list/#703021258%2FFunctions%2F-246181541">spliterator&lt;/a>&lt;/td>
+&lt;td>&lt;a name="kotlin.collections/List/spliterator/#/PointingToDeclaration/">&lt;/a>[JVM] &lt;br>Content &lt;br>open override fun &lt;a href="../-extension-list/#703021258%2FFunctions%2F-246181541">spliterator&lt;/a>(): &lt;a href="https://docs.oracle.com/javase/8/docs/api/java/util/Spliterator.html">Spliterator&lt;/a>&amp;lt;&lt;a href="">E&lt;/a>&amp;gt; &lt;br>&lt;br>&lt;br>&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>&lt;a name="kotlin.collections/Collection/stream/#/PointingToDeclaration/">&lt;/a>&lt;a href="../-extension-list/#135225651%2FFunctions%2F-246181541">stream&lt;/a>&lt;/td>
+&lt;td>&lt;a name="kotlin.collections/Collection/stream/#/PointingToDeclaration/">&lt;/a>[JVM] &lt;br>Content &lt;br>open fun &lt;a href="../-extension-list/#135225651%2FFunctions%2F-246181541">stream&lt;/a>(): &lt;a href="https://docs.oracle.com/javase/8/docs/api/java/util/stream/Stream.html">Stream&lt;/a>&amp;lt;&lt;a href="">E&lt;/a>&amp;gt; &lt;br>&lt;br>&lt;br>&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>&lt;a name="kotlin.collections/List/subList/#kotlin.Int#kotlin.Int/PointingToDeclaration/">&lt;/a>&lt;a href="../-extension-list/#423386006%2FFunctions%2F-246181541">subList&lt;/a>&lt;/td>
+&lt;td>&lt;a name="kotlin.collections/List/subList/#kotlin.Int#kotlin.Int/PointingToDeclaration/">&lt;/a>[JVM] &lt;br>Content &lt;br>open override fun &lt;a href="../-extension-list/#423386006%2FFunctions%2F-246181541">subList&lt;/a>(fromIndex: &lt;a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-int/index.html">Int&lt;/a>, toIndex: &lt;a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-int/index.html">Int&lt;/a>): &lt;a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin.collections/-list/index.html">List&lt;/a>&amp;lt;&lt;a href="">E&lt;/a>&amp;gt; &lt;br>&lt;br>&lt;br>&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>&lt;a name="kotlin.collections/Collection/toArray/#java.util.function.IntFunction[kotlin.Array[TypeParam(bounds=[kotlin.Any])]]/PointingToDeclaration/">&lt;/a>&lt;a href="../-extension-list/#-1215154575%2FFunctions%2F-246181541">toArray&lt;/a>&lt;/td>
+&lt;td>&lt;a name="kotlin.collections/Collection/toArray/#java.util.function.IntFunction[kotlin.Array[TypeParam(bounds=[kotlin.Any])]]/PointingToDeclaration/">&lt;/a>[JVM] &lt;br>Content &lt;br>&lt;del>open&lt;/del> &lt;del>fun&lt;/del> &lt;del>&amp;lt;&lt;/del>&lt;a href="../-extension-list/#-1215154575%2FFunctions%2F-246181541">T&lt;/a> : &lt;a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-any/index.html">Any&lt;/a>&lt;del>&amp;gt;&lt;/del> &lt;a href="../-extension-list/#-1215154575%2FFunctions%2F-246181541">&lt;del>toArray&lt;/del>&lt;/a>&lt;del>(&lt;del>&lt;del>p0&lt;/del>&lt;/del>:&lt;/del> &lt;a href="https://docs.oracle.com/javase/8/docs/api/java/util/function/IntFunction.html">IntFunction&lt;/a>&amp;lt;&lt;a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-array/index.html">Array&lt;/a>&amp;lt;&lt;a href="../-extension-list/#-1215154575%2FFunctions%2F-246181541">T&lt;/a>&amp;raquo;&lt;del>)~~~~:&lt;/del> &lt;a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-array/index.html">Array&lt;/a>&amp;lt;&lt;a href="../-extension-list/#-1215154575%2FFunctions%2F-246181541">T&lt;/a>&amp;gt; &lt;br>&lt;br>&lt;br>&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>&lt;a name="com.google.protobuf.kotlin/DslList/toString/#/PointingToDeclaration/">&lt;/a>&lt;a href="to-string">toString&lt;/a>&lt;/td>
+&lt;td>&lt;a name="com.google.protobuf.kotlin/DslList/toString/#/PointingToDeclaration/">&lt;/a>[JVM] &lt;br>Content &lt;br>open override fun &lt;a href="to-string">toString&lt;/a>(): &lt;a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-string/index.html">String&lt;/a> &lt;br>&lt;br>&lt;br>&lt;/td>
+&lt;/tr>
+&lt;/tbody>
+&lt;/table>
+&lt;h2 id="properties">Properties&lt;/h2>
+&lt;table>
+&lt;thead>
+&lt;tr>
+&lt;th>Name&lt;/th>
+&lt;th>Summary&lt;/th>
+&lt;/tr>
+&lt;/thead>
+&lt;tbody>
+&lt;tr>
+&lt;td>&lt;a name="com.google.protobuf.kotlin/DslList/size/#/PointingToDeclaration/">&lt;/a>&lt;a href="#1874448885%2FProperties%2F-246181541">size&lt;/a>&lt;/td>
+&lt;td>&lt;a name="com.google.protobuf.kotlin/DslList/size/#/PointingToDeclaration/">&lt;/a> [JVM] open override val &lt;a href="#1874448885%2FProperties%2F-246181541">size&lt;/a>: &lt;a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-int/index.html">Int&lt;/a> &lt;br>&lt;/td>
+&lt;/tr>
+&lt;/tbody>
+&lt;/table></description></item><item><title>Reference:</title><link>/reference/kotlin/api-docs/protobuf-kotlin/com.google.protobuf.kotlin/-dsl-map/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>/reference/kotlin/api-docs/protobuf-kotlin/com.google.protobuf.kotlin/-dsl-map/</guid><description>
+&lt;p>//&lt;a href="/reference/kotlin/api-docs/">protobuf-kotlin&lt;/a>/&lt;a href="/reference/kotlin/api-docs/protobuf-kotlin/com.google.protobuf.kotlin/">com.google.protobuf.kotlin&lt;/a>/DslMap&lt;/p>
+&lt;h1 id="dslmap">DslMap&lt;/h1>
+&lt;p>[JVM] class &lt;a href="">DslMap&lt;/a>&amp;lt;&lt;a href="">K&lt;/a>, &lt;a href="">V&lt;/a>, &lt;a href="">P&lt;/a> :
+&lt;a href="../-dsl-proxy/">DslProxy&lt;/a>&amp;gt;constructor(&lt;strong>delegate&lt;/strong>:
+&lt;a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin.collections/-map/index.html">Map&lt;/a>&amp;lt;&lt;a href="">K&lt;/a>,
+&lt;a href="">V&lt;/a>&amp;gt;) :
+&lt;a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin.collections/-map/index.html">Map&lt;/a>&amp;lt;&lt;a href="">K&lt;/a>,
+&lt;a href="">V&lt;/a>&amp;gt;&lt;/p>
+&lt;p>A simple wrapper around a
+&lt;a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin.collections/-map/index.html">Map&lt;/a>
+with an extra generic parameter that can be used to disambiguate extension
+methods.&lt;/p>
+&lt;p>This class is used by Kotlin protocol buffer extensions, and its constructor
+is public only because generated message code is in a different compilation
+unit. Others should not use this class directly in any way.
+&lt;h2 id="constructors">Constructors&lt;/h2>
+&lt;table>
+&lt;thead>
+&lt;tr>
+&lt;th>Name&lt;/th>
+&lt;th>Summary&lt;/th>
+&lt;/tr>
+&lt;/thead>
+&lt;tbody>
+&lt;tr>
+&lt;td>[DslMap])&lt;/td>
+&lt;td>[JVM] fun &amp;lt;&lt;a href="">K&lt;/a>, &lt;a href="">V&lt;/a>&amp;gt; &lt;a href="">DslMap&lt;/a>(delegate: &lt;a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin.collections/-map/index.html">Map&lt;/a>&amp;lt;&lt;a href="">K&lt;/a>, &lt;a href="">V&lt;/a>&amp;gt;)&lt;/td>
+&lt;/tr>
+&lt;/tbody>
+&lt;/table>
+&lt;h2 id="functions">Functions&lt;/h2>
+&lt;table>
+&lt;thead>
+&lt;tr>
+&lt;th>Name&lt;/th>
+&lt;th>Summary&lt;/th>
+&lt;/tr>
+&lt;/thead>
+&lt;tbody>
+&lt;tr>
+&lt;td>&lt;a name="kotlin.collections/Map/containsKey/#TypeParam(bounds=[kotlin.Any?])/PointingToDeclaration/">&lt;/a>&lt;a href="#189495335%2FFunctions%2F-246181541">containsKey&lt;/a>&lt;/td>
+&lt;td>&lt;a name="kotlin.collections/Map/containsKey/#TypeParam(bounds=[kotlin.Any?])/PointingToDeclaration/">&lt;/a>[JVM] &lt;br>Content &lt;br>open override fun &lt;a href="#189495335%2FFunctions%2F-246181541">containsKey&lt;/a>(key: &lt;a href="">K&lt;/a>): &lt;a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-boolean/index.html">Boolean&lt;/a> &lt;br>&lt;br>&lt;br>&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>&lt;a name="kotlin.collections/Map/containsValue/#TypeParam(bounds=[kotlin.Any?])/PointingToDeclaration/">&lt;/a>&lt;a href="#-337993863%2FFunctions%2F-246181541">containsValue&lt;/a>&lt;/td>
+&lt;td>&lt;a name="kotlin.collections/Map/containsValue/#TypeParam(bounds=[kotlin.Any?])/PointingToDeclaration/">&lt;/a>[JVM] &lt;br>Content &lt;br>open override fun &lt;a href="#-337993863%2FFunctions%2F-246181541">containsValue&lt;/a>(value: &lt;a href="">V&lt;/a>): &lt;a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-boolean/index.html">Boolean&lt;/a> &lt;br>&lt;br>&lt;br>&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>&lt;a name="com.google.protobuf.kotlin/DslMap/equals/#kotlin.Any?/PointingToDeclaration/">&lt;/a>&lt;a href="equals">equals&lt;/a>&lt;/td>
+&lt;td>&lt;a name="com.google.protobuf.kotlin/DslMap/equals/#kotlin.Any?/PointingToDeclaration/">&lt;/a>[JVM] &lt;br>Content &lt;br>open operator override fun &lt;a href="equals">equals&lt;/a>(other: &lt;a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-any/index.html">Any&lt;/a>?): &lt;a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-boolean/index.html">Boolean&lt;/a> &lt;br>&lt;br>&lt;br>&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>&lt;a name="kotlin.collections/Map/forEach/#java.util.function.BiConsumer[TypeParam(bounds=[kotlin.Any?]),TypeParam(bounds=[kotlin.Any?])]/PointingToDeclaration/">&lt;/a>&lt;a href="#1890068580%2FFunctions%2F-246181541">forEach&lt;/a>&lt;/td>
+&lt;td>&lt;a name="kotlin.collections/Map/forEach/#java.util.function.BiConsumer[TypeParam(bounds=[kotlin.Any?]),TypeParam(bounds=[kotlin.Any?])]/PointingToDeclaration/">&lt;/a>[JVM] &lt;br>Content &lt;br>open fun &lt;a href="#1890068580%2FFunctions%2F-246181541">forEach&lt;/a>(p0: &lt;a href="https://docs.oracle.com/javase/8/docs/api/java/util/function/BiConsumer.html">BiConsumer&lt;/a>&amp;lt;in &lt;a href="">K&lt;/a>, in &lt;a href="">V&lt;/a>&amp;gt;) &lt;br>&lt;br>&lt;br>&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>&lt;a name="kotlin.collections/Map/get/#TypeParam(bounds=[kotlin.Any?])/PointingToDeclaration/">&lt;/a>&lt;a href="#1589144509%2FFunctions%2F-246181541">get&lt;/a>&lt;/td>
+&lt;td>&lt;a name="kotlin.collections/Map/get/#TypeParam(bounds=[kotlin.Any?])/PointingToDeclaration/">&lt;/a>[JVM] &lt;br>Content &lt;br>open operator override fun &lt;a href="#1589144509%2FFunctions%2F-246181541">get&lt;/a>(key: &lt;a href="">K&lt;/a>): &lt;a href="">V&lt;/a>? &lt;br>&lt;br>&lt;br>&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>&lt;a name="kotlin.collections/Map/getOrDefault/#TypeParam(bounds=[kotlin.Any?])#TypeParam(bounds=[kotlin.Any?])/PointingToDeclaration/">&lt;/a>&lt;a href="#1493482850%2FFunctions%2F-246181541">getOrDefault&lt;/a>&lt;/td>
+&lt;td>&lt;a name="kotlin.collections/Map/getOrDefault/#TypeParam(bounds=[kotlin.Any?])#TypeParam(bounds=[kotlin.Any?])/PointingToDeclaration/">&lt;/a>[JVM] &lt;br>Content &lt;br>open fun &lt;a href="#1493482850%2FFunctions%2F-246181541">getOrDefault&lt;/a>(key: &lt;a href="">K&lt;/a>, defaultValue: &lt;a href="">V&lt;/a>): &lt;a href="">V&lt;/a> &lt;br>&lt;br>&lt;br>&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>&lt;a name="com.google.protobuf.kotlin/DslMap/hashCode/#/PointingToDeclaration/">&lt;/a>&lt;a href="hash-code">hashCode&lt;/a>&lt;/td>
+&lt;td>&lt;a name="com.google.protobuf.kotlin/DslMap/hashCode/#/PointingToDeclaration/">&lt;/a>[JVM] &lt;br>Content &lt;br>open override fun &lt;a href="hash-code">hashCode&lt;/a>(): &lt;a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-int/index.html">Int&lt;/a> &lt;br>&lt;br>&lt;br>&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>&lt;a name="kotlin.collections/Map/isEmpty/#/PointingToDeclaration/">&lt;/a>&lt;a href="#-1708477740%2FFunctions%2F-246181541">isEmpty&lt;/a>&lt;/td>
+&lt;td>&lt;a name="kotlin.collections/Map/isEmpty/#/PointingToDeclaration/">&lt;/a>[JVM] &lt;br>Content &lt;br>open override fun &lt;a href="#-1708477740%2FFunctions%2F-246181541">isEmpty&lt;/a>(): &lt;a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-boolean/index.html">Boolean&lt;/a> &lt;br>&lt;br>&lt;br>&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>&lt;a name="com.google.protobuf.kotlin/DslMap/toString/#/PointingToDeclaration/">&lt;/a>&lt;a href="to-string">toString&lt;/a>&lt;/td>
+&lt;td>&lt;a name="com.google.protobuf.kotlin/DslMap/toString/#/PointingToDeclaration/">&lt;/a>[JVM] &lt;br>Content &lt;br>open override fun &lt;a href="to-string">toString&lt;/a>(): &lt;a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-string/index.html">String&lt;/a> &lt;br>&lt;br>&lt;br>&lt;/td>
+&lt;/tr>
+&lt;/tbody>
+&lt;/table>
+&lt;h2 id="properties">Properties&lt;/h2>
+&lt;table>
+&lt;thead>
+&lt;tr>
+&lt;th>Name&lt;/th>
+&lt;th>Summary&lt;/th>
+&lt;/tr>
+&lt;/thead>
+&lt;tbody>
+&lt;tr>
+&lt;td>&lt;a name="com.google.protobuf.kotlin/DslMap/entries/#/PointingToDeclaration/">&lt;/a>&lt;a href="entries">entries&lt;/a>&lt;/td>
+&lt;td>&lt;a name="com.google.protobuf.kotlin/DslMap/entries/#/PointingToDeclaration/">&lt;/a> [JVM] open override val &lt;a href="entries">entries&lt;/a>: &lt;a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin.collections/-set/index.html">Set&lt;/a>&amp;lt;&lt;a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin.collections/-map/-entry/index.html">Map.Entry&lt;/a>&amp;lt;&lt;a href="">K&lt;/a>, &lt;a href="">V&lt;/a>&amp;raquo; &lt;br>&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>&lt;a name="com.google.protobuf.kotlin/DslMap/keys/#/PointingToDeclaration/">&lt;/a>&lt;a href="keys">keys&lt;/a>&lt;/td>
+&lt;td>&lt;a name="com.google.protobuf.kotlin/DslMap/keys/#/PointingToDeclaration/">&lt;/a> [JVM] open override val &lt;a href="keys">keys&lt;/a>: &lt;a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin.collections/-set/index.html">Set&lt;/a>&amp;lt;&lt;a href="">K&lt;/a>&amp;gt; &lt;br>&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>&lt;a name="com.google.protobuf.kotlin/DslMap/size/#/PointingToDeclaration/">&lt;/a>&lt;a href="#-2063973537%2FProperties%2F-246181541">size&lt;/a>&lt;/td>
+&lt;td>&lt;a name="com.google.protobuf.kotlin/DslMap/size/#/PointingToDeclaration/">&lt;/a> [JVM] open override val &lt;a href="#-2063973537%2FProperties%2F-246181541">size&lt;/a>: &lt;a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-int/index.html">Int&lt;/a> &lt;br>&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>&lt;a name="com.google.protobuf.kotlin/DslMap/values/#/PointingToDeclaration/">&lt;/a>&lt;a href="values">values&lt;/a>&lt;/td>
+&lt;td>&lt;a name="com.google.protobuf.kotlin/DslMap/values/#/PointingToDeclaration/">&lt;/a> [JVM] open override val &lt;a href="values">values&lt;/a>: &lt;a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin.collections/-collection/index.html">Collection&lt;/a>&amp;lt;&lt;a href="">V&lt;/a>&amp;gt; &lt;br>&lt;/td>
+&lt;/tr>
+&lt;/tbody>
+&lt;/table></description></item><item><title>Reference:</title><link>/reference/kotlin/api-docs/protobuf-kotlin/com.google.protobuf.kotlin/-dsl-proxy/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>/reference/kotlin/api-docs/protobuf-kotlin/com.google.protobuf.kotlin/-dsl-proxy/</guid><description>
+&lt;p>//&lt;a href="/reference/kotlin/api-docs/">protobuf-kotlin&lt;/a>/&lt;a href="/reference/kotlin/api-docs/protobuf-kotlin/com.google.protobuf.kotlin/">com.google.protobuf.kotlin&lt;/a>/DslProxy&lt;/p>
+&lt;h1 id="dslproxy">DslProxy&lt;/h1>
+&lt;p>[JVM] abstract class &lt;a href="">DslProxy&lt;/a>&lt;/p>
+&lt;p>A type meaningful only for its existence, never intended to be instantiated. For
+example, a DslList&amp;lt;Int, FooProxy&amp;gt; can be given different extension methods than
+a DslList&amp;lt;Int, BarProxy&amp;gt;.&lt;/p></description></item><item><title>Reference:</title><link>/reference/kotlin/api-docs/protobuf-kotlin/com.google.protobuf.kotlin/-extension-list/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>/reference/kotlin/api-docs/protobuf-kotlin/com.google.protobuf.kotlin/-extension-list/</guid><description>
+&lt;p>//&lt;a href="/reference/kotlin/api-docs/">protobuf-kotlin&lt;/a>/&lt;a href="/reference/kotlin/api-docs/protobuf-kotlin/com.google.protobuf.kotlin/">com.google.protobuf.kotlin&lt;/a>/ExtensionList&lt;/p>
+&lt;h1 id="extensionlist">ExtensionList&lt;/h1>
+&lt;p>[JVM] class &lt;a href="">ExtensionList&lt;/a>&amp;lt;&lt;a href="">E&lt;/a>, &lt;a href="">M&lt;/a> :
+&lt;a href="/reference/java/api-docs/com/google/protobuf/MessageLite.html">MessageLite&lt;/a>&amp;gt;constructor(&lt;strong>extension&lt;/strong>:
+&lt;a href="/reference/java/api-docs/com/google/protobuf/ExtensionLite.html">ExtensionLite&lt;/a>&amp;lt;&lt;a href="">M&lt;/a>,
+&lt;a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin.collections/-list/index.html">List&lt;/a>&amp;lt;&lt;a href="">E&lt;/a>&amp;raquo;,
+&lt;strong>delegate&lt;/strong>:
+&lt;a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin.collections/-list/index.html">List&lt;/a>&amp;lt;&lt;a href="">E&lt;/a>&amp;gt;) :
+&lt;a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin.collections/-list/index.html">List&lt;/a>&amp;lt;&lt;a href="">E&lt;/a>&amp;gt;&lt;/p>
+&lt;p>Implementation for ExtensionList and ExtensionListLite. Like
+&lt;a href="../-dsl-list/">DslList&lt;/a>, represents an unmodifiable view of a repeated proto
+field &amp;ndash; in this case, an extension field &amp;ndash; but supports querying the
+extension.&lt;/p>
+&lt;h2 id="constructors">Constructors&lt;/h2>
+&lt;table>
+&lt;thead>
+&lt;tr>
+&lt;th>Name&lt;/th>
+&lt;th>Summary&lt;/th>
+&lt;/tr>
+&lt;/thead>
+&lt;tbody>
+&lt;tr>
+&lt;td>&lt;a href="">ExtensionList&lt;/a>&lt;/td>
+&lt;td>[JVM] fun &amp;lt;&lt;a href="">E&lt;/a>, &lt;a href="">M&lt;/a> : &lt;a href="/reference/java/api-docs/com/google/protobuf/MessageLite.html">MessageLite&lt;/a>&amp;gt; &lt;a href="">ExtensionList&lt;/a>(extension: &lt;a href="/reference/java/api-docs/com/google/protobuf/ExtensionLite.html">ExtensionLite&lt;/a>&amp;lt;&lt;a href="">M&lt;/a>, &lt;a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin.collections/-list/index.html">List&lt;/a>&amp;lt;&lt;a href="">E&lt;/a>&amp;gt;&amp;gt;, delegate: &lt;a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin.collections/-list/index.html">List&lt;/a>&amp;lt;&lt;a href="">E&lt;/a>&amp;gt;)&lt;/td>
+&lt;/tr>
+&lt;/tbody>
+&lt;/table>
+&lt;h2 id="functions">Functions&lt;/h2>
+&lt;table>
+&lt;thead>
+&lt;tr>
+&lt;th>Name&lt;/th>
+&lt;th>Summary&lt;/th>
+&lt;/tr>
+&lt;/thead>
+&lt;tbody>
+&lt;tr>
+&lt;td>&lt;a name="kotlin.collections/List/contains/#TypeParam(bounds=[kotlin.Any?])/PointingToDeclaration/">&lt;/a>&lt;a href="#765883978%2FFunctions%2F-246181541">contains&lt;/a>&lt;/td>
+&lt;td>&lt;a name="kotlin.collections/List/contains/#TypeParam(bounds=[kotlin.Any?])/PointingToDeclaration/">&lt;/a>[JVM] &lt;br>Content &lt;br>open operator override fun &lt;a href="#765883978%2FFunctions%2F-246181541">contains&lt;/a>(element: &lt;a href="">E&lt;/a>): &lt;a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-boolean/index.html">Boolean&lt;/a> &lt;br>&lt;br>&lt;br>&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>&lt;a name="kotlin.collections/List/containsAll/#kotlin.collections.Collection[TypeParam(bounds=[kotlin.Any?])]/PointingToDeclaration/">&lt;/a>&lt;a href="#-225903147%2FFunctions%2F-246181541">containsAll&lt;/a>&lt;/td>
+&lt;td>&lt;a name="kotlin.collections/List/containsAll/#kotlin.collections.Collection[TypeParam(bounds=[kotlin.Any?])]/PointingToDeclaration/">&lt;/a>[JVM] &lt;br>Content &lt;br>open override fun &lt;a href="#-225903147%2FFunctions%2F-246181541">containsAll&lt;/a>(elements: &lt;a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin.collections/-collection/index.html">Collection&lt;/a>&amp;lt;&lt;a href="">E&lt;/a>&amp;gt;): &lt;a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-boolean/index.html">Boolean&lt;/a> &lt;br>&lt;br>&lt;br>&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>&lt;a name="com.google.protobuf.kotlin/ExtensionList/equals/#kotlin.Any?/PointingToDeclaration/">&lt;/a>&lt;a href="equals">equals&lt;/a>&lt;/td>
+&lt;td>&lt;a name="com.google.protobuf.kotlin/ExtensionList/equals/#kotlin.Any?/PointingToDeclaration/">&lt;/a>[JVM] &lt;br>Content &lt;br>open operator override fun &lt;a href="equals">equals&lt;/a>(other: &lt;a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-any/index.html">Any&lt;/a>?): &lt;a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-boolean/index.html">Boolean&lt;/a> &lt;br>&lt;br>&lt;br>&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>&lt;a name="kotlin.collections/Iterable/forEach/#java.util.function.Consumer[TypeParam(bounds=[kotlin.Any?])]/PointingToDeclaration/">&lt;/a>&lt;a href="#1532301601%2FFunctions%2F-246181541">forEach&lt;/a>&lt;/td>
+&lt;td>&lt;a name="kotlin.collections/Iterable/forEach/#java.util.function.Consumer[TypeParam(bounds=[kotlin.Any?])]/PointingToDeclaration/">&lt;/a>[JVM] &lt;br>Content &lt;br>open fun &lt;a href="#1532301601%2FFunctions%2F-246181541">forEach&lt;/a>(p0: &lt;a href="https://docs.oracle.com/javase/8/docs/api/java/util/function/Consumer.html">Consumer&lt;/a>&amp;lt;in &lt;a href="">E&lt;/a>&amp;gt;) &lt;br>&lt;br>&lt;br>&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>&lt;a name="kotlin.collections/List/get/#kotlin.Int/PointingToDeclaration/">&lt;/a>&lt;a href="#961975567%2FFunctions%2F-246181541">get&lt;/a>&lt;/td>
+&lt;td>&lt;a name="kotlin.collections/List/get/#kotlin.Int/PointingToDeclaration/">&lt;/a>[JVM] &lt;br>Content &lt;br>open operator override fun &lt;a href="#961975567%2FFunctions%2F-246181541">get&lt;/a>(index: &lt;a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-int/index.html">Int&lt;/a>): &lt;a href="">E&lt;/a> &lt;br>&lt;br>&lt;br>&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>&lt;a name="com.google.protobuf.kotlin/ExtensionList/hashCode/#/PointingToDeclaration/">&lt;/a>&lt;a href="hash-code">hashCode&lt;/a>&lt;/td>
+&lt;td>&lt;a name="com.google.protobuf.kotlin/ExtensionList/hashCode/#/PointingToDeclaration/">&lt;/a>[JVM] &lt;br>Content &lt;br>open override fun &lt;a href="hash-code">hashCode&lt;/a>(): &lt;a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-int/index.html">Int&lt;/a> &lt;br>&lt;br>&lt;br>&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>&lt;a name="kotlin.collections/List/indexOf/#TypeParam(bounds=[kotlin.Any?])/PointingToDeclaration/">&lt;/a>&lt;a href="#-407930336%2FFunctions%2F-246181541">indexOf&lt;/a>&lt;/td>
+&lt;td>&lt;a name="kotlin.collections/List/indexOf/#TypeParam(bounds=[kotlin.Any?])/PointingToDeclaration/">&lt;/a>[JVM] &lt;br>Content &lt;br>open override fun &lt;a href="#-407930336%2FFunctions%2F-246181541">indexOf&lt;/a>(element: &lt;a href="">E&lt;/a>): &lt;a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-int/index.html">Int&lt;/a> &lt;br>&lt;br>&lt;br>&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>&lt;a name="kotlin.collections/List/isEmpty/#/PointingToDeclaration/">&lt;/a>&lt;a href="#-1000881820%2FFunctions%2F-246181541">isEmpty&lt;/a>&lt;/td>
+&lt;td>&lt;a name="kotlin.collections/List/isEmpty/#/PointingToDeclaration/">&lt;/a>[JVM] &lt;br>Content &lt;br>open override fun &lt;a href="#-1000881820%2FFunctions%2F-246181541">isEmpty&lt;/a>(): &lt;a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-boolean/index.html">Boolean&lt;/a> &lt;br>&lt;br>&lt;br>&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>&lt;a name="com.google.protobuf.kotlin/ExtensionList/iterator/#/PointingToDeclaration/">&lt;/a>&lt;a href="iterator">iterator&lt;/a>&lt;/td>
+&lt;td>&lt;a name="com.google.protobuf.kotlin/ExtensionList/iterator/#/PointingToDeclaration/">&lt;/a>[JVM] &lt;br>Content &lt;br>open operator override fun &lt;a href="iterator">iterator&lt;/a>(): &lt;a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin.collections/-iterator/index.html">Iterator&lt;/a>&amp;lt;&lt;a href="">E&lt;/a>&amp;gt; &lt;br>&lt;br>&lt;br>&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>&lt;a name="kotlin.collections/List/lastIndexOf/#TypeParam(bounds=[kotlin.Any?])/PointingToDeclaration/">&lt;/a>&lt;a href="#1327716778%2FFunctions%2F-246181541">lastIndexOf&lt;/a>&lt;/td>
+&lt;td>&lt;a name="kotlin.collections/List/lastIndexOf/#TypeParam(bounds=[kotlin.Any?])/PointingToDeclaration/">&lt;/a>[JVM] &lt;br>Content &lt;br>open override fun &lt;a href="#1327716778%2FFunctions%2F-246181541">lastIndexOf&lt;/a>(element: &lt;a href="">E&lt;/a>): &lt;a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-int/index.html">Int&lt;/a> &lt;br>&lt;br>&lt;br>&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>&lt;a name="com.google.protobuf.kotlin/ExtensionList/listIterator/#/PointingToDeclaration/">&lt;/a>&lt;a href="list-iterator">listIterator&lt;/a>&lt;/td>
+&lt;td>&lt;a name="com.google.protobuf.kotlin/ExtensionList/listIterator/#/PointingToDeclaration/">&lt;/a>[JVM] &lt;br>Content &lt;br>open override fun &lt;a href="list-iterator">listIterator&lt;/a>(): &lt;a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin.collections/-list-iterator/index.html">ListIterator&lt;/a>&amp;lt;&lt;a href="">E&lt;/a>&amp;gt; &lt;br>open override fun &lt;a href="list-iterator">listIterator&lt;/a>(index: &lt;a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-int/index.html">Int&lt;/a>): &lt;a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin.collections/-list-iterator/index.html">ListIterator&lt;/a>&amp;lt;&lt;a href="">E&lt;/a>&amp;gt; &lt;br>&lt;br>&lt;br>&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>&lt;a name="kotlin.collections/Collection/parallelStream/#/PointingToDeclaration/">&lt;/a>&lt;a href="#-1592339412%2FFunctions%2F-246181541">parallelStream&lt;/a>&lt;/td>
+&lt;td>&lt;a name="kotlin.collections/Collection/parallelStream/#/PointingToDeclaration/">&lt;/a>[JVM] &lt;br>Content &lt;br>open fun &lt;a href="#-1592339412%2FFunctions%2F-246181541">parallelStream&lt;/a>(): &lt;a href="https://docs.oracle.com/javase/8/docs/api/java/util/stream/Stream.html">Stream&lt;/a>&amp;lt;&lt;a href="">E&lt;/a>&amp;gt; &lt;br>&lt;br>&lt;br>&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>&lt;a name="kotlin.collections/List/spliterator/#/PointingToDeclaration/">&lt;/a>&lt;a href="#703021258%2FFunctions%2F-246181541">spliterator&lt;/a>&lt;/td>
+&lt;td>&lt;a name="kotlin.collections/List/spliterator/#/PointingToDeclaration/">&lt;/a>[JVM] &lt;br>Content &lt;br>open override fun &lt;a href="#703021258%2FFunctions%2F-246181541">spliterator&lt;/a>(): &lt;a href="https://docs.oracle.com/javase/8/docs/api/java/util/Spliterator.html">Spliterator&lt;/a>&amp;lt;&lt;a href="">E&lt;/a>&amp;gt; &lt;br>&lt;br>&lt;br>&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>&lt;a name="kotlin.collections/Collection/stream/#/PointingToDeclaration/">&lt;/a>&lt;a href="#135225651%2FFunctions%2F-246181541">stream&lt;/a>&lt;/td>
+&lt;td>&lt;a name="kotlin.collections/Collection/stream/#/PointingToDeclaration/">&lt;/a>[JVM] &lt;br>Content &lt;br>open fun &lt;a href="#135225651%2FFunctions%2F-246181541">stream&lt;/a>(): &lt;a href="https://docs.oracle.com/javase/8/docs/api/java/util/stream/Stream.html">Stream&lt;/a>&amp;lt;&lt;a href="">E&lt;/a>&amp;gt; &lt;br>&lt;br>&lt;br>&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>&lt;a name="kotlin.collections/List/subList/#kotlin.Int#kotlin.Int/PointingToDeclaration/">&lt;/a>&lt;a href="#423386006%2FFunctions%2F-246181541">subList&lt;/a>&lt;/td>
+&lt;td>&lt;a name="kotlin.collections/List/subList/#kotlin.Int#kotlin.Int/PointingToDeclaration/">&lt;/a>[JVM] &lt;br>Content &lt;br>open override fun &lt;a href="#423386006%2FFunctions%2F-246181541">subList&lt;/a>(fromIndex: &lt;a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-int/index.html">Int&lt;/a>, toIndex: &lt;a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-int/index.html">Int&lt;/a>): &lt;a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin.collections/-list/index.html">List&lt;/a>&amp;lt;&lt;a href="">E&lt;/a>&amp;gt; &lt;br>&lt;br>&lt;br>&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>&lt;a name="kotlin.collections/Collection/toArray/#java.util.function.IntFunction[kotlin.Array[TypeParam(bounds=[kotlin.Any])]]/PointingToDeclaration/">&lt;/a>&lt;a href="#-1215154575%2FFunctions%2F-246181541">toArray&lt;/a>&lt;/td>
+&lt;td>&lt;a name="kotlin.collections/Collection/toArray/#java.util.function.IntFunction[kotlin.Array[TypeParam(bounds=[kotlin.Any])]]/PointingToDeclaration/">&lt;/a>[JVM] &lt;br>Content &lt;br>&lt;del>open&lt;/del> &lt;del>fun&lt;/del> &lt;del>&amp;lt;&lt;/del>&lt;a href="#-1215154575%2FFunctions%2F-246181541">T&lt;/a> : &lt;a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-any/index.html">Any&lt;/a>&lt;del>&amp;gt;&lt;/del> &lt;a href="#-1215154575%2FFunctions%2F-246181541">&lt;del>toArray&lt;/del>&lt;/a>&lt;del>(&lt;del>&lt;del>p0&lt;/del>&lt;/del>:&lt;/del> &lt;a href="https://docs.oracle.com/javase/8/docs/api/java/util/function/IntFunction.html">IntFunction&lt;/a>&amp;lt;&lt;a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-array/index.html">Array&lt;/a>&amp;lt;&lt;a href="#-1215154575%2FFunctions%2F-246181541">T&lt;/a>&amp;raquo;&lt;del>)~~~~:&lt;/del> &lt;a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-array/index.html">Array&lt;/a>&amp;lt;&lt;a href="#-1215154575%2FFunctions%2F-246181541">T&lt;/a>&amp;gt; &lt;br>&lt;br>&lt;br>&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>&lt;a name="com.google.protobuf.kotlin/ExtensionList/toString/#/PointingToDeclaration/">&lt;/a>&lt;a href="to-string">toString&lt;/a>&lt;/td>
+&lt;td>&lt;a name="com.google.protobuf.kotlin/ExtensionList/toString/#/PointingToDeclaration/">&lt;/a>[JVM] &lt;br>Content &lt;br>open override fun &lt;a href="to-string">toString&lt;/a>(): &lt;a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-string/index.html">String&lt;/a> &lt;br>&lt;br>&lt;br>&lt;/td>
+&lt;/tr>
+&lt;/tbody>
+&lt;/table>
+&lt;h2 id="properties">Properties&lt;/h2>
+&lt;table>
+&lt;thead>
+&lt;tr>
+&lt;th>Name&lt;/th>
+&lt;th>Summary&lt;/th>
+&lt;/tr>
+&lt;/thead>
+&lt;tbody>
+&lt;tr>
+&lt;td>&lt;a name="com.google.protobuf.kotlin/ExtensionList/extension/#/PointingToDeclaration/">&lt;/a>&lt;a href="extension">extension&lt;/a>&lt;/td>
+&lt;td>&lt;a name="com.google.protobuf.kotlin/ExtensionList/extension/#/PointingToDeclaration/">&lt;/a> [JVM] val &lt;a href="extension">extension&lt;/a>: &lt;a href="/reference/java/api-docs/com/google/protobuf/ExtensionLite.html">ExtensionLite&lt;/a>&amp;lt;&lt;a href="">M&lt;/a>, &lt;a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin.collections/-list/index.html">List&lt;/a>&amp;lt;&lt;a href="">E&lt;/a>&amp;raquo; &lt;br>&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>&lt;a name="com.google.protobuf.kotlin/ExtensionList/size/#/PointingToDeclaration/">&lt;/a>&lt;a href="#648753719%2FProperties%2F-246181541">size&lt;/a>&lt;/td>
+&lt;td>&lt;a name="com.google.protobuf.kotlin/ExtensionList/size/#/PointingToDeclaration/">&lt;/a> [JVM] open override val &lt;a href="#648753719%2FProperties%2F-246181541">size&lt;/a>: &lt;a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-int/index.html">Int&lt;/a> &lt;br>&lt;/td>
+&lt;/tr>
+&lt;/tbody>
+&lt;/table></description></item><item><title>Reference:</title><link>/reference/kotlin/api-docs/protobuf-kotlin/com.google.protobuf.kotlin/-only-for-use-by-generated-proto-code/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>/reference/kotlin/api-docs/protobuf-kotlin/com.google.protobuf.kotlin/-only-for-use-by-generated-proto-code/</guid><description>
+&lt;p>//&lt;a href="/reference/kotlin/api-docs/">protobuf-kotlin&lt;/a>/&lt;a href="/reference/kotlin/api-docs/protobuf-kotlin/com.google.protobuf.kotlin/">com.google.protobuf.kotlin&lt;/a>/OnlyForUseByGeneratedProtoCode&lt;/p>
+&lt;h1 id="onlyforusebygeneratedprotocode">OnlyForUseByGeneratedProtoCode&lt;/h1>
+&lt;p>[JVM]
+@&lt;a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin.annotation/-target/index.html">Target&lt;/a>(allowedTargets =
+[&lt;a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin.annotation/-annotation-target/-c-o-n-s-t-r-u-c-t-o-r.html#kotlin.annotation.AnnotationTarget.CONSTRUCTOR">AnnotationTarget.CONSTRUCTOR&lt;/a>,
+&lt;a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin.annotation/-annotation-target/-c-l-a-s-s.html#kotlin.annotation.AnnotationTarget.CLASS">AnnotationTarget.ANNOTATION_CLASS&lt;/a>])&lt;/p>
+&lt;p>annotation class &lt;a href="">OnlyForUseByGeneratedProtoCode&lt;/a>&lt;/p>
+&lt;p>Opt-in annotation to make it difficult to accidentally use APIs only intended
+for use by proto generated code. See
+&lt;a href="https://kotlinlang.org/docs/reference/opt-in-requirements.html">https://kotlinlang.org/docs/reference/opt-in-requirements.html&lt;/a> for details on
+how this API works.&lt;/p>
+&lt;h2 id="constructors">Constructors&lt;/h2>
+&lt;table>
+&lt;thead>
+&lt;tr>
+&lt;th>Name&lt;/th>
+&lt;th>Summary&lt;/th>
+&lt;/tr>
+&lt;/thead>
+&lt;tbody>
+&lt;tr>
+&lt;td>&lt;a href="">OnlyForUseByGeneratedProtoCode&lt;/a>&lt;/td>
+&lt;td>[JVM] fun &lt;a href="">OnlyForUseByGeneratedProtoCode&lt;/a>() &lt;br>&lt;/td>
+&lt;/tr>
+&lt;/tbody>
+&lt;/table></description></item><item><title>Reference:</title><link>/reference/kotlin/api-docs/protobuf-kotlin/com.google.protobuf.kotlin/-proto-dsl-marker/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>/reference/kotlin/api-docs/protobuf-kotlin/com.google.protobuf.kotlin/-proto-dsl-marker/</guid><description>
+&lt;p>//&lt;a href="/reference/kotlin/api-docs/">protobuf-kotlin&lt;/a>/&lt;a href="/reference/kotlin/api-docs/protobuf-kotlin/com.google.protobuf.kotlin/">com.google.protobuf.kotlin&lt;/a>/&lt;a href="">ProtoDslMarker&lt;/a>&lt;/p>
+&lt;h1 id="protodslmarker">ProtoDslMarker&lt;/h1>
+&lt;p>[JVM]
+@&lt;a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-dsl-marker/index.html">DslMarker&lt;/a>()
+&lt;br>
+@&lt;a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin.annotation/-target/index.html">Target&lt;/a>(allowedTargets =
+[&lt;a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin.annotation/-annotation-target/-c-l-a-s-s/index.html">AnnotationTarget.CLASS&lt;/a>])&lt;/p>
+&lt;p>annotation class &lt;a href="">ProtoDslMarker&lt;/a>&lt;/p>
+&lt;p>Indicates an API that is part of a DSL to generate protocol buffer messages.&lt;/p>
+&lt;h2 id="constructors">Constructors&lt;/h2>
+&lt;table>
+&lt;thead>
+&lt;tr>
+&lt;th>Name&lt;/th>
+&lt;th>Summary&lt;/th>
+&lt;/tr>
+&lt;/thead>
+&lt;tbody>
+&lt;tr>
+&lt;td>&lt;a href="">ProtoDslMarker&lt;/a>&lt;/td>
+&lt;td>[JVM] fun &lt;a href="">ProtoDslMarker&lt;/a>()&lt;/td>
+&lt;/tr>
+&lt;/tbody>
+&lt;/table></description></item><item><title>Reference:</title><link>/reference/kotlin/api-docs/protobuf-kotlin/com.google.protobuf.kotlin/contains/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>/reference/kotlin/api-docs/protobuf-kotlin/com.google.protobuf.kotlin/contains/</guid><description>
+&lt;p>//&lt;a href="/reference/kotlin/api-docs/">protobuf-kotlin&lt;/a>/&lt;a href="/reference/kotlin/api-docs/protobuf-kotlin/com.google.protobuf.kotlin/">com.google.protobuf.kotlin&lt;/a>/contains&lt;/p>
+&lt;h1 id="contains">contains&lt;/h1>
+&lt;p>[JVM] &lt;br>
+Content &lt;br>
+operator fun &amp;lt;&lt;a href="">M&lt;/a> :
+&lt;a href="https://github.com/protocolbuffers/protobuf/blob/master/java/core/src/main/java/com/google/protobuf/GeneratedMessageV3.java">GeneratedMessageV3.ExtendableMessage&lt;/a>&amp;lt;&lt;a href="">M&lt;/a>&amp;gt;,
+&lt;a href="">MorBT&lt;/a> :
+&lt;a href="https://github.com/protocolbuffers/protobuf/blob/master/java/core/src/main/java/com/google/protobuf/GeneratedMessageV3.java">GeneratedMessageV3.ExtendableMessageOrBuilder&lt;/a>&amp;lt;&lt;a href="">M&lt;/a>&amp;raquo;
+&lt;a href="">MorBT&lt;/a>.&lt;a href="">contains&lt;/a>(extension:
+&lt;a href="/reference/java/api-docs/com/google/protobuf/ExtensionLite.html">ExtensionLite&lt;/a>&amp;lt;&lt;a href="">M&lt;/a>,
+*&amp;gt;):
+&lt;a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-boolean/index.html">Boolean&lt;/a>&lt;/p>
+&lt;p>Returns true if the specified extension is set on this builder.&lt;/p></description></item><item><title>Reference:</title><link>/reference/kotlin/api-docs/protobuf-kotlin/com.google.protobuf.kotlin/get/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>/reference/kotlin/api-docs/protobuf-kotlin/com.google.protobuf.kotlin/get/</guid><description>
+&lt;p>//&lt;a href="/reference/kotlin/api-docs/">protobuf-kotlin&lt;/a>/&lt;a href="/reference/kotlin/api-docs/protobuf-kotlin/com.google.protobuf.kotlin/">com.google.protobuf.kotlin&lt;/a>/&lt;a href="">get&lt;/a>&lt;/p>
+&lt;h1 id="get">get&lt;/h1>
+&lt;p>[JVM] &lt;br>
+Content &lt;br>
+operator fun
+&lt;a href="/reference/java/api-docs/com/google/protobuf/ByteString.html">ByteString&lt;/a>.&lt;a href="">get&lt;/a>(index:
+&lt;a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-int/index.html">Int&lt;/a>):
+&lt;a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-byte/index.html">Byte&lt;/a>&lt;/p>
+&lt;p>Gets the byte at &lt;a href="">index&lt;/a>.&lt;/p>
+&lt;p>[JVM] &lt;br>
+Content &lt;br>
+operator fun &amp;lt;&lt;a href="">M&lt;/a> :
+&lt;a href="https://github.com/protocolbuffers/protobuf/blob/master/java/core/src/main/java/com/google/protobuf/GeneratedMessageV3.java">GeneratedMessageV3.ExtendableMessage&lt;/a>&amp;lt;&lt;a href="">M&lt;/a>&amp;gt;,
+&lt;a href="">MorBT&lt;/a> :
+&lt;a href="https://github.com/protocolbuffers/protobuf/blob/master/java/core/src/main/java/com/google/protobuf/GeneratedMessageV3.java">GeneratedMessageV3.ExtendableMessageOrBuilder&lt;/a>&amp;lt;&lt;a href="">M&lt;/a>&amp;gt;,
+&lt;a href="">T&lt;/a> :
+&lt;a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-any/index.html">Any&lt;/a>&amp;gt;
+&lt;a href="">MorBT&lt;/a>.&lt;a href="">get&lt;/a>(extension:
+&lt;a href="/reference/java/api-docs/com/google/protobuf/ExtensionLite.html">ExtensionLite&lt;/a>&amp;lt;&lt;a href="">M&lt;/a>,
+&lt;a href="">T&lt;/a>&amp;gt;): &lt;a href="">T&lt;/a>&lt;/p>
+&lt;p>Gets the current value of the proto extension.&lt;/p></description></item><item><title>Reference:</title><link>/reference/kotlin/api-docs/protobuf-kotlin/com.google.protobuf.kotlin/is-a/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>/reference/kotlin/api-docs/protobuf-kotlin/com.google.protobuf.kotlin/is-a/</guid><description>
+&lt;p>//&lt;a href="/reference/kotlin/api-docs/">protobuf-kotlin&lt;/a>/&lt;a href="/reference/kotlin/api-docs/protobuf-kotlin/com.google.protobuf.kotlin/">com.google.protobuf.kotlin&lt;/a>/&lt;a href="">isA&lt;/a>&lt;/p>
+&lt;h1 id="isa">isA&lt;/h1>
+&lt;p>[JVM] &lt;br>
+Content &lt;br>
+inline fun &amp;lt;&lt;a href="">T&lt;/a> :
+&lt;a href="/reference/java/api-docs/com/google/protobuf/Message.html">Message&lt;/a>&amp;gt;
+&lt;a href="/reference/java/api-docs/com/google/protobuf/Any.html">Any&lt;/a>.&lt;a href="">isA&lt;/a>():
+&lt;a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-boolean/index.html">Boolean&lt;/a>&lt;/p>
+&lt;p>Returns true if this
+&lt;a href="/reference/java/api-docs/com/google/protobuf/Any.html">com.google.protobuf.Any&lt;/a>
+contains a message of type T.&lt;/p></description></item><item><title>Reference:</title><link>/reference/kotlin/api-docs/protobuf-kotlin/com.google.protobuf.kotlin/plus/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>/reference/kotlin/api-docs/protobuf-kotlin/com.google.protobuf.kotlin/plus/</guid><description>
+&lt;p>//&lt;a href="/reference/kotlin/api-docs/">protobuf-kotlin&lt;/a>/&lt;a href="/reference/kotlin/api-docs/protobuf-kotlin/com.google.protobuf.kotlin/">com.google.protobuf.kotlin&lt;/a>/plus&lt;/p>
+&lt;h1 id="plus">plus&lt;/h1>
+&lt;p>[JVM] &lt;br>
+Content &lt;br>
+operator fun
+&lt;a href="/reference/java/api-docs/com/google/protobuf/ByteString.html">ByteString&lt;/a>.plus(other:
+&lt;a href="/reference/java/api-docs/com/google/protobuf/ByteString.html">ByteString&lt;/a>):
+&lt;a href="/reference/java/api-docs/com/google/protobuf/ByteString.html">ByteString&lt;/a>
+\&lt;/p>
+&lt;p>Concatenates the given
+&lt;a href="/reference/java/api-docs/com/google/protobuf/ByteString.html">ByteString&lt;/a>
+to this one.&lt;/p></description></item><item><title>Reference:</title><link>/reference/kotlin/api-docs/protobuf-kotlin/com.google.protobuf.kotlin/set/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>/reference/kotlin/api-docs/protobuf-kotlin/com.google.protobuf.kotlin/set/</guid><description>
+&lt;p>//&lt;a href="/reference/kotlin/api-docs/">protobuf-kotlin&lt;/a>/&lt;a href="/reference/kotlin/api-docs/protobuf-kotlin/com.google.protobuf.kotlin/">com.google.protobuf.kotlin&lt;/a>/set&lt;/p>
+&lt;h1 id="set">set&lt;/h1>
+&lt;p>[JVM] &lt;br>
+Content &lt;br>
+operator fun &amp;lt;&lt;a href="">M&lt;/a> :
+&lt;a href="https://github.com/protocolbuffers/protobuf/blob/master/java/core/src/main/java/com/google/protobuf/GeneratedMessageV3.java">GeneratedMessageV3.ExtendableMessage&lt;/a>&amp;lt;&lt;a href="">M&lt;/a>&amp;gt;,
+&lt;a href="">B&lt;/a> :
+&lt;a href="/reference/java/api-docs/com/google/protobuf/GeneratedMessageV3.ExtendableBuilder.html">GeneratedMessageV3.ExtendableBuilder&lt;/a>&amp;lt;&lt;a href="">M&lt;/a>,
+&lt;a href="">B&lt;/a>&amp;gt;, &lt;a href="">T&lt;/a> :
+&lt;a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-any/index.html">Any&lt;/a>&amp;gt;
+&lt;a href="">B&lt;/a>.&lt;a href="">set&lt;/a>(extension:
+&lt;a href="/reference/java/api-docs/com/google/protobuf/ExtensionLite.html">ExtensionLite&lt;/a>&amp;lt;&lt;a href="set">M&lt;/a>,
+&lt;a href="">T&lt;/a>&amp;gt;, value: &lt;a href="">T&lt;/a>)&lt;/p>
+&lt;p>Sets the current value of the proto extension in this builder.&lt;/p></description></item><item><title>Reference:</title><link>/reference/kotlin/api-docs/protobuf-kotlin/com.google.protobuf.kotlin/to-byte-string-utf8/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>/reference/kotlin/api-docs/protobuf-kotlin/com.google.protobuf.kotlin/to-byte-string-utf8/</guid><description>
+&lt;p>//&lt;a href="/reference/kotlin/api-docs/">protobuf-kotlin&lt;/a>/&lt;a href="/reference/kotlin/api-docs/protobuf-kotlin/com.google.protobuf.kotlin/">com.google.protobuf.kotlin&lt;/a>/toByteStringUtf8&lt;/p>
+&lt;h1 id="tobytestringutf8">toByteStringUtf8&lt;/h1>
+&lt;p>[JVM] &lt;br>
+Content &lt;br>
+fun
+&lt;a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-string/index.html">String&lt;/a>.&lt;a href="">toByteStringUtf8&lt;/a>():
+&lt;a href="/reference/java/api-docs/com/google/protobuf/ByteString.html">ByteString&lt;/a>&lt;/p>
+&lt;p>Encodes this String into a sequence of UTF-8 bytes and returns the result as a
+&lt;a href="/reference/java/api-docs/com/google/protobuf/ByteString.html">ByteString&lt;/a>.&lt;/p></description></item><item><title>Reference:</title><link>/reference/kotlin/api-docs/protobuf-kotlin/com.google.protobuf.kotlin/to-byte-string/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>/reference/kotlin/api-docs/protobuf-kotlin/com.google.protobuf.kotlin/to-byte-string/</guid><description>
+&lt;p>//&lt;a href="/reference/kotlin/api-docs/">protobuf-kotlin&lt;/a>/&lt;a href="/reference/kotlin/api-docs/protobuf-kotlin/com.google.protobuf.kotlin/">com.google.protobuf.kotlin&lt;/a>/toByteString&lt;/p>
+&lt;h1 id="tobytestring">toByteString&lt;/h1>
+&lt;p>[JVM] &lt;br>
+Content &lt;br>
+fun
+&lt;a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-byte-array/index.html">ByteArray&lt;/a>.&lt;a href="">toByteString&lt;/a>():
+&lt;a href="/reference/java/api-docs/com/google/protobuf/ByteString.html">ByteString&lt;/a>&lt;/p>
+&lt;p>Returns a copy of this
+&lt;a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-byte-array/index.html">ByteArray&lt;/a>
+as an immutable
+&lt;a href="/reference/java/api-docs/com/google/protobuf/ByteString.html">ByteString&lt;/a>.&lt;/p>
+&lt;p>[JVM] &lt;br>
+Content &lt;br>
+fun
+&lt;a href="https://docs.oracle.com/javase/8/docs/api/java/nio/ByteBuffer.html">ByteBuffer&lt;/a>.&lt;a href="">toByteString&lt;/a>():
+&lt;a href="/reference/java/api-docs/com/google/protobuf/ByteString.html">ByteString&lt;/a>&lt;/p>
+&lt;p>Copies the remaining bytes from this
+&lt;a href="https://docs.oracle.com/javase/8/docs/api/java/nio/ByteBuffer.html">ByteBuffer&lt;/a>
+to a
+&lt;a href="/reference/java/api-docs/com/google/protobuf/ByteString.html">ByteString&lt;/a>.&lt;/p></description></item><item><title>Reference:</title><link>/reference/kotlin/api-docs/protobuf-kotlin/com.google.protobuf.kotlin/unpack/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>/reference/kotlin/api-docs/protobuf-kotlin/com.google.protobuf.kotlin/unpack/</guid><description>
+&lt;p>//&lt;a href="/reference/kotlin/api-docs/">protobuf-kotlin&lt;/a>/&lt;a href="/reference/kotlin/api-docs/protobuf-kotlin/com.google.protobuf.kotlin/">com.google.protobuf.kotlin&lt;/a>/unpack&lt;/p>
+&lt;h1 id="unpack">unpack&lt;/h1>
+&lt;p>[JVM] &lt;br>
+Content &lt;br>
+inline fun &amp;lt;&lt;a href="">T&lt;/a> :
+&lt;a href="/reference/java/api-docs/com/google/protobuf/Message.html">Message&lt;/a>&amp;gt;
+&lt;a href="/reference/java/api-docs/com/google/protobuf/Any.html">Any&lt;/a>.&lt;a href="">unpack&lt;/a>():
+&lt;a href="">T&lt;/a>&lt;/p>
+&lt;p>Returns the message of type T encoded in this
+&lt;a href="/reference/java/api-docs/com/google/protobuf/Any.html">com.google.protobuf.Any&lt;/a>.&lt;/p>
+&lt;h4 id="throws">Throws&lt;/h4>
+&lt;pre>&lt;code> | |
+&lt;/code>&lt;/pre>
+&lt;p>&amp;mdash;&amp;mdash;&amp;mdash;&amp;mdash;&amp;mdash;&amp;mdash;&amp;mdash;&amp;mdash;&amp;mdash;&amp;mdash;&amp;mdash;&amp;mdash;&amp;mdash;&amp;mdash;&amp;mdash;&amp;mdash;&amp;mdash;&amp;mdash;&amp;mdash;&amp;mdash;&amp;mdash;&amp;mdash;&amp;mdash;&amp;mdash;&amp;mdash;&amp;mdash;&amp;mdash;&amp;mdash;&amp;mdash;&amp;mdash;&amp;mdash;&amp;mdash;&amp;mdash;&amp;mdash;&amp;mdash;&amp;mdash;&amp;mdash;&amp;mdash;&amp;mdash;&amp;mdash;&amp;mdash;&amp;mdash;- | &amp;mdash;
+&lt;a name="com.google.protobuf.kotlin//unpack/com.google.protobuf.Any#/PointingToDeclaration/">&lt;/a>InvalidProtocolBufferException | &lt;a name="com.google.protobuf.kotlin//unpack/com.google.protobuf.Any#/PointingToDeclaration/">&lt;/a>&lt;br>&lt;br>if this &lt;a href="/reference/java/api-docs/com/google/protobuf/Any.html">com.google.protobuf.Any&lt;/a> does not contain a T message.&lt;br>&lt;br>&lt;/p></description></item></channel></rss>
