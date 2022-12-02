@@ -76,11 +76,15 @@ boolLit = "true" | "false"
 ### String Literals {#string_literals}
 
 ```
-strLit = ( "'" { charValue } "'" ) |  ( '"' { charValue } '"' )
-charValue = hexEscape | octEscape | charEscape | /[^\0\n\\]/
-hexEscape = '\' ( "x" | "X" ) hexDigit hexDigit
-octEscape = '\' octalDigit octalDigit octalDigit
+strLit = strLitSingle { strLitSingle }
+strLitSingle = ( "'" { charValue } "'" ) |  ( '"' { charValue } '"' )
+charValue = hexEscape | octEscape | charEscape | unicodeEscape | unicodeLongEscape | /[^\0\n\\]/
+hexEscape = '\' ( "x" | "X" ) hexDigit [ hexDigit ]
+octEscape = '\' octalDigit [ octalDigit [ octalDigit ] ]
 charEscape = '\' ( "a" | "b" | "f" | "n" | "r" | "t" | "v" | '\' | "'" | '"' )
+unicodeEscape = '\' "u" hexDigit hexDigit hexDigit hexDigit
+unicodeLongEscape = '\' "U" ( "000" hexDigit hexDigit hexDigit hexDigit hexDigit |
+                              "0010" hexDigit hexDigit hexDigit hexDigit
 ```
 
 ### EmptyStatement
@@ -189,7 +193,7 @@ repeated int32 samples = 4 [packed=true];
 A oneof consists of oneof fields and a oneof name.
 
 ```
-oneof = "oneof" oneofName "{" { option | oneofField | emptyStatement } "}"
+oneof = "oneof" oneofName "{" { option | oneofField } "}"
 oneofField = type fieldName "=" fieldNumber [ "[" fieldOptions "]" ] ";"
 ```
 
