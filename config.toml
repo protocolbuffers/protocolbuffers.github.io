@@ -1,7 +1,6 @@
 baseURL = 'https://protobuf.dev'
 languageCode = 'en-us'
 title = 'Protocol Buffers Documentation'
-sidebar_search_disable = true
 
 # Theme
 [module]
@@ -151,7 +150,7 @@ navbar_translucent_over_cover_disable = false
 # Enable to show the side bar menu in its compact state.
 sidebar_menu_compact = false
 # Set to true to hide the sidebar search box (the top nav search box will still be displayed if search is enabled)
-sidebar_search_disable = false
+sidebar_search_disable = true
 
 # ui.sidebar_menu_compact = true
 ui.ul_show = 2
