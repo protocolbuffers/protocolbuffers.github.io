@@ -61,6 +61,7 @@ details, see [Other Languages](/reference/other).
 ### PHP Reference
 
 -   [PHP Generated Code Guide](/reference/php/php-generated)
+-   [PHP API](/reference/php/api-docs)
 
 ### Python Reference
 
