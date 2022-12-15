@@ -42,6 +42,7 @@ details, see [Other Languages](/reference/other).
 
 -   [Go Generated Code Guide](/reference/go/go-generated)
 -   [Go API (godoc)](https://pkg.go.dev/google.golang.org/protobuf/proto)
+    
 -   [Go FAQ](/reference/go/faq)
 
 ### Java Reference
@@ -61,6 +62,7 @@ details, see [Other Languages](/reference/other).
 ### PHP Reference
 
 -   [PHP Generated Code Guide](/reference/php/php-generated)
+-   [PHP API](/reference/php/api-docs)
 
 ### Python Reference
 

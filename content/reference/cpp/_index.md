@@ -12,4 +12,4 @@ description: "This section contains reference documentation for working with pro
 *   [C++ Generated Code Guide](/reference/cpp/cpp-generated)
 *   [C++ Arena Allocation Guide](/reference/cpp/arenas)
 
-*   [C++ API](/reference/cpp)
+*   [C++ API](/reference/cpp/api-docs)

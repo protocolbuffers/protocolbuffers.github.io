@@ -948,10 +948,14 @@ following rules:
     deserialized is language-dependent. Int fields always just preserve their
     value.
 *   Changing a single `optional` field or extension into a member of a **new**
-    `oneof` is safe and binary compatible. Moving multiple fields into a new
-    `oneof` may be safe if you are sure that no code sets more than one at a
-    time. Moving any fields into an existing `oneof` is not safe. Likewise,
-    changing a single field `oneof` to an `optional` field or extension is safe.
+    `oneof` is binary compatible, however for some languages (notably, Go) the
+    generated code's API will change in incompatible ways. For this reason,
+    Google does not make such changes in its public APIs, as documented in
+    [AIP-180](https://google.aip.dev/180#moving-into-oneofs). With
+    the same caveat about source-compatibility, moving multiple fields into a
+    new `oneof` may be safe if you are sure that no code sets more than one at a
+    time. Moving fields into an existing `oneof` is not safe. Likewise, changing
+    a single field `oneof` to an `optional` field or extension is safe.
 
 ## Unknown Fields {#unknowns}
 
@@ -1116,7 +1120,7 @@ wire is a member of the oneof.
     information (some fields will be cleared) after the message is serialized
     and parsed. However, you can safely move a single field into a **new** oneof
     and may be able to move multiple fields if it is known that only one is ever
-    set.
+    set. See [Updating A Message Type](#updating) for further details.
 *   **Delete a oneof field and add it back**: This may clear your currently set
     oneof field after the message is serialized and parsed.
 *   **Split or merge oneof**: This has similar issues to moving regular fields.
@@ -1263,12 +1267,19 @@ Proto3 supports a canonical encoding in JSON, making it easier to share data
 between systems. The encoding is described on a type-by-type basis in the table
 below.
 
-If a value is missing in the JSON-encoded data or if its value is `null`, it
-will be interpreted as the appropriate [default value](#default) when parsed
-into a protocol buffer. If a field has the default value in the protocol buffer,
-it will be omitted in the JSON-encoded data by default to save space. An
-implementation may provide options to emit fields with default values in the
-JSON-encoded output.
+When parsing JSON-encoded data into a protocol buffer, if a value is missing or
+if its value is `null`, it will be interpreted as the corresponding
+[default value](#default).
+
+When generating JSON-encoded output from a protocol buffer, if a protobuf field
+has the default value and if the field doesn't support field presence, it will
+be omitted from the output by default. An implementation may provide options to
+include fields with default values in the output.
+
+A proto3 field that is defined with the `optional` keyword supports field
+presence. Fields that have a value set and that support field presence always
+include the field value in the JSON-encoded output, even if it is the default
+value.
 
 <table>
   <tbody>
@@ -1557,8 +1568,9 @@ Here are a few of the most commonly used options:
 
 *   `deprecated` (field option): If set to `true`, indicates that the field is
     deprecated and should not be used by new code. In most languages this has no
-    actual effect. In Java, this becomes a `@Deprecated` annotation. In the
-    future, other language-specific code generators may generate deprecation
+    actual effect. In Java, this becomes a `@Deprecated` annotation. For C++,
+    clang-tidy will generate warnings whenever deprecated fields are used. In
+    the future, other language-specific code generators may generate deprecation
     annotations on the field's accessors, which will in turn cause a warning to
     be emitted when compiling code which attempts to use the field. If the field
     is not used by anyone and you want to prevent new users from using it,
