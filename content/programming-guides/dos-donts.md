@@ -70,6 +70,13 @@ zero and can round-trip (deserialize, serialize) an unknown enum value.
 [example-unspecified]: http://cs/#search/&q=file:proto%20%22_UNSPECIFIED%20=%200%22&type=cs
 [proto-enums]: /programming-guides/proto#enum
 
+## **Don't** Use C/C++ Macro Constants for Enum Values
+
+Using words that have already been defined by the C++ language - specifically,
+in its headers such as `math.h`, may cause compilation errors if the `#include`
+statement for one of those headers appears before the one for `.proto.h`. Avoid
+using macro constants such as "`NULL`," "`NAN`," and "`DOMAIN`" as enum values.
+
 ## **Do** Use Well-Known Types and Common Types
 
 Embedding the following common, shared types is strongly encouraged. Do not use
@@ -150,18 +157,6 @@ from repeated to scalar will result in the last deserialized value "winning."
 Going from scalar to repeated is OK in proto2 and in proto3 with
 `[packed=false]` because for binary serialization the scalar value becomes a
 one-element list .
-
-## **Always** Create a Build Rule for Your Proto Files
-
-If your proto is only used by a script that doesn't require a build rule, create
-a `proto_library` rule with an associated
-`build_test` rule.
-
-With a `build_test` rule, errors in the file are caught when the test fails.
-Otherwise, typos and errors can persist and lead to hard-to-diagnose
-problems. Adding this `build_test` to
-your build script is also highly recommended, so you
-can be notified of future breakages.
 
 ## **Do** Follow the Style Guide for Generated Code
 

@@ -653,3 +653,12 @@ the schema, so they may provide various features.
 # proto-file: some/proto/my_file.proto
 # proto-message: MyMessage
 ```
+
+## Working with the Format Programmatically
+
+Due to how individual Protocol Buffer implementations emit
+neither a consistent nor canonical text format,
+tools or libraries that modify TextProto files or emit TextProto output must
+explicitly use
+https://github.com/protocolbuffers/txtpbfmt
+to format their output.

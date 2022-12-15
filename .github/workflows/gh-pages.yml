@@ -19,7 +19,10 @@ jobs:
         uses: peaceiris/actions-hugo@v2
         with:
           hugo-version: 'latest'
-          # extended: true
+          extended: true
+          
+      - name: Install Dependencies
+        run: npm install autoprefixer postcss postcss-cli
 
       - name: Build
         run: hugo --minify
@@ -30,3 +33,4 @@ jobs:
         with:
           github_token: ${{ secrets.GITHUB_TOKEN }}
           publish_dir: ./public
+          cname: protobuf.dev
