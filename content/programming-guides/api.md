@@ -424,9 +424,10 @@ message Foo {
 }
 ```
 
-Only fields with high [cohesion](http://what/cohesion) should be nested. If the
-fields are genuinely related, you'll often want to pass them around together
-inside a server. That's easier if they're defined together in a message. Think:
+Only fields with high cohesion should be
+nested. If the fields are genuinely related, you'll often want to pass them
+around together inside a server. That's easier if they're defined together in a
+message. Think:
 
 ```java
 CurrencyAmount calculateLocalTax(CurrencyAmount price, Location where)

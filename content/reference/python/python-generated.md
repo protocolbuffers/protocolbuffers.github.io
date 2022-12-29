@@ -133,10 +133,10 @@ can refer to it as `Foo.Bar`.
 ## Well Known Types {#wkt}
 
 Protocol buffers provides a number of
-[well-known types](/reference/protobuf/google.protobuf) that you
-can use in your .proto files along with your own message types. Some WKT
-messages have special methods in addition to the usual protocol buffer message
-methods, as they subclass both
+[well-known types](/reference/protobuf/google.protobuf.md)
+that you can use in your .proto files along with your own message types. Some
+WKT messages have special methods in addition to the usual protocol buffer
+message methods, as they subclass both
 [`google.protobuf.Message`](https://googleapis.dev/python/protobuf/latest/google/protobuf/message.html#google.protobuf.message.Message)
 and a WKT class.
 
@@ -948,7 +948,7 @@ generic services are deprecated. (Note that prior to 2.4.0, the option defaults
 to `true`)
 
 RPC systems based on `.proto`-language service definitions should provide
-[plugins](/reference/cpp/api-docs/google.protobuf.compiler.plugin.pb)
+[plugins](/reference/cpp/api-docs/google.protobuf.compiler.plugin.pb.md)
 to generate code appropriate for the system. These plugins are likely to require
 that abstract services are disabled, so that they can generate their own classes
 of the same names. Plugins are new in version 2.3.0 (January 2010).
@@ -1015,7 +1015,7 @@ implementations of `RpcChannel` and
 
 ## Plugin Insertion Points {#plugins}
 
-[Code generator plugins](/reference/cpp/api-docs/google.protobuf.compiler.plugin.pb)
+[Code generator plugins](/reference/cpp/api-docs/google.protobuf.compiler.plugin.pb.md)
 which want to extend the output of the Python code generator may insert code of
 the following types using the given insertion point names.
 
@@ -1029,9 +1029,10 @@ Protocol Buffers. {{% /alert %}}
 
 ## Sharing Messages Between Python and C++ {#sharing-messages}
 
-Prior to Python 4.21.0, Python apps could share messages with C++ using a native
-extension. Starting in Python 4.21.0, sharing messages between Python and C++ is
-not supported by the default install. To enable this capability when working
-with 4.x and later versions of the Python API, define the environment variable,
+Prior to the 4.21.0 version of the Protobuf Python API, Python apps could share
+messages with C++ using a native extension. Starting in the 4.21.0 API version,
+sharing messages between Python and C++ is not supported by the default install.
+To enable this capability when working with the 4.x and later versions of the
+Protobuf Python API, define the environment variable,
 `PROTOCOL_BUFFERS_PYTHON_IMPLEMENTATION=cpp`, and ensure that the Python/C++
 extension is installed.
