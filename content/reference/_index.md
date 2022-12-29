@@ -25,7 +25,7 @@ details, see [Other Languages](/reference/other).
 
 -   [C++ Generated Code Guide](/reference/cpp/cpp-generated)
 -   [C++ Arena Allocation Guide](/reference/cpp/arenas)
--   [C++ Static Reflection](/reference/cpp/cpp-static-reflection)
+
 -   [C++ API](/reference/cpp/api-docs/)
 
 ### C\# Reference
@@ -48,6 +48,7 @@ details, see [Other Languages](/reference/other).
 ### Java Reference
 
 -   [Java Generated Code Guide](/reference/java/java-generated)
+-   [Java Proto Names](/reference/java/java-proto-names)
 -   [Java API (Javadoc)](/reference/java/api-docs/overview-summary.html)
 
 ### Kotlin Reference

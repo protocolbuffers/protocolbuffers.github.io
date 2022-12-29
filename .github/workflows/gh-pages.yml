@@ -20,7 +20,7 @@ jobs:
         with:
           hugo-version: 'latest'
           extended: true
-
+          
       - name: Install Dependencies
         run: npm install autoprefixer postcss postcss-cli
 

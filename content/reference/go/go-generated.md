@@ -14,9 +14,9 @@ for any given protocol definition. Any differences between proto2 and proto3
 generated code are highlighted - note that these differences are in the
 generated code as described in this document, not the base API, which are the
 same in both versions. You should read the
-[proto2 language guide](/programming-guides/proto) and/or the
-[proto3 language guide](/programming-guides/proto3) before reading this
-document.
+[proto2 language guide](/programming-guides/proto) and/or
+the [proto3 language guide](/programming-guides/proto3)
+before reading this document.
 
 ## Compiler Invocation {#invocation}
 
@@ -124,10 +124,10 @@ the same package). The import path is also used to construct output filenames.
 See the \"Compiler Invocation\" section above for details.
 
 There is no correlation between the Go import path and the
-[`package` specifier](/programming-guides/proto3#packages) in the `.proto`
-file. The latter is only relevant to the protobuf namespace, while the former is
-only relevant to the Go namespace. Also, there is no correlation between the Go
-import path and the `.proto` import path.
+[`package` specifier](/programming-guides/proto3#packages)
+in the `.proto` file. The latter is only relevant to the protobuf namespace,
+while the former is only relevant to the Go namespace. Also, there is no
+correlation between the Go import path and the `.proto` import path.
 
 ## Messages {#message}
 
@@ -175,8 +175,8 @@ it is a singular, repeated, map, or oneof field.
 
 Note that the generated Go field names always use camel-case naming, even if the
 field name in the `.proto` file uses lower-case with underscores
-([as it should](/programming-guides/style)). The case-conversion works as
-follows:
+([as it should](/programming-guides/style)). The
+case-conversion works as follows:
 
 1.  The first letter is capitalized for export. If the first character is an
     underscore, it is removed and a capital X is prepended.
@@ -220,8 +220,8 @@ if the field is unset (`0` for numbers, the empty string for strings).
 
 For other scalar field types (including `bool`, `bytes`, and `string`), `int32`
 is replaced with the corresponding Go type according to the
-[scalar value types table](/programming-guides/proto3#scalar). Unset values
-in the proto will be represented as the
+[scalar value types table](/programming-guides/proto3#scalar).
+Unset values in the proto will be represented as the
 [zero value](https://golang.org/ref/spec#The_zero_value) of that type
 (`0` for numbers, the empty string for strings).
 
@@ -458,6 +458,9 @@ returns the corresponding pointer:
 ```go
 func (Foo) Enum() *Foo
 ```
+
+If you use proto3 syntax for your `.proto` definition, the `Enum()` method is
+not generated.
 
 The protocol buffer compiler generates a constant for each value in the enum.
 For enums within a message, the constants begin with the enclosing message's

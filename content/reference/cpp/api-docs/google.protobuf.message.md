@@ -2,7 +2,7 @@
 toc_hide: "true"
 ---
 
-<html devsite><head><title>message.h</title><meta name="project_path" value="/protocol-buffers/_project.yaml" /><meta name="book_path" value="/protocol-buffers/_book.yaml" /></head><body><h1>message.h</h1><p><code>#include &lt;google/protobuf/message.h&gt;<br>namespace <a href="#google.protobuf">google::protobuf</a></code></p><p>Defines <a href='google.protobuf.message#Message'>Message</a>, the abstract interface implemented by non-lite protocol message objects. </p><p>Although it's possible to implement this interface manually, most users will use the protocol compiler to generate implementations.</p>
+<html devsite><head><title>message.h</title><meta name="project_path" value="/protocol-buffers/_project.yaml" /><meta name="book_path" value="/protocol-buffers/_book.yaml" /></head><body><h1>message.h</h1><p><code>#include &lt;google/protobuf/message.h&gt;<br>namespace <a href="#google.protobuf">google::protobuf</a></code></p><p>Defines <a href="google.protobuf.message#Message">Message</a>, the abstract interface implemented by non-lite protocol message objects. </p><p>Although it's possible to implement this interface manually, most users will use the protocol compiler to generate implementations.</p>
 <p>Example usage:</p>
 <p>Say you have a message defined as:</p>
 <pre>message Foo {
