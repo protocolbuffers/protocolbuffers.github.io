@@ -4,9 +4,9 @@ for any given protocol definition. Any differences between proto2 and proto3
 generated code are highlighted - note that these differences are in the
 generated code as described in this document, not the base API, which are the
 same in both versions. You should read the
-&lt;a href="https://protobuf.dev/programming-guides/proto">proto2 language guide&lt;/a> and/or the
-&lt;a href="https://protobuf.dev/programming-guides/proto3">proto3 language guide&lt;/a> before reading this
-document.&lt;/p>
+&lt;a href="https://protobuf.dev/programming-guides/proto">proto2 language guide&lt;/a> and/or
+the &lt;a href="https://protobuf.dev/programming-guides/proto3">proto3 language guide&lt;/a>
+before reading this document.&lt;/p>
 &lt;h2 id="invocation">Compiler Invocation&lt;/h2>
 &lt;p>The protocol buffer compiler requires a plugin to generate Go code. Install it
 using Go 1.16 or higher by running:&lt;/p>
@@ -88,10 +88,10 @@ package which contains the generated &lt;code>b.pb.go&lt;/code> file (unless bot
 the same package). The import path is also used to construct output filenames.
 See the &amp;quot;Compiler Invocation&amp;quot; section above for details.&lt;/p>
 &lt;p>There is no correlation between the Go import path and the
-&lt;a href="https://protobuf.dev/programming-guides/proto3#packages">&lt;code>package&lt;/code> specifier&lt;/a> in the &lt;code>.proto&lt;/code>
-file. The latter is only relevant to the protobuf namespace, while the former is
-only relevant to the Go namespace. Also, there is no correlation between the Go
-import path and the &lt;code>.proto&lt;/code> import path.&lt;/p>
+&lt;a href="https://protobuf.dev/programming-guides/proto3#packages">&lt;code>package&lt;/code> specifier&lt;/a>
+in the &lt;code>.proto&lt;/code> file. The latter is only relevant to the protobuf namespace,
+while the former is only relevant to the Go namespace. Also, there is no
+correlation between the Go import path and the &lt;code>.proto&lt;/code> import path.&lt;/p>
 &lt;h2 id="message">Messages&lt;/h2>
 &lt;p>Given a simple message declaration:&lt;/p>
 &lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-proto" data-lang="proto">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#204a87;font-weight:bold">message&lt;/span> &lt;span style="color:#000">Foo&lt;/span> &lt;span style="color:#000;font-weight:bold">{}&lt;/span>&lt;span style="color:#a40000">
@@ -121,8 +121,8 @@ within a message. The exact nature of this field depends on its type and whether
 it is a singular, repeated, map, or oneof field.&lt;/p>
 &lt;p>Note that the generated Go field names always use camel-case naming, even if the
 field name in the &lt;code>.proto&lt;/code> file uses lower-case with underscores
-(&lt;a href="https://protobuf.dev/programming-guides/style">as it should&lt;/a>). The case-conversion works as
-follows:&lt;/p>
+(&lt;a href="https://protobuf.dev/programming-guides/style">as it should&lt;/a>). The
+case-conversion works as follows:&lt;/p>
 &lt;ol>
 &lt;li>The first letter is capitalized for export. If the first character is an
 underscore, it is removed and a capital X is prepended.&lt;/li>
@@ -152,8 +152,8 @@ accessor method &lt;code>GetFoo()&lt;/code> which returns the &lt;code>int32&lt;
 if the field is unset (&lt;code>0&lt;/code> for numbers, the empty string for strings).&lt;/p>
 &lt;p>For other scalar field types (including &lt;code>bool&lt;/code>, &lt;code>bytes&lt;/code>, and &lt;code>string&lt;/code>), &lt;code>int32&lt;/code>
 is replaced with the corresponding Go type according to the
-&lt;a href="https://protobuf.dev/programming-guides/proto3#scalar">scalar value types table&lt;/a>. Unset values
-in the proto will be represented as the
+&lt;a href="https://protobuf.dev/programming-guides/proto3#scalar">scalar value types table&lt;/a>.
+Unset values in the proto will be represented as the
 &lt;a href="https://golang.org/ref/spec#The_zero_value">zero value&lt;/a> of that type
 (&lt;code>0&lt;/code> for numbers, the empty string for strings).&lt;/p>
 &lt;h3 id="singular-message">Singular Message Fields&lt;/h3>
@@ -305,7 +305,9 @@ message name:&lt;/p>
 &lt;p>The &lt;code>Enum()&lt;/code> method initializes freshly allocated memory with a given value and
 returns the corresponding pointer:&lt;/p>
 &lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-go" data-lang="go">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#204a87;font-weight:bold">func&lt;/span> &lt;span style="color:#000;font-weight:bold">(&lt;/span>&lt;span style="color:#000">Foo&lt;/span>&lt;span style="color:#000;font-weight:bold">)&lt;/span> &lt;span style="color:#000">Enum&lt;/span>&lt;span style="color:#000;font-weight:bold">()&lt;/span> &lt;span style="color:#ce5c00;font-weight:bold">*&lt;/span>&lt;span style="color:#000">Foo&lt;/span>
-&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>The protocol buffer compiler generates a constant for each value in the enum.
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>If you use proto3 syntax for your &lt;code>.proto&lt;/code> definition, the &lt;code>Enum()&lt;/code> method is
+not generated.&lt;/p>
+&lt;p>The protocol buffer compiler generates a constant for each value in the enum.
 For enums within a message, the constants begin with the enclosing message&amp;rsquo;s
 name:&lt;/p>
 &lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-go" data-lang="go">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#204a87;font-weight:bold">const&lt;/span> &lt;span style="color:#000;font-weight:bold">(&lt;/span>
