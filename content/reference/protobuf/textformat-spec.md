@@ -175,15 +175,13 @@ Unicode code points are interpreted per
 [Unicode 13 Table A-1 Extended BNF](https://www.unicode.org/versions/Unicode13.0.0/appA.pdf#page=5)
 and are encoded as UTF-8.
 
-{{% alert title="Warning" color="warning" %}}
-The C++ implementation currently interprets escaped high-surrogate
-code points as UTF-16 code units, and expects a `\uHHHH` low-surrogate code
-point to immediately follow, without any split across separate quoted strings.
-In addition, unpaired surrogates will be rendered directly into also-invalid
-UTF-8. These are both non-conforming behaviors[^surrogates] and should not be
-relied on.
-{{% /alert %}}
-
+{{% alert title="Warning" color="warning" %}} The
+C++ implementation currently interprets escaped high-surrogate code points as
+UTF-16 code units, and expects a `\uHHHH` low-surrogate code point to
+immediately follow, without any split across separate quoted strings. In
+addition, unpaired surrogates will be rendered directly into also-invalid UTF-8.
+These are both non-conforming behaviors[^surrogates] and should not be relied
+on. {{% /alert %}}
 
 [^surrogates]: See Unicode 13
     [§3.8 Surrogates](https://www.unicode.org/versions/Unicode13.0.0/ch03.pdf#page=48),
@@ -554,7 +552,8 @@ With the above *.proto* definition, the following text format is a valid
 my_map { key: "entry1", value: 1 }
 my_map { key: "entry2", value: 2 }
 
-# Alternatively the list syntax may be used.
+# You can also use the list syntax, though it isn't compatible with
+# https://github.com/protocolbuffers/txtpbfmt
 my_map: [
   { key: "entry3", value: 3 },
   { key: "entry4", value: 4 }

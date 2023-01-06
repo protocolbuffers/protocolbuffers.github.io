@@ -923,7 +923,9 @@ singular messages and a sequence for repeated fields.
 The
 [`Message`](https://googleapis.dev/python/protobuf/latest/google/protobuf/message.html#google.protobuf.message.Message)
 interface's `HasField()` and `ClearField()` methods do not work with extensions;
-you must use `HasExtension()` and `ClearExtension()` instead.
+you must use `HasExtension()` and `ClearExtension()` instead. To use the
+`HasExtension()` and `ClearExtension()` methods, pass in the `field_descriptor`
+for the extension you are checking for the existence of.
 
 ## Services {#service}
 
