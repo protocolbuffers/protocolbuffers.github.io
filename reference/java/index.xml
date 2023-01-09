@@ -5,8 +5,8 @@ proto3 generated code are highlighted—note that these differences are in
 the generated code as described in this document, not the base message
 classes/interfaces, which are the same in both versions. You should read the
 &lt;a href="https://protobuf.dev/programming-guides/proto">proto2 language guide&lt;/a> and/or
-&lt;a href="https://protobuf.dev/programming-guides/proto3">proto3 language guide&lt;/a> before reading this
-document.&lt;/p>
+&lt;a href="https://protobuf.dev/programming-guides/proto3">proto3 language guide&lt;/a>
+before reading this document.&lt;/p>
 &lt;p>Note that no Java protocol buffer methods accept or return nulls unless
 otherwise specified.&lt;/p>
 &lt;h2 id="invocation">Compiler Invocation&lt;/h2>
@@ -105,9 +105,9 @@ performance. Alternatively, if the &lt;code>.proto&lt;/code> file contains:&lt;/
 the &lt;code>MessageLite&lt;/code> interface, which only contains a subset of the methods of
 &lt;code>Message&lt;/code>. In particular, it does not support descriptors or reflection.
 However, in this mode, the generated code only needs to link against
-&lt;code>libprotobuf-lite.jar&lt;/code> instead of &lt;code>libprotobuf.jar&lt;/code>. The &amp;ldquo;lite&amp;rdquo; library is
-much smaller than the full library, and is more appropriate for
-resource-constrained systems such as mobile phones.&lt;/p>
+&lt;code>libprotobuf-lite.jar&lt;/code> instead of &lt;code>libprotobuf.jar&lt;/code>. The &amp;ldquo;lite&amp;rdquo; library is much
+smaller than the full library, and is more appropriate for resource-constrained
+systems such as mobile phones.&lt;/p>
 &lt;p>The &lt;code>Message&lt;/code> interface defines methods that let you check, manipulate, read, or
 write the entire message. In addition to these methods, the &lt;code>Foo&lt;/code> class defines
 the following static methods:&lt;/p>
@@ -200,8 +200,8 @@ are defined both in the message class and its corresponding builder; the methods
 that modify the value are defined in the builder only.&lt;/p>
 &lt;p>Note that method names always use camel-case naming, even if the field name in
 the &lt;code>.proto&lt;/code> file uses lower-case with underscores
-(&lt;a href="https://protobuf.dev/programming-guides/style">as it should&lt;/a>). The case-conversion works
-as follows:&lt;/p>
+(&lt;a href="https://protobuf.dev/programming-guides/style">as it should&lt;/a>). The
+case-conversion works as follows:&lt;/p>
 &lt;ol>
 &lt;li>For each underscore in the name, the underscore is removed, and the
 following letter is capitalized.&lt;/li>
@@ -233,7 +233,8 @@ this, &lt;code>hasFoo()&lt;/code> will return &lt;code>true&lt;/code> and &lt;co
 &lt;code>hasFoo()&lt;/code> will return &lt;code>false&lt;/code> and &lt;code>getFoo()&lt;/code> will return the default value.&lt;/li>
 &lt;/ul>
 &lt;p>For other simple field types, the corresponding Java type is chosen according to
-the &lt;a href="https://protobuf.dev/programming-guides/proto#scalar">scalar value types table&lt;/a>.
+the
+&lt;a href="https://protobuf.dev/programming-guides/proto#scalar">scalar value types table&lt;/a>.
 For message and enum types, the value type is replaced with the message or enum
 class.&lt;/p>
 &lt;h4 id="embedded-message-fields">Embedded Message Fields&lt;/h4>
@@ -271,7 +272,8 @@ this, &lt;code>getFoo()&lt;/code> will return &lt;code>value&lt;/code>.&lt;/li>
 &lt;code>getFoo()&lt;/code> will return the default value for the field&amp;rsquo;s type.&lt;/li>
 &lt;/ul>
 &lt;p>For other simple field types, the corresponding Java type is chosen according to
-the &lt;a href="https://protobuf.dev/programming-guides/proto#scalar">scalar value types table&lt;/a>.
+the
+&lt;a href="https://protobuf.dev/programming-guides/proto#scalar">scalar value types table&lt;/a>.
 For message and enum types, the value type is replaced with the message or enum
 class.&lt;/p>
 &lt;h4 id="embedded-message-fields-1">Embedded Message Fields&lt;/h4>
@@ -313,83 +315,84 @@ unknown—this is a special additional value added by the proto3 compiler to
 the generated &lt;a href="#enum">enum type&lt;/a>.&lt;/p>
 &lt;h3 id="repeated-fields">Repeated Fields&lt;/h3>
 &lt;p>For this field definition:&lt;/p>
-&lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-proto" data-lang="proto">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#204a87;font-weight:bold">repeated&lt;/span> &lt;span style="color:#204a87;font-weight:bold">string&lt;/span> &lt;span style="color:#000">foo&lt;/span> &lt;span style="color:#ce5c00;font-weight:bold">=&lt;/span> &lt;span style="color:#0000cf;font-weight:bold">1&lt;/span>&lt;span style="color:#000;font-weight:bold">;&lt;/span>&lt;span style="color:#a40000">
+&lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-proto" data-lang="proto">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#204a87;font-weight:bold">repeated&lt;/span> &lt;span style="color:#204a87;font-weight:bold">string&lt;/span> &lt;span style="color:#000">foos&lt;/span> &lt;span style="color:#ce5c00;font-weight:bold">=&lt;/span> &lt;span style="color:#0000cf;font-weight:bold">1&lt;/span>&lt;span style="color:#000;font-weight:bold">;&lt;/span>&lt;span style="color:#a40000">
 &lt;/span>&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>The compiler will generate the following accessor methods in both the message
 class and its builder:&lt;/p>
 &lt;ul>
-&lt;li>&lt;code>int getFooCount()&lt;/code>: Returns the number of elements currently in the field.&lt;/li>
-&lt;li>&lt;code>String getFoo(int index)&lt;/code>: Returns the element at the given zero-based
+&lt;li>&lt;code>int getFoosCount()&lt;/code>: Returns the number of elements currently in the field.&lt;/li>
+&lt;li>&lt;code>String getFoos(int index)&lt;/code>: Returns the element at the given zero-based
 index.&lt;/li>
-&lt;li>&lt;code>ProtocolStringList getFooList()&lt;/code>: Returns the entire field as a
+&lt;li>&lt;code>ProtocolStringList getFoosList()&lt;/code>: Returns the entire field as a
 &lt;code>ProtocolStringList&lt;/code>. If the field is not set, returns an empty list.&lt;/li>
 &lt;/ul>
 &lt;p>The compiler will generate the following methods only in the message&amp;rsquo;s builder:&lt;/p>
 &lt;ul>
-&lt;li>&lt;code>Builder setFoo(int index, String value)&lt;/code>: Sets the value of the element at
+&lt;li>&lt;code>Builder setFoos(int index, String value)&lt;/code>: Sets the value of the element at
 the given zero-based index.&lt;/li>
-&lt;li>&lt;code>Builder addFoo(String value)&lt;/code>: Appends a new element to the field with the
+&lt;li>&lt;code>Builder addFoos(String value)&lt;/code>: Appends a new element to the field with the
 given value.&lt;/li>
-&lt;li>&lt;code>Builder addAllFoo(Iterable&amp;lt;? extends String&amp;gt; value)&lt;/code>: Appends all elements
+&lt;li>&lt;code>Builder addAllFoos(Iterable&amp;lt;? extends String&amp;gt; value)&lt;/code>: Appends all elements
 in the given &lt;code>Iterable&lt;/code> to the field.&lt;/li>
-&lt;li>&lt;code>Builder clearFoo()&lt;/code>: Removes all elements from the field. After calling
-this, &lt;code>getFooCount()&lt;/code> will return zero.&lt;/li>
+&lt;li>&lt;code>Builder clearFoos()&lt;/code>: Removes all elements from the field. After calling
+this, &lt;code>getFoosCount()&lt;/code> will return zero.&lt;/li>
 &lt;/ul>
 &lt;p>For other simple field types, the corresponding Java type is chosen according to
-the &lt;a href="https://protobuf.dev/programming-guides/proto#scalar">scalar value types table&lt;/a>.
+the
+&lt;a href="https://protobuf.dev/programming-guides/proto#scalar">scalar value types table&lt;/a>.
 For message and enum types, the type is the message or enum class.&lt;/p>
 &lt;h4 id="repeated-embedded-message-fields">Repeated Embedded Message Fields&lt;/h4>
-&lt;p>For message types, &lt;code>setFoo()&lt;/code> and &lt;code>addFoo()&lt;/code> also accept an instance of the
+&lt;p>For message types, &lt;code>setFoos()&lt;/code> and &lt;code>addFoos()&lt;/code> also accept an instance of the
 message&amp;rsquo;s builder type as the parameter. This is just a shortcut which is
 equivalent to calling &lt;code>.build()&lt;/code> on the builder and passing the result to the
 method. There is also an additional generated method:&lt;/p>
 &lt;ul>
-&lt;li>&lt;code>Builder addFoo(int index, Field value)&lt;/code>: Inserts a new element at the given
-zero-based index. Shifts the element currently at that position (if any) and
-any subsequent elements to the right (adds one to their indices).&lt;/li>
+&lt;li>&lt;code>Builder addFoos(int index, Field value)&lt;/code>: Inserts a new element at the
+given zero-based index. Shifts the element currently at that position (if
+any) and any subsequent elements to the right (adds one to their indices).&lt;/li>
 &lt;/ul>
 &lt;p>In addition, the compiler generates the following additional accessor methods in
 both the message class and its builder for message types, allowing you to access
 the relevant sub-builders:&lt;/p>
 &lt;ul>
-&lt;li>&lt;code>FooOrBuilder getFooOrBuilder(int index)&lt;/code>: Returns the builder for the
+&lt;li>&lt;code>FooOrBuilder getFoosOrBuilder(int index)&lt;/code>: Returns the builder for the
 specified element, if it already exists, or throws
 &lt;code>IndexOutOfBoundsException&lt;/code> if not. If this is called from a message class,
 it will always return a message (or throw an exception) rather than a
 builder. Calling this method on builders will not create a sub-builder for
 the field.&lt;/li>
-&lt;li>&lt;code>List&amp;lt;FooOrBuilder&amp;gt; getFooOrBuilderList()&lt;/code>: Returns the entire field as an
+&lt;li>&lt;code>List&amp;lt;FooOrBuilder&amp;gt; getFoosOrBuilderList()&lt;/code>: Returns the entire field as an
 unmodifiable list of builders (if available) or messages if not. If this is
 called from a message class, it will always return an immutable list of
 messages rather than an unmodifiable list of builders.&lt;/li>
 &lt;/ul>
 &lt;p>The compiler will generate the following methods only in the message&amp;rsquo;s builder:&lt;/p>
 &lt;ul>
-&lt;li>&lt;code>Builder getFooBuilder(int index)&lt;/code>: Returns the builder for the element at
+&lt;li>&lt;code>Builder getFoosBuilder(int index)&lt;/code>: Returns the builder for the element at
 the specified index, or throws &lt;code>IndexOutOfBoundsException&lt;/code> if the index is
 out of bounds.&lt;/li>
-&lt;li>&lt;code>Builder addFooBuilder(int index)&lt;/code>: Inserts and returns a builder for a
+&lt;li>&lt;code>Builder addFoosBuilder(int index)&lt;/code>: Inserts and returns a builder for a
 default message instance at the specified index. The existing entries are
 shifted to higher indices to make room for the inserted builder.&lt;/li>
-&lt;li>&lt;code>Builder addFooBuilder()&lt;/code>: Appends and returns a builder for a default
+&lt;li>&lt;code>Builder addFoosBuilder()&lt;/code>: Appends and returns a builder for a default
 message instance.&lt;/li>
-&lt;li>&lt;code>Builder removeFoo(int index)&lt;/code>: Removes the element at the given zero-based
+&lt;li>&lt;code>Builder removeFoos(int index)&lt;/code>: Removes the element at the given zero-based
 index.&lt;/li>
-&lt;li>&lt;code>List&amp;lt;Builder&amp;gt; getFooBuilderList()&lt;/code>: Returns the entire field as an
+&lt;li>&lt;code>List&amp;lt;Builder&amp;gt; getFoosBuilderList()&lt;/code>: Returns the entire field as an
 unmodifiable list of builders.&lt;/li>
 &lt;/ul>
 &lt;h4 id="repeated-enum-fields-proto3-only">Repeated Enum Fields (proto3 only)&lt;/h4>
 &lt;p>The compiler will generate the following additional methods in both the message
 class and its builder:&lt;/p>
 &lt;ul>
-&lt;li>&lt;code>int getFooValue(int index)&lt;/code>: Returns the integer value of the enum at the
+&lt;li>&lt;code>int getFoosValue(int index)&lt;/code>: Returns the integer value of the enum at the
 specified index.&lt;/li>
-&lt;li>&lt;code>List&amp;lt;java.lang.Integer&amp;gt; getFooValueList()&lt;/code>: Returns the entire field as a
+&lt;li>&lt;code>List&amp;lt;java.lang.Integer&amp;gt; getFoosValueList()&lt;/code>: Returns the entire field as a
 list of Integers.&lt;/li>
 &lt;/ul>
 &lt;p>The compiler will generate the following additional method only in the message&amp;rsquo;s
 builder:&lt;/p>
 &lt;ul>
-&lt;li>&lt;code>Builder setFooValue(int index, int value)&lt;/code>: Sets the integer value of the
+&lt;li>&lt;code>Builder setFoosValue(int index, int value)&lt;/code>: Sets the integer value of the
 enum at the specified index.&lt;/li>
 &lt;/ul>
 &lt;h4 id="name-conflicts">Name Conflicts&lt;/h4>
@@ -397,11 +400,11 @@ enum at the specified index.&lt;/li>
 field&amp;rsquo;s generated methods, then both field names will have their protobuf field
 number appended to the end.&lt;/p>
 &lt;p>For these field definitions:&lt;/p>
-&lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-proto" data-lang="proto">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#204a87;font-weight:bold">int32&lt;/span> &lt;span style="color:#000">foo_count&lt;/span> &lt;span style="color:#ce5c00;font-weight:bold">=&lt;/span> &lt;span style="color:#0000cf;font-weight:bold">1&lt;/span>&lt;span style="color:#000;font-weight:bold">;&lt;/span>&lt;span style="color:#a40000">
-&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#a40000">&lt;/span>&lt;span style="color:#204a87;font-weight:bold">repeated&lt;/span> &lt;span style="color:#204a87;font-weight:bold">string&lt;/span> &lt;span style="color:#000">foo&lt;/span> &lt;span style="color:#ce5c00;font-weight:bold">=&lt;/span> &lt;span style="color:#0000cf;font-weight:bold">2&lt;/span>&lt;span style="color:#000;font-weight:bold">;&lt;/span>&lt;span style="color:#a40000">
+&lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-proto" data-lang="proto">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#204a87;font-weight:bold">int32&lt;/span> &lt;span style="color:#000">foos_count&lt;/span> &lt;span style="color:#ce5c00;font-weight:bold">=&lt;/span> &lt;span style="color:#0000cf;font-weight:bold">1&lt;/span>&lt;span style="color:#000;font-weight:bold">;&lt;/span>&lt;span style="color:#a40000">
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#a40000">&lt;/span>&lt;span style="color:#204a87;font-weight:bold">repeated&lt;/span> &lt;span style="color:#204a87;font-weight:bold">string&lt;/span> &lt;span style="color:#000">foos&lt;/span> &lt;span style="color:#ce5c00;font-weight:bold">=&lt;/span> &lt;span style="color:#0000cf;font-weight:bold">2&lt;/span>&lt;span style="color:#000;font-weight:bold">;&lt;/span>&lt;span style="color:#a40000">
 &lt;/span>&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>The compiler will first rename them to the following:&lt;/p>
-&lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-proto" data-lang="proto">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#204a87;font-weight:bold">int32&lt;/span> &lt;span style="color:#000">foo_count_1&lt;/span> &lt;span style="color:#ce5c00;font-weight:bold">=&lt;/span> &lt;span style="color:#0000cf;font-weight:bold">1&lt;/span>&lt;span style="color:#000;font-weight:bold">;&lt;/span>&lt;span style="color:#a40000">
-&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#a40000">&lt;/span>&lt;span style="color:#204a87;font-weight:bold">repeated&lt;/span> &lt;span style="color:#204a87;font-weight:bold">string&lt;/span> &lt;span style="color:#000">foo_2&lt;/span> &lt;span style="color:#ce5c00;font-weight:bold">=&lt;/span> &lt;span style="color:#0000cf;font-weight:bold">2&lt;/span>&lt;span style="color:#000;font-weight:bold">;&lt;/span>&lt;span style="color:#a40000">
+&lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-proto" data-lang="proto">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#204a87;font-weight:bold">int32&lt;/span> &lt;span style="color:#000">foos_count_1&lt;/span> &lt;span style="color:#ce5c00;font-weight:bold">=&lt;/span> &lt;span style="color:#0000cf;font-weight:bold">1&lt;/span>&lt;span style="color:#000;font-weight:bold">;&lt;/span>&lt;span style="color:#a40000">
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#a40000">&lt;/span>&lt;span style="color:#204a87;font-weight:bold">repeated&lt;/span> &lt;span style="color:#204a87;font-weight:bold">string&lt;/span> &lt;span style="color:#000">foos_2&lt;/span> &lt;span style="color:#ce5c00;font-weight:bold">=&lt;/span> &lt;span style="color:#0000cf;font-weight:bold">2&lt;/span>&lt;span style="color:#000;font-weight:bold">;&lt;/span>&lt;span style="color:#a40000">
 &lt;/span>&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>The accessor methods will subsequently be generated as described above.&lt;/p>
 &lt;h3 id="oneof-fields">Oneof Fields&lt;/h3>
 &lt;p>For this oneof field definition:&lt;/p>
@@ -432,7 +435,8 @@ return &lt;code>false&lt;/code>, &lt;code>getFoo()&lt;/code> will return the def
 &lt;/li>
 &lt;/ul>
 &lt;p>For other simple field types, the corresponding Java type is chosen according to
-the &lt;a href="https://protobuf.dev/programming-guides/proto#scalar">scalar value types table&lt;/a>.
+the
+&lt;a href="https://protobuf.dev/programming-guides/proto#scalar">scalar value types table&lt;/a>.
 For message and enum types, the value type is replaced with the message or enum
 class.&lt;/p>
 &lt;h3 id="map-fields">Map Fields&lt;/h3>
@@ -463,7 +467,8 @@ instances. The returned map reference may be invalidated by any subsequent
 method calls to the Builder.&lt;/li>
 &lt;/ul>
 &lt;h2 id="any">Any&lt;/h2>
-&lt;p>Given an &lt;a href="https://protobuf.dev/programming-guides/proto3#any">&lt;code>Any&lt;/code>&lt;/a> field like this:&lt;/p>
+&lt;p>Given an &lt;a href="https://protobuf.dev/programming-guides/proto3#any">&lt;code>Any&lt;/code>&lt;/a> field
+like this:&lt;/p>
 &lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-proto" data-lang="proto">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#204a87;font-weight:bold">import&lt;/span> &lt;span style="color:#4e9a06">&amp;#34;google/protobuf/any.proto&amp;#34;&lt;/span>&lt;span style="color:#000;font-weight:bold">;&lt;/span>&lt;span style="color:#a40000">
 &lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#a40000">
 &lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#a40000">&lt;/span>&lt;span style="color:#204a87;font-weight:bold">message&lt;/span> &lt;span style="color:#000">ErrorStatus&lt;/span> &lt;span style="color:#000;font-weight:bold">{&lt;/span>&lt;span style="color:#a40000">
@@ -755,8 +760,8 @@ call a callback. So, for example, &lt;code>bar&lt;/code> is defined as:&lt;/p>
 sends requests to a particular &lt;code>BlockingRpcChannel&lt;/code>.&lt;/p>
 &lt;h2 id="plugins">Plugin Insertion Points&lt;/h2>
 &lt;p>&lt;a href="https://protobuf.dev/reference/cpp/api-docs/google.protobuf.compiler.plugin.pb">Code generator plugins&lt;/a>
-that want to extend the output of the Java code generator may insert code of
-the following types using the given insertion point names.&lt;/p>
+that want to extend the output of the Java code generator may insert code of the
+following types using the given insertion point names.&lt;/p>
 &lt;ul>
 &lt;li>&lt;code>outer_class_scope&lt;/code>: Member declarations that belong in the file&amp;rsquo;s wrapper
 class.&lt;/li>

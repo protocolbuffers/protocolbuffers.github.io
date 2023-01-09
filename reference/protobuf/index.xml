@@ -520,12 +520,13 @@ For example:&lt;/p>
 and are encoded as UTF-8.&lt;/p>
 &lt;div class="alert alert-warning" role="alert">
 &lt;h4 class="alert-heading">Warning&lt;/h4>
-The C++ implementation currently interprets escaped high-surrogate
-code points as UTF-16 code units, and expects a &lt;code>\uHHHH&lt;/code> low-surrogate code
-point to immediately follow, without any split across separate quoted strings.
-In addition, unpaired surrogates will be rendered directly into also-invalid
-UTF-8. These are both non-conforming behaviors[^surrogates] and should not be
-relied on.
+The
+C++ implementation currently interprets escaped high-surrogate code points as
+UTF-16 code units, and expects a &lt;code>\uHHHH&lt;/code> low-surrogate code point to
+immediately follow, without any split across separate quoted strings. In
+addition, unpaired surrogates will be rendered directly into also-invalid UTF-8.
+These are both non-conforming behaviors[^surrogates] and should not be relied
+on.
 &lt;/div>
 &lt;h2 id="syntax">Syntax Elements&lt;/h2>
 &lt;h3 id="message">Message&lt;/h3>
@@ -807,7 +808,8 @@ key/value entries. Example:&lt;/p>
 &lt;code>MessageWithMap&lt;/code>:&lt;/p>
 &lt;pre tabindex="0">&lt;code class="language-textproto" data-lang="textproto">my_map { key: &amp;#34;entry1&amp;#34;, value: 1 }
 my_map { key: &amp;#34;entry2&amp;#34;, value: 2 }
-# Alternatively the list syntax may be used.
+# You can also use the list syntax, though it isn&amp;#39;t compatible with
+# https://github.com/protocolbuffers/txtpbfmt
 my_map: [
 { key: &amp;#34;entry3&amp;#34;, value: 3 },
 { key: &amp;#34;entry4&amp;#34;, value: 4 }

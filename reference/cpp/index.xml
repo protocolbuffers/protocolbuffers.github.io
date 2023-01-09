@@ -1007,7 +1007,8 @@ exactly what C++ code the protocol buffer compiler generates in addition to the
 code described in the
 &lt;a href="https://protobuf.dev/reference/cpp/cpp-generated">C++ Generated Code Guide&lt;/a>
 when arena allocation is enabled. It assumes that you are familiar with the
-material in the &lt;a href="https://protobuf.dev/programming-guides/proto">language guide&lt;/a> and the
+material in the
+&lt;a href="https://protobuf.dev/programming-guides/proto">language guide&lt;/a> and the
 &lt;a href="https://protobuf.dev/reference/cpp/cpp-generated">C++ Generated Code Guide&lt;/a>.&lt;/p>
 &lt;h2 id="why">Why Use Arena Allocation?&lt;/h2>
 &lt;p>Memory allocation and deallocation constitutes a significant fraction of CPU
@@ -1050,7 +1051,7 @@ using arena allocation.&lt;/p>
 can see a more extensive &lt;a href="#example">example&lt;/a> at the end of the document.&lt;/p>
 &lt;h2 id="arenaclass">Arena Class API&lt;/h2>
 &lt;p>You create message objects on the arena using the
-&lt;a href="https://protobuf.dev/reference/cpp/api-docs/google.protobuf.arena">&lt;code>google::protobuf::Arena&lt;/code>&lt;/a>
+&lt;a href="https://protobuf.dev/reference/cpp/api-docs/google.protobuf.arena.md">&lt;code>google::protobuf::Arena&lt;/code>&lt;/a>
 class. This class implements the following public methods.&lt;/p>
 &lt;h3 id="constructors">Constructors&lt;/h3>
 &lt;ul>
@@ -1167,12 +1168,12 @@ underlying data. In both cases the source message is left in a valid but
 unspecified state.&lt;/li>
 &lt;li>&lt;code>void Swap(Message* other)&lt;/code>: If both messages to be swapped are not on
 arenas or are on the &lt;em>same&lt;/em> arena,
-&lt;a href="https://protobuf.dev/reference/cpp/cpp-generated#message">&lt;code>Swap()&lt;/code>&lt;/a> behaves
-as it does without having arena allocation enabled: it efficiently swaps the
-message objects&amp;rsquo; contents, usually via cheap pointer swaps and avoiding
-copies at all costs. However, if only one message is on an arena, or the
-messages are on different arenas, &lt;code>Swap()&lt;/code> performs &lt;em>deep copies&lt;/em> of the
-underlying data. This new behavior is necessary because otherwise the
+&lt;a href="https://protobuf.dev/reference/cpp/cpp-generated#message">&lt;code>Swap()&lt;/code>&lt;/a>
+behaves as it does without having arena allocation enabled: it efficiently
+swaps the message objects&amp;rsquo; contents, almost exclusively through cheap
+pointer swaps, avoiding copies. However, if only one message is on an arena,
+or the messages are on different arenas, &lt;code>Swap()&lt;/code> performs &lt;em>deep copies&lt;/em> of
+the underlying data. This new behavior is necessary because otherwise the
 swapped sub-objects could have differing lifetimes, leading potentially to
 use-after-free bugs.&lt;/li>
 &lt;li>&lt;code>Message* New(Arena* arena)&lt;/code>: An alternate override for the standard &lt;code>New()&lt;/code>
@@ -1254,8 +1255,8 @@ details on safe ways to use this.&lt;/li>
 &lt;h3 id="arenastring">String Fields&lt;/h3>
 &lt;p>Currently, string fields store their data on the heap even when their parent
 message is on the arena. Because of this, string accessor methods use the
-&lt;a href="https://protobuf.dev/reference/cpp/cpp-generated#string">default behavior&lt;/a> even
-when arena allocation is enabled.&lt;/p>
+&lt;a href="https://protobuf.dev/reference/cpp/cpp-generated#string">default behavior&lt;/a>
+even when arena allocation is enabled.&lt;/p>
 &lt;h3 id="arenarepeated">Repeated Fields&lt;/h3>
 &lt;p>Repeated fields allocate their internal array storage on the arena when the
 containing message is arena-allocated, and also allocate their elements on the
@@ -1283,27 +1284,44 @@ holds an array on its own arena or heap, as appropriate.&lt;/li>
 &lt;p>&lt;code>RepeatedPtrField&lt;/code> objects that contain messages have the following new/changed
 methods when arena allocation is enabled.&lt;/p>
 &lt;ul>
-&lt;li>&lt;code>void UnsafeArenaSwap(RepeatedPtrField* other)&lt;/code>: Performs a swap of
+&lt;li>
+&lt;p>&lt;code>void UnsafeArenaSwap(RepeatedPtrField* other)&lt;/code>: Performs a swap of
 &lt;code>RepeatedPtrField&lt;/code> contents without validating that this repeated field and
 other have the same arena pointer. If they do not, the two repeated field
 objects must have arena pointers with equivalent lifetimes. The case where
 one has a non-NULL arena pointer and one has a NULL arena pointer is checked
-and disallowed.&lt;/li>
-&lt;li>&lt;code>void Swap(RepeatedPtrField* other)&lt;/code>: Checks each repeated field object&amp;rsquo;s
+and disallowed.&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>&lt;code>void Swap(RepeatedPtrField* other)&lt;/code>: Checks each repeated field object&amp;rsquo;s
 arena pointer, and if one is non-NULL (contents on arena) while one is NULL
 (contents on heap) or if both are non-NULL but have different values, the
 underlying arrays and their pointed-to objects are copied before the swap
 occurs. This means that after the swap, each repeated field object holds an
-array on its own arena or on the heap, as appropriate.&lt;/li>
-&lt;li>&lt;code>void AddAllocated(SubMessageType* value)&lt;/code>: Checks that the provided message
-object is on the same arena as the repeated field&amp;rsquo;s arena pointer. If it is
-on the same arena, then the object pointer is added directly to the
-underlying array. Otherwise, a copy is made, the original is freed if it was
-heap-allocated, and the copy is placed on the array. This maintains the
-invariant that all objects pointed to by a repeated field are in the same
-ownership domain (heap or specific arena) as indicated by the repeated
-field&amp;rsquo;s arena pointer.&lt;/li>
-&lt;li>&lt;code>SubMessageType* ReleaseLast()&lt;/code>: Returns a heap-allocated message equivalent
+array on its own arena or on the heap, as appropriate.&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>&lt;code>void AddAllocated(SubMessageType* value)&lt;/code>: Checks that the provided message
+object is on the same arena as the repeated field&amp;rsquo;s arena pointer.&lt;/p>
+&lt;ul>
+&lt;li>The source and destination are both arena-allocated and on the same
+arena: the object pointer is added directly to the underlying array.&lt;/li>
+&lt;li>The source and destination are both arena-allocated and on different
+arenas: a copy is made, the original is freed if it was heap-allocated,
+and the copy is placed on the array.&lt;/li>
+&lt;li>The source is heap-allocated and the destination is arena-allocated: No
+copy is made.&lt;/li>
+&lt;li>The source is arena-allocated and the destination is heap-allocated: A
+copy is made and placed on the array.&lt;/li>
+&lt;li>Both source and destination are heap allocated: The object pointer is
+added directly to the underlying array.&lt;/li>
+&lt;/ul>
+&lt;p>This maintains the invariant that all objects pointed to by a repeated field
+are in the same ownership domain (heap or specific arena) as indicated by
+the repeated field&amp;rsquo;s arena pointer.&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>&lt;code>SubMessageType* ReleaseLast()&lt;/code>: Returns a heap-allocated message equivalent
 to the last message in the repeated field, removing it from the repeated
 field. If the repeated field itself has a NULL arena pointer (and thus, all
 of its pointed-to messages are heap-allocated), then this method simply
@@ -1311,29 +1329,38 @@ returns a pointer to the original object. Otherwise, if the repeated field
 has a non-NULL arena pointer, this method makes a copy that is
 heap-allocated and returns that copy. In both cases, the caller receives
 ownership of a heap-allocated object and is responsible for deleting the
-object.&lt;/li>
-&lt;li>&lt;code>void UnsafeArenaAddAllocated(SubMessageType* value)&lt;/code>: Like
+object.&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>&lt;code>void UnsafeArenaAddAllocated(SubMessageType* value)&lt;/code>: Like
 &lt;code>AddAllocated()&lt;/code>, but does not perform heap/arena checks or any message
 copies. It adds the provided pointer directly to the internal array of
 pointers for this repeated field. See
 &lt;a href="#set-allocated">allocated/release patterns&lt;/a> for details on safe ways to use
-this.&lt;/li>
-&lt;li>&lt;code>SubMessageType* UnsafeArenaReleaseLast()&lt;/code>: Like &lt;code>ReleaseLast()&lt;/code> but
+this.&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>&lt;code>SubMessageType* UnsafeArenaReleaseLast()&lt;/code>: Like &lt;code>ReleaseLast()&lt;/code> but
 performs no copies, even if the repeated field has a non-NULL arena pointer.
 Instead, it directly returns the pointer to the object as it was in the
 repeated field. See &lt;a href="#set-allocated">allocated/release patterns&lt;/a> for details
-on safe ways to use this.&lt;/li>
-&lt;li>&lt;code>void ExtractSubrange(int start, int num, SubMessageType** elements)&lt;/code>:
+on safe ways to use this.&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>&lt;code>void ExtractSubrange(int start, int num, SubMessageType** elements)&lt;/code>:
 Removes &lt;code>num&lt;/code> elements from the repeated field, starting from index &lt;code>start&lt;/code>,
 and returns them in &lt;code>elements&lt;/code> if it is not NULL. If the repeated field is
 on an arena, and elements are being returned, the elements are copied to the
 heap first. In both cases (arena or no arena), the caller owns the returned
-objects on the heap.&lt;/li>
-&lt;li>&lt;code>void UnsafeArenaExtractSubrange(int start, int num, SubMessageType** elements)&lt;/code>: Removes &lt;code>num&lt;/code> elements from the repeated field, starting from
+objects on the heap.&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>&lt;code>void UnsafeArenaExtractSubrange(int start, int num, SubMessageType** elements)&lt;/code>: Removes &lt;code>num&lt;/code> elements from the repeated field, starting from
 index &lt;code>start&lt;/code>, and returns them in &lt;code>elements&lt;/code> if it is not NULL. Unlike
 &lt;code>ExtractSubrange()&lt;/code>, this method never copies the extracted elements. See
 &lt;a href="#set-allocated">allocated/release patterns&lt;/a> for details on safe ways to use
-this.&lt;/li>
+this.&lt;/p>
+&lt;/li>
 &lt;/ul>
 &lt;h4 id="repeated-string">Repeated String Fields&lt;/h4>
 &lt;p>Repeated fields of strings have the same new methods and modified semantics as

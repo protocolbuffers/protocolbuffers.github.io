@@ -633,7 +633,9 @@ singular messages and a sequence for repeated fields.&lt;/p>
 &lt;p>The
 &lt;a href="https://googleapis.dev/python/protobuf/latest/google/protobuf/message.html#google.protobuf.message.Message">&lt;code>Message&lt;/code>&lt;/a>
 interface&amp;rsquo;s &lt;code>HasField()&lt;/code> and &lt;code>ClearField()&lt;/code> methods do not work with extensions;
-you must use &lt;code>HasExtension()&lt;/code> and &lt;code>ClearExtension()&lt;/code> instead.&lt;/p>
+you must use &lt;code>HasExtension()&lt;/code> and &lt;code>ClearExtension()&lt;/code> instead. To use the
+&lt;code>HasExtension()&lt;/code> and &lt;code>ClearExtension()&lt;/code> methods, pass in the &lt;code>field_descriptor&lt;/code>
+for the extension you are checking for the existence of.&lt;/p>
 &lt;h2 id="service">Services&lt;/h2>
 &lt;p>If the &lt;code>.proto&lt;/code> file contains the following line:&lt;/p>
 &lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-proto" data-lang="proto">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#204a87;font-weight:bold">option&lt;/span> &lt;span style="color:#000">py_generic_services&lt;/span> &lt;span style="color:#ce5c00;font-weight:bold">=&lt;/span> &lt;span style="color:#204a87;font-weight:bold">true&lt;/span>&lt;span style="color:#000;font-weight:bold">;&lt;/span>&lt;span style="color:#a40000">
