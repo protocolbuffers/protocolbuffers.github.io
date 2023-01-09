@@ -15,7 +15,8 @@ exactly what C++ code the protocol buffer compiler generates in addition to the
 code described in the
 [C++ Generated Code Guide](/reference/cpp/cpp-generated)
 when arena allocation is enabled. It assumes that you are familiar with the
-material in the [language guide](/programming-guides/proto) and the
+material in the
+[language guide](/programming-guides/proto) and the
 [C++ Generated Code Guide](/reference/cpp/cpp-generated).
 
 ## Why Use Arena Allocation? {#why}
@@ -76,7 +77,7 @@ can see a more extensive [example](#example) at the end of the document.
 ## Arena Class API {#arenaclass}
 
 You create message objects on the arena using the
-[`google::protobuf::Arena`](/reference/cpp/api-docs/google.protobuf.arena)
+[`google::protobuf::Arena`](/reference/cpp/api-docs/google.protobuf.arena.md)
 class. This class implements the following public methods.
 
 ### Constructors {#constructors}
@@ -205,12 +206,12 @@ allocation.
     unspecified state.
 -   `void Swap(Message* other)`: If both messages to be swapped are not on
     arenas or are on the *same* arena,
-    [`Swap()`](/reference/cpp/cpp-generated#message) behaves
-    as it does without having arena allocation enabled: it efficiently swaps the
-    message objects' contents, usually via cheap pointer swaps and avoiding
-    copies at all costs. However, if only one message is on an arena, or the
-    messages are on different arenas, `Swap()` performs *deep copies* of the
-    underlying data. This new behavior is necessary because otherwise the
+    [`Swap()`](/reference/cpp/cpp-generated#message)
+    behaves as it does without having arena allocation enabled: it efficiently
+    swaps the message objects' contents, almost exclusively through cheap
+    pointer swaps, avoiding copies. However, if only one message is on an arena,
+    or the messages are on different arenas, `Swap()` performs *deep copies* of
+    the underlying data. This new behavior is necessary because otherwise the
     swapped sub-objects could have differing lifetimes, leading potentially to
     use-after-free bugs.
 -   `Message* New(Arena* arena)`: An alternate override for the standard `New()`
@@ -292,8 +293,8 @@ allocation is enabled. Otherwise, accessor methods just use the
 
 Currently, string fields store their data on the heap even when their parent
 message is on the arena. Because of this, string accessor methods use the
-[default behavior](/reference/cpp/cpp-generated#string) even
-when arena allocation is enabled.
+[default behavior](/reference/cpp/cpp-generated#string)
+even when arena allocation is enabled.
 
 ### Repeated Fields {#arenarepeated}
 
@@ -339,13 +340,24 @@ methods when arena allocation is enabled.
     occurs. This means that after the swap, each repeated field object holds an
     array on its own arena or on the heap, as appropriate.
 -   `void AddAllocated(SubMessageType* value)`: Checks that the provided message
-    object is on the same arena as the repeated field's arena pointer. If it is
-    on the same arena, then the object pointer is added directly to the
-    underlying array. Otherwise, a copy is made, the original is freed if it was
-    heap-allocated, and the copy is placed on the array. This maintains the
-    invariant that all objects pointed to by a repeated field are in the same
-    ownership domain (heap or specific arena) as indicated by the repeated
-    field's arena pointer.
+    object is on the same arena as the repeated field's arena pointer.
+
+    *   The source and destination are both arena-allocated and on the same
+        arena: the object pointer is added directly to the underlying array.
+    *   The source and destination are both arena-allocated and on different
+        arenas: a copy is made, the original is freed if it was heap-allocated,
+        and the copy is placed on the array.
+    *   The source is heap-allocated and the destination is arena-allocated: No
+        copy is made.
+    *   The source is arena-allocated and the destination is heap-allocated: A
+        copy is made and placed on the array.
+    *   Both source and destination are heap allocated: The object pointer is
+        added directly to the underlying array.
+
+    This maintains the invariant that all objects pointed to by a repeated field
+    are in the same ownership domain (heap or specific arena) as indicated by
+    the repeated field's arena pointer.
+
 -   `SubMessageType* ReleaseLast()`: Returns a heap-allocated message equivalent
     to the last message in the repeated field, removing it from the repeated
     field. If the repeated field itself has a NULL arena pointer (and thus, all
@@ -355,23 +367,27 @@ methods when arena allocation is enabled.
     heap-allocated and returns that copy. In both cases, the caller receives
     ownership of a heap-allocated object and is responsible for deleting the
     object.
+
 -   `void UnsafeArenaAddAllocated(SubMessageType* value)`: Like
     `AddAllocated()`, but does not perform heap/arena checks or any message
     copies. It adds the provided pointer directly to the internal array of
     pointers for this repeated field. See
     [allocated/release patterns](#set-allocated) for details on safe ways to use
     this.
+
 -   `SubMessageType* UnsafeArenaReleaseLast()`: Like `ReleaseLast()` but
     performs no copies, even if the repeated field has a non-NULL arena pointer.
     Instead, it directly returns the pointer to the object as it was in the
     repeated field. See [allocated/release patterns](#set-allocated) for details
     on safe ways to use this.
+
 -   `void ExtractSubrange(int start, int num, SubMessageType** elements)`:
     Removes `num` elements from the repeated field, starting from index `start`,
     and returns them in `elements` if it is not NULL. If the repeated field is
     on an arena, and elements are being returned, the elements are copied to the
     heap first. In both cases (arena or no arena), the caller owns the returned
     objects on the heap.
+
 -   `void UnsafeArenaExtractSubrange(int start, int num, SubMessageType**
     elements)`: Removes `num` elements from the repeated field, starting from
     index `start`, and returns them in `elements` if it is not NULL. Unlike

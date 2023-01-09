@@ -1312,7 +1312,7 @@ projects we know about, see the
 Individual declarations in a `.proto` file can be annotated with a number of
 *options*. Options do not change the overall meaning of a declaration, but may
 affect the way it is handled in a particular context. The complete list of
-available options is defined in `google/protobuf/descriptor.proto`.
+available options is defined in [`/google/protobuf/descriptor.proto`](https://github.com/protocolbuffers/protobuf/blob/main/src/google/protobuf/descriptor.proto).
 
 Some options are file-level options, meaning they should be written at the
 top-level scope, not inside any message, enum, or service definition. Some

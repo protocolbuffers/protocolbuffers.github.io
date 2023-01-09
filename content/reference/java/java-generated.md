@@ -15,8 +15,8 @@ proto3 generated code are highlighted&mdash;note that these differences are in
 the generated code as described in this document, not the base message
 classes/interfaces, which are the same in both versions. You should read the
 [proto2 language guide](/programming-guides/proto) and/or
-[proto3 language guide](/programming-guides/proto3) before reading this
-document.
+[proto3 language guide](/programming-guides/proto3)
+before reading this document.
 
 Note that no Java protocol buffer methods accept or return nulls unless
 otherwise specified.
@@ -165,9 +165,9 @@ then `Foo` will include fast implementations of all methods, but will implement
 the `MessageLite` interface, which only contains a subset of the methods of
 `Message`. In particular, it does not support descriptors or reflection.
 However, in this mode, the generated code only needs to link against
-`libprotobuf-lite.jar` instead of `libprotobuf.jar`. The "lite" library is
-much smaller than the full library, and is more appropriate for
-resource-constrained systems such as mobile phones.
+`libprotobuf-lite.jar` instead of `libprotobuf.jar`. The "lite" library is much
+smaller than the full library, and is more appropriate for resource-constrained
+systems such as mobile phones.
 
 The `Message` interface defines methods that let you check, manipulate, read, or
 write the entire message. In addition to these methods, the `Foo` class defines
@@ -288,8 +288,8 @@ that modify the value are defined in the builder only.
 
 Note that method names always use camel-case naming, even if the field name in
 the `.proto` file uses lower-case with underscores
-([as it should](/programming-guides/style)). The case-conversion works
-as follows:
+([as it should](/programming-guides/style)). The
+case-conversion works as follows:
 
 1.  For each underscore in the name, the underscore is removed, and the
     following letter is capitalized.
@@ -329,7 +329,8 @@ The compiler will generate the following methods only in the message's builder:
     `hasFoo()` will return `false` and `getFoo()` will return the default value.
 
 For other simple field types, the corresponding Java type is chosen according to
-the [scalar value types table](/programming-guides/proto#scalar).
+the
+[scalar value types table](/programming-guides/proto#scalar).
 For message and enum types, the value type is replaced with the message or enum
 class.
 
@@ -376,7 +377,8 @@ The compiler will generate the following methods only in the message's builder:
     `getFoo()` will return the default value for the field's type.
 
 For other simple field types, the corresponding Java type is chosen according to
-the [scalar value types table](/programming-guides/proto#scalar).
+the
+[scalar value types table](/programming-guides/proto#scalar).
 For message and enum types, the value type is replaced with the message or enum
 class.
 
@@ -427,72 +429,73 @@ the generated [enum type](#enum).
 For this field definition:
 
 ```proto
-repeated string foo = 1;
+repeated string foos = 1;
 ```
 
 The compiler will generate the following accessor methods in both the message
 class and its builder:
 
--   `int getFooCount()`: Returns the number of elements currently in the field.
--   `String getFoo(int index)`: Returns the element at the given zero-based
+-   `int getFoosCount()`: Returns the number of elements currently in the field.
+-   `String getFoos(int index)`: Returns the element at the given zero-based
     index.
--   `ProtocolStringList getFooList()`: Returns the entire field as a
+-   `ProtocolStringList getFoosList()`: Returns the entire field as a
     `ProtocolStringList`. If the field is not set, returns an empty list.
 
 The compiler will generate the following methods only in the message's builder:
 
--   `Builder setFoo(int index, String value)`: Sets the value of the element at
+-   `Builder setFoos(int index, String value)`: Sets the value of the element at
     the given zero-based index.
--   `Builder addFoo(String value)`: Appends a new element to the field with the
+-   `Builder addFoos(String value)`: Appends a new element to the field with the
     given value.
--   `Builder addAllFoo(Iterable<? extends String> value)`: Appends all elements
+-   `Builder addAllFoos(Iterable<? extends String> value)`: Appends all elements
     in the given `Iterable` to the field.
--   `Builder clearFoo()`: Removes all elements from the field. After calling
-    this, `getFooCount()` will return zero.
+-   `Builder clearFoos()`: Removes all elements from the field. After calling
+    this, `getFoosCount()` will return zero.
 
 For other simple field types, the corresponding Java type is chosen according to
-the [scalar value types table](/programming-guides/proto#scalar).
+the
+[scalar value types table](/programming-guides/proto#scalar).
 For message and enum types, the type is the message or enum class.
 
 #### Repeated Embedded Message Fields
 
-For message types, `setFoo()` and `addFoo()` also accept an instance of the
+For message types, `setFoos()` and `addFoos()` also accept an instance of the
 message's builder type as the parameter. This is just a shortcut which is
 equivalent to calling `.build()` on the builder and passing the result to the
 method. There is also an additional generated method:
 
--   `Builder addFoo(int index, Field value)`: Inserts a new element at the given
-    zero-based index. Shifts the element currently at that position (if any) and
-    any subsequent elements to the right (adds one to their indices).
+-   `Builder addFoos(int index, Field value)`: Inserts a new element at the
+    given zero-based index. Shifts the element currently at that position (if
+    any) and any subsequent elements to the right (adds one to their indices).
 
 In addition, the compiler generates the following additional accessor methods in
 both the message class and its builder for message types, allowing you to access
 the relevant sub-builders:
 
--   `FooOrBuilder getFooOrBuilder(int index)`: Returns the builder for the
+-   `FooOrBuilder getFoosOrBuilder(int index)`: Returns the builder for the
     specified element, if it already exists, or throws
     `IndexOutOfBoundsException` if not. If this is called from a message class,
     it will always return a message (or throw an exception) rather than a
     builder. Calling this method on builders will not create a sub-builder for
     the field.
--   `List<FooOrBuilder> getFooOrBuilderList()`: Returns the entire field as an
+-   `List<FooOrBuilder> getFoosOrBuilderList()`: Returns the entire field as an
     unmodifiable list of builders (if available) or messages if not. If this is
     called from a message class, it will always return an immutable list of
     messages rather than an unmodifiable list of builders.
 
 The compiler will generate the following methods only in the message's builder:
 
--   `Builder getFooBuilder(int index)`: Returns the builder for the element at
+-   `Builder getFoosBuilder(int index)`: Returns the builder for the element at
     the specified index, or throws `IndexOutOfBoundsException` if the index is
     out of bounds.
--   `Builder addFooBuilder(int index)`: Inserts and returns a builder for a
+-   `Builder addFoosBuilder(int index)`: Inserts and returns a builder for a
     default message instance at the specified index. The existing entries are
     shifted to higher indices to make room for the inserted builder.
--   `Builder addFooBuilder()`: Appends and returns a builder for a default
+-   `Builder addFoosBuilder()`: Appends and returns a builder for a default
     message instance.
--   `Builder removeFoo(int index)`: Removes the element at the given zero-based
+-   `Builder removeFoos(int index)`: Removes the element at the given zero-based
     index.
--   `List<Builder> getFooBuilderList()`: Returns the entire field as an
+-   `List<Builder> getFoosBuilderList()`: Returns the entire field as an
     unmodifiable list of builders.
 
 #### Repeated Enum Fields (proto3 only)
@@ -500,15 +503,15 @@ The compiler will generate the following methods only in the message's builder:
 The compiler will generate the following additional methods in both the message
 class and its builder:
 
--   `int getFooValue(int index)`: Returns the integer value of the enum at the
+-   `int getFoosValue(int index)`: Returns the integer value of the enum at the
     specified index.
--   `List<java.lang.Integer> getFooValueList()`: Returns the entire field as a
+-   `List<java.lang.Integer> getFoosValueList()`: Returns the entire field as a
     list of Integers.
 
 The compiler will generate the following additional method only in the message's
 builder:
 
--   `Builder setFooValue(int index, int value)`: Sets the integer value of the
+-   `Builder setFoosValue(int index, int value)`: Sets the integer value of the
     enum at the specified index.
 
 #### Name Conflicts
@@ -520,15 +523,15 @@ number appended to the end.
 For these field definitions:
 
 ```proto
-int32 foo_count = 1;
-repeated string foo = 2;
+int32 foos_count = 1;
+repeated string foos = 2;
 ```
 
 The compiler will first rename them to the following:
 
 ```proto
-int32 foo_count_1 = 1;
-repeated string foo_2 = 2;
+int32 foos_count_1 = 1;
+repeated string foos_2 = 2;
 ```
 
 The accessor methods will subsequently be generated as described above.
@@ -564,7 +567,8 @@ The compiler will generate the following methods only in the message's builder:
         `getExampleNameCase()` will return `EXAMPLENAME_NOT_SET`.
 
 For other simple field types, the corresponding Java type is chosen according to
-the [scalar value types table](/programming-guides/proto#scalar).
+the
+[scalar value types table](/programming-guides/proto#scalar).
 For message and enum types, the value type is replaced with the message or enum
 class.
 
@@ -602,7 +606,8 @@ The compiler will generate the following methods only in the message's builder:
 
 ## Any
 
-Given an [`Any`](/programming-guides/proto3#any) field like this:
+Given an [`Any`](/programming-guides/proto3#any) field
+like this:
 
 ```proto
 import "google/protobuf/any.proto";
@@ -994,8 +999,8 @@ sends requests to a particular `BlockingRpcChannel`.
 ## Plugin Insertion Points {#plugins}
 
 [Code generator plugins](/reference/cpp/api-docs/google.protobuf.compiler.plugin.pb)
-that want to extend the output of the Java code generator may insert code of
-the following types using the given insertion point names.
+that want to extend the output of the Java code generator may insert code of the
+following types using the given insertion point names.
 
 -   `outer_class_scope`: Member declarations that belong in the file's wrapper
     class.

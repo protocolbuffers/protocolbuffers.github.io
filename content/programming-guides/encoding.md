@@ -361,7 +361,7 @@ concatenation) even if you do not know their types.
 
 ### Packed Repeated Fields {#packed}
 
-Starting in v2.1.0, `repeated` fields of scalar integer type can be declared as
+Starting in v2.1.0, `repeated` fields of scalar type can be declared as
 "packed". In proto2 this is done with the `[packed=true]`, but in proto3 it is
 the default.
 
@@ -474,10 +474,10 @@ Field numbers may be declared in any order in a `.proto` file. The order chosen
 has no effect on how the messages are serialized.
 
 When a message is serialized, there is no guaranteed order for how its known or
-[unknown fields](/programming-guides/proto#updating) will be written.
-Serialization order is an implementation detail, and the details of any
-particular implementation may change in the future. Therefore, protocol buffer
-parsers must be able to parse fields in any order.
+[unknown fields](/programming-guides/proto#updating) will
+be written. Serialization order is an implementation detail, and the details of
+any particular implementation may change in the future. Therefore, protocol
+buffer parsers must be able to parse fields in any order.
 
 ### Implications
 
