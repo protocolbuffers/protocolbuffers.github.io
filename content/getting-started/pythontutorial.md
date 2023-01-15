@@ -348,12 +348,12 @@ def PromptForAddress(person):
     phone_number = person.phones.add()
     phone_number.number = number
 
-    type = input("Is this a mobile, home, or work phone? ")
-    if type == "mobile":
+    phone_type = input("Is this a mobile, home, or work phone? ")
+    if phone_type == "mobile":
       phone_number.type = addressbook_pb2.Person.PhoneType.MOBILE
-    elif type == "home":
+    elif phone_type == "home":
       phone_number.type = addressbook_pb2.Person.PhoneType.HOME
-    elif type == "work":
+    elif phone_type == "work":
       phone_number.type = addressbook_pb2.Person.PhoneType.WORK
     else:
       print("Unknown phone type; leaving as default value.")
