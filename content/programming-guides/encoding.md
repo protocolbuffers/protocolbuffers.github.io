@@ -387,9 +387,8 @@ as Protoscope text,
 6: {3 270 86942}
 ```
 
-Only repeated fields of primitive numeric types (types) can be declared
-"packed". These are types that would normally use the `VARINT`, `I32`, or `I64`
-wire types.
+Only repeated fields of primitive numeric types can be declared "packed". These
+are types that would normally use the `VARINT`, `I32`, or `I64` wire types.
 
 Note that although there's usually no reason to encode more than one key-value
 pair for a packed repeated field, parsers must be prepared to accept multiple

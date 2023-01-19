@@ -134,10 +134,10 @@ correlation between the Go import path and the `.proto` import path.
 Given a simple message declaration:
 
 ```proto
-message Foo {}
+message Artist {}
 ```
 
-the protocol buffer compiler generates a struct called `Foo`. A `*Foo`
+the protocol buffer compiler generates a struct called `Artist`. An `*Artist`
 implements the
 [`proto.Message`](https://pkg.go.dev/google.golang.org/protobuf/proto?tab=doc#Message)
 interface.
@@ -159,13 +159,13 @@ The `optimize_for` option does not affect the output of the Go code generator.
 A message can be declared inside another message. For example:
 
 ```proto
-message Foo {
-  message Bar {
+message Artist {
+  message Name {
   }
 }
 ```
 
-In this case, the compiler generates two structs: `Foo` and `Foo_Bar`.
+In this case, the compiler generates two structs: `Artist` and `Artist_Name`.
 
 ## Fields
 
@@ -175,31 +175,31 @@ it is a singular, repeated, map, or oneof field.
 
 Note that the generated Go field names always use camel-case naming, even if the
 field name in the `.proto` file uses lower-case with underscores
-([as it should](/programming-guides/style)). The
-case-conversion works as follows:
+([as it should](/programming-guides/style#message-field-names)).
+The case-conversion works as follows:
 
 1.  The first letter is capitalized for export. If the first character is an
     underscore, it is removed and a capital X is prepended.
 2.  If an interior underscore is followed by a lower-case letter, the underscore
     is removed, and the following letter is capitalized.
 
-Thus, the proto field `foo_bar_baz` becomes `FooBarBaz` in Go, and
-`_my_field_name_2` becomes `XMyFieldName_2`.
+Thus, the proto field `birth_year` becomes `BirthYear` in Go, and
+`_birth_year_2` becomes `XBirthYear_2`.
 
 ### Singular Scalar Fields (proto2) {#singular-scalar-proto2}
 
 For either of these field definitions:
 
 ```proto
-optional int32 foo = 1;
-required int32 foo = 1;
+optional int32 birth_year = 1;
+required int32 birth_year = 1;
 ```
 
-the compiler generates a struct with an `*int32` field named `Foo` and an
-accessor method `GetFoo()` which returns the `int32` value in `Foo` or the
-default value if the field is unset. If the default is not explicitly set, the
-[zero value](https://golang.org/ref/spec#The_zero_value) of that type
-is used instead (`0` for numbers, the empty string for strings).
+the compiler generates a struct with an `*int32` field named `BirthYear` and an
+accessor method `GetBirthYear()` which returns the `int32` value in `Artist` or
+the default value if the field is unset. If the default is not explicitly set,
+the [zero value](https://golang.org/ref/spec#The_zero_value) of that
+type is used instead (`0` for numbers, the empty string for strings).
 
 For other scalar field types (including `bool`, `bytes`, and `string`), `*int32`
 is replaced with the corresponding Go type according to the
@@ -210,13 +210,19 @@ is replaced with the corresponding Go type according to the
 For this field definition:
 
 ```proto
-int32 foo = 1;
+int32 birth_year = 1;
+optional int32 first_active_year = 2;
 ```
 
-The compiler will generate a struct with an `int32` field named `Foo` and an
-accessor method `GetFoo()` which returns the `int32` value in `Foo` or the
+The compiler will generate a struct with an `int32` field named `BirthYear` and
+an accessor method `GetBirthYear()` which returns the `int32` value in
+`birth_year` or the
 [zero value](https://golang.org/ref/spec#The_zero_value) of that type
 if the field is unset (`0` for numbers, the empty string for strings).
+
+The `FirstActiveYear` struct field will be of type `*int32`, and additionally
+have the `HasFirstActiveYear()` and `ClearFirstActiveYear()` accessors, because
+it is marked `optional`.
 
 For other scalar field types (including `bool`, `bytes`, and `string`), `int32`
 is replaced with the corresponding Go type according to the
@@ -230,29 +236,29 @@ Unset values in the proto will be represented as the
 Given the message type:
 
 ```proto
-message Bar {}
+message Band {}
 ```
 
-For a message with a `Bar` field:
+For a message with a `Band` field:
 
 ```proto
 // proto2
-message Baz {
-  optional Bar foo = 1;
+message Concert {
+  optional Band headliner = 1;
   // The generated code is the same result if required instead of optional.
 }
 
 // proto3
-message Baz {
-  Bar foo = 1;
+message Concert {
+  Band headliner = 1;
 }
 ```
 
 The compiler will generate a Go struct
 
 ```go
-type Baz struct {
-    Foo *Bar
+type Concert struct {
+    Headliner *Band
 }
 ```
 
@@ -260,9 +266,15 @@ Message fields can be set to `nil`, which means that the field is unset,
 effectively clearing the field. This is not equivalent to setting the value to
 an \"empty\" instance of the message struct.
 
-The compiler also generates a `func (m *Baz) GetFoo() *Bar` helper function.
-This function returns a `nil` `*Bar` if `m` is nil or `foo` is unset. This makes
-it possible to chain get calls without intermediate `nil` checks.
+The compiler also generates a `func (m *Concert) GetHeadliner() *Band` helper
+function. This function returns a `nil` `*Band` if `m` is nil or `headliner` is
+unset. This makes it possible to chain get calls without intermediate `nil`
+checks:
+
+```go
+var m *Concert // defaults to nil
+log.Infof("GetFoundingYear() = %d (no panic!)", m.GetHeadliner().GetFoundingYear())
+```
 
 ### Repeated Fields {#repeated}
 
@@ -270,29 +282,32 @@ Each repeated field generates a slice of `T` field in the struct in Go, where
 `T` is the field's element type. For this message with a repeated field:
 
 ```proto
-message Baz {
-  repeated Bar foo = 1;
+message Concert {
+  // Best practice: use pluralized names for repeated fields:
+  // /programming-guides/style#repeated-fields
+  repeated Band support_acts = 1;
 }
 ```
 
 the compiler generates the Go struct:
 
 ```go
-type Baz struct {
-    Foo  []*Bar
+type Concert struct {
+    SupportActs []*Band
 }
 ```
 
-Likewise, for the field definition `repeated bytes foo = 1;` the compiler will
-generate a Go struct with a `[][]byte` field named `Foo`. For a repeated
-[enumeration](#enum) `repeated MyEnum bar = 2;`, the compiler generates a struct
-with a `[]MyEnum` field called `Bar`.
+Likewise, for the field definition `repeated bytes band_promo_images = 1;` the
+compiler will generate a Go struct with a `[][]byte` field named
+`BandPromoImage`. For a repeated [enumeration](#enum) like `repeated MusicGenre
+genres = 2;`, the compiler generates a struct with a `[]MusicGenre` field called
+`Genre`.
 
 The following example shows how to set the field:
 
 ```go
-baz := &Baz{
-  Foo: []*Bar{
+concert := &Concert{
+  SupportActs: []*Band{
     {}, // First element.
     {}, // Second element.
   },
@@ -302,8 +317,8 @@ baz := &Baz{
 To access the field, you can do the following:
 
 ```go
-foo := baz.GetFoo() // foo type is []*Bar.
-b1 := foo[0] // b1 type is *Bar, the first element in foo.
+support := concert.GetSupportActs() // support type is []*Band.
+b1 := support[0] // b1 type is *Band, the first element in support_acts.
 ```
 
 ### Map Fields {#map}
@@ -313,18 +328,20 @@ Each map field generates a field in the struct of type `map[TKey]TValue` where
 message with a map field:
 
 ```proto
-message Bar {}
+message MerchItem {}
 
-message Baz {
-  map<string, Bar> foo = 1;
+message MerchBooth {
+  // items maps from merchandise item name ("Signed T-Shirt") to
+  // a MerchItem message with more details about the item.
+  map<string, MerchItem> items = 1;
 }
 ```
 
 the compiler generates the Go struct:
 
 ```go
-type Baz struct {
-    Foo map[string]*Bar
+type MerchBooth struct {
+    Items map[string]*MerchItem
 }
 ```
 
@@ -409,18 +426,17 @@ value for that field or the zero value if it is not set.
 Given an enumeration like:
 
 ```proto
-message SearchRequest {
-  enum Corpus {
-    UNIVERSAL = 0;
-    WEB = 1;
-    IMAGES = 2;
-    LOCAL = 3;
-    NEWS = 4;
-    PRODUCTS = 5;
-    VIDEO = 6;
+message Venue {
+  enum Kind {
+    KIND_UNSPECIFIED = 0;
+    KIND_CONCERT_HALL = 1;
+    KIND_STADIUM = 2;
+    KIND_BAR = 3;
+    KIND_OPEN_AIR_FESTIVAL = 4;
+    // ...
   }
-  Corpus corpus = 1;
-  ...
+  Kind kind = 1;
+  // ...
 }
 ```
 
@@ -431,23 +447,25 @@ For enums within a message (like the one above), the type name begins with the
 message name:
 
 ```go
-type SearchRequest_Corpus int32
+type Venue_Kind int32
 ```
 
 For a package-level enum:
 
 ```proto
-enum Foo {
-  DEFAULT_BAR = 0;
-  BAR_BELLS = 1;
-  BAR_B_CUE = 2;
+enum Genre {
+  GENRE_UNSPECIFIED = 0;
+  GENRE_ROCK = 1;
+  GENRE_INDIE = 2;
+  GENRE_DRUM_AND_BASS = 3;
+  // ...
 }
 ```
 
 the Go type name is unmodified from the proto enum name:
 
 ```go
-type Foo int32
+type Genre int32
 ```
 
 This type has a `String()` method that returns the name of a given value.
@@ -456,7 +474,7 @@ The `Enum()` method initializes freshly allocated memory with a given value and
 returns the corresponding pointer:
 
 ```go
-func (Foo) Enum() *Foo
+func (Genre) Enum() *Genre
 ```
 
 If you use proto3 syntax for your `.proto` definition, the `Enum()` method is
@@ -468,13 +486,11 @@ name:
 
 ```go
 const (
-    SearchRequest_UNIVERSAL SearchRequest_Corpus = 0
-    SearchRequest_WEB       SearchRequest_Corpus = 1
-    SearchRequest_IMAGES    SearchRequest_Corpus = 2
-    SearchRequest_LOCAL     SearchRequest_Corpus = 3
-    SearchRequest_NEWS      SearchRequest_Corpus = 4
-    SearchRequest_PRODUCTS  SearchRequest_Corpus = 5
-    SearchRequest_VIDEO     SearchRequest_Corpus = 6
+    Venue_KIND_UNSPECIFIED       Venue_Kind = 0
+    Venue_KIND_CONCERT_HALL      Venue_Kind = 1
+    Venue_KIND_STADIUM           Venue_Kind = 2
+    Venue_KIND_BAR               Venue_Kind = 3
+    Venue_KIND_OPEN_AIR_FESTIVAL Venue_Kind = 4
 )
 ```
 
@@ -482,9 +498,10 @@ For a package-level enum, the constants begin with the enum name instead:
 
 ```go
 const (
-    Foo_DEFAULT_BAR Foo = 0
-    Foo_BAR_BELLS   Foo = 1
-    Foo_BAR_B_CUE   Foo = 2
+    Genre_GENRE_UNSPECIFIED   Genre = 0
+    Genre_GENRE_ROCK          Genre = 1
+    Genre_GENRE_INDIE         Genre = 2
+    Genre_GENRE_DRUM_AND_BASS Genre = 3
 )
 ```
 
@@ -492,15 +509,17 @@ The protobuf compiler also generates a map from integer values to the string
 names and a map from the names to the values:
 
 ```go
-var Foo_name = map[int32]string{
-    0: "DEFAULT_BAR",
-    1: "BAR_BELLS",
-    2: "BAR_B_CUE",
+var Genre_name = map[int32]string{
+    0: "GENRE_UNSPECIFIED",
+    1: "GENRE_ROCK",
+    2: "GENRE_INDIE",
+    3: "GENRE_DRUM_AND_BASS",
 }
-var Foo_value = map[string]int32{
-    "DEFAULT_BAR": 0,
-    "BAR_BELLS":   1,
-    "BAR_B_CUE":   2,
+var Genre_value = map[string]int32{
+    "GENRE_UNSPECIFIED":   0,
+    "GENRE_ROCK":          1,
+    "GENRE_INDIE":         2,
+    "GENRE_DRUM_AND_BASS": 3,
 }
 ```
 
@@ -515,21 +534,21 @@ numeric value to the name which appears first in the .proto file.
 Given an extension definition:
 
 ```proto
-extend Foo {
-  optional int32 bar = 123;
+extend Concert {
+  optional int32 promo_id = 123;
 }
 ```
 
 The protocol buffer compiler will generate a
 [`protoreflect.ExtensionType`](https://pkg.go.dev/google.golang.org/protobuf/reflect/protoreflect?tab=doc#ExtensionType)
-value named `E_Bar`. This value may be used with the
+value named `E_Promo_id`. This value may be used with the
 [`proto.GetExtension`](https://pkg.go.dev/google.golang.org/protobuf/proto?tab=doc#GetExtension),
 [`proto.SetExtension`](https://pkg.go.dev/google.golang.org/protobuf/proto?tab=doc#SetExtension),
 [`proto.HasExtension`](https://pkg.go.dev/google.golang.org/protobuf/proto?tab=doc#HasExtension),
 and
 [`proto.ClearExtension`](https://pkg.go.dev/google.golang.org/protobuf/proto?tab=doc#ClearExtension)
 functions to access an extension in a message. The `GetExtension` function and
-`SetExtension` functions respectively accept and return an `interface{}` value
+`SetExtension` functions respectively return and accept an `interface{}` value
 containing the extension value type.
 
 For singular scalar extension fields, the extension value type is the
@@ -545,38 +564,38 @@ singular type.
 For example, given the following definition:
 
 ```proto
-extend Foo {
+extend Concert {
   optional int32 singular_int32 = 1;
-  repeated bytes repeated_string = 2;
-  optional Bar singular_message = 3;
+  repeated bytes repeated_strings = 2;
+  optional Band singular_message = 3;
 }
 ```
 
 Extension values may be accessed as:
 
 ```go
-m := &somepb.Foo{}
+m := &somepb.Concert{}
 proto.SetExtension(m, extpb.E_SingularInt32, int32(1))
 proto.SetExtension(m, extpb.E_RepeatedString, []string{"a", "b", "c"})
-proto.SetExtension(m, extpb.E_SingularMessage, &extpb.Bar{})
+proto.SetExtension(m, extpb.E_SingularMessage, &extpb.Band{})
 
 v1 := proto.GetExtension(m, extpb.E_SingularInt32).(int32)
 v2 := proto.GetExtension(m, extpb.E_RepeatedString).([][]byte)
-v3 := proto.GetExtension(m, extpb.E_SingularMessage).(*extpb.Bar)
+v3 := proto.GetExtension(m, extpb.E_SingularMessage).(*extpb.Band)
 ```
 
 Extensions can be declared nested inside of another type. For example, a common
 pattern is to do something like this:
 
 ```proto
-message Baz {
-  extend Foo {
-    optional Baz foo_ext = 124;
+message Promo {
+  extend Concert {
+    optional int32 promo_id = 124;
   }
 }
 ```
 
-In this case, the `ExtensionType` value is named `E_Baz_Foo`.
+In this case, the `ExtensionType` value is named `E_Promo_Concert`.
 
 ## Services {#service}
 
