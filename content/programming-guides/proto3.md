@@ -1065,9 +1065,11 @@ language in the relevant [API reference](/reference/).
     ```c++
     SampleMessage message;
     message.set_name("name");
-    CHECK(message.has_name());
-    message.mutable_sub_message();   // Will clear name field.
-    CHECK(!message.has_name());
+    CHECK_EQ(message.name(), "name");
+    // Calling mutable_sub_message() will clear the name field and will set
+    // sub_message to a new instance of SubMessage with none of its fields set.
+    message.mutable_sub_message();
+    CHECK(message.name().empty());
     ```
 
 *   If the parser encounters multiple members of the same oneof on the wire,
@@ -1103,7 +1105,7 @@ language in the relevant [API reference](/reference/).
     msg2.mutable_sub_message();
     msg1.swap(&msg2);
     CHECK(msg1.has_sub_message());
-    CHECK(msg2.has_name());
+    CHECK_EQ(msg2.name(), "name");
     ```
 
 ### Backwards-compatibility issues

@@ -652,12 +652,12 @@ message PhotoEnhancement {
 message PhotoEnhancementReply {
   // Good: PhotoEnhancement can grow to describe enhancements that require
   // more fields than just an enum.
-  repeated PhotoEnhancement enhancement;
+  repeated PhotoEnhancement enhancements;
 
   // Bad: If we ever want to return parameters associated with the
   // enhancement, we'd have to introduce a parallel array (terrible) or
   // deprecate this field and introduce a repeated message.
-  repeated EnhancementType enhancement_type;
+  repeated EnhancementType enhancement_types;
 }
 ```
 
@@ -888,9 +888,9 @@ pass the two related fields around inside your own service.
 message BatchEquationSolverResponse {
   // Bad: Solved values are returned in the order of the equations given in
   // the request.
-  repeated double solved_value;
-  // (Usually) Bad: Parallel array for solved_value.
-  repeated double solved_complex_value;
+  repeated double solved_values;
+  // (Usually) Bad: Parallel array for solved_values.
+  repeated double solved_complex_values;
 }
 
 // Good: A separate message that can grow to include more fields and be
@@ -899,7 +899,7 @@ message BatchEquationSolverResponse {
 message BatchEquationSolverResponse {
   // Deprecated, this will continue to be populated in responses until Q2
   // 2014, after which clients must move to using the solutions field below.
-  repeated double solved_value [deprecated = true];
+  repeated double solved_values [deprecated = true];
 
   // Good: Each equation in the request has a unique identifier that's
   // included in the EquationSolution below so that the solutions can be
