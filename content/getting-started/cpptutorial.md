@@ -127,13 +127,13 @@ if you want one of your fields to have one of a predefined list of values --
 here you want to specify that a phone number can be one of the following phone
 types: `MOBILE`, `HOME`, or `WORK`.
 
-The " = 1", " = 2" markers on each element identify the unique "tag" that field
-uses in the binary encoding. Tag numbers 1-15 require one less byte to encode
-than higher numbers, so as an optimization you can decide to use those tags for
-the commonly used or repeated elements, leaving tags 16 and higher for
-less-commonly used optional elements. Each element in a repeated field requires
-re-encoding the tag number, so repeated fields are particularly good candidates
-for this optimization.
+The " = 1", " = 2" markers on each element identify the unique field number that
+field uses in the binary encoding. Field numbers 1-15 require one less byte to
+encode than higher numbers, so as an optimization you can decide to use those
+numbers for the commonly used or repeated elements, leaving field numbers 16 and
+higher for less-commonly used optional elements. Each element in a repeated
+field requires re-encoding the field number, so repeated fields are particularly
+good candidates for this optimization.
 
 Each field must be annotated with one of the following modifiers:
 
@@ -550,12 +550,12 @@ your new buffers to be backwards-compatible, and your old buffers to be
 forward-compatible -- and you almost certainly do want this -- then there are
 some rules you need to follow. In the new version of the protocol buffer:
 
--   you *must not* change the tag numbers of any existing fields.
+-   you *must not* change the field numbers of any existing fields.
 -   you *must not* add or delete any required fields.
 -   you *may* delete optional or repeated fields.
--   you *may* add new optional or repeated fields but you must use fresh tag
-    numbers (that is, tag numbers that were never used in this protocol buffer,
-    not even by deleted fields).
+-   you *may* add new optional or repeated fields but you must use fresh field
+    numbers (that is, field numbers that were never used in this protocol
+    buffer, not even by deleted fields).
 
 (There are
 [some exceptions](/programming-guides/proto#updating) to
@@ -567,7 +567,7 @@ simply have their default value, and deleted repeated fields will be empty. New
 code will also transparently read old messages. However, keep in mind that new
 optional fields will not be present in old messages, so you will need to either
 check explicitly whether they're set with `has_`, or provide a reasonable
-default value in your `.proto` file with `[default = value]` after the tag
+default value in your `.proto` file with `[default = value]` after the field
 number. If the default value is not specified for an optional element, a
 type-specific default value is used instead: for strings, the default value is
 the empty string. For booleans, the default value is false. For numeric types,
