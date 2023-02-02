@@ -44,7 +44,8 @@ Java code as described in the
 [Java generated code reference](/reference/java/java-generated#package).
 
 The output file is chosen by concatenating the parameter to `--kotlin_out=`, the
-package name (with `.`s replaced with `/`s), and the suffix `Kt.kt` file name.
+package name (with periods [.] replaced with slashes [/]), and the suffix
+`Kt.kt` file name.
 
 So, for example, let's say you invoke the compiler as follows:
 
