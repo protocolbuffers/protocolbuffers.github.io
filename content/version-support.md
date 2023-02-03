@@ -9,7 +9,7 @@ description: "A list of the support windows provided for language implementation
 ---
     
 
-<!--* css: "//depot/includes/version-tables.css" *-->
+<link rel="stylesheet" href="/includes/version-tables.css">
 
 Support windows for protoc and the various languages are covered in the tables
 later in this topic. Version numbers throughout this topic use
@@ -419,7 +419,6 @@ The Java 3.21.x runtime was first released in 2022 Q2.
     <td class="gray">16.x</td>
     <td class="gray">3.16.x</td>
     <td class="blue">IR</td>
-    <td></td>
     <td></td>
     <td></td>
     <td></td>
