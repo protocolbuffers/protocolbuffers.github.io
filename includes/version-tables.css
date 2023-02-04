@@ -1,4 +1,4 @@
-table, th, td {
+table tbody, th, td {
   border: 1px solid #818589;
   padding-top: 2px;
   padding-bottom: 2px;
@@ -8,27 +8,27 @@ table, th, td {
 
 }
 
-td {
+tbody td {
   background: #fff;
 }
 
-td.red {
+tbody td.red {
   background: #f00;
   color: #fff;
 }
 
-td.blue {
+tbody td.blue {
   background: #c9daf8;
 }
 
-td.green {
+tbody td.green {
   background: #d9ead3;
 }
 
-td.gray {
+tbody td.gray {
   background: #f3f3f3;
 }
 
-td.yellow {
+tbody td.yellow {
   background: #fff2cc;
 }
