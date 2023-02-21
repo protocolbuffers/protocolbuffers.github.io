@@ -549,14 +549,13 @@ With the above *.proto* definition, the following text format is a valid
 `MessageWithMap`:
 
 ```textproto
-my_map { key: "entry1", value: 1 }
-my_map { key: "entry2", value: 2 }
+my_map { key: "entry1" value: 1 }
+my_map { key: "entry2" value: 2 }
 
-# You can also use the list syntax, though it isn't compatible with
-# https://github.com/protocolbuffers/txtpbfmt
+# You can also use the list syntax
 my_map: [
-  { key: "entry3", value: 3 },
-  { key: "entry4", value: 4 }
+  { key: "entry3" value: 3 },
+  { key: "entry4" value: 4 }
 ]
 ```
 

@@ -92,8 +92,8 @@ Message fields can be one of the following:
 *   `repeated`: this field type can be repeated zero or more times in a
     well-formed message. The order of the repeated values will be preserved.
 *   `map`: this is a paired key/value field type. See
-    [Maps](/programming-guides/encoding.md#maps) for more
-    on this field type.
+    [Maps](/programming-guides/encoding#maps) for more on
+    this field type.
 
 In proto3, `repeated` fields of scalar numeric types use `packed` encoding by
 default. You can find out more about `packed` encoding in
@@ -750,6 +750,12 @@ with closed enum types such as Java, a case in the enum is used to represent an
 unrecognized value, and the underlying integer can be accessed with special
 accessors. In either case, if the message is serialized the unrecognized value
 will still be serialized with the message.
+
+{{% alert title="Important" color="warning" %}} For
+information on how enums should work contrasted with how they currently work in
+different languages, see
+[Enum Behavior](/programming-guides/enum).
+{{% /alert %}}
 
 For more information about how to work with message `enum`s in your
 applications, see the [generated code guide](/reference/)

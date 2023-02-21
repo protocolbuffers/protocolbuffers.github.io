@@ -79,11 +79,15 @@ boolLit = "true" | "false"
 ### String Literals {#string_literals}
 
 ```
-strLit = ( "'" { charValue } "'" ) | ( '"' { charValue } '"' )
-charValue = hexEscape | octEscape | charEscape | /[^\0\n\\]/
-hexEscape = '\' ( "x" | "X" ) hexDigit hexDigit
-octEscape = '\' octalDigit octalDigit octalDigit
+strLit = strLitSingle { strLitSingle }
+strLitSingle = ( "'" { charValue } "'" ) | ( '"' { charValue } '"' )
+charValue = hexEscape | octEscape | charEscape | unicodeEscape | unicodeLongEscape | /[^\0\n\\]/
+hexEscape = '\' ( "x" | "X" ) hexDigit [ hexDigit ]
+octEscape = '\' octalDigit [ octalDigit [ octalDigit ] ]
 charEscape = '\' ( "a" | "b" | "f" | "n" | "r" | "t" | "v" | '\' | "'" | '"' )
+unicodeEscape = '\' "u" hexDigit hexDigit hexDigit hexDigit
+unicodeLongEscape = '\' "U" ( "000" hexDigit hexDigit hexDigit hexDigit hexDigit |
+                              "0010" hexDigit hexDigit hexDigit hexDigit
 ```
 
 ### EmptyStatement
@@ -212,7 +216,7 @@ A oneof consists of oneof fields and a oneof name. Oneof fields do not have
 labels.
 
 ```
-oneof = "oneof" oneofName "{" { option | oneofField | emptyStatement } "}"
+oneof = "oneof" oneofName "{" { option | oneofField } "}"
 oneofField = type fieldName "=" fieldNumber [ "[" fieldOptions "]" ] ";"
 ```
 
@@ -342,7 +346,7 @@ If a message in the same or imported .proto file has reserved a range for
 extensions, the message can be extended.
 
 ```
-extend = "extend" messageType "{" {field | group | emptyStatement} "}"
+extend = "extend" messageType "{" {field | group} "}"
 ```
 
 Example:
@@ -356,11 +360,9 @@ extend Foo {
 ### Service definition {#service_definition}
 
 ```
-service = "service" serviceName "{" { option | rpc | stream | emptyStatement } "}"
+service = "service" serviceName "{" { option | rpc | emptyStatement } "}"
 rpc = "rpc" rpcName "(" [ "stream" ] messageType ")" "returns" "(" [ "stream" ]
 messageType ")" (( "{" { option | emptyStatement } "}" ) | ";" )
-stream = "stream" streamName "(" messageType "," messageType ")" (( "{"
-{ option | emptyStatement } "}") | ";" )
 ```
 
 Example:

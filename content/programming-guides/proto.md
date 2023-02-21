@@ -572,6 +572,12 @@ generated code may be subject to language-specific limitations on the number of
 enumerators (low thousands for one language). Review the limitations for the
 languages you plan to use. {{% /alert %}}
 
+{{% alert title="Important" color="warning" %}} For
+information on how enums should work contrasted with how they currently work in
+different languages, see
+[Enum Behavior](/programming-guides/enum).
+{{% /alert %}}
+
 For more information about how to work with message `enum`s in your
 applications, see the [generated code guide](/reference/)
 for your chosen language.
