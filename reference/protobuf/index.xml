@@ -41,11 +41,15 @@ exponent = ( &amp;#34;e&amp;#34; | &amp;#34;E&amp;#34; ) [ &amp;#34;+&amp;#34; |
 &lt;/code>&lt;/pre>&lt;h3 id="boolean">Boolean&lt;/h3>
 &lt;pre tabindex="0">&lt;code>boolLit = &amp;#34;true&amp;#34; | &amp;#34;false&amp;#34;
 &lt;/code>&lt;/pre>&lt;h3 id="string_literals">String Literals&lt;/h3>
-&lt;pre tabindex="0">&lt;code>strLit = ( &amp;#34;&amp;#39;&amp;#34; { charValue } &amp;#34;&amp;#39;&amp;#34; ) | ( &amp;#39;&amp;#34;&amp;#39; { charValue } &amp;#39;&amp;#34;&amp;#39; )
-charValue = hexEscape | octEscape | charEscape | /[^\0\n\\]/
-hexEscape = &amp;#39;\&amp;#39; ( &amp;#34;x&amp;#34; | &amp;#34;X&amp;#34; ) hexDigit hexDigit
-octEscape = &amp;#39;\&amp;#39; octalDigit octalDigit octalDigit
+&lt;pre tabindex="0">&lt;code>strLit = strLitSingle { strLitSingle }
+strLitSingle = ( &amp;#34;&amp;#39;&amp;#34; { charValue } &amp;#34;&amp;#39;&amp;#34; ) | ( &amp;#39;&amp;#34;&amp;#39; { charValue } &amp;#39;&amp;#34;&amp;#39; )
+charValue = hexEscape | octEscape | charEscape | unicodeEscape | unicodeLongEscape | /[^\0\n\\]/
+hexEscape = &amp;#39;\&amp;#39; ( &amp;#34;x&amp;#34; | &amp;#34;X&amp;#34; ) hexDigit [ hexDigit ]
+octEscape = &amp;#39;\&amp;#39; octalDigit [ octalDigit [ octalDigit ] ]
 charEscape = &amp;#39;\&amp;#39; ( &amp;#34;a&amp;#34; | &amp;#34;b&amp;#34; | &amp;#34;f&amp;#34; | &amp;#34;n&amp;#34; | &amp;#34;r&amp;#34; | &amp;#34;t&amp;#34; | &amp;#34;v&amp;#34; | &amp;#39;\&amp;#39; | &amp;#34;&amp;#39;&amp;#34; | &amp;#39;&amp;#34;&amp;#39; )
+unicodeEscape = &amp;#39;\&amp;#39; &amp;#34;u&amp;#34; hexDigit hexDigit hexDigit hexDigit
+unicodeLongEscape = &amp;#39;\&amp;#39; &amp;#34;U&amp;#34; ( &amp;#34;000&amp;#34; hexDigit hexDigit hexDigit hexDigit hexDigit |
+&amp;#34;0010&amp;#34; hexDigit hexDigit hexDigit hexDigit
 &lt;/code>&lt;/pre>&lt;h3 id="emptystatement">EmptyStatement&lt;/h3>
 &lt;pre tabindex="0">&lt;code>emptyStatement = &amp;#34;;&amp;#34;
 &lt;/code>&lt;/pre>&lt;h3 id="constant">Constant&lt;/h3>
@@ -105,7 +109,7 @@ must begin with capital letter.&lt;/p>
 &lt;/span>&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h3 id="oneof_and_oneof_field">Oneof and oneof field&lt;/h3>
 &lt;p>A oneof consists of oneof fields and a oneof name. Oneof fields do not have
 labels.&lt;/p>
-&lt;pre tabindex="0">&lt;code>oneof = &amp;#34;oneof&amp;#34; oneofName &amp;#34;{&amp;#34; { option | oneofField | emptyStatement } &amp;#34;}&amp;#34;
+&lt;pre tabindex="0">&lt;code>oneof = &amp;#34;oneof&amp;#34; oneofName &amp;#34;{&amp;#34; { option | oneofField } &amp;#34;}&amp;#34;
 oneofField = type fieldName &amp;#34;=&amp;#34; fieldNumber [ &amp;#34;[&amp;#34; fieldOptions &amp;#34;]&amp;#34; ] &amp;#34;;&amp;#34;
 &lt;/code>&lt;/pre>&lt;p>Example:&lt;/p>
 &lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-proto" data-lang="proto">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#204a87;font-weight:bold">oneof&lt;/span> &lt;span style="color:#000">foo&lt;/span> &lt;span style="color:#000;font-weight:bold">{&lt;/span>&lt;span style="color:#a40000">
@@ -178,17 +182,15 @@ option | oneof | mapField | reserved | emptyStatement } &amp;#34;}&amp;#34;
 &lt;/span>&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h3 id="extend">Extend&lt;/h3>
 &lt;p>If a message in the same or imported .proto file has reserved a range for
 extensions, the message can be extended.&lt;/p>
-&lt;pre tabindex="0">&lt;code>extend = &amp;#34;extend&amp;#34; messageType &amp;#34;{&amp;#34; {field | group | emptyStatement} &amp;#34;}&amp;#34;
+&lt;pre tabindex="0">&lt;code>extend = &amp;#34;extend&amp;#34; messageType &amp;#34;{&amp;#34; {field | group} &amp;#34;}&amp;#34;
 &lt;/code>&lt;/pre>&lt;p>Example:&lt;/p>
 &lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-proto" data-lang="proto">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#204a87;font-weight:bold">extend&lt;/span> &lt;span style="color:#000">Foo&lt;/span> &lt;span style="color:#000;font-weight:bold">{&lt;/span>&lt;span style="color:#a40000">
 &lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#a40000">&lt;/span> &lt;span style="color:#204a87;font-weight:bold">optional&lt;/span> &lt;span style="color:#204a87;font-weight:bold">int32&lt;/span> &lt;span style="color:#000">bar&lt;/span> &lt;span style="color:#ce5c00;font-weight:bold">=&lt;/span> &lt;span style="color:#0000cf;font-weight:bold">126&lt;/span>&lt;span style="color:#000;font-weight:bold">;&lt;/span>&lt;span style="color:#a40000">
 &lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#a40000">&lt;/span>&lt;span style="color:#000;font-weight:bold">}&lt;/span>&lt;span style="color:#a40000">
 &lt;/span>&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h3 id="service_definition">Service definition&lt;/h3>
-&lt;pre tabindex="0">&lt;code>service = &amp;#34;service&amp;#34; serviceName &amp;#34;{&amp;#34; { option | rpc | stream | emptyStatement } &amp;#34;}&amp;#34;
+&lt;pre tabindex="0">&lt;code>service = &amp;#34;service&amp;#34; serviceName &amp;#34;{&amp;#34; { option | rpc | emptyStatement } &amp;#34;}&amp;#34;
 rpc = &amp;#34;rpc&amp;#34; rpcName &amp;#34;(&amp;#34; [ &amp;#34;stream&amp;#34; ] messageType &amp;#34;)&amp;#34; &amp;#34;returns&amp;#34; &amp;#34;(&amp;#34; [ &amp;#34;stream&amp;#34; ]
 messageType &amp;#34;)&amp;#34; (( &amp;#34;{&amp;#34; { option | emptyStatement } &amp;#34;}&amp;#34; ) | &amp;#34;;&amp;#34; )
-stream = &amp;#34;stream&amp;#34; streamName &amp;#34;(&amp;#34; messageType &amp;#34;,&amp;#34; messageType &amp;#34;)&amp;#34; (( &amp;#34;{&amp;#34;
-{ option | emptyStatement } &amp;#34;}&amp;#34;) | &amp;#34;;&amp;#34; )
 &lt;/code>&lt;/pre>&lt;p>Example:&lt;/p>
 &lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-proto" data-lang="proto">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#204a87;font-weight:bold">service&lt;/span> &lt;span style="color:#000">SearchService&lt;/span> &lt;span style="color:#000;font-weight:bold">{&lt;/span>&lt;span style="color:#a40000">
 &lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#a40000">&lt;/span> &lt;span style="color:#204a87;font-weight:bold">rpc&lt;/span> &lt;span style="color:#000">Search&lt;/span> &lt;span style="color:#000;font-weight:bold">(&lt;/span>&lt;span style="color:#000">SearchRequest&lt;/span>&lt;span style="color:#000;font-weight:bold">)&lt;/span> &lt;span style="color:#204a87;font-weight:bold">returns&lt;/span> &lt;span style="color:#000;font-weight:bold">(&lt;/span>&lt;span style="color:#000">SearchResponse&lt;/span>&lt;span style="color:#000;font-weight:bold">);&lt;/span>&lt;span style="color:#a40000">
@@ -262,11 +264,15 @@ exponent = ( &amp;#34;e&amp;#34; | &amp;#34;E&amp;#34; ) [ &amp;#34;+&amp;#34; |
 &lt;/code>&lt;/pre>&lt;h3 id="boolean">Boolean&lt;/h3>
 &lt;pre tabindex="0">&lt;code>boolLit = &amp;#34;true&amp;#34; | &amp;#34;false&amp;#34;
 &lt;/code>&lt;/pre>&lt;h3 id="string_literals">String Literals&lt;/h3>
-&lt;pre tabindex="0">&lt;code>strLit = ( &amp;#34;&amp;#39;&amp;#34; { charValue } &amp;#34;&amp;#39;&amp;#34; ) | ( &amp;#39;&amp;#34;&amp;#39; { charValue } &amp;#39;&amp;#34;&amp;#39; )
-charValue = hexEscape | octEscape | charEscape | /[^\0\n\\]/
-hexEscape = &amp;#39;\&amp;#39; ( &amp;#34;x&amp;#34; | &amp;#34;X&amp;#34; ) hexDigit hexDigit
-octEscape = &amp;#39;\&amp;#39; octalDigit octalDigit octalDigit
+&lt;pre tabindex="0">&lt;code>strLit = strLitSingle { strLitSingle }
+strLitSingle = ( &amp;#34;&amp;#39;&amp;#34; { charValue } &amp;#34;&amp;#39;&amp;#34; ) | ( &amp;#39;&amp;#34;&amp;#39; { charValue } &amp;#39;&amp;#34;&amp;#39; )
+charValue = hexEscape | octEscape | charEscape | unicodeEscape | unicodeLongEscape | /[^\0\n\\]/
+hexEscape = &amp;#39;\&amp;#39; ( &amp;#34;x&amp;#34; | &amp;#34;X&amp;#34; ) hexDigit [ hexDigit ]
+octEscape = &amp;#39;\&amp;#39; octalDigit [ octalDigit [ octalDigit ] ]
 charEscape = &amp;#39;\&amp;#39; ( &amp;#34;a&amp;#34; | &amp;#34;b&amp;#34; | &amp;#34;f&amp;#34; | &amp;#34;n&amp;#34; | &amp;#34;r&amp;#34; | &amp;#34;t&amp;#34; | &amp;#34;v&amp;#34; | &amp;#39;\&amp;#39; | &amp;#34;&amp;#39;&amp;#34; | &amp;#39;&amp;#34;&amp;#39; )
+unicodeEscape = &amp;#39;\&amp;#39; &amp;#34;u&amp;#34; hexDigit hexDigit hexDigit hexDigit
+unicodeLongEscape = &amp;#39;\&amp;#39; &amp;#34;U&amp;#34; ( &amp;#34;000&amp;#34; hexDigit hexDigit hexDigit hexDigit hexDigit |
+&amp;#34;0010&amp;#34; hexDigit hexDigit hexDigit hexDigit
 &lt;/code>&lt;/pre>&lt;h3 id="emptystatement">EmptyStatement&lt;/h3>
 &lt;pre tabindex="0">&lt;code>emptyStatement = &amp;#34;;&amp;#34;
 &lt;/code>&lt;/pre>&lt;h3 id="constant">Constant&lt;/h3>
@@ -312,7 +318,7 @@ fieldOption = optionName &amp;#34;=&amp;#34; constant
 &lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#a40000">&lt;/span>&lt;span style="color:#204a87;font-weight:bold">repeated&lt;/span> &lt;span style="color:#204a87;font-weight:bold">int32&lt;/span> &lt;span style="color:#000">samples&lt;/span> &lt;span style="color:#ce5c00;font-weight:bold">=&lt;/span> &lt;span style="color:#0000cf;font-weight:bold">4&lt;/span> &lt;span style="color:#000;font-weight:bold">[&lt;/span>&lt;span style="color:#204a87;font-weight:bold">packed&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">=&lt;/span>&lt;span style="color:#204a87;font-weight:bold">true&lt;/span>&lt;span style="color:#000;font-weight:bold">];&lt;/span>&lt;span style="color:#a40000">
 &lt;/span>&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h3 id="oneof_and_oneof_field">Oneof and Oneof Field&lt;/h3>
 &lt;p>A oneof consists of oneof fields and a oneof name.&lt;/p>
-&lt;pre tabindex="0">&lt;code>oneof = &amp;#34;oneof&amp;#34; oneofName &amp;#34;{&amp;#34; { option | oneofField | emptyStatement } &amp;#34;}&amp;#34;
+&lt;pre tabindex="0">&lt;code>oneof = &amp;#34;oneof&amp;#34; oneofName &amp;#34;{&amp;#34; { option | oneofField } &amp;#34;}&amp;#34;
 oneofField = type fieldName &amp;#34;=&amp;#34; fieldNumber [ &amp;#34;[&amp;#34; fieldOptions &amp;#34;]&amp;#34; ] &amp;#34;;&amp;#34;
 &lt;/code>&lt;/pre>&lt;p>Example:&lt;/p>
 &lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-proto" data-lang="proto">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#204a87;font-weight:bold">oneof&lt;/span> &lt;span style="color:#000">foo&lt;/span> &lt;span style="color:#000;font-weight:bold">{&lt;/span>&lt;span style="color:#a40000">
@@ -806,13 +812,12 @@ key/value entries. Example:&lt;/p>
 &lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#a40000">&lt;/span>&lt;span style="color:#000;font-weight:bold">}&lt;/span>&lt;span style="color:#a40000">
 &lt;/span>&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>With the above &lt;em>.proto&lt;/em> definition, the following text format is a valid
 &lt;code>MessageWithMap&lt;/code>:&lt;/p>
-&lt;pre tabindex="0">&lt;code class="language-textproto" data-lang="textproto">my_map { key: &amp;#34;entry1&amp;#34;, value: 1 }
-my_map { key: &amp;#34;entry2&amp;#34;, value: 2 }
-# You can also use the list syntax, though it isn&amp;#39;t compatible with
-# https://github.com/protocolbuffers/txtpbfmt
+&lt;pre tabindex="0">&lt;code class="language-textproto" data-lang="textproto">my_map { key: &amp;#34;entry1&amp;#34; value: 1 }
+my_map { key: &amp;#34;entry2&amp;#34; value: 2 }
+# You can also use the list syntax
 my_map: [
-{ key: &amp;#34;entry3&amp;#34;, value: 3 },
-{ key: &amp;#34;entry4&amp;#34;, value: 4 }
+{ key: &amp;#34;entry3&amp;#34; value: 3 },
+{ key: &amp;#34;entry4&amp;#34; value: 4 }
 ]
 &lt;/code>&lt;/pre>&lt;p>Both the &lt;code>key&lt;/code> and &lt;code>value&lt;/code> fields are optional and default to the zero value of
 their respective types if unspecified. If a key is duplicated, only the
