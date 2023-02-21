@@ -140,7 +140,7 @@ and
 
 It’s standard for software products to be backward compatible, but it is less
 common for them to be forward compatible. As long as you follow some
-[simple practices](/programming-guides/proto/#updating)
+[simple practices](/programming-guides/proto3/#updating)
 when updating `.proto` definitions, old code will read new messages without
 issues, ignoring any newly added fields. To the old code, fields that were
 deleted will have their default value, and deleted repeated fields will be
@@ -245,12 +245,12 @@ When defining `.proto` files, you can specify that a field is either `optional`
 or `repeated` (proto2 and proto3) or `singular` (proto3). (The option to set a
 field to `required` is absent in proto3 and strongly discouraged in proto2. For
 more on this, see "Required is Forever" in
-[Specifying Field Rules](/programming-guides/proto#specifying-rules).)
+[Specifying Field Rules](/programming-guides/proto3#specifying-field-rules).)
 
 After setting the optionality/repeatability of a field, you specify the data
 type. Protocol buffers support the usual primitive data types, such as integers,
 booleans, and floats. For the full list, see
-[Scalar Value Types](/programming-guides/proto#scalar).
+[Scalar Value Types](/programming-guides/proto3#scalar).
 
 A field can also be of:
 
