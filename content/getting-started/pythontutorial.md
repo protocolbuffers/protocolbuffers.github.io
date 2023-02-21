@@ -263,7 +263,7 @@ any particular field definition, see the
 
 Enums are expanded by the metaclass into a set of symbolic constants with
 integer values. So, for example, the constant
-`addressbook_pb2.Person.PhoneType.WORK` has the value 2.
+`addressbook_pb2.Person.WORK` has the value 2.
 
 ### Standard Message Methods {#standard-message-methods}
 
@@ -350,11 +350,11 @@ def PromptForAddress(person):
 
     type = raw_input("Is this a mobile, home, or work phone? ")
     if type == "mobile":
-      phone_number.type = addressbook_pb2.Person.PhoneType.MOBILE
+      phone_number.type = addressbook_pb2.Person.MOBILE
     elif type == "home":
-      phone_number.type = addressbook_pb2.Person.PhoneType.HOME
+      phone_number.type = addressbook_pb2.Person.HOME
     elif type == "work":
-      phone_number.type = addressbook_pb2.Person.PhoneType.WORK
+      phone_number.type = addressbook_pb2.Person.WORK
     else:
       print "Unknown phone type; leaving as default value."
 
@@ -405,11 +405,11 @@ def ListPeople(address_book):
       print "  E-mail address:", person.email
 
     for phone_number in person.phones:
-      if phone_number.type == addressbook_pb2.Person.PhoneType.MOBILE:
+      if phone_number.type == addressbook_pb2.Person.MOBILE:
         print "  Mobile phone #: ",
-      elif phone_number.type == addressbook_pb2.Person.PhoneType.HOME:
+      elif phone_number.type == addressbook_pb2.Person.HOME:
         print "  Home phone #: ",
-      elif phone_number.type == addressbook_pb2.Person.PhoneType.WORK:
+      elif phone_number.type == addressbook_pb2.Person.WORK:
         print "  Work phone #: ",
       print phone_number.number
 
