@@ -1,11 +1,13 @@
 ---
 title: "Migration Guide"
-weight: 1040
+weight: 920
 toc_hide: false
 linkTitle: "Migration Guide"
 no_list: "true"
 type: docs
 description: "A list of the breaking changes made to versions of the libraries, and how to update your code to accommodate the changes."
+aliases: 
+  - /programming-guides/migration/
 ---
 
 This topic provides information about breaking changes in Protocol Buffers, and
