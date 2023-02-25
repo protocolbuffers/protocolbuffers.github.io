@@ -1,11 +1,13 @@
 ---
 title: "Version Support"
-weight: 1030
+weight: 910
 toc_hide: false
 linkTitle: "Version Support"
 no_list: "true"
 type: docs
 description: "A list of the support windows provided for language implementations."
+aliases: 
+  - /version-support/
 ---
     
 
@@ -50,15 +52,13 @@ The following sections provide a visual guide to the support for each language.
 
 ## C++ {#cpp}
 
-The C++ 3.21.x runtime was first released in 2022 Q2 and has support until 2023
-Q2. The planned 4.22.x release is a breaking change.
+The C++ 3.21.x runtime was first released in 2022 Q2 and has support until 2024
+Q1. The C++ 4.22.x runtime was first released in 2023 Q1.
 
 <table>
   <tr>
     <th>protoc</th>
     <th>C++</th>
-    <th>21Q2</th>
-    <th>21Q3</th>
     <th>21Q4</th>
     <th>22Q1</th>
     <th>22Q2</th>
@@ -71,42 +71,8 @@ Q2. The planned 4.22.x release is a breaking change.
     <th>24Q1</th>
   </tr>
   <tr>
-    <td class="gray">17.x</td>
-    <td class="gray">3.17.x</td>
-    <td class="blue">IR</td>
-    <td></td>
-    <td></td>
-    <td></td>
-    <td></td>
-    <td></td>
-    <td></td>
-    <td></td>
-    <td></td>
-    <td></td>
-    <td></td>
-    <td></td>
-  </tr>
-  <tr>
-    <td class="gray">18.x</td>
-    <td class="gray">3.18.x</td>
-    <td></td>
-    <td class="blue">IR</td>
-    <td></td>
-    <td></td>
-    <td></td>
-    <td></td>
-    <td></td>
-    <td></td>
-    <td></td>
-    <td></td>
-    <td></td>
-    <td></td>
-  </tr>
-  <tr>
     <td class="gray">19.x</td>
     <td class="gray">3.19.x</td>
-    <td></td>
-    <td></td>
     <td class="blue">IR</td>
     <td></td>
     <td></td>
@@ -121,8 +87,6 @@ Q2. The planned 4.22.x release is a breaking change.
   <tr>
     <td class="gray">20.x</td>
     <td class="gray">3.20.x</td>
-    <td></td>
-    <td></td>
     <td></td>
     <td class="blue">IR</td>
     <td></td>
@@ -139,8 +103,6 @@ Q2. The planned 4.22.x release is a breaking change.
     <td class="gray">3.21.x</td>
     <td></td>
     <td></td>
-    <td></td>
-    <td></td>
     <td class="blue">IR</td>
     <td class="green">PS</td>
     <td class="green">PS</td>
@@ -151,13 +113,6 @@ Q2. The planned 4.22.x release is a breaking change.
     <td class="red">SE</td>
   </tr>
   <tr>
-    <td colspan="14">
-      The cells below are projections of future releases, but are not guarantees
-      <br/>that those releases will happen, or that they will happen on that
-      schedule.
-    </td>
-  </tr>
-  <tr>
     <td class="gray">22.x</td>
     <td class="gray">4.22.x</td>
     <td></td>
@@ -165,19 +120,22 @@ Q2. The planned 4.22.x release is a breaking change.
     <td></td>
     <td></td>
     <td></td>
-    <td></td>
-    <td></td>
     <td class="blue">IR</td>
-    <td></td>
-    <td></td>
-    <td></td>
-    <td></td>
+    <td class="green">PS</td>
+    <td class="green">PS</td>
+    <td class="green">PS</td>
+    <td class="green">PS</td>
+  </tr>
+  <tr>
+    <td colspan="14">
+      The cells below are projections of future releases, but are not guarantees
+      <br/>that those releases will happen, or that they will happen on that
+      schedule.
+    </td>
   </tr>
   <tr>
     <td class="gray">23.x</td>
     <td class="gray"></td>
-    <td></td>
-    <td></td>
     <td></td>
     <td></td>
     <td></td>
@@ -192,8 +150,6 @@ Q2. The planned 4.22.x release is a breaking change.
   <tr>
     <td class="gray">24.x</td>
     <td class="gray"></td>
-    <td></td>
-    <td></td>
     <td></td>
     <td></td>
     <td></td>
@@ -232,14 +188,12 @@ Q2. The planned 4.22.x release is a breaking change.
 
 ## C&#35; {#csharp}
 
-The C# 3.21.x runtime was first released in 2022 Q2.
+The C# 3.22.x runtime was first released in 2023 Q1.
 
 <table>
   <tr>
     <th>protoc</th>
     <th>C#</th>
-    <th>21Q2</th>
-    <th>21Q3</th>
     <th>21Q4</th>
     <th>22Q1</th>
     <th>22Q2</th>
@@ -250,38 +204,8 @@ The C# 3.21.x runtime was first released in 2022 Q2.
     <th>23Q3</th>
   </tr>
   <tr>
-    <td class="gray">17.x</td>
-    <td class="gray">3.17.x</td>
-    <td class="blue">IR</td>
-    <td></td>
-    <td></td>
-    <td></td>
-    <td></td>
-    <td></td>
-    <td></td>
-    <td></td>
-    <td></td>
-    <td></td>
-  </tr>
-  <tr>
-    <td class="gray">18.x</td>
-    <td class="gray">3.18.x</td>
-    <td></td>
-    <td class="blue">IR</td>
-    <td></td>
-    <td></td>
-    <td></td>
-    <td></td>
-    <td></td>
-    <td></td>
-    <td></td>
-    <td></td>
-  </tr>
-  <tr>
     <td class="gray">19.x</td>
     <td class="gray">3.19.x</td>
-    <td></td>
-    <td></td>
     <td class="blue">IR</td>
     <td></td>
     <td></td>
@@ -294,8 +218,6 @@ The C# 3.21.x runtime was first released in 2022 Q2.
   <tr>
     <td class="gray">20.x</td>
     <td class="gray">3.20.x</td>
-    <td></td>
-    <td></td>
     <td></td>
     <td class="blue">IR</td>
     <td></td>
@@ -310,12 +232,22 @@ The C# 3.21.x runtime was first released in 2022 Q2.
     <td class="gray">3.21.x</td>
     <td></td>
     <td></td>
-    <td></td>
-    <td></td>
     <td class="blue">IR</td>
     <td class="green">PS</td>
     <td class="green">PS</td>
-    <td class="green">PS</td>
+    <td></td>
+    <td></td>
+    <td></td>
+  </tr>
+  <tr>
+    <td class="gray">22.x</td>
+    <td class="gray">3.22.x</td>
+    <td></td>
+    <td></td>
+    <td></td>
+    <td></td>
+    <td></td>
+    <td class="blue">IR</td>
     <td class="green">PS</td>
     <td class="green">PS</td>
   </tr>
@@ -327,24 +259,8 @@ The C# 3.21.x runtime was first released in 2022 Q2.
     </td>
   </tr>
   <tr>
-    <td class="gray">22.x</td>
-    <td class="gray"></td>
-    <td></td>
-    <td></td>
-    <td></td>
-    <td></td>
-    <td></td>
-    <td></td>
-    <td></td>
-    <td class="blue">IR</td>
-    <td></td>
-    <td></td>
-  </tr>
-  <tr>
     <td class="gray">23.x</td>
     <td class="gray"></td>
-    <td></td>
-    <td></td>
     <td></td>
     <td></td>
     <td></td>
@@ -357,8 +273,6 @@ The C# 3.21.x runtime was first released in 2022 Q2.
   <tr>
     <td class="gray">24.x</td>
     <td class="gray"></td>
-    <td></td>
-    <td></td>
     <td></td>
     <td></td>
     <td></td>
@@ -395,15 +309,12 @@ The C# 3.21.x runtime was first released in 2022 Q2.
 
 ## Java {#java}
 
-The Java 3.21.x runtime was first released in 2022 Q2.
+The Java 3.22.x runtime was first released in 2023 Q1.
 
 <table>
   <tr>
     <th>protoc</th>
     <th>Java</th>
-    <th>21Q1</th>
-    <th>21Q2</th>
-    <th>21Q3</th>
     <th>21Q4</th>
     <th>22Q1</th>
     <th>22Q2</th>
@@ -414,64 +325,12 @@ The Java 3.21.x runtime was first released in 2022 Q2.
     <th>23Q3</th>
     <th>23Q4</th>
     <th>24Q1</th>
-  </tr>
-  <tr>
-    <td class="gray">16.x</td>
-    <td class="gray">3.16.x</td>
-    <td class="blue">IR</td>
-    <td></td>
-    <td></td>
-    <td></td>
-    <td></td>
-    <td></td>
-    <td></td>
-    <td></td>
-    <td></td>
-    <td></td>
-    <td></td>
-    <td></td>
-    <td></td>
-  </tr>
-  <tr>
-    <td class="gray">17.x</td>
-    <td class="gray">3.17.x</td>
-    <td></td>
-    <td class="blue">IR</td>
-    <td></td>
-    <td></td>
-    <td></td>
-    <td></td>
-    <td></td>
-    <td></td>
-    <td></td>
-    <td></td>
-    <td></td>
-    <td></td>
-    <td></td>
-  </tr>
-  <tr>
-    <td class="gray">18.x</td>
-    <td class="gray">3.18.x</td>
-    <td></td>
-    <td></td>
-    <td class="blue">IR</td>
-    <td></td>
-    <td></td>
-    <td></td>
-    <td></td>
-    <td></td>
-    <td></td>
-    <td></td>
-    <td></td>
-    <td></td>
-    <td></td>
+    <th>24Q2</th>
+    <th>24Q3</th>
   </tr>
   <tr>
     <td class="gray">19.x</td>
     <td class="gray">3.19.x</td>
-    <td></td>
-    <td></td>
-    <td></td>
     <td class="blue">IR</td>
     <td></td>
     <td></td>
@@ -482,16 +341,17 @@ The Java 3.21.x runtime was first released in 2022 Q2.
     <td></td>
     <td></td>
     <td></td>
-
+    <td></td>
+    <td></td>
   </tr>
   <tr>
     <td class="gray">20.x</td>
     <td class="gray">3.20.x</td>
     <td></td>
-    <td></td>
-    <td></td>
-    <td></td>
     <td class="blue">IR</td>
+    <td></td>
+    <td></td>
+    <td></td>
     <td></td>
     <td></td>
     <td></td>
@@ -505,6 +365,22 @@ The Java 3.21.x runtime was first released in 2022 Q2.
     <td class="gray">3.21.x</td>
     <td></td>
     <td></td>
+    <td class="blue">IR</td>
+    <td class="green">PS</td>
+    <td class="green">PS</td>
+    <td></td>
+    <td></td>
+    <td></td>
+    <td></td>
+    <td></td>
+    <td></td>
+    <td></td>
+  </tr>
+  <tr>
+    <td class="gray">22.x</td>
+    <td class="gray">3.22.x</td>
+    <td></td>
+    <td></td>
     <td></td>
     <td></td>
     <td></td>
@@ -515,31 +391,13 @@ The Java 3.21.x runtime was first released in 2022 Q2.
     <td class="green">PS</td>
     <td class="green">PS</td>
     <td class="green">PS</td>
-    <td class="green">PS</td>
   </tr>
   <tr>
-    <td colspan="15">
+    <td colspan="17">
       The cells below are projections of future releases, but are not guarantees
       <br/>that those releases will happen, or that they will happen on that
       schedule.
     </td>
-  </tr>
-  <tr>
-    <td class="gray">22.x</td>
-    <td class="gray"></td>
-    <td></td>
-    <td></td>
-    <td></td>
-    <td></td>
-    <td></td>
-    <td></td>
-    <td></td>
-    <td></td>
-    <td class="blue">IR</td>
-    <td></td>
-    <td></td>
-    <td></td>
-    <td></td>
   </tr>
   <tr>
     <td class="gray">23.x</td>
@@ -550,10 +408,9 @@ The Java 3.21.x runtime was first released in 2022 Q2.
     <td></td>
     <td></td>
     <td></td>
-    <td></td>
-    <td></td>
-    <td></td>
     <td class="blue">IR</td>
+    <td></td>
+    <td></td>
     <td></td>
     <td></td>
     <td></td>
@@ -568,10 +425,9 @@ The Java 3.21.x runtime was first released in 2022 Q2.
     <td></td>
     <td></td>
     <td></td>
-    <td></td>
-    <td></td>
-    <td></td>
     <td class="blue">IR</td>
+    <td></td>
+    <td></td>
     <td></td>
     <td></td>
   </tr>
@@ -602,14 +458,12 @@ The Java 3.21.x runtime was first released in 2022 Q2.
 
 ## Objective-C {#objc}
 
-The Objective-C 3.21.x runtime was first released in 2022 Q2.
+The Objective-C 3.22.x runtime was first released in 2023 Q1.
 
 <table>
   <tr>
     <th>protoc</th>
     <th>ObjC</th>
-    <th>21Q2</th>
-    <th>21Q3</th>
     <th>21Q4</th>
     <th>22Q1</th>
     <th>22Q2</th>
@@ -620,38 +474,8 @@ The Objective-C 3.21.x runtime was first released in 2022 Q2.
     <th>23Q3</th>
   </tr>
   <tr>
-    <td class="gray">17.x</td>
-    <td class="gray">3.17.x</td>
-    <td class="blue">IR</td>
-    <td></td>
-    <td></td>
-    <td></td>
-    <td></td>
-    <td></td>
-    <td></td>
-    <td></td>
-    <td></td>
-    <td></td>
-  </tr>
-  <tr>
-    <td class="gray">18.x</td>
-    <td class="gray">3.18.x</td>
-    <td></td>
-    <td class="blue">IR</td>
-    <td></td>
-    <td></td>
-    <td></td>
-    <td></td>
-    <td></td>
-    <td></td>
-    <td></td>
-    <td></td>
-  </tr>
-  <tr>
     <td class="gray">19.x</td>
     <td class="gray">3.19.x</td>
-    <td></td>
-    <td></td>
     <td class="blue">IR</td>
     <td></td>
     <td></td>
@@ -664,8 +488,6 @@ The Objective-C 3.21.x runtime was first released in 2022 Q2.
   <tr>
     <td class="gray">20.x</td>
     <td class="gray">3.20.x</td>
-    <td></td>
-    <td></td>
     <td></td>
     <td class="blue">IR</td>
     <td></td>
@@ -680,12 +502,22 @@ The Objective-C 3.21.x runtime was first released in 2022 Q2.
     <td class="gray">3.21.x</td>
     <td></td>
     <td></td>
-    <td></td>
-    <td></td>
     <td class="blue">IR</td>
     <td class="green">PS</td>
     <td class="green">PS</td>
-    <td class="green">PS</td>
+    <td></td>
+    <td></td>
+    <td></td>
+  </tr>
+  <tr>
+    <td class="gray">22.x</td>
+    <td class="gray">3.22.x</td>
+    <td></td>
+    <td></td>
+    <td></td>
+    <td></td>
+    <td></td>
+    <td class="blue">IR</td>
     <td class="green">PS</td>
     <td class="green">PS</td>
   </tr>
@@ -697,24 +529,8 @@ The Objective-C 3.21.x runtime was first released in 2022 Q2.
     </td>
   </tr>
   <tr>
-    <td class="gray">22.x</td>
-    <td class="gray"></td>
-    <td></td>
-    <td></td>
-    <td></td>
-    <td></td>
-    <td></td>
-    <td></td>
-    <td></td>
-    <td class="blue">IR</td>
-    <td></td>
-    <td></td>
-  </tr>
-  <tr>
     <td class="gray">23.x</td>
     <td class="gray"></td>
-    <td></td>
-    <td></td>
     <td></td>
     <td></td>
     <td></td>
@@ -727,8 +543,6 @@ The Objective-C 3.21.x runtime was first released in 2022 Q2.
   <tr>
     <td class="gray">24.x</td>
     <td class="gray"></td>
-    <td></td>
-    <td></td>
     <td></td>
     <td></td>
     <td></td>
@@ -765,14 +579,12 @@ The Objective-C 3.21.x runtime was first released in 2022 Q2.
 
 ## PHP {#php}
 
-The PHP 3.21.x runtime was first released in 2022 Q2.
+The PHP 3.22.x runtime was first released in 2023 Q1.
 
 <table>
   <tr>
     <th>protoc</th>
     <th>PHP</th>
-    <th>21Q2</th>
-    <th>21Q3</th>
     <th>21Q4</th>
     <th>22Q1</th>
     <th>22Q2</th>
@@ -783,38 +595,8 @@ The PHP 3.21.x runtime was first released in 2022 Q2.
     <th>23Q3</th>
   </tr>
   <tr>
-    <td class="gray">17.x</td>
-    <td class="gray">3.17.x</td>
-    <td class="blue">IR</td>
-    <td></td>
-    <td></td>
-    <td></td>
-    <td></td>
-    <td></td>
-    <td></td>
-    <td></td>
-    <td></td>
-    <td></td>
-  </tr>
-  <tr>
-    <td class="gray">18.x</td>
-    <td class="gray">3.18.x</td>
-    <td></td>
-    <td class="blue">IR</td>
-    <td></td>
-    <td></td>
-    <td></td>
-    <td></td>
-    <td></td>
-    <td></td>
-    <td></td>
-    <td></td>
-  </tr>
-  <tr>
     <td class="gray">19.x</td>
     <td class="gray">3.19.x</td>
-    <td></td>
-    <td></td>
     <td class="blue">IR</td>
     <td></td>
     <td></td>
@@ -827,8 +609,6 @@ The PHP 3.21.x runtime was first released in 2022 Q2.
   <tr>
     <td class="gray">20.x</td>
     <td class="gray">3.20.x</td>
-    <td></td>
-    <td></td>
     <td></td>
     <td class="blue">IR</td>
     <td></td>
@@ -843,12 +623,22 @@ The PHP 3.21.x runtime was first released in 2022 Q2.
     <td class="gray">3.21.x</td>
     <td></td>
     <td></td>
-    <td></td>
-    <td></td>
     <td class="blue">IR</td>
     <td class="green">PS</td>
     <td class="green">PS</td>
-    <td class="green">PS</td>
+    <td></td>
+    <td></td>
+    <td></td>
+  </tr>
+  <tr>
+    <td class="gray">22.x</td>
+    <td class="gray">3.22.x</td>
+    <td></td>
+    <td></td>
+    <td></td>
+    <td></td>
+    <td></td>
+    <td class="blue">IR</td>
     <td class="green">PS</td>
     <td class="green">PS</td>
   </tr>
@@ -860,24 +650,8 @@ The PHP 3.21.x runtime was first released in 2022 Q2.
     </td>
   </tr>
   <tr>
-    <td class="gray">22.x</td>
-    <td class="gray"></td>
-    <td></td>
-    <td></td>
-    <td></td>
-    <td></td>
-    <td></td>
-    <td></td>
-    <td></td>
-    <td class="blue">IR</td>
-    <td></td>
-    <td></td>
-  </tr>
-  <tr>
     <td class="gray">23.x</td>
     <td class="gray"></td>
-    <td></td>
-    <td></td>
     <td></td>
     <td></td>
     <td></td>
@@ -890,8 +664,6 @@ The PHP 3.21.x runtime was first released in 2022 Q2.
   <tr>
     <td class="gray">24.x</td>
     <td class="gray"></td>
-    <td></td>
-    <td></td>
     <td></td>
     <td></td>
     <td></td>
@@ -929,14 +701,12 @@ The PHP 3.21.x runtime was first released in 2022 Q2.
 ## Python {#python}
 
 The Python 3.20.x runtime was first released in 2022 Q1 and has support until
-2023 Q2. The Python 4.21.x runtime was first released in 2022 Q2.
+2023 Q2. The Python 4.22.x runtime was first released in 2023 Q1.
 
 <table>
   <tr>
     <th>protoc</th>
     <th>Python</th>
-    <th>21Q2</th>
-    <th>21Q3</th>
     <th>21Q4</th>
     <th>22Q1</th>
     <th>22Q2</th>
@@ -947,38 +717,8 @@ The Python 3.20.x runtime was first released in 2022 Q1 and has support until
     <th>23Q3</th>
   </tr>
   <tr>
-    <td class="gray">17.x</td>
-    <td class="gray">3.17.x</td>
-    <td class="blue">IR</td>
-    <td></td>
-    <td></td>
-    <td></td>
-    <td></td>
-    <td></td>
-    <td></td>
-    <td></td>
-    <td></td>
-    <td></td>
-  </tr>
-  <tr>
-    <td class="gray">18.x</td>
-    <td class="gray">3.18.x</td>
-    <td></td>
-    <td class="blue">IR</td>
-    <td></td>
-    <td></td>
-    <td></td>
-    <td></td>
-    <td></td>
-    <td></td>
-    <td></td>
-    <td></td>
-  </tr>
-  <tr>
     <td class="gray">19.x</td>
     <td class="gray">3.19.x</td>
-    <td></td>
-    <td></td>
     <td class="blue">IR</td>
     <td></td>
     <td></td>
@@ -991,8 +731,6 @@ The Python 3.20.x runtime was first released in 2022 Q1 and has support until
   <tr>
     <td class="gray">20.x</td>
     <td class="gray">3.20.x</td>
-    <td></td>
-    <td></td>
     <td></td>
     <td class="blue">IR</td>
     <td class="green">PS</td>
@@ -1007,12 +745,22 @@ The Python 3.20.x runtime was first released in 2022 Q1 and has support until
     <td class="gray">4.21.x</td>
     <td></td>
     <td></td>
-    <td></td>
-    <td></td>
     <td class="blue">IR</td>
     <td class="green">PS</td>
     <td class="green">PS</td>
-    <td class="green">PS</td>
+    <td></td>
+    <td></td>
+    <td></td>
+  </tr>
+  <tr>
+    <td class="gray">22.x</td>
+    <td class="gray">4.22.x</td>
+    <td></td>
+    <td></td>
+    <td></td>
+    <td></td>
+    <td></td>
+    <td class="blue">IR</td>
     <td class="green">PS</td>
     <td class="green">PS</td>
   </tr>
@@ -1024,24 +772,8 @@ The Python 3.20.x runtime was first released in 2022 Q1 and has support until
     </td>
   </tr>
   <tr>
-    <td class="gray">22.x</td>
-    <td class="gray"></td>
-    <td></td>
-    <td></td>
-    <td></td>
-    <td></td>
-    <td></td>
-    <td></td>
-    <td></td>
-    <td class="blue">IR</td>
-    <td></td>
-    <td></td>
-  </tr>
-  <tr>
     <td class="gray">23.x</td>
     <td class="gray"></td>
-    <td></td>
-    <td></td>
     <td></td>
     <td></td>
     <td></td>
@@ -1054,8 +786,6 @@ The Python 3.20.x runtime was first released in 2022 Q1 and has support until
   <tr>
     <td class="gray">24.x</td>
     <td class="gray"></td>
-    <td></td>
-    <td></td>
     <td></td>
     <td></td>
     <td></td>
@@ -1092,15 +822,12 @@ The Python 3.20.x runtime was first released in 2022 Q1 and has support until
 
 ## Ruby {#ruby}
 
-The Ruby 3.21.x runtime was first released in 2022 Q2 and has support until 2023
-Q2. The planned 4.22.x release is a breaking change.
+The Ruby 3.22.x runtime was first released in 2023 Q1.
 
 <table>
   <tr>
     <th>protoc</th>
     <th>Ruby</th>
-    <th>21Q2</th>
-    <th>21Q3</th>
     <th>21Q4</th>
     <th>22Q1</th>
     <th>22Q2</th>
@@ -1113,42 +840,8 @@ Q2. The planned 4.22.x release is a breaking change.
     <th>24Q1</th>
   </tr>
   <tr>
-    <td class="gray">17.x</td>
-    <td class="gray">3.17.x</td>
-    <td class="blue">IR</td>
-    <td></td>
-    <td></td>
-    <td></td>
-    <td></td>
-    <td></td>
-    <td></td>
-    <td></td>
-    <td></td>
-    <td></td>
-    <td></td>
-    <td></td>
-  </tr>
-  <tr>
-    <td class="gray">18.x</td>
-    <td class="gray">3.18.x</td>
-    <td></td>
-    <td class="blue">IR</td>
-    <td></td>
-    <td></td>
-    <td></td>
-    <td></td>
-    <td></td>
-    <td></td>
-    <td></td>
-    <td></td>
-    <td></td>
-    <td></td>
-  </tr>
-  <tr>
     <td class="gray">19.x</td>
     <td class="gray">3.19.x</td>
-    <td></td>
-    <td></td>
     <td class="blue">IR</td>
     <td></td>
     <td></td>
@@ -1163,8 +856,6 @@ Q2. The planned 4.22.x release is a breaking change.
   <tr>
     <td class="gray">20.x</td>
     <td class="gray">3.20.x</td>
-    <td></td>
-    <td></td>
     <td></td>
     <td class="blue">IR</td>
     <td></td>
@@ -1181,6 +872,21 @@ Q2. The planned 4.22.x release is a breaking change.
     <td class="gray">3.21.x</td>
     <td></td>
     <td></td>
+    <td class="blue">IR</td>
+    <td class="green">PS</td>
+    <td class="green">PS</td>
+    <td></td>
+    <td></td>
+    <td></td>
+    <td></td>
+    <td></td>
+  </tr>
+  <tr>
+    <td class="gray">22.x</td>
+    <td class="gray">3.22.x</td>
+    <td></td>
+    <td></td>
+    <td></td>
     <td></td>
     <td></td>
     <td class="blue">IR</td>
@@ -1188,9 +894,6 @@ Q2. The planned 4.22.x release is a breaking change.
     <td class="green">PS</td>
     <td class="green">PS</td>
     <td class="green">PS</td>
-    <td class="green">PS</td>
-    <td class="green">PS</td>
-    <td class="red">SE</td>
   </tr>
   <tr>
     <td colspan="14">
@@ -1200,26 +903,8 @@ Q2. The planned 4.22.x release is a breaking change.
     </td>
   </tr>
   <tr>
-    <td class="gray">22.x</td>
-    <td class="gray"></td>
-    <td></td>
-    <td></td>
-    <td></td>
-    <td></td>
-    <td></td>
-    <td></td>
-    <td></td>
-    <td class="blue">IR</td>
-    <td></td>
-    <td></td>
-    <td></td>
-    <td></td>
-  </tr>
-  <tr>
     <td class="gray">23.x</td>
     <td class="gray"></td>
-    <td></td>
-    <td></td>
     <td></td>
     <td></td>
     <td></td>
@@ -1234,8 +919,6 @@ Q2. The planned 4.22.x release is a breaking change.
   <tr>
     <td class="gray">24.x</td>
     <td class="gray"></td>
-    <td></td>
-    <td></td>
     <td></td>
     <td></td>
     <td></td>
