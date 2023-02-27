@@ -1634,6 +1634,49 @@ Also, note that each option type (file-level, message-level, field-level, etc.)
 has its own number space, so, for example, you could declare extensions of
 FieldOptions and MessageOptions with the same number.
 
+### Option Retention {#option-retention}
+
+Options have a notion of *retention*, which controls whether an option is
+retained in the generated code. Options have *runtime retention* by default,
+meaning that they are retained in the generated code and are thus visible at
+runtime in the generated descriptor pool. However, you can set `retention =
+RETENTION_SOURCE` to specify that an option (or field within an option) must not
+be retained at runtime. This is called *source retention*.
+
+Option retention is an advanced feature that most users should not need to worry
+about, but it can be useful if you would like to use certain options without
+paying the code size cost of retaining them in your binaries. Options with
+source retention are still visible to `protoc` and `protoc` plugins, so code
+generators can use them to customize their behavior.
+
+Retention can be set directly on an option, like this;
+
+```proto
+extend google.protobuf.FileOptions {
+  optional int32 source_retention_option = 1234
+      [retention = RETENTION_SOURCE];
+}
+```
+
+It can also be set on a plain field, in which case it takes effect only when
+that field appears inside an option:
+
+```proto
+message OptionsMessage {
+  optional int32 source_retention_field = 1 [retention = RETENTION_SOURCE];
+}
+```
+
+You can set `retention = RETENTION_RUNTIME` if you like, but this has no effect
+since it is the default behavior. When a message field is marked
+`RETENTION_SOURCE`, its entire contents are dropped; fields inside it cannot
+override that by trying to set `RETENTION_RUNTIME`.
+
+{{% alert title="Note" color="note" %}} As
+of Protocol Buffers 22.0, support for option retention is still in progress and
+only C++ and Java are supported. In all other languages, options are always
+retained at runtime. {{% /alert %}}
+
 ## Generating Your Classes {#generating}
 
 To generate the Java, Python, or C++ code you need to work with the message
