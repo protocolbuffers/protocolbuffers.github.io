@@ -1031,6 +1031,34 @@ lines.&lt;/p>
 suitable granularity at which to use arenas (for servers, this is often
 per-request). You can find out more about how to get the most from arena
 allocation in &lt;a href="#usage">Usage patterns and best practices&lt;/a>.&lt;/p>
+&lt;p>This table summarizes the typical performance advantages and disadvantages of
+using arenas:&lt;/p>
+&lt;table>
+&lt;thead>
+&lt;tr>
+&lt;th style="text-align:left">Operation&lt;/th>
+&lt;th style="text-align:left">Heap-allocated proto messages&lt;/th>
+&lt;th style="text-align:left">Arena-allocated proto messages&lt;/th>
+&lt;/tr>
+&lt;/thead>
+&lt;tbody>
+&lt;tr>
+&lt;td style="text-align:left">&lt;em>Message allocation&lt;/em>&lt;/td>
+&lt;td style="text-align:left">Slower on average&lt;/td>
+&lt;td style="text-align:left">Faster on average&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td style="text-align:left">&lt;em>Message destruction&lt;/em>&lt;/td>
+&lt;td style="text-align:left">Slower on average&lt;/td>
+&lt;td style="text-align:left">Faster on average&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td style="text-align:left">&lt;em>Message moves&lt;/em>&lt;/td>
+&lt;td style="text-align:left">Always a move (equivalent to a &lt;a href="https://en.wikipedia.org/wiki/Object_copying#Shallow_copy">shallow copy&lt;/a> in cost)&lt;/td>
+&lt;td style="text-align:left">Sometimes a &lt;a href="https://en.wikipedia.org/wiki/Object_copying#Deep_copy">deep copy&lt;/a>&lt;/td>
+&lt;/tr>
+&lt;/tbody>
+&lt;/table>
 &lt;h2 id="gettingstarted">Getting Started&lt;/h2>
 &lt;p>The protocol buffer compiler generates code for arena allocation for the
 messages in your file, as used in the following example.&lt;/p>

@@ -2,96 +2,96 @@
 &lt;p>This is a language specification reference for version 2 of the Protocol Buffers
 language (proto2). The syntax is specified using
 &lt;a href="https://en.wikipedia.org/wiki/Extended_Backus%E2%80%93Naur_Form">Extended Backus-Naur Form (EBNF)&lt;/a>:&lt;/p>
-&lt;pre tabindex="0">&lt;code>| alternation
-() grouping
-[] option (zero or one time)
-{} repetition (any number of times)
-&lt;/code>&lt;/pre>&lt;p>For more information about using proto2, see the
+&lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-fallback" data-lang="fallback">&lt;span style="display:flex;">&lt;span>| alternation
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>() grouping
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>[] option (zero or one time)
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>{} repetition (any number of times)
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>For more information about using proto2, see the
 &lt;a href="https://protobuf.dev/programming-guides/proto">language guide&lt;/a>.&lt;/p>
 &lt;h2 id="lexical_elements">Lexical Elements&lt;/h2>
 &lt;h3 id="letters_and_digits">Letters and Digits&lt;/h3>
-&lt;pre tabindex="0">&lt;code>letter = &amp;#34;A&amp;#34; … &amp;#34;Z&amp;#34; | &amp;#34;a&amp;#34; … &amp;#34;z&amp;#34;
-capitalLetter = &amp;#34;A&amp;#34; … &amp;#34;Z&amp;#34;
-decimalDigit = &amp;#34;0&amp;#34; … &amp;#34;9&amp;#34;
-octalDigit = &amp;#34;0&amp;#34; … &amp;#34;7&amp;#34;
-hexDigit = &amp;#34;0&amp;#34; … &amp;#34;9&amp;#34; | &amp;#34;A&amp;#34; … &amp;#34;F&amp;#34; | &amp;#34;a&amp;#34; … &amp;#34;f&amp;#34;
-&lt;/code>&lt;/pre>&lt;h3 id="identifiers">Identifiers&lt;/h3>
-&lt;pre tabindex="0">&lt;code>ident = letter { letter | decimalDigit | &amp;#34;_&amp;#34; }
-fullIdent = ident { &amp;#34;.&amp;#34; ident }
-messageName = ident
-enumName = ident
-fieldName = ident
-oneofName = ident
-mapName = ident
-serviceName = ident
-rpcName = ident
-streamName = ident
-messageType = [ &amp;#34;.&amp;#34; ] { ident &amp;#34;.&amp;#34; } messageName
-enumType = [ &amp;#34;.&amp;#34; ] { ident &amp;#34;.&amp;#34; } enumName
-groupName = capitalLetter { letter | decimalDigit | &amp;#34;_&amp;#34; }
-&lt;/code>&lt;/pre>&lt;h3 id="integer_literals">Integer Literals&lt;/h3>
-&lt;pre tabindex="0">&lt;code>intLit = decimalLit | octalLit | hexLit
-decimalLit = ( &amp;#34;1&amp;#34; … &amp;#34;9&amp;#34; ) { decimalDigit }
-octalLit = &amp;#34;0&amp;#34; { octalDigit }
-hexLit = &amp;#34;0&amp;#34; ( &amp;#34;x&amp;#34; | &amp;#34;X&amp;#34; ) hexDigit { hexDigit }
-&lt;/code>&lt;/pre>&lt;h3 id="floating-point-literals">Floating-point Literals&lt;/h3>
-&lt;pre tabindex="0">&lt;code>floatLit = ( decimals &amp;#34;.&amp;#34; [ decimals ] [ exponent ] | decimals exponent | &amp;#34;.&amp;#34;decimals [ exponent ] ) | &amp;#34;inf&amp;#34; | &amp;#34;nan&amp;#34;
-decimals = decimalDigit { decimalDigit }
-exponent = ( &amp;#34;e&amp;#34; | &amp;#34;E&amp;#34; ) [ &amp;#34;+&amp;#34; | &amp;#34;-&amp;#34; ] decimals
-&lt;/code>&lt;/pre>&lt;h3 id="boolean">Boolean&lt;/h3>
-&lt;pre tabindex="0">&lt;code>boolLit = &amp;#34;true&amp;#34; | &amp;#34;false&amp;#34;
-&lt;/code>&lt;/pre>&lt;h3 id="string_literals">String Literals&lt;/h3>
-&lt;pre tabindex="0">&lt;code>strLit = strLitSingle { strLitSingle }
-strLitSingle = ( &amp;#34;&amp;#39;&amp;#34; { charValue } &amp;#34;&amp;#39;&amp;#34; ) | ( &amp;#39;&amp;#34;&amp;#39; { charValue } &amp;#39;&amp;#34;&amp;#39; )
-charValue = hexEscape | octEscape | charEscape | unicodeEscape | unicodeLongEscape | /[^\0\n\\]/
-hexEscape = &amp;#39;\&amp;#39; ( &amp;#34;x&amp;#34; | &amp;#34;X&amp;#34; ) hexDigit [ hexDigit ]
-octEscape = &amp;#39;\&amp;#39; octalDigit [ octalDigit [ octalDigit ] ]
-charEscape = &amp;#39;\&amp;#39; ( &amp;#34;a&amp;#34; | &amp;#34;b&amp;#34; | &amp;#34;f&amp;#34; | &amp;#34;n&amp;#34; | &amp;#34;r&amp;#34; | &amp;#34;t&amp;#34; | &amp;#34;v&amp;#34; | &amp;#39;\&amp;#39; | &amp;#34;&amp;#39;&amp;#34; | &amp;#39;&amp;#34;&amp;#39; )
-unicodeEscape = &amp;#39;\&amp;#39; &amp;#34;u&amp;#34; hexDigit hexDigit hexDigit hexDigit
-unicodeLongEscape = &amp;#39;\&amp;#39; &amp;#34;U&amp;#34; ( &amp;#34;000&amp;#34; hexDigit hexDigit hexDigit hexDigit hexDigit |
-&amp;#34;0010&amp;#34; hexDigit hexDigit hexDigit hexDigit
-&lt;/code>&lt;/pre>&lt;h3 id="emptystatement">EmptyStatement&lt;/h3>
-&lt;pre tabindex="0">&lt;code>emptyStatement = &amp;#34;;&amp;#34;
-&lt;/code>&lt;/pre>&lt;h3 id="constant">Constant&lt;/h3>
-&lt;pre tabindex="0">&lt;code>constant = fullIdent | ( [ &amp;#34;-&amp;#34; | &amp;#34;+&amp;#34; ] intLit ) | ( [ &amp;#34;-&amp;#34; | &amp;#34;+&amp;#34; ] floatLit ) |
-strLit | boolLit
-&lt;/code>&lt;/pre>&lt;h2 id="syntax">Syntax&lt;/h2>
+&lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-fallback" data-lang="fallback">&lt;span style="display:flex;">&lt;span>letter = &amp;#34;A&amp;#34; … &amp;#34;Z&amp;#34; | &amp;#34;a&amp;#34; … &amp;#34;z&amp;#34;
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>capitalLetter = &amp;#34;A&amp;#34; … &amp;#34;Z&amp;#34;
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>decimalDigit = &amp;#34;0&amp;#34; … &amp;#34;9&amp;#34;
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>octalDigit = &amp;#34;0&amp;#34; … &amp;#34;7&amp;#34;
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>hexDigit = &amp;#34;0&amp;#34; … &amp;#34;9&amp;#34; | &amp;#34;A&amp;#34; … &amp;#34;F&amp;#34; | &amp;#34;a&amp;#34; … &amp;#34;f&amp;#34;
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h3 id="identifiers">Identifiers&lt;/h3>
+&lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-fallback" data-lang="fallback">&lt;span style="display:flex;">&lt;span>ident = letter { letter | decimalDigit | &amp;#34;_&amp;#34; }
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>fullIdent = ident { &amp;#34;.&amp;#34; ident }
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>messageName = ident
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>enumName = ident
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>fieldName = ident
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>oneofName = ident
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>mapName = ident
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>serviceName = ident
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>rpcName = ident
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>streamName = ident
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>messageType = [ &amp;#34;.&amp;#34; ] { ident &amp;#34;.&amp;#34; } messageName
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>enumType = [ &amp;#34;.&amp;#34; ] { ident &amp;#34;.&amp;#34; } enumName
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>groupName = capitalLetter { letter | decimalDigit | &amp;#34;_&amp;#34; }
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h3 id="integer_literals">Integer Literals&lt;/h3>
+&lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-fallback" data-lang="fallback">&lt;span style="display:flex;">&lt;span>intLit = decimalLit | octalLit | hexLit
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>decimalLit = ( &amp;#34;1&amp;#34; … &amp;#34;9&amp;#34; ) { decimalDigit }
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>octalLit = &amp;#34;0&amp;#34; { octalDigit }
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>hexLit = &amp;#34;0&amp;#34; ( &amp;#34;x&amp;#34; | &amp;#34;X&amp;#34; ) hexDigit { hexDigit }
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h3 id="floating-point-literals">Floating-point Literals&lt;/h3>
+&lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-fallback" data-lang="fallback">&lt;span style="display:flex;">&lt;span>floatLit = ( decimals &amp;#34;.&amp;#34; [ decimals ] [ exponent ] | decimals exponent | &amp;#34;.&amp;#34;decimals [ exponent ] ) | &amp;#34;inf&amp;#34; | &amp;#34;nan&amp;#34;
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>decimals = decimalDigit { decimalDigit }
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>exponent = ( &amp;#34;e&amp;#34; | &amp;#34;E&amp;#34; ) [ &amp;#34;+&amp;#34; | &amp;#34;-&amp;#34; ] decimals
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h3 id="boolean">Boolean&lt;/h3>
+&lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-fallback" data-lang="fallback">&lt;span style="display:flex;">&lt;span>boolLit = &amp;#34;true&amp;#34; | &amp;#34;false&amp;#34;
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h3 id="string_literals">String Literals&lt;/h3>
+&lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-fallback" data-lang="fallback">&lt;span style="display:flex;">&lt;span>strLit = strLitSingle { strLitSingle }
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>strLitSingle = ( &amp;#34;&amp;#39;&amp;#34; { charValue } &amp;#34;&amp;#39;&amp;#34; ) | ( &amp;#39;&amp;#34;&amp;#39; { charValue } &amp;#39;&amp;#34;&amp;#39; )
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>charValue = hexEscape | octEscape | charEscape | unicodeEscape | unicodeLongEscape | /[^\0\n\\]/
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>hexEscape = &amp;#39;\&amp;#39; ( &amp;#34;x&amp;#34; | &amp;#34;X&amp;#34; ) hexDigit [ hexDigit ]
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>octEscape = &amp;#39;\&amp;#39; octalDigit [ octalDigit [ octalDigit ] ]
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>charEscape = &amp;#39;\&amp;#39; ( &amp;#34;a&amp;#34; | &amp;#34;b&amp;#34; | &amp;#34;f&amp;#34; | &amp;#34;n&amp;#34; | &amp;#34;r&amp;#34; | &amp;#34;t&amp;#34; | &amp;#34;v&amp;#34; | &amp;#39;\&amp;#39; | &amp;#34;&amp;#39;&amp;#34; | &amp;#39;&amp;#34;&amp;#39; )
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>unicodeEscape = &amp;#39;\&amp;#39; &amp;#34;u&amp;#34; hexDigit hexDigit hexDigit hexDigit
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>unicodeLongEscape = &amp;#39;\&amp;#39; &amp;#34;U&amp;#34; ( &amp;#34;000&amp;#34; hexDigit hexDigit hexDigit hexDigit hexDigit |
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &amp;#34;0010&amp;#34; hexDigit hexDigit hexDigit hexDigit
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h3 id="emptystatement">EmptyStatement&lt;/h3>
+&lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-fallback" data-lang="fallback">&lt;span style="display:flex;">&lt;span>emptyStatement = &amp;#34;;&amp;#34;
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h3 id="constant">Constant&lt;/h3>
+&lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-fallback" data-lang="fallback">&lt;span style="display:flex;">&lt;span>constant = fullIdent | ( [ &amp;#34;-&amp;#34; | &amp;#34;+&amp;#34; ] intLit ) | ( [ &amp;#34;-&amp;#34; | &amp;#34;+&amp;#34; ] floatLit ) |
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> strLit | boolLit
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h2 id="syntax">Syntax&lt;/h2>
 &lt;p>The syntax statement is used to define the protobuf version.&lt;/p>
-&lt;pre tabindex="0">&lt;code>syntax = &amp;#34;syntax&amp;#34; &amp;#34;=&amp;#34; (&amp;#34;&amp;#39;&amp;#34; &amp;#34;proto2&amp;#34; &amp;#34;&amp;#39;&amp;#34; | &amp;#39;&amp;#34;&amp;#39; &amp;#34;proto2&amp;#34; &amp;#39;&amp;#34;&amp;#39;) &amp;#34;;&amp;#34;
-&lt;/code>&lt;/pre>&lt;h2 id="import_statement">Import Statement&lt;/h2>
+&lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-fallback" data-lang="fallback">&lt;span style="display:flex;">&lt;span>syntax = &amp;#34;syntax&amp;#34; &amp;#34;=&amp;#34; (&amp;#34;&amp;#39;&amp;#34; &amp;#34;proto2&amp;#34; &amp;#34;&amp;#39;&amp;#34; | &amp;#39;&amp;#34;&amp;#39; &amp;#34;proto2&amp;#34; &amp;#39;&amp;#34;&amp;#39;) &amp;#34;;&amp;#34;
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h2 id="import_statement">Import Statement&lt;/h2>
 &lt;p>The import statement is used to import another .proto&amp;rsquo;s definitions.&lt;/p>
-&lt;pre tabindex="0">&lt;code>import = &amp;#34;import&amp;#34; [ &amp;#34;weak&amp;#34; | &amp;#34;public&amp;#34; ] strLit &amp;#34;;&amp;#34;
-&lt;/code>&lt;/pre>&lt;p>Example:&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-fallback" data-lang="fallback">&lt;span style="display:flex;">&lt;span>import = &amp;#34;import&amp;#34; [ &amp;#34;weak&amp;#34; | &amp;#34;public&amp;#34; ] strLit &amp;#34;;&amp;#34;
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>Example:&lt;/p>
 &lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-proto" data-lang="proto">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#204a87;font-weight:bold">import&lt;/span> &lt;span style="color:#000">public&lt;/span> &lt;span style="color:#4e9a06">&amp;#34;other.proto&amp;#34;&lt;/span>&lt;span style="color:#000;font-weight:bold">;&lt;/span>&lt;span style="color:#a40000">
 &lt;/span>&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h2 id="package">Package&lt;/h2>
 &lt;p>The package specifier can be used to prevent name clashes between protocol
 message types.&lt;/p>
-&lt;pre tabindex="0">&lt;code>package = &amp;#34;package&amp;#34; fullIdent &amp;#34;;&amp;#34;
-&lt;/code>&lt;/pre>&lt;p>Example:&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-go" data-lang="go">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#204a87;font-weight:bold">package&lt;/span> &lt;span style="color:#000;font-weight:bold">=&lt;/span> &lt;span style="color:#4e9a06">&amp;#34;package&amp;#34;&lt;/span> &lt;span style="color:#000">fullIdent&lt;/span> &lt;span style="color:#4e9a06">&amp;#34;;&amp;#34;&lt;/span>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>Example:&lt;/p>
 &lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-proto" data-lang="proto">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#204a87;font-weight:bold">package&lt;/span> &lt;span style="color:#000">foo&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">.&lt;/span>&lt;span style="color:#000">bar&lt;/span>&lt;span style="color:#000;font-weight:bold">;&lt;/span>&lt;span style="color:#a40000">
 &lt;/span>&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h2 id="option">Option&lt;/h2>
 &lt;p>Options can be used in proto files, messages, enums and services. An option can
 be a protobuf defined option or a custom option. For more information, see
 &lt;a href="https://protobuf.dev/programming-guides/proto#options">Options&lt;/a> in the language guide.&lt;/p>
-&lt;pre tabindex="0">&lt;code>option = &amp;#34;option&amp;#34; optionName &amp;#34;=&amp;#34; constant &amp;#34;;&amp;#34;
-optionName = ( ident | &amp;#34;(&amp;#34; fullIdent &amp;#34;)&amp;#34; ) { &amp;#34;.&amp;#34; ident }
-&lt;/code>&lt;/pre>&lt;p>For examples:&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-fallback" data-lang="fallback">&lt;span style="display:flex;">&lt;span>option = &amp;#34;option&amp;#34; optionName &amp;#34;=&amp;#34; constant &amp;#34;;&amp;#34;
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>optionName = ( ident | &amp;#34;(&amp;#34; fullIdent &amp;#34;)&amp;#34; ) { &amp;#34;.&amp;#34; ident }
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>For examples:&lt;/p>
 &lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-proto" data-lang="proto">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#204a87;font-weight:bold">option&lt;/span> &lt;span style="color:#000">java_package&lt;/span> &lt;span style="color:#ce5c00;font-weight:bold">=&lt;/span> &lt;span style="color:#4e9a06">&amp;#34;com.example.foo&amp;#34;&lt;/span>&lt;span style="color:#000;font-weight:bold">;&lt;/span>&lt;span style="color:#a40000">
 &lt;/span>&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h2 id="fields">Fields&lt;/h2>
 &lt;p>Fields are the basic elements of a protocol buffer message. Fields can be normal
 fields, group fields, oneof fields, or map fields. A field has a label, type and
 field number.&lt;/p>
-&lt;pre tabindex="0">&lt;code>label = &amp;#34;required&amp;#34; | &amp;#34;optional&amp;#34; | &amp;#34;repeated&amp;#34;
-type = &amp;#34;double&amp;#34; | &amp;#34;float&amp;#34; | &amp;#34;int32&amp;#34; | &amp;#34;int64&amp;#34; | &amp;#34;uint32&amp;#34; | &amp;#34;uint64&amp;#34;
-| &amp;#34;sint32&amp;#34; | &amp;#34;sint64&amp;#34; | &amp;#34;fixed32&amp;#34; | &amp;#34;fixed64&amp;#34; | &amp;#34;sfixed32&amp;#34; | &amp;#34;sfixed64&amp;#34;
-| &amp;#34;bool&amp;#34; | &amp;#34;string&amp;#34; | &amp;#34;bytes&amp;#34; | messageType | enumType
-fieldNumber = intLit;
-&lt;/code>&lt;/pre>&lt;h3 id="normal_field">Normal field&lt;/h3>
+&lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-fallback" data-lang="fallback">&lt;span style="display:flex;">&lt;span>label = &amp;#34;required&amp;#34; | &amp;#34;optional&amp;#34; | &amp;#34;repeated&amp;#34;
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>type = &amp;#34;double&amp;#34; | &amp;#34;float&amp;#34; | &amp;#34;int32&amp;#34; | &amp;#34;int64&amp;#34; | &amp;#34;uint32&amp;#34; | &amp;#34;uint64&amp;#34;
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> | &amp;#34;sint32&amp;#34; | &amp;#34;sint64&amp;#34; | &amp;#34;fixed32&amp;#34; | &amp;#34;fixed64&amp;#34; | &amp;#34;sfixed32&amp;#34; | &amp;#34;sfixed64&amp;#34;
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> | &amp;#34;bool&amp;#34; | &amp;#34;string&amp;#34; | &amp;#34;bytes&amp;#34; | messageType | enumType
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>fieldNumber = intLit;
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h3 id="normal_field">Normal field&lt;/h3>
 &lt;p>Each field has label, type, name and field number. It may have field options.&lt;/p>
-&lt;pre tabindex="0">&lt;code>field = label type fieldName &amp;#34;=&amp;#34; fieldNumber [ &amp;#34;[&amp;#34; fieldOptions &amp;#34;]&amp;#34; ] &amp;#34;;&amp;#34;
-fieldOptions = fieldOption { &amp;#34;,&amp;#34; fieldOption }
-fieldOption = optionName &amp;#34;=&amp;#34; constant
-&lt;/code>&lt;/pre>&lt;p>Examples:&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-fallback" data-lang="fallback">&lt;span style="display:flex;">&lt;span>field = label type fieldName &amp;#34;=&amp;#34; fieldNumber [ &amp;#34;[&amp;#34; fieldOptions &amp;#34;]&amp;#34; ] &amp;#34;;&amp;#34;
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>fieldOptions = fieldOption { &amp;#34;,&amp;#34; fieldOption }
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>fieldOption = optionName &amp;#34;=&amp;#34; constant
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>Examples:&lt;/p>
 &lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-proto" data-lang="proto">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#204a87;font-weight:bold">optional&lt;/span> &lt;span style="color:#000">foo.bar&lt;/span> &lt;span style="color:#000">nested_message&lt;/span> &lt;span style="color:#ce5c00;font-weight:bold">=&lt;/span> &lt;span style="color:#0000cf;font-weight:bold">2&lt;/span>&lt;span style="color:#000;font-weight:bold">;&lt;/span>&lt;span style="color:#a40000">
 &lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#a40000">&lt;/span>&lt;span style="color:#204a87;font-weight:bold">repeated&lt;/span> &lt;span style="color:#204a87;font-weight:bold">int32&lt;/span> &lt;span style="color:#000">samples&lt;/span> &lt;span style="color:#ce5c00;font-weight:bold">=&lt;/span> &lt;span style="color:#0000cf;font-weight:bold">4&lt;/span> &lt;span style="color:#000;font-weight:bold">[&lt;/span>&lt;span style="color:#204a87;font-weight:bold">packed&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">=&lt;/span>&lt;span style="color:#204a87;font-weight:bold">true&lt;/span>&lt;span style="color:#000;font-weight:bold">];&lt;/span>&lt;span style="color:#a40000">
 &lt;/span>&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h3 id="group_field">Group field&lt;/h3>
@@ -99,8 +99,8 @@ fieldOption = optionName &amp;#34;=&amp;#34; constant
 message types &amp;ndash; use nested message types instead.&lt;/strong>&lt;/p>
 &lt;p>Groups are one way to nest information in message definitions. The group name
 must begin with capital letter.&lt;/p>
-&lt;pre tabindex="0">&lt;code>group = label &amp;#34;group&amp;#34; groupName &amp;#34;=&amp;#34; fieldNumber messageBody
-&lt;/code>&lt;/pre>&lt;p>Example:&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-fallback" data-lang="fallback">&lt;span style="display:flex;">&lt;span>group = label &amp;#34;group&amp;#34; groupName &amp;#34;=&amp;#34; fieldNumber messageBody
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>Example:&lt;/p>
 &lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-proto" data-lang="proto">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#204a87;font-weight:bold">repeated&lt;/span> &lt;span style="color:#204a87;font-weight:bold">group&lt;/span> &lt;span style="color:#000">Result&lt;/span> &lt;span style="color:#ce5c00;font-weight:bold">=&lt;/span> &lt;span style="color:#0000cf;font-weight:bold">1&lt;/span> &lt;span style="color:#000;font-weight:bold">{&lt;/span>&lt;span style="color:#a40000">
 &lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#a40000">&lt;/span> &lt;span style="color:#204a87;font-weight:bold">required&lt;/span> &lt;span style="color:#204a87;font-weight:bold">string&lt;/span> &lt;span style="color:#000">url&lt;/span> &lt;span style="color:#ce5c00;font-weight:bold">=&lt;/span> &lt;span style="color:#0000cf;font-weight:bold">2&lt;/span>&lt;span style="color:#000;font-weight:bold">;&lt;/span>&lt;span style="color:#a40000">
 &lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#a40000">&lt;/span> &lt;span style="color:#204a87;font-weight:bold">optional&lt;/span> &lt;span style="color:#204a87;font-weight:bold">string&lt;/span> &lt;span style="color:#000">title&lt;/span> &lt;span style="color:#ce5c00;font-weight:bold">=&lt;/span> &lt;span style="color:#0000cf;font-weight:bold">3&lt;/span>&lt;span style="color:#000;font-weight:bold">;&lt;/span>&lt;span style="color:#a40000">
@@ -109,9 +109,9 @@ must begin with capital letter.&lt;/p>
 &lt;/span>&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h3 id="oneof_and_oneof_field">Oneof and oneof field&lt;/h3>
 &lt;p>A oneof consists of oneof fields and a oneof name. Oneof fields do not have
 labels.&lt;/p>
-&lt;pre tabindex="0">&lt;code>oneof = &amp;#34;oneof&amp;#34; oneofName &amp;#34;{&amp;#34; { option | oneofField } &amp;#34;}&amp;#34;
-oneofField = type fieldName &amp;#34;=&amp;#34; fieldNumber [ &amp;#34;[&amp;#34; fieldOptions &amp;#34;]&amp;#34; ] &amp;#34;;&amp;#34;
-&lt;/code>&lt;/pre>&lt;p>Example:&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-fallback" data-lang="fallback">&lt;span style="display:flex;">&lt;span>oneof = &amp;#34;oneof&amp;#34; oneofName &amp;#34;{&amp;#34; { option | oneofField } &amp;#34;}&amp;#34;
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>oneofField = type fieldName &amp;#34;=&amp;#34; fieldNumber [ &amp;#34;[&amp;#34; fieldOptions &amp;#34;]&amp;#34; ] &amp;#34;;&amp;#34;
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>Example:&lt;/p>
 &lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-proto" data-lang="proto">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#204a87;font-weight:bold">oneof&lt;/span> &lt;span style="color:#000">foo&lt;/span> &lt;span style="color:#000;font-weight:bold">{&lt;/span>&lt;span style="color:#a40000">
 &lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#a40000">&lt;/span> &lt;span style="color:#204a87;font-weight:bold">string&lt;/span> &lt;span style="color:#000">name&lt;/span> &lt;span style="color:#ce5c00;font-weight:bold">=&lt;/span> &lt;span style="color:#0000cf;font-weight:bold">4&lt;/span>&lt;span style="color:#000;font-weight:bold">;&lt;/span>&lt;span style="color:#a40000">
 &lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#a40000">&lt;/span> &lt;span style="color:#000">SubMessage&lt;/span> &lt;span style="color:#000">sub_message&lt;/span> &lt;span style="color:#ce5c00;font-weight:bold">=&lt;/span> &lt;span style="color:#0000cf;font-weight:bold">9&lt;/span>&lt;span style="color:#000;font-weight:bold">;&lt;/span>&lt;span style="color:#a40000">
@@ -119,10 +119,10 @@ oneofField = type fieldName &amp;#34;=&amp;#34; fieldNumber [ &amp;#34;[&amp;#34
 &lt;/span>&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h3 id="map_field">Map field&lt;/h3>
 &lt;p>A map field has a key type, value type, name, and field number. The key type can
 be any integral or string type. Note, the key type may not be an enum.&lt;/p>
-&lt;pre tabindex="0">&lt;code>mapField = &amp;#34;map&amp;#34; &amp;#34;&amp;lt;&amp;#34; keyType &amp;#34;,&amp;#34; type &amp;#34;&amp;gt;&amp;#34; mapName &amp;#34;=&amp;#34; fieldNumber [ &amp;#34;[&amp;#34; fieldOptions &amp;#34;]&amp;#34; ] &amp;#34;;&amp;#34;
-keyType = &amp;#34;int32&amp;#34; | &amp;#34;int64&amp;#34; | &amp;#34;uint32&amp;#34; | &amp;#34;uint64&amp;#34; | &amp;#34;sint32&amp;#34; | &amp;#34;sint64&amp;#34; |
-&amp;#34;fixed32&amp;#34; | &amp;#34;fixed64&amp;#34; | &amp;#34;sfixed32&amp;#34; | &amp;#34;sfixed64&amp;#34; | &amp;#34;bool&amp;#34; | &amp;#34;string&amp;#34;
-&lt;/code>&lt;/pre>&lt;p>Example:&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-fallback" data-lang="fallback">&lt;span style="display:flex;">&lt;span>mapField = &amp;#34;map&amp;#34; &amp;#34;&amp;lt;&amp;#34; keyType &amp;#34;,&amp;#34; type &amp;#34;&amp;gt;&amp;#34; mapName &amp;#34;=&amp;#34; fieldNumber [ &amp;#34;[&amp;#34; fieldOptions &amp;#34;]&amp;#34; ] &amp;#34;;&amp;#34;
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>keyType = &amp;#34;int32&amp;#34; | &amp;#34;int64&amp;#34; | &amp;#34;uint32&amp;#34; | &amp;#34;uint64&amp;#34; | &amp;#34;sint32&amp;#34; | &amp;#34;sint64&amp;#34; |
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &amp;#34;fixed32&amp;#34; | &amp;#34;fixed64&amp;#34; | &amp;#34;sfixed32&amp;#34; | &amp;#34;sfixed64&amp;#34; | &amp;#34;bool&amp;#34; | &amp;#34;string&amp;#34;
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>Example:&lt;/p>
 &lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-proto" data-lang="proto">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#000">map&lt;/span>&lt;span style="color:#000;font-weight:bold">&amp;lt;&lt;/span>&lt;span style="color:#204a87;font-weight:bold">string&lt;/span>&lt;span style="color:#000;font-weight:bold">,&lt;/span> &lt;span style="color:#000">Project&lt;/span>&lt;span style="color:#000;font-weight:bold">&amp;gt;&lt;/span> &lt;span style="color:#000">projects&lt;/span> &lt;span style="color:#ce5c00;font-weight:bold">=&lt;/span> &lt;span style="color:#0000cf;font-weight:bold">3&lt;/span>&lt;span style="color:#000;font-weight:bold">;&lt;/span>&lt;span style="color:#a40000">
 &lt;/span>&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h2 id="extensions_and_reserved">Extensions and Reserved&lt;/h2>
 &lt;p>Extensions and reserved are message elements that declare a range of field
@@ -132,30 +132,30 @@ numbers or field names.&lt;/p>
 third-party extensions. Other people can declare new fields for your message
 type with those numeric tags in their own .proto files without having to edit
 the original file.&lt;/p>
-&lt;pre tabindex="0">&lt;code>extensions = &amp;#34;extensions&amp;#34; ranges &amp;#34;;&amp;#34;
-ranges = range { &amp;#34;,&amp;#34; range }
-range = intLit [ &amp;#34;to&amp;#34; ( intLit | &amp;#34;max&amp;#34; ) ]
-&lt;/code>&lt;/pre>&lt;p>Examples:&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-fallback" data-lang="fallback">&lt;span style="display:flex;">&lt;span>extensions = &amp;#34;extensions&amp;#34; ranges &amp;#34;;&amp;#34;
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>ranges = range { &amp;#34;,&amp;#34; range }
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>range = intLit [ &amp;#34;to&amp;#34; ( intLit | &amp;#34;max&amp;#34; ) ]
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>Examples:&lt;/p>
 &lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-proto" data-lang="proto">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#204a87;font-weight:bold">extensions&lt;/span> &lt;span style="color:#0000cf;font-weight:bold">100&lt;/span> &lt;span style="color:#204a87;font-weight:bold">to&lt;/span> &lt;span style="color:#0000cf;font-weight:bold">199&lt;/span>&lt;span style="color:#000;font-weight:bold">;&lt;/span>&lt;span style="color:#a40000">
 &lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#a40000">&lt;/span>&lt;span style="color:#204a87;font-weight:bold">extensions&lt;/span> &lt;span style="color:#0000cf;font-weight:bold">4&lt;/span>&lt;span style="color:#000;font-weight:bold">,&lt;/span> &lt;span style="color:#0000cf;font-weight:bold">20&lt;/span> &lt;span style="color:#204a87;font-weight:bold">to&lt;/span> &lt;span style="color:#204a87;font-weight:bold">max&lt;/span>&lt;span style="color:#000;font-weight:bold">;&lt;/span>&lt;span style="color:#a40000">
 &lt;/span>&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h3 id="reserved">Reserved&lt;/h3>
 &lt;p>Reserved declares a range of field numbers or field names in a message that can
 not be used.&lt;/p>
-&lt;pre tabindex="0">&lt;code>reserved = &amp;#34;reserved&amp;#34; ( ranges | strFieldNames ) &amp;#34;;&amp;#34;
-strFieldNames = strFieldName { &amp;#34;,&amp;#34; strFieldName }
-strFieldName = &amp;#34;&amp;#39;&amp;#34; fieldName &amp;#34;&amp;#39;&amp;#34; | &amp;#39;&amp;#34;&amp;#39; fieldName &amp;#39;&amp;#34;&amp;#39;
-&lt;/code>&lt;/pre>&lt;p>Examples:&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-fallback" data-lang="fallback">&lt;span style="display:flex;">&lt;span>reserved = &amp;#34;reserved&amp;#34; ( ranges | strFieldNames ) &amp;#34;;&amp;#34;
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>strFieldNames = strFieldName { &amp;#34;,&amp;#34; strFieldName }
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>strFieldName = &amp;#34;&amp;#39;&amp;#34; fieldName &amp;#34;&amp;#39;&amp;#34; | &amp;#39;&amp;#34;&amp;#39; fieldName &amp;#39;&amp;#34;&amp;#39;
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>Examples:&lt;/p>
 &lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-proto" data-lang="proto">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#000">reserved&lt;/span> &lt;span style="color:#0000cf;font-weight:bold">2&lt;/span>&lt;span style="color:#000;font-weight:bold">,&lt;/span> &lt;span style="color:#0000cf;font-weight:bold">15&lt;/span>&lt;span style="color:#000;font-weight:bold">,&lt;/span> &lt;span style="color:#0000cf;font-weight:bold">9&lt;/span> &lt;span style="color:#204a87;font-weight:bold">to&lt;/span> &lt;span style="color:#0000cf;font-weight:bold">11&lt;/span>&lt;span style="color:#000;font-weight:bold">;&lt;/span>&lt;span style="color:#a40000">
 &lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#a40000">&lt;/span>&lt;span style="color:#000">reserved&lt;/span> &lt;span style="color:#4e9a06">&amp;#34;foo&amp;#34;&lt;/span>&lt;span style="color:#000;font-weight:bold">,&lt;/span> &lt;span style="color:#4e9a06">&amp;#34;bar&amp;#34;&lt;/span>&lt;span style="color:#000;font-weight:bold">;&lt;/span>&lt;span style="color:#a40000">
 &lt;/span>&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h2 id="top_level_definitions">Top Level definitions&lt;/h2>
 &lt;h3 id="enum_definition">Enum definition&lt;/h3>
 &lt;p>The enum definition consists of a name and an enum body. The enum body can have
 options, enum fields, and reserved statements.&lt;/p>
-&lt;pre tabindex="0">&lt;code>enum = &amp;#34;enum&amp;#34; enumName enumBody
-enumBody = &amp;#34;{&amp;#34; { option | enumField | emptyStatement | reserved } &amp;#34;}&amp;#34;
-enumField = ident &amp;#34;=&amp;#34; [ &amp;#34;-&amp;#34; ] intLit [ &amp;#34;[&amp;#34; enumValueOption { &amp;#34;,&amp;#34; enumValueOption } &amp;#34;]&amp;#34; ]&amp;#34;;&amp;#34;
-enumValueOption = optionName &amp;#34;=&amp;#34; constant
-&lt;/code>&lt;/pre>&lt;p>Example:&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-fallback" data-lang="fallback">&lt;span style="display:flex;">&lt;span>enum = &amp;#34;enum&amp;#34; enumName enumBody
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>enumBody = &amp;#34;{&amp;#34; { option | enumField | emptyStatement | reserved } &amp;#34;}&amp;#34;
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>enumField = ident &amp;#34;=&amp;#34; [ &amp;#34;-&amp;#34; ] intLit [ &amp;#34;[&amp;#34; enumValueOption { &amp;#34;,&amp;#34; enumValueOption } &amp;#34;]&amp;#34; ]&amp;#34;;&amp;#34;
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>enumValueOption = optionName &amp;#34;=&amp;#34; constant
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>Example:&lt;/p>
 &lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-proto" data-lang="proto">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#204a87;font-weight:bold">enum&lt;/span> &lt;span style="color:#000">EnumAllowingAlias&lt;/span> &lt;span style="color:#000;font-weight:bold">{&lt;/span>&lt;span style="color:#a40000">
 &lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#a40000">&lt;/span> &lt;span style="color:#204a87;font-weight:bold">option&lt;/span> &lt;span style="color:#000">allow_alias&lt;/span> &lt;span style="color:#ce5c00;font-weight:bold">=&lt;/span> &lt;span style="color:#204a87;font-weight:bold">true&lt;/span>&lt;span style="color:#000;font-weight:bold">;&lt;/span>&lt;span style="color:#a40000">
 &lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#a40000">&lt;/span> &lt;span style="color:#000">EAA_UNSPECIFIED&lt;/span> &lt;span style="color:#ce5c00;font-weight:bold">=&lt;/span> &lt;span style="color:#0000cf;font-weight:bold">0&lt;/span>&lt;span style="color:#000;font-weight:bold">;&lt;/span>&lt;span style="color:#a40000">
@@ -167,10 +167,10 @@ enumValueOption = optionName &amp;#34;=&amp;#34; constant
 have fields, nested enum definitions, nested message definitions, extend
 statements, extensions, groups, options, oneofs, map fields, and reserved
 statements.&lt;/p>
-&lt;pre tabindex="0">&lt;code>message = &amp;#34;message&amp;#34; messageName messageBody
-messageBody = &amp;#34;{&amp;#34; { field | enum | message | extend | extensions | group |
-option | oneof | mapField | reserved | emptyStatement } &amp;#34;}&amp;#34;
-&lt;/code>&lt;/pre>&lt;p>Example:&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-fallback" data-lang="fallback">&lt;span style="display:flex;">&lt;span>message = &amp;#34;message&amp;#34; messageName messageBody
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>messageBody = &amp;#34;{&amp;#34; { field | enum | message | extend | extensions | group |
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>option | oneof | mapField | reserved | emptyStatement } &amp;#34;}&amp;#34;
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>Example:&lt;/p>
 &lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-proto" data-lang="proto">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#204a87;font-weight:bold">message&lt;/span> &lt;span style="color:#000">Outer&lt;/span> &lt;span style="color:#000;font-weight:bold">{&lt;/span>&lt;span style="color:#a40000">
 &lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#a40000">&lt;/span> &lt;span style="color:#204a87;font-weight:bold">option&lt;/span> &lt;span style="color:#000;font-weight:bold">(&lt;/span>&lt;span style="color:#000">my_option&lt;/span>&lt;span style="color:#000;font-weight:bold">)&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">.&lt;/span>&lt;span style="color:#000">a&lt;/span> &lt;span style="color:#ce5c00;font-weight:bold">=&lt;/span> &lt;span style="color:#204a87;font-weight:bold">true&lt;/span>&lt;span style="color:#000;font-weight:bold">;&lt;/span>&lt;span style="color:#a40000">
 &lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#a40000">&lt;/span> &lt;span style="color:#204a87;font-weight:bold">message&lt;/span> &lt;span style="color:#000">Inner&lt;/span> &lt;span style="color:#000;font-weight:bold">{&lt;/span> &lt;span style="color:#8f5902;font-style:italic">// Level 2
@@ -182,23 +182,23 @@ option | oneof | mapField | reserved | emptyStatement } &amp;#34;}&amp;#34;
 &lt;/span>&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h3 id="extend">Extend&lt;/h3>
 &lt;p>If a message in the same or imported .proto file has reserved a range for
 extensions, the message can be extended.&lt;/p>
-&lt;pre tabindex="0">&lt;code>extend = &amp;#34;extend&amp;#34; messageType &amp;#34;{&amp;#34; {field | group} &amp;#34;}&amp;#34;
-&lt;/code>&lt;/pre>&lt;p>Example:&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-fallback" data-lang="fallback">&lt;span style="display:flex;">&lt;span>extend = &amp;#34;extend&amp;#34; messageType &amp;#34;{&amp;#34; {field | group} &amp;#34;}&amp;#34;
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>Example:&lt;/p>
 &lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-proto" data-lang="proto">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#204a87;font-weight:bold">extend&lt;/span> &lt;span style="color:#000">Foo&lt;/span> &lt;span style="color:#000;font-weight:bold">{&lt;/span>&lt;span style="color:#a40000">
 &lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#a40000">&lt;/span> &lt;span style="color:#204a87;font-weight:bold">optional&lt;/span> &lt;span style="color:#204a87;font-weight:bold">int32&lt;/span> &lt;span style="color:#000">bar&lt;/span> &lt;span style="color:#ce5c00;font-weight:bold">=&lt;/span> &lt;span style="color:#0000cf;font-weight:bold">126&lt;/span>&lt;span style="color:#000;font-weight:bold">;&lt;/span>&lt;span style="color:#a40000">
 &lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#a40000">&lt;/span>&lt;span style="color:#000;font-weight:bold">}&lt;/span>&lt;span style="color:#a40000">
 &lt;/span>&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h3 id="service_definition">Service definition&lt;/h3>
-&lt;pre tabindex="0">&lt;code>service = &amp;#34;service&amp;#34; serviceName &amp;#34;{&amp;#34; { option | rpc | emptyStatement } &amp;#34;}&amp;#34;
-rpc = &amp;#34;rpc&amp;#34; rpcName &amp;#34;(&amp;#34; [ &amp;#34;stream&amp;#34; ] messageType &amp;#34;)&amp;#34; &amp;#34;returns&amp;#34; &amp;#34;(&amp;#34; [ &amp;#34;stream&amp;#34; ]
-messageType &amp;#34;)&amp;#34; (( &amp;#34;{&amp;#34; { option | emptyStatement } &amp;#34;}&amp;#34; ) | &amp;#34;;&amp;#34; )
-&lt;/code>&lt;/pre>&lt;p>Example:&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-fallback" data-lang="fallback">&lt;span style="display:flex;">&lt;span>service = &amp;#34;service&amp;#34; serviceName &amp;#34;{&amp;#34; { option | rpc | emptyStatement } &amp;#34;}&amp;#34;
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>rpc = &amp;#34;rpc&amp;#34; rpcName &amp;#34;(&amp;#34; [ &amp;#34;stream&amp;#34; ] messageType &amp;#34;)&amp;#34; &amp;#34;returns&amp;#34; &amp;#34;(&amp;#34; [ &amp;#34;stream&amp;#34; ]
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>messageType &amp;#34;)&amp;#34; (( &amp;#34;{&amp;#34; { option | emptyStatement } &amp;#34;}&amp;#34; ) | &amp;#34;;&amp;#34; )
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>Example:&lt;/p>
 &lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-proto" data-lang="proto">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#204a87;font-weight:bold">service&lt;/span> &lt;span style="color:#000">SearchService&lt;/span> &lt;span style="color:#000;font-weight:bold">{&lt;/span>&lt;span style="color:#a40000">
 &lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#a40000">&lt;/span> &lt;span style="color:#204a87;font-weight:bold">rpc&lt;/span> &lt;span style="color:#000">Search&lt;/span> &lt;span style="color:#000;font-weight:bold">(&lt;/span>&lt;span style="color:#000">SearchRequest&lt;/span>&lt;span style="color:#000;font-weight:bold">)&lt;/span> &lt;span style="color:#204a87;font-weight:bold">returns&lt;/span> &lt;span style="color:#000;font-weight:bold">(&lt;/span>&lt;span style="color:#000">SearchResponse&lt;/span>&lt;span style="color:#000;font-weight:bold">);&lt;/span>&lt;span style="color:#a40000">
 &lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#a40000">&lt;/span>&lt;span style="color:#000;font-weight:bold">}&lt;/span>&lt;span style="color:#a40000">
 &lt;/span>&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h2 id="proto_file">Proto file&lt;/h2>
-&lt;pre tabindex="0">&lt;code>proto = syntax { import | package | option | topLevelDef | emptyStatement }
-topLevelDef = message | enum | extend | service
-&lt;/code>&lt;/pre>&lt;p>An example .proto file:&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-go" data-lang="go">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#000">proto&lt;/span> &lt;span style="color:#000;font-weight:bold">=&lt;/span> &lt;span style="color:#000">syntax&lt;/span> &lt;span style="color:#000;font-weight:bold">{&lt;/span> &lt;span style="color:#204a87;font-weight:bold">import&lt;/span> &lt;span style="color:#000;font-weight:bold">|&lt;/span> &lt;span style="color:#204a87;font-weight:bold">package&lt;/span> &lt;span style="color:#000;font-weight:bold">|&lt;/span> &lt;span style="color:#000">option&lt;/span> &lt;span style="color:#000;font-weight:bold">|&lt;/span> &lt;span style="color:#000">topLevelDef&lt;/span> &lt;span style="color:#000;font-weight:bold">|&lt;/span> &lt;span style="color:#000">emptyStatement&lt;/span> &lt;span style="color:#000;font-weight:bold">}&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#000">topLevelDef&lt;/span> &lt;span style="color:#000;font-weight:bold">=&lt;/span> &lt;span style="color:#000">message&lt;/span> &lt;span style="color:#000;font-weight:bold">|&lt;/span> &lt;span style="color:#000">enum&lt;/span> &lt;span style="color:#000;font-weight:bold">|&lt;/span> &lt;span style="color:#000">extend&lt;/span> &lt;span style="color:#000;font-weight:bold">|&lt;/span> &lt;span style="color:#000">service&lt;/span>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>An example .proto file:&lt;/p>
 &lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-proto" data-lang="proto">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#000">syntax&lt;/span> &lt;span style="color:#ce5c00;font-weight:bold">=&lt;/span> &lt;span style="color:#4e9a06">&amp;#34;proto2&amp;#34;&lt;/span>&lt;span style="color:#000;font-weight:bold">;&lt;/span>&lt;span style="color:#a40000">
 &lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#a40000">&lt;/span>&lt;span style="color:#204a87;font-weight:bold">import&lt;/span> &lt;span style="color:#000">public&lt;/span> &lt;span style="color:#4e9a06">&amp;#34;other.proto&amp;#34;&lt;/span>&lt;span style="color:#000;font-weight:bold">;&lt;/span>&lt;span style="color:#a40000">
 &lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#a40000">&lt;/span>&lt;span style="color:#204a87;font-weight:bold">option&lt;/span> &lt;span style="color:#000">java_package&lt;/span> &lt;span style="color:#ce5c00;font-weight:bold">=&lt;/span> &lt;span style="color:#4e9a06">&amp;#34;com.example.foo&amp;#34;&lt;/span>&lt;span style="color:#000;font-weight:bold">;&lt;/span>&lt;span style="color:#a40000">
@@ -228,99 +228,99 @@ topLevelDef = message | enum | extend | service
 &lt;p>This is a language specification reference for version 3 of the Protocol Buffers
 language (proto3). The syntax is specified using
 &lt;a href="https://en.wikipedia.org/wiki/Extended_Backus%E2%80%93Naur_Form">Extended Backus-Naur Form (EBNF)&lt;/a>:&lt;/p>
-&lt;pre tabindex="0">&lt;code>| alternation
-() grouping
-[] option (zero or one time)
-{} repetition (any number of times)
-&lt;/code>&lt;/pre>&lt;p>For more information about using proto3, see the
+&lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-fallback" data-lang="fallback">&lt;span style="display:flex;">&lt;span>| alternation
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>() grouping
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>[] option (zero or one time)
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>{} repetition (any number of times)
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>For more information about using proto3, see the
 &lt;a href="https://protobuf.dev/programming-guides/proto3">language guide&lt;/a>.&lt;/p>
 &lt;h2 id="lexical_elements">Lexical Elements&lt;/h2>
 &lt;h3 id="letters_and_digits">Letters and Digits&lt;/h3>
-&lt;pre tabindex="0">&lt;code>letter = &amp;#34;A&amp;#34; … &amp;#34;Z&amp;#34; | &amp;#34;a&amp;#34; … &amp;#34;z&amp;#34;
-decimalDigit = &amp;#34;0&amp;#34; … &amp;#34;9&amp;#34;
-octalDigit = &amp;#34;0&amp;#34; … &amp;#34;7&amp;#34;
-hexDigit = &amp;#34;0&amp;#34; … &amp;#34;9&amp;#34; | &amp;#34;A&amp;#34; … &amp;#34;F&amp;#34; | &amp;#34;a&amp;#34; … &amp;#34;f&amp;#34;
-&lt;/code>&lt;/pre>&lt;h3 id="identifiers">Identifiers&lt;/h3>
-&lt;pre tabindex="0">&lt;code>ident = letter { letter | decimalDigit | &amp;#34;_&amp;#34; }
-fullIdent = ident { &amp;#34;.&amp;#34; ident }
-messageName = ident
-enumName = ident
-fieldName = ident
-oneofName = ident
-mapName = ident
-serviceName = ident
-rpcName = ident
-messageType = [ &amp;#34;.&amp;#34; ] { ident &amp;#34;.&amp;#34; } messageName
-enumType = [ &amp;#34;.&amp;#34; ] { ident &amp;#34;.&amp;#34; } enumName
-&lt;/code>&lt;/pre>&lt;h3 id="integer_literals">Integer Literals&lt;/h3>
-&lt;pre tabindex="0">&lt;code>intLit = decimalLit | octalLit | hexLit
-decimalLit = ( &amp;#34;1&amp;#34; … &amp;#34;9&amp;#34; ) { decimalDigit }
-octalLit = &amp;#34;0&amp;#34; { octalDigit }
-hexLit = &amp;#34;0&amp;#34; ( &amp;#34;x&amp;#34; | &amp;#34;X&amp;#34; ) hexDigit { hexDigit }
-&lt;/code>&lt;/pre>&lt;h3 id="floating-point-literals">Floating-point Literals&lt;/h3>
-&lt;pre tabindex="0">&lt;code>floatLit = ( decimals &amp;#34;.&amp;#34; [ decimals ] [ exponent ] | decimals exponent | &amp;#34;.&amp;#34;decimals [ exponent ] ) | &amp;#34;inf&amp;#34; | &amp;#34;nan&amp;#34;
-decimals = decimalDigit { decimalDigit }
-exponent = ( &amp;#34;e&amp;#34; | &amp;#34;E&amp;#34; ) [ &amp;#34;+&amp;#34; | &amp;#34;-&amp;#34; ] decimals
-&lt;/code>&lt;/pre>&lt;h3 id="boolean">Boolean&lt;/h3>
-&lt;pre tabindex="0">&lt;code>boolLit = &amp;#34;true&amp;#34; | &amp;#34;false&amp;#34;
-&lt;/code>&lt;/pre>&lt;h3 id="string_literals">String Literals&lt;/h3>
-&lt;pre tabindex="0">&lt;code>strLit = strLitSingle { strLitSingle }
-strLitSingle = ( &amp;#34;&amp;#39;&amp;#34; { charValue } &amp;#34;&amp;#39;&amp;#34; ) | ( &amp;#39;&amp;#34;&amp;#39; { charValue } &amp;#39;&amp;#34;&amp;#39; )
-charValue = hexEscape | octEscape | charEscape | unicodeEscape | unicodeLongEscape | /[^\0\n\\]/
-hexEscape = &amp;#39;\&amp;#39; ( &amp;#34;x&amp;#34; | &amp;#34;X&amp;#34; ) hexDigit [ hexDigit ]
-octEscape = &amp;#39;\&amp;#39; octalDigit [ octalDigit [ octalDigit ] ]
-charEscape = &amp;#39;\&amp;#39; ( &amp;#34;a&amp;#34; | &amp;#34;b&amp;#34; | &amp;#34;f&amp;#34; | &amp;#34;n&amp;#34; | &amp;#34;r&amp;#34; | &amp;#34;t&amp;#34; | &amp;#34;v&amp;#34; | &amp;#39;\&amp;#39; | &amp;#34;&amp;#39;&amp;#34; | &amp;#39;&amp;#34;&amp;#39; )
-unicodeEscape = &amp;#39;\&amp;#39; &amp;#34;u&amp;#34; hexDigit hexDigit hexDigit hexDigit
-unicodeLongEscape = &amp;#39;\&amp;#39; &amp;#34;U&amp;#34; ( &amp;#34;000&amp;#34; hexDigit hexDigit hexDigit hexDigit hexDigit |
-&amp;#34;0010&amp;#34; hexDigit hexDigit hexDigit hexDigit
-&lt;/code>&lt;/pre>&lt;h3 id="emptystatement">EmptyStatement&lt;/h3>
-&lt;pre tabindex="0">&lt;code>emptyStatement = &amp;#34;;&amp;#34;
-&lt;/code>&lt;/pre>&lt;h3 id="constant">Constant&lt;/h3>
-&lt;pre tabindex="0">&lt;code>constant = fullIdent | ( [ &amp;#34;-&amp;#34; | &amp;#34;+&amp;#34; ] intLit ) | ( [ &amp;#34;-&amp;#34; | &amp;#34;+&amp;#34; ] floatLit ) | strLit | boolLit
-&lt;/code>&lt;/pre>&lt;h2 id="syntax">Syntax&lt;/h2>
+&lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-fallback" data-lang="fallback">&lt;span style="display:flex;">&lt;span>letter = &amp;#34;A&amp;#34; … &amp;#34;Z&amp;#34; | &amp;#34;a&amp;#34; … &amp;#34;z&amp;#34;
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>decimalDigit = &amp;#34;0&amp;#34; … &amp;#34;9&amp;#34;
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>octalDigit = &amp;#34;0&amp;#34; … &amp;#34;7&amp;#34;
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>hexDigit = &amp;#34;0&amp;#34; … &amp;#34;9&amp;#34; | &amp;#34;A&amp;#34; … &amp;#34;F&amp;#34; | &amp;#34;a&amp;#34; … &amp;#34;f&amp;#34;
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h3 id="identifiers">Identifiers&lt;/h3>
+&lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-fallback" data-lang="fallback">&lt;span style="display:flex;">&lt;span>ident = letter { letter | decimalDigit | &amp;#34;_&amp;#34; }
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>fullIdent = ident { &amp;#34;.&amp;#34; ident }
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>messageName = ident
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>enumName = ident
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>fieldName = ident
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>oneofName = ident
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>mapName = ident
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>serviceName = ident
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>rpcName = ident
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>messageType = [ &amp;#34;.&amp;#34; ] { ident &amp;#34;.&amp;#34; } messageName
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>enumType = [ &amp;#34;.&amp;#34; ] { ident &amp;#34;.&amp;#34; } enumName
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h3 id="integer_literals">Integer Literals&lt;/h3>
+&lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-fallback" data-lang="fallback">&lt;span style="display:flex;">&lt;span>intLit = decimalLit | octalLit | hexLit
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>decimalLit = ( &amp;#34;1&amp;#34; … &amp;#34;9&amp;#34; ) { decimalDigit }
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>octalLit = &amp;#34;0&amp;#34; { octalDigit }
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>hexLit = &amp;#34;0&amp;#34; ( &amp;#34;x&amp;#34; | &amp;#34;X&amp;#34; ) hexDigit { hexDigit }
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h3 id="floating-point-literals">Floating-point Literals&lt;/h3>
+&lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-fallback" data-lang="fallback">&lt;span style="display:flex;">&lt;span>floatLit = ( decimals &amp;#34;.&amp;#34; [ decimals ] [ exponent ] | decimals exponent | &amp;#34;.&amp;#34;decimals [ exponent ] ) | &amp;#34;inf&amp;#34; | &amp;#34;nan&amp;#34;
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>decimals = decimalDigit { decimalDigit }
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>exponent = ( &amp;#34;e&amp;#34; | &amp;#34;E&amp;#34; ) [ &amp;#34;+&amp;#34; | &amp;#34;-&amp;#34; ] decimals
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h3 id="boolean">Boolean&lt;/h3>
+&lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-fallback" data-lang="fallback">&lt;span style="display:flex;">&lt;span>boolLit = &amp;#34;true&amp;#34; | &amp;#34;false&amp;#34;
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h3 id="string_literals">String Literals&lt;/h3>
+&lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-fallback" data-lang="fallback">&lt;span style="display:flex;">&lt;span>strLit = strLitSingle { strLitSingle }
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>strLitSingle = ( &amp;#34;&amp;#39;&amp;#34; { charValue } &amp;#34;&amp;#39;&amp;#34; ) | ( &amp;#39;&amp;#34;&amp;#39; { charValue } &amp;#39;&amp;#34;&amp;#39; )
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>charValue = hexEscape | octEscape | charEscape | unicodeEscape | unicodeLongEscape | /[^\0\n\\]/
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>hexEscape = &amp;#39;\&amp;#39; ( &amp;#34;x&amp;#34; | &amp;#34;X&amp;#34; ) hexDigit [ hexDigit ]
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>octEscape = &amp;#39;\&amp;#39; octalDigit [ octalDigit [ octalDigit ] ]
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>charEscape = &amp;#39;\&amp;#39; ( &amp;#34;a&amp;#34; | &amp;#34;b&amp;#34; | &amp;#34;f&amp;#34; | &amp;#34;n&amp;#34; | &amp;#34;r&amp;#34; | &amp;#34;t&amp;#34; | &amp;#34;v&amp;#34; | &amp;#39;\&amp;#39; | &amp;#34;&amp;#39;&amp;#34; | &amp;#39;&amp;#34;&amp;#39; )
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>unicodeEscape = &amp;#39;\&amp;#39; &amp;#34;u&amp;#34; hexDigit hexDigit hexDigit hexDigit
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>unicodeLongEscape = &amp;#39;\&amp;#39; &amp;#34;U&amp;#34; ( &amp;#34;000&amp;#34; hexDigit hexDigit hexDigit hexDigit hexDigit |
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &amp;#34;0010&amp;#34; hexDigit hexDigit hexDigit hexDigit
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h3 id="emptystatement">EmptyStatement&lt;/h3>
+&lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-fallback" data-lang="fallback">&lt;span style="display:flex;">&lt;span>emptyStatement = &amp;#34;;&amp;#34;
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h3 id="constant">Constant&lt;/h3>
+&lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-fallback" data-lang="fallback">&lt;span style="display:flex;">&lt;span>constant = fullIdent | ( [ &amp;#34;-&amp;#34; | &amp;#34;+&amp;#34; ] intLit ) | ( [ &amp;#34;-&amp;#34; | &amp;#34;+&amp;#34; ] floatLit ) | strLit | boolLit
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h2 id="syntax">Syntax&lt;/h2>
 &lt;p>The syntax statement is used to define the protobuf version.&lt;/p>
-&lt;pre tabindex="0">&lt;code>syntax = &amp;#34;syntax&amp;#34; &amp;#34;=&amp;#34; (&amp;#34;&amp;#39;&amp;#34; &amp;#34;proto3&amp;#34; &amp;#34;&amp;#39;&amp;#34; | &amp;#39;&amp;#34;&amp;#39; &amp;#34;proto3&amp;#34; &amp;#39;&amp;#34;&amp;#39;) &amp;#34;;&amp;#34;
-&lt;/code>&lt;/pre>&lt;p>Example:&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-fallback" data-lang="fallback">&lt;span style="display:flex;">&lt;span>syntax = &amp;#34;syntax&amp;#34; &amp;#34;=&amp;#34; (&amp;#34;&amp;#39;&amp;#34; &amp;#34;proto3&amp;#34; &amp;#34;&amp;#39;&amp;#34; | &amp;#39;&amp;#34;&amp;#39; &amp;#34;proto3&amp;#34; &amp;#39;&amp;#34;&amp;#39;) &amp;#34;;&amp;#34;
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>Example:&lt;/p>
 &lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-proto" data-lang="proto">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#000">syntax&lt;/span> &lt;span style="color:#ce5c00;font-weight:bold">=&lt;/span> &lt;span style="color:#4e9a06">&amp;#34;proto3&amp;#34;&lt;/span>&lt;span style="color:#000;font-weight:bold">;&lt;/span>&lt;span style="color:#a40000">
 &lt;/span>&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h2 id="import_statement">Import Statement&lt;/h2>
 &lt;p>The import statement is used to import another .proto&amp;rsquo;s definitions.&lt;/p>
-&lt;pre tabindex="0">&lt;code>import = &amp;#34;import&amp;#34; [ &amp;#34;weak&amp;#34; | &amp;#34;public&amp;#34; ] strLit &amp;#34;;&amp;#34;
-&lt;/code>&lt;/pre>&lt;p>Example:&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-fallback" data-lang="fallback">&lt;span style="display:flex;">&lt;span>import = &amp;#34;import&amp;#34; [ &amp;#34;weak&amp;#34; | &amp;#34;public&amp;#34; ] strLit &amp;#34;;&amp;#34;
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>Example:&lt;/p>
 &lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-proto" data-lang="proto">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#204a87;font-weight:bold">import&lt;/span> &lt;span style="color:#000">public&lt;/span> &lt;span style="color:#4e9a06">&amp;#34;other.proto&amp;#34;&lt;/span>&lt;span style="color:#000;font-weight:bold">;&lt;/span>&lt;span style="color:#a40000">
 &lt;/span>&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h2 id="package">Package&lt;/h2>
 &lt;p>The package specifier can be used to prevent name clashes between protocol
 message types.&lt;/p>
-&lt;pre tabindex="0">&lt;code>package = &amp;#34;package&amp;#34; fullIdent &amp;#34;;&amp;#34;
-&lt;/code>&lt;/pre>&lt;p>Example:&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-go" data-lang="go">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#204a87;font-weight:bold">package&lt;/span> &lt;span style="color:#000;font-weight:bold">=&lt;/span> &lt;span style="color:#4e9a06">&amp;#34;package&amp;#34;&lt;/span> &lt;span style="color:#000">fullIdent&lt;/span> &lt;span style="color:#4e9a06">&amp;#34;;&amp;#34;&lt;/span>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>Example:&lt;/p>
 &lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-proto" data-lang="proto">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#204a87;font-weight:bold">package&lt;/span> &lt;span style="color:#000">foo&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">.&lt;/span>&lt;span style="color:#000">bar&lt;/span>&lt;span style="color:#000;font-weight:bold">;&lt;/span>&lt;span style="color:#a40000">
 &lt;/span>&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h2 id="option">Option&lt;/h2>
 &lt;p>Options can be used in proto files, messages, enums and services. An option can
 be a protobuf defined option or a custom option. For more information, see
 &lt;a href="https://protobuf.dev/programming-guides/proto3#options">Options&lt;/a> in the language guide.&lt;/p>
-&lt;pre tabindex="0">&lt;code>option = &amp;#34;option&amp;#34; optionName &amp;#34;=&amp;#34; constant &amp;#34;;&amp;#34;
-optionName = ( ident | &amp;#34;(&amp;#34; fullIdent &amp;#34;)&amp;#34; ) { &amp;#34;.&amp;#34; ident }
-&lt;/code>&lt;/pre>&lt;p>Example:&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-fallback" data-lang="fallback">&lt;span style="display:flex;">&lt;span>option = &amp;#34;option&amp;#34; optionName &amp;#34;=&amp;#34; constant &amp;#34;;&amp;#34;
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>optionName = ( ident | &amp;#34;(&amp;#34; fullIdent &amp;#34;)&amp;#34; ) { &amp;#34;.&amp;#34; ident }
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>Example:&lt;/p>
 &lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-proto" data-lang="proto">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#204a87;font-weight:bold">option&lt;/span> &lt;span style="color:#000">java_package&lt;/span> &lt;span style="color:#ce5c00;font-weight:bold">=&lt;/span> &lt;span style="color:#4e9a06">&amp;#34;com.example.foo&amp;#34;&lt;/span>&lt;span style="color:#000;font-weight:bold">;&lt;/span>&lt;span style="color:#a40000">
 &lt;/span>&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h2 id="fields">Fields&lt;/h2>
 &lt;p>Fields are the basic elements of a protocol buffer message. Fields can be normal
 fields, oneof fields, or map fields. A field has a type and field number.&lt;/p>
-&lt;pre tabindex="0">&lt;code>type = &amp;#34;double&amp;#34; | &amp;#34;float&amp;#34; | &amp;#34;int32&amp;#34; | &amp;#34;int64&amp;#34; | &amp;#34;uint32&amp;#34; | &amp;#34;uint64&amp;#34;
-| &amp;#34;sint32&amp;#34; | &amp;#34;sint64&amp;#34; | &amp;#34;fixed32&amp;#34; | &amp;#34;fixed64&amp;#34; | &amp;#34;sfixed32&amp;#34; | &amp;#34;sfixed64&amp;#34;
-| &amp;#34;bool&amp;#34; | &amp;#34;string&amp;#34; | &amp;#34;bytes&amp;#34; | messageType | enumType
-fieldNumber = intLit;
-&lt;/code>&lt;/pre>&lt;h3 id="normal_field">Normal Field&lt;/h3>
+&lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-fallback" data-lang="fallback">&lt;span style="display:flex;">&lt;span>type = &amp;#34;double&amp;#34; | &amp;#34;float&amp;#34; | &amp;#34;int32&amp;#34; | &amp;#34;int64&amp;#34; | &amp;#34;uint32&amp;#34; | &amp;#34;uint64&amp;#34;
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> | &amp;#34;sint32&amp;#34; | &amp;#34;sint64&amp;#34; | &amp;#34;fixed32&amp;#34; | &amp;#34;fixed64&amp;#34; | &amp;#34;sfixed32&amp;#34; | &amp;#34;sfixed64&amp;#34;
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> | &amp;#34;bool&amp;#34; | &amp;#34;string&amp;#34; | &amp;#34;bytes&amp;#34; | messageType | enumType
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>fieldNumber = intLit;
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h3 id="normal_field">Normal Field&lt;/h3>
 &lt;p>Each field has type, name and field number. It may have field options.&lt;/p>
-&lt;pre tabindex="0">&lt;code>field = [ &amp;#34;repeated&amp;#34; ] type fieldName &amp;#34;=&amp;#34; fieldNumber [ &amp;#34;[&amp;#34; fieldOptions &amp;#34;]&amp;#34; ] &amp;#34;;&amp;#34;
-fieldOptions = fieldOption { &amp;#34;,&amp;#34; fieldOption }
-fieldOption = optionName &amp;#34;=&amp;#34; constant
-&lt;/code>&lt;/pre>&lt;p>Examples:&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-fallback" data-lang="fallback">&lt;span style="display:flex;">&lt;span>field = [ &amp;#34;repeated&amp;#34; ] type fieldName &amp;#34;=&amp;#34; fieldNumber [ &amp;#34;[&amp;#34; fieldOptions &amp;#34;]&amp;#34; ] &amp;#34;;&amp;#34;
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>fieldOptions = fieldOption { &amp;#34;,&amp;#34; fieldOption }
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>fieldOption = optionName &amp;#34;=&amp;#34; constant
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>Examples:&lt;/p>
 &lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-proto" data-lang="proto">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#000">foo.Bar&lt;/span> &lt;span style="color:#000">nested_message&lt;/span> &lt;span style="color:#ce5c00;font-weight:bold">=&lt;/span> &lt;span style="color:#0000cf;font-weight:bold">2&lt;/span>&lt;span style="color:#000;font-weight:bold">;&lt;/span>&lt;span style="color:#a40000">
 &lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#a40000">&lt;/span>&lt;span style="color:#204a87;font-weight:bold">repeated&lt;/span> &lt;span style="color:#204a87;font-weight:bold">int32&lt;/span> &lt;span style="color:#000">samples&lt;/span> &lt;span style="color:#ce5c00;font-weight:bold">=&lt;/span> &lt;span style="color:#0000cf;font-weight:bold">4&lt;/span> &lt;span style="color:#000;font-weight:bold">[&lt;/span>&lt;span style="color:#204a87;font-weight:bold">packed&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">=&lt;/span>&lt;span style="color:#204a87;font-weight:bold">true&lt;/span>&lt;span style="color:#000;font-weight:bold">];&lt;/span>&lt;span style="color:#a40000">
 &lt;/span>&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h3 id="oneof_and_oneof_field">Oneof and Oneof Field&lt;/h3>
 &lt;p>A oneof consists of oneof fields and a oneof name.&lt;/p>
-&lt;pre tabindex="0">&lt;code>oneof = &amp;#34;oneof&amp;#34; oneofName &amp;#34;{&amp;#34; { option | oneofField } &amp;#34;}&amp;#34;
-oneofField = type fieldName &amp;#34;=&amp;#34; fieldNumber [ &amp;#34;[&amp;#34; fieldOptions &amp;#34;]&amp;#34; ] &amp;#34;;&amp;#34;
-&lt;/code>&lt;/pre>&lt;p>Example:&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-fallback" data-lang="fallback">&lt;span style="display:flex;">&lt;span>oneof = &amp;#34;oneof&amp;#34; oneofName &amp;#34;{&amp;#34; { option | oneofField } &amp;#34;}&amp;#34;
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>oneofField = type fieldName &amp;#34;=&amp;#34; fieldNumber [ &amp;#34;[&amp;#34; fieldOptions &amp;#34;]&amp;#34; ] &amp;#34;;&amp;#34;
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>Example:&lt;/p>
 &lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-proto" data-lang="proto">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#204a87;font-weight:bold">oneof&lt;/span> &lt;span style="color:#000">foo&lt;/span> &lt;span style="color:#000;font-weight:bold">{&lt;/span>&lt;span style="color:#a40000">
 &lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#a40000">&lt;/span> &lt;span style="color:#204a87;font-weight:bold">string&lt;/span> &lt;span style="color:#000">name&lt;/span> &lt;span style="color:#ce5c00;font-weight:bold">=&lt;/span> &lt;span style="color:#0000cf;font-weight:bold">4&lt;/span>&lt;span style="color:#000;font-weight:bold">;&lt;/span>&lt;span style="color:#a40000">
 &lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#a40000">&lt;/span> &lt;span style="color:#000">SubMessage&lt;/span> &lt;span style="color:#000">sub_message&lt;/span> &lt;span style="color:#ce5c00;font-weight:bold">=&lt;/span> &lt;span style="color:#0000cf;font-weight:bold">9&lt;/span>&lt;span style="color:#000;font-weight:bold">;&lt;/span>&lt;span style="color:#a40000">
@@ -328,31 +328,31 @@ oneofField = type fieldName &amp;#34;=&amp;#34; fieldNumber [ &amp;#34;[&amp;#34
 &lt;/span>&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h3 id="map_field">Map Field&lt;/h3>
 &lt;p>A map field has a key type, value type, name, and field number. The key type can
 be any integral or string type.&lt;/p>
-&lt;pre tabindex="0">&lt;code>mapField = &amp;#34;map&amp;#34; &amp;#34;&amp;lt;&amp;#34; keyType &amp;#34;,&amp;#34; type &amp;#34;&amp;gt;&amp;#34; mapName &amp;#34;=&amp;#34; fieldNumber [ &amp;#34;[&amp;#34; fieldOptions &amp;#34;]&amp;#34; ] &amp;#34;;&amp;#34;
-keyType = &amp;#34;int32&amp;#34; | &amp;#34;int64&amp;#34; | &amp;#34;uint32&amp;#34; | &amp;#34;uint64&amp;#34; | &amp;#34;sint32&amp;#34; | &amp;#34;sint64&amp;#34; |
-&amp;#34;fixed32&amp;#34; | &amp;#34;fixed64&amp;#34; | &amp;#34;sfixed32&amp;#34; | &amp;#34;sfixed64&amp;#34; | &amp;#34;bool&amp;#34; | &amp;#34;string&amp;#34;
-&lt;/code>&lt;/pre>&lt;p>Example:&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-fallback" data-lang="fallback">&lt;span style="display:flex;">&lt;span>mapField = &amp;#34;map&amp;#34; &amp;#34;&amp;lt;&amp;#34; keyType &amp;#34;,&amp;#34; type &amp;#34;&amp;gt;&amp;#34; mapName &amp;#34;=&amp;#34; fieldNumber [ &amp;#34;[&amp;#34; fieldOptions &amp;#34;]&amp;#34; ] &amp;#34;;&amp;#34;
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>keyType = &amp;#34;int32&amp;#34; | &amp;#34;int64&amp;#34; | &amp;#34;uint32&amp;#34; | &amp;#34;uint64&amp;#34; | &amp;#34;sint32&amp;#34; | &amp;#34;sint64&amp;#34; |
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &amp;#34;fixed32&amp;#34; | &amp;#34;fixed64&amp;#34; | &amp;#34;sfixed32&amp;#34; | &amp;#34;sfixed64&amp;#34; | &amp;#34;bool&amp;#34; | &amp;#34;string&amp;#34;
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>Example:&lt;/p>
 &lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-proto" data-lang="proto">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#000">map&lt;/span>&lt;span style="color:#000;font-weight:bold">&amp;lt;&lt;/span>&lt;span style="color:#204a87;font-weight:bold">string&lt;/span>&lt;span style="color:#000;font-weight:bold">,&lt;/span> &lt;span style="color:#000">Project&lt;/span>&lt;span style="color:#000;font-weight:bold">&amp;gt;&lt;/span> &lt;span style="color:#000">projects&lt;/span> &lt;span style="color:#ce5c00;font-weight:bold">=&lt;/span> &lt;span style="color:#0000cf;font-weight:bold">3&lt;/span>&lt;span style="color:#000;font-weight:bold">;&lt;/span>&lt;span style="color:#a40000">
 &lt;/span>&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h2 id="reserved">Reserved&lt;/h2>
 &lt;p>Reserved statements declare a range of field numbers or field names that cannot
 be used in this message.&lt;/p>
-&lt;pre tabindex="0">&lt;code>reserved = &amp;#34;reserved&amp;#34; ( ranges | strFieldNames ) &amp;#34;;&amp;#34;
-ranges = range { &amp;#34;,&amp;#34; range }
-range = intLit [ &amp;#34;to&amp;#34; ( intLit | &amp;#34;max&amp;#34; ) ]
-strFieldNames = strFieldName { &amp;#34;,&amp;#34; strFieldName }
-strFieldName = &amp;#34;&amp;#39;&amp;#34; fieldName &amp;#34;&amp;#39;&amp;#34; | &amp;#39;&amp;#34;&amp;#39; fieldName &amp;#39;&amp;#34;&amp;#39;
-&lt;/code>&lt;/pre>&lt;p>Examples:&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-fallback" data-lang="fallback">&lt;span style="display:flex;">&lt;span>reserved = &amp;#34;reserved&amp;#34; ( ranges | strFieldNames ) &amp;#34;;&amp;#34;
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>ranges = range { &amp;#34;,&amp;#34; range }
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>range = intLit [ &amp;#34;to&amp;#34; ( intLit | &amp;#34;max&amp;#34; ) ]
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>strFieldNames = strFieldName { &amp;#34;,&amp;#34; strFieldName }
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>strFieldName = &amp;#34;&amp;#39;&amp;#34; fieldName &amp;#34;&amp;#39;&amp;#34; | &amp;#39;&amp;#34;&amp;#39; fieldName &amp;#39;&amp;#34;&amp;#39;
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>Examples:&lt;/p>
 &lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-proto" data-lang="proto">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#000">reserved&lt;/span> &lt;span style="color:#0000cf;font-weight:bold">2&lt;/span>&lt;span style="color:#000;font-weight:bold">,&lt;/span> &lt;span style="color:#0000cf;font-weight:bold">15&lt;/span>&lt;span style="color:#000;font-weight:bold">,&lt;/span> &lt;span style="color:#0000cf;font-weight:bold">9&lt;/span> &lt;span style="color:#204a87;font-weight:bold">to&lt;/span> &lt;span style="color:#0000cf;font-weight:bold">11&lt;/span>&lt;span style="color:#000;font-weight:bold">;&lt;/span>&lt;span style="color:#a40000">
 &lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#a40000">&lt;/span>&lt;span style="color:#000">reserved&lt;/span> &lt;span style="color:#4e9a06">&amp;#34;foo&amp;#34;&lt;/span>&lt;span style="color:#000;font-weight:bold">,&lt;/span> &lt;span style="color:#4e9a06">&amp;#34;bar&amp;#34;&lt;/span>&lt;span style="color:#000;font-weight:bold">;&lt;/span>&lt;span style="color:#a40000">
 &lt;/span>&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h2 id="top_level_definitions">Top Level Definitions&lt;/h2>
 &lt;h3 id="enum_definition">Enum Definition&lt;/h3>
 &lt;p>The enum definition consists of a name and an enum body. The enum body can have
 options, enum fields, and reserved statements.&lt;/p>
-&lt;pre tabindex="0">&lt;code>enum = &amp;#34;enum&amp;#34; enumName enumBody
-enumBody = &amp;#34;{&amp;#34; { option | enumField | emptyStatement | reserved } &amp;#34;}&amp;#34;
-enumField = ident &amp;#34;=&amp;#34; [ &amp;#34;-&amp;#34; ] intLit [ &amp;#34;[&amp;#34; enumValueOption { &amp;#34;,&amp;#34; enumValueOption } &amp;#34;]&amp;#34; ]&amp;#34;;&amp;#34;
-enumValueOption = optionName &amp;#34;=&amp;#34; constant
-&lt;/code>&lt;/pre>&lt;p>Example:&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-fallback" data-lang="fallback">&lt;span style="display:flex;">&lt;span>enum = &amp;#34;enum&amp;#34; enumName enumBody
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>enumBody = &amp;#34;{&amp;#34; { option | enumField | emptyStatement | reserved } &amp;#34;}&amp;#34;
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>enumField = ident &amp;#34;=&amp;#34; [ &amp;#34;-&amp;#34; ] intLit [ &amp;#34;[&amp;#34; enumValueOption { &amp;#34;,&amp;#34; enumValueOption } &amp;#34;]&amp;#34; ]&amp;#34;;&amp;#34;
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>enumValueOption = optionName &amp;#34;=&amp;#34; constant
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>Example:&lt;/p>
 &lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-proto" data-lang="proto">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#204a87;font-weight:bold">enum&lt;/span> &lt;span style="color:#000">EnumAllowingAlias&lt;/span> &lt;span style="color:#000;font-weight:bold">{&lt;/span>&lt;span style="color:#a40000">
 &lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#a40000">&lt;/span> &lt;span style="color:#204a87;font-weight:bold">option&lt;/span> &lt;span style="color:#000">allow_alias&lt;/span> &lt;span style="color:#ce5c00;font-weight:bold">=&lt;/span> &lt;span style="color:#204a87;font-weight:bold">true&lt;/span>&lt;span style="color:#000;font-weight:bold">;&lt;/span>&lt;span style="color:#a40000">
 &lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#a40000">&lt;/span> &lt;span style="color:#000">EAA_UNSPECIFIED&lt;/span> &lt;span style="color:#ce5c00;font-weight:bold">=&lt;/span> &lt;span style="color:#0000cf;font-weight:bold">0&lt;/span>&lt;span style="color:#000;font-weight:bold">;&lt;/span>&lt;span style="color:#a40000">
@@ -363,10 +363,10 @@ enumValueOption = optionName &amp;#34;=&amp;#34; constant
 &lt;p>A message consists of a message name and a message body. The message body can
 have fields, nested enum definitions, nested message definitions, options,
 oneofs, map fields, and reserved statements.&lt;/p>
-&lt;pre tabindex="0">&lt;code>message = &amp;#34;message&amp;#34; messageName messageBody
-messageBody = &amp;#34;{&amp;#34; { field | enum | message | option | oneof | mapField |
-reserved | emptyStatement } &amp;#34;}&amp;#34;
-&lt;/code>&lt;/pre>&lt;p>Example:&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-fallback" data-lang="fallback">&lt;span style="display:flex;">&lt;span>message = &amp;#34;message&amp;#34; messageName messageBody
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>messageBody = &amp;#34;{&amp;#34; { field | enum | message | option | oneof | mapField |
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>reserved | emptyStatement } &amp;#34;}&amp;#34;
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>Example:&lt;/p>
 &lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-proto" data-lang="proto">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#204a87;font-weight:bold">message&lt;/span> &lt;span style="color:#000">Outer&lt;/span> &lt;span style="color:#000;font-weight:bold">{&lt;/span>&lt;span style="color:#a40000">
 &lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#a40000">&lt;/span> &lt;span style="color:#204a87;font-weight:bold">option&lt;/span> &lt;span style="color:#000;font-weight:bold">(&lt;/span>&lt;span style="color:#000">my_option&lt;/span>&lt;span style="color:#000;font-weight:bold">)&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">.&lt;/span>&lt;span style="color:#000">a&lt;/span> &lt;span style="color:#ce5c00;font-weight:bold">=&lt;/span> &lt;span style="color:#204a87;font-weight:bold">true&lt;/span>&lt;span style="color:#000;font-weight:bold">;&lt;/span>&lt;span style="color:#a40000">
 &lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#a40000">&lt;/span> &lt;span style="color:#204a87;font-weight:bold">message&lt;/span> &lt;span style="color:#000">Inner&lt;/span> &lt;span style="color:#000;font-weight:bold">{&lt;/span> &lt;span style="color:#8f5902;font-style:italic">// Level 2
@@ -375,17 +375,17 @@ reserved | emptyStatement } &amp;#34;}&amp;#34;
 &lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#a40000">&lt;/span> &lt;span style="color:#000">map&lt;/span>&lt;span style="color:#000;font-weight:bold">&amp;lt;&lt;/span>&lt;span style="color:#204a87;font-weight:bold">int32&lt;/span>&lt;span style="color:#000;font-weight:bold">,&lt;/span> &lt;span style="color:#204a87;font-weight:bold">string&lt;/span>&lt;span style="color:#000;font-weight:bold">&amp;gt;&lt;/span> &lt;span style="color:#000">my_map&lt;/span> &lt;span style="color:#ce5c00;font-weight:bold">=&lt;/span> &lt;span style="color:#0000cf;font-weight:bold">2&lt;/span>&lt;span style="color:#000;font-weight:bold">;&lt;/span>&lt;span style="color:#a40000">
 &lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#a40000">&lt;/span>&lt;span style="color:#000;font-weight:bold">}&lt;/span>&lt;span style="color:#a40000">
 &lt;/span>&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h3 id="service_definition">Service Definition&lt;/h3>
-&lt;pre tabindex="0">&lt;code>service = &amp;#34;service&amp;#34; serviceName &amp;#34;{&amp;#34; { option | rpc | emptyStatement } &amp;#34;}&amp;#34;
-rpc = &amp;#34;rpc&amp;#34; rpcName &amp;#34;(&amp;#34; [ &amp;#34;stream&amp;#34; ] messageType &amp;#34;)&amp;#34; &amp;#34;returns&amp;#34; &amp;#34;(&amp;#34; [ &amp;#34;stream&amp;#34; ]
-messageType &amp;#34;)&amp;#34; (( &amp;#34;{&amp;#34; {option | emptyStatement } &amp;#34;}&amp;#34; ) | &amp;#34;;&amp;#34;)
-&lt;/code>&lt;/pre>&lt;p>Example:&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-fallback" data-lang="fallback">&lt;span style="display:flex;">&lt;span>service = &amp;#34;service&amp;#34; serviceName &amp;#34;{&amp;#34; { option | rpc | emptyStatement } &amp;#34;}&amp;#34;
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>rpc = &amp;#34;rpc&amp;#34; rpcName &amp;#34;(&amp;#34; [ &amp;#34;stream&amp;#34; ] messageType &amp;#34;)&amp;#34; &amp;#34;returns&amp;#34; &amp;#34;(&amp;#34; [ &amp;#34;stream&amp;#34; ]
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>messageType &amp;#34;)&amp;#34; (( &amp;#34;{&amp;#34; {option | emptyStatement } &amp;#34;}&amp;#34; ) | &amp;#34;;&amp;#34;)
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>Example:&lt;/p>
 &lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-proto" data-lang="proto">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#204a87;font-weight:bold">service&lt;/span> &lt;span style="color:#000">SearchService&lt;/span> &lt;span style="color:#000;font-weight:bold">{&lt;/span>&lt;span style="color:#a40000">
 &lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#a40000">&lt;/span> &lt;span style="color:#204a87;font-weight:bold">rpc&lt;/span> &lt;span style="color:#000">Search&lt;/span> &lt;span style="color:#000;font-weight:bold">(&lt;/span>&lt;span style="color:#000">SearchRequest&lt;/span>&lt;span style="color:#000;font-weight:bold">)&lt;/span> &lt;span style="color:#204a87;font-weight:bold">returns&lt;/span> &lt;span style="color:#000;font-weight:bold">(&lt;/span>&lt;span style="color:#000">SearchResponse&lt;/span>&lt;span style="color:#000;font-weight:bold">);&lt;/span>&lt;span style="color:#a40000">
 &lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#a40000">&lt;/span>&lt;span style="color:#000;font-weight:bold">}&lt;/span>&lt;span style="color:#a40000">
 &lt;/span>&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h2 id="proto_file">Proto File&lt;/h2>
-&lt;pre tabindex="0">&lt;code>proto = syntax { import | package | option | topLevelDef | emptyStatement }
-topLevelDef = message | enum | service
-&lt;/code>&lt;/pre>&lt;p>An example .proto file:&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-go" data-lang="go">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#000">proto&lt;/span> &lt;span style="color:#000;font-weight:bold">=&lt;/span> &lt;span style="color:#000">syntax&lt;/span> &lt;span style="color:#000;font-weight:bold">{&lt;/span> &lt;span style="color:#204a87;font-weight:bold">import&lt;/span> &lt;span style="color:#000;font-weight:bold">|&lt;/span> &lt;span style="color:#204a87;font-weight:bold">package&lt;/span> &lt;span style="color:#000;font-weight:bold">|&lt;/span> &lt;span style="color:#000">option&lt;/span> &lt;span style="color:#000;font-weight:bold">|&lt;/span> &lt;span style="color:#000">topLevelDef&lt;/span> &lt;span style="color:#000;font-weight:bold">|&lt;/span> &lt;span style="color:#000">emptyStatement&lt;/span> &lt;span style="color:#000;font-weight:bold">}&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#000">topLevelDef&lt;/span> &lt;span style="color:#000;font-weight:bold">=&lt;/span> &lt;span style="color:#000">message&lt;/span> &lt;span style="color:#000;font-weight:bold">|&lt;/span> &lt;span style="color:#000">enum&lt;/span> &lt;span style="color:#000;font-weight:bold">|&lt;/span> &lt;span style="color:#000">service&lt;/span>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>An example .proto file:&lt;/p>
 &lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-proto" data-lang="proto">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#000">syntax&lt;/span> &lt;span style="color:#ce5c00;font-weight:bold">=&lt;/span> &lt;span style="color:#4e9a06">&amp;#34;proto3&amp;#34;&lt;/span>&lt;span style="color:#000;font-weight:bold">;&lt;/span>&lt;span style="color:#a40000">
 &lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#a40000">&lt;/span>&lt;span style="color:#204a87;font-weight:bold">import&lt;/span> &lt;span style="color:#000">public&lt;/span> &lt;span style="color:#4e9a06">&amp;#34;other.proto&amp;#34;&lt;/span>&lt;span style="color:#000;font-weight:bold">;&lt;/span>&lt;span style="color:#a40000">
 &lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#a40000">&lt;/span>&lt;span style="color:#204a87;font-weight:bold">option&lt;/span> &lt;span style="color:#000">java_package&lt;/span> &lt;span style="color:#ce5c00;font-weight:bold">=&lt;/span> &lt;span style="color:#4e9a06">&amp;#34;com.example.foo&amp;#34;&lt;/span>&lt;span style="color:#000;font-weight:bold">;&lt;/span>&lt;span style="color:#a40000">
@@ -428,94 +428,98 @@ tokens.&lt;/p>
 &lt;p>For example, a signed floating point value comprises two syntactic elements: the
 sign (&lt;code>-&lt;/code>) and the &lt;code>FLOAT&lt;/code> literal. Optional whitespace and comments may exist
 between the sign and the number, but not within the number. Example:&lt;/p>
-&lt;pre tabindex="0">&lt;code class="language-textproto" data-lang="textproto">value: -2.0 # Valid: no additional whitespace.
-value: - 2.0 # Valid: whitespace between &amp;#39;-&amp;#39; and &amp;#39;2.0&amp;#39;.
-value: -
-# comment
-2.0 # Valid: whitespace and comments between &amp;#39;-&amp;#39; and &amp;#39;2.0&amp;#39;.
-value: 2 . 0 # Invalid: the floating point period is part of the lexical
-# element, so no additional whitespace is allowed.
-&lt;/code>&lt;/pre>&lt;p>There is one edge case that requires special attention: a number token (&lt;code>FLOAT&lt;/code>,
+&lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-fallback" data-lang="fallback">&lt;span style="display:flex;">&lt;span>value: -2.0 # Valid: no additional whitespace.
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>value: - 2.0 # Valid: whitespace between &amp;#39;-&amp;#39; and &amp;#39;2.0&amp;#39;.
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>value: -
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> # comment
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> 2.0 # Valid: whitespace and comments between &amp;#39;-&amp;#39; and &amp;#39;2.0&amp;#39;.
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>value: 2 . 0 # Invalid: the floating point period is part of the lexical
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> # element, so no additional whitespace is allowed.
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>There is one edge case that requires special attention: a number token (&lt;code>FLOAT&lt;/code>,
 &lt;code>DEC_INT&lt;/code>, &lt;code>OCT_INT&lt;/code>, or &lt;code>HEX_INT&lt;/code>) may not be immediately followed by an
 &lt;code>IDENT&lt;/code> token. Example:&lt;/p>
-&lt;pre tabindex="0">&lt;code class="language-textproto" data-lang="textproto">foo: 10 bar: 20 # Valid: whitespace separates &amp;#39;10&amp;#39; and &amp;#39;bar&amp;#39;
-foo: 10,bar: 20 # Valid: &amp;#39;,&amp;#39; separates &amp;#39;10&amp;#39; and &amp;#39;bar&amp;#39;
-foo: 10[com.foo.ext]: 20 # Valid: &amp;#39;10&amp;#39; is followed immediately by &amp;#39;[&amp;#39;, which is
-# not an identifier.
-foo: 10bar: 20 # Invalid: no space between &amp;#39;10&amp;#39; and identifier &amp;#39;bar&amp;#39;.
-&lt;/code>&lt;/pre>&lt;h2 id="lexical">Lexical Elements&lt;/h2>
+&lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-fallback" data-lang="fallback">&lt;span style="display:flex;">&lt;span>foo: 10 bar: 20 # Valid: whitespace separates &amp;#39;10&amp;#39; and &amp;#39;bar&amp;#39;
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>foo: 10,bar: 20 # Valid: &amp;#39;,&amp;#39; separates &amp;#39;10&amp;#39; and &amp;#39;bar&amp;#39;
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>foo: 10[com.foo.ext]: 20 # Valid: &amp;#39;10&amp;#39; is followed immediately by &amp;#39;[&amp;#39;, which is
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> # not an identifier.
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>foo: 10bar: 20 # Invalid: no space between &amp;#39;10&amp;#39; and identifier &amp;#39;bar&amp;#39;.
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h2 id="lexical">Lexical Elements&lt;/h2>
 &lt;p>The lexical elements described below fall into two categories: uppercase primary
 elements and lowercase fragments. Only primary elements are included in the
 output stream of tokens used during syntactic analysis; fragments exist only to
 simplify construction of primary elements.&lt;/p>
 &lt;p>When parsing input text, the longest matching primary element wins. Example:&lt;/p>
-&lt;pre tabindex="0">&lt;code class="language-textproto" data-lang="textproto">value: 10 # &amp;#39;10&amp;#39; is parsed as a DEC_INT token.
-value: 10f # &amp;#39;10f&amp;#39; is parsed as a FLOAT token, despite containing &amp;#39;10&amp;#39; which
-# would also match DEC_INT. In this case, FLOAT matches a longer
-# subsequence of the input.
-&lt;/code>&lt;/pre>&lt;h3 id="characters">Characters&lt;/h3>
-&lt;pre tabindex="0">&lt;code>char = ? Any non-NUL unicode character ? ;
-newline = ? ASCII #10 (line feed) ? ;
-letter = &amp;#34;A&amp;#34; | &amp;#34;B&amp;#34; | &amp;#34;C&amp;#34; | &amp;#34;D&amp;#34; | &amp;#34;E&amp;#34; | &amp;#34;F&amp;#34; | &amp;#34;G&amp;#34; | &amp;#34;H&amp;#34; | &amp;#34;I&amp;#34; | &amp;#34;J&amp;#34; | &amp;#34;K&amp;#34; | &amp;#34;L&amp;#34; | &amp;#34;M&amp;#34;
-| &amp;#34;N&amp;#34; | &amp;#34;O&amp;#34; | &amp;#34;P&amp;#34; | &amp;#34;Q&amp;#34; | &amp;#34;R&amp;#34; | &amp;#34;S&amp;#34; | &amp;#34;T&amp;#34; | &amp;#34;U&amp;#34; | &amp;#34;V&amp;#34; | &amp;#34;W&amp;#34; | &amp;#34;X&amp;#34; | &amp;#34;Y&amp;#34; | &amp;#34;Z&amp;#34;
-| &amp;#34;a&amp;#34; | &amp;#34;b&amp;#34; | &amp;#34;c&amp;#34; | &amp;#34;d&amp;#34; | &amp;#34;e&amp;#34; | &amp;#34;f&amp;#34; | &amp;#34;g&amp;#34; | &amp;#34;h&amp;#34; | &amp;#34;i&amp;#34; | &amp;#34;j&amp;#34; | &amp;#34;k&amp;#34; | &amp;#34;l&amp;#34; | &amp;#34;m&amp;#34;
-| &amp;#34;n&amp;#34; | &amp;#34;o&amp;#34; | &amp;#34;p&amp;#34; | &amp;#34;q&amp;#34; | &amp;#34;r&amp;#34; | &amp;#34;s&amp;#34; | &amp;#34;t&amp;#34; | &amp;#34;u&amp;#34; | &amp;#34;v&amp;#34; | &amp;#34;w&amp;#34; | &amp;#34;x&amp;#34; | &amp;#34;y&amp;#34; | &amp;#34;z&amp;#34;
-| &amp;#34;_&amp;#34; ;
-oct = &amp;#34;0&amp;#34; | &amp;#34;1&amp;#34; | &amp;#34;2&amp;#34; | &amp;#34;3&amp;#34; | &amp;#34;4&amp;#34; | &amp;#34;5&amp;#34; | &amp;#34;6&amp;#34; | &amp;#34;7&amp;#34; ;
-dec = &amp;#34;0&amp;#34; | &amp;#34;1&amp;#34; | &amp;#34;2&amp;#34; | &amp;#34;3&amp;#34; | &amp;#34;4&amp;#34; | &amp;#34;5&amp;#34; | &amp;#34;6&amp;#34; | &amp;#34;7&amp;#34; | &amp;#34;8&amp;#34; | &amp;#34;9&amp;#34; ;
-hex = &amp;#34;0&amp;#34; | &amp;#34;1&amp;#34; | &amp;#34;2&amp;#34; | &amp;#34;3&amp;#34; | &amp;#34;4&amp;#34; | &amp;#34;5&amp;#34; | &amp;#34;6&amp;#34; | &amp;#34;7&amp;#34; | &amp;#34;8&amp;#34; | &amp;#34;9&amp;#34;
-| &amp;#34;A&amp;#34; | &amp;#34;B&amp;#34; | &amp;#34;C&amp;#34; | &amp;#34;D&amp;#34; | &amp;#34;E&amp;#34; | &amp;#34;F&amp;#34;
-| &amp;#34;a&amp;#34; | &amp;#34;b&amp;#34; | &amp;#34;c&amp;#34; | &amp;#34;d&amp;#34; | &amp;#34;e&amp;#34; | &amp;#34;f&amp;#34; ;
-&lt;/code>&lt;/pre>&lt;h3 id="whitespace">Whitespace and Comments&lt;/h3>
-&lt;pre tabindex="0">&lt;code>COMMENT = &amp;#34;#&amp;#34;, { char - newline }, [ newline ] ;
-WHITESPACE = &amp;#34; &amp;#34;
-| newline
-| ? ASCII #9 (horizontal tab) ?
-| ? ASCII #11 (vertical tab) ?
-| ? ASCII #12 (form feed) ?
-| ? ASCII #13 (carriage return) ? ;
-&lt;/code>&lt;/pre>&lt;h3 id="identifiers">Identifiers&lt;/h3>
-&lt;pre tabindex="0">&lt;code>IDENT = letter, { letter | dec } ;
-&lt;/code>&lt;/pre>&lt;h3 id="numeric">Numeric Literals&lt;/h3>
-&lt;pre tabindex="0">&lt;code>dec_lit = &amp;#34;0&amp;#34;
-| ( dec - &amp;#34;0&amp;#34; ), { dec } ;
-float_lit = &amp;#34;.&amp;#34;, dec, { dec }, [ exp ]
-| dec_lit, &amp;#34;.&amp;#34;, { dec }, [ exp ]
-| dec_lit, exp ;
-exp = ( &amp;#34;E&amp;#34; | &amp;#34;e&amp;#34; ), [ &amp;#34;+&amp;#34; | &amp;#34;-&amp;#34; ], dec, { dec } ;
-DEC_INT = dec_lit
-OCT_INT = &amp;#34;0&amp;#34;, oct, { oct } ;
-HEX_INT = &amp;#34;0&amp;#34;, ( &amp;#34;X&amp;#34; | &amp;#34;x&amp;#34; ), hex, { hex } ;
-FLOAT = float_lit, [ &amp;#34;F&amp;#34; | &amp;#34;f&amp;#34; ]
-| dec_lit, ( &amp;#34;F&amp;#34; | &amp;#34;f&amp;#34; ) ;
-&lt;/code>&lt;/pre>&lt;p>Decimal integers can be cast as floating-point values by using the &lt;code>F&lt;/code> and &lt;code>f&lt;/code>
+&lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-fallback" data-lang="fallback">&lt;span style="display:flex;">&lt;span>value: 10 # &amp;#39;10&amp;#39; is parsed as a DEC_INT token.
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>value: 10f # &amp;#39;10f&amp;#39; is parsed as a FLOAT token, despite containing &amp;#39;10&amp;#39; which
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> # would also match DEC_INT. In this case, FLOAT matches a longer
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> # subsequence of the input.
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h3 id="characters">Characters&lt;/h3>
+&lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-fallback" data-lang="fallback">&lt;span style="display:flex;">&lt;span>char = ? Any non-NUL unicode character ? ;
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>newline = ? ASCII #10 (line feed) ? ;
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>letter = &amp;#34;A&amp;#34; | &amp;#34;B&amp;#34; | &amp;#34;C&amp;#34; | &amp;#34;D&amp;#34; | &amp;#34;E&amp;#34; | &amp;#34;F&amp;#34; | &amp;#34;G&amp;#34; | &amp;#34;H&amp;#34; | &amp;#34;I&amp;#34; | &amp;#34;J&amp;#34; | &amp;#34;K&amp;#34; | &amp;#34;L&amp;#34; | &amp;#34;M&amp;#34;
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> | &amp;#34;N&amp;#34; | &amp;#34;O&amp;#34; | &amp;#34;P&amp;#34; | &amp;#34;Q&amp;#34; | &amp;#34;R&amp;#34; | &amp;#34;S&amp;#34; | &amp;#34;T&amp;#34; | &amp;#34;U&amp;#34; | &amp;#34;V&amp;#34; | &amp;#34;W&amp;#34; | &amp;#34;X&amp;#34; | &amp;#34;Y&amp;#34; | &amp;#34;Z&amp;#34;
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> | &amp;#34;a&amp;#34; | &amp;#34;b&amp;#34; | &amp;#34;c&amp;#34; | &amp;#34;d&amp;#34; | &amp;#34;e&amp;#34; | &amp;#34;f&amp;#34; | &amp;#34;g&amp;#34; | &amp;#34;h&amp;#34; | &amp;#34;i&amp;#34; | &amp;#34;j&amp;#34; | &amp;#34;k&amp;#34; | &amp;#34;l&amp;#34; | &amp;#34;m&amp;#34;
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> | &amp;#34;n&amp;#34; | &amp;#34;o&amp;#34; | &amp;#34;p&amp;#34; | &amp;#34;q&amp;#34; | &amp;#34;r&amp;#34; | &amp;#34;s&amp;#34; | &amp;#34;t&amp;#34; | &amp;#34;u&amp;#34; | &amp;#34;v&amp;#34; | &amp;#34;w&amp;#34; | &amp;#34;x&amp;#34; | &amp;#34;y&amp;#34; | &amp;#34;z&amp;#34;
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> | &amp;#34;_&amp;#34; ;
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>oct = &amp;#34;0&amp;#34; | &amp;#34;1&amp;#34; | &amp;#34;2&amp;#34; | &amp;#34;3&amp;#34; | &amp;#34;4&amp;#34; | &amp;#34;5&amp;#34; | &amp;#34;6&amp;#34; | &amp;#34;7&amp;#34; ;
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>dec = &amp;#34;0&amp;#34; | &amp;#34;1&amp;#34; | &amp;#34;2&amp;#34; | &amp;#34;3&amp;#34; | &amp;#34;4&amp;#34; | &amp;#34;5&amp;#34; | &amp;#34;6&amp;#34; | &amp;#34;7&amp;#34; | &amp;#34;8&amp;#34; | &amp;#34;9&amp;#34; ;
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>hex = &amp;#34;0&amp;#34; | &amp;#34;1&amp;#34; | &amp;#34;2&amp;#34; | &amp;#34;3&amp;#34; | &amp;#34;4&amp;#34; | &amp;#34;5&amp;#34; | &amp;#34;6&amp;#34; | &amp;#34;7&amp;#34; | &amp;#34;8&amp;#34; | &amp;#34;9&amp;#34;
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> | &amp;#34;A&amp;#34; | &amp;#34;B&amp;#34; | &amp;#34;C&amp;#34; | &amp;#34;D&amp;#34; | &amp;#34;E&amp;#34; | &amp;#34;F&amp;#34;
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> | &amp;#34;a&amp;#34; | &amp;#34;b&amp;#34; | &amp;#34;c&amp;#34; | &amp;#34;d&amp;#34; | &amp;#34;e&amp;#34; | &amp;#34;f&amp;#34; ;
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h3 id="whitespace">Whitespace and Comments&lt;/h3>
+&lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-fallback" data-lang="fallback">&lt;span style="display:flex;">&lt;span>COMMENT = &amp;#34;#&amp;#34;, { char - newline }, [ newline ] ;
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>WHITESPACE = &amp;#34; &amp;#34;
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> | newline
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> | ? ASCII #9 (horizontal tab) ?
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> | ? ASCII #11 (vertical tab) ?
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> | ? ASCII #12 (form feed) ?
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> | ? ASCII #13 (carriage return) ? ;
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h3 id="identifiers">Identifiers&lt;/h3>
+&lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-fallback" data-lang="fallback">&lt;span style="display:flex;">&lt;span>IDENT = letter, { letter | dec } ;
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h3 id="numeric">Numeric Literals&lt;/h3>
+&lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-fallback" data-lang="fallback">&lt;span style="display:flex;">&lt;span>dec_lit = &amp;#34;0&amp;#34;
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> | ( dec - &amp;#34;0&amp;#34; ), { dec } ;
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>float_lit = &amp;#34;.&amp;#34;, dec, { dec }, [ exp ]
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> | dec_lit, &amp;#34;.&amp;#34;, { dec }, [ exp ]
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> | dec_lit, exp ;
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>exp = ( &amp;#34;E&amp;#34; | &amp;#34;e&amp;#34; ), [ &amp;#34;+&amp;#34; | &amp;#34;-&amp;#34; ], dec, { dec } ;
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>DEC_INT = dec_lit
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>OCT_INT = &amp;#34;0&amp;#34;, oct, { oct } ;
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>HEX_INT = &amp;#34;0&amp;#34;, ( &amp;#34;X&amp;#34; | &amp;#34;x&amp;#34; ), hex, { hex } ;
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>FLOAT = float_lit, [ &amp;#34;F&amp;#34; | &amp;#34;f&amp;#34; ]
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> | dec_lit, ( &amp;#34;F&amp;#34; | &amp;#34;f&amp;#34; ) ;
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>Decimal integers can be cast as floating-point values by using the &lt;code>F&lt;/code> and &lt;code>f&lt;/code>
 suffixes. Example:&lt;/p>
-&lt;pre tabindex="0">&lt;code class="language-textproto" data-lang="textproto">foo: 10 # This is an integer value.
-foo: 10f # This is a floating-point value.
-foo: 1.0f # Also optional for floating-point literals.
-&lt;/code>&lt;/pre>&lt;h3 id="string">String Literals&lt;/h3>
-&lt;pre tabindex="0">&lt;code>STRING = single_string | double_string ;
-single_string = &amp;#34;&amp;#39;&amp;#34;, { escape | char - &amp;#34;&amp;#39;&amp;#34; - newline - &amp;#34;\&amp;#34; }, &amp;#34;&amp;#39;&amp;#34; ;
-double_string = &amp;#39;&amp;#34;&amp;#39;, { escape | char - &amp;#39;&amp;#34;&amp;#39; - newline - &amp;#34;\&amp;#34; }, &amp;#39;&amp;#34;&amp;#39; ;
-escape = &amp;#34;\a&amp;#34; (* ASCII #7 (bell) *)
-| &amp;#34;\b&amp;#34; (* ASCII #8 (backspace) *)
-| &amp;#34;\f&amp;#34; (* ASCII #12 (form feed) *)
-| &amp;#34;\n&amp;#34; (* ASCII #10 (line feed) *)
-| &amp;#34;\r&amp;#34; (* ASCII #13 (carriage return) *)
-| &amp;#34;\t&amp;#34; (* ASCII #9 (horizontal tab) *)
-| &amp;#34;\v&amp;#34; (* ASCII #11 (vertical tab) *)
-| &amp;#34;\?&amp;#34; (* ASCII #63 (question mark) *)
-| &amp;#34;\\&amp;#34; (* ASCII #92 (backslash) *)
-| &amp;#34;\&amp;#39;&amp;#34; (* ASCII #39 (apostrophe) *)
-| &amp;#39;\&amp;#34;&amp;#39; (* ASCII #34 (quote) *)
-| &amp;#34;\&amp;#34;, oct, [ oct, [ oct ] ] (* UTF-8 byte in octal *)
-| &amp;#34;\x&amp;#34;, hex, [ hex ] (* UTF-8 byte in hexadecimal *)
-| &amp;#34;\u&amp;#34;, hex, hex, hex, hex (* Unicode code point up to 0xffff *)
-| &amp;#34;\U000&amp;#34;,
-hex, hex, hex, hex, hex (* Unicode code point up to 0xfffff *)
-| &amp;#34;\U0010&amp;#34;,
-hex, hex, hex, hex ; (* Unicode code point between 0x100000 and 0x10ffff *)
-&lt;/code>&lt;/pre>&lt;p>Longer strings can be broken into several quoted strings on successive lines.
+&lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-fallback" data-lang="fallback">&lt;span style="display:flex;">&lt;span>foo: 10 # This is an integer value.
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>foo: 10f # This is a floating-point value.
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>foo: 1.0f # Also optional for floating-point literals.
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h3 id="string">String Literals&lt;/h3>
+&lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-fallback" data-lang="fallback">&lt;span style="display:flex;">&lt;span>STRING = single_string | double_string ;
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>single_string = &amp;#34;&amp;#39;&amp;#34;, { escape | char - &amp;#34;&amp;#39;&amp;#34; - newline - &amp;#34;\&amp;#34; }, &amp;#34;&amp;#39;&amp;#34; ;
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>double_string = &amp;#39;&amp;#34;&amp;#39;, { escape | char - &amp;#39;&amp;#34;&amp;#39; - newline - &amp;#34;\&amp;#34; }, &amp;#39;&amp;#34;&amp;#39; ;
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>escape = &amp;#34;\a&amp;#34; (* ASCII #7 (bell) *)
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> | &amp;#34;\b&amp;#34; (* ASCII #8 (backspace) *)
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> | &amp;#34;\f&amp;#34; (* ASCII #12 (form feed) *)
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> | &amp;#34;\n&amp;#34; (* ASCII #10 (line feed) *)
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> | &amp;#34;\r&amp;#34; (* ASCII #13 (carriage return) *)
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> | &amp;#34;\t&amp;#34; (* ASCII #9 (horizontal tab) *)
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> | &amp;#34;\v&amp;#34; (* ASCII #11 (vertical tab) *)
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> | &amp;#34;\?&amp;#34; (* ASCII #63 (question mark) *)
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> | &amp;#34;\\&amp;#34; (* ASCII #92 (backslash) *)
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> | &amp;#34;\&amp;#39;&amp;#34; (* ASCII #39 (apostrophe) *)
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> | &amp;#39;\&amp;#34;&amp;#39; (* ASCII #34 (quote) *)
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> | &amp;#34;\&amp;#34;, oct, [ oct, [ oct ] ] (* UTF-8 byte in octal *)
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> | &amp;#34;\x&amp;#34;, hex, [ hex ] (* UTF-8 byte in hexadecimal *)
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> | &amp;#34;\u&amp;#34;, hex, hex, hex, hex (* Unicode code point up to 0xffff *)
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> | &amp;#34;\U000&amp;#34;,
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> hex, hex, hex, hex, hex (* Unicode code point up to 0xfffff *)
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> | &amp;#34;\U0010&amp;#34;,
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> hex, hex, hex, hex ; (* Unicode code point between 0x100000 and 0x10ffff *)
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>Longer strings can be broken into several quoted strings on successive lines.
 For example:&lt;/p>
 &lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-proto" data-lang="proto">&lt;span style="display:flex;">&lt;span> &lt;span style="color:#000">quote&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">:&lt;/span>&lt;span style="color:#a40000">
 &lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#a40000">&lt;/span> &lt;span style="color:#4e9a06">&amp;#34;When we got into office, the thing that surprised me most was to find &amp;#34;&lt;/span>&lt;span style="color:#a40000">
@@ -537,88 +541,90 @@ on.
 &lt;h2 id="syntax">Syntax Elements&lt;/h2>
 &lt;h3 id="message">Message&lt;/h3>
 &lt;p>A message is a collection of fields. A text format file is a single Message.&lt;/p>
-&lt;pre tabindex="0">&lt;code>Message = { Field } ;
-&lt;/code>&lt;/pre>&lt;h3 id="literals">Literals&lt;/h3>
+&lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-fallback" data-lang="fallback">&lt;span style="display:flex;">&lt;span>Message = { Field } ;
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h3 id="literals">Literals&lt;/h3>
 &lt;p>Field literal values can be numbers, strings, or identifiers such as &lt;code>true&lt;/code> or
 enum values.&lt;/p>
-&lt;pre tabindex="0">&lt;code>String = STRING, { STRING } ;
-Float = [ &amp;#34;-&amp;#34; ], FLOAT ;
-Identifier = IDENT ;
-SignedIdentifier = &amp;#34;-&amp;#34;, IDENT ; (* For example, &amp;#34;-inf&amp;#34; *)
-DecSignedInteger = &amp;#34;-&amp;#34;, DEC_INT ;
-OctSignedInteger = &amp;#34;-&amp;#34;, OCT_INT ;
-HexSignedInteger = &amp;#34;-&amp;#34;, HEX_INT ;
-DecUnsignedInteger = DEC_INT ;
-OctUnsignedInteger = OCT_INT ;
-HexUnsignedInteger = HEX_INT ;
-&lt;/code>&lt;/pre>&lt;p>A single string value can comprise multiple quoted parts separated by optional
+&lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-fallback" data-lang="fallback">&lt;span style="display:flex;">&lt;span>String = STRING, { STRING } ;
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>Float = [ &amp;#34;-&amp;#34; ], FLOAT ;
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>Identifier = IDENT ;
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>SignedIdentifier = &amp;#34;-&amp;#34;, IDENT ; (* For example, &amp;#34;-inf&amp;#34; *)
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>DecSignedInteger = &amp;#34;-&amp;#34;, DEC_INT ;
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>OctSignedInteger = &amp;#34;-&amp;#34;, OCT_INT ;
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>HexSignedInteger = &amp;#34;-&amp;#34;, HEX_INT ;
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>DecUnsignedInteger = DEC_INT ;
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>OctUnsignedInteger = OCT_INT ;
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>HexUnsignedInteger = HEX_INT ;
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>A single string value can comprise multiple quoted parts separated by optional
 whitespace. Example:&lt;/p>
-&lt;pre tabindex="0">&lt;code class="language-textproto" data-lang="textproto">a_string: &amp;#34;first part&amp;#34; &amp;#39;second part&amp;#39;
-&amp;#34;third part&amp;#34;
-no_whitespace: &amp;#34;first&amp;#34;&amp;#34;second&amp;#34;&amp;#39;third&amp;#39;&amp;#39;fourth&amp;#39;
-&lt;/code>&lt;/pre>&lt;h3 id="field-names">Field Names&lt;/h3>
+&lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-fallback" data-lang="fallback">&lt;span style="display:flex;">&lt;span>a_string: &amp;#34;first part&amp;#34; &amp;#39;second part&amp;#39;
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &amp;#34;third part&amp;#34;
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>no_whitespace: &amp;#34;first&amp;#34;&amp;#34;second&amp;#34;&amp;#39;third&amp;#39;&amp;#39;fourth&amp;#39;
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h3 id="field-names">Field Names&lt;/h3>
 &lt;p>Fields that are part of the containing message use simple &lt;code>Identifiers&lt;/code> as
 names.
 &lt;a href="https://protobuf.dev/programming-guides/proto#extensions">&lt;code>Extension&lt;/code>&lt;/a> and
 &lt;a href="https://protobuf.dev/programming-guides/proto3#any">&lt;code>Any&lt;/code>&lt;/a> field names are
 wrapped in square brackets and fully-qualified. &lt;code>Any&lt;/code> field names are prefixed
 with a qualifying domain name, such as &lt;code>type.googleapis.com/&lt;/code>.&lt;/p>
-&lt;pre tabindex="0">&lt;code>FieldName = ExtensionName | AnyName | IDENT ;
-ExtensionName = &amp;#34;[&amp;#34;, TypeName, &amp;#34;]&amp;#34; ;
-AnyName = &amp;#34;[&amp;#34;, Domain, &amp;#34;/&amp;#34;, TypeName, &amp;#34;]&amp;#34; ;
-TypeName = IDENT, { &amp;#34;.&amp;#34;, IDENT } ;
-Domain = IDENT, { &amp;#34;.&amp;#34;, IDENT } ;
-&lt;/code>&lt;/pre>&lt;p>Regular fields and extension fields can have scalar or message values. &lt;code>Any&lt;/code>
+&lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-fallback" data-lang="fallback">&lt;span style="display:flex;">&lt;span>FieldName = ExtensionName | AnyName | IDENT ;
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>ExtensionName = &amp;#34;[&amp;#34;, TypeName, &amp;#34;]&amp;#34; ;
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>AnyName = &amp;#34;[&amp;#34;, Domain, &amp;#34;/&amp;#34;, TypeName, &amp;#34;]&amp;#34; ;
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>TypeName = IDENT, { &amp;#34;.&amp;#34;, IDENT } ;
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>Domain = IDENT, { &amp;#34;.&amp;#34;, IDENT } ;
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>Regular fields and extension fields can have scalar or message values. &lt;code>Any&lt;/code>
 fields are always messages. Example:&lt;/p>
-&lt;pre tabindex="0">&lt;code class="language-textproto" data-lang="textproto">reg_scalar: 10
-reg_message { foo: &amp;#34;bar&amp;#34; }
-[com.foo.ext.scalar]​: 10
-[com.foo.ext.message] { foo: &amp;#34;bar&amp;#34; }
-any_value {
-[type.googleapis.com/com.foo.any] { foo: &amp;#34;bar&amp;#34; }
-}
-&lt;/code>&lt;/pre>&lt;h3 id="fields">Fields&lt;/h3>
+&lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-fallback" data-lang="fallback">&lt;span style="display:flex;">&lt;span>reg_scalar: 10
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>reg_message { foo: &amp;#34;bar&amp;#34; }
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>[com.foo.ext.scalar]​: 10
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>[com.foo.ext.message] { foo: &amp;#34;bar&amp;#34; }
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>any_value {
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> [type.googleapis.com/com.foo.any] { foo: &amp;#34;bar&amp;#34; }
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>}
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h3 id="fields">Fields&lt;/h3>
 &lt;p>Field values can be literals (strings, numbers, or identifiers), or nested
 messages.&lt;/p>
-&lt;pre tabindex="0">&lt;code>Field = ScalarField | MessageField ;
-MessageField = FieldName, [ &amp;#34;:&amp;#34; ], ( MessageValue | MessageList ) [ &amp;#34;;&amp;#34; | &amp;#34;,&amp;#34; ];
-ScalarField = FieldName, &amp;#34;:&amp;#34;, ( ScalarValue | ScalarList ) [ &amp;#34;;&amp;#34; | &amp;#34;,&amp;#34; ];
-MessageList = &amp;#34;[&amp;#34;, [ MessageValue, { &amp;#34;,&amp;#34;, MessageValue } ], &amp;#34;]&amp;#34; ;
-ScalarList = &amp;#34;[&amp;#34;, [ ScalarValue, { &amp;#34;,&amp;#34;, ScalarValue } ], &amp;#34;]&amp;#34; ;
-MessageValue = &amp;#34;{&amp;#34;, Message, &amp;#34;}&amp;#34; | &amp;#34;&amp;lt;&amp;#34;, Message, &amp;#34;&amp;gt;&amp;#34; ;
-ScalarValue = String
-| Float
-| Identifier
-| SignedIdentifier
-| DecSignedInteger
-| OctSignedInteger
-| HexSignedInteger
-| DecUnsignedInteger
-| OctUnsignedInteger
-| HexUnsignedInteger ;
-&lt;/code>&lt;/pre>&lt;p>The &lt;code>:&lt;/code> delimiter between the field name and value is required for scalar fields
+&lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-fallback" data-lang="fallback">&lt;span style="display:flex;">&lt;span>Field = ScalarField | MessageField ;
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>MessageField = FieldName, [ &amp;#34;:&amp;#34; ], ( MessageValue | MessageList ) [ &amp;#34;;&amp;#34; | &amp;#34;,&amp;#34; ];
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>ScalarField = FieldName, &amp;#34;:&amp;#34;, ( ScalarValue | ScalarList ) [ &amp;#34;;&amp;#34; | &amp;#34;,&amp;#34; ];
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>MessageList = &amp;#34;[&amp;#34;, [ MessageValue, { &amp;#34;,&amp;#34;, MessageValue } ], &amp;#34;]&amp;#34; ;
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>ScalarList = &amp;#34;[&amp;#34;, [ ScalarValue, { &amp;#34;,&amp;#34;, ScalarValue } ], &amp;#34;]&amp;#34; ;
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>MessageValue = &amp;#34;{&amp;#34;, Message, &amp;#34;}&amp;#34; | &amp;#34;&amp;lt;&amp;#34;, Message, &amp;#34;&amp;gt;&amp;#34; ;
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>ScalarValue = String
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> | Float
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> | Identifier
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> | SignedIdentifier
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> | DecSignedInteger
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> | OctSignedInteger
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> | HexSignedInteger
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> | DecUnsignedInteger
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> | OctUnsignedInteger
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> | HexUnsignedInteger ;
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>The &lt;code>:&lt;/code> delimiter between the field name and value is required for scalar fields
 but optional for message fields (including lists). Example:&lt;/p>
-&lt;pre tabindex="0">&lt;code class="language-textproto" data-lang="textproto">scalar: 10 # Valid
-scalar 10 # Invalid
-scalars: [1, 2, 3] # Valid
-scalars [1, 2, 3] # Invalid
-message: {} # Valid
-message {} # Valid
-messages: [{}, {}] # Valid
-messages [{}, {}] # Valid
-&lt;/code>&lt;/pre>&lt;p>Values of message fields can be surrounded by curly brackets
+&lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-fallback" data-lang="fallback">&lt;span style="display:flex;">&lt;span>scalar: 10 # Valid
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>scalar 10 # Invalid
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>scalars: [1, 2, 3] # Valid
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>scalars [1, 2, 3] # Invalid
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>message: {} # Valid
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>message {} # Valid
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>messages: [{}, {}] # Valid
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>messages [{}, {}] # Valid
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>Values of message fields can be surrounded by curly brackets
 or angle brackets:&lt;/p>
-&lt;pre tabindex="0">&lt;code class="language-textproto" data-lang="textproto">message: { foo: &amp;#34;bar&amp;#34; }
-message: &amp;lt; foo: &amp;#34;bar&amp;#34; &amp;gt;
-&lt;/code>&lt;/pre>&lt;p>Fields marked &lt;code>repeated&lt;/code> can have multiple values specified by repeating the
+&lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-fallback" data-lang="fallback">&lt;span style="display:flex;">&lt;span>message: { foo: &amp;#34;bar&amp;#34; }
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>message: &amp;lt; foo: &amp;#34;bar&amp;#34; &amp;gt;
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>Fields marked &lt;code>repeated&lt;/code> can have multiple values specified by repeating the
 field, using the special &lt;code>[]&lt;/code> list syntax, or some combination of both. The
 order of values is maintained. Example:&lt;/p>
-&lt;pre tabindex="0">&lt;code class="language-textproto" data-lang="textproto">repeated_field: 1
-repeated_field: 2
-repeated_field: [3, 4, 5]
-repeated_field: 6
-repeated_field: [7, 8, 9]
-&lt;/code>&lt;/pre>&lt;p>Non-&lt;code>repeated&lt;/code> fields cannot use the list syntax. For example, &lt;code>[0]&lt;/code> is not
+&lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-fallback" data-lang="fallback">&lt;span style="display:flex;">&lt;span>repeated_field: 1
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>repeated_field: 2
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>repeated_field: [3, 4, 5]
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>repeated_field: 6
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>repeated_field: [7, 8, 9]
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>Non-&lt;code>repeated&lt;/code> fields cannot use the list syntax. For example, &lt;code>[0]&lt;/code> is not
 valid for &lt;code>optional&lt;/code> or &lt;code>required&lt;/code> fields. Fields marked &lt;code>optional&lt;/code> can be
 omitted or specified once. Fields marked &lt;code>required&lt;/code> must be specified exactly
 once.&lt;/p>
@@ -630,10 +636,10 @@ text format.&lt;/p>
 &lt;p>When a field&amp;rsquo;s associated &lt;em>.proto&lt;/em> value type is known, the following value
 descriptions and constraints apply. For the purposes of this section, we declare
 the following container elements:&lt;/p>
-&lt;pre tabindex="0">&lt;code>signedInteger = DecSignedInteger | OctSignedInteger | HexSignedInteger ;
-unsignedInteger = DecUnsignedInteger | OctUnsignedInteger | HexUnsignedInteger ;
-integer = signedInteger | unsignedInteger ;
-&lt;/code>&lt;/pre>&lt;table>
+&lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-fallback" data-lang="fallback">&lt;span style="display:flex;">&lt;span>signedInteger = DecSignedInteger | OctSignedInteger | HexSignedInteger ;
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>unsignedInteger = DecUnsignedInteger | OctUnsignedInteger | HexUnsignedInteger ;
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>integer = signedInteger | unsignedInteger ;
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;table>
 &lt;thead>
 &lt;tr>
 &lt;th style="text-align:center">&lt;strong>.proto Type&lt;/strong>&lt;/th>
@@ -761,9 +767,9 @@ A &lt;code>MessageValue&lt;/code> element.
 &lt;/table>
 &lt;h2 id="extension">Extension Fields&lt;/h2>
 &lt;p>Extension fields are specified using their qualified names. Example:&lt;/p>
-&lt;pre tabindex="0">&lt;code class="language-textproto" data-lang="textproto">local_field: 10
-[com.example.ext_field]​: 20
-&lt;/code>&lt;/pre>&lt;p>Extension fields are generally defined in other &lt;em>.proto&lt;/em> files. The text format
+&lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-fallback" data-lang="fallback">&lt;span style="display:flex;">&lt;span>local_field: 10
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>[com.example.ext_field]​: 20
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>Extension fields are generally defined in other &lt;em>.proto&lt;/em> files. The text format
 language does not provide a mechanism for specifying the locations of files that
 define extension fields; instead, the parser must have prior knowledge of their
 locations.&lt;/p>
@@ -771,19 +777,21 @@ locations.&lt;/p>
 &lt;p>Text format supports an expanded form of the
 &lt;a href="https://protobuf.dev/programming-guides/proto3#any">&lt;code>google.protobuf.Any&lt;/code>&lt;/a>
 well-known type using a special syntax resembling extension fields. Example:&lt;/p>
-&lt;pre tabindex="0">&lt;code class="language-textproto" data-lang="textproto">local_field: 10
-# An Any value using regular fields.
-any_value {
-type_url: &amp;#34;type.googleapis.com/com.example.SomeType&amp;#34;
-value: &amp;#34;\x0a\x05hello&amp;#34; # serialized bytes of com.example.SomeType
-}
-# The same value using Any expansion
-any_value {
-[type.googleapis.com/com.example.SomeType] {
-field1: &amp;#34;hello&amp;#34;
-}
-}
-&lt;/code>&lt;/pre>&lt;p>In this example, &lt;code>any_value&lt;/code> is a field of type &lt;code>google.protobuf.Any&lt;/code>, and it
+&lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-fallback" data-lang="fallback">&lt;span style="display:flex;">&lt;span>local_field: 10
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span># An Any value using regular fields.
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>any_value {
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> type_url: &amp;#34;type.googleapis.com/com.example.SomeType&amp;#34;
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> value: &amp;#34;\x0a\x05hello&amp;#34; # serialized bytes of com.example.SomeType
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>}
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span># The same value using Any expansion
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>any_value {
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> [type.googleapis.com/com.example.SomeType] {
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> field1: &amp;#34;hello&amp;#34;
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> }
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>}
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>In this example, &lt;code>any_value&lt;/code> is a field of type &lt;code>google.protobuf.Any&lt;/code>, and it
 stores a serialized &lt;code>com.example.SomeType&lt;/code> message containing &lt;code>field1: hello&lt;/code>.&lt;/p>
 &lt;h2 id="group">&lt;code>group&lt;/code> Fields&lt;/h2>
 &lt;p>In text format, a &lt;code>group&lt;/code> field uses a normal &lt;code>MessageValue&lt;/code> element as its
@@ -796,10 +804,10 @@ implicit lowercased field name. Example:&lt;/p>
 &lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#a40000">&lt;/span>&lt;span style="color:#000;font-weight:bold">}&lt;/span>&lt;span style="color:#a40000">
 &lt;/span>&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>With the above &lt;em>.proto&lt;/em> definition, the following text format is a valid
 &lt;code>MessageWithGroup&lt;/code>:&lt;/p>
-&lt;pre tabindex="0">&lt;code class="language-textproto" data-lang="textproto">MyGroup {
-my_value: 1
-}
-&lt;/code>&lt;/pre>&lt;p>Similar to Message fields, the &lt;code>:&lt;/code> delimiter between the group name and value is
+&lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-fallback" data-lang="fallback">&lt;span style="display:flex;">&lt;span>MyGroup {
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> my_value: 1
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>}
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>Similar to Message fields, the &lt;code>:&lt;/code> delimiter between the group name and value is
 optional.&lt;/p>
 &lt;h2 id="map">&lt;code>map&lt;/code> Fields&lt;/h2>
 &lt;p>Text format does not provide a custom syntax for specifying map field entries.
@@ -812,14 +820,15 @@ key/value entries. Example:&lt;/p>
 &lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#a40000">&lt;/span>&lt;span style="color:#000;font-weight:bold">}&lt;/span>&lt;span style="color:#a40000">
 &lt;/span>&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>With the above &lt;em>.proto&lt;/em> definition, the following text format is a valid
 &lt;code>MessageWithMap&lt;/code>:&lt;/p>
-&lt;pre tabindex="0">&lt;code class="language-textproto" data-lang="textproto">my_map { key: &amp;#34;entry1&amp;#34; value: 1 }
-my_map { key: &amp;#34;entry2&amp;#34; value: 2 }
-# You can also use the list syntax
-my_map: [
-{ key: &amp;#34;entry3&amp;#34; value: 3 },
-{ key: &amp;#34;entry4&amp;#34; value: 4 }
-]
-&lt;/code>&lt;/pre>&lt;p>Both the &lt;code>key&lt;/code> and &lt;code>value&lt;/code> fields are optional and default to the zero value of
+&lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-fallback" data-lang="fallback">&lt;span style="display:flex;">&lt;span>my_map { key: &amp;#34;entry1&amp;#34; value: 1 }
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>my_map { key: &amp;#34;entry2&amp;#34; value: 2 }
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span># You can also use the list syntax
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>my_map: [
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> { key: &amp;#34;entry3&amp;#34; value: 3 },
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> { key: &amp;#34;entry4&amp;#34; value: 4 }
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>]
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>Both the &lt;code>key&lt;/code> and &lt;code>value&lt;/code> fields are optional and default to the zero value of
 their respective types if unspecified. If a key is duplicated, only the
 last-specified value will be retained in a parsed map.&lt;/p>
 &lt;h2 id="oneof">&lt;code>oneof&lt;/code> Fields&lt;/h2>
@@ -837,23 +846,25 @@ concurrently is not valid. Example:&lt;/p>
 &lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#a40000">&lt;/span> &lt;span style="color:#204a87;font-weight:bold">repeated&lt;/span> &lt;span style="color:#000">MessageWithOneof&lt;/span> &lt;span style="color:#204a87;font-weight:bold">message&lt;/span> &lt;span style="color:#ce5c00;font-weight:bold">=&lt;/span> &lt;span style="color:#0000cf;font-weight:bold">1&lt;/span>&lt;span style="color:#000;font-weight:bold">;&lt;/span>&lt;span style="color:#a40000">
 &lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#a40000">&lt;/span>&lt;span style="color:#000;font-weight:bold">}&lt;/span>&lt;span style="color:#a40000">
 &lt;/span>&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>The above &lt;em>.proto&lt;/em> definition results in the following text format behavior:&lt;/p>
-&lt;pre tabindex="0">&lt;code class="language-textproto" data-lang="textproto"># Valid: only one field from the Example oneof is set.
-message {
-not_part_of_oneof: &amp;#34;always valid&amp;#34;
-first_oneof_field: &amp;#34;valid by itself&amp;#34;
-}
-# Valid: the other oneof field is set.
-message {
-not_part_of_oneof: &amp;#34;always valid&amp;#34;
-second_oneof_field: &amp;#34;valid by itself&amp;#34;
-}
-# Invalid: multiple fields from the Example oneof are set.
-message {
-not_part_of_oneof: &amp;#34;always valid&amp;#34;
-first_oneof_field: &amp;#34;not valid&amp;#34;
-second_oneof_field: &amp;#34;not valid&amp;#34;
-}
-&lt;/code>&lt;/pre>&lt;h2 id="text-format-files">Text Format Files&lt;/h2>
+&lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-fallback" data-lang="fallback">&lt;span style="display:flex;">&lt;span># Valid: only one field from the Example oneof is set.
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>message {
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> not_part_of_oneof: &amp;#34;always valid&amp;#34;
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> first_oneof_field: &amp;#34;valid by itself&amp;#34;
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>}
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span># Valid: the other oneof field is set.
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>message {
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> not_part_of_oneof: &amp;#34;always valid&amp;#34;
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> second_oneof_field: &amp;#34;valid by itself&amp;#34;
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>}
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span># Invalid: multiple fields from the Example oneof are set.
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>message {
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> not_part_of_oneof: &amp;#34;always valid&amp;#34;
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> first_oneof_field: &amp;#34;not valid&amp;#34;
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> second_oneof_field: &amp;#34;not valid&amp;#34;
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>}
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h2 id="text-format-files">Text Format Files&lt;/h2>
 &lt;p>A text format file uses the &lt;code>.textproto&lt;/code> filename suffix and contains a single
 &lt;code>Message&lt;/code>. Text format files are UTF-8 encoded. An example textproto file is
 provided below.&lt;/p>
@@ -866,27 +877,31 @@ extensions are &lt;strong>strongly&lt;/strong> discouraged; in particular, exten
 &lt;code>.protoascii&lt;/code> wrongly imply that text format is ascii-only, and others like
 &lt;code>.pb.txt&lt;/code> are not recognized by common tooling.
 &lt;/div>
-&lt;pre tabindex="0">&lt;code class="language-textproto" data-lang="textproto"># This is an example of Protocol Buffer&amp;#39;s text format.
-# Unlike .proto files, only shell-style line comments are supported.
-name: &amp;#34;John Smith&amp;#34;
-pet {
-kind: DOG
-name: &amp;#34;Fluffy&amp;#34;
-tail_wagginess: 0.65f
-}
-pet &amp;lt;
-kind: LIZARD
-name: &amp;#34;Lizzy&amp;#34;
-legs: 4
-&amp;gt;
-string_value_with_escape: &amp;#34;valid \n escape&amp;#34;
-repeated_values: [ &amp;#34;one&amp;#34;, &amp;#34;two&amp;#34;, &amp;#34;three&amp;#34; ]
-&lt;/code>&lt;/pre>&lt;h3 id="header">Header&lt;/h3>
+&lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-fallback" data-lang="fallback">&lt;span style="display:flex;">&lt;span># This is an example of Protocol Buffer&amp;#39;s text format.
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span># Unlike .proto files, only shell-style line comments are supported.
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>name: &amp;#34;John Smith&amp;#34;
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>pet {
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> kind: DOG
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> name: &amp;#34;Fluffy&amp;#34;
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> tail_wagginess: 0.65f
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>}
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>pet &amp;lt;
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> kind: LIZARD
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> name: &amp;#34;Lizzy&amp;#34;
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> legs: 4
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&amp;gt;
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>string_value_with_escape: &amp;#34;valid \n escape&amp;#34;
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>repeated_values: [ &amp;#34;one&amp;#34;, &amp;#34;two&amp;#34;, &amp;#34;three&amp;#34; ]
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h3 id="header">Header&lt;/h3>
 &lt;p>The header comments &lt;code>proto-file&lt;/code> and &lt;code>proto-message&lt;/code> inform developer tools of
 the schema, so they may provide various features.&lt;/p>
-&lt;pre tabindex="0">&lt;code class="language-textproto" data-lang="textproto"># proto-file: some/proto/my_file.proto
-# proto-message: MyMessage
-&lt;/code>&lt;/pre>&lt;h2 id="working-with-the-format-programmatically">Working with the Format Programmatically&lt;/h2>
+&lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-fallback" data-lang="fallback">&lt;span style="display:flex;">&lt;span># proto-file: some/proto/my_file.proto
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span># proto-message: MyMessage
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h2 id="working-with-the-format-programmatically">Working with the Format Programmatically&lt;/h2>
 &lt;p>Due to how individual Protocol Buffer implementations emit
 neither a consistent nor canonical text format,
 tools or libraries that modify TextProto files or emit TextProto output must
@@ -933,25 +948,26 @@ the type of the serialized message.&lt;/p>
 &lt;p>The JSON representation of an &lt;code>Any&lt;/code> value uses the regular representation of the
 deserialized, embedded message, with an additional field &lt;code>@type&lt;/code> which contains
 the type URL. Example:&lt;/p>
-&lt;pre tabindex="0">&lt;code>package google.profile;
-message Person {
-string first_name = 1;
-string last_name = 2;
-}
-{
-&amp;#34;@type&amp;#34;: &amp;#34;type.googleapis.com/google.profile.Person&amp;#34;,
-&amp;#34;firstName&amp;#34;: &amp;lt;string&amp;gt;,
-&amp;#34;lastName&amp;#34;: &amp;lt;string&amp;gt;
-}
-&lt;/code>&lt;/pre>&lt;p>If the embedded message type is well-known and has a custom JSON representation,
+&lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-go" data-lang="go">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#204a87;font-weight:bold">package&lt;/span> &lt;span style="color:#000">google&lt;/span>&lt;span style="color:#000;font-weight:bold">.&lt;/span>&lt;span style="color:#000">profile&lt;/span>&lt;span style="color:#000;font-weight:bold">;&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#000">message&lt;/span> &lt;span style="color:#000">Person&lt;/span> &lt;span style="color:#000;font-weight:bold">{&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#204a87;font-weight:bold">string&lt;/span> &lt;span style="color:#000">first_name&lt;/span> &lt;span style="color:#000;font-weight:bold">=&lt;/span> &lt;span style="color:#0000cf;font-weight:bold">1&lt;/span>&lt;span style="color:#000;font-weight:bold">;&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#204a87;font-weight:bold">string&lt;/span> &lt;span style="color:#000">last_name&lt;/span> &lt;span style="color:#000;font-weight:bold">=&lt;/span> &lt;span style="color:#0000cf;font-weight:bold">2&lt;/span>&lt;span style="color:#000;font-weight:bold">;&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#000;font-weight:bold">}&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#000;font-weight:bold">{&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#4e9a06">&amp;#34;@type&amp;#34;&lt;/span>&lt;span style="color:#000;font-weight:bold">:&lt;/span> &lt;span style="color:#4e9a06">&amp;#34;type.googleapis.com/google.profile.Person&amp;#34;&lt;/span>&lt;span style="color:#000;font-weight:bold">,&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#4e9a06">&amp;#34;firstName&amp;#34;&lt;/span>&lt;span style="color:#000;font-weight:bold">:&lt;/span> &lt;span style="color:#000;font-weight:bold">&amp;lt;&lt;/span>&lt;span style="color:#204a87;font-weight:bold">string&lt;/span>&lt;span style="color:#000;font-weight:bold">&amp;gt;,&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#4e9a06">&amp;#34;lastName&amp;#34;&lt;/span>&lt;span style="color:#000;font-weight:bold">:&lt;/span> &lt;span style="color:#000;font-weight:bold">&amp;lt;&lt;/span>&lt;span style="color:#204a87;font-weight:bold">string&lt;/span>&lt;span style="color:#000;font-weight:bold">&amp;gt;&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#000;font-weight:bold">}&lt;/span>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>If the embedded message type is well-known and has a custom JSON representation,
 that representation will be embedded adding a field &lt;code>value&lt;/code> which holds the
 custom JSON in addition to the &lt;code>@type&lt;/code> field. Example (for message
 &lt;code>google.protobuf.Duration&lt;/code>):&lt;/p>
-&lt;pre tabindex="0">&lt;code>{
-&amp;#34;@type&amp;#34;: &amp;#34;type.googleapis.com/google.protobuf.Duration&amp;#34;,
-&amp;#34;value&amp;#34;: &amp;#34;1.212s&amp;#34;
-}
-&lt;/code>&lt;/pre>&lt;table id="google.protobuf.Any.FIELDS">
+&lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-fallback" data-lang="fallback">&lt;span style="display:flex;">&lt;span>{
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &amp;#34;@type&amp;#34;: &amp;#34;type.googleapis.com/google.protobuf.Duration&amp;#34;,
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &amp;#34;value&amp;#34;: &amp;#34;1.212s&amp;#34;
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>}
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;table id="google.protobuf.Any.FIELDS">
 &lt;thead>
 &lt;tr>
 &lt;th>Field name&lt;/th>
@@ -1141,32 +1157,36 @@ Timestamp in that the difference between two Timestamp values is a Duration and
 it can be added or subtracted from a Timestamp. Range is approximately +-10,000
 years.&lt;/p>
 &lt;p>Example 1: Compute Duration from two Timestamps in pseudo code.&lt;/p>
-&lt;pre tabindex="0">&lt;code>Timestamp start = ...;
-Timestamp end = ...;
-Duration duration = ...;
-duration.seconds = end.seconds - start.seconds;
-duration.nanos = end.nanos - start.nanos;
-if (duration.seconds &amp;lt; 0 &amp;amp;&amp;amp; duration.nanos &amp;gt; 0) {
-duration.seconds += 1;
-duration.nanos -= 1000000000;
-} else if (duration.seconds &amp;gt; 0 &amp;amp;&amp;amp; duration.nanos &amp;lt; 0) {
-duration.seconds -= 1;
-duration.nanos += 1000000000;
-}
-&lt;/code>&lt;/pre>&lt;p>Example 2: Compute Timestamp from Timestamp + Duration in pseudo code.&lt;/p>
-&lt;pre tabindex="0">&lt;code>Timestamp start = ...;
-Duration duration = ...;
-Timestamp end = ...;
-end.seconds = start.seconds + duration.seconds;
-end.nanos = start.nanos + duration.nanos;
-if (end.nanos &amp;lt; 0) {
-end.seconds -= 1;
-end.nanos += 1000000000;
-} else if (end.nanos &amp;gt;= 1000000000) {
-end.seconds += 1;
-end.nanos -= 1000000000;
-}
-&lt;/code>&lt;/pre>&lt;p>The JSON representation for &lt;code>Duration&lt;/code> is a &lt;code>String&lt;/code> that ends in &lt;code>s&lt;/code> to
+&lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-fallback" data-lang="fallback">&lt;span style="display:flex;">&lt;span>Timestamp start = ...;
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>Timestamp end = ...;
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>Duration duration = ...;
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>duration.seconds = end.seconds - start.seconds;
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>duration.nanos = end.nanos - start.nanos;
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>if (duration.seconds &amp;lt; 0 &amp;amp;&amp;amp; duration.nanos &amp;gt; 0) {
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> duration.seconds += 1;
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> duration.nanos -= 1000000000;
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>} else if (duration.seconds &amp;gt; 0 &amp;amp;&amp;amp; duration.nanos &amp;lt; 0) {
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> duration.seconds -= 1;
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> duration.nanos += 1000000000;
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>}
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>Example 2: Compute Timestamp from Timestamp + Duration in pseudo code.&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-fallback" data-lang="fallback">&lt;span style="display:flex;">&lt;span>Timestamp start = ...;
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>Duration duration = ...;
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>Timestamp end = ...;
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>end.seconds = start.seconds + duration.seconds;
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>end.nanos = start.nanos + duration.nanos;
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>if (end.nanos &amp;lt; 0) {
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> end.seconds -= 1;
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> end.nanos += 1000000000;
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>} else if (end.nanos &amp;gt;= 1000000000) {
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> end.seconds += 1;
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> end.nanos -= 1000000000;
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>}
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>The JSON representation for &lt;code>Duration&lt;/code> is a &lt;code>String&lt;/code> that ends in &lt;code>s&lt;/code> to
 indicate seconds and is preceded by the number of seconds, with nanoseconds
 expressed as fractional seconds.&lt;/p>
 &lt;table>
@@ -1732,54 +1752,56 @@ API plus the &lt;code>root&lt;/code> path if specified.&lt;/p>
 &lt;/li>
 &lt;/ul>
 &lt;p>Example of a simple mixin:&lt;/p>
-&lt;pre tabindex="0">&lt;code>package google.acl.v1;
-service AccessControl {
-// Get the underlying ACL object.
-rpc GetAcl(GetAclRequest) returns (Acl) {
-option (google.api.http).get = &amp;#34;/v1/{resource=**}:getAcl&amp;#34;;
-}
-}
-package google.storage.v2;
-service Storage {
-// rpc GetAcl(GetAclRequest) returns (Acl);
-// Get a data record.
-rpc GetData(GetDataRequest) returns (Data) {
-option (google.api.http).get = &amp;#34;/v2/{resource=**}&amp;#34;;
-}
-}
-&lt;/code>&lt;/pre>&lt;p>Example of a mixin configuration:&lt;/p>
-&lt;pre tabindex="0">&lt;code>apis:
-- name: google.storage.v2.Storage
-mixins:
-- name: google.acl.v1.AccessControl
-&lt;/code>&lt;/pre>&lt;p>The mixin construct implies that all methods in &lt;code>AccessControl&lt;/code> are also
+&lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-go" data-lang="go">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#204a87;font-weight:bold">package&lt;/span> &lt;span style="color:#000">google&lt;/span>&lt;span style="color:#000;font-weight:bold">.&lt;/span>&lt;span style="color:#000">acl&lt;/span>&lt;span style="color:#000;font-weight:bold">.&lt;/span>&lt;span style="color:#000">v1&lt;/span>&lt;span style="color:#000;font-weight:bold">;&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#000">service&lt;/span> &lt;span style="color:#000">AccessControl&lt;/span> &lt;span style="color:#000;font-weight:bold">{&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#8f5902;font-style:italic">// Get the underlying ACL object.
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#8f5902;font-style:italic">&lt;/span> &lt;span style="color:#000">rpc&lt;/span> &lt;span style="color:#000">GetAcl&lt;/span>&lt;span style="color:#000;font-weight:bold">(&lt;/span>&lt;span style="color:#000">GetAclRequest&lt;/span>&lt;span style="color:#000;font-weight:bold">)&lt;/span> &lt;span style="color:#000">returns&lt;/span> &lt;span style="color:#000;font-weight:bold">(&lt;/span>&lt;span style="color:#000">Acl&lt;/span>&lt;span style="color:#000;font-weight:bold">)&lt;/span> &lt;span style="color:#000;font-weight:bold">{&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#000">option&lt;/span> &lt;span style="color:#000;font-weight:bold">(&lt;/span>&lt;span style="color:#000">google&lt;/span>&lt;span style="color:#000;font-weight:bold">.&lt;/span>&lt;span style="color:#000">api&lt;/span>&lt;span style="color:#000;font-weight:bold">.&lt;/span>&lt;span style="color:#000">http&lt;/span>&lt;span style="color:#000;font-weight:bold">).&lt;/span>&lt;span style="color:#000">get&lt;/span> &lt;span style="color:#000;font-weight:bold">=&lt;/span> &lt;span style="color:#4e9a06">&amp;#34;/v1/{resource=**}:getAcl&amp;#34;&lt;/span>&lt;span style="color:#000;font-weight:bold">;&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#000;font-weight:bold">}&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#000;font-weight:bold">}&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#204a87;font-weight:bold">package&lt;/span> &lt;span style="color:#000">google&lt;/span>&lt;span style="color:#000;font-weight:bold">.&lt;/span>&lt;span style="color:#000">storage&lt;/span>&lt;span style="color:#000;font-weight:bold">.&lt;/span>&lt;span style="color:#000">v2&lt;/span>&lt;span style="color:#000;font-weight:bold">;&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#000">service&lt;/span> &lt;span style="color:#000">Storage&lt;/span> &lt;span style="color:#000;font-weight:bold">{&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#8f5902;font-style:italic">// rpc GetAcl(GetAclRequest) returns (Acl);
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#8f5902;font-style:italic">&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#8f5902;font-style:italic">// Get a data record.
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#8f5902;font-style:italic">&lt;/span> &lt;span style="color:#000">rpc&lt;/span> &lt;span style="color:#000">GetData&lt;/span>&lt;span style="color:#000;font-weight:bold">(&lt;/span>&lt;span style="color:#000">GetDataRequest&lt;/span>&lt;span style="color:#000;font-weight:bold">)&lt;/span> &lt;span style="color:#000">returns&lt;/span> &lt;span style="color:#000;font-weight:bold">(&lt;/span>&lt;span style="color:#000">Data&lt;/span>&lt;span style="color:#000;font-weight:bold">)&lt;/span> &lt;span style="color:#000;font-weight:bold">{&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#000">option&lt;/span> &lt;span style="color:#000;font-weight:bold">(&lt;/span>&lt;span style="color:#000">google&lt;/span>&lt;span style="color:#000;font-weight:bold">.&lt;/span>&lt;span style="color:#000">api&lt;/span>&lt;span style="color:#000;font-weight:bold">.&lt;/span>&lt;span style="color:#000">http&lt;/span>&lt;span style="color:#000;font-weight:bold">).&lt;/span>&lt;span style="color:#000">get&lt;/span> &lt;span style="color:#000;font-weight:bold">=&lt;/span> &lt;span style="color:#4e9a06">&amp;#34;/v2/{resource=**}&amp;#34;&lt;/span>&lt;span style="color:#000;font-weight:bold">;&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#000;font-weight:bold">}&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#000;font-weight:bold">}&lt;/span>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>Example of a mixin configuration:&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-fallback" data-lang="fallback">&lt;span style="display:flex;">&lt;span>apis:
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>- name: google.storage.v2.Storage
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> mixins:
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> - name: google.acl.v1.AccessControl
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>The mixin construct implies that all methods in &lt;code>AccessControl&lt;/code> are also
 declared with same name and request/response types in &lt;code>Storage&lt;/code>. A documentation
 generator or annotation processor will see the effective &lt;code>Storage.GetAcl&lt;/code> method
 after inherting documentation and annotations as follows:&lt;/p>
-&lt;pre tabindex="0">&lt;code>service Storage {
-// Get the underlying ACL object.
-rpc GetAcl(GetAclRequest) returns (Acl) {
-option (google.api.http).get = &amp;#34;/v2/{resource=**}:getAcl&amp;#34;;
-}
-...
-}
-&lt;/code>&lt;/pre>&lt;p>Note how the version in the path pattern changed from &lt;code>v1&lt;/code> to &lt;code>v2&lt;/code>.&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-fallback" data-lang="fallback">&lt;span style="display:flex;">&lt;span>service Storage {
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> // Get the underlying ACL object.
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> rpc GetAcl(GetAclRequest) returns (Acl) {
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> option (google.api.http).get = &amp;#34;/v2/{resource=**}:getAcl&amp;#34;;
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> }
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> ...
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>}
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>Note how the version in the path pattern changed from &lt;code>v1&lt;/code> to &lt;code>v2&lt;/code>.&lt;/p>
 &lt;p>If the &lt;code>root&lt;/code> field in the mixin is specified, it should be a relative path
 under which inherited HTTP paths are placed. Example:&lt;/p>
-&lt;pre tabindex="0">&lt;code>apis:
-- name: google.storage.v2.Storage
-mixins:
-- name: google.acl.v1.AccessControl
-root: acls
-&lt;/code>&lt;/pre>&lt;p>This implies the following inherited HTTP annotation:&lt;/p>
-&lt;pre tabindex="0">&lt;code>service Storage {
-// Get the underlying ACL object.
-rpc GetAcl(GetAclRequest) returns (Acl) {
-option (google.api.http).get = &amp;#34;/v2/acls/{resource=**}:getAcl&amp;#34;;
-}
-...
-}
-&lt;/code>&lt;/pre>&lt;table>
+&lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-fallback" data-lang="fallback">&lt;span style="display:flex;">&lt;span>apis:
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>- name: google.storage.v2.Storage
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> mixins:
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> - name: google.acl.v1.AccessControl
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> root: acls
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>This implies the following inherited HTTP annotation:&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-fallback" data-lang="fallback">&lt;span style="display:flex;">&lt;span>service Storage {
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> // Get the underlying ACL object.
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> rpc GetAcl(GetAclRequest) returns (Acl) {
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> option (google.api.http).get = &amp;#34;/v2/acls/{resource=**}:getAcl&amp;#34;;
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> }
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> ...
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>}
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;table>
 &lt;thead>
 &lt;tr>
 &lt;th>Field name&lt;/th>
@@ -1950,34 +1972,37 @@ table is needed for interpretation. Range is from 0001-01-01T00:00:00Z to
 can convert to and from RFC 3339 date strings. See
 &lt;a href="https://www.ietf.org/rfc/rfc3339.txt">https://www.ietf.org/rfc/rfc3339.txt&lt;/a>.&lt;/p>
 &lt;p>Example 1: Compute Timestamp from POSIX &lt;code>time()&lt;/code>.&lt;/p>
-&lt;pre tabindex="0">&lt;code>Timestamp timestamp;
-timestamp.set_seconds(time(NULL));
-timestamp.set_nanos(0);
-&lt;/code>&lt;/pre>&lt;p>Example 2: Compute Timestamp from POSIX &lt;code>gettimeofday()&lt;/code>.&lt;/p>
-&lt;pre tabindex="0">&lt;code>struct timeval tv;
-gettimeofday(&amp;amp;tv, NULL);
-Timestamp timestamp;
-timestamp.set_seconds(tv.tv_sec);
-timestamp.set_nanos(tv.tv_usec * 1000);
-&lt;/code>&lt;/pre>&lt;p>Example 3: Compute Timestamp from Win32 &lt;code>GetSystemTimeAsFileTime()&lt;/code>.&lt;/p>
-&lt;pre tabindex="0">&lt;code>FILETIME ft;
-GetSystemTimeAsFileTime(&amp;amp;ft);
-UINT64 ticks = (((UINT64)ft.dwHighDateTime) &amp;lt;&amp;lt; 32) | ft.dwLowDateTime;
-// A Windows tick is 100 nanoseconds. Windows epoch 1601-01-01T00:00:00Z
-// is 11644473600 seconds before Unix epoch 1970-01-01T00:00:00Z.
-Timestamp timestamp;
-timestamp.set_seconds((INT64) ((ticks / 10000000) - 11644473600LL));
-timestamp.set_nanos((INT32) ((ticks % 10000000) * 100));
-&lt;/code>&lt;/pre>&lt;p>Example 4: Compute Timestamp from Java &lt;code>System.currentTimeMillis()&lt;/code>.&lt;/p>
-&lt;pre tabindex="0">&lt;code>long millis = System.currentTimeMillis();
-Timestamp timestamp = Timestamp.newBuilder().setSeconds(millis / 1000)
-.setNanos((int) ((millis % 1000) * 1000000)).build();
-&lt;/code>&lt;/pre>&lt;p>Example 5: Compute Timestamp from current time in Python.&lt;/p>
-&lt;pre tabindex="0">&lt;code>now = time.time()
-seconds = int(now)
-nanos = int((now - seconds) * 10**9)
-timestamp = Timestamp(seconds=seconds, nanos=nanos)
-&lt;/code>&lt;/pre>&lt;table>
+&lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-fallback" data-lang="fallback">&lt;span style="display:flex;">&lt;span>Timestamp timestamp;
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>timestamp.set_seconds(time(NULL));
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>timestamp.set_nanos(0);
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>Example 2: Compute Timestamp from POSIX &lt;code>gettimeofday()&lt;/code>.&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-fallback" data-lang="fallback">&lt;span style="display:flex;">&lt;span>struct timeval tv;
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>gettimeofday(&amp;amp;tv, NULL);
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>Timestamp timestamp;
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>timestamp.set_seconds(tv.tv_sec);
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>timestamp.set_nanos(tv.tv_usec * 1000);
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>Example 3: Compute Timestamp from Win32 &lt;code>GetSystemTimeAsFileTime()&lt;/code>.&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-fallback" data-lang="fallback">&lt;span style="display:flex;">&lt;span>FILETIME ft;
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>GetSystemTimeAsFileTime(&amp;amp;ft);
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>UINT64 ticks = (((UINT64)ft.dwHighDateTime) &amp;lt;&amp;lt; 32) | ft.dwLowDateTime;
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>// A Windows tick is 100 nanoseconds. Windows epoch 1601-01-01T00:00:00Z
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>// is 11644473600 seconds before Unix epoch 1970-01-01T00:00:00Z.
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>Timestamp timestamp;
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>timestamp.set_seconds((INT64) ((ticks / 10000000) - 11644473600LL));
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>timestamp.set_nanos((INT32) ((ticks % 10000000) * 100));
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>Example 4: Compute Timestamp from Java &lt;code>System.currentTimeMillis()&lt;/code>.&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-fallback" data-lang="fallback">&lt;span style="display:flex;">&lt;span>long millis = System.currentTimeMillis();
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>Timestamp timestamp = Timestamp.newBuilder().setSeconds(millis / 1000)
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> .setNanos((int) ((millis % 1000) * 1000000)).build();
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>Example 5: Compute Timestamp from current time in Python.&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-fallback" data-lang="fallback">&lt;span style="display:flex;">&lt;span>now = time.time()
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>seconds = int(now)
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>nanos = int((now - seconds) * 10**9)
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>timestamp = Timestamp(seconds=seconds, nanos=nanos)
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;table>
 &lt;thead>
 &lt;tr>
 &lt;th>Field name&lt;/th>

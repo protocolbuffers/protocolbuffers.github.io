@@ -1,7 +1,7 @@
 <!doctype html><html itemscope itemtype=http://schema.org/WebPage lang=en class=no-js><head><meta charset=utf-8><meta name=viewport content="width=device-width,initial-scale=1,shrink-to-fit=no"><meta name=generator content="Hugo 0.110.0"><meta name=robots content="index, follow"><link rel="shortcut icon" href=/favicons/favicon.ico><link rel=apple-touch-icon href=/favicons/apple-touch-icon-180x180.png sizes=180x180><link rel=icon type=image/png href=/favicons/favicon-16x16.png sizes=16x16><link rel=icon type=image/png href=/favicons/favicon-32x32.png sizes=32x32><link rel=icon type=image/png href=/favicons/android-36x36.png sizes=36x36><link rel=icon type=image/png href=/favicons/android-48x48.png sizes=48x48><link rel=icon type=image/png href=/favicons/android-72x72.png sizes=72x72><link rel=icon type=image/png href=/favicons/android-96x96.png sizes=96x96><link rel=icon type=image/png href=/favicons/android-144x144.png sizes=144x144><link rel=icon type=image/png href=/favicons/android-192x192.png sizes=192x192><title>Text Format Language Specification | Protocol Buffers Documentation</title><meta name=description content="The protocol buffer Text Format Language specifies a syntax for representation of protobuf data in text form, which is often useful for configurations or tests."><meta property="og:title" content="Text Format Language Specification"><meta property="og:description" content="The protocol buffer Text Format Language specifies a syntax for representation of protobuf data in text form, which is often useful for configurations or tests."><meta property="og:type" content="article"><meta property="og:url" content="https://protobuf.dev/reference/protobuf/textformat-spec/"><meta property="article:section" content="reference"><meta property="og:site_name" content="Protocol Buffers Documentation"><meta itemprop=name content="Text Format Language Specification"><meta itemprop=description content="The protocol buffer Text Format Language specifies a syntax for representation of protobuf data in text form, which is often useful for configurations or tests."><meta itemprop=wordCount content="2723"><meta itemprop=keywords content><meta name=twitter:card content="summary"><meta name=twitter:title content="Text Format Language Specification"><meta name=twitter:description content="The protocol buffer Text Format Language specifies a syntax for representation of protobuf data in text form, which is often useful for configurations or tests."><link rel=preload href=/scss/main.min.def2cdda5cfcd95d9660c969a68946395435ad5fc75402be473d9995c7e926b3.css as=style><link href=/scss/main.min.def2cdda5cfcd95d9660c969a68946395435ad5fc75402be473d9995c7e926b3.css rel=stylesheet integrity><script src=https://code.jquery.com/jquery-3.6.0.min.js integrity=sha384-vtXRMe3mGCbOeY7l30aIg8H9p3GdeSe4IFlP6G8JMa7o7lXvnz3GFKzPxzJdPfGK crossorigin=anonymous></script>
 <script defer src=https://unpkg.com/lunr@2.3.9/lunr.min.js integrity=sha384-203J0SNzyqHby3iU6hzvzltrWi/M41wOP5Gu+BiJMz5nwKykbkUx8Kp7iti0Lpli crossorigin=anonymous></script>
 <script async src="https://www.googletagmanager.com/gtag/js?id=G-5L8P8GRN4Y"></script>
-<script>var doNotTrack=!1;if(!doNotTrack){window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments)}gtag("js",new Date),gtag("config","G-5L8P8GRN4Y")}</script></head><body class=td-page><header><nav class="js-navbar-scroll navbar navbar-expand navbar-dark flex-column flex-md-row td-navbar"><a class=navbar-brand href=/><span class="navbar-brand__logo navbar-logo"></span><span class=navbar-brand__name>Protocol Buffers Documentation</span></a><div class="td-navbar-nav-scroll ml-md-auto" id=main_navbar><ul class="navbar-nav mt-2 mt-lg-0"></ul></div><div class="navbar-nav d-none d-lg-block"><div class="td-search td-search--offline"><div class=td-search__icon></div><input type=search class="td-search__input form-control" placeholder="Search this site…" aria-label="Search this site…" autocomplete=off data-offline-search-index-json-src=/offline-search-index.31fc5998e968621dd7bd47205e2ab0be.json data-offline-search-base-href=/ data-offline-search-max-results=10></div></div></nav></header><div class="container-fluid td-outer"><div class=td-main><div class="row flex-xl-nowrap"><aside class="col-12 col-md-3 col-xl-2 td-sidebar d-print-none"><div id=td-sidebar-menu class=td-sidebar__inner><div id=content-mobile><form class="td-sidebar__search d-flex align-items-center"><div class="td-search td-search--offline"><div class=td-search__icon></div><input type=search class="td-search__input form-control" placeholder="Search this site…" aria-label="Search this site…" autocomplete=off data-offline-search-index-json-src=/offline-search-index.31fc5998e968621dd7bd47205e2ab0be.json data-offline-search-base-href=/ data-offline-search-max-results=10></div><button class="btn btn-link td-sidebar__toggle d-md-none p-0 ml-3 fas fa-bars" type=button data-toggle=collapse data-target=#td-section-nav aria-controls=td-section-nav aria-expanded=false aria-label="Toggle section navigation"></button></form></div><div id=content-desktop></div><nav class="collapse td-sidebar-nav" id=td-section-nav><ul class="td-sidebar-nav__section pr-md-3 ul-0"><li class="td-sidebar-nav__section-title td-sidebar-nav__section with-child active-path" id=m--li><a href=/ class="align-left pl-0 td-sidebar-link td-sidebar-link__section tree-root" id=m-><span>Protocol Buffers</span></a><ul class=ul-1><li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child" id=m-overview-li><a href=/overview/ class="align-left pl-0 td-sidebar-link td-sidebar-link__page" id=m-overview><span>Overview</span></a></li><li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child" id=m-news-li><a href=/news/ class="align-left pl-0 td-sidebar-link td-sidebar-link__section" id=m-news><span>News</span></a></li><li class="td-sidebar-nav__section-title td-sidebar-nav__section with-child" id=m-programming-guides-li><a href=/programming-guides/ class="align-left pl-0 td-sidebar-link td-sidebar-link__section" id=m-programming-guides><span>Programming Guides</span></a><ul class="ul-2 foldable"><li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child" id=m-programming-guidesproto-li><a href=/programming-guides/proto/ class="align-left pl-0 td-sidebar-link td-sidebar-link__page" id=m-programming-guidesproto><span>Language Guide (proto 2)</span></a></li><li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child" id=m-programming-guidesproto3-li><a href=/programming-guides/proto3/ class="align-left pl-0 td-sidebar-link td-sidebar-link__page" id=m-programming-guidesproto3><span>Language Guide (proto 3)</span></a></li><li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child" id=m-programming-guidesstyle-li><a href=/programming-guides/style/ class="align-left pl-0 td-sidebar-link td-sidebar-link__page" id=m-programming-guidesstyle><span>Style Guide</span></a></li><li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child" id=m-programming-guidesenum-li><a href=/programming-guides/enum/ class="align-left pl-0 td-sidebar-link td-sidebar-link__page" id=m-programming-guidesenum><span>Enum Behavior</span></a></li><li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child" id=m-programming-guidesencoding-li><a href=/programming-guides/encoding/ class="align-left pl-0 td-sidebar-link td-sidebar-link__page" id=m-programming-guidesencoding><span>Encoding</span></a></li><li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child" id=m-programming-guidestechniques-li><a href=/programming-guides/techniques/ class="align-left pl-0 td-sidebar-link td-sidebar-link__page" id=m-programming-guidestechniques><span>Techniques</span></a></li><li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child" id=m-programming-guidesaddons-li><a href=/programming-guides/addons/ title="Third-party Add-ons" class="align-left pl-0 td-sidebar-link td-sidebar-link__page" id=m-programming-guidesaddons><span>Add-ons</span></a></li><li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child" id=m-programming-guidesfield_presence-li><a href=/programming-guides/field_presence/ title="Application Note: Field Presence" class="align-left pl-0 td-sidebar-link td-sidebar-link__page" id=m-programming-guidesfield_presence><span>Field Presence</span></a></li><li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child" id=m-programming-guidesdos-donts-li><a href=/programming-guides/dos-donts/ class="align-left pl-0 td-sidebar-link td-sidebar-link__page" id=m-programming-guidesdos-donts><span>Proto Best Practices</span></a></li><li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child" id=m-programming-guidesapi-li><a href=/programming-guides/api/ class="align-left pl-0 td-sidebar-link td-sidebar-link__page" id=m-programming-guidesapi><span>API Best Practices</span></a></li><li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child" id=m-programming-guidesmigration-li><a href=/programming-guides/migration/ class="align-left pl-0 td-sidebar-link td-sidebar-link__page" id=m-programming-guidesmigration><span>Migration Guide</span></a></li></ul></li><li class="td-sidebar-nav__section-title td-sidebar-nav__section with-child" id=m-getting-started-li><a href=/getting-started/ class="align-left pl-0 td-sidebar-link td-sidebar-link__section" id=m-getting-started><span>Tutorials</span></a><ul class="ul-2 foldable"><li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child" id=m-getting-startedcpptutorial-li><a href=/getting-started/cpptutorial/ title="Protocol Buffer Basics: C++" class="align-left pl-0 td-sidebar-link td-sidebar-link__page" id=m-getting-startedcpptutorial><span>C++</span></a></li><li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child" id=m-getting-startedcsharptutorial-li><a href=/getting-started/csharptutorial/ title="Protocol Buffer Basics: C#" class="align-left pl-0 td-sidebar-link td-sidebar-link__page" id=m-getting-startedcsharptutorial><span>C#</span></a></li><li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child" id=m-getting-starteddarttutorial-li><a href=/getting-started/darttutorial/ title="Protocol Buffer Basics: Dart" class="align-left pl-0 td-sidebar-link td-sidebar-link__page" id=m-getting-starteddarttutorial><span>Dart</span></a></li><li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child" id=m-getting-startedgotutorial-li><a href=/getting-started/gotutorial/ title="Protocol Buffer Basics: Go" class="align-left pl-0 td-sidebar-link td-sidebar-link__page" id=m-getting-startedgotutorial><span>Go</span></a></li><li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child" id=m-getting-startedjavatutorial-li><a href=/getting-started/javatutorial/ title="Protocol Buffer Basics: Java" class="align-left pl-0 td-sidebar-link td-sidebar-link__page" id=m-getting-startedjavatutorial><span>Java</span></a></li><li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child" id=m-getting-startedkotlintutorial-li><a href=/getting-started/kotlintutorial/ title="Protocol Buffer Basics: Kotlin" class="align-left pl-0 td-sidebar-link td-sidebar-link__page" id=m-getting-startedkotlintutorial><span>Kotlin</span></a></li><li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child" id=m-getting-startedpythontutorial-li><a href=/getting-started/pythontutorial/ title="Protocol Buffer Basics: Python" class="align-left pl-0 td-sidebar-link td-sidebar-link__page" id=m-getting-startedpythontutorial><span>Python</span></a></li></ul></li><li class="td-sidebar-nav__section-title td-sidebar-nav__section with-child active-path" id=m-reference-li><a href=/reference/ class="align-left pl-0 td-sidebar-link td-sidebar-link__section" id=m-reference><span>Reference Guides</span></a><ul class="ul-2 foldable"><li class="td-sidebar-nav__section-title td-sidebar-nav__section with-child" id=m-referencecpp-li><a href=/reference/cpp/ class="align-left pl-0 td-sidebar-link td-sidebar-link__section" id=m-referencecpp><span>C++ Reference</span></a><ul class="ul-3 foldable"><li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child" id=m-referencecppcpp-generated-li><a href=/reference/cpp/cpp-generated/ title="C++ Generated Code Guide" class="align-left pl-0 td-sidebar-link td-sidebar-link__page" id=m-referencecppcpp-generated><span>Generated Code Guide</span></a></li><li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child" id=m-referencecpparenas-li><a href=/reference/cpp/arenas/ title="C++ Arena Allocation Guide" class="align-left pl-0 td-sidebar-link td-sidebar-link__page" id=m-referencecpparenas><span>Arena Allocation Guide</span></a></li><li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child" id=m-referencecppapi-docs-link-li><a href=/reference/cpp/api-docs/ target=_blank rel=noopener class="align-left pl-0 td-sidebar-link td-sidebar-link__page" id=m-referencecppapi-docs-link><span>C++ API</span></a></li></ul></li><li class="td-sidebar-nav__section-title td-sidebar-nav__section with-child" id=m-referencecsharp-li><a href=/reference/csharp/ title="C# Reference" class="align-left pl-0 td-sidebar-link td-sidebar-link__section" id=m-referencecsharp><span>C#</span></a><ul class="ul-3 foldable"><li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child" id=m-referencecsharpcsharp-generated-li><a href=/reference/csharp/csharp-generated/ title="C# Generated Code Guide" class="align-left pl-0 td-sidebar-link td-sidebar-link__page" id=m-referencecsharpcsharp-generated><span>Generated Code Guide</span></a></li><li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child" id=m-referencecsharpapi-docs-link-li><a href=/reference/csharp/api-docs target=_blank rel=noopener class="align-left pl-0 td-sidebar-link td-sidebar-link__page" id=m-referencecsharpapi-docs-link><span>C# API</span></a></li></ul></li><li class="td-sidebar-nav__section-title td-sidebar-nav__section with-child" id=m-referencedart-li><a href=/reference/dart/ title="Dart Reference" class="align-left pl-0 td-sidebar-link td-sidebar-link__section" id=m-referencedart><span>Dart</span></a><ul class="ul-3 foldable"><li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child" id=m-referencedartdart-generated-li><a href=/reference/dart/dart-generated/ title="Dart Generated Code Guide" class="align-left pl-0 td-sidebar-link td-sidebar-link__page" id=m-referencedartdart-generated><span>Generated Code Guide</span></a></li><li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child" id=m-referencedartapi-docs-link-li><a href=https://pub.dartlang.org/documentation/protobuf target=_blank rel=noopener class="align-left pl-0 td-sidebar-link td-sidebar-link__page" id=m-referencedartapi-docs-link><span>Dart API</span></a></li></ul></li><li class="td-sidebar-nav__section-title td-sidebar-nav__section with-child" id=m-referencego-li><a href=/reference/go/ title="Go Reference" class="align-left pl-0 td-sidebar-link td-sidebar-link__section" id=m-referencego><span>Go</span></a><ul class="ul-3 foldable"><li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child" id=m-referencegogo-generated-li><a href=/reference/go/go-generated/ title="Go Generated Code Guide" class="align-left pl-0 td-sidebar-link td-sidebar-link__page" id=m-referencegogo-generated><span>Generated Code Guide</span></a></li><li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child" id=m-referencegofaq-li><a href=/reference/go/faq/ title="Go FAQ" class="align-left pl-0 td-sidebar-link td-sidebar-link__page" id=m-referencegofaq><span>FAQ</span></a></li><li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child" id=m-referencegoapi-docs-link-li><a href=https://pkg.go.dev/google.golang.org/protobuf/proto target=_blank rel=noopener class="align-left pl-0 td-sidebar-link td-sidebar-link__page" id=m-referencegoapi-docs-link><span>Go API</span></a></li></ul></li><li class="td-sidebar-nav__section-title td-sidebar-nav__section with-child" id=m-referencejava-li><a href=/reference/java/ title="Java Reference" class="align-left pl-0 td-sidebar-link td-sidebar-link__section" id=m-referencejava><span>Java</span></a><ul class="ul-3 foldable"><li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child" id=m-referencejavajava-generated-li><a href=/reference/java/java-generated/ title="Java Generated Code Guide" class="align-left pl-0 td-sidebar-link td-sidebar-link__page" id=m-referencejavajava-generated><span>Generated Code Guide</span></a></li><li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child" id=m-referencejavaapi-docs-link-li><a href=/reference/java/api-docs/overview-summary.html target=_blank rel=noopener class="align-left pl-0 td-sidebar-link td-sidebar-link__page" id=m-referencejavaapi-docs-link><span>Java API</span></a></li><li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child" id=m-referencejavajava-proto-names-li><a href=/reference/java/java-proto-names/ class="align-left pl-0 td-sidebar-link td-sidebar-link__page" id=m-referencejavajava-proto-names><span></span></a></li></ul></li><li class="td-sidebar-nav__section-title td-sidebar-nav__section with-child" id=m-referencekotlin-li><a href=/reference/kotlin/ title="Kotlin Reference" class="align-left pl-0 td-sidebar-link td-sidebar-link__section" id=m-referencekotlin><span>Kotlin</span></a><ul class="ul-3 foldable"><li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child" id=m-referencekotlinkotlin-generated-li><a href=/reference/kotlin/kotlin-generated/ title="Kotlin Generated Code Guide" class="align-left pl-0 td-sidebar-link td-sidebar-link__page" id=m-referencekotlinkotlin-generated><span>Generated Code Guide</span></a></li><li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child" id=m-referencekotlinapi-docs-li><a href=/reference/kotlin/api-docs/ class="align-left pl-0 td-sidebar-link td-sidebar-link__section" id=m-referencekotlinapi-docs><span>Kotlin API</span></a></li></ul></li><li class="td-sidebar-nav__section-title td-sidebar-nav__section with-child" id=m-referenceobjective-c-li><a href=/reference/objective-c/ title="Objective-C Reference" class="align-left pl-0 td-sidebar-link td-sidebar-link__section" id=m-referenceobjective-c><span>Objective-C</span></a><ul class="ul-3 foldable"><li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child" id=m-referenceobjective-cobjective-c-generated-li><a href=/reference/objective-c/objective-c-generated/ title="Objective-C Generated Code Guide" class="align-left pl-0 td-sidebar-link td-sidebar-link__page" id=m-referenceobjective-cobjective-c-generated><span>Generated Code Guide</span></a></li></ul></li><li class="td-sidebar-nav__section-title td-sidebar-nav__section with-child" id=m-referencephp-li><a href=/reference/php/ title="PHP Reference" class="align-left pl-0 td-sidebar-link td-sidebar-link__section" id=m-referencephp><span>PHP</span></a><ul class="ul-3 foldable"><li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child" id=m-referencephpphp-generated-li><a href=/reference/php/php-generated/ title="PHP Generated Code Guide" class="align-left pl-0 td-sidebar-link td-sidebar-link__page" id=m-referencephpphp-generated><span>Generated Code Guide</span></a></li><li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child" id=m-referencephpapi-docs-link-li><a href=/reference/php/api-docs/ target=_blank rel=noopener class="align-left pl-0 td-sidebar-link td-sidebar-link__page" id=m-referencephpapi-docs-link><span>PHP API</span></a></li></ul></li><li class="td-sidebar-nav__section-title td-sidebar-nav__section with-child" id=m-referencepython-li><a href=/reference/python/ title="Python Reference" class="align-left pl-0 td-sidebar-link td-sidebar-link__section" id=m-referencepython><span>Python</span></a><ul class="ul-3 foldable"><li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child" id=m-referencepythonpython-generated-li><a href=/reference/python/python-generated/ title="Python Generated Code Guide" class="align-left pl-0 td-sidebar-link td-sidebar-link__page" id=m-referencepythonpython-generated><span>Generated Code Guide</span></a></li><li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child" id=m-referencepythonapi-docs-link-li><a href=https://googleapis.dev/python/protobuf/latest/ target=_blank rel=noopener class="align-left pl-0 td-sidebar-link td-sidebar-link__page" id=m-referencepythonapi-docs-link><span>Python API</span></a></li></ul></li><li class="td-sidebar-nav__section-title td-sidebar-nav__section with-child" id=m-referenceruby-li><a href=/reference/ruby/ title="Ruby Reference" class="align-left pl-0 td-sidebar-link td-sidebar-link__section" id=m-referenceruby><span>Ruby</span></a><ul class="ul-3 foldable"><li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child" id=m-referencerubyruby-generated-li><a href=/reference/ruby/ruby-generated/ title="Ruby Generated Code Guide" class="align-left pl-0 td-sidebar-link td-sidebar-link__page" id=m-referencerubyruby-generated><span>Generated Code Guide</span></a></li></ul></li><li class="td-sidebar-nav__section-title td-sidebar-nav__section with-child active-path" id=m-referenceprotobuf-li><a href=/reference/protobuf/ title="Protocol Buffers Reference" class="align-left pl-0 td-sidebar-link td-sidebar-link__section" id=m-referenceprotobuf><span>Protocol Buffers</span></a><ul class="ul-3 foldable"><li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child" id=m-referenceprotobufproto2-spec-li><a href=/reference/protobuf/proto2-spec/ title="Protocol Buffers Version 2 Language Specification" class="align-left pl-0 td-sidebar-link td-sidebar-link__page" id=m-referenceprotobufproto2-spec><span>Version 2 Language Specification</span></a></li><li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child" id=m-referenceprotobufproto3-spec-li><a href=/reference/protobuf/proto3-spec/ title="Protocol Buffers Version 3 Language Specification" class="align-left pl-0 td-sidebar-link td-sidebar-link__page" id=m-referenceprotobufproto3-spec><span>Version 3 Language Specification</span></a></li><li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child active-path" id=m-referenceprotobuftextformat-spec-li><a href=/reference/protobuf/textformat-spec/ class="align-left pl-0 active td-sidebar-link td-sidebar-link__page" id=m-referenceprotobuftextformat-spec><span class=td-sidebar-nav-active-item>Text Format Language Specification</span></a></li><li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child" id=m-referenceprotobufgoogleprotobuf-li><a href=/reference/protobuf/google.protobuf/ title="Protocol Buffers Well-Known Types" class="align-left pl-0 td-sidebar-link td-sidebar-link__page" id=m-referenceprotobufgoogleprotobuf><span>Well-Known Types</span></a></li></ul></li><li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child" id=m-referenceother-li><a href=/reference/other/ class="align-left pl-0 td-sidebar-link td-sidebar-link__page" id=m-referenceother><span>Other Languages</span></a></li></ul></li><li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child" id=m-downloads-li><a href=/downloads/ class="align-left pl-0 td-sidebar-link td-sidebar-link__page" id=m-downloads><span>Downloads</span></a></li><li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child" id=m-history-li><a href=/history/ class="align-left pl-0 td-sidebar-link td-sidebar-link__page" id=m-history><span>History</span></a></li><li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child" id=m-version-support-li><a href=/version-support/ class="align-left pl-0 td-sidebar-link td-sidebar-link__page" id=m-version-support><span>Version Support</span></a></li><li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child" id=m-forum-link-li><a href=https://groups.google.com/g/protobuf target=_blank rel=noopener class="align-left pl-0 td-sidebar-link td-sidebar-link__page" id=m-forum-link><span>Forum</span></a></li><li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child" id=m-navbar-li><a href=/navbar/ class="align-left pl-0 td-sidebar-link td-sidebar-link__page" id=m-navbar><span></span></a></li><li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child" id=m-search-li><a href=/search/ class="align-left pl-0 td-sidebar-link td-sidebar-link__page" id=m-search><span>Search Results</span></a></li></ul></li></ul></nav></div></aside><aside class="d-none d-xl-block col-xl-2 td-sidebar-toc d-print-none"><div class="td-page-meta ml-2 pb-1 pt-2 mb-0"><a href=https://github.com/protocolbuffers/protocolbuffers.github.io/tree/main/content/reference/protobuf/textformat-spec.md class=td-page-meta--view target=_blank rel=noopener><i class="fa-solid fa-file-lines fa-fw"></i> View page source</a>
+<script>var doNotTrack=!1;if(!doNotTrack){window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments)}gtag("js",new Date),gtag("config","G-5L8P8GRN4Y")}</script></head><body class=td-page><header><nav class="js-navbar-scroll navbar navbar-expand navbar-dark flex-column flex-md-row td-navbar"><a class=navbar-brand href=/><span class="navbar-brand__logo navbar-logo"></span><span class=navbar-brand__name>Protocol Buffers Documentation</span></a><div class="td-navbar-nav-scroll ml-md-auto" id=main_navbar><ul class="navbar-nav mt-2 mt-lg-0"></ul></div><div class="navbar-nav d-none d-lg-block"><div class="td-search td-search--offline"><div class=td-search__icon></div><input type=search class="td-search__input form-control" placeholder="Search this site…" aria-label="Search this site…" autocomplete=off data-offline-search-index-json-src=/offline-search-index.38f103a9aea969bb2521eec9e183ea42.json data-offline-search-base-href=/ data-offline-search-max-results=10></div></div></nav></header><div class="container-fluid td-outer"><div class=td-main><div class="row flex-xl-nowrap"><aside class="col-12 col-md-3 col-xl-2 td-sidebar d-print-none"><div id=td-sidebar-menu class=td-sidebar__inner><div id=content-mobile><form class="td-sidebar__search d-flex align-items-center"><div class="td-search td-search--offline"><div class=td-search__icon></div><input type=search class="td-search__input form-control" placeholder="Search this site…" aria-label="Search this site…" autocomplete=off data-offline-search-index-json-src=/offline-search-index.38f103a9aea969bb2521eec9e183ea42.json data-offline-search-base-href=/ data-offline-search-max-results=10></div><button class="btn btn-link td-sidebar__toggle d-md-none p-0 ml-3 fas fa-bars" type=button data-toggle=collapse data-target=#td-section-nav aria-controls=td-section-nav aria-expanded=false aria-label="Toggle section navigation"></button></form></div><div id=content-desktop></div><nav class="collapse td-sidebar-nav" id=td-section-nav><ul class="td-sidebar-nav__section pr-md-3 ul-0"><li class="td-sidebar-nav__section-title td-sidebar-nav__section with-child active-path" id=m--li><a href=/ class="align-left pl-0 td-sidebar-link td-sidebar-link__section tree-root" id=m-><span>Protocol Buffers</span></a><ul class=ul-1><li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child" id=m-overview-li><a href=/overview/ class="align-left pl-0 td-sidebar-link td-sidebar-link__page" id=m-overview><span>Overview</span></a></li><li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child" id=m-news-li><a href=/news/ class="align-left pl-0 td-sidebar-link td-sidebar-link__section" id=m-news><span>News</span></a></li><li class="td-sidebar-nav__section-title td-sidebar-nav__section with-child" id=m-programming-guides-li><a href=/programming-guides/ class="align-left pl-0 td-sidebar-link td-sidebar-link__section" id=m-programming-guides><span>Programming Guides</span></a><ul class="ul-2 foldable"><li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child" id=m-programming-guidesproto-li><a href=/programming-guides/proto/ class="align-left pl-0 td-sidebar-link td-sidebar-link__page" id=m-programming-guidesproto><span>Language Guide (proto 2)</span></a></li><li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child" id=m-programming-guidesproto3-li><a href=/programming-guides/proto3/ class="align-left pl-0 td-sidebar-link td-sidebar-link__page" id=m-programming-guidesproto3><span>Language Guide (proto 3)</span></a></li><li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child" id=m-programming-guidesstyle-li><a href=/programming-guides/style/ class="align-left pl-0 td-sidebar-link td-sidebar-link__page" id=m-programming-guidesstyle><span>Style Guide</span></a></li><li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child" id=m-programming-guidesenum-li><a href=/programming-guides/enum/ class="align-left pl-0 td-sidebar-link td-sidebar-link__page" id=m-programming-guidesenum><span>Enum Behavior</span></a></li><li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child" id=m-programming-guidesencoding-li><a href=/programming-guides/encoding/ class="align-left pl-0 td-sidebar-link td-sidebar-link__page" id=m-programming-guidesencoding><span>Encoding</span></a></li><li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child" id=m-programming-guidestechniques-li><a href=/programming-guides/techniques/ class="align-left pl-0 td-sidebar-link td-sidebar-link__page" id=m-programming-guidestechniques><span>Techniques</span></a></li><li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child" id=m-programming-guidesaddons-li><a href=/programming-guides/addons/ title="Third-party Add-ons" class="align-left pl-0 td-sidebar-link td-sidebar-link__page" id=m-programming-guidesaddons><span>Add-ons</span></a></li><li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child" id=m-programming-guidesfield_presence-li><a href=/programming-guides/field_presence/ title="Application Note: Field Presence" class="align-left pl-0 td-sidebar-link td-sidebar-link__page" id=m-programming-guidesfield_presence><span>Field Presence</span></a></li><li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child" id=m-programming-guidesdos-donts-li><a href=/programming-guides/dos-donts/ class="align-left pl-0 td-sidebar-link td-sidebar-link__page" id=m-programming-guidesdos-donts><span>Proto Best Practices</span></a></li><li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child" id=m-programming-guidesapi-li><a href=/programming-guides/api/ class="align-left pl-0 td-sidebar-link td-sidebar-link__page" id=m-programming-guidesapi><span>API Best Practices</span></a></li></ul></li><li class="td-sidebar-nav__section-title td-sidebar-nav__section with-child" id=m-getting-started-li><a href=/getting-started/ class="align-left pl-0 td-sidebar-link td-sidebar-link__section" id=m-getting-started><span>Tutorials</span></a><ul class="ul-2 foldable"><li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child" id=m-getting-startedcpptutorial-li><a href=/getting-started/cpptutorial/ title="Protocol Buffer Basics: C++" class="align-left pl-0 td-sidebar-link td-sidebar-link__page" id=m-getting-startedcpptutorial><span>C++</span></a></li><li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child" id=m-getting-startedcsharptutorial-li><a href=/getting-started/csharptutorial/ title="Protocol Buffer Basics: C#" class="align-left pl-0 td-sidebar-link td-sidebar-link__page" id=m-getting-startedcsharptutorial><span>C#</span></a></li><li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child" id=m-getting-starteddarttutorial-li><a href=/getting-started/darttutorial/ title="Protocol Buffer Basics: Dart" class="align-left pl-0 td-sidebar-link td-sidebar-link__page" id=m-getting-starteddarttutorial><span>Dart</span></a></li><li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child" id=m-getting-startedgotutorial-li><a href=/getting-started/gotutorial/ title="Protocol Buffer Basics: Go" class="align-left pl-0 td-sidebar-link td-sidebar-link__page" id=m-getting-startedgotutorial><span>Go</span></a></li><li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child" id=m-getting-startedjavatutorial-li><a href=/getting-started/javatutorial/ title="Protocol Buffer Basics: Java" class="align-left pl-0 td-sidebar-link td-sidebar-link__page" id=m-getting-startedjavatutorial><span>Java</span></a></li><li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child" id=m-getting-startedkotlintutorial-li><a href=/getting-started/kotlintutorial/ title="Protocol Buffer Basics: Kotlin" class="align-left pl-0 td-sidebar-link td-sidebar-link__page" id=m-getting-startedkotlintutorial><span>Kotlin</span></a></li><li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child" id=m-getting-startedpythontutorial-li><a href=/getting-started/pythontutorial/ title="Protocol Buffer Basics: Python" class="align-left pl-0 td-sidebar-link td-sidebar-link__page" id=m-getting-startedpythontutorial><span>Python</span></a></li></ul></li><li class="td-sidebar-nav__section-title td-sidebar-nav__section with-child active-path" id=m-reference-li><a href=/reference/ class="align-left pl-0 td-sidebar-link td-sidebar-link__section" id=m-reference><span>Reference Guides</span></a><ul class="ul-2 foldable"><li class="td-sidebar-nav__section-title td-sidebar-nav__section with-child" id=m-referencecpp-li><a href=/reference/cpp/ class="align-left pl-0 td-sidebar-link td-sidebar-link__section" id=m-referencecpp><span>C++ Reference</span></a><ul class="ul-3 foldable"><li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child" id=m-referencecppcpp-generated-li><a href=/reference/cpp/cpp-generated/ title="C++ Generated Code Guide" class="align-left pl-0 td-sidebar-link td-sidebar-link__page" id=m-referencecppcpp-generated><span>Generated Code Guide</span></a></li><li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child" id=m-referencecpparenas-li><a href=/reference/cpp/arenas/ title="C++ Arena Allocation Guide" class="align-left pl-0 td-sidebar-link td-sidebar-link__page" id=m-referencecpparenas><span>Arena Allocation Guide</span></a></li><li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child" id=m-referencecppapi-docs-link-li><a href=/reference/cpp/api-docs/ target=_blank rel=noopener class="align-left pl-0 td-sidebar-link td-sidebar-link__page" id=m-referencecppapi-docs-link><span>C++ API</span></a></li></ul></li><li class="td-sidebar-nav__section-title td-sidebar-nav__section with-child" id=m-referencecsharp-li><a href=/reference/csharp/ title="C# Reference" class="align-left pl-0 td-sidebar-link td-sidebar-link__section" id=m-referencecsharp><span>C#</span></a><ul class="ul-3 foldable"><li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child" id=m-referencecsharpcsharp-generated-li><a href=/reference/csharp/csharp-generated/ title="C# Generated Code Guide" class="align-left pl-0 td-sidebar-link td-sidebar-link__page" id=m-referencecsharpcsharp-generated><span>Generated Code Guide</span></a></li><li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child" id=m-referencecsharpapi-docs-link-li><a href=/reference/csharp/api-docs target=_blank rel=noopener class="align-left pl-0 td-sidebar-link td-sidebar-link__page" id=m-referencecsharpapi-docs-link><span>C# API</span></a></li></ul></li><li class="td-sidebar-nav__section-title td-sidebar-nav__section with-child" id=m-referencedart-li><a href=/reference/dart/ title="Dart Reference" class="align-left pl-0 td-sidebar-link td-sidebar-link__section" id=m-referencedart><span>Dart</span></a><ul class="ul-3 foldable"><li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child" id=m-referencedartdart-generated-li><a href=/reference/dart/dart-generated/ title="Dart Generated Code Guide" class="align-left pl-0 td-sidebar-link td-sidebar-link__page" id=m-referencedartdart-generated><span>Generated Code Guide</span></a></li><li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child" id=m-referencedartapi-docs-link-li><a href=https://pub.dartlang.org/documentation/protobuf target=_blank rel=noopener class="align-left pl-0 td-sidebar-link td-sidebar-link__page" id=m-referencedartapi-docs-link><span>Dart API</span></a></li></ul></li><li class="td-sidebar-nav__section-title td-sidebar-nav__section with-child" id=m-referencego-li><a href=/reference/go/ title="Go Reference" class="align-left pl-0 td-sidebar-link td-sidebar-link__section" id=m-referencego><span>Go</span></a><ul class="ul-3 foldable"><li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child" id=m-referencegogo-generated-li><a href=/reference/go/go-generated/ title="Go Generated Code Guide" class="align-left pl-0 td-sidebar-link td-sidebar-link__page" id=m-referencegogo-generated><span>Generated Code Guide</span></a></li><li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child" id=m-referencegofaq-li><a href=/reference/go/faq/ title="Go FAQ" class="align-left pl-0 td-sidebar-link td-sidebar-link__page" id=m-referencegofaq><span>FAQ</span></a></li><li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child" id=m-referencegoapi-docs-link-li><a href=https://pkg.go.dev/google.golang.org/protobuf/proto target=_blank rel=noopener class="align-left pl-0 td-sidebar-link td-sidebar-link__page" id=m-referencegoapi-docs-link><span>Go API</span></a></li></ul></li><li class="td-sidebar-nav__section-title td-sidebar-nav__section with-child" id=m-referencejava-li><a href=/reference/java/ title="Java Reference" class="align-left pl-0 td-sidebar-link td-sidebar-link__section" id=m-referencejava><span>Java</span></a><ul class="ul-3 foldable"><li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child" id=m-referencejavajava-generated-li><a href=/reference/java/java-generated/ title="Java Generated Code Guide" class="align-left pl-0 td-sidebar-link td-sidebar-link__page" id=m-referencejavajava-generated><span>Generated Code Guide</span></a></li><li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child" id=m-referencejavaapi-docs-link-li><a href=/reference/java/api-docs/overview-summary.html target=_blank rel=noopener class="align-left pl-0 td-sidebar-link td-sidebar-link__page" id=m-referencejavaapi-docs-link><span>Java API</span></a></li><li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child" id=m-referencejavajava-proto-names-li><a href=/reference/java/java-proto-names/ class="align-left pl-0 td-sidebar-link td-sidebar-link__page" id=m-referencejavajava-proto-names><span></span></a></li></ul></li><li class="td-sidebar-nav__section-title td-sidebar-nav__section with-child" id=m-referencekotlin-li><a href=/reference/kotlin/ title="Kotlin Reference" class="align-left pl-0 td-sidebar-link td-sidebar-link__section" id=m-referencekotlin><span>Kotlin</span></a><ul class="ul-3 foldable"><li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child" id=m-referencekotlinkotlin-generated-li><a href=/reference/kotlin/kotlin-generated/ title="Kotlin Generated Code Guide" class="align-left pl-0 td-sidebar-link td-sidebar-link__page" id=m-referencekotlinkotlin-generated><span>Generated Code Guide</span></a></li><li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child" id=m-referencekotlinapi-docs-li><a href=/reference/kotlin/api-docs/ class="align-left pl-0 td-sidebar-link td-sidebar-link__section" id=m-referencekotlinapi-docs><span>Kotlin API</span></a></li></ul></li><li class="td-sidebar-nav__section-title td-sidebar-nav__section with-child" id=m-referenceobjective-c-li><a href=/reference/objective-c/ title="Objective-C Reference" class="align-left pl-0 td-sidebar-link td-sidebar-link__section" id=m-referenceobjective-c><span>Objective-C</span></a><ul class="ul-3 foldable"><li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child" id=m-referenceobjective-cobjective-c-generated-li><a href=/reference/objective-c/objective-c-generated/ title="Objective-C Generated Code Guide" class="align-left pl-0 td-sidebar-link td-sidebar-link__page" id=m-referenceobjective-cobjective-c-generated><span>Generated Code Guide</span></a></li></ul></li><li class="td-sidebar-nav__section-title td-sidebar-nav__section with-child" id=m-referencephp-li><a href=/reference/php/ title="PHP Reference" class="align-left pl-0 td-sidebar-link td-sidebar-link__section" id=m-referencephp><span>PHP</span></a><ul class="ul-3 foldable"><li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child" id=m-referencephpphp-generated-li><a href=/reference/php/php-generated/ title="PHP Generated Code Guide" class="align-left pl-0 td-sidebar-link td-sidebar-link__page" id=m-referencephpphp-generated><span>Generated Code Guide</span></a></li><li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child" id=m-referencephpapi-docs-link-li><a href=/reference/php/api-docs/ target=_blank rel=noopener class="align-left pl-0 td-sidebar-link td-sidebar-link__page" id=m-referencephpapi-docs-link><span>PHP API</span></a></li></ul></li><li class="td-sidebar-nav__section-title td-sidebar-nav__section with-child" id=m-referencepython-li><a href=/reference/python/ title="Python Reference" class="align-left pl-0 td-sidebar-link td-sidebar-link__section" id=m-referencepython><span>Python</span></a><ul class="ul-3 foldable"><li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child" id=m-referencepythonpython-generated-li><a href=/reference/python/python-generated/ title="Python Generated Code Guide" class="align-left pl-0 td-sidebar-link td-sidebar-link__page" id=m-referencepythonpython-generated><span>Generated Code Guide</span></a></li><li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child" id=m-referencepythonapi-docs-link-li><a href=https://googleapis.dev/python/protobuf/latest/ target=_blank rel=noopener class="align-left pl-0 td-sidebar-link td-sidebar-link__page" id=m-referencepythonapi-docs-link><span>Python API</span></a></li></ul></li><li class="td-sidebar-nav__section-title td-sidebar-nav__section with-child" id=m-referenceruby-li><a href=/reference/ruby/ title="Ruby Reference" class="align-left pl-0 td-sidebar-link td-sidebar-link__section" id=m-referenceruby><span>Ruby</span></a><ul class="ul-3 foldable"><li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child" id=m-referencerubyruby-generated-li><a href=/reference/ruby/ruby-generated/ title="Ruby Generated Code Guide" class="align-left pl-0 td-sidebar-link td-sidebar-link__page" id=m-referencerubyruby-generated><span>Generated Code Guide</span></a></li></ul></li><li class="td-sidebar-nav__section-title td-sidebar-nav__section with-child active-path" id=m-referenceprotobuf-li><a href=/reference/protobuf/ title="Protocol Buffers Reference" class="align-left pl-0 td-sidebar-link td-sidebar-link__section" id=m-referenceprotobuf><span>Protocol Buffers</span></a><ul class="ul-3 foldable"><li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child" id=m-referenceprotobufproto2-spec-li><a href=/reference/protobuf/proto2-spec/ title="Protocol Buffers Version 2 Language Specification" class="align-left pl-0 td-sidebar-link td-sidebar-link__page" id=m-referenceprotobufproto2-spec><span>Version 2 Language Specification</span></a></li><li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child" id=m-referenceprotobufproto3-spec-li><a href=/reference/protobuf/proto3-spec/ title="Protocol Buffers Version 3 Language Specification" class="align-left pl-0 td-sidebar-link td-sidebar-link__page" id=m-referenceprotobufproto3-spec><span>Version 3 Language Specification</span></a></li><li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child active-path" id=m-referenceprotobuftextformat-spec-li><a href=/reference/protobuf/textformat-spec/ class="align-left pl-0 active td-sidebar-link td-sidebar-link__page" id=m-referenceprotobuftextformat-spec><span class=td-sidebar-nav-active-item>Text Format Language Specification</span></a></li><li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child" id=m-referenceprotobufgoogleprotobuf-li><a href=/reference/protobuf/google.protobuf/ title="Protocol Buffers Well-Known Types" class="align-left pl-0 td-sidebar-link td-sidebar-link__page" id=m-referenceprotobufgoogleprotobuf><span>Well-Known Types</span></a></li></ul></li><li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child" id=m-referenceother-li><a href=/reference/other/ class="align-left pl-0 td-sidebar-link td-sidebar-link__page" id=m-referenceother><span>Other Languages</span></a></li></ul></li><li class="td-sidebar-nav__section-title td-sidebar-nav__section with-child" id=m-support-li><a href=/support/ class="align-left pl-0 td-sidebar-link td-sidebar-link__section" id=m-support><span>Support</span></a><ul class="ul-2 foldable"><li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child" id=m-supportversion-support-li><a href=/support/version-support/ class="align-left pl-0 td-sidebar-link td-sidebar-link__page" id=m-supportversion-support><span>Version Support</span></a></li><li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child" id=m-supportmigration-li><a href=/support/migration/ class="align-left pl-0 td-sidebar-link td-sidebar-link__page" id=m-supportmigration><span>Migration Guide</span></a></li><li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child" id=m-supportcross-version-runtime-guarantee-li><a href=/support/cross-version-runtime-guarantee/ class="align-left pl-0 td-sidebar-link td-sidebar-link__page" id=m-supportcross-version-runtime-guarantee><span>Cross-Version Runtime Guarantee</span></a></li></ul></li><li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child" id=m-downloads-li><a href=/downloads/ class="align-left pl-0 td-sidebar-link td-sidebar-link__page" id=m-downloads><span>Downloads</span></a></li><li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child" id=m-history-li><a href=/history/ class="align-left pl-0 td-sidebar-link td-sidebar-link__page" id=m-history><span>History</span></a></li><li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child" id=m-forum-link-li><a href=https://groups.google.com/g/protobuf target=_blank rel=noopener class="align-left pl-0 td-sidebar-link td-sidebar-link__page" id=m-forum-link><span>Forum</span></a></li><li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child" id=m-navbar-li><a href=/navbar/ class="align-left pl-0 td-sidebar-link td-sidebar-link__page" id=m-navbar><span></span></a></li><li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child" id=m-search-li><a href=/search/ class="align-left pl-0 td-sidebar-link td-sidebar-link__page" id=m-search><span>Search Results</span></a></li></ul></li></ul></nav></div></aside><aside class="d-none d-xl-block col-xl-2 td-sidebar-toc d-print-none"><div class="td-page-meta ml-2 pb-1 pt-2 mb-0"><a href=https://github.com/protocolbuffers/protocolbuffers.github.io/tree/main/content/reference/protobuf/textformat-spec.md class=td-page-meta--view target=_blank rel=noopener><i class="fa-solid fa-file-lines fa-fw"></i> View page source</a>
 <a href=https://github.com/protocolbuffers/protocolbuffers.github.io/edit/main/content/reference/protobuf/textformat-spec.md class=td-page-meta--edit target=_blank rel=noopener><i class="fa-solid fa-pen-to-square fa-fw"></i> Edit this page</a>
 <a href="https://github.com/protocolbuffers/protocolbuffers.github.io/new/main/content/reference/protobuf/textformat-spec.md?filename=change-me.md&value=---%0Atitle%3A+%22Long+Page+Title%22%0AlinkTitle%3A+%22Short+Nav+Title%22%0Aweight%3A+100%0Adescription%3A+%3E-%0A+++++Page+description+for+heading+and+indexes.%0A---%0A%0A%23%23+Heading%0A%0AEdit+this+template+to+create+your+new+page.%0A%0A%2A+Give+it+a+good+name%2C+ending+in+%60.md%60+-+e.g.+%60getting-started.md%60%0A%2A+Edit+the+%22front+matter%22+section+at+the+top+of+the+page+%28weight+controls+how+its+ordered+amongst+other+pages+in+the+same+directory%3B+lowest+number+first%29.%0A%2A+Add+a+good+commit+message+at+the+bottom+of+the+page+%28%3C80+characters%3B+use+the+extended+description+field+for+more+detail%29.%0A%2A+Create+a+new+branch+so+you+can+preview+your+new+file+and+request+a+review+via+Pull+Request.%0A" class=td-page-meta--child target=_blank rel=noopener><i class="fa-solid fa-pen-to-square fa-fw"></i> Create child page</a>
 <a href="https://github.com/protocolbuffers/protocolbuffers.github.io/issues/new?title=Text%20Format%20Language%20Specification" class=td-page-meta--issue target=_blank rel=noopener><i class="fa-solid fa-list-check fa-fw"></i> Create documentation issue</a>
@@ -19,88 +19,88 @@ categories. Lexical elements must match the input text exactly as described, but
 syntactic elements may be separated by optional <code>WHITESPACE</code> and <code>COMMENT</code>
 tokens.</p><p>For example, a signed floating point value comprises two syntactic elements: the
 sign (<code>-</code>) and the <code>FLOAT</code> literal. Optional whitespace and comments may exist
-between the sign and the number, but not within the number. Example:</p><pre tabindex=0><code class=language-textproto data-lang=textproto>value: -2.0   # Valid: no additional whitespace.
-value: - 2.0  # Valid: whitespace between &#39;-&#39; and &#39;2.0&#39;.
-value: -
-  # comment
-  2.0         # Valid: whitespace and comments between &#39;-&#39; and &#39;2.0&#39;.
-value: 2 . 0  # Invalid: the floating point period is part of the lexical
-              # element, so no additional whitespace is allowed.
-</code></pre><p>There is one edge case that requires special attention: a number token (<code>FLOAT</code>,
+between the sign and the number, but not within the number. Example:</p><div class=highlight><pre tabindex=0 style=background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-fallback data-lang=fallback><span style=display:flex><span>value: -2.0   # Valid: no additional whitespace.
+</span></span><span style=display:flex><span>value: - 2.0  # Valid: whitespace between &#39;-&#39; and &#39;2.0&#39;.
+</span></span><span style=display:flex><span>value: -
+</span></span><span style=display:flex><span>  # comment
+</span></span><span style=display:flex><span>  2.0         # Valid: whitespace and comments between &#39;-&#39; and &#39;2.0&#39;.
+</span></span><span style=display:flex><span>value: 2 . 0  # Invalid: the floating point period is part of the lexical
+</span></span><span style=display:flex><span>              # element, so no additional whitespace is allowed.
+</span></span></code></pre></div><p>There is one edge case that requires special attention: a number token (<code>FLOAT</code>,
 <code>DEC_INT</code>, <code>OCT_INT</code>, or <code>HEX_INT</code>) may not be immediately followed by an
-<code>IDENT</code> token. Example:</p><pre tabindex=0><code class=language-textproto data-lang=textproto>foo: 10 bar: 20           # Valid: whitespace separates &#39;10&#39; and &#39;bar&#39;
-foo: 10,bar: 20           # Valid: &#39;,&#39; separates &#39;10&#39; and &#39;bar&#39;
-foo: 10[com.foo.ext]: 20  # Valid: &#39;10&#39; is followed immediately by &#39;[&#39;, which is
-                          # not an identifier.
-foo: 10bar: 20            # Invalid: no space between &#39;10&#39; and identifier &#39;bar&#39;.
-</code></pre><h2 id=lexical>Lexical Elements</h2><p>The lexical elements described below fall into two categories: uppercase primary
+<code>IDENT</code> token. Example:</p><div class=highlight><pre tabindex=0 style=background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-fallback data-lang=fallback><span style=display:flex><span>foo: 10 bar: 20           # Valid: whitespace separates &#39;10&#39; and &#39;bar&#39;
+</span></span><span style=display:flex><span>foo: 10,bar: 20           # Valid: &#39;,&#39; separates &#39;10&#39; and &#39;bar&#39;
+</span></span><span style=display:flex><span>foo: 10[com.foo.ext]: 20  # Valid: &#39;10&#39; is followed immediately by &#39;[&#39;, which is
+</span></span><span style=display:flex><span>                          # not an identifier.
+</span></span><span style=display:flex><span>foo: 10bar: 20            # Invalid: no space between &#39;10&#39; and identifier &#39;bar&#39;.
+</span></span></code></pre></div><h2 id=lexical>Lexical Elements</h2><p>The lexical elements described below fall into two categories: uppercase primary
 elements and lowercase fragments. Only primary elements are included in the
 output stream of tokens used during syntactic analysis; fragments exist only to
-simplify construction of primary elements.</p><p>When parsing input text, the longest matching primary element wins. Example:</p><pre tabindex=0><code class=language-textproto data-lang=textproto>value: 10   # &#39;10&#39; is parsed as a DEC_INT token.
-value: 10f  # &#39;10f&#39; is parsed as a FLOAT token, despite containing &#39;10&#39; which
-            # would also match DEC_INT. In this case, FLOAT matches a longer
-            # subsequence of the input.
-</code></pre><h3 id=characters>Characters</h3><pre tabindex=0><code>char    = ? Any non-NUL unicode character ? ;
-newline = ? ASCII #10 (line feed) ? ;
-
-letter = &#34;A&#34; | &#34;B&#34; | &#34;C&#34; | &#34;D&#34; | &#34;E&#34; | &#34;F&#34; | &#34;G&#34; | &#34;H&#34; | &#34;I&#34; | &#34;J&#34; | &#34;K&#34; | &#34;L&#34; | &#34;M&#34;
-       | &#34;N&#34; | &#34;O&#34; | &#34;P&#34; | &#34;Q&#34; | &#34;R&#34; | &#34;S&#34; | &#34;T&#34; | &#34;U&#34; | &#34;V&#34; | &#34;W&#34; | &#34;X&#34; | &#34;Y&#34; | &#34;Z&#34;
-       | &#34;a&#34; | &#34;b&#34; | &#34;c&#34; | &#34;d&#34; | &#34;e&#34; | &#34;f&#34; | &#34;g&#34; | &#34;h&#34; | &#34;i&#34; | &#34;j&#34; | &#34;k&#34; | &#34;l&#34; | &#34;m&#34;
-       | &#34;n&#34; | &#34;o&#34; | &#34;p&#34; | &#34;q&#34; | &#34;r&#34; | &#34;s&#34; | &#34;t&#34; | &#34;u&#34; | &#34;v&#34; | &#34;w&#34; | &#34;x&#34; | &#34;y&#34; | &#34;z&#34;
-       | &#34;_&#34; ;
-
-oct = &#34;0&#34; | &#34;1&#34; | &#34;2&#34; | &#34;3&#34; | &#34;4&#34; | &#34;5&#34; | &#34;6&#34; | &#34;7&#34; ;
-dec = &#34;0&#34; | &#34;1&#34; | &#34;2&#34; | &#34;3&#34; | &#34;4&#34; | &#34;5&#34; | &#34;6&#34; | &#34;7&#34; | &#34;8&#34; | &#34;9&#34; ;
-hex = &#34;0&#34; | &#34;1&#34; | &#34;2&#34; | &#34;3&#34; | &#34;4&#34; | &#34;5&#34; | &#34;6&#34; | &#34;7&#34; | &#34;8&#34; | &#34;9&#34;
-    | &#34;A&#34; | &#34;B&#34; | &#34;C&#34; | &#34;D&#34; | &#34;E&#34; | &#34;F&#34;
-    | &#34;a&#34; | &#34;b&#34; | &#34;c&#34; | &#34;d&#34; | &#34;e&#34; | &#34;f&#34; ;
-</code></pre><h3 id=whitespace>Whitespace and Comments</h3><pre tabindex=0><code>COMMENT    = &#34;#&#34;, { char - newline }, [ newline ] ;
-WHITESPACE = &#34; &#34;
-           | newline
-           | ? ASCII #9  (horizontal tab) ?
-           | ? ASCII #11 (vertical tab) ?
-           | ? ASCII #12 (form feed) ?
-           | ? ASCII #13 (carriage return) ? ;
-</code></pre><h3 id=identifiers>Identifiers</h3><pre tabindex=0><code>IDENT = letter, { letter | dec } ;
-</code></pre><h3 id=numeric>Numeric Literals</h3><pre tabindex=0><code>dec_lit   = &#34;0&#34;
-          | ( dec - &#34;0&#34; ), { dec } ;
-float_lit = &#34;.&#34;, dec, { dec }, [ exp ]
-          | dec_lit, &#34;.&#34;, { dec }, [ exp ]
-          | dec_lit, exp ;
-exp       = ( &#34;E&#34; | &#34;e&#34; ), [ &#34;+&#34; | &#34;-&#34; ], dec, { dec } ;
-
-DEC_INT   = dec_lit
-OCT_INT   = &#34;0&#34;, oct, { oct } ;
-HEX_INT   = &#34;0&#34;, ( &#34;X&#34; | &#34;x&#34; ), hex, { hex } ;
-FLOAT     = float_lit, [ &#34;F&#34; | &#34;f&#34; ]
-          | dec_lit,   ( &#34;F&#34; | &#34;f&#34; ) ;
-</code></pre><p>Decimal integers can be cast as floating-point values by using the <code>F</code> and <code>f</code>
-suffixes. Example:</p><pre tabindex=0><code class=language-textproto data-lang=textproto>foo: 10    # This is an integer value.
-foo: 10f   # This is a floating-point value.
-foo: 1.0f  # Also optional for floating-point literals.
-</code></pre><h3 id=string>String Literals</h3><pre tabindex=0><code>STRING = single_string | double_string ;
-single_string = &#34;&#39;&#34;, { escape | char - &#34;&#39;&#34; - newline - &#34;\&#34; }, &#34;&#39;&#34; ;
-double_string = &#39;&#34;&#39;, { escape | char - &#39;&#34;&#39; - newline - &#34;\&#34; }, &#39;&#34;&#39; ;
-
-escape = &#34;\a&#34;                        (* ASCII #7  (bell)                 *)
-       | &#34;\b&#34;                        (* ASCII #8  (backspace)            *)
-       | &#34;\f&#34;                        (* ASCII #12 (form feed)            *)
-       | &#34;\n&#34;                        (* ASCII #10 (line feed)            *)
-       | &#34;\r&#34;                        (* ASCII #13 (carriage return)      *)
-       | &#34;\t&#34;                        (* ASCII #9  (horizontal tab)       *)
-       | &#34;\v&#34;                        (* ASCII #11 (vertical tab)         *)
-       | &#34;\?&#34;                        (* ASCII #63 (question mark)        *)
-       | &#34;\\&#34;                        (* ASCII #92 (backslash)            *)
-       | &#34;\&#39;&#34;                        (* ASCII #39 (apostrophe)           *)
-       | &#39;\&#34;&#39;                        (* ASCII #34 (quote)                *)
-       | &#34;\&#34;, oct, [ oct, [ oct ] ]  (* UTF-8 byte in octal              *)
-       | &#34;\x&#34;, hex, [ hex ]          (* UTF-8 byte in hexadecimal        *)
-       | &#34;\u&#34;, hex, hex, hex, hex    (* Unicode code point up to 0xffff  *)
-       | &#34;\U000&#34;,
-         hex, hex, hex, hex, hex     (* Unicode code point up to 0xfffff *)
-       | &#34;\U0010&#34;,
-         hex, hex, hex, hex ;        (* Unicode code point between 0x100000 and 0x10ffff *)
-</code></pre><p>Longer strings can be broken into several quoted strings on successive lines.
+simplify construction of primary elements.</p><p>When parsing input text, the longest matching primary element wins. Example:</p><div class=highlight><pre tabindex=0 style=background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-fallback data-lang=fallback><span style=display:flex><span>value: 10   # &#39;10&#39; is parsed as a DEC_INT token.
+</span></span><span style=display:flex><span>value: 10f  # &#39;10f&#39; is parsed as a FLOAT token, despite containing &#39;10&#39; which
+</span></span><span style=display:flex><span>            # would also match DEC_INT. In this case, FLOAT matches a longer
+</span></span><span style=display:flex><span>            # subsequence of the input.
+</span></span></code></pre></div><h3 id=characters>Characters</h3><div class=highlight><pre tabindex=0 style=background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-fallback data-lang=fallback><span style=display:flex><span>char    = ? Any non-NUL unicode character ? ;
+</span></span><span style=display:flex><span>newline = ? ASCII #10 (line feed) ? ;
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>letter = &#34;A&#34; | &#34;B&#34; | &#34;C&#34; | &#34;D&#34; | &#34;E&#34; | &#34;F&#34; | &#34;G&#34; | &#34;H&#34; | &#34;I&#34; | &#34;J&#34; | &#34;K&#34; | &#34;L&#34; | &#34;M&#34;
+</span></span><span style=display:flex><span>       | &#34;N&#34; | &#34;O&#34; | &#34;P&#34; | &#34;Q&#34; | &#34;R&#34; | &#34;S&#34; | &#34;T&#34; | &#34;U&#34; | &#34;V&#34; | &#34;W&#34; | &#34;X&#34; | &#34;Y&#34; | &#34;Z&#34;
+</span></span><span style=display:flex><span>       | &#34;a&#34; | &#34;b&#34; | &#34;c&#34; | &#34;d&#34; | &#34;e&#34; | &#34;f&#34; | &#34;g&#34; | &#34;h&#34; | &#34;i&#34; | &#34;j&#34; | &#34;k&#34; | &#34;l&#34; | &#34;m&#34;
+</span></span><span style=display:flex><span>       | &#34;n&#34; | &#34;o&#34; | &#34;p&#34; | &#34;q&#34; | &#34;r&#34; | &#34;s&#34; | &#34;t&#34; | &#34;u&#34; | &#34;v&#34; | &#34;w&#34; | &#34;x&#34; | &#34;y&#34; | &#34;z&#34;
+</span></span><span style=display:flex><span>       | &#34;_&#34; ;
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>oct = &#34;0&#34; | &#34;1&#34; | &#34;2&#34; | &#34;3&#34; | &#34;4&#34; | &#34;5&#34; | &#34;6&#34; | &#34;7&#34; ;
+</span></span><span style=display:flex><span>dec = &#34;0&#34; | &#34;1&#34; | &#34;2&#34; | &#34;3&#34; | &#34;4&#34; | &#34;5&#34; | &#34;6&#34; | &#34;7&#34; | &#34;8&#34; | &#34;9&#34; ;
+</span></span><span style=display:flex><span>hex = &#34;0&#34; | &#34;1&#34; | &#34;2&#34; | &#34;3&#34; | &#34;4&#34; | &#34;5&#34; | &#34;6&#34; | &#34;7&#34; | &#34;8&#34; | &#34;9&#34;
+</span></span><span style=display:flex><span>    | &#34;A&#34; | &#34;B&#34; | &#34;C&#34; | &#34;D&#34; | &#34;E&#34; | &#34;F&#34;
+</span></span><span style=display:flex><span>    | &#34;a&#34; | &#34;b&#34; | &#34;c&#34; | &#34;d&#34; | &#34;e&#34; | &#34;f&#34; ;
+</span></span></code></pre></div><h3 id=whitespace>Whitespace and Comments</h3><div class=highlight><pre tabindex=0 style=background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-fallback data-lang=fallback><span style=display:flex><span>COMMENT    = &#34;#&#34;, { char - newline }, [ newline ] ;
+</span></span><span style=display:flex><span>WHITESPACE = &#34; &#34;
+</span></span><span style=display:flex><span>           | newline
+</span></span><span style=display:flex><span>           | ? ASCII #9  (horizontal tab) ?
+</span></span><span style=display:flex><span>           | ? ASCII #11 (vertical tab) ?
+</span></span><span style=display:flex><span>           | ? ASCII #12 (form feed) ?
+</span></span><span style=display:flex><span>           | ? ASCII #13 (carriage return) ? ;
+</span></span></code></pre></div><h3 id=identifiers>Identifiers</h3><div class=highlight><pre tabindex=0 style=background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-fallback data-lang=fallback><span style=display:flex><span>IDENT = letter, { letter | dec } ;
+</span></span></code></pre></div><h3 id=numeric>Numeric Literals</h3><div class=highlight><pre tabindex=0 style=background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-fallback data-lang=fallback><span style=display:flex><span>dec_lit   = &#34;0&#34;
+</span></span><span style=display:flex><span>          | ( dec - &#34;0&#34; ), { dec } ;
+</span></span><span style=display:flex><span>float_lit = &#34;.&#34;, dec, { dec }, [ exp ]
+</span></span><span style=display:flex><span>          | dec_lit, &#34;.&#34;, { dec }, [ exp ]
+</span></span><span style=display:flex><span>          | dec_lit, exp ;
+</span></span><span style=display:flex><span>exp       = ( &#34;E&#34; | &#34;e&#34; ), [ &#34;+&#34; | &#34;-&#34; ], dec, { dec } ;
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>DEC_INT   = dec_lit
+</span></span><span style=display:flex><span>OCT_INT   = &#34;0&#34;, oct, { oct } ;
+</span></span><span style=display:flex><span>HEX_INT   = &#34;0&#34;, ( &#34;X&#34; | &#34;x&#34; ), hex, { hex } ;
+</span></span><span style=display:flex><span>FLOAT     = float_lit, [ &#34;F&#34; | &#34;f&#34; ]
+</span></span><span style=display:flex><span>          | dec_lit,   ( &#34;F&#34; | &#34;f&#34; ) ;
+</span></span></code></pre></div><p>Decimal integers can be cast as floating-point values by using the <code>F</code> and <code>f</code>
+suffixes. Example:</p><div class=highlight><pre tabindex=0 style=background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-fallback data-lang=fallback><span style=display:flex><span>foo: 10    # This is an integer value.
+</span></span><span style=display:flex><span>foo: 10f   # This is a floating-point value.
+</span></span><span style=display:flex><span>foo: 1.0f  # Also optional for floating-point literals.
+</span></span></code></pre></div><h3 id=string>String Literals</h3><div class=highlight><pre tabindex=0 style=background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-fallback data-lang=fallback><span style=display:flex><span>STRING = single_string | double_string ;
+</span></span><span style=display:flex><span>single_string = &#34;&#39;&#34;, { escape | char - &#34;&#39;&#34; - newline - &#34;\&#34; }, &#34;&#39;&#34; ;
+</span></span><span style=display:flex><span>double_string = &#39;&#34;&#39;, { escape | char - &#39;&#34;&#39; - newline - &#34;\&#34; }, &#39;&#34;&#39; ;
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>escape = &#34;\a&#34;                        (* ASCII #7  (bell)                 *)
+</span></span><span style=display:flex><span>       | &#34;\b&#34;                        (* ASCII #8  (backspace)            *)
+</span></span><span style=display:flex><span>       | &#34;\f&#34;                        (* ASCII #12 (form feed)            *)
+</span></span><span style=display:flex><span>       | &#34;\n&#34;                        (* ASCII #10 (line feed)            *)
+</span></span><span style=display:flex><span>       | &#34;\r&#34;                        (* ASCII #13 (carriage return)      *)
+</span></span><span style=display:flex><span>       | &#34;\t&#34;                        (* ASCII #9  (horizontal tab)       *)
+</span></span><span style=display:flex><span>       | &#34;\v&#34;                        (* ASCII #11 (vertical tab)         *)
+</span></span><span style=display:flex><span>       | &#34;\?&#34;                        (* ASCII #63 (question mark)        *)
+</span></span><span style=display:flex><span>       | &#34;\\&#34;                        (* ASCII #92 (backslash)            *)
+</span></span><span style=display:flex><span>       | &#34;\&#39;&#34;                        (* ASCII #39 (apostrophe)           *)
+</span></span><span style=display:flex><span>       | &#39;\&#34;&#39;                        (* ASCII #34 (quote)                *)
+</span></span><span style=display:flex><span>       | &#34;\&#34;, oct, [ oct, [ oct ] ]  (* UTF-8 byte in octal              *)
+</span></span><span style=display:flex><span>       | &#34;\x&#34;, hex, [ hex ]          (* UTF-8 byte in hexadecimal        *)
+</span></span><span style=display:flex><span>       | &#34;\u&#34;, hex, hex, hex, hex    (* Unicode code point up to 0xffff  *)
+</span></span><span style=display:flex><span>       | &#34;\U000&#34;,
+</span></span><span style=display:flex><span>         hex, hex, hex, hex, hex     (* Unicode code point up to 0xfffff *)
+</span></span><span style=display:flex><span>       | &#34;\U0010&#34;,
+</span></span><span style=display:flex><span>         hex, hex, hex, hex ;        (* Unicode code point between 0x100000 and 0x10ffff *)
+</span></span></code></pre></div><p>Longer strings can be broken into several quoted strings on successive lines.
 For example:</p><div class=highlight><pre tabindex=0 style=background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-proto data-lang=proto><span style=display:flex><span>  <span style=color:#000>quote</span><span style=color:#ce5c00;font-weight:700>:</span><span style=color:#a40000>
 </span></span></span><span style=display:flex><span><span style=color:#a40000></span>      <span style=color:#4e9a06>&#34;When we got into office, the thing that surprised me most was to find &#34;</span><span style=color:#a40000>
 </span></span></span><span style=display:flex><span><span style=color:#a40000></span>      <span style=color:#4e9a06>&#34;that things were just as bad as we&#39;d been saying they were.\n\n&#34;</span><span style=color:#a40000>
@@ -113,79 +113,79 @@ UTF-16 code units, and expects a <code>\uHHHH</code> low-surrogate code point to
 immediately follow, without any split across separate quoted strings. In
 addition, unpaired surrogates will be rendered directly into also-invalid UTF-8.
 These are both non-conforming behaviors[^surrogates] and should not be relied
-on.</div><h2 id=syntax>Syntax Elements</h2><h3 id=message>Message</h3><p>A message is a collection of fields. A text format file is a single Message.</p><pre tabindex=0><code>Message = { Field } ;
-</code></pre><h3 id=literals>Literals</h3><p>Field literal values can be numbers, strings, or identifiers such as <code>true</code> or
-enum values.</p><pre tabindex=0><code>String             = STRING, { STRING } ;
-Float              = [ &#34;-&#34; ], FLOAT ;
-Identifier         = IDENT ;
-SignedIdentifier   = &#34;-&#34;, IDENT ;   (* For example, &#34;-inf&#34; *)
-DecSignedInteger   = &#34;-&#34;, DEC_INT ;
-OctSignedInteger   = &#34;-&#34;, OCT_INT ;
-HexSignedInteger   = &#34;-&#34;, HEX_INT ;
-DecUnsignedInteger = DEC_INT ;
-OctUnsignedInteger = OCT_INT ;
-HexUnsignedInteger = HEX_INT ;
-</code></pre><p>A single string value can comprise multiple quoted parts separated by optional
-whitespace. Example:</p><pre tabindex=0><code class=language-textproto data-lang=textproto>a_string: &#34;first part&#34; &#39;second part&#39;
-          &#34;third part&#34;
-no_whitespace: &#34;first&#34;&#34;second&#34;&#39;third&#39;&#39;fourth&#39;
-</code></pre><h3 id=field-names>Field Names</h3><p>Fields that are part of the containing message use simple <code>Identifiers</code> as
+on.</div><h2 id=syntax>Syntax Elements</h2><h3 id=message>Message</h3><p>A message is a collection of fields. A text format file is a single Message.</p><div class=highlight><pre tabindex=0 style=background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-fallback data-lang=fallback><span style=display:flex><span>Message = { Field } ;
+</span></span></code></pre></div><h3 id=literals>Literals</h3><p>Field literal values can be numbers, strings, or identifiers such as <code>true</code> or
+enum values.</p><div class=highlight><pre tabindex=0 style=background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-fallback data-lang=fallback><span style=display:flex><span>String             = STRING, { STRING } ;
+</span></span><span style=display:flex><span>Float              = [ &#34;-&#34; ], FLOAT ;
+</span></span><span style=display:flex><span>Identifier         = IDENT ;
+</span></span><span style=display:flex><span>SignedIdentifier   = &#34;-&#34;, IDENT ;   (* For example, &#34;-inf&#34; *)
+</span></span><span style=display:flex><span>DecSignedInteger   = &#34;-&#34;, DEC_INT ;
+</span></span><span style=display:flex><span>OctSignedInteger   = &#34;-&#34;, OCT_INT ;
+</span></span><span style=display:flex><span>HexSignedInteger   = &#34;-&#34;, HEX_INT ;
+</span></span><span style=display:flex><span>DecUnsignedInteger = DEC_INT ;
+</span></span><span style=display:flex><span>OctUnsignedInteger = OCT_INT ;
+</span></span><span style=display:flex><span>HexUnsignedInteger = HEX_INT ;
+</span></span></code></pre></div><p>A single string value can comprise multiple quoted parts separated by optional
+whitespace. Example:</p><div class=highlight><pre tabindex=0 style=background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-fallback data-lang=fallback><span style=display:flex><span>a_string: &#34;first part&#34; &#39;second part&#39;
+</span></span><span style=display:flex><span>          &#34;third part&#34;
+</span></span><span style=display:flex><span>no_whitespace: &#34;first&#34;&#34;second&#34;&#39;third&#39;&#39;fourth&#39;
+</span></span></code></pre></div><h3 id=field-names>Field Names</h3><p>Fields that are part of the containing message use simple <code>Identifiers</code> as
 names.
 <a href=/programming-guides/proto#extensions><code>Extension</code></a> and
 <a href=/programming-guides/proto3#any><code>Any</code></a> field names are
 wrapped in square brackets and fully-qualified. <code>Any</code> field names are prefixed
-with a qualifying domain name, such as <code>type.googleapis.com/</code>.</p><pre tabindex=0><code>FieldName     = ExtensionName | AnyName | IDENT ;
-ExtensionName = &#34;[&#34;, TypeName, &#34;]&#34; ;
-AnyName       = &#34;[&#34;, Domain, &#34;/&#34;, TypeName, &#34;]&#34; ;
-TypeName      = IDENT, { &#34;.&#34;, IDENT } ;
-Domain        = IDENT, { &#34;.&#34;, IDENT } ;
-</code></pre><p>Regular fields and extension fields can have scalar or message values. <code>Any</code>
-fields are always messages. Example:</p><pre tabindex=0><code class=language-textproto data-lang=textproto>reg_scalar: 10
-reg_message { foo: &#34;bar&#34; }
-
-[com.foo.ext.scalar]​: 10
-[com.foo.ext.message] { foo: &#34;bar&#34; }
-
-any_value {
-  [type.googleapis.com/com.foo.any] { foo: &#34;bar&#34; }
-}
-</code></pre><h3 id=fields>Fields</h3><p>Field values can be literals (strings, numbers, or identifiers), or nested
-messages.</p><pre tabindex=0><code>Field        = ScalarField | MessageField ;
-MessageField = FieldName, [ &#34;:&#34; ], ( MessageValue | MessageList ) [ &#34;;&#34; | &#34;,&#34; ];
-ScalarField  = FieldName, &#34;:&#34;,     ( ScalarValue  | ScalarList  ) [ &#34;;&#34; | &#34;,&#34; ];
-MessageList  = &#34;[&#34;, [ MessageValue, { &#34;,&#34;, MessageValue } ], &#34;]&#34; ;
-ScalarList   = &#34;[&#34;, [ ScalarValue,  { &#34;,&#34;, ScalarValue  } ], &#34;]&#34; ;
-MessageValue = &#34;{&#34;, Message, &#34;}&#34; | &#34;&lt;&#34;, Message, &#34;&gt;&#34; ;
-ScalarValue  = String
-             | Float
-             | Identifier
-             | SignedIdentifier
-             | DecSignedInteger
-             | OctSignedInteger
-             | HexSignedInteger
-             | DecUnsignedInteger
-             | OctUnsignedInteger
-             | HexUnsignedInteger ;
-</code></pre><p>The <code>:</code> delimiter between the field name and value is required for scalar fields
-but optional for message fields (including lists). Example:</p><pre tabindex=0><code class=language-textproto data-lang=textproto>scalar: 10          # Valid
-scalar  10          # Invalid
-scalars: [1, 2, 3]  # Valid
-scalars  [1, 2, 3]  # Invalid
-message: {}         # Valid
-message  {}         # Valid
-messages: [{}, {}]  # Valid
-messages  [{}, {}]  # Valid
-</code></pre><p>Values of message fields can be surrounded by curly brackets
-or angle brackets:</p><pre tabindex=0><code class=language-textproto data-lang=textproto>message: { foo: &#34;bar&#34; }
-message: &lt; foo: &#34;bar&#34; &gt;
-</code></pre><p>Fields marked <code>repeated</code> can have multiple values specified by repeating the
+with a qualifying domain name, such as <code>type.googleapis.com/</code>.</p><div class=highlight><pre tabindex=0 style=background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-fallback data-lang=fallback><span style=display:flex><span>FieldName     = ExtensionName | AnyName | IDENT ;
+</span></span><span style=display:flex><span>ExtensionName = &#34;[&#34;, TypeName, &#34;]&#34; ;
+</span></span><span style=display:flex><span>AnyName       = &#34;[&#34;, Domain, &#34;/&#34;, TypeName, &#34;]&#34; ;
+</span></span><span style=display:flex><span>TypeName      = IDENT, { &#34;.&#34;, IDENT } ;
+</span></span><span style=display:flex><span>Domain        = IDENT, { &#34;.&#34;, IDENT } ;
+</span></span></code></pre></div><p>Regular fields and extension fields can have scalar or message values. <code>Any</code>
+fields are always messages. Example:</p><div class=highlight><pre tabindex=0 style=background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-fallback data-lang=fallback><span style=display:flex><span>reg_scalar: 10
+</span></span><span style=display:flex><span>reg_message { foo: &#34;bar&#34; }
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>[com.foo.ext.scalar]​: 10
+</span></span><span style=display:flex><span>[com.foo.ext.message] { foo: &#34;bar&#34; }
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>any_value {
+</span></span><span style=display:flex><span>  [type.googleapis.com/com.foo.any] { foo: &#34;bar&#34; }
+</span></span><span style=display:flex><span>}
+</span></span></code></pre></div><h3 id=fields>Fields</h3><p>Field values can be literals (strings, numbers, or identifiers), or nested
+messages.</p><div class=highlight><pre tabindex=0 style=background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-fallback data-lang=fallback><span style=display:flex><span>Field        = ScalarField | MessageField ;
+</span></span><span style=display:flex><span>MessageField = FieldName, [ &#34;:&#34; ], ( MessageValue | MessageList ) [ &#34;;&#34; | &#34;,&#34; ];
+</span></span><span style=display:flex><span>ScalarField  = FieldName, &#34;:&#34;,     ( ScalarValue  | ScalarList  ) [ &#34;;&#34; | &#34;,&#34; ];
+</span></span><span style=display:flex><span>MessageList  = &#34;[&#34;, [ MessageValue, { &#34;,&#34;, MessageValue } ], &#34;]&#34; ;
+</span></span><span style=display:flex><span>ScalarList   = &#34;[&#34;, [ ScalarValue,  { &#34;,&#34;, ScalarValue  } ], &#34;]&#34; ;
+</span></span><span style=display:flex><span>MessageValue = &#34;{&#34;, Message, &#34;}&#34; | &#34;&lt;&#34;, Message, &#34;&gt;&#34; ;
+</span></span><span style=display:flex><span>ScalarValue  = String
+</span></span><span style=display:flex><span>             | Float
+</span></span><span style=display:flex><span>             | Identifier
+</span></span><span style=display:flex><span>             | SignedIdentifier
+</span></span><span style=display:flex><span>             | DecSignedInteger
+</span></span><span style=display:flex><span>             | OctSignedInteger
+</span></span><span style=display:flex><span>             | HexSignedInteger
+</span></span><span style=display:flex><span>             | DecUnsignedInteger
+</span></span><span style=display:flex><span>             | OctUnsignedInteger
+</span></span><span style=display:flex><span>             | HexUnsignedInteger ;
+</span></span></code></pre></div><p>The <code>:</code> delimiter between the field name and value is required for scalar fields
+but optional for message fields (including lists). Example:</p><div class=highlight><pre tabindex=0 style=background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-fallback data-lang=fallback><span style=display:flex><span>scalar: 10          # Valid
+</span></span><span style=display:flex><span>scalar  10          # Invalid
+</span></span><span style=display:flex><span>scalars: [1, 2, 3]  # Valid
+</span></span><span style=display:flex><span>scalars  [1, 2, 3]  # Invalid
+</span></span><span style=display:flex><span>message: {}         # Valid
+</span></span><span style=display:flex><span>message  {}         # Valid
+</span></span><span style=display:flex><span>messages: [{}, {}]  # Valid
+</span></span><span style=display:flex><span>messages  [{}, {}]  # Valid
+</span></span></code></pre></div><p>Values of message fields can be surrounded by curly brackets
+or angle brackets:</p><div class=highlight><pre tabindex=0 style=background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-fallback data-lang=fallback><span style=display:flex><span>message: { foo: &#34;bar&#34; }
+</span></span><span style=display:flex><span>message: &lt; foo: &#34;bar&#34; &gt;
+</span></span></code></pre></div><p>Fields marked <code>repeated</code> can have multiple values specified by repeating the
 field, using the special <code>[]</code> list syntax, or some combination of both. The
-order of values is maintained. Example:</p><pre tabindex=0><code class=language-textproto data-lang=textproto>repeated_field: 1
-repeated_field: 2
-repeated_field: [3, 4, 5]
-repeated_field: 6
-repeated_field: [7, 8, 9]
-</code></pre><p>Non-<code>repeated</code> fields cannot use the list syntax. For example, <code>[0]</code> is not
+order of values is maintained. Example:</p><div class=highlight><pre tabindex=0 style=background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-fallback data-lang=fallback><span style=display:flex><span>repeated_field: 1
+</span></span><span style=display:flex><span>repeated_field: 2
+</span></span><span style=display:flex><span>repeated_field: [3, 4, 5]
+</span></span><span style=display:flex><span>repeated_field: 6
+</span></span><span style=display:flex><span>repeated_field: [7, 8, 9]
+</span></span></code></pre></div><p>Non-<code>repeated</code> fields cannot use the list syntax. For example, <code>[0]</code> is not
 valid for <code>optional</code> or <code>required</code> fields. Fields marked <code>optional</code> can be
 omitted or specified once. Fields marked <code>required</code> must be specified exactly
 once.</p><p>Fields not specified in the associated <em>.proto</em> message are not allowed unless
@@ -193,10 +193,10 @@ the field name is present in the message&rsquo;s <code>reserved</code> field lis
 fields, if present in any form (scalar, list, message), are simply ignored by
 text format.</p><h2 id=value>Value Types</h2><p>When a field&rsquo;s associated <em>.proto</em> value type is known, the following value
 descriptions and constraints apply. For the purposes of this section, we declare
-the following container elements:</p><pre tabindex=0><code>signedInteger   = DecSignedInteger | OctSignedInteger | HexSignedInteger ;
-unsignedInteger = DecUnsignedInteger | OctUnsignedInteger | HexUnsignedInteger ;
-integer         = signedInteger | unsignedInteger ;
-</code></pre><table><thead><tr><th style=text-align:center><strong>.proto Type</strong></th><th style=text-align:center><strong>Values</strong></th></tr></thead><tbody><tr><td style=text-align:center><code>float</code>, <code>double</code></td><td style=text-align:left>A <code>Float</code>, <code>DecSignedInteger</code>, or
+the following container elements:</p><div class=highlight><pre tabindex=0 style=background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-fallback data-lang=fallback><span style=display:flex><span>signedInteger   = DecSignedInteger | OctSignedInteger | HexSignedInteger ;
+</span></span><span style=display:flex><span>unsignedInteger = DecUnsignedInteger | OctUnsignedInteger | HexUnsignedInteger ;
+</span></span><span style=display:flex><span>integer         = signedInteger | unsignedInteger ;
+</span></span></code></pre></div><table><thead><tr><th style=text-align:center><strong>.proto Type</strong></th><th style=text-align:center><strong>Values</strong></th></tr></thead><tbody><tr><td style=text-align:center><code>float</code>, <code>double</code></td><td style=text-align:left>A <code>Float</code>, <code>DecSignedInteger</code>, or
 <code>DecUnsignedInteger</code> element, or an <code>Identifier</code>
 or <code>SignedIdentifier</code> element whose <code>IDENT</code>
 portion is equal to <em>"inf"</em>, <em>"infinity"</em>, or
@@ -226,28 +226,28 @@ valid to specify a number that is not a member of the field's
 particular runtime implementation (such as IDE support) may choose to
 issue a warning when a provided number value is not a valid member. Note
 that certain names that are valid keywords in other contexts, such as
-<em>"true"</em> or <em>"infinity"</em>, are also valid enum value names.</td></tr><tr><td style=text-align:center><em>message values</em></td><td style=text-align:left>A <code>MessageValue</code> element.</td></tr></tbody></table><h2 id=extension>Extension Fields</h2><p>Extension fields are specified using their qualified names. Example:</p><pre tabindex=0><code class=language-textproto data-lang=textproto>local_field: 10
-[com.example.ext_field]​: 20
-</code></pre><p>Extension fields are generally defined in other <em>.proto</em> files. The text format
+<em>"true"</em> or <em>"infinity"</em>, are also valid enum value names.</td></tr><tr><td style=text-align:center><em>message values</em></td><td style=text-align:left>A <code>MessageValue</code> element.</td></tr></tbody></table><h2 id=extension>Extension Fields</h2><p>Extension fields are specified using their qualified names. Example:</p><div class=highlight><pre tabindex=0 style=background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-fallback data-lang=fallback><span style=display:flex><span>local_field: 10
+</span></span><span style=display:flex><span>[com.example.ext_field]​: 20
+</span></span></code></pre></div><p>Extension fields are generally defined in other <em>.proto</em> files. The text format
 language does not provide a mechanism for specifying the locations of files that
 define extension fields; instead, the parser must have prior knowledge of their
 locations.</p><h2 id=any><code>Any</code> Fields</h2><p>Text format supports an expanded form of the
 <a href=/programming-guides/proto3#any><code>google.protobuf.Any</code></a>
-well-known type using a special syntax resembling extension fields. Example:</p><pre tabindex=0><code class=language-textproto data-lang=textproto>local_field: 10
-
-# An Any value using regular fields.
-any_value {
-  type_url: &#34;type.googleapis.com/com.example.SomeType&#34;
-  value: &#34;\x0a\x05hello&#34;  # serialized bytes of com.example.SomeType
-}
-
-# The same value using Any expansion
-any_value {
-  [type.googleapis.com/com.example.SomeType] {
-    field1: &#34;hello&#34;
-  }
-}
-</code></pre><p>In this example, <code>any_value</code> is a field of type <code>google.protobuf.Any</code>, and it
+well-known type using a special syntax resembling extension fields. Example:</p><div class=highlight><pre tabindex=0 style=background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-fallback data-lang=fallback><span style=display:flex><span>local_field: 10
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span># An Any value using regular fields.
+</span></span><span style=display:flex><span>any_value {
+</span></span><span style=display:flex><span>  type_url: &#34;type.googleapis.com/com.example.SomeType&#34;
+</span></span><span style=display:flex><span>  value: &#34;\x0a\x05hello&#34;  # serialized bytes of com.example.SomeType
+</span></span><span style=display:flex><span>}
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span># The same value using Any expansion
+</span></span><span style=display:flex><span>any_value {
+</span></span><span style=display:flex><span>  [type.googleapis.com/com.example.SomeType] {
+</span></span><span style=display:flex><span>    field1: &#34;hello&#34;
+</span></span><span style=display:flex><span>  }
+</span></span><span style=display:flex><span>}
+</span></span></code></pre></div><p>In this example, <code>any_value</code> is a field of type <code>google.protobuf.Any</code>, and it
 stores a serialized <code>com.example.SomeType</code> message containing <code>field1: hello</code>.</p><h2 id=group><code>group</code> Fields</h2><p>In text format, a <code>group</code> field uses a normal <code>MessageValue</code> element as its
 value, but is specified using the capitalized group name rather than the
 implicit lowercased field name. Example:</p><div class=highlight><pre tabindex=0 style=background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-proto data-lang=proto><span style=display:flex><span><span style=color:#204a87;font-weight:700>message</span> <span style=color:#000>MessageWithGroup</span> <span style=color:#000;font-weight:700>{</span><span style=color:#a40000>
@@ -256,10 +256,10 @@ implicit lowercased field name. Example:</p><div class=highlight><pre tabindex=0
 </span></span></span><span style=display:flex><span><span style=color:#a40000></span>  <span style=color:#000;font-weight:700>}</span><span style=color:#a40000>
 </span></span></span><span style=display:flex><span><span style=color:#a40000></span><span style=color:#000;font-weight:700>}</span><span style=color:#a40000>
 </span></span></span></code></pre></div><p>With the above <em>.proto</em> definition, the following text format is a valid
-<code>MessageWithGroup</code>:</p><pre tabindex=0><code class=language-textproto data-lang=textproto>MyGroup {
-  my_value: 1
-}
-</code></pre><p>Similar to Message fields, the <code>:</code> delimiter between the group name and value is
+<code>MessageWithGroup</code>:</p><div class=highlight><pre tabindex=0 style=background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-fallback data-lang=fallback><span style=display:flex><span>MyGroup {
+</span></span><span style=display:flex><span>  my_value: 1
+</span></span><span style=display:flex><span>}
+</span></span></code></pre></div><p>Similar to Message fields, the <code>:</code> delimiter between the group name and value is
 optional.</p><h2 id=map><code>map</code> Fields</h2><p>Text format does not provide a custom syntax for specifying map field entries.
 When a <a href=/programming-guides/proto#maps><code>map</code></a> field is
 defined in a <em>.proto</em> file, an implicit <code>Entry</code> message is defined containing
@@ -268,15 +268,15 @@ key/value entries. Example:</p><div class=highlight><pre tabindex=0 style=backgr
 </span></span></span><span style=display:flex><span><span style=color:#a40000></span>  <span style=color:#000>map</span><span style=color:#000;font-weight:700>&lt;</span><span style=color:#204a87;font-weight:700>string</span><span style=color:#000;font-weight:700>,</span> <span style=color:#204a87;font-weight:700>int32</span><span style=color:#000;font-weight:700>&gt;</span> <span style=color:#000>my_map</span> <span style=color:#ce5c00;font-weight:700>=</span> <span style=color:#0000cf;font-weight:700>1</span><span style=color:#000;font-weight:700>;</span><span style=color:#a40000>
 </span></span></span><span style=display:flex><span><span style=color:#a40000></span><span style=color:#000;font-weight:700>}</span><span style=color:#a40000>
 </span></span></span></code></pre></div><p>With the above <em>.proto</em> definition, the following text format is a valid
-<code>MessageWithMap</code>:</p><pre tabindex=0><code class=language-textproto data-lang=textproto>my_map { key: &#34;entry1&#34; value: 1 }
-my_map { key: &#34;entry2&#34; value: 2 }
-
-# You can also use the list syntax
-my_map: [
-  { key: &#34;entry3&#34; value: 3 },
-  { key: &#34;entry4&#34; value: 4 }
-]
-</code></pre><p>Both the <code>key</code> and <code>value</code> fields are optional and default to the zero value of
+<code>MessageWithMap</code>:</p><div class=highlight><pre tabindex=0 style=background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-fallback data-lang=fallback><span style=display:flex><span>my_map { key: &#34;entry1&#34; value: 1 }
+</span></span><span style=display:flex><span>my_map { key: &#34;entry2&#34; value: 2 }
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span># You can also use the list syntax
+</span></span><span style=display:flex><span>my_map: [
+</span></span><span style=display:flex><span>  { key: &#34;entry3&#34; value: 3 },
+</span></span><span style=display:flex><span>  { key: &#34;entry4&#34; value: 4 }
+</span></span><span style=display:flex><span>]
+</span></span></code></pre></div><p>Both the <code>key</code> and <code>value</code> fields are optional and default to the zero value of
 their respective types if unspecified. If a key is duplicated, only the
 last-specified value will be retained in a parsed map.</p><h2 id=oneof><code>oneof</code> Fields</h2><p>While there is no special syntax related to <code>oneof</code> fields in text format, only
 one <code>oneof</code> member may be specified at a time. Specifying multiple members
@@ -290,54 +290,54 @@ concurrently is not valid. Example:</p><div class=highlight><pre tabindex=0 styl
 </span></span></span><span style=display:flex><span><span style=color:#a40000></span>  <span style=color:#000;font-weight:700>}</span><span style=color:#a40000>
 </span></span></span><span style=display:flex><span><span style=color:#a40000></span>  <span style=color:#204a87;font-weight:700>repeated</span> <span style=color:#000>MessageWithOneof</span> <span style=color:#204a87;font-weight:700>message</span> <span style=color:#ce5c00;font-weight:700>=</span> <span style=color:#0000cf;font-weight:700>1</span><span style=color:#000;font-weight:700>;</span><span style=color:#a40000>
 </span></span></span><span style=display:flex><span><span style=color:#a40000></span><span style=color:#000;font-weight:700>}</span><span style=color:#a40000>
-</span></span></span></code></pre></div><p>The above <em>.proto</em> definition results in the following text format behavior:</p><pre tabindex=0><code class=language-textproto data-lang=textproto># Valid: only one field from the Example oneof is set.
-message {
-  not_part_of_oneof: &#34;always valid&#34;
-  first_oneof_field: &#34;valid by itself&#34;
-}
-
-# Valid: the other oneof field is set.
-message {
-  not_part_of_oneof: &#34;always valid&#34;
-  second_oneof_field: &#34;valid by itself&#34;
-}
-
-# Invalid: multiple fields from the Example oneof are set.
-message {
-  not_part_of_oneof: &#34;always valid&#34;
-  first_oneof_field: &#34;not valid&#34;
-  second_oneof_field: &#34;not valid&#34;
-}
-</code></pre><h2 id=text-format-files>Text Format Files</h2><p>A text format file uses the <code>.textproto</code> filename suffix and contains a single
+</span></span></span></code></pre></div><p>The above <em>.proto</em> definition results in the following text format behavior:</p><div class=highlight><pre tabindex=0 style=background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-fallback data-lang=fallback><span style=display:flex><span># Valid: only one field from the Example oneof is set.
+</span></span><span style=display:flex><span>message {
+</span></span><span style=display:flex><span>  not_part_of_oneof: &#34;always valid&#34;
+</span></span><span style=display:flex><span>  first_oneof_field: &#34;valid by itself&#34;
+</span></span><span style=display:flex><span>}
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span># Valid: the other oneof field is set.
+</span></span><span style=display:flex><span>message {
+</span></span><span style=display:flex><span>  not_part_of_oneof: &#34;always valid&#34;
+</span></span><span style=display:flex><span>  second_oneof_field: &#34;valid by itself&#34;
+</span></span><span style=display:flex><span>}
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span># Invalid: multiple fields from the Example oneof are set.
+</span></span><span style=display:flex><span>message {
+</span></span><span style=display:flex><span>  not_part_of_oneof: &#34;always valid&#34;
+</span></span><span style=display:flex><span>  first_oneof_field: &#34;not valid&#34;
+</span></span><span style=display:flex><span>  second_oneof_field: &#34;not valid&#34;
+</span></span><span style=display:flex><span>}
+</span></span></code></pre></div><h2 id=text-format-files>Text Format Files</h2><p>A text format file uses the <code>.textproto</code> filename suffix and contains a single
 <code>Message</code>. Text format files are UTF-8 encoded. An example textproto file is
 provided below.</p><div class="alert alert-warning" role=alert><h4 class=alert-heading>Important</h4><code>.textproto</code> is the canonical text format file extension and should be preferred
 to the alternatives, although some tools also recognize the legacy extensions
 <code>.textpb</code> and <code>.pbtxt</code> (METADATA files are also an exception). All other
 extensions are <strong>strongly</strong> discouraged; in particular, extensions such as
 <code>.protoascii</code> wrongly imply that text format is ascii-only, and others like
-<code>.pb.txt</code> are not recognized by common tooling.</div><pre tabindex=0><code class=language-textproto data-lang=textproto># This is an example of Protocol Buffer&#39;s text format.
-# Unlike .proto files, only shell-style line comments are supported.
-
-name: &#34;John Smith&#34;
-
-pet {
-  kind: DOG
-  name: &#34;Fluffy&#34;
-  tail_wagginess: 0.65f
-}
-
-pet &lt;
-  kind: LIZARD
-  name: &#34;Lizzy&#34;
-  legs: 4
-&gt;
-
-string_value_with_escape: &#34;valid \n escape&#34;
-repeated_values: [ &#34;one&#34;, &#34;two&#34;, &#34;three&#34; ]
-</code></pre><h3 id=header>Header</h3><p>The header comments <code>proto-file</code> and <code>proto-message</code> inform developer tools of
-the schema, so they may provide various features.</p><pre tabindex=0><code class=language-textproto data-lang=textproto># proto-file: some/proto/my_file.proto
-# proto-message: MyMessage
-</code></pre><h2 id=working-with-the-format-programmatically>Working with the Format Programmatically</h2><p>Due to how individual Protocol Buffer implementations emit
+<code>.pb.txt</code> are not recognized by common tooling.</div><div class=highlight><pre tabindex=0 style=background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-fallback data-lang=fallback><span style=display:flex><span># This is an example of Protocol Buffer&#39;s text format.
+</span></span><span style=display:flex><span># Unlike .proto files, only shell-style line comments are supported.
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>name: &#34;John Smith&#34;
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>pet {
+</span></span><span style=display:flex><span>  kind: DOG
+</span></span><span style=display:flex><span>  name: &#34;Fluffy&#34;
+</span></span><span style=display:flex><span>  tail_wagginess: 0.65f
+</span></span><span style=display:flex><span>}
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>pet &lt;
+</span></span><span style=display:flex><span>  kind: LIZARD
+</span></span><span style=display:flex><span>  name: &#34;Lizzy&#34;
+</span></span><span style=display:flex><span>  legs: 4
+</span></span><span style=display:flex><span>&gt;
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>string_value_with_escape: &#34;valid \n escape&#34;
+</span></span><span style=display:flex><span>repeated_values: [ &#34;one&#34;, &#34;two&#34;, &#34;three&#34; ]
+</span></span></code></pre></div><h3 id=header>Header</h3><p>The header comments <code>proto-file</code> and <code>proto-message</code> inform developer tools of
+the schema, so they may provide various features.</p><div class=highlight><pre tabindex=0 style=background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-fallback data-lang=fallback><span style=display:flex><span># proto-file: some/proto/my_file.proto
+</span></span><span style=display:flex><span># proto-message: MyMessage
+</span></span></code></pre></div><h2 id=working-with-the-format-programmatically>Working with the Format Programmatically</h2><p>Due to how individual Protocol Buffer implementations emit
 neither a consistent nor canonical text format,
 tools or libraries that modify TextProto files or emit TextProto output must
 explicitly use
