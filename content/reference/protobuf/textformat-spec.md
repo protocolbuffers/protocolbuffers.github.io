@@ -22,6 +22,19 @@ and may change based on further discussion and review. While an effort has been
 made to keep text formats consistent across supported languages,
 incompatibilities are likely to exist. {{% /alert %}}
 
+## Example
+
+```textproto
+convolution_benchmark {
+  label: "NHWC_128x20x20x56x160"
+  input {
+    dimension: [128, 56, 20, 20]
+    data_type: DATA_HALF
+    format: TENSOR_NHWC
+  }
+}
+```
+
 ## Parsing Overview {#parsing}
 
 The language elements in this spec are split into lexical and syntactic
