@@ -668,6 +668,10 @@ system."
 If the enhancement field in `PhotoEnhancementReply` were a scalar or enum, this
 would be much harder to support.
 
+This applies equally to maps. It is much easier to add additional fields to a
+map value if it's already a message rather than having to migrate from
+`map<string, string>` to `map<string, MyProto>`.
+
 One exception:
 
 Latency-critical applications will find parallel arrays of primitive types are

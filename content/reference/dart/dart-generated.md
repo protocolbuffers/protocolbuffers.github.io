@@ -14,9 +14,9 @@ any given protocol definition. Any differences between proto2 and proto3
 generated code are highlighted - note that these differences are in the
 generated code as described in this document, not the base API, which are the
 same in both versions. You should read the
-[proto2 language guide](/programming-guides/proto) and/or the
-[proto3 language guide](/programming-guides/proto3) before reading this
-document.
+[proto2 language guide](/programming-guides/proto) and/or
+the [proto3 language guide](/programming-guides/proto3)
+before reading this document.
 
 ## Compiler Invocation {#invocation}
 
@@ -101,8 +101,8 @@ message in the `.proto` file.
 
 Note that the generated names always use camel-case naming, even if the field
 name in the `.proto` file uses lower-case with underscores
-([as it should](/programming-guides/style)). The case-conversion works
-as follows:
+([as it should](/programming-guides/style)). The
+case-conversion works as follows:
 
 1.  For each underscore in the name, the underscore is removed, and the
     following letter is capitalized.
@@ -132,7 +132,8 @@ The compiler will generate the following accessor methods in the message class:
     `hasFoo()` will return `false` and `get foo` will return the default value.
 
 For other simple field types, the corresponding Dart type is chosen according to
-the [scalar value types table](/programming-guides/proto#scalar).
+the
+[scalar value types table](/programming-guides/proto#scalar).
 For message and enum types, the value type is replaced with the message or enum
 class.
 
@@ -228,7 +229,8 @@ import 'package:fixnum/fixnum.dart';
 
 ### Map Fields
 
-Given a [`map`](/programming-guides/proto3#maps) field definition like this:
+Given a [`map`](/programming-guides/proto3#maps) field
+definition like this:
 
 ```proto
 map<int32, int32> map_field = 1;
@@ -242,7 +244,8 @@ The compiler will generate the following getter:
 
 ## Any
 
-Given an [`Any`](/programming-guides/proto3#any) field like this:
+Given an [`Any`](/programming-guides/proto3#any) field
+like this:
 
 ```proto
 import "google/protobuf/any.proto";
@@ -285,7 +288,8 @@ and unpack the `Any`'s values:
 
 ## Oneof
 
-Given a [`oneof`](/programming-guides/proto3#oneof) definition like this:
+Given a [`oneof`](/programming-guides/proto3#oneof)
+definition like this:
 
 ```proto
 message Foo {
@@ -383,8 +387,8 @@ The protocol buffer compiler will generate a class called `Bar`, which extends
 ## Extensions (proto2 only) {#extension}
 
 Given a file `foo_test.proto` including a message with an
-[extension range](/programming-guides/proto#extensions) and a top-level
-extension definition:
+[extension range](/programming-guides/proto#extensions)
+and a top-level extension definition:
 
 ```proto
 message Foo {
