@@ -186,6 +186,14 @@ Q1. The C++ 4.22.x runtime was first released in 2023 Q1.
   </tr>
 </table>
 
+### C++ Tooling, Platform, and Library Support {#cpp-tooling}
+
+Protobuf is committed to following the tooling, platform, and library support
+policy described in
+[Foundational C++ Support Policy](https://opensource.google/documentation/policies/cplusplus-support).
+For specific versions supported, see
+[Foundational C++ Support](https://github.com/google/oss-policies-info/blob/main/foundational-cxx-support-matrix.md).
+
 ## C&#35; {#csharp}
 
 The C# 3.22.x runtime was first released in 2023 Q1.

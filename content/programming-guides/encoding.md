@@ -204,7 +204,7 @@ Signed Original | Encoded As
 Using some bit tricks, it's cheap to convert `n` into its ZigZag representation:
 
 ```
-n + n + (n < 0)
+(n + n) ^ -(n < 0) - (n < 0)
 ```
 
 Here, we assume that the boolean `n < 0` is converted into an integer 1 if true

@@ -36,7 +36,8 @@ message Person {
 </div>
 <div class="col-md">
 
-```proto
+```java
+// Java code
 Person john = Person.newBuilder()
     .setId(1234)
     .setName("John Doe")
@@ -51,7 +52,8 @@ john.writeTo(output);
 </div>
 <div class="col-md">
 
-```proto
+```cpp
+// C++ code
 Person john;
 fstream input(argv[1],
     ios::in | ios::binary);
