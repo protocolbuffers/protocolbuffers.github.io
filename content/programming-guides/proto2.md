@@ -6,6 +6,8 @@ linkTitle: "Language Guide (proto 2)"
 no_list: "true"
 type: docs
 description: "This topic covers how to use the version 2 of Protocol Buffers in your project. It contains language-agnostic content. For information specific to the language you're using, see the corresponding documentation for your language."
+aliases: 
+  - /programming-guides/proto/
 ---
 
 This guide describes how to use the protocol buffer language to structure your

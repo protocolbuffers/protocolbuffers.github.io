@@ -204,7 +204,7 @@ Signed Original | Encoded As
 Using some bit tricks, it's cheap to convert `n` into its ZigZag representation:
 
 ```
-(n + n) ^ -(n < 0) - (n < 0)
+((n + n) ^ -(n < 0)) - (n < 0)
 ```
 
 Here, we assume that the boolean `n < 0` is converted into an integer 1 if true
@@ -296,7 +296,7 @@ Missing `optional` fields are easy to encode: we just leave out the record if
 it's not present. This means that "huge" protos with only a few fields set are
 quite sparse.
 
-`repeated` fields are a bit more compicated. Ordinary (not [packed](#packed))
+`repeated` fields are a bit more complicated. Ordinary (not [packed](#packed))
 repeated fields emit one record for every element of the field. Thus, if we have
 
 ```proto
