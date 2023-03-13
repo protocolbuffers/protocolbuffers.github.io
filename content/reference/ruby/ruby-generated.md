@@ -12,7 +12,8 @@ description: "This topic describes the API of message objects that the protocol 
 This page describes the API of message objects that the protocol buffer compiler
 generates for any given protocol definition. You should read the language guides
 for [proto2](/programming-guides/proto) or
-[proto3](/programming-guides/proto3) before reading this document.
+[proto3](/programming-guides/proto3) before reading this
+document.
 
 The protocol compiler for Ruby emits Ruby source files that use a DSL to define
 the message schema. However the DSL is still subject to change. In this guide we

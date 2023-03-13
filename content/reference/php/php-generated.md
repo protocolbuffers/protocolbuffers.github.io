@@ -11,9 +11,9 @@ description: "This topic describes the PHP code that the protocol buffer compile
 
 This page describes the PHP code that the protocol buffer compiler generates for
 any given protocol definition. You should read the
-[proto3 language guide](/programming-guides/proto3) before reading this
-document. Note that the protocol buffer compiler currently only supports proto3
-code generation for PHP.
+[proto3 language guide](/programming-guides/proto3)
+before reading this document. Note that the protocol buffer compiler currently
+only supports proto3 code generation for PHP.
 
 ## Compiler Invocation {#invocation}
 
@@ -150,7 +150,8 @@ all conversions to/from arrays or objects. Float to integer overflow conversions
 are undefined.
 
 You can see the corresponding PHP type for each scalar protocol buffers type in
-the [scalar value types table](/programming-guides/proto3#scalar).
+the
+[scalar value types table](/programming-guides/proto3#scalar).
 
 ### Singular Message Fields {#embedded_message}
 
@@ -246,10 +247,10 @@ specified, it is prepended to all generated enum classes.
 
 ## Oneof
 
-For a [oneof](/programming-guides/proto3#oneof)s, the protocol
-buffer compiler generates the same code as it would for regular singular fields,
-but also adds a special accessor method that lets you find out which oneof field
-(if any) is set. So, given this message:
+For a [oneof](/programming-guides/proto3#oneof)s, the
+protocol buffer compiler generates the same code as it would for regular
+singular fields, but also adds a special accessor method that lets you find out
+which oneof field (if any) is set. So, given this message:
 
 ```proto
 message TestMessage {

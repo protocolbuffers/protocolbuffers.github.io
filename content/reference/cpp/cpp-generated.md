@@ -15,8 +15,8 @@ generated code are highlighted - note that these differences are in the
 generated code as described in this document, not the base message
 classes/interfaces, which are the same in both versions. You should read the
 [proto2 language guide](/programming-guides/proto) and/or
-[proto3 language guide](/programming-guides/proto3) before reading this
-document.
+[proto3 language guide](/programming-guides/proto3)
+before reading this document.
 
 ## Compiler Invocation {#invocation}
 
@@ -465,8 +465,8 @@ The compiler will generate the following accessor methods:
 -   `int foo_size() const`: Returns the number of elements currently in the
     field.
 -   `const string& foo(int index) const`: Returns the element at the given
-    zero-based index. Calling this method with index outside of [0, foo_size()-1]
-    yields undefined behavior.
+    zero-based index. Calling this method with index outside of [0,
+    foo_size()-1] yields undefined behavior.
 -   `void set_foo(int index, const string& value)`: Sets the value of the
     element at the given zero-based index.
 -   `void set_foo(int index, const char* value)`: Sets the value of the element
@@ -885,7 +885,8 @@ it is put into a map field as if it is a known enum value.
 
 ## Any
 
-Given an [`Any`](/programming-guides/proto3#any) field like this:
+Given an [`Any`](/programming-guides/proto3#any) field
+like this:
 
 ```proto
 import "google/protobuf/any.proto";
