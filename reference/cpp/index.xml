@@ -5,8 +5,8 @@ generated code are highlighted - note that these differences are in the
 generated code as described in this document, not the base message
 classes/interfaces, which are the same in both versions. You should read the
 &lt;a href="https://protobuf.dev/programming-guides/proto">proto2 language guide&lt;/a> and/or
-&lt;a href="https://protobuf.dev/programming-guides/proto3">proto3 language guide&lt;/a> before reading this
-document.&lt;/p>
+&lt;a href="https://protobuf.dev/programming-guides/proto3">proto3 language guide&lt;/a>
+before reading this document.&lt;/p>
 &lt;h2 id="invocation">Compiler Invocation&lt;/h2>
 &lt;p>The protocol buffer compiler produces C++ output when invoked with the
 &lt;code>--cpp_out=&lt;/code> command-line flag. The parameter to the &lt;code>--cpp_out=&lt;/code> option is the
@@ -352,8 +352,8 @@ corresponding C++ type according to the
 &lt;li>&lt;code>int foo_size() const&lt;/code>: Returns the number of elements currently in the
 field.&lt;/li>
 &lt;li>&lt;code>const string&amp;amp; foo(int index) const&lt;/code>: Returns the element at the given
-zero-based index. Calling this method with index outside of [0, foo_size()-1]
-yields undefined behavior.&lt;/li>
+zero-based index. Calling this method with index outside of [0,
+foo_size()-1] yields undefined behavior.&lt;/li>
 &lt;li>&lt;code>void set_foo(int index, const string&amp;amp; value)&lt;/code>: Sets the value of the
 element at the given zero-based index.&lt;/li>
 &lt;li>&lt;code>void set_foo(int index, const char* value)&lt;/code>: Sets the value of the element
@@ -735,7 +735,8 @@ it&amp;rsquo;s handled differently in proto2 and proto3. In proto2, the whole ma
 message is put into the unknown field set of the containing message. In proto3,
 it is put into a map field as if it is a known enum value.&lt;/p>
 &lt;h2 id="any">Any&lt;/h2>
-&lt;p>Given an &lt;a href="https://protobuf.dev/programming-guides/proto3#any">&lt;code>Any&lt;/code>&lt;/a> field like this:&lt;/p>
+&lt;p>Given an &lt;a href="https://protobuf.dev/programming-guides/proto3#any">&lt;code>Any&lt;/code>&lt;/a> field
+like this:&lt;/p>
 &lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-proto" data-lang="proto">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#204a87;font-weight:bold">import&lt;/span> &lt;span style="color:#4e9a06">&amp;#34;google/protobuf/any.proto&amp;#34;&lt;/span>&lt;span style="color:#000;font-weight:bold">;&lt;/span>&lt;span style="color:#a40000">
 &lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#a40000">
 &lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#a40000">&lt;/span>&lt;span style="color:#204a87;font-weight:bold">message&lt;/span> &lt;span style="color:#000">ErrorStatus&lt;/span> &lt;span style="color:#000;font-weight:bold">{&lt;/span>&lt;span style="color:#a40000">

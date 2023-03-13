@@ -3,8 +3,8 @@
 generates for any given protocol definition. Any differences between proto2 and
 proto3 generated code are highlighted. You should read the
 &lt;a href="https://protobuf.dev/programming-guides/proto">proto2 language guide&lt;/a> and/or
-&lt;a href="https://protobuf.dev/programming-guides/proto3">proto3 language guide&lt;/a> before reading this
-document.&lt;/p>
+&lt;a href="https://protobuf.dev/programming-guides/proto3">proto3 language guide&lt;/a>
+before reading this document.&lt;/p>
 &lt;h2 id="invocation">Compiler invocation&lt;/h2>
 &lt;p>The protocol buffer compiler produces Objective-C output when invoked with the
 &lt;code>--objc_out=&lt;/code> command-line flag. The parameter to the &lt;code>--objc_out=&lt;/code> option is
@@ -105,11 +105,11 @@ to support a superset of the following interface:&lt;/p>
 &lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#8f5902;font-style:italic">&lt;/span>&lt;span style="color:#000;font-weight:bold">-&lt;/span> &lt;span style="color:#000;font-weight:bold">(&lt;/span>&lt;span style="color:#204a87;font-weight:bold">BOOL&lt;/span>&lt;span style="color:#000;font-weight:bold">)&lt;/span>&lt;span style="color:#000">isEqual:&lt;/span>&lt;span style="color:#000;font-weight:bold">(&lt;/span>&lt;span style="color:#204a87;font-weight:bold">id&lt;/span>&lt;span style="color:#000;font-weight:bold">)&lt;/span>&lt;span style="color:#000">value&lt;/span>&lt;span style="color:#000;font-weight:bold">;&lt;/span>
 &lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h3 id="unknown-fields-proto2-only">Unknown fields (proto2 only)&lt;/h3>
 &lt;p>If a message created with an
-&lt;a href="https://protobuf.dev/programming-guides/proto#updating">older version&lt;/a> of your .proto
-definition is parsed with code generated from a newer version (or vice versa),
-the message may contain optional or repeated fields that the &amp;quot;new&amp;quot; code does
-not recognize. In proto2 generated code, these fields are not discarded and are
-stored in the message&amp;rsquo;s &lt;code>unknownFields&lt;/code> property.&lt;/p>
+&lt;a href="https://protobuf.dev/programming-guides/proto#updating">older version&lt;/a> of
+your .proto definition is parsed with code generated from a newer version (or
+vice versa), the message may contain optional or repeated fields that the
+&amp;quot;new&amp;quot; code does not recognize. In proto2 generated code, these fields are not
+discarded and are stored in the message&amp;rsquo;s &lt;code>unknownFields&lt;/code> property.&lt;/p>
 &lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-objc" data-lang="objc">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#204a87;font-weight:bold">@property&lt;/span>&lt;span style="color:#000;font-weight:bold">(&lt;/span>&lt;span style="color:#204a87;font-weight:bold">nonatomic&lt;/span>&lt;span style="color:#000;font-weight:bold">,&lt;/span> &lt;span style="color:#204a87;font-weight:bold">copy&lt;/span>&lt;span style="color:#000;font-weight:bold">,&lt;/span> &lt;span style="color:#000">nullable&lt;/span>&lt;span style="color:#000;font-weight:bold">)&lt;/span> &lt;span style="color:#000">GPBUnknownFieldSet&lt;/span> &lt;span style="color:#ce5c00;font-weight:bold">*&lt;/span>&lt;span style="color:#000">unknownFields&lt;/span>&lt;span style="color:#000;font-weight:bold">;&lt;/span>
 &lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>You can use the &lt;code>GPBUnknownFieldSet&lt;/code> interface to fetch these fields by number
 or loop over them as an array.&lt;/p>
@@ -196,8 +196,8 @@ unique, and stands for &amp;quot;property&amp;quot;).&lt;/p>
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#204a87;font-weight:bold">@property&lt;/span>&lt;span style="color:#000;font-weight:bold">(&lt;/span>&lt;span style="color:#204a87;font-weight:bold">nonatomic&lt;/span>&lt;span style="color:#000;font-weight:bold">,&lt;/span> &lt;span style="color:#204a87;font-weight:bold">readwrite&lt;/span>&lt;span style="color:#000;font-weight:bold">)&lt;/span> &lt;span style="color:#000">int32_t&lt;/span> &lt;span style="color:#000">id_p&lt;/span>&lt;span style="color:#000;font-weight:bold">;&lt;/span>
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#204a87;font-weight:bold">@end&lt;/span>
 &lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h4 id="default">Default values&lt;/h4>
-&lt;p>The &lt;a href="https://protobuf.dev/programming-guides/proto3#default">default value&lt;/a> for
-numeric types is &lt;code>0&lt;/code>.&lt;/p>
+&lt;p>The &lt;a href="https://protobuf.dev/programming-guides/proto3#default">default value&lt;/a>
+for numeric types is &lt;code>0&lt;/code>.&lt;/p>
 &lt;p>The default value for strings is &lt;code>@&amp;quot;&amp;quot;&lt;/code>, and the default value for bytes is
 &lt;code>[NSData data]&lt;/code>.&lt;/p>
 &lt;p>Assigning &lt;code>nil&lt;/code> to a string field will assert in debug, and set the field to
@@ -318,8 +318,8 @@ unique, and stands for &amp;quot;property&amp;quot;).&lt;/p>
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#204a87;font-weight:bold">@property&lt;/span>&lt;span style="color:#000;font-weight:bold">(&lt;/span>&lt;span style="color:#204a87;font-weight:bold">nonatomic&lt;/span>&lt;span style="color:#000;font-weight:bold">,&lt;/span> &lt;span style="color:#204a87;font-weight:bold">readwrite&lt;/span>&lt;span style="color:#000;font-weight:bold">)&lt;/span> &lt;span style="color:#000">int32_t&lt;/span> &lt;span style="color:#000">id_p&lt;/span>&lt;span style="color:#000;font-weight:bold">;&lt;/span>
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#204a87;font-weight:bold">@end&lt;/span>
 &lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h4 id="default">Default values (optional fields only)&lt;/h4>
-&lt;p>The &lt;a href="https://protobuf.dev/programming-guides/proto#optional">default value&lt;/a> for
-numeric types, if no explicit default was specified by the user, is &lt;code>0&lt;/code>.&lt;/p>
+&lt;p>The &lt;a href="https://protobuf.dev/programming-guides/proto#optional">default value&lt;/a>
+for numeric types, if no explicit default was specified by the user, is &lt;code>0&lt;/code>.&lt;/p>
 &lt;p>The default value for strings is &lt;code>@&amp;quot;&amp;quot;&lt;/code>, and the default value for bytes is
 &lt;code>[NSData data]&lt;/code>.&lt;/p>
 &lt;p>Assigning &lt;code>nil&lt;/code> to a string field will assert in debug, and set the field to
@@ -393,10 +393,10 @@ to support in the compiler.&lt;/p>
 &lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>For string, bytes and message fields, elements of the array are &lt;code>NSString*&lt;/code>,
 &lt;code>NSData*&lt;/code> and pointers to subclasses of &lt;code>GPBMessage&lt;/code> respectively.&lt;/p>
 &lt;h4 id="repeateddefault">Default values&lt;/h4>
-&lt;p>The &lt;a href="https://protobuf.dev/programming-guides/proto3#default">default value&lt;/a> for a
-repeated field is to be empty. In Objective-C generated code, this is an empty
-&lt;code>GPB&amp;lt;VALUE&amp;gt;Array&lt;/code>. If you access an empty repeated field, you&amp;rsquo;ll get back an
-empty array that you can update like any other repeated field array.&lt;/p>
+&lt;p>The &lt;a href="https://protobuf.dev/programming-guides/proto3#default">default value&lt;/a>
+for a repeated field is to be empty. In Objective-C generated code, this is an
+empty &lt;code>GPB&amp;lt;VALUE&amp;gt;Array&lt;/code>. If you access an empty repeated field, you&amp;rsquo;ll get back
+an empty array that you can update like any other repeated field array.&lt;/p>
 &lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-objc" data-lang="objc">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#000">Foo&lt;/span> &lt;span style="color:#ce5c00;font-weight:bold">*&lt;/span>&lt;span style="color:#000">myFoo&lt;/span> &lt;span style="color:#ce5c00;font-weight:bold">=&lt;/span> &lt;span style="color:#000;font-weight:bold">[[&lt;/span>&lt;span style="color:#000">Foo&lt;/span> &lt;span style="color:#000">alloc&lt;/span>&lt;span style="color:#000;font-weight:bold">]&lt;/span> &lt;span style="color:#000">init&lt;/span>&lt;span style="color:#000;font-weight:bold">];&lt;/span>
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#000;font-weight:bold">[&lt;/span>&lt;span style="color:#000">myFoo&lt;/span>&lt;span style="color:#000;font-weight:bold">.&lt;/span>&lt;span style="color:#000">stringValueArray&lt;/span> &lt;span style="color:#f57900">addObject&lt;/span>&lt;span style="color:#000;font-weight:bold">:&lt;/span>&lt;span style="color:#4e9a06">@&amp;#34;A string&amp;#34;&lt;/span>&lt;span style="color:#000;font-weight:bold">]&lt;/span>
 &lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>You can also use the provided &lt;code>&amp;lt;field&amp;gt;Array_Count&lt;/code> property to check if the
@@ -510,8 +510,9 @@ function and to access raw values.&lt;/p>
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#204a87;font-weight:bold">@end&lt;/span>
 &lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h3 id="oneof">Oneof fields&lt;/h3>
-&lt;p>Given a message with &lt;a href="https://protobuf.dev/programming-guides/proto3#oneof">oneof&lt;/a>
-field definitions:&lt;/p>
+&lt;p>Given a message with
+&lt;a href="https://protobuf.dev/programming-guides/proto3#oneof">oneof&lt;/a> field
+definitions:&lt;/p>
 &lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-proto" data-lang="proto">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#204a87;font-weight:bold">message&lt;/span> &lt;span style="color:#000">Order&lt;/span> &lt;span style="color:#000;font-weight:bold">{&lt;/span>&lt;span style="color:#a40000">
 &lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#a40000">&lt;/span> &lt;span style="color:#204a87;font-weight:bold">oneof&lt;/span> &lt;span style="color:#000">OrderID&lt;/span> &lt;span style="color:#000;font-weight:bold">{&lt;/span>&lt;span style="color:#a40000">
 &lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#a40000">&lt;/span> &lt;span style="color:#204a87;font-weight:bold">string&lt;/span> &lt;span style="color:#000">name&lt;/span> &lt;span style="color:#ce5c00;font-weight:bold">=&lt;/span> &lt;span style="color:#0000cf;font-weight:bold">1&lt;/span>&lt;span style="color:#000;font-weight:bold">;&lt;/span>&lt;span style="color:#a40000">
@@ -577,8 +578,8 @@ cut down on the number of classes and is in line with how Objective-C works
 with &lt;code>NSMutableDictionary&lt;/code>.&lt;/li>
 &lt;/ul>
 &lt;h4 id="repeateddefault">Default values&lt;/h4>
-&lt;p>The &lt;a href="https://protobuf.dev/programming-guides/proto3#default">default value&lt;/a> for a map
-field is empty. In Objective-C generated code, this is an empty
+&lt;p>The &lt;a href="https://protobuf.dev/programming-guides/proto3#default">default value&lt;/a>
+for a map field is empty. In Objective-C generated code, this is an empty
 &lt;code>GBP&amp;lt;KEY&amp;gt;&amp;lt;VALUE&amp;gt;Dictionary&lt;/code>. If you access an empty map field, you&amp;rsquo;ll get back
 an empty dictionary that you can update like any other map field.&lt;/p>
 &lt;p>You can also use the provided &lt;code>&amp;lt;mapField&amp;gt;_Count&lt;/code> property to check if a
@@ -838,9 +839,9 @@ Protocol buffer-generated enumerations support Objective-C to Swift conversions.
 just use their proto definitions in generated Objective-C code, though we supply
 some basic conversion methods in categories to make using them simpler. Note
 that we do not have special APIs for all well-known types yet, including
-&lt;a href="https://protobuf.dev/programming-guides/proto3#any">&lt;code>Any&lt;/code>&lt;/a> (there is currently no
-helper method to convert an &lt;code>Any&lt;/code>&amp;rsquo;s message value into a message of the
-appropriate type).&lt;/p>
+&lt;a href="https://protobuf.dev/programming-guides/proto3#any">&lt;code>Any&lt;/code>&lt;/a> (there is
+currently no helper method to convert an &lt;code>Any&lt;/code>&amp;rsquo;s message value into a message of
+the appropriate type).&lt;/p>
 &lt;h3 id="time-stamps">Time Stamps&lt;/h3>
 &lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-objc" data-lang="objc">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#204a87;font-weight:bold">@interface&lt;/span> &lt;span style="color:#000">GPBTimeStamp&lt;/span> &lt;span style="color:#f57900">(GPBWellKnownTypes)&lt;/span>
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#204a87;font-weight:bold">@property&lt;/span> &lt;span style="color:#000;font-weight:bold">(&lt;/span>&lt;span style="color:#204a87;font-weight:bold">nonatomic&lt;/span>&lt;span style="color:#000;font-weight:bold">,&lt;/span> &lt;span style="color:#204a87;font-weight:bold">readwrite&lt;/span>&lt;span style="color:#000;font-weight:bold">,&lt;/span> &lt;span style="color:#204a87;font-weight:bold">strong&lt;/span>&lt;span style="color:#000;font-weight:bold">)&lt;/span> &lt;span style="color:#000">NSDate&lt;/span> &lt;span style="color:#ce5c00;font-weight:bold">*&lt;/span>&lt;span style="color:#000">date&lt;/span>&lt;span style="color:#000;font-weight:bold">;&lt;/span>
