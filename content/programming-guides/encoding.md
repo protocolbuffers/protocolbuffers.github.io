@@ -296,7 +296,7 @@ Missing `optional` fields are easy to encode: we just leave out the record if
 it's not present. This means that "huge" protos with only a few fields set are
 quite sparse.
 
-`repeated` fields are a bit more compicated. Ordinary (not [packed](#packed))
+`repeated` fields are a bit more complicated. Ordinary (not [packed](#packed))
 repeated fields emit one record for every element of the field. Thus, if we have
 
 ```proto
