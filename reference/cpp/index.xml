@@ -197,17 +197,19 @@ calling this, &lt;code>has_foo()&lt;/code> will return &lt;code>true&lt;/code> a
 whatever value is written into the given string.&lt;/li>
 &lt;li>&lt;code>void clear_foo()&lt;/code>: Clears the value of the field. After calling this,
 &lt;code>has_foo()&lt;/code> will return &lt;code>false&lt;/code> and &lt;code>foo()&lt;/code> will return the default value.&lt;/li>
-&lt;li>&lt;code>void set_allocated_foo(string* value)&lt;/code>: Sets the &lt;code>string&lt;/code> object to the
-field and frees the previous field value if it exists. If the &lt;code>string&lt;/code>
-pointer is not &lt;code>NULL&lt;/code>, the message takes ownership of the allocated &lt;code>string&lt;/code>
-object and &lt;code>has_foo()&lt;/code> will return &lt;code>true&lt;/code>. The message is free to delete the
-allocated &lt;code>string&lt;/code> object at any time, so references to the object may be
-invalidated. Otherwise, if the &lt;code>value&lt;/code> is &lt;code>NULL&lt;/code>, the behavior is the same
-as calling &lt;code>clear_foo()&lt;/code>.&lt;/li>
-&lt;li>&lt;code>string* release_foo()&lt;/code>: Releases the ownership of the field and returns the
-pointer of the &lt;code>string&lt;/code> object. After calling this, caller takes the
-ownership of the allocated &lt;code>string&lt;/code> object, &lt;code>has_foo()&lt;/code> will return &lt;code>false&lt;/code>,
-and &lt;code>foo()&lt;/code> will return the default value.&lt;/li>
+&lt;li>&lt;code>void set_allocated_foo(string* value)&lt;/code>:
+Sets the &lt;code>string&lt;/code>
+object to the field and frees the previous field value if it exists. If the
+&lt;code>string&lt;/code> pointer is not &lt;code>NULL&lt;/code>, the message takes ownership of the allocated
+&lt;code>string&lt;/code> object and &lt;code>has_foo()&lt;/code> will return &lt;code>true&lt;/code>. The message is free to
+delete the allocated &lt;code>string&lt;/code> object at any time, so references to the
+object may be invalidated. Otherwise, if the &lt;code>value&lt;/code> is &lt;code>NULL&lt;/code>, the behavior
+is the same as calling &lt;code>clear_foo()&lt;/code>.&lt;/li>
+&lt;li>&lt;code>string* release_foo()&lt;/code>:
+Releases the
+ownership of the field and returns the pointer of the &lt;code>string&lt;/code> object. After
+calling this, caller takes the ownership of the allocated &lt;code>string&lt;/code> object,
+&lt;code>has_foo()&lt;/code> will return &lt;code>false&lt;/code>, and &lt;code>foo()&lt;/code> will return the default value.&lt;/li>
 &lt;/ul>
 &lt;h3 id="proto3_string">Singular String Fields (proto3)&lt;/h3>
 &lt;p>For any of these field definitions:&lt;/p>
@@ -234,16 +236,18 @@ then the returned string will be empty. After calling this, &lt;code>foo()&lt;/c
 return whatever value is written into the given string.&lt;/li>
 &lt;li>&lt;code>void clear_foo()&lt;/code>: Clears the value of the field. After calling this,
 &lt;code>foo()&lt;/code> will return the empty string/empty bytes.&lt;/li>
-&lt;li>&lt;code>void set_allocated_foo(string* value)&lt;/code>: Sets the &lt;code>string&lt;/code> object to the
-field and frees the previous field value if it exists. If the &lt;code>string&lt;/code>
-pointer is not &lt;code>NULL&lt;/code>, the message takes ownership of the allocated &lt;code>string&lt;/code>
-object. The message is free to delete the allocated &lt;code>string&lt;/code> object at any
-time, so references to the object may be invalidated. Otherwise, if the
-&lt;code>value&lt;/code> is &lt;code>NULL&lt;/code>, the behavior is the same as calling &lt;code>clear_foo()&lt;/code>.&lt;/li>
-&lt;li>&lt;code>string* release_foo()&lt;/code>: Releases the ownership of the field and returns the
-pointer of the &lt;code>string&lt;/code> object. After calling this, caller takes the
-ownership of the allocated &lt;code>string&lt;/code> object and &lt;code>foo()&lt;/code> will return the empty
-string/empty bytes.&lt;/li>
+&lt;li>&lt;code>void set_allocated_foo(string* value)&lt;/code>:
+Sets the &lt;code>string&lt;/code>
+object to the field and frees the previous field value if it exists. If the
+&lt;code>string&lt;/code> pointer is not &lt;code>NULL&lt;/code>, the message takes ownership of the allocated
+&lt;code>string&lt;/code> object. The message is free to delete the allocated &lt;code>string&lt;/code> object
+at any time, so references to the object may be invalidated. Otherwise, if
+the &lt;code>value&lt;/code> is &lt;code>NULL&lt;/code>, the behavior is the same as calling &lt;code>clear_foo()&lt;/code>.&lt;/li>
+&lt;li>&lt;code>string* release_foo()&lt;/code>:
+Releases the
+ownership of the field and returns the pointer of the &lt;code>string&lt;/code> object. After
+calling this, caller takes the ownership of the allocated &lt;code>string&lt;/code> object
+and &lt;code>foo()&lt;/code> will return the empty string/empty bytes.&lt;/li>
 &lt;/ul>
 &lt;h3 id="enum_field">Singular Enum Fields (proto2)&lt;/h3>
 &lt;p>Given the enum type:&lt;/p>
