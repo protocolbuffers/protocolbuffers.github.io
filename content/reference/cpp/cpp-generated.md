@@ -267,17 +267,19 @@ The compiler will generate the following accessor methods:
     whatever value is written into the given string.
 -   `void clear_foo()`: Clears the value of the field. After calling this,
     `has_foo()` will return `false` and `foo()` will return the default value.
--   `void set_allocated_foo(string* value)`: Sets the `string` object to the
-    field and frees the previous field value if it exists. If the `string`
-    pointer is not `NULL`, the message takes ownership of the allocated `string`
-    object and `has_foo()` will return `true`. The message is free to delete the
-    allocated `string` object at any time, so references to the object may be
-    invalidated. Otherwise, if the `value` is `NULL`, the behavior is the same
-    as calling `clear_foo()`.
--   `string* release_foo()`: Releases the ownership of the field and returns the
-    pointer of the `string` object. After calling this, caller takes the
-    ownership of the allocated `string` object, `has_foo()` will return `false`,
-    and `foo()` will return the default value.
+-   `void set_allocated_foo(string* value)`:
+    Sets the `string`
+    object to the field and frees the previous field value if it exists. If the
+    `string` pointer is not `NULL`, the message takes ownership of the allocated
+    `string` object and `has_foo()` will return `true`. The message is free to
+    delete the allocated `string` object at any time, so references to the
+    object may be invalidated. Otherwise, if the `value` is `NULL`, the behavior
+    is the same as calling `clear_foo()`.
+-   `string* release_foo()`:
+    Releases the
+    ownership of the field and returns the pointer of the `string` object. After
+    calling this, caller takes the ownership of the allocated `string` object,
+    `has_foo()` will return `false`, and `foo()` will return the default value.
 
 ### Singular String Fields (proto3) {#proto3_string}
 
@@ -309,16 +311,18 @@ The compiler will generate the following accessor methods:
     return whatever value is written into the given string.
 -   `void clear_foo()`: Clears the value of the field. After calling this,
     `foo()` will return the empty string/empty bytes.
--   `void set_allocated_foo(string* value)`: Sets the `string` object to the
-    field and frees the previous field value if it exists. If the `string`
-    pointer is not `NULL`, the message takes ownership of the allocated `string`
-    object. The message is free to delete the allocated `string` object at any
-    time, so references to the object may be invalidated. Otherwise, if the
-    `value` is `NULL`, the behavior is the same as calling `clear_foo()`.
--   `string* release_foo()`: Releases the ownership of the field and returns the
-    pointer of the `string` object. After calling this, caller takes the
-    ownership of the allocated `string` object and `foo()` will return the empty
-    string/empty bytes.
+-   `void set_allocated_foo(string* value)`:
+    Sets the `string`
+    object to the field and frees the previous field value if it exists. If the
+    `string` pointer is not `NULL`, the message takes ownership of the allocated
+    `string` object. The message is free to delete the allocated `string` object
+    at any time, so references to the object may be invalidated. Otherwise, if
+    the `value` is `NULL`, the behavior is the same as calling `clear_foo()`.
+-   `string* release_foo()`:
+    Releases the
+    ownership of the field and returns the pointer of the `string` object. After
+    calling this, caller takes the ownership of the allocated `string` object
+    and `foo()` will return the empty string/empty bytes.
 
 ### Singular Enum Fields (proto2) {#enum_field}
 
