@@ -79,11 +79,15 @@ boolLit = "true" | "false"
 ### String Literals {#string_literals}
 
 ```
-strLit = ( "'" { charValue } "'" ) | ( '"' { charValue } '"' )
-charValue = hexEscape | octEscape | charEscape | /[^\0\n\\]/
-hexEscape = '\' ( "x" | "X" ) hexDigit hexDigit
-octEscape = '\' octalDigit octalDigit octalDigit
+strLit = strLitSingle { strLitSingle }
+strLitSingle = ( "'" { charValue } "'" ) | ( '"' { charValue } '"' )
+charValue = hexEscape | octEscape | charEscape | unicodeEscape | unicodeLongEscape | /[^\0\n\\]/
+hexEscape = '\' ( "x" | "X" ) hexDigit [ hexDigit ]
+octEscape = '\' octalDigit [ octalDigit [ octalDigit ] ]
 charEscape = '\' ( "a" | "b" | "f" | "n" | "r" | "t" | "v" | '\' | "'" | '"' )
+unicodeEscape = '\' "u" hexDigit hexDigit hexDigit hexDigit
+unicodeLongEscape = '\' "U" ( "000" hexDigit hexDigit hexDigit hexDigit hexDigit |
+                              "0010" hexDigit hexDigit hexDigit hexDigit
 ```
 
 ### EmptyStatement
@@ -140,7 +144,8 @@ package foo.bar;
 
 Options can be used in proto files, messages, enums and services. An option can
 be a protobuf defined option or a custom option. For more information, see
-[Options](/programming-guides/proto#options) in the language guide.
+[Options](/programming-guides/proto#options) in the
+language guide.
 
 ```
 option = "option" optionName  "=" constant ";"
@@ -212,7 +217,7 @@ A oneof consists of oneof fields and a oneof name. Oneof fields do not have
 labels.
 
 ```
-oneof = "oneof" oneofName "{" { option | oneofField | emptyStatement } "}"
+oneof = "oneof" oneofName "{" { option | oneofField } "}"
 oneofField = type fieldName "=" fieldNumber [ "[" fieldOptions "]" ] ";"
 ```
 
@@ -336,13 +341,44 @@ message Outer {
 }
 ```
 
+None of the entities declared inside a message may have conflicting names. All
+of the following are prohibited:
+
+```
+message MyMessage {
+  optional string foo = 1;
+  message foo {}
+}
+
+message MyMessage {
+  optional string foo = 1;
+  oneof foo {
+    string bar = 2;
+  }
+}
+
+message MyMessage {
+  optional string foo = 1;
+  extend Extendable {
+    optional string foo = 2;
+  }
+}
+
+message MyMessage {
+  optional string foo = 1;
+  enum E {
+    foo = 0;
+  }
+}
+```
+
 ### Extend
 
 If a message in the same or imported .proto file has reserved a range for
 extensions, the message can be extended.
 
 ```
-extend = "extend" messageType "{" {field | group | emptyStatement} "}"
+extend = "extend" messageType "{" {field | group} "}"
 ```
 
 Example:
@@ -356,11 +392,9 @@ extend Foo {
 ### Service definition {#service_definition}
 
 ```
-service = "service" serviceName "{" { option | rpc | stream | emptyStatement } "}"
+service = "service" serviceName "{" { option | rpc | emptyStatement } "}"
 rpc = "rpc" rpcName "(" [ "stream" ] messageType ")" "returns" "(" [ "stream" ]
 messageType ")" (( "{" { option | emptyStatement } "}" ) | ";" )
-stream = "stream" streamName "(" messageType "," messageType ")" (( "{"
-{ option | emptyStatement } "}") | ";" )
 ```
 
 Example:

@@ -183,11 +183,13 @@ This is the *two's complement* of 2, defined in unsigned arithmetic as `~0 - 2 +
 1`, where `~0` is the all-ones 64-bit integer. It is a useful exercise to
 understand why this produces so many ones.
 
-On the other hand, `sintN` uses the "ZigZag" encoding instead of two's
-complement to encode negative integers. Positive integers `n` are encoded as `2
-* n` (the even numbers), while negative integers `-n` are encoded as `2 * n + 1`
-(the odd numbers). The encoding thus "zig-zags" between positive and negative
-numbers. For example:
+<!-- mdformat off(the asterisks cause bullets) -->
+`sintN` uses the "ZigZag" encoding instead of two's complement to encode
+negative integers. Positive integers `n` are encoded as `2 * n` (the even
+numbers), while negative integers `-n` are encoded as `2 * n + 1` (the odd
+numbers). The encoding thus "zig-zags" between positive and negative numbers.
+For example:
+<!-- mdformat on -->
 
 Signed Original | Encoded As
 --------------- | ----------
@@ -202,7 +204,7 @@ Signed Original | Encoded As
 Using some bit tricks, it's cheap to convert `n` into its ZigZag representation:
 
 ```
-n + n + (n < 0)
+((n + n) ^ -(n < 0)) - (n < 0)
 ```
 
 Here, we assume that the boolean `n < 0` is converted into an integer 1 if true
@@ -294,7 +296,7 @@ Missing `optional` fields are easy to encode: we just leave out the record if
 it's not present. This means that "huge" protos with only a few fields set are
 quite sparse.
 
-`repeated` fields are a bit more compicated. Ordinary (not [packed](#packed))
+`repeated` fields are a bit more complicated. Ordinary (not [packed](#packed))
 repeated fields emit one record for every element of the field. Thus, if we have
 
 ```proto

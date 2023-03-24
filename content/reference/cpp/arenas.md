@@ -44,6 +44,15 @@ suitable granularity at which to use arenas (for servers, this is often
 per-request). You can find out more about how to get the most from arena
 allocation in [Usage patterns and best practices](#usage).
 
+This table summarizes the typical performance advantages and disadvantages of
+using arenas:
+
+Operation             | Heap-allocated proto messages                                                                                                | Arena-allocated proto messages
+:-------------------- | :--------------------------------------------------------------------------------------------------------------------------- | :-----------------------------
+*Message allocation*  | Slower on average                                                                                                            | Faster on average
+*Message destruction* | Slower on average                                                                                                            | Faster on average
+*Message moves*       | Always a move (equivalent to a [shallow copy](https://en.wikipedia.org/wiki/Object_copying#Shallow_copy) in cost) | Sometimes a [deep copy](https://en.wikipedia.org/wiki/Object_copying#Deep_copy)
+
 ## Getting Started {#gettingstarted}
 
 The protocol buffer compiler generates code for arena allocation for the

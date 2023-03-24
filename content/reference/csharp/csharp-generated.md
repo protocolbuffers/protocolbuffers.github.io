@@ -11,14 +11,15 @@ description: "This topic describes exactly what C# code the protocol buffer comp
 
 This page describes exactly what C\# code the protocol buffer compiler generates
 for protocol definitions using `proto3` syntax. You should read the
-[proto3 language guide](/programming-guides/proto3) before reading this
-document.
+[proto3 language guide](/programming-guides/proto3)
+before reading this document.
 
 {{% alert title="Note" color="note" %}}
-The protobuf compiler can generate C\# interfaces for definitions
-using `proto2` syntax starting from release 3.10. Refer to the
-[proto2 language guide](/programming-guides/proto) for details of the
-semantics of `proto2` definitions, and see `docs/csharp/proto2.md`
+The protobuf compiler can generate C\# interfaces for definitions using `proto2`
+syntax starting from release 3.10. Refer to the
+[proto2 language guide](/programming-guides/proto) for
+details of the semantics of `proto2` definitions, and see
+`docs/csharp/proto2.md`
 ([view on GitHub](https://github.com/protocolbuffers/protobuf/blob/master/docs/csharp/proto2.md))
 for details on the generated C\# code for proto2.
 {{% /alert %}}
@@ -109,7 +110,8 @@ The `namespace` is inferred from the proto's `package`, using the same
 conversion rules as the file name. For example, a proto package of
 `example.high_score` would result in a namespace of `Example.HighScore`. You can
 override the default generated namespace for a particular .proto using the
-`csharp_namespace` [file option](/programming-guides/proto3#options).
+`csharp_namespace`
+[file option](/programming-guides/proto3#options).
 
 Each top-level enum and message results in an enum or class being declared as
 members of the namespace. Additionally, a single static partial class is always

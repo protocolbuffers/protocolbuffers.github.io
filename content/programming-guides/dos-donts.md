@@ -166,8 +166,14 @@ For example:
 
 *   `java_outer_classname` should follow
     https://google.github.io/styleguide/javaguide.html#s5.2.2-class-names
+
 *   `java_package` and `java_alt_package` should follow
     https://google.github.io/styleguide/javaguide.html#s5.2.1-package-names
+
+*   `package`, although used for Java when `java_package` is not present, always
+    directly corresponds to C++ namespace and thus should follow
+    https://google.github.io/styleguide/cppguide.html#Namespace_Names.
+    If these style guides conflict, use `java_package` for Java.
 
 ## **Never** Use Text-format Messages for Interchange
 

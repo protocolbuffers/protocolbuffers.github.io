@@ -22,6 +22,19 @@ and may change based on further discussion and review. While an effort has been
 made to keep text formats consistent across supported languages,
 incompatibilities are likely to exist. {{% /alert %}}
 
+## Example {#example}
+
+```textproto
+convolution_benchmark {
+  label: "NHWC_128x20x20x56x160"
+  input {
+    dimension: [128, 56, 20, 20]
+    data_type: DATA_HALF
+    format: TENSOR_NHWC
+  }
+}
+```
+
 ## Parsing Overview {#parsing}
 
 The language elements in this spec are split into lexical and syntactic
@@ -549,14 +562,13 @@ With the above *.proto* definition, the following text format is a valid
 `MessageWithMap`:
 
 ```textproto
-my_map { key: "entry1", value: 1 }
-my_map { key: "entry2", value: 2 }
+my_map { key: "entry1" value: 1 }
+my_map { key: "entry2" value: 2 }
 
-# You can also use the list syntax, though it isn't compatible with
-# https://github.com/protocolbuffers/txtpbfmt
+# You can also use the list syntax
 my_map: [
-  { key: "entry3", value: 3 },
-  { key: "entry4", value: 4 }
+  { key: "entry3" value: 3 },
+  { key: "entry4" value: 4 }
 ]
 ```
 

@@ -76,11 +76,15 @@ boolLit = "true" | "false"
 ### String Literals {#string_literals}
 
 ```
-strLit = ( "'" { charValue } "'" ) |  ( '"' { charValue } '"' )
-charValue = hexEscape | octEscape | charEscape | /[^\0\n\\]/
-hexEscape = '\' ( "x" | "X" ) hexDigit hexDigit
-octEscape = '\' octalDigit octalDigit octalDigit
+strLit = strLitSingle { strLitSingle }
+strLitSingle = ( "'" { charValue } "'" ) |  ( '"' { charValue } '"' )
+charValue = hexEscape | octEscape | charEscape | unicodeEscape | unicodeLongEscape | /[^\0\n\\]/
+hexEscape = '\' ( "x" | "X" ) hexDigit [ hexDigit ]
+octEscape = '\' octalDigit [ octalDigit [ octalDigit ] ]
 charEscape = '\' ( "a" | "b" | "f" | "n" | "r" | "t" | "v" | '\' | "'" | '"' )
+unicodeEscape = '\' "u" hexDigit hexDigit hexDigit hexDigit
+unicodeLongEscape = '\' "U" ( "000" hexDigit hexDigit hexDigit hexDigit hexDigit |
+                              "0010" hexDigit hexDigit hexDigit hexDigit
 ```
 
 ### EmptyStatement
@@ -142,7 +146,8 @@ package foo.bar;
 
 Options can be used in proto files, messages, enums and services. An option can
 be a protobuf defined option or a custom option. For more information, see
-[Options](/programming-guides/proto3#options) in the language guide.
+[Options](/programming-guides/proto3#options) in the
+language guide.
 
 ```
 option = "option" optionName  "=" constant ";"
@@ -189,7 +194,7 @@ repeated int32 samples = 4 [packed=true];
 A oneof consists of oneof fields and a oneof name.
 
 ```
-oneof = "oneof" oneofName "{" { option | oneofField | emptyStatement } "}"
+oneof = "oneof" oneofName "{" { option | oneofField } "}"
 oneofField = type fieldName "=" fieldNumber [ "[" fieldOptions "]" ] ";"
 ```
 
@@ -285,6 +290,30 @@ message Outer {
     int64 ival = 1;
   }
   map<int32, string> my_map = 2;
+}
+```
+
+None of the entities declared inside a message may have conflicting names. All
+of the following are prohibited:
+
+```
+message MyMessage {
+  optional string foo = 1;
+  message foo {}
+}
+
+message MyMessage {
+  optional string foo = 1;
+  oneof foo {
+    string bar = 2;
+  }
+}
+
+message MyMessage {
+  optional string foo = 1;
+  enum E {
+    foo = 0;
+  }
 }
 ```
 
