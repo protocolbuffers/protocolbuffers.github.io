@@ -214,7 +214,7 @@ When the `sint32` or `sint64` is parsed, its value is decoded back to the
 original, signed version.
 
 In protoscope, suffixing an integer with a `z` will make it encode as ZigZag.
-For example, `-500z` is the same as the varint `1001`.
+For example, `-500z` is the same as the varint `999`.
 
 ### Non-varint Numbers
 
