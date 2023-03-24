@@ -46,8 +46,8 @@ the protocol buffer type definitions.
 
 ## Message and Field Names {#message-field-names}
 
-Use CamelCase (with an initial capital) for message names – for example,
-`SongServerRequest`. Use underscore_separated_names for field names (including
+Use PascalCase (with an initial capital) for message names – for example,
+`SongServerRequest`. Use lower_snake_case for field names (including
 oneof field and extension names) – for example, `song_name`.
 
 ```proto
@@ -89,7 +89,7 @@ repeated string keys = 1;
 
 ## Enums {#enums}
 
-Use CamelCase (with an initial capital) for enum type names and
+Use PascalCase (with an initial capital) for enum type names and
 CAPITALS_WITH_UNDERSCORES for value names:
 
 ```proto
@@ -109,7 +109,7 @@ first enum value.
 
 ## Services {#services}
 
-If your `.proto` defines an RPC service, you should use CamelCase (with an
+If your `.proto` defines an RPC service, you should use PascalCase (with an
 initial capital) for both the service name and any RPC method names:
 
 ```proto
