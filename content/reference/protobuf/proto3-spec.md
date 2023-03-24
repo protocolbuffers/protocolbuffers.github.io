@@ -146,7 +146,8 @@ package foo.bar;
 
 Options can be used in proto files, messages, enums and services. An option can
 be a protobuf defined option or a custom option. For more information, see
-[Options](/programming-guides/proto3#options) in the language guide.
+[Options](/programming-guides/proto3#options) in the
+language guide.
 
 ```
 option = "option" optionName  "=" constant ";"
@@ -289,6 +290,30 @@ message Outer {
     int64 ival = 1;
   }
   map<int32, string> my_map = 2;
+}
+```
+
+None of the entities declared inside a message may have conflicting names. All
+of the following are prohibited:
+
+```
+message MyMessage {
+  optional string foo = 1;
+  message foo {}
+}
+
+message MyMessage {
+  optional string foo = 1;
+  oneof foo {
+    string bar = 2;
+  }
+}
+
+message MyMessage {
+  optional string foo = 1;
+  enum E {
+    foo = 0;
+  }
 }
 ```
 

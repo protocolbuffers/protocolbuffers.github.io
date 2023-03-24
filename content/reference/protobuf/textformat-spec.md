@@ -22,7 +22,7 @@ and may change based on further discussion and review. While an effort has been
 made to keep text formats consistent across supported languages,
 incompatibilities are likely to exist. {{% /alert %}}
 
-## Example
+## Example {#example}
 
 ```textproto
 convolution_benchmark {

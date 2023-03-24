@@ -53,13 +53,15 @@ The JSON representation of an `Any` value uses the regular representation of the
 deserialized, embedded message, with an additional field `@type` which contains
 the type URL. Example:
 
-```
+```proto
 package google.profile;
 message Person {
   string first_name = 1;
   string last_name = 2;
 }
+```
 
+```json
 {
   "@type": "type.googleapis.com/google.profile.Person",
   "firstName": <string>,
@@ -72,7 +74,7 @@ that representation will be embedded adding a field `value` which holds the
 custom JSON in addition to the `@type` field. Example (for message
 `google.protobuf.Duration`):
 
-```
+```json
 {
   "@type": "type.googleapis.com/google.protobuf.Duration",
   "value": "1.212s"
@@ -288,7 +290,7 @@ years.
 
 Example 1: Compute Duration from two Timestamps in pseudo code.
 
-```
+```c
 Timestamp start = ...;
 Timestamp end = ...;
 Duration duration = ...;
@@ -307,7 +309,7 @@ if (duration.seconds < 0 && duration.nanos > 0) {
 
 Example 2: Compute Timestamp from Timestamp + Duration in pseudo code.
 
-```
+```c
 Timestamp start = ...;
 Duration duration = ...;
 Timestamp end = ...;
@@ -971,7 +973,7 @@ as follows:
 
 Example of a simple mixin:
 
-```
+```proto
 package google.acl.v1;
 service AccessControl {
   // Get the underlying ACL object.
@@ -1005,7 +1007,7 @@ declared with same name and request/response types in `Storage`. A documentation
 generator or annotation processor will see the effective `Storage.GetAcl` method
 after inherting documentation and annotations as follows:
 
-```
+```proto
 service Storage {
   // Get the underlying ACL object.
   rpc GetAcl(GetAclRequest) returns (Acl) {
@@ -1030,7 +1032,7 @@ apis:
 
 This implies the following inherited HTTP annotation:
 
-```
+```proto
 service Storage {
   // Get the underlying ACL object.
   rpc GetAcl(GetAclRequest) returns (Acl) {
@@ -1236,7 +1238,7 @@ can convert to and from RFC 3339 date strings. See
 
 Example 1: Compute Timestamp from POSIX `time()`.
 
-```
+```cpp
 Timestamp timestamp;
 timestamp.set_seconds(time(NULL));
 timestamp.set_nanos(0);
@@ -1244,7 +1246,7 @@ timestamp.set_nanos(0);
 
 Example 2: Compute Timestamp from POSIX `gettimeofday()`.
 
-```
+```cpp
 struct timeval tv;
 gettimeofday(&tv, NULL);
 
@@ -1255,7 +1257,7 @@ timestamp.set_nanos(tv.tv_usec * 1000);
 
 Example 3: Compute Timestamp from Win32 `GetSystemTimeAsFileTime()`.
 
-```
+```cpp
 FILETIME ft;
 GetSystemTimeAsFileTime(&ft);
 UINT64 ticks = (((UINT64)ft.dwHighDateTime) << 32) | ft.dwLowDateTime;
@@ -1269,7 +1271,7 @@ timestamp.set_nanos((INT32) ((ticks % 10000000) * 100));
 
 Example 4: Compute Timestamp from Java `System.currentTimeMillis()`.
 
-```
+```java
 long millis = System.currentTimeMillis();
 
 Timestamp timestamp = Timestamp.newBuilder().setSeconds(millis / 1000)
@@ -1278,7 +1280,7 @@ Timestamp timestamp = Timestamp.newBuilder().setSeconds(millis / 1000)
 
 Example 5: Compute Timestamp from current time in Python.
 
-```
+```py
 now = time.time()
 seconds = int(now)
 nanos = int((now - seconds) * 10**9)
