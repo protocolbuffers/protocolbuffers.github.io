@@ -120,10 +120,10 @@ other languages, like C++:</p><div class=highlight><pre tabindex=0 style=backgro
 or <code>repeated</code> (proto2 and proto3) or <code>singular</code> (proto3). (The option to set a
 field to <code>required</code> is absent in proto3 and strongly discouraged in proto2. For
 more on this, see &ldquo;Required is Forever&rdquo; in
-<a href=/programming-guides/proto3#specifying-field-rules>Specifying Field Rules</a>.)</p><p>After setting the optionality/repeatability of a field, you specify the data
+<a href=/programming-guides/proto3/#specifying-field-rules>Specifying Field Rules</a>.)</p><p>After setting the optionality/repeatability of a field, you specify the data
 type. Protocol buffers support the usual primitive data types, such as integers,
 booleans, and floats. For the full list, see
-<a href=/programming-guides/proto3#scalar>Scalar Value Types</a>.</p><p>A field can also be of:</p><ul><li>A <code>message</code> type, so that you can nest parts of the definition, such as for
+<a href=/programming-guides/proto3/#scalar>Scalar Value Types</a>.</p><p>A field can also be of:</p><ul><li>A <code>message</code> type, so that you can nest parts of the definition, such as for
 repeating sets of data.</li><li>An <code>enum</code> type, so you can specify a set of values to choose from.</li><li>A <code>oneof</code> type, which you can use when a message has many optional fields
 and at most one field will be set at the same time.</li><li>A <code>map</code> type, to add key-value pairs to your definition.</li></ul><p>In proto2, messages can allow <strong>extensions</strong> to define fields outside of the
 message, itself. For example, the protobuf library&rsquo;s internal message schema
