@@ -7,7 +7,6 @@ no_list: "true"
 type: docs
 description: "This topic is a language specification reference for version 2 of the Protocol Buffers language (proto2)."
 ---
-    
 
 This is a language specification reference for version 2 of the Protocol Buffers
 language (proto2). The syntax is specified using
@@ -100,8 +99,11 @@ emptyStatement = ";"
 
 ```
 constant = fullIdent | ( [ "-" | "+" ] intLit ) | ( [ "-" | "+" ] floatLit ) |
-                strLit | boolLit
+                strLit | boolLit | MessageValue
 ```
+
+`MessageValue` is defined in the
+[Text Format Language Specification](/reference/protobuf/textformat-spec#fields).
 
 ## Syntax
 

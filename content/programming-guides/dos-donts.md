@@ -204,5 +204,5 @@ code).
 ### API Best Practices
 
 This document lists only changes that are extremely likely to cause breakage.
-For higher-level guidance on how to craft proto API's that grow gracefully see
+For higher-level guidance on how to craft proto APIs that grow gracefully see
 [API Best Practices](/programming-guides/api).

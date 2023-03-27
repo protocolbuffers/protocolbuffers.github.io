@@ -7,7 +7,6 @@ no_list: "true"
 type: docs
 description: "This topic describes exactly what Kotlin code the protocol buffer compiler generates for any given protocol definition,"
 ---
-    
 
 This page describes exactly what Kotlin code the protocol buffer compiler
 generates for any given protocol definition, in addition to the code generated

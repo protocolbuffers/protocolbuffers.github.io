@@ -7,7 +7,6 @@ no_list: "true"
 type: docs
 description: "protoc, the Protocol Buffers Compiler, can be extended to support new languages via plugins."
 ---
-    
 
 While the current release includes compilers and APIs for C++, Java, Go, Ruby,
 C\#, and Python, the compiler code is designed so that it's easy to add support

@@ -7,10 +7,12 @@ no_list: "true"
 type: docs
 description: "This tutorial provides a basic C# programmers introduction to working with protocol buffers."
 ---
+    
 
 This tutorial provides a basic C# programmer's introduction to working with
-protocol buffers, using the [proto3](/programming-guides/proto3) version of
-the protocol buffers language. By walking through creating a simple example
+protocol buffers, using the
+[proto3](/programming-guides/proto3) version of the
+protocol buffers language. By walking through creating a simple example
 application, it shows you how to
 
 -   Define message formats in a `.proto` file.
@@ -19,10 +21,11 @@ application, it shows you how to
 
 This isn't a comprehensive guide to using protocol buffers in C#. For more
 detailed reference information, see the
-[Protocol Buffer Language Guide](/programming-guides/proto3), the
-[C# API Reference](/reference/csharp/api-docs), the
+[Protocol Buffer Language Guide](/programming-guides/proto3),
+the [C# API Reference](/reference/csharp/api-docs), the
 [C# Generated Code Guide](/reference/csharp/csharp-generated),
-and the [Encoding Reference](/programming-guides/encoding).
+and the
+[Encoding Reference](/programming-guides/encoding).
 
 ## The Problem Domain {#problem-domain}
 
@@ -157,12 +160,12 @@ re-encoding the tag number, so repeated fields are particularly good candidates
 for this optimization.
 
 If a field value isn't set, a
-[default value](/programming-guides/proto3#default) is used: zero for
-numeric types, the empty string for strings, false for bools. For embedded
-messages, the default value is always the "default instance" or "prototype" of
-the message, which has none of its fields set. Calling the accessor to get the
-value of a field which has not been explicitly set always returns that field's
-default value.
+[default value](/programming-guides/proto3#default) is
+used: zero for numeric types, the empty string for strings, false for bools. For
+embedded messages, the default value is always the "default instance" or
+"prototype" of the message, which has none of its fields set. Calling the
+accessor to get the value of a field which has not been explicitly set always
+returns that field's default value.
 
 If a field is `repeated`, the field may be repeated any number of times
 (including zero). The order of the repeated values will be preserved in the
@@ -170,9 +173,9 @@ protocol buffer. Think of repeated fields as dynamically sized arrays.
 
 You'll find a complete guide to writing `.proto` files -- including all the
 possible field types -- in the
-[Protocol Buffer Language Guide](/programming-guides/proto3). Don't go
-looking for facilities similar to class inheritance, though -- protocol buffers
-don't do that.
+[Protocol Buffer Language Guide](/programming-guides/proto3).
+Don't go looking for facilities similar to class inheritance, though -- protocol
+buffers don't do that.
 
 ## Compiling Your Protocol Buffers {#compiling-protocol-buffers}
 
@@ -299,8 +302,9 @@ some rules you need to follow. In the new version of the protocol buffer:
     numbers that were never used in this protocol buffer, not even by deleted
     fields).
 
-(There are [some exceptions](/programming-guides/proto3#updating) to these
-rules, but they are rarely used.)
+(There are
+[some exceptions](/programming-guides/proto3#updating) to
+these rules, but they are rarely used.)
 
 If you follow these rules, old code will happily read new messages and simply
 ignore any new fields. To the old code, singular fields that were deleted will
@@ -309,9 +313,9 @@ code will also transparently read old messages.
 
 However, keep in mind that new fields will not be present in old messages, so
 you will need to do something reasonable with the default value. A type-specific
-[default value](/programming-guides/proto3#default) is used: for strings,
-the default value is the empty string. For booleans, the default value is false.
-For numeric types, the default value is zero.
+[default value](/programming-guides/proto3#default) is
+used: for strings, the default value is the empty string. For booleans, the
+default value is false. For numeric types, the default value is zero.
 
 ## Reflection {#reflection}
 
