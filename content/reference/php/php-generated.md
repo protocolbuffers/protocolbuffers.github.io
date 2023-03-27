@@ -7,7 +7,6 @@ no_list: "true"
 type: docs
 description: "This topic describes the PHP code that the protocol buffer compiler generates for any given protocol definition."
 ---
-    
 
 This page describes the PHP code that the protocol buffer compiler generates for
 any given protocol definition. You should read the

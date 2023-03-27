@@ -7,6 +7,7 @@ no_list: "true"
 type: docs
 description: "This tutorial provides a basic Java programmers introduction to working with protocol buffers."
 ---
+    
 
 This tutorial provides a basic Java programmer's introduction to working with
 protocol buffers. By walking through creating a simple example application, it
@@ -404,8 +405,7 @@ to craft an interface better suited to the unique environment of your
 application: hiding some data and methods, exposing convenience functions, etc.
 **You should never add behavior to the generated classes by inheriting from
 them**. This will break internal mechanisms and is not good object-oriented
-practice anyway.
-{{% /alert %}}
+practice anyway. {{% /alert %}}
 
 ## Writing a Message {#writing-a-message}
 

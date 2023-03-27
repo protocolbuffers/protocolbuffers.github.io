@@ -1406,8 +1406,8 @@ Here are a few of the most commonly used options:
     options): Whether or not the protocol buffer compiler should generate
     abstract service code based on [services definitions](#services) in C++,
     Java, and Python, respectively. For legacy reasons, these default to `true`.
-    However, as of version 2.3.0 (January 2010), it is considered preferrable
-    for RPC implementations to provide
+    However, as of version 2.3.0 (January 2010), it is considered preferable for
+    RPC implementations to provide
     [code generator plugins](/reference/cpp/api-docs/google.protobuf.compiler.plugin.pb)
     to generate code more specific to each system, rather than rely on the
     "abstract" services.
@@ -1465,6 +1465,33 @@ Here are a few of the most commonly used options:
     ```proto
     optional int32 old_field = 6 [deprecated=true];
     ```
+
+### Enum Value Options {#enum-value-options}
+
+Enum value options are supported. You can use the `deprecated` option to
+indicate that a value shouldn't be used anymore. You can also create custom
+options using extensions.
+
+The following example shows the syntax for adding these options:
+
+```proto
+import "net/proto2/proto/descriptor.proto";
+
+extend proto2.EnumValueOptions {
+  optional string string_name = 123456789;
+}
+
+enum Data {
+  DATA_UNKNOWN = 0;
+  DATA_SEARCH = 1 [deprecated = true];
+  DATA_DISPLAY = 2 [
+    (string_name) = "display_value"
+  ]
+}
+```
+
+Continue to the next section, [Custom Options](#customoptions) to see how to
+apply custom options to enum values and to fields.
 
 ### Custom Options {#customoptions}
 
@@ -1676,8 +1703,9 @@ override that by trying to set `RETENTION_RUNTIME`.
 
 {{% alert title="Note" color="note" %}} As
 of Protocol Buffers 22.0, support for option retention is still in progress and
-only C++ and Java are supported. In all other languages, options are always
-retained at runtime. {{% /alert %}}
+only C++ and Java are supported. Go has support starting from 1.29.0. Python
+support is complete but has not made it into a release yet.
+{{% /alert %}}
 
 ## Generating Your Classes {#generating}
 

@@ -7,7 +7,6 @@ no_list: "true"
 type: docs
 description: "This topic describes exactly what C# code the protocol buffer compiler generates for protocol definitions using proto3 syntax."
 ---
-    
 
 This page describes exactly what C\# code the protocol buffer compiler generates
 for protocol definitions using `proto3` syntax. You should read the

@@ -7,6 +7,7 @@ no_list: "true"
 type: docs
 description: "This tutorial provides a basic C++ programmers introduction to working with protocol buffers."
 ---
+    
 
 This tutorial provides a basic C++ programmers introduction to working with
 protocol buffers. By walking through creating a simple example application, it
