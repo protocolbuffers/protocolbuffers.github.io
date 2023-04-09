@@ -57,7 +57,7 @@ message SongServerRequest {
 ```
 
 Using this naming convention for field names gives you accessors like those
-shown in the the following two code samples.
+shown in the following two code samples.
 
 C++:
 
