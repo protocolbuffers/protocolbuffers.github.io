@@ -65,7 +65,7 @@ Remember to leave some room for frequently occurring elements that might be
 added in the future.
 
 The smallest field number you can specify is 1, and the largest is
-2<sup>29</sup> - 1, or 536,870,911\. You also cannot use the numbers 19000
+2<sup>28</sup> - 1, or 536,870,911\. You also cannot use the numbers 19000
 through 19999 (`FieldDescriptor::kFirstReservedNumber` through
 `FieldDescriptor::kLastReservedNumber`), as they are reserved for the Protocol
 Buffers implementation—the protocol buffer compiler will complain if you use one
