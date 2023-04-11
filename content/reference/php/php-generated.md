@@ -52,8 +52,8 @@ directory `build/gen/Foo/Bar` if necessary, but it will *not* create `build` or
 
 ## Packages {#package}
 
-The package name defined in the `.proto` file is used to generate a module
-structure for the generated PHP classes. Given a file like:
+The package name defined in the `.proto` file is used by default to generate
+a module structure for the generated PHP classes. Given a file like:
 
 ```proto
 package foo.bar;
@@ -63,6 +63,34 @@ message MyMessage {}
 
 The protocol compiler generates an output class with the name
 `Foo\Bar\MyMessage`.
+
+### Namespace options
+
+The compiler supports additional options to define the PHP and metadata
+namespace. When defined these will be used to generate the module structure
+and the namespace. Given options like:
+
+```proto
+package foo.bar;
+
+option php_namespace = "baz\\qux";
+
+option php_metadata_namespace = "Foo";
+
+message MyMessage {}
+```
+
+The protocol compiler generates an output class with the name
+`baz\qux\MyMessage`.
+The class will have the namespace
+`namespace baz\qux;`.
+
+The protocol compiler generates a metadata class with the name
+`Foo\Metadata`.
+The class will have the namespace
+`namespace Foo;`.
+
+_The options are also generated case-sensitive, by default the package is converted to pascal case._
 
 ## Messages {#message}
 
