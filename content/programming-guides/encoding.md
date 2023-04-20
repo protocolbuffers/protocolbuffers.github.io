@@ -253,8 +253,9 @@ up the bytes,
 ```
 
 we see that the tag, `` `12` ``, is `00010 010`, or `2:LEN`. The byte that
-follows is the varint `7`, and the next seven bytes are the UTF-8 encoding of
-`"testing"`.
+follows is the signed int32 varint `7`, and the next seven bytes are the UTF-8
+encoding of `"testing"`. The int32 varint means that the max length of a string
+is 2GB.
 
 In Protoscope, this is written as `2:LEN 7 "testing"`. However, it can be
 incovenient to repeat the length of the string (which, in Protoscope text, is
@@ -363,9 +364,11 @@ concatenation) even if you do not know their types.
 
 ### Packed Repeated Fields {#packed}
 
-Starting in v2.1.0, `repeated` fields of scalar type can be declared as
-"packed". In proto2 this is done with the `[packed=true]`, but in proto3 it is
-the default.
+Starting in v2.1.0, `repeated` fields of
+[scalar type](/programming-guides/proto2#scalar) can be
+declared as "packed". In proto2 this is done with using the field option
+`[packed=true]`, but in proto3 it is the default. Repeated enums may be packable
+at some point, but they currently are not.
 
 Instead of being encoded as one record per entry, they are encoded as a single
 `LEN` record that contains each element concatenated. To decode, elements are
@@ -519,7 +522,7 @@ easy-to-reference format.
 message    := (tag value)*
 
 tag        := (field << 3) bit-or wire_type;
-                encoded as varint
+                encoded as uint32 varint
 value      := varint      for wire_type == VARINT,
               i32         for wire_type == I32,
               i64         for wire_type == I64,
@@ -536,7 +539,7 @@ i64        := sfixed64 | fixed64 | double;
                 memcpy of the equivalent C types (u?int32_t, float)
 
 len-prefix := size (message | string | bytes | packed);
-                size encoded as varint
+                size encoded as int32 varint
 string     := valid UTF-8 string (e.g. ASCII);
                 max 2GB of bytes
 bytes      := any sequence of 8-bit bytes;
