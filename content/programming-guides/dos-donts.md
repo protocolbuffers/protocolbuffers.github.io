@@ -26,9 +26,8 @@ Almost never change the type of a field; it'll mess up deserialization, same as
 re-using a tag number. The
 [protobuf docs](/programming-guides/proto#updating)
 outline a small number of cases that are okay (for example, going between
-`int32`, `uint32`, `int64` and `bool`). However, you’re guaranteed to break if
-you change a field’s message type (for example, going from a `Foo` message to a
-`Bar` message).
+`int32`, `uint32`, `int64` and `bool`). However, changing a field’s message type
+**will break** unless the new message is a superset of the old one.
 
 ## **Don't** Add a Required Field
 
@@ -204,5 +203,5 @@ code).
 ### API Best Practices
 
 This document lists only changes that are extremely likely to cause breakage.
-For higher-level guidance on how to craft proto API's that grow gracefully see
+For higher-level guidance on how to craft proto APIs that grow gracefully see
 [API Best Practices](/programming-guides/api).

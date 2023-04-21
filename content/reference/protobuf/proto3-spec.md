@@ -7,7 +7,6 @@ no_list: "true"
 type: docs
 description: "This topic is a language specification reference for version 3 of the Protocol Buffers language (proto3)."
 ---
-    
 
 This is a language specification reference for version 3 of the Protocol Buffers
 language (proto3). The syntax is specified using
@@ -96,8 +95,12 @@ emptyStatement = ";"
 ### Constant
 
 ```
-constant = fullIdent | ( [ "-" | "+" ] intLit ) | ( [ "-" | "+" ] floatLit ) | strLit | boolLit
+constant = fullIdent | ( [ "-" | "+" ] intLit ) | ( [ "-" | "+" ] floatLit ) |
+                strLit | boolLit | MessageValue
 ```
+
+`MessageValue` is defined in the
+[Text Format Language Specification](/reference/protobuf/textformat-spec#fields).
 
 ## Syntax
 

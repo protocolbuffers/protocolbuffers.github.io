@@ -7,10 +7,12 @@ no_list: "true"
 type: docs
 description: "This tutorial provides a basic Dart programmers introduction to working with protocol buffers."
 ---
+    
 
 This tutorial provides a basic Dart programmer's introduction to working with
-protocol buffers, using the [proto3](/programming-guides/proto3) version of
-the protocol buffers language. By walking through creating a simple example
+protocol buffers, using the
+[proto3](/programming-guides/proto3) version of the
+protocol buffers language. By walking through creating a simple example
 application, it shows you how to
 
 -   Define message formats in a `.proto` file.
@@ -19,11 +21,13 @@ application, it shows you how to
 
 This isn't a comprehensive guide to using protocol buffers in Dart . For more
 detailed reference information, see the
-[Protocol Buffer Language Guide](/programming-guides/proto3), the
+[Protocol Buffer Language Guide](/programming-guides/proto3),
+the
 [Dart Language Tour,](https://www.dartlang.org/guides/language/language-tour)
 the [Dart API Reference](https://pub.dartlang.org/documentation/protobuf), the
 [Dart Generated Code Guide](/reference/dart/dart-generated),
-and the [Encoding Reference](/programming-guides/encoding).
+and the
+[Encoding Reference](/programming-guides/encoding).
 
 ## The Problem Domain {#problem-domain}
 
@@ -49,15 +53,15 @@ ways to solve this problem:
     navigating simple fields in a class normally would be.
 
 Protocol buffers are the flexible, efficient, automated solution to solve
-exactly this problem. With protocol buffers, you write a
-`.proto` description of the data structure you wish to
-store. From that, the protocol buffer compiler creates a class that implements
-automatic encoding and parsing of the protocol buffer data with an efficient
-binary format. The generated class provides getters and setters for the fields
-that make up a protocol buffer and takes care of the details of reading and
-writing the protocol buffer as a unit. Importantly, the protocol buffer format
-supports the idea of extending the format over time in such a way that the code
-can still read data encoded with the old format.
+exactly this problem. With protocol buffers, you write a `.proto` description of
+the data structure you wish to store. From that, the protocol buffer compiler
+creates a class that implements automatic encoding and parsing of the protocol
+buffer data with an efficient binary format. The generated class provides
+getters and setters for the fields that make up a protocol buffer and takes care
+of the details of reading and writing the protocol buffer as a unit.
+Importantly, the protocol buffer format supports the idea of extending the
+format over time in such a way that the code can still read data encoded with
+the old format.
 
 ## Where to Find the Example Code {#example-code}
 
@@ -124,12 +128,11 @@ message AddressBook {
 ```
 
 In the above example, the `Person` message contains `PhoneNumber` messages,
-while the `AddressBook` message contains `Person`
-messages. You can even define message types nested inside other messages -- as
-you can see, the `PhoneNumber` type is defined inside `Person`. You can also
-define `enum` types if you want one of your fields to have one of a predefined
-list of values -- here you want to specify that a phone number can be one of
-`MOBILE`, `HOME`, or `WORK`.
+while the `AddressBook` message contains `Person` messages. You can even define
+message types nested inside other messages -- as you can see, the `PhoneNumber`
+type is defined inside `Person`. You can also define `enum` types if you want
+one of your fields to have one of a predefined list of values -- here you want
+to specify that a phone number can be one of `MOBILE`, `HOME`, or `WORK`.
 
 The " = 1", " = 2" markers on each element identify the unique "tag" that field
 uses in the binary encoding. Tag numbers 1-15 require one less byte to encode
@@ -140,12 +143,12 @@ re-encoding the tag number, so repeated fields are particularly good candidates
 for this optimization.
 
 If a field value isn't set, a
-[default value](/programming-guides/proto3#default) is used: zero for
-numeric types, the empty string for strings, false for bools. For embedded
-messages, the default value is always the "default instance" or "prototype" of
-the message, which has none of its fields set. Calling the accessor to get the
-value of a field which has not been explicitly set always returns that field's
-default value.
+[default value](/programming-guides/proto3#default) is
+used: zero for numeric types, the empty string for strings, false for bools. For
+embedded messages, the default value is always the "default instance" or
+"prototype" of the message, which has none of its fields set. Calling the
+accessor to get the value of a field which has not been explicitly set always
+returns that field's default value.
 
 If a field is `repeated`, the field may be repeated any number of times
 (including zero). The order of the repeated values will be preserved in the
@@ -153,16 +156,16 @@ protocol buffer. Think of repeated fields as dynamically sized arrays.
 
 You'll find a complete guide to writing `.proto` files -- including all the
 possible field types -- in the
-[Protocol Buffer Language Guide](/programming-guides/proto3). Don't go
-looking for facilities similar to class inheritance, though -- protocol buffers
-don't do that.
+[Protocol Buffer Language Guide](/programming-guides/proto3).
+Don't go looking for facilities similar to class inheritance, though -- protocol
+buffers don't do that.
 
 ## Compiling Your Protocol Buffers {#compiling-protocol-buffers}
 
 Now that you have a `.proto`, the next thing you need to do is generate the
-classes you'll need to read and write `AddressBook` (and hence
-`Person` and `PhoneNumber`) messages. To do this, you
-need to run the protocol buffer compiler `protoc` on your `.proto`:
+classes you'll need to read and write `AddressBook` (and hence `Person` and
+`PhoneNumber`) messages. To do this, you need to run the protocol buffer
+compiler `protoc` on your `.proto`:
 
 1.  If you haven't installed the compiler,
     [download the package](/downloads) and follow the
@@ -176,17 +179,15 @@ need to run the protocol buffer compiler `protoc` on your `.proto`:
 3.  Now run the compiler, specifying the source directory (where your
     application's source code lives -- the current directory is used if you
     don't provide a value), the destination directory (where you want the
-    generated code to go; often the same as
-    `$SRC_DIR`), and the path to your `.proto`. In
-    this case, you would invoke:
+    generated code to go; often the same as `$SRC_DIR`), and the path to your
+    `.proto`. In this case, you would invoke:
 
     ```shell
     protoc -I=$SRC_DIR --dart_out=$DST_DIR $SRC_DIR/addressbook.proto
     ```
 
-    Because you want Dart code, you use the
-    `--dart_out` option -- similar options are
-    provided for other supported languages.
+    Because you want Dart code, you use the `--dart_out` option -- similar
+    options are provided for other supported languages.
 
 This generates `addressbook.pb.dart` in your specified destination directory.
 
@@ -197,8 +198,7 @@ Generating `addressbook.pb.dart` gives you the following useful types:
 -   An `AddressBook` class with a `List<Person> get people` getter.
 -   A `Person` class with accessor methods for `name`, `id`, `email` and
     `phones`.
--   A `Person_PhoneNumber` class, with accessor methods for `number` and
-    `type`.
+-   A `Person_PhoneNumber` class, with accessor methods for `number` and `type`.
 -   A `Person_PhoneType` class with static fields for each value in the
     `Person.PhoneType` enum.
 
@@ -360,8 +360,9 @@ some rules you need to follow. In the new version of the protocol buffer:
     numbers that were never used in this protocol buffer, not even by deleted
     fields).
 
-(There are [some exceptions](/programming-guides/proto3#updating) to these
-rules, but they are rarely used.)
+(There are
+[some exceptions](/programming-guides/proto3#updating) to
+these rules, but they are rarely used.)
 
 If you follow these rules, old code will happily read new messages and simply
 ignore any new fields. To the old code, singular fields that were deleted will
@@ -370,6 +371,6 @@ code will also transparently read old messages.
 
 However, keep in mind that new fields will not be present in old messages, so
 you will need to do something reasonable with the default value. A type-specific
-[default value](/programming-guides/proto3#default) is used: for strings,
-the default value is the empty string. For booleans, the default value is false.
-For numeric types, the default value is zero.
+[default value](/programming-guides/proto3#default) is
+used: for strings, the default value is the empty string. For booleans, the
+default value is false. For numeric types, the default value is zero.

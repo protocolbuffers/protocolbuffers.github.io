@@ -28,16 +28,20 @@ particular page of results you are interested in, and a number of results per
 page. Here's the `.proto` file you use to define the message type.
 
 ```proto
+syntax = "proto2";
+
 message SearchRequest {
-  required string query = 1;
+  optional string query = 1;
   optional int32 page_number = 2;
   optional int32 result_per_page = 3;
 }
 ```
 
-The `SearchRequest` message definition specifies three fields (name/value
-pairs), one for each piece of data that you want to include in this type of
-message. Each field has a name and a type.
+*   The first line of the file specifies that you're using `proto2` syntax. This
+    should be the first non-empty, non-comment line of the file.
+*   The `SearchRequest` message definition specifies three fields (name/value
+    pairs), one for each piece of data that you want to include in this type of
+    message. Each field has a name and a type.
 
 ### Specifying Field Types {#specifying-types}
 
@@ -48,36 +52,76 @@ your field.
 
 ### Assigning Field Numbers {#assigning}
 
-As you can see, each field in the message definition has a **unique number**.
-These numbers are used to identify your fields in the
-[message binary format](/programming-guides/encoding),
-and should not be changed once your message type is in use. Field numbers in the
-range 1 through 15 take one byte to encode, including the field number and the
-field's type (you can find out more about this in
-[Protocol Buffer Encoding](/programming-guides/encoding#structure)).
-Field numbers in the range 16 through 2047 take two bytes. So you should reserve
-the field numbers 1 through 15 for message elements that occur very frequently.
-Remember to leave some room for frequently occurring elements that might be
-added in the future.
+You must give each field in your message definition a number between `1` and
+`536,870,911` with the following restrictions:
 
-The smallest field number you can specify is 1, and the largest is
-2<sup>29</sup> - 1, or 536,870,911\. You also cannot use the numbers 19000
-through 19999 (`FieldDescriptor::kFirstReservedNumber` through
-`FieldDescriptor::kLastReservedNumber`), as they are reserved for the Protocol
-Buffers implementation - the protocol buffer compiler will complain if you use
-one of these reserved numbers in your `.proto`. Similarly, you cannot use any
-previously [reserved](#reserved) field numbers.
+-   The given number **must be unique** among all fields for that message.
+-   Field numbers `19,000` to `19,999` are reserved for the Protocol Buffers
+    implementation. The protocol buffer compiler will complain if you use one of
+    these reserved field numbers in your message.
+-   You cannot use any previously [reserved](#fieldreserved) field numbers or
+    any field numbers that have been allocated to [extensions](#extensions).
+
+This number **cannot be changed once your message type is in use** because it
+identifies the field in the
+[message wire format](/programming-guides/encoding).
+"Changing" a field number is equivalent to deleting that field and creating a
+new field with the same type but a new number. See [Deleting Fields](#deleting)
+for how to do this properly.
+
+Field numbers **should never be reused**. Never take a field number out of the
+[reserved](#fieldreserved) list for reuse with a new field definition. See
+[Consequences of Reusing Field Numbers](#consequences).
+
+You should use the field numbers 1 through 15 for the most-frequently-set
+fields. Lower field number values take less space in the wire format. For
+example, field numbers in the range 1 through 15 take one byte to encode. Field
+numbers in the range 16 through 2047 take two bytes. You can find out more about
+this in
+[Protocol Buffer Encoding](/programming-guides/encoding#structure).
+
+#### Consequences of Reusing Field Numbers {#consequences}
+
+Reusing a field number makes decoding wire-format messages ambiguous.
+
+The protobuf wire format is lean and doesn't provide a way to detect fields
+encoded using one definition and decoded using another.
+
+Encoding a field using one definition and then decoding that same field with a
+different definition can lead to:
+
+-   Developer time lost to debugging
+-   A parse/merge error (best case scenario)
+-   Leaked PII/SPII
+-   Data corruption
+
+Common causes of field number reuse:
+
+-   renumbering fields (sometimes done to achieve a more aesthetically pleasing
+    number order for fields). Renumbering effectively deletes and re-adds all
+    the fields involved in the renumbering, resulting in incompatible
+    wire-format changes.
+-   deleting a field and not [reserving](#fieldreserved) the number to prevent
+    future reuse. This has been a very easy mistake to make with
+    [extension fields](#extensions) for several reasons.
+
+The max field is 29 bits instead of the more-typical 32 bits because three lower
+bits are used for the wire format. For more on this, see the
+[Encoding topic](/programming-guides/encoding#structure).
 
 ### Specifying Field Rules {#specifying-rules}
 
-You specify that message fields are one of the following:
+Message fields can be one of the following:
 
-*   `required`: a well-formed message must have exactly one of this field.
 *   `optional`: a well-formed message can have zero or one of this field (but
     not more than one).
 *   `repeated`: this field can be repeated any number of times (including zero)
     in a well-formed message. The order of the repeated values will be
     preserved.
+*   `required`: **Do not use.** Required fields are so problematic they were
+    removed from proto3. Semantics for required field should be implemented at
+    the application layer. When it *is* used, a
+    well-formed message must have exactly one of this field.
 
 For historical reasons, `repeated` fields of scalar numeric types (for example,
 `int32`, `int64`, `enum`) aren't encoded as efficiently as they could be. New
@@ -93,12 +137,13 @@ You can find out more about `packed` encoding in
 [Protocol Buffer Encoding](/programming-guides/encoding#packed).
 
 {{% alert title="Important" color="warning" %}} **Required Is Forever**
-You should be very careful about marking fields as `required`. If at some point
-you wish to stop writing or sending a required field, it will be problematic to
-change the field to an optional field – old readers will consider messages
-without this field to be incomplete and may reject or drop them unintentionally.
-You should consider writing application-specific custom validation routines for
-your buffers instead. {{% /alert %}}
+As mentioned earlier **`required` must not be used for new fields**. Semantics
+for required fields should be implemented at the application layer instead.
+Existing `required` fields should be treated as permanent, immutable elements of
+the message definition. It is nearly impossible to safely change a field from
+`required` to `optional`. If there is any chance that a stale reader exists, it
+will consider messages without this field to be incomplete and may reject or
+drop them. {{% /alert %}}
 
 A second issue with required fields appears when someone adds a value to an
 enum. In this case, the unrecognized enum value is treated as if it were
@@ -113,7 +158,7 @@ message type, you could add it to the same `.proto`:
 
 ```proto
 message SearchRequest {
-  required string query = 1;
+  optional string query = 1;
   optional int32 page_number = 2;
   optional int32 result_per_page = 3;
 }
@@ -129,33 +174,50 @@ also lead to dependency bloat when large numbers of messages with varying
 dependencies are defined in a single file. It's recommended to include as few
 message types per `.proto` file as possible.
 
-### Adding Comments
+### Adding Comments {#adding-comments}
 
 To add comments to your `.proto` files, use C/C++-style `//` and `/* ... */`
 syntax.
 
 ```proto
-
 /* SearchRequest represents a search query, with pagination options to
  * indicate which results to include in the response. */
 
 message SearchRequest {
-  required string query = 1;
+  optional string query = 1;
   optional int32 page_number = 2;  // Which page number do we want?
   optional int32 result_per_page = 3;  // Number of results to return per page.
 }
 ```
 
-### Reserved Fields {#reserved}
+### Deleting Fields {#deleting}
 
-If you [update](#updating) a message type by entirely removing a field, or
-commenting it out, future users can reuse the field number when making their own
-updates to the type. This can cause severe issues if they later load old
-versions of the same `.proto`, including data corruption, privacy bugs, and so
-on. One way to make sure this doesn't happen is to specify that the field
-numbers (and/or names, which can also cause issues for JSON serialization) of
-your deleted fields are `reserved`. The protocol buffer compiler will complain
-if any future users try to use these field identifiers.
+Deleting fields can cause serious problems if not done properly.
+
+**Do not delete** `required` fields. This is almost impossible to do safely.
+
+When you no longer need a non-required field and all references have been
+deleted from client code, you may delete the field definition from the message.
+However, you **must** [reserve the deleted field number](#fieldreserved). If you
+do not reserve the field number, it is possible for a developer to reuse that
+number in the future.
+
+You should also reserve the field name to allow JSON and TextFormat encodings of
+your message to continue to parse.
+
+### Reserved Fields {#fieldreserved}
+
+If you [update](#updating) a message type by entirely deleting a field, or
+commenting it out, future developers can reuse the field number when making
+their own updates to the type. This can cause severe issues, as described in
+[Consequences of Reusing Field Numbers](#consequences).
+
+To make sure this doesn't happen, add your deleted field number to the
+`reserved` list. To make sure JSON and TextFormat instances of your message can
+still be parsed, also add the deleted field name to a `reserved` list.
+
+The protocol buffer compiler will complain if any future developers try to use
+these reserved field numbers or names.
 
 ```proto
 message Foo {
@@ -179,7 +241,7 @@ from an input stream.
 *   For **C++**, the compiler generates a `.h` and `.cc` file from each
     `.proto`, with a class for each message type described in your file.
 *   For **Java**, the compiler generates a `.java` file with a class for each
-    message type, as well as special `Builder` classes for creating message
+    message type, as well as a special `Builder` class for creating message
     class instances.
 *   **Python** is a little different – the Python compiler generates a module
     with a static descriptor of each message type in your `.proto`, which is
@@ -525,7 +587,7 @@ enum Corpus {
 }
 
 message SearchRequest {
-  required string query = 1;
+  optional string query = 1;
   optional int32 page_number = 2;
   optional int32 result_per_page = 3 [default = 10];
   optional Corpus corpus = 4 [default = CORPUS_UNIVERSAL];
@@ -620,7 +682,7 @@ message SearchResponse {
 }
 
 message Result {
-  required string url = 1;
+  optional string url = 1;
   optional string title = 2;
   repeated string snippets = 3;
 }
@@ -691,7 +753,7 @@ following example – here the `Result` message is defined inside the
 ```proto
 message SearchResponse {
   message Result {
-    required string url = 1;
+    optional string url = 1;
     optional string title = 2;
     repeated string snippets = 3;
   }
@@ -741,7 +803,7 @@ example, another way to specify a `SearchResponse` containing a number of
 ```proto
 message SearchResponse {
   repeated group Result = 1 {
-    required string url = 2;
+    optional string url = 2;
     optional string title = 3;
     repeated string snippets = 4;
   }
@@ -773,7 +835,10 @@ If your use case isn't covered in the safe-or-not tool, check
 [Proto Best Practices](/programming-guides/dos-donts) and
 the following rules:
 
-*   Don't change the field numbers for any existing fields.
+*   Don't change the field numbers for any existing fields. "Changing" the field
+    number is equivalent to deleting the field and adding a new field with the
+    same type. If you want to renumber a field, see the instructions for
+    [deleting a field](#deleting).
 *   Any new fields that you add should be `optional` or `repeated`. This means
     that any messages serialized by code using your "old" message format can be
     parsed by your new generated code, as they won't be missing any `required`
@@ -787,7 +852,7 @@ the following rules:
 *   Non-required fields can be removed, as long as the field number is not used
     again in your updated message type. You may want to rename the field
     instead, perhaps adding the prefix "OBSOLETE_", or make the field number
-    [reserved](#reserved), so that future users of your `.proto` can't
+    [reserved](#fieldreserved), so that future users of your `.proto` can't
     accidentally reuse the number.
 *   A non-required field can be converted to an [extension](#extensions) and
     vice versa, as long as the type and number stay the same.
@@ -855,120 +920,113 @@ the following rules:
 
 ## Extensions {#extensions}
 
-Extensions let you declare that a range of field numbers in a message are
-available for third-party extensions. An extension is a placeholder for a field
-whose type is not defined by the original `.proto` file. This allows other
-`.proto` files to add to your message definition by defining the types of some
-or all of the fields with those field numbers. Let's look at an example:
+An extension is a field defined outside of its container message; usually in a
+`.proto` file separate from the container message's `.proto` file.
+
+### Why Use Extensions? {#why-ext}
+
+There are two main reasons to use extensions:
+
+*   The container message's `.proto` file will have fewer imports/dependencies.
+    This can improve build times, break circular dependencies, and otherwise
+    promote loose coupling. Extensions are very good for this.
+*   Allow systems to attach data to a container message with minimal dependency
+    and coordination. Extensions are not a great solution for this because of
+    the limited field number space and the
+    [Consequences of Reusing Field Numbers](#consequences). If your use case
+    requires very low coordination for a large number of extensions, consider
+    using the
+    [`Any` message type](/reference/protobuf/google.protobuf.md#any)
+    instead.
+
+### Example Extension? {#ext-example}
+
+Let's look at an example extension:
 
 ```proto
-message Foo {
-  // ...
+// file kittens/video_ext.proto
+
+import "kittens/video.proto";
+import "media/user_content.proto";
+
+package kittens;
+
+// This extension allows kitten videos in a media.UserContent message.
+extend media.UserContent {
+  // Video is a message imported from kittens/video.proto
+  repeated Video kitten_videos = 126;
+}
+```
+
+Note that the file defining the extension (`kittens/video_ext.proto`) imports
+the container message's file (`media/user_content.proto`).
+
+The container message must reserve a subset of its field numbers for extensions.
+
+```proto
+// file media/user_content.proto
+
+package media;
+
+// A container message to hold stuff that a user has created.
+message UserContent {
   extensions 100 to 199;
 }
 ```
 
-This says that the range of field numbers [100, 199] in `Foo` is reserved for
-extensions. Other users can now add new fields to `Foo` in their own `.proto`
-files that import your `.proto`, using field numbers within your specified range
-– for example:
+The container message's file (`media/user_content.proto`) defines the message
+`UserContent`, which reserves field numbers [100 to 199] for extensions.
+
+Note that the container message's file (`media/user_content.proto`) **does not**
+import the kitten_video extension definition (`kittens/video_ext.proto`)
+
+There is no difference in the wire-format encoding of extension fields as
+compared to a standard field with the same field number, type, and cardinality.
+Therefore, it is safe to move a standard field out of its container to be an
+extension or to move an extension field into its container message as a standard
+field so long as the field number, type, and cardinality remain constant.
+
+However, because extensions are defined outside of the container message, no
+specialized accessors are generated to get and set specific extension fields.
+For our example, the protobuf compiler **will not generate** `AddKittenVideos()`
+or `GetKittenVideos()` accessors. Instead, extensions are accessed through
+parameterized functions like: `HasExtension()`, `ClearExtension()`,
+`GetExtension()`, `MutableExtension()`, and `AddExtension()`.
+
+In C++, it would look something like:
+
+```cpp
+UserContent user_content;
+user_content.AddExtension(kittens::kitten_videos, new kittens::Video());
+assert(1 == user_content.GetExtensionCount(kittens::kitten_videos));
+user_content.GetExtension(kittens::kitten_videos, 0);
+```
+
+### Defining Extension Ranges {#defining-ranges}
+
+If you are the owner of a container message, you will need to define an
+extension range for the extensions to your message.
+
+Field numbers allocated to extension fields cannot be reused for standard
+fields.
+
+It is safe to expand an extension range after it is defined. A good default is
+to allocate 1000 relatively small numbers, and densely populate that space using
+extension declarations:
 
 ```proto
-extend Foo {
-  optional int32 bar = 126;
+message ModernExtendableMessage {
+  extensions 1000 to 2000;
 }
 ```
 
-This adds a field named `bar` with the field number 126 to the original
-definition of `Foo`.
+It is not safe to increase the start field number nor decrease the end field
+number to move or shrink an extension range. These changes can invalidate an
+existing extension.
 
-When your user's `Foo` messages are encoded, the wire format is exactly the same
-as if the user defined the new field inside `Foo`. However, the way you access
-extension fields in your application code is slightly different to accessing
-regular fields – your generated data access code has special accessors for
-working with extensions. So, for example, here's how you set the value of `bar`
-in C++:
-
-```c++
-Foo foo;
-foo.SetExtension(bar, 15);
-```
-
-Similarly, the `Foo` class defines templated accessors `HasExtension()`,
-`ClearExtension()`, `GetExtension()`, `MutableExtension()`, and
-`AddExtension()`. All have semantics matching the corresponding generated
-accessors for a normal field. For more information about working with
-extensions, see the generated code reference for your chosen language.
-
-Note that extensions can be of any field type, including message types, but
-cannot be oneofs or maps.
-
-### Nested Extensions {#nested-exts}
-
-You can declare extensions in the scope of another type:
-
-```proto
-message Baz {
-  extend Foo {
-    optional int32 bar = 126;
-  }
-  ...
-}
-```
-
-In this case, the C++ code to access this extension is:
-
-<pre lang="cpp">
-Foo foo;
-foo.SetExtension(Baz::bar, 15);</pre>
-
-In other words, the only effect is that `bar` is defined within the scope of
-`Baz`.
-
-This is a common source of confusion: Declaring an `extend` block nested inside
-a message type *does not* imply any relationship between the outer type and the
-extended type. In particular, the above example *does not* mean that `Baz` is
-any sort of subclass of `Foo`. All it means is that the symbol `bar` is declared
-inside the scope of `Baz`; it's simply a static member.
-
-A common pattern is to define extensions inside the scope of the extension's
-field type – for example, here's an extension to `Foo` of type `Baz`, where the
-extension is defined as part of `Baz`:
-
-```proto
-message Baz {
-  extend Foo {
-    optional Baz foo_ext = 127;
-  }
-  ...
-}
-```
-
-However, there is no requirement that an extension with a message type be
-defined inside that type. You can also do this:
-
-```proto
-message Baz {
-  ...
-}
-
-// This can even be in a different file.
-extend Foo {
-  optional Baz foo_baz_ext = 127;
-}
-```
-
-In fact, this syntax may be preferred to avoid confusion. As mentioned above,
-the nested syntax is often mistaken for subclassing by users who are not already
-familiar with extensions.
-
-### Choosing Extension Numbers {#choosing}
-
-It's very important to make sure that two users don't add extensions to the same
-message type using the same field number – data corruption can result if an
-extension is accidentally interpreted as the wrong type. You may want to
-consider defining an extension numbering convention for your project to prevent
-this happening.
+Prefer using field numbers 1 to 15 for standard fields that are populated in
+most instances of your proto. It is not recommended to use these numbers for
+extensions.
 
 If your numbering convention might involve extensions having very large field
 numbers, you can specify that your extension range goes up to the maximum
@@ -982,13 +1040,135 @@ message Foo {
 
 `max` is 2<sup>29</sup> - 1, or 536,870,911.
 
-As when choosing field numbers in general, your numbering convention also needs
-to avoid field numbers 19000 though 19999
-(`FieldDescriptor::kFirstReservedNumber` through
-`FieldDescriptor::kLastReservedNumber`), as they are reserved for the Protocol
-Buffers implementation. You can define an extension range that includes this
-range, but the protocol compiler will not allow you to define actual extensions
-with these numbers.
+### Choosing Extension Numbers {#choosing}
+
+Extensions are just fields that can be specified outside of their container
+messages. All the same rules for [Assigning Field Numbers](#assigning) apply to
+extension field numbers. The same
+[Consequences of Reusing Field Numbers](#consequences) also apply to reusing
+extension field numbers.
+
+### Specifying Extension Types {#specifying-extension-types}
+
+Extensions can be of any field type except `oneof`s and `map`s.
+
+### Nested Extensions (not recommended) {#nested-exts}
+
+You can declare extensions in the scope of another message:
+
+```proto
+import "common/user_profile.proto";
+
+package puppies;
+
+message Photo {
+  extend common.UserProfile {
+    optional int32 likes_count = 111;
+  }
+  ...
+}
+```
+
+In this case, the C++ code to access this extension is:
+
+```cpp
+UserProfile user_profile;
+user_profile.SetExtension(puppies::Photo::likes_count, 42);
+```
+
+In other words, the only effect is that `likes_count` is defined within the
+scope of `puppies.Photo`.
+
+This is a common source of confusion: Declaring an `extend` block nested inside
+a message type *does not* imply any relationship between the outer type and the
+extended type. In particular, the above example *does not* mean that `Photo` is
+any sort of subclass of `UserProfile`. All it means is that the symbol
+`likes_count` is declared inside the scope of `Photo`; it's simply a static
+member.
+
+A common pattern is to define extensions inside the scope of the extension's
+field type - for example, here's an extension to `media.UserContent` of type
+`puppies.Photo`, where the extension is defined as part of `Photo`:
+
+```proto
+import "media/user_content.proto";
+
+package puppies;
+
+message Photo {
+  extend media.UserContent {
+    optional Photo puppy_photo = 127;
+  }
+  ...
+}
+```
+
+However, there is no requirement that an extension with a message type be
+defined inside that type. You can also use the standard definition pattern:
+
+```proto
+import "media/user_content.proto";
+
+package puppies;
+
+message Photo {
+  ...
+}
+
+// This can even be in a different file.
+extend media.UserContent {
+  optional Photo puppy_photo = 127;
+}
+```
+
+This **standard (file-level) syntax is preferred** to avoid confusion. The
+nested syntax is often mistaken for subclassing by users who are not already
+familiar with extensions.
+
+## Any {#any}
+
+The `Any` message type lets you use messages as embedded types without having
+their .proto definition. An `Any` contains an arbitrary serialized message as
+`bytes`, along with a URL that acts as a globally unique identifier for and
+resolves to that message's type. To use the `Any` type, you need to
+[import](#other) `google/protobuf/any.proto`.
+
+```proto
+import "google/protobuf/any.proto";
+
+message ErrorStatus {
+  string message = 1;
+  repeated google.protobuf.Any details = 2;
+}
+```
+
+The default type URL for a given message type is
+`type.googleapis.com/_packagename_._messagename_`.
+
+Different language implementations will support runtime library helpers to pack
+and unpack `Any` values in a typesafe manner – for example, in Java, the `Any`
+type will have special `pack()` and `unpack()` accessors, while in C++ there are
+`PackFrom()` and `UnpackTo()` methods:
+
+```c++
+// Storing an arbitrary message type in Any.
+NetworkErrorDetails details = ...;
+ErrorStatus status;
+status.add_details()->PackFrom(details);
+
+// Reading an arbitrary message from Any.
+ErrorStatus status = ...;
+for (const google::protobuf::Any& detail : status.details()) {
+  if (detail.Is<NetworkErrorDetails>()) {
+    NetworkErrorDetails network_error;
+    detail.UnpackTo(&network_error);
+    ... processing network_error ...
+  }
+}
+```
+
+**Currently the runtime libraries for working with `Any` types are under
+development**.
 
 ## Oneof {#oneof}
 
@@ -1141,13 +1321,14 @@ You can find out more about the map API for your chosen language in the relevant
 The map syntax is equivalent to the following on the wire, so protocol buffers
 implementations that do not support maps can still handle your data:
 
-<pre class="prettyprint" lang="proto">message MapFieldEntry {
+```proto
+message MapFieldEntry {
   optional key_type key = 1;
   optional value_type value = 2;
 }
 
 repeated MapFieldEntry map_field = N;
-</pre>
+```
 
 Any protocol buffers implementation that supports maps must both produce and
 accept data that can be accepted by the above definition.
@@ -1168,7 +1349,7 @@ type:
 ```proto
 message Foo {
   ...
-  required foo.bar.Open open = 1;
+  optional foo.bar.Open open = 1;
   ...
 }
 ```
@@ -1406,8 +1587,8 @@ Here are a few of the most commonly used options:
     options): Whether or not the protocol buffer compiler should generate
     abstract service code based on [services definitions](#services) in C++,
     Java, and Python, respectively. For legacy reasons, these default to `true`.
-    However, as of version 2.3.0 (January 2010), it is considered preferrable
-    for RPC implementations to provide
+    However, as of version 2.3.0 (January 2010), it is considered preferable for
+    RPC implementations to provide
     [code generator plugins](/reference/cpp/api-docs/google.protobuf.compiler.plugin.pb)
     to generate code more specific to each system, rather than rely on the
     "abstract" services.
@@ -1459,12 +1640,39 @@ Here are a few of the most commonly used options:
     annotations on the field's accessors, which will in turn cause a warning to
     be emitted when compiling code which attempts to use the field. If the field
     is not used by anyone and you want to prevent new users from using it,
-    consider replacing the field declaration with a [reserved](#reserved)
+    consider replacing the field declaration with a [reserved](#fieldreserved)
     statement.
 
     ```proto
     optional int32 old_field = 6 [deprecated=true];
     ```
+
+### Enum Value Options {#enum-value-options}
+
+Enum value options are supported. You can use the `deprecated` option to
+indicate that a value shouldn't be used anymore. You can also create custom
+options using extensions.
+
+The following example shows the syntax for adding these options:
+
+```proto
+import "net/proto2/proto/descriptor.proto";
+
+extend proto2.EnumValueOptions {
+  optional string string_name = 123456789;
+}
+
+enum Data {
+  DATA_UNKNOWN = 0;
+  DATA_SEARCH = 1 [deprecated = true];
+  DATA_DISPLAY = 2 [
+    (string_name) = "display_value"
+  ]
+}
+```
+
+Continue to the next section, [Custom Options](#customoptions) to see how to
+apply custom options to enum values and to fields.
 
 ### Custom Options {#customoptions}
 
@@ -1676,8 +1884,9 @@ override that by trying to set `RETENTION_RUNTIME`.
 
 {{% alert title="Note" color="note" %}} As
 of Protocol Buffers 22.0, support for option retention is still in progress and
-only C++ and Java are supported. In all other languages, options are always
-retained at runtime. {{% /alert %}}
+only C++ and Java are supported. Go has support starting from 1.29.0. Python
+support is complete but has not made it into a release yet.
+{{% /alert %}}
 
 ## Generating Your Classes {#generating}
 

@@ -31,7 +31,7 @@ syntax = "proto3";
 message SearchRequest {
   string query = 1;
   int32 page_number = 2;
-  int32 result_per_page = 3;
+  int32 results_per_page = 3;
 }
 ```
 
@@ -43,36 +43,72 @@ message SearchRequest {
     pairs), one for each piece of data that you want to include in this type of
     message. Each field has a name and a type.
 
-### Specifying Field Types
+### Specifying Field Types {#specifying-types}
 
-In the above example, all the fields are [scalar types](#scalar): two integers
-(`page_number` and `result_per_page`) and a string (`query`). However, you can
-also specify composite types for your fields, including [enumerations](#enum)
-and other message types.
+In the earlier example, all the fields are [scalar types](#scalar): two integers
+(`page_number` and `results_per_page`) and a string (`query`). You can also
+specify [enumerations](#enum) and composite types like other message types for
+your field.
 
-### Assigning Field Numbers
+### Assigning Field Numbers {#assigning}
 
-As you can see, each field in the message definition has a **unique number**.
-These field numbers are used to identify your fields in the
-[message binary format](/programming-guides/encoding),
-and should not be changed once your message type is in use. Note that field
-numbers in the range 1 through 15 take one byte to encode, including the field
-number and the field's type (you can find out more about this in
-[Protocol Buffer Encoding](/programming-guides/encoding#structure)).
-Field numbers in the range 16 through 2047 take two bytes. So you should reserve
-the numbers 1 through 15 for very frequently occurring message elements.
-Remember to leave some room for frequently occurring elements that might be
-added in the future.
+You must give each field in your message definition a number between `1` and
+`536,870,911` with the following restrictions:
 
-The smallest field number you can specify is 1, and the largest is
-2<sup>29</sup> - 1, or 536,870,911\. You also cannot use the numbers 19000
-through 19999 (`FieldDescriptor::kFirstReservedNumber` through
-`FieldDescriptor::kLastReservedNumber`), as they are reserved for the Protocol
-Buffers implementation—the protocol buffer compiler will complain if you use one
-of these reserved numbers in your `.proto`. Similarly, you cannot use any
-previously [reserved](#reserved) field numbers.
+-   The given number **must be unique** among all fields for that message.
+-   Field numbers `19,000` to `19,999` are reserved for the Protocol Buffers
+    implementation. The protocol buffer compiler will complain if you use one of
+    these reserved field numbers in your message.
+-   You cannot use any previously [reserved](#fieldreserved) field numbers or
+    any field numbers that have been allocated to [extensions](#extensions).
 
-### Specifying Field Rules
+This number **cannot be changed once your message type is in use** because it
+identifies the field in the
+[message wire format](/programming-guides/encoding).
+"Changing" a field number is equivalent to deleting that field and creating a
+new field with the same type but a new number. See [Deleting Fields](#deleting)
+for how to do this properly.
+
+Field numbers **should never be reused**. Never take a field number out of the
+[reserved](#fieldreserved) list for reuse with a new field definition. See
+[Consequences of Reusing Field Numbers](#consequences).
+
+You should use the field numbers 1 through 15 for the most-frequently-set
+fields. Lower field number values take less space in the wire format. For
+example, field numbers in the range 1 through 15 take one byte to encode. Field
+numbers in the range 16 through 2047 take two bytes. You can find out more about
+this in
+[Protocol Buffer Encoding](/programming-guides/encoding#structure).
+
+#### Consequences of Reusing Field Numbers {#consequences}
+
+Reusing a field number makes decoding wire-format messages ambiguous.
+
+The protobuf wire format is lean and doesn’t provide a way to detect fields
+encoded using one definition and decoded using another.
+
+Encoding a field using one definition and then decoding that same field with a
+different definition can lead to:
+
+-   Developer time lost to debugging
+-   A parse/merge error (best case scenario)
+-   Leaked PII/SPII
+-   Data corruption
+
+Common causes of field number reuse:
+
+-   renumbering fields (sometimes done to achieve a more aesthetically pleasing
+    number order for fields). Renumbering effectively deletes and re-adds all
+    the fields involved in the renumbering, resulting in incompatible
+    wire-format changes.
+-   deleting a field and not [reserving](#fieldreserved) the number to prevent
+    future reuse.
+
+The max field is 29 bits instead of the more-typical 32 bits because three lower
+bits are used for the wire format. For more on this, see the
+[Encoding topic](/programming-guides/encoding#structure).
+
+### Specifying Field Rules {#specifying-rules}
 
 Message fields can be one of the following:
 
@@ -110,7 +146,7 @@ message type, you could add it to the same `.proto`:
 message SearchRequest {
   string query = 1;
   int32 page_number = 2;
-  int32 result_per_page = 3;
+  int32 results_per_page = 3;
 }
 
 message SearchResponse {
@@ -130,20 +166,36 @@ syntax.
 message SearchRequest {
   string query = 1;
   int32 page_number = 2;  // Which page number do we want?
-  int32 result_per_page = 3;  // Number of results to return per page.
+  int32 results_per_page = 3;  // Number of results to return per page.
 }
 ```
 
-### Reserved Fields {#reserved}
+### Deleting Fields {#deleting}
 
-If you [update](#updating) a message type by entirely removing a field, or
-commenting it out, future users can reuse the field number when making their own
-updates to the type. This can cause severe issues if they later load old
-versions of the same `.proto`, including data corruption, privacy bugs, and so
-on. One way to make sure this doesn't happen is to specify that the field
-numbers (and/or names, which can also cause issues for JSON serialization) of
-your deleted fields are `reserved`. The protocol buffer compiler will complain
-if any future users try to use these field identifiers.
+Deleting fields can cause serious problems if not done properly.
+
+When you no longer need a non-required field and all references have been
+deleted from client code, you may delete the field definition from the message.
+However, you **must** [reserve the deleted field number](#fieldreserved). If you
+do not reserve the field number, it is possible for a developer to reuse that
+number in the future.
+
+You should also reserve the field name to allow JSON and TextFormat encodings of
+your message to continue to parse.
+
+### Reserved Fields {#fieldreserved}
+
+If you [update](#updating) a message type by entirely deleting a field, or
+commenting it out, future developers can reuse the field number when making
+their own updates to the type. This can cause severe issues, as described in
+[Consequences of Reusing Field Numbers](#consequences).
+
+To make sure this doesn't happen, add your deleted field number to the
+`reserved` list. To make sure JSON and TextFormat instances of your message can
+still be parsed, also add the deleted field name to a `reserved` list.
+
+The protocol buffer compiler will complain if any future developers try to use
+these reserved field numbers or names.
 
 ```proto
 message Foo {
@@ -152,10 +204,11 @@ message Foo {
 }
 ```
 
-Note that you can't mix field names and field numbers in the same `reserved`
-statement.
+Reserved field number ranges are inclusive (`9 to 11` is the same as `9, 10,
+11`). Note that you can't mix field names and field numbers in the same
+`reserved` statement.
 
-### What's Generated From Your `.proto`?
+### What's Generated From Your `.proto`? {#generated}
 
 When you run the [protocol buffer compiler](#generating) on a `.proto`, the
 compiler generates the code in your chosen language you'll need to work with the
@@ -684,7 +737,7 @@ enum Corpus {
 message SearchRequest {
   string query = 1;
   int32 page_number = 2;
-  int32 result_per_page = 3;
+  int32 results_per_page = 3;
   Corpus corpus = 4;
 }
 ```
@@ -761,7 +814,7 @@ For more information about how to work with message `enum`s in your
 applications, see the [generated code guide](/reference/)
 for your chosen language.
 
-### Reserved Values
+### Reserved Values {#reserved}
 
 If you [update](#updating) an enum type by entirely removing an enum entry, or
 commenting it out, future users can reuse the numeric value when making their
@@ -803,7 +856,7 @@ message Result {
 }
 ```
 
-### Importing Definitions
+### Importing Definitions {#importing}
 
 In the above example, the `Result` message type is defined in the same file as
 `SearchResponse` – what if the message type you want to use as a field type is
@@ -910,10 +963,23 @@ message Outer {                  // Level 0
 If an existing message type no longer meets all your needs – for example, you'd
 like the message format to have an extra field – but you'd still like to use
 code created with the old format, don't worry! It's very simple to update
-message types without breaking any of your existing code. Just remember the
-following rules:
+message types without breaking any of your existing code when you use the binary
+wire format.
 
-*   Don't change the field numbers for any existing fields.
+{{% alert title="Note" color="note" %}} If
+you use JSON or
+[proto text format](/reference/protobuf/textformat-spec)
+to store your protocol buffer messages, the changes that you can make in your
+proto definition are different. {{% /alert %}}
+
+Check
+[Proto Best Practices](/programming-guides/dos-donts) and
+the following rules:
+
+*   Don't change the field numbers for any existing fields. "Changing" the field
+    number is equivalent to deleting the field and adding a new field with the
+    same type. If you want to renumber a field, see the instructions for
+    [deleting a field](#deleting).
 *   If you add new fields, any messages serialized by code using your "old"
     message format can still be parsed by your new generated code. You should
     keep in mind the [default values](#default) for these elements so that new
@@ -924,7 +990,7 @@ following rules:
 *   Fields can be removed, as long as the field number is not used again in your
     updated message type. You may want to rename the field instead, perhaps
     adding the prefix "OBSOLETE_", or make the field number
-    [reserved](#reserved), so that future users of your `.proto` can't
+    [reserved](#fieldreserved), so that future users of your `.proto` can't
     accidentally reuse the number.
 *   `int32`, `uint32`, `int64`, `uint64`, and `bool` are all compatible – this
     means you can change a field from one of these types to another without
@@ -1114,7 +1180,7 @@ language in the relevant [API reference](/reference/).
     CHECK_EQ(msg2.name(), "name");
     ```
 
-### Backwards-compatibility issues
+### Backwards-compatibility issues {#backward}
 
 Be careful when adding or removing oneof fields. If checking the value of a
 oneof returns `None`/`NOT_SET`, it could mean that the oneof has not been set or
@@ -1122,7 +1188,7 @@ it has been set to a field in a different version of the oneof. There is no way
 to tell the difference, since there's no way to know if an unknown field on the
 wire is a member of the oneof.
 
-#### Tag Reuse Issues
+#### Tag Reuse Issues {#reuse}
 
 *   **Move fields into or out of a oneof**: You may lose some of your
     information (some fields will be cleared) after the message is serialized
@@ -1171,7 +1237,7 @@ The generated map API is currently available for all proto3 supported languages.
 You can find out more about the map API for your chosen language in the relevant
 [API reference](/reference/).
 
-### Backwards Compatibility
+### Backwards compatibility {#backwards}
 
 The map syntax is equivalent to the following on the wire, so protocol buffers
 implementations that do not support maps can still handle your data:
@@ -1228,7 +1294,7 @@ language:
     PascalCase, unless you explicitly provide an `option csharp_namespace` in
     your `.proto` file. For example, `Open` would be in the namespace `Foo.Bar`.
 
-### Packages and Name Resolution
+### Packages and Name Resolution {#name-resolution}
 
 Type name resolution in the protocol buffer language works like C++: first the
 innermost scope is searched, then the next-innermost, and so on, with each
@@ -1582,12 +1648,39 @@ Here are a few of the most commonly used options:
     annotations on the field's accessors, which will in turn cause a warning to
     be emitted when compiling code which attempts to use the field. If the field
     is not used by anyone and you want to prevent new users from using it,
-    consider replacing the field declaration with a [reserved](#reserved)
+    consider replacing the field declaration with a [reserved](#fieldreserved)
     statement.
 
     ```proto
     int32 old_field = 6 [deprecated = true];
     ```
+
+### Enum Value Options {#enum-value-options}
+
+Enum value options are supported. You can use the `deprecated` option to
+indicate that a value shouldn't be used anymore. You can also create custom
+options using extensions.
+
+The following example shows the syntax for adding these options:
+
+```proto
+import "net/proto2/proto/descriptor.proto";
+
+extend proto2.EnumValueOptions {
+  optional string string_name = 123456789;
+}
+
+enum Data {
+  DATA_UNKNOWN = 0;
+  DATA_SEARCH = 1 [deprecated = true];
+  DATA_DISPLAY = 2 [
+    (string_name) = "display_value"
+  ]
+}
+```
+
+Continue to the next section, [Custom Options](#customoptions) to see how to
+apply custom options to enum values and to fields.
 
 ### Custom Options {#customoptions}
 
@@ -1639,8 +1732,9 @@ override that by trying to set `RETENTION_RUNTIME`.
 
 {{% alert title="Note" color="note" %}} As
 of Protocol Buffers 22.0, support for option retention is still in progress and
-only C++ and Java are supported. In all other languages, options are always
-retained at runtime. {{% /alert %}}
+only C++ and Java are supported. Go has support starting from 1.29.0. Python
+support is complete but has not made it into a release yet.
+{{% /alert %}}
 
 ## Generating Your Classes {#generating}
 
