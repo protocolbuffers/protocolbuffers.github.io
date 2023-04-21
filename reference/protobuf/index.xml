@@ -54,8 +54,10 @@ language (proto2). The syntax is specified using
 &lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-fallback" data-lang="fallback">&lt;span style="display:flex;">&lt;span>emptyStatement = &amp;#34;;&amp;#34;
 &lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h3 id="constant">Constant&lt;/h3>
 &lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-fallback" data-lang="fallback">&lt;span style="display:flex;">&lt;span>constant = fullIdent | ( [ &amp;#34;-&amp;#34; | &amp;#34;+&amp;#34; ] intLit ) | ( [ &amp;#34;-&amp;#34; | &amp;#34;+&amp;#34; ] floatLit ) |
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> strLit | boolLit
-&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h2 id="syntax">Syntax&lt;/h2>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> strLit | boolLit | MessageValue
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>&lt;code>MessageValue&lt;/code> is defined in the
+&lt;a href="https://protobuf.dev/reference/protobuf/textformat-spec#fields">Text Format Language Specification&lt;/a>.&lt;/p>
+&lt;h2 id="syntax">Syntax&lt;/h2>
 &lt;p>The syntax statement is used to define the protobuf version.&lt;/p>
 &lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-fallback" data-lang="fallback">&lt;span style="display:flex;">&lt;span>syntax = &amp;#34;syntax&amp;#34; &amp;#34;=&amp;#34; (&amp;#34;&amp;#39;&amp;#34; &amp;#34;proto2&amp;#34; &amp;#34;&amp;#39;&amp;#34; | &amp;#39;&amp;#34;&amp;#39; &amp;#34;proto2&amp;#34; &amp;#39;&amp;#34;&amp;#39;) &amp;#34;;&amp;#34;
 &lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h2 id="import_statement">Import Statement&lt;/h2>
@@ -304,8 +306,11 @@ language (proto3). The syntax is specified using
 &lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h3 id="emptystatement">EmptyStatement&lt;/h3>
 &lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-fallback" data-lang="fallback">&lt;span style="display:flex;">&lt;span>emptyStatement = &amp;#34;;&amp;#34;
 &lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h3 id="constant">Constant&lt;/h3>
-&lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-fallback" data-lang="fallback">&lt;span style="display:flex;">&lt;span>constant = fullIdent | ( [ &amp;#34;-&amp;#34; | &amp;#34;+&amp;#34; ] intLit ) | ( [ &amp;#34;-&amp;#34; | &amp;#34;+&amp;#34; ] floatLit ) | strLit | boolLit
-&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h2 id="syntax">Syntax&lt;/h2>
+&lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-fallback" data-lang="fallback">&lt;span style="display:flex;">&lt;span>constant = fullIdent | ( [ &amp;#34;-&amp;#34; | &amp;#34;+&amp;#34; ] intLit ) | ( [ &amp;#34;-&amp;#34; | &amp;#34;+&amp;#34; ] floatLit ) |
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> strLit | boolLit | MessageValue
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>&lt;code>MessageValue&lt;/code> is defined in the
+&lt;a href="https://protobuf.dev/reference/protobuf/textformat-spec#fields">Text Format Language Specification&lt;/a>.&lt;/p>
+&lt;h2 id="syntax">Syntax&lt;/h2>
 &lt;p>The syntax statement is used to define the protobuf version.&lt;/p>
 &lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-fallback" data-lang="fallback">&lt;span style="display:flex;">&lt;span>syntax = &amp;#34;syntax&amp;#34; &amp;#34;=&amp;#34; (&amp;#34;&amp;#39;&amp;#34; &amp;#34;proto3&amp;#34; &amp;#34;&amp;#39;&amp;#34; | &amp;#39;&amp;#34;&amp;#39; &amp;#34;proto3&amp;#34; &amp;#39;&amp;#34;&amp;#39;) &amp;#34;;&amp;#34;
 &lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>Example:&lt;/p>
