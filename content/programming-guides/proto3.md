@@ -1664,9 +1664,9 @@ options using extensions.
 The following example shows the syntax for adding these options:
 
 ```proto
-import "net/proto2/proto/descriptor.proto";
+import "google/protobufs/descriptor.proto";
 
-extend proto2.EnumValueOptions {
+extend google.protobufs.EnumValueOptions {
   optional string string_name = 123456789;
 }
 
