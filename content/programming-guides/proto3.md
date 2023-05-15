@@ -108,28 +108,35 @@ The max field is 29 bits instead of the more-typical 32 bits because three lower
 bits are used for the wire format. For more on this, see the
 [Encoding topic](/programming-guides/encoding#structure).
 
-### Specifying Field Rules {#specifying-rules}
+<a id="specifying-field-rules"></a>
+
+### Specifying Field Labels {#field-labels}
 
 Message fields can be one of the following:
 
-*   `singular`: a well-formed message can have zero or one of this field (but
-    not more than one). When using proto3 syntax, this is the default field rule
-    when no other field rules are specified for a given field. You cannot
-    determine whether it was parsed from the wire. It will be serialized to the
-    wire unless it is the default value. For more on this subject, see
-    [Field Presence](/programming-guides/field_presence).
-*   `optional`: the same as `singular`, except that you can check to see if the
-    value was explicitly set. An `optional` field is in one of two possible
-    states:
+*   `optional`: An `optional` field is in one of two possible states:
+
     *   the field is set, and contains a value that was explicitly set or parsed
         from the wire. It will be serialized to the wire.
     *   the field is unset, and will return the default value. It will not be
         serialized to the wire.
+
+    You can check to see if the value was explicitly set.
+
 *   `repeated`: this field type can be repeated zero or more times in a
     well-formed message. The order of the repeated values will be preserved.
+
 *   `map`: this is a paired key/value field type. See
     [Maps](/programming-guides/encoding#maps) for more on
     this field type.
+
+*   If no explicit field label is applied, the default field label, called
+    "implicit field presence," is assumed. (You cannot explicitly set a field to
+    this state.) A well-formed message can have zero or one of this field (but
+    not more than one). You also cannot determine whether a field of this type
+    was parsed from the wire. An implicit presence field will be serialized to
+    the wire unless it is the default value. For more on this subject, see
+    [Field Presence](/programming-guides/field_presence).
 
 In proto3, `repeated` fields of scalar numeric types use `packed` encoding by
 default. You can find out more about `packed` encoding in
@@ -1366,7 +1373,7 @@ value.
     <tr>
       <td>message</td>
       <td>object</td>
-      <td><code>{"fooBar": v, "g": null, …}</code></td>
+      <td><code>{"fooBar": v, "g": null, ...}</code></td>
       <td>Generates JSON objects. Message field names are mapped to
         lowerCamelCase and become JSON object keys. If the
         <code>json_name</code> field option is specified, the specified value
@@ -1374,7 +1381,9 @@ value.
         name (or the one specified by the <code>json_name</code> option) and the
         original proto field name. <code>null</code> is an accepted value for
         all field types and treated as the default value of the corresponding
-        field type.
+        field type. However, <code>null</code> cannot be used for the
+        <code>json_name</code> value. For more on why, see
+        <a href="/news/2023-04-28#json-name">Stricter validation for json_name</a>.
       </td>
     </tr>
     <tr>
@@ -1388,13 +1397,13 @@ value.
     <tr>
       <td>map&lt;K,V&gt;</td>
       <td>object</td>
-      <td><code>{"k": v, …}</code></td>
+      <td><code>{"k": v, ...}</code></td>
       <td>All keys are converted to strings.</td>
     </tr>
     <tr>
       <td>repeated V</td>
       <td>array</td>
-      <td><code>[v, …]</code></td>
+      <td><code>[v, ...]</code></td>
       <td><code>null</code> is accepted as the empty list <code>[]</code>.</td>
     </tr>
     <tr>
@@ -1446,7 +1455,7 @@ value.
     <tr>
       <td>Any</td>
       <td><code>object</code></td>
-      <td><code>{"@type": "url", "f": v, … }</code></td>
+      <td><code>{"@type": "url", "f": v, ... }</code></td>
       <td>If the <code>Any</code> contains a value that has a special JSON
         mapping, it will be converted as follows: <code>{"@type": xxx, "value":
         yyy}</code>. Otherwise, the value will be converted into a JSON object,
@@ -1476,13 +1485,13 @@ value.
     <tr>
       <td>Struct</td>
       <td><code>object</code></td>
-      <td><code>{ … }</code></td>
+      <td><code>{ ... }</code></td>
       <td>Any JSON object. See <code>struct.proto</code>.</td>
     </tr>
     <tr>
       <td>Wrapper types</td>
       <td>various types</td>
-      <td><code>2, "2", "foo", true, "true", null, 0, …</code></td>
+      <td><code>2, "2", "foo", true, "true", null, 0, ...</code></td>
       <td>Wrappers use the same representation in JSON as the wrapped primitive
         type, except that <code>null</code> is allowed and preserved during data
         conversion and transfer.
@@ -1497,7 +1506,7 @@ value.
     <tr>
       <td>ListValue</td>
       <td>array</td>
-      <td><code>[foo, bar, …]</code></td>
+      <td><code>[foo, bar, ...]</code></td>
       <td></td>
     </tr>
     <tr>
@@ -1664,9 +1673,9 @@ options using extensions.
 The following example shows the syntax for adding these options:
 
 ```proto
-import "net/proto2/proto/descriptor.proto";
+import "google/protobufs/descriptor.proto";
 
-extend proto2.EnumValueOptions {
+extend google.protobufs.EnumValueOptions {
   optional string string_name = 123456789;
 }
 
@@ -1707,7 +1716,7 @@ paying the code size cost of retaining them in your binaries. Options with
 source retention are still visible to `protoc` and `protoc` plugins, so code
 generators can use them to customize their behavior.
 
-Retention can be set directly on an option, like this;
+Retention can be set directly on an option, like this:
 
 ```proto
 extend google.protobuf.FileOptions {
@@ -1721,7 +1730,7 @@ that field appears inside an option:
 
 ```proto
 message OptionsMessage {
-  optional int32 source_retention_field = 1 [retention = RETENTION_SOURCE];
+  int32 source_retention_field = 1 [retention = RETENTION_SOURCE];
 }
 ```
 
@@ -1735,6 +1744,55 @@ of Protocol Buffers 22.0, support for option retention is still in progress and
 only C++ and Java are supported. Go has support starting from 1.29.0. Python
 support is complete but has not made it into a release yet.
 {{% /alert %}}
+
+### Option Targets {#option-targets}
+
+Fields have a `targets` option which controls the types of entities that the
+field may apply to when used as an option. For example, if a field has
+`targets = TARGET_TYPE_MESSAGE` then that field cannot be set in a custom option
+on an enum (or any other non-message entity). Protoc enforces this and will
+raise an error if there is a violation of the target constraints.
+
+At first glance, this feature may seem unnecessary given that every custom
+option is an extension of the options message for a specific entity, which
+already constrains the option to that one entity. However, option targets are
+useful in the case where you have a shared options message applied to multiple
+entity types and you want to control the usage of individual fields in that
+message. For example:
+
+```proto
+message MyOptions {
+  string file_only_option = 1 [targets = TARGET_TYPE_FILE];
+  int32 message_and_enum_option = 2 [targets = TARGET_TYPE_MESSAGE,
+                                     targets = TARGET_TYPE_ENUM];
+}
+
+extend google.protobuf.FileOptions {
+  optional MyOptions file_options = 50000;
+}
+
+extend google.protobuf.MessageOptions {
+  optional MyOptions message_options = 50000;
+}
+
+extend google.protobuf.EnumOptions {
+  optional MyOptions enum_options = 50000;
+}
+
+// OK: this field is allowed on file options
+option (file_options).file_only_option = "abc";
+
+message MyMessage {
+  // OK: this field is allowed on both message and enum options
+  option (message_options).message_and_enum_option = 42;
+}
+
+enum MyEnum {
+  MY_ENUM_UNSPECIFIED = 0;
+  // Error: file_only_option cannot be set on an enum.
+  option (enum_options).file_only_option = "xyz";
+}
+```
 
 ## Generating Your Classes {#generating}
 

@@ -549,7 +549,7 @@ oneof example_name {
 The compiler will generate the following accessor methods in both the message
 class and its builder:
 
--   `boolean hasFoo()` (proto2 only): Returns `true` if the oneof case is `FOO`.
+-   `boolean hasFoo()`: Returns `true` if the oneof case is `FOO`.
 -   `int getFoo()`: Returns the current value of `example_name` if the oneof
     case is `FOO`. Otherwise, returns the default value of this field.
 

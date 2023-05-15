@@ -27,10 +27,10 @@ For more information about using proto3, see the
 ### Letters and Digits {#letters_and_digits}
 
 ```
-letter = "A" … "Z" | "a" … "z"
-decimalDigit = "0" … "9"
-octalDigit   = "0" … "7"
-hexDigit     = "0" … "9" | "A" … "F" | "a" … "f"
+letter = "A" ... "Z" | "a" ... "z"
+decimalDigit = "0" ... "9"
+octalDigit   = "0" ... "7"
+hexDigit     = "0" ... "9" | "A" ... "F" | "a" ... "f"
 ```
 
 ### Identifiers
@@ -53,7 +53,7 @@ enumType = [ "." ] { ident "." } enumName
 
 ```
 intLit     = decimalLit | octalLit | hexLit
-decimalLit = ( "1" … "9" ) { decimalDigit }
+decimalLit = ( "1" ... "9" ) { decimalDigit }
 octalLit   = "0" { octalDigit }
 hexLit     = "0" ( "x" | "X" ) hexDigit { hexDigit }
 ```
@@ -276,7 +276,8 @@ enum EnumAllowingAlias {
 
 A message consists of a message name and a message body. The message body can
 have fields, nested enum definitions, nested message definitions, options,
-oneofs, map fields, and reserved statements.
+oneofs, map fields, and reserved statements. A message cannot contain two fields
+with the same name in the same message schema.
 
 ```
 message = "message" messageName messageBody

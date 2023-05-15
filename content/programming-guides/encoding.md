@@ -185,8 +185,8 @@ understand why this produces so many ones.
 
 <!-- mdformat off(the asterisks cause bullets) -->
 `sintN` uses the "ZigZag" encoding instead of two's complement to encode
-negative integers. Positive integers `n` are encoded as `2 * n` (the even
-numbers), while negative integers `-n` are encoded as `2 * n + 1` (the odd
+negative integers. Positive integers `p` are encoded as `2 * p` (the even
+numbers), while negative integers `n` are encoded as `2 * |n| - 1` (the odd
 numbers). The encoding thus "zig-zags" between positive and negative numbers.
 For example:
 <!-- mdformat on -->
@@ -214,7 +214,7 @@ When the `sint32` or `sint64` is parsed, its value is decoded back to the
 original, signed version.
 
 In protoscope, suffixing an integer with a `z` will make it encode as ZigZag.
-For example, `-500z` is the same as the varint `1001`.
+For example, `-500z` is the same as the varint `999`.
 
 ### Non-varint Numbers
 

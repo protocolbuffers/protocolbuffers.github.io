@@ -113,8 +113,8 @@ bits are used for the wire format. For more on this, see the
 
 Message fields can be one of the following:
 
-*   `optional`: a well-formed message can have zero or one of this field (but
-    not more than one).
+*   `optional`: a [well-formed](#well-formed) message can have zero or one of
+    this field (but not more than one).
 *   `repeated`: this field can be repeated any number of times (including zero)
     in a well-formed message. The order of the repeated values will be
     preserved.
@@ -148,6 +148,17 @@ drop them. {{% /alert %}}
 A second issue with required fields appears when someone adds a value to an
 enum. In this case, the unrecognized enum value is treated as if it were
 missing, which also causes the required value check to fail.
+
+#### Well-formed Messages {#well-formed}
+
+The term "well-formed," when applied to protobuf messages, refers to the bytes
+serialized/deserialized. The protoc parser validates that a given proto
+definition file is parseable.
+
+In the case of `optional` fields that have more than one value, the protoc
+parser will accept the input, but only uses the last field. So, the "bytes" may
+not be "well-formed" but the resulting message would have only one and would be
+"well-formed" (but would not roundtrip the same).
 
 ### Adding More Message Types {#adding-types}
 
@@ -803,9 +814,9 @@ example, another way to specify a `SearchResponse` containing a number of
 ```proto
 message SearchResponse {
   repeated group Result = 1 {
-    optional string url = 2;
-    optional string title = 3;
-    repeated string snippets = 4;
+    optional string url = 1;
+    optional string title = 2;
+    repeated string snippets = 3;
   }
 }
 ```
@@ -1859,7 +1870,7 @@ paying the code size cost of retaining them in your binaries. Options with
 source retention are still visible to `protoc` and `protoc` plugins, so code
 generators can use them to customize their behavior.
 
-Retention can be set directly on an option, like this;
+Retention can be set directly on an option, like this:
 
 ```proto
 extend google.protobuf.FileOptions {
@@ -1887,6 +1898,55 @@ of Protocol Buffers 22.0, support for option retention is still in progress and
 only C++ and Java are supported. Go has support starting from 1.29.0. Python
 support is complete but has not made it into a release yet.
 {{% /alert %}}
+
+### Option Targets {#option-targets}
+
+Fields have a `targets` option which controls the types of entities that the
+field may apply to when used as an option. For example, if a field has
+`targets = TARGET_TYPE_MESSAGE` then that field cannot be set in a custom option
+on an enum (or any other non-message entity). Protoc enforces this and will
+raise an error if there is a violation of the target constraints.
+
+At first glance, this feature may seem unnecessary given that every custom
+option is an extension of the options message for a specific entity, which
+already constrains the option to that one entity. However, option targets are
+useful in the case where you have a shared options message applied to multiple
+entity types and you want to control the usage of individual fields in that
+message. For example:
+
+```proto
+message MyOptions {
+  optional string file_only_option = 1 [targets = TARGET_TYPE_FILE];
+  optional int32 message_and_enum_option = 2 [targets = TARGET_TYPE_MESSAGE,
+                                              targets = TARGET_TYPE_ENUM];
+}
+
+extend google.protobuf.FileOptions {
+  optional MyOptions file_options = 50000;
+}
+
+extend google.protobuf.MessageOptions {
+  optional MyOptions message_options = 50000;
+}
+
+extend google.protobuf.EnumOptions {
+  optional MyOptions enum_options = 50000;
+}
+
+// OK: this field is allowed on file options
+option (file_options).file_only_option = "abc";
+
+message MyMessage {
+  // OK: this field is allowed on both message and enum options
+  option (message_options).message_and_enum_option = 42;
+}
+
+enum MyEnum {
+  MY_ENUM_UNSPECIFIED = 0;
+  // Error: file_only_option cannot be set on an enum.
+  option (enum_options).file_only_option = "xyz";
+}
+```
 
 ## Generating Your Classes {#generating}
 
