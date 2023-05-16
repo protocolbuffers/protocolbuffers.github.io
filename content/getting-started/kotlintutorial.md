@@ -280,7 +280,7 @@ fun promptPerson(): Person = person {
 
 // Reads the entire address book from a file, adds one person based
 // on user input, then writes it back out to the same file.
-fun main(args: List) {
+fun main(arguments: List<String>) {
   if (arguments.size != 1) {
     println("Usage: add_person ADDRESS_BOOK_FILE")
     exitProcess(-1)
