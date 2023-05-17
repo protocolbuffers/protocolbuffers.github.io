@@ -244,43 +244,43 @@ import java.util.Scanner
 
 // This function fills in a Person message based on user input.
 fun promptPerson(): Person = person {
-  print("Enter person ID: ")
-  id = readLine().toInt()
+    print("Enter person ID: ")
+    id = readLine()?.toInt()!!
 
-  print("Enter name: ")
-  name = readLine()
+    print("Enter name: ")
+    name = readLine()!!
 
-  print("Enter email address (blank for none): ")
-  val email = readLine()
-  if (email.isNotEmpty()) {
-    this.email = email
-  }
-
-  while (true) {
-    print("Enter a phone number (or leave blank to finish): ")
-    val number = readLine()
-    if (number.isEmpty()) break
-
-    print("Is this a mobile, home, or work phone? ")
-    val type = when (readLine()) {
-      "mobile" -> Person.PhoneType.MOBILE
-      "home" -> Person.PhoneType.HOME
-      "work" -> Person.PhoneType.WORK
-      else -> {
-        println("Unknown phone type.  Using home.")
-        Person.PhoneType.HOME
-      }
+    print("Enter email address (blank for none): ")
+    val email = readLine()
+    if (email!!.isNotEmpty()) {
+        this.email = email
     }
-    phones += phoneNumber {
-      this.number = number
-      this.type = type
+
+    while (true) {
+        print("Enter a phone number (or leave blank to finish): ")
+        val number = readLine()
+        if (number!!.isEmpty()) break
+
+        print("Is this a mobile, home, or work phone? ")
+        val type = when (readLine()) {
+            "mobile" -> Person.PhoneType.MOBILE
+            "home" -> Person.PhoneType.HOME
+            "work" -> Person.PhoneType.WORK
+            else -> {
+                println("Unknown phone type.  Using home.")
+                Person.PhoneType.HOME
+            }
+        }
+        phones += phoneNumber {
+            this.number = number
+            this.type = type
+        }
     }
-  }
 }
 
 // Reads the entire address book from a file, adds one person based
 // on user input, then writes it back out to the same file.
-fun main(args: List) {
+fun main(arguments: Array<String>) {
   if (arguments.size != 1) {
     println("Usage: add_person ADDRESS_BOOK_FILE")
     exitProcess(-1)
@@ -295,7 +295,7 @@ fun main(args: List) {
     }
   }
   path.outputStream().use {
-    initialAddressBook.copy { peopleList += promptPerson() }.writeTo(it)
+    initialAddressBook.copy { people += promptPerson() }.writeTo(it)
   }
 }
 ```
@@ -315,7 +315,7 @@ fun print(addressBook: AddressBook) {
   for (person in addressBook.peopleList) {
     println("Person ID: ${person.id}")
     println("  Name: ${person.name}")
-    if (person.hasEmail()) {
+    if (person.email.isNotEmpty()) {
       println("  Email address: ${person.email}")
     }
     for (phoneNumber in person.phonesList) {
