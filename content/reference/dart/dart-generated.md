@@ -342,7 +342,7 @@ the `ProtobufEnum` class. The class will include a `static const Color` for each
 of the three values defined as well as a `static const List<Color>` containing
 all the three values. It will also include the following method:
 
--   `static Color valueOf(int value)`: Returns the `Color` corresponding to the
+-   `static Color? valueOf(int value)`: Returns the `Color` corresponding to the
     given numeric value.
 
 Each value will have the following properties:

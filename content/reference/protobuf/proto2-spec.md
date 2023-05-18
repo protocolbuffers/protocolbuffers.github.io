@@ -20,18 +20,18 @@ language (proto2). The syntax is specified using
 ```
 
 For more information about using proto2, see the
-[language guide](/programming-guides/proto).
+[language guide](/programming-guides/proto2).
 
 ## Lexical Elements {#lexical_elements}
 
 ### Letters and Digits {#letters_and_digits}
 
 ```
-letter = "A" … "Z" | "a" … "z"
-capitalLetter =  "A" … "Z"
-decimalDigit = "0" … "9"
-octalDigit   = "0" … "7"
-hexDigit     = "0" … "9" | "A" … "F" | "a" … "f"
+letter = "A" ... "Z" | "a" ... "z"
+capitalLetter =  "A" ... "Z"
+decimalDigit = "0" ... "9"
+octalDigit   = "0" ... "7"
+hexDigit     = "0" ... "9" | "A" ... "F" | "a" ... "f"
 ```
 
 ### Identifiers
@@ -56,7 +56,7 @@ groupName = capitalLetter { letter | decimalDigit | "_" }
 
 ```
 intLit     = decimalLit | octalLit | hexLit
-decimalLit = ( "1" … "9" ) { decimalDigit }
+decimalLit = ( "1" ... "9" ) { decimalDigit }
 octalLit   = "0" { octalDigit }
 hexLit     = "0" ( "x" | "X" ) hexDigit { hexDigit }
 ```
@@ -146,7 +146,7 @@ package foo.bar;
 
 Options can be used in proto files, messages, enums and services. An option can
 be a protobuf defined option or a custom option. For more information, see
-[Options](/programming-guides/proto#options) in the
+[Options](/programming-guides/proto2#options) in the
 language guide.
 
 ```
@@ -207,9 +207,9 @@ Example:
 
 ```proto
 repeated group Result = 1 {
-    required string url = 2;
-    optional string title = 3;
-    repeated string snippets = 4;
+    required string url = 1;
+    optional string title = 2;
+    repeated string snippets = 3;
 }
 ```
 
@@ -322,7 +322,8 @@ enum EnumAllowingAlias {
 A message consists of a message name and a message body. The message body can
 have fields, nested enum definitions, nested message definitions, extend
 statements, extensions, groups, options, oneofs, map fields, and reserved
-statements.
+statements. A message cannot contain two fields with the same name in the same
+message schema.
 
 ```
 message = "message" messageName messageBody

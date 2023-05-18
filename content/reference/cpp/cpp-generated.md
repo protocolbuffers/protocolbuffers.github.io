@@ -212,10 +212,11 @@ corresponding C++ type according to the
 
 ### Singular Numeric Fields (proto3)
 
-For this field definition:
+For these field definitions:
 
 ```proto
-int32 foo = 1;
+optional int32 foo = 1;
+int32 foo = 1;  // no field label specified, defaults to implicit presence.
 ```
 
 The compiler will generate the following accessor methods:
@@ -231,7 +232,7 @@ For other numeric field types (including `bool`), `int32` is replaced with the
 corresponding C++ type according to the
 [scalar value types table](/programming-guides/proto3#scalar).
 
-### Singular String Fields (proto2) {#string}
+### Singular String/Bytes Fields (proto2) {#string}
 
 For any of these field definitions:
 
@@ -280,12 +281,14 @@ The compiler will generate the following accessor methods:
     calling this, caller takes the ownership of the allocated `string` object,
     `has_foo()` will return `false`, and `foo()` will return the default value.
 
-### Singular String Fields (proto3) {#proto3_string}
+### Singular String/Bytes Fields (proto3) {#proto3_string}
 
 For any of these field definitions:
 
 ```proto
-string foo = 1;
+optional string foo = 1;
+string foo = 1;  // no field label specified, defaults to implicit presence.
+optional bytes foo = 1;
 bytes foo = 1;
 ```
 
@@ -322,6 +325,38 @@ The compiler will generate the following accessor methods:
     ownership of the field and returns the pointer of the `string` object. After
     calling this, caller takes the ownership of the allocated `string` object
     and `foo()` will return the empty string/empty bytes.
+
+### Singular Bytes Fields with Cord Support {#cord}
+
+v23.0 added support for
+[`absl::Cord`](https://github.com/abseil/abseil-cpp/blob/master/absl/strings/cord.h)
+for singular `bytes` fields (including
+[`oneof` fields](#oneof-numeric)). Singular `string`, `repeated string`, and `repeated
+bytes` fields do not support using `Cord`s.
+
+To set a singular `bytes` field to store data using `absl::Cord`, use the
+following syntax:
+
+```proto
+optional bytes foo = 25 [ctype=CORD];
+bytes bar = 26 [ctype=CORD];
+```
+
+Using `cord` is not available for `repeated bytes` fields. Protoc ignores
+`[ctype=CORD]` settings on those fields.
+
+The compiler will generate the following accessor methods:
+
+-   `const ::absl::Cord& foo() const`: Returns the current value of the field.
+    If the field is not set, returns an empty `Cord` (proto3) or the default
+    value (proto2).
+-   `void set_foo(const ::absl::Cord& value)`: Sets the value of the field.
+    After calling this, `foo()` will return `value`.
+-   `void set_foo(::absl::string_view value)`: Sets the value of the field.
+    After calling this, `foo()` will return `value` as an `absl::Cord`.
+-   `void clear_foo()`: Clears the value of the field. After calling this,
+    `foo()` will return an empty `Cord` (proto3) or the default value (proto2).
+-   `bool has_foo()`: Returns `true` if the field is set.
 
 ### Singular Enum Fields (proto2) {#enum_field}
 
@@ -364,10 +399,11 @@ enum Bar {
 }
 ```
 
-For this field definitions:
+For these field definitions:
 
 ```proto
-Bar foo = 1;
+optional Bar foo = 1;
+Bar foo = 1;  // no field label specified, defaults to implicit presence.
 ```
 
 The compiler will generate the following accessor methods:
@@ -452,7 +488,7 @@ The compiler will generate the following accessor methods:
 
 For other numeric field types (including `bool`), `int32` is replaced with the
 corresponding C++ type according to the
-[scalar value types table](/programming-guides/proto#scalar).
+[scalar value types table](/programming-guides/proto2#scalar).
 
 ### Repeated String Fields {#repeatedstring}
 
@@ -576,7 +612,7 @@ The compiler will generate the following accessor methods:
     mutable `RepeatedPtrField` that stores the field's elements. This container
     class provides STL-like iterators and other methods.
 
-### Oneof Numeric Fields
+### Oneof Numeric Fields {#oneof-numeric}
 
 For this [oneof](#oneof) field definition:
 
@@ -610,18 +646,18 @@ For other numeric field types (including `bool`),`int32` is replaced with the
 corresponding C++ type according to the
 [scalar value types table](/programming-guides/proto3#scalar).
 
-### Oneof String Fields
+### Oneof String Fields {#oneof-string}
 
 For any of these [oneof](#oneof) field definitions:
 
 ```proto
 oneof example_name {
     string foo = 1;
-    …
+    ...
 }
 oneof example_name {
     bytes foo = 1;
-    ….
+    ...
 }
 ```
 
@@ -677,7 +713,7 @@ The compiler will generate the following accessor methods:
         `foo()` will return the default value, and `example_name_case()` will
         return `EXAMPLE_NAME_NOT_SET`.
 
-### Oneof Enum Fields
+### Oneof Enum Fields {#oneof-enum}
 
 Given the enum type:
 
@@ -718,7 +754,7 @@ The compiler will generate the following accessor methods:
         the default value and `example_name_case()` will return
         `EXAMPLE_NAME_NOT_SET`.
 
-### Oneof Embedded Message Fields
+### Oneof Embedded Message Fields {#oneof-embedded}
 
 Given the message type:
 
@@ -790,6 +826,8 @@ The compiler will generate the following accessor methods:
 A `google::protobuf::Map` is a special container type used in protocol buffers
 to store map fields. As you can see from its interface below, it uses a
 commonly-used subset of `std::map` and `std::unordered_map` methods.
+
+**NOTE:** These maps are unordered.
 
 ```cpp
 template<typename Key, typename T> {

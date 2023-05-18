@@ -551,13 +551,13 @@ equivalent:
 // Version 1: Using groups
 message SearchResponse {
   repeated group SearchResult = 1 {
-    required string url = 2;
+    required string url = 1;
   }
 }
 // Version 2: Not using groups
 message SearchResponse {
   message SearchResult {
-    required string url = 2;
+    required string url = 1;
   }
   repeated SearchResult searchresult = 1;
 }
