@@ -7,14 +7,14 @@ language (proto2). The syntax is specified using
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>[] option (zero or one time)
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>{} repetition (any number of times)
 &lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>For more information about using proto2, see the
-&lt;a href="https://protobuf.dev/programming-guides/proto">language guide&lt;/a>.&lt;/p>
+&lt;a href="https://protobuf.dev/programming-guides/proto2">language guide&lt;/a>.&lt;/p>
 &lt;h2 id="lexical_elements">Lexical Elements&lt;/h2>
 &lt;h3 id="letters_and_digits">Letters and Digits&lt;/h3>
-&lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-fallback" data-lang="fallback">&lt;span style="display:flex;">&lt;span>letter = &amp;#34;A&amp;#34; … &amp;#34;Z&amp;#34; | &amp;#34;a&amp;#34; … &amp;#34;z&amp;#34;
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>capitalLetter = &amp;#34;A&amp;#34; … &amp;#34;Z&amp;#34;
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>decimalDigit = &amp;#34;0&amp;#34; … &amp;#34;9&amp;#34;
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>octalDigit = &amp;#34;0&amp;#34; … &amp;#34;7&amp;#34;
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>hexDigit = &amp;#34;0&amp;#34; … &amp;#34;9&amp;#34; | &amp;#34;A&amp;#34; … &amp;#34;F&amp;#34; | &amp;#34;a&amp;#34; … &amp;#34;f&amp;#34;
+&lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-fallback" data-lang="fallback">&lt;span style="display:flex;">&lt;span>letter = &amp;#34;A&amp;#34; ... &amp;#34;Z&amp;#34; | &amp;#34;a&amp;#34; ... &amp;#34;z&amp;#34;
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>capitalLetter = &amp;#34;A&amp;#34; ... &amp;#34;Z&amp;#34;
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>decimalDigit = &amp;#34;0&amp;#34; ... &amp;#34;9&amp;#34;
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>octalDigit = &amp;#34;0&amp;#34; ... &amp;#34;7&amp;#34;
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>hexDigit = &amp;#34;0&amp;#34; ... &amp;#34;9&amp;#34; | &amp;#34;A&amp;#34; ... &amp;#34;F&amp;#34; | &amp;#34;a&amp;#34; ... &amp;#34;f&amp;#34;
 &lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h3 id="identifiers">Identifiers&lt;/h3>
 &lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-fallback" data-lang="fallback">&lt;span style="display:flex;">&lt;span>ident = letter { letter | decimalDigit | &amp;#34;_&amp;#34; }
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>fullIdent = ident { &amp;#34;.&amp;#34; ident }
@@ -31,7 +31,7 @@ language (proto2). The syntax is specified using
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>groupName = capitalLetter { letter | decimalDigit | &amp;#34;_&amp;#34; }
 &lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h3 id="integer_literals">Integer Literals&lt;/h3>
 &lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-fallback" data-lang="fallback">&lt;span style="display:flex;">&lt;span>intLit = decimalLit | octalLit | hexLit
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>decimalLit = ( &amp;#34;1&amp;#34; … &amp;#34;9&amp;#34; ) { decimalDigit }
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>decimalLit = ( &amp;#34;1&amp;#34; ... &amp;#34;9&amp;#34; ) { decimalDigit }
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>octalLit = &amp;#34;0&amp;#34; { octalDigit }
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>hexLit = &amp;#34;0&amp;#34; ( &amp;#34;x&amp;#34; | &amp;#34;X&amp;#34; ) hexDigit { hexDigit }
 &lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h3 id="floating-point-literals">Floating-point Literals&lt;/h3>
@@ -74,7 +74,7 @@ message types.&lt;/p>
 &lt;/span>&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h2 id="option">Option&lt;/h2>
 &lt;p>Options can be used in proto files, messages, enums and services. An option can
 be a protobuf defined option or a custom option. For more information, see
-&lt;a href="https://protobuf.dev/programming-guides/proto#options">Options&lt;/a> in the
+&lt;a href="https://protobuf.dev/programming-guides/proto2#options">Options&lt;/a> in the
 language guide.&lt;/p>
 &lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-fallback" data-lang="fallback">&lt;span style="display:flex;">&lt;span>option = &amp;#34;option&amp;#34; optionName &amp;#34;=&amp;#34; constant &amp;#34;;&amp;#34;
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>optionName = ( ident | &amp;#34;(&amp;#34; fullIdent &amp;#34;)&amp;#34; ) { &amp;#34;.&amp;#34; ident }
@@ -105,9 +105,9 @@ must begin with capital letter.&lt;/p>
 &lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-fallback" data-lang="fallback">&lt;span style="display:flex;">&lt;span>group = label &amp;#34;group&amp;#34; groupName &amp;#34;=&amp;#34; fieldNumber messageBody
 &lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>Example:&lt;/p>
 &lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-proto" data-lang="proto">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#204a87;font-weight:bold">repeated&lt;/span> &lt;span style="color:#204a87;font-weight:bold">group&lt;/span> &lt;span style="color:#000">Result&lt;/span> &lt;span style="color:#ce5c00;font-weight:bold">=&lt;/span> &lt;span style="color:#0000cf;font-weight:bold">1&lt;/span> &lt;span style="color:#000;font-weight:bold">{&lt;/span>&lt;span style="color:#a40000">
-&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#a40000">&lt;/span> &lt;span style="color:#204a87;font-weight:bold">required&lt;/span> &lt;span style="color:#204a87;font-weight:bold">string&lt;/span> &lt;span style="color:#000">url&lt;/span> &lt;span style="color:#ce5c00;font-weight:bold">=&lt;/span> &lt;span style="color:#0000cf;font-weight:bold">2&lt;/span>&lt;span style="color:#000;font-weight:bold">;&lt;/span>&lt;span style="color:#a40000">
-&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#a40000">&lt;/span> &lt;span style="color:#204a87;font-weight:bold">optional&lt;/span> &lt;span style="color:#204a87;font-weight:bold">string&lt;/span> &lt;span style="color:#000">title&lt;/span> &lt;span style="color:#ce5c00;font-weight:bold">=&lt;/span> &lt;span style="color:#0000cf;font-weight:bold">3&lt;/span>&lt;span style="color:#000;font-weight:bold">;&lt;/span>&lt;span style="color:#a40000">
-&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#a40000">&lt;/span> &lt;span style="color:#204a87;font-weight:bold">repeated&lt;/span> &lt;span style="color:#204a87;font-weight:bold">string&lt;/span> &lt;span style="color:#000">snippets&lt;/span> &lt;span style="color:#ce5c00;font-weight:bold">=&lt;/span> &lt;span style="color:#0000cf;font-weight:bold">4&lt;/span>&lt;span style="color:#000;font-weight:bold">;&lt;/span>&lt;span style="color:#a40000">
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#a40000">&lt;/span> &lt;span style="color:#204a87;font-weight:bold">required&lt;/span> &lt;span style="color:#204a87;font-weight:bold">string&lt;/span> &lt;span style="color:#000">url&lt;/span> &lt;span style="color:#ce5c00;font-weight:bold">=&lt;/span> &lt;span style="color:#0000cf;font-weight:bold">1&lt;/span>&lt;span style="color:#000;font-weight:bold">;&lt;/span>&lt;span style="color:#a40000">
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#a40000">&lt;/span> &lt;span style="color:#204a87;font-weight:bold">optional&lt;/span> &lt;span style="color:#204a87;font-weight:bold">string&lt;/span> &lt;span style="color:#000">title&lt;/span> &lt;span style="color:#ce5c00;font-weight:bold">=&lt;/span> &lt;span style="color:#0000cf;font-weight:bold">2&lt;/span>&lt;span style="color:#000;font-weight:bold">;&lt;/span>&lt;span style="color:#a40000">
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#a40000">&lt;/span> &lt;span style="color:#204a87;font-weight:bold">repeated&lt;/span> &lt;span style="color:#204a87;font-weight:bold">string&lt;/span> &lt;span style="color:#000">snippets&lt;/span> &lt;span style="color:#ce5c00;font-weight:bold">=&lt;/span> &lt;span style="color:#0000cf;font-weight:bold">3&lt;/span>&lt;span style="color:#000;font-weight:bold">;&lt;/span>&lt;span style="color:#a40000">
 &lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#a40000">&lt;/span>&lt;span style="color:#000;font-weight:bold">}&lt;/span>&lt;span style="color:#a40000">
 &lt;/span>&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h3 id="oneof_and_oneof_field">Oneof and oneof field&lt;/h3>
 &lt;p>A oneof consists of oneof fields and a oneof name. Oneof fields do not have
@@ -169,7 +169,8 @@ options, enum fields, and reserved statements.&lt;/p>
 &lt;p>A message consists of a message name and a message body. The message body can
 have fields, nested enum definitions, nested message definitions, extend
 statements, extensions, groups, options, oneofs, map fields, and reserved
-statements.&lt;/p>
+statements. A message cannot contain two fields with the same name in the same
+message schema.&lt;/p>
 &lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-fallback" data-lang="fallback">&lt;span style="display:flex;">&lt;span>message = &amp;#34;message&amp;#34; messageName messageBody
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>messageBody = &amp;#34;{&amp;#34; { field | enum | message | extend | extensions | group |
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>option | oneof | mapField | reserved | emptyStatement } &amp;#34;}&amp;#34;
@@ -266,10 +267,10 @@ language (proto3). The syntax is specified using
 &lt;a href="https://protobuf.dev/programming-guides/proto3">language guide&lt;/a>.&lt;/p>
 &lt;h2 id="lexical_elements">Lexical Elements&lt;/h2>
 &lt;h3 id="letters_and_digits">Letters and Digits&lt;/h3>
-&lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-fallback" data-lang="fallback">&lt;span style="display:flex;">&lt;span>letter = &amp;#34;A&amp;#34; … &amp;#34;Z&amp;#34; | &amp;#34;a&amp;#34; … &amp;#34;z&amp;#34;
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>decimalDigit = &amp;#34;0&amp;#34; … &amp;#34;9&amp;#34;
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>octalDigit = &amp;#34;0&amp;#34; … &amp;#34;7&amp;#34;
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>hexDigit = &amp;#34;0&amp;#34; … &amp;#34;9&amp;#34; | &amp;#34;A&amp;#34; … &amp;#34;F&amp;#34; | &amp;#34;a&amp;#34; … &amp;#34;f&amp;#34;
+&lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-fallback" data-lang="fallback">&lt;span style="display:flex;">&lt;span>letter = &amp;#34;A&amp;#34; ... &amp;#34;Z&amp;#34; | &amp;#34;a&amp;#34; ... &amp;#34;z&amp;#34;
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>decimalDigit = &amp;#34;0&amp;#34; ... &amp;#34;9&amp;#34;
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>octalDigit = &amp;#34;0&amp;#34; ... &amp;#34;7&amp;#34;
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>hexDigit = &amp;#34;0&amp;#34; ... &amp;#34;9&amp;#34; | &amp;#34;A&amp;#34; ... &amp;#34;F&amp;#34; | &amp;#34;a&amp;#34; ... &amp;#34;f&amp;#34;
 &lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h3 id="identifiers">Identifiers&lt;/h3>
 &lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-fallback" data-lang="fallback">&lt;span style="display:flex;">&lt;span>ident = letter { letter | decimalDigit | &amp;#34;_&amp;#34; }
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>fullIdent = ident { &amp;#34;.&amp;#34; ident }
@@ -284,7 +285,7 @@ language (proto3). The syntax is specified using
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>enumType = [ &amp;#34;.&amp;#34; ] { ident &amp;#34;.&amp;#34; } enumName
 &lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h3 id="integer_literals">Integer Literals&lt;/h3>
 &lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-fallback" data-lang="fallback">&lt;span style="display:flex;">&lt;span>intLit = decimalLit | octalLit | hexLit
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>decimalLit = ( &amp;#34;1&amp;#34; … &amp;#34;9&amp;#34; ) { decimalDigit }
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>decimalLit = ( &amp;#34;1&amp;#34; ... &amp;#34;9&amp;#34; ) { decimalDigit }
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>octalLit = &amp;#34;0&amp;#34; { octalDigit }
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>hexLit = &amp;#34;0&amp;#34; ( &amp;#34;x&amp;#34; | &amp;#34;X&amp;#34; ) hexDigit { hexDigit }
 &lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h3 id="floating-point-literals">Floating-point Literals&lt;/h3>
@@ -396,7 +397,8 @@ options, enum fields, and reserved statements.&lt;/p>
 &lt;/span>&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h3 id="message_definition">Message Definition&lt;/h3>
 &lt;p>A message consists of a message name and a message body. The message body can
 have fields, nested enum definitions, nested message definitions, options,
-oneofs, map fields, and reserved statements.&lt;/p>
+oneofs, map fields, and reserved statements. A message cannot contain two fields
+with the same name in the same message schema.&lt;/p>
 &lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-fallback" data-lang="fallback">&lt;span style="display:flex;">&lt;span>message = &amp;#34;message&amp;#34; messageName messageBody
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>messageBody = &amp;#34;{&amp;#34; { field | enum | message | option | oneof | mapField |
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>reserved | emptyStatement } &amp;#34;}&amp;#34;

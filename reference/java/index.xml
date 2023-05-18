@@ -415,7 +415,7 @@ number appended to the end.&lt;/p>
 &lt;/span>&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>The compiler will generate the following accessor methods in both the message
 class and its builder:&lt;/p>
 &lt;ul>
-&lt;li>&lt;code>boolean hasFoo()&lt;/code> (proto2 only): Returns &lt;code>true&lt;/code> if the oneof case is &lt;code>FOO&lt;/code>.&lt;/li>
+&lt;li>&lt;code>boolean hasFoo()&lt;/code>: Returns &lt;code>true&lt;/code> if the oneof case is &lt;code>FOO&lt;/code>.&lt;/li>
 &lt;li>&lt;code>int getFoo()&lt;/code>: Returns the current value of &lt;code>example_name&lt;/code> if the oneof
 case is &lt;code>FOO&lt;/code>. Otherwise, returns the default value of this field.&lt;/li>
 &lt;/ul>

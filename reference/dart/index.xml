@@ -246,7 +246,7 @@ the &lt;code>ProtobufEnum&lt;/code> class. The class will include a &lt;code>sta
 of the three values defined as well as a &lt;code>static const List&amp;lt;Color&amp;gt;&lt;/code> containing
 all the three values. It will also include the following method:&lt;/p>
 &lt;ul>
-&lt;li>&lt;code>static Color valueOf(int value)&lt;/code>: Returns the &lt;code>Color&lt;/code> corresponding to the
+&lt;li>&lt;code>static Color? valueOf(int value)&lt;/code>: Returns the &lt;code>Color&lt;/code> corresponding to the
 given numeric value.&lt;/li>
 &lt;/ul>
 &lt;p>Each value will have the following properties:&lt;/p>

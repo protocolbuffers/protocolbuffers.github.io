@@ -84,14 +84,14 @@ protoscope into</p><div class=highlight><pre tabindex=0 style=background-color:#
 </span></span></span><span style=display:flex><span><span style=color:#a40000></span><span style=color:#0000cf;font-weight:700>11111111</span> <span style=color:#0000cf;font-weight:700>11111111</span> <span style=color:#0000cf;font-weight:700>11111111</span> <span style=color:#0000cf;font-weight:700>11111111</span> <span style=color:#0000cf;font-weight:700>00000001</span><span style=color:#a40000>
 </span></span></span></code></pre></div><p>This is the <em>two&rsquo;s complement</em> of 2, defined in unsigned arithmetic as <code>~0 - 2 + 1</code>, where <code>~0</code> is the all-ones 64-bit integer. It is a useful exercise to
 understand why this produces so many ones.</p><p><code>sintN</code> uses the &ldquo;ZigZag&rdquo; encoding instead of two&rsquo;s complement to encode
-negative integers. Positive integers <code>n</code> are encoded as <code>2 * n</code> (the even
-numbers), while negative integers <code>-n</code> are encoded as <code>2 * n + 1</code> (the odd
+negative integers. Positive integers <code>p</code> are encoded as <code>2 * p</code> (the even
+numbers), while negative integers <code>n</code> are encoded as <code>2 * |n| - 1</code> (the odd
 numbers). The encoding thus &ldquo;zig-zags&rdquo; between positive and negative numbers.
 For example:</p><table><thead><tr><th>Signed Original</th><th>Encoded As</th></tr></thead><tbody><tr><td>0</td><td>0</td></tr><tr><td>-1</td><td>1</td></tr><tr><td>1</td><td>2</td></tr><tr><td>-2</td><td>3</td></tr><tr><td>&mldr;</td><td>&mldr;</td></tr><tr><td>0x7fffffff</td><td>0xfffffffe</td></tr><tr><td>-0x80000000</td><td>0xffffffff</td></tr></tbody></table><p>Using some bit tricks, it&rsquo;s cheap to convert <code>n</code> into its ZigZag representation:</p><div class=highlight><pre tabindex=0 style=background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-fallback data-lang=fallback><span style=display:flex><span>((n + n) ^ -(n &lt; 0)) - (n &lt; 0)
 </span></span></code></pre></div><p>Here, we assume that the boolean <code>n &lt; 0</code> is converted into an integer 1 if true
 or an integer 0 if false.</p><p>When the <code>sint32</code> or <code>sint64</code> is parsed, its value is decoded back to the
 original, signed version.</p><p>In protoscope, suffixing an integer with a <code>z</code> will make it encode as ZigZag.
-For example, <code>-500z</code> is the same as the varint <code>1001</code>.</p><h3 id=non-varint-numbers>Non-varint Numbers</h3><p>Non-varint numeric types are simple &ndash; <code>double</code> and <code>fixed64</code> have wire type
+For example, <code>-500z</code> is the same as the varint <code>999</code>.</p><h3 id=non-varint-numbers>Non-varint Numbers</h3><p>Non-varint numeric types are simple &ndash; <code>double</code> and <code>fixed64</code> have wire type
 <code>I64</code>, which tells the parser to expect a fixed eight-byte lump of data. We can
 specify a <code>double</code> record by writing <code>5: 25.4</code>, or a <code>fixed64</code> record with <code>6: 200i64</code>. In both cases, omitting an explicit wire type infers the <code>I64</code> wire
 type.</p><p>Similarly <code>float</code> and <code>fixed32</code> have wire type <code>I32</code>, which tells it to expect
