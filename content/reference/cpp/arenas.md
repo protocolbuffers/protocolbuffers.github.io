@@ -1,17 +1,13 @@
----
-title: "C++ Arena Allocation Guide"
-weight: 520
-toc_hide: false
-linkTitle: "Arena Allocation Guide"
-no_list: "true"
-type: docs
-description: "Arena allocation is a C++-only feature that helps you optimize your memory usage and improve performance when working with protocol buffers."
----
++++
+title = "C++ Arena Allocation Guide"
+weight = 520
+linkTitle = "Arena Allocation Guide"
+description = "Arena allocation is a C++-only feature that helps you optimize your memory usage and improve performance when working with protocol buffers."
+type = "docs"
++++
 
-Arena allocation is a C++-only feature that helps you optimize your memory usage
-and improve performance when working with protocol buffers. This page describes
-exactly what C++ code the protocol buffer compiler generates in addition to the
-code described in the
+This page describes exactly what C++ code the protocol
+buffer compiler generates in addition to the code described in the
 [C++ Generated Code Guide](/reference/cpp/cpp-generated)
 when arena allocation is enabled. It assumes that you are familiar with the
 material in the

@@ -1,12 +1,9 @@
----
-title: "Language Guide (proto 3)"
-weight: 40
-toc_hide: false
-linkTitle: "Language Guide (proto 3)"
-no_list: "true"
-type: docs
-description: "This topic covers how to use the version 3 of Protocol Buffers in your project. It contains language-agnostic content. For information specific to the language you're using, see the corresponding documentation for your language."
----
++++
+title = "Language Guide (proto 3)"
+weight = 40
+description = "This topic covers how to use the version 3 of Protocol Buffers in your project."
+type = "docs"
++++
 
 This guide describes how to use the protocol buffer language to structure your
 protocol buffer data, including `.proto` file syntax and how to generate data

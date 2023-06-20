@@ -1,15 +1,12 @@
----
-title: "PHP Generated Code Guide"
-weight: 730
-toc_hide: false
-linkTitle: "Generated Code Guide"
-no_list: "true"
-type: docs
-description: "This topic describes the PHP code that the protocol buffer compiler generates for any given protocol definition."
----
++++
+title = "PHP Generated Code Guide"
+weight = 730
+linkTitle = "Generated Code Guide"
+description = "This topic describes the PHP code that the protocol buffer compiler generates for any given protocol definition."
+type = "docs"
++++
 
-This page describes the PHP code that the protocol buffer compiler generates for
-any given protocol definition. You should read the
+You should read the
 [proto3 language guide](/programming-guides/proto3)
 before reading this document. Note that the protocol buffer compiler currently
 only supports proto3 code generation for PHP.

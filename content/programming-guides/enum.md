@@ -1,12 +1,9 @@
----
-title: "Enum Behavior"
-weight: 55
-toc_hide: false
-linkTitle: "Enum Behavior"
-no_list: "true"
-type: docs
-description: "This topic explains how enums currently work in Protocol Buffers vs. how they should work."
----
++++
+title = "Enum Behavior"
+weight = 55
+description = "This topic explains how enums currently work in Protocol Buffers vs. how they should work."
+type = "docs"
++++
 
 Enums behave differently in different language libraries. This topic covers the
 different behaviors as well as the plans to move protobufs to a state where they
@@ -191,3 +188,7 @@ enum.
 ### Swift {#swift}
 
 Swift is conformant.
+
+### Dart {#dart}
+
+Dart treats all enums as **closed**.

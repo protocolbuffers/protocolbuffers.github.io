@@ -1,13 +1,10 @@
----
-title: "Protocol Buffer Basics: Java"
-weight: 250
-toc_hide: false
-linkTitle: "Java"
-no_list: "true"
-type: docs
-description: "This tutorial provides a basic Java programmers introduction to working with protocol buffers."
----
-    
++++
+title = "Protocol Buffer Basics: Java"
+weight = 250
+linkTitle = "Java"
+description = "This tutorial provides a basic Java programmers introduction to working with protocol buffers."
+type = "docs"
++++
 
 This tutorial provides a basic Java programmer's introduction to working with
 protocol buffers. By walking through creating a simple example application, it

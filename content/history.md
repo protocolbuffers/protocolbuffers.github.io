@@ -1,16 +1,13 @@
----
-title: "History"
-weight: 1020
-toc_hide: false
-linkTitle: "History"
-no_list: "true"
-type: docs
-description: "A brief history behind the creation of protocol buffers."
----
++++
+title = "History"
+weight = 1020
+description = "A brief history behind the creation of protocol buffers."
+type = "docs"
++++
 
-This is a brief history of protocol buffers. Understanding why it was created
-and the decisions that changed it over time can help you to better utilize the
-features of the tool.
+Understanding
+why protobuf was created and the decisions that changed it over time can help
+you to better use the features of the tool.
 
 ## Why Did You Release Protocol Buffers? {#why}
 

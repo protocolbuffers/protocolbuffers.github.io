@@ -1,18 +1,15 @@
----
-title: "Dart Generated Code Guide"
-weight: 580
-toc_hide: false
-linkTitle: "Generated Code Guide"
-no_list: "true"
-type: docs
-description: "This topic describes what Dart code the protocol buffer compiler generates for any given protocol definition."
----
++++
+title = "Dart Generated Code"
+weight = 580
+linkTitle = "Generated Code"
+description = "This topic describes what Dart code the protocol buffer compiler generates for any given protocol definition."
+type = "docs"
++++
 
-This page describes what Dart code the protocol buffer compiler generates for
-any given protocol definition. Any differences between proto2 and proto3
-generated code are highlighted - note that these differences are in the
-generated code as described in this document, not the base API, which are the
-same in both versions. You should read the
+Any differences between
+proto2 and proto3 generated code are highlighted - note that these differences
+are in the generated code as described in this document, not the base API, which
+are the same in both versions. You should read the
 [proto2 language guide](/programming-guides/proto) and/or
 the [proto3 language guide](/programming-guides/proto3)
 before reading this document.
@@ -152,6 +149,15 @@ The compiler will generate the following accessor methods in the message class:
     foo` will return `value`.
 -   `void clearFoo()`: Clears the value of the field. After calling this,`get
     foo` will return the default value.
+
+**NOTE:** Due to a quirk in the Dart proto3 implementation, the following
+methods are generated even if the `optional` modifier, used to request
+[presence semantics](/programming-guides/field_presence#presence-in-proto3-apis),
+isn't in the proto definition.
+
+-   `bool hasFoo()`: Returns `true` if the field is set.
+-   `void clearFoo()`: Clears the value of the field. After calling this,
+    `hasFoo()` will return `false` and `get foo` will return the default value.
 
 ### Singular Message Fields {#singular-message}
 

@@ -1,13 +1,10 @@
----
-title: "Protocol Buffer Basics: Go"
-weight: 240
-toc_hide: false
-linkTitle: "Go"
-no_list: "true"
-type: docs
-description: "This tutorial provides a basic Go programmers introduction to working with protocol buffers."
----
-    
++++
+title = "Protocol Buffer Basics: Go"
+weight = 240
+linkTitle = "Go"
+description = "This tutorial provides a basic Go programmers introduction to working with protocol buffers."
+type = "docs"
++++
 
 This tutorial provides a basic Go programmer's introduction to working with
 protocol buffers, using the

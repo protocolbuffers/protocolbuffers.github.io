@@ -1,15 +1,12 @@
----
-title: "Techniques"
-weight: 70
-toc_hide: false
-linkTitle: "Techniques"
-no_list: "true"
-type: docs
-description: "This topic describes some commonly-used design patterns for dealing with Protocol Buffers."
----
++++
+title = "Techniques"
+weight = 70
+description = "This topic describes some commonly-used design patterns for dealing with Protocol Buffers."
+type = "docs"
++++
 
-This page describes some commonly-used design patterns for dealing with Protocol
-Buffers. You can also send design and usage questions to the
+You can also send design and usage questions to
+the
 [Protocol Buffers discussion group](http://groups.google.com/group/protobuf).
 
 ## Streaming Multiple Messages {#streaming}

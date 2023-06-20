@@ -1,16 +1,14 @@
----
-title: "Ruby Generated Code Guide"
-weight: 780
-toc_hide: false
-linkTitle: "Generated Code Guide"
-no_list: "true"
-type: docs
-description: "This topic describes the API of message objects that the protocol buffer compiler generates for any given protocol definition."
----
++++
+title = "Ruby Generated Code Guide"
+weight = 780
+linkTitle = "Generated Code Guide"
+description = "This topic describes the API of message objects that the protocol buffer compiler generates for any given protocol definition."
+type = "docs"
++++
 
-This page describes the API of message objects that the protocol buffer compiler
-generates for any given protocol definition. You should read the language guides
-for [proto2](/programming-guides/proto) or
+You should
+read the language guides for
+[proto2](/programming-guides/proto2) or
 [proto3](/programming-guides/proto3) before reading this
 document.
 

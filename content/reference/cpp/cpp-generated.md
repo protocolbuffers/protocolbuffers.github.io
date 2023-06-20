@@ -1,18 +1,15 @@
----
-title: "C++ Generated Code Guide"
-weight: 510
-toc_hide: false
-linkTitle: "Generated Code Guide"
-no_list: "true"
-type: docs
-description: "This topic describes exactly what C++ code the protocol buffer compiler generates for any given protocol definition. "
----
++++
+title = "C++ Generated Code Guide"
+weight = 510
+linkTitle = "Generated Code Guide"
+description = "This topic describes exactly what C++ code the protocol buffer compiler generates for any given protocol definition. "
+type = "docs"
++++
 
-This page describes exactly what C++ code the protocol buffer compiler generates
-for any given protocol definition. Any differences between proto2 and proto3
-generated code are highlighted - note that these differences are in the
-generated code as described in this document, not the base message
-classes/interfaces, which are the same in both versions. You should read the
+Any differences between proto2 and proto3 generated code are highlighted - note
+that these differences are in the generated code as described in this document,
+not the base message classes/interfaces, which are the same in both versions.
+You should read the
 [proto2 language guide](/programming-guides/proto) and/or
 [proto3 language guide](/programming-guides/proto3)
 before reading this document.
@@ -854,6 +851,7 @@ class Map {
   T& at(const Key& key);
 
   // Lookup
+  bool contains(const Key& key) const;
   int count(const Key& key) const;
   const_iterator find(const Key& key) const;
   iterator find(const Key& key);

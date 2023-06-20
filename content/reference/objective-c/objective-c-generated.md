@@ -1,16 +1,14 @@
----
-title: "Objective-C Generated Code Guide"
-weight: 710
-toc_hide: false
-linkTitle: "Generated Code Guide"
-no_list: "true"
-type: docs
-description: "This topic describes exactly what Objective-C code the protocol buffer compiler generates for any given protocol definition."
----
++++
+title = "Objective-C Generated Code Guide"
+weight = 710
+linkTitle = "Generated Code Guide"
+description = "This topic describes exactly what Objective-C code the protocol buffer compiler generates for any given protocol definition."
+type = "docs"
++++
 
-This page describes exactly what Objective-C code the protocol buffer compiler
-generates for any given protocol definition. Any differences between proto2 and
-proto3 generated code are highlighted. You should read the
+Any
+differences between proto2 and proto3 generated code are highlighted. You should
+read the
 [proto2 language guide](/programming-guides/proto) and/or
 [proto3 language guide](/programming-guides/proto3)
 before reading this document.

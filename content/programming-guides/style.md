@@ -1,12 +1,9 @@
----
-title: "Style Guide"
-weight: 50
-toc_hide: false
-linkTitle: "Style Guide"
-no_list: "true"
-type: docs
-description: "This topic provides direction for how best to stucture your proto definitions."
----
++++
+title = "Style Guide"
+weight = 50
+description = "This topic provides direction for how best to structure your proto definitions."
+type = "docs"
++++
 
 This document provides a style guide for `.proto` files. By following these
 conventions, you'll make your protocol buffer message definitions and their
@@ -57,7 +54,7 @@ message SongServerRequest {
 ```
 
 Using this naming convention for field names gives you accessors like those
-shown in the the following two code samples.
+shown in the following two code samples.
 
 C++:
 

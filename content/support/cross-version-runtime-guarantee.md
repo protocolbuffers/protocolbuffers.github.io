@@ -1,13 +1,9 @@
----
-title: "Cross-Version Runtime Guarantee"
-weight: 930
-toc_hide: false
-linkTitle: "Cross-Version Runtime Guarantee"
-no_list: "true"
-type: docs
-description: "The guarantees that the language has for cross-version runtime compatibility."
----
-    
++++
+title = "Cross-Version Runtime Guarantee"
+weight = 930
+description = "The guarantees that the language has for cross-version runtime compatibility."
+type = "docs"
++++
 
 <link rel="stylesheet" href="/includes/version-tables.css">
 

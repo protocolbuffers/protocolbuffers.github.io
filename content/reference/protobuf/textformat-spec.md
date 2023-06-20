@@ -1,18 +1,13 @@
----
-title: "Text Format Language Specification"
-weight: 820
-toc_hide: false
-linkTitle: "Text Format Language Specification"
-no_list: "true"
-type: docs
-description: "The protocol buffer Text Format Language specifies a syntax for representation of protobuf data in text form, which is often useful for configurations or tests."
----
++++
+title = "Text Format Language Specification"
+weight = 820
+description = "The protocol buffer Text Format Language specifies a syntax for representation of protobuf data in text form, which is often useful for configurations or tests."
+type = "docs"
++++
 
-The protocol buffer Text Format Language specifies a syntax for representation
-of protobuf *data* in text form, which is often useful for configurations or
-tests. This format is distinct from the format of text within a `.proto` schema,
-for example. This document contains reference documentation using the syntax
-specified in
+This format is distinct from the format of text
+within a `.proto` schema, for example. This document contains reference
+documentation using the syntax specified in
 [ISO/IEC 14977 EBNF](https://en.wikipedia.org/wiki/Extended_Backus%E2%80%93Naur_Form).
 
 {{% alert title="Note" color="note" %}}
@@ -662,7 +657,7 @@ the schema, so they may provide various features.
 
 ```textproto
 # proto-file: some/proto/my_file.proto
-# proto-message: MyMessage
+# proto-message: some.package.MyMessage
 ```
 
 ## Working with the Format Programmatically

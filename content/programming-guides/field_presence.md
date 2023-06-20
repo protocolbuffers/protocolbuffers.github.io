@@ -1,16 +1,10 @@
----
-title: "Application Note: Field Presence"
-weight: 85
-toc_hide: false
-linkTitle: "Field Presence"
-no_list: "true"
-type: docs
-description: "This topic explains the various presence-tracking disciplines for protobuf fields. It also explains the behavior of explicit presence-tracking for singular proto3 fields with basic types."
----
-
-This application note explains the various presence tracking disciplines for
-protobuf fields. It also explains the behaviour of explicit presence tracking
-for singular proto3 fields with basic types.
++++
+title = "Application Note: Field Presence"
+weight = 85
+linkTitle = "Field Presence"
+description = "This topic explains the various presence-tracking disciplines for protobuf fields. It also explains the behavior of explicit presence-tracking for singular proto3 fields with basic types."
+type = "docs"
++++
 
 ## Background
 

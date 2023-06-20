@@ -1,15 +1,12 @@
----
-title: "Protocol Buffers Version 3 Language Specification"
-weight: 810
-toc_hide: false
-linkTitle: "Version 3 Language Specification"
-no_list: "true"
-type: docs
-description: "This topic is a language specification reference for version 3 of the Protocol Buffers language (proto3)."
----
++++
+title = "Protocol Buffers Version 3 Language Specification"
+weight = 810
+linkTitle = "Version 3 Language Specification"
+description = "This topic is a language specification reference for version 3 of the Protocol Buffers language (proto3)."
+type = "docs"
++++
 
-This is a language specification reference for version 3 of the Protocol Buffers
-language (proto3). The syntax is specified using
+The syntax is specified using
 [Extended Backus-Naur Form (EBNF)](https://en.wikipedia.org/wiki/Extended_Backus%E2%80%93Naur_Form):
 
 ```
