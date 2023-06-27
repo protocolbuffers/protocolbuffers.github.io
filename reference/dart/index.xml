@@ -1,9 +1,8 @@
-<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Protocol Buffers Documentation – Dart Reference</title><link>https://protobuf.dev/reference/dart/</link><description>Recent content in Dart Reference on Protocol Buffers Documentation</description><generator>Hugo -- gohugo.io</generator><language>en-us</language><atom:link href="https://protobuf.dev/reference/dart/index.xml" rel="self" type="application/rss+xml"/><item><title>Reference: Dart Generated Code Guide</title><link>https://protobuf.dev/reference/dart/dart-generated/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://protobuf.dev/reference/dart/dart-generated/</guid><description>
-&lt;p>This page describes what Dart code the protocol buffer compiler generates for
-any given protocol definition. Any differences between proto2 and proto3
-generated code are highlighted - note that these differences are in the
-generated code as described in this document, not the base API, which are the
-same in both versions. You should read the
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Protocol Buffers Documentation – Dart Reference</title><link>https://protobuf.dev/reference/dart/</link><description>Recent content in Dart Reference on Protocol Buffers Documentation</description><generator>Hugo -- gohugo.io</generator><language>en</language><atom:link href="https://protobuf.dev/reference/dart/index.xml" rel="self" type="application/rss+xml"/><item><title>Reference: Dart Generated Code</title><link>https://protobuf.dev/reference/dart/dart-generated/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://protobuf.dev/reference/dart/dart-generated/</guid><description>
+&lt;p>Any differences between
+proto2 and proto3 generated code are highlighted - note that these differences
+are in the generated code as described in this document, not the base API, which
+are the same in both versions. You should read the
 &lt;a href="https://protobuf.dev/programming-guides/proto">proto2 language guide&lt;/a> and/or
 the &lt;a href="https://protobuf.dev/programming-guides/proto3">proto3 language guide&lt;/a>
 before reading this document.&lt;/p>
@@ -107,6 +106,15 @@ class.&lt;/p>
 set, returns the default value.&lt;/li>
 &lt;li>&lt;code>set foo(int value)&lt;/code>: Sets the value of the field. After calling this, &lt;code>get foo&lt;/code> will return &lt;code>value&lt;/code>.&lt;/li>
 &lt;li>&lt;code>void clearFoo()&lt;/code>: Clears the value of the field. After calling this,&lt;code>get foo&lt;/code> will return the default value.&lt;/li>
+&lt;/ul>
+&lt;p>&lt;strong>NOTE:&lt;/strong> Due to a quirk in the Dart proto3 implementation, the following
+methods are generated even if the &lt;code>optional&lt;/code> modifier, used to request
+&lt;a href="https://protobuf.dev/programming-guides/field_presence#presence-in-proto3-apis">presence semantics&lt;/a>,
+isn&amp;rsquo;t in the proto definition.&lt;/p>
+&lt;ul>
+&lt;li>&lt;code>bool hasFoo()&lt;/code>: Returns &lt;code>true&lt;/code> if the field is set.&lt;/li>
+&lt;li>&lt;code>void clearFoo()&lt;/code>: Clears the value of the field. After calling this,
+&lt;code>hasFoo()&lt;/code> will return &lt;code>false&lt;/code> and &lt;code>get foo&lt;/code> will return the default value.&lt;/li>
 &lt;/ul>
 &lt;h3 id="singular-message">Singular Message Fields&lt;/h3>
 &lt;p>Given the message type:&lt;/p>

@@ -1,9 +1,8 @@
-<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Protocol Buffers Documentation – C++ Reference</title><link>https://protobuf.dev/reference/cpp/</link><description>Recent content in C++ Reference on Protocol Buffers Documentation</description><generator>Hugo -- gohugo.io</generator><language>en-us</language><atom:link href="https://protobuf.dev/reference/cpp/index.xml" rel="self" type="application/rss+xml"/><item><title>Reference: C++ Generated Code Guide</title><link>https://protobuf.dev/reference/cpp/cpp-generated/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://protobuf.dev/reference/cpp/cpp-generated/</guid><description>
-&lt;p>This page describes exactly what C++ code the protocol buffer compiler generates
-for any given protocol definition. Any differences between proto2 and proto3
-generated code are highlighted - note that these differences are in the
-generated code as described in this document, not the base message
-classes/interfaces, which are the same in both versions. You should read the
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Protocol Buffers Documentation – C++ Reference</title><link>https://protobuf.dev/reference/cpp/</link><description>Recent content in C++ Reference on Protocol Buffers Documentation</description><generator>Hugo -- gohugo.io</generator><language>en</language><atom:link href="https://protobuf.dev/reference/cpp/index.xml" rel="self" type="application/rss+xml"/><item><title>Reference: C++ Generated Code Guide</title><link>https://protobuf.dev/reference/cpp/cpp-generated/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://protobuf.dev/reference/cpp/cpp-generated/</guid><description>
+&lt;p>Any differences between proto2 and proto3 generated code are highlighted - note
+that these differences are in the generated code as described in this document,
+not the base message classes/interfaces, which are the same in both versions.
+You should read the
 &lt;a href="https://protobuf.dev/programming-guides/proto">proto2 language guide&lt;/a> and/or
 &lt;a href="https://protobuf.dev/programming-guides/proto3">proto3 language guide&lt;/a>
 before reading this document.&lt;/p>
@@ -721,7 +720,8 @@ commonly-used subset of &lt;code>std::map&lt;/code> and &lt;code>std::unordered_
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#000">T&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">&amp;amp;&lt;/span> &lt;span style="color:#000">at&lt;/span>&lt;span style="color:#000;font-weight:bold">(&lt;/span>&lt;span style="color:#204a87;font-weight:bold">const&lt;/span> &lt;span style="color:#000">Key&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">&amp;amp;&lt;/span> &lt;span style="color:#000">key&lt;/span>&lt;span style="color:#000;font-weight:bold">);&lt;/span>
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#8f5902;font-style:italic">// Lookup
-&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#8f5902;font-style:italic">&lt;/span> &lt;span style="color:#204a87;font-weight:bold">int&lt;/span> &lt;span style="color:#000">count&lt;/span>&lt;span style="color:#000;font-weight:bold">(&lt;/span>&lt;span style="color:#204a87;font-weight:bold">const&lt;/span> &lt;span style="color:#000">Key&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">&amp;amp;&lt;/span> &lt;span style="color:#000">key&lt;/span>&lt;span style="color:#000;font-weight:bold">)&lt;/span> &lt;span style="color:#204a87;font-weight:bold">const&lt;/span>&lt;span style="color:#000;font-weight:bold">;&lt;/span>
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#8f5902;font-style:italic">&lt;/span> &lt;span style="color:#204a87;font-weight:bold">bool&lt;/span> &lt;span style="color:#000">contains&lt;/span>&lt;span style="color:#000;font-weight:bold">(&lt;/span>&lt;span style="color:#204a87;font-weight:bold">const&lt;/span> &lt;span style="color:#000">Key&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">&amp;amp;&lt;/span> &lt;span style="color:#000">key&lt;/span>&lt;span style="color:#000;font-weight:bold">)&lt;/span> &lt;span style="color:#204a87;font-weight:bold">const&lt;/span>&lt;span style="color:#000;font-weight:bold">;&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#204a87;font-weight:bold">int&lt;/span> &lt;span style="color:#000">count&lt;/span>&lt;span style="color:#000;font-weight:bold">(&lt;/span>&lt;span style="color:#204a87;font-weight:bold">const&lt;/span> &lt;span style="color:#000">Key&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">&amp;amp;&lt;/span> &lt;span style="color:#000">key&lt;/span>&lt;span style="color:#000;font-weight:bold">)&lt;/span> &lt;span style="color:#204a87;font-weight:bold">const&lt;/span>&lt;span style="color:#000;font-weight:bold">;&lt;/span>
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#000">const_iterator&lt;/span> &lt;span style="color:#000">find&lt;/span>&lt;span style="color:#000;font-weight:bold">(&lt;/span>&lt;span style="color:#204a87;font-weight:bold">const&lt;/span> &lt;span style="color:#000">Key&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">&amp;amp;&lt;/span> &lt;span style="color:#000">key&lt;/span>&lt;span style="color:#000;font-weight:bold">)&lt;/span> &lt;span style="color:#204a87;font-weight:bold">const&lt;/span>&lt;span style="color:#000;font-weight:bold">;&lt;/span>
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#000">iterator&lt;/span> &lt;span style="color:#000">find&lt;/span>&lt;span style="color:#000;font-weight:bold">(&lt;/span>&lt;span style="color:#204a87;font-weight:bold">const&lt;/span> &lt;span style="color:#000">Key&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">&amp;amp;&lt;/span> &lt;span style="color:#000">key&lt;/span>&lt;span style="color:#000;font-weight:bold">);&lt;/span>
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
@@ -1035,10 +1035,8 @@ only in the &lt;code>.pb.h&lt;/code> file.&lt;/li>
 &lt;p>Do not generate code which relies on private class members declared by the
 standard code generator, as these implementation details may change in future
 versions of Protocol Buffers.&lt;/p></description></item><item><title>Reference: C++ Arena Allocation Guide</title><link>https://protobuf.dev/reference/cpp/arenas/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://protobuf.dev/reference/cpp/arenas/</guid><description>
-&lt;p>Arena allocation is a C++-only feature that helps you optimize your memory usage
-and improve performance when working with protocol buffers. This page describes
-exactly what C++ code the protocol buffer compiler generates in addition to the
-code described in the
+&lt;p>This page describes exactly what C++ code the protocol
+buffer compiler generates in addition to the code described in the
 &lt;a href="https://protobuf.dev/reference/cpp/cpp-generated">C++ Generated Code Guide&lt;/a>
 when arena allocation is enabled. It assumes that you are familiar with the
 material in the

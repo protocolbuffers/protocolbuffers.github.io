@@ -1,11 +1,21 @@
-<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Protocol Buffers Documentation – Kotlin Reference</title><link>https://protobuf.dev/reference/kotlin/</link><description>Recent content in Kotlin Reference on Protocol Buffers Documentation</description><generator>Hugo -- gohugo.io</generator><language>en-us</language><atom:link href="https://protobuf.dev/reference/kotlin/index.xml" rel="self" type="application/rss+xml"/><item><title>Reference: Kotlin Generated Code Guide</title><link>https://protobuf.dev/reference/kotlin/kotlin-generated/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://protobuf.dev/reference/kotlin/kotlin-generated/</guid><description>
-&lt;p>This page describes exactly what Kotlin code the protocol buffer compiler
-generates for any given protocol definition, in addition to the code generated
-for &lt;a href="https://protobuf.dev/reference/java/java-generated">Java&lt;/a>. Any
-differences between proto2 and proto3 generated code are highlighted—note
-that these differences are in the generated code as described in this document,
-not the base message classes/interfaces, which are the same in both versions.
-You should read the
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Protocol Buffers Documentation – Kotlin Reference</title><link>https://protobuf.dev/reference/kotlin/</link><description>Recent content in Kotlin Reference on Protocol Buffers Documentation</description><generator>Hugo -- gohugo.io</generator><language>en</language><atom:link href="https://protobuf.dev/reference/kotlin/index.xml" rel="self" type="application/rss+xml"/><item><title>Reference: Kotlin Reference</title><link>https://protobuf.dev/reference/kotlin/api-docs/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://protobuf.dev/reference/kotlin/api-docs/</guid><description>
+&lt;h2 id="packages">Packages&lt;/h2>
+&lt;table>
+&lt;thead>
+&lt;tr>
+&lt;th>Name&lt;/th>
+&lt;/tr>
+&lt;/thead>
+&lt;tbody>
+&lt;tr>
+&lt;td>&lt;a name="com.google.protobuf.kotlin////PointingToDeclaration/">&lt;/a>&lt;a href="protobuf-kotlin/com.google.protobuf.kotlin/">com.google.protobuf.kotlin&lt;/a>&lt;/td>
+&lt;/tr>
+&lt;/tbody>
+&lt;/table></description></item><item><title>Reference: Kotlin Generated Code Guide</title><link>https://protobuf.dev/reference/kotlin/kotlin-generated/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://protobuf.dev/reference/kotlin/kotlin-generated/</guid><description>
+&lt;p>Any differences between proto2 and proto3 generated code
+are highlighted—note that these differences are in the generated code as
+described in this document, not the base message classes/interfaces, which are
+the same in both versions. You should read the
 &lt;a href="https://protobuf.dev/programming-guides/proto">proto2 language guide&lt;/a> and/or
 &lt;a href="https://protobuf.dev/programming-guides/proto3">proto3 language guide&lt;/a>
 before reading this document.&lt;/p>
@@ -264,18 +274,4 @@ extensions have &amp;quot;natural&amp;quot; list syntax that works similarly to
 &lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#a40000">&lt;/span> &lt;span style="color:#204a87;font-weight:bold">optional&lt;/span> &lt;span style="color:#204a87;font-weight:bold">int32&lt;/span> &lt;span style="color:#000">bar&lt;/span> &lt;span style="color:#ce5c00;font-weight:bold">=&lt;/span> &lt;span style="color:#0000cf;font-weight:bold">123&lt;/span>&lt;span style="color:#000;font-weight:bold">;&lt;/span>&lt;span style="color:#a40000">
 &lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#a40000">&lt;/span>&lt;span style="color:#000;font-weight:bold">}&lt;/span>&lt;span style="color:#a40000">
 &lt;/span>&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>Java generates the &amp;quot;extension identifier&amp;quot; &lt;code>bar&lt;/code>, which is used to &amp;quot;key&amp;quot;
-extension operations above.&lt;/p></description></item><item><title>Reference: Kotlin API</title><link>https://protobuf.dev/reference/kotlin/api-docs/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://protobuf.dev/reference/kotlin/api-docs/</guid><description>
-&lt;p>//&lt;a href="./">protobuf-kotlin&lt;/a>&lt;/p>
-&lt;h2 id="packages">Packages&lt;/h2>
-&lt;table>
-&lt;thead>
-&lt;tr>
-&lt;th>Name&lt;/th>
-&lt;/tr>
-&lt;/thead>
-&lt;tbody>
-&lt;tr>
-&lt;td>&lt;a name="com.google.protobuf.kotlin////PointingToDeclaration/">&lt;/a>&lt;a href="protobuf-kotlin/com.google.protobuf.kotlin/">com.google.protobuf.kotlin&lt;/a>&lt;/td>
-&lt;/tr>
-&lt;/tbody>
-&lt;/table></description></item></channel></rss>
+extension operations above.&lt;/p></description></item></channel></rss>

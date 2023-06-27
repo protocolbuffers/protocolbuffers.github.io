@@ -1,6 +1,5 @@
-<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Protocol Buffers Documentation – Protocol Buffers Reference</title><link>https://protobuf.dev/reference/protobuf/</link><description>Recent content in Protocol Buffers Reference on Protocol Buffers Documentation</description><generator>Hugo -- gohugo.io</generator><language>en-us</language><atom:link href="https://protobuf.dev/reference/protobuf/index.xml" rel="self" type="application/rss+xml"/><item><title>Reference: Protocol Buffers Version 2 Language Specification</title><link>https://protobuf.dev/reference/protobuf/proto2-spec/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://protobuf.dev/reference/protobuf/proto2-spec/</guid><description>
-&lt;p>This is a language specification reference for version 2 of the Protocol Buffers
-language (proto2). The syntax is specified using
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Protocol Buffers Documentation – Protocol Buffers Reference</title><link>https://protobuf.dev/reference/protobuf/</link><description>Recent content in Protocol Buffers Reference on Protocol Buffers Documentation</description><generator>Hugo -- gohugo.io</generator><language>en</language><atom:link href="https://protobuf.dev/reference/protobuf/index.xml" rel="self" type="application/rss+xml"/><item><title>Reference: Protocol Buffers Version 2 Language Specification</title><link>https://protobuf.dev/reference/protobuf/proto2-spec/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://protobuf.dev/reference/protobuf/proto2-spec/</guid><description>
+&lt;p>The syntax is specified using
 &lt;a href="https://en.wikipedia.org/wiki/Extended_Backus%E2%80%93Naur_Form">Extended Backus-Naur Form (EBNF)&lt;/a>:&lt;/p>
 &lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-fallback" data-lang="fallback">&lt;span style="display:flex;">&lt;span>| alternation
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>() grouping
@@ -256,8 +255,7 @@ extensions, the message can be extended.&lt;/p>
 &lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#a40000">&lt;/span> &lt;span style="color:#000;font-weight:bold">}&lt;/span>&lt;span style="color:#a40000">
 &lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#a40000">&lt;/span>&lt;span style="color:#000;font-weight:bold">}&lt;/span>&lt;span style="color:#a40000">
 &lt;/span>&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div></description></item><item><title>Reference: Protocol Buffers Version 3 Language Specification</title><link>https://protobuf.dev/reference/protobuf/proto3-spec/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://protobuf.dev/reference/protobuf/proto3-spec/</guid><description>
-&lt;p>This is a language specification reference for version 3 of the Protocol Buffers
-language (proto3). The syntax is specified using
+&lt;p>The syntax is specified using
 &lt;a href="https://en.wikipedia.org/wiki/Extended_Backus%E2%80%93Naur_Form">Extended Backus-Naur Form (EBNF)&lt;/a>:&lt;/p>
 &lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-fallback" data-lang="fallback">&lt;span style="display:flex;">&lt;span>| alternation
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>() grouping
@@ -462,11 +460,9 @@ of the following are prohibited:&lt;/p>
 &lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#a40000">&lt;/span> &lt;span style="color:#000">map&lt;/span>&lt;span style="color:#000;font-weight:bold">&amp;lt;&lt;/span>&lt;span style="color:#204a87;font-weight:bold">int32&lt;/span>&lt;span style="color:#000;font-weight:bold">,&lt;/span> &lt;span style="color:#204a87;font-weight:bold">string&lt;/span>&lt;span style="color:#000;font-weight:bold">&amp;gt;&lt;/span> &lt;span style="color:#000">my_map&lt;/span> &lt;span style="color:#ce5c00;font-weight:bold">=&lt;/span> &lt;span style="color:#0000cf;font-weight:bold">4&lt;/span>&lt;span style="color:#000;font-weight:bold">;&lt;/span>&lt;span style="color:#a40000">
 &lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#a40000">&lt;/span>&lt;span style="color:#000;font-weight:bold">}&lt;/span>&lt;span style="color:#a40000">
 &lt;/span>&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div></description></item><item><title>Reference: Text Format Language Specification</title><link>https://protobuf.dev/reference/protobuf/textformat-spec/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://protobuf.dev/reference/protobuf/textformat-spec/</guid><description>
-&lt;p>The protocol buffer Text Format Language specifies a syntax for representation
-of protobuf &lt;em>data&lt;/em> in text form, which is often useful for configurations or
-tests. This format is distinct from the format of text within a &lt;code>.proto&lt;/code> schema,
-for example. This document contains reference documentation using the syntax
-specified in
+&lt;p>This format is distinct from the format of text
+within a &lt;code>.proto&lt;/code> schema, for example. This document contains reference
+documentation using the syntax specified in
 &lt;a href="https://en.wikipedia.org/wiki/Extended_Backus%E2%80%93Naur_Form">ISO/IEC 14977 EBNF&lt;/a>.&lt;/p>
 &lt;div class="alert alert-note" role="alert">
 &lt;h4 class="alert-heading">Note&lt;/h4>
@@ -965,7 +961,7 @@ extensions are &lt;strong>strongly&lt;/strong> discouraged; in particular, exten
 &lt;p>The header comments &lt;code>proto-file&lt;/code> and &lt;code>proto-message&lt;/code> inform developer tools of
 the schema, so they may provide various features.&lt;/p>
 &lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-fallback" data-lang="fallback">&lt;span style="display:flex;">&lt;span># proto-file: some/proto/my_file.proto
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span># proto-message: MyMessage
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span># proto-message: some.package.MyMessage
 &lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h2 id="working-with-the-format-programmatically">Working with the Format Programmatically&lt;/h2>
 &lt;p>Due to how individual Protocol Buffer implementations emit
 neither a consistent nor canonical text format,

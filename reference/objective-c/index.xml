@@ -1,7 +1,7 @@
-<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Protocol Buffers Documentation – Objective-C Reference</title><link>https://protobuf.dev/reference/objective-c/</link><description>Recent content in Objective-C Reference on Protocol Buffers Documentation</description><generator>Hugo -- gohugo.io</generator><language>en-us</language><atom:link href="https://protobuf.dev/reference/objective-c/index.xml" rel="self" type="application/rss+xml"/><item><title>Reference: Objective-C Generated Code Guide</title><link>https://protobuf.dev/reference/objective-c/objective-c-generated/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://protobuf.dev/reference/objective-c/objective-c-generated/</guid><description>
-&lt;p>This page describes exactly what Objective-C code the protocol buffer compiler
-generates for any given protocol definition. Any differences between proto2 and
-proto3 generated code are highlighted. You should read the
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Protocol Buffers Documentation – Objective-C Reference</title><link>https://protobuf.dev/reference/objective-c/</link><description>Recent content in Objective-C Reference on Protocol Buffers Documentation</description><generator>Hugo -- gohugo.io</generator><language>en</language><atom:link href="https://protobuf.dev/reference/objective-c/index.xml" rel="self" type="application/rss+xml"/><item><title>Reference: Objective-C Generated Code Guide</title><link>https://protobuf.dev/reference/objective-c/objective-c-generated/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://protobuf.dev/reference/objective-c/objective-c-generated/</guid><description>
+&lt;p>Any
+differences between proto2 and proto3 generated code are highlighted. You should
+read the
 &lt;a href="https://protobuf.dev/programming-guides/proto">proto2 language guide&lt;/a> and/or
 &lt;a href="https://protobuf.dev/programming-guides/proto3">proto3 language guide&lt;/a>
 before reading this document.&lt;/p>

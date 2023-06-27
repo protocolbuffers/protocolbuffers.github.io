@@ -1,6 +1,5 @@
-<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Protocol Buffers Documentation – PHP Reference</title><link>https://protobuf.dev/reference/php/</link><description>Recent content in PHP Reference on Protocol Buffers Documentation</description><generator>Hugo -- gohugo.io</generator><language>en-us</language><atom:link href="https://protobuf.dev/reference/php/index.xml" rel="self" type="application/rss+xml"/><item><title>Reference: PHP Generated Code Guide</title><link>https://protobuf.dev/reference/php/php-generated/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://protobuf.dev/reference/php/php-generated/</guid><description>
-&lt;p>This page describes the PHP code that the protocol buffer compiler generates for
-any given protocol definition. You should read the
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Protocol Buffers Documentation – PHP Reference</title><link>https://protobuf.dev/reference/php/</link><description>Recent content in PHP Reference on Protocol Buffers Documentation</description><generator>Hugo -- gohugo.io</generator><language>en</language><atom:link href="https://protobuf.dev/reference/php/index.xml" rel="self" type="application/rss+xml"/><item><title>Reference: PHP Generated Code Guide</title><link>https://protobuf.dev/reference/php/php-generated/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://protobuf.dev/reference/php/php-generated/</guid><description>
+&lt;p>You should read the
 &lt;a href="https://protobuf.dev/programming-guides/proto3">proto3 language guide&lt;/a>
 before reading this document. Note that the protocol buffer compiler currently
 only supports proto3 code generation for PHP.&lt;/p>
