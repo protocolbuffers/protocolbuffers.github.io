@@ -1,17 +1,10 @@
----
-title: "Migration Guide"
-weight: 920
-toc_hide: false
-linkTitle: "Migration Guide"
-no_list: "true"
-type: docs
-description: "A list of the breaking changes made to versions of the libraries, and how to update your code to accommodate the changes."
-aliases: 
-  - /programming-guides/migration/
----
-
-This topic provides information about breaking changes in Protocol Buffers, and
-gives guidance on how to update your projects to adapt to those changes.
++++
+title = "Migration Guide"
+weight = 920
+description = "A list of the breaking changes made to versions of the libraries, and how to update your code to accommodate the changes."
+aliases = "/programming-guides/migration/"
+type = "docs"
++++
 
 ## Compiler Changes in v22.0 {#compiler-22}
 
@@ -107,6 +100,76 @@ notable changes include:
         [submodule](https://github.com/protocolbuffers/protobuf/tree/main/third_party).
         If `protobuf_ABSL_PROVIDER` is set to `package`, we will look for a
         pre-installed system version of Abseil.
+
+### Changes in GetCurrentTime Method {#getcurrenttime}
+
+On Windows, `GetCurrentTime()` is the name of a macro provided by the system.
+Prior to v22.x, Protobuf incorrectly removed the macro definition for
+`GetCurrentTime()`. That made the macro unusable for Windows developers after
+including `<protobuf/util/time_util.h>`. Starting with v22.x, Protobuf preserves
+the macro definition. This may break customer code relying on the previous
+behavior, such as if they use the expression
+[`google::protobuf::util::TimeUtil::GetCurrentTime()`](/reference/cpp/api-docs/google.protobuf.util.time_util.md#TimeUtil).
+
+To migrate your app to the new behavior, change your code to do one of the
+following:
+
+*   if the `GetCurrent` macro is defined, explicitly undefine the
+    `GetCurrentTime` macro
+*   prevent the macro expansion by using
+    `(google::protobuf::util::TimeUtil::GetCurrentTime)()` or a similar
+    expression
+
+#### Example: Undefining the macro
+
+Use this approach if you don't use the macro from Windows.
+
+Before:
+
+```cpp
+#include <google/protobuf/util/time_util.h>
+
+void F() {
+  auto time = google::protobuf::util::TimeUtil::GetCurrentTime();
+}
+```
+
+After:
+
+```cpp
+#include <google/protobuf/util/time_util.h>
+#ifdef GetCurrent
+#undef GetCurrentTime
+#endif
+
+void F() {
+  auto time = google::protobuf::util::TimeUtil::GetCurrentTime();
+}
+
+```
+
+**Example 2: Preventing macro expansion**
+
+Before:
+
+```cpp
+#include <google/protobuf/util/time_util.h>
+
+void F() {
+  auto time = google::protobuf::util::TimeUtil::GetCurrentTime();
+}
+```
+
+After:
+
+```cpp
+#include <google/protobuf/util/time_util.h>
+
+void F() {
+  auto time = (google::protobuf::util::TimeUtil::GetCurrentTime)();
+}
+
+```
 
 ## C++20 Support {#cpp20}
 

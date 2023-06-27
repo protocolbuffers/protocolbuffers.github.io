@@ -1,20 +1,15 @@
----
-title: "Overview"
-weight: 10
-toc_hide: false
-linkTitle: "Overview"
-no_list: "true"
-type: docs
-description: "Protocol Buffers are a language-neutral, platform-neutral extensible mechanism for serializing structured data."
----
++++
+title = "Overview"
+weight = 10
+description = "Protocol Buffers are a language-neutral, platform-neutral extensible mechanism for serializing structured data."
+type = "docs"
++++
 
-Protocol buffers provide a language-neutral, platform-neutral, extensible
-mechanism for serializing structured data in a forward-compatible and
-backward-compatible way. It’s like JSON, except it's smaller and faster, and it
-generates native language bindings. You define how you want your data to be
-structured once, then you can use special generated source code to easily write
-and read your structured data to and from a variety of data streams and using a
-variety of languages.
+It’s like JSON, except it's
+smaller and faster, and it generates native language bindings. You define how
+you want your data to be structured once, then you can use special generated
+source code to easily write and read your structured data to and from a variety
+of data streams and using a variety of languages.
 
 Protocol buffers are a combination of the definition language (created in
 `.proto` files), the code that the proto compiler generates to interface with

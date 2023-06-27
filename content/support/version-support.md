@@ -1,15 +1,10 @@
----
-title: "Version Support"
-weight: 910
-toc_hide: false
-linkTitle: "Version Support"
-no_list: "true"
-type: docs
-description: "A list of the support windows provided for language implementations."
-aliases: 
-  - /version-support/
----
-    
++++
+title = "Version Support"
+weight = 910
+description = "A list of the support windows provided for language implementations."
+aliases = "/version-support/"
+type = "docs"
++++
 
 <link rel="stylesheet" href="/includes/version-tables.css">
 

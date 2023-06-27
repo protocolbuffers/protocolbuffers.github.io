@@ -1,13 +1,10 @@
----
-title: "Protocol Buffer Basics: Dart"
-weight: 230
-toc_hide: false
-linkTitle: "Dart"
-no_list: "true"
-type: docs
-description: "This tutorial provides a basic Dart programmers introduction to working with protocol buffers."
----
-    
++++
+title = "Protocol Buffer Basics: Dart"
+weight = 230
+linkTitle = "Dart"
+description = "This tutorial provides a basic Dart programmers introduction to working with protocol buffers."
+type = "docs"
++++
 
 This tutorial provides a basic Dart programmer's introduction to working with
 protocol buffers, using the

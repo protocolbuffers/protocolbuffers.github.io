@@ -1,12 +1,9 @@
----
-title: "Proto Best Practices"
-weight: 90
-toc_hide: false
-linkTitle: "Proto Best Practices"
-no_list: "true"
-type: docs
-description: "This topic contains vetted best practices for authoring Protocol Buffers."
----
++++
+title = "Proto Best Practices"
+weight = 90
+description = "This topic contains vetted best practices for authoring Protocol Buffers."
+type = "docs"
++++
 
 Clients and servers are never updated at exactly the same time - even when you
 try to update them at the same time. One or the

@@ -1,12 +1,9 @@
----
-title: "Encoding"
-weight: 60
-toc_hide: false
-linkTitle: "Encoding"
-no_list: "true"
-type: docs
-description: "This topic explains how Protocol Buffers encodes data to files or to the wire."
----
++++
+title = "Encoding"
+weight = 60
+description = "This topic explains how Protocol Buffers encodes data to files or to the wire."
+type = "docs"
++++
 
 This document describes the protocol buffer *wire format*, which defines the
 details of how your message is sent on the wire and how much space it consumes
@@ -221,7 +218,7 @@ For example, `-500z` is the same as the varint `999`.
 Non-varint numeric types are simple -- `double` and `fixed64` have wire type
 `I64`, which tells the parser to expect a fixed eight-byte lump of data. We can
 specify a `double` record by writing `5: 25.4`, or a `fixed64` record with `6:
-200i64`. In both cases, omitting an explicit wire type infers the `I64` wire
+200i64`. In both cases, omitting an explicit wire type implies the `I64` wire
 type.
 
 Similarly `float` and `fixed32` have wire type `I32`, which tells it to expect
@@ -253,7 +250,7 @@ up the bytes,
 ```
 
 we see that the tag, `` `12` ``, is `00010 010`, or `2:LEN`. The byte that
-follows is the signed int32 varint `7`, and the next seven bytes are the UTF-8
+follows is the int32 varint `7`, and the next seven bytes are the UTF-8
 encoding of `"testing"`. The int32 varint means that the max length of a string
 is 2GB.
 
@@ -366,9 +363,8 @@ concatenation) even if you do not know their types.
 
 Starting in v2.1.0, `repeated` fields of
 [scalar type](/programming-guides/proto2#scalar) can be
-declared as "packed". In proto2 this is done with using the field option
-`[packed=true]`, but in proto3 it is the default. Repeated enums may be packable
-at some point, but they currently are not.
+declared as "packed". In proto2 this is done using the field option
+`[packed=true]`. In proto3 it is the default.
 
 Instead of being encoded as one record per entry, they are encoded as a single
 `LEN` record that contains each element concatenated. To decode, elements are

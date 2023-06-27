@@ -1,17 +1,13 @@
----
-title: "API Best Practices"
-weight: 100
-toc_hide: false
-linkTitle: "API Best Practices"
-no_list: "true"
-type: docs
-description: "A future-proof API is surprisingly hard to get right. The suggestions in this document make trade-offs to favor long-term, bug-free evolution."
----
++++
+title = "API Best Practices"
+weight = 100
+description = "A future-proof API is surprisingly hard to get right. The suggestions in this document make trade-offs to favor long-term, bug-free evolution."
+type = "docs"
++++
 
 Updated for proto3. Patches welcome!
 
-The suggestions in this document make trade-offs to favor
-long-term, bug-free evolution. This doc is a complement to
+This doc is a complement to
 [Proto Best Practices](/programming-guides/dos-donts).
 It's not a prescription for Java/C++/Go and other APIs.
 

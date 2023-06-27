@@ -1,12 +1,9 @@
----
-title: "Downloads"
-weight: 1000
-toc_hide: false
-linkTitle: "Downloads"
-no_list: "true"
-type: docs
-description: "The downloads page for protocol buffers."
----
++++
+title = "Downloads"
+weight = 1000
+description = "The downloads page for protocol buffers."
+type = "docs"
++++
 
 ## Release Packages
 

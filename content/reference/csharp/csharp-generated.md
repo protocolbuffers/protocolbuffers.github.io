@@ -1,15 +1,13 @@
----
-title: "C# Generated Code Guide"
-weight: 550
-toc_hide: false
-linkTitle: "Generated Code Guide"
-no_list: "true"
-type: docs
-description: "This topic describes exactly what C# code the protocol buffer compiler generates for protocol definitions using proto3 syntax."
----
++++
+title = "C# Generated Code Guide"
+weight = 550
+linkTitle = "Generated Code Guide"
+description = "This topic describes exactly what C# code the protocol buffer compiler generates for protocol definitions using proto3 syntax."
+type = "docs"
++++
 
-This page describes exactly what C\# code the protocol buffer compiler generates
-for protocol definitions using `proto3` syntax. You should read the
+You should
+read the
 [proto3 language guide](/programming-guides/proto3)
 before reading this document.
 

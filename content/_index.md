@@ -1,13 +1,11 @@
----
-title: "Protocol Buffers"
-weight: 5
-toc_hide: true
-linkTitle: "Protocol Buffers"
-no_list: "true"
-type: docs
-description: "Protocol Buffers are a language-neutral, platform-neutral extensible mechanism for serializing structured data."
----
-    
++++
+title = "Protocol Buffers"
+weight = 5
+toc_hide = "true"
+description = "Protocol Buffers are language-neutral, platform-neutral extensible mechanisms for serializing structured data."
+type = "docs"
+no_list = "true"
++++
 
 <!--* css: "//depot/includes/suppress-nav.css" *-->
 

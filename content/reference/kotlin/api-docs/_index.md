@@ -1,15 +1,10 @@
----
-title: "Kotlin API"
-weight: 690
-toc_hide: false
-linkTitle: "Kotlin API"
-no_list: "true"
-type: docs
-description: "The API docs for Kotlin."
----
-    
-
-//[protobuf-kotlin](./)
++++
+title = "Kotlin Reference"
+weight = 670
+linkTitle = "Kotlin"
+description = "This section contains reference documentation for working with protocol buffers in Kotlin."
+type = "docs"
++++
 
 ## Packages
 

@@ -1,12 +1,9 @@
----
-title: "Other Languages"
-weight: 840
-toc_hide: false
-linkTitle: "Other Languages"
-no_list: "true"
-type: docs
-description: "protoc, the Protocol Buffers Compiler, can be extended to support new languages via plugins."
----
++++
+title = "Other Languages"
+weight = 840
+description = "protoc, the Protocol Buffers Compiler, can be extended to support new languages via plugins."
+type = "docs"
++++
 
 While the current release includes compilers and APIs for C++, Java, Go, Ruby,
 C\#, and Python, the compiler code is designed so that it's easy to add support

@@ -1,20 +1,15 @@
----
-title: "Kotlin Generated Code Guide"
-weight: 680
-toc_hide: false
-linkTitle: "Generated Code Guide"
-no_list: "true"
-type: docs
-description: "This topic describes exactly what Kotlin code the protocol buffer compiler generates for any given protocol definition,"
----
++++
+title = "Kotlin Generated Code Guide"
+weight = 680
+linkTitle = "Generated Code Guide"
+description = "This topic describes exactly what Kotlin code the protocol buffer compiler generates for any given protocol definition, in addition to the code generated for Java."
+type = "docs"
++++
 
-This page describes exactly what Kotlin code the protocol buffer compiler
-generates for any given protocol definition, in addition to the code generated
-for [Java](/reference/java/java-generated). Any
-differences between proto2 and proto3 generated code are highlighted&mdash;note
-that these differences are in the generated code as described in this document,
-not the base message classes/interfaces, which are the same in both versions.
-You should read the
+Any differences between proto2 and proto3 generated code
+are highlighted&mdash;note that these differences are in the generated code as
+described in this document, not the base message classes/interfaces, which are
+the same in both versions. You should read the
 [proto2 language guide](/programming-guides/proto) and/or
 [proto3 language guide](/programming-guides/proto3)
 before reading this document.

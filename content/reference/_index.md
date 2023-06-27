@@ -1,13 +1,9 @@
----
-title: "Reference Guides"
-weight: 490
-toc_hide: false
-linkTitle: "Reference Guides"
-no_list: "true"
-type: docs
-description: "This section contains reference documentation for working with protocol buffer classes in C++, Java, Python, Go, C#, Objective-C, Ruby, PHP, and Dart, as well as some reference documentation for Protocol Buffers itself."
----
-    
++++
+title = "Reference Guides"
+weight = 490
+description = "This section contains reference documentation for working with protocol buffer classes in C++, Java, Python, Go, C#, Objective-C, Ruby, PHP, and Dart, as well as some reference documentation for Protocol Buffers itself."
+type = "docs"
++++
 
 This section contains reference documentation for working with protocol buffer
 classes in C++, Java, Python, Go, C\#, Objective-C, Ruby, PHP, and Dart, as well
@@ -20,66 +16,3 @@ for each language includes (where available):
 
 Note that there are APIs for several more languages in the pipeline -- for
 details, see [Other Languages](/reference/other).
-
-### C++ Reference
-
--   [C++ Generated Code Guide](/reference/cpp/cpp-generated)
--   [C++ Arena Allocation Guide](/reference/cpp/arenas)
-
--   [C++ API](/reference/cpp/api-docs/)
-
-### C\# Reference
-
--   [C\# Generated Code Guide](/reference/csharp/csharp-generated)
--   [C\# API](/reference/csharp/api-docs/)
-
-### Dart Reference
-
--   [Dart Generated Code Guide](/reference/dart/dart-generated)
--   [Dart API (Dartdoc)](//pub.dartlang.org/documentation/protobuf)
-
-### Go Reference
-
--   [Go Generated Code Guide](/reference/go/go-generated)
--   [Go API (godoc)](https://pkg.go.dev/google.golang.org/protobuf/proto)
-    
--   [Go FAQ](/reference/go/faq)
-
-### Java Reference
-
--   [Java Generated Code Guide](/reference/java/java-generated)
--   [Java Proto Names](/reference/java/java-proto-names)
--   [Java API (Javadoc)](/reference/java/api-docs/overview-summary.html)
-
-### Kotlin Reference
-
--   [Kotlin Generated Code Guide](/reference/kotlin/kotlin-generated)
--   [Kotlin API](/reference/kotlin/api-docs)
-
-### Objective-C Reference
-
--   [Objective-C Generated Code Guide](/reference/objective-c/objective-c-generated)
-
-### PHP Reference
-
--   [PHP Generated Code Guide](/reference/php/php-generated)
--   [PHP API](/reference/php/api-docs)
-
-### Python Reference
-
--   [Python Generated Code Guide](/reference/python/python-generated)
--   [Python API (Sphinx)](https://googleapis.dev/python/protobuf/latest/)
-
-### Ruby Reference
-
--   [Ruby Generated Code Guide](/reference/ruby/ruby-generated)
-
-### Protocol Buffers Reference
-
--   [Protocol Buffers Version 2 Language Specification](/reference/protobuf/proto2-spec)
--   [Protocol Buffers Version 3 Language Specification](/reference/protobuf/proto3-spec)
--   [Text Format Language Specification](/reference/protobuf/textformat-spec)
-
-### Other
-
--   [Other Languages](/reference/other)

@@ -1,13 +1,10 @@
----
-title: "Protocol Buffer Basics: Python"
-weight: 270
-toc_hide: false
-linkTitle: "Python"
-no_list: "true"
-type: docs
-description: "This tutorial provides a basic Python programmers introduction to working with protocol buffers."
----
-    
++++
+title = "Protocol Buffer Basics: Python"
+weight = 270
+linkTitle = "Python"
+description = "This tutorial provides a basic Python programmers introduction to working with protocol buffers."
+type = "docs"
++++
 
 This tutorial provides a basic Python programmer's introduction to working with
 protocol buffers. By walking through creating a simple example application, it

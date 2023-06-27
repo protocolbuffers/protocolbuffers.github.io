@@ -1,13 +1,10 @@
----
-title: "Protocol Buffers Well-Known Types"
-weight: 830
-toc_hide: false
-linkTitle: "Well-Known Types"
-no_list: "true"
-type: docs
-description: "API documentation for the google.protobuf package."
----
-    
++++
+title = "Protocol Buffers Well-Known Types"
+weight = 830
+linkTitle = "Well-Known Types"
+description = "API documentation for the google.protobuf package."
+type = "docs"
++++
 
 ## Index
 

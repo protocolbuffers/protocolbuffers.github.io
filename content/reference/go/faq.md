@@ -1,12 +1,10 @@
----
-title: "Go FAQ"
-weight: 620
-toc_hide: false
-linkTitle: "FAQ"
-no_list: "true"
-type: docs
-description: "This topic has a list of frequently asked questions about implementing protocol buffers in Go, with answer for each."
----
++++
+title = "Go FAQ"
+weight = 620
+linkTitle = "FAQ"
+description = "This topic has a list of frequently asked questions about implementing protocol buffers in Go, with answer for each."
+type = "docs"
++++
 
 ## Versions
 

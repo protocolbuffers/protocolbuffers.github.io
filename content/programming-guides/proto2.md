@@ -1,14 +1,10 @@
----
-title: "Language Guide (proto 2)"
-weight: 30
-toc_hide: false
-linkTitle: "Language Guide (proto 2)"
-no_list: "true"
-type: docs
-description: "This topic covers how to use the version 2 of Protocol Buffers in your project. It contains language-agnostic content. For information specific to the language you're using, see the corresponding documentation for your language."
-aliases: 
-  - /programming-guides/proto/
----
++++
+title = "Language Guide (proto 2)"
+weight = 30
+description = "This topic covers how to use the version 2 of Protocol Buffers in your project."
+aliases = "/programming-guides/proto/"
+type = "docs"
++++
 
 This guide describes how to use the protocol buffer language to structure your
 protocol buffer data, including `.proto` file syntax and how to generate data
@@ -1667,9 +1663,9 @@ options using extensions.
 The following example shows the syntax for adding these options:
 
 ```proto
-import "net/proto2/proto/descriptor.proto";
+import "google/protobuf/descriptor.proto";
 
-extend proto2.EnumValueOptions {
+extend google.protobuf.EnumValueOptions {
   optional string string_name = 123456789;
 }
 

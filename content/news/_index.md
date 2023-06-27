@@ -1,12 +1,9 @@
----
-title: "News"
-weight: 20
-toc_hide: false
-linkTitle: "News"
-no_list: "true"
-type: docs
-description: "Get the latest news about Protocol Buffers."
----
++++
+title = "News"
+weight = 20
+description = "Get the latest news about Protocol Buffers."
+type = "docs"
++++
 
 News topics provide information about past events and changes with Protocol
 Buffers, and plans for upcoming changes.
