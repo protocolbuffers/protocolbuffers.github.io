@@ -47,7 +47,7 @@ example:
 
 <!-- mdformat off (preserve single lines/no wrapping) -->
 
-5.  At some point, `feature.amazing_new_feature` is marked deprecated in an edition and removed in a later one. {value=5}
+4.  At some point, `feature.amazing_new_feature` is marked deprecated in an edition and removed in a later one.
 
     When a feature is removed, the code generators for that behavior and the
     runtime libraries that support it may also be removed. The timelines will be
