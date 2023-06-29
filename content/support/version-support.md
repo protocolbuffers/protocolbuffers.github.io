@@ -38,7 +38,7 @@ defined by our
 
 The most recent release is always supported. Support for earlier minor versions
 ends when a new minor version under the same major version is released. Support
-for earlier major verions ends four quarters beyond the quarter that the
+for earlier major versions ends four quarters beyond the quarter that the
 breaking release is introduced. For example, when Python 4.21.0 was released in
 May of 2022, that set the end of public support of Python 3.20.1 at the
 [end of 2023 Q2](#python).
@@ -180,7 +180,7 @@ Protobuf is committed to following the tooling, platform, and library support
 policy described in
 [Foundational C++ Support Policy](https://opensource.google/documentation/policies/cplusplus-support).
 For specific versions supported, see
-[Foundational C++ Support](https://github.com/google/oss-policies-info/blob/main/foundational-cxx-support-matrix.md).
+[Foundational C++ Support Matrix](https://github.com/google/oss-policies-info/blob/main/foundational-cxx-support-matrix.md).
 
 ## C&#35; {#csharp}
 
@@ -321,21 +321,6 @@ The Java 3.23.x runtime was first released in 2023 Q2.
     <th>24Q1</th>
     <th>24Q2</th>
     <th>24Q3</th>
-  </tr>
-  <tr>
-    <td class="gray">19.x</td>
-    <td class="gray">3.19.x</td>
-    <td></td>
-    <td></td>
-    <td></td>
-    <td></td>
-    <td></td>
-    <td></td>
-    <td></td>
-    <td></td>
-    <td></td>
-    <td></td>
-    <td></td>
   </tr>
   <tr>
     <td class="gray">20.x</td>
@@ -823,6 +808,12 @@ The Python 3.20.x runtime was first released in 2022 Q1 and has support until
   </tr>
 </table>
 
+### Python Platform and Library Support {#python-support}
+
+Protobuf is committed to following the platform and library support policy
+described in
+[Python Support Policy](https://cloud.google.com/python/docs/supported-python-versions).
+
 ## Ruby {#ruby}
 
 The Ruby 3.23.x runtime was first released in 2023 Q2.
@@ -950,3 +941,11 @@ The Ruby 3.23.x runtime was first released in 2023 Q2.
     </td>
   </tr>
 </table>
+
+### Ruby Platform and Library Support {#ruby-support}
+
+Protobuf is committed to following the platform and library support policy
+described in
+[Ruby Support Policy](https://cloud.google.com/ruby/getting-started/supported-ruby-versions).
+For specific versions supported, see
+[Foundational Ruby Support Matrix](https://github.com/google/oss-policies-info/blob/main/foundational-ruby-support-matrix.md).
