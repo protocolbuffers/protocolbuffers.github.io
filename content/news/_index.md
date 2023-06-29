@@ -8,6 +8,8 @@ type = "docs"
 News topics provide information about past events and changes with Protocol
 Buffers, and plans for upcoming changes.
 
+*   [June 29, 2023](/news/2023-06-29) - Protobuf Editions
+    announcement
 *   [April 28, 2023](/news/2023-04-28) - Null no longer
     allowed in `json_name` field options
 *   [April 20, 2023](/news/2023-04-20) - Update to Ruby

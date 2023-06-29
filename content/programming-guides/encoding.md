@@ -198,14 +198,19 @@ Signed Original | Encoded As
 0x7fffffff      | 0xfffffffe
 -0x80000000     | 0xffffffff
 
-Using some bit tricks, it's cheap to convert `n` into its ZigZag representation:
+In other words, each value `n` is encoded using
 
 ```
-((n + n) ^ -(n < 0)) - (n < 0)
+(n << 1) ^ (n >> 31)
 ```
 
-Here, we assume that the boolean `n < 0` is converted into an integer 1 if true
-or an integer 0 if false.
+for `sint32`s, or
+
+```
+(n << 1) ^ (n >> 63)
+```
+
+for the 64-bit version.
 
 When the `sint32` or `sint64` is parsed, its value is decoded back to the
 original, signed version.
