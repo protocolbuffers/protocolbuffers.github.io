@@ -255,9 +255,10 @@ up the bytes,
 ```
 
 we see that the tag, `` `12` ``, is `00010 010`, or `2:LEN`. The byte that
-follows is the int32 varint `7`, and the next seven bytes are the UTF-8
-encoding of `"testing"`. The int32 varint means that the max length of a string
-is 2GB.
+follows  wire type 2, or `LEN`,is the int32 varint that gives the lelength of the string. 
+The int32 varint means that the max length of a string is 2GB. 
+In our example its `7`, so the variant dosen't has any continuation and the next seven bytes are the UTF-8
+encoding of `"testing"`.
 
 In Protoscope, this is written as `2:LEN 7 "testing"`. However, it can be
 incovenient to repeat the length of the string (which, in Protoscope text, is
