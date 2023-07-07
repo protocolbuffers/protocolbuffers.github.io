@@ -361,8 +361,9 @@ Given the enum type:
 
 ```proto
 enum Bar {
-  BAR_VALUE = 0;
-  OTHER_VALUE = 1;
+  BAR_UNSPECIFIED = 0;
+  BAR_VALUE = 1;
+  BAR_OTHER_VALUE = 2;
 }
 ```
 
@@ -391,8 +392,9 @@ Given the enum type:
 
 ```proto
 enum Bar {
-  BAR_VALUE = 0;
-  OTHER_VALUE = 1;
+  BAR_UNSPECIFIED = 0;
+  BAR_VALUE = 1;
+  BAR_OTHER_VALUE = 2;
 }
 ```
 
@@ -538,8 +540,9 @@ Given the enum type:
 
 ```proto
 enum Bar {
-  BAR_VALUE = 0;
-  OTHER_VALUE = 1;
+  BAR_UNSPECIFIED = 0;
+  BAR_VALUE = 1;
+  BAR_OTHER_VALUE = 2;
 }
 ```
 
@@ -716,8 +719,9 @@ Given the enum type:
 
 ```proto
 enum Bar {
-  BAR_VALUE = 0;
-  OTHER_VALUE = 1;
+  BAR_UNSPECIFIED = 0;
+  BAR_VALUE = 1;
+  BAR_OTHER_VALUE = 2;
 }
 ```
 

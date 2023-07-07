@@ -92,9 +92,10 @@ message Person {
   optional string email = 3;
 
   enum PhoneType {
-    MOBILE = 0;
-    HOME = 1;
-    WORK = 2;
+    PHONE_TYPE_UNSPECIFIED = 0;
+    PHONE_TYPE_MOBILE = 1;
+    PHONE_TYPE_HOME = 2;
+    PHONE_TYPE_WORK = 3;
   }
 
   message PhoneNumber {
@@ -145,7 +146,7 @@ even define message types nested inside other messages -- as you can see, the
 `PhoneNumber` type is defined inside `Person`. You can also define `enum` types
 if you want one of your fields to have one of a predefined list of values --
 here you want to specify that a phone number can be one of the following phone
-types: `MOBILE`, `HOME`, or `WORK`.
+types: `PHONE_TYPE_MOBILE`, `PHONE_TYPE_HOME`, or `PHONE_TYPE_WORK`.
 
 The " = 1", " = 2" markers on each element identify the unique "tag" that field
 uses in the binary encoding. Tag numbers 1-15 require one less byte to encode
@@ -313,9 +314,10 @@ The generated code includes a `PhoneType` Java 5 enum, nested within `Person`:
 
 ```java
 public static enum PhoneType {
-  MOBILE(0, 0),
-  HOME(1, 1),
-  WORK(2, 2),
+  PHONE_TYPE_UNSPECIFIED(0, 0),
+  PHONE_TYPE_MOBILE(1, 1),
+  PHONE_TYPE_HOME(2, 2),
+  PHONE_TYPE_WORK(3, 3),
   ;
   ...
 }

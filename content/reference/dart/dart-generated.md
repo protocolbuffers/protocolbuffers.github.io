@@ -337,16 +337,17 @@ Given an enum definition like:
 
 ```proto
 enum Color {
-  RED = 0;
-  GREEN = 1;
-  BLUE = 2;
+  COLOR_UNSPECIFIED = 0;
+  COLOR_RED = 1;
+  COLOR_GREEN = 2;
+  COLOR_BLUE = 3;
 }
 ```
 
 The protocol buffer compiler will generate a class called `Color`, which extends
 the `ProtobufEnum` class. The class will include a `static const Color` for each
 of the three values defined as well as a `static const List<Color>` containing
-all the three values. It will also include the following method:
+all the three non-unspecified values. It will also include the following method:
 
 -   `static Color? valueOf(int value)`: Returns the `Color` corresponding to the
     given numeric value.
@@ -378,9 +379,10 @@ definition like:
 ```proto
 message Bar {
   enum Color {
-    RED = 0;
-    GREEN = 1;
-    BLUE = 2;
+    COLOR_UNSPECIFIED = 0;
+    COLOR_RED = 1;
+    COLOR_GREEN = 2;
+    COLOR_BLUE = 3;
   }
 }
 ```

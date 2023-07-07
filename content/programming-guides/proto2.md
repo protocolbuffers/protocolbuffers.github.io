@@ -1670,7 +1670,7 @@ extend google.protobuf.EnumValueOptions {
 }
 
 enum Data {
-  DATA_UNKNOWN = 0;
+  DATA_UNSPECIFIED = 0;
   DATA_SEARCH = 1 [deprecated = true];
   DATA_DISPLAY = 2 [
     (string_name) = "display_value"

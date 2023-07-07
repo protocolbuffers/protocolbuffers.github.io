@@ -688,8 +688,8 @@ The PHP 3.23.x runtime was first released in 2023 Q2.
 
 ## Python {#python}
 
-The Python 3.20.x runtime was first released in 2022 Q1 and has support until
-2023 Q2. The Python 4.23.x runtime was first released in 2023 Q2.
+The Python 4.23.x runtime was first released in 2023 Q2. The Python 3.x runtime
+went out of support on July 1, 2023.
 
 <table>
   <tr>
