@@ -116,7 +116,9 @@ unpacking; &lt;code>True&lt;/code> otherwise.&lt;/p>
 &lt;p>You can also call the &lt;code>Is()&lt;/code> method to check if the Any message represents the
 given protocol buffer type. For example:&lt;/p>
 &lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-python" data-lang="python">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#204a87;font-weight:bold">assert&lt;/span> &lt;span style="color:#000">any_message&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">.&lt;/span>&lt;span style="color:#000">Is&lt;/span>&lt;span style="color:#000;font-weight:bold">(&lt;/span>&lt;span style="color:#000">message&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">.&lt;/span>&lt;span style="color:#000">DESCRIPTOR&lt;/span>&lt;span style="color:#000;font-weight:bold">)&lt;/span>
-&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h3 id="timestamp">Timestamp&lt;/h3>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>Use the &lt;code>TypeName()&lt;/code> method to retrieve the protobuf type name of an inner
+message.&lt;/p>
+&lt;h3 id="timestamp">Timestamp&lt;/h3>
 &lt;p>Timestamp messages can be converted to/from RFC 3339 date string format (JSON
 string) using the &lt;code>ToJsonString()&lt;/code>/&lt;code>FromJsonString()&lt;/code> methods. For example:&lt;/p>
 &lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-python" data-lang="python">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#000">timestamp_message&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">.&lt;/span>&lt;span style="color:#000">FromJsonString&lt;/span>&lt;span style="color:#000;font-weight:bold">(&lt;/span>&lt;span style="color:#4e9a06">&amp;#34;1970-01-01T00:00:00Z&amp;#34;&lt;/span>&lt;span style="color:#000;font-weight:bold">)&lt;/span>
@@ -145,15 +147,15 @@ call &lt;code>ToTimedelta()&lt;/code> or &lt;code>FromTimedelta&lt;/code>. For e
 &lt;code>ToJsonString()&lt;/code>/&lt;code>FromJsonString()&lt;/code> methods. In addition, a FieldMask message
 has the following methods:&lt;/p>
 &lt;ul>
-&lt;li>&lt;code>IsValidForDescriptor&lt;/code>: Checks whether the FieldMask is valid for Message
-Descriptor.&lt;/li>
-&lt;li>&lt;code>AllFieldsFromDescriptor&lt;/code>: Gets all direct fields of Message Descriptor to
-FieldMask.&lt;/li>
-&lt;li>&lt;code>CanonicalFormFromMask&lt;/code>: Converts a FieldMask to the canonical form.&lt;/li>
-&lt;li>&lt;code>Union&lt;/code>: Merges two FieldMasks into this FieldMask.&lt;/li>
-&lt;li>&lt;code>Intersect&lt;/code>: Intersects two FieldMasks into this FieldMask.&lt;/li>
-&lt;li>&lt;code>MergeMessage&lt;/code>: Merges fields specified in FieldMask from source to
-destination.&lt;/li>
+&lt;li>&lt;code>IsValidForDescriptor(message_descriptor)&lt;/code>: Checks whether the FieldMask is
+valid for Message Descriptor.&lt;/li>
+&lt;li>&lt;code>AllFieldsFromDescriptor(message_descriptor)&lt;/code>: Gets all direct fields of
+Message Descriptor to FieldMask.&lt;/li>
+&lt;li>&lt;code>CanonicalFormFromMask(mask)&lt;/code>: Converts a FieldMask to the canonical form.&lt;/li>
+&lt;li>&lt;code>Union(mask1, mask2)&lt;/code>: Merges two FieldMasks into this FieldMask.&lt;/li>
+&lt;li>&lt;code>Intersect(mask1, mask2)&lt;/code>: Intersects two FieldMasks into this FieldMask.&lt;/li>
+&lt;li>&lt;code>MergeMessage(source, destination, replace_message_field=False, replace_repeated_field=False)&lt;/code>: Merges fields specified in FieldMask from
+source to destination.&lt;/li>
 &lt;/ul>
 &lt;h3 id="struct">Struct&lt;/h3>
 &lt;p>Struct messages let you get and set the items directly. For example:&lt;/p>
@@ -220,19 +222,12 @@ type, you call the &lt;code>ClearField()&lt;/code> method of the
 interface. For example:&lt;/p>
 &lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-python" data-lang="python">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#000">message&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">.&lt;/span>&lt;span style="color:#000">foo&lt;/span> &lt;span style="color:#ce5c00;font-weight:bold">=&lt;/span> &lt;span style="color:#0000cf;font-weight:bold">123&lt;/span>
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#000">message&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">.&lt;/span>&lt;span style="color:#000">ClearField&lt;/span>&lt;span style="color:#000;font-weight:bold">(&lt;/span>&lt;span style="color:#4e9a06">&amp;#34;foo&amp;#34;&lt;/span>&lt;span style="color:#000;font-weight:bold">)&lt;/span>
-&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>
-&lt;div class="alert alert-note" role="alert">
-&lt;h4 class="alert-heading">Note&lt;/h4>
-Unlike in proto2, you cannot call &lt;code>HasField()&lt;/code> for a singular non-message field
-in proto3, and the library will throw an exception if you try to do this.
-&lt;/div>
-&lt;h3 id="embedded_message">Singular Message Fields&lt;/h3>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h3 id="embedded_message">Singular Message Fields&lt;/h3>
 &lt;p>Message types work slightly differently. You cannot assign a value to an
 embedded message field. Instead, assigning a value to any field within the child
-message implies setting the message field in the parent. In proto3, you can also
-use the parent message&amp;rsquo;s &lt;code>HasField()&lt;/code> method to check if a message type field
-value has been set, which you can&amp;rsquo;t do with other types of proto3 singular
-field.&lt;/p>
+message implies setting the message field in the parent. You can also use the
+parent message&amp;rsquo;s &lt;code>HasField()&lt;/code> method to check if a message type field value has
+been set.&lt;/p>
 &lt;p>So, for example, let&amp;rsquo;s say you have the following &lt;code>.proto&lt;/code> definition:&lt;/p>
 &lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-proto" data-lang="proto">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#204a87;font-weight:bold">message&lt;/span> &lt;span style="color:#000">Foo&lt;/span> &lt;span style="color:#000;font-weight:bold">{&lt;/span>&lt;span style="color:#a40000">
 &lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#a40000">&lt;/span> &lt;span style="color:#204a87;font-weight:bold">optional&lt;/span> &lt;span style="color:#000">Bar&lt;/span> &lt;span style="color:#000">bar&lt;/span> &lt;span style="color:#ce5c00;font-weight:bold">=&lt;/span> &lt;span style="color:#0000cf;font-weight:bold">1&lt;/span>&lt;span style="color:#000;font-weight:bold">;&lt;/span>&lt;span style="color:#a40000">
@@ -297,6 +292,9 @@ manipulate it. For example, given this message definition:&lt;/p>
 &lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>The &lt;code>ClearField()&lt;/code> method of the
 &lt;a href="https://googleapis.dev/python/protobuf/latest/google/protobuf/message.html#google.protobuf.message.Message">&lt;code>Message&lt;/code>&lt;/a>
 interface works in addition to using Python &lt;code>del&lt;/code>.&lt;/p>
+&lt;p>When using the index to retrieve a value, you can use negative numbers, such as
+using &lt;code>-1&lt;/code> to retrieve the last element in the list. If your index goes out of
+bounds, you&amp;rsquo;ll get an &lt;code>IndexError: list index out of range&lt;/code>.&lt;/p>
 &lt;h3 id="repeated-message-fields">Repeated Message Fields&lt;/h3>
 &lt;p>Repeated message fields work similar to repeated scalar fields. However, the
 corresponding Python object also has an &lt;code>add()&lt;/code> method that creates a new
@@ -388,13 +386,13 @@ equivalent:&lt;/p>
 &lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-python" data-lang="python">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#ce5c00;font-weight:bold">//&lt;/span> &lt;span style="color:#000">Version&lt;/span> &lt;span style="color:#0000cf;font-weight:bold">1&lt;/span>&lt;span style="color:#000;font-weight:bold">:&lt;/span> &lt;span style="color:#000">Using&lt;/span> &lt;span style="color:#000">groups&lt;/span>
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#000">message&lt;/span> &lt;span style="color:#000">SearchResponse&lt;/span> &lt;span style="color:#000;font-weight:bold">{&lt;/span>
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#000">repeated&lt;/span> &lt;span style="color:#000">group&lt;/span> &lt;span style="color:#000">SearchResult&lt;/span> &lt;span style="color:#ce5c00;font-weight:bold">=&lt;/span> &lt;span style="color:#0000cf;font-weight:bold">1&lt;/span> &lt;span style="color:#000;font-weight:bold">{&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#000">required&lt;/span> &lt;span style="color:#000">string&lt;/span> &lt;span style="color:#000">url&lt;/span> &lt;span style="color:#ce5c00;font-weight:bold">=&lt;/span> &lt;span style="color:#0000cf;font-weight:bold">1&lt;/span>&lt;span style="color:#000;font-weight:bold">;&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#000">optional&lt;/span> &lt;span style="color:#000">string&lt;/span> &lt;span style="color:#000">url&lt;/span> &lt;span style="color:#ce5c00;font-weight:bold">=&lt;/span> &lt;span style="color:#0000cf;font-weight:bold">1&lt;/span>&lt;span style="color:#000;font-weight:bold">;&lt;/span>
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#000;font-weight:bold">}&lt;/span>
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#000;font-weight:bold">}&lt;/span>
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#ce5c00;font-weight:bold">//&lt;/span> &lt;span style="color:#000">Version&lt;/span> &lt;span style="color:#0000cf;font-weight:bold">2&lt;/span>&lt;span style="color:#000;font-weight:bold">:&lt;/span> &lt;span style="color:#000">Not&lt;/span> &lt;span style="color:#000">using&lt;/span> &lt;span style="color:#000">groups&lt;/span>
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#000">message&lt;/span> &lt;span style="color:#000">SearchResponse&lt;/span> &lt;span style="color:#000;font-weight:bold">{&lt;/span>
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#000">message&lt;/span> &lt;span style="color:#000">SearchResult&lt;/span> &lt;span style="color:#000;font-weight:bold">{&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#000">required&lt;/span> &lt;span style="color:#000">string&lt;/span> &lt;span style="color:#000">url&lt;/span> &lt;span style="color:#ce5c00;font-weight:bold">=&lt;/span> &lt;span style="color:#0000cf;font-weight:bold">1&lt;/span>&lt;span style="color:#000;font-weight:bold">;&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#000">optional&lt;/span> &lt;span style="color:#000">string&lt;/span> &lt;span style="color:#000">url&lt;/span> &lt;span style="color:#ce5c00;font-weight:bold">=&lt;/span> &lt;span style="color:#0000cf;font-weight:bold">1&lt;/span>&lt;span style="color:#000;font-weight:bold">;&lt;/span>
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#000;font-weight:bold">}&lt;/span>
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#000">repeated&lt;/span> &lt;span style="color:#000">SearchResult&lt;/span> &lt;span style="color:#000">searchresult&lt;/span> &lt;span style="color:#ce5c00;font-weight:bold">=&lt;/span> &lt;span style="color:#0000cf;font-weight:bold">1&lt;/span>&lt;span style="color:#000;font-weight:bold">;&lt;/span>
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#000;font-weight:bold">}&lt;/span>
