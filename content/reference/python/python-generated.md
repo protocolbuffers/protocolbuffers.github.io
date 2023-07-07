@@ -114,7 +114,7 @@ module to work with protocol messages in text format: for example, the `Merge()`
 method lets you merge an ASCII representation of a message into an existing
 message.
 
-### Nested Types
+### Nested Types {#nested-types}
 
 A message can be declared inside another message. For example:
 
@@ -137,7 +137,7 @@ message methods, as they subclass both
 [`google.protobuf.Message`](https://googleapis.dev/python/protobuf/latest/google/protobuf/message.html#google.protobuf.message.Message)
 and a WKT class.
 
-### Any
+### Any {#any}
 
 For Any messages, you can call `Pack()` to pack a specified message into the
 current Any message, or `Unpack()` to unpack the current Any message into a
@@ -159,7 +159,10 @@ given protocol buffer type. For example:
 assert any_message.Is(message.DESCRIPTOR)
 ```
 
-### Timestamp
+Use the `TypeName()` method to retrieve the protobuf type name of an inner
+message.
+
+### Timestamp {#timestamp}
 
 Timestamp messages can be converted to/from RFC 3339 date string format (JSON
 string) using the `ToJsonString()`/`FromJsonString()` methods. For example:
@@ -190,7 +193,7 @@ timestamp_message.FromDatetime(dt)
 self.assertEqual(dt, timestamp_message.ToDatetime())
 ```
 
-### Duration
+### Duration {#duration}
 
 Duration messages have the same methods as Timestamp to convert between JSON
 string and other time units. To convert between timedelta and Duration, you can
@@ -203,23 +206,24 @@ assert td.seconds == 1
 assert td.microseconds == 999999
 ```
 
-### FieldMask
+### FieldMask {#fieldmask}
 
 FieldMask messages can be converted to/from JSON string using the
 `ToJsonString()`/`FromJsonString()` methods. In addition, a FieldMask message
 has the following methods:
 
--   `IsValidForDescriptor`: Checks whether the FieldMask is valid for Message
-    Descriptor.
--   `AllFieldsFromDescriptor`: Gets all direct fields of Message Descriptor to
-    FieldMask.
--   `CanonicalFormFromMask`: Converts a FieldMask to the canonical form.
--   `Union`: Merges two FieldMasks into this FieldMask.
--   `Intersect`: Intersects two FieldMasks into this FieldMask.
--   `MergeMessage`: Merges fields specified in FieldMask from source to
-    destination.
+-   `IsValidForDescriptor(message_descriptor)`: Checks whether the FieldMask is
+    valid for Message Descriptor.
+-   `AllFieldsFromDescriptor(message_descriptor)`: Gets all direct fields of
+    Message Descriptor to FieldMask.
+-   `CanonicalFormFromMask(mask)`: Converts a FieldMask to the canonical form.
+-   `Union(mask1, mask2)`: Merges two FieldMasks into this FieldMask.
+-   `Intersect(mask1, mask2)`: Intersects two FieldMasks into this FieldMask.
+-   `MergeMessage(source, destination, replace_message_field=False,
+    replace_repeated_field=False)`: Merges fields specified in FieldMask from
+    source to destination.
 
-### Struct
+### Struct {#struct}
 
 Struct messages let you get and set the items directly. For example:
 
@@ -237,7 +241,7 @@ struct.get_or_create_struct("key4")["subkey"] = 11.0
 struct.get_or_create_list("key5")
 ```
 
-### ListValue
+### ListValue {#listvalue}
 
 A ListValue message acts like a Python sequence that lets you do the following:
 
@@ -260,7 +264,7 @@ list_value.add_struct()["key"] = 1
 list_value.add_list().extend([1, "two", True])
 ```
 
-## Fields
+## Fields {#fields}
 
 For each field in a message type, the corresponding class has a property with
 the same name as the field. How you can manipulate the property depends on its
@@ -276,7 +280,7 @@ If the field's name is a Python keyword, then its property will only be
 accessible via `getattr()` and `setattr()`, as described in the
 [*Names which conflict with Python keywords*](#keyword-conflicts) section.
 
-### Singular Fields (proto2)
+### Singular Fields (proto2) {#singular-fields-proto2}
 
 If you have a singular (optional or required) field `foo` of any non-message
 type, you can manipulate the field `foo` as if it were a regular field. For
@@ -303,7 +307,7 @@ message.ClearField("foo")
 assert not message.HasField("foo")
 ```
 
-### Singular Fields (proto3)
+### Singular Fields (proto3) {#singular-fields-proto3}
 
 If you have a singular field `foo` of any non-message type, you can manipulate
 the field `foo` as if it were a regular field. For example, if `foo`'s type is
@@ -327,19 +331,13 @@ message.foo = 123
 message.ClearField("foo")
 ```
 
-{{% alert title="Note" color="note" %}}
-Unlike in proto2, you cannot call `HasField()` for a singular non-message field
-in proto3, and the library will throw an exception if you try to do this.
-{{% /alert %}}
-
 ### Singular Message Fields {#embedded_message}
 
 Message types work slightly differently. You cannot assign a value to an
 embedded message field. Instead, assigning a value to any field within the child
-message implies setting the message field in the parent. In proto3, you can also
-use the parent message's `HasField()` method to check if a message type field
-value has been set, which you can't do with other types of proto3 singular
-field.
+message implies setting the message field in the parent. You can also use the
+parent message's `HasField()` method to check if a message type field value has
+been set.
 
 So, for example, let's say you have the following `.proto` definition:
 
@@ -401,7 +399,7 @@ foo.bar.SetInParent()  # Set Foo.bar to a default Bar message
 assert foo.HasField("bar")
 ```
 
-### Repeated Fields
+### Repeated Fields {#repeated-fields}
 
 Repeated fields are represented as an object that acts like a Python sequence.
 As with embedded messages, you cannot assign the field directly, but you can
@@ -439,7 +437,11 @@ The `ClearField()` method of the
 [`Message`](https://googleapis.dev/python/protobuf/latest/google/protobuf/message.html#google.protobuf.message.Message)
 interface works in addition to using Python `del`.
 
-### Repeated Message Fields
+When using the index to retrieve a value, you can use negative numbers, such as
+using `-1` to retrieve the last element in the list. If your index goes out of
+bounds, you'll get an `IndexError: list index out of range`.
+
+### Repeated Message Fields {#repeated-message-fields}
 
 Repeated message fields work similar to repeated scalar fields. However, the
 corresponding Python object also has an `add()` method that creates a new
@@ -531,7 +533,7 @@ foo.bars[0] = Bar(i=15)  # Raises an exception
 foo.bars[:] = [Bar(i=15), Bar(i=17)]  # Also raises an exception
 ```
 
-### Groups (proto2)
+### Groups (proto2) {#groups-proto2}
 
 **Note that groups are deprecated and should not be used when creating new
 message types -- use nested message types instead.**
@@ -549,13 +551,13 @@ equivalent:
 // Version 1: Using groups
 message SearchResponse {
   repeated group SearchResult = 1 {
-    required string url = 1;
+    optional string url = 1;
   }
 }
 // Version 2: Not using groups
 message SearchResponse {
   message SearchResult {
-    required string url = 1;
+    optional string url = 1;
   }
   repeated SearchResult searchresult = 1;
 }
@@ -576,7 +578,7 @@ assert resp.searchresult[0].url == "https://blog.google"
 assert resp.searchresult[0] == SearchResponse.SearchResult(url="https://blog.google")
 ```
 
-### Map Fields
+### Map Fields {#map-fields}
 
 Given this message definition:
 
@@ -786,7 +788,7 @@ enum SomeEnum {
 
 In the above example, `myproto_pb2.SomeEnum.Name(5)` returns `"VALUE_B"`.
 
-## Oneof
+## Oneof {#oneof}
 
 Given a message with a oneof:
 
@@ -955,7 +957,7 @@ of the same names. Plugins are new in version 2.3.0 (January 2010).
 The remainder of this section describes what the protocol buffer compiler
 generates when abstract services are enabled.
 
-### Interface
+### Interface {#interface}
 
 Given a service definition:
 
@@ -994,7 +996,7 @@ automatically generates implementations of the methods of `Service` as follows:
 -   `GetRequestClass` and `GetResponseClass`: Returns the class of the request
     or response of the correct type for the given method.
 
-### Stub
+### Stub {#stub}
 
 The protocol buffer compiler also generates a \"stub\" implementation of every
 service interface, which is used by clients wishing to send requests to servers

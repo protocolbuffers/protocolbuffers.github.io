@@ -8,6 +8,8 @@ type = "docs"
 News topics provide information about past events and changes with Protocol
 Buffers, and plans for upcoming changes.
 
+*   [July 6, 2023](/news/2023-07-06) - Dropping support
+    for older versions of PHP, Ruby, and Python
 *   [June 29, 2023](/news/2023-06-29) - Protobuf Editions
     announcement
 *   [April 28, 2023](/news/2023-04-28) - Null no longer

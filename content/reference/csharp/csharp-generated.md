@@ -353,7 +353,8 @@ Given an enumeration definition like:
 
 ```proto
 enum Color {
-  COLOR_RED = 0;
+  COLOR_UNSPECIFIED = 0;
+  COLOR_RED = 1;
   COLOR_GREEN = 5;
   COLOR_BLUE = 1234;
 }
@@ -372,7 +373,8 @@ The `Color` proto enum above would therefore become the following C\# code:
 ```csharp
 enum Color
 {
-  Red = 0,
+  Unspecified = 0,
+  Red = 1,
   Green = 5,
   Blue = 1234
 }
