@@ -1189,6 +1189,8 @@ the oneof automatically clears all the other members. You can check which value
 in a oneof is set (if any) using a special `case()` or `WhichOneof()` method,
 depending on your chosen language.
 
+Field numbers for oneof fields must be unique within the enclosing message.
+
 ### Using Oneof {#using-oneof}
 
 To define a oneof in your `.proto` you use the `oneof` keyword followed by your

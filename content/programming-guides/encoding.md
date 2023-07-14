@@ -81,15 +81,15 @@ And here is 150, encoded as `` `9601` `` -- this is a bit more complicated:
 How do you figure out that this is 150? First you drop the MSB from each byte,
 as this is just there to tell us whether we've reached the end of the number (as
 you can see, it's set in the first byte as there is more than one byte in the
-varint). Then we concatenate the 7-bit payloads, and interpret it as a
-little-endian, 64-bit unsigned integer:
+varint). These 7-bit payloads are in little-endian order. Convert to big-endian
+order, concatenate, and interpret as an unsigned 64-bit integer:
 
 ```proto
 10010110 00000001        // Original inputs.
  0010110  0000001        // Drop continuation bits.
- 0000001  0010110        // Put into little-endian order.
- 10010110                // Concatenate.
- 128 + 16 + 4 + 2 = 150  // Interpret as integer.
+ 0000001  0010110        // Convert to big-endian.
+   00000010010110        // Concatenate.
+ 128 + 16 + 4 + 2 = 150  // Interpret as an unsigned 64-bit integer.
 ```
 
 Because varints are so crucial to protocol buffers, in protoscope syntax, we
@@ -218,7 +218,7 @@ original, signed version.
 In protoscope, suffixing an integer with a `z` will make it encode as ZigZag.
 For example, `-500z` is the same as the varint `999`.
 
-### Non-varint Numbers
+### Non-varint Numbers {#non-varints}
 
 Non-varint numeric types are simple -- `double` and `fixed64` have wire type
 `I64`, which tells the parser to expect a fixed eight-byte lump of data. We can
@@ -331,7 +331,11 @@ respect to each other is preserved. Thus, this could also have been encoded as
 5: 3
 ```
 
-There is no special treatment for `oneof`s in the wire format.
+### Oneofs {#oneofs}
+
+[`Oneof` fields](/programming-guides/proto2#oneof) are
+encoded the same as if the fields were not in a `oneof`. The rules that apply to
+`oneofs` are independent of how they are represented on the wire.
 
 ### Last One Wins {#last-one-wins}
 
@@ -411,7 +415,7 @@ Protocol buffer parsers must be able to parse repeated fields that were compiled
 as `packed` as if they were not packed, and vice versa. This permits adding
 `[packed=true]` to existing fields in a forward- and backward-compatible way.
 
-### Maps
+### Maps {#maps}
 
 Map fields are just a shorthand for a special kind of repeated field. If we have
 
@@ -436,7 +440,7 @@ message Test6 {
 Thus, maps are encoded exactly like a `repeated` message field: as a sequence of
 `LEN`-typed records, with two fields each.
 
-## Groups
+## Groups {#groups}
 
 Groups are a deprecated feature that should not be used, but they remain in the
 wire format, and deserve a passing mention.
@@ -484,7 +488,7 @@ be written. Serialization order is an implementation detail, and the details of
 any particular implementation may change in the future. Therefore, protocol
 buffer parsers must be able to parse fields in any order.
 
-### Implications
+### Implications {#implications}
 
 *   Do not assume the byte output of a serialized message is stable. This is
     especially true for messages with transitive bytes fields representing other

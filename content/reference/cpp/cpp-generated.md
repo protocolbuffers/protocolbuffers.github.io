@@ -115,9 +115,13 @@ In addition to these methods, the `Foo` class defines the following methods:
 -   `Foo& operator=(Foo&& other)`: Move-assignment operator.
 -   `void Swap(Foo* other)`: Swap content with another message.
 -   `const UnknownFieldSet& unknown_fields() const`: Returns the set of unknown
-    fields encountered while parsing this message.
+    fields encountered while parsing this message. If `option optimize_for =
+    LITE_RUNTIME` is specified in the `.proto` file, then the return type
+    changes to `std::string&`.
 -   `UnknownFieldSet* mutable_unknown_fields()`: Returns a pointer to the
-    mutable set of unknown fields encountered while parsing this message.
+    mutable set of unknown fields encountered while parsing this message. If
+    `option optimize_for = LITE_RUNTIME` is specified in the `.proto` file, then
+    the return type changes to `std::string*`.
 
 The class also defines the following static methods:
 
@@ -131,6 +135,38 @@ The class also defines the following static methods:
     singular fields are unset and all repeated fields are empty). Note that the
     default instance of a message can be used as a factory by calling its
     `New()` method.
+
+### Generated Filenames {#generated-filenames}
+
+[Reserved keywords](https://github.com/protocolbuffers/protobuf/blob/main/src/google/protobuf/compiler/cpp/helpers.cc#L4)
+are appended with an underscore in the generated output.
+
+For example, the following proto3 definition syntax:
+
+```proto
+message MyMessage {
+  string false = 1;
+  string myFalse = 2;
+}
+```
+
+generates the following partial output:
+
+```cpp
+  void clear_false_() ;
+  const std::string& false_() const;
+  void set_false_(Arg_&& arg, Args_... args);
+  std::string* mutable_false_();
+  PROTOBUF_NODISCARD std::string* release_false_();
+  void set_allocated_false_(std::string* ptr);
+
+  void clear_myfalse() ;
+  const std::string& myfalse() const;
+  void set_myfalse(Arg_&& arg, Args_... args);
+  std::string* mutable_myfalse();
+  PROTOBUF_NODISCARD std::string* release_myfalse();
+  void set_allocated_myfalse(std::string* ptr);
+```
 
 ### Nested Types
 
@@ -184,7 +220,7 @@ any method inherited from `Message` or accessing the message through other ways
 Correspondingly, the value of the returned pointer is never guaranteed to be the
 same across two different invocations of the accessor.
 
-### Singular Numeric Fields (proto2)
+### Optional Numeric Fields (proto2 and proto3)
 
 For either of these field definitions:
 
@@ -207,7 +243,7 @@ For other numeric field types (including `bool`), `int32` is replaced with the
 corresponding C++ type according to the
 [scalar value types table](/programming-guides/proto3#scalar).
 
-### Singular Numeric Fields (proto3)
+### Implicit Presence Numeric Fields (proto3)
 
 For these field definitions:
 
@@ -229,7 +265,7 @@ For other numeric field types (including `bool`), `int32` is replaced with the
 corresponding C++ type according to the
 [scalar value types table](/programming-guides/proto3#scalar).
 
-### Singular String/Bytes Fields (proto2) {#string}
+### Optional String/Bytes Fields (proto2 and proto3) {#string}
 
 For any of these field definitions:
 
@@ -278,7 +314,7 @@ The compiler will generate the following accessor methods:
     calling this, caller takes the ownership of the allocated `string` object,
     `has_foo()` will return `false`, and `foo()` will return the default value.
 
-### Singular String/Bytes Fields (proto3) {#proto3_string}
+### Implicit Presence String/Bytes Fields (proto3) {#proto3_string}
 
 For any of these field definitions:
 
@@ -355,7 +391,7 @@ The compiler will generate the following accessor methods:
     `foo()` will return an empty `Cord` (proto3) or the default value (proto2).
 -   `bool has_foo()`: Returns `true` if the field is set.
 
-### Singular Enum Fields (proto2) {#enum_field}
+### Optional Enum Fields (proto2 and proto3) {#enum_field}
 
 Given the enum type:
 
@@ -386,7 +422,7 @@ The compiler will generate the following accessor methods:
 -   `void clear_foo()`: Clears the value of the field. After calling this,
     `has_foo()` will return `false` and `foo()` will return the default value.
 
-### Singular Enum Fields (proto3)
+### Implicit Presence Enum Fields (proto3)
 
 Given the enum type:
 
@@ -414,7 +450,7 @@ The compiler will generate the following accessor methods:
 -   `void clear_foo()`: Clears the value of the field. After calling this,
     `foo()` will return the default value.
 
-### Singular Embedded Message Fields {#embeddedmessage}
+### Optional Embedded Message Fields (proto2 and proto3) {#embeddedmessage}
 
 Given the message type:
 

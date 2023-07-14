@@ -813,6 +813,8 @@ went out of support on July 1, 2023.
 Protobuf is committed to following the platform and library support policy
 described in
 [Python Support Policy](https://cloud.google.com/python/docs/supported-python-versions).
+For specific versions supported, see
+[Foundational Python Support Matrix](https://github.com/google/oss-policies-info/blob/main/foundational-python-support-matrix.md).
 
 ## Ruby {#ruby}
 

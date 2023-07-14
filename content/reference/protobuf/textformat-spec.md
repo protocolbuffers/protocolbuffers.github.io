@@ -571,6 +571,8 @@ Both the `key` and `value` fields are optional and default to the zero value of
 their respective types if unspecified. If a key is duplicated, only the
 last-specified value will be retained in a parsed map.
 
+The order of maps is not maintained in textprotos.
+
 ## `oneof` Fields {#oneof}
 
 While there is no special syntax related to `oneof` fields in text format, only
@@ -657,7 +659,7 @@ the schema, so they may provide various features.
 
 ```textproto
 # proto-file: some/proto/my_file.proto
-# proto-message: some.package.MyMessage
+# proto-message: MyMessage
 ```
 
 ## Working with the Format Programmatically

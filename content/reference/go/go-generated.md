@@ -385,13 +385,13 @@ The following example shows how to set the field:
 
 ```go
 p1 := &account.Profile{
-  Avatar: &account.Profile_ImageUrl{"http://example.com/image.png"},
+  Avatar: &account.Profile_ImageUrl{ImageUrl: "http://example.com/image.png"},
 }
 
 // imageData is []byte
 imageData := getImageData()
 p2 := &account.Profile{
-  Avatar: &account.Profile_ImageData{imageData},
+  Avatar: &account.Profile_ImageData{ImageData: imageData},
 }
 ```
 
@@ -429,7 +429,6 @@ message Venue {
     KIND_STADIUM = 2;
     KIND_BAR = 3;
     KIND_OPEN_AIR_FESTIVAL = 4;
-    // ...
   }
   Kind kind = 1;
   // ...
@@ -437,7 +436,19 @@ message Venue {
 ```
 
 the protocol buffer compiler generates a type and a series of constants with
-that type.
+that type:
+
+```go
+type Venue_Kind int32
+
+const (
+    Venue_KIND_UNSPECIFIED       Venue_Kind = 0
+    Venue_KIND_CONCERT_HALL      Venue_Kind = 1
+    Venue_KIND_STADIUM           Venue_Kind = 2
+    Venue_KIND_BAR               Venue_Kind = 3
+    Venue_KIND_OPEN_AIR_FESTIVAL Venue_Kind = 4
+)
+```
 
 For enums within a message (like the one above), the type name begins with the
 message name:
