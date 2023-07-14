@@ -332,8 +332,8 @@ The protocol buffer compiler will add the following methods to `FooKt.Dsl`:
 -   `operator fun <T : Comparable<T>> set(extension: ExtensionLite<Foo, T>)`:
     sets the current value of the extension field in the DSL (for `Comparable`
     field types)
--   `operator fun <T : MessageLite<T>> set(extension: ExtensionLite<Foo, T>)`:
-    sets the current value of the extension field in the DSL (for message field
+-   `operator fun <T : MessageLite> set(extension: ExtensionLite<Foo, T>)`: sets
+    the current value of the extension field in the DSL (for message field
     types)
 -   `operator fun set(extension: ExtensionLite<Foo, ByteString>)`: sets the
     current value of the extension field in the DSL (for `bytes` fields)
@@ -350,7 +350,7 @@ The protocol buffer compiler will add the following methods to `FooKt.Dsl`:
     alias for `addAll` using operator syntax
 -   `operator fun <E> ExtensionList<Foo, E>.set(index: Int, value: E)`: sets the
     element of the repeated extension field at the specified index
--   `operator fun ExtensionList<Foo, *>.clear()`: clears the elements of the
+-   `inline fun ExtensionList<Foo, *>.clear()`: clears the elements of the
     repeated extension field
 
 The generics here are complex, but the effect is that `this[extension] = value`

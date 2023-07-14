@@ -1110,6 +1110,8 @@ depending on your chosen language.
 Note that if *multiple values are set, the last set value as determined by the
 order in the proto will overwrite all previous ones*.
 
+Field numbers for oneof fields must be unique within the enclosing message.
+
 ### Using Oneof
 
 To define a oneof in your `.proto` you use the `oneof` keyword followed by your

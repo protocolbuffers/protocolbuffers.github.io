@@ -9,6 +9,20 @@ You can also send design and usage questions to
 the
 [Protocol Buffers discussion group](http://groups.google.com/group/protobuf).
 
+## Common Filename Suffixes {#suffixes}
+
+It is fairly common to write messages to files in several different formats. We
+recommend using the following file extensions for these files.
+
+Content                                                                   | Extension
+------------------------------------------------------------------------- | ---------
+[Text Format](/reference/protobuf/textformat-spec) | `.txtpb`
+[Wire Format](/programming-guides/encoding)        | `.binpb`
+[JSON Format](/programming-guides/proto3#json)     | `.json`
+
+For Text Format specifically, `.textproto` is also fairly common, but we
+recommend `.txtpb` for its brevity.
+
 ## Streaming Multiple Messages {#streaming}
 
 If you want to write multiple messages to a single file or stream, it is up to

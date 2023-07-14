@@ -6,11 +6,11 @@ description = "This topic describes exactly what Python definitions the protocol
 type = "docs"
 +++
 
-Any differences
-between proto2 and proto3 generated code are highlighted - note that these
-differences are in the generated code as described in this document, not the
-base message classes/interfaces, which are the same in both versions. You should
-read the
+Any
+differences between proto2 and proto3 generated code are highlighted - note that
+these differences are in the generated code as described in this document, not
+the base message classes/interfaces, which are the same in both versions. You
+should read the
 [proto2 language guide](/programming-guides/proto) and/or
 [proto3 language guide](/programming-guides/proto3)
 before reading this document.
@@ -47,6 +47,8 @@ produce two output files: `build/gen/foo_pb2.py` and `build/gen/bar/baz_pb2.py`.
 The compiler will automatically create the directory `build/gen/bar` if
 necessary, but it will *not* create `build` or `build/gen`; they must already
 exist.
+
+Protoc can generate Python stubs (`.pyi`) using the `--pyi_out` parameter.
 
 Note that if the `.proto` file or its path contains any characters which cannot
 be used in Python module names (for example, hyphens), they will be replaced
