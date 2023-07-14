@@ -1,9 +1,9 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Protocol Buffers Documentation – Python Reference</title><link>https://protobuf.dev/reference/python/</link><description>Recent content in Python Reference on Protocol Buffers Documentation</description><generator>Hugo -- gohugo.io</generator><language>en</language><atom:link href="https://protobuf.dev/reference/python/index.xml" rel="self" type="application/rss+xml"/><item><title>Reference: Python Generated Code Guide</title><link>https://protobuf.dev/reference/python/python-generated/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://protobuf.dev/reference/python/python-generated/</guid><description>
-&lt;p>Any differences
-between proto2 and proto3 generated code are highlighted - note that these
-differences are in the generated code as described in this document, not the
-base message classes/interfaces, which are the same in both versions. You should
-read the
+&lt;p>Any
+differences between proto2 and proto3 generated code are highlighted - note that
+these differences are in the generated code as described in this document, not
+the base message classes/interfaces, which are the same in both versions. You
+should read the
 &lt;a href="https://protobuf.dev/programming-guides/proto">proto2 language guide&lt;/a> and/or
 &lt;a href="https://protobuf.dev/programming-guides/proto3">proto3 language guide&lt;/a>
 before reading this document.&lt;/p>
@@ -33,6 +33,7 @@ produce two output files: &lt;code>build/gen/foo_pb2.py&lt;/code> and &lt;code>b
 The compiler will automatically create the directory &lt;code>build/gen/bar&lt;/code> if
 necessary, but it will &lt;em>not&lt;/em> create &lt;code>build&lt;/code> or &lt;code>build/gen&lt;/code>; they must already
 exist.&lt;/p>
+&lt;p>Protoc can generate Python stubs (&lt;code>.pyi&lt;/code>) using the &lt;code>--pyi_out&lt;/code> parameter.&lt;/p>
 &lt;p>Note that if the &lt;code>.proto&lt;/code> file or its path contains any characters which cannot
 be used in Python module names (for example, hyphens), they will be replaced
 with underscores. So, the file &lt;code>foo-bar.proto&lt;/code> becomes the Python file

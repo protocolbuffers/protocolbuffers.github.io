@@ -244,8 +244,8 @@ field in the DSL as a read-only &lt;code>List&lt;/code>&lt;/li>
 &lt;li>&lt;code>operator fun &amp;lt;T : Comparable&amp;lt;T&amp;gt;&amp;gt; set(extension: ExtensionLite&amp;lt;Foo, T&amp;gt;)&lt;/code>:
 sets the current value of the extension field in the DSL (for &lt;code>Comparable&lt;/code>
 field types)&lt;/li>
-&lt;li>&lt;code>operator fun &amp;lt;T : MessageLite&amp;lt;T&amp;gt;&amp;gt; set(extension: ExtensionLite&amp;lt;Foo, T&amp;gt;)&lt;/code>:
-sets the current value of the extension field in the DSL (for message field
+&lt;li>&lt;code>operator fun &amp;lt;T : MessageLite&amp;gt; set(extension: ExtensionLite&amp;lt;Foo, T&amp;gt;)&lt;/code>: sets
+the current value of the extension field in the DSL (for message field
 types)&lt;/li>
 &lt;li>&lt;code>operator fun set(extension: ExtensionLite&amp;lt;Foo, ByteString&amp;gt;)&lt;/code>: sets the
 current value of the extension field in the DSL (for &lt;code>bytes&lt;/code> fields)&lt;/li>
@@ -262,7 +262,7 @@ multiple values to the repeated extension field&lt;/li>
 alias for &lt;code>addAll&lt;/code> using operator syntax&lt;/li>
 &lt;li>&lt;code>operator fun &amp;lt;E&amp;gt; ExtensionList&amp;lt;Foo, E&amp;gt;.set(index: Int, value: E)&lt;/code>: sets the
 element of the repeated extension field at the specified index&lt;/li>
-&lt;li>&lt;code>operator fun ExtensionList&amp;lt;Foo, *&amp;gt;.clear()&lt;/code>: clears the elements of the
+&lt;li>&lt;code>inline fun ExtensionList&amp;lt;Foo, *&amp;gt;.clear()&lt;/code>: clears the elements of the
 repeated extension field&lt;/li>
 &lt;/ul>
 &lt;p>The generics here are complex, but the effect is that &lt;code>this[extension] = value&lt;/code>

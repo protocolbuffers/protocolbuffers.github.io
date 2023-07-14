@@ -892,6 +892,7 @@ key/value entries. Example:&lt;/p>
 &lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>Both the &lt;code>key&lt;/code> and &lt;code>value&lt;/code> fields are optional and default to the zero value of
 their respective types if unspecified. If a key is duplicated, only the
 last-specified value will be retained in a parsed map.&lt;/p>
+&lt;p>The order of maps is not maintained in textprotos.&lt;/p>
 &lt;h2 id="oneof">&lt;code>oneof&lt;/code> Fields&lt;/h2>
 &lt;p>While there is no special syntax related to &lt;code>oneof&lt;/code> fields in text format, only
 one &lt;code>oneof&lt;/code> member may be specified at a time. Specifying multiple members
@@ -961,7 +962,7 @@ extensions are &lt;strong>strongly&lt;/strong> discouraged; in particular, exten
 &lt;p>The header comments &lt;code>proto-file&lt;/code> and &lt;code>proto-message&lt;/code> inform developer tools of
 the schema, so they may provide various features.&lt;/p>
 &lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-fallback" data-lang="fallback">&lt;span style="display:flex;">&lt;span># proto-file: some/proto/my_file.proto
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span># proto-message: some.package.MyMessage
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span># proto-message: MyMessage
 &lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h2 id="working-with-the-format-programmatically">Working with the Format Programmatically&lt;/h2>
 &lt;p>Due to how individual Protocol Buffer implementations emit
 neither a consistent nor canonical text format,

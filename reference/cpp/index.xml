@@ -80,9 +80,12 @@ representation of the proto (should only be used for debugging).&lt;/li>
 &lt;li>&lt;code>Foo&amp;amp; operator=(Foo&amp;amp;&amp;amp; other)&lt;/code>: Move-assignment operator.&lt;/li>
 &lt;li>&lt;code>void Swap(Foo* other)&lt;/code>: Swap content with another message.&lt;/li>
 &lt;li>&lt;code>const UnknownFieldSet&amp;amp; unknown_fields() const&lt;/code>: Returns the set of unknown
-fields encountered while parsing this message.&lt;/li>
+fields encountered while parsing this message. If &lt;code>option optimize_for = LITE_RUNTIME&lt;/code> is specified in the &lt;code>.proto&lt;/code> file, then the return type
+changes to &lt;code>std::string&amp;amp;&lt;/code>.&lt;/li>
 &lt;li>&lt;code>UnknownFieldSet* mutable_unknown_fields()&lt;/code>: Returns a pointer to the
-mutable set of unknown fields encountered while parsing this message.&lt;/li>
+mutable set of unknown fields encountered while parsing this message. If
+&lt;code>option optimize_for = LITE_RUNTIME&lt;/code> is specified in the &lt;code>.proto&lt;/code> file, then
+the return type changes to &lt;code>std::string*&lt;/code>.&lt;/li>
 &lt;/ul>
 &lt;p>The class also defines the following static methods:&lt;/p>
 &lt;ul>
@@ -97,7 +100,29 @@ singular fields are unset and all repeated fields are empty). Note that the
 default instance of a message can be used as a factory by calling its
 &lt;code>New()&lt;/code> method.&lt;/li>
 &lt;/ul>
-&lt;h3 id="nested-types">Nested Types&lt;/h3>
+&lt;h3 id="generated-filenames">Generated Filenames&lt;/h3>
+&lt;p>&lt;a href="https://github.com/protocolbuffers/protobuf/blob/main/src/google/protobuf/compiler/cpp/helpers.cc#L4">Reserved keywords&lt;/a>
+are appended with an underscore in the generated output.&lt;/p>
+&lt;p>For example, the following proto3 definition syntax:&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-proto" data-lang="proto">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#204a87;font-weight:bold">message&lt;/span> &lt;span style="color:#000">MyMessage&lt;/span> &lt;span style="color:#000;font-weight:bold">{&lt;/span>&lt;span style="color:#a40000">
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#a40000">&lt;/span> &lt;span style="color:#204a87;font-weight:bold">string&lt;/span> &lt;span style="color:#204a87;font-weight:bold">false&lt;/span> &lt;span style="color:#ce5c00;font-weight:bold">=&lt;/span> &lt;span style="color:#0000cf;font-weight:bold">1&lt;/span>&lt;span style="color:#000;font-weight:bold">;&lt;/span>&lt;span style="color:#a40000">
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#a40000">&lt;/span> &lt;span style="color:#204a87;font-weight:bold">string&lt;/span> &lt;span style="color:#000">myFalse&lt;/span> &lt;span style="color:#ce5c00;font-weight:bold">=&lt;/span> &lt;span style="color:#0000cf;font-weight:bold">2&lt;/span>&lt;span style="color:#000;font-weight:bold">;&lt;/span>&lt;span style="color:#a40000">
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#a40000">&lt;/span>&lt;span style="color:#000;font-weight:bold">}&lt;/span>&lt;span style="color:#a40000">
+&lt;/span>&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>generates the following partial output:&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-cpp" data-lang="cpp">&lt;span style="display:flex;">&lt;span> &lt;span style="color:#204a87;font-weight:bold">void&lt;/span> &lt;span style="color:#000">clear_false_&lt;/span>&lt;span style="color:#000;font-weight:bold">()&lt;/span> &lt;span style="color:#000;font-weight:bold">;&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#204a87;font-weight:bold">const&lt;/span> &lt;span style="color:#000">std&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">::&lt;/span>&lt;span style="color:#000">string&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">&amp;amp;&lt;/span> &lt;span style="color:#000">false_&lt;/span>&lt;span style="color:#000;font-weight:bold">()&lt;/span> &lt;span style="color:#204a87;font-weight:bold">const&lt;/span>&lt;span style="color:#000;font-weight:bold">;&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#204a87;font-weight:bold">void&lt;/span> &lt;span style="color:#000">set_false_&lt;/span>&lt;span style="color:#000;font-weight:bold">(&lt;/span>&lt;span style="color:#000">Arg_&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">&amp;amp;&amp;amp;&lt;/span> &lt;span style="color:#000">arg&lt;/span>&lt;span style="color:#000;font-weight:bold">,&lt;/span> &lt;span style="color:#000">Args_&lt;/span>&lt;span style="color:#000;font-weight:bold">...&lt;/span> &lt;span style="color:#000">args&lt;/span>&lt;span style="color:#000;font-weight:bold">);&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#000">std&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">::&lt;/span>&lt;span style="color:#000">string&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">*&lt;/span> &lt;span style="color:#000">mutable_false_&lt;/span>&lt;span style="color:#000;font-weight:bold">();&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#000">PROTOBUF_NODISCARD&lt;/span> &lt;span style="color:#000">std&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">::&lt;/span>&lt;span style="color:#000">string&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">*&lt;/span> &lt;span style="color:#000">release_false_&lt;/span>&lt;span style="color:#000;font-weight:bold">();&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#204a87;font-weight:bold">void&lt;/span> &lt;span style="color:#000">set_allocated_false_&lt;/span>&lt;span style="color:#000;font-weight:bold">(&lt;/span>&lt;span style="color:#000">std&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">::&lt;/span>&lt;span style="color:#000">string&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">*&lt;/span> &lt;span style="color:#000">ptr&lt;/span>&lt;span style="color:#000;font-weight:bold">);&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#204a87;font-weight:bold">void&lt;/span> &lt;span style="color:#000">clear_myfalse&lt;/span>&lt;span style="color:#000;font-weight:bold">()&lt;/span> &lt;span style="color:#000;font-weight:bold">;&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#204a87;font-weight:bold">const&lt;/span> &lt;span style="color:#000">std&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">::&lt;/span>&lt;span style="color:#000">string&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">&amp;amp;&lt;/span> &lt;span style="color:#000">myfalse&lt;/span>&lt;span style="color:#000;font-weight:bold">()&lt;/span> &lt;span style="color:#204a87;font-weight:bold">const&lt;/span>&lt;span style="color:#000;font-weight:bold">;&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#204a87;font-weight:bold">void&lt;/span> &lt;span style="color:#000">set_myfalse&lt;/span>&lt;span style="color:#000;font-weight:bold">(&lt;/span>&lt;span style="color:#000">Arg_&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">&amp;amp;&amp;amp;&lt;/span> &lt;span style="color:#000">arg&lt;/span>&lt;span style="color:#000;font-weight:bold">,&lt;/span> &lt;span style="color:#000">Args_&lt;/span>&lt;span style="color:#000;font-weight:bold">...&lt;/span> &lt;span style="color:#000">args&lt;/span>&lt;span style="color:#000;font-weight:bold">);&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#000">std&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">::&lt;/span>&lt;span style="color:#000">string&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">*&lt;/span> &lt;span style="color:#000">mutable_myfalse&lt;/span>&lt;span style="color:#000;font-weight:bold">();&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#000">PROTOBUF_NODISCARD&lt;/span> &lt;span style="color:#000">std&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">::&lt;/span>&lt;span style="color:#000">string&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">*&lt;/span> &lt;span style="color:#000">release_myfalse&lt;/span>&lt;span style="color:#000;font-weight:bold">();&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#204a87;font-weight:bold">void&lt;/span> &lt;span style="color:#000">set_allocated_myfalse&lt;/span>&lt;span style="color:#000;font-weight:bold">(&lt;/span>&lt;span style="color:#000">std&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">::&lt;/span>&lt;span style="color:#000">string&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">*&lt;/span> &lt;span style="color:#000">ptr&lt;/span>&lt;span style="color:#000;font-weight:bold">);&lt;/span>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h3 id="nested-types">Nested Types&lt;/h3>
 &lt;p>A message can be declared inside another message. For example:&lt;/p>
 &lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-proto" data-lang="proto">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#204a87;font-weight:bold">message&lt;/span> &lt;span style="color:#000">Foo&lt;/span> &lt;span style="color:#000;font-weight:bold">{&lt;/span>&lt;span style="color:#a40000">
 &lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#a40000">&lt;/span> &lt;span style="color:#204a87;font-weight:bold">message&lt;/span> &lt;span style="color:#000">Bar&lt;/span> &lt;span style="color:#000;font-weight:bold">{}&lt;/span>&lt;span style="color:#a40000">
@@ -134,7 +159,7 @@ any method inherited from &lt;code>Message&lt;/code> or accessing the message th
 (for example, by copying the message using the copy constructor).
 Correspondingly, the value of the returned pointer is never guaranteed to be the
 same across two different invocations of the accessor.&lt;/p>
-&lt;h3 id="singular-numeric-fields-proto2">Singular Numeric Fields (proto2)&lt;/h3>
+&lt;h3 id="optional-numeric-fields-proto2-and-proto3">Optional Numeric Fields (proto2 and proto3)&lt;/h3>
 &lt;p>For either of these field definitions:&lt;/p>
 &lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-proto" data-lang="proto">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#204a87;font-weight:bold">optional&lt;/span> &lt;span style="color:#204a87;font-weight:bold">int32&lt;/span> &lt;span style="color:#000">foo&lt;/span> &lt;span style="color:#ce5c00;font-weight:bold">=&lt;/span> &lt;span style="color:#0000cf;font-weight:bold">1&lt;/span>&lt;span style="color:#000;font-weight:bold">;&lt;/span>&lt;span style="color:#a40000">
 &lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#a40000">&lt;/span>&lt;span style="color:#204a87;font-weight:bold">required&lt;/span> &lt;span style="color:#204a87;font-weight:bold">int32&lt;/span> &lt;span style="color:#000">foo&lt;/span> &lt;span style="color:#ce5c00;font-weight:bold">=&lt;/span> &lt;span style="color:#0000cf;font-weight:bold">1&lt;/span>&lt;span style="color:#000;font-weight:bold">;&lt;/span>&lt;span style="color:#a40000">
@@ -151,7 +176,7 @@ this, &lt;code>has_foo()&lt;/code> will return &lt;code>true&lt;/code> and &lt;c
 &lt;p>For other numeric field types (including &lt;code>bool&lt;/code>), &lt;code>int32&lt;/code> is replaced with the
 corresponding C++ type according to the
 &lt;a href="https://protobuf.dev/programming-guides/proto3#scalar">scalar value types table&lt;/a>.&lt;/p>
-&lt;h3 id="singular-numeric-fields-proto3">Singular Numeric Fields (proto3)&lt;/h3>
+&lt;h3 id="implicit-presence-numeric-fields-proto3">Implicit Presence Numeric Fields (proto3)&lt;/h3>
 &lt;p>For these field definitions:&lt;/p>
 &lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-proto" data-lang="proto">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#204a87;font-weight:bold">optional&lt;/span> &lt;span style="color:#204a87;font-weight:bold">int32&lt;/span> &lt;span style="color:#000">foo&lt;/span> &lt;span style="color:#ce5c00;font-weight:bold">=&lt;/span> &lt;span style="color:#0000cf;font-weight:bold">1&lt;/span>&lt;span style="color:#000;font-weight:bold">;&lt;/span>&lt;span style="color:#a40000">
 &lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#a40000">&lt;/span>&lt;span style="color:#204a87;font-weight:bold">int32&lt;/span> &lt;span style="color:#000">foo&lt;/span> &lt;span style="color:#ce5c00;font-weight:bold">=&lt;/span> &lt;span style="color:#0000cf;font-weight:bold">1&lt;/span>&lt;span style="color:#000;font-weight:bold">;&lt;/span> &lt;span style="color:#8f5902;font-style:italic">// no field label specified, defaults to implicit presence.
@@ -167,7 +192,7 @@ this, &lt;code>foo()&lt;/code> will return &lt;code>value&lt;/code>.&lt;/li>
 &lt;p>For other numeric field types (including &lt;code>bool&lt;/code>), &lt;code>int32&lt;/code> is replaced with the
 corresponding C++ type according to the
 &lt;a href="https://protobuf.dev/programming-guides/proto3#scalar">scalar value types table&lt;/a>.&lt;/p>
-&lt;h3 id="string">Singular String/Bytes Fields (proto2)&lt;/h3>
+&lt;h3 id="string">Optional String/Bytes Fields (proto2 and proto3)&lt;/h3>
 &lt;p>For any of these field definitions:&lt;/p>
 &lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-proto" data-lang="proto">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#204a87;font-weight:bold">optional&lt;/span> &lt;span style="color:#204a87;font-weight:bold">string&lt;/span> &lt;span style="color:#000">foo&lt;/span> &lt;span style="color:#ce5c00;font-weight:bold">=&lt;/span> &lt;span style="color:#0000cf;font-weight:bold">1&lt;/span>&lt;span style="color:#000;font-weight:bold">;&lt;/span>&lt;span style="color:#a40000">
 &lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#a40000">&lt;/span>&lt;span style="color:#204a87;font-weight:bold">required&lt;/span> &lt;span style="color:#204a87;font-weight:bold">string&lt;/span> &lt;span style="color:#000">foo&lt;/span> &lt;span style="color:#ce5c00;font-weight:bold">=&lt;/span> &lt;span style="color:#0000cf;font-weight:bold">1&lt;/span>&lt;span style="color:#000;font-weight:bold">;&lt;/span>&lt;span style="color:#a40000">
@@ -211,7 +236,7 @@ ownership of the field and returns the pointer of the &lt;code>string&lt;/code> 
 calling this, caller takes the ownership of the allocated &lt;code>string&lt;/code> object,
 &lt;code>has_foo()&lt;/code> will return &lt;code>false&lt;/code>, and &lt;code>foo()&lt;/code> will return the default value.&lt;/li>
 &lt;/ul>
-&lt;h3 id="proto3_string">Singular String/Bytes Fields (proto3)&lt;/h3>
+&lt;h3 id="proto3_string">Implicit Presence String/Bytes Fields (proto3)&lt;/h3>
 &lt;p>For any of these field definitions:&lt;/p>
 &lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-proto" data-lang="proto">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#204a87;font-weight:bold">optional&lt;/span> &lt;span style="color:#204a87;font-weight:bold">string&lt;/span> &lt;span style="color:#000">foo&lt;/span> &lt;span style="color:#ce5c00;font-weight:bold">=&lt;/span> &lt;span style="color:#0000cf;font-weight:bold">1&lt;/span>&lt;span style="color:#000;font-weight:bold">;&lt;/span>&lt;span style="color:#a40000">
 &lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#a40000">&lt;/span>&lt;span style="color:#204a87;font-weight:bold">string&lt;/span> &lt;span style="color:#000">foo&lt;/span> &lt;span style="color:#ce5c00;font-weight:bold">=&lt;/span> &lt;span style="color:#0000cf;font-weight:bold">1&lt;/span>&lt;span style="color:#000;font-weight:bold">;&lt;/span> &lt;span style="color:#8f5902;font-style:italic">// no field label specified, defaults to implicit presence.
@@ -275,7 +300,7 @@ After calling this, &lt;code>foo()&lt;/code> will return &lt;code>value&lt;/code
 &lt;code>foo()&lt;/code> will return an empty &lt;code>Cord&lt;/code> (proto3) or the default value (proto2).&lt;/li>
 &lt;li>&lt;code>bool has_foo()&lt;/code>: Returns &lt;code>true&lt;/code> if the field is set.&lt;/li>
 &lt;/ul>
-&lt;h3 id="enum_field">Singular Enum Fields (proto2)&lt;/h3>
+&lt;h3 id="enum_field">Optional Enum Fields (proto2 and proto3)&lt;/h3>
 &lt;p>Given the enum type:&lt;/p>
 &lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-proto" data-lang="proto">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#204a87;font-weight:bold">enum&lt;/span> &lt;span style="color:#000">Bar&lt;/span> &lt;span style="color:#000;font-weight:bold">{&lt;/span>&lt;span style="color:#a40000">
 &lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#a40000">&lt;/span> &lt;span style="color:#000">BAR_UNSPECIFIED&lt;/span> &lt;span style="color:#ce5c00;font-weight:bold">=&lt;/span> &lt;span style="color:#0000cf;font-weight:bold">0&lt;/span>&lt;span style="color:#000;font-weight:bold">;&lt;/span>&lt;span style="color:#a40000">
@@ -297,7 +322,7 @@ values defined for &lt;code>Bar&lt;/code>, this method will abort the process.&l
 &lt;li>&lt;code>void clear_foo()&lt;/code>: Clears the value of the field. After calling this,
 &lt;code>has_foo()&lt;/code> will return &lt;code>false&lt;/code> and &lt;code>foo()&lt;/code> will return the default value.&lt;/li>
 &lt;/ul>
-&lt;h3 id="singular-enum-fields-proto3">Singular Enum Fields (proto3)&lt;/h3>
+&lt;h3 id="implicit-presence-enum-fields-proto3">Implicit Presence Enum Fields (proto3)&lt;/h3>
 &lt;p>Given the enum type:&lt;/p>
 &lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-proto" data-lang="proto">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#204a87;font-weight:bold">enum&lt;/span> &lt;span style="color:#000">Bar&lt;/span> &lt;span style="color:#000;font-weight:bold">{&lt;/span>&lt;span style="color:#a40000">
 &lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#a40000">&lt;/span> &lt;span style="color:#000">BAR_UNSPECIFIED&lt;/span> &lt;span style="color:#ce5c00;font-weight:bold">=&lt;/span> &lt;span style="color:#0000cf;font-weight:bold">0&lt;/span>&lt;span style="color:#000;font-weight:bold">;&lt;/span>&lt;span style="color:#a40000">
@@ -316,7 +341,7 @@ not set, returns the default value (0).&lt;/li>
 &lt;li>&lt;code>void clear_foo()&lt;/code>: Clears the value of the field. After calling this,
 &lt;code>foo()&lt;/code> will return the default value.&lt;/li>
 &lt;/ul>
-&lt;h3 id="embeddedmessage">Singular Embedded Message Fields&lt;/h3>
+&lt;h3 id="embeddedmessage">Optional Embedded Message Fields (proto2 and proto3)&lt;/h3>
 &lt;p>Given the message type:&lt;/p>
 &lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-proto" data-lang="proto">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#204a87;font-weight:bold">message&lt;/span> &lt;span style="color:#000">Bar&lt;/span> &lt;span style="color:#000;font-weight:bold">{}&lt;/span>&lt;span style="color:#a40000">
 &lt;/span>&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>For any of these field definitions:&lt;/p>
