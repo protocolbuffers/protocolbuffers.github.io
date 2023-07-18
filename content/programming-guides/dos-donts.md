@@ -171,12 +171,17 @@ For example:
     https://google.github.io/styleguide/cppguide.html#Namespace_Names.
     If these style guides conflict, use `java_package` for Java.
 
-## **Never** Use Text-format Messages for Interchange
+## **Don't** use Text Format Messages for Interchange
 
-Deserializing of text-format protocol buffers will fail when the binary is
-unaware of a field rename, a new field, or a new extension. In general,
-text-format is not future proof. Use text-format for human editing and debugging
-only.
+Text-based serialization formats like text format and
+JSON represent fields and enum values as strings. As a result, deserialization
+of protocol buffers in these formats using old code will fail when a field or
+enum value is renamed, or when a new field or enum value or extension is added.
+Use binary serialization when possible for data interchange, and use text format
+for human editing and debugging only.
+
+If you use protos converted to JSON in your API or for storing data, you may not
+be able to safely rename fields or enums at all.
 
 ## **Never** Rely on Serialization Stability Across Builds
 

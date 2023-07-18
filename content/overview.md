@@ -262,10 +262,19 @@ message, itself. For example, the protobuf library's internal message schema
 allows extensions for custom, usage-specific options.
 
 For more information about the options available, see the language guide for
-[proto2](/programming-guides/proto) or
+[proto2](/programming-guides/proto2) or
 [proto3](/programming-guides/proto3).
 
-After setting optionality and field type, you assign a field number. Field
+After setting optionality and field type, you choose a name for the field.
+There are some things to keep in mind when setting field names:
+
+*   It can sometimes be difficult, or even impossible, to change field names
+    after they've been used in production.
+*   Field names cannot contain dashes. For more on field name syntax, see
+    [Message and Field Names](/programming-guides/style#message-field-names).
+*   Use pluralized names for repeated fields.
+
+After assigning a name to the field, you assign a field number. Field
 numbers cannot be repurposed or reused. If you delete a field, you should
 reserve its field number to prevent someone from accidentally reusing the
 number.

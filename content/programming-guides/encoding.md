@@ -483,10 +483,10 @@ Field numbers may be declared in any order in a `.proto` file. The order chosen
 has no effect on how the messages are serialized.
 
 When a message is serialized, there is no guaranteed order for how its known or
-[unknown fields](/programming-guides/proto#updating) will
-be written. Serialization order is an implementation detail, and the details of
-any particular implementation may change in the future. Therefore, protocol
-buffer parsers must be able to parse fields in any order.
+[unknown fields](/programming-guides/proto2#updating)
+will be written. Serialization order is an implementation detail, and the
+details of any particular implementation may change in the future. Therefore,
+protocol buffer parsers must be able to parse fields in any order.
 
 ### Implications {#implications}
 
@@ -541,7 +541,7 @@ i32        := sfixed32 | fixed32 | float;
                 memcpy of the equivalent C types (u?int32_t, float)
 i64        := sfixed64 | fixed64 | double;
                 encoded as 8-byte little-endian;
-                memcpy of the equivalent C types (u?int32_t, float)
+                memcpy of the equivalent C types (u?int64_t, double)
 
 len-prefix := size (message | string | bytes | packed);
                 size encoded as int32 varint
