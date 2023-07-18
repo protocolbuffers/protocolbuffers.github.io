@@ -599,8 +599,13 @@ message SearchRequest {
   optional int32 result_per_page = 3 [default = 10];
   optional Corpus corpus = 4 [default = CORPUS_UNIVERSAL];
 }
-
 ```
+
+Because `SearchRequest` sets a default for the value of the `corpus` field, the
+`CORPUS_UNSPECIFIED` value will not be used as a default. It will still be used
+if a value of 0 is encountered on the wire. Other instances of the `Corpus` type
+that **don't** set a default would use the `CORPUS_UNSPECIFIED` value as the
+default.
 
 You can define aliases by assigning the same value to different enum constants.
 To do this you need to set the `allow_alias` option to `true`. Otherwise, the

@@ -832,13 +832,11 @@ The Ruby 3.23.x runtime was first released in 2023 Q2.
     <th>23Q2</th>
     <th>23Q3</th>
     <th>23Q4</th>
-    <th>23Q5</th>
   </tr>
   <tr>
     <td class="gray">20.x</td>
     <td class="gray">3.20.x</td>
     <td class="blue">IR</td>
-    <td></td>
     <td></td>
     <td></td>
     <td></td>
@@ -858,7 +856,6 @@ The Ruby 3.23.x runtime was first released in 2023 Q2.
     <td></td>
     <td></td>
     <td></td>
-    <td></td>
   </tr>
   <tr>
     <td class="gray">22.x</td>
@@ -868,8 +865,7 @@ The Ruby 3.23.x runtime was first released in 2023 Q2.
     <td></td>
     <td></td>
     <td class="blue">IR</td>
-    <td class="green">PS</td>
-    <td class="green">PS</td>
+    <td></td>
     <td></td>
     <td></td>
   </tr>
@@ -881,13 +877,12 @@ The Ruby 3.23.x runtime was first released in 2023 Q2.
     <td></td>
     <td></td>
     <td></td>
-    <td></td>
     <td class="blue">IR</td>
     <td class="green">PS</td>
     <td class="green">PS</td>
   </tr>
   <tr>
-    <td colspan="11">
+    <td colspan="10">
       The cells below are projections of future releases, but are not guarantees
       <br/>that those releases will happen, or that they will happen on that
       schedule.
@@ -902,14 +897,12 @@ The Ruby 3.23.x runtime was first released in 2023 Q2.
     <td></td>
     <td></td>
     <td></td>
-    <td></td>
     <td class="blue">IR</td>
     <td></td>
   </tr>
   <tr>
     <td class="gray">25.x</td>
     <td class="gray"></td>
-    <td></td>
     <td></td>
     <td></td>
     <td></td>

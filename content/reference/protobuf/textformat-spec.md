@@ -617,18 +617,19 @@ message {
 
 ## Text Format Files {#text-format-files}
 
-A text format file uses the `.textproto` filename suffix and contains a single
+A text format file uses the `.txtpb` filename suffix and contains a single
 `Message`. Text format files are UTF-8 encoded. An example textproto file is
 provided below.
 
 {{% alert title="Important" color="warning" %}}
-`.textproto` is the canonical text format file extension and should be preferred
-to the alternatives, although some tools also recognize the legacy extensions
-`.textpb` and `.pbtxt` (METADATA files are also an exception). All other
-extensions are **strongly** discouraged; in particular, extensions such as
-`.protoascii` wrongly imply that text format is ascii-only, and others like
-`.pb.txt` are not recognized by common tooling.
-{{% /alert %}}
+`.txtpb` is the canonical text format file extension and should be preferred to
+the alternatives. This suffix is preferred for its brevity and consistency with
+the official wire-format file extension `.binpb`. Some tools also recognize the
+legacy extensions `.textproto`, `.textpb` and `.pbtxt`. METADATA files are also
+a textproto files despite the lack of extension. All other extensions are
+**strongly** discouraged; in particular, extensions such as `.protoascii`
+wrongly imply that text format is ascii-only, and others like `.pb.txt` are not
+recognized by common tooling. {{% /alert %}}
 
 ```textproto
 # This is an example of Protocol Buffer's text format.

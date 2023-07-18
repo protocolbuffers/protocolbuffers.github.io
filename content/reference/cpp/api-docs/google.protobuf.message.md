@@ -1,15 +1,24 @@
----
-toc_hide: "true"
----
++++
+title = "message.h"
+toc_hide = "true"
+linkTitle = "C++"
+description = "This section contains reference documentation for working with protocol buffer classes in C++."
+type = "docs"
++++
 
-<html devsite><head><title>message.h</title><meta name="project_path" value="/protocol-buffers/_project.yaml" /><meta name="book_path" value="/protocol-buffers/_book.yaml" /></head><body><h1>message.h</h1><p><code>#include &lt;google/protobuf/message.h&gt;<br>namespace <a href="#google.protobuf">google::protobuf</a></code></p><p>Defines <a href="google.protobuf.message#Message">Message</a>, the abstract interface implemented by non-lite protocol message objects. </p><p>Although it's possible to implement this interface manually, most users will use the protocol compiler to generate implementations.</p>
+<p><code>#include &lt;google/protobuf/message.h&gt;<br>namespace <a href="#google.protobuf">google::protobuf</a></code></p><p>Defines <a href="google.protobuf.message#Message">Message</a>, the abstract interface implemented by non-lite protocol message objects. </p><p>Although it's possible to implement this interface manually, most users will use the protocol compiler to generate implementations.</p>
+
 <p>Example usage:</p>
+
 <p>Say you have a message defined as:</p>
+
 <pre>message Foo {
   optional string text = 1;
   repeated int32 numbers = 2;
 }</pre>
+
 <p>Then, if you used the protocol compiler to generate a class from the above definition, you could use it like so:</p>
+
 <pre>std::string data;  // Will store a serialized version of the message.
 
 {
@@ -67,6 +76,7 @@ toc_hide: "true"
 
   delete foo;
 }</pre>
+
 <table width="100%"><tr><th colspan="2"><h3 style="margin-top: 4px">Classes in this file</h3></th></tr><tr><td><div><code><a href="#Metadata">Metadata</a></code></div><div style="font-style: italic; margin-top: 4px; margin-left: 16px;">A container to hold message metadata. </div></td></tr><tr><td><div><code><a href="#Message">Message</a></code></div><div style="font-style: italic; margin-top: 4px; margin-left: 16px;">Abstract interface for protocol messages. </div></td></tr><tr><td><div><code><a href="#Reflection">Reflection</a></code></div><div style="font-style: italic; margin-top: 4px; margin-left: 16px;">This interface contains methods that can be used to dynamically access and modify the fields of a protocol message. </div></td></tr><tr><td><div><code><a href="#MessageFactory">MessageFactory</a></code></div><div style="font-style: italic; margin-top: 4px; margin-left: 16px;">Abstract interface for a factory for message objects. </div></td></tr></table><table><tr><th colspan="2"><h3 style="margin-top: 4px">File Members</h3><div style="font-style: italic; font-weight: normal;">These definitions are not part of any class.</div></th></tr><tr><td style="border-right-width: 0px; text-align: right;"><code>template const T *</code></td><td style="border-left-width: 0px"id="DynamicCastToGenerated"><div style="padding-left: 16px; text-indent: -16px"><code><b>DynamicCastToGenerated</b>(const <a href='google.protobuf.message#Message'>Message</a> * from)</code></div><div style="font-style: italic; margin-top: 4px; margin-left: 16px;">Tries to downcast this message to a generated message type.  <a href="#DynamicCastToGenerated.details">more...</a></div></td></tr><tr><td style="border-right-width: 0px; text-align: right;"><code>template T *</code></td><td style="border-left-width: 0px"id="DynamicCastToGenerated"><div style="padding-left: 16px; text-indent: -16px"><code><b>DynamicCastToGenerated</b>(<a href='google.protobuf.message#Message'>Message</a> * from)</code></div></td></tr><tr><td style="border-right-width: 0px; text-align: right;"><code>template void</code></td><td style="border-left-width: 0px"id="LinkMessageReflection"><div style="padding-left: 16px; text-indent: -16px"><code><b>LinkMessageReflection</b>()</code></div><div style="font-style: italic; margin-top: 4px; margin-left: 16px;">Call this function to ensure that this message's reflection is linked into the binary:  <a href="#LinkMessageReflection.details">more...</a></div></td></tr><tr><td style="border-right-width: 0px; text-align: right;"><code>const <a href='google.protobuf.repeated_field#RepeatedPtrField'>RepeatedPtrField</a>&lt; std::string &gt; &amp;</code></td><td style="border-left-width: 0px"id="Reflection::GetRepeatedPtrFieldInternal< std::string >"><div style="padding-left: 16px; text-indent: -16px"><code><b>Reflection::GetRepeatedPtrFieldInternal< std::string ></b>(const <a href='google.protobuf.message#Message'>Message</a> &amp; message, const <a href='google.protobuf.descriptor#FieldDescriptor'>FieldDescriptor</a> * field) const</code></div></td></tr><tr><td style="border-right-width: 0px; text-align: right;"><code><a href='google.protobuf.repeated_field#RepeatedPtrField'>RepeatedPtrField</a>&lt; std::string &gt; *</code></td><td style="border-left-width: 0px"id="Reflection::MutableRepeatedPtrFieldInternal< std::string >"><div style="padding-left: 16px; text-indent: -16px"><code><b>Reflection::MutableRepeatedPtrFieldInternal< std::string ></b>(<a href='google.protobuf.message#Message'>Message</a> * message, const <a href='google.protobuf.descriptor#FieldDescriptor'>FieldDescriptor</a> * field) const</code></div></td></tr></table> <hr><h3 id="DynamicCastToGenerated.details"><code>template const T * protobuf::DynamicCastToGenerated(<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;const <a href='google.protobuf.message#Message'>Message</a> * from)</code></h3><div style="margin-left: 16px"><p>Tries to downcast this message to a generated message type. </p><p>Returns nullptr if this class is not an instance of T. This works even if RTTI is disabled.</p>
 <p>This also has the effect of creating a strong reference to T that will prevent the linker from stripping it out at link time. This can be important if you are using a <a href='google.protobuf.dynamic_message#DynamicMessageFactory'>DynamicMessageFactory</a> that delegates to the generated factory. </p>
 </div> <hr><h3 id="LinkMessageReflection.details"><code>template void protobuf::LinkMessageReflection()</code></h3><div style="margin-left: 16px"><p>Call this function to ensure that this message's reflection is linked into the binary: </p><pre>google::protobuf::LinkMessageReflection&lt;FooMessage&gt;();</pre>
@@ -192,4 +202,4 @@ if (reflection-&gt;SupportsUnknownEnumValues()) {
 <p>This factory is a singleton. The caller must not delete the object. </p>
 </div> <hr><h3 id="MessageFactory.InternalRegisterGeneratedFile.details"><code>static void MessageFactory::InternalRegisterGeneratedFile(<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;const google::protobuf::internal::DescriptorTable * table)</code></h3><div style="margin-left: 16px"><p>For internal use only: Registers a .proto file at static initialization time, to be placed in generated_factory. </p><p>The first time <a href='google.protobuf.message#MessageFactory.GetPrototype'>GetPrototype()</a> is called with a descriptor from this file, |register_messages| will be called, with the file name as the parameter. It must call <a href='google.protobuf.message#MessageFactory.InternalRegisterGeneratedMessage'>InternalRegisterGeneratedMessage()</a> (below) to register each message type in the file. This strange mechanism is necessary because descriptors are built lazily, so we can't register types by their descriptor until we know that the descriptor exists. |filename| must be a permanent string. </p>
 </div> <hr><h3 id="MessageFactory.InternalRegisterGeneratedMessage.details"><code>static void MessageFactory::InternalRegisterGeneratedMessage(<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;const <a href='google.protobuf.descriptor#Descriptor'>Descriptor</a> * descriptor,<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;const <a href='google.protobuf.message#Message'>Message</a> * prototype)</code></h3><div style="margin-left: 16px"><p>For internal use only: Registers a message type. </p><p>Called only by the functions which are registered with <a href='google.protobuf.message#MessageFactory.InternalRegisterGeneratedFile'>InternalRegisterGeneratedFile()</a>, above. </p>
-</div></body></html>
+</div>

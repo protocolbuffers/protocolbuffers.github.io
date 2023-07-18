@@ -1,21 +1,34 @@
----
-toc_hide: "true"
----
++++
+title = "zero_copy_stream.h"
+toc_hide = "true"
+linkTitle = "C++"
+description = "This section contains reference documentation for working with protocol buffer classes in C++."
+type = "docs"
++++
 
-<html devsite><head><title>zero_copy_stream.h</title><meta name="project_path" value="/protocol-buffers/_project.yaml" /><meta name="book_path" value="/protocol-buffers/_book.yaml" /></head><body><h1>zero_copy_stream.h</h1><p><code>#include &lt;google/protobuf/io/zero_copy_stream.h&gt;<br>namespace <a href="#google.protobuf.io">google::protobuf::io</a></code></p><p>This file contains the <a href='google.protobuf.io.zero_copy_stream#ZeroCopyInputStream'>ZeroCopyInputStream</a> and <a href='google.protobuf.io.zero_copy_stream#ZeroCopyOutputStream'>ZeroCopyOutputStream</a> interfaces, which represent abstract I/O streams to and from which protocol buffers can be read and written. </p><p>For a few simple implementations of these interfaces, see <a href='google.protobuf.io.zero_copy_stream_impl'>zero_copy_stream_impl.h</a>.</p>
+<p><code>#include &lt;google/protobuf/io/zero_copy_stream.h&gt;<br>namespace <a href="#google.protobuf.io">google::protobuf::io</a></code></p><p>This file contains the <a href='google.protobuf.io.zero_copy_stream#ZeroCopyInputStream'>ZeroCopyInputStream</a> and <a href='google.protobuf.io.zero_copy_stream#ZeroCopyOutputStream'>ZeroCopyOutputStream</a> interfaces, which represent abstract I/O streams to and from which protocol buffers can be read and written. </p><p>For a few simple implementations of these interfaces, see <a href='google.protobuf.io.zero_copy_stream_impl'>zero_copy_stream_impl.h</a>.</p>
+
 <p>These interfaces are different from classic I/O streams in that they try to minimize the amount of data copying that needs to be done. To accomplish this, responsibility for allocating buffers is moved to the stream object, rather than being the responsibility of the caller. So, the stream can return a buffer which actually points directly into the final data structure where the bytes are to be stored, and the caller can interact directly with that buffer, eliminating an intermediate copy operation.</p>
+
 <p>As an example, consider the common case in which you are reading bytes from an array that is already in memory (or perhaps an mmap()ed file). With classic I/O streams, you would do something like: </p>
+
 <pre>char buffer[[]BUFFER_SIZE];
 input-&gt;Read(buffer, BUFFER_SIZE);
 DoSomething(buffer, BUFFER_SIZE);</pre>
+
 <p> Then, the stream basically just calls memcpy() to copy the data from the array into your buffer. With a <a href='google.protobuf.io.zero_copy_stream#ZeroCopyInputStream'>ZeroCopyInputStream</a>, you would do this instead: </p>
+
 <pre>const void* buffer;
 int size;
 input-&gt;Next(&amp;buffer, &amp;size);
 DoSomething(buffer, size);</pre>
+
 <p> Here, no copy is performed. The input stream returns a pointer directly into the backing array, and the caller ends up reading directly from it.</p>
+
 <p>If you want to be able to read the old-fashion way, you can create a <a href='google.protobuf.io.coded_stream#CodedInputStream'>CodedInputStream</a> or <a href='google.protobuf.io.coded_stream#CodedOutputStream'>CodedOutputStream</a> wrapping these objects and use their ReadRaw()/WriteRaw() methods. These will, of course, add a copy step, but Coded*Stream will handle buffering so at least it will be reasonably efficient.</p>
+
 <p><a href='google.protobuf.io.zero_copy_stream#ZeroCopyInputStream'>ZeroCopyInputStream</a> example: </p>
+
 <pre>// Read in a file and print its contents to stdout.
 int fd = open("myfile", O_RDONLY);
 ZeroCopyInputStream* input = new FileInputStream(fd);
@@ -28,7 +41,9 @@ while (input-&gt;Next(&amp;buffer, &amp;size)) {
 
 delete input;
 close(fd);</pre>
+
 <p><a href='google.protobuf.io.zero_copy_stream#ZeroCopyOutputStream'>ZeroCopyOutputStream</a> example: </p>
+
 <pre>// Copy the contents of "infile" to "outfile", using plain read() for
 // "infile" but a ZeroCopyOutputStream for "outfile".
 int infd = open("infile", O_RDONLY);
@@ -49,6 +64,7 @@ while (output-&gt;Next(&amp;buffer, &amp;size)) {
 delete output;
 close(infd);
 close(outfd);</pre>
+
 <table width="100%"><tr><th colspan="2"><h3 style="margin-top: 4px">Classes in this file</h3></th></tr><tr><td><div><code><a href="#ZeroCopyInputStream">ZeroCopyInputStream</a></code></div><div style="font-style: italic; margin-top: 4px; margin-left: 16px;">Abstract interface similar to an input stream but designed to minimize copying. </div></td></tr><tr><td><div><code><a href="#ZeroCopyOutputStream">ZeroCopyOutputStream</a></code></div><div style="font-style: italic; margin-top: 4px; margin-left: 16px;">Abstract interface similar to an output stream but designed to minimize copying. </div></td></tr></table><h2 id="ZeroCopyInputStream">class ZeroCopyInputStream</h2><p><code>#include &lt;<a href="#">google/protobuf/io/zero_copy_stream.h</a>&gt;<br>namespace <a href="#google.protobuf.io">google::protobuf::io</a></code></p><p>Abstract interface similar to an input stream but designed to minimize copying. </p><p>Known subclasses:</p><ul><li><code><a href="google.protobuf.io.zero_copy_stream_impl_lite#ArrayInputStream">ArrayInputStream</a></code></li><li><code><a href="google.protobuf.io.zero_copy_stream_impl#ConcatenatingInputStream">ConcatenatingInputStream</a></code></li><li><code><a href="google.protobuf.io.zero_copy_stream_impl_lite#CopyingInputStreamAdaptor">CopyingInputStreamAdaptor</a></code></li><li><code><a href="google.protobuf.io.zero_copy_stream_impl#FileInputStream">FileInputStream</a></code></li><li><code><a href="google.protobuf.io.zero_copy_stream_impl#IstreamInputStream">IstreamInputStream</a></code></li><li><code><a href="google.protobuf.io.zero_copy_stream_impl_lite#LimitingInputStream">LimitingInputStream</a></code></li></ul><table><tr><th colspan="2"><h3 style="margin-top: 4px">Members</h3></th></tr><tr><td style="border-right-width: 0px; text-align: right;"><code></code></td><td style="border-left-width: 0px"id="ZeroCopyInputStream.ZeroCopyInputStream"><div style="padding-left: 16px; text-indent: -16px"><code><b>ZeroCopyInputStream</b>()</code></div></td></tr><tr><td style="border-right-width: 0px; text-align: right;"><code>virtual </code></td><td style="border-left-width: 0px"id="ZeroCopyInputStream.~ZeroCopyInputStream"><div style="padding-left: 16px; text-indent: -16px"><code><b>~ZeroCopyInputStream</b>()</code></div></td></tr><tr><td style="border-right-width: 0px; text-align: right;"><code>virtual bool</code></td><td style="border-left-width: 0px"id="ZeroCopyInputStream.Next"><div style="padding-left: 16px; text-indent: -16px"><code><b>Next</b>(const void ** data, int * size)  = 0</code></div><div style="font-style: italic; margin-top: 4px; margin-left: 16px;">Obtains a chunk of data from the stream.  <a href="#ZeroCopyInputStream.Next.details">more...</a></div></td></tr><tr><td style="border-right-width: 0px; text-align: right;"><code>virtual void</code></td><td style="border-left-width: 0px"id="ZeroCopyInputStream.BackUp"><div style="padding-left: 16px; text-indent: -16px"><code><b>BackUp</b>(int count)  = 0</code></div><div style="font-style: italic; margin-top: 4px; margin-left: 16px;">Backs up a number of bytes, so that the next call to <a href='google.protobuf.io.zero_copy_stream#ZeroCopyInputStream.Next'>Next()</a> returns data again that was already returned by the last call to <a href='google.protobuf.io.zero_copy_stream#ZeroCopyInputStream.Next'>Next()</a>.  <a href="#ZeroCopyInputStream.BackUp.details">more...</a></div></td></tr><tr><td style="border-right-width: 0px; text-align: right;"><code>virtual bool</code></td><td style="border-left-width: 0px"id="ZeroCopyInputStream.Skip"><div style="padding-left: 16px; text-indent: -16px"><code><b>Skip</b>(int count)  = 0</code></div><div style="font-style: italic; margin-top: 4px; margin-left: 16px;">Skips a number of bytes.  <a href="#ZeroCopyInputStream.Skip.details">more...</a></div></td></tr><tr><td style="border-right-width: 0px; text-align: right;"><code>virtual int64_t</code></td><td style="border-left-width: 0px"id="ZeroCopyInputStream.ByteCount"><div style="padding-left: 16px; text-indent: -16px"><code><b>ByteCount</b>() const  = 0</code></div><div style="font-style: italic; margin-top: 4px; margin-left: 16px;">Returns the total number of bytes read since this object was created. </div></td></tr></table> <hr><h3 id="ZeroCopyInputStream.Next.details"><code>virtual bool ZeroCopyInputStream::Next(<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;const void ** data,<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;int * size)  = 0</code></h3><div style="margin-left: 16px"><p>Obtains a chunk of data from the stream. </p><p>Preconditions:</p>
 <ul>
   <li>"size" and "data" are not NULL.</li>
@@ -97,4 +113,4 @@ close(outfd);</pre>
 </ul>
 </div> <hr><h3 id="ZeroCopyOutputStream.WriteAliasedRaw.details"><code>virtual bool ZeroCopyOutputStream::WriteAliasedRaw(<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;const void * data,<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;int size)</code></h3><div style="margin-left: 16px"><p>Write a given chunk of data to the output. </p><p>Some output streams may implement this in a way that avoids copying. Check AllowsAliasing() before calling <a href='google.protobuf.io.zero_copy_stream#ZeroCopyOutputStream.WriteAliasedRaw'>WriteAliasedRaw()</a>. It will GOOGLE_CHECK fail if <a href='google.protobuf.io.zero_copy_stream#ZeroCopyOutputStream.WriteAliasedRaw'>WriteAliasedRaw()</a> is called on a stream that does not allow aliasing.</p>
 <p>NOTE: It is caller's responsibility to ensure that the chunk of memory remains live until all of the data has been consumed from the stream. </p>
-</div></body></html>
+</div>
