@@ -927,17 +927,19 @@ concurrently is not valid. Example:&lt;/p>
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> second_oneof_field: &amp;#34;not valid&amp;#34;
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>}
 &lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h2 id="text-format-files">Text Format Files&lt;/h2>
-&lt;p>A text format file uses the &lt;code>.textproto&lt;/code> filename suffix and contains a single
+&lt;p>A text format file uses the &lt;code>.txtpb&lt;/code> filename suffix and contains a single
 &lt;code>Message&lt;/code>. Text format files are UTF-8 encoded. An example textproto file is
 provided below.&lt;/p>
 &lt;div class="alert alert-warning" role="alert">
 &lt;h4 class="alert-heading">Important&lt;/h4>
-&lt;code>.textproto&lt;/code> is the canonical text format file extension and should be preferred
-to the alternatives, although some tools also recognize the legacy extensions
-&lt;code>.textpb&lt;/code> and &lt;code>.pbtxt&lt;/code> (METADATA files are also an exception). All other
-extensions are &lt;strong>strongly&lt;/strong> discouraged; in particular, extensions such as
-&lt;code>.protoascii&lt;/code> wrongly imply that text format is ascii-only, and others like
-&lt;code>.pb.txt&lt;/code> are not recognized by common tooling.
+&lt;code>.txtpb&lt;/code> is the canonical text format file extension and should be preferred to
+the alternatives. This suffix is preferred for its brevity and consistency with
+the official wire-format file extension &lt;code>.binpb&lt;/code>. Some tools also recognize the
+legacy extensions &lt;code>.textproto&lt;/code>, &lt;code>.textpb&lt;/code> and &lt;code>.pbtxt&lt;/code>. METADATA files are also
+a textproto files despite the lack of extension. All other extensions are
+&lt;strong>strongly&lt;/strong> discouraged; in particular, extensions such as &lt;code>.protoascii&lt;/code>
+wrongly imply that text format is ascii-only, and others like &lt;code>.pb.txt&lt;/code> are not
+recognized by common tooling.
 &lt;/div>
 &lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-fallback" data-lang="fallback">&lt;span style="display:flex;">&lt;span># This is an example of Protocol Buffer&amp;#39;s text format.
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span># Unlike .proto files, only shell-style line comments are supported.

@@ -211,10 +211,10 @@ Group field numbers need to match up. If we encounter <code>7:EGROUP</code> wher
 </span></span></span></code></pre></div><p>This will generate the appropriate start and end group markers. The <code>!{}</code> syntax
 can only occur immediately after an un-typed tag expression, like <code>8:</code>.</p><h2 id=order>Field Order</h2><p>Field numbers may be declared in any order in a <code>.proto</code> file. The order chosen
 has no effect on how the messages are serialized.</p><p>When a message is serialized, there is no guaranteed order for how its known or
-<a href=/programming-guides/proto#updating>unknown fields</a> will
-be written. Serialization order is an implementation detail, and the details of
-any particular implementation may change in the future. Therefore, protocol
-buffer parsers must be able to parse fields in any order.</p><h3 id=implications>Implications</h3><ul><li>Do not assume the byte output of a serialized message is stable. This is
+<a href=/programming-guides/proto2#updating>unknown fields</a>
+will be written. Serialization order is an implementation detail, and the
+details of any particular implementation may change in the future. Therefore,
+protocol buffer parsers must be able to parse fields in any order.</p><h3 id=implications>Implications</h3><ul><li>Do not assume the byte output of a serialized message is stable. This is
 especially true for messages with transitive bytes fields representing other
 serialized protocol buffer messages.</li><li>By default, repeated invocations of serialization methods on the same
 protocol buffer message instance may not produce the same byte output. That
@@ -243,7 +243,7 @@ easy-to-reference format.</p><div class=highlight><pre tabindex=0 style=backgrou
 </span></span><span style=display:flex><span>                memcpy of the equivalent C types (u?int32_t, float)
 </span></span><span style=display:flex><span>i64        := sfixed64 | fixed64 | double;
 </span></span><span style=display:flex><span>                encoded as 8-byte little-endian;
-</span></span><span style=display:flex><span>                memcpy of the equivalent C types (u?int32_t, float)
+</span></span><span style=display:flex><span>                memcpy of the equivalent C types (u?int64_t, double)
 </span></span><span style=display:flex><span>
 </span></span><span style=display:flex><span>len-prefix := size (message | string | bytes | packed);
 </span></span><span style=display:flex><span>                size encoded as int32 varint
