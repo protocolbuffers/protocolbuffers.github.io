@@ -154,7 +154,7 @@ Common ways that namespace conflicts occur:
 
     *   Warning: Retroactively changing the package name on a `.proto` file is
         not backwards compatible for types used as extension fields, stored in
-        `google.protobuf.Any`, or used as gRPC requests or responses.
+        `google.protobuf.Any`, or for gRPC Service definitions.
 
 Starting with v1.26.0 of the `google.golang.org/protobuf` module, a hard error
 will be reported when a Go program starts up that has multiple conflicting
