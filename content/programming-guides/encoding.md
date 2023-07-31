@@ -370,10 +370,10 @@ concatenation) even if you do not know their types.
 
 ### Packed Repeated Fields {#packed}
 
-Starting in v2.1.0, `repeated` fields of
-[scalar type](/programming-guides/proto2#scalar) can be
-declared as "packed". In proto2 this is done using the field option
-`[packed=true]`. In proto3 it is the default.
+Starting in v2.1.0, `repeated` fields of a primitive type
+(any [scalar type](/programming-guides/proto2#scalar)
+that is not `string` or `bytes`) can be declared as "packed". In proto2 this is
+done using the field option `[packed=true]`. In proto3 it is the default.
 
 Instead of being encoded as one record per entry, they are encoded as a single
 `LEN` record that contains each element concatenated. To decode, elements are
