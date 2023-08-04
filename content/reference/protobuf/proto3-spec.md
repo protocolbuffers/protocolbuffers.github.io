@@ -151,7 +151,7 @@ language guide.
 
 ```
 option = "option" optionName  "=" constant ";"
-optionName = ( ident | "(" fullIdent ")" ) { "." ident }
+optionName = ( ident | "(" ["."] fullIdent ")" )
 ```
 
 Example:
