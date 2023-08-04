@@ -3,7 +3,8 @@
 that these differences are in the generated code as described in this document,
 not the base message classes/interfaces, which are the same in both versions.
 You should read the
-&lt;a href="https://protobuf.dev/programming-guides/proto">proto2 language guide&lt;/a> and/or
+&lt;a href="https://protobuf.dev/programming-guides/proto2">proto2 language guide&lt;/a>
+and/or
 &lt;a href="https://protobuf.dev/programming-guides/proto3">proto3 language guide&lt;/a>
 before reading this document.&lt;/p>
 &lt;h2 id="invocation">Compiler Invocation&lt;/h2>
@@ -37,11 +38,13 @@ file will be placed in a corresponding C++ namespace. For example, given the
 &lt;p>Given a simple message declaration:&lt;/p>
 &lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-proto" data-lang="proto">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#204a87;font-weight:bold">message&lt;/span> &lt;span style="color:#000">Foo&lt;/span> &lt;span style="color:#000;font-weight:bold">{}&lt;/span>&lt;span style="color:#a40000">
 &lt;/span>&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>The protocol buffer compiler generates a class called &lt;code>Foo&lt;/code>, which publicly
-derives from &lt;code>google::protobuf::Message&lt;/code>. The class is a concrete class; no
-pure-virtual methods are left unimplemented. Methods that are virtual in
-&lt;code>Message&lt;/code> but not pure-virtual may or may not be overridden by &lt;code>Foo&lt;/code>, depending
-on the optimization mode. By default, &lt;code>Foo&lt;/code> implements specialized versions of
-all methods for maximum speed. However, if the &lt;code>.proto&lt;/code> file contains the line:&lt;/p>
+derives from
+&lt;a href="https://protobuf.dev/reference/cpp/api-docs/google.protobuf.message">&lt;code>google::protobuf::Message&lt;/code>&lt;/a>.
+The class is a concrete class; no pure-virtual methods are left unimplemented.
+Methods that are virtual in &lt;code>Message&lt;/code> but not pure-virtual may or may not be
+overridden by &lt;code>Foo&lt;/code>, depending on the optimization mode. By default, &lt;code>Foo&lt;/code>
+implements specialized versions of all methods for maximum speed. However, if
+the &lt;code>.proto&lt;/code> file contains the line:&lt;/p>
 &lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-proto" data-lang="proto">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#204a87;font-weight:bold">option&lt;/span> &lt;span style="color:#000">optimize_for&lt;/span> &lt;span style="color:#ce5c00;font-weight:bold">=&lt;/span> &lt;span style="color:#000">CODE_SIZE&lt;/span>&lt;span style="color:#000;font-weight:bold">;&lt;/span>&lt;span style="color:#a40000">
 &lt;/span>&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>then &lt;code>Foo&lt;/code> will override only the minimum set of methods necessary to function
 and rely on reflection-based implementations of the rest. This significantly
@@ -49,13 +52,14 @@ reduces the size of the generated code, but also reduces performance.
 Alternatively, if the &lt;code>.proto&lt;/code> file contains:&lt;/p>
 &lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-proto" data-lang="proto">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#204a87;font-weight:bold">option&lt;/span> &lt;span style="color:#000">optimize_for&lt;/span> &lt;span style="color:#ce5c00;font-weight:bold">=&lt;/span> &lt;span style="color:#000">LITE_RUNTIME&lt;/span>&lt;span style="color:#000;font-weight:bold">;&lt;/span>&lt;span style="color:#a40000">
 &lt;/span>&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>then &lt;code>Foo&lt;/code> will include fast implementations of all methods, but will implement
-the &lt;code>google::protobuf::MessageLite&lt;/code> interface, which only contains a subset of
-the methods of &lt;code>Message&lt;/code>. In particular, it does not support descriptors or
-reflection. However, in this mode, the generated code only needs to link against
-&lt;code>libprotobuf-lite.so&lt;/code> (&lt;code>libprotobuf-lite.lib&lt;/code> on Windows) instead of
-&lt;code>libprotobuf.so&lt;/code> (&lt;code>libprotobuf.lib&lt;/code>). The &amp;ldquo;lite&amp;rdquo; library is much smaller than
-the full library, and is more appropriate for resource-constrained systems such
-as mobile phones.&lt;/p>
+the
+&lt;a href="https://protobuf.dev/reference/cpp/api-docs/google.protobuf.message_lite">&lt;code>google::protobuf::MessageLite&lt;/code>&lt;/a>
+interface, which only contains a subset of the methods of &lt;code>Message&lt;/code>. In
+particular, it does not support descriptors or reflection. However, in this
+mode, the generated code only needs to link against &lt;code>libprotobuf-lite.so&lt;/code>
+(&lt;code>libprotobuf-lite.lib&lt;/code> on Windows) instead of &lt;code>libprotobuf.so&lt;/code>
+(&lt;code>libprotobuf.lib&lt;/code>). The &amp;ldquo;lite&amp;rdquo; library is much smaller than the full library,
+and is more appropriate for resource-constrained systems such as mobile phones.&lt;/p>
 &lt;p>You should &lt;em>not&lt;/em> create your own &lt;code>Foo&lt;/code> subclasses. If you subclass this class
 and override a virtual method, the override may be ignored, as many generated
 method calls are de-virtualized to improve performance.&lt;/p>
@@ -159,7 +163,7 @@ any method inherited from &lt;code>Message&lt;/code> or accessing the message th
 (for example, by copying the message using the copy constructor).
 Correspondingly, the value of the returned pointer is never guaranteed to be the
 same across two different invocations of the accessor.&lt;/p>
-&lt;h3 id="optional-numeric-fields-proto2-and-proto3">Optional Numeric Fields (proto2 and proto3)&lt;/h3>
+&lt;h3 id="numeric">Optional Numeric Fields (proto2 and proto3)&lt;/h3>
 &lt;p>For either of these field definitions:&lt;/p>
 &lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-proto" data-lang="proto">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#204a87;font-weight:bold">optional&lt;/span> &lt;span style="color:#204a87;font-weight:bold">int32&lt;/span> &lt;span style="color:#000">foo&lt;/span> &lt;span style="color:#ce5c00;font-weight:bold">=&lt;/span> &lt;span style="color:#0000cf;font-weight:bold">1&lt;/span>&lt;span style="color:#000;font-weight:bold">;&lt;/span>&lt;span style="color:#a40000">
 &lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#a40000">&lt;/span>&lt;span style="color:#204a87;font-weight:bold">required&lt;/span> &lt;span style="color:#204a87;font-weight:bold">int32&lt;/span> &lt;span style="color:#000">foo&lt;/span> &lt;span style="color:#ce5c00;font-weight:bold">=&lt;/span> &lt;span style="color:#0000cf;font-weight:bold">1&lt;/span>&lt;span style="color:#000;font-weight:bold">;&lt;/span>&lt;span style="color:#a40000">
@@ -176,7 +180,7 @@ this, &lt;code>has_foo()&lt;/code> will return &lt;code>true&lt;/code> and &lt;c
 &lt;p>For other numeric field types (including &lt;code>bool&lt;/code>), &lt;code>int32&lt;/code> is replaced with the
 corresponding C++ type according to the
 &lt;a href="https://protobuf.dev/programming-guides/proto3#scalar">scalar value types table&lt;/a>.&lt;/p>
-&lt;h3 id="implicit-presence-numeric-fields-proto3">Implicit Presence Numeric Fields (proto3)&lt;/h3>
+&lt;h3 id="implicit-numeric">Implicit Presence Numeric Fields (proto3)&lt;/h3>
 &lt;p>For these field definitions:&lt;/p>
 &lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-proto" data-lang="proto">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#204a87;font-weight:bold">optional&lt;/span> &lt;span style="color:#204a87;font-weight:bold">int32&lt;/span> &lt;span style="color:#000">foo&lt;/span> &lt;span style="color:#ce5c00;font-weight:bold">=&lt;/span> &lt;span style="color:#0000cf;font-weight:bold">1&lt;/span>&lt;span style="color:#000;font-weight:bold">;&lt;/span>&lt;span style="color:#a40000">
 &lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#a40000">&lt;/span>&lt;span style="color:#204a87;font-weight:bold">int32&lt;/span> &lt;span style="color:#000">foo&lt;/span> &lt;span style="color:#ce5c00;font-weight:bold">=&lt;/span> &lt;span style="color:#0000cf;font-weight:bold">1&lt;/span>&lt;span style="color:#000;font-weight:bold">;&lt;/span> &lt;span style="color:#8f5902;font-style:italic">// no field label specified, defaults to implicit presence.
@@ -236,7 +240,8 @@ ownership of the field and returns the pointer of the &lt;code>string&lt;/code> 
 calling this, caller takes the ownership of the allocated &lt;code>string&lt;/code> object,
 &lt;code>has_foo()&lt;/code> will return &lt;code>false&lt;/code>, and &lt;code>foo()&lt;/code> will return the default value.&lt;/li>
 &lt;/ul>
-&lt;h3 id="proto3_string">Implicit Presence String/Bytes Fields (proto3)&lt;/h3>
+&lt;p>&lt;a id="proto3_string">&lt;/a>&lt;/p>
+&lt;h3 id="implicit-string">Implicit Presence String/Bytes Fields (proto3)&lt;/h3>
 &lt;p>For any of these field definitions:&lt;/p>
 &lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-proto" data-lang="proto">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#204a87;font-weight:bold">optional&lt;/span> &lt;span style="color:#204a87;font-weight:bold">string&lt;/span> &lt;span style="color:#000">foo&lt;/span> &lt;span style="color:#ce5c00;font-weight:bold">=&lt;/span> &lt;span style="color:#0000cf;font-weight:bold">1&lt;/span>&lt;span style="color:#000;font-weight:bold">;&lt;/span>&lt;span style="color:#a40000">
 &lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#a40000">&lt;/span>&lt;span style="color:#204a87;font-weight:bold">string&lt;/span> &lt;span style="color:#000">foo&lt;/span> &lt;span style="color:#ce5c00;font-weight:bold">=&lt;/span> &lt;span style="color:#0000cf;font-weight:bold">1&lt;/span>&lt;span style="color:#000;font-weight:bold">;&lt;/span> &lt;span style="color:#8f5902;font-style:italic">// no field label specified, defaults to implicit presence.
@@ -322,7 +327,7 @@ values defined for &lt;code>Bar&lt;/code>, this method will abort the process.&l
 &lt;li>&lt;code>void clear_foo()&lt;/code>: Clears the value of the field. After calling this,
 &lt;code>has_foo()&lt;/code> will return &lt;code>false&lt;/code> and &lt;code>foo()&lt;/code> will return the default value.&lt;/li>
 &lt;/ul>
-&lt;h3 id="implicit-presence-enum-fields-proto3">Implicit Presence Enum Fields (proto3)&lt;/h3>
+&lt;h3 id="implicit-enum">Implicit Presence Enum Fields (proto3)&lt;/h3>
 &lt;p>Given the enum type:&lt;/p>
 &lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-proto" data-lang="proto">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#204a87;font-weight:bold">enum&lt;/span> &lt;span style="color:#000">Bar&lt;/span> &lt;span style="color:#000;font-weight:bold">{&lt;/span>&lt;span style="color:#a40000">
 &lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#a40000">&lt;/span> &lt;span style="color:#000">BAR_UNSPECIFIED&lt;/span> &lt;span style="color:#ce5c00;font-weight:bold">=&lt;/span> &lt;span style="color:#0000cf;font-weight:bold">0&lt;/span>&lt;span style="color:#000;font-weight:bold">;&lt;/span>&lt;span style="color:#a40000">
@@ -392,8 +397,9 @@ with the given value.&lt;/li>
 &lt;li>&lt;code>void clear_foo()&lt;/code>: Removes all elements from the field. After calling this,
 &lt;code>foo_size()&lt;/code> will return zero.&lt;/li>
 &lt;li>&lt;code>const RepeatedField&amp;lt;int32&amp;gt;&amp;amp; foo() const&lt;/code>: Returns the underlying
-&lt;code>RepeatedField&lt;/code> that stores the field&amp;rsquo;s elements. This container class
-provides STL-like iterators and other methods.&lt;/li>
+&lt;a href="https://protobuf.dev/reference/cpp/api-docs/google.protobuf.repeated_field#RepeatedField">&lt;code>RepeatedField&lt;/code>&lt;/a>
+that stores the field&amp;rsquo;s elements. This container class provides STL-like
+iterators and other methods.&lt;/li>
 &lt;li>&lt;code>RepeatedField&amp;lt;int32&amp;gt;* mutable_foo()&lt;/code>: Returns a pointer to the underlying
 mutable &lt;code>RepeatedField&lt;/code> that stores the field&amp;rsquo;s elements. This container
 class provides STL-like iterators and other methods.&lt;/li>
@@ -435,8 +441,9 @@ and returns a pointer to it.&lt;/li>
 &lt;li>&lt;code>void clear_foo()&lt;/code>: Removes all elements from the field. After calling this,
 &lt;code>foo_size()&lt;/code> will return zero.&lt;/li>
 &lt;li>&lt;code>const RepeatedPtrField&amp;lt;string&amp;gt;&amp;amp; foo() const&lt;/code>: Returns the underlying
-&lt;code>RepeatedPtrField&lt;/code> that stores the field&amp;rsquo;s elements. This container class
-provides STL-like iterators and other methods.&lt;/li>
+&lt;a href="https://protobuf.dev/reference/cpp/api-docs/google.protobuf.repeated_field#RepeatedPtrField">&lt;code>RepeatedPtrField&lt;/code>&lt;/a>
+that stores the field&amp;rsquo;s elements. This container class provides STL-like
+iterators and other methods.&lt;/li>
 &lt;li>&lt;code>RepeatedPtrField&amp;lt;string&amp;gt;* mutable_foo()&lt;/code>: Returns a pointer to the
 underlying mutable &lt;code>RepeatedPtrField&lt;/code> that stores the field&amp;rsquo;s elements. This
 container class provides STL-like iterators and other methods.&lt;/li>
@@ -468,8 +475,9 @@ the process.&lt;/li>
 &lt;li>&lt;code>void clear_foo()&lt;/code>: Removes all elements from the field. After calling this,
 &lt;code>foo_size()&lt;/code> will return zero.&lt;/li>
 &lt;li>&lt;code>const RepeatedField&amp;lt;int&amp;gt;&amp;amp; foo() const&lt;/code>: Returns the underlying
-&lt;code>RepeatedField&lt;/code> that stores the field&amp;rsquo;s elements. This container class
-provides STL-like iterators and other methods.&lt;/li>
+&lt;a href="https://protobuf.dev/reference/cpp/api-docs/google.protobuf.repeated_field#RepeatedField">&lt;code>RepeatedField&lt;/code>&lt;/a>
+that stores the field&amp;rsquo;s elements. This container class provides STL-like
+iterators and other methods.&lt;/li>
 &lt;li>&lt;code>RepeatedField&amp;lt;int&amp;gt;* mutable_foo()&lt;/code>: Returns a pointer to the underlying
 mutable &lt;code>RepeatedField&lt;/code> that stores the field&amp;rsquo;s elements. This container
 class provides STL-like iterators and other methods.&lt;/li>
@@ -495,8 +503,9 @@ fields set (i.e. it will be identical to a newly-allocated &lt;code>Bar&lt;/code
 &lt;li>&lt;code>void clear_foo()&lt;/code>: Removes all elements from the field. After calling this,
 &lt;code>foo_size()&lt;/code> will return zero.&lt;/li>
 &lt;li>&lt;code>const RepeatedPtrField&amp;lt;Bar&amp;gt;&amp;amp; foo() const&lt;/code>: Returns the underlying
-&lt;code>RepeatedPtrField&lt;/code> that stores the field&amp;rsquo;s elements. This container class
-provides STL-like iterators and other methods.&lt;/li>
+&lt;a href="https://protobuf.dev/reference/cpp/api-docs/google.protobuf.repeated_field#RepeatedPtrField">&lt;code>RepeatedPtrField&lt;/code>&lt;/a>
+that stores the field&amp;rsquo;s elements. This container class provides STL-like
+iterators and other methods.&lt;/li>
 &lt;li>&lt;code>RepeatedPtrField&amp;lt;Bar&amp;gt;* mutable_foo()&lt;/code>: Returns a pointer to the underlying
 mutable &lt;code>RepeatedPtrField&lt;/code> that stores the field&amp;rsquo;s elements. This container
 class provides STL-like iterators and other methods.&lt;/li>
@@ -666,7 +675,8 @@ the default value and &lt;code>example_name_case()&lt;/code> will return
 &lt;ul>
 &lt;li>&lt;code>bool has_foo() const&lt;/code>: Returns true if oneof case is &lt;code>kFoo&lt;/code>.&lt;/li>
 &lt;li>&lt;code>const Bar&amp;amp; foo() const&lt;/code>: Returns the current value of the field if oneof
-case is &lt;code>kFoo&lt;/code>. Otherwise, returns &lt;code>Bar::default_instance()&lt;/code>.&lt;/li>
+case is &lt;code>kFoo&lt;/code>. Otherwise, returns a Bar with none of its fields set
+(possibly &lt;code>Bar::default_instance()&lt;/code>).&lt;/li>
 &lt;li>&lt;code>Bar* mutable_foo()&lt;/code>:
 &lt;ul>
 &lt;li>If any other oneof field in the same oneof is set, calls
@@ -711,7 +721,7 @@ value and &lt;code>example_name_case()&lt;/code> will return &lt;code>EXAMPLE_NA
 &lt;/ul>
 &lt;/li>
 &lt;/ul>
-&lt;h3 id="map-fields">Map Fields&lt;/h3>
+&lt;h3 id="map">Map Fields&lt;/h3>
 &lt;p>For this map field definition:&lt;/p>
 &lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-proto" data-lang="proto">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#000">map&lt;/span>&lt;span style="color:#000;font-weight:bold">&amp;lt;&lt;/span>&lt;span style="color:#204a87;font-weight:bold">int32&lt;/span>&lt;span style="color:#000;font-weight:bold">,&lt;/span> &lt;span style="color:#204a87;font-weight:bold">int32&lt;/span>&lt;span style="color:#000;font-weight:bold">&amp;gt;&lt;/span> &lt;span style="color:#000">weight&lt;/span> &lt;span style="color:#ce5c00;font-weight:bold">=&lt;/span> &lt;span style="color:#0000cf;font-weight:bold">1&lt;/span>&lt;span style="color:#000;font-weight:bold">;&lt;/span>&lt;span style="color:#a40000">
 &lt;/span>&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>The compiler will generate the following accessor methods:&lt;/p>
@@ -721,9 +731,11 @@ value and &lt;code>example_name_case()&lt;/code> will return &lt;code>EXAMPLE_NA
 &lt;li>&lt;code>google::protobuf::Map&amp;lt;int32, int32&amp;gt;* mutable_weight();&lt;/code>: Returns a mutable
 &lt;code>Map&lt;/code>.&lt;/li>
 &lt;/ul>
-&lt;p>A &lt;code>google::protobuf::Map&lt;/code> is a special container type used in protocol buffers
-to store map fields. As you can see from its interface below, it uses a
-commonly-used subset of &lt;code>std::map&lt;/code> and &lt;code>std::unordered_map&lt;/code> methods.&lt;/p>
+&lt;p>A
+&lt;a href="https://protobuf.dev/reference/cpp/api-docs/google.protobuf.map">&lt;code>google::protobuf::Map&lt;/code>&lt;/a>
+is a special container type used in protocol buffers to store map fields. As you
+can see from its interface below, it uses a commonly-used subset of &lt;code>std::map&lt;/code>
+and &lt;code>std::unordered_map&lt;/code> methods.&lt;/p>
 &lt;p>&lt;strong>NOTE:&lt;/strong> These maps are unordered.&lt;/p>
 &lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-cpp" data-lang="cpp">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#204a87;font-weight:bold">template&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">&amp;lt;&lt;/span>&lt;span style="color:#204a87;font-weight:bold">typename&lt;/span> &lt;span style="color:#000">Key&lt;/span>&lt;span style="color:#000;font-weight:bold">,&lt;/span> &lt;span style="color:#204a87;font-weight:bold">typename&lt;/span> &lt;span style="color:#000">T&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">&amp;gt;&lt;/span> &lt;span style="color:#000;font-weight:bold">{&lt;/span>
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#204a87;font-weight:bold">class&lt;/span> &lt;span style="color:#000">Map&lt;/span> &lt;span style="color:#000;font-weight:bold">{&lt;/span>
@@ -774,7 +786,7 @@ commonly-used subset of &lt;code>std::map&lt;/code> and &lt;code>std::unordered_
 deep copy of the &lt;code>value_type&lt;/code> instance. The most efficient way to insert a new
 value into a &lt;code>google::protobuf::Map&lt;/code> is as follows:&lt;/p>
 &lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-cpp" data-lang="cpp">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#000">T&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">&amp;amp;&lt;/span> &lt;span style="color:#204a87;font-weight:bold">operator&lt;/span>&lt;span style="color:#000;font-weight:bold">[](&lt;/span>&lt;span style="color:#204a87;font-weight:bold">const&lt;/span> &lt;span style="color:#000">Key&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">&amp;amp;&lt;/span> &lt;span style="color:#000">key&lt;/span>&lt;span style="color:#000;font-weight:bold">)&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">:&lt;/span> &lt;span style="color:#000">map&lt;/span>&lt;span style="color:#000;font-weight:bold">[&lt;/span>&lt;span style="color:#000">new_key&lt;/span>&lt;span style="color:#000;font-weight:bold">]&lt;/span> &lt;span style="color:#ce5c00;font-weight:bold">=&lt;/span> &lt;span style="color:#000">new_mapped&lt;/span>&lt;span style="color:#000;font-weight:bold">;&lt;/span>
-&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h4 id="using-googleprotobufmap-with-standard-maps">Using &lt;code>google::protobuf::Map&lt;/code> with standard maps&lt;/h4>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h4 id="protobuf-map">Using &lt;code>google::protobuf::Map&lt;/code> with standard maps&lt;/h4>
 &lt;p>&lt;code>google::protobuf::Map&lt;/code> supports the same iterator API as &lt;code>std::map&lt;/code> and
 &lt;code>std::unordered_map&lt;/code>. If you don&amp;rsquo;t want to use &lt;code>google::protobuf::Map&lt;/code> directly,
 you can convert a &lt;code>google::protobuf::Map&lt;/code> to a standard map by doing the
@@ -784,7 +796,7 @@ following:&lt;/p>
 &lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>Note that this will make a deep copy of the entire map.&lt;/p>
 &lt;p>You can also construct a &lt;code>google::protobuf::Map&lt;/code> from a standard map as follows:&lt;/p>
 &lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-cpp" data-lang="cpp">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#000">google&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">::&lt;/span>&lt;span style="color:#000">protobuf&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">::&lt;/span>&lt;span style="color:#000">Map&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">&amp;lt;&lt;/span>&lt;span style="color:#000">int32&lt;/span>&lt;span style="color:#000;font-weight:bold">,&lt;/span> &lt;span style="color:#000">int32&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">&amp;gt;&lt;/span> &lt;span style="color:#000">weight&lt;/span>&lt;span style="color:#000;font-weight:bold">(&lt;/span>&lt;span style="color:#000">standard_map&lt;/span>&lt;span style="color:#000;font-weight:bold">.&lt;/span>&lt;span style="color:#000">begin&lt;/span>&lt;span style="color:#000;font-weight:bold">(),&lt;/span> &lt;span style="color:#000">standard_map&lt;/span>&lt;span style="color:#000;font-weight:bold">.&lt;/span>&lt;span style="color:#000">end&lt;/span>&lt;span style="color:#000;font-weight:bold">());&lt;/span>
-&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h4 id="parsing-unknown-values">Parsing unknown values&lt;/h4>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h4 id="parsing-unknown">Parsing unknown values&lt;/h4>
 &lt;p>On the wire, a .proto map is equivalent to a map entry message for each
 key/value pair, while the map itself is a repeated field of map entries. Like
 ordinary message types, it&amp;rsquo;s possible for a parsed map entry message to have
@@ -922,6 +934,7 @@ prefix.)&lt;/p>
 &lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-proto" data-lang="proto">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#204a87;font-weight:bold">extend&lt;/span> &lt;span style="color:#000">Foo&lt;/span> &lt;span style="color:#000;font-weight:bold">{&lt;/span>&lt;span style="color:#a40000">
 &lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#a40000">&lt;/span> &lt;span style="color:#204a87;font-weight:bold">optional&lt;/span> &lt;span style="color:#204a87;font-weight:bold">int32&lt;/span> &lt;span style="color:#000">bar&lt;/span> &lt;span style="color:#ce5c00;font-weight:bold">=&lt;/span> &lt;span style="color:#0000cf;font-weight:bold">123&lt;/span>&lt;span style="color:#000;font-weight:bold">;&lt;/span>&lt;span style="color:#a40000">
 &lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#a40000">&lt;/span> &lt;span style="color:#204a87;font-weight:bold">repeated&lt;/span> &lt;span style="color:#204a87;font-weight:bold">int32&lt;/span> &lt;span style="color:#000">repeated_bar&lt;/span> &lt;span style="color:#ce5c00;font-weight:bold">=&lt;/span> &lt;span style="color:#0000cf;font-weight:bold">124&lt;/span>&lt;span style="color:#000;font-weight:bold">;&lt;/span>&lt;span style="color:#a40000">
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#a40000">&lt;/span> &lt;span style="color:#204a87;font-weight:bold">optional&lt;/span> &lt;span style="color:#000">Bar&lt;/span> &lt;span style="color:#000">message_bar&lt;/span> &lt;span style="color:#ce5c00;font-weight:bold">=&lt;/span> &lt;span style="color:#0000cf;font-weight:bold">125&lt;/span>&lt;span style="color:#000;font-weight:bold">;&lt;/span>&lt;span style="color:#a40000">
 &lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#a40000">&lt;/span>&lt;span style="color:#000;font-weight:bold">}&lt;/span>&lt;span style="color:#a40000">
 &lt;/span>&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>For the singular extension field &lt;code>bar&lt;/code>, the protocol buffer compiler generates
 an &amp;ldquo;extension identifier&amp;rdquo; called &lt;code>bar&lt;/code>, which you can use with &lt;code>Foo&lt;/code>&amp;rsquo;s extension
@@ -933,7 +946,10 @@ accessors to access this extension, like so:&lt;/p>
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#000">assert&lt;/span>&lt;span style="color:#000;font-weight:bold">(&lt;/span>&lt;span style="color:#000">foo&lt;/span>&lt;span style="color:#000;font-weight:bold">.&lt;/span>&lt;span style="color:#000">GetExtension&lt;/span>&lt;span style="color:#000;font-weight:bold">(&lt;/span>&lt;span style="color:#000">bar&lt;/span>&lt;span style="color:#000;font-weight:bold">)&lt;/span> &lt;span style="color:#ce5c00;font-weight:bold">==&lt;/span> &lt;span style="color:#0000cf;font-weight:bold">1&lt;/span>&lt;span style="color:#000;font-weight:bold">);&lt;/span>
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#000">foo&lt;/span>&lt;span style="color:#000;font-weight:bold">.&lt;/span>&lt;span style="color:#000">ClearExtension&lt;/span>&lt;span style="color:#000;font-weight:bold">(&lt;/span>&lt;span style="color:#000">bar&lt;/span>&lt;span style="color:#000;font-weight:bold">);&lt;/span>
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#000">assert&lt;/span>&lt;span style="color:#000;font-weight:bold">(&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">!&lt;/span>&lt;span style="color:#000">foo&lt;/span>&lt;span style="color:#000;font-weight:bold">.&lt;/span>&lt;span style="color:#000">HasExtension&lt;/span>&lt;span style="color:#000;font-weight:bold">(&lt;/span>&lt;span style="color:#000">bar&lt;/span>&lt;span style="color:#000;font-weight:bold">));&lt;/span>
-&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>Similarly, for the repeated extension field &lt;code>repeated_bar&lt;/code>, the compiler
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>For the message extension field &lt;code>message_bar&lt;/code>, if the field is not set
+&lt;code>foo.GetExtension(message_bar)&lt;/code> returns a &lt;code>Bar&lt;/code> with none of its fields set
+(possibly &lt;code>Bar::default_instance()&lt;/code>).&lt;/p>
+&lt;p>Similarly, for the repeated extension field &lt;code>repeated_bar&lt;/code>, the compiler
 generates an extension identifier called &lt;code>repeated_bar&lt;/code>, which you can also use
 with &lt;code>Foo&lt;/code>&amp;rsquo;s extension accessors:&lt;/p>
 &lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-cpp" data-lang="cpp">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#000">Foo&lt;/span> &lt;span style="color:#000">foo&lt;/span>&lt;span style="color:#000;font-weight:bold">;&lt;/span>
@@ -945,8 +961,8 @@ with &lt;code>Foo&lt;/code>&amp;rsquo;s extension accessors:&lt;/p>
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#000">assert&lt;/span>&lt;span style="color:#000;font-weight:bold">(&lt;/span>&lt;span style="color:#000">foo&lt;/span>&lt;span style="color:#000;font-weight:bold">.&lt;/span>&lt;span style="color:#000">GetExtension&lt;/span>&lt;span style="color:#000;font-weight:bold">(&lt;/span>&lt;span style="color:#000">repeated_bar&lt;/span>&lt;span style="color:#000;font-weight:bold">,&lt;/span> &lt;span style="color:#000">i&lt;/span>&lt;span style="color:#000;font-weight:bold">)&lt;/span> &lt;span style="color:#ce5c00;font-weight:bold">==&lt;/span> &lt;span style="color:#000">i&lt;/span>&lt;span style="color:#000;font-weight:bold">)&lt;/span>
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#000;font-weight:bold">}&lt;/span>
 &lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>(The exact implementation of extension identifiers is complicated and involves
-magical use of templates—however, you don&amp;rsquo;t need to worry about how
-extension identifiers work to use them.)&lt;/p>
+magical use of templates—however, you don&amp;rsquo;t need to worry about how extension
+identifiers work to use them.)&lt;/p>
 &lt;p>Extensions can be declared nested inside of another type. For example, a common
 pattern is to do something like this:&lt;/p>
 &lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-proto" data-lang="proto">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#204a87;font-weight:bold">message&lt;/span> &lt;span style="color:#000">Baz&lt;/span> &lt;span style="color:#000;font-weight:bold">{&lt;/span>&lt;span style="color:#a40000">
@@ -1005,7 +1021,8 @@ implement its methods as appropriate.&lt;/p>
 &lt;p>&lt;code>Foo&lt;/code> subclasses the &lt;code>Service&lt;/code> interface. The protocol buffer compiler
 automatically generates implementations of the methods of &lt;code>Service&lt;/code> as follows:&lt;/p>
 &lt;ul>
-&lt;li>&lt;code>GetDescriptor&lt;/code>: Returns the service&amp;rsquo;s &lt;code>ServiceDescriptor&lt;/code>.&lt;/li>
+&lt;li>&lt;code>GetDescriptor&lt;/code>: Returns the service&amp;rsquo;s
+&lt;a href="https://protobuf.dev/reference/cpp/api-docs/google.protobuf.descriptor#ServiceDescriptor">&lt;code>ServiceDescriptor&lt;/code>&lt;/a>.&lt;/li>
 &lt;li>&lt;code>CallMethod&lt;/code>: Determines which method is being called based on the provided
 method descriptor and calls it directly, down-casting the request and
 response messages objects to the correct types.&lt;/li>
@@ -1042,8 +1059,13 @@ around the channel. Calling one of the methods simply calls
 &lt;p>The Protocol Buffer library does not include an RPC implementation. However, it
 includes all of the tools you need to hook up a generated service class to any
 arbitrary RPC implementation of your choice. You need only provide
-implementations of &lt;code>RpcChannel&lt;/code> and &lt;code>RpcController&lt;/code>. See the documentation for
-&lt;code>service.h&lt;/code> for more information.&lt;/p>
+implementations of
+&lt;a href="https://protobuf.dev/reference/cpp/api-docs/google.protobuf.service#RpcChannel">&lt;code>RpcChannel&lt;/code>&lt;/a>
+and
+&lt;a href="https://protobuf.dev/reference/cpp/api-docs/google.protobuf.service#RpcController">&lt;code>RpcController&lt;/code>&lt;/a>.
+See the documentation for
+&lt;a href="https://protobuf.dev/reference/cpp/api-docs/google.protobuf.service">&lt;code>service.h&lt;/code>&lt;/a>
+for more information.&lt;/p>
 &lt;h2 id="plugins">Plugin Insertion Points&lt;/h2>
 &lt;p>&lt;a href="https://protobuf.dev/reference/cpp/api-docs/google.protobuf.compiler.plugin.pb">Code generator plugins&lt;/a>
 which want to extend the output of the C++ code generator may insert code of the
