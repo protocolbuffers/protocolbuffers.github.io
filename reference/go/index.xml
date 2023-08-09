@@ -503,7 +503,7 @@ specifying an explicit version: &lt;code>go install google.golang.org/protobuf/c
 global registry.&lt;/p>
 &lt;p>Every protobuf declaration (for example, enums, enum values, or messages) has an
 absolute name, which is the concatenation of the
-&lt;a href="https://protobuf.dev/programming-guides/proto#packages">package name&lt;/a> with
+&lt;a href="https://protobuf.dev/programming-guides/proto2#packages">package name&lt;/a> with
 the relative name of the declaration in the &lt;code>.proto&lt;/code> source file (for example,
 &lt;code>my.proto.package.MyMessage.NestedMessage&lt;/code>). The protobuf language assumes that
 all declarations are universally unique.&lt;/p>
@@ -541,9 +541,9 @@ We recommend that every &lt;code>.proto&lt;/code> file have a package name that 
 deliberately chosen to be universally unique (for example, prefixed with the
 name of a company).&lt;/p>
 &lt;ul>
-&lt;li>Warning: Retroactively changing the package name on a &lt;code>.proto&lt;/code> file can
-potentially cause the use of extension fields or messages stored in
-&lt;code>google.protobuf.Any&lt;/code> to stop working properly.&lt;/li>
+&lt;li>&lt;strong>Warning:&lt;/strong> Retroactively changing the package name on a &lt;code>.proto&lt;/code> file
+is not backwards compatible for types used as extension fields, stored
+in &lt;code>google.protobuf.Any&lt;/code>, or for gRPC Service definitions.&lt;/li>
 &lt;/ul>
 &lt;/li>
 &lt;/ul>
