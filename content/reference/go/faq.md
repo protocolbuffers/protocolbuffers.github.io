@@ -113,7 +113,7 @@ global registry.
 
 Every protobuf declaration (for example, enums, enum values, or messages) has an
 absolute name, which is the concatenation of the
-[package name](/programming-guides/proto#packages) with
+[package name](/programming-guides/proto2#packages) with
 the relative name of the declaration in the `.proto` source file (for example,
 `my.proto.package.MyMessage.NestedMessage`). The protobuf language assumes that
 all declarations are universally unique.
@@ -152,9 +152,9 @@ Common ways that namespace conflicts occur:
     deliberately chosen to be universally unique (for example, prefixed with the
     name of a company).
 
-    *   Warning: Retroactively changing the package name on a `.proto` file can
-        potentially cause the use of extension fields or messages stored in
-        `google.protobuf.Any` to stop working properly.
+    *   **Warning:** Retroactively changing the package name on a `.proto` file
+        is not backwards compatible for types used as extension fields, stored
+        in `google.protobuf.Any`, or for gRPC Service definitions.
 
 Starting with v1.26.0 of the `google.golang.org/protobuf` module, a hard error
 will be reported when a Go program starts up that has multiple conflicting

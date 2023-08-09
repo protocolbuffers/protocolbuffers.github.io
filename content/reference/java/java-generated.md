@@ -11,7 +11,8 @@ differences between proto2 and proto3 generated code are highlighted&mdash;note
 that these differences are in the generated code as described in this document,
 not the base message classes/interfaces, which are the same in both versions.
 You should read the
-[proto2 language guide](/programming-guides/proto) and/or
+[proto2 language guide](/programming-guides/proto2)
+and/or
 [proto3 language guide](/programming-guides/proto3)
 before reading this document.
 
@@ -194,7 +195,7 @@ the following static methods:
     embedded message and string objects are immutable, they are shared between
     the original and the copy.
 
-### Builders
+### Builders {#builders}
 
 Message objects&mdash;such as instances of the `Foo` class described
 above&mdash;are immutable, just like a Java `String`. To construct a message
@@ -221,7 +222,7 @@ Note that builders are not thread-safe, so Java synchronization should be used
 whenever it is necessary for multiple different threads to be modifying the
 contents of a single builder.
 
-### Sub-Builders
+### Sub-Builders {#sub-builders}
 
 For messages containing sub-messages, the compiler also generates sub-builders.
 This allows you to repeatedly modify deep-nested sub-messages without rebuilding
@@ -262,7 +263,7 @@ builder.getBarBuilder().getFooBuilder().setVal(10);
 baz = builder.build();
 ```
 
-### Nested Types
+### Nested Types {#nested}
 
 A message can be declared inside another message. For example:
 
@@ -275,7 +276,7 @@ message Foo {
 In this case, the compiler simply generates `Bar` as an inner class nested
 inside `Foo`.
 
-## Fields
+## Fields {#fields}
 
 In addition to the methods described in the previous section, the protocol
 buffer compiler generates a set of accessor methods for each field defined
@@ -302,7 +303,7 @@ to upper-case followed by `_FIELD_NUMBER`. For example, given the field
 `optional int32 foo_bar = 5;`, the compiler will generate the constant `public
 static final int FOO_BAR_FIELD_NUMBER = 5;`.
 
-### Singular Fields (proto2)
+### Singular Fields (proto2) {#singular-proto2}
 
 For any of these field definitions:
 
@@ -327,11 +328,11 @@ The compiler will generate the following methods only in the message's builder:
 
 For other simple field types, the corresponding Java type is chosen according to
 the
-[scalar value types table](/programming-guides/proto#scalar).
+[scalar value types table](/programming-guides/proto2#scalar).
 For message and enum types, the value type is replaced with the message or enum
 class.
 
-#### Embedded Message Fields
+#### Embedded Message Fields {#embedded-message-proto2}
 
 For message types, `setFoo()` also accepts an instance of the message's builder
 type as the parameter. This is just a shortcut which is equivalent to calling
@@ -352,7 +353,7 @@ The compiler generates the following method only in the message's builder.
 
 -   `Builder getFooBuilder()`: Returns the builder for the field.
 
-### Singular Fields (proto3)
+### Singular Fields (proto3) {#singular-proto3}
 
 For this field definition:
 
@@ -375,11 +376,11 @@ The compiler will generate the following methods only in the message's builder:
 
 For other simple field types, the corresponding Java type is chosen according to
 the
-[scalar value types table](/programming-guides/proto#scalar).
+[scalar value types table](/programming-guides/proto2#scalar).
 For message and enum types, the value type is replaced with the message or enum
 class.
 
-#### Embedded Message Fields
+#### Embedded Message Fields {#embedded-message-proto3}
 
 For message field types, an additional accessor method is generated in both the
 message class and its builder:
@@ -405,7 +406,7 @@ The compiler generates the following method only in the message's builder.
 
 -   `Builder getFooBuilder()`: Returns the builder for the field.
 
-#### Enum Fields
+#### Enum Fields {#enum-proto3}
 
 For enum field types, an additional accessor method is generated in both the
 message class and its builder:
@@ -421,7 +422,7 @@ In addition, `getFoo()` will return `UNRECOGNIZED` if the enum value is
 unknown&mdash;this is a special additional value added by the proto3 compiler to
 the generated [enum type](#enum).
 
-### Repeated Fields
+### Repeated Fields {#repeated}
 
 For this field definition:
 
@@ -451,10 +452,10 @@ The compiler will generate the following methods only in the message's builder:
 
 For other simple field types, the corresponding Java type is chosen according to
 the
-[scalar value types table](/programming-guides/proto#scalar).
+[scalar value types table](/programming-guides/proto2#scalar).
 For message and enum types, the type is the message or enum class.
 
-#### Repeated Embedded Message Fields
+#### Repeated Embedded Message Fields {#repeated-embedded}
 
 For message types, `setFoos()` and `addFoos()` also accept an instance of the
 message's builder type as the parameter. This is just a shortcut which is
@@ -495,7 +496,7 @@ The compiler will generate the following methods only in the message's builder:
 -   `List<Builder> getFoosBuilderList()`: Returns the entire field as an
     unmodifiable list of builders.
 
-#### Repeated Enum Fields (proto3 only)
+#### Repeated Enum Fields (proto3 only) {#repeated-enum-proto3}
 
 The compiler will generate the following additional methods in both the message
 class and its builder:
@@ -511,7 +512,7 @@ builder:
 -   `Builder setFoosValue(int index, int value)`: Sets the integer value of the
     enum at the specified index.
 
-#### Name Conflicts
+#### Name Conflicts {#conflicts}
 
 If another non-repeated field has a name that conflicts with one of the repeated
 field's generated methods, then both field names will have their protobuf field
@@ -533,43 +534,73 @@ repeated string foos_2 = 2;
 
 The accessor methods will subsequently be generated as described above.
 
-### Oneof Fields
+<a id="oneof"></a>
+
+### Oneof Fields {#oneof-fields}
 
 For this oneof field definition:
 
 ```proto
-oneof example_name {
-    int32 foo = 1;
+oneof choice {
+    int32 foo_int = 4;
+    string foo_string = 9;
     ...
 }
 ```
 
+All the fields in the `choice` oneof will use a single private field for their
+value. In addition, the protocol buffer compiler will generate a Java enum type
+for the oneof case, as follows:
+
+```java
+public enum ChoiceCase
+        implements com.google.protobuf.Internal.EnumLite {
+      FOO_INT(4),
+      FOO_STRING(9),
+      ...
+      CHOICE_NOT_SET(0);
+      ...
+    };
+```
+
+The values of this enum type have the following special methods:
+
+-   `int getNumber()`: Returns the object's numeric value as defined in the
+    .proto file.
+-   `static ChoiceCase forNumber(int value)`: Returns the enum object
+    corresponding to the given numeric value (or `null` for other numeric
+    values).
+
 The compiler will generate the following accessor methods in both the message
 class and its builder:
 
--   `boolean hasFoo()`: Returns `true` if the oneof case is `FOO`.
--   `int getFoo()`: Returns the current value of `example_name` if the oneof
-    case is `FOO`. Otherwise, returns the default value of this field.
+-   `boolean hasFooInt()`: Returns `true` if the oneof case is `FOO`.
+-   `int getFooInt()`: Returns the current value of `foo` if the oneof case is
+    `FOO`. Otherwise, returns the default value of this field.
+-   `ChoiceCase getChoiceCase()`: Returns the enum indicating which field is
+    set. Returns `CHOICE_NOT_SET` if none of them is set.
 
 The compiler will generate the following methods only in the message's builder:
 
--   `Builder setFoo(int value)`: Sets `example_name` to this value and sets the
-    oneof case to `FOO`. After calling this, `hasFoo()` will return `true`,
-    `getFoo()` will return `value` and `getExampleNameCase()` will return `FOO`.
--   `Builder clearFoo()`:
+-   `Builder setFooInt(int value)`: Sets `Foo` to this value and sets the oneof
+    case to `FOO`. After calling this, `hasFooInt()` will return `true`,
+    `getFooInt()` will return `value` and `getChoiceCase()` will return `FOO`.
+-   `Builder clearFooInt()`:
     -   Nothing will be changed if the oneof case is not `FOO`.
-    -   If the oneof case is `FOO`, sets `example_name` to null and the oneof
-        case to `EXAMPLENAME_NOT_SET`. After calling this, `hasFoo()` will
-        return `false`, `getFoo()` will return the default value and
-        `getExampleNameCase()` will return `EXAMPLENAME_NOT_SET`.
+    -   If the oneof case is `FOO`, sets `Foo` to null and the oneof case to
+        `FOO_NOT_SET`. After calling this, `hasFooInt()` will return `false`,
+        `getFooInt()` will return the default value and `getChoiceCase()` will
+        return `FOO_NOT_SET`.
+-   `Builder.clearChoice()`: Resets the value for `choice`, returning the
+    builder.
 
 For other simple field types, the corresponding Java type is chosen according to
 the
-[scalar value types table](/programming-guides/proto#scalar).
+[scalar value types table](/programming-guides/proto2#scalar).
 For message and enum types, the value type is replaced with the message or enum
 class.
 
-### Map Fields
+### Map Fields {#map-fields}
 
 For this map field definition:
 
@@ -601,7 +632,7 @@ The compiler will generate the following methods only in the message's builder:
     instances. The returned map reference may be invalidated by any subsequent
     method calls to the Builder.
 
-## Any
+## Any {#any-fields}
 
 Given an [`Any`](/programming-guides/proto3#any) field
 like this:
@@ -638,52 +669,6 @@ class Any {
       throws InvalidProtocolBufferException;
 }
 ```
-
-## Oneofs {#oneof}
-
-Given a oneof definition like this:
-
-```proto
-oneof example_name {
-    int32 foo_int = 4;
-    string foo_string = 9;
-    ...
-}
-```
-
-All the fields in the `example_name` oneof will use a single private field for
-their value. In addition, the protocol buffer compiler will generate a Java enum
-type for the oneof case, as follows:
-
-```java
-public enum ExampleNameCase
-        implements com.google.protobuf.Internal.EnumLite {
-      FOO_INT(4),
-      FOO_STRING(9),
-      ...
-      EXAMPLENAME_NOT_SET(0);
-      ...
-    };
-```
-
-The values of this enum type have the following special methods:
-
--   `int getNumber()`: Returns the object's numeric value as defined in the
-    .proto file.
--   `static ExampleNameCase forNumber(int value)`: Returns the enum object
-    corresponding to the given numeric value (or `null` for other numeric
-    values).
-
-The compiler will also generate the following accessor method in both the
-message class and its builder:
-
--   `ExampleNameCase getExampleNameCase()`: Returns the enum indicating which
-    field is set. Returns `EXAMPLENAME_NOT_SET` if none of them is set.
-
-The compiler will generate the following method only in the message's builder:
-
--   `Builder clearExampleName()`: Resets the oneof's private field to null, and
-    sets the oneof case to `EXAMPLENAME_NOT_SET`.
 
 ## Enumerations {#enum}
 
@@ -883,14 +868,14 @@ to `true`)
 
 RPC systems based on `.proto`-language service definitions should provide
 [plugins](/reference/cpp/api-docs/google.protobuf.compiler.plugin.pb)
-to generate code approriate for the system. These plugins are likely to require
+to generate code appropriate for the system. These plugins are likely to require
 that abstract services are disabled, so that they can generate their own classes
 of the same names. Plugins are new in version 2.3.0 (January 2010).
 
 The remainder of this section describes what the protocol buffer compiler
 generates when abstract services are enabled.
 
-### Interface
+### Interface {#interface}
 
 Given a service definition:
 
@@ -948,7 +933,7 @@ To recap, when implementing your own service, you have two options:
     to construct a `Service` wrapping it, then pass the wrapper to your RPC
     implementation.
 
-### Stub
+### Stub {#stub}
 
 The protocol buffer compiler also generates a "stub" implementation of every
 service interface, which is used by clients wishing to send requests to servers
@@ -971,13 +956,13 @@ includes all of the tools you need to hook up a generated service class to any
 arbitrary RPC implementation of your choice. You need only provide
 implementations of `RpcChannel` and `RpcController`.
 
-### Blocking Interfaces
+### Blocking Interfaces {#blocking}
 
 The RPC classes described above all have non-blocking semantics: when you call a
 method, you provide a callback object which will be invoked once the method
 completes. Often it is easier (though possibly less scalable) to write code
 using blocking semantics, where the method simply doesn't return until it is
-done. To accomodate this, the protocol buffer compiler also generates blocking
+done. To accommodate this, the protocol buffer compiler also generates blocking
 versions of your service class. `Foo.BlockingInterface` is equivalent to
 `Foo.Interface` except that each method simply returns the result rather than
 call a callback. So, for example, `bar` is defined as:
@@ -1027,7 +1012,7 @@ Do not generate code which relies on private class members declared by the
 standard code generator, as these implementation details may change in future
 versions of Protocol Buffers.
 
-## Utility Classes
+## Utility Classes {#utility-classes}
 
 Protocol buffer provides
 [utility classes](/reference/java/api-docs/com/google/protobuf/util/package-summary.html)

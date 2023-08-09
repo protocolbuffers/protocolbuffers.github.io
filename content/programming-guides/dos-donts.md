@@ -236,6 +236,17 @@ A common practice is to generate your protos into a `proto` subpackage in your
 project that **only** contains those protos (that is, no hand-written source
 code).
 
+## Avoid Using Language Keywords for Field Names {#avoid-keywords}
+
+If the name of a message, field, enum, or enum value is a keyword in the
+language that reads from/writes to that field, then protobuf may change the
+field name, and may have different ways to access them than normal fields. For
+example, see
+[this warning about Python](/reference/python/python-generated#keyword-conflicts).
+
+You should also avoid using keywords in your file paths, as this can also cause
+problems.
+
 ## Appendix {#appendix}
 
 ### API Best Practices {#api-best-practices}
