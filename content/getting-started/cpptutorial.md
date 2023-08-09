@@ -276,9 +276,9 @@ any particular field definition, see the
 
 The generated code includes a `PhoneType` enum that corresponds to your `.proto`
 enum. You can refer to this type as `Person::PhoneType` and its values as
-`Person::MOBILE`, `Person::HOME`, and `Person::WORK` (the implementation details
-are a little more complicated, but you don't need to understand them to use the
-enum).
+`Person::PHONE_TYPE_MOBILE`, `Person::PHONE_TYPE_HOME`, and
+`Person::PHONE_TYPE_WORK` (the implementation details are a little more
+complicated, but you don't need to understand them to use the enum).
 
 The compiler has also generated a nested class for you called
 `Person::PhoneNumber`. If you look at the code, you can see that the "real"
@@ -394,11 +394,11 @@ void PromptForAddress(tutorial::Person* person) {
     string type;
     getline(cin, type);
     if (type == "mobile") {
-      phone_number->set_type(tutorial::Person::MOBILE);
+      phone_number->set_type(tutorial::Person::PHONE_TYPE_MOBILE);
     } else if (type == "home") {
-      phone_number->set_type(tutorial::Person::HOME);
+      phone_number->set_type(tutorial::Person::PHONE_TYPE_HOME);
     } else if (type == "work") {
-      phone_number->set_type(tutorial::Person::WORK);
+      phone_number->set_type(tutorial::Person::PHONE_TYPE_WORK);
     } else {
       cout << "Unknown phone type.  Using default." << endl;
     }
@@ -494,13 +494,13 @@ void ListPeople(const tutorial::AddressBook& address_book) {
       const tutorial::Person::PhoneNumber& phone_number = person.phones(j);
 
       switch (phone_number.type()) {
-        case tutorial::Person::MOBILE:
+        case tutorial::Person::PHONE_TYPE_MOBILE:
           cout << "  Mobile phone #: ";
           break;
-        case tutorial::Person::HOME:
+        case tutorial::Person::PHONE_TYPE_HOME:
           cout << "  Home phone #: ";
           break;
-        case tutorial::Person::WORK:
+        case tutorial::Person::PHONE_TYPE_WORK:
           cout << "  Work phone #: ";
           break;
       }

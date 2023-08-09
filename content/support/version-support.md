@@ -530,7 +530,7 @@ The Objective-C 3.23.x runtime was first released in 2023 Q2.
     <td title=23Q4></td>
   </tr>
   <tr>
-    <td class="gray">24.x</td>
+    <td class="gray">25.x</td>
     <td class="gray"></td>
     <td title=22Q1></td>
     <td title=22Q2></td>
