@@ -8,6 +8,8 @@ type = "docs"
 News topics provide information about past events and changes with Protocol
 Buffers, and plans for upcoming changes.
 
+*   [August 9, 2023](/news/2023-08-09) - Support policy
+    for .NET
 *   [July 17, 2023](/news/2023-07-17) - Dropping support
     for older versions of Bazel
 *   [July 6, 2023](/news/2023-07-06) - Dropping support

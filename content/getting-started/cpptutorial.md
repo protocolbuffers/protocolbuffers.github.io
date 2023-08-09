@@ -278,8 +278,7 @@ The generated code includes a `PhoneType` enum that corresponds to your `.proto`
 enum. You can refer to this type as `Person::PhoneType` and its values as
 `Person::PHONE_TYPE_MOBILE`, `Person::PHONE_TYPE_HOME`, and
 `Person::PHONE_TYPE_WORK` (the implementation details are a little more
-complicated, but you don't need to understand them to use the
-enum).
+complicated, but you don't need to understand them to use the enum).
 
 The compiler has also generated a nested class for you called
 `Person::PhoneNumber`. If you look at the code, you can see that the "real"
