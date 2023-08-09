@@ -94,7 +94,7 @@ message Person {
 
   message PhoneNumber {
     optional string number = 1;
-    optional PhoneType type = 2 [default = HOME];
+    optional PhoneType type = 2 [default = PHONE_TYPE_HOME];
   }
 
   repeated PhoneNumber phones = 4;
@@ -348,11 +348,11 @@ def PromptForAddress(person):
 
     phone_type = input("Is this a mobile, home, or work phone? ")
     if phone_type == "mobile":
-      phone_number.type = addressbook_pb2.Person.PhoneType.MOBILE
+      phone_number.type = addressbook_pb2.Person.PhoneType.PHONE_TYPE_MOBILE
     elif phone_type == "home":
-      phone_number.type = addressbook_pb2.Person.PhoneType.HOME
+      phone_number.type = addressbook_pb2.Person.PhoneType.PHONE_TYPE_HOME
     elif phone_type == "work":
-      phone_number.type = addressbook_pb2.Person.PhoneType.WORK
+      phone_number.type = addressbook_pb2.Person.PhoneType.PHONE_TYPE_WORK
     else:
       print("Unknown phone type; leaving as default value.")
 
@@ -401,11 +401,11 @@ def ListPeople(address_book):
       print("  E-mail address:", person.email)
 
     for phone_number in person.phones:
-      if phone_number.type == addressbook_pb2.Person.PhoneType.MOBILE:
+      if phone_number.type == addressbook_pb2.Person.PhoneType.PHONE_TYPE_MOBILE:
         print("  Mobile phone #: ", end="")
-      elif phone_number.type == addressbook_pb2.Person.PhoneType.HOME:
+      elif phone_number.type == addressbook_pb2.Person.PhoneType.PHONE_TYPE_HOME:
         print("  Home phone #: ", end="")
-      elif phone_number.type == addressbook_pb2.Person.PhoneType.WORK:
+      elif phone_number.type == addressbook_pb2.Person.PhoneType.PHONE_TYPE_WORK:
         print("  Work phone #: ", end="")
       print(phone_number.number)
 
