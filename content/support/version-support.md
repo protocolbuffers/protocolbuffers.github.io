@@ -47,7 +47,7 @@ The following sections provide a visual guide to the support for each language.
 
 ## C++ {#cpp}
 
-The C++ 4.23.x runtime was first released in 2023 Q2.
+The C++ 4.24.x runtime was first released in 2023 Q3.
 
 The C++ 3.21.x runtime was first released in 2022 Q2 and has support until 2024
 Q1.
@@ -56,7 +56,6 @@ Q1.
   <tr>
     <th>protoc</th>
     <th>C++</th>
-    <th>22Q1</th>
     <th>22Q2</th>
     <th>22Q3</th>
     <th>22Q4</th>
@@ -65,24 +64,11 @@ Q1.
     <th>23Q3</th>
     <th>23Q4</th>
     <th>24Q1</th>
-  </tr>
-  <tr>
-    <td class="gray">20.x</td>
-    <td class="gray">3.20.x</td>
-    <td title=24Q1 class="blue">IR</td>
-    <td title=22Q2></td>
-    <td title=22Q3></td>
-    <td title=22Q4></td>
-    <td title=23Q1></td>
-    <td title=23Q2></td>
-    <td title=23Q3></td>
-    <td title=23Q4></td>
-    <td title=24Q1></td>
+    <th>24Q2</th>
   </tr>
   <tr>
     <td class="gray">21.x</td>
     <td class="gray">3.21.x</td>
-    <td title=22Q1></td>
     <td title=22Q2 class="blue">IR</td>
     <td title=22Q3 class="green">PS</td>
     <td title=22Q4 class="green">PS</td>
@@ -91,11 +77,11 @@ Q1.
     <td title=23Q3 class="green">PS</td>
     <td title=23Q4 class="green">PS</td>
     <td title=24Q1 class="red">SE</td>
+    <td title=24Q2></td>
   </tr>
   <tr>
     <td class="gray">22.x</td>
     <td class="gray">4.22.x</td>
-    <td title=22Q1></td>
     <td title=22Q2></td>
     <td title=22Q3></td>
     <td title=22Q4></td>
@@ -104,19 +90,33 @@ Q1.
     <td title=23Q3></td>
     <td title=23Q4></td>
     <td title=24Q1></td>
+    <td title=24Q2></td>
   </tr>
   <tr>
     <td class="gray">23.x</td>
     <td class="gray">4.23.x</td>
-    <td title=22Q1></td>
     <td title=22Q2></td>
     <td title=22Q3></td>
     <td title=22Q4></td>
     <td title=23Q1></td>
     <td title=23Q2 class="blue">IR</td>
-    <td title=23Q3 class="green">PS</td>
+    <td title=23Q3></td>
+    <td title=23Q4></td>
+    <td title=24Q1></td>
+    <td title=22Q2></td>
+  </tr>
+  <tr>
+    <td class="gray">24.x</td>
+    <td class="gray">4.24.x</td>
+    <td title=22Q2></td>
+    <td title=22Q3></td>
+    <td title=22Q4></td>
+    <td title=23Q1></td>
+    <td title=23Q2></td>
+    <td title=23Q3 class="blue">IR</td>
     <td title=23Q4 class="green">PS</td>
     <td title=24Q1 class="green">PS</td>
+    <td title=24Q2 class="green">PS</td>
   </tr>
   <tr>
     <td colspan="13">
@@ -126,22 +126,8 @@ Q1.
     </td>
   </tr>
   <tr>
-    <td class="gray">24.x</td>
-    <td class="gray"></td>
-    <td title=22Q1></td>
-    <td title=22Q2></td>
-    <td title=22Q3></td>
-    <td title=22Q4></td>
-    <td title=23Q1></td>
-    <td title=23Q2></td>
-    <td title=23Q3 class="blue">IR</td>
-    <td title=23Q4></td>
-    <td title=24Q1></td>
-  </tr>
-  <tr>
     <td class="gray">25.x</td>
     <td class="gray"></td>
-    <td title=22Q1></td>
     <td title=22Q2></td>
     <td title=22Q3></td>
     <td title=22Q4></td>
@@ -150,6 +136,20 @@ Q1.
     <td title=23Q3></td>
     <td title=23Q4 class="blue">IR</td>
     <td title=24Q1></td>
+    <td title=24Q2></td>
+  </tr>
+  <tr>
+    <td class="gray">26.x</td>
+    <td class="gray"></td>
+    <td title=22Q2></td>
+    <td title=22Q3></td>
+    <td title=22Q4></td>
+    <td title=23Q1></td>
+    <td title=23Q2></td>
+    <td title=23Q3></td>
+    <td title=23Q4></td>
+    <td title=24Q1 class="blue">IR</td>
+    <td title=24Q2></td>
   </tr>
 </table>
 
@@ -186,13 +186,12 @@ For specific versions supported, see
 
 ## C&#35; {#csharp}
 
-The C# 3.23.x runtime was first released in 2023 Q2.
+The C# 3.24.x runtime was first released in 2023 Q3.
 
 <table>
   <tr>
     <th>protoc</th>
     <th>C#</th>
-    <th>22Q1</th>
     <th>22Q2</th>
     <th>22Q3</th>
     <th>22Q4</th>
@@ -200,23 +199,11 @@ The C# 3.23.x runtime was first released in 2023 Q2.
     <th>23Q2</th>
     <th>23Q3</th>
     <th>23Q4</th>
-  </tr>
-  <tr>
-    <td class="gray">20.x</td>
-    <td class="gray">3.20.x</td>
-    <td title=22Q1 class="blue">IR</td>
-    <td title=22Q2></td>
-    <td title=22Q3></td>
-    <td title=22Q4></td>
-    <td title=23Q1></td>
-    <td title=23Q2></td>
-    <td title=23Q3></td>
-    <td title=23Q4></td>
+    <th>24Q1</th>
   </tr>
   <tr>
     <td class="gray">21.x</td>
     <td class="gray">3.21.x</td>
-    <td title=22Q1></td>
     <td title=22Q2 class="blue">IR</td>
     <td title=22Q3 class="green">PS</td>
     <td title=22Q4 class="green">PS</td>
@@ -224,11 +211,11 @@ The C# 3.23.x runtime was first released in 2023 Q2.
     <td title=23Q2></td>
     <td title=23Q3></td>
     <td title=23Q4></td>
+    <td title=24Q1></td>
   </tr>
   <tr>
     <td class="gray">22.x</td>
     <td class="gray">3.22.x</td>
-    <td title=22Q1></td>
     <td title=22Q2></td>
     <td title=22Q3></td>
     <td title=22Q4></td>
@@ -236,18 +223,31 @@ The C# 3.23.x runtime was first released in 2023 Q2.
     <td title=23Q2></td>
     <td title=23Q3></td>
     <td title=23Q4></td>
+    <td title=24Q1></td>
   </tr>
   <tr>
     <td class="gray">23.x</td>
-    <td class="gray">4.23.x</td>
-    <td title=22Q1></td>
+    <td class="gray">3.23.x</td>
     <td title=22Q2></td>
     <td title=22Q3></td>
     <td title=22Q4></td>
     <td title=23Q1></td>
     <td title=23Q2 class="blue">IR</td>
-    <td title=23Q3 class="green">PS</td>
+    <td title=23Q3></td>
+    <td title=23Q4></td>
+    <td title=24Q1></td>
+  </tr>
+  <tr>
+    <td class="gray">24.x</td>
+    <td class="gray">3.24.x</td>
+    <td title=22Q2></td>
+    <td title=22Q3></td>
+    <td title=22Q4></td>
+    <td title=23Q1></td>
+    <td title=23Q2></td>
+    <td title=23Q3 class="blue">IR</td>
     <td title=23Q4 class="green">PS</td>
+    <td title=24Q1 class="green">PS</td>
   </tr>
   <tr>
     <td colspan="12">
@@ -257,21 +257,8 @@ The C# 3.23.x runtime was first released in 2023 Q2.
     </td>
   </tr>
   <tr>
-    <td class="gray">24.x</td>
-    <td class="gray"></td>
-    <td title=22Q1></td>
-    <td title=22Q2></td>
-    <td title=22Q3></td>
-    <td title=22Q4></td>
-    <td title=23Q1></td>
-    <td title=23Q2></td>
-    <td title=23Q3 class="blue">IR</td>
-    <td title=23Q4></td>
-  </tr>
-  <tr>
     <td class="gray">25.x</td>
     <td class="gray"></td>
-    <td title=22Q1></td>
     <td title=22Q2></td>
     <td title=22Q3></td>
     <td title=22Q4></td>
@@ -279,6 +266,19 @@ The C# 3.23.x runtime was first released in 2023 Q2.
     <td title=23Q2></td>
     <td title=23Q3></td>
     <td title=23Q4 class="blue">IR</td>
+    <td title=24Q1></td>
+  </tr>
+  <tr>
+    <td class="gray">26.x</td>
+    <td class="gray"></td>
+    <td title=22Q2></td>
+    <td title=22Q3></td>
+    <td title=22Q4></td>
+    <td title=23Q1></td>
+    <td title=23Q2></td>
+    <td title=23Q3></td>
+    <td title=23Q4></td>
+    <td title=24Q1 class="blue">IR</td>
   </tr>
 </table>
 
@@ -311,7 +311,6 @@ The C# 3.23.x runtime was first released in 2023 Q2.
   <tr>
     <th>protoc</th>
     <th>Java</th>
-    <th>22Q1</th>
     <th>22Q2</th>
     <th>22Q3</th>
     <th>22Q4</th>
@@ -324,24 +323,8 @@ The C# 3.23.x runtime was first released in 2023 Q2.
     <th>24Q3</th>
   </tr>
   <tr>
-    <td class="gray">20.x</td>
-    <td class="gray">3.20.x</td>
-    <td title=22Q1 class="blue">IR</td>
-    <td title=22Q2></td>
-    <td title=22Q3></td>
-    <td title=22Q4></td>
-    <td title=23Q1></td>
-    <td title=23Q2></td>
-    <td title=23Q3></td>
-    <td title=23Q4></td>
-    <td title=24Q1></td>
-    <td title=24Q2></td>
-    <td title=24Q3></td>
-  </tr>
-  <tr>
     <td class="gray">21.x</td>
     <td class="gray">3.21.x</td>
-    <td title=22Q1></td>
     <td title=22Q2 class="blue">IR</td>
     <td title=22Q3 class="green">PS</td>
     <td title=22Q4 class="green">PS</td>
@@ -356,7 +339,6 @@ The C# 3.23.x runtime was first released in 2023 Q2.
   <tr>
     <td class="gray">22.x</td>
     <td class="gray">3.22.x</td>
-    <td title=22Q1></td>
     <td title=22Q2></td>
     <td title=22Q3></td>
     <td title=22Q4></td>
@@ -371,44 +353,41 @@ The C# 3.23.x runtime was first released in 2023 Q2.
   <tr>
     <td class="gray">23.x</td>
     <td class="gray">3.23.x</td>
-    <td title=22Q1></td>
     <td title=22Q2></td>
     <td title=22Q3></td>
     <td title=22Q4></td>
     <td title=23Q1></td>
     <td title=23Q2 class="blue">IR</td>
-    <td title=23Q3 class="green">PS</td>
-    <td title=23Q4 class="green">PS</td>
-    <td title=24Q1 class="green">PS</td>
-    <td title=24Q2 class="green">PS</td>
-    <td title=24Q3 class="green">PS</td>
-  </tr>
-  <tr>
-    <td colspan="17">
-      The cells below are projections of future releases, but are not guarantees
-      <br/>that those releases will happen, or that they will happen on that
-      schedule.
-    </td>
-  </tr>
-  <tr>
-    <td class="gray">24.x</td>
-    <td class="gray"></td>
-    <td title=22Q1></td>
-    <td title=22Q2></td>
-    <td title=22Q3></td>
-    <td title=22Q4></td>
-    <td title=23Q1></td>
-    <td title=23Q2></td>
-    <td title=23Q3 class="blue">IR</td>
+    <td title=23Q3></td>
     <td title=23Q4></td>
     <td title=24Q1></td>
     <td title=24Q2></td>
     <td title=24Q3></td>
   </tr>
   <tr>
+    <td class="gray">24.x</td>
+    <td class="gray">3.24.x</td>
+    <td title=22Q2></td>
+    <td title=22Q3></td>
+    <td title=22Q4></td>
+    <td title=23Q1></td>
+    <td title=23Q2></td>
+    <td title=23Q3 class="blue">IR</td>
+    <td title=23Q4 class="green">PS</td>
+    <td title=24Q1 class="green">PS</td>
+    <td title=24Q2 class="green">PS</td>
+    <td title=24Q3 class="green">PS</td>
+  </tr>
+  <tr>
+    <td colspan="12">
+      The cells below are projections of future releases, but are not guarantees
+      <br/>that those releases will happen, or that they will happen on that
+      schedule.
+    </td>
+  </tr>
+  <tr>
     <td class="gray">25.x</td>
     <td class="gray"></td>
-    <td title=22Q1></td>
     <td title=22Q2></td>
     <td title=22Q3></td>
     <td title=22Q4></td>
@@ -417,6 +396,20 @@ The C# 3.23.x runtime was first released in 2023 Q2.
     <td title=23Q3></td>
     <td title=23Q4 class="blue">IR</td>
     <td title=24Q1></td>
+    <td title=24Q2></td>
+    <td title=24Q3></td>
+  </tr>
+  <tr>
+    <td class="gray">26.x</td>
+    <td class="gray"></td>
+    <td title=22Q2></td>
+    <td title=22Q3></td>
+    <td title=22Q4></td>
+    <td title=23Q1></td>
+    <td title=23Q2></td>
+    <td title=23Q3></td>
+    <td title=23Q4></td>
+    <td title=24Q1 class="blue">IR</td>
     <td title=24Q2></td>
     <td title=24Q3></td>
   </tr>
@@ -447,13 +440,12 @@ The C# 3.23.x runtime was first released in 2023 Q2.
 
 ## Objective-C {#objc}
 
-The Objective-C 3.23.x runtime was first released in 2023 Q2.
+The Objective-C 3.24.x runtime was first released in 2023 Q3.
 
 <table>
   <tr>
     <th>protoc</th>
     <th>ObjC</th>
-    <th>22Q1</th>
     <th>22Q2</th>
     <th>22Q3</th>
     <th>22Q4</th>
@@ -461,23 +453,11 @@ The Objective-C 3.23.x runtime was first released in 2023 Q2.
     <th>23Q2</th>
     <th>23Q3</th>
     <th>23Q4</th>
-  </tr>
-  <tr>
-    <td class="gray">20.x</td>
-    <td class="gray">3.20.x</td>
-    <td title=22Q1 class="blue">IR</td>
-    <td title=22Q2></td>
-    <td title=22Q3></td>
-    <td title=22Q4></td>
-    <td title=23Q1></td>
-    <td title=23Q2></td>
-    <td title=23Q3></td>
-    <td title=23Q4></td>
+    <th>24Q1</th>
   </tr>
   <tr>
     <td class="gray">21.x</td>
     <td class="gray">3.21.x</td>
-    <td title=22Q1></td>
     <td title=22Q2 class="blue">IR</td>
     <td title=22Q3 class="green">PS</td>
     <td title=22Q4 class="green">PS</td>
@@ -485,11 +465,11 @@ The Objective-C 3.23.x runtime was first released in 2023 Q2.
     <td title=23Q2></td>
     <td title=23Q3></td>
     <td title=23Q4></td>
+    <td title=24Q1></td>
   </tr>
   <tr>
     <td class="gray">22.x</td>
     <td class="gray">3.22.x</td>
-    <td title=22Q1></td>
     <td title=22Q2></td>
     <td title=22Q3></td>
     <td title=22Q4></td>
@@ -497,18 +477,31 @@ The Objective-C 3.23.x runtime was first released in 2023 Q2.
     <td title=23Q2></td>
     <td title=23Q3></td>
     <td title=23Q4></td>
+    <td title=24Q1></td>
   </tr>
   <tr>
     <td class="gray">23.x</td>
     <td class="gray">3.23.x</td>
-    <td title=22Q1></td>
     <td title=22Q2></td>
     <td title=22Q3></td>
     <td title=22Q4></td>
     <td title=23Q1></td>
     <td title=23Q2 class="blue">IR</td>
-    <td title=23Q3 class="green">PS</td>
+    <td title=23Q3></td>
+    <td title=23Q4></td>
+    <td title=24Q1></td>
+  </tr>
+  <tr>
+    <td class="gray">24.x</td>
+    <td class="gray">3.24.x</td>
+    <td title=22Q2></td>
+    <td title=22Q3></td>
+    <td title=22Q4></td>
+    <td title=23Q1></td>
+    <td title=23Q2></td>
+    <td title=23Q3 class="blue">IR</td>
     <td title=23Q4 class="green">PS</td>
+    <td title=24Q1 class="green">PS</td>
   </tr>
   <tr>
     <td colspan="12">
@@ -518,21 +511,8 @@ The Objective-C 3.23.x runtime was first released in 2023 Q2.
     </td>
   </tr>
   <tr>
-    <td class="gray">24.x</td>
-    <td class="gray"></td>
-    <td title=22Q1></td>
-    <td title=22Q2></td>
-    <td title=22Q3></td>
-    <td title=22Q4></td>
-    <td title=23Q1></td>
-    <td title=23Q2></td>
-    <td title=23Q3 class="blue">IR</td>
-    <td title=23Q4></td>
-  </tr>
-  <tr>
     <td class="gray">25.x</td>
     <td class="gray"></td>
-    <td title=22Q1></td>
     <td title=22Q2></td>
     <td title=22Q3></td>
     <td title=22Q4></td>
@@ -540,6 +520,19 @@ The Objective-C 3.23.x runtime was first released in 2023 Q2.
     <td title=23Q2></td>
     <td title=23Q3></td>
     <td title=23Q4 class="blue">IR</td>
+    <td title=24Q1></td>
+  </tr>
+  <tr>
+    <td class="gray">26.x</td>
+    <td class="gray"></td>
+    <td title=22Q2></td>
+    <td title=22Q3></td>
+    <td title=22Q4></td>
+    <td title=23Q1></td>
+    <td title=23Q2></td>
+    <td title=23Q3></td>
+    <td title=23Q4></td>
+    <td title=24Q1 class="blue">IR</td>
   </tr>
 </table>
 
@@ -568,13 +561,12 @@ The Objective-C 3.23.x runtime was first released in 2023 Q2.
 
 ## PHP {#php}
 
-The PHP 3.23.x runtime was first released in 2023 Q2.
+The PHP 3.24.x runtime was first released in 2023 Q3.
 
 <table>
   <tr>
     <th>protoc</th>
     <th>PHP</th>
-    <th>22Q1</th>
     <th>22Q2</th>
     <th>22Q3</th>
     <th>22Q4</th>
@@ -582,23 +574,11 @@ The PHP 3.23.x runtime was first released in 2023 Q2.
     <th>23Q2</th>
     <th>23Q3</th>
     <th>23Q4</th>
-  </tr>
-  <tr>
-    <td class="gray">20.x</td>
-    <td class="gray">3.20.x</td>
-    <td title=22Q1 class="blue">IR</td>
-    <td title=22Q2></td>
-    <td title=22Q3></td>
-    <td title=22Q4></td>
-    <td title=23Q1></td>
-    <td title=23Q2></td>
-    <td title=23Q3></td>
-    <td title=23Q4></td>
+    <th>24Q1</th>
   </tr>
   <tr>
     <td class="gray">21.x</td>
     <td class="gray">3.21.x</td>
-    <td title=22Q1></td>
     <td title=22Q2 class="blue">IR</td>
     <td title=22Q3 class="green">PS</td>
     <td title=22Q4 class="green">PS</td>
@@ -606,11 +586,11 @@ The PHP 3.23.x runtime was first released in 2023 Q2.
     <td title=23Q2></td>
     <td title=23Q3></td>
     <td title=23Q4></td>
+    <td title=24Q1></td>
   </tr>
   <tr>
     <td class="gray">22.x</td>
     <td class="gray">3.22.x</td>
-    <td title=22Q1></td>
     <td title=22Q2></td>
     <td title=22Q3></td>
     <td title=22Q4></td>
@@ -618,18 +598,31 @@ The PHP 3.23.x runtime was first released in 2023 Q2.
     <td title=23Q2></td>
     <td title=23Q3></td>
     <td title=23Q4></td>
+    <td title=24Q1></td>
   </tr>
   <tr>
     <td class="gray">23.x</td>
     <td class="gray">3.23.x</td>
-    <td title=22Q1></td>
     <td title=22Q2></td>
     <td title=22Q3></td>
     <td title=22Q4></td>
     <td title=23Q1></td>
     <td title=23Q2 class="blue">IR</td>
-    <td title=23Q3 class="green">PS</td>
+    <td title=23Q3></td>
+    <td title=23Q4></td>
+    <td title=24Q1></td>
+  </tr>
+  <tr>
+    <td class="gray">24.x</td>
+    <td class="gray">3.24.x</td>
+    <td title=22Q2></td>
+    <td title=22Q3></td>
+    <td title=22Q4></td>
+    <td title=23Q1></td>
+    <td title=23Q2></td>
+    <td title=23Q3 class="blue">IR</td>
     <td title=23Q4 class="green">PS</td>
+    <td title=24Q1 class="green">PS</td>
   </tr>
   <tr>
     <td colspan="12">
@@ -639,21 +632,8 @@ The PHP 3.23.x runtime was first released in 2023 Q2.
     </td>
   </tr>
   <tr>
-    <td class="gray">24.x</td>
-    <td class="gray"></td>
-    <td title=22Q1></td>
-    <td title=22Q2></td>
-    <td title=22Q3></td>
-    <td title=22Q4></td>
-    <td title=23Q1></td>
-    <td title=23Q2></td>
-    <td title=23Q3 class="blue">IR</td>
-    <td title=23Q4></td>
-  </tr>
-  <tr>
     <td class="gray">25.x</td>
     <td class="gray"></td>
-    <td title=22Q1></td>
     <td title=22Q2></td>
     <td title=22Q3></td>
     <td title=22Q4></td>
@@ -661,6 +641,19 @@ The PHP 3.23.x runtime was first released in 2023 Q2.
     <td title=23Q2></td>
     <td title=23Q3></td>
     <td title=23Q4 class="blue">IR</td>
+    <td title=24Q1></td>
+  </tr>
+  <tr>
+    <td class="gray">26.x</td>
+    <td class="gray"></td>
+    <td title=22Q2></td>
+    <td title=22Q3></td>
+    <td title=22Q4></td>
+    <td title=23Q1></td>
+    <td title=23Q2></td>
+    <td title=23Q3></td>
+    <td title=23Q4></td>
+    <td title=24Q1 class="blue">IR</td>
   </tr>
 </table>
 
@@ -697,7 +690,7 @@ For specific versions supported, see
 
 ## Python {#python}
 
-The Python 4.23.x runtime was first released in 2023 Q2.
+The Python 4.24.x runtime was first released in 2023 Q3.
 
 The Python 3.x runtime went out of support on July 1, 2023.
 
@@ -705,7 +698,6 @@ The Python 3.x runtime went out of support on July 1, 2023.
   <tr>
     <th>protoc</th>
     <th>Python</th>
-    <th>22Q1</th>
     <th>22Q2</th>
     <th>22Q3</th>
     <th>22Q4</th>
@@ -713,11 +705,11 @@ The Python 3.x runtime went out of support on July 1, 2023.
     <th>23Q2</th>
     <th>23Q3</th>
     <th>23Q4</th>
+    <th>24Q1</th>
   </tr>
   <tr>
     <td class="gray">20.x</td>
     <td class="gray">3.20.x</td>
-    <td title=22Q1 class="blue">IR</td>
     <td title=22Q2 class="green">PS</td>
     <td title=22Q3 class="green">PS</td>
     <td title=22Q4 class="green">PS</td>
@@ -725,11 +717,11 @@ The Python 3.x runtime went out of support on July 1, 2023.
     <td title=23Q2 class="red">SE</td>
     <td title=23Q3></td>
     <td title=23Q4></td>
+    <td title=24Q1></td>
   </tr>
   <tr>
     <td class="gray">21.x</td>
     <td class="gray">4.21.x</td>
-    <td title=22Q1></td>
     <td title=22Q2 class="blue">IR</td>
     <td title=22Q3 class="green">PS</td>
     <td title=22Q4 class="green">PS</td>
@@ -737,11 +729,11 @@ The Python 3.x runtime went out of support on July 1, 2023.
     <td title=23Q2></td>
     <td title=23Q3></td>
     <td title=23Q4></td>
+    <td title=24Q1></td>
   </tr>
   <tr>
     <td class="gray">22.x</td>
     <td class="gray">4.22.x</td>
-    <td title=22Q1></td>
     <td title=22Q2></td>
     <td title=22Q3></td>
     <td title=22Q4></td>
@@ -749,18 +741,31 @@ The Python 3.x runtime went out of support on July 1, 2023.
     <td title=23Q2></td>
     <td title=23Q3></td>
     <td title=23Q4></td>
+    <td title=24Q1></td>
   </tr>
   <tr>
     <td class="gray">23.x</td>
     <td class="gray">4.23.x</td>
-    <td title=22Q1></td>
     <td title=22Q2></td>
     <td title=22Q3></td>
     <td title=22Q4></td>
     <td title=23Q1></td>
     <td title=23Q2 class="blue">IR</td>
-    <td title=23Q3 class="green">PS</td>
+    <td title=23Q3></td>
+    <td title=23Q4></td>
+    <td title=24Q1></td>
+  </tr>
+  <tr>
+    <td class="gray">24.x</td>
+    <td class="gray">4.24.x</td>
+    <td title=22Q2></td>
+    <td title=22Q3></td>
+    <td title=22Q4></td>
+    <td title=23Q1></td>
+    <td title=23Q2></td>
+    <td title=23Q3 class="blue">IR</td>
     <td title=23Q4 class="green">PS</td>
+    <td title=24Q1 class="green">PS</td>
   </tr>
   <tr>
     <td colspan="12">
@@ -770,21 +775,8 @@ The Python 3.x runtime went out of support on July 1, 2023.
     </td>
   </tr>
   <tr>
-    <td class="gray">24.x</td>
-    <td class="gray"></td>
-    <td title=22Q1></td>
-    <td title=22Q2></td>
-    <td title=22Q3></td>
-    <td title=22Q4></td>
-    <td title=23Q1></td>
-    <td title=23Q2></td>
-    <td title=23Q3 class="blue">IR</td>
-    <td title=23Q4></td>
-  </tr>
-  <tr>
     <td class="gray">25.x</td>
     <td class="gray"></td>
-    <td title=22Q1></td>
     <td title=22Q2></td>
     <td title=22Q3></td>
     <td title=22Q4></td>
@@ -792,6 +784,19 @@ The Python 3.x runtime went out of support on July 1, 2023.
     <td title=23Q2></td>
     <td title=23Q3></td>
     <td title=23Q4 class="blue">IR</td>
+    <td title=24Q1></td>
+  </tr>
+  <tr>
+    <td class="gray">26.x</td>
+    <td class="gray"></td>
+    <td title=22Q2></td>
+    <td title=22Q3></td>
+    <td title=22Q4></td>
+    <td title=23Q1></td>
+    <td title=23Q2></td>
+    <td title=23Q3></td>
+    <td title=23Q4></td>
+    <td title=24Q1 class="blue">IR</td>
   </tr>
 </table>
 
@@ -828,13 +833,12 @@ For specific versions supported, see
 
 ## Ruby {#ruby}
 
-The Ruby 3.23.x runtime was first released in 2023 Q2.
+The Ruby 3.24.x runtime was first released in 2023 Q3.
 
 <table>
   <tr>
     <th>protoc</th>
     <th>Ruby</th>
-    <th>22Q1</th>
     <th>22Q2</th>
     <th>22Q3</th>
     <th>22Q4</th>
@@ -842,23 +846,11 @@ The Ruby 3.23.x runtime was first released in 2023 Q2.
     <th>23Q2</th>
     <th>23Q3</th>
     <th>23Q4</th>
-  </tr>
-  <tr>
-    <td class="gray">20.x</td>
-    <td class="gray">3.20.x</td>
-    <td title=22Q1 class="blue">IR</td>
-    <td title=22Q2></td>
-    <td title=22Q3></td>
-    <td title=22Q4></td>
-    <td title=23Q1></td>
-    <td title=23Q2></td>
-    <td title=23Q3></td>
-    <td title=23Q4></td>
+    <th>24Q1</th>
   </tr>
   <tr>
     <td class="gray">21.x</td>
     <td class="gray">3.21.x</td>
-    <td title=22Q1></td>
     <td title=22Q2 class="blue">IR</td>
     <td title=22Q3 class="green">PS</td>
     <td title=22Q4 class="green">PS</td>
@@ -866,11 +858,11 @@ The Ruby 3.23.x runtime was first released in 2023 Q2.
     <td title=23Q2></td>
     <td title=23Q3></td>
     <td title=23Q4></td>
+    <td title=24Q1></td>
   </tr>
   <tr>
     <td class="gray">22.x</td>
     <td class="gray">3.22.x</td>
-    <td title=22Q1></td>
     <td title=22Q2></td>
     <td title=22Q3></td>
     <td title=22Q4></td>
@@ -878,18 +870,31 @@ The Ruby 3.23.x runtime was first released in 2023 Q2.
     <td title=23Q2></td>
     <td title=23Q3></td>
     <td title=23Q4></td>
+    <td title=24Q1></td>
   </tr>
   <tr>
     <td class="gray">23.x</td>
     <td class="gray">3.23.x</td>
-    <td title=22Q1></td>
     <td title=22Q2></td>
     <td title=22Q3></td>
     <td title=22Q4></td>
     <td title=23Q1></td>
     <td title=23Q2 class="blue">IR</td>
-    <td title=23Q3 class="green">PS</td>
+    <td title=23Q3></td>
+    <td title=23Q4></td>
+    <td title=24Q1></td>
+  </tr>
+  <tr>
+    <td class="gray">24.x</td>
+    <td class="gray">3.24.x</td>
+    <td title=22Q2></td>
+    <td title=22Q3></td>
+    <td title=22Q4></td>
+    <td title=23Q1></td>
+    <td title=23Q2></td>
+    <td title=23Q3 class="blue">IR</td>
     <td title=23Q4 class="green">PS</td>
+    <td title=24Q1 class="green">PS</td>
   </tr>
   <tr>
     <td colspan="10">
@@ -899,21 +904,8 @@ The Ruby 3.23.x runtime was first released in 2023 Q2.
     </td>
   </tr>
   <tr>
-    <td class="gray">24.x</td>
-    <td class="gray"></td>
-    <td title=22Q1></td>
-    <td title=22Q2></td>
-    <td title=22Q3></td>
-    <td title=22Q4></td>
-    <td title=23Q1></td>
-    <td title=23Q2></td>
-    <td title=23Q3 class="blue">IR</td>
-    <td title=23Q4></td>
-  </tr>
-  <tr>
     <td class="gray">25.x</td>
     <td class="gray"></td>
-    <td title=22Q1></td>
     <td title=22Q2></td>
     <td title=22Q3></td>
     <td title=22Q4></td>
@@ -921,6 +913,19 @@ The Ruby 3.23.x runtime was first released in 2023 Q2.
     <td title=23Q2></td>
     <td title=23Q3></td>
     <td title=23Q4 class="blue">IR</td>
+    <td title=24Q1></td>
+  </tr>
+  <tr>
+    <td class="gray">26.x</td>
+    <td class="gray"></td>
+    <td title=22Q2></td>
+    <td title=22Q3></td>
+    <td title=22Q4></td>
+    <td title=23Q1></td>
+    <td title=23Q2></td>
+    <td title=23Q3></td>
+    <td title=23Q4></td>
+    <td title=24Q1 class="blue">IR</td>
   </tr>
 </table>
 

@@ -96,7 +96,7 @@ message Person {
 
   message PhoneNumber {
     optional string number = 1;
-    optional PhoneType type = 2 [default = HOME];
+    optional PhoneType type = 2 [default = PHONE_TYPE_HOME];
   }
 
   repeated PhoneNumber phones = 4;
