@@ -8,6 +8,8 @@ type = "docs"
 News topics provide information about past events and changes with Protocol
 Buffers, and plans for upcoming changes.
 
+*   [August 15, 2023](/news/2023-08-15) - Breaking Python
+    change with the replacement of `message.UnknownFields()``
 *   [August 9, 2023](/news/2023-08-09) - Support policy
     for .NET
 *   [July 17, 2023](/news/2023-07-17) - Dropping support

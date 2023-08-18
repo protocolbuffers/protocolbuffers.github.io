@@ -94,7 +94,7 @@ message Person {
 
   message PhoneNumber {
     optional string number = 1;
-    optional PhoneType type = 2 [default = HOME];
+    optional PhoneType type = 2 [default = PHONE_TYPE_HOME];
   }
 
   repeated PhoneNumber phones = 4;
@@ -125,7 +125,7 @@ even define message types nested inside other messages -- as you can see, the
 `PhoneNumber` type is defined inside `Person`. You can also define `enum` types
 if you want one of your fields to have one of a predefined list of values --
 here you want to specify that a phone number can be one of the following phone
-types: `MOBILE`, `HOME`, or `WORK`.
+types: `PHONE_TYPE_MOBILE`, `PHONE_TYPE_HOME`, or `PHONE_TYPE_WORK`.
 
 The " = 1", " = 2" markers on each element identify the unique "tag" that field
 uses in the binary encoding. Tag numbers 1-15 require one less byte to encode
@@ -240,7 +240,7 @@ person.name = "John Doe"
 person.email = "jdoe@example.com"
 phone = person.phones.add()
 phone.number = "555-4321"
-phone.type = addressbook_pb2.Person.HOME
+phone.type = addressbook_pb2.Person.PHONE_TYPE_HOME
 ```
 
 Note that these assignments are not just adding arbitrary new fields to a
@@ -262,7 +262,7 @@ any particular field definition, see the
 
 Enums are expanded by the metaclass into a set of symbolic constants with
 integer values. So, for example, the constant
-`addressbook_pb2.Person.PhoneType.WORK` has the value 2.
+`addressbook_pb2.Person.PhoneType.PHONE_TYPE_WORK` has the value 2.
 
 ### Standard Message Methods {#standard-message-methods}
 
@@ -348,11 +348,11 @@ def PromptForAddress(person):
 
     phone_type = input("Is this a mobile, home, or work phone? ")
     if phone_type == "mobile":
-      phone_number.type = addressbook_pb2.Person.PhoneType.MOBILE
+      phone_number.type = addressbook_pb2.Person.PhoneType.PHONE_TYPE_MOBILE
     elif phone_type == "home":
-      phone_number.type = addressbook_pb2.Person.PhoneType.HOME
+      phone_number.type = addressbook_pb2.Person.PhoneType.PHONE_TYPE_HOME
     elif phone_type == "work":
-      phone_number.type = addressbook_pb2.Person.PhoneType.WORK
+      phone_number.type = addressbook_pb2.Person.PhoneType.PHONE_TYPE_WORK
     else:
       print("Unknown phone type; leaving as default value.")
 
@@ -401,11 +401,11 @@ def ListPeople(address_book):
       print("  E-mail address:", person.email)
 
     for phone_number in person.phones:
-      if phone_number.type == addressbook_pb2.Person.PhoneType.MOBILE:
+      if phone_number.type == addressbook_pb2.Person.PhoneType.PHONE_TYPE_MOBILE:
         print("  Mobile phone #: ", end="")
-      elif phone_number.type == addressbook_pb2.Person.PhoneType.HOME:
+      elif phone_number.type == addressbook_pb2.Person.PhoneType.PHONE_TYPE_HOME:
         print("  Home phone #: ", end="")
-      elif phone_number.type == addressbook_pb2.Person.PhoneType.WORK:
+      elif phone_number.type == addressbook_pb2.Person.PhoneType.PHONE_TYPE_WORK:
         print("  Work phone #: ", end="")
       print(phone_number.number)
 

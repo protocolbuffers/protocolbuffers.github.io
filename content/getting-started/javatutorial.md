@@ -100,7 +100,7 @@ message Person {
 
   message PhoneNumber {
     optional string number = 1;
-    optional PhoneType type = 2 [default = HOME];
+    optional PhoneType type = 2 [default = PHONE_TYPE_HOME];
   }
 
   repeated PhoneNumber phones = 4;
@@ -350,7 +350,7 @@ Person john =
     .addPhones(
       Person.PhoneNumber.newBuilder()
         .setNumber("555-4321")
-        .setType(Person.PhoneType.HOME))
+        .setType(Person.PhoneType.PHONE_TYPE_HOME))
     .build();
 ```
 
@@ -460,11 +460,11 @@ class AddPerson {
       stdout.print("Is this a mobile, home, or work phone? ");
       String type = stdin.readLine();
       if (type.equals("mobile")) {
-        phoneNumber.setType(Person.PhoneType.MOBILE);
+        phoneNumber.setType(Person.PhoneType.PHONE_TYPE_MOBILE);
       } else if (type.equals("home")) {
-        phoneNumber.setType(Person.PhoneType.HOME);
+        phoneNumber.setType(Person.PhoneType.PHONE_TYPE_HOME);
       } else if (type.equals("work")) {
-        phoneNumber.setType(Person.PhoneType.WORK);
+        phoneNumber.setType(Person.PhoneType.PHONE_TYPE_WORK);
       } else {
         stdout.println("Unknown phone type.  Using default.");
       }
@@ -531,13 +531,13 @@ class ListPeople {
 
       for (Person.PhoneNumber phoneNumber : person.getPhonesList()) {
         switch (phoneNumber.getType()) {
-          case MOBILE:
+          case PHONE_TYPE_MOBILE:
             System.out.print("  Mobile phone #: ");
             break;
-          case HOME:
+          case PHONE_TYPE_HOME:
             System.out.print("  Home phone #: ");
             break;
-          case WORK:
+          case PHONE_TYPE_WORK:
             System.out.print("  Work phone #: ");
             break;
         }

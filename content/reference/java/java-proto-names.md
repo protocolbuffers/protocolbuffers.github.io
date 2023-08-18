@@ -49,7 +49,9 @@ java_api_version | java_multiple_files | java_alt_api_package | java_package | j
     If the generated class name would be the same as one of the messages defined
     in the proto file, `derived_outer_class` has `OuterClass` appended to it.
     For example, if the proto is `foo_bar.proto` and contains a `FooBar`
-    message, the `$derived_outer_class` value is `FooBarOuterClass`.
+    message, the `$derived_outer_class` value is `FooBarOuterClass`. The same is
+    true when using the v1 API, whether or not the class name would be the same
+    as one of the messages defined.
 
 *   All other `$names` are the values of the corresponding proto2 file options
     defined in the proto file.
