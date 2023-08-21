@@ -63,6 +63,9 @@ enum, or message (including nested types) in the file with the same name,
     `java_outer_classname` is also set to the string `FooService`, then the
     wrapper class will generate a class name of `FooServiceOuterClass`.
 
+**Note:** If you are using the deprecated v1 of the protobuf API, `OuterClass`
+is added regardless of any collisions with message names.
+
 In addition to any nested classes, the wrapper class itself will have the
 following API (assuming the wrapper class is named `Foo` and was generated from
 `foo.proto`):
@@ -107,11 +110,6 @@ to read source code directly from JAR files. To output to a JAR file, simply
 provide an output location ending in `.jar`. Note that only the Java source code
 is placed in the archive; you must still compile it separately to produce Java
 class files.
-
-## Packages {#package}
-
-The generated class is placed in a Java package based on the `java_package`
-option. If the option is omitted, the `package` declaration is used instead.
 
 For example, if the `.proto` file contains:
 
