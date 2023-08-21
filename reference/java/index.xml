@@ -42,6 +42,8 @@ will generate a class name of &lt;code>FooBarOuterClass&lt;/code>.&lt;/li>
 &lt;code>java_outer_classname&lt;/code> is also set to the string &lt;code>FooService&lt;/code>, then the
 wrapper class will generate a class name of &lt;code>FooServiceOuterClass&lt;/code>.&lt;/li>
 &lt;/ul>
+&lt;p>&lt;strong>Note:&lt;/strong> If you are using the deprecated v1 of the protobuf API, &lt;code>OuterClass&lt;/code>
+is added regardless of any collisions with message names.&lt;/p>
 &lt;p>In addition to any nested classes, the wrapper class itself will have the
 following API (assuming the wrapper class is named &lt;code>Foo&lt;/code> and was generated from
 &lt;code>foo.proto&lt;/code>):&lt;/p>
@@ -75,9 +77,6 @@ to read source code directly from JAR files. To output to a JAR file, simply
 provide an output location ending in &lt;code>.jar&lt;/code>. Note that only the Java source code
 is placed in the archive; you must still compile it separately to produce Java
 class files.&lt;/p>
-&lt;h2 id="package">Packages&lt;/h2>
-&lt;p>The generated class is placed in a Java package based on the &lt;code>java_package&lt;/code>
-option. If the option is omitted, the &lt;code>package&lt;/code> declaration is used instead.&lt;/p>
 &lt;p>For example, if the &lt;code>.proto&lt;/code> file contains:&lt;/p>
 &lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-proto" data-lang="proto">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#204a87;font-weight:bold">package&lt;/span> &lt;span style="color:#000">foo&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">.&lt;/span>&lt;span style="color:#000">bar&lt;/span>&lt;span style="color:#000;font-weight:bold">;&lt;/span>&lt;span style="color:#a40000">
 &lt;/span>&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>Then the resulting Java class will be placed in Java package &lt;code>foo.bar&lt;/code>. However,
@@ -944,7 +943,9 @@ the &lt;code>$derived_outer_class&lt;/code> value is &lt;code>FooBar&lt;/code>.&
 &lt;p>If the generated class name would be the same as one of the messages defined
 in the proto file, &lt;code>derived_outer_class&lt;/code> has &lt;code>OuterClass&lt;/code> appended to it.
 For example, if the proto is &lt;code>foo_bar.proto&lt;/code> and contains a &lt;code>FooBar&lt;/code>
-message, the &lt;code>$derived_outer_class&lt;/code> value is &lt;code>FooBarOuterClass&lt;/code>.&lt;/p>
+message, the &lt;code>$derived_outer_class&lt;/code> value is &lt;code>FooBarOuterClass&lt;/code>. The same is
+true when using the v1 API, whether or not the class name would be the same
+as one of the messages defined.&lt;/p>
 &lt;/li>
 &lt;li>
 &lt;p>All other &lt;code>$names&lt;/code> are the values of the corresponding proto2 file options
