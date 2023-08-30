@@ -10,7 +10,8 @@ Any differences between proto2 and proto3 generated code are highlighted - note
 that these differences are in the generated code as described in this document,
 not the base message classes/interfaces, which are the same in both versions.
 You should read the
-[proto2 language guide](/programming-guides/proto) and/or
+[proto2 language guide](/programming-guides/proto2)
+and/or
 [proto3 language guide](/programming-guides/proto3)
 before reading this document.
 
@@ -62,11 +63,13 @@ message Foo {}
 ```
 
 The protocol buffer compiler generates a class called `Foo`, which publicly
-derives from `google::protobuf::Message`. The class is a concrete class; no
-pure-virtual methods are left unimplemented. Methods that are virtual in
-`Message` but not pure-virtual may or may not be overridden by `Foo`, depending
-on the optimization mode. By default, `Foo` implements specialized versions of
-all methods for maximum speed. However, if the `.proto` file contains the line:
+derives from
+[`google::protobuf::Message`](/reference/cpp/api-docs/google.protobuf.message).
+The class is a concrete class; no pure-virtual methods are left unimplemented.
+Methods that are virtual in `Message` but not pure-virtual may or may not be
+overridden by `Foo`, depending on the optimization mode. By default, `Foo`
+implements specialized versions of all methods for maximum speed. However, if
+the `.proto` file contains the line:
 
 ```proto
 option optimize_for = CODE_SIZE;
@@ -82,13 +85,14 @@ option optimize_for = LITE_RUNTIME;
 ```
 
 then `Foo` will include fast implementations of all methods, but will implement
-the `google::protobuf::MessageLite` interface, which only contains a subset of
-the methods of `Message`. In particular, it does not support descriptors or
-reflection. However, in this mode, the generated code only needs to link against
-`libprotobuf-lite.so` (`libprotobuf-lite.lib` on Windows) instead of
-`libprotobuf.so` (`libprotobuf.lib`). The "lite" library is much smaller than
-the full library, and is more appropriate for resource-constrained systems such
-as mobile phones.
+the
+[`google::protobuf::MessageLite`](/reference/cpp/api-docs/google.protobuf.message_lite)
+interface, which only contains a subset of the methods of `Message`. In
+particular, it does not support descriptors or reflection. However, in this
+mode, the generated code only needs to link against `libprotobuf-lite.so`
+(`libprotobuf-lite.lib` on Windows) instead of `libprotobuf.so`
+(`libprotobuf.lib`). The "lite" library is much smaller than the full library,
+and is more appropriate for resource-constrained systems such as mobile phones.
 
 You should *not* create your own `Foo` subclasses. If you subclass this class
 and override a virtual method, the override may be ignored, as many generated
@@ -168,7 +172,7 @@ generates the following partial output:
   void set_allocated_myfalse(std::string* ptr);
 ```
 
-### Nested Types
+### Nested Types {#nested-types}
 
 A message can be declared inside another message. For example:
 
@@ -190,7 +194,7 @@ class `Foo::Bar`. However, note that C++ does not allow nested types to be
 forward-declared. If you want to forward-declare `Bar` in another file and use
 that declaration, you must identify it as `Foo_Bar`.
 
-## Fields
+## Fields {#fields}
 
 In addition to the methods described in the previous section, the protocol
 buffer compiler generates a set of accessor methods for each field defined
@@ -220,7 +224,7 @@ any method inherited from `Message` or accessing the message through other ways
 Correspondingly, the value of the returned pointer is never guaranteed to be the
 same across two different invocations of the accessor.
 
-### Optional Numeric Fields (proto2 and proto3)
+### Optional Numeric Fields (proto2 and proto3) {#numeric}
 
 For either of these field definitions:
 
@@ -243,7 +247,7 @@ For other numeric field types (including `bool`), `int32` is replaced with the
 corresponding C++ type according to the
 [scalar value types table](/programming-guides/proto3#scalar).
 
-### Implicit Presence Numeric Fields (proto3)
+### Implicit Presence Numeric Fields (proto3) {#implicit-numeric}
 
 For these field definitions:
 
@@ -314,7 +318,9 @@ The compiler will generate the following accessor methods:
     calling this, caller takes the ownership of the allocated `string` object,
     `has_foo()` will return `false`, and `foo()` will return the default value.
 
-### Implicit Presence String/Bytes Fields (proto3) {#proto3_string}
+<a id="proto3_string"></a>
+
+### Implicit Presence String/Bytes Fields (proto3) {#implicit-string}
 
 For any of these field definitions:
 
@@ -422,7 +428,7 @@ The compiler will generate the following accessor methods:
 -   `void clear_foo()`: Clears the value of the field. After calling this,
     `has_foo()` will return `false` and `foo()` will return the default value.
 
-### Implicit Presence Enum Fields (proto3)
+### Implicit Presence Enum Fields (proto3) {#implicit-enum}
 
 Given the enum type:
 
@@ -515,8 +521,9 @@ The compiler will generate the following accessor methods:
 -   `void clear_foo()`: Removes all elements from the field. After calling this,
     `foo_size()` will return zero.
 -   `const RepeatedField<int32>& foo() const`: Returns the underlying
-    `RepeatedField` that stores the field's elements. This container class
-    provides STL-like iterators and other methods.
+    [`RepeatedField`](/reference/cpp/api-docs/google.protobuf.repeated_field#RepeatedField)
+    that stores the field's elements. This container class provides STL-like
+    iterators and other methods.
 -   `RepeatedField<int32>* mutable_foo()`: Returns a pointer to the underlying
     mutable `RepeatedField` that stores the field's elements. This container
     class provides STL-like iterators and other methods.
@@ -564,8 +571,9 @@ The compiler will generate the following accessor methods:
 -   `void clear_foo()`: Removes all elements from the field. After calling this,
     `foo_size()` will return zero.
 -   `const RepeatedPtrField<string>& foo() const`: Returns the underlying
-    `RepeatedPtrField` that stores the field's elements. This container class
-    provides STL-like iterators and other methods.
+    [`RepeatedPtrField`](/reference/cpp/api-docs/google.protobuf.repeated_field#RepeatedPtrField)
+    that stores the field's elements. This container class provides STL-like
+    iterators and other methods.
 -   `RepeatedPtrField<string>* mutable_foo()`: Returns a pointer to the
     underlying mutable `RepeatedPtrField` that stores the field's elements. This
     container class provides STL-like iterators and other methods.
@@ -606,8 +614,9 @@ The compiler will generate the following accessor methods:
 -   `void clear_foo()`: Removes all elements from the field. After calling this,
     `foo_size()` will return zero.
 -   `const RepeatedField<int>& foo() const`: Returns the underlying
-    `RepeatedField` that stores the field's elements. This container class
-    provides STL-like iterators and other methods.
+    [`RepeatedField`](/reference/cpp/api-docs/google.protobuf.repeated_field#RepeatedField)
+    that stores the field's elements. This container class provides STL-like
+    iterators and other methods.
 -   `RepeatedField<int>* mutable_foo()`: Returns a pointer to the underlying
     mutable `RepeatedField` that stores the field's elements. This container
     class provides STL-like iterators and other methods.
@@ -642,8 +651,9 @@ The compiler will generate the following accessor methods:
 -   `void clear_foo()`: Removes all elements from the field. After calling this,
     `foo_size()` will return zero.
 -   `const RepeatedPtrField<Bar>& foo() const`: Returns the underlying
-    `RepeatedPtrField` that stores the field's elements. This container class
-    provides STL-like iterators and other methods.
+    [`RepeatedPtrField`](/reference/cpp/api-docs/google.protobuf.repeated_field#RepeatedPtrField)
+    that stores the field's elements. This container class provides STL-like
+    iterators and other methods.
 -   `RepeatedPtrField<Bar>* mutable_foo()`: Returns a pointer to the underlying
     mutable `RepeatedPtrField` that stores the field's elements. This container
     class provides STL-like iterators and other methods.
@@ -812,7 +822,8 @@ The compiler will generate the following accessor methods:
 
 -   `bool has_foo() const`: Returns true if oneof case is `kFoo`.
 -   `const Bar& foo() const`: Returns the current value of the field if oneof
-    case is `kFoo`. Otherwise, returns `Bar::default_instance()`.
+    case is `kFoo`. Otherwise, returns a Bar with none of its fields set
+    (possibly `Bar::default_instance()`).
 -   `Bar* mutable_foo()`:
     -   If any other oneof field in the same oneof is set, calls
         `clear_example_name()`.
@@ -845,7 +856,7 @@ The compiler will generate the following accessor methods:
         object, `has_foo()` will return `false`, `foo()` will return the default
         value and `example_name_case()` will return `EXAMPLE_NAME_NOT_SET`.
 
-### Map Fields
+### Map Fields {#map}
 
 For this map field definition:
 
@@ -860,9 +871,11 @@ The compiler will generate the following accessor methods:
 -   `google::protobuf::Map<int32, int32>* mutable_weight();`: Returns a mutable
     `Map`.
 
-A `google::protobuf::Map` is a special container type used in protocol buffers
-to store map fields. As you can see from its interface below, it uses a
-commonly-used subset of `std::map` and `std::unordered_map` methods.
+A
+[`google::protobuf::Map`](/reference/cpp/api-docs/google.protobuf.map)
+is a special container type used in protocol buffers to store map fields. As you
+can see from its interface below, it uses a commonly-used subset of `std::map`
+and `std::unordered_map` methods.
 
 **NOTE:** These maps are unordered.
 
@@ -926,7 +939,7 @@ value into a `google::protobuf::Map` is as follows:
 T& operator[](const Key& key): map[new_key] = new_mapped;
 ```
 
-#### Using `google::protobuf::Map` with standard maps
+#### Using `google::protobuf::Map` with standard maps {#protobuf-map}
 
 `google::protobuf::Map` supports the same iterator API as `std::map` and
 `std::unordered_map`. If you don't want to use `google::protobuf::Map` directly,
@@ -946,7 +959,7 @@ You can also construct a `google::protobuf::Map` from a standard map as follows:
 google::protobuf::Map<int32, int32> weight(standard_map.begin(), standard_map.end());
 ```
 
-#### Parsing unknown values
+#### Parsing unknown values {#parsing-unknown}
 
 On the wire, a .proto map is equivalent to a map entry message for each
 key/value pair, while the map itself is a repeated field of map entries. Like
@@ -962,7 +975,7 @@ it's handled differently in proto2 and proto3. In proto2, the whole map entry
 message is put into the unknown field set of the containing message. In proto3,
 it is put into a map field as if it is a known enum value.
 
-## Any
+## Any {#any}
 
 Given an [`Any`](/programming-guides/proto3#any) field
 like this:
@@ -1001,7 +1014,7 @@ class Any {
 }
 ```
 
-## Oneof
+## Oneof {#oneof}
 
 Given a oneof definition like this:
 
@@ -1123,6 +1136,7 @@ Given an extension definition:
 extend Foo {
   optional int32 bar = 123;
   repeated int32 repeated_bar = 124;
+  optional Bar message_bar = 125;
 }
 ```
 
@@ -1140,6 +1154,10 @@ foo.ClearExtension(bar);
 assert(!foo.HasExtension(bar));
 ```
 
+For the message extension field `message_bar`, if the field is not set
+`foo.GetExtension(message_bar)` returns a `Bar` with none of its fields set
+(possibly `Bar::default_instance()`).
+
 Similarly, for the repeated extension field `repeated_bar`, the compiler
 generates an extension identifier called `repeated_bar`, which you can also use
 with `Foo`'s extension accessors:
@@ -1156,8 +1174,8 @@ for (int i = 0; i < kSize; ++i) {
 ```
 
 (The exact implementation of extension identifiers is complicated and involves
-magical use of templates&mdash;however, you don't need to worry about how
-extension identifiers work to use them.)
+magical use of templates—however, you don't need to worry about how extension
+identifiers work to use them.)
 
 Extensions can be declared nested inside of another type. For example, a common
 pattern is to do something like this:
@@ -1250,7 +1268,8 @@ implement its methods as appropriate.
 `Foo` subclasses the `Service` interface. The protocol buffer compiler
 automatically generates implementations of the methods of `Service` as follows:
 
--   `GetDescriptor`: Returns the service's `ServiceDescriptor`.
+-   `GetDescriptor`: Returns the service's
+    [`ServiceDescriptor`](/reference/cpp/api-docs/google.protobuf.descriptor#ServiceDescriptor).
 -   `CallMethod`: Determines which method is being called based on the provided
     method descriptor and calls it directly, down-casting the request and
     response messages objects to the correct types.
@@ -1264,7 +1283,7 @@ The following static method is also generated:
     which contains information about what methods this service has and what
     their input and output types are.
 
-### Stub
+### Stub {#stub}
 
 The protocol buffer compiler also generates a "stub" implementation of every
 service interface, which is used by clients wishing to send requests to servers
@@ -1290,8 +1309,13 @@ around the channel. Calling one of the methods simply calls
 The Protocol Buffer library does not include an RPC implementation. However, it
 includes all of the tools you need to hook up a generated service class to any
 arbitrary RPC implementation of your choice. You need only provide
-implementations of `RpcChannel` and `RpcController`. See the documentation for
-`service.h` for more information.
+implementations of
+[`RpcChannel`](/reference/cpp/api-docs/google.protobuf.service#RpcChannel)
+and
+[`RpcController`](/reference/cpp/api-docs/google.protobuf.service#RpcController).
+See the documentation for
+[`service.h`](/reference/cpp/api-docs/google.protobuf.service)
+for more information.
 
 ## Plugin Insertion Points {#plugins}
 

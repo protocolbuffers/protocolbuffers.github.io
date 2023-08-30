@@ -232,7 +232,7 @@ p := pb.Person{
     Name:  "John Doe",
     Email: "jdoe@example.com",
     Phones: []*pb.Person_PhoneNumber{
-        {Number: "555-4321", Type: pb.Person_HOME},
+        {Number: "555-4321", Type: pb.Person_PHONE_TYPE_HOME},
     },
 }
 ```

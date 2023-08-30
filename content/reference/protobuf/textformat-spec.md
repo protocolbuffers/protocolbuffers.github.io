@@ -624,12 +624,15 @@ provided below.
 {{% alert title="Important" color="warning" %}}
 `.txtpb` is the canonical text format file extension and should be preferred to
 the alternatives. This suffix is preferred for its brevity and consistency with
-the official wire-format file extension `.binpb`. Some tools also recognize the
-legacy extensions `.textproto`, `.textpb` and `.pbtxt`. METADATA files are also
-a textproto files despite the lack of extension. All other extensions are
-**strongly** discouraged; in particular, extensions such as `.protoascii`
-wrongly imply that text format is ascii-only, and others like `.pb.txt` are not
-recognized by common tooling. {{% /alert %}}
+the official wire-format file extension `.binpb`. The legacy canonical extension
+`.textproto` still has widespread usage and tooling
+support. Some tooling also
+supports the legacy extensions `.textpb` and `.pbtxt`. All other extensions
+besides the above are **strongly** discouraged; in particular, extensions such
+as `.protoascii` wrongly imply that text format is ascii-only, and others like
+`.pb.txt` are not recognized by common tooling. METADATA files are special text
+format proto files that lack any extension.
+{{% /alert %}}
 
 ```textproto
 # This is an example of Protocol Buffer's text format.

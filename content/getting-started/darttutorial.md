@@ -251,13 +251,13 @@ Person promptForAddress() {
     String type = stdin.readLineSync();
     switch (type) {
       case 'mobile':
-        phoneNumber.type = Person_PhoneType.MOBILE;
+        phoneNumber.type = Person_PhoneType.PHONE_TYPE_MOBILE;
         break;
       case 'home':
-        phoneNumber.type = Person_PhoneType.HOME;
+        phoneNumber.type = Person_PhoneType.PHONE_TYPE_HOME;
         break;
       case 'work':
-        phoneNumber.type = Person_PhoneType.WORK;
+        phoneNumber.type = Person_PhoneType.PHONE_TYPE_WORK;
         break;
       default:
         print('Unknown phone type.  Using default.');
@@ -312,13 +312,13 @@ void printAddressBook(AddressBook addressBook) {
 
     for (Person_PhoneNumber phoneNumber in person.phones) {
       switch (phoneNumber.type) {
-        case Person_PhoneType.MOBILE:
+        case Person_PhoneType.PHONE_TYPE_MOBILE:
           print('   Mobile phone #: ');
           break;
-        case Person_PhoneType.HOME:
+        case Person_PhoneType.PHONE_TYPE_HOME:
           print('   Home phone #: ');
           break;
-        case Person_PhoneType.WORK:
+        case Person_PhoneType.PHONE_TYPE_WORK:
           print('   Work phone #: ');
           break;
         default:

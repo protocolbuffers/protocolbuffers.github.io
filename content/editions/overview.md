@@ -224,7 +224,7 @@ message Person {
   string name = 1;
   int32 id = 2 [features.presence = IMPLICIT];
 
-  enum Pay_Type
+  enum Pay_Type {
     PAY_TYPE_UNSPECIFIED = 1,
     PAY_TYPE_SALARY = 2,
     PAY_TYPE_HOURLY = 3

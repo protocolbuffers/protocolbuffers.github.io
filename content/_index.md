@@ -93,7 +93,7 @@ Dart, Go, Ruby, PHP, and C#, with more languages to come.
 <ol>
 
   <li>
-    <a href="https://github.com/protocolbuffers/protobuf#protocol-compiler-installation">Download
+    <a href="https://github.com/protocolbuffers/protobuf#protobuf-compiler-installation">Download
     and install</a> the protocol buffer compiler.
   </li>
 

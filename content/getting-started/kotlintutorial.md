@@ -262,12 +262,12 @@ fun promptPerson(): Person = person {
 
     print("Is this a mobile, home, or work phone? ")
     val type = when (readLine()) {
-      "mobile" -> Person.PhoneType.MOBILE
-      "home" -> Person.PhoneType.HOME
-      "work" -> Person.PhoneType.WORK
+      "mobile" -> Person.PhoneType.PHONE_TYPE_MOBILE
+      "home" -> Person.PhoneType.PHONE_TYPE_HOME
+      "work" -> Person.PhoneType.PHONE_TYPE_WORK
       else -> {
         println("Unknown phone type.  Using home.")
-        Person.PhoneType.HOME
+        Person.PhoneType.PHONE_TYPE_HOME
       }
     }
     phones += phoneNumber {
@@ -319,9 +319,9 @@ fun print(addressBook: AddressBook) {
     }
     for (phoneNumber in person.phonesList) {
       val modifier = when (phoneNumber.type) {
-        Person.PhoneType.MOBILE -> "Mobile"
-        Person.PhoneType.HOME -> "Home"
-        Person.PhoneType.WORK -> "Work"
+        Person.PhoneType.PHONE_TYPE_MOBILE -> "Mobile"
+        Person.PhoneType.PHONE_TYPE_HOME -> "Home"
+        Person.PhoneType.PHONE_TYPE_WORK -> "Work"
         else -> "Unknown"
       }
       println("  $modifier phone #: ${phoneNumber.number}")
