@@ -117,8 +117,9 @@ For example, if the `.proto` file contains:
 package foo.bar;
 ```
 
-Then the resulting Java class will be placed in Java package `foo.bar`. However,
-if the `.proto` file also contains a `java_package` option, like so:
+Then the resulting Java class will be placed in Java package
+`foo.bar`. However, if the `.proto` file also
+contains a `java_package` option, like so:
 
 ```proto
 package foo.bar;
@@ -629,6 +630,16 @@ The compiler will generate the following methods only in the message's builder:
     `Map`. Note that multiple calls to this method may return different map
     instances. The returned map reference may be invalidated by any subsequent
     method calls to the Builder.
+
+#### Message Value Map Fields {#message-value-map-fields}
+
+For maps with message types as values, the compiler will generate an additional
+method in the message's builder:
+
+-   `Foo.Builder putFooBuilderIfAbsent(int key);`: Ensures that `key` is present
+    in the mapping, and inserts a new `Foo.Builder` if one does not already
+    exist. Changes to the returned `Foo.Builder` will be reflected in the final
+    message.
 
 ## Any {#any-fields}
 
