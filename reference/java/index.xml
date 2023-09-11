@@ -79,8 +79,9 @@ is placed in the archive; you must still compile it separately to produce Java
 class files.&lt;/p>
 &lt;p>For example, if the &lt;code>.proto&lt;/code> file contains:&lt;/p>
 &lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-proto" data-lang="proto">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#204a87;font-weight:bold">package&lt;/span> &lt;span style="color:#000">foo&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">.&lt;/span>&lt;span style="color:#000">bar&lt;/span>&lt;span style="color:#000;font-weight:bold">;&lt;/span>&lt;span style="color:#a40000">
-&lt;/span>&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>Then the resulting Java class will be placed in Java package &lt;code>foo.bar&lt;/code>. However,
-if the &lt;code>.proto&lt;/code> file also contains a &lt;code>java_package&lt;/code> option, like so:&lt;/p>
+&lt;/span>&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>Then the resulting Java class will be placed in Java package
+&lt;code>foo.bar&lt;/code>. However, if the &lt;code>.proto&lt;/code> file also
+contains a &lt;code>java_package&lt;/code> option, like so:&lt;/p>
 &lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-proto" data-lang="proto">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#204a87;font-weight:bold">package&lt;/span> &lt;span style="color:#000">foo&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">.&lt;/span>&lt;span style="color:#000">bar&lt;/span>&lt;span style="color:#000;font-weight:bold">;&lt;/span>&lt;span style="color:#a40000">
 &lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#a40000">&lt;/span>&lt;span style="color:#204a87;font-weight:bold">option&lt;/span> &lt;span style="color:#000">java_package&lt;/span> &lt;span style="color:#ce5c00;font-weight:bold">=&lt;/span> &lt;span style="color:#4e9a06">&amp;#34;com.example.foo.bar&amp;#34;&lt;/span>&lt;span style="color:#000;font-weight:bold">;&lt;/span>&lt;span style="color:#a40000">
 &lt;/span>&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>Then the class is placed in the &lt;code>com.example.foo.bar&lt;/code> package instead. The
@@ -490,6 +491,15 @@ the given map to this field.&lt;/li>
 &lt;code>Map&lt;/code>. Note that multiple calls to this method may return different map
 instances. The returned map reference may be invalidated by any subsequent
 method calls to the Builder.&lt;/li>
+&lt;/ul>
+&lt;h4 id="message-value-map-fields">Message Value Map Fields&lt;/h4>
+&lt;p>For maps with message types as values, the compiler will generate an additional
+method in the message&amp;rsquo;s builder:&lt;/p>
+&lt;ul>
+&lt;li>&lt;code>Foo.Builder putFooBuilderIfAbsent(int key);&lt;/code>: Ensures that &lt;code>key&lt;/code> is present
+in the mapping, and inserts a new &lt;code>Foo.Builder&lt;/code> if one does not already
+exist. Changes to the returned &lt;code>Foo.Builder&lt;/code> will be reflected in the final
+message.&lt;/li>
 &lt;/ul>
 &lt;h2 id="any-fields">Any&lt;/h2>
 &lt;p>Given an &lt;a href="https://protobuf.dev/programming-guides/proto3#any">&lt;code>Any&lt;/code>&lt;/a> field
