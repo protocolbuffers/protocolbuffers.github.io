@@ -305,6 +305,12 @@ The C# 3.24.x runtime was first released in 2023 Q3.
   </tr>
 </table>
 
+### C&#35; Platform and Library Support {#csharp-support}
+
+Protobuf is committed to following the platform and library support policy
+described in
+[.NET Support Policy](https://opensource.google/documentation/policies/dotnet-support).
+
 ## Java {#java}
 
 <table>

@@ -9,7 +9,7 @@ This guide describes how to use the protocol buffer language to structure your
 protocol buffer data, including `.proto` file syntax and how to generate data
 access classes from your `.proto` files. It covers the **proto3** version of the
 protocol buffers language: for information on the **proto2** syntax, see the
-[Proto2 Language Guide](/programming-guides/proto).
+[Proto2 Language Guide](/programming-guides/proto2).
 
 This is a reference guide – for a step by step example that uses many of the
 features described in this document, see the
@@ -34,8 +34,8 @@ message SearchRequest {
 
 *   The first line of the file specifies that you're using `proto3` syntax: if
     you don't do this the protocol buffer compiler will assume you are using
-    [proto2](/programming-guides/proto). This must be the
-    first non-empty, non-comment line of the file.
+    [proto2](/programming-guides/proto2). This must be
+    the first non-empty, non-comment line of the file.
 *   The `SearchRequest` message definition specifies three fields (name/value
     pairs), one for each piece of data that you want to include in this type of
     message. Each field has a name and a type.
@@ -753,7 +753,7 @@ This is because:
 *   There must be a zero value, so that we can use 0 as a numeric
     [default value](#default).
 *   The zero value needs to be the first element, for compatibility with the
-    [proto2](/programming-guides/proto) semantics where
+    [proto2](/programming-guides/proto2) semantics where
     the first enum value is always the default.
 
 You can define aliases by assigning the same value to different enum constants.
@@ -912,9 +912,9 @@ project and use fully qualified names for all imports.
 ### Using proto2 Message Types
 
 It's possible to import
-[proto2](/programming-guides/proto) message types and use
-them in your proto3 messages, and vice versa. However, proto2 enums cannot be
-used directly in proto3 syntax (it's okay if an imported proto2 message uses
+[proto2](/programming-guides/proto2) message types and
+use them in your proto3 messages, and vice versa. However, proto2 enums cannot
+be used directly in proto3 syntax (it's okay if an imported proto2 message uses
 them).
 
 ## Nested Types {#nested}
@@ -1091,9 +1091,9 @@ for (const google::protobuf::Any& detail : status.details()) {
 development**.
 
 If you are already familiar with
-[proto2 syntax](/programming-guides/proto), the `Any` can
-hold arbitrary proto3 messages, similar to proto2 messages which can allow
-[extensions](/programming-guides/proto#extensions).
+[proto2 syntax](/programming-guides/proto2), the `Any`
+can hold arbitrary proto3 messages, similar to proto2 messages which can allow
+[extensions](/programming-guides/proto2#extensions).
 
 ## Oneof {#oneof}
 
@@ -1334,7 +1334,7 @@ special protocol buffer compiler plugin.
 
 If you don't want to use gRPC, it's also possible to use protocol buffers with
 your own RPC implementation. You can find out more about this in the
-[Proto2 Language Guide](/programming-guides/proto#services).
+[Proto2 Language Guide](/programming-guides/proto2#services).
 
 There are also a number of ongoing third-party projects to develop RPC
 implementations for Protocol Buffers. For a list of links to projects we know
@@ -1695,10 +1695,10 @@ apply custom options to enum values and to fields.
 Protocol Buffers also allows you to define and use your own options. This is an
 **advanced feature** which most people don't need. If you do think you need to
 create your own options, see the
-[Proto2 Language Guide](/programming-guides/proto#customoptions)
+[Proto2 Language Guide](/programming-guides/proto2#customoptions)
 for details. Note that creating custom options uses
-[extensions](/programming-guides/proto#extensions), which
-are permitted only for custom options in proto3.
+[extensions](/programming-guides/proto2#extensions),
+which are permitted only for custom options in proto3.
 
 ### Option Retention {#option-retention}
 
