@@ -518,6 +518,11 @@ protocol buffer parsers must be able to parse fields in any order.
     *   `foo` and `bar` are concatenations of the same individual messages in a
         different order.
 
+## Encoded Proto Size Limitations {#size-limit}
+
+Protos must be smaller than 2 GiB when serialized. Many proto implementations
+will refuse to serialize or parse messages that exceed this limit.
+
 ## Condensed Reference Card {#cheat-sheet}
 
 The following provides the most prominent parts of the wire format in an

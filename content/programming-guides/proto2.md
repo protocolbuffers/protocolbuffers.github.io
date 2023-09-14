@@ -100,6 +100,8 @@ Common causes of field number reuse:
 -   deleting a field and not [reserving](#fieldreserved) the number to prevent
     future reuse. This has been a very easy mistake to make with
     [extension fields](#extensions) for several reasons.
+    [Extension Declarations](/programming-guides/extension_declarations)
+    provide a mechanism for reserving extension fields.
 
 The max field is 29 bits instead of the more-typical 32 bits because three lower
 bits are used for the wire format. For more on this, see the
@@ -982,12 +984,40 @@ package media;
 
 // A container message to hold stuff that a user has created.
 message UserContent {
-  extensions 100 to 199;
+  // Set verification to `DECLARATION` to enforce extension declarations for all
+  // extensions in this range.
+  extensions 100 to 199 [verification = DECLARATION];
 }
 ```
 
 The container message's file (`media/user_content.proto`) defines the message
-`UserContent`, which reserves field numbers [100 to 199] for extensions.
+`UserContent`, which reserves field numbers [100 to 199] for extensions. It is
+recommended to set `verification = DECLARATION` for the range to require
+declarations for all its extensions.
+
+When the new extension (`kittens/video_ext.proto`) is added, a corresponding
+declaration should be added to `UserContent` and `verification` should be
+removed.
+
+```
+// A container message to hold stuff that a user has created.
+message UserContent {
+  extensions 100 to 199 [
+    declaration = {
+      number: 126,
+      full_name: ".kittens.kitten_videos",
+      type: ".kittens.Video",
+      repeated: true
+    }
+  ];
+}
+```
+
+`UserContent` declares that field number `126` will be used by a `repeated`
+extension field with the fully-qualified name `.kittens.kitten_videos` and the
+fully-qualified type `.kittens.Video`. To learn more about extension
+declarations see
+[Extension Declarations](/programming-guides/extension_declarations).
 
 Note that the container message's file (`media/user_content.proto`) **does not**
 import the kitten_video extension definition (`kittens/video_ext.proto`)
@@ -1028,7 +1058,36 @@ extension declarations:
 
 ```proto
 message ModernExtendableMessage {
-  extensions 1000 to 2000;
+  // All extensions in this range should use extension declarations.
+  extensions 1000 to 2000 [verification = DECLARATION];
+}
+```
+
+When adding a range for extension declarations before the actual extensions, you
+should add `verification = DECLARATION` to enforce that declarations are used
+for this new range. This placeholder can be removed once an actual declaration
+is added.
+
+It is safe to split an existing extension range into separate ranges that cover
+the same total range. This might be necessary for migrating a legacy message
+type to
+[Extension Declarations](/programming-guides/extension_declarations).
+For example, before migration, the range might be defined as:
+
+```proto
+message LegacyMessage {
+  extensions 1000 to max;
+}
+```
+
+And after migration (splitting the range) it can be:
+
+```proto
+message LegacyMessage {
+  // Legacy range that was using an unverified allocation scheme.
+  extensions 1000 to 524999999 [verification = UNVERIFIED];
+  // Current range that uses extension declarations.
+  extensions 525000000 to max  [verification = DECLARATION];
 }
 ```
 
@@ -1059,6 +1118,60 @@ messages. All the same rules for [Assigning Field Numbers](#assigning) apply to
 extension field numbers. The same
 [Consequences of Reusing Field Numbers](#consequences) also apply to reusing
 extension field numbers.
+
+Choosing unique extension field numbers is simple if the container message uses
+[extension declarations](/programming-guides/extension_declarations).
+When defining a new extension, choose the lowest field number above all other
+declarations from the highest extension range defined in the container message.
+For example, if a container message is defined like this:
+
+```proto
+message Container {
+  // Legacy range that was using an unverified allocation scheme
+  extensions 1000 to 524999999;
+  // Current range that uses extension declarations. (highest extension range)
+  extensions 525000000 to max  [
+    declaration = {
+      number: 525000001,
+      full_name: ".bar.baz_ext",
+      type: ".bar.Baz"
+    }
+    // 525,000,002 is the lowest field number above all other declarations
+  ];
+}
+```
+
+The next extension of `Container` should add a new declaration with the number
+`525000002`.
+
+#### Unverified Extension Number Allocation (not recommended) {#unverified}
+
+The owner of a container message may choose to forgo extension declarations in
+favor of their own unverified extension number allocation strategy.
+
+An unverified allocation scheme uses a mechanism external to the protobuf
+ecosystem to allocate extension field numbers within the selected extension
+range. One example could be using a monorepo's commit number. This system is
+"unverified" from the protobuf compiler's point of view since there is no way to
+check that an extension is using a properly acquired extension field number.
+
+The benefit of an unverified system over a verified system like extension
+declarations is the ability to define an extension without coordinating with the
+container message owner.
+
+The downside of an unverified system is that the protobuf compiler cannot
+protect participants from reusing extension field numbers.
+
+**Unverified extension field number allocation strategies are not recommended**
+because the [Consequences of Reusing Field Numbers](#consequences) fall on all
+extenders of a message (not just the developer that didn't follow the rules). If
+your use case requires very low coordination, consider using the
+[`Any` message](/reference/protobuf/google.protobuf.md#any)
+instead.
+
+Unverified extension field number allocation strategies are limited to the range
+1 to 524,999,999. Field numbers 525,000,000 and above can only be used with
+extension declarations.
 
 ### Specifying Extension Types {#specifying-extension-types}
 
@@ -1181,6 +1294,12 @@ for (const google::protobuf::Any& detail : status.details()) {
 
 **Currently the runtime libraries for working with `Any` types are under
 development**.
+
+If you want to limit contained messages to a small number of types and to
+require permission before adding new types to the list, consider using
+[extensions](#extensions) with
+[extension declarations](/programming-guides/extension_declarations)
+instead of `Any` message types.
 
 ## Oneof {#oneof}
 

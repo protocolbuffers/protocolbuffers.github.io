@@ -89,21 +89,14 @@ running on another platform.
 The following languages are supported directly in the protocol buffers compiler,
 protoc:
 
-*   [C++](/reference/cpp/cpp-generated/#invocation)
-
-*   [C#](/reference/csharp/csharp-generated/#invocation)
-
-*   [Java](/reference/java/java-generated/#invocation)
-
-*   [Kotlin](/reference/kotlin/kotlin-generated/#invocation)
-
-*   [Objective-C](/reference/objective-c/objective-c-generated/#invocation)
-
-*   [PHP](/reference/php/php-generated/#invocation)
-
-*   [Python](/reference/python/python-generated/#invocation)
-
-*   [Ruby](/reference/ruby/ruby-generated/#invocation)
+*   [C++](/reference/cpp/cpp-generated#invocation)
+*   [C#](/reference/csharp/csharp-generated#invocation)
+*   [Java](/reference/java/java-generated#invocation)
+*   [Kotlin](/reference/kotlin/kotlin-generated#invocation)
+*   [Objective-C](/reference/objective-c/objective-c-generated#invocation)
+*   [PHP](/reference/php/php-generated#invocation)
+*   [Python](/reference/python/python-generated#invocation)
+*   [Ruby](/reference/ruby/ruby-generated#invocation)
 
 The following languages are supported by Google, but the projects' source code
 resides in GitHub repositories. The protoc compiler uses plugins for these

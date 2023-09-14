@@ -1,5 +1,6 @@
 +++
 title = "Protobuf Editions Overview"
+linkTitle = "Overview"
 weight = 42
 description = "An overview of the Protobuf Editions functionality."
 type = "docs"
