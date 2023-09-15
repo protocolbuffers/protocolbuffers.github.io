@@ -3,13 +3,16 @@ title = "News"
 weight = 20
 description = "Get the latest news about Protocol Buffers."
 type = "docs"
+no_list = "true"
 +++
 
 News topics provide information about past events and changes with Protocol
 Buffers, and plans for upcoming changes.
 
+*   [September 15, 2023](/news/2023-09-15) - μpb Moving
+    to the Protobuf GitHub repository
 *   [August 15, 2023](/news/2023-08-15) - Breaking Python
-    change with the replacement of `message.UnknownFields()``
+    change with the replacement of `message.UnknownFields()`
 *   [August 9, 2023](/news/2023-08-09) - Support policy
     for .NET
 *   [July 17, 2023](/news/2023-07-17) - Dropping support

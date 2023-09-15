@@ -288,13 +288,15 @@ the `.proto` file uses lower-case with underscores
 ([as it should](/programming-guides/style)). The
 case-conversion works as follows:
 
-1.  For each underscore in the name, the underscore is removed, and the
+*   For each underscore in the name, the underscore is removed, and the
     following letter is capitalized.
-2.  If the name will have a prefix attached (e.g. "get"), the first letter is
+*   If the name will have a prefix attached (e.g. "get"), the first letter is
     capitalized. Otherwise, it is lower-cased.
+*   The letter following the last digit in each number in a method name is
+    capitalized.
 
 Thus, the field `foo_bar_baz` becomes `fooBarBaz`. If prefixed with `get`, it
-would be `getFooBarBaz`.
+would be `getFooBarBaz`. And `foo_ba23r_baz` becomes `fooBa23RBaz`.
 
 As well as accessor methods, the compiler generates an integer constant for each
 field containing its field number. The constant name is the field name converted
