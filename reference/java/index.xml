@@ -203,14 +203,16 @@ that modify the value are defined in the builder only.&lt;/p>
 the &lt;code>.proto&lt;/code> file uses lower-case with underscores
 (&lt;a href="https://protobuf.dev/programming-guides/style">as it should&lt;/a>). The
 case-conversion works as follows:&lt;/p>
-&lt;ol>
+&lt;ul>
 &lt;li>For each underscore in the name, the underscore is removed, and the
 following letter is capitalized.&lt;/li>
 &lt;li>If the name will have a prefix attached (e.g. &amp;ldquo;get&amp;rdquo;), the first letter is
 capitalized. Otherwise, it is lower-cased.&lt;/li>
-&lt;/ol>
+&lt;li>The letter following the last digit in each number in a method name is
+capitalized.&lt;/li>
+&lt;/ul>
 &lt;p>Thus, the field &lt;code>foo_bar_baz&lt;/code> becomes &lt;code>fooBarBaz&lt;/code>. If prefixed with &lt;code>get&lt;/code>, it
-would be &lt;code>getFooBarBaz&lt;/code>.&lt;/p>
+would be &lt;code>getFooBarBaz&lt;/code>. And &lt;code>foo_ba23r_baz&lt;/code> becomes &lt;code>fooBa23RBaz&lt;/code>.&lt;/p>
 &lt;p>As well as accessor methods, the compiler generates an integer constant for each
 field containing its field number. The constant name is the field name converted
 to upper-case followed by &lt;code>_FIELD_NUMBER&lt;/code>. For example, given the field
