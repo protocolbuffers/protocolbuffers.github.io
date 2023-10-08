@@ -16,7 +16,7 @@ type = "docs"
 <p>Example of accepted format: </p>
 
 <pre>"1972-01-01T10:00:20.021-05:00"</pre>
-</div> <hr><h3 id="TimeUtil.ToString.details"><code>static std::string TimeUtil::ToString(<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;const Duration &amp; duration)</code></h3><div style="margin-left: 16px"><p>Converts Duration to/from string format. </p><p>The string format will contains 3, 6, or 9 fractional digits depending on the precision required to represent the exact Duration value. For example: </p>
+</div> <hr><h3 id="TimeUtil.ToString.details"><code>static std::string TimeUtil::ToString(<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;const Duration &amp; duration)</code></h3><div style="margin-left: 16px"><p>Converts Duration to/from string format. </p><p>The string format will contain 3, 6, or 9 fractional digits depending on the precision required to represent the exact Duration value. For example: </p>
 <pre>"1s", "1.010s", "1.000000100s", "-3.100s"</pre>
 
 <p> The range that can be represented by Duration is from -315,576,000,000 to +315,576,000,000 inclusive (in seconds). </p>

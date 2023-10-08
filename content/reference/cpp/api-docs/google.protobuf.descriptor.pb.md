@@ -228,12 +228,12 @@ TYPE_SINT64 = 18;  // Uses ZigZag encoding.
   // If true, this is a proto3 "optional". When a proto3 field is optional, it
   // tracks presence regardless of field type.
   //
-  // When proto3_optional is true, this field must be belong to a oneof to
-  // signal to old proto3 clients that presence is tracked for this field. This
-  // oneof is known as a "synthetic" oneof, and this field must be its sole
-  // member (each proto3 optional field gets its own synthetic oneof). Synthetic
-  // oneofs exist in the descriptor only, and do not generate any API. Synthetic
-  // oneofs must be ordered after all "real" oneofs.
+  // When proto3_optional is true, this field must belong to a oneof to signal
+  // to old proto3 clients that presence is tracked for this field. This oneof
+  // is known as a "synthetic" oneof, and this field must be its sole member
+  // (each proto3 optional field gets its own synthetic oneof). Synthetic oneofs
+  // exist in the descriptor only, and do not generate any API. Synthetic oneofs
+  // must be ordered after all "real" oneofs.
   //
   // For message fields, proto3_optional doesn't create any semantic change,
   // since non-repeated message fields always track presence. However it still
@@ -433,7 +433,7 @@ message FileOptions {
 
   // By default Swift generators will take the proto package and CamelCase it
   // replacing '.' with underscore and use that to prefix the types/symbols
-  // defined. When this options is provided, they will use this value instead
+  // defined. When this option is provided, they will use this value instead
   // to prefix the types/symbols defined.
   optional string swift_prefix = 39;
 
@@ -722,7 +722,7 @@ message MethodOptions {
   extensions 1000 to max;
 }
 
-// A message representing a option the parser does not recognize. This only
+// A message representing an option the parser does not recognize. This only
 // appears in options protos created by the compiler::Parser class.
 // DescriptorPool resolves these when building Descriptor objects. Therefore,
 // options protos in descriptor objects (e.g. returned by Descriptor::options(),
@@ -730,7 +730,7 @@ message MethodOptions {
 // in them.
 message UninterpretedOption {
   // The name of the uninterpreted option.  Each string represents a segment in
-  // a dot-separated name.  is_extension is true iff a segment represents an
+  // a dot-separated name.  is_extension is true if a segment represents an
   // extension (denoted with parentheses in options specs in .proto files).
   // E.g.,{ [[]"foo", false], [[]"bar.baz", true], [[]"qux", false] } represents
   // "foo.(bar.baz).qux".
