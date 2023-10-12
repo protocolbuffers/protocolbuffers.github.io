@@ -1,13 +1,18 @@
 +++
-title = "Style Guide"
+title = "Effective Protos"
 weight = 50
 description = "Provides direction for how best to structure your proto definitions."
 type = "docs"
 +++
 
-This document provides a style guide for `.proto` files. By following these
-conventions, you'll make your protocol buffer message definitions and their
-corresponding classes consistent and easy to read.
+**Warning:** We're currently updating this page! Feel free to look around.
+
+This document provides guidelines for structuring your `.proto` files, design
+considerations and generally a good good practices that allows to improve
+maintainability of your protocol buffers overtime.
+
+By following these conventions, you'll make your protocol buffer message
+definitions and their corresponding classes consistent and easy to read.
 
 Note that protocol buffer style has evolved over time, so it is likely that you
 will see `.proto` files written in different conventions or styles. **Respect

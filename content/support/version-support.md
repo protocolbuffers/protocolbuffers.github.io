@@ -52,6 +52,8 @@ The C++ 4.24.x runtime was first released in 2023 Q3.
 The C++ 3.21.x runtime was first released in 2022 Q2 and has support until 2024
 Q1.
 
+C++ will target making major version bumps annually in Q1 of each year.
+
 <table>
   <tr>
     <th>protoc</th>
@@ -127,7 +129,7 @@ Q1.
   </tr>
   <tr>
     <td class="gray">25.x</td>
-    <td class="gray"></td>
+    <td class="gray">4.25.x</td>
     <td title=22Q2></td>
     <td title=22Q3></td>
     <td title=22Q4></td>
@@ -140,7 +142,7 @@ Q1.
   </tr>
   <tr>
     <td class="gray">26.x</td>
-    <td class="gray"></td>
+    <td class="gray">5.26.x</td>
     <td title=22Q2></td>
     <td title=22Q3></td>
     <td title=22Q4></td>
@@ -313,6 +315,8 @@ described in
 
 ## Java {#java}
 
+Java will target making major version bumps annually in Q1 of each year.
+
 <table>
   <tr>
     <th>protoc</th>
@@ -393,7 +397,7 @@ described in
   </tr>
   <tr>
     <td class="gray">25.x</td>
-    <td class="gray"></td>
+    <td class="gray">3.25.x</td>
     <td title=22Q2></td>
     <td title=22Q3></td>
     <td title=22Q4></td>
@@ -407,7 +411,7 @@ described in
   </tr>
   <tr>
     <td class="gray">26.x</td>
-    <td class="gray"></td>
+    <td class="gray">4.26.x</td>
     <td title=22Q2></td>
     <td title=22Q3></td>
     <td title=22Q4></td>

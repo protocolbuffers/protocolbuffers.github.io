@@ -1,7 +1,7 @@
 +++
 title = "Extension Declarations"
 weight = 83
-description = "This topic describes in detail what extension declarations are, why we need them, and how we use them."
+description = "Describes in detail what extension declarations are, why we need them, and how we use them."
 type = "docs"
 +++
 

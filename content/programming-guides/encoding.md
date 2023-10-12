@@ -1,7 +1,7 @@
 +++
 title = "Encoding"
 weight = 60
-description = "This topic explains how Protocol Buffers encodes data to files or to the wire."
+description = "Explains how Protocol Buffers encodes data to files or to the wire."
 type = "docs"
 +++
 

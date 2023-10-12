@@ -1,7 +1,7 @@
 +++
 title = "Language Guide (proto 3)"
 weight = 40
-description = "This topic covers how to use the version 3 of Protocol Buffers in your project."
+description = "Covers how to use the version 3 of Protocol Buffers in your project."
 type = "docs"
 +++
 
@@ -13,7 +13,8 @@ protocol buffers language: for information on the **proto2** syntax, see the
 
 This is a reference guide – for a step by step example that uses many of the
 features described in this document, see the
-[tutorial](/getting-started) for your chosen language.
+[tutorial](/getting-started)
+for your chosen language.
 
 ## Defining A Message Type {#simple}
 
@@ -81,7 +82,7 @@ this in
 
 Reusing a field number makes decoding wire-format messages ambiguous.
 
-The protobuf wire format is lean and doesn’t provide a way to detect fields
+The protobuf wire format is lean and doesn't provide a way to detect fields
 encoded using one definition and decoded using another.
 
 Encoding a field using one definition and then decoding that same field with a
@@ -139,7 +140,18 @@ In proto3, `repeated` fields of scalar numeric types use `packed` encoding by
 default. You can find out more about `packed` encoding in
 [Protocol Buffer Encoding](/programming-guides/encoding#packed).
 
-### Adding More Message Types
+#### Well-formed Messages {#well-formed}
+
+The term "well-formed," when applied to protobuf messages, refers to the bytes
+serialized/deserialized. The protoc parser validates that a given proto
+definition file is parseable.
+
+In the case of `optional` fields that have more than one value, the protoc
+parser will accept the input, but only uses the last field. So, the "bytes" may
+not be "well-formed" but the resulting message would have only one and would be
+"well-formed" (but would not roundtrip the same).
+
+### Adding More Message Types {#adding-types}
 
 Multiple message types can be defined in a single `.proto` file. This is useful
 if you are defining multiple related messages – so, for example, if you wanted
@@ -158,7 +170,13 @@ message SearchResponse {
 }
 ```
 
-### Adding Comments
+**Combining Messages leads to bloat** While multiple message types (such as
+message, enum, and service) can be defined in a single `.proto` file, it can
+also lead to dependency bloat when large numbers of messages with varying
+dependencies are defined in a single file. It's recommended to include as few
+message types per `.proto` file as possible.
+
+### Adding Comments {#adding-comments}
 
 To add comments to your `.proto` files, use C/C++-style `//` and `/* ... */`
 syntax.
@@ -178,11 +196,11 @@ message SearchRequest {
 
 Deleting fields can cause serious problems if not done properly.
 
-When you no longer need a non-required field and all references have been
-deleted from client code, you may delete the field definition from the message.
-However, you **must** [reserve the deleted field number](#fieldreserved). If you
-do not reserve the field number, it is possible for a developer to reuse that
-number in the future.
+When you no longer need a field and all references have been deleted from client
+code, you may delete the field definition from the message. However, you
+**must** [reserve the deleted field number](#fieldreserved). If you do not
+reserve the field number, it is possible for a developer to reuse that number in
+the future.
 
 You should also reserve the field name to allow JSON and TextFormat encodings of
 your message to continue to parse.
@@ -212,7 +230,7 @@ Reserved field number ranges are inclusive (`9 to 11` is the same as `9, 10,
 11`). Note that you can't mix field names and field numbers in the same
 `reserved` statement.
 
-### What's Generated From Your `.proto`? {#generated}
+### What's Generated from Your `.proto`? {#generated}
 
 When you run the [protocol buffer compiler](#generating) on a `.proto`, the
 compiler generates the code in your chosen language you'll need to work with the
@@ -241,14 +259,16 @@ from an input stream.
     file.
 *   For **C#**, the compiler generates a `.cs` file from each `.proto`, with a
     class for each message type described in your file.
+*   For **PHP**, the compiler generates a `.php` message file for each message
+    type described in your file, and a `.php` metadata file for each `.proto`
+    file you compile. The metadata file is used to load the valid message types
+    into the descriptor pool.
 *   For **Dart**, the compiler generates a `.pb.dart` file with a class for each
     message type in your file.
 
 You can find out more about using the APIs for each language by following the
-tutorial for your chosen language (proto3 versions coming soon). For even more
-API details, see the relevant
-[API reference](/reference/) (proto3 versions also coming
-soon).
+tutorial for your chosen language. For even more API
+details, see the relevant [API reference](/reference/).
 
 ## Scalar Value Types {#scalar}
 
@@ -257,412 +277,212 @@ type specified in the `.proto` file, and the corresponding type in the
 automatically generated class:
 
 <div style="overflow:auto;width:100%;">
-
-<table style="width: 110%;">
-
-<tbody>
-
-<tr>
-
-<th>.proto Type</th>
-
-<th>Notes</th>
-
-<th>C++ Type</th>
-
-<th>Java/Kotlin Type<sup>[1]</sup></th>
-
-<th>Python Type<sup>[3]</sup></th>
-
-<th>Go Type</th>
-
-<th>Ruby Type</th>
-
-<th>C# Type</th>
-
-<th>PHP Type</th>
-
-<th>Dart Type</th>
-
-</tr>
-
-<tr>
-
-<td>double</td>
-
-<td></td>
-
-<td>double</td>
-
-<td>double</td>
-
-<td>float</td>
-
-<td>float64</td>
-
-<td>Float</td>
-
-<td>double</td>
-
-<td>float</td>
-
-<td>double</td>
-
-</tr>
-
-<tr>
-
-<td>float</td>
-
-<td></td>
-
-<td>float</td>
-
-<td>float</td>
-
-<td>float</td>
-
-<td>float32</td>
-
-<td>Float</td>
-
-<td>float</td>
-
-<td>float</td>
-
-<td>double</td>
-
-</tr>
-
-<tr>
-
-<td>int32</td>
-
-<td>Uses variable-length encoding. Inefficient for encoding negative numbers –
- if your field is likely to have negative values, use sint32 instead.</td>
-
-<td>int32</td>
-
-<td>int</td>
-
-<td>int</td>
-
-<td>int32</td>
-
-<td>Fixnum or Bignum (as required)</td>
-
-<td>int</td>
-
-<td>integer</td>
-
-<td>int</td>
-
-</tr>
-
-<tr>
-
-<td>int64</td>
-
-<td>Uses variable-length encoding. Inefficient for encoding negative numbers –
-if your field is likely to have negative values, use sint64 instead.</td>
-
-<td>int64</td>
-
-<td>long</td>
-
-<td>int/long<sup>[4]</sup></td>
-
-<td>int64</td>
-
-<td>Bignum</td>
-
-<td>long</td>
-
-<td>integer/string<sup>[6]</sup></td>
-
-<td>Int64</td>
-
-</tr>
-
-<tr>
-
-<td>uint32</td>
-
-<td>Uses variable-length encoding.</td>
-
-<td>uint32</td>
-
-<td>int<sup>[2]</sup></td>
-
-<td>int/long<sup>[4]</sup></td>
-
-<td>uint32</td>
-
-<td>Fixnum or Bignum (as required)</td>
-
-<td>uint</td>
-
-<td>integer</td>
-
-<td>int</td>
-
-</tr>
-
-<tr>
-
-<td>uint64</td>
-
-<td>Uses variable-length encoding.</td>
-
-<td>uint64</td>
-
-<td>long<sup>[2]</sup></td>
-
-<td>int/long<sup>[4]</sup></td>
-
-<td>uint64</td>
-
-<td>Bignum</td>
-
-<td>ulong</td>
-
-<td>integer/string<sup>[6]</sup></td>
-
-<td>Int64</td>
-
-</tr>
-
-<tr>
-
-<td>sint32</td>
-
-<td>Uses variable-length encoding. Signed int value. These more efficiently
-encode negative numbers than regular int32s.</td>
-
-<td>int32</td>
-
-<td>int</td>
-
-<td>int</td>
-
-<td>int32</td>
-
-<td>Fixnum or Bignum (as required)</td>
-
-<td>int</td>
-
-<td>integer</td>
-
-<td>int</td>
-
-</tr>
-
-<tr>
-
-<td>sint64</td>
-
-<td>Uses variable-length encoding. Signed int value. These more efficiently
-encode negative numbers than regular int64s.</td>
-
-<td>int64</td>
-
-<td>long</td>
-
-<td>int/long<sup>[4]</sup></td>
-
-<td>int64</td>
-
-<td>Bignum</td>
-
-<td>long</td>
-
-<td>integer/string<sup>[6]</sup></td>
-
-<td>Int64</td>
-
-</tr>
-
-<tr>
-
-<td>fixed32</td>
-
-<td>Always four bytes. More efficient than uint32 if values are often greater
-than 2<sup>28</sup>.</td>
-
-<td>uint32</td>
-
-<td>int<sup>[2]</sup></td>
-
-<td>int/long<sup>[4]</sup></td>
-
-<td>uint32</td>
-
-<td>Fixnum or Bignum (as required)</td>
-
-<td>uint</td>
-
-<td>integer</td>
-
-<td>int</td>
-
-</tr>
-
-<tr>
-
-<td>fixed64</td>
-
-<td>Always eight bytes. More efficient than uint64 if values are often greater
-than 2<sup>56</sup>.</td>
-
-<td>uint64</td>
-
-<td>long<sup>[2]</sup></td>
-
-<td>int/long<sup>[4]</sup></td>
-
-<td>uint64</td>
-
-<td>Bignum</td>
-
-<td>ulong</td>
-
-<td>integer/string<sup>[6]</sup></td>
-
-<td>Int64</td>
-
-</tr>
-
-<tr>
-
-<td>sfixed32</td>
-
-<td>Always four bytes.</td>
-
-<td>int32</td>
-
-<td>int</td>
-
-<td>int</td>
-
-<td>int32</td>
-
-<td>Fixnum or Bignum (as required)</td>
-
-<td>int</td>
-
-<td>integer</td>
-
-<td>int</td>
-
-</tr>
-
-<tr>
-
-<td>sfixed64</td>
-
-<td>Always eight bytes.</td>
-
-<td>int64</td>
-
-<td>long</td>
-
-<td>int/long<sup>[4]</sup></td>
-
-<td>int64</td>
-
-<td>Bignum</td>
-
-<td>long</td>
-
-<td>integer/string<sup>[6]</sup></td>
-
-<td>Int64</td>
-
-</tr>
-
-<tr>
-
-<td>bool</td>
-
-<td></td>
-
-<td>bool</td>
-
-<td>boolean</td>
-
-<td>bool</td>
-
-<td>bool</td>
-
-<td>TrueClass/FalseClass</td>
-
-<td>bool</td>
-
-<td>boolean</td>
-
-<td>bool</td>
-
-</tr>
-
-<tr>
-
-<td>string</td>
-
-<td>A string must always contain UTF-8 encoded or 7-bit ASCII text, and cannot
-be longer than 2<sup>32</sup>.</td>
-
-<td>string</td>
-
-<td>String</td>
-
-<td>str/unicode<sup>[5]</sup></td>
-
-<td>string</td>
-
-<td>String (UTF-8)</td>
-
-<td>string</td>
-
-<td>string</td>
-
-<td>String</td>
-
-</tr>
-
-<tr>
-
-<td>bytes</td>
-
-<td>May contain any arbitrary sequence of bytes no longer than
-2<sup>32</sup>.</td>
-
-<td>string</td>
-
-<td>ByteString</td>
-
-<td>str (Python 2)<br/>bytes (Python 3)</td>
-
-<td>[]byte</td>
-
-<td>String (ASCII-8BIT)</td>
-
-<td>ByteString</td>
-
-<td>string</td>
-
-<td>List<int></td>
-
-</tr>
-
-</tbody>
-
-</table>
-
+  <table style="width: 110%;">
+    <tbody>
+      <tr>
+        <th>.proto Type</th>
+        <th>Notes</th>
+        <th>C++ Type</th>
+        <th>Java/Kotlin Type<sup>[1]</sup></th>
+        <th>Python Type<sup>[3]</sup></th>
+        <th>Go Type</th>
+        <th>Ruby Type</th>
+        <th>C# Type</th>
+        <th>PHP Type</th>
+        <th>Dart Type</th>
+      </tr>
+      <tr>
+        <td>double</td>
+        <td></td>
+        <td>double</td>
+        <td>double</td>
+        <td>float</td>
+        <td>float64</td>
+        <td>Float</td>
+        <td>double</td>
+        <td>float</td>
+        <td>double</td>
+      </tr>
+      <tr>
+        <td>float</td>
+        <td></td>
+        <td>float</td>
+        <td>float</td>
+        <td>float</td>
+        <td>float32</td>
+        <td>Float</td>
+        <td>float</td>
+        <td>float</td>
+        <td>double</td>
+      </tr>
+      <tr>
+        <td>int32</td>
+        <td>Uses variable-length encoding. Inefficient for encoding negative
+        numbers – if your field is likely to have negative values, use sint32
+        instead.</td>
+        <td>int32</td>
+        <td>int</td>
+        <td>int</td>
+        <td>int32</td>
+        <td>Fixnum or Bignum (as required)</td>
+        <td>int</td>
+        <td>integer</td>
+        <td>int</td>
+      </tr>
+      <tr>
+        <td>int64</td>
+        <td>Uses variable-length encoding. Inefficient for encoding negative
+        numbers – if your field is likely to have negative values, use sint64
+        instead.</td>
+        <td>int64</td>
+        <td>long</td>
+        <td>int/long<sup>[4]</sup></td>
+        <td>int64</td>
+        <td>Bignum</td>
+        <td>long</td>
+        <td>integer/string<sup>[6]</sup></td>
+        <td>Int64</td>
+      </tr>
+      <tr>
+        <td>uint32</td>
+        <td>Uses variable-length encoding.</td>
+        <td>uint32</td>
+        <td>int<sup>[2]</sup></td>
+        <td>int/long<sup>[4]</sup></td>
+        <td>uint32</td>
+        <td>Fixnum or Bignum (as required)</td>
+        <td>uint</td>
+        <td>integer</td>
+        <td>int</td>
+      </tr>
+      <tr>
+        <td>uint64</td>
+        <td>Uses variable-length encoding.</td>
+        <td>uint64</td>
+        <td>long<sup>[2]</sup></td>
+        <td>int/long<sup>[4]</sup></td>
+        <td>uint64</td>
+        <td>Bignum</td>
+        <td>ulong</td>
+        <td>integer/string<sup>[6]</sup></td>
+        <td>Int64</td>
+      </tr>
+      <tr>
+        <td>sint32</td>
+        <td>Uses variable-length encoding. Signed int value. These more
+        efficiently encode negative numbers than regular int32s.</td>
+        <td>int32</td>
+        <td>int</td>
+        <td>int</td>
+        <td>int32</td>
+        <td>Fixnum or Bignum (as required)</td>
+        <td>int</td>
+        <td>integer</td>
+        <td>int</td>
+      </tr>
+      <tr>
+        <td>sint64</td>
+        <td>Uses variable-length encoding. Signed int value. These more
+        efficiently encode negative numbers than regular int64s.</td>
+        <td>int64</td>
+        <td>long</td>
+        <td>int/long<sup>[4]</sup></td>
+        <td>int64</td>
+        <td>Bignum</td>
+        <td>long</td>
+        <td>integer/string<sup>[6]</sup></td>
+        <td>Int64</td>
+      </tr>
+      <tr>
+        <td>fixed32</td>
+        <td>Always four bytes. More efficient than uint32 if values are often
+        greater than 2<sup>28</sup>.</td>
+        <td>uint32</td>
+        <td>int<sup>[2]</sup></td>
+        <td>int/long<sup>[4]</sup></td>
+        <td>uint32</td>
+        <td>Fixnum or Bignum (as required)</td>
+        <td>uint</td>
+        <td>integer</td>
+        <td>int</td>
+      </tr>
+      <tr>
+        <td>fixed64</td>
+        <td>Always eight bytes. More efficient than uint64 if values are often
+        greater than 2<sup>56</sup>.</td>
+        <td>uint64</td>
+        <td>long<sup>[2]</sup></td>
+        <td>int/long<sup>[4]</sup></td>
+        <td>uint64</td>
+        <td>Bignum</td>
+        <td>ulong</td>
+        <td>integer/string<sup>[6]</sup></td>
+        <td>Int64</td>
+      </tr>
+      <tr>
+        <td>sfixed32</td>
+        <td>Always four bytes.</td>
+        <td>int32</td>
+        <td>int</td>
+        <td>int</td>
+        <td>int32</td>
+        <td>Fixnum or Bignum (as required)</td>
+        <td>int</td>
+        <td>integer</td>
+        <td>int</td>
+      </tr>
+      <tr>
+        <td>sfixed64</td>
+        <td>Always eight bytes.</td>
+        <td>int64</td>
+        <td>long</td>
+        <td>int/long<sup>[4]</sup></td>
+        <td>int64</td>
+        <td>Bignum</td>
+        <td>long</td>
+        <td>integer/string<sup>[6]</sup></td>
+        <td>Int64</td>
+      </tr>
+      <tr>
+        <td>bool</td>
+        <td></td>
+        <td>bool</td>
+        <td>boolean</td>
+        <td>bool</td>
+        <td>bool</td>
+        <td>TrueClass/FalseClass</td>
+        <td>bool</td>
+        <td>boolean</td>
+        <td>bool</td>
+      </tr>
+      <tr>
+        <td>string</td>
+        <td>A string must always contain UTF-8 encoded or 7-bit ASCII text, and cannot
+        be longer than 2<sup>32</sup>.</td>
+        <td>string</td>
+        <td>String</td>
+        <td>str/unicode<sup>[5]</sup></td>
+        <td>string</td>
+        <td>String (UTF-8)</td>
+        <td>string</td>
+        <td>string</td>
+        <td>String</td>
+      </tr>
+      <tr>
+        <td>bytes</td>
+        <td>May contain any arbitrary sequence of bytes no longer than 2<sup>32</sup>.</td>
+        <td>string</td>
+        <td>ByteString</td>
+        <td>str (Python 2)<br/>bytes (Python 3)</td>
+        <td>[]byte</td>
+        <td>String (ASCII-8BIT)</td>
+        <td>ByteString</td>
+        <td>string</td>
+        <td>List<int></td>
+      </tr>
+    </tbody>
+  </table>
 </div>
-
-You can find out more about how these types are encoded when you serialize your
-message in
-[Protocol Buffer Encoding](/programming-guides/encoding).
 
 <sup>[1]</sup> Kotlin uses the corresponding types from Java, even for unsigned
 types, to ensure compatibility in mixed Java/Kotlin codebases.
@@ -684,18 +504,23 @@ str if an ASCII string is given (this is subject to change).
 <sup>[6]</sup> Integer is used on 64-bit machines and string is used on 32-bit
 machines.
 
+You can find out more about how these types are encoded when you serialize your
+message in
+[Protocol Buffer Encoding](/programming-guides/encoding).
+
 ## Default Values {#default}
 
 When a message is parsed, if the encoded message does not contain a particular
-singular element, the corresponding field in the parsed object is set to the
-default value for that field. These defaults are type-specific:
+implicit presence element, accessing the corresponding field in the parsed
+object returns the default value for that field. These defaults are
+type-specific:
 
 *   For strings, the default value is the empty string.
 *   For bytes, the default value is empty bytes.
 *   For bools, the default value is false.
 *   For numeric types, the default value is zero.
-*   For [enums](#enum), the default value is the **first defined enum value**,
-    which must be 0.
+*   For enums, the default value is the **first defined enum value**, which must
+    be 0.
 *   For message fields, the field is not set. Its exact value is
     language-dependent. See the
     [generated code guide](/reference/) for details.
@@ -717,7 +542,7 @@ chosen language for more details about how defaults work in generated code.
 ## Enumerations {#enum}
 
 When you're defining a message type, you might want one of its fields to only
-have one of a pre-defined list of values. For example, let's say you want to add
+have one of a predefined list of values. For example, let's say you want to add
 a `corpus` field for each `SearchRequest`, where the corpus can be `UNIVERSAL`,
 `WEB`, `IMAGES`, `LOCAL`, `NEWS`, `PRODUCTS` or `VIDEO`. You can do this very
 simply by adding an `enum` to your message definition with a constant for each
@@ -754,13 +579,14 @@ This is because:
     [default value](#default).
 *   The zero value needs to be the first element, for compatibility with the
     [proto2](/programming-guides/proto2) semantics where
-    the first enum value is always the default.
+    the first enum value is the default unless a different value is explicitly
+    specified.
 
 You can define aliases by assigning the same value to different enum constants.
-To do this you need to set the `allow_alias` option to `true`, otherwise the
-protocol compiler generates a warning message when aliases are found.
-Though all alias values are valid during deserialization, the first value is
-always used when serializing.
+To do this you need to set the `allow_alias` option to `true`. Otherwise, the
+protocol buffer compiler generates a warning message when aliases are
+found. Though all alias values are valid during deserialization, the first value
+is always used when serializing.
 
 ```proto
 enum EnumAllowingAlias {
@@ -783,9 +609,9 @@ Enumerator constants must be in the range of a 32-bit integer. Since `enum`
 values use
 [varint encoding](/programming-guides/encoding) on the
 wire, negative values are inefficient and thus not recommended. You can define
-`enum`s within a message definition, as in the above example, or outside – these
-`enum`s can be reused in any message definition in your `.proto` file. You can
-also use an `enum` type declared in one message as the type of a field in a
+`enum`s within a message definition, as in the earlier example, or outside –
+these `enum`s can be reused in any message definition in your `.proto` file. You
+can also use an `enum` type declared in one message as the type of a field in a
 different message, using the syntax `_MessageType_._EnumType_`.
 
 When you run the protocol buffer compiler on a `.proto` that uses an `enum`, the
@@ -862,7 +688,7 @@ message Result {
 
 ### Importing Definitions {#importing}
 
-In the above example, the `Result` message type is defined in the same file as
+In the earlier example, the `Result` message type is defined in the same file as
 `SearchResponse` – what if the message type you want to use as a field type is
 already defined in another `.proto` file?
 
@@ -909,7 +735,7 @@ flag. If no flag was given, it looks in the directory in which the compiler was
 invoked. In general you should set the `--proto_path` flag to the root of your
 project and use fully qualified names for all imports.
 
-### Using proto2 Message Types
+### Using proto2 Message Types {#proto2}
 
 It's possible to import
 [proto2](/programming-guides/proto2) message types and
@@ -943,10 +769,12 @@ message SomeOtherMessage {
 }
 ```
 
-You can nest messages as deeply as you like:
+You can nest messages as deeply as you like. In the example below, note that the
+two nested types named `Inner` are entirely independent, since they are defined
+within different messages:
 
 ```proto
-message Outer {                  // Level 0
+message Outer {       // Level 0
   message MiddleAA {  // Level 1
     message Inner {   // Level 2
       int64 ival = 1;
@@ -1018,7 +846,7 @@ the following rules:
     which will not be parsed correctly when an `optional` field is expected.
 *   `enum` is compatible with `int32`, `uint32`, `int64`, and `uint64` in terms
     of wire format (note that values will be truncated if they don't fit).
-    However be aware that client code may treat them differently when the
+    However, be aware that client code may treat them differently when the
     message is deserialized: for example, unrecognized proto3 `enum` types will
     be preserved in the message, but how this is represented when the message is
     deserialized is language-dependent. Int fields always just preserve their
@@ -1032,6 +860,13 @@ the following rules:
     new `oneof` may be safe if you are sure that no code sets more than one at a
     time. Moving fields into an existing `oneof` is not safe. Likewise, changing
     a single field `oneof` to an `optional` field or extension is safe.
+*   Changing a field between a `map<K, V>` and the corresponding `repeated`
+    message field is binary compatible (see [Maps](#maps), below, for the
+    message layout and other restrictions). However, the safety of the change is
+    application-dependent: when deserializing and reserializing a message,
+    clients using the `repeated` field definition will produce a semantically
+    identical result; however, clients using the `map` field definition may
+    reorder entries and drop entries with duplicate keys.
 
 ## Unknown Fields {#unknowns}
 
@@ -1090,9 +925,8 @@ for (const google::protobuf::Any& detail : status.details()) {
 **Currently the runtime libraries for working with `Any` types are under
 development**.
 
-If you are already familiar with
-[proto2 syntax](/programming-guides/proto2), the `Any`
-can hold arbitrary proto3 messages, similar to proto2 messages which can allow
+The `Any` message types can hold arbitrary proto3 messages, similar to proto2
+messages which can allow
 [extensions](/programming-guides/proto2#extensions).
 
 ## Oneof {#oneof}
@@ -1112,7 +946,7 @@ order in the proto will overwrite all previous ones*.
 
 Field numbers for oneof fields must be unique within the enclosing message.
 
-### Using Oneof
+### Using Oneof {#using-oneof}
 
 To define a oneof in your `.proto` you use the `oneof` keyword followed by your
 oneof name, in this case `test_oneof`:
@@ -1127,14 +961,15 @@ message SampleMessage {
 ```
 
 You then add your oneof fields to the oneof definition. You can add fields of
-any type, except `map` fields and `repeated` fields.
+any type, except `map` fields and `repeated` fields. If you need to add a
+repeated field to a oneof, you can use a message containing the repeated field.
 
 In your generated code, oneof fields have the same getters and setters as
 regular fields. You also get a special method for checking which value (if any)
 in the oneof is set. You can find out more about the oneof API for your chosen
 language in the relevant [API reference](/reference/).
 
-### Oneof Features
+### Oneof Features {#oneof-features}
 
 *   Setting a oneof field will automatically clear all other members of the
     oneof. So if you set several oneof fields, only the *last* field you set
@@ -1173,7 +1008,7 @@ language in the relevant [API reference](/reference/).
     ```
 
 *   Again in C++, if you `Swap()` two messages with oneofs, each message will
-    end up with the other’s oneof case: in the example below, `msg1` will have a
+    end up with the other's oneof case: in the example below, `msg1` will have a
     `sub_message` and `msg2` will have a `name`.
 
     ```c++
@@ -1226,6 +1061,8 @@ message is associated with a string key, you could define it like this:
 map<string, Project> projects = 3;
 ```
 
+### Maps Features {#maps-features}
+
 *   Map fields cannot be `repeated`.
 *   Wire format ordering and map iteration ordering of map values are undefined,
     so you cannot rely on your map items being in a particular order.
@@ -1239,8 +1076,8 @@ map<string, Project> projects = 3;
     the default value for the type is serialized, while in other languages
     nothing is serialized.
 
-The generated map API is currently available for all proto3 supported languages.
-You can find out more about the map API for your chosen language in the relevant
+The generated map API is currently available for all supported languages. You
+can find out more about the map API for your chosen language in the relevant
 [API reference](/reference/).
 
 ### Backwards compatibility {#backwards}
@@ -1258,7 +1095,7 @@ repeated MapFieldEntry map_field = N;
 ```
 
 Any protocol buffers implementation that supports maps must both produce and
-accept data that can be accepted by the above definition.
+accept data that can be accepted by the earlier definition.
 
 ## Packages {#packages}
 
@@ -1288,17 +1125,26 @@ language:
     example, `Open` would be in the namespace `foo::bar`.
 *   In **Java** and **Kotlin**, the package is used as the Java package, unless
     you explicitly provide an `option java_package` in your `.proto` file.
-*   In **Python**, the package directive is ignored, since Python modules are
+*   In **Python**, the `package` directive is ignored, since Python modules are
     organized according to their location in the file system.
-*   In **Go**, the package is used as the Go package name, unless you explicitly
-    provide an `option go_package` in your `.proto` file.
+*   In **Go**, the `package` directive is ignored, and the generated `.pb.go`
+    file is in the package named after the corresponding `go_proto_library`
+    Bazel rule. For open source projects, you **must** provide either a `go_package` option or set the Bazel `-M` flag.
 *   In **Ruby**, the generated classes are wrapped inside nested Ruby
     namespaces, converted to the required Ruby capitalization style (first
     letter capitalized; if the first character is not a letter, `PB_` is
     prepended). For example, `Open` would be in the namespace `Foo::Bar`.
+*   In **PHP** the package is used as the namespace after converting to
+    PascalCase, unless you explicitly provide an `option php_namespace` in your
+    `.proto` file. For example, `Open` would be in the namespace `Foo\Bar`.
 *   In **C#** the package is used as the namespace after converting to
     PascalCase, unless you explicitly provide an `option csharp_namespace` in
     your `.proto` file. For example, `Open` would be in the namespace `Foo.Bar`.
+
+Note that even when the `package` directive does not directly affect the
+generated code, for example in Python, it is still strongly recommended to
+specify the package for the `.proto` file, as otherwise it may lead to naming
+conflicts in descriptors and make the proto not portable for other languages.
 
 ### Packages and Name Resolution {#name-resolution}
 
@@ -1532,7 +1378,7 @@ value.
   </tbody>
 </table>
 
-### JSON Options
+### JSON Options {#json-options}
 
 A proto3 JSON implementation may provide the following options:
 
@@ -1637,6 +1483,24 @@ Here are a few of the most commonly used options:
     option optimize_for = CODE_SIZE;
     ```
 
+*   `cc_generic_services`, `java_generic_services`, `py_generic_services` (file
+    options): **Generic services are deprecated.** Whether or not the protocol
+    buffer compiler should generate abstract service code based on
+    [services definitions](#services) in C++, Java, and Python, respectively.
+    For legacy reasons, these default to `true`. However, as of version 2.3.0
+    (January 2010), it is considered preferable for RPC implementations to
+    provide
+    [code generator plugins](/reference/cpp/api-docs/google.protobuf.compiler.plugin.pb)
+    to generate code more specific to each system, rather than rely on the
+    "abstract" services.
+
+    ```proto
+    // This file relies on plugins to generate service code.
+    option cc_generic_services = false;
+    option java_generic_services = false;
+    option py_generic_services = false;
+    ```
+
 *   `cc_enable_arenas` (file option): Enables
     [arena allocation](/reference/cpp/arenas) for C++
     generated code.
@@ -1647,6 +1511,21 @@ Here are a few of the most commonly used options:
     uppercase characters as
     [recommended by Apple](https://developer.apple.com/library/ios/documentation/Cocoa/Conceptual/ProgrammingWithObjectiveC/Conventions/Conventions.html#//apple_ref/doc/uid/TP40011210-CH10-SW4).
     Note that all 2 letter prefixes are reserved by Apple.
+
+*   `packed` (field option): Defaults to `true` on a repeated field of a basic
+    numeric type, causing a more compact
+    [encoding](/programming-guides/encoding#packed) to be
+    used. There is no downside to using this option, but it can be set to
+    `false`. Note that prior to version 2.3.0, parsers that received packed data
+    when not expected would ignore it. Therefore, it was not possible to change
+    an existing field to packed format without breaking wire compatibility. In
+    2.3.0 and later, this change is safe, as parsers for packable fields will
+    always accept both formats, but be careful if you have to deal with old
+    programs using old protobuf versions.
+
+    ```proto
+    repeated int32 samples = 4 [packed = false];
+    ```
 
 *   `deprecated` (field option): If set to `true`, indicates that the field is
     deprecated and should not be used by new code. In most languages this has no
@@ -1679,22 +1558,22 @@ extend google.protobuf.EnumValueOptions {
 }
 
 enum Data {
-  DATA_UNKNOWN = 0;
+  DATA_UNSPECIFIED = 0;
   DATA_SEARCH = 1 [deprecated = true];
   DATA_DISPLAY = 2 [
     (string_name) = "display_value"
-  ]
+  ];
 }
 ```
 
-Continue to the next section, [Custom Options](#customoptions) to see how to
-apply custom options to enum values and to fields.
+See [Custom Options](#customoptions) to see how to apply custom options to enum
+values and to fields.
 
 ### Custom Options {#customoptions}
 
-Protocol Buffers also allows you to define and use your own options. This is an
-**advanced feature** which most people don't need. If you do think you need to
-create your own options, see the
+Protocol Buffers also allows you to define and use your own options. Note that
+this is an **advanced feature** which most people don't need. If you do think
+you need to create your own options, see the
 [Proto2 Language Guide](/programming-guides/proto2#customoptions)
 for details. Note that creating custom options uses
 [extensions](/programming-guides/proto2#extensions),
@@ -1795,14 +1674,15 @@ enum MyEnum {
 
 ## Generating Your Classes {#generating}
 
-To generate the Java, Kotlin, Python, C++, Go, Ruby, Objective-C, or C# code you
-need to work with the message types defined in a `.proto` file, you need to run
-the protocol buffer compiler `protoc` on the `.proto`. If you haven't installed
-the compiler, [download the package](/downloads) and
-follow the instructions in the README. For Go, you also need to install a
-special code generator plugin for the compiler: you can find this and
-installation instructions in the
-[golang/protobuf](https://github.com/golang/protobuf/) repository on GitHub.
+To generate the Java, Kotlin, Python, C++, Go, Ruby, Objective-C, or C# code
+that you need to work with the message types defined in a `.proto` file, you
+need to run the protocol buffer compiler `protoc` on the `.proto` file. If you
+haven't installed the compiler,
+[download the package](/downloads) and follow the
+instructions in the README. For Go, you also need to install a special code
+generator plugin for the compiler; you can find this and installation
+instructions in the [golang/protobuf](https://github.com/golang/protobuf/)
+repository on GitHub.
 
 The Protocol Compiler is invoked as follows:
 
@@ -1849,8 +1729,7 @@ protoc --proto_path=IMPORT_PATH --cpp_out=DST_DIR --java_out=DST_DIR --python_ou
     compiler will write the output to a single ZIP-format archive file with the
     given name. `.jar` outputs will also be given a manifest file as required by
     the Java JAR specification. Note that if the output archive already exists,
-    it will be overwritten; the compiler is not smart enough to add files to an
-    existing archive.
+    it will be overwritten.
 
 *   You must provide one or more `.proto` files as input. Multiple `.proto`
     files can be specified at once. Although the files are named relative to the

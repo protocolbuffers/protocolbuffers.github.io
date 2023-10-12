@@ -1,7 +1,7 @@
 +++
 title = "Enum Behavior"
 weight = 55
-description = "This topic explains how enums currently work in Protocol Buffers vs. how they should work."
+description = "Explains how enums currently work in Protocol Buffers vs. how they should work."
 type = "docs"
 +++
 

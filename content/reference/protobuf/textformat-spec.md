@@ -630,8 +630,7 @@ support. Some tooling also
 supports the legacy extensions `.textpb` and `.pbtxt`. All other extensions
 besides the above are **strongly** discouraged; in particular, extensions such
 as `.protoascii` wrongly imply that text format is ascii-only, and others like
-`.pb.txt` are not recognized by common tooling. METADATA files are special text
-format proto files that lack any extension.
+`.pb.txt` are not recognized by common tooling.
 {{% /alert %}}
 
 ```textproto

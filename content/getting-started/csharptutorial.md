@@ -2,7 +2,7 @@
 title = "Protocol Buffer Basics: C#"
 weight = 220
 linkTitle = "C#"
-description = "This tutorial provides a basic C# programmers introduction to working with protocol buffers."
+description = "A basic C# programmers introduction to working with protocol buffers."
 type = "docs"
 +++
 

@@ -2,7 +2,7 @@
 title = "Go Generated Code Guide"
 weight = 610
 linkTitle = "Generated Code Guide"
-description = "This topic describes exactly what Go code the protocol buffer compiler generates for any given protocol definition."
+description = "Describes exactly what Go code the protocol buffer compiler generates for any given protocol definition."
 type = "docs"
 +++
 

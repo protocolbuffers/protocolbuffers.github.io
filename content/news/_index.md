@@ -9,6 +9,8 @@ no_list = "true"
 News topics provide information about past events and changes with Protocol
 Buffers, and plans for upcoming changes.
 
+*   [October 10, 2023](/news/2023-10-10) - Documentation
+    for Protobuf Editions features is published
 *   [September 15, 2023](/news/2023-09-15) - μpb Moving
     to the Protobuf GitHub repository
 *   [August 15, 2023](/news/2023-08-15) - Breaking Python

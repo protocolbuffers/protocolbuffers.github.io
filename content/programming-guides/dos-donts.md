@@ -1,7 +1,7 @@
 +++
 title = "Proto Best Practices"
 weight = 90
-description = "This topic contains vetted best practices for authoring Protocol Buffers."
+description = "Shares vetted best practices for authoring Protocol Buffers."
 type = "docs"
 +++
 

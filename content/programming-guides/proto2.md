@@ -1,7 +1,7 @@
 +++
 title = "Language Guide (proto 2)"
 weight = 30
-description = "This topic covers how to use the version 2 of Protocol Buffers in your project."
+description = "Covers how to use the version 2 of Protocol Buffers in your project."
 aliases = "/programming-guides/proto/"
 type = "docs"
 +++
@@ -9,12 +9,13 @@ type = "docs"
 This guide describes how to use the protocol buffer language to structure your
 protocol buffer data, including `.proto` file syntax and how to generate data
 access classes from your `.proto` files. It covers the **proto2** version of the
-protocol buffers language: for information on **proto3** syntax, see the
+protocol buffers language; for information on **proto3** syntax, see the
 [Proto3 Language Guide](/programming-guides/proto3).
 
 This is a reference guide – for a step by step example that uses many of the
 features described in this document, see the
-[tutorial](/getting-started) for your chosen language.
+[tutorial](/getting-started)
+for your chosen language.
 
 ## Defining A Message Type {#simple}
 
@@ -29,20 +30,20 @@ syntax = "proto2";
 message SearchRequest {
   optional string query = 1;
   optional int32 page_number = 2;
-  optional int32 result_per_page = 3;
+  optional int32 results_per_page = 3;
 }
 ```
 
 *   The first line of the file specifies that you're using `proto2` syntax. This
-    should be the first non-empty, non-comment line of the file.
+    must be the first non-empty, non-comment line of the file.
 *   The `SearchRequest` message definition specifies three fields (name/value
     pairs), one for each piece of data that you want to include in this type of
     message. Each field has a name and a type.
 
 ### Specifying Field Types {#specifying-types}
 
-In the above example, all the fields are [scalar types](#scalar): two integers
-(`page_number` and `result_per_page`) and a string (`query`). You can also
+In the earlier example, all the fields are [scalar types](#scalar): two integers
+(`page_number` and `results_per_page`) and a string (`query`). You can also
 specify [enumerations](#enum) and composite types like other message types for
 your field.
 
@@ -107,15 +108,28 @@ The max field is 29 bits instead of the more-typical 32 bits because three lower
 bits are used for the wire format. For more on this, see the
 [Encoding topic](/programming-guides/encoding#structure).
 
-### Specifying Field Rules {#specifying-rules}
+<a id="specifying-rules"></a>
+
+### Specifying Field Labels {#field-labels}
 
 Message fields can be one of the following:
 
-*   `optional`: a [well-formed](#well-formed) message can have zero or one of
-    this field (but not more than one).
-*   `repeated`: this field can be repeated any number of times (including zero)
-    in a well-formed message. The order of the repeated values will be
-    preserved.
+*   `optional`: An `optional` field is in one of two possible states:
+
+    *   the field is set, and contains a value that was explicitly set or parsed
+        from the wire. It will be serialized to the wire.
+    *   the field is unset, and will return the default value. It will not be
+        serialized to the wire.
+
+    You can check to see if the value was explicitly set.
+
+*   `repeated`: this field type can be repeated zero or more times in a
+    well-formed message. The order of the repeated values will be preserved.
+
+*   `map`: this is a paired key/value field type. See
+    [Maps](/programming-guides/encoding#maps) for more on
+    this field type.
+
 *   `required`: **Do not use.** Required fields are so problematic they were
     removed from proto3. Semantics for required field should be implemented at
     the application layer. When it *is* used, a
@@ -169,7 +183,7 @@ message type, you could add it to the same `.proto`:
 message SearchRequest {
   optional string query = 1;
   optional int32 page_number = 2;
-  optional int32 result_per_page = 3;
+  optional int32 results_per_page = 3;
 }
 
 message SearchResponse {
@@ -195,7 +209,7 @@ syntax.
 message SearchRequest {
   optional string query = 1;
   optional int32 page_number = 2;  // Which page number do we want?
-  optional int32 result_per_page = 3;  // Number of results to return per page.
+  optional int32 results_per_page = 3;  // Number of results to return per page.
 }
 ```
 
@@ -239,7 +253,7 @@ Reserved field number ranges are inclusive (`9 to 11` is the same as `9, 10,
 11`). Note that you can't mix field names and field numbers in the same
 `reserved` statement.
 
-### What's Generated From Your `.proto`? {#generated}
+### What's Generated from Your `.proto`? {#generated}
 
 When you run the [protocol buffer compiler](#generating) on a `.proto`, the
 compiler generates the code in your chosen language you'll need to work with the
@@ -252,16 +266,28 @@ from an input stream.
 *   For **Java**, the compiler generates a `.java` file with a class for each
     message type, as well as a special `Builder` class for creating message
     class instances.
-*   **Python** is a little different – the Python compiler generates a module
+*   For **Kotlin**, in addition to the Java generated code, the compiler
+    generates a `.kt` file for each message type, containing a DSL which can be
+    used to simplify creating message instances.
+*   **Python** is a little different — the Python compiler generates a module
     with a static descriptor of each message type in your `.proto`, which is
     then used with a *metaclass* to create the necessary Python data access
     class at runtime.
 *   For **Go**, the compiler generates a `.pb.go` file with a type for each
     message type in your file.
+*   For **Ruby**, the compiler generates a `.rb` file with a Ruby module
+    containing your message types.
+*   For **Objective-C**, the compiler generates a `pbobjc.h` and `pbobjc.m` file
+    from each `.proto`, with a class for each message type described in your
+    file.
+*   For **C#**, the compiler generates a `.cs` file from each `.proto`, with a
+    class for each message type described in your file.
+*   For **Dart**, the compiler generates a `.pb.dart` file with a class for each
+    message type in your file.
 
 You can find out more about using the APIs for each language by following the
-tutorial for your chosen language. For even more API details, see the relevant
-[API reference](/reference/).
+tutorial for your chosen language. For even more API
+details, see the relevant [API reference](/reference/).
 
 ## Scalar Value Types {#scalar}
 
@@ -269,317 +295,255 @@ A scalar message field can have one of the following types – the table shows t
 type specified in the `.proto` file, and the corresponding type in the
 automatically generated class:
 
-<table border="1">
-
-<tbody>
-
-<tr>
-
-<th>.proto Type</th>
-
-<th>Notes</th>
-
-<th>C++ Type</th>
-
-<th>Java Type</th>
-
-<th>Python Type<sup>[2]</sup></th>
-
-<th>Go Type</th>
-
-</tr>
-
-<tr>
-
-<td>double</td>
-
-<td></td>
-
-<td>double</td>
-
-<td>double</td>
-
-<td>float</td>
-
-<td>*float64</td>
-
-</tr>
-
-<tr>
-
-<td>float</td>
-
-<td></td>
-
-<td>float</td>
-
-<td>float</td>
-
-<td>float</td>
-
-<td>*float32</td>
-
-</tr>
-
-<tr>
-
-<td>int32</td>
-
-<td>Uses variable-length encoding. Inefficient for encoding negative numbers – if your field is likely to have negative values, use sint32 instead.</td>
-
-<td>int32</td>
-
-<td>int</td>
-
-<td>int</td>
-
-<td>*int32</td>
-
-</tr>
-
-<tr>
-
-<td>int64</td>
-
-<td>Uses variable-length encoding. Inefficient for encoding negative numbers – if your field is likely to have negative values, use sint64 instead.</td>
-
-<td>int64</td>
-
-<td>long</td>
-
-<td>int/long<sup>[3]</sup></td>
-
-<td>*int64</td>
-
-</tr>
-
-<tr>
-
-<td>uint32</td>
-
-<td>Uses variable-length encoding.</td>
-
-<td>uint32</td>
-
-<td>int<sup>[1]</sup></td>
-
-<td>int/long<sup>[3]</sup></td>
-
-<td>*uint32</td>
-
-</tr>
-
-<tr>
-
-<td>uint64</td>
-
-<td>Uses variable-length encoding.</td>
-
-<td>uint64</td>
-
-<td>long<sup>[1]</sup></td>
-
-<td>int/long<sup>[3]</sup></td>
-
-<td>*uint64</td>
-
-</tr>
-
-<tr>
-
-<td>sint32</td>
-
-<td>Uses variable-length encoding. Signed int value. These more efficiently encode negative numbers than regular int32s.</td>
-
-<td>int32</td>
-
-<td>int</td>
-
-<td>int</td>
-
-<td>*int32</td>
-
-</tr>
-
-<tr>
-
-<td>sint64</td>
-
-<td>Uses variable-length encoding. Signed int value. These more efficiently encode negative numbers than regular int64s.</td>
-
-<td>int64</td>
-
-<td>long</td>
-
-<td>int/long<sup>[3]</sup></td>
-
-<td>*int64</td>
-
-</tr>
-
-<tr>
-
-<td>fixed32</td>
-
-<td>Always four bytes. More efficient than uint32 if values are often greater than 2<sup>28</sup>.</td>
-
-<td>uint32</td>
-
-<td>int<sup>[1]</sup></td>
-
-<td>int/long<sup>[3]</sup></td>
-
-<td>*uint32</td>
-
-</tr>
-
-<tr>
-
-<td>fixed64</td>
-
-<td>Always eight bytes. More efficient than uint64 if values are often greater than 2<sup>56</sup>.</td>
-
-<td>uint64</td>
-
-<td>long<sup>[1]</sup></td>
-
-<td>int/long<sup>[3]</sup></td>
-
-<td>*uint64</td>
-
-</tr>
-
-<tr>
-
-<td>sfixed32</td>
-
-<td>Always four bytes.</td>
-
-<td>int32</td>
-
-<td>int</td>
-
-<td>int</td>
-
-<td>*int32</td>
-
-</tr>
-
-<tr>
-
-<td>sfixed64</td>
-
-<td>Always eight bytes.</td>
-
-<td>int64</td>
-
-<td>long</td>
-
-<td>int/long<sup>[3]</sup></td>
-
-<td>*int64</td>
-
-</tr>
-
-<tr>
-
-<td>bool</td>
-
-<td></td>
-
-<td>bool</td>
-
-<td>boolean</td>
-
-<td>bool</td>
-
-<td>*bool</td>
-
-</tr>
-
-<tr>
-
-<td>string</td>
-
-<td>A string must always contain UTF-8 encoded text.</td>
-
-<td>string</td>
-
-<td>String</td>
-
-<td>unicode (Python 2) or str (Python 3)</td>
-
-<td>*string</td>
-
-</tr>
-
-<tr>
-
-<td>bytes</td>
-
-<td>May contain any arbitrary sequence of bytes.</td>
-
-<td>string</td>
-
-<td>ByteString</td>
-
-<td>bytes</td>
-
-<td>[]byte</td>
-
-</tr>
-
-</tbody>
-
-</table>
+<div style="overflow:auto;width:100%;">
+  <table style="width: 110%;">
+    <tbody>
+      <tr>
+        <th>.proto Type</th>
+        <th>Notes</th>
+        <th>C++ Type</th>
+        <th>Java/Kotlin Type<sup>[1]</sup></th>
+        <th>Python Type<sup>[3]</sup></th>
+        <th>Go Type</th>
+        <th>Ruby Type</th>
+        <th>C# Type</th>
+        <th>Dart Type</th>
+      </tr>
+      <tr>
+        <td>double</td>
+        <td></td>
+        <td>double</td>
+        <td>double</td>
+        <td>float</td>
+        <td>*float64</td>
+        <td>Float</td>
+        <td>double</td>
+        <td>double</td>
+      </tr>
+      <tr>
+        <td>float</td>
+        <td></td>
+        <td>float</td>
+        <td>float</td>
+        <td>float</td>
+        <td>*float32</td>
+        <td>Float</td>
+        <td>float</td>
+        <td>double</td>
+      </tr>
+      <tr>
+        <td>int32</td>
+        <td>Uses variable-length encoding. Inefficient for encoding negative
+        numbers – if your field is likely to have negative values, use sint32
+        instead.</td>
+        <td>int32</td>
+        <td>int</td>
+        <td>int</td>
+        <td>int32</td>
+        <td>Fixnum or Bignum (as required)</td>
+        <td>int</td>
+        <td>*int32</td>
+      </tr>
+      <tr>
+        <td>int64</td>
+        <td>Uses variable-length encoding. Inefficient for encoding negative
+        numbers – if your field is likely to have negative values, use sint64
+        instead.</td>
+        <td>int64</td>
+        <td>long</td>
+        <td>int/long<sup>[4]</sup></td>
+        <td>*int64</td>
+        <td>Bignum</td>
+        <td>long</td>
+        <td>Int64</td>
+      </tr>
+      <tr>
+        <td>uint32</td>
+        <td>Uses variable-length encoding.</td>
+        <td>uint32</td>
+        <td>int<sup>[2]</sup></td>
+        <td>int/long<sup>[4]</sup></td>
+        <td>*uint32</td>
+        <td>Fixnum or Bignum (as required)</td>
+        <td>uint</td>
+        <td>int</td>
+      </tr>
+      <tr>
+        <td>uint64</td>
+        <td>Uses variable-length encoding.</td>
+        <td>uint64</td>
+        <td>long<sup>[2]</sup></td>
+        <td>int/long<sup>[4]</sup></td>
+        <td>*uint64</td>
+        <td>Bignum</td>
+        <td>ulong</td>
+        <td>Int64</td>
+      </tr>
+      <tr>
+        <td>sint32</td>
+        <td>Uses variable-length encoding. Signed int value. These more
+        efficiently encode negative numbers than regular int32s.</td>
+        <td>int32</td>
+        <td>int</td>
+        <td>int</td>
+        <td>int32</td>
+        <td>Fixnum or Bignum (as required)</td>
+        <td>int</td>
+        <td>*int32</td>
+      </tr>
+      <tr>
+        <td>sint64</td>
+        <td>Uses variable-length encoding. Signed int value. These more
+        efficiently encode negative numbers than regular int64s.</td>
+        <td>int64</td>
+        <td>long</td>
+        <td>int/long<sup>[4]</sup></td>
+        <td>*int64</td>
+        <td>Bignum</td>
+        <td>long</td>
+        <td>Int64</td>
+      </tr>
+      <tr>
+        <td>fixed32</td>
+        <td>Always four bytes. More efficient than uint32 if values are often
+        greater than 2<sup>28</sup>.</td>
+        <td>uint32</td>
+        <td>int<sup>[2]</sup></td>
+        <td>int/long<sup>[4]</sup></td>
+        <td>*uint32</td>
+        <td>Fixnum or Bignum (as required)</td>
+        <td>uint</td>
+        <td>int</td>
+      </tr>
+      <tr>
+        <td>fixed64</td>
+        <td>Always eight bytes. More efficient than uint64 if values are often
+        greater than 2<sup>56</sup>.</td>
+        <td>uint64</td>
+        <td>long<sup>[2]</sup></td>
+        <td>int/long<sup>[4]</sup></td>
+        <td>*uint64</td>
+        <td>Bignum</td>
+        <td>ulong</td>
+        <td>Int64</td>
+      </tr>
+      <tr>
+        <td>sfixed32</td>
+        <td>Always four bytes.</td>
+        <td>int32</td>
+        <td>int</td>
+        <td>int</td>
+        <td>*int32</td>
+        <td>Fixnum or Bignum (as required)</td>
+        <td>int</td>
+        <td>int</td>
+      </tr>
+      <tr>
+        <td>sfixed64</td>
+        <td>Always eight bytes.</td>
+        <td>int64</td>
+        <td>long</td>
+        <td>int/long<sup>[4]</sup></td>
+        <td>*int64</td>
+        <td>Bignum</td>
+        <td>long</td>
+        <td>Int64</td>
+      </tr>
+      <tr>
+        <td>bool</td>
+        <td></td>
+        <td>bool</td>
+        <td>boolean</td>
+        <td>bool</td>
+        <td>*bool</td>
+        <td>TrueClass/FalseClass</td>
+        <td>bool</td>
+        <td>bool</td>
+      </tr>
+      <tr>
+        <td>string</td>
+        <td>A string must always contain UTF-8 encoded or 7-bit ASCII text, and
+        cannot be longer than 2<sup>32</sup>.</td>
+        <td>string</td>
+        <td>String</td>
+        <td>unicode (Python 2) or str (Python 3)</td>
+        <td>*string</td>
+        <td>String (UTF-8)</td>
+        <td>string</td>
+        <td>String</td>
+      </tr>
+      <tr>
+        <td>bytes</td>
+        <td>May contain any arbitrary sequence of bytes no longer than
+        2<sup>32</sup>.</td>
+        <td>string</td>
+        <td>ByteString</td>
+        <td>bytes</td>
+        <td>[]byte</td>
+        <td>String (ASCII-8BIT)</td>
+        <td>ByteString</td>
+        <td>List<int></td>
+      </tr>
+    </tbody>
+  </table>
+</div>
+
+<sup>[1]</sup> Kotlin uses the corresponding types from Java, even for unsigned
+types, to ensure compatibility in mixed Java/Kotlin codebases.
+
+<sup>[2]</sup> In Java, unsigned 32-bit and 64-bit integers are represented
+using their signed counterparts, with the top bit simply being stored in the
+sign bit.
+
+<sup>[3]</sup> In all cases, setting values to a field will perform type
+checking to make sure it is valid.
+
+<sup>[4]</sup> 64-bit or unsigned 32-bit integers are always represented as long
+when decoded, but can be an int if an int is given when setting the field. In
+all cases, the value must fit in the type represented when set. See [2].
 
 You can find out more about how these types are encoded when you serialize your
 message in
 [Protocol Buffer Encoding](/programming-guides/encoding).
 
-<sup>[1]</sup> In Java, unsigned 32-bit and 64-bit integers are represented
-using their signed counterparts, with the top bit simply being stored in the
-sign bit.
+## Optional Fields and Default Values {#optional}
 
-<sup>[2]</sup> In all cases, setting values to a field will perform type
-checking to make sure it is valid.
-
-<sup>[3]</sup> 64-bit or unsigned 32-bit integers are always represented as long
-when decoded, but can be an int if an int is given when setting the field. In
-all cases, the value must fit in the type represented when set. See [2].
-
-## Optional Fields And Default Values {#optional}
-
-As mentioned above, elements in a message description can be labeled `optional`.
-A well-formed message may or may not contain an optional element. When a message
-is parsed, if it does not contain an optional element, accessing the
-corresponding field in the parsed object returns the default value for that
-field. The default value can be specified as part of the message description.
-For example, let's say you want to provide a default value of 10 for a
-`SearchRequest`'s `result_per_page` value.
+As mentioned earlier, elements in a message description can be labeled
+`optional`. A well-formed message may or may not contain an optional element.
+When a message is parsed, if the encoded message does not contain an optional
+element, accessing the corresponding field in the parsed object returns the
+default value for that field. The default value can be specified as part of the
+message description. For example, let's say you want to provide a default value
+of 10 for a `SearchRequest`'s `result_per_page` value.
 
 ```proto
 optional int32 result_per_page = 3 [default = 10];
 ```
 
 If the default value is not specified for an optional element, a type-specific
-default value is used instead: for strings, the default value is the empty
-string. For bytes, the default value is the empty byte string. For bools, the
-default value is false. For numeric types, the default value is zero. For enums,
-the default value is the first value listed in the enum's type definition. This
-means care must be taken when adding a value to the beginning of an enum value
-list. See the [Updating A Message Type](#updating) section for guidelines on how
-to safely change definitions.
+default value is used instead:
+
+*   For strings, the default value is the empty string.
+*   For bytes, the default value is empty bytes.
+*   For bools, the default value is false.
+*   For numeric types, the default value is zero.
+*   For enums, the default value is the **first defined enum value**.
+
+Because the default value for enums is the first defined enum value, take care
+when adding a value to the beginning of an enum value list. See the
+[Updating a Message Type](#updating) section for guidelines on how to safely
+change definitions.
 
 ## Enumerations {#enum}
 
 When you're defining a message type, you might want one of its fields to only
-have one of a pre-defined list of values. For example, let's say you want to add
+have one of a predefined list of values. For example, let's say you want to add
 a `corpus` field for each `SearchRequest`, where the corpus can be `UNIVERSAL`,
 `WEB`, `IMAGES`, `LOCAL`, `NEWS`, `PRODUCTS` or `VIDEO`. You can do this very
 simply by adding an `enum` to your message definition - a field with an `enum`
 type can only have one of a specified set of constants as its value (if you try
 to provide a different value, the parser will treat it like an unknown field).
+
 In the following example we've added an `enum` called `Corpus` with all the
 possible values, and a field of type `Corpus`:
 
@@ -598,7 +562,7 @@ enum Corpus {
 message SearchRequest {
   optional string query = 1;
   optional int32 page_number = 2;
-  optional int32 result_per_page = 3 [default = 10];
+  optional int32 results_per_page = 3 [default = 10];
   optional Corpus corpus = 4 [default = CORPUS_UNIVERSAL];
 }
 ```
@@ -619,9 +583,9 @@ is always used when serializing.
 enum EnumAllowingAlias {
   option allow_alias = true;
   EAA_UNSPECIFIED = 0;
-  EAA_UNKNOWN = 1;
   EAA_STARTED = 1;
-  EAA_RUNNING = 2;
+  EAA_RUNNING = 1;
+  EAA_FINISHED = 2;
 }
 enum EnumNotAllowingAlias {
   ENAA_UNSPECIFIED = 0;
@@ -635,15 +599,15 @@ Enumerator constants must be in the range of a 32-bit integer. Since `enum`
 values use
 [varint encoding](/programming-guides/encoding) on the
 wire, negative values are inefficient and thus not recommended. You can define
-`enum`s within a message definition or outside – these `enum`s can be reused in
-any message definition in your `.proto` file. You can also use an `enum` type
-declared in one message as the type of a field in a different message, using the
-syntax `_MessageType_._EnumType_`.
+`enum`s within a message definition, as in the earlier example, or outside –
+these `enum`s can be reused in any message definition in your `.proto` file. You
+can also use an `enum` type declared in one message as the type of a field in a
+different message, using the syntax `_MessageType_._EnumType_`.
 
 When you run the protocol buffer compiler on a `.proto` that uses an `enum`, the
-generated code will have a corresponding `enum` for Java or C++, or a special
-`EnumDescriptor` class for Python that's used to create a set of symbolic
-constants with integer values in the runtime-generated class.
+generated code will have a corresponding `enum` for Java, Kotlin, or C++, or a
+special `EnumDescriptor` class for Python that's used to create a set of
+symbolic constants with integer values in the runtime-generated class.
 
 {{% alert title="Important" color="warning" %}} The
 generated code may be subject to language-specific limitations on the number of
@@ -692,7 +656,7 @@ specify a field of type `Result` in `SearchResponse`:
 
 ```proto
 message SearchResponse {
-  repeated Result result = 1;
+  repeated Result results = 1;
 }
 
 message Result {
@@ -704,7 +668,7 @@ message Result {
 
 ### Importing Definitions {#importing}
 
-In the above example, the `Result` message type is defined in the same file as
+In the earlier example, the `Result` message type is defined in the same file as
 `SearchResponse` – what if the message type you want to use as a field type is
 already defined in another `.proto` file?
 
@@ -771,7 +735,7 @@ message SearchResponse {
     optional string title = 2;
     repeated string snippets = 3;
   }
-  repeated Result result = 1;
+  repeated Result results = 1;
 }
 ```
 
@@ -798,8 +762,8 @@ message Outer {       // Level 0
   }
   message MiddleBB {  // Level 1
     message Inner {   // Level 2
-      optional string name = 1;
-      optional bool   flag = 2;
+      optional int32  ival = 1;
+      optional bool   booly = 2;
     }
   }
 }
@@ -828,10 +792,10 @@ A group simply combines a nested message type and a field into a single
 declaration. In your code, you can treat this message just as if it had a
 `Result` type field called `result` (the latter name is converted to lower-case
 so that it does not conflict with the former). Therefore, this example is
-exactly equivalent to the `SearchResponse` above, except that the message has a
-different [wire format](/programming-guides/encoding).
+exactly equivalent to the `SearchResponse` earlier, except that the message has
+a different [wire format](/programming-guides/encoding).
 
-## Updating A Message Type {#updating}
+## Updating a Message Type {#updating}
 
 If an existing message type no longer meets all your needs – for example, you'd
 like the message format to have an extra field – but you'd still like to use
@@ -845,7 +809,7 @@ you use JSON or
 to store your protocol buffer messages, the changes that you can make in your
 proto definition are different. {{% /alert %}}
 
-If your use case isn't covered in the safe-or-not tool, check
+Check
 [Proto Best Practices](/programming-guides/dos-donts) and
 the following rules:
 
@@ -854,15 +818,16 @@ the following rules:
     same type. If you want to renumber a field, see the instructions for
     [deleting a field](#deleting).
 *   Any new fields that you add should be `optional` or `repeated`. This means
-    that any messages serialized by code using your "old" message format can be
-    parsed by your new generated code, as they won't be missing any `required`
-    elements. You should set up sensible [default values](#optional) for these
-    elements so that new code can properly interact with messages generated by
-    old code. Similarly, messages created by your new code can be parsed by your
-    old code: old binaries simply ignore the new field when parsing. However,
-    the unknown fields are not discarded, and if the message is later
-    serialized, the unknown fields are serialized along with it – so if the
-    message is passed on to new code, the new fields are still available.
+    that any messages serialized by code using your "old" message format can
+    still be parsed by your new generated code, as they won't be missing any
+    `required` elements. You should keep in mind the [default values](#optional)
+    for these elements so that new code can properly interact with messages
+    generated by old code. Similarly, messages created by your new code can be
+    parsed by your old code: old binaries simply ignore the new field when
+    parsing. However, the unknown fields are not discarded, and if the message
+    is later serialized, the unknown fields are serialized along with it – so if
+    the message is passed on to new code, the new fields are still available.
+    See the [Unknown Fields](#unknowns) section for details.
 *   Non-required fields can be removed, as long as the field number is not used
     again in your updated message type. You may want to rename the field
     instead, perhaps adding the prefix "OBSOLETE_", or make the field number
@@ -896,16 +861,16 @@ the following rules:
     default value as it was defined in that program's version of the protocol.
     It will NOT see the default value that was defined in the sender's code.
 *   `enum` is compatible with `int32`, `uint32`, `int64`, and `uint64` in terms
-    of wire format (note that values will be truncated if they don't fit), but
-    be aware that client code may treat them differently when the message is
-    deserialized. Notably, unrecognized `enum` values are discarded when the
-    message is deserialized, which makes the field's `has..` accessor return
-    false and its getter return the first value listed in the `enum` definition,
-    or the default value if one is specified. In the case of repeated enum
-    fields, any unrecognized values are stripped out of the list. However, an
-    integer field will always preserve its value. Because of this, you need to
-    be very careful when upgrading an integer to an `enum` in terms of receiving
-    out of bounds enum values on the wire.
+    of wire format (note that values will be truncated if they don't fit).
+    However, be aware that client code may treat them differently when the
+    message is deserialized. Notably, unrecognized `enum` values are discarded
+    when the message is deserialized, which makes the field's `has..` accessor
+    return false and its getter return the first value listed in the `enum`
+    definition, or the default value if one is specified. In the case of
+    repeated enum fields, any unrecognized values are stripped out of the list.
+    However, an integer field will always preserve its value. Because of this,
+    you need to be very careful when upgrading an integer to an `enum` in terms
+    of receiving out of bounds enum values on the wire.
 *   In the current Java and C++ implementations, when unrecognized `enum` values
     are stripped out, they are stored along with other unknown fields. Note that
     this can result in strange behavior if this data is serialized and then
@@ -932,6 +897,18 @@ the following rules:
     identical result; however, clients using the `map` field definition may
     reorder entries and drop entries with duplicate keys.
 
+## Unknown Fields {#unknowns}
+
+Unknown fields are well-formed protocol buffer serialized data representing
+fields that the parser does not recognize. For example, when an old binary
+parses data sent by a new binary with new fields, those new fields become
+unknown fields in the old binary.
+
+Originally, proto3 messages always discarded unknown fields during parsing, but
+in version 3.5 we reintroduced the preservation of unknown fields to match the
+proto2 behavior. In versions 3.5 and later, unknown fields are retained during
+parsing and included in the serialized output.
+
 ## Extensions {#extensions}
 
 An extension is a field defined outside of its container message; usually in a
@@ -950,10 +927,10 @@ There are two main reasons to use extensions:
     [Consequences of Reusing Field Numbers](#consequences). If your use case
     requires very low coordination for a large number of extensions, consider
     using the
-    [`Any` message type](/reference/protobuf/google.protobuf.md#any)
+    [`Any` message type](/reference/protobuf/google.protobuf#any)
     instead.
 
-### Example Extension? {#ext-example}
+### Example Extension {#ext-example}
 
 Let's look at an example extension:
 
@@ -1166,7 +1143,7 @@ protect participants from reusing extension field numbers.
 because the [Consequences of Reusing Field Numbers](#consequences) fall on all
 extenders of a message (not just the developer that didn't follow the rules). If
 your use case requires very low coordination, consider using the
-[`Any` message](/reference/protobuf/google.protobuf.md#any)
+[`Any` message](/reference/protobuf/google.protobuf#any)
 instead.
 
 Unverified extension field number allocation strategies are limited to the range
@@ -1206,8 +1183,8 @@ scope of `puppies.Photo`.
 
 This is a common source of confusion: Declaring an `extend` block nested inside
 a message type *does not* imply any relationship between the outer type and the
-extended type. In particular, the above example *does not* mean that `Photo` is
-any sort of subclass of `UserProfile`. All it means is that the symbol
+extended type. In particular, the earlier example *does not* mean that `Photo`
+is any sort of subclass of `UserProfile`. All it means is that the symbol
 `likes_count` is declared inside the scope of `Photo`; it's simply a static
 member.
 
@@ -1313,6 +1290,9 @@ the oneof automatically clears all the other members. You can check which value
 in a oneof is set (if any) using a special `case()` or `WhichOneof()` method,
 depending on your chosen language.
 
+Note that if *multiple values are set, the last set value as determined by the
+order in the proto will overwrite all previous ones*.
+
 Field numbers for oneof fields must be unique within the enclosing message.
 
 ### Using Oneof {#using-oneof}
@@ -1330,12 +1310,12 @@ message SampleMessage {
 ```
 
 You then add your oneof fields to the oneof definition. You can add fields of
-any type, but cannot use the `required`, `optional`, or `repeated` keywords. If
-you need to add a repeated field to a oneof, you can use a message containing
-the repeated field.
+any type except `map` fields, but you cannot use the `required`, `optional`, or
+`repeated` keywords. If you need to add a repeated field to a oneof, you can use
+a message containing the repeated field.
 
 In your generated code, oneof fields have the same getters and setters as
-regular `optional` methods. You also get a special method for checking which
+regular `optional` fields. You also get a special method for checking which
 value (if any) in the oneof is set. You can find out more about the oneof API
 for your chosen language in the relevant
 [API reference](/reference/).
@@ -1346,11 +1326,13 @@ for your chosen language in the relevant
     oneof. So if you set several oneof fields, only the *last* field you set
     will still have a value.
 
-    ```c++
+    ```cpp
     SampleMessage message;
     message.set_name("name");
     CHECK(message.has_name());
-    message.mutable_sub_message();   // Will clear name field.
+    // Calling mutable_sub_message() will clear the name field and will set
+    // sub_message to a new instance of SubMessage with none of its fields set.
+    message.mutable_sub_message();
     CHECK(!message.has_name());
     ```
 
@@ -1379,7 +1361,7 @@ for your chosen language in the relevant
     ```
 
 *   Again in C++, if you `Swap()` two messages with oneofs, each message will
-    end up with the other’s oneof case: in the example below, `msg1` will have a
+    end up with the other's oneof case: in the example below, `msg1` will have a
     `sub_message` and `msg2` will have a `name`.
 
     ```c++
@@ -1433,10 +1415,6 @@ message is associated with a string key, you could define it like this:
 map<string, Project> projects = 3;
 ```
 
-The generated map API is currently available for all proto2 supported languages.
-You can find out more about the map API for your chosen language in the relevant
-[API reference](/reference/).
-
 ### Maps Features {#maps-features}
 
 *   Extensions are not supported for maps.
@@ -1449,7 +1427,11 @@ You can find out more about the map API for your chosen language in the relevant
     the last key seen is used. When parsing a map from text format, parsing may
     fail if there are duplicate keys.
 
-### Backwards compatibility {#backwards}
+The generated map API is currently available for all supported languages. You
+can find out more about the map API for your chosen language in the relevant
+[API reference](/reference/).
+
+### Backwards Compatibility {#backwards}
 
 The map syntax is equivalent to the following on the wire, so protocol buffers
 implementations that do not support maps can still handle your data:
@@ -1464,7 +1446,7 @@ repeated MapFieldEntry map_field = N;
 ```
 
 Any protocol buffers implementation that supports maps must both produce and
-accept data that can be accepted by the above definition.
+accept data that can be accepted by the earlier definition.
 
 ## Packages {#packages}
 
@@ -1492,13 +1474,20 @@ language:
 
 *   In **C++** the generated classes are wrapped inside a C++ namespace. For
     example, `Open` would be in the namespace `foo::bar`.
-*   In **Java**, the package is used as the Java package, unless you explicitly
-    provide a `option java_package` in your `.proto` file.
+*   In **Java** and **Kotlin**, the package is used as the Java package, unless
+    you explicitly provide an `option java_package` in your `.proto` file.
 *   In **Python**, the `package` directive is ignored, since Python modules are
     organized according to their location in the file system.
 *   In **Go**, the `package` directive is ignored, and the generated `.pb.go`
     file is in the package named after the corresponding `go_proto_library`
-    rule.
+    Bazel rule. For open source projects, you **must** provide either a `go_package` option or set the Bazel `-M` flag.
+*   In **Ruby**, the generated classes are wrapped inside nested Ruby
+    namespaces, converted to the required Ruby capitalization style (first
+    letter capitalized; if the first character is not a letter, `PB_` is
+    prepended). For example, `Open` would be in the namespace `Foo::Bar`.
+*   In **C#** the package is used as the namespace after converting to
+    PascalCase, unless you explicitly provide an `option csharp_namespace` in
+    your `.proto` file. For example, `Open` would be in the namespace `Foo.Bar`.
 
 Note that even when the `package` directive does not directly affect the
 generated code, for example in Python, it is still strongly recommended to
@@ -1557,7 +1546,7 @@ void DoSearch() {
   controller = new MyRpcController;
 
   // The protocol compiler generates the SearchService class based on the
-  // definition given above.
+  // definition given earlier.
   service = new SearchService::Stub(channel);
 
   // Set up the request.
@@ -1612,7 +1601,7 @@ int main() {
 }
 ```
 
-If you don't want to plug in your own existing RPC system, you can now use
+If you don't want to plug in your own existing RPC system, you can use
 [gRPC](https://github.com/grpc/grpc-common): a language- and platform-neutral
 open source RPC system developed at Google. gRPC works particularly well with
 protocol buffers and lets you generate the relevant RPC code directly from your
@@ -1628,6 +1617,207 @@ In addition to gRPC, there are also a number of ongoing third-party projects to
 develop RPC implementations for Protocol Buffers. For a list of links to
 projects we know about, see the
 [third-party add-ons wiki page](https://github.com/protocolbuffers/protobuf/blob/master/docs/third_party.md).
+
+## JSON Mapping {#json}
+
+Proto2 supports a canonical encoding in JSON, making it easier to share data
+between systems. The encoding is described on a type-by-type basis in the table
+below.
+
+When parsing JSON-encoded data into a protocol buffer, if a value is missing or
+if its value is `null`, it will be interpreted as the corresponding
+[default value](#optional).
+
+A proto2 field that is defined with the `optional` keyword supports field
+presence. Fields that have a value set and that support field presence always
+include the field value in the JSON-encoded output, even if it is the default
+value.
+
+<table>
+  <tbody>
+    <tr>
+      <th>proto2</th>
+      <th>JSON</th>
+      <th>JSON example</th>
+      <th>Notes</th>
+    </tr>
+    <tr>
+      <td>message</td>
+      <td>object</td>
+      <td><code>{"fooBar": v, "g": null, ...}</code></td>
+      <td>Generates JSON objects. Message field names are mapped to
+        lowerCamelCase and become JSON object keys. If the
+        <code>json_name</code> field option is specified, the specified value
+        will be used as the key instead. Parsers accept both the lowerCamelCase
+        name (or the one specified by the <code>json_name</code> option) and the
+        original proto field name. <code>null</code> is an accepted value for
+        all field types and treated as the default value of the corresponding
+        field type. However, <code>null</code> cannot be used for the
+        <code>json_name</code> value. For more on why, see
+        <a href="/news/2023-04-28#json-name">Stricter validation for json_name</a>.
+      </td>
+    </tr>
+    <tr>
+      <td>enum</td>
+      <td>string</td>
+      <td><code>"FOO_BAR"</code></td>
+      <td>The name of the enum value as specified in proto is used. Parsers
+        accept both enum names and integer values.
+      </td>
+    </tr>
+    <tr>
+      <td>map&lt;K,V&gt;</td>
+      <td>object</td>
+      <td><code>{"k": v, ...}</code></td>
+      <td>All keys are converted to strings.</td>
+    </tr>
+    <tr>
+      <td>repeated V</td>
+      <td>array</td>
+      <td><code>[v, ...]</code></td>
+      <td><code>null</code> is accepted as the empty list <code>[]</code>.</td>
+    </tr>
+    <tr>
+      <td>bool</td>
+      <td>true, false</td>
+      <td><code>true, false</code></td>
+      <td></td>
+    </tr>
+    <tr>
+      <td>string</td>
+      <td>string</td>
+      <td><code>"Hello World!"</code></td>
+      <td></td>
+    </tr>
+    <tr>
+      <td>bytes</td>
+      <td>base64 string</td>
+      <td><code>"YWJjMTIzIT8kKiYoKSctPUB+"</code></td>
+      <td>JSON value will be the data encoded as a string using standard base64
+        encoding with paddings. Either standard or URL-safe base64 encoding
+        with/without paddings are accepted.
+      </td>
+    </tr>
+    <tr>
+      <td>int32, fixed32, uint32</td>
+      <td>number</td>
+      <td><code>1, -10, 0</code></td>
+      <td>JSON value will be a decimal number. Either numbers or strings are
+        accepted.
+      </td>
+    </tr>
+    <tr>
+      <td>int64, fixed64, uint64</td>
+      <td>string</td>
+      <td><code>"1", "-10"</code></td>
+      <td>JSON value will be a decimal string. Either numbers or strings are
+        accepted.
+      </td>
+    </tr>
+    <tr>
+      <td>float, double</td>
+      <td>number</td>
+      <td><code>1.1, -10.0, 0, "NaN", "Infinity"</code></td>
+      <td>JSON value will be a number or one of the special string values "NaN",
+        "Infinity", and "-Infinity". Either numbers or strings are accepted.
+        Exponent notation is also accepted.  -0 is considered equivalent to 0.
+      </td>
+    </tr>
+    <tr>
+      <td>Any</td>
+      <td><code>object</code></td>
+      <td><code>{"@type": "url", "f": v, ... }</code></td>
+      <td>If the <code>Any</code> contains a value that has a special JSON
+        mapping, it will be converted as follows: <code>{"@type": xxx, "value":
+        yyy}</code>. Otherwise, the value will be converted into a JSON object,
+        and the <code>"@type"</code> field will be inserted to indicate the
+        actual data type.
+      </td>
+    </tr>
+    <tr>
+      <td>Timestamp</td>
+      <td>string</td>
+      <td><code>"1972-01-01T10:00:20.021Z"</code></td>
+      <td>Uses RFC 3339, where generated output will always be Z-normalized
+          and uses 0, 3, 6 or 9 fractional digits. Offsets other than "Z" are
+          also accepted.
+      </td>
+    </tr>
+    <tr>
+      <td>Duration</td>
+      <td>string</td>
+      <td><code>"1.000340012s", "1s"</code></td>
+      <td>Generated output always contains 0, 3, 6, or 9 fractional digits,
+        depending on required precision, followed by the suffix "s". Accepted
+        are any fractional digits (also none) as long as they fit into
+        nano-seconds precision and the suffix "s" is required.
+      </td>
+    </tr>
+    <tr>
+      <td>Struct</td>
+      <td><code>object</code></td>
+      <td><code>{ ... }</code></td>
+      <td>Any JSON object. See <code>struct.proto</code>.</td>
+    </tr>
+    <tr>
+      <td>Wrapper types</td>
+      <td>various types</td>
+      <td><code>2, "2", "foo", true, "true", null, 0, ...</code></td>
+      <td>Wrappers use the same representation in JSON as the wrapped primitive
+        type, except that <code>null</code> is allowed and preserved during data
+        conversion and transfer.
+      </td>
+    </tr>
+    <tr>
+      <td>FieldMask</td>
+      <td>string</td>
+      <td><code>"f.fooBar,h"</code></td>
+      <td>See <code>field_mask.proto</code>.</td>
+    </tr>
+    <tr>
+      <td>ListValue</td>
+      <td>array</td>
+      <td><code>[foo, bar, ...]</code></td>
+      <td></td>
+    </tr>
+    <tr>
+      <td>Value</td>
+      <td>value</td>
+      <td></td>
+      <td>Any JSON value. Check
+        <code><a href="/reference/protobuf/google.protobuf#value">google.protobuf.Value</a></code>
+        for details.
+      </td>
+    </tr>
+    <tr>
+      <td>NullValue</td>
+      <td>null</td>
+      <td></td>
+      <td>JSON null</td>
+    </tr>
+    <tr>
+      <td>Empty</td>
+      <td>object</td>
+      <td><code>{}</code></td>
+      <td>An empty JSON object</td>
+    </tr>
+  </tbody>
+</table>
+
+### JSON Options {#json-options}
+
+A proto2 JSON implementation may provide the following options:
+
+*   **Ignore unknown fields**: Proto2 JSON parser should reject unknown fields
+    by default but may provide an option to ignore unknown fields in parsing.
+*   **Use proto field name instead of lowerCamelCase name**: By default proto2
+    JSON printer should convert the field name to lowerCamelCase and use that as
+    the JSON name. An implementation may provide an option to use proto field
+    name as the JSON name instead. Proto2 JSON parsers are required to accept
+    both the converted lowerCamelCase name and the proto field name.
+*   **Emit enum values as integers instead of strings**: The name of an enum
+    value is used by default in JSON output. An option may be provided to use
+    the numeric value of the enum value instead.
 
 ## Options {#options}
 
@@ -1647,12 +1837,12 @@ useful options currently exist for any of these.
 Here are a few of the most commonly used options:
 
 *   `java_package` (file option): The package you want to use for your generated
-    Java classes. If no explicit `java_package` option is given in the `.proto`
-    file, then by default the proto package (specified using the "package"
-    keyword in the `.proto` file) will be used. However, proto packages
-    generally do not make good Java packages since proto packages are not
-    expected to start with reverse domain names. If not generating Java code,
-    this option has no effect.
+    Java/Kotlin classes. If no explicit `java_package` option is given in the
+    `.proto` file, then by default the proto package (specified using the
+    "package" keyword in the `.proto` file) will be used. However, proto
+    packages generally do not make good Java packages since proto packages are
+    not expected to start with reverse domain names. If not generating Java or
+    Kotlin code, this option has no effect.
 
     ```proto
     option java_package = "com.example.foo";
@@ -1717,11 +1907,12 @@ Here are a few of the most commonly used options:
     ```
 
 *   `cc_generic_services`, `java_generic_services`, `py_generic_services` (file
-    options): Whether or not the protocol buffer compiler should generate
-    abstract service code based on [services definitions](#services) in C++,
-    Java, and Python, respectively. For legacy reasons, these default to `true`.
-    However, as of version 2.3.0 (January 2010), it is considered preferable for
-    RPC implementations to provide
+    options): **Generic services are deprecated.** Whether or not the protocol
+    buffer compiler should generate abstract service code based on
+    [services definitions](#services) in C++, Java, and Python, respectively.
+    For legacy reasons, these default to `true`. However, as of version 2.3.0
+    (January 2010), it is considered preferable for RPC implementations to
+    provide
     [code generator plugins](/reference/cpp/api-docs/google.protobuf.compiler.plugin.pb)
     to generate code more specific to each system, rather than rely on the
     "abstract" services.
@@ -1736,6 +1927,13 @@ Here are a few of the most commonly used options:
 *   `cc_enable_arenas` (file option): Enables
     [arena allocation](/reference/cpp/arenas) for C++
     generated code.
+
+*   `objc_class_prefix` (file option): Sets the Objective-C class prefix which
+    is prepended to all Objective-C generated classes and enums from this
+    .proto. There is no default. You should use prefixes that are between 3-5
+    uppercase characters as
+    [recommended by Apple](https://developer.apple.com/library/ios/documentation/Cocoa/Conceptual/ProgrammingWithObjectiveC/Conventions/Conventions.html#//apple_ref/doc/uid/TP40011210-CH10-SW4).
+    Note that all 2 letter prefixes are reserved by Apple.
 
 *   `message_set_wire_format` (message option): If set to `true`, the message
     uses a different binary format intended to be compatible with an old format
@@ -1800,16 +1998,16 @@ enum Data {
   DATA_SEARCH = 1 [deprecated = true];
   DATA_DISPLAY = 2 [
     (string_name) = "display_value"
-  ]
+  ];
 }
 ```
 
-Continue to the next section, [Custom Options](#customoptions) to see how to
-apply custom options to enum values and to fields.
+See [Custom Options](#customoptions) to see how to apply custom options to enum
+values and to fields.
 
 ### Custom Options {#customoptions}
 
-Protocol Buffers even allow you to define and use your own options. Note that
+Protocol Buffers also allows you to define and use your own options. Note that
 this is an **advanced feature** which most people don't need. Since options are
 defined by the messages defined in `google/protobuf/descriptor.proto` (like
 `FileOptions` or `FieldOptions`), defining your own options is simply a matter
@@ -1944,7 +2142,7 @@ message MyMessage {
 ```
 
 One last thing: Since custom options are extensions, they must be assigned field
-numbers like any other field or extension. In the examples above, we have used
+numbers like any other field or extension. In the examples earlier, we have used
 field numbers in the range 50000-99999\. This range is reserved for internal use
 within individual organizations, so you can use numbers in this range freely for
 in-house applications. If you intend to use custom options in public
@@ -2072,16 +2270,20 @@ enum MyEnum {
 
 ## Generating Your Classes {#generating}
 
-To generate the Java, Python, or C++ code you need to work with the message
-types defined in a `.proto` file, you need to run the protocol buffer compiler
-`protoc` on the `.proto`. If you haven't installed the compiler,
+To generate the Java, Kotlin, Python, C++, Go, Ruby, Objective-C, or C# code
+that you need to work with the message types defined in a `.proto` file, you
+need to run the protocol buffer compiler `protoc` on the `.proto` file. If you
+haven't installed the compiler,
 [download the package](/downloads) and follow the
-instructions in the README.
+instructions in the README. For Go, you also need to install a special code
+generator plugin for the compiler; you can find this and installation
+instructions in the [golang/protobuf](https://github.com/golang/protobuf/)
+repository on GitHub.
 
 The Protocol Compiler is invoked as follows:
 
 ```sh
-protoc --proto_path=IMPORT_PATH --cpp_out=DST_DIR --java_out=DST_DIR --python_out=DST_DIR path/to/file.proto
+protoc --proto_path=IMPORT_PATH --cpp_out=DST_DIR --java_out=DST_DIR --python_out=DST_DIR --go_out=DST_DIR --ruby_out=DST_DIR --objc_out=DST_DIR --csharp_out=DST_DIR path/to/file.proto
 ```
 
 *   `IMPORT_PATH` specifies a directory in which to look for `.proto` files when
@@ -2097,16 +2299,30 @@ protoc --proto_path=IMPORT_PATH --cpp_out=DST_DIR --java_out=DST_DIR --python_ou
     *   `--java_out` generates Java code in `DST_DIR`. See the
         [Java generated code reference](/reference/java/java-generated)
         for more.
+    *   `--kotlin_out` generates additional Kotlin code in `DST_DIR`. See the
+        [Kotlin generated code reference](/reference/kotlin/kotlin-generated)
+        for more.
     *   `--python_out` generates Python code in `DST_DIR`. See the
         [Python generated code reference](/reference/python/python-generated)
+        for more.
+    *   `--go_out` generates Go code in `DST_DIR`. See the
+        [Go generated code reference](/reference/go/go-generated)
+        for more.
+    *   `--ruby_out` generates Ruby code in `DST_DIR`. See the
+        [Ruby generated code reference](/reference/ruby/ruby-generated)
+        for more.
+    *   `--objc_out` generates Objective-C code in `DST_DIR`. See the
+        [Objective-C generated code reference](/reference/objective-c/objective-c-generated)
+        for more.
+    *   `--csharp_out` generates C# code in `DST_DIR`. See the
+        [C# generated code reference](/reference/csharp/csharp-generated)
         for more.
 
     As an extra convenience, if the `DST_DIR` ends in `.zip` or `.jar`, the
     compiler will write the output to a single ZIP-format archive file with the
     given name. `.jar` outputs will also be given a manifest file as required by
     the Java JAR specification. Note that if the output archive already exists,
-    it will be overwritten; the compiler is not smart enough to add files to an
-    existing archive.
+    it will be overwritten.
 
 *   You must provide one or more `.proto` files as input. Multiple `.proto`
     files can be specified at once. Although the files are named relative to the

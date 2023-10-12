@@ -1,7 +1,7 @@
 +++
 title = "Techniques"
 weight = 70
-description = "This topic describes some commonly-used design patterns for dealing with Protocol Buffers."
+description = "Describes some commonly-used design patterns for dealing with Protocol Buffers."
 type = "docs"
 +++
 

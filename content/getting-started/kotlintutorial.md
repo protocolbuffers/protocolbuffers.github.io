@@ -2,7 +2,7 @@
 title = "Protocol Buffer Basics: Kotlin"
 weight = 260
 linkTitle = "Kotlin"
-description = "This tutorial provides a basic Kotlin programmers introduction to working with protocol buffers."
+description = "A basic Kotlin programmers introduction to working with protocol buffers."
 type = "docs"
 +++
 

@@ -2,7 +2,7 @@
 title = "Protocol Buffers Version 2 Language Specification"
 weight = 800
 linkTitle = "Version 2 Language Specification"
-description = "This topic is a language specification reference for version 2 of the Protocol Buffers language (proto2)."
+description = "Language specification reference for version 2 of the Protocol Buffers language (proto2)."
 type = "docs"
 +++
 

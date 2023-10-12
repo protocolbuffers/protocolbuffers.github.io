@@ -2,7 +2,7 @@
 title = "Protocol Buffer Basics: Go"
 weight = 240
 linkTitle = "Go"
-description = "This tutorial provides a basic Go programmers introduction to working with protocol buffers."
+description = "A basic Go programmers introduction to working with protocol buffers."
 type = "docs"
 +++
 

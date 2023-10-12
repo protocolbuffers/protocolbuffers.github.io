@@ -22,7 +22,7 @@ selected. You can also override your overrides. The
 [section later in this topic on inheritance](#inheritance) goes into more detail
 on that.
 
-## Lifecycles of a Feature {#lifecycles}
+## Lifecycle of a Feature {#lifecycles}
 
 Editions provide the fundamental increments for the lifecycle of a feature.
 Features have an expected lifecycle: introducing
@@ -102,10 +102,10 @@ message Player {
   repeated int32 scores = 3;
 
   enum Handed {
-    HANDED_UNSPECIFIED = 0,
-    HANDED_LEFT = 1,
-    HANDED_RIGHT = 2,
-    HANDED_AMBIDEXTROUS = 3,
+    HANDED_UNSPECIFIED = 0;
+    HANDED_LEFT = 1;
+    HANDED_RIGHT = 2;
+    HANDED_AMBIDEXTROUS = 3;
   }
 
   // in proto2 enums are closed
@@ -130,10 +130,10 @@ message Player {
   enum Handed {
     // this overrides the default edition 2023 behavior, which is OPEN
     option features.enum_type = CLOSED;
-    HANDED_UNSPECIFIED = 0,
-    HANDED_LEFT = 1,
-    HANDED_RIGHT = 2,
-    HANDED_AMBIDEXTROUS = 3,
+    HANDED_UNSPECIFIED = 0;
+    HANDED_LEFT = 1;
+    HANDED_RIGHT = 2;
+    HANDED_AMBIDEXTROUS = 3;
   }
 
   Handed handed = 4;
@@ -164,10 +164,10 @@ message Player {
   repeated int32 scores = 3;
 
   enum Handed {
-    HANDED_UNSPECIFIED = 0,
-    HANDED_LEFT = 1,
-    HANDED_RIGHT = 2,
-    HANDED_AMBIDEXTROUS = 3,
+    HANDED_UNSPECIFIED = 0;
+    HANDED_LEFT = 1;
+    HANDED_RIGHT = 2;
+    HANDED_AMBIDEXTROUS = 3;
   }
 
   // in proto3 enums are open
@@ -190,13 +190,13 @@ message Player {
   repeated int32 scores = 3 [features.repeated_field_encoding = PACKED];
 
   enum Handed {
-    HANDED_UNSPECIFIED = 0,
-    HANDED_LEFT = 1,
-    HANDED_RIGHT = 2,
-    HANDED_AMBIDEXTROUS = 3,
+    HANDED_UNSPECIFIED = 0;
+    HANDED_LEFT = 1;
+    HANDED_RIGHT = 2;
+    HANDED_AMBIDEXTROUS = 3;
   }
 
-  Handed handed = 4 [features.field_presence = IMPLICIT];
+  Handed handed = 4;
 }
 ```
 
