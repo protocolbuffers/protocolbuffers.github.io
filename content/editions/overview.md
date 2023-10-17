@@ -13,14 +13,14 @@ as `edition = "2024"`, to specify the default behaviors your file will have.
 Editions enable the language to evolve incrementally over time.
 
 Instead of the hardcoded behaviors that older versions have had, editions
-represent a collection of features with a default value (behavior) per feature.
-Features are options on a file, message, field, enum, and so on, that specify
-the behavior of protoc, the code generators, and protobuf runtimes. You can
-explicitly override a behavior at those different levels (file, message, field,
-...) when your needs don't match the default behavior for the edition you've
-selected. You can also override your overrides. The
-[section later in this topic on inheritance](#inheritance) goes into more detail
-on that.
+represent a collection of [features](/editions/features)
+with a default value (behavior) per feature. Features are options on a file,
+message, field, enum, and so on, that specify the behavior of protoc, the code
+generators, and protobuf runtimes. You can explicitly override a behavior at
+those different levels (file, message, field, ...) when your needs don't match
+the default behavior for the edition you've selected. You can also override your
+overrides. The [section later in this topic on inheritance](#inheritance) goes
+into more detail on that.
 
 ## Lifecycle of a Feature {#lifecycles}
 

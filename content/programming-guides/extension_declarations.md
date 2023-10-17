@@ -15,8 +15,9 @@ freshness: { owner: 'shaod' reviewed: '2023-09-06' }
 This page describes in detail what extension declarations are, why we need them,
 and how we use them.
 
-**NOTE:** Extension declarations are used in proto2 only, as proto3 does not
-support extensions at this time.
+**NOTE:** Extension declarations are mostly used in proto2, as proto3 does not
+support extensions at this time (except for
+[declaring custom options](/programming-guides/proto3/#customoptions)).
 
 If you need an introduction to extensions, read this
 [extensions guide](https://protobuf.dev/programming-guides/proto2/#extensions)
