@@ -227,7 +227,7 @@ from an input stream.
     class instances.
 *   For **Kotlin**, in addition to the Java generated code, the compiler
     generates a `.kt` file for each message type with an improved Kotlin API.
-    This includes a DSL which simplies creating message instances, a nullable
+    This includes a DSL which simplifies creating message instances, a nullable
     field accessor, and a copy function.
 *   **Python** is a little different — the Python compiler generates a module
     with a static descriptor of each message type in your `.proto`, which is
