@@ -1141,8 +1141,9 @@ protect participants from reusing extension field numbers.
 
 **Unverified extension field number allocation strategies are not recommended**
 because the [Consequences of Reusing Field Numbers](#consequences) fall on all
-extenders of a message (not just the developer that didn't follow the rules). If
-your use case requires very low coordination, consider using the
+extenders of a message (not just the developer that didn't follow the
+recommendations). If your use case requires very low coordination, consider
+using the
 [`Any` message](/reference/protobuf/google.protobuf#any)
 instead.
 

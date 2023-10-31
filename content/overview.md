@@ -278,36 +278,8 @@ Protocol buffers support many scalar value types, including integers that use
 both variable-length encoding and fixed sizes. You can also create your own
 composite data types by defining messages that are, themselves, data types that
 you can assign to a field. In addition to the simple and composite value types,
-several common types are published.
-
-### Common Types {#common-types}
-
-*   [`Duration`](https://github.com/protocolbuffers/protobuf/blob/master/src/google/protobuf/duration.proto)
-    is a signed, fixed-length span of time, such as 42s.
-*   [`Timestamp`](https://github.com/protocolbuffers/protobuf/blob/master/src/google/protobuf/timestamp.proto)
-    is a point in time independent of any time zone or calendar, such as
-    2017-01-15T01:30:15.01Z.
-*   [`Interval`](https://github.com/googleapis/googleapis/blob/master/google/type/interval.proto)
-    is a time interval independent of time zone or calendar, such as
-    2017-01-15T01:30:15.01Z - 2017-01-16T02:30:15.01Z.
-*   [`Date`](https://github.com/googleapis/googleapis/blob/master/google/type/date.proto)
-    is a whole calendar date, such as 2025-09-19.
-*   [`DayOfWeek`](https://github.com/googleapis/googleapis/blob/master/google/type/dayofweek.proto)
-    is a day of the week, such as Monday.
-*   [`TimeOfDay`](https://github.com/googleapis/googleapis/blob/master/google/type/timeofday.proto)
-    is a time of day, such as 10:42:23.
-*   [`LatLng`](https://github.com/googleapis/googleapis/blob/master/google/type/latlng.proto)
-    is a latitude/longitude pair, such as 37.386051 latitude and -122.083855
-    longitude.
-*   [`Money`](https://github.com/googleapis/googleapis/blob/master/google/type/money.proto)
-    is an amount of money with its currency type, such as 42 USD.
-*   [`PostalAddress`](https://github.com/googleapis/googleapis/blob/master/google/type/postal_address.proto)
-    is a postal address, such as 1600 Amphitheatre Parkway Mountain View, CA
-    94043 USA.
-*   [`Color`](https://github.com/googleapis/googleapis/blob/master/google/type/color.proto)
-    is a color in the RGBA color space.
-*   [`Month`](https://github.com/googleapis/googleapis/blob/master/google/type/month.proto)
-    is a month of the year, such as April.
+several [common types](/programming-guides/dos-donts#common)
+are published.
 
 ## History {#history}
 

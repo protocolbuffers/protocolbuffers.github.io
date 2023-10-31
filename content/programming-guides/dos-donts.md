@@ -19,6 +19,24 @@ one is using the field, don’t re-use a tag number. If the change was live ever
 there could be serialized versions of your proto in a log
 somewhere. Or there could be old code in another server that will break.
 
+<a id="do-reserve-tag-numbers-for-deleted-fields"></a>
+
+## **Do** Reserve Tag Numbers for Deleted Fields {#reserve-tag-numbers}
+
+When you delete a field that's no longer used, reserve its tag number so that no
+one accidentally re-uses it in the future. Just `reserved 2, 3;` is enough. No
+type required (lets you trim dependencies!). You can also reserve names to avoid
+recycling now-deleted field names: `reserved "foo", "bar";`.
+
+<a id="do-reserve-numbers-for-deleted-enum-values"></a>
+
+## **Do** Reserve Numbers for Deleted Enum Values {#reserve-deleted-numbers}
+
+When you delete an enum value that's no longer used, reserve its number so that
+no one accidentally re-uses it in the future. Just `reserved 2, 3;` is enough.
+You can also reserve names to avoid recycling now-deleted value names: `reserved
+"FOO", "BAR";`.
+
 <a id="dont-change-the-type-of-a-field"></a>
 
 ## **Don't** Change the Type of a Field {#change-type}
@@ -109,26 +127,31 @@ when a perfectly suitable common type already exists!
 
 ### Common Types {#common}
 
-*   [interval](https://github.com/googleapis/googleapis/blob/master/google/type/interval.proto)
+*   [`Duration`](https://github.com/protocolbuffers/protobuf/blob/master/src/google/protobuf/duration.proto)
+    is a signed, fixed-length span of time, such as 42s.
+*   [`Timestamp`](https://github.com/protocolbuffers/protobuf/blob/master/src/google/protobuf/timestamp.proto)
+    is a point in time independent of any time zone or calendar, such as
+    2017-01-15T01:30:15.01Z.
+*   [`interval`](https://github.com/googleapis/googleapis/blob/master/google/type/interval.proto)
     is a time interval independent of time zone or calendar (for example,
     2017-01-15T01:30:15.01Z - 2017-01-16T02:30:15.01Z).
-*   [date](https://github.com/googleapis/googleapis/blob/master/google/type/date.proto)
+*   [`date`](https://github.com/googleapis/googleapis/blob/master/google/type/date.proto)
     is a whole calendar date (for example, 2005-09-19).
-*   [dayofweek](https://github.com/googleapis/googleapis/blob/master/google/type/dayofweek.proto)
+*   [`dayofweek`](https://github.com/googleapis/googleapis/blob/master/google/type/dayofweek.proto)
     is a day of week (for example, Monday).
-*   [timeofday](https://github.com/googleapis/googleapis/blob/master/google/type/timeofday.proto)
+*   [`timeofday`](https://github.com/googleapis/googleapis/blob/master/google/type/timeofday.proto)
     is a time of day (for example, 10:42:23).
-*   [latlng](https://github.com/googleapis/googleapis/blob/master/google/type/latlng.proto)
+*   [`latlng`](https://github.com/googleapis/googleapis/blob/master/google/type/latlng.proto)
     is a latitude/longitude pair (for example, 37.386051 latitude and
     -122.083855 longitude).
-*   [money](https://github.com/googleapis/googleapis/blob/master/google/type/money.proto)
+*   [`money`](https://github.com/googleapis/googleapis/blob/master/google/type/money.proto)
     is an amount of money with its currency type (for example, 42 USD).
-*   [postal_address](https://github.com/googleapis/googleapis/blob/master/google/type/postal_address.proto)
+*   [`postal_address`](https://github.com/googleapis/googleapis/blob/master/google/type/postal_address.proto)
     is a postal address (for example, 1600 Amphitheatre Parkway Mountain View,
     CA 94043 USA).
-*   [color](https://github.com/googleapis/googleapis/blob/master/google/type/color.proto)
+*   [`color`](https://github.com/googleapis/googleapis/blob/master/google/type/color.proto)
     is a color in the RGBA color space.
-*   [month](https://github.com/googleapis/googleapis/blob/master/google/type/month.proto)
+*   [`month`](https://github.com/googleapis/googleapis/blob/master/google/type/month.proto)
     is a month of year (for example, April).
 
 <a id="do-define-widely-used-message-types-in-separate-files"></a>
@@ -139,24 +162,6 @@ If you're defining message types or enums that you hope/fear/expect to be widely
 used outside your immediate team, consider putting them in their own file with
 no dependencies. Then it's easy for anyone to use those types without
 introducing the transitive dependencies in your other proto files.
-
-<a id="do-reserve-tag-numbers-for-deleted-fields"></a>
-
-## **Do** Reserve Tag Numbers for Deleted Fields {#reserve-tag-numbers}
-
-When you delete a field that's no longer used, reserve its tag number so that no
-one accidentally re-uses it in the future. Just `reserved 2, 3;` is enough. No
-type required (lets you trim dependencies!). You can also reserve names to avoid
-recycling now-deleted field names: `reserved "foo", "bar";`.
-
-<a id="do-reserve-numbers-for-deleted-enum-values"></a>
-
-## **Do** Reserve Numbers for Deleted Enum Values {#reserve-deleted-numbers}
-
-When you delete an enum value that's no longer used, reserve its number so that
-no one accidentally re-uses it in the future. Just `reserved 2, 3;` is enough.
-You can also reserve names to avoid recycling now-deleted value names: `reserved
-"FOO", "BAR";`.
 
 <a id="dont-change-the-default-value-of-a-field"></a>
 
