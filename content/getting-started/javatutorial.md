@@ -2,7 +2,7 @@
 title = "Protocol Buffer Basics: Java"
 weight = 250
 linkTitle = "Java"
-description = "This tutorial provides a basic Java programmers introduction to working with protocol buffers."
+description = "A basic Java programmers introduction to working with protocol buffers."
 type = "docs"
 +++
 

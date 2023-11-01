@@ -2,7 +2,7 @@
 title = "Third-Party Add-ons"
 weight = 80
 linkTitle = "Add-ons"
-description = "This topic links out to many open source projects that seek to add useful functionality on top of Protocol Buffers."
+description = "Links out to many open source projects that seek to add useful functionality on top of Protocol Buffers."
 type = "docs"
 +++
 

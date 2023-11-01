@@ -1,7 +1,7 @@
 +++
 title = "Style Guide"
 weight = 50
-description = "This topic provides direction for how best to structure your proto definitions."
+description = "Provides direction for how best to structure your proto definitions."
 type = "docs"
 +++
 

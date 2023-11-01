@@ -13,16 +13,16 @@ as `edition = "2024"`, to specify the default behaviors your file will have.
 Editions enable the language to evolve incrementally over time.
 
 Instead of the hardcoded behaviors that older versions have had, editions
-represent a collection of features with a default value (behavior) per feature.
-Features are options on a file, message, field, enum, and so on, that specify
-the behavior of protoc, the code generators, and protobuf runtimes. You can
-explicitly override a behavior at those different levels (file, message, field,
-...) when your needs don't match the default behavior for the edition you've
-selected. You can also override your overrides. The
-[section later in this topic on inheritance](#inheritance) goes into more detail
-on that.
+represent a collection of [features](/editions/features)
+with a default value (behavior) per feature. Features are options on a file,
+message, field, enum, and so on, that specify the behavior of protoc, the code
+generators, and protobuf runtimes. You can explicitly override a behavior at
+those different levels (file, message, field, ...) when your needs don't match
+the default behavior for the edition you've selected. You can also override your
+overrides. The [section later in this topic on inheritance](#inheritance) goes
+into more detail on that.
 
-## Lifecycles of a Feature {#lifecycles}
+## Lifecycle of a Feature {#lifecycles}
 
 Editions provide the fundamental increments for the lifecycle of a feature.
 Features have an expected lifecycle: introducing
@@ -102,10 +102,10 @@ message Player {
   repeated int32 scores = 3;
 
   enum Handed {
-    HANDED_UNSPECIFIED = 0,
-    HANDED_LEFT = 1,
-    HANDED_RIGHT = 2,
-    HANDED_AMBIDEXTROUS = 3,
+    HANDED_UNSPECIFIED = 0;
+    HANDED_LEFT = 1;
+    HANDED_RIGHT = 2;
+    HANDED_AMBIDEXTROUS = 3;
   }
 
   // in proto2 enums are closed
@@ -130,10 +130,10 @@ message Player {
   enum Handed {
     // this overrides the default edition 2023 behavior, which is OPEN
     option features.enum_type = CLOSED;
-    HANDED_UNSPECIFIED = 0,
-    HANDED_LEFT = 1,
-    HANDED_RIGHT = 2,
-    HANDED_AMBIDEXTROUS = 3,
+    HANDED_UNSPECIFIED = 0;
+    HANDED_LEFT = 1;
+    HANDED_RIGHT = 2;
+    HANDED_AMBIDEXTROUS = 3;
   }
 
   Handed handed = 4;
@@ -164,10 +164,10 @@ message Player {
   repeated int32 scores = 3;
 
   enum Handed {
-    HANDED_UNSPECIFIED = 0,
-    HANDED_LEFT = 1,
-    HANDED_RIGHT = 2,
-    HANDED_AMBIDEXTROUS = 3,
+    HANDED_UNSPECIFIED = 0;
+    HANDED_LEFT = 1;
+    HANDED_RIGHT = 2;
+    HANDED_AMBIDEXTROUS = 3;
   }
 
   // in proto3 enums are open
@@ -190,13 +190,13 @@ message Player {
   repeated int32 scores = 3 [features.repeated_field_encoding = PACKED];
 
   enum Handed {
-    HANDED_UNSPECIFIED = 0,
-    HANDED_LEFT = 1,
-    HANDED_RIGHT = 2,
-    HANDED_AMBIDEXTROUS = 3,
+    HANDED_UNSPECIFIED = 0;
+    HANDED_LEFT = 1;
+    HANDED_RIGHT = 2;
+    HANDED_AMBIDEXTROUS = 3;
   }
 
-  Handed handed = 4 [features.field_presence = IMPLICIT];
+  Handed handed = 4;
 }
 ```
 

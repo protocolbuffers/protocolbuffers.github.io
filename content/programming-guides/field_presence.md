@@ -2,7 +2,7 @@
 title = "Application Note: Field Presence"
 weight = 85
 linkTitle = "Field Presence"
-description = "This topic explains the various presence-tracking disciplines for protobuf fields. It also explains the behavior of explicit presence-tracking for singular proto3 fields with basic types."
+description = "Explains the various presence-tracking disciplines for protobuf fields. It also explains the behavior of explicit presence-tracking for singular proto3 fields with basic types."
 type = "docs"
 +++
 

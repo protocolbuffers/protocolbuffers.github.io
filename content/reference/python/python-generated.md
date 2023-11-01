@@ -2,7 +2,7 @@
 title = "Python Generated Code Guide"
 weight = 750
 linkTitle = "Generated Code Guide"
-description = "This topic describes exactly what Python definitions the protocol buffer compiler generates for any given protocol definition."
+description = "Describes exactly what Python definitions the protocol buffer compiler generates for any given protocol definition."
 type = "docs"
 +++
 
@@ -87,10 +87,11 @@ message Foo {}
 ```
 
 The protocol buffer compiler generates a class called `Foo`, which subclasses
-`google.protobuf.Message`. The class is a concrete class; no abstract methods
-are left unimplemented. Unlike C++ and Java, Python generated code is unaffected
-by the `optimize_for` option in the `.proto` file; in effect, all Python code is
-optimized for code size.
+[`google.protobuf.Message`](https://googleapis.dev/python/protobuf/latest/google/protobuf/message.html#google.protobuf.message.Message).
+The class is a concrete class; no abstract methods are left unimplemented.
+Unlike C++ and Java, Python generated code is unaffected by the `optimize_for`
+option in the `.proto` file; in effect, all Python code is optimized for code
+size.
 
 If the message's name is a Python keyword, then its class will only be
 accessible via `getattr()`, as described in the

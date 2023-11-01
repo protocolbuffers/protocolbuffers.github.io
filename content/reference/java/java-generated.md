@@ -2,7 +2,7 @@
 title = "Java Generated Code Guide"
 weight = 650
 linkTitle = "Generated Code Guide"
-description = "This topic describes exactly what Java code the protocol buffer compiler generates for any given protocol definition."
+description = "Describes exactly what Java code the protocol buffer compiler generates for any given protocol definition."
 type = "docs"
 +++
 

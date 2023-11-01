@@ -2,7 +2,7 @@
 title = "Protocol Buffer Basics: Python"
 weight = 270
 linkTitle = "Python"
-description = "This tutorial provides a basic Python programmers introduction to working with protocol buffers."
+description = "A basic Python programmers introduction to working with protocol buffers."
 type = "docs"
 +++
 

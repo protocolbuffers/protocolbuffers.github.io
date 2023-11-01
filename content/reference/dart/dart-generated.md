@@ -2,7 +2,7 @@
 title = "Dart Generated Code"
 weight = 580
 linkTitle = "Generated Code"
-description = "This topic describes what Dart code the protocol buffer compiler generates for any given protocol definition."
+description = "Describes what Dart code the protocol buffer compiler generates for any given protocol definition."
 type = "docs"
 +++
 
