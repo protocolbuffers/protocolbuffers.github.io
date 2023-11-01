@@ -65,10 +65,11 @@ packages are identified by directory structure.&lt;/p>
 &lt;p>Given a simple message declaration:&lt;/p>
 &lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-proto" data-lang="proto">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#204a87;font-weight:bold">message&lt;/span> &lt;span style="color:#000">Foo&lt;/span> &lt;span style="color:#000;font-weight:bold">{}&lt;/span>&lt;span style="color:#a40000">
 &lt;/span>&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>The protocol buffer compiler generates a class called &lt;code>Foo&lt;/code>, which subclasses
-&lt;code>google.protobuf.Message&lt;/code>. The class is a concrete class; no abstract methods
-are left unimplemented. Unlike C++ and Java, Python generated code is unaffected
-by the &lt;code>optimize_for&lt;/code> option in the &lt;code>.proto&lt;/code> file; in effect, all Python code is
-optimized for code size.&lt;/p>
+&lt;a href="https://googleapis.dev/python/protobuf/latest/google/protobuf/message.html#google.protobuf.message.Message">&lt;code>google.protobuf.Message&lt;/code>&lt;/a>.
+The class is a concrete class; no abstract methods are left unimplemented.
+Unlike C++ and Java, Python generated code is unaffected by the &lt;code>optimize_for&lt;/code>
+option in the &lt;code>.proto&lt;/code> file; in effect, all Python code is optimized for code
+size.&lt;/p>
 &lt;p>If the message&amp;rsquo;s name is a Python keyword, then its class will only be
 accessible via &lt;code>getattr()&lt;/code>, as described in the
 &lt;a href="#keyword-conflicts">&lt;em>Names which conflict with Python keywords&lt;/em>&lt;/a> section.&lt;/p>

@@ -386,7 +386,9 @@ will return the default value.&lt;/li>
 &lt;/span>&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>The compiler will generate the following accessor methods:&lt;/p>
 &lt;ul>
 &lt;li>&lt;code>int foo_size() const&lt;/code>: Returns the number of elements currently in the
-field.&lt;/li>
+field. To check for an empty set, consider using the
+&lt;a href="https://protobuf.dev/reference/cpp/api-docs/google.protobuf.repeated_field#RepeatedPtrField">&lt;code>empty()&lt;/code>&lt;/a>
+method in the underlying &lt;code>RepeatedField&lt;/code> instead of this method.&lt;/li>
 &lt;li>&lt;code>int32 foo(int index) const&lt;/code>: Returns the element at the given zero-based
 index. Calling this method with index outside of [0, foo_size()) yields
 undefined behavior.&lt;/li>
@@ -414,7 +416,9 @@ corresponding C++ type according to the
 &lt;/span>&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>The compiler will generate the following accessor methods:&lt;/p>
 &lt;ul>
 &lt;li>&lt;code>int foo_size() const&lt;/code>: Returns the number of elements currently in the
-field.&lt;/li>
+field. To check for an empty set, consider using the
+&lt;a href="https://protobuf.dev/reference/cpp/api-docs/google.protobuf.repeated_field#RepeatedPtrField">&lt;code>empty()&lt;/code>&lt;/a>
+method in the underlying &lt;code>RepeatedField&lt;/code> instead of this method.&lt;/li>
 &lt;li>&lt;code>const string&amp;amp; foo(int index) const&lt;/code>: Returns the element at the given
 zero-based index. Calling this method with index outside of [0,
 foo_size()-1] yields undefined behavior.&lt;/li>
@@ -460,7 +464,9 @@ container class provides STL-like iterators and other methods.&lt;/li>
 &lt;/span>&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>The compiler will generate the following accessor methods:&lt;/p>
 &lt;ul>
 &lt;li>&lt;code>int foo_size() const&lt;/code>: Returns the number of elements currently in the
-field.&lt;/li>
+field. To check for an empty set, consider using the
+&lt;a href="https://protobuf.dev/reference/cpp/api-docs/google.protobuf.repeated_field#RepeatedPtrField">&lt;code>empty()&lt;/code>&lt;/a>
+method in the underlying &lt;code>RepeatedField&lt;/code> instead of this method.&lt;/li>
 &lt;li>&lt;code>Bar foo(int index) const&lt;/code>: Returns the element at the given zero-based
 index. Calling this method with index outside of [0, foo_size()) yields
 undefined behavior.&lt;/li>
@@ -490,7 +496,9 @@ class provides STL-like iterators and other methods.&lt;/li>
 &lt;/span>&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>The compiler will generate the following accessor methods:&lt;/p>
 &lt;ul>
 &lt;li>&lt;code>int foo_size() const&lt;/code>: Returns the number of elements currently in the
-field.&lt;/li>
+field. To check for an empty set, consider using the
+&lt;a href="https://protobuf.dev/reference/cpp/api-docs/google.protobuf.repeated_field#RepeatedPtrField">&lt;code>empty()&lt;/code>&lt;/a>
+method in the underlying &lt;code>RepeatedField&lt;/code> instead of this method.&lt;/li>
 &lt;li>&lt;code>const Bar&amp;amp; foo(int index) const&lt;/code>: Returns the element at the given
 zero-based index. Calling this method with index outside of [0, foo_size())
 yields undefined behavior.&lt;/li>
