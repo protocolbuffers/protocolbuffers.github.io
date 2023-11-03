@@ -1,6 +1,6 @@
 +++
 title = "Feature Settings for Editions"
-weight = 42
+weight = 43
 description = "Protobuf Editions features and how they affect protobuf behavior."
 type = "docs"
 +++
