@@ -49,7 +49,7 @@ and after of a proto3 file.
 The following code sample shows a proto2 file:
 
 ```proto
-syntax = "proto2"
+syntax = "proto2";
 
 enum Foo {
   A = 2;
@@ -62,7 +62,7 @@ After running [Prototiller](#prototiller), the equivalent code might look like
 this:
 
 ```proto
-edition = "2023"
+edition = "2023";
 
 enum Foo {
   option features.enum_type = CLOSED;
@@ -104,7 +104,7 @@ for more information.
 The following code sample shows a proto2 file:
 
 ```proto
-syntax = "proto2"
+syntax = "proto2";
 
 message Foo {
   required int32 x = 1;
@@ -116,7 +116,7 @@ message Foo {
 After running Prototiller, the equivalent code might look like this:
 
 ```proto
-edition = "2023"
+edition = "2023";
 
 message Foo {
   int32 x = 1 [features.field_presence = LEGACY_REQUIRED];
@@ -140,7 +140,7 @@ message Bar {
 After running Prototiller, the equivalent code might look like this:
 
 ```proto
-edition = "2023"
+edition = "2023";
 option features.field_presence = IMPLICIT;
 
 message Bar {
@@ -227,7 +227,7 @@ and after of a proto3 file.
 The following code sample shows a proto2 file:
 
 ```proto
-syntax = "proto2"
+syntax = "proto2";
 
 message Foo {
   group Bar = 1 {
@@ -240,7 +240,7 @@ message Foo {
 After running Prototiller, the equivalent code might look like this:
 
 ```proto
-edition = "2023"
+edition = "2023";
 
 message Foo {
   message Bar {
@@ -275,7 +275,7 @@ for `repeated` fields has been migrated to in Editions.
 The following code sample shows a proto2 file:
 
 ```proto
-syntax = "proto2"
+syntax = "proto2";
 
 message Foo {
   repeated int32 bar = 6 [packed=true];
@@ -286,8 +286,8 @@ message Foo {
 After running Prototiller, the equivalent code might look like this:
 
 ```proto
-edition = "2023"
-options features.repeated_field_encoding = EXPANDED;
+edition = "2023";
+option features.repeated_field_encoding = EXPANDED;
 
 message Foo {
   repeated int32 bar = 6 [features.repeated_field_encoding=PACKED];
@@ -309,7 +309,7 @@ message Foo {
 After running Prototiller, the equivalent code might look like this:
 
 ```proto
-edition = "2023"
+edition = "2023";
 
 message Foo {
   repeated int32 bar = 6;
@@ -346,7 +346,7 @@ and after of a proto3 file.
 The following code sample shows a proto2 file:
 
 ```proto
-syntax = "proto2"
+syntax = "proto2";
 
 message MyMessage {
   string foo = 1;
@@ -356,7 +356,7 @@ message MyMessage {
 After running Prototiller, the equivalent code might look like this:
 
 ```proto
-edition = "2023"
+edition = "2023";
 
 message MyMessage {
   string foo = 1 [features.utf8_validation = NONE];
@@ -410,7 +410,7 @@ message Msg {
 After running Prototiller, the equivalent code might look like this:
 
 ```proto
-edition = "2023"
+edition = "2023";
 
 import "myproject/proto3file.proto";
 

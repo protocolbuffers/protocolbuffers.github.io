@@ -221,9 +221,14 @@ Deleting an extension declaration opens the door to accidental reuse in the
 future. If the extension is no longer processed and the definition is deleted,
 the extension declaration can be [marked reserved](#reserved).
 
-### Never Use a Field Number from the `reserved` List for a New Extension Declaration {#never-reuse-reserved}
+### Never Use a Field Name or Number from the `reserved` List for a New Extension Declaration {#never-reuse-reserved}
 
 Reserved numbers may have been used for fields or other extensions in the past.
+
+Using the `full_name` of a reserved field
+is not recommended
+due
+to the possibility of ambiguity when using textproto.
 
 ### Never change the type of an existing extension declaration {#never-change-type}
 

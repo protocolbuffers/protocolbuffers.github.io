@@ -534,6 +534,9 @@ foo.bars.add(i=3)
 foo.bars[0] = Bar(i=15)  # Raises an exception
 # WRONG!
 foo.bars[:] = [Bar(i=15), Bar(i=17)]  # Also raises an exception
+# RIGHT
+del foo.bars
+foo.bars.extend([Bar(i=15), Bar(i=17)])
 ```
 
 ### Groups (proto2) {#groups-proto2}
@@ -849,11 +852,10 @@ If the name of a message, field, enum, or enum value is a
 [Python keyword](https://docs.python.org/3/reference/lexical_analysis#keywords),
 then the name of its corresponding class or property will be the same, but
 you'll only be able to access it using Python's
-[`getattr()`](https://docs.python.org/3/library/functions#getattr)
-and
-[`setattr()`](https://docs.python.org/3/library/functions#setattr)
-built-in functions, and not via Python's normal attribute reference syntax (i.e.
-the dot operator).
+[`getattr()`](https://docs.python.org/3/library/functions#getattr) and
+[`setattr()`](https://docs.python.org/3/library/functions#setattr) built-in
+functions, and not via Python's normal attribute reference syntax (i.e. the dot
+operator).
 
 For example, if you have the following `.proto` definition:
 
