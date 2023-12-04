@@ -103,9 +103,9 @@ This significantly reduces the size of the generated code, but also reduces
 performance. Alternatively, if the &lt;code>.proto&lt;/code> file contains:&lt;/p>
 &lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-proto" data-lang="proto">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#204a87;font-weight:bold">option&lt;/span> &lt;span style="color:#000">optimize_for&lt;/span> &lt;span style="color:#ce5c00;font-weight:bold">=&lt;/span> &lt;span style="color:#000">LITE_RUNTIME&lt;/span>&lt;span style="color:#000;font-weight:bold">;&lt;/span>&lt;span style="color:#a40000">
 &lt;/span>&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>then &lt;code>Foo&lt;/code> will include fast implementations of all methods, but will implement
-the &lt;code>MessageLite&lt;/code> interface, which only contains a subset of the methods of
-&lt;code>Message&lt;/code>. In particular, it does not support descriptors or reflection.
-However, in this mode, the generated code only needs to link against
+the &lt;code>MessageLite&lt;/code> interface, which contains a subset of the methods of
+&lt;code>Message&lt;/code>. In particular, it does not support descriptors, nested builders, or
+reflection. However, in this mode, the generated code only needs to link against
 &lt;code>libprotobuf-lite.jar&lt;/code> instead of &lt;code>libprotobuf.jar&lt;/code>. The &amp;ldquo;lite&amp;rdquo; library is much
 smaller than the full library, and is more appropriate for resource-constrained
 systems such as mobile phones.&lt;/p>
@@ -374,10 +374,11 @@ messages rather than an unmodifiable list of builders.&lt;/li>
 the specified index, or throws &lt;code>IndexOutOfBoundsException&lt;/code> if the index is
 out of bounds.&lt;/li>
 &lt;li>&lt;code>Builder addFoosBuilder(int index)&lt;/code>: Inserts and returns a builder for a
-default message instance at the specified index. The existing entries are
-shifted to higher indices to make room for the inserted builder.&lt;/li>
+default message instance of the repeated message at the specified index. The
+existing entries are shifted to higher indices to make room for the inserted
+builder.&lt;/li>
 &lt;li>&lt;code>Builder addFoosBuilder()&lt;/code>: Appends and returns a builder for a default
-message instance.&lt;/li>
+message instance of the repeated message.&lt;/li>
 &lt;li>&lt;code>Builder removeFoos(int index)&lt;/code>: Removes the element at the given zero-based
 index.&lt;/li>
 &lt;li>&lt;code>List&amp;lt;Builder&amp;gt; getFoosBuilderList()&lt;/code>: Returns the entire field as an
