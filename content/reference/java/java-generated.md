@@ -159,9 +159,9 @@ option optimize_for = LITE_RUNTIME;
 ```
 
 then `Foo` will include fast implementations of all methods, but will implement
-the `MessageLite` interface, which only contains a subset of the methods of
-`Message`. In particular, it does not support descriptors or reflection.
-However, in this mode, the generated code only needs to link against
+the `MessageLite` interface, which contains a subset of the methods of
+`Message`. In particular, it does not support descriptors, nested builders, or
+reflection. However, in this mode, the generated code only needs to link against
 `libprotobuf-lite.jar` instead of `libprotobuf.jar`. The "lite" library is much
 smaller than the full library, and is more appropriate for resource-constrained
 systems such as mobile phones.
@@ -488,10 +488,11 @@ The compiler will generate the following methods only in the message's builder:
     the specified index, or throws `IndexOutOfBoundsException` if the index is
     out of bounds.
 -   `Builder addFoosBuilder(int index)`: Inserts and returns a builder for a
-    default message instance at the specified index. The existing entries are
-    shifted to higher indices to make room for the inserted builder.
+    default message instance of the repeated message at the specified index. The
+    existing entries are shifted to higher indices to make room for the inserted
+    builder.
 -   `Builder addFoosBuilder()`: Appends and returns a builder for a default
-    message instance.
+    message instance of the repeated message.
 -   `Builder removeFoos(int index)`: Removes the element at the given zero-based
     index.
 -   `List<Builder> getFoosBuilderList()`: Returns the entire field as an

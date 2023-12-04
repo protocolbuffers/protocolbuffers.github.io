@@ -244,8 +244,9 @@ from an input stream.
     message type, as well as a special `Builder` class for creating message
     class instances.
 *   For **Kotlin**, in addition to the Java generated code, the compiler
-    generates a `.kt` file for each message type, containing a DSL which can be
-    used to simplify creating message instances.
+    generates a `.kt` file for each message type with an improved Kotlin API.
+    This includes a DSL that simplifies creating message instances, a nullable
+    field accessor, and a copy function.
 *   **Python** is a little different — the Python compiler generates a module
     with a static descriptor of each message type in your `.proto`, which is
     then used with a *metaclass* to create the necessary Python data access
@@ -518,7 +519,8 @@ type-specific:
 *   For strings, the default value is the empty string.
 *   For bytes, the default value is empty bytes.
 *   For bools, the default value is false.
-*   For numeric types, the default value is zero.
+*   For numeric types, the default value is zero. For float and double types,
+    -0.0 and 0.0 are treated as equivalent, and will round-trip.
 *   For enums, the default value is the **first defined enum value**, which must
     be 0.
 *   For message fields, the field is not set. Its exact value is
@@ -534,7 +536,8 @@ whether a boolean was set to `false`) or just not set at all: you should bear
 this in mind when defining your message types. For example, don't have a boolean
 that switches on some behavior when set to `false` if you don't want that
 behavior to also happen by default. Also note that if a scalar message field
-**is** set to its default, the value will not be serialized on the wire.
+**is** set to its default, the value will not be serialized on the wire. If a
+float or double value is set to -0 or +0, it will not be serialized.
 
 See the [generated code guide](/reference/) for your
 chosen language for more details about how defaults work in generated code.
@@ -875,10 +878,8 @@ fields that the parser does not recognize. For example, when an old binary
 parses data sent by a new binary with new fields, those new fields become
 unknown fields in the old binary.
 
-Originally, proto3 messages always discarded unknown fields during parsing, but
-in version 3.5 we reintroduced the preservation of unknown fields to match the
-proto2 behavior. In versions 3.5 and later, unknown fields are retained during
-parsing and included in the serialized output.
+Proto3 messages preserve unknown fields and includes them during parsing and in
+the serialized output, which matches proto2 behavior.
 
 ## Any {#any}
 

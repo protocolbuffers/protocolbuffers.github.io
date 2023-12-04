@@ -266,6 +266,21 @@ any_value {
 }
 ```
 
+#### Unknown Fields (#unknown-fields)
+
+Text format parsers cannot support unknown fields represented as raw field
+numbers in place of field names because three of the six wire types are
+represented in the same way in textformat. Some text-format serializer
+implementations encode unknown fields with a format that uses a field number and
+a numeric representation of the value, but this is inherently lossy because the
+wire-type information is ignored. For comparison, wire-format is non-lossy
+because it includes the wire-type in each field tag as `(field_number << 3) |
+wire_type`. For more information on encoding, see the
+[Encoding](/programming-guides/encoding.md) topic.
+
+Without information about the field type from the message schema, the value
+cannot be correctly encoded into a wire-format proto message.
+
 ### Fields {#fields}
 
 Field values can be literals (strings, numbers, or identifiers), or nested

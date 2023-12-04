@@ -19,7 +19,7 @@ message, field, enum, and so on, that specify the behavior of protoc, the code
 generators, and protobuf runtimes. You can explicitly override a behavior at
 those different levels (file, message, field, ...) when your needs don't match
 the default behavior for the edition you've selected. You can also override your
-overrides. The [section later in this topic on inheritance](#inheritance) goes
+overrides. The [section later in this topic on lexical scoping](#scoping) goes
 into more detail on that.
 
 ## Lifecycle of a Feature {#lifecycles}
@@ -202,16 +202,19 @@ message Player {
 
 </section>
 
-### Inheritance {#inheritance}
+<a name="inheritance"></a>
 
-Editions syntax supports inheritance, with a per-feature list of allowed
+### Lexical Scoping {#scoping}
+
+Editions syntax supports lexical scoping, with a per-feature list of allowed
 targets. For example, in the first edition, features can be specified at only
-the file level or the lowest level of granularity. Inheritance enables you to
-set the default behavior for a feature across an entire file, and then override
-that behavior at the message, field, enum, enum value, oneof, service, or
-method. Settings made at a higher level (file, message) apply when no setting is
-made within the same scope (field, enum value). Any features not explicitly set
-conform to the behavior defined in the edition version used for the .proto file.
+the file level or the lowest level of granularity. The implementation of lexical
+scoping enables you to set the default behavior for a feature across an entire
+file, and then override that behavior at the message, field, enum, enum value,
+oneof, service, or method level. Settings made at a higher level (file, message)
+apply when no setting is made within the same scope (field, enum value). Any
+features not explicitly set conform to the behavior defined in the edition
+version used for the .proto file.
 
 The following code sample shows some features being set at the file, message,
 and enum level. The settings are in the highlighted lines:
@@ -243,7 +246,7 @@ message Person {
 
 In the preceding example, the presence feature is set to `IMPLICIT`; it would
 default to `EXPLICIT` if it wasn't set. The `Pay_Type` `enum` will be `CLOSED`,
-as it inherits the file-level setting. The `Employment` `enum`, though, will be
+as it applies the file-level setting. The `Employment` `enum`, though, will be
 `OPEN`, as it is set within the enum.
 
 ### Prototiller {#prototiller}
