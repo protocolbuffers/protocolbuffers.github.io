@@ -37,7 +37,7 @@ the serialization contains no information about not-present values.
 The generated API for a proto message includes (de)serialization definitions
 which translate between API types and a stream of definitionally *present* (tag,
 value) pairs. This translation is designed to be forward- and
-backward-compatibile across changes to the message definition; however, this
+backward-compatible across changes to the message definition; however, this
 compatibility introduces some (perhaps surprising) considerations when
 deserializing wire-formatted messages:
 
@@ -566,7 +566,7 @@ if (m.hasFoo()) {
 }
 ```
 
-#### Objective C Example
+#### Objective-C Example
 
 No presence:
 
@@ -593,3 +593,38 @@ if (m.hasFoo()) {
   [m setFoo:1];
 }
 ```
+
+## Cheat sheet {#cheat}
+
+**Proto2:**
+
+Is field presence tracked?
+
+Field type             | Tracked?
+---------------------- | --------
+Singular field         | yes
+Singular message field | yes
+Field in a oneof       | yes
+Repeated field & map   | no
+
+**Proto3:**
+
+Is field presence tracked?
+
+Field type             | Tracked?
+---------------------- | ------------------------
+Singular message field | yes
+Field in a oneof       | yes
+*Other* singular field | if defined as `optional`
+Repeated field & map   | no
+
+**Edition 2023:**
+
+Is field presence tracked?
+
+Field type                                         | Tracked?
+-------------------------------------------------- | --------
+Default                                            | yes
+`features.field_presence` set to `LEGACY_REQUIRED` | yes
+`features.field_presence` set to `IMPLICIT`        | no
+Repeated field & map                               | no

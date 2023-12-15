@@ -98,7 +98,9 @@ enum FooBar {
 ```
 
 Each enum value should end with a semicolon, not a comma. Prefer prefixing enum
-values instead of surrounding them in an enclosing message.
+values instead of surrounding them in an enclosing message. Since some languages
+don't support an enum being defined inside a "struct" type, this ensures a
+consistent approach across binding languages.
 
 The zero value enum should have the suffix `UNSPECIFIED`, because a server or
 application that gets an unexpected enum value will mark the field as unset in

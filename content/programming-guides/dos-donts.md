@@ -60,6 +60,8 @@ and whether someone will be forced to fill in your required field with an empty
 string or zero in four years when it’s no longer logically required but the
 proto still says it is.
 
+For proto3 there are no `required` fields, so this advice does not apply.
+
 <a id="dont-make-a-message-with-lots-of-fields"></a>
 
 ## **Don't** Make a Message with Lots of Fields {#lots-of-fields}
