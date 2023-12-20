@@ -252,7 +252,7 @@ as it applies the file-level setting. The `Employment` `enum`, though, will be
 ### Prototiller {#prototiller}
 
 We provide both a migration guide and migration tooling that ease the migration
-to editions. The tool, called Prototiller, will enable you to:
+to and between editions. The tool, called Prototiller, will enable you to:
 
 *   convert proto2 and proto3 definition files to the new editions syntax, at
     scale

@@ -484,9 +484,6 @@ returns the corresponding pointer:
 func (Genre) Enum() *Genre
 ```
 
-If you use proto3 syntax for your `.proto` definition, the `Enum()` method is
-not generated.
-
 The protocol buffer compiler generates a constant for each value in the enum.
 For enums within a message, the constants begin with the enclosing message's
 name:

@@ -507,8 +507,8 @@ option features.enum_type = CLOSED;
 option features.repeated_field_encoding = EXPANDED;
 option features.json_format = LEGACY_BEST_EFFORT;
 option features.utf8_validation = NONE;
-option features.(pb.cpp).legacy_enum_closed = true;
-option features.(pb.java).legacy_enum_closed = true;
+option features.(pb.cpp).legacy_closed_enum = true;
+option features.(pb.java).legacy_closed_enum = true;
 ```
 
 ### Proto3 Behavior {#proto3-behavior}
@@ -526,8 +526,8 @@ option features.enum_type = OPEN;
 // features in Editions syntax
 option features.json_format = ALLOW;
 option features.utf8_validation = VERIFY;
-option features.(pb.cpp).legacy_enum_closed = false;
-option features.(pb.java).legacy_enum_closed = false;
+option features.(pb.cpp).legacy_closed_enum = false;
+option features.(pb.java).legacy_closed_enum = false;
 ```
 
 ### Caveats and Exceptions {#caveats}

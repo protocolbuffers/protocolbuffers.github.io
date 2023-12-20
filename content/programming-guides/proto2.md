@@ -620,6 +620,19 @@ different languages, see
 [Enum Behavior](/programming-guides/enum).
 {{% /alert %}}
 
+Removing enum values is a breaking change for persisted protos. Instead of
+removing a value, mark the value with the `reserved` keyword to prevent the enum
+value from being code-generated:
+
+```proto
+enum PhoneType {
+  PHONE_TYPE_UNSPECIFIED = 0;
+  PHONE_TYPE_MOBILE = 1;
+  PHONE_TYPE_HOME = 2;
+  PHONE_TYPE_WORK = 3 [deprecated=true];
+}
+```
+
 For more information about how to work with message `enum`s in your
 applications, see the [generated code guide](/reference/)
 for your chosen language.
