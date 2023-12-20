@@ -574,14 +574,34 @@ suffixes. Example:&lt;/p>
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> | &amp;#34;\\&amp;#34; (* ASCII #92 (backslash) *)
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> | &amp;#34;\&amp;#39;&amp;#34; (* ASCII #39 (apostrophe) *)
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> | &amp;#39;\&amp;#34;&amp;#39; (* ASCII #34 (quote) *)
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> | &amp;#34;\&amp;#34;, oct, [ oct, [ oct ] ] (* UTF-8 byte in octal *)
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> | &amp;#34;\x&amp;#34;, hex, [ hex ] (* UTF-8 byte in hexadecimal *)
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> | &amp;#34;\&amp;#34;, oct, [ oct, [ oct ] ] (* octal escaped byte value *)
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> | &amp;#34;\x&amp;#34;, hex, [ hex ] (* hexadecimal escaped byte value *)
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> | &amp;#34;\u&amp;#34;, hex, hex, hex, hex (* Unicode code point up to 0xffff *)
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> | &amp;#34;\U000&amp;#34;,
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> hex, hex, hex, hex, hex (* Unicode code point up to 0xfffff *)
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> | &amp;#34;\U0010&amp;#34;,
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> hex, hex, hex, hex ; (* Unicode code point between 0x100000 and 0x10ffff *)
-&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>Longer strings can be broken into several quoted strings on successive lines.
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>Octal escape sequences consume up to three octal digits. Additional digits are
+passed through without escaping. For example, when unescaping the input &lt;code>\1234&lt;/code>,
+the parser consumes three octal digits (123) to unescape the byte value 0x83
+(ASCII &amp;lsquo;S&amp;rsquo;) and the subsequent &amp;lsquo;4&amp;rsquo; passes through as the byte value 0x34 (ASCII
+&amp;lsquo;4&amp;rsquo;). To ensure correct parsing, express octal escape sequences with 3 octal
+digits, using leading zeros as needed, such as: &lt;code>\000&lt;/code>, &lt;code>\001&lt;/code>, &lt;code>\063&lt;/code>, &lt;code>\377&lt;/code>.
+Fewer than three digits are consumed when a non-numeric character follows the
+numeric characters, such as &lt;code>\5Hello&lt;/code>.&lt;/p>
+&lt;p>Hexadecimal escape sequences consume up to two hexadecimal digits. For example,
+when unescaping &lt;code>\x213&lt;/code>, the parser consumes only the first two digits (21) to
+unescape the byte value 0x21 (ASCII &amp;lsquo;!&amp;rsquo;). To ensure correct parsing, express
+hexadecimal escape sequences with 2 hexadecimal digits, using leading zeros as
+needed, such as: &lt;code>\x00&lt;/code>, &lt;code>\x01&lt;/code>, &lt;code>\xFF&lt;/code>. Fewer than two digits are consumed when
+a non-hexadecimal character follows the numeric character, such as &lt;code>\xFHello&lt;/code> or
+&lt;code>\x3world&lt;/code>.&lt;/p>
+&lt;p>Use byte-wise escaping only for fields with type &lt;code>bytes&lt;/code>. While it is possible
+to use byte-wise escaping in fields with type &lt;code>string&lt;/code>, those escape sequences
+are required to form valid UTF-8 sequences. Using byte-wise escaping to express
+UTF-8 sequences is error-prone. Prefer unicode escape sequences for unprintable
+characters and line-breaking characters in literals for &lt;code>string&lt;/code>-type fields.&lt;/p>
+&lt;p>Longer strings can be broken into several quoted strings on successive lines.
 For example:&lt;/p>
 &lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-proto" data-lang="proto">&lt;span style="display:flex;">&lt;span> &lt;span style="color:#000">quote&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">:&lt;/span>&lt;span style="color:#a40000">
 &lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#a40000">&lt;/span> &lt;span style="color:#4e9a06">&amp;#34;When we got into office, the thing that surprised me most was to find &amp;#34;&lt;/span>&lt;span style="color:#a40000">
@@ -645,7 +665,7 @@ fields are always messages. Example:&lt;/p>
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>any_value {
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> [type.googleapis.com/com.foo.any] { foo: &amp;#34;bar&amp;#34; }
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>}
-&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h4 id="unknown-fields-unknown-fields">Unknown Fields (#unknown-fields)&lt;/h4>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h4 id="unknown-fields">Unknown Fields&lt;/h4>
 &lt;p>Text format parsers cannot support unknown fields represented as raw field
 numbers in place of field names because three of the six wire types are
 represented in the same way in textformat. Some text-format serializer
