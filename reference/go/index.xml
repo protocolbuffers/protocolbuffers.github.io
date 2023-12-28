@@ -151,9 +151,6 @@ an accessor method &lt;code>GetBirthYear()&lt;/code> which returns the &lt;code>
 &lt;code>birth_year&lt;/code> or the
 &lt;a href="https://golang.org/ref/spec#The_zero_value">zero value&lt;/a> of that type
 if the field is unset (&lt;code>0&lt;/code> for numbers, the empty string for strings).&lt;/p>
-&lt;p>The &lt;code>FirstActiveYear&lt;/code> struct field will be of type &lt;code>*int32&lt;/code>, and additionally
-have the &lt;code>HasFirstActiveYear()&lt;/code> and &lt;code>ClearFirstActiveYear()&lt;/code> accessors, because
-it is marked &lt;code>optional&lt;/code>.&lt;/p>
 &lt;p>For other scalar field types (including &lt;code>bool&lt;/code>, &lt;code>bytes&lt;/code>, and &lt;code>string&lt;/code>), &lt;code>int32&lt;/code>
 is replaced with the corresponding Go type according to the
 &lt;a href="https://protobuf.dev/programming-guides/proto3#scalar">scalar value types table&lt;/a>.
