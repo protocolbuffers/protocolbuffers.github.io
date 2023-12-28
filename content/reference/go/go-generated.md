@@ -216,10 +216,6 @@ an accessor method `GetBirthYear()` which returns the `int32` value in
 [zero value](https://golang.org/ref/spec#The_zero_value) of that type
 if the field is unset (`0` for numbers, the empty string for strings).
 
-The `FirstActiveYear` struct field will be of type `*int32`, and additionally
-have the `HasFirstActiveYear()` and `ClearFirstActiveYear()` accessors, because
-it is marked `optional`.
-
 For other scalar field types (including `bool`, `bytes`, and `string`), `int32`
 is replaced with the corresponding Go type according to the
 [scalar value types table](/programming-guides/proto3#scalar).
