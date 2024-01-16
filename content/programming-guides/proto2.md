@@ -863,9 +863,9 @@ the following rules:
 *   For `string`, `bytes`, and message fields, `optional` is compatible with
     `repeated`. Given serialized data of a repeated field as input, clients that
     expect this field to be `optional` will take the last input value if it's a
-    primitive type field or merge all input elements if it's a message type
-    field. Note that this is **not** generally safe for numeric types, including
-    bools and enums. Repeated fields of numeric types can be serialized in the
+    scalar type field or merge all input elements if it's a message type field.
+    Note that this is **not** generally safe for numeric types, including bools
+    and enums. Repeated fields of numeric types can be serialized in the
     [packed](/programming-guides/encoding#packed) format,
     which will not be parsed correctly when an `optional` field is expected.
 *   Changing a default value is generally OK, as long as you remember that
@@ -998,7 +998,9 @@ message UserContent {
       full_name: ".kittens.kitten_videos",
       type: ".kittens.Video",
       repeated: true
-    }
+    },
+    // Ensures all field numbers in this extension range are declarations.
+    verification = DECLARATION
   ];
 }
 ```
@@ -1777,7 +1779,7 @@ value.
       <td>Wrapper types</td>
       <td>various types</td>
       <td><code>2, "2", "foo", true, "true", null, 0, ...</code></td>
-      <td>Wrappers use the same representation in JSON as the wrapped primitive
+      <td>Wrappers use the same representation in JSON as the wrapped scalar
         type, except that <code>null</code> is allowed and preserved during data
         conversion and transfer.
       </td>
@@ -2014,6 +2016,13 @@ enum Data {
     (string_name) = "display_value"
   ];
 }
+```
+
+The C++ code to read the `string_name` option might look something like this:
+
+```cpp
+const absl::string_view foo = proto2::GetEnumDescriptor<Data>()
+    ->FindValueByName("DATA_DISPLAY")->options().GetExtension(string_name);
 ```
 
 See [Custom Options](#customoptions) to see how to apply custom options to enum

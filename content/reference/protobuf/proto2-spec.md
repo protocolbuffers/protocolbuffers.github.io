@@ -53,16 +53,16 @@ groupName = capitalLetter { letter | decimalDigit | "_" }
 
 ```
 intLit     = decimalLit | octalLit | hexLit
-decimalLit = ( "1" ... "9" ) { decimalDigit }
-octalLit   = "0" { octalDigit }
-hexLit     = "0" ( "x" | "X" ) hexDigit { hexDigit }
+decimalLit = [-] ( "1" ... "9" ) { decimalDigit }
+octalLit   = [-] "0" { octalDigit }
+hexLit     = [-] "0" ( "x" | "X" ) hexDigit { hexDigit }
 ```
 
 ### Floating-point Literals
 
 ```
-floatLit = ( decimals "." [ decimals ] [ exponent ] | decimals exponent | "."decimals [ exponent ] ) | "inf" | "nan"
-decimals  = decimalDigit { decimalDigit }
+floatLit = [-] ( decimals "." [ decimals ] [ exponent ] | decimals exponent | "."decimals [ exponent ] ) | "inf" | "nan"
+decimals  = [-] decimalDigit { decimalDigit }
 exponent  = ( "e" | "E" ) [ "+" | "-" ] decimals
 ```
 

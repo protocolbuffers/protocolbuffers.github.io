@@ -9,6 +9,8 @@ no_list = "true"
 News topics provide information about past events and changes with Protocol
 Buffers, and plans for upcoming changes.
 
+*   [January 5, 2024](/news/2024-01-05) - Breaking
+    changes in the 26.x line for Ruby and Python
 *   [December 27, 2023](/news/2023-12-27) - Breaking
     changes in the 26.x line for Ruby, PHP, Python, and upb
 *   [December 13, 2023](/news/2023-12-13) - Breaking
