@@ -30,12 +30,12 @@
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#000">groupName&lt;/span> &lt;span style="color:#ce5c00;font-weight:bold">=&lt;/span> &lt;span style="color:#000">capitalLetter&lt;/span> &lt;span style="color:#000;font-weight:bold">{&lt;/span> &lt;span style="color:#000">letter&lt;/span> &lt;span style="color:#ce5c00;font-weight:bold">|&lt;/span> &lt;span style="color:#000">decimalDigit&lt;/span> &lt;span style="color:#ce5c00;font-weight:bold">|&lt;/span> &lt;span style="color:#4e9a06">&amp;#34;_&amp;#34;&lt;/span> &lt;span style="color:#000;font-weight:bold">}&lt;/span>
 &lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h3 id="integer_literals">Integer Literals&lt;/h3>
 &lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-fallback" data-lang="fallback">&lt;span style="display:flex;">&lt;span>intLit = decimalLit | octalLit | hexLit
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>decimalLit = ( &amp;#34;1&amp;#34; ... &amp;#34;9&amp;#34; ) { decimalDigit }
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>octalLit = &amp;#34;0&amp;#34; { octalDigit }
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>hexLit = &amp;#34;0&amp;#34; ( &amp;#34;x&amp;#34; | &amp;#34;X&amp;#34; ) hexDigit { hexDigit }
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>decimalLit = [-] ( &amp;#34;1&amp;#34; ... &amp;#34;9&amp;#34; ) { decimalDigit }
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>octalLit = [-] &amp;#34;0&amp;#34; { octalDigit }
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>hexLit = [-] &amp;#34;0&amp;#34; ( &amp;#34;x&amp;#34; | &amp;#34;X&amp;#34; ) hexDigit { hexDigit }
 &lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h3 id="floating-point-literals">Floating-point Literals&lt;/h3>
-&lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-fallback" data-lang="fallback">&lt;span style="display:flex;">&lt;span>floatLit = ( decimals &amp;#34;.&amp;#34; [ decimals ] [ exponent ] | decimals exponent | &amp;#34;.&amp;#34;decimals [ exponent ] ) | &amp;#34;inf&amp;#34; | &amp;#34;nan&amp;#34;
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>decimals = decimalDigit { decimalDigit }
+&lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-fallback" data-lang="fallback">&lt;span style="display:flex;">&lt;span>floatLit = [-] ( decimals &amp;#34;.&amp;#34; [ decimals ] [ exponent ] | decimals exponent | &amp;#34;.&amp;#34;decimals [ exponent ] ) | &amp;#34;inf&amp;#34; | &amp;#34;nan&amp;#34;
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>decimals = [-] decimalDigit { decimalDigit }
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>exponent = ( &amp;#34;e&amp;#34; | &amp;#34;E&amp;#34; ) [ &amp;#34;+&amp;#34; | &amp;#34;-&amp;#34; ] decimals
 &lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h3 id="boolean">Boolean&lt;/h3>
 &lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-fallback" data-lang="fallback">&lt;span style="display:flex;">&lt;span>boolLit = &amp;#34;true&amp;#34; | &amp;#34;false&amp;#34;
@@ -283,12 +283,12 @@ extensions, the message can be extended.&lt;/p>
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#000">enumType&lt;/span> &lt;span style="color:#ce5c00;font-weight:bold">=&lt;/span> &lt;span style="color:#000;font-weight:bold">[&lt;/span> &lt;span style="color:#4e9a06">&amp;#34;.&amp;#34;&lt;/span> &lt;span style="color:#000;font-weight:bold">]&lt;/span> &lt;span style="color:#000;font-weight:bold">{&lt;/span> &lt;span style="color:#000">ident&lt;/span> &lt;span style="color:#4e9a06">&amp;#34;.&amp;#34;&lt;/span> &lt;span style="color:#000;font-weight:bold">}&lt;/span> &lt;span style="color:#000">enumName&lt;/span>
 &lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h3 id="integer_literals">Integer Literals&lt;/h3>
 &lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-fallback" data-lang="fallback">&lt;span style="display:flex;">&lt;span>intLit = decimalLit | octalLit | hexLit
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>decimalLit = ( &amp;#34;1&amp;#34; ... &amp;#34;9&amp;#34; ) { decimalDigit }
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>octalLit = &amp;#34;0&amp;#34; { octalDigit }
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>hexLit = &amp;#34;0&amp;#34; ( &amp;#34;x&amp;#34; | &amp;#34;X&amp;#34; ) hexDigit { hexDigit }
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>decimalLit = [-] ( &amp;#34;1&amp;#34; ... &amp;#34;9&amp;#34; ) { decimalDigit }
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>octalLit = [-] &amp;#34;0&amp;#34; { octalDigit }
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>hexLit = [-] &amp;#34;0&amp;#34; ( &amp;#34;x&amp;#34; | &amp;#34;X&amp;#34; ) hexDigit { hexDigit }
 &lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h3 id="floating-point-literals">Floating-point Literals&lt;/h3>
-&lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-fallback" data-lang="fallback">&lt;span style="display:flex;">&lt;span>floatLit = ( decimals &amp;#34;.&amp;#34; [ decimals ] [ exponent ] | decimals exponent | &amp;#34;.&amp;#34;decimals [ exponent ] ) | &amp;#34;inf&amp;#34; | &amp;#34;nan&amp;#34;
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>decimals = decimalDigit { decimalDigit }
+&lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-fallback" data-lang="fallback">&lt;span style="display:flex;">&lt;span>floatLit = [-] ( decimals &amp;#34;.&amp;#34; [ decimals ] [ exponent ] | decimals exponent | &amp;#34;.&amp;#34;decimals [ exponent ] ) | &amp;#34;inf&amp;#34; | &amp;#34;nan&amp;#34;
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>decimals = [-] decimalDigit { decimalDigit }
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>exponent = ( &amp;#34;e&amp;#34; | &amp;#34;E&amp;#34; ) [ &amp;#34;+&amp;#34; | &amp;#34;-&amp;#34; ] decimals
 &lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h3 id="boolean">Boolean&lt;/h3>
 &lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-fallback" data-lang="fallback">&lt;span style="display:flex;">&lt;span>boolLit = &amp;#34;true&amp;#34; | &amp;#34;false&amp;#34;
