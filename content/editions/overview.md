@@ -216,8 +216,8 @@ apply when no setting is made within the same scope (field, enum value). Any
 features not explicitly set conform to the behavior defined in the edition
 version used for the .proto file.
 
-The following code sample shows some features being set at the file, message,
-and enum level. The settings are in the highlighted lines:
+The following code sample shows some features being set at the file, field, and
+enum level. The settings are in the highlighted lines:
 
 ```proto {highlight="lines:3,7,16"}
 edition = "2023";

@@ -43,14 +43,46 @@ breaking release is introduced. For example, when Python 4.21.0 was released in
 May of 2022, that set the end of public support of Python 3.20.1 at the
 [end of 2023 Q2](#python).
 
-The following sections provide a visual guide to the support for each language.
+The following sections provide a guide to the support for each language.
 
 ## C++ {#cpp}
 
-The C++ 4.25.x runtime was first released in 2023 Q4.
+This table provides specific dates for support duration.
 
-The C++ 3.21.x runtime was first released in 2022 Q2 and has support until 2024
-Q1.
+<table>
+  <tr>
+    <th>Branch</th>
+    <th>Initial Release</th>
+    <th>Public Support Until</th>
+  </tr>
+  <tr>
+    <td class="gray">3.21.x</td>
+    <td>25 May 2022</td>
+    <td>31 Mar 2024</td>
+  </tr>
+  <tr>
+    <td class="gray">4.22.x</td>
+    <td class="gray">16 Feb 2023</td>
+    <td class="gray"><s>8 May 2023</s></td>
+  </tr>
+  <tr>
+    <td class="gray">4.23.x</td>
+    <td class="gray">8 May 2023</td>
+    <td class="gray"><s>8 Aug 2023</s></td>
+  </tr>
+  <tr>
+    <td class="gray">4.24.x</td>
+    <td class="gray">8 Aug 2023</td>
+    <td class="gray"><s>1 Nov 2023</s></td>
+  </tr>
+  <tr>
+    <td class="gray">4.25.x</td>
+    <td>1 Nov 2023</td>
+    <td>TBD, projected to be<br/>31 Mar 2025</td>
+  </tr>
+</table>
+
+This table graphically shows support durations.
 
 C++ will target making major version bumps annually in Q1 of each year.
 
@@ -201,7 +233,37 @@ For specific versions supported, see
 
 ## C&#35; {#csharp}
 
-The C# 3.25.x runtime was first released in 2023 Q4.
+This table provides specific dates for support duration.
+
+<table>
+  <tr>
+    <th>Branch</th>
+    <th>Initial Release</th>
+    <th>Public Support Until</th>
+  </tr>
+  <tr>
+    <td class="gray">3.22.x</td>
+    <td class="gray">16 Feb 2023</td>
+    <td class="gray"><s>8 May 2023</s></td>
+  </tr>
+  <tr>
+    <td class="gray">3.23.x</td>
+    <td class="gray">8 May 2023</td>
+    <td class="gray"><s>8 Aug 2023</s></td>
+  </tr>
+  <tr>
+    <td class="gray">3.24.x</td>
+    <td class="gray">8 Aug 2023</td>
+    <td class="gray"><s>1 Nov 2023</s></td>
+  </tr>
+  <tr>
+    <td class="gray">3.25.x</td>
+    <td>1 Nov 2023</td>
+    <td>TBD</td>
+  </tr>
+</table>
+
+This table graphically shows support durations.
 
 <table>
   <tr>
@@ -313,6 +375,53 @@ described in
 [.NET Support Policy](https://opensource.google/documentation/policies/dotnet-support).
 
 ## Java {#java}
+
+This table provides specific dates for support duration.
+
+<table>
+  <tr>
+    <th>Branch</th>
+    <th>Initial Release</th>
+    <th>Public Support Until</th>
+  </tr>
+  <tr>
+    <td class="gray">3.19.x</td>
+    <td class="gray">20 Oct 2021</td>
+    <td class="gray"><s>25 Mar 2022</s></td>
+  </tr>
+  <tr>
+    <td class="gray">3.20.x</td>
+    <td class="gray">25 Mar 2022</td>
+    <td class="gray"><s>25 May 2022</s></td>
+  </tr>
+  <tr>
+    <td class="gray">3.21.x</td>
+    <td class="gray">25 May 2022</td>
+    <td class="gray"><s>16 Feb 2023</s></td>
+  </tr>
+  <tr>
+    <td class="gray">3.22.x</td>
+    <td class="gray">16 Feb 2023</td>
+    <td class="gray"><s>8 May 2023</s></td>
+  </tr>
+  <tr>
+    <td class="gray">3.23.x</td>
+    <td class="gray">8 May 2023</td>
+    <td class="gray"><s>8 Aug 2023</s></td>
+  </tr>
+  <tr>
+    <td class="gray">3.24.x</td>
+    <td class="gray">8 Aug 2023</td>
+    <td class="gray"><s>1 Nov 2023</s></td>
+  </tr>
+  <tr>
+    <td class="gray">3.25.x</td>
+    <td>1 Nov 2023</td>
+    <td>TBD, projected to be<br/>31 Mar 2025</td>
+  </tr>
+</table>
+
+This table graphically shows support durations.
 
 Java will target making major version bumps annually in Q1 of each year.
 
@@ -463,7 +572,37 @@ Java will target making major version bumps annually in Q1 of each year.
 
 ## Objective-C {#objc}
 
-The Objective-C 3.25.x runtime was first released in 2023 Q4.
+This table provides specific dates for support duration.
+
+<table>
+  <tr>
+    <th>Branch</th>
+    <th>Initial Release</th>
+    <th>Public Support Until</th>
+  </tr>
+  <tr>
+    <td class="gray">3.22.x</td>
+    <td class="gray">16 Feb 2023</td>
+    <td class="gray"><s>8 May 2023</s></td>
+  </tr>
+  <tr>
+    <td class="gray">3.23.x</td>
+    <td class="gray">8 May 2023</td>
+    <td class="gray"><s>8 Aug 2023</s></td>
+  </tr>
+  <tr>
+    <td class="gray">3.24.x</td>
+    <td class="gray">8 Aug 2023</td>
+    <td class="gray"><s>1 Nov 2023</s></td>
+  </tr>
+  <tr>
+    <td class="gray">3.25.x</td>
+    <td>1 Nov 2023</td>
+    <td>TBD</td>
+  </tr>
+</table>
+
+This table graphically shows support durations.
 
 <table>
   <tr>
@@ -570,7 +709,37 @@ The Objective-C 3.25.x runtime was first released in 2023 Q4.
 
 ## PHP {#php}
 
-The PHP 3.25.x runtime was first released in 2023 Q4.
+This table provides specific dates for support duration.
+
+<table>
+  <tr>
+    <th>Branch</th>
+    <th>Initial Release</th>
+    <th>Public Support Until</th>
+  </tr>
+  <tr>
+    <td class="gray">3.22.x</td>
+    <td class="gray">16 Feb 2023</td>
+    <td class="gray"><s>8 May 2023</s></td>
+  </tr>
+  <tr>
+    <td class="gray">3.23.x</td>
+    <td class="gray">8 May 2023</td>
+    <td class="gray"><s>8 Aug 2023</s></td>
+  </tr>
+  <tr>
+    <td class="gray">3.24.x</td>
+    <td class="gray">8 Aug 2023</td>
+    <td class="gray"><s>1 Nov 2023</s></td>
+  </tr>
+  <tr>
+    <td class="gray">3.25.x</td>
+    <td>1 Nov 2023</td>
+    <td>TBD, projected to be<br/>31 Mar 2025</td>
+  </tr>
+</table>
+
+This table graphically shows support durations.
 
 <table>
   <tr>
@@ -632,7 +801,7 @@ The PHP 3.25.x runtime was first released in 2023 Q4.
   </tr>
   <tr>
     <td class="gray">26.x</td>
-    <td class="gray"></td>
+    <td class="gray">4.26.x</td>
     <td title=23Q1></td>
     <td title=23Q2></td>
     <td title=23Q3></td>
@@ -642,7 +811,7 @@ The PHP 3.25.x runtime was first released in 2023 Q4.
   </tr>
   <tr>
     <td class="gray">27.x</td>
-    <td class="gray"></td>
+    <td class="gray">4.27.x</td>
     <td title=23Q1></td>
     <td title=23Q2></td>
     <td title=23Q3></td>
@@ -685,9 +854,47 @@ For specific versions supported, see
 
 ## Python {#python}
 
-The Python 4.25.x runtime was first released in 2023 Q4.
+This table provides specific dates for support duration.
 
-The Python 3.x runtime went out of support on July 1, 2023.
+<table>
+  <tr>
+    <th>Branch</th>
+    <th>Initial Release</th>
+    <th>Public Support Until</th>
+  </tr>
+  <tr>
+    <td class="gray">3.20.x</td>
+    <td class="gray">25 Mar 2022</td>
+    <td class="gray"><s>30 Jun 2023</s></td>
+  </tr>
+  <tr>
+    <td class="gray">4.21.x</td>
+    <td class="gray">25 May 2022</td>
+    <td class="gray"><s>16 Feb 2023</s></td>
+  </tr>
+  <tr>
+    <td class="gray">4.22.x</td>
+    <td class="gray">16 Feb 2023</td>
+    <td class="gray"><s>8 May 2023</s></td>
+  </tr>
+  <tr>
+    <td class="gray">4.23.x</td>
+    <td class="gray">8 May 2023</td>
+    <td class="gray"><s>8 Aug 2023</s></td>
+  </tr>
+  <tr>
+    <td class="gray">4.24.x</td>
+    <td class="gray">8 Aug 2023</td>
+    <td class="gray"><s>1 Nov 2023</s></td>
+  </tr>
+  <tr>
+    <td class="gray">4.25.x</td>
+    <td>1 Nov 2023</td>
+    <td>TBD, projected to be<br/>31 Mar 2025</td>
+  </tr>
+</table>
+
+This table graphically shows support durations.
 
 <table>
   <tr>
@@ -783,7 +990,7 @@ The Python 3.x runtime went out of support on July 1, 2023.
   </tr>
   <tr>
     <td class="gray">26.x</td>
-    <td class="gray"></td>
+    <td class="gray">5.26.x</td>
     <td title=22Q3></td>
     <td title=22Q4></td>
     <td title=23Q1></td>
@@ -795,7 +1002,7 @@ The Python 3.x runtime went out of support on July 1, 2023.
   </tr>
   <tr>
     <td class="gray">27.x</td>
-    <td class="gray"></td>
+    <td class="gray">5.27.x</td>
     <td title=22Q3></td>
     <td title=22Q4></td>
     <td title=23Q1></td>
@@ -840,7 +1047,42 @@ For specific versions supported, see
 
 ## Ruby {#ruby}
 
-The Ruby 3.25.x runtime was first released in 2023 Q4.
+This table provides specific dates for support duration.
+
+<table>
+  <tr>
+    <th>Branch</th>
+    <th>Initial Release</th>
+    <th>Public Support Until</th>
+  </tr>
+  <tr>
+    <td class="gray">3.21.x</td>
+    <td class="gray">25 May 2022</td>
+    <td class="gray"><s>16 Feb 2023</s></td>
+  </tr>
+  <tr>
+    <td class="gray">3.22.x</td>
+    <td class="gray">16 Feb 2023</td>
+    <td class="gray"><s>8 May 2023</s></td>
+  </tr>
+  <tr>
+    <td class="gray">3.23.x</td>
+    <td class="gray">8 May 2023</td>
+    <td class="gray"><s>8 Aug 2023</s></td>
+  </tr>
+  <tr>
+    <td class="gray">3.24.x</td>
+    <td class="gray">8 Aug 2023</td>
+    <td class="gray"><s>1 Nov 2023</s></td>
+  </tr>
+  <tr>
+    <td class="gray">3.25.x</td>
+    <td>1 Nov 2023</td>
+    <td>TBD, projected to be<br/>31 Mar 2025</td>
+  </tr>
+</table>
+
+This table graphically shows support durations.
 
 <table>
   <tr>
@@ -930,7 +1172,7 @@ The Ruby 3.25.x runtime was first released in 2023 Q4.
   </tr>
   <tr>
     <td class="gray">26.x</td>
-    <td class="gray"></td>
+    <td class="gray">4.26.x</td>
     <td title=22Q2></td>
     <td title=22Q3></td>
     <td title=22Q4></td>
@@ -943,7 +1185,7 @@ The Ruby 3.25.x runtime was first released in 2023 Q4.
   </tr>
   <tr>
     <td class="gray">27.x</td>
-    <td class="gray"></td>
+    <td class="gray">4.27.x</td>
     <td title=22Q2></td>
     <td title=22Q3></td>
     <td title=22Q4></td>
