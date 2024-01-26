@@ -13,16 +13,16 @@ as `edition = "2024"`, to specify the default behaviors your file will have.
 Editions enable the language to evolve incrementally over time.
 
 Instead of the hardcoded behaviors that older versions have had, editions
-represent a collection of features with a default value (behavior) per feature.
-Features are options on a file, message, field, enum, and so on, that specify
-the behavior of protoc, the code generators, and protobuf runtimes. You can
-explicitly override a behavior at those different levels (file, message, field,
-...) when your needs don't match the default behavior for the edition you've
-selected. You can also override your overrides. The
-[section later in this topic on inheritance](#inheritance) goes into more detail
-on that.
+represent a collection of [features](/editions/features)
+with a default value (behavior) per feature. Features are options on a file,
+message, field, enum, and so on, that specify the behavior of protoc, the code
+generators, and protobuf runtimes. You can explicitly override a behavior at
+those different levels (file, message, field, ...) when your needs don't match
+the default behavior for the edition you've selected. You can also override your
+overrides. The [section later in this topic on lexical scoping](#scoping) goes
+into more detail on that.
 
-## Lifecycles of a Feature {#lifecycles}
+## Lifecycle of a Feature {#lifecycles}
 
 Editions provide the fundamental increments for the lifecycle of a feature.
 Features have an expected lifecycle: introducing
@@ -102,10 +102,10 @@ message Player {
   repeated int32 scores = 3;
 
   enum Handed {
-    HANDED_UNSPECIFIED = 0,
-    HANDED_LEFT = 1,
-    HANDED_RIGHT = 2,
-    HANDED_AMBIDEXTROUS = 3,
+    HANDED_UNSPECIFIED = 0;
+    HANDED_LEFT = 1;
+    HANDED_RIGHT = 2;
+    HANDED_AMBIDEXTROUS = 3;
   }
 
   // in proto2 enums are closed
@@ -130,10 +130,10 @@ message Player {
   enum Handed {
     // this overrides the default edition 2023 behavior, which is OPEN
     option features.enum_type = CLOSED;
-    HANDED_UNSPECIFIED = 0,
-    HANDED_LEFT = 1,
-    HANDED_RIGHT = 2,
-    HANDED_AMBIDEXTROUS = 3,
+    HANDED_UNSPECIFIED = 0;
+    HANDED_LEFT = 1;
+    HANDED_RIGHT = 2;
+    HANDED_AMBIDEXTROUS = 3;
   }
 
   Handed handed = 4;
@@ -164,10 +164,10 @@ message Player {
   repeated int32 scores = 3;
 
   enum Handed {
-    HANDED_UNSPECIFIED = 0,
-    HANDED_LEFT = 1,
-    HANDED_RIGHT = 2,
-    HANDED_AMBIDEXTROUS = 3,
+    HANDED_UNSPECIFIED = 0;
+    HANDED_LEFT = 1;
+    HANDED_RIGHT = 2;
+    HANDED_AMBIDEXTROUS = 3;
   }
 
   // in proto3 enums are open
@@ -190,31 +190,34 @@ message Player {
   repeated int32 scores = 3 [features.repeated_field_encoding = PACKED];
 
   enum Handed {
-    HANDED_UNSPECIFIED = 0,
-    HANDED_LEFT = 1,
-    HANDED_RIGHT = 2,
-    HANDED_AMBIDEXTROUS = 3,
+    HANDED_UNSPECIFIED = 0;
+    HANDED_LEFT = 1;
+    HANDED_RIGHT = 2;
+    HANDED_AMBIDEXTROUS = 3;
   }
 
-  Handed handed = 4 [features.field_presence = IMPLICIT];
+  Handed handed = 4;
 }
 ```
 
 </section>
 
-### Inheritance {#inheritance}
+<a name="inheritance"></a>
 
-Editions syntax supports inheritance, with a per-feature list of allowed
+### Lexical Scoping {#scoping}
+
+Editions syntax supports lexical scoping, with a per-feature list of allowed
 targets. For example, in the first edition, features can be specified at only
-the file level or the lowest level of granularity. Inheritance enables you to
-set the default behavior for a feature across an entire file, and then override
-that behavior at the message, field, enum, enum value, oneof, service, or
-method. Settings made at a higher level (file, message) apply when no setting is
-made within the same scope (field, enum value). Any features not explicitly set
-conform to the behavior defined in the edition version used for the .proto file.
+the file level or the lowest level of granularity. The implementation of lexical
+scoping enables you to set the default behavior for a feature across an entire
+file, and then override that behavior at the message, field, enum, enum value,
+oneof, service, or method level. Settings made at a higher level (file, message)
+apply when no setting is made within the same scope (field, enum value). Any
+features not explicitly set conform to the behavior defined in the edition
+version used for the .proto file.
 
-The following code sample shows some features being set at the file, message,
-and enum level. The settings are in the highlighted lines:
+The following code sample shows some features being set at the file, field, and
+enum level. The settings are in the highlighted lines:
 
 ```proto {highlight="lines:3,7,16"}
 edition = "2023";
@@ -243,13 +246,13 @@ message Person {
 
 In the preceding example, the presence feature is set to `IMPLICIT`; it would
 default to `EXPLICIT` if it wasn't set. The `Pay_Type` `enum` will be `CLOSED`,
-as it inherits the file-level setting. The `Employment` `enum`, though, will be
+as it applies the file-level setting. The `Employment` `enum`, though, will be
 `OPEN`, as it is set within the enum.
 
 ### Prototiller {#prototiller}
 
 We provide both a migration guide and migration tooling that ease the migration
-to editions. The tool, called Prototiller, will enable you to:
+to and between editions. The tool, called Prototiller, will enable you to:
 
 *   convert proto2 and proto3 definition files to the new editions syntax, at
     scale

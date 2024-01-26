@@ -2,7 +2,7 @@
 title = "Protocol Buffer Basics: Go"
 weight = 240
 linkTitle = "Go"
-description = "This tutorial provides a basic Go programmers introduction to working with protocol buffers."
+description = "A basic Go programmers introduction to working with protocol buffers."
 type = "docs"
 +++
 
@@ -113,13 +113,6 @@ message Person {
   int32 id = 2;  // Unique ID number for this person.
   string email = 3;
 
-  enum PhoneType {
-    PHONE_TYPE_UNSPECIFIED = 0;
-    PHONE_TYPE_MOBILE = 1;
-    PHONE_TYPE_HOME = 2;
-    PHONE_TYPE_WORK = 3;
-  }
-
   message PhoneNumber {
     string number = 1;
     PhoneType type = 2;
@@ -128,6 +121,13 @@ message Person {
   repeated PhoneNumber phones = 4;
 
   google.protobuf.Timestamp last_updated = 5;
+}
+
+enum PhoneType {
+  PHONE_TYPE_UNSPECIFIED = 0;
+  PHONE_TYPE_MOBILE = 1;
+  PHONE_TYPE_HOME = 2;
+  PHONE_TYPE_WORK = 3;
 }
 
 // Our address book file is just one of these.

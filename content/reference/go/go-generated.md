@@ -2,7 +2,7 @@
 title = "Go Generated Code Guide"
 weight = 610
 linkTitle = "Generated Code Guide"
-description = "This topic describes exactly what Go code the protocol buffer compiler generates for any given protocol definition."
+description = "Describes exactly what Go code the protocol buffer compiler generates for any given protocol definition."
 type = "docs"
 +++
 
@@ -215,10 +215,6 @@ an accessor method `GetBirthYear()` which returns the `int32` value in
 `birth_year` or the
 [zero value](https://golang.org/ref/spec#The_zero_value) of that type
 if the field is unset (`0` for numbers, the empty string for strings).
-
-The `FirstActiveYear` struct field will be of type `*int32`, and additionally
-have the `HasFirstActiveYear()` and `ClearFirstActiveYear()` accessors, because
-it is marked `optional`.
 
 For other scalar field types (including `bool`, `bytes`, and `string`), `int32`
 is replaced with the corresponding Go type according to the
@@ -483,9 +479,6 @@ returns the corresponding pointer:
 ```go
 func (Genre) Enum() *Genre
 ```
-
-If you use proto3 syntax for your `.proto` definition, the `Enum()` method is
-not generated.
 
 The protocol buffer compiler generates a constant for each value in the enum.
 For enums within a message, the constants begin with the enclosing message's

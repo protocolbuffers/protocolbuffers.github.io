@@ -160,14 +160,37 @@ escape = "\a"                        (* ASCII #7  (bell)                 *)
        | "\\"                        (* ASCII #92 (backslash)            *)
        | "\'"                        (* ASCII #39 (apostrophe)           *)
        | '\"'                        (* ASCII #34 (quote)                *)
-       | "\", oct, [ oct, [ oct ] ]  (* UTF-8 byte in octal              *)
-       | "\x", hex, [ hex ]          (* UTF-8 byte in hexadecimal        *)
+       | "\", oct, [ oct, [ oct ] ]  (* octal escaped byte value         *)
+       | "\x", hex, [ hex ]          (* hexadecimal escaped byte value   *)
        | "\u", hex, hex, hex, hex    (* Unicode code point up to 0xffff  *)
        | "\U000",
          hex, hex, hex, hex, hex     (* Unicode code point up to 0xfffff *)
        | "\U0010",
          hex, hex, hex, hex ;        (* Unicode code point between 0x100000 and 0x10ffff *)
 ```
+
+Octal escape sequences consume up to three octal digits. Additional digits are
+passed through without escaping. For example, when unescaping the input `\1234`,
+the parser consumes three octal digits (123) to unescape the byte value 0x83
+(ASCII 'S') and the subsequent '4' passes through as the byte value 0x34 (ASCII
+'4'). To ensure correct parsing, express octal escape sequences with 3 octal
+digits, using leading zeros as needed, such as: `\000`, `\001`, `\063`, `\377`.
+Fewer than three digits are consumed when a non-numeric character follows the
+numeric characters, such as `\5Hello`.
+
+Hexadecimal escape sequences consume up to two hexadecimal digits. For example,
+when unescaping `\x213`, the parser consumes only the first two digits (21) to
+unescape the byte value 0x21 (ASCII '!'). To ensure correct parsing, express
+hexadecimal escape sequences with 2 hexadecimal digits, using leading zeros as
+needed, such as: `\x00`, `\x01`, `\xFF`. Fewer than two digits are consumed when
+a non-hexadecimal character follows the numeric character, such as `\xFHello` or
+`\x3world`.
+
+Use byte-wise escaping only for fields with type `bytes`. While it is possible
+to use byte-wise escaping in fields with type `string`, those escape sequences
+are required to form valid UTF-8 sequences. Using byte-wise escaping to express
+UTF-8 sequences is error-prone. Prefer unicode escape sequences for unprintable
+characters and line-breaking characters in literals for `string`-type fields.
 
 Longer strings can be broken into several quoted strings on successive lines.
 For example:
@@ -265,6 +288,21 @@ any_value {
   [type.googleapis.com/com.foo.any] { foo: "bar" }
 }
 ```
+
+#### Unknown Fields {#unknown-fields}
+
+Text format parsers cannot support unknown fields represented as raw field
+numbers in place of field names because three of the six wire types are
+represented in the same way in textformat. Some text-format serializer
+implementations encode unknown fields with a format that uses a field number and
+a numeric representation of the value, but this is inherently lossy because the
+wire-type information is ignored. For comparison, wire-format is non-lossy
+because it includes the wire-type in each field tag as `(field_number << 3) |
+wire_type`. For more information on encoding, see the
+[Encoding](/programming-guides/encoding.md) topic.
+
+Without information about the field type from the message schema, the value
+cannot be correctly encoded into a wire-format proto message.
 
 ### Fields {#fields}
 
@@ -630,8 +668,7 @@ support. Some tooling also
 supports the legacy extensions `.textpb` and `.pbtxt`. All other extensions
 besides the above are **strongly** discouraged; in particular, extensions such
 as `.protoascii` wrongly imply that text format is ascii-only, and others like
-`.pb.txt` are not recognized by common tooling. METADATA files are special text
-format proto files that lack any extension.
+`.pb.txt` are not recognized by common tooling.
 {{% /alert %}}
 
 ```textproto

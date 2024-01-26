@@ -2,7 +2,7 @@
 title = "Ruby Generated Code Guide"
 weight = 780
 linkTitle = "Generated Code Guide"
-description = "This topic describes the API of message objects that the protocol buffer compiler generates for any given protocol definition."
+description = "Describes the API of message objects that the protocol buffer compiler generates for any given protocol definition."
 type = "docs"
 +++
 

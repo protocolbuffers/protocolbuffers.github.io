@@ -2,7 +2,7 @@
 title = "Protocol Buffer Basics: Kotlin"
 weight = 260
 linkTitle = "Kotlin"
-description = "This tutorial provides a basic Kotlin programmers introduction to working with protocol buffers."
+description = "A basic Kotlin programmers introduction to working with protocol buffers."
 type = "docs"
 +++
 
@@ -199,7 +199,7 @@ existing APIs generated for protocol buffers for Java. This ensures that
 codebases written in a mix of Java and Kotlin can interact with the same
 protocol buffer message objects without any special handling or conversion.
 
-Protocol buffers for other Kotlin compilation targets, such as Javascript and
+Protocol buffers for other Kotlin compilation targets, such as JavaScript and
 native, are not currently supported.
 
 Compiling `addressbook.proto` gives you the following APIs in Java:

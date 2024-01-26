@@ -1,7 +1,7 @@
 +++
 title = "Reference Guides"
 weight = 490
-description = "This section contains reference documentation for working with protocol buffer classes in C++, Java, Python, Go, C#, Objective-C, Ruby, PHP, and Dart, as well as some reference documentation for Protocol Buffers itself."
+description = "Reference documentation for working with protocol buffer classes in C++, Java, Python, Go, C#, Objective-C, Ruby, PHP, and Dart, as well as some reference documentation for Protocol Buffers itself."
 type = "docs"
 +++
 

@@ -1,7 +1,7 @@
 +++
 title = "Style Guide"
 weight = 50
-description = "This topic provides direction for how best to structure your proto definitions."
+description = "Provides direction for how best to structure your proto definitions."
 type = "docs"
 +++
 
@@ -98,11 +98,16 @@ enum FooBar {
 ```
 
 Each enum value should end with a semicolon, not a comma. Prefer prefixing enum
-values instead of surrounding them in an enclosing message. The zero value enum
-should have the suffix `UNSPECIFIED`, because a server or application that gets
-an unexpected enum value will mark the field as unset in the proto instance. The
-field accessor will then return the default value, which for enum fields is the
-first enum value.
+values instead of surrounding them in an enclosing message. Since some languages
+don't support an enum being defined inside a "struct" type, this ensures a
+consistent approach across binding languages.
+
+The zero value enum should have the suffix `UNSPECIFIED`, because a server or
+application that gets an unexpected enum value will mark the field as unset in
+the proto instance. The field accessor will then return the default value, which
+for enum fields is the first enum value. For more information on the unspecified
+enum value, see
+[the Proto Best Practices page](/programming-guides/dos-donts#unspecified-enum).
 
 ## Services {#services}
 

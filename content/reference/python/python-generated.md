@@ -2,7 +2,7 @@
 title = "Python Generated Code Guide"
 weight = 750
 linkTitle = "Generated Code Guide"
-description = "This topic describes exactly what Python definitions the protocol buffer compiler generates for any given protocol definition."
+description = "Describes exactly what Python definitions the protocol buffer compiler generates for any given protocol definition."
 type = "docs"
 +++
 
@@ -87,10 +87,11 @@ message Foo {}
 ```
 
 The protocol buffer compiler generates a class called `Foo`, which subclasses
-`google.protobuf.Message`. The class is a concrete class; no abstract methods
-are left unimplemented. Unlike C++ and Java, Python generated code is unaffected
-by the `optimize_for` option in the `.proto` file; in effect, all Python code is
-optimized for code size.
+[`google.protobuf.Message`](https://googleapis.dev/python/protobuf/latest/google/protobuf/message.html#google.protobuf.message.Message).
+The class is a concrete class; no abstract methods are left unimplemented.
+Unlike C++ and Java, Python generated code is unaffected by the `optimize_for`
+option in the `.proto` file; in effect, all Python code is optimized for code
+size.
 
 If the message's name is a Python keyword, then its class will only be
 accessible via `getattr()`, as described in the
@@ -533,6 +534,9 @@ foo.bars.add(i=3)
 foo.bars[0] = Bar(i=15)  # Raises an exception
 # WRONG!
 foo.bars[:] = [Bar(i=15), Bar(i=17)]  # Also raises an exception
+# RIGHT
+del foo.bars
+foo.bars.extend([Bar(i=15), Bar(i=17)])
 ```
 
 ### Groups (proto2) {#groups-proto2}
@@ -848,11 +852,10 @@ If the name of a message, field, enum, or enum value is a
 [Python keyword](https://docs.python.org/3/reference/lexical_analysis#keywords),
 then the name of its corresponding class or property will be the same, but
 you'll only be able to access it using Python's
-[`getattr()`](https://docs.python.org/3/library/functions#getattr)
-and
-[`setattr()`](https://docs.python.org/3/library/functions#setattr)
-built-in functions, and not via Python's normal attribute reference syntax (i.e.
-the dot operator).
+[`getattr()`](https://docs.python.org/3/library/functions#getattr) and
+[`setattr()`](https://docs.python.org/3/library/functions#setattr) built-in
+functions, and not via Python's normal attribute reference syntax (i.e. the dot
+operator).
 
 For example, if you have the following `.proto` definition:
 

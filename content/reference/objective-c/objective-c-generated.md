@@ -2,7 +2,7 @@
 title = "Objective-C Generated Code Guide"
 weight = 710
 linkTitle = "Generated Code Guide"
-description = "This topic describes exactly what Objective-C code the protocol buffer compiler generates for any given protocol definition."
+description = "Describes exactly what Objective-C code the protocol buffer compiler generates for any given protocol definition."
 type = "docs"
 +++
 

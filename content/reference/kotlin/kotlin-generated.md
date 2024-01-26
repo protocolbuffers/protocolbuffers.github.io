@@ -2,7 +2,7 @@
 title = "Kotlin Generated Code Guide"
 weight = 680
 linkTitle = "Generated Code Guide"
-description = "This topic describes exactly what Kotlin code the protocol buffer compiler generates for any given protocol definition, in addition to the code generated for Java."
+description = "Describes exactly what Kotlin code the protocol buffer compiler generates for any given protocol definition, in addition to the code generated for Java."
 type = "docs"
 +++
 

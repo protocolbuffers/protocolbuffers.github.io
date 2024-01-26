@@ -2,7 +2,7 @@
 title = "C++ Generated Code Guide"
 weight = 510
 linkTitle = "Generated Code Guide"
-description = "This topic describes exactly what C++ code the protocol buffer compiler generates for any given protocol definition. "
+description = "Describes exactly what C++ code the protocol buffer compiler generates for any given protocol definition. "
 type = "docs"
 +++
 
@@ -510,7 +510,9 @@ repeated int32 foo = 1;
 The compiler will generate the following accessor methods:
 
 -   `int foo_size() const`: Returns the number of elements currently in the
-    field.
+    field. To check for an empty set, consider using the
+    [`empty()`](/reference/cpp/api-docs/google.protobuf.repeated_field#RepeatedPtrField)
+    method in the underlying `RepeatedField` instead of this method.
 -   `int32 foo(int index) const`: Returns the element at the given zero-based
     index. Calling this method with index outside of [0, foo_size()) yields
     undefined behavior.
@@ -544,7 +546,9 @@ repeated bytes foo = 1;
 The compiler will generate the following accessor methods:
 
 -   `int foo_size() const`: Returns the number of elements currently in the
-    field.
+    field. To check for an empty set, consider using the
+    [`empty()`](/reference/cpp/api-docs/google.protobuf.repeated_field#RepeatedPtrField)
+    method in the underlying `RepeatedField` instead of this method.
 -   `const string& foo(int index) const`: Returns the element at the given
     zero-based index. Calling this method with index outside of [0,
     foo_size()-1] yields undefined behavior.
@@ -599,7 +603,9 @@ repeated Bar foo = 1;
 The compiler will generate the following accessor methods:
 
 -   `int foo_size() const`: Returns the number of elements currently in the
-    field.
+    field. To check for an empty set, consider using the
+    [`empty()`](/reference/cpp/api-docs/google.protobuf.repeated_field#RepeatedPtrField)
+    method in the underlying `RepeatedField` instead of this method.
 -   `Bar foo(int index) const`: Returns the element at the given zero-based
     index. Calling this method with index outside of [0, foo_size()) yields
     undefined behavior.
@@ -638,7 +644,9 @@ repeated Bar foo = 1;
 The compiler will generate the following accessor methods:
 
 -   `int foo_size() const`: Returns the number of elements currently in the
-    field.
+    field. To check for an empty set, consider using the
+    [`empty()`](/reference/cpp/api-docs/google.protobuf.repeated_field#RepeatedPtrField)
+    method in the underlying `RepeatedField` instead of this method.
 -   `const Bar& foo(int index) const`: Returns the element at the given
     zero-based index. Calling this method with index outside of [0, foo_size())
     yields undefined behavior.

@@ -81,9 +81,9 @@ to and from a variety of data streams and using a variety of languages.
 
 ## Pick Your Favorite Language
 
-Protocol buffers currently support generated code in Java, Python, Objective-C,
-and C++. With our new proto3 language version, you can also work with Kotlin,
-Dart, Go, Ruby, PHP, and C#, with more languages to come.
+Protocol buffers support generated code in C++, C#, Dart, Go, Java,
+Kotlin,
+Objective-C, Python, and Ruby. With proto3, you can also work with PHP.
 
 </div>
 <div class="col-md">

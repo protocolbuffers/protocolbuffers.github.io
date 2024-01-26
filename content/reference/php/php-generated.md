@@ -2,7 +2,7 @@
 title = "PHP Generated Code Guide"
 weight = 730
 linkTitle = "Generated Code Guide"
-description = "This topic describes the PHP code that the protocol buffer compiler generates for any given protocol definition."
+description = "Describes the PHP code that the protocol buffer compiler generates for any given protocol definition."
 type = "docs"
 +++
 

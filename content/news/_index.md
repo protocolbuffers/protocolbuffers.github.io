@@ -9,6 +9,16 @@ no_list = "true"
 News topics provide information about past events and changes with Protocol
 Buffers, and plans for upcoming changes.
 
+*   [January 5, 2024](/news/2024-01-05) - Breaking
+    changes in the 26.x line for Ruby and Python
+*   [December 27, 2023](/news/2023-12-27) - Breaking
+    changes in the 26.x line for Ruby, PHP, Python, and upb
+*   [December 13, 2023](/news/2023-12-13) - Breaking
+    Python and C++ changes in the 26.x line
+*   [December 5, 2023](/news/2023-12-05) - Breaking Java
+    changes in the 26.x line
+*   [October 10, 2023](/news/2023-10-10) - Documentation
+    for Protobuf Editions features is published
 *   [September 15, 2023](/news/2023-09-15) - μpb Moving
     to the Protobuf GitHub repository
 *   [August 15, 2023](/news/2023-08-15) - Breaking Python

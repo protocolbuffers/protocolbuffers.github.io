@@ -2,7 +2,7 @@
 title = "Protocol Buffer Basics: Dart"
 weight = 230
 linkTitle = "Dart"
-description = "This tutorial provides a basic Dart programmers introduction to working with protocol buffers."
+description = "A basic Dart programmers introduction to working with protocol buffers."
 type = "docs"
 +++
 
