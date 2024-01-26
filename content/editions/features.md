@@ -128,7 +128,7 @@ message Foo {
 The following shows a proto3 file:
 
 ```proto
-syntax = "proto3"
+syntax = "proto3";
 
 message Bar {
   int32 x = 1;
@@ -298,7 +298,7 @@ message Foo {
 The following shows a proto3 file:
 
 ```proto
-syntax = "proto3"
+syntax = "proto3";
 
 message Foo {
   repeated int32 bar = 6;
