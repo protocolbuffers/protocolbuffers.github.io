@@ -613,9 +613,9 @@ Is field presence tracked?
 
 Field type             | Tracked?
 ---------------------- | ------------------------
+*Other* singular field | if defined as `optional`
 Singular message field | yes
 Field in a oneof       | yes
-*Other* singular field | if defined as `optional`
 Repeated field & map   | no
 
 **Edition 2023:**
