@@ -10,9 +10,9 @@ type = "docs"
 
 Support windows for protoc and the various languages are covered in the tables
 later in this topic. Version numbers throughout this topic use
-[SemVer](https://semver.org) conventions; in the version "3.21.7," we
-say that "3" is the major version, "21" is the minor version, and "7" is the
-micro or patch number.
+[SemVer](https://semver.org) conventions; in the version "3.21.7," we say that
+"3" is the major version, "21" is the minor version, and "7" is the micro or
+patch number.
 
 Starting with the v20.x protoc release, we changed our versioning scheme to
 enable nimbler updates to language-specific parts of Protocol Buffers. In the
@@ -33,6 +33,11 @@ Protobuf does not officially have a release cadence; however, we strive to
 release updates quarterly, on a best-effort basis. Our support windows are
 defined by our
 [library breaking change policy](https://opensource.google/documentation/policies/library-breaking-change).
+
+Protobuf does *not* consider enforcement of its documented language, tooling,
+platform, and library support policies to be a breaking change. For example, a
+release may drop support for an EOL language version without bumping major
+versions.
 
 ## Support Duration {#duration}
 
@@ -373,6 +378,8 @@ This table graphically shows support durations.
 Protobuf is committed to following the platform and library support policy
 described in
 [.NET Support Policy](https://opensource.google/documentation/policies/dotnet-support).
+For specific versions supported, see
+[Foundational .NET Support Matrix](https://github.com/google/oss-policies-info/blob/main/foundational-dotnet-support-matrix.md).
 
 ## Java {#java}
 
@@ -569,6 +576,14 @@ Java will target making major version bumps annually in Q1 of each year.
     </td>
   </tr>
 </table>
+
+### Java Platform and Library Support {#java-support}
+
+Protobuf is committed to following the platform and library support policy
+described in
+[Java Support Policy](https://cloud.google.com/java/docs/supported-java-versions).
+For specific versions supported, see
+[Foundational Java Support Matrix](https://github.com/google/oss-policies-info/blob/main/foundational-java-support-matrix.md).
 
 ## Objective-C {#objc}
 

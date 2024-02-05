@@ -1383,9 +1383,12 @@ value.
 
 A proto3 JSON implementation may provide the following options:
 
-*   **Emit fields with default values**: Fields with default values are omitted
-    by default in proto3 JSON output. An implementation may provide an option to
-    override this behavior and output fields with their default values.
+*   **Always emit fields without presence**: Fields that don't support presence
+    and that have their default value are omitted by default in JSON output (for
+    example, an implicit presence integer with a 0 value, implicit presence
+    string fields that are empty strings, and empty repeated and map fields). An
+    implementation may provide an option to override this behavior and output
+    fields with their default values.
 *   **Ignore unknown fields**: Proto3 JSON parser should reject unknown fields
     by default but may provide an option to ignore unknown fields in parsing.
 *   **Use proto field name instead of lowerCamelCase name**: By default proto3

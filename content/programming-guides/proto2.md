@@ -622,7 +622,8 @@ different languages, see
 
 Removing enum values is a breaking change for persisted protos. Instead of
 removing a value, mark the value with the `reserved` keyword to prevent the enum
-value from being code-generated:
+value from being code-generated, or keep the value but indicate that it will be
+removed later by using the `deprecated` field option:
 
 ```proto
 enum PhoneType {
@@ -630,6 +631,7 @@ enum PhoneType {
   PHONE_TYPE_MOBILE = 1;
   PHONE_TYPE_HOME = 2;
   PHONE_TYPE_WORK = 3 [deprecated=true];
+  reserved 4,5;
 }
 ```
 
@@ -1824,13 +1826,26 @@ value.
 
 A proto2 JSON implementation may provide the following options:
 
+*   **Always emit fields without presence**: Fields that don't support presence
+    and that have their default value are omitted by default in JSON output (for
+    example, an implicit presence integer with a 0 value, implicit presence
+    string fields that are empty strings, and empty repeated and map fields). An
+    implementation may provide an option to override this behavior and output
+    fields with their default values.
+
+    As of v25.x, the C++, Java, and Python implementations are nonconformant, as
+    this flag affects proto2 `optional` fields but not proto3 `optional` fields.
+    A fix is planned for a future release.
+
 *   **Ignore unknown fields**: Proto2 JSON parser should reject unknown fields
     by default but may provide an option to ignore unknown fields in parsing.
+
 *   **Use proto field name instead of lowerCamelCase name**: By default proto2
     JSON printer should convert the field name to lowerCamelCase and use that as
     the JSON name. An implementation may provide an option to use proto field
     name as the JSON name instead. Proto2 JSON parsers are required to accept
     both the converted lowerCamelCase name and the proto field name.
+
 *   **Emit enum values as integers instead of strings**: The name of an enum
     value is used by default in JSON output. An option may be provided to use
     the numeric value of the enum value instead.

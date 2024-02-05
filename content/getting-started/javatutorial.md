@@ -350,7 +350,8 @@ Person john =
     .addPhones(
       Person.PhoneNumber.newBuilder()
         .setNumber("555-4321")
-        .setType(Person.PhoneType.PHONE_TYPE_HOME))
+        .setType(Person.PhoneType.PHONE_TYPE_HOME)
+        .build());
     .build();
 ```
 

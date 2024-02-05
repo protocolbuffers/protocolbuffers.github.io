@@ -534,8 +534,11 @@ foo.bars.add(i=3)
 foo.bars[0] = Bar(i=15)  # Raises an exception
 # WRONG!
 foo.bars[:] = [Bar(i=15), Bar(i=17)]  # Also raises an exception
-# RIGHT
+# WRONG!
+# AttributeError: Cannot delete field attribute
 del foo.bars
+# RIGHT
+del foo.bars[:]
 foo.bars.extend([Bar(i=15), Bar(i=17)])
 ```
 
