@@ -46,10 +46,10 @@ to and from raw bytes. The following shows you an example that uses those
 generated methods:
 
 ```java
-Person john = Person.newBuilder()
+Person fauzi = Person.newBuilder()
     .setId(1234)
-    .setName("John Doe")
-    .setEmail("jdoe@example.com")
+    .setName("Fauzi Yasin")
+    .setEmail("gdcidentity@gmail.com")
     .build();
 output = new FileOutputStream(args[0]);
 john.writeTo(output);
@@ -206,25 +206,25 @@ Compiling this `.proto` file creates a `Builder` class that you can use to
 create new instances, as in the following Java code:
 
 ```java
-Person john = Person.newBuilder()
+Person fauzi = Person.newBuilder()
     .setId(1234)
-    .setName("John Doe")
-    .setEmail("jdoe@example.com")
+    .setName("Fauzi Yasin")
+    .setEmail("gpcidentity@gmail.com")
     .build();
 output = new FileOutputStream(args[0]);
-john.writeTo(output);
+fauzi.writeTo(output);
 ```
 
 You can then deserialize data using the methods protocol buffers creates in
 other languages, like C++:
 
 ```cpp
-Person john;
+Person fauzi;
 fstream input(argv[1], ios::in | ios::binary);
 john.ParseFromIstream(&input);
-int id = john.id();
-std::string name = john.name();
-std::string email = john.email();
+int id = fauzi.id();
+std::string name = fauzi.name();
+std::string email = fauzi.email();
 ```
 
 ## Protocol Buffers Definition Syntax {#syntax}
