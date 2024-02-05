@@ -9,6 +9,8 @@ no_list = "true"
 News topics provide information about past events and changes with Protocol
 Buffers, and plans for upcoming changes.
 
+*   [February 5, 2024](/news/2024-02-05) - Breaking
+    changes in Java, C++, and Python in the 26.x line.
 *   [January 31, 2024](/news/2024-01-31) - Breaking
     changes in the 26.x line for Python
 *   [January 5, 2024](/news/2024-01-05) - Breaking
