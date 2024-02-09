@@ -1243,3 +1243,7 @@ described in
 [Ruby Support Policy](https://cloud.google.com/ruby/getting-started/supported-ruby-versions).
 For specific versions supported, see
 [Foundational Ruby Support Matrix](https://github.com/google/oss-policies-info/blob/main/foundational-ruby-support-matrix.md).
+
+JRuby is not officially supported, but we provide unofficial support for the
+latest JRuby version targeting compatibility with our minimum Ruby version or
+above on a best-effort basis.

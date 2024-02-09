@@ -121,6 +121,12 @@ service FooService {
 }
 ```
 
+For more service-related guidance, see
+[Create Unique Protos per Method](/programming-guides/api#unique-protos)
+and
+[Don't Include Primitive Types in a Top-level Request or Response Proto](/programming-guides/api#dont-include-primitive-types)
+in the API Best Practices topic.
+
 ## Things to Avoid {#avoid}
 
 *   Required fields (only for proto2)
