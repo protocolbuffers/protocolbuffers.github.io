@@ -835,6 +835,22 @@ convey meaning, each RPC method should document what error codes it returns in
 which circumstances. The implementation of each method should conform to the
 documented API contract.
 
+## Create Unique Protos per Method {#unique-protos}
+
+Create a unique request and response proto for each RPC method. Discovering
+later that you need to diverge the top-level request or response can be
+expensive. This includes "empty" responses; create a unique empty response proto
+rather than reusing the [well-known Empty message type](https://github.com/protocolbuffers/protobuf/blob/main/src/google/protobuf/empty.proto).
+
+### Reusing Messages {#reuse-messages}
+
+To reuse messages, create shared "domain" message types to include in multiple
+Request and Response protos. Write your application logic in terms of those
+types rather than the request and response types.
+
+This gives you the flexibility to evolve your method request/response types
+independently, but share code for logical sub-units.
+
 ## Appendix {#appendix}
 
 ### Returning Repeated Fields {#returning-repeated-fields}

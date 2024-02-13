@@ -519,8 +519,7 @@ type-specific:
 *   For strings, the default value is the empty string.
 *   For bytes, the default value is empty bytes.
 *   For bools, the default value is false.
-*   For numeric types, the default value is zero. For float and double types,
-    -0.0 and 0.0 are treated as equivalent, and will round-trip.
+*   For numeric types, the default value is zero.
 *   For enums, the default value is the **first defined enum value**, which must
     be 0.
 *   For message fields, the field is not set. Its exact value is
@@ -537,7 +536,8 @@ this in mind when defining your message types. For example, don't have a boolean
 that switches on some behavior when set to `false` if you don't want that
 behavior to also happen by default. Also note that if a scalar message field
 **is** set to its default, the value will not be serialized on the wire. If a
-float or double value is set to -0 or +0, it will not be serialized.
+float or double value is set to +0 it will not be serialized, but -0 is
+considered distinct and will be serialized.
 
 See the [generated code guide](/reference/) for your
 chosen language for more details about how defaults work in generated code.
@@ -1295,7 +1295,7 @@ value.
       <td><code>1.1, -10.0, 0, "NaN", "Infinity"</code></td>
       <td>JSON value will be a number or one of the special string values "NaN",
         "Infinity", and "-Infinity". Either numbers or strings are accepted.
-        Exponent notation is also accepted.  -0 is considered equivalent to 0.
+        Exponent notation is also accepted.
       </td>
     </tr>
     <tr>

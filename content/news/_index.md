@@ -7,7 +7,14 @@ no_list = "true"
 +++
 
 News topics provide information about past events and changes with Protocol
-Buffers, and plans for upcoming changes.
+Buffers, and plans for upcoming changes. The information is available both
+chronologically and per-release. Note that not everything is included in the
+per-release topics, as some content is not tied to a version.
+
+## Chronological {#chronological}
+
+The following news topics provide information in the reverse order in which it
+was released.
 
 *   [February 5, 2024](/news/2024-02-05) - Breaking
     changes in Java, C++, and Python in the 26.x line.
@@ -48,3 +55,26 @@ Buffers, and plans for upcoming changes.
     Change Policy
 *   [May 6, 2022](/news/2022-05-06) - Versioning, Python
     Updates, and JavaScript Support
+
+## Per Release {#per-release}
+
+<!-- Protobuf team: Add individual sections to a topic below when the section is
+specific to a particular release, rather than a general update. -->
+
+The following new topics provide per-release information. All News entries
+appear in the chronological listing in the previous section, but only entries
+that are specific to a particular version appear in the pages listed in this
+section.
+
+These pages do not replace the
+[release notes](https://github.com/protocolbuffers/protobuf/releases), as the
+release notes will be more complete. Also, not everything from the chronological
+listing will be in these topics, as some content is not specific to a particular
+release.
+
+*   [Version 26.x](/news/v26)
+*   [Version 25.x](/news/v25)
+*   [Version 24.x](/news/v24)
+*   [Version 23.x](/news/v23)
+*   [Version 22.x](/news/v22)
+*   [Version 21.x](/news/v21)
