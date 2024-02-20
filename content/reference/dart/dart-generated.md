@@ -421,7 +421,7 @@ extend Foo {
 
 The protocol buffer compiler will generate, in addition to the `Foo` class, a
 class `Foo_test` which will contain a `static Extension` for each extension
-field in the file along with a method for registering all the exensions in an
+field in the file along with a method for registering all the extensions in an
 `ExtensionRegistry` :
 
 -   `static final Extension bar`
