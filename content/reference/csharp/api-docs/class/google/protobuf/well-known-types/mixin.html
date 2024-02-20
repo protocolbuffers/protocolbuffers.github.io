@@ -31,7 +31,7 @@ service Storage {
 - name: google.storage.v2.Storage
   mixins:
   - name: google.acl.v1.AccessControl
-</pre></p><p>The mixin construct implies that all methods in <code>AccessControl</code> are also declared with same name and request/response types in <code>Storage</code>. A documentation generator or annotation processor will see the effective <code>Storage.GetAcl</code> method after inherting documentation and annotations as follows: <pre class="prettyprint">service Storage {
+</pre></p><p>The mixin construct implies that all methods in <code>AccessControl</code> are also declared with same name and request/response types in <code>Storage</code>. A documentation generator or annotation processor will see the effective <code>Storage.GetAcl</code> method after inheriting documentation and annotations as follows: <pre class="prettyprint">service Storage {
   // Get the underlying ACL object.
   rpc GetAcl(GetAclRequest) returns (Acl) {
     option (google.api.http).get = "/v2/{resource=**}:getAcl";
