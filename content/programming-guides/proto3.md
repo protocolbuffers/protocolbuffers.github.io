@@ -1052,8 +1052,8 @@ map<key_type, value_type> map_field = N;
 
 ...where the `key_type` can be any integral or string type (so, any
 [scalar](#scalar) type except for floating point types and `bytes`). Note that
-enum is not a valid `key_type`. The `value_type` can be any type except another
-map.
+neither enum nor proto messages are valid for `key_type`.
+The `value_type` can be any type except another map.
 
 So, for example, if you wanted to create a map of projects where each `Project`
 message is associated with a string key, you could define it like this:
