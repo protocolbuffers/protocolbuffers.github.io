@@ -16,6 +16,8 @@ per-release topics, as some content is not tied to a version.
 The following news topics provide information in the reverse order in which it
 was released.
 
+*   [February 27, 2024](/news/2024-02-05) - Dropping
+    support for older versions of Ruby
 *   [February 5, 2024](/news/2024-02-05) - Breaking
     changes in Java, C++, and Python in the 26.x line.
 *   [January 31, 2024](/news/2024-01-31) - Breaking
