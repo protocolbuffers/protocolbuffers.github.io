@@ -4,7 +4,7 @@ proto2 and proto3 generated code are highlighted - note that these differences
 are in the generated code as described in this document, not the base API, which
 are the same in both versions. You should read the
 &lt;a href="https://protobuf.dev/programming-guides/proto">proto2 language guide&lt;/a> and/or
-the &lt;a href="https://protobuf.dev/programming-guides/proto3">proto3 language guide&lt;/a>
+the &lt;a href="https://protobuf.dev/programming-guides/proto3/">proto3 language guide&lt;/a>
 before reading this document.&lt;/p>
 &lt;h2 id="invocation">Compiler Invocation&lt;/h2>
 &lt;p>The protocol buffer compiler requires a
@@ -68,7 +68,7 @@ buffer compiler generates accessor methods for each field defined within the
 message in the &lt;code>.proto&lt;/code> file.&lt;/p>
 &lt;p>Note that the generated names always use camel-case naming, even if the field
 name in the &lt;code>.proto&lt;/code> file uses lower-case with underscores
-(&lt;a href="https://protobuf.dev/programming-guides/style">as it should&lt;/a>). The
+(&lt;a href="https://protobuf.dev/programming-guides/style/">as it should&lt;/a>). The
 case-conversion works as follows:&lt;/p>
 &lt;ol>
 &lt;li>For each underscore in the name, the underscore is removed, and the
@@ -109,7 +109,7 @@ set, returns the default value.&lt;/li>
 &lt;/ul>
 &lt;p>&lt;strong>NOTE:&lt;/strong> Due to a quirk in the Dart proto3 implementation, the following
 methods are generated even if the &lt;code>optional&lt;/code> modifier, used to request
-&lt;a href="https://protobuf.dev/programming-guides/field_presence#presence-in-proto3-apis">presence semantics&lt;/a>,
+&lt;a href="https://protobuf.dev/programming-guides/field_presence/#presence-in-proto3-apis">presence semantics&lt;/a>,
 isn&amp;rsquo;t in the proto definition.&lt;/p>
 &lt;ul>
 &lt;li>&lt;code>bool hasFoo()&lt;/code>: Returns &lt;code>true&lt;/code> if the field is set.&lt;/li>
@@ -167,7 +167,7 @@ field.&lt;/li>
 objects, you may need to import the Dart &lt;code>fixnum&lt;/code> library:&lt;/p>
 &lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-dart" data-lang="dart">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#204a87;font-weight:bold">import&lt;/span> &lt;span style="color:#4e9a06">&amp;#39;package:fixnum/fixnum.dart&amp;#39;&lt;/span>&lt;span style="color:#000;font-weight:bold">;&lt;/span>
 &lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h3 id="map-fields">Map Fields&lt;/h3>
-&lt;p>Given a &lt;a href="https://protobuf.dev/programming-guides/proto3#maps">&lt;code>map&lt;/code>&lt;/a> field
+&lt;p>Given a &lt;a href="https://protobuf.dev/programming-guides/proto3/#maps">&lt;code>map&lt;/code>&lt;/a> field
 definition like this:&lt;/p>
 &lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-proto" data-lang="proto">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#000">map&lt;/span>&lt;span style="color:#000;font-weight:bold">&amp;lt;&lt;/span>&lt;span style="color:#204a87;font-weight:bold">int32&lt;/span>&lt;span style="color:#000;font-weight:bold">,&lt;/span> &lt;span style="color:#204a87;font-weight:bold">int32&lt;/span>&lt;span style="color:#000;font-weight:bold">&amp;gt;&lt;/span> &lt;span style="color:#000">map_field&lt;/span> &lt;span style="color:#ce5c00;font-weight:bold">=&lt;/span> &lt;span style="color:#0000cf;font-weight:bold">1&lt;/span>&lt;span style="color:#000;font-weight:bold">;&lt;/span>&lt;span style="color:#a40000">
 &lt;/span>&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>The compiler will generate the following getter:&lt;/p>
@@ -177,7 +177,7 @@ field is not set, returns an empty map. Modifications to the map are
 reflected in the field.&lt;/li>
 &lt;/ul>
 &lt;h2 id="any">Any&lt;/h2>
-&lt;p>Given an &lt;a href="https://protobuf.dev/programming-guides/proto3#any">&lt;code>Any&lt;/code>&lt;/a> field
+&lt;p>Given an &lt;a href="https://protobuf.dev/programming-guides/proto3/#any">&lt;code>Any&lt;/code>&lt;/a> field
 like this:&lt;/p>
 &lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-proto" data-lang="proto">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#204a87;font-weight:bold">import&lt;/span> &lt;span style="color:#4e9a06">&amp;#34;google/protobuf/any.proto&amp;#34;&lt;/span>&lt;span style="color:#000;font-weight:bold">;&lt;/span>&lt;span style="color:#a40000">
 &lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#a40000">
@@ -212,7 +212,7 @@ and unpack the &lt;code>Any&lt;/code>&amp;rsquo;s values:&lt;/p>
 &lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#8f5902;font-style:italic">&lt;/span> &lt;span style="color:#204a87;font-weight:bold">static&lt;/span> &lt;span style="color:#000">Any&lt;/span> &lt;span style="color:#000">pack&lt;/span>&lt;span style="color:#000;font-weight:bold">(&lt;/span>&lt;span style="color:#000">GeneratedMessage&lt;/span> &lt;span style="color:#000">message&lt;/span>&lt;span style="color:#000;font-weight:bold">,&lt;/span>
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#000;font-weight:bold">{&lt;/span>&lt;span style="color:#204a87;font-weight:bold">String&lt;/span> &lt;span style="color:#000">typeUrlPrefix&lt;/span> &lt;span style="color:#ce5c00;font-weight:bold">=&lt;/span> &lt;span style="color:#4e9a06">&amp;#39;type.googleapis.com&amp;#39;&lt;/span>&lt;span style="color:#000;font-weight:bold">});&lt;/span>
 &lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h2 id="oneof">Oneof&lt;/h2>
-&lt;p>Given a &lt;a href="https://protobuf.dev/programming-guides/proto3#oneof">&lt;code>oneof&lt;/code>&lt;/a>
+&lt;p>Given a &lt;a href="https://protobuf.dev/programming-guides/proto3/#oneof">&lt;code>oneof&lt;/code>&lt;/a>
 definition like this:&lt;/p>
 &lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-proto" data-lang="proto">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#204a87;font-weight:bold">message&lt;/span> &lt;span style="color:#000">Foo&lt;/span> &lt;span style="color:#000;font-weight:bold">{&lt;/span>&lt;span style="color:#a40000">
 &lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#a40000">&lt;/span> &lt;span style="color:#204a87;font-weight:bold">oneof&lt;/span> &lt;span style="color:#000">test&lt;/span> &lt;span style="color:#000;font-weight:bold">{&lt;/span>&lt;span style="color:#a40000">
@@ -343,6 +343,12 @@ extensions when doing &lt;code>GeneratedMessage.fromBuffer&lt;/code>.&lt;/p>
 &lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#a40000">&lt;/span>&lt;span style="color:#000;font-weight:bold">}&lt;/span>&lt;span style="color:#a40000">
 &lt;/span>&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>The protocol buffer compiler can be invoked with the `grpc` option (e.g.
 &lt;code>--dart_out=grpc:output_folder&lt;/code>), in which case it will generate code to support
-&lt;a href="//www.grpc.io/">gRPC&lt;/a>. See the
+&lt;a href="https://protobuf.dev/">gRPC&lt;/a>. See the
 &lt;a href="https://grpc.io/docs/quickstart/dart.html">gRPC Dart Quickstart guide&lt;/a>
-for more details.&lt;/p></description></item><item><title>Reference: Dart API</title><link>https://protobuf.dev/reference/dart/api-docs-link/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://protobuf.dev/reference/dart/api-docs-link/</guid><description/></item></channel></rss>
+for more details.&lt;/p></description></item><item><title>Reference:</title><link>https://protobuf.dev/reference/dart/api-docs-link/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://protobuf.dev/reference/dart/api-docs-link/</guid><description>
+&lt;!-- mdformat global-off -->
+&lt;hr>
+&lt;h2 id="weight-590">title: &amp;ldquo;Dart API&amp;rdquo;
+manualLink: &amp;ldquo;&lt;a href="https://pub.dartlang.org/documentation/protobuf%22">https://pub.dartlang.org/documentation/protobuf"&lt;/a>
+manualLinkTarget: &amp;ldquo;_blank&amp;rdquo;
+weight: 590&lt;/h2></description></item></channel></rss>

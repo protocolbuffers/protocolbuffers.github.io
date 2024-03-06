@@ -3,9 +3,9 @@
 that these differences are in the generated code as described in this document,
 not the base message classes/interfaces, which are the same in both versions.
 You should read the
-&lt;a href="https://protobuf.dev/programming-guides/proto2">proto2 language guide&lt;/a>
+&lt;a href="https://protobuf.dev/programming-guides/proto2/">proto2 language guide&lt;/a>
 and/or
-&lt;a href="https://protobuf.dev/programming-guides/proto3">proto3 language guide&lt;/a>
+&lt;a href="https://protobuf.dev/programming-guides/proto3/">proto3 language guide&lt;/a>
 before reading this document.&lt;/p>
 &lt;h2 id="invocation">Compiler Invocation&lt;/h2>
 &lt;p>The protocol buffer compiler produces C++ output when invoked with the
@@ -39,7 +39,7 @@ file will be placed in a corresponding C++ namespace. For example, given the
 &lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-proto" data-lang="proto">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#204a87;font-weight:bold">message&lt;/span> &lt;span style="color:#000">Foo&lt;/span> &lt;span style="color:#000;font-weight:bold">{}&lt;/span>&lt;span style="color:#a40000">
 &lt;/span>&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>The protocol buffer compiler generates a class called &lt;code>Foo&lt;/code>, which publicly
 derives from
-&lt;a href="https://protobuf.dev/reference/cpp/api-docs/google.protobuf.message">&lt;code>google::protobuf::Message&lt;/code>&lt;/a>.
+&lt;a href="https://protobuf.dev/reference/cpp/api-docs/google.protobuf.message/">&lt;code>google::protobuf::Message&lt;/code>&lt;/a>.
 The class is a concrete class; no pure-virtual methods are left unimplemented.
 Methods that are virtual in &lt;code>Message&lt;/code> but not pure-virtual may or may not be
 overridden by &lt;code>Foo&lt;/code>, depending on the optimization mode. By default, &lt;code>Foo&lt;/code>
@@ -53,7 +53,7 @@ Alternatively, if the &lt;code>.proto&lt;/code> file contains:&lt;/p>
 &lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-proto" data-lang="proto">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#204a87;font-weight:bold">option&lt;/span> &lt;span style="color:#000">optimize_for&lt;/span> &lt;span style="color:#ce5c00;font-weight:bold">=&lt;/span> &lt;span style="color:#000">LITE_RUNTIME&lt;/span>&lt;span style="color:#000;font-weight:bold">;&lt;/span>&lt;span style="color:#a40000">
 &lt;/span>&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>then &lt;code>Foo&lt;/code> will include fast implementations of all methods, but will implement
 the
-&lt;a href="https://protobuf.dev/reference/cpp/api-docs/google.protobuf.message_lite">&lt;code>google::protobuf::MessageLite&lt;/code>&lt;/a>
+&lt;a href="https://protobuf.dev/reference/cpp/api-docs/google.protobuf.message_lite/">&lt;code>google::protobuf::MessageLite&lt;/code>&lt;/a>
 interface, which only contains a subset of the methods of &lt;code>Message&lt;/code>. In
 particular, it does not support descriptors or reflection. However, in this
 mode, the generated code only needs to link against &lt;code>libprotobuf-lite.so&lt;/code>
@@ -96,7 +96,7 @@ the return type changes to &lt;code>std::string*&lt;/code>.&lt;/li>
 &lt;li>&lt;code>static const Descriptor* descriptor()&lt;/code>: Returns the type&amp;rsquo;s descriptor. This
 contains information about the type, including what fields it has and what
 their types are. This can be used with
-&lt;a href="https://protobuf.dev/reference/cpp/api-docs/google.protobuf.message#Reflection">reflection&lt;/a>
+&lt;a href="https://protobuf.dev/reference/cpp/api-docs/google.protobuf.message/#Reflection">reflection&lt;/a>
 to inspect fields programmatically.&lt;/li>
 &lt;li>&lt;code>static const Foo&amp;amp; default_instance()&lt;/code>: Returns a const singleton instance
 of &lt;code>Foo&lt;/code> which is identical to a newly-constructed instance of &lt;code>Foo&lt;/code> (so all
@@ -179,7 +179,7 @@ this, &lt;code>has_foo()&lt;/code> will return &lt;code>true&lt;/code> and &lt;c
 &lt;/ul>
 &lt;p>For other numeric field types (including &lt;code>bool&lt;/code>), &lt;code>int32&lt;/code> is replaced with the
 corresponding C++ type according to the
-&lt;a href="https://protobuf.dev/programming-guides/proto3#scalar">scalar value types table&lt;/a>.&lt;/p>
+&lt;a href="https://protobuf.dev/programming-guides/proto3/#scalar">scalar value types table&lt;/a>.&lt;/p>
 &lt;h3 id="implicit-numeric">Implicit Presence Numeric Fields (proto3)&lt;/h3>
 &lt;p>For these field definitions:&lt;/p>
 &lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-proto" data-lang="proto">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#204a87;font-weight:bold">optional&lt;/span> &lt;span style="color:#204a87;font-weight:bold">int32&lt;/span> &lt;span style="color:#000">foo&lt;/span> &lt;span style="color:#ce5c00;font-weight:bold">=&lt;/span> &lt;span style="color:#0000cf;font-weight:bold">1&lt;/span>&lt;span style="color:#000;font-weight:bold">;&lt;/span>&lt;span style="color:#a40000">
@@ -195,7 +195,7 @@ this, &lt;code>foo()&lt;/code> will return &lt;code>value&lt;/code>.&lt;/li>
 &lt;/ul>
 &lt;p>For other numeric field types (including &lt;code>bool&lt;/code>), &lt;code>int32&lt;/code> is replaced with the
 corresponding C++ type according to the
-&lt;a href="https://protobuf.dev/programming-guides/proto3#scalar">scalar value types table&lt;/a>.&lt;/p>
+&lt;a href="https://protobuf.dev/programming-guides/proto3/#scalar">scalar value types table&lt;/a>.&lt;/p>
 &lt;h3 id="string">Optional String/Bytes Fields (proto2 and proto3)&lt;/h3>
 &lt;p>For any of these field definitions:&lt;/p>
 &lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-proto" data-lang="proto">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#204a87;font-weight:bold">optional&lt;/span> &lt;span style="color:#204a87;font-weight:bold">string&lt;/span> &lt;span style="color:#000">foo&lt;/span> &lt;span style="color:#ce5c00;font-weight:bold">=&lt;/span> &lt;span style="color:#0000cf;font-weight:bold">1&lt;/span>&lt;span style="color:#000;font-weight:bold">;&lt;/span>&lt;span style="color:#a40000">
@@ -285,7 +285,7 @@ and &lt;code>foo()&lt;/code> will return the empty string/empty bytes.&lt;/li>
 &lt;p>v23.0 added support for
 &lt;a href="https://github.com/abseil/abseil-cpp/blob/master/absl/strings/cord.h">&lt;code>absl::Cord&lt;/code>&lt;/a>
 for singular &lt;code>bytes&lt;/code> fields (including
-&lt;a href="#oneof-numeric">&lt;code>oneof&lt;/code> fields&lt;/a>). Singular &lt;code>string&lt;/code>, &lt;code>repeated string&lt;/code>, and &lt;code>repeated bytes&lt;/code> fields do not support using &lt;code>Cord&lt;/code>s.&lt;/p>
+&lt;a href="https://protobuf.dev/reference/cpp/cpp-generated/#oneof-numeric">&lt;code>oneof&lt;/code> fields&lt;/a>). Singular &lt;code>string&lt;/code>, &lt;code>repeated string&lt;/code>, and &lt;code>repeated bytes&lt;/code> fields do not support using &lt;code>Cord&lt;/code>s.&lt;/p>
 &lt;p>To set a singular &lt;code>bytes&lt;/code> field to store data using &lt;code>absl::Cord&lt;/code>, use the
 following syntax:&lt;/p>
 &lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-proto" data-lang="proto">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#204a87;font-weight:bold">optional&lt;/span> &lt;span style="color:#204a87;font-weight:bold">bytes&lt;/span> &lt;span style="color:#000">foo&lt;/span> &lt;span style="color:#ce5c00;font-weight:bold">=&lt;/span> &lt;span style="color:#0000cf;font-weight:bold">25&lt;/span> &lt;span style="color:#000;font-weight:bold">[&lt;/span>&lt;span style="color:#204a87;font-weight:bold">ctype&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">=&lt;/span>&lt;span style="color:#000">CORD&lt;/span>&lt;span style="color:#000;font-weight:bold">];&lt;/span>&lt;span style="color:#a40000">
@@ -387,7 +387,7 @@ will return the default value.&lt;/li>
 &lt;ul>
 &lt;li>&lt;code>int foo_size() const&lt;/code>: Returns the number of elements currently in the
 field. To check for an empty set, consider using the
-&lt;a href="https://protobuf.dev/reference/cpp/api-docs/google.protobuf.repeated_field#RepeatedPtrField">&lt;code>empty()&lt;/code>&lt;/a>
+&lt;a href="https://protobuf.dev/reference/cpp/api-docs/google.protobuf.repeated_field/#RepeatedPtrField">&lt;code>empty()&lt;/code>&lt;/a>
 method in the underlying &lt;code>RepeatedField&lt;/code> instead of this method.&lt;/li>
 &lt;li>&lt;code>int32 foo(int index) const&lt;/code>: Returns the element at the given zero-based
 index. Calling this method with index outside of [0, foo_size()) yields
@@ -399,7 +399,7 @@ with the given value.&lt;/li>
 &lt;li>&lt;code>void clear_foo()&lt;/code>: Removes all elements from the field. After calling this,
 &lt;code>foo_size()&lt;/code> will return zero.&lt;/li>
 &lt;li>&lt;code>const RepeatedField&amp;lt;int32&amp;gt;&amp;amp; foo() const&lt;/code>: Returns the underlying
-&lt;a href="https://protobuf.dev/reference/cpp/api-docs/google.protobuf.repeated_field#RepeatedField">&lt;code>RepeatedField&lt;/code>&lt;/a>
+&lt;a href="https://protobuf.dev/reference/cpp/api-docs/google.protobuf.repeated_field/#RepeatedField">&lt;code>RepeatedField&lt;/code>&lt;/a>
 that stores the field&amp;rsquo;s elements. This container class provides STL-like
 iterators and other methods.&lt;/li>
 &lt;li>&lt;code>RepeatedField&amp;lt;int32&amp;gt;* mutable_foo()&lt;/code>: Returns a pointer to the underlying
@@ -408,7 +408,7 @@ class provides STL-like iterators and other methods.&lt;/li>
 &lt;/ul>
 &lt;p>For other numeric field types (including &lt;code>bool&lt;/code>), &lt;code>int32&lt;/code> is replaced with the
 corresponding C++ type according to the
-&lt;a href="https://protobuf.dev/programming-guides/proto2#scalar">scalar value types table&lt;/a>.&lt;/p>
+&lt;a href="https://protobuf.dev/programming-guides/proto2/#scalar">scalar value types table&lt;/a>.&lt;/p>
 &lt;h3 id="repeatedstring">Repeated String Fields&lt;/h3>
 &lt;p>For either of these field definitions:&lt;/p>
 &lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-proto" data-lang="proto">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#204a87;font-weight:bold">repeated&lt;/span> &lt;span style="color:#204a87;font-weight:bold">string&lt;/span> &lt;span style="color:#000">foo&lt;/span> &lt;span style="color:#ce5c00;font-weight:bold">=&lt;/span> &lt;span style="color:#0000cf;font-weight:bold">1&lt;/span>&lt;span style="color:#000;font-weight:bold">;&lt;/span>&lt;span style="color:#a40000">
@@ -417,7 +417,7 @@ corresponding C++ type according to the
 &lt;ul>
 &lt;li>&lt;code>int foo_size() const&lt;/code>: Returns the number of elements currently in the
 field. To check for an empty set, consider using the
-&lt;a href="https://protobuf.dev/reference/cpp/api-docs/google.protobuf.repeated_field#RepeatedPtrField">&lt;code>empty()&lt;/code>&lt;/a>
+&lt;a href="https://protobuf.dev/reference/cpp/api-docs/google.protobuf.repeated_field/#RepeatedPtrField">&lt;code>empty()&lt;/code>&lt;/a>
 method in the underlying &lt;code>RepeatedField&lt;/code> instead of this method.&lt;/li>
 &lt;li>&lt;code>const string&amp;amp; foo(int index) const&lt;/code>: Returns the element at the given
 zero-based index. Calling this method with index outside of [0,
@@ -445,7 +445,7 @@ and returns a pointer to it.&lt;/li>
 &lt;li>&lt;code>void clear_foo()&lt;/code>: Removes all elements from the field. After calling this,
 &lt;code>foo_size()&lt;/code> will return zero.&lt;/li>
 &lt;li>&lt;code>const RepeatedPtrField&amp;lt;string&amp;gt;&amp;amp; foo() const&lt;/code>: Returns the underlying
-&lt;a href="https://protobuf.dev/reference/cpp/api-docs/google.protobuf.repeated_field#RepeatedPtrField">&lt;code>RepeatedPtrField&lt;/code>&lt;/a>
+&lt;a href="https://protobuf.dev/reference/cpp/api-docs/google.protobuf.repeated_field/#RepeatedPtrField">&lt;code>RepeatedPtrField&lt;/code>&lt;/a>
 that stores the field&amp;rsquo;s elements. This container class provides STL-like
 iterators and other methods.&lt;/li>
 &lt;li>&lt;code>RepeatedPtrField&amp;lt;string&amp;gt;* mutable_foo()&lt;/code>: Returns a pointer to the
@@ -465,7 +465,7 @@ container class provides STL-like iterators and other methods.&lt;/li>
 &lt;ul>
 &lt;li>&lt;code>int foo_size() const&lt;/code>: Returns the number of elements currently in the
 field. To check for an empty set, consider using the
-&lt;a href="https://protobuf.dev/reference/cpp/api-docs/google.protobuf.repeated_field#RepeatedPtrField">&lt;code>empty()&lt;/code>&lt;/a>
+&lt;a href="https://protobuf.dev/reference/cpp/api-docs/google.protobuf.repeated_field/#RepeatedPtrField">&lt;code>empty()&lt;/code>&lt;/a>
 method in the underlying &lt;code>RepeatedField&lt;/code> instead of this method.&lt;/li>
 &lt;li>&lt;code>Bar foo(int index) const&lt;/code>: Returns the element at the given zero-based
 index. Calling this method with index outside of [0, foo_size()) yields
@@ -481,7 +481,7 @@ the process.&lt;/li>
 &lt;li>&lt;code>void clear_foo()&lt;/code>: Removes all elements from the field. After calling this,
 &lt;code>foo_size()&lt;/code> will return zero.&lt;/li>
 &lt;li>&lt;code>const RepeatedField&amp;lt;int&amp;gt;&amp;amp; foo() const&lt;/code>: Returns the underlying
-&lt;a href="https://protobuf.dev/reference/cpp/api-docs/google.protobuf.repeated_field#RepeatedField">&lt;code>RepeatedField&lt;/code>&lt;/a>
+&lt;a href="https://protobuf.dev/reference/cpp/api-docs/google.protobuf.repeated_field/#RepeatedField">&lt;code>RepeatedField&lt;/code>&lt;/a>
 that stores the field&amp;rsquo;s elements. This container class provides STL-like
 iterators and other methods.&lt;/li>
 &lt;li>&lt;code>RepeatedField&amp;lt;int&amp;gt;* mutable_foo()&lt;/code>: Returns a pointer to the underlying
@@ -497,7 +497,7 @@ class provides STL-like iterators and other methods.&lt;/li>
 &lt;ul>
 &lt;li>&lt;code>int foo_size() const&lt;/code>: Returns the number of elements currently in the
 field. To check for an empty set, consider using the
-&lt;a href="https://protobuf.dev/reference/cpp/api-docs/google.protobuf.repeated_field#RepeatedPtrField">&lt;code>empty()&lt;/code>&lt;/a>
+&lt;a href="https://protobuf.dev/reference/cpp/api-docs/google.protobuf.repeated_field/#RepeatedPtrField">&lt;code>empty()&lt;/code>&lt;/a>
 method in the underlying &lt;code>RepeatedField&lt;/code> instead of this method.&lt;/li>
 &lt;li>&lt;code>const Bar&amp;amp; foo(int index) const&lt;/code>: Returns the element at the given
 zero-based index. Calling this method with index outside of [0, foo_size())
@@ -511,7 +511,7 @@ fields set (i.e. it will be identical to a newly-allocated &lt;code>Bar&lt;/code
 &lt;li>&lt;code>void clear_foo()&lt;/code>: Removes all elements from the field. After calling this,
 &lt;code>foo_size()&lt;/code> will return zero.&lt;/li>
 &lt;li>&lt;code>const RepeatedPtrField&amp;lt;Bar&amp;gt;&amp;amp; foo() const&lt;/code>: Returns the underlying
-&lt;a href="https://protobuf.dev/reference/cpp/api-docs/google.protobuf.repeated_field#RepeatedPtrField">&lt;code>RepeatedPtrField&lt;/code>&lt;/a>
+&lt;a href="https://protobuf.dev/reference/cpp/api-docs/google.protobuf.repeated_field/#RepeatedPtrField">&lt;code>RepeatedPtrField&lt;/code>&lt;/a>
 that stores the field&amp;rsquo;s elements. This container class provides STL-like
 iterators and other methods.&lt;/li>
 &lt;li>&lt;code>RepeatedPtrField&amp;lt;Bar&amp;gt;* mutable_foo()&lt;/code>: Returns a pointer to the underlying
@@ -519,7 +519,7 @@ mutable &lt;code>RepeatedPtrField&lt;/code> that stores the field&amp;rsquo;s el
 class provides STL-like iterators and other methods.&lt;/li>
 &lt;/ul>
 &lt;h3 id="oneof-numeric">Oneof Numeric Fields&lt;/h3>
-&lt;p>For this &lt;a href="#oneof">oneof&lt;/a> field definition:&lt;/p>
+&lt;p>For this &lt;a href="https://protobuf.dev/reference/cpp/cpp-generated/#oneof">oneof&lt;/a> field definition:&lt;/p>
 &lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-proto" data-lang="proto">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#204a87;font-weight:bold">oneof&lt;/span> &lt;span style="color:#000">example_name&lt;/span> &lt;span style="color:#000;font-weight:bold">{&lt;/span>&lt;span style="color:#a40000">
 &lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#a40000">&lt;/span> &lt;span style="color:#204a87;font-weight:bold">int32&lt;/span> &lt;span style="color:#000">foo&lt;/span> &lt;span style="color:#ce5c00;font-weight:bold">=&lt;/span> &lt;span style="color:#0000cf;font-weight:bold">1&lt;/span>&lt;span style="color:#000;font-weight:bold">;&lt;/span>&lt;span style="color:#a40000">
 &lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#a40000">&lt;/span> &lt;span style="color:#ce5c00;font-weight:bold">...&lt;/span>&lt;span style="color:#a40000">
@@ -551,9 +551,9 @@ default value and &lt;code>example_name_case()&lt;/code> will return
 &lt;/ul>
 &lt;p>For other numeric field types (including &lt;code>bool&lt;/code>),&lt;code>int32&lt;/code> is replaced with the
 corresponding C++ type according to the
-&lt;a href="https://protobuf.dev/programming-guides/proto3#scalar">scalar value types table&lt;/a>.&lt;/p>
+&lt;a href="https://protobuf.dev/programming-guides/proto3/#scalar">scalar value types table&lt;/a>.&lt;/p>
 &lt;h3 id="oneof-string">Oneof String Fields&lt;/h3>
-&lt;p>For any of these &lt;a href="#oneof">oneof&lt;/a> field definitions:&lt;/p>
+&lt;p>For any of these &lt;a href="https://protobuf.dev/reference/cpp/cpp-generated/#oneof">oneof&lt;/a> field definitions:&lt;/p>
 &lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-proto" data-lang="proto">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#204a87;font-weight:bold">oneof&lt;/span> &lt;span style="color:#000">example_name&lt;/span> &lt;span style="color:#000;font-weight:bold">{&lt;/span>&lt;span style="color:#a40000">
 &lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#a40000">&lt;/span> &lt;span style="color:#204a87;font-weight:bold">string&lt;/span> &lt;span style="color:#000">foo&lt;/span> &lt;span style="color:#ce5c00;font-weight:bold">=&lt;/span> &lt;span style="color:#0000cf;font-weight:bold">1&lt;/span>&lt;span style="color:#000;font-weight:bold">;&lt;/span>&lt;span style="color:#a40000">
 &lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#a40000">&lt;/span> &lt;span style="color:#ce5c00;font-weight:bold">...&lt;/span>&lt;span style="color:#a40000">
@@ -639,7 +639,7 @@ return &lt;code>EXAMPLE_NAME_NOT_SET&lt;/code>.&lt;/li>
 &lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#a40000">&lt;/span> &lt;span style="color:#000">BAR_VALUE&lt;/span> &lt;span style="color:#ce5c00;font-weight:bold">=&lt;/span> &lt;span style="color:#0000cf;font-weight:bold">1&lt;/span>&lt;span style="color:#000;font-weight:bold">;&lt;/span>&lt;span style="color:#a40000">
 &lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#a40000">&lt;/span> &lt;span style="color:#000">BAR_OTHER_VALUE&lt;/span> &lt;span style="color:#ce5c00;font-weight:bold">=&lt;/span> &lt;span style="color:#0000cf;font-weight:bold">2&lt;/span>&lt;span style="color:#000;font-weight:bold">;&lt;/span>&lt;span style="color:#a40000">
 &lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#a40000">&lt;/span>&lt;span style="color:#000;font-weight:bold">}&lt;/span>&lt;span style="color:#a40000">
-&lt;/span>&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>For the &lt;a href="#oneof">oneof&lt;/a> field definition:&lt;/p>
+&lt;/span>&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>For the &lt;a href="https://protobuf.dev/reference/cpp/cpp-generated/#oneof">oneof&lt;/a> field definition:&lt;/p>
 &lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-proto" data-lang="proto">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#204a87;font-weight:bold">oneof&lt;/span> &lt;span style="color:#000">example_name&lt;/span> &lt;span style="color:#000;font-weight:bold">{&lt;/span>&lt;span style="color:#a40000">
 &lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#a40000">&lt;/span> &lt;span style="color:#000">Bar&lt;/span> &lt;span style="color:#000">foo&lt;/span> &lt;span style="color:#ce5c00;font-weight:bold">=&lt;/span> &lt;span style="color:#0000cf;font-weight:bold">1&lt;/span>&lt;span style="color:#000;font-weight:bold">;&lt;/span>&lt;span style="color:#a40000">
 &lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#a40000">&lt;/span> &lt;span style="color:#ce5c00;font-weight:bold">...&lt;/span>&lt;span style="color:#a40000">
@@ -674,7 +674,7 @@ the default value and &lt;code>example_name_case()&lt;/code> will return
 &lt;h3 id="oneof-embedded">Oneof Embedded Message Fields&lt;/h3>
 &lt;p>Given the message type:&lt;/p>
 &lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-proto" data-lang="proto">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#204a87;font-weight:bold">message&lt;/span> &lt;span style="color:#000">Bar&lt;/span> &lt;span style="color:#000;font-weight:bold">{}&lt;/span>&lt;span style="color:#a40000">
-&lt;/span>&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>For the &lt;a href="#oneof">oneof&lt;/a> field definition:&lt;/p>
+&lt;/span>&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>For the &lt;a href="https://protobuf.dev/reference/cpp/cpp-generated/#oneof">oneof&lt;/a> field definition:&lt;/p>
 &lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-proto" data-lang="proto">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#204a87;font-weight:bold">oneof&lt;/span> &lt;span style="color:#000">example_name&lt;/span> &lt;span style="color:#000;font-weight:bold">{&lt;/span>&lt;span style="color:#a40000">
 &lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#a40000">&lt;/span> &lt;span style="color:#000">Bar&lt;/span> &lt;span style="color:#000">foo&lt;/span> &lt;span style="color:#ce5c00;font-weight:bold">=&lt;/span> &lt;span style="color:#0000cf;font-weight:bold">1&lt;/span>&lt;span style="color:#000;font-weight:bold">;&lt;/span>&lt;span style="color:#a40000">
 &lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#a40000">&lt;/span> &lt;span style="color:#ce5c00;font-weight:bold">...&lt;/span>&lt;span style="color:#a40000">
@@ -740,7 +740,7 @@ value and &lt;code>example_name_case()&lt;/code> will return &lt;code>EXAMPLE_NA
 &lt;code>Map&lt;/code>.&lt;/li>
 &lt;/ul>
 &lt;p>A
-&lt;a href="https://protobuf.dev/reference/cpp/api-docs/google.protobuf.map">&lt;code>google::protobuf::Map&lt;/code>&lt;/a>
+&lt;a href="https://protobuf.dev/reference/cpp/api-docs/google.protobuf.map/">&lt;code>google::protobuf::Map&lt;/code>&lt;/a>
 is a special container type used in protocol buffers to store map fields. As you
 can see from its interface below, it uses a commonly-used subset of &lt;code>std::map&lt;/code>
 and &lt;code>std::unordered_map&lt;/code> methods.&lt;/p>
@@ -817,7 +817,7 @@ it&amp;rsquo;s handled differently in proto2 and proto3. In proto2, the whole ma
 message is put into the unknown field set of the containing message. In proto3,
 it is put into a map field as if it is a known enum value.&lt;/p>
 &lt;h2 id="any">Any&lt;/h2>
-&lt;p>Given an &lt;a href="https://protobuf.dev/programming-guides/proto3#any">&lt;code>Any&lt;/code>&lt;/a> field
+&lt;p>Given an &lt;a href="https://protobuf.dev/programming-guides/proto3/#any">&lt;code>Any&lt;/code>&lt;/a> field
 like this:&lt;/p>
 &lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-proto" data-lang="proto">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#204a87;font-weight:bold">import&lt;/span> &lt;span style="color:#4e9a06">&amp;#34;google/protobuf/any.proto&amp;#34;&lt;/span>&lt;span style="color:#000;font-weight:bold">;&lt;/span>&lt;span style="color:#a40000">
 &lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#a40000">
@@ -902,7 +902,7 @@ or the results may be undefined. If in doubt, use the generated &lt;code>Foo_IsV
 function to test if the cast is valid. Setting an enum-typed field of a proto2
 message to an invalid value may cause an assertion failure. If an invalid enum
 value is read when parsing a proto2 message, it will be treated as an
-&lt;a href="https://protobuf.dev/reference/cpp/api-docs/google.protobuf.unknown_field_set">unknown field&lt;/a>.
+&lt;a href="https://protobuf.dev/reference/cpp/api-docs/google.protobuf.unknown_field_set/">unknown field&lt;/a>.
 These semantics have been changed in proto3. It&amp;rsquo;s safe to cast any integer to a
 proto3 enum value as long as it fits into int32. Invalid enum values will also
 be kept when parsing a proto3 message and returned by enum field accessors.&lt;/p>
@@ -988,7 +988,7 @@ pattern is to do something like this:&lt;/p>
 and improve performance when working with protocol buffers. Enabling arena
 allocation in your &lt;code>.proto&lt;/code> adds additional code for working with arenas to your
 C++ generated code. You can find out more about the arena allocation API in the
-&lt;a href="https://protobuf.dev/reference/cpp/arenas">Arena Allocation Guide&lt;/a>.&lt;/p>
+&lt;a href="https://protobuf.dev/reference/cpp/arenas/">Arena Allocation Guide&lt;/a>.&lt;/p>
 &lt;h2 id="service">Services&lt;/h2>
 &lt;p>If the &lt;code>.proto&lt;/code> file contains the following line:&lt;/p>
 &lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-proto" data-lang="proto">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#204a87;font-weight:bold">option&lt;/span> &lt;span style="color:#000">cc_generic_services&lt;/span> &lt;span style="color:#ce5c00;font-weight:bold">=&lt;/span> &lt;span style="color:#204a87;font-weight:bold">true&lt;/span>&lt;span style="color:#000;font-weight:bold">;&lt;/span>&lt;span style="color:#a40000">
@@ -1002,7 +1002,7 @@ system. If you do NOT want this code to be generated, add this line to the file:
 generic services are deprecated. (Note that prior to 2.4.0, the option defaults
 to &lt;code>true&lt;/code>)&lt;/p>
 &lt;p>RPC systems based on &lt;code>.proto&lt;/code>-language service definitions should provide
-&lt;a href="https://protobuf.dev/reference/cpp/api-docs/google.protobuf.compiler.plugin.pb">plugins&lt;/a>
+&lt;a href="https://protobuf.dev/reference/cpp/api-docs/google.protobuf.compiler.plugin.pb/">plugins&lt;/a>
 to generate code appropriate for the system. These plugins are likely to require
 that abstract services are disabled, so that they can generate their own classes
 of the same names.&lt;/p>
@@ -1030,7 +1030,7 @@ implement its methods as appropriate.&lt;/p>
 automatically generates implementations of the methods of &lt;code>Service&lt;/code> as follows:&lt;/p>
 &lt;ul>
 &lt;li>&lt;code>GetDescriptor&lt;/code>: Returns the service&amp;rsquo;s
-&lt;a href="https://protobuf.dev/reference/cpp/api-docs/google.protobuf.descriptor#ServiceDescriptor">&lt;code>ServiceDescriptor&lt;/code>&lt;/a>.&lt;/li>
+&lt;a href="https://protobuf.dev/reference/cpp/api-docs/google.protobuf.descriptor/#ServiceDescriptor">&lt;code>ServiceDescriptor&lt;/code>&lt;/a>.&lt;/li>
 &lt;li>&lt;code>CallMethod&lt;/code>: Determines which method is being called based on the provided
 method descriptor and calls it directly, down-casting the request and
 response messages objects to the correct types.&lt;/li>
@@ -1068,14 +1068,14 @@ around the channel. Calling one of the methods simply calls
 includes all of the tools you need to hook up a generated service class to any
 arbitrary RPC implementation of your choice. You need only provide
 implementations of
-&lt;a href="https://protobuf.dev/reference/cpp/api-docs/google.protobuf.service#RpcChannel">&lt;code>RpcChannel&lt;/code>&lt;/a>
+&lt;a href="https://protobuf.dev/reference/cpp/api-docs/google.protobuf.service/#RpcChannel">&lt;code>RpcChannel&lt;/code>&lt;/a>
 and
-&lt;a href="https://protobuf.dev/reference/cpp/api-docs/google.protobuf.service#RpcController">&lt;code>RpcController&lt;/code>&lt;/a>.
+&lt;a href="https://protobuf.dev/reference/cpp/api-docs/google.protobuf.service/#RpcController">&lt;code>RpcController&lt;/code>&lt;/a>.
 See the documentation for
-&lt;a href="https://protobuf.dev/reference/cpp/api-docs/google.protobuf.service">&lt;code>service.h&lt;/code>&lt;/a>
+&lt;a href="https://protobuf.dev/reference/cpp/api-docs/google.protobuf.service/">&lt;code>service.h&lt;/code>&lt;/a>
 for more information.&lt;/p>
 &lt;h2 id="plugins">Plugin Insertion Points&lt;/h2>
-&lt;p>&lt;a href="https://protobuf.dev/reference/cpp/api-docs/google.protobuf.compiler.plugin.pb">Code generator plugins&lt;/a>
+&lt;p>&lt;a href="https://protobuf.dev/reference/cpp/api-docs/google.protobuf.compiler.plugin.pb/">Code generator plugins&lt;/a>
 which want to extend the output of the C++ code generator may insert code of the
 following types using the given insertion point names. Each insertion point
 appears in both the &lt;code>.pb.cc&lt;/code> file and the &lt;code>.pb.h&lt;/code> file unless otherwise noted.&lt;/p>
@@ -1096,11 +1096,11 @@ standard code generator, as these implementation details may change in future
 versions of Protocol Buffers.&lt;/p></description></item><item><title>Reference: C++ Arena Allocation Guide</title><link>https://protobuf.dev/reference/cpp/arenas/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://protobuf.dev/reference/cpp/arenas/</guid><description>
 &lt;p>This page describes exactly what C++ code the protocol
 buffer compiler generates in addition to the code described in the
-&lt;a href="https://protobuf.dev/reference/cpp/cpp-generated">C++ Generated Code Guide&lt;/a>
+&lt;a href="https://protobuf.dev/reference/cpp/cpp-generated/">C++ Generated Code Guide&lt;/a>
 when arena allocation is enabled. It assumes that you are familiar with the
 material in the
 &lt;a href="https://protobuf.dev/programming-guides/proto">language guide&lt;/a> and the
-&lt;a href="https://protobuf.dev/reference/cpp/cpp-generated">C++ Generated Code Guide&lt;/a>.&lt;/p>
+&lt;a href="https://protobuf.dev/reference/cpp/cpp-generated/">C++ Generated Code Guide&lt;/a>.&lt;/p>
 &lt;h2 id="why">Why Use Arena Allocation?&lt;/h2>
 &lt;p>Memory allocation and deallocation constitutes a significant fraction of CPU
 time spent in protocol buffers code. By default, protocol buffers performs heap
@@ -1121,7 +1121,7 @@ lines.&lt;/p>
 &lt;p>To get these benefits you&amp;rsquo;ll need to be aware of object lifetimes and find a
 suitable granularity at which to use arenas (for servers, this is often
 per-request). You can find out more about how to get the most from arena
-allocation in &lt;a href="#usage">Usage patterns and best practices&lt;/a>.&lt;/p>
+allocation in &lt;a href="https://protobuf.dev/reference/cpp/arenas/#usage">Usage patterns and best practices&lt;/a>.&lt;/p>
 &lt;p>This table summarizes the typical performance advantages and disadvantages of
 using arenas:&lt;/p>
 &lt;table>
@@ -1167,10 +1167,10 @@ on the arena as well.&lt;/p>
 &lt;p>For the most part, the rest of your code will be the same as if you weren&amp;rsquo;t
 using arena allocation.&lt;/p>
 &lt;p>We&amp;rsquo;ll look at the arena API in more detail in the following sections, and you
-can see a more extensive &lt;a href="#example">example&lt;/a> at the end of the document.&lt;/p>
+can see a more extensive &lt;a href="https://protobuf.dev/reference/cpp/arenas/#example">example&lt;/a> at the end of the document.&lt;/p>
 &lt;h2 id="arenaclass">Arena Class API&lt;/h2>
 &lt;p>You create message objects on the arena using the
-&lt;a href="https://protobuf.dev/reference/cpp/api-docs/google.protobuf.arena.md">&lt;code>google::protobuf::Arena&lt;/code>&lt;/a>
+&lt;a href="https://protobuf.dev/reference/cpp/api-docs/google.protobuf.arena/">&lt;code>google::protobuf::Arena&lt;/code>&lt;/a>
 class. This class implements the following public methods.&lt;/p>
 &lt;h3 id="constructors">Constructors&lt;/h3>
 &lt;ul>
@@ -1287,7 +1287,7 @@ underlying data. In both cases the source message is left in a valid but
 unspecified state.&lt;/li>
 &lt;li>&lt;code>void Swap(Message* other)&lt;/code>: If both messages to be swapped are not on
 arenas or are on the &lt;em>same&lt;/em> arena,
-&lt;a href="https://protobuf.dev/reference/cpp/cpp-generated#message">&lt;code>Swap()&lt;/code>&lt;/a>
+&lt;a href="https://protobuf.dev/reference/cpp/cpp-generated/#message">&lt;code>Swap()&lt;/code>&lt;/a>
 behaves as it does without having arena allocation enabled: it efficiently
 swaps the message objects&amp;rsquo; contents, almost exclusively through cheap
 pointer swaps, avoiding copies. However, if only one message is on an arena,
@@ -1330,7 +1330,7 @@ along with the objects on the arena itself.&lt;/li>
 &lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#a40000">&lt;/span>&lt;span style="color:#204a87;font-weight:bold">required&lt;/span> &lt;span style="color:#000">Bar&lt;/span> &lt;span style="color:#000">foo&lt;/span> &lt;span style="color:#ce5c00;font-weight:bold">=&lt;/span> &lt;span style="color:#0000cf;font-weight:bold">1&lt;/span>&lt;span style="color:#000;font-weight:bold">;&lt;/span>&lt;span style="color:#a40000">
 &lt;/span>&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>The following methods are added or have some special behavior when arena
 allocation is enabled. Otherwise, accessor methods just use the
-&lt;a href="https://protobuf.dev/reference/cpp/cpp-generated#embeddedmessage">default behavior&lt;/a>.&lt;/p>
+&lt;a href="https://protobuf.dev/reference/cpp/cpp-generated/#embeddedmessage">default behavior&lt;/a>.&lt;/p>
 &lt;ul>
 &lt;li>&lt;code>Bar* mutable_foo()&lt;/code>: Returns a mutable pointer to the submessage instance.
 If the parent object is on an arena then the returned object will be as
@@ -1365,16 +1365,16 @@ the submessage on the heap, clear the field value, and return the copy.&lt;/li>
 &lt;code>set_allocated_foo&lt;/code>, but assumes both parent and submessage are on the same
 arena. Using this version of the method can improve performance as it
 doesn&amp;rsquo;t need to check whether the messages are on a particular arena or the
-heap. See &lt;a href="#set-allocated">allocated/release patterns&lt;/a> for details on safe
+heap. See &lt;a href="https://protobuf.dev/reference/cpp/arenas/#set-allocated">allocated/release patterns&lt;/a> for details on safe
 ways to use this.&lt;/li>
 &lt;li>&lt;code>Bar* unsafe_arena_release_foo()&lt;/code>: Similar to &lt;code>release_foo()&lt;/code>, but skips all
-ownership checking. See &lt;a href="#set-allocated">allocated/release patterns&lt;/a> for
+ownership checking. See &lt;a href="https://protobuf.dev/reference/cpp/arenas/#set-allocated">allocated/release patterns&lt;/a> for
 details on safe ways to use this.&lt;/li>
 &lt;/ul>
 &lt;h3 id="arenastring">String Fields&lt;/h3>
 &lt;p>Currently, string fields store their data on the heap even when their parent
 message is on the arena. Because of this, string accessor methods use the
-&lt;a href="https://protobuf.dev/reference/cpp/cpp-generated#string">default behavior&lt;/a>
+&lt;a href="https://protobuf.dev/reference/cpp/cpp-generated/#string">default behavior&lt;/a>
 even when arena allocation is enabled.&lt;/p>
 &lt;h3 id="arenarepeated">Repeated Fields&lt;/h3>
 &lt;p>Repeated fields allocate their internal array storage on the arena when the
@@ -1455,14 +1455,14 @@ object.&lt;/p>
 &lt;code>AddAllocated()&lt;/code>, but does not perform heap/arena checks or any message
 copies. It adds the provided pointer directly to the internal array of
 pointers for this repeated field. See
-&lt;a href="#set-allocated">allocated/release patterns&lt;/a> for details on safe ways to use
+&lt;a href="https://protobuf.dev/reference/cpp/arenas/#set-allocated">allocated/release patterns&lt;/a> for details on safe ways to use
 this.&lt;/p>
 &lt;/li>
 &lt;li>
 &lt;p>&lt;code>SubMessageType* UnsafeArenaReleaseLast()&lt;/code>: Like &lt;code>ReleaseLast()&lt;/code> but
 performs no copies, even if the repeated field has a non-NULL arena pointer.
 Instead, it directly returns the pointer to the object as it was in the
-repeated field. See &lt;a href="#set-allocated">allocated/release patterns&lt;/a> for details
+repeated field. See &lt;a href="https://protobuf.dev/reference/cpp/arenas/#set-allocated">allocated/release patterns&lt;/a> for details
 on safe ways to use this.&lt;/p>
 &lt;/li>
 &lt;li>
@@ -1477,7 +1477,7 @@ objects on the heap.&lt;/p>
 &lt;p>&lt;code>void UnsafeArenaExtractSubrange(int start, int num, SubMessageType** elements)&lt;/code>: Removes &lt;code>num&lt;/code> elements from the repeated field, starting from
 index &lt;code>start&lt;/code>, and returns them in &lt;code>elements&lt;/code> if it is not NULL. Unlike
 &lt;code>ExtractSubrange()&lt;/code>, this method never copies the extracted elements. See
-&lt;a href="#set-allocated">allocated/release patterns&lt;/a> for details on safe ways to use
+&lt;a href="https://protobuf.dev/reference/cpp/arenas/#set-allocated">allocated/release patterns&lt;/a> for details on safe ways to use
 this.&lt;/p>
 &lt;/li>
 &lt;/ul>
@@ -1546,7 +1546,7 @@ Let&amp;rsquo;s say you have created the following messages on an arena.&lt;/p>
 &lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-cpp" data-lang="cpp">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#000">arena_message_2&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">-&amp;gt;&lt;/span>&lt;span style="color:#000">unsafe_arena_set_allocated_nested_message&lt;/span>&lt;span style="color:#000;font-weight:bold">(&lt;/span>
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#000">arena_message_1&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">-&amp;gt;&lt;/span>&lt;span style="color:#000">unsafe_arena_release_nested_message&lt;/span>&lt;span style="color:#000;font-weight:bold">());&lt;/span>
 &lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>You can find out more about these methods in the
-&lt;a href="#arenaembeddedmessage">Embedded message fields&lt;/a> section above.&lt;/p>
+&lt;a href="https://protobuf.dev/reference/cpp/arenas/#arenaembeddedmessage">Embedded message fields&lt;/a> section above.&lt;/p>
 &lt;h4 id="swap">Swap&lt;/h4>
 &lt;p>When two messages&amp;rsquo; contents are swapped with &lt;code>Swap()&lt;/code>, the underlying subobjects
 may be copied if the two messages live on different arenas, or if one is on the
@@ -1625,7 +1625,13 @@ containing message is on the arena. Unknown fields are also
 heap-allocated.&amp;#160;&lt;a href="#fnref:1" class="footnote-backref" role="doc-backlink">&amp;#x21a9;&amp;#xfe0e;&lt;/a>&lt;/p>
 &lt;/li>
 &lt;/ol>
-&lt;/div></description></item><item><title>Reference: C++ API</title><link>https://protobuf.dev/reference/cpp/api-docs-link/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://protobuf.dev/reference/cpp/api-docs-link/</guid><description/></item><item><title>Reference: C++ Reference</title><link>https://protobuf.dev/reference/cpp/api-docs/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://protobuf.dev/reference/cpp/api-docs/</guid><description>
+&lt;/div></description></item><item><title>Reference:</title><link>https://protobuf.dev/reference/cpp/api-docs-link/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://protobuf.dev/reference/cpp/api-docs-link/</guid><description>
+&lt;!-- mdformat global-off -->
+&lt;hr>
+&lt;h2 id="weight-530">title: &amp;ldquo;C++ API&amp;rdquo;
+manualLink: &amp;ldquo;/reference/cpp/api-docs/&amp;rdquo;
+manualLinkTarget: &amp;ldquo;_blank&amp;rdquo;
+weight: 530&lt;/h2></description></item><item><title>Reference: C++ Reference</title><link>https://protobuf.dev/reference/cpp/api-docs/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://protobuf.dev/reference/cpp/api-docs/</guid><description>
 &lt;table width="100%">&lt;tr>&lt;th colspan="2">&lt;h3 style="margin-top: 4px">Packages&lt;/h3>&lt;/th>&lt;/tr>&lt;tr>&lt;td>&lt;div>&lt;code>&lt;a href="#google.protobuf">google::protobuf&lt;/a>&lt;/code>&lt;/div>&lt;div style="font-style: italic; margin-top: 4px; margin-left: 16px;">&lt;/div>&lt;/td>&lt;/tr>&lt;tr>&lt;td>&lt;div>&lt;code>&lt;a href="#google.protobuf.io">google::protobuf::io&lt;/a>&lt;/code>&lt;/div>&lt;div style="font-style: italic; margin-top: 4px; margin-left: 16px;">Auxiliary classes used for I/O. &lt;/div>&lt;/td>&lt;/tr>&lt;tr>&lt;td>&lt;div>&lt;code>&lt;a href="#google.protobuf.util">google::protobuf::util&lt;/a>&lt;/code>&lt;/div>&lt;div style="font-style: italic; margin-top: 4px; margin-left: 16px;">Utility classes. &lt;/div>&lt;/td>&lt;/tr>&lt;tr>&lt;td>&lt;div>&lt;code>&lt;a href="#google.protobuf.compiler">google::protobuf::compiler&lt;/a>&lt;/code>&lt;/div>&lt;div style="font-style: italic; margin-top: 4px; margin-left: 16px;">Implementation of the Protocol Buffer compiler. &lt;/div>&lt;/td>&lt;/tr>&lt;/table>&lt;h2 id="google.protobuf">google::protobuf&lt;/h2>&lt;p>&lt;/p>&lt;table width="100%">&lt;tr>&lt;th colspan="2">&lt;h3 style="margin-top: 4px">Files&lt;/h3>&lt;/th>&lt;/tr>&lt;tr>&lt;td>&lt;div>&lt;code>&lt;a href="google.protobuf.arena">google/protobuf/arena.h&lt;/a>&lt;/code>&lt;/div>&lt;div style="font-style: italic; margin-top: 4px; margin-left: 16px;">This file defines an &lt;a href='google.protobuf.arena#Arena'>Arena&lt;/a> allocator for better allocation performance. &lt;/div>&lt;/td>&lt;/tr>&lt;tr>&lt;td>&lt;div>&lt;code>&lt;a href="google.protobuf.descriptor">google/protobuf/descriptor.h&lt;/a>&lt;/code>&lt;/div>&lt;div style="font-style: italic; margin-top: 4px; margin-left: 16px;">This file contains classes which describe a type of protocol message. &lt;/div>&lt;/td>&lt;/tr>&lt;tr>&lt;td>&lt;div>&lt;code>&lt;a href="google.protobuf.descriptor.pb">google/protobuf/descriptor.pb.h&lt;/a>&lt;/code>&lt;/div>&lt;div style="font-style: italic; margin-top: 4px; margin-left: 16px;">Protocol buffer representations of descriptors.&lt;/div>&lt;/td>&lt;/tr>&lt;tr>&lt;td>&lt;div>&lt;code>&lt;a href="google.protobuf.descriptor_database">google/protobuf/descriptor_database.h&lt;/a>&lt;/code>&lt;/div>&lt;div style="font-style: italic; margin-top: 4px; margin-left: 16px;">Interface for manipulating databases of descriptors. &lt;/div>&lt;/td>&lt;/tr>&lt;tr>&lt;td>&lt;div>&lt;code>&lt;a href="google.protobuf.dynamic_message">google/protobuf/dynamic_message.h&lt;/a>&lt;/code>&lt;/div>&lt;div style="font-style: italic; margin-top: 4px; margin-left: 16px;">Defines an implementation of &lt;a href='google.protobuf.message#Message'>Message&lt;/a> which can emulate types which are not known at compile-time. &lt;/div>&lt;/td>&lt;/tr>&lt;tr>&lt;td>&lt;div>&lt;code>&lt;a href="google.protobuf.map">google/protobuf/map.h&lt;/a>&lt;/code>&lt;/div>&lt;div style="font-style: italic; margin-top: 4px; margin-left: 16px;">This file defines the map container and its helpers to support protobuf maps. &lt;/div>&lt;/td>&lt;/tr>&lt;tr>&lt;td>&lt;div>&lt;code>&lt;a href="google.protobuf.message">google/protobuf/message.h&lt;/a>&lt;/code>&lt;/div>&lt;div style="font-style: italic; margin-top: 4px; margin-left: 16px;">Defines &lt;a href='google.protobuf.message#Message'>Message&lt;/a>, the abstract interface implemented by non-lite protocol message objects. &lt;/div>&lt;/td>&lt;/tr>&lt;tr>&lt;td>&lt;div>&lt;code>&lt;a href="google.protobuf.message_lite">google/protobuf/message_lite.h&lt;/a>&lt;/code>&lt;/div>&lt;div style="font-style: italic; margin-top: 4px; margin-left: 16px;">Defines &lt;a href='google.protobuf.message_lite#MessageLite'>MessageLite&lt;/a>, the abstract interface implemented by all (lite and non-lite) protocol message objects. &lt;/div>&lt;/td>&lt;/tr>&lt;tr>&lt;td>&lt;div>&lt;code>&lt;a href="google.protobuf.repeated_field">google/protobuf/repeated_field.h&lt;/a>&lt;/code>&lt;/div>&lt;div style="font-style: italic; margin-top: 4px; margin-left: 16px;">&lt;a href='google.protobuf.repeated_field#RepeatedField'>RepeatedField&lt;/a> and &lt;a href='google.protobuf.repeated_field#RepeatedPtrField'>RepeatedPtrField&lt;/a> are used by generated protocol message classes to manipulate repeated fields. &lt;/div>&lt;/td>&lt;/tr>&lt;tr>&lt;td>&lt;div>&lt;code>&lt;a href="google.protobuf.service">google/protobuf/service.h&lt;/a>&lt;/code>&lt;/div>&lt;div style="font-style: italic; margin-top: 4px; margin-left: 16px;">DEPRECATED: This module declares the abstract interfaces underlying proto2 RPC services. &lt;/div>&lt;/td>&lt;/tr>&lt;tr>&lt;td>&lt;div>&lt;code>&lt;a href="google.protobuf.text_format">google/protobuf/text_format.h&lt;/a>&lt;/code>&lt;/div>&lt;div style="font-style: italic; margin-top: 4px; margin-left: 16px;">Utilities for printing and parsing protocol messages in a human-readable, text-based format. &lt;/div>&lt;/td>&lt;/tr>&lt;tr>&lt;td>&lt;div>&lt;code>&lt;a href="google.protobuf.unknown_field_set">google/protobuf/unknown_field_set.h&lt;/a>&lt;/code>&lt;/div>&lt;div style="font-style: italic; margin-top: 4px; margin-left: 16px;">Contains classes used to keep track of unrecognized fields seen while parsing a protocol message. &lt;/div>&lt;/td>&lt;/tr>&lt;/table>&lt;h2 id="google.protobuf.io">google::protobuf::io&lt;/h2>&lt;p>Auxiliary classes used for I/O. &lt;/p>&lt;p>The Protocol Buffer library uses the classes in this package to deal with I/O and encoding/decoding raw bytes. Most users will not need to deal with this package. However, users who want to adapt the system to work with their own I/O abstractions &amp;ndash; e.g., to allow Protocol Buffers to be read from a different kind of input stream without the need for a temporary buffer &amp;ndash; should take a closer look. &lt;/p>
 &lt;table width="100%">&lt;tr>&lt;th colspan="2">&lt;h3 style="margin-top: 4px">Files&lt;/h3>&lt;/th>&lt;/tr>&lt;tr>&lt;td>&lt;div>&lt;code>&lt;a href="google.protobuf.io.coded_stream">google/protobuf/io/coded_stream.h&lt;/a>&lt;/code>&lt;/div>&lt;div style="font-style: italic; margin-top: 4px; margin-left: 16px;">This file contains the &lt;a href='google.protobuf.io.coded_stream#CodedInputStream'>CodedInputStream&lt;/a> and &lt;a href='google.protobuf.io.coded_stream#CodedOutputStream'>CodedOutputStream&lt;/a> classes, which wrap a &lt;a href='google.protobuf.io.zero_copy_stream#ZeroCopyInputStream'>ZeroCopyInputStream&lt;/a> or &lt;a href='google.protobuf.io.zero_copy_stream#ZeroCopyOutputStream'>ZeroCopyOutputStream&lt;/a>, respectively, and allow you to read or write individual pieces of data in various formats. &lt;/div>&lt;/td>&lt;/tr>&lt;tr>&lt;td>&lt;div>&lt;code>&lt;a href="google.protobuf.io.printer">google/protobuf/io/printer.h&lt;/a>&lt;/code>&lt;/div>&lt;div style="font-style: italic; margin-top: 4px; margin-left: 16px;">Utility class for writing text to a &lt;a href='google.protobuf.io.zero_copy_stream#ZeroCopyOutputStream'>ZeroCopyOutputStream&lt;/a>. &lt;/div>&lt;/td>&lt;/tr>&lt;tr>&lt;td>&lt;div>&lt;code>&lt;a href="google.protobuf.io.tokenizer">google/protobuf/io/tokenizer.h&lt;/a>&lt;/code>&lt;/div>&lt;div style="font-style: italic; margin-top: 4px; margin-left: 16px;">Class for parsing tokenized text from a &lt;a href='google.protobuf.io.zero_copy_stream#ZeroCopyInputStream'>ZeroCopyInputStream&lt;/a>. &lt;/div>&lt;/td>&lt;/tr>&lt;tr>&lt;td>&lt;div>&lt;code>&lt;a href="google.protobuf.io.zero_copy_stream">google/protobuf/io/zero_copy_stream.h&lt;/a>&lt;/code>&lt;/div>&lt;div style="font-style: italic; margin-top: 4px; margin-left: 16px;">This file contains the &lt;a href='google.protobuf.io.zero_copy_stream#ZeroCopyInputStream'>ZeroCopyInputStream&lt;/a> and &lt;a href='google.protobuf.io.zero_copy_stream#ZeroCopyOutputStream'>ZeroCopyOutputStream&lt;/a> interfaces, which represent abstract I/O streams to and from which protocol buffers can be read and written. &lt;/div>&lt;/td>&lt;/tr>&lt;tr>&lt;td>&lt;div>&lt;code>&lt;a href="google.protobuf.io.zero_copy_stream_impl">google/protobuf/io/zero_copy_stream_impl.h&lt;/a>&lt;/code>&lt;/div>&lt;div style="font-style: italic; margin-top: 4px; margin-left: 16px;">This file contains common implementations of the interfaces defined in &lt;a href='google.protobuf.io.zero_copy_stream'>zero_copy_stream.h&lt;/a> which are only included in the full (non-lite) protobuf library. &lt;/div>&lt;/td>&lt;/tr>&lt;tr>&lt;td>&lt;div>&lt;code>&lt;a href="google.protobuf.io.zero_copy_stream_impl_lite">google/protobuf/io/zero_copy_stream_impl_lite.h&lt;/a>&lt;/code>&lt;/div>&lt;div style="font-style: italic; margin-top: 4px; margin-left: 16px;">This file contains common implementations of the interfaces defined in &lt;a href='google.protobuf.io.zero_copy_stream'>zero_copy_stream.h&lt;/a> which are included in the "lite" protobuf library. &lt;/div>&lt;/td>&lt;/tr>&lt;/table>&lt;h2 id="google.protobuf.util">google::protobuf::util&lt;/h2>&lt;p>Utility classes. &lt;/p>&lt;p>This package contains various utilities for message comparison, JSON conversion, well known types, etc. &lt;/p>
 &lt;table width="100%">&lt;tr>&lt;th colspan="2">&lt;h3 style="margin-top: 4px">Files&lt;/h3>&lt;/th>&lt;/tr>&lt;tr>&lt;td>&lt;div>&lt;code>&lt;a href="google.protobuf.util.field_comparator">google/protobuf/util/field_comparator.h&lt;/a>&lt;/code>&lt;/div>&lt;div style="font-style: italic; margin-top: 4px; margin-left: 16px;">Defines classes for field comparison. &lt;/div>&lt;/td>&lt;/tr>&lt;tr>&lt;td>&lt;div>&lt;code>&lt;a href="google.protobuf.util.field_mask_util">google/protobuf/util/field_mask_util.h&lt;/a>&lt;/code>&lt;/div>&lt;div style="font-style: italic; margin-top: 4px; margin-left: 16px;">Defines utilities for the FieldMask well known type. &lt;/div>&lt;/td>&lt;/tr>&lt;tr>&lt;td>&lt;div>&lt;code>&lt;a href="google.protobuf.util.json_util">google/protobuf/util/json_util.h&lt;/a>&lt;/code>&lt;/div>&lt;div style="font-style: italic; margin-top: 4px; margin-left: 16px;">Utility functions to convert between protobuf binary format and proto3 JSON format. &lt;/div>&lt;/td>&lt;/tr>&lt;tr>&lt;td>&lt;div>&lt;code>&lt;a href="google.protobuf.util.message_differencer">google/protobuf/util/message_differencer.h&lt;/a>&lt;/code>&lt;/div>&lt;div style="font-style: italic; margin-top: 4px; margin-left: 16px;">This file defines static methods and classes for comparing Protocol Messages. &lt;/div>&lt;/td>&lt;/tr>&lt;tr>&lt;td>&lt;div>&lt;code>&lt;a href="google.protobuf.util.time_util">google/protobuf/util/time_util.h&lt;/a>&lt;/code>&lt;/div>&lt;div style="font-style: italic; margin-top: 4px; margin-left: 16px;">Defines utilities for the Timestamp and Duration well known types. &lt;/div>&lt;/td>&lt;/tr>&lt;tr>&lt;td>&lt;div>&lt;code>&lt;a href="google.protobuf.util.type_resolver">google/protobuf/util/type_resolver.h&lt;/a>&lt;/code>&lt;/div>&lt;div style="font-style: italic; margin-top: 4px; margin-left: 16px;">Defines a TypeResolver for the Any message. &lt;/div>&lt;/td>&lt;/tr>&lt;tr>&lt;td>&lt;div>&lt;code>&lt;a href="google.protobuf.util.type_resolver_util">google/protobuf/util/type_resolver_util.h&lt;/a>&lt;/code>&lt;/div>&lt;div style="font-style: italic; margin-top: 4px; margin-left: 16px;">Defines utilities for the TypeResolver. &lt;/div>&lt;/td>&lt;/tr>&lt;/table>&lt;h2 id="google.protobuf.compiler">google::protobuf::compiler&lt;/h2>&lt;p>Implementation of the Protocol Buffer compiler. &lt;/p>&lt;p>This package contains code for parsing .proto files and generating code based on them. There are two reasons you might be interested in this package:&lt;/p>

@@ -1,7 +1,7 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Protocol Buffers Documentation – C# Reference</title><link>https://protobuf.dev/reference/csharp/</link><description>Recent content in C# Reference on Protocol Buffers Documentation</description><generator>Hugo -- gohugo.io</generator><language>en</language><atom:link href="https://protobuf.dev/reference/csharp/index.xml" rel="self" type="application/rss+xml"/><item><title>Reference: C# Generated Code Guide</title><link>https://protobuf.dev/reference/csharp/csharp-generated/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://protobuf.dev/reference/csharp/csharp-generated/</guid><description>
 &lt;p>You should
 read the
-&lt;a href="https://protobuf.dev/programming-guides/proto3">proto3 language guide&lt;/a>
+&lt;a href="https://protobuf.dev/programming-guides/proto3/">proto3 language guide&lt;/a>
 before reading this document.&lt;/p>
 &lt;div class="alert alert-note" role="alert">
 &lt;h4 class="alert-heading">Note&lt;/h4>
@@ -17,7 +17,7 @@ for details on the generated C# code for proto2.
 &lt;p>The protocol buffer compiler produces C# output when invoked with the
 &lt;code>--csharp_out&lt;/code> command-line flag. The parameter to the &lt;code>--csharp_out&lt;/code> option is
 the directory where you want the compiler to write your C# output, although
-depending on &lt;a href="#compiler_options">other options&lt;/a> the compiler may create
+depending on &lt;a href="https://protobuf.dev/reference/csharp/csharp-generated/#compiler_options">other options&lt;/a> the compiler may create
 subdirectories of the specified directory. The compiler creates a single source
 file for each &lt;code>.proto&lt;/code> file input, defaulting to an extension of &lt;code>.cs&lt;/code> but
 configurable via compiler options.&lt;/p>
@@ -66,7 +66,7 @@ following example:&lt;/p>
 it to Pascal-case, treating underscores as word separators. So, for example, a
 file called &lt;code>player_record.proto&lt;/code> will result in an output file called
 &lt;code>PlayerRecord.cs&lt;/code> (where the file extension can be specified using
-&lt;code>--csharp_opt&lt;/code>, &lt;a href="#compiler_options">as shown above&lt;/a>).&lt;/p>
+&lt;code>--csharp_opt&lt;/code>, &lt;a href="https://protobuf.dev/reference/csharp/csharp-generated/#compiler_options">as shown above&lt;/a>).&lt;/p>
 &lt;p>Each generated file takes the following form, in terms of public members. (The
 implementation is not shown here.)&lt;/p>
 &lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-csharp" data-lang="csharp">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#204a87;font-weight:bold">namespace&lt;/span> &lt;span style="color:#a40000">[&lt;/span>&lt;span style="color:#000">...&lt;/span>&lt;span style="color:#000;font-weight:bold">]&lt;/span>
@@ -84,7 +84,7 @@ conversion rules as the file name. For example, a proto package of
 &lt;code>example.high_score&lt;/code> would result in a namespace of &lt;code>Example.HighScore&lt;/code>. You can
 override the default generated namespace for a particular .proto using the
 &lt;code>csharp_namespace&lt;/code>
-&lt;a href="https://protobuf.dev/programming-guides/proto3#options">file option&lt;/a>.&lt;/p>
+&lt;a href="https://protobuf.dev/programming-guides/proto3/#options">file option&lt;/a>.&lt;/p>
 &lt;p>Each top-level enum and message results in an enum or class being declared as
 members of the namespace. Additionally, a single static partial class is always
 generated for the file descriptor. This is used for reflection-based operations.
@@ -212,7 +212,7 @@ Additionally, &lt;code>RepeatedField&amp;lt;T&amp;gt;&lt;/code> has direct suppo
 deserialization and cloning, but this is usually used by generated code instead
 of manually-written application code.&lt;/p>
 &lt;p>Repeated fields cannot contain null values, even of message types, except for
-the nullable wrapper types &lt;a href="#wrapper_types">explained below&lt;/a>.&lt;/p>
+the nullable wrapper types &lt;a href="https://protobuf.dev/reference/csharp/csharp-generated/#wrapper_types">explained below&lt;/a>.&lt;/p>
 &lt;h3 id="map">Map Fields&lt;/h3>
 &lt;p>Each map field generates a read-only property of type
 &lt;code>Google.Protobuf.Collections.MapField&amp;lt;TKey, TValue&amp;gt;&lt;/code> where &lt;code>TKey&lt;/code> is the field&amp;rsquo;s
@@ -227,7 +227,7 @@ values may be if the corresponding singular field type would support null
 values.&lt;/p>
 &lt;h3 id="oneof">Oneof Fields&lt;/h3>
 &lt;p>Each field within a oneof has a separate property, like a regular
-&lt;a href="#singular">singular field&lt;/a>. However, the compiler also generates an additional
+&lt;a href="https://protobuf.dev/reference/csharp/csharp-generated/#singular">singular field&lt;/a>. However, the compiler also generates an additional
 property to determine which field in the enum has been set, along with an enum
 and a method to clear the oneof. For example, for this oneof field definition&lt;/p>
 &lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-proto" data-lang="proto">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#204a87;font-weight:bold">oneof&lt;/span> &lt;span style="color:#000">avatar&lt;/span> &lt;span style="color:#000;font-weight:bold">{&lt;/span>&lt;span style="color:#a40000">
@@ -251,7 +251,7 @@ the value set for that property. Otherwise, fetching the property will return
 the default value for the property&amp;rsquo;s type—only one member of a oneof can
 be set at a time.&lt;/p>
 &lt;p>Setting any constituent property of the oneof will change the reported &amp;quot;case&amp;quot;
-of the oneof. As with a regular &lt;a href="#singular">singular field&lt;/a>, you cannot set a
+of the oneof. As with a regular &lt;a href="https://protobuf.dev/reference/csharp/csharp-generated/#singular">singular field&lt;/a>, you cannot set a
 oneof field with a &lt;code>string&lt;/code> or &lt;code>bytes&lt;/code> type to a null value. Setting a
 message-type field to null is equivalent to calling the oneof-specific &lt;code>Clear&lt;/code>
 method.&lt;/p>
@@ -303,4 +303,562 @@ member being generated; a nested enumeration lead to a C# enum being generated
 in the &lt;code>Types&lt;/code> nested class within the class corresponding to the message the
 enumeration is nested within.&lt;/p>
 &lt;h2 id="service">Services&lt;/h2>
-&lt;p>The C# code generator ignores services entirely.&lt;/p></description></item><item><title>Reference: C# API</title><link>https://protobuf.dev/reference/csharp/api-docs-link/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://protobuf.dev/reference/csharp/api-docs-link/</guid><description/></item></channel></rss>
+&lt;p>The C# code generator ignores services entirely.&lt;/p></description></item><item><title>Reference:</title><link>https://protobuf.dev/reference/csharp/api-docs-link/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://protobuf.dev/reference/csharp/api-docs-link/</guid><description>
+&lt;!-- mdformat global-off -->
+&lt;hr>
+&lt;h2 id="weight-560">title: &amp;ldquo;C# API&amp;rdquo;
+manualLink: &amp;ldquo;/reference/csharp/api-docs&amp;rdquo;
+manualLinkTarget: &amp;ldquo;_blank&amp;rdquo;
+weight: 560&lt;/h2></description></item><item><title>Reference:</title><link>https://protobuf.dev/reference/csharp/api-docs/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://protobuf.dev/reference/csharp/api-docs/</guid><description>
+&lt;!DOCTYPE html>
+&lt;html devsite>
+&lt;head>
+&lt;title>Protocol Buffers .NET Runtime Library API Reference&lt;/title>
+&lt;link rel="stylesheet" href="https://protobuf.dev/reference/csharp/api-docs/includes/stylesheet.css">
+&lt;/head>
+&lt;body>
+&lt;div id="top">&lt;!-- do not remove this div -->&lt;/div>
+&lt;h1>Protocol Buffers .NET Runtime Library API Reference&lt;/h1>
+&lt;div>Protocol Buffers .NET Runtime Library&lt;/div>
+&lt;h2>
+&lt;a href="https://protobuf.dev/reference/csharp/api-docs/namespace/google/protobuf.html">Google.&lt;wbr/>Protobuf&lt;/a>
+&lt;/h2>
+&lt;table class="nested-classes responsive">
+&lt;tbody>
+&lt;tr>
+&lt;th colspan="2">
+&lt;h3>Classes&lt;/h3>
+&lt;/th>
+&lt;/tr>
+&lt;tr>
+&lt;td>
+&lt;a href="https://protobuf.dev/reference/csharp/api-docs/class/google/protobuf/byte-string.html">ByteString&lt;/a>
+&lt;/td>
+&lt;td>Immutable array of bytes. &lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>
+&lt;a href="https://protobuf.dev/reference/csharp/api-docs/class/google/protobuf/coded-input-stream.html">CodedInputStream&lt;/a>
+&lt;/td>
+&lt;td>Reads and decodes protocol message fields. &lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>
+&lt;a href="https://protobuf.dev/reference/csharp/api-docs/class/google/protobuf/coded-output-stream.html">CodedOutputStream&lt;/a>
+&lt;/td>
+&lt;td>Encodes and writes protocol message fields. &lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>
+&lt;a href="https://protobuf.dev/reference/csharp/api-docs/class/google/protobuf/coded-output-stream/out-of-space-exception.html">CodedOutputStream.OutOfSpaceException&lt;/a>
+&lt;/td>
+&lt;td>Indicates that a &lt;a href="https://protobuf.dev/reference/csharp/api-docs/class/google/protobuf/coded-output-stream.html#class_google_1_1_protobuf_1_1_coded_output_stream">CodedOutputStream&lt;/a> wrapping a flat byte array ran out of space. &lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>
+&lt;a href="https://protobuf.dev/reference/csharp/api-docs/class/google/protobuf/field-codec.html">FieldCodec&lt;/a>
+&lt;/td>
+&lt;td>Factory methods for FieldCodec{T}. &lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>
+&lt;a href="https://protobuf.dev/reference/csharp/api-docs/class/google/protobuf/field-codec-t-.html">FieldCodec&lt; T >&lt;/a>
+&lt;/td>
+&lt;td />
+&lt;/tr>
+&lt;tr>
+&lt;td>
+&lt;a href="https://protobuf.dev/reference/csharp/api-docs/class/google/protobuf/invalid-json-exception.html">InvalidJsonException&lt;/a>
+&lt;/td>
+&lt;td>Thrown when an attempt is made to parse invalid JSON, e.g. &lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>
+&lt;a href="https://protobuf.dev/reference/csharp/api-docs/class/google/protobuf/invalid-protocol-buffer-exception.html">InvalidProtocolBufferException&lt;/a>
+&lt;/td>
+&lt;td>Thrown when a protocol message being parsed is invalid in some way, e.g. &lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>
+&lt;a href="https://protobuf.dev/reference/csharp/api-docs/class/google/protobuf/json-formatter.html">JsonFormatter&lt;/a>
+&lt;/td>
+&lt;td>Reflection-based converter from messages to JSON. &lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>
+&lt;a href="https://protobuf.dev/reference/csharp/api-docs/class/google/protobuf/json-formatter/settings.html">JsonFormatter.Settings&lt;/a>
+&lt;/td>
+&lt;td>&lt;a href="https://protobuf.dev/reference/csharp/api-docs/class/google/protobuf/json-formatter/settings.html#class_google_1_1_protobuf_1_1_json_formatter_1_1_settings">Settings&lt;/a> controlling JSON formatting. &lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>
+&lt;a href="https://protobuf.dev/reference/csharp/api-docs/class/google/protobuf/json-parser.html">JsonParser&lt;/a>
+&lt;/td>
+&lt;td>Reflection-based converter from JSON to messages. &lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>
+&lt;a href="https://protobuf.dev/reference/csharp/api-docs/class/google/protobuf/json-parser/settings.html">JsonParser.Settings&lt;/a>
+&lt;/td>
+&lt;td>&lt;a href="https://protobuf.dev/reference/csharp/api-docs/class/google/protobuf/json-parser/settings.html#class_google_1_1_protobuf_1_1_json_parser_1_1_settings">Settings&lt;/a> controlling JSON parsing. &lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>
+&lt;a href="https://protobuf.dev/reference/csharp/api-docs/class/google/protobuf/message-extensions.html">MessageExtensions&lt;/a>
+&lt;/td>
+&lt;td>Extension methods on &lt;a href="https://protobuf.dev/reference/csharp/api-docs/interface/google/protobuf/i-message.html#interface_google_1_1_protobuf_1_1_i_message">IMessage&lt;/a> and IMessage{T}. &lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>
+&lt;a href="https://protobuf.dev/reference/csharp/api-docs/class/google/protobuf/message-parser.html">MessageParser&lt;/a>
+&lt;/td>
+&lt;td>A general message parser, typically used by reflection-based code as all the methods return simple &lt;a href="https://protobuf.dev/reference/csharp/api-docs/interface/google/protobuf/i-message.html#interface_google_1_1_protobuf_1_1_i_message">IMessage&lt;/a>. &lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>
+&lt;a href="https://protobuf.dev/reference/csharp/api-docs/class/google/protobuf/message-parser-t-.html">MessageParser&lt; T >&lt;/a>
+&lt;/td>
+&lt;td>A parser for a specific message type. &lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>
+&lt;a href="https://protobuf.dev/reference/csharp/api-docs/class/google/protobuf/proto-preconditions.html">ProtoPreconditions&lt;/a>
+&lt;/td>
+&lt;td>Helper methods for throwing exceptions when preconditions are not met. &lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>
+&lt;a href="https://protobuf.dev/reference/csharp/api-docs/class/google/protobuf/wire-format.html">WireFormat&lt;/a>
+&lt;/td>
+&lt;td>This class is used internally by the Protocol Buffer Library and generated message implementations. &lt;/td>
+&lt;/tr>
+&lt;/tbody>
+&lt;/table>
+&lt;table class="constructors responsive">
+&lt;tbody>
+&lt;tr>
+&lt;th colspan="2">
+&lt;h3>Interfaces&lt;/h3>
+&lt;/th>
+&lt;/tr>
+&lt;tr>
+&lt;td>
+&lt;a href="https://protobuf.dev/reference/csharp/api-docs/interface/google/protobuf/i-custom-diagnostic-message.html">ICustomDiagnosticMessage&lt;/a>
+&lt;/td>
+&lt;td>A message type that has a custom string format for diagnostic purposes. &lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>
+&lt;a href="https://protobuf.dev/reference/csharp/api-docs/interface/google/protobuf/i-deep-cloneable-t-.html">IDeepCloneable&lt; T >&lt;/a>
+&lt;/td>
+&lt;td>Generic interface for a deeply cloneable type. &lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>
+&lt;a href="https://protobuf.dev/reference/csharp/api-docs/interface/google/protobuf/i-message.html">IMessage&lt;/a>
+&lt;/td>
+&lt;td>Interface for a Protocol Buffers message, supporting basic operations required for serialization. &lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>
+&lt;a href="https://protobuf.dev/reference/csharp/api-docs/interface/google/protobuf/i-message-t-.html">IMessage&lt; T >&lt;/a>
+&lt;/td>
+&lt;td>Generic interface for a Protocol Buffers message, where the type parameter is expected to be the same type as the implementation class. &lt;/td>
+&lt;/tr>
+&lt;/tbody>
+&lt;/table>
+&lt;h2>
+&lt;a href="https://protobuf.dev/reference/csharp/api-docs/namespace/google/protobuf/collections.html">Google.&lt;wbr/>Protobuf.&lt;wbr/>Collections&lt;/a>
+&lt;/h2>
+&lt;table class="nested-classes responsive">
+&lt;tbody>
+&lt;tr>
+&lt;th colspan="2">
+&lt;h3>Classes&lt;/h3>
+&lt;/th>
+&lt;/tr>
+&lt;tr>
+&lt;td>
+&lt;a href="https://protobuf.dev/reference/csharp/api-docs/class/google/protobuf/collections/map-field-t-key-t-value-.html">MapField&lt; TKey, TValue >&lt;/a>
+&lt;/td>
+&lt;td>Representation of a map field in a Protocol Buffer message. &lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>
+&lt;a href="https://protobuf.dev/reference/csharp/api-docs/class/google/protobuf/collections/map-field-t-key-t-value-/codec.html">MapField&lt; TKey, TValue >.Codec&lt;/a>
+&lt;/td>
+&lt;td>A codec for a specific map field. &lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>
+&lt;a href="https://protobuf.dev/reference/csharp/api-docs/class/google/protobuf/collections/repeated-field-t-.html">RepeatedField&lt; T >&lt;/a>
+&lt;/td>
+&lt;td>The contents of a repeated field: essentially, a collection with some extra restrictions (no null values) and capabilities (deep cloning). &lt;/td>
+&lt;/tr>
+&lt;/tbody>
+&lt;/table>
+&lt;h2>
+&lt;a href="https://protobuf.dev/reference/csharp/api-docs/namespace/google/protobuf/reflection.html">Google.&lt;wbr/>Protobuf.&lt;wbr/>Reflection&lt;/a>
+&lt;/h2>
+&lt;table class="nested-classes responsive">
+&lt;tbody>
+&lt;tr>
+&lt;th colspan="2">
+&lt;h3>Classes&lt;/h3>
+&lt;/th>
+&lt;/tr>
+&lt;tr>
+&lt;td>
+&lt;a href="https://protobuf.dev/reference/csharp/api-docs/class/google/protobuf/reflection/descriptor-base.html">DescriptorBase&lt;/a>
+&lt;/td>
+&lt;td>Base class for nearly all descriptors, providing common functionality. &lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>
+&lt;a href="https://protobuf.dev/reference/csharp/api-docs/class/google/protobuf/reflection/descriptor-validation-exception.html">DescriptorValidationException&lt;/a>
+&lt;/td>
+&lt;td>Thrown when building descriptors fails because the source DescriptorProtos are not valid. &lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>
+&lt;a href="https://protobuf.dev/reference/csharp/api-docs/class/google/protobuf/reflection/enum-descriptor.html">EnumDescriptor&lt;/a>
+&lt;/td>
+&lt;td>Descriptor for an enum type in a .proto file. &lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>
+&lt;a href="https://protobuf.dev/reference/csharp/api-docs/class/google/protobuf/reflection/enum-value-descriptor.html">EnumValueDescriptor&lt;/a>
+&lt;/td>
+&lt;td>Descriptor for a single enum value within an enum in a .proto file. &lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>
+&lt;a href="https://protobuf.dev/reference/csharp/api-docs/class/google/protobuf/reflection/field-descriptor.html">FieldDescriptor&lt;/a>
+&lt;/td>
+&lt;td>Descriptor for a field or extension within a message in a .proto file. &lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>
+&lt;a href="https://protobuf.dev/reference/csharp/api-docs/class/google/protobuf/reflection/file-descriptor.html">FileDescriptor&lt;/a>
+&lt;/td>
+&lt;td>Describes a .proto file, including everything defined within. &lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>
+&lt;a href="https://protobuf.dev/reference/csharp/api-docs/class/google/protobuf/reflection/generated-clr-type-info.html">GeneratedClrTypeInfo&lt;/a>
+&lt;/td>
+&lt;td>Extra information provided by generated code when initializing a message or file descriptor. &lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>
+&lt;a href="https://protobuf.dev/reference/csharp/api-docs/class/google/protobuf/reflection/message-descriptor.html">MessageDescriptor&lt;/a>
+&lt;/td>
+&lt;td>Describes a message type. &lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>
+&lt;a href="https://protobuf.dev/reference/csharp/api-docs/class/google/protobuf/reflection/message-descriptor/field-collection.html">MessageDescriptor.FieldCollection&lt;/a>
+&lt;/td>
+&lt;td>A collection to simplify retrieving the field accessor for a particular field. &lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>
+&lt;a href="https://protobuf.dev/reference/csharp/api-docs/class/google/protobuf/reflection/method-descriptor.html">MethodDescriptor&lt;/a>
+&lt;/td>
+&lt;td>Describes a single method in a service. &lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>
+&lt;a href="https://protobuf.dev/reference/csharp/api-docs/class/google/protobuf/reflection/oneof-accessor.html">OneofAccessor&lt;/a>
+&lt;/td>
+&lt;td>&lt;a href="https://protobuf.dev/reference/csharp/api-docs/namespace/google/protobuf/reflection.html#namespace_google_1_1_protobuf_1_1_reflection">Reflection&lt;/a> access for a oneof, allowing clear and "get case" actions. &lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>
+&lt;a href="https://protobuf.dev/reference/csharp/api-docs/class/google/protobuf/reflection/oneof-descriptor.html">OneofDescriptor&lt;/a>
+&lt;/td>
+&lt;td>Describes a "oneof" field collection in a message type: a set of fields of which at most one can be set in any particular message. &lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>
+&lt;a href="https://protobuf.dev/reference/csharp/api-docs/class/google/protobuf/reflection/original-name-attribute.html">OriginalNameAttribute&lt;/a>
+&lt;/td>
+&lt;td>Specifies the original name (in the .proto file) of a named element, such as an enum value. &lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>
+&lt;a href="https://protobuf.dev/reference/csharp/api-docs/class/google/protobuf/reflection/service-descriptor.html">ServiceDescriptor&lt;/a>
+&lt;/td>
+&lt;td>Describes a service type. &lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>
+&lt;a href="https://protobuf.dev/reference/csharp/api-docs/class/google/protobuf/reflection/type-registry.html">TypeRegistry&lt;/a>
+&lt;/td>
+&lt;td>An immutable registry of types which can be looked up by their full name. &lt;/td>
+&lt;/tr>
+&lt;/tbody>
+&lt;/table>
+&lt;table class="constructors responsive">
+&lt;tbody>
+&lt;tr>
+&lt;th colspan="2">
+&lt;h3>Interfaces&lt;/h3>
+&lt;/th>
+&lt;/tr>
+&lt;tr>
+&lt;td>
+&lt;a href="https://protobuf.dev/reference/csharp/api-docs/interface/google/protobuf/reflection/i-descriptor.html">IDescriptor&lt;/a>
+&lt;/td>
+&lt;td>Interface implemented by all descriptor types. &lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>
+&lt;a href="https://protobuf.dev/reference/csharp/api-docs/interface/google/protobuf/reflection/i-field-accessor.html">IFieldAccessor&lt;/a>
+&lt;/td>
+&lt;td>Allows fields to be reflectively accessed. &lt;/td>
+&lt;/tr>
+&lt;/tbody>
+&lt;/table>
+&lt;h2>
+&lt;a href="https://protobuf.dev/reference/csharp/api-docs/namespace/google/protobuf/well-known-types.html">Google.&lt;wbr/>Protobuf.&lt;wbr/>WellKnownTypes&lt;/a>
+&lt;/h2>
+&lt;table class="nested-classes responsive">
+&lt;tbody>
+&lt;tr>
+&lt;th colspan="2">
+&lt;h3>Classes&lt;/h3>
+&lt;/th>
+&lt;/tr>
+&lt;tr>
+&lt;td>
+&lt;a href="https://protobuf.dev/reference/csharp/api-docs/class/google/protobuf/well-known-types/any.html">Any&lt;/a>
+&lt;/td>
+&lt;td>&lt;code>&lt;a href="https://protobuf.dev/reference/csharp/api-docs/class/google/protobuf/well-known-types/any.html#class_google_1_1_protobuf_1_1_well_known_types_1_1_any">Any&lt;/a>&lt;/code> contains an arbitrary serialized protocol buffer message along with a URL that describes the type of the serialized message. &lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>
+&lt;a href="https://protobuf.dev/reference/csharp/api-docs/class/google/protobuf/well-known-types/any-reflection.html">AnyReflection&lt;/a>
+&lt;/td>
+&lt;td>Holder for reflection information generated from google/protobuf/any.proto&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>
+&lt;a href="https://protobuf.dev/reference/csharp/api-docs/class/google/protobuf/well-known-types/api.html">Api&lt;/a>
+&lt;/td>
+&lt;td>&lt;a href="https://protobuf.dev/reference/csharp/api-docs/class/google/protobuf/well-known-types/api.html#class_google_1_1_protobuf_1_1_well_known_types_1_1_api">Api&lt;/a> is a light-weight descriptor for a protocol buffer service. &lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>
+&lt;a href="https://protobuf.dev/reference/csharp/api-docs/class/google/protobuf/well-known-types/api-reflection.html">ApiReflection&lt;/a>
+&lt;/td>
+&lt;td>Holder for reflection information generated from google/protobuf/api.proto&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>
+&lt;a href="https://protobuf.dev/reference/csharp/api-docs/class/google/protobuf/well-known-types/bool-value.html">BoolValue&lt;/a>
+&lt;/td>
+&lt;td>Wrapper message for &lt;code>bool&lt;/code>. &lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>
+&lt;a href="https://protobuf.dev/reference/csharp/api-docs/class/google/protobuf/well-known-types/bytes-value.html">BytesValue&lt;/a>
+&lt;/td>
+&lt;td>Wrapper message for &lt;code>bytes&lt;/code>. &lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>
+&lt;a href="https://protobuf.dev/reference/csharp/api-docs/class/google/protobuf/well-known-types/double-value.html">DoubleValue&lt;/a>
+&lt;/td>
+&lt;td>Wrapper message for &lt;code>double&lt;/code>. &lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>
+&lt;a href="https://protobuf.dev/reference/csharp/api-docs/class/google/protobuf/well-known-types/duration.html">Duration&lt;/a>
+&lt;/td>
+&lt;td>A &lt;a href="https://protobuf.dev/reference/csharp/api-docs/class/google/protobuf/well-known-types/duration.html#class_google_1_1_protobuf_1_1_well_known_types_1_1_duration">Duration&lt;/a> represents a signed, fixed-length span of time represented as a count of seconds and fractions of seconds at nanosecond resolution. &lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>
+&lt;a href="https://protobuf.dev/reference/csharp/api-docs/class/google/protobuf/well-known-types/duration-reflection.html">DurationReflection&lt;/a>
+&lt;/td>
+&lt;td>Holder for reflection information generated from google/protobuf/duration.proto&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>
+&lt;a href="https://protobuf.dev/reference/csharp/api-docs/class/google/protobuf/well-known-types/empty.html">Empty&lt;/a>
+&lt;/td>
+&lt;td>A generic empty message that you can re-use to avoid defining duplicated empty messages in your APIs. &lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>
+&lt;a href="https://protobuf.dev/reference/csharp/api-docs/class/google/protobuf/well-known-types/empty-reflection.html">EmptyReflection&lt;/a>
+&lt;/td>
+&lt;td>Holder for reflection information generated from google/protobuf/empty.proto&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>
+&lt;a href="https://protobuf.dev/reference/csharp/api-docs/class/google/protobuf/well-known-types/enum.html">Enum&lt;/a>
+&lt;/td>
+&lt;td>&lt;a href="https://protobuf.dev/reference/csharp/api-docs/class/google/protobuf/well-known-types/enum.html#class_google_1_1_protobuf_1_1_well_known_types_1_1_enum">Enum&lt;/a> type definition. &lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>
+&lt;a href="https://protobuf.dev/reference/csharp/api-docs/class/google/protobuf/well-known-types/enum-value.html">EnumValue&lt;/a>
+&lt;/td>
+&lt;td>&lt;a href="https://protobuf.dev/reference/csharp/api-docs/class/google/protobuf/well-known-types/enum.html#class_google_1_1_protobuf_1_1_well_known_types_1_1_enum">Enum&lt;/a> value definition. &lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>
+&lt;a href="https://protobuf.dev/reference/csharp/api-docs/class/google/protobuf/well-known-types/field.html">Field&lt;/a>
+&lt;/td>
+&lt;td>A single field of a message type. &lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>
+&lt;a href="https://protobuf.dev/reference/csharp/api-docs/class/google/protobuf/well-known-types/field/types.html">Field.Types&lt;/a>
+&lt;/td>
+&lt;td>Container for nested types declared in the &lt;a href="https://protobuf.dev/reference/csharp/api-docs/class/google/protobuf/well-known-types/field.html#class_google_1_1_protobuf_1_1_well_known_types_1_1_field">Field&lt;/a> message type.&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>
+&lt;a href="https://protobuf.dev/reference/csharp/api-docs/class/google/protobuf/well-known-types/field-mask.html">FieldMask&lt;/a>
+&lt;/td>
+&lt;td>&lt;code>&lt;a href="https://protobuf.dev/reference/csharp/api-docs/class/google/protobuf/well-known-types/field-mask.html#class_google_1_1_protobuf_1_1_well_known_types_1_1_field_mask">FieldMask&lt;/a>&lt;/code> represents a set of symbolic field paths, for example: &lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>
+&lt;a href="https://protobuf.dev/reference/csharp/api-docs/class/google/protobuf/well-known-types/field-mask-reflection.html">FieldMaskReflection&lt;/a>
+&lt;/td>
+&lt;td>Holder for reflection information generated from google/protobuf/field_mask.proto&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>
+&lt;a href="https://protobuf.dev/reference/csharp/api-docs/class/google/protobuf/well-known-types/float-value.html">FloatValue&lt;/a>
+&lt;/td>
+&lt;td>Wrapper message for &lt;code>float&lt;/code>. &lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>
+&lt;a href="https://protobuf.dev/reference/csharp/api-docs/class/google/protobuf/well-known-types/int32-value.html">Int32Value&lt;/a>
+&lt;/td>
+&lt;td>Wrapper message for &lt;code>int32&lt;/code>. &lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>
+&lt;a href="https://protobuf.dev/reference/csharp/api-docs/class/google/protobuf/well-known-types/int64-value.html">Int64Value&lt;/a>
+&lt;/td>
+&lt;td>Wrapper message for &lt;code>int64&lt;/code>. &lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>
+&lt;a href="https://protobuf.dev/reference/csharp/api-docs/class/google/protobuf/well-known-types/list-value.html">ListValue&lt;/a>
+&lt;/td>
+&lt;td>&lt;code>&lt;a href="https://protobuf.dev/reference/csharp/api-docs/class/google/protobuf/well-known-types/list-value.html#class_google_1_1_protobuf_1_1_well_known_types_1_1_list_value">ListValue&lt;/a>&lt;/code> is a wrapper around a repeated field of values. &lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>
+&lt;a href="https://protobuf.dev/reference/csharp/api-docs/class/google/protobuf/well-known-types/method.html">Method&lt;/a>
+&lt;/td>
+&lt;td>&lt;a href="https://protobuf.dev/reference/csharp/api-docs/class/google/protobuf/well-known-types/method.html#class_google_1_1_protobuf_1_1_well_known_types_1_1_method">Method&lt;/a> represents a method of an api. &lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>
+&lt;a href="https://protobuf.dev/reference/csharp/api-docs/class/google/protobuf/well-known-types/mixin.html">Mixin&lt;/a>
+&lt;/td>
+&lt;td>Declares an API to be included in this API. &lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>
+&lt;a href="https://protobuf.dev/reference/csharp/api-docs/class/google/protobuf/well-known-types/option.html">Option&lt;/a>
+&lt;/td>
+&lt;td>A protocol buffer option, which can be attached to a message, field, enumeration, etc. &lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>
+&lt;a href="https://protobuf.dev/reference/csharp/api-docs/class/google/protobuf/well-known-types/source-context.html">SourceContext&lt;/a>
+&lt;/td>
+&lt;td>&lt;code>&lt;a href="https://protobuf.dev/reference/csharp/api-docs/class/google/protobuf/well-known-types/source-context.html#class_google_1_1_protobuf_1_1_well_known_types_1_1_source_context">SourceContext&lt;/a>&lt;/code> represents information about the source of a protobuf element, like the file in which it is defined. &lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>
+&lt;a href="https://protobuf.dev/reference/csharp/api-docs/class/google/protobuf/well-known-types/source-context-reflection.html">SourceContextReflection&lt;/a>
+&lt;/td>
+&lt;td>Holder for reflection information generated from google/protobuf/source_context.proto&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>
+&lt;a href="https://protobuf.dev/reference/csharp/api-docs/class/google/protobuf/well-known-types/string-value.html">StringValue&lt;/a>
+&lt;/td>
+&lt;td>Wrapper message for &lt;code>string&lt;/code>. &lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>
+&lt;a href="https://protobuf.dev/reference/csharp/api-docs/class/google/protobuf/well-known-types/struct.html">Struct&lt;/a>
+&lt;/td>
+&lt;td>&lt;code>&lt;a href="https://protobuf.dev/reference/csharp/api-docs/class/google/protobuf/well-known-types/struct.html#class_google_1_1_protobuf_1_1_well_known_types_1_1_struct">Struct&lt;/a>&lt;/code> represents a structured data value, consisting of fields which map to dynamically typed values. &lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>
+&lt;a href="https://protobuf.dev/reference/csharp/api-docs/class/google/protobuf/well-known-types/struct-reflection.html">StructReflection&lt;/a>
+&lt;/td>
+&lt;td>Holder for reflection information generated from google/protobuf/struct.proto&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>
+&lt;a href="https://protobuf.dev/reference/csharp/api-docs/class/google/protobuf/well-known-types/time-extensions.html">TimeExtensions&lt;/a>
+&lt;/td>
+&lt;td>Extension methods on BCL time-related types, converting to protobuf types. &lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>
+&lt;a href="https://protobuf.dev/reference/csharp/api-docs/class/google/protobuf/well-known-types/timestamp.html">Timestamp&lt;/a>
+&lt;/td>
+&lt;td>A &lt;a href="https://protobuf.dev/reference/csharp/api-docs/class/google/protobuf/well-known-types/timestamp.html#class_google_1_1_protobuf_1_1_well_known_types_1_1_timestamp">Timestamp&lt;/a> represents a point in time independent of any time zone or calendar, represented as seconds and fractions of seconds at nanosecond resolution in UTC Epoch time. &lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>
+&lt;a href="https://protobuf.dev/reference/csharp/api-docs/class/google/protobuf/well-known-types/timestamp-reflection.html">TimestampReflection&lt;/a>
+&lt;/td>
+&lt;td>Holder for reflection information generated from google/protobuf/timestamp.proto&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>
+&lt;a href="https://protobuf.dev/reference/csharp/api-docs/class/google/protobuf/well-known-types/type.html">Type&lt;/a>
+&lt;/td>
+&lt;td>A protocol buffer message type. &lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>
+&lt;a href="https://protobuf.dev/reference/csharp/api-docs/class/google/protobuf/well-known-types/type-reflection.html">TypeReflection&lt;/a>
+&lt;/td>
+&lt;td>Holder for reflection information generated from google/protobuf/type.proto&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>
+&lt;a href="https://protobuf.dev/reference/csharp/api-docs/class/google/protobuf/well-known-types/u-int32-value.html">UInt32Value&lt;/a>
+&lt;/td>
+&lt;td>Wrapper message for &lt;code>uint32&lt;/code>. &lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>
+&lt;a href="https://protobuf.dev/reference/csharp/api-docs/class/google/protobuf/well-known-types/u-int64-value.html">UInt64Value&lt;/a>
+&lt;/td>
+&lt;td>Wrapper message for &lt;code>uint64&lt;/code>. &lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>
+&lt;a href="https://protobuf.dev/reference/csharp/api-docs/class/google/protobuf/well-known-types/value.html">Value&lt;/a>
+&lt;/td>
+&lt;td>&lt;code>&lt;a href="https://protobuf.dev/reference/csharp/api-docs/class/google/protobuf/well-known-types/value.html#class_google_1_1_protobuf_1_1_well_known_types_1_1_value">Value&lt;/a>&lt;/code> represents a dynamically typed value which can be either null, a number, a string, a boolean, a recursive struct value, or a list of values. &lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>
+&lt;a href="https://protobuf.dev/reference/csharp/api-docs/class/google/protobuf/well-known-types/wrappers-reflection.html">WrappersReflection&lt;/a>
+&lt;/td>
+&lt;td>Holder for reflection information generated from google/protobuf/wrappers.proto&lt;/td>
+&lt;/tr>
+&lt;/tbody>
+&lt;/table>
+&lt;/body>
+&lt;/html></description></item></channel></rss>

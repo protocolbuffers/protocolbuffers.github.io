@@ -1,6 +1,6 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Protocol Buffers Documentation – PHP Reference</title><link>https://protobuf.dev/reference/php/</link><description>Recent content in PHP Reference on Protocol Buffers Documentation</description><generator>Hugo -- gohugo.io</generator><language>en</language><atom:link href="https://protobuf.dev/reference/php/index.xml" rel="self" type="application/rss+xml"/><item><title>Reference: PHP Generated Code Guide</title><link>https://protobuf.dev/reference/php/php-generated/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://protobuf.dev/reference/php/php-generated/</guid><description>
 &lt;p>You should read the
-&lt;a href="https://protobuf.dev/programming-guides/proto3">proto3 language guide&lt;/a>
+&lt;a href="https://protobuf.dev/programming-guides/proto3/">proto3 language guide&lt;/a>
 before reading this document. Note that the protocol buffer compiler currently
 only supports proto3 code generation for PHP.&lt;/p>
 &lt;h2 id="invocation">Compiler Invocation&lt;/h2>
@@ -108,7 +108,7 @@ all conversions to/from arrays or objects. Float to integer overflow conversions
 are undefined.&lt;/p>
 &lt;p>You can see the corresponding PHP type for each scalar protocol buffers type in
 the
-&lt;a href="https://protobuf.dev/programming-guides/proto3#scalar">scalar value types table&lt;/a>.&lt;/p>
+&lt;a href="https://protobuf.dev/programming-guides/proto3/#scalar">scalar value types table&lt;/a>.&lt;/p>
 &lt;h3 id="embedded_message">Singular Message Fields&lt;/h3>
 &lt;p>A field with a message type defaults to nil, and is not automatically created
 when the field is accessed. Thus you need to explicitly create sub messages, as
@@ -137,7 +137,7 @@ this field:&lt;/p>
 &lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h2 id="enum">Enumerations&lt;/h2>
 &lt;p>PHP doesn&amp;rsquo;t have native enums, so instead the protocol buffer compiler generates
 a PHP class for each enum type in your &lt;code>.proto&lt;/code> file, just like for
-&lt;a href="#message">messages&lt;/a>, with constants defined for each value. So, given this
+&lt;a href="https://protobuf.dev/reference/php/php-generated/#message">messages&lt;/a>, with constants defined for each value. So, given this
 enum:&lt;/p>
 &lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-proto" data-lang="proto">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#204a87;font-weight:bold">enum&lt;/span> &lt;span style="color:#000">TestEnum&lt;/span> &lt;span style="color:#000;font-weight:bold">{&lt;/span>&lt;span style="color:#a40000">
 &lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#a40000">&lt;/span> &lt;span style="color:#000">Default&lt;/span> &lt;span style="color:#ce5c00;font-weight:bold">=&lt;/span> &lt;span style="color:#0000cf;font-weight:bold">0&lt;/span>&lt;span style="color:#000;font-weight:bold">;&lt;/span>&lt;span style="color:#a40000">
@@ -160,7 +160,7 @@ does not support nested classes.&lt;/p>
 &lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>We have also provided the file level option &lt;code>php_class_prefix&lt;/code>. If this is
 specified, it is prepended to all generated enum classes.&lt;/p>
 &lt;h2 id="oneof">Oneof&lt;/h2>
-&lt;p>For a &lt;a href="https://protobuf.dev/programming-guides/proto3#oneof">oneof&lt;/a>s, the
+&lt;p>For a &lt;a href="https://protobuf.dev/programming-guides/proto3/#oneof">oneof&lt;/a>s, the
 protocol buffer compiler generates the same code as it would for regular
 singular fields, but also adds a special accessor method that lets you find out
 which oneof field (if any) is set. So, given this message:&lt;/p>
@@ -181,4 +181,11 @@ which oneof field (if any) is set. So, given this message:&lt;/p>
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#204a87;font-weight:bold">public&lt;/span> &lt;span style="color:#204a87;font-weight:bold">function&lt;/span> &lt;span style="color:#000">getTestOneof&lt;/span>&lt;span style="color:#000;font-weight:bold">();&lt;/span> &lt;span style="color:#8f5902;font-style:italic">// Return field name
 &lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#8f5902;font-style:italic">&lt;/span>&lt;span style="color:#000;font-weight:bold">}&lt;/span>
 &lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>The accessor method&amp;rsquo;s name is based on the oneof&amp;rsquo;s name, and returns an enum
-value representing the field in the oneof that is currently set.&lt;/p></description></item><item><title>Reference: PHP API</title><link>https://protobuf.dev/reference/php/api-docs-link/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://protobuf.dev/reference/php/api-docs-link/</guid><description/></item></channel></rss>
+value representing the field in the oneof that is currently set.&lt;/p></description></item><item><title>Reference:</title><link>https://protobuf.dev/reference/php/api-docs-link/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://protobuf.dev/reference/php/api-docs-link/</guid><description>
+&lt;!-- mdformat global-off -->
+&lt;hr>
+&lt;h2 id="weight-735">title: &amp;ldquo;PHP API&amp;rdquo;
+manualLink: &amp;ldquo;/reference/php/api-docs/&amp;rdquo;
+manualLinkTarget: &amp;ldquo;_blank&amp;rdquo;
+weight: 735&lt;/h2></description></item><item><title>Reference:</title><link>https://protobuf.dev/reference/php/api-docs/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://protobuf.dev/reference/php/api-docs/</guid><description>
+&lt;html>&lt;head>&lt;script>window.location.replace('Google/Protobuf.html')&lt;/script>&lt;/head>&lt;body>&lt;/body>&lt;/html></description></item></channel></rss>

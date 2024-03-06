@@ -4,7 +4,7 @@ proto2 and proto3 generated code are highlighted - note that these differences
 are in the generated code as described in this document, not the base API, which
 are the same in both versions. You should read the
 &lt;a href="https://protobuf.dev/programming-guides/proto">proto2 language guide&lt;/a> and/or
-the &lt;a href="https://protobuf.dev/programming-guides/proto3">proto3 language guide&lt;/a>
+the &lt;a href="https://protobuf.dev/programming-guides/proto3/">proto3 language guide&lt;/a>
 before reading this document.&lt;/p>
 &lt;h2 id="invocation">Compiler Invocation&lt;/h2>
 &lt;p>The protocol buffer compiler requires a plugin to generate Go code. Install it
@@ -87,7 +87,7 @@ package which contains the generated &lt;code>b.pb.go&lt;/code> file (unless bot
 the same package). The import path is also used to construct output filenames.
 See the &amp;quot;Compiler Invocation&amp;quot; section above for details.&lt;/p>
 &lt;p>There is no correlation between the Go import path and the
-&lt;a href="https://protobuf.dev/programming-guides/proto3#packages">&lt;code>package&lt;/code> specifier&lt;/a>
+&lt;a href="https://protobuf.dev/programming-guides/proto3/#packages">&lt;code>package&lt;/code> specifier&lt;/a>
 in the &lt;code>.proto&lt;/code> file. The latter is only relevant to the protobuf namespace,
 while the former is only relevant to the Go namespace. Also, there is no
 correlation between the Go import path and the &lt;code>.proto&lt;/code> import path.&lt;/p>
@@ -120,7 +120,7 @@ within a message. The exact nature of this field depends on its type and whether
 it is a singular, repeated, map, or oneof field.&lt;/p>
 &lt;p>Note that the generated Go field names always use camel-case naming, even if the
 field name in the &lt;code>.proto&lt;/code> file uses lower-case with underscores
-(&lt;a href="https://protobuf.dev/programming-guides/style#message-field-names">as it should&lt;/a>).
+(&lt;a href="https://protobuf.dev/programming-guides/style/#message-field-names">as it should&lt;/a>).
 The case-conversion works as follows:&lt;/p>
 &lt;ol>
 &lt;li>The first letter is capitalized for export. If the first character is an
@@ -153,7 +153,7 @@ an accessor method &lt;code>GetBirthYear()&lt;/code> which returns the &lt;code>
 if the field is unset (&lt;code>0&lt;/code> for numbers, the empty string for strings).&lt;/p>
 &lt;p>For other scalar field types (including &lt;code>bool&lt;/code>, &lt;code>bytes&lt;/code>, and &lt;code>string&lt;/code>), &lt;code>int32&lt;/code>
 is replaced with the corresponding Go type according to the
-&lt;a href="https://protobuf.dev/programming-guides/proto3#scalar">scalar value types table&lt;/a>.
+&lt;a href="https://protobuf.dev/programming-guides/proto3/#scalar">scalar value types table&lt;/a>.
 Unset values in the proto will be represented as the
 &lt;a href="https://golang.org/ref/spec#The_zero_value">zero value&lt;/a> of that type
 (&lt;code>0&lt;/code> for numbers, the empty string for strings).&lt;/p>
@@ -198,7 +198,7 @@ checks:&lt;/p>
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#000;font-weight:bold">}&lt;/span>
 &lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>Likewise, for the field definition &lt;code>repeated bytes band_promo_images = 1;&lt;/code> the
 compiler will generate a Go struct with a &lt;code>[][]byte&lt;/code> field named
-&lt;code>BandPromoImage&lt;/code>. For a repeated &lt;a href="#enum">enumeration&lt;/a> like &lt;code>repeated MusicGenre genres = 2;&lt;/code>, the compiler generates a struct with a &lt;code>[]MusicGenre&lt;/code> field called
+&lt;code>BandPromoImage&lt;/code>. For a repeated &lt;a href="https://protobuf.dev/reference/go/go-generated/#enum">enumeration&lt;/a> like &lt;code>repeated MusicGenre genres = 2;&lt;/code>, the compiler generates a struct with a &lt;code>[]MusicGenre&lt;/code> field called
 &lt;code>Genre&lt;/code>.&lt;/p>
 &lt;p>The following example shows how to set the field:&lt;/p>
 &lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-go" data-lang="go">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#000">concert&lt;/span> &lt;span style="color:#ce5c00;font-weight:bold">:=&lt;/span> &lt;span style="color:#ce5c00;font-weight:bold">&amp;amp;&lt;/span>&lt;span style="color:#000">Concert&lt;/span>&lt;span style="color:#000;font-weight:bold">{&lt;/span>
@@ -228,7 +228,7 @@ message with a map field:&lt;/p>
 &lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h3 id="oneof">Oneof Fields&lt;/h3>
 &lt;p>For a oneof field, the protobuf compiler generates a single field with an
 interface type &lt;code>isMessageName_MyField&lt;/code>. It also generates a struct for each of
-the &lt;a href="#singular-scalar-proto2">singular fields&lt;/a> within the oneof. These all
+the &lt;a href="https://protobuf.dev/reference/go/go-generated/#singular-scalar-proto2">singular fields&lt;/a> within the oneof. These all
 implement this &lt;code>isMessageName_MyField&lt;/code> interface.&lt;/p>
 &lt;p>For this message with a oneof field:&lt;/p>
 &lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-proto" data-lang="proto">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#204a87;font-weight:bold">package&lt;/span> &lt;span style="color:#000">account&lt;/span>&lt;span style="color:#000;font-weight:bold">;&lt;/span>&lt;span style="color:#a40000">
@@ -376,7 +376,7 @@ functions to access an extension in a message. The &lt;code>GetExtension&lt;/cod
 containing the extension value type.&lt;/p>
 &lt;p>For singular scalar extension fields, the extension value type is the
 corresponding Go type from the
-&lt;a href="https://protobuf.dev/programming-guides/proto3#scalar">scalar value types table&lt;/a>.&lt;/p>
+&lt;a href="https://protobuf.dev/programming-guides/proto3/#scalar">scalar value types table&lt;/a>.&lt;/p>
 &lt;p>For singular embedded message extension fields, the extension value type is
 &lt;code>*M&lt;/code>, where &lt;code>M&lt;/code> is the field message type.&lt;/p>
 &lt;p>For repeated extension fields, the extension value type is a slice of the
@@ -498,7 +498,7 @@ specifying an explicit version: &lt;code>go install google.golang.org/protobuf/c
 global registry.&lt;/p>
 &lt;p>Every protobuf declaration (for example, enums, enum values, or messages) has an
 absolute name, which is the concatenation of the
-&lt;a href="https://protobuf.dev/programming-guides/proto2#packages">package name&lt;/a> with
+&lt;a href="https://protobuf.dev/programming-guides/proto2/#packages">package name&lt;/a> with
 the relative name of the declaration in the &lt;code>.proto&lt;/code> source file (for example,
 &lt;code>my.proto.package.MyMessage.NestedMessage&lt;/code>). The protobuf language assumes that
 all declarations are universally unique.&lt;/p>
@@ -604,7 +604,7 @@ guarantee that all errors will match
 according to &lt;a href="https://pkg.go.dev/errors?tab=doc#Is">&lt;code>errors.Is&lt;/code>&lt;/a>.&lt;/p>
 &lt;h3 id="unstable-json">Why does the output of &lt;a href="https://pkg.go.dev/google.golang.org/protobuf/encoding/protojson">&lt;code>protojson&lt;/code>&lt;/a> keep changing?&lt;/h3>
 &lt;p>We make no promises about the long-term stability of Go&amp;rsquo;s implementation of the
-&lt;a href="https://protobuf.dev/programming-guides/proto3#json">JSON format for protocol buffers&lt;/a>.
+&lt;a href="https://protobuf.dev/programming-guides/proto3/#json">JSON format for protocol buffers&lt;/a>.
 The specification only specifies what is valid JSON, but provides no
 specification for a &lt;em>canonical&lt;/em> format for how a marshaler ought to &lt;em>exactly&lt;/em>
 format a given message. To avoid giving the illusion that the output is stable,
@@ -654,4 +654,10 @@ option exist in at least one other supported implementation.&lt;/p>
 &lt;h3 id="custom-code">Can I customize the code generated by &lt;code>protoc-gen-go&lt;/code>?&lt;/h3>
 &lt;p>In general, no. Protocol buffers are intended to be a language-agnostic data
 interchange format, and implementation-specific customizations run counter to
-that intent.&lt;/p></description></item><item><title>Reference: Go API</title><link>https://protobuf.dev/reference/go/api-docs-link/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://protobuf.dev/reference/go/api-docs-link/</guid><description/></item></channel></rss>
+that intent.&lt;/p></description></item><item><title>Reference:</title><link>https://protobuf.dev/reference/go/api-docs-link/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://protobuf.dev/reference/go/api-docs-link/</guid><description>
+&lt;!-- mdformat global-off -->
+&lt;hr>
+&lt;h2 id="weight-630">title: &amp;ldquo;Go API&amp;rdquo;
+manualLink: &amp;ldquo;&lt;a href="https://pkg.go.dev/google.golang.org/protobuf/proto%22">https://pkg.go.dev/google.golang.org/protobuf/proto"&lt;/a>
+manualLinkTarget: &amp;ldquo;_blank&amp;rdquo;
+weight: 630&lt;/h2></description></item></channel></rss>

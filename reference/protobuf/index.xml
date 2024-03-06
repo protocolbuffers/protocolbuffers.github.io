@@ -6,7 +6,7 @@
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>[] option (zero or one time)
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>{} repetition (any number of times)
 &lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>For more information about using proto2, see the
-&lt;a href="https://protobuf.dev/programming-guides/proto2">language guide&lt;/a>.&lt;/p>
+&lt;a href="https://protobuf.dev/programming-guides/proto2/">language guide&lt;/a>.&lt;/p>
 &lt;h2 id="lexical_elements">Lexical Elements&lt;/h2>
 &lt;h3 id="letters_and_digits">Letters and Digits&lt;/h3>
 &lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-fallback" data-lang="fallback">&lt;span style="display:flex;">&lt;span>letter = &amp;#34;A&amp;#34; ... &amp;#34;Z&amp;#34; | &amp;#34;a&amp;#34; ... &amp;#34;z&amp;#34;
@@ -55,7 +55,7 @@
 &lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-gdscript3" data-lang="gdscript3">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#000">constant&lt;/span> &lt;span style="color:#ce5c00;font-weight:bold">=&lt;/span> &lt;span style="color:#000">fullIdent&lt;/span> &lt;span style="color:#ce5c00;font-weight:bold">|&lt;/span> &lt;span style="color:#000;font-weight:bold">(&lt;/span> &lt;span style="color:#000;font-weight:bold">[&lt;/span> &lt;span style="color:#4e9a06">&amp;#34;-&amp;#34;&lt;/span> &lt;span style="color:#ce5c00;font-weight:bold">|&lt;/span> &lt;span style="color:#4e9a06">&amp;#34;+&amp;#34;&lt;/span> &lt;span style="color:#000;font-weight:bold">]&lt;/span> &lt;span style="color:#000">intLit&lt;/span> &lt;span style="color:#000;font-weight:bold">)&lt;/span> &lt;span style="color:#ce5c00;font-weight:bold">|&lt;/span> &lt;span style="color:#000;font-weight:bold">(&lt;/span> &lt;span style="color:#000;font-weight:bold">[&lt;/span> &lt;span style="color:#4e9a06">&amp;#34;-&amp;#34;&lt;/span> &lt;span style="color:#ce5c00;font-weight:bold">|&lt;/span> &lt;span style="color:#4e9a06">&amp;#34;+&amp;#34;&lt;/span> &lt;span style="color:#000;font-weight:bold">]&lt;/span> &lt;span style="color:#000">floatLit&lt;/span> &lt;span style="color:#000;font-weight:bold">)&lt;/span> &lt;span style="color:#ce5c00;font-weight:bold">|&lt;/span>
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#000">strLit&lt;/span> &lt;span style="color:#ce5c00;font-weight:bold">|&lt;/span> &lt;span style="color:#000">boolLit&lt;/span> &lt;span style="color:#ce5c00;font-weight:bold">|&lt;/span> &lt;span style="color:#000">MessageValue&lt;/span>
 &lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>&lt;code>MessageValue&lt;/code> is defined in the
-&lt;a href="https://protobuf.dev/reference/protobuf/textformat-spec#fields">Text Format Language Specification&lt;/a>.&lt;/p>
+&lt;a href="https://protobuf.dev/reference/protobuf/textformat-spec/#fields">Text Format Language Specification&lt;/a>.&lt;/p>
 &lt;h2 id="syntax">Syntax&lt;/h2>
 &lt;p>The syntax statement is used to define the protobuf version.&lt;/p>
 &lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-fallback" data-lang="fallback">&lt;span style="display:flex;">&lt;span>syntax = &amp;#34;syntax&amp;#34; &amp;#34;=&amp;#34; (&amp;#34;&amp;#39;&amp;#34; &amp;#34;proto2&amp;#34; &amp;#34;&amp;#39;&amp;#34; | &amp;#39;&amp;#34;&amp;#39; &amp;#34;proto2&amp;#34; &amp;#39;&amp;#34;&amp;#39;) &amp;#34;;&amp;#34;
@@ -73,7 +73,7 @@ message types.&lt;/p>
 &lt;/span>&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h2 id="option">Option&lt;/h2>
 &lt;p>Options can be used in proto files, messages, enums and services. An option can
 be a protobuf defined option or a custom option. For more information, see
-&lt;a href="https://protobuf.dev/programming-guides/proto2#options">Options&lt;/a> in the
+&lt;a href="https://protobuf.dev/programming-guides/proto2/#options">Options&lt;/a> in the
 language guide.&lt;/p>
 &lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-gdscript3" data-lang="gdscript3">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#000">option&lt;/span> &lt;span style="color:#ce5c00;font-weight:bold">=&lt;/span> &lt;span style="color:#4e9a06">&amp;#34;option&amp;#34;&lt;/span> &lt;span style="color:#000">optionName&lt;/span> &lt;span style="color:#4e9a06">&amp;#34;=&amp;#34;&lt;/span> &lt;span style="color:#000">constant&lt;/span> &lt;span style="color:#4e9a06">&amp;#34;;&amp;#34;&lt;/span>
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#000">optionName&lt;/span> &lt;span style="color:#ce5c00;font-weight:bold">=&lt;/span> &lt;span style="color:#000;font-weight:bold">(&lt;/span> &lt;span style="color:#000">ident&lt;/span> &lt;span style="color:#ce5c00;font-weight:bold">|&lt;/span> &lt;span style="color:#4e9a06">&amp;#34;(&amp;#34;&lt;/span> &lt;span style="color:#000;font-weight:bold">[&lt;/span>&lt;span style="color:#4e9a06">&amp;#34;.&amp;#34;&lt;/span>&lt;span style="color:#000;font-weight:bold">]&lt;/span> &lt;span style="color:#000">fullIdent&lt;/span> &lt;span style="color:#4e9a06">&amp;#34;)&amp;#34;&lt;/span> &lt;span style="color:#000;font-weight:bold">)&lt;/span>
@@ -262,7 +262,7 @@ extensions, the message can be extended.&lt;/p>
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>[] option (zero or one time)
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>{} repetition (any number of times)
 &lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>For more information about using proto3, see the
-&lt;a href="https://protobuf.dev/programming-guides/proto3">language guide&lt;/a>.&lt;/p>
+&lt;a href="https://protobuf.dev/programming-guides/proto3/">language guide&lt;/a>.&lt;/p>
 &lt;h2 id="lexical_elements">Lexical Elements&lt;/h2>
 &lt;h3 id="letters_and_digits">Letters and Digits&lt;/h3>
 &lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-fallback" data-lang="fallback">&lt;span style="display:flex;">&lt;span>letter = &amp;#34;A&amp;#34; ... &amp;#34;Z&amp;#34; | &amp;#34;a&amp;#34; ... &amp;#34;z&amp;#34;
@@ -308,7 +308,7 @@ extensions, the message can be extended.&lt;/p>
 &lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-gdscript3" data-lang="gdscript3">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#000">constant&lt;/span> &lt;span style="color:#ce5c00;font-weight:bold">=&lt;/span> &lt;span style="color:#000">fullIdent&lt;/span> &lt;span style="color:#ce5c00;font-weight:bold">|&lt;/span> &lt;span style="color:#000;font-weight:bold">(&lt;/span> &lt;span style="color:#000;font-weight:bold">[&lt;/span> &lt;span style="color:#4e9a06">&amp;#34;-&amp;#34;&lt;/span> &lt;span style="color:#ce5c00;font-weight:bold">|&lt;/span> &lt;span style="color:#4e9a06">&amp;#34;+&amp;#34;&lt;/span> &lt;span style="color:#000;font-weight:bold">]&lt;/span> &lt;span style="color:#000">intLit&lt;/span> &lt;span style="color:#000;font-weight:bold">)&lt;/span> &lt;span style="color:#ce5c00;font-weight:bold">|&lt;/span> &lt;span style="color:#000;font-weight:bold">(&lt;/span> &lt;span style="color:#000;font-weight:bold">[&lt;/span> &lt;span style="color:#4e9a06">&amp;#34;-&amp;#34;&lt;/span> &lt;span style="color:#ce5c00;font-weight:bold">|&lt;/span> &lt;span style="color:#4e9a06">&amp;#34;+&amp;#34;&lt;/span> &lt;span style="color:#000;font-weight:bold">]&lt;/span> &lt;span style="color:#000">floatLit&lt;/span> &lt;span style="color:#000;font-weight:bold">)&lt;/span> &lt;span style="color:#ce5c00;font-weight:bold">|&lt;/span>
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#000">strLit&lt;/span> &lt;span style="color:#ce5c00;font-weight:bold">|&lt;/span> &lt;span style="color:#000">boolLit&lt;/span> &lt;span style="color:#ce5c00;font-weight:bold">|&lt;/span> &lt;span style="color:#000">MessageValue&lt;/span>
 &lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>&lt;code>MessageValue&lt;/code> is defined in the
-&lt;a href="https://protobuf.dev/reference/protobuf/textformat-spec#fields">Text Format Language Specification&lt;/a>.&lt;/p>
+&lt;a href="https://protobuf.dev/reference/protobuf/textformat-spec/#fields">Text Format Language Specification&lt;/a>.&lt;/p>
 &lt;h2 id="syntax">Syntax&lt;/h2>
 &lt;p>The syntax statement is used to define the protobuf version.&lt;/p>
 &lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-fallback" data-lang="fallback">&lt;span style="display:flex;">&lt;span>syntax = &amp;#34;syntax&amp;#34; &amp;#34;=&amp;#34; (&amp;#34;&amp;#39;&amp;#34; &amp;#34;proto3&amp;#34; &amp;#34;&amp;#39;&amp;#34; | &amp;#39;&amp;#34;&amp;#39; &amp;#34;proto3&amp;#34; &amp;#39;&amp;#34;&amp;#39;) &amp;#34;;&amp;#34;
@@ -328,7 +328,7 @@ message types.&lt;/p>
 &lt;/span>&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h2 id="option">Option&lt;/h2>
 &lt;p>Options can be used in proto files, messages, enums and services. An option can
 be a protobuf defined option or a custom option. For more information, see
-&lt;a href="https://protobuf.dev/programming-guides/proto3#options">Options&lt;/a> in the
+&lt;a href="https://protobuf.dev/programming-guides/proto3/#options">Options&lt;/a> in the
 language guide.&lt;/p>
 &lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-gdscript3" data-lang="gdscript3">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#000">option&lt;/span> &lt;span style="color:#ce5c00;font-weight:bold">=&lt;/span> &lt;span style="color:#4e9a06">&amp;#34;option&amp;#34;&lt;/span> &lt;span style="color:#000">optionName&lt;/span> &lt;span style="color:#4e9a06">&amp;#34;=&amp;#34;&lt;/span> &lt;span style="color:#000">constant&lt;/span> &lt;span style="color:#4e9a06">&amp;#34;;&amp;#34;&lt;/span>
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#000">optionName&lt;/span> &lt;span style="color:#ce5c00;font-weight:bold">=&lt;/span> &lt;span style="color:#000">optionNamePart&lt;/span> &lt;span style="color:#000;font-weight:bold">{&lt;/span> &lt;span style="color:#4e9a06">&amp;#34;.&amp;#34;&lt;/span> &lt;span style="color:#000">optionNamePart&lt;/span> &lt;span style="color:#000;font-weight:bold">}&lt;/span>
@@ -646,7 +646,7 @@ whitespace. Example:&lt;/p>
 &lt;p>Fields that are part of the containing message use simple &lt;code>Identifiers&lt;/code> as
 names.
 &lt;a href="https://protobuf.dev/programming-guides/proto#extensions">&lt;code>Extension&lt;/code>&lt;/a> and
-&lt;a href="https://protobuf.dev/programming-guides/proto3#any">&lt;code>Any&lt;/code>&lt;/a> field names are
+&lt;a href="https://protobuf.dev/programming-guides/proto3/#any">&lt;code>Any&lt;/code>&lt;/a> field names are
 wrapped in square brackets and fully-qualified. &lt;code>Any&lt;/code> field names are prefixed
 with a qualifying domain name, such as &lt;code>type.googleapis.com/&lt;/code>.&lt;/p>
 &lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-fallback" data-lang="fallback">&lt;span style="display:flex;">&lt;span>FieldName = ExtensionName | AnyName | IDENT ;
@@ -673,7 +673,7 @@ implementations encode unknown fields with a format that uses a field number and
 a numeric representation of the value, but this is inherently lossy because the
 wire-type information is ignored. For comparison, wire-format is non-lossy
 because it includes the wire-type in each field tag as &lt;code>(field_number &amp;lt;&amp;lt; 3) | wire_type&lt;/code>. For more information on encoding, see the
-&lt;a href="https://protobuf.dev/programming-guides/encoding.md">Encoding&lt;/a> topic.&lt;/p>
+&lt;a href="https://protobuf.dev/programming-guides/encoding/">Encoding&lt;/a> topic.&lt;/p>
 &lt;p>Without information about the field type from the message schema, the value
 cannot be correctly encoded into a wire-format proto message.&lt;/p>
 &lt;h3 id="fields">Fields&lt;/h3>
@@ -868,7 +868,7 @@ define extension fields; instead, the parser must have prior knowledge of their
 locations.&lt;/p>
 &lt;h2 id="any">&lt;code>Any&lt;/code> Fields&lt;/h2>
 &lt;p>Text format supports an expanded form of the
-&lt;a href="https://protobuf.dev/programming-guides/proto3#any">&lt;code>google.protobuf.Any&lt;/code>&lt;/a>
+&lt;a href="https://protobuf.dev/programming-guides/proto3/#any">&lt;code>google.protobuf.Any&lt;/code>&lt;/a>
 well-known type using a special syntax resembling extension fields. Example:&lt;/p>
 &lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-fallback" data-lang="fallback">&lt;span style="display:flex;">&lt;span>local_field: 10
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
@@ -1007,36 +1007,36 @@ explicitly use
 to format their output.&lt;/p></description></item><item><title>Reference: Protocol Buffers Well-Known Types</title><link>https://protobuf.dev/reference/protobuf/google.protobuf/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://protobuf.dev/reference/protobuf/google.protobuf/</guid><description>
 &lt;h2 id="index">Index&lt;/h2>
 &lt;ul>
-&lt;li>&lt;a href="#any">&lt;code>Any&lt;/code>&lt;/a> (message)&lt;/li>
-&lt;li>&lt;a href="#api">&lt;code>Api&lt;/code>&lt;/a> (message)&lt;/li>
-&lt;li>&lt;a href="#bool-value">&lt;code>BoolValue&lt;/code>&lt;/a> (message)&lt;/li>
-&lt;li>&lt;a href="#bytes-value">&lt;code>BytesValue&lt;/code>&lt;/a> (message)&lt;/li>
-&lt;li>&lt;a href="#double-value">&lt;code>DoubleValue&lt;/code>&lt;/a> (message)&lt;/li>
-&lt;li>&lt;a href="#duration">&lt;code>Duration&lt;/code>&lt;/a> (message)&lt;/li>
-&lt;li>&lt;a href="#empty">&lt;code>Empty&lt;/code>&lt;/a> (message)&lt;/li>
-&lt;li>&lt;a href="#enum">&lt;code>Enum&lt;/code>&lt;/a> (message)&lt;/li>
-&lt;li>&lt;a href="#enum-value">&lt;code>EnumValue&lt;/code>&lt;/a> (message)&lt;/li>
-&lt;li>&lt;a href="#field">&lt;code>Field&lt;/code>&lt;/a> (message)&lt;/li>
-&lt;li>&lt;a href="#field-cardinality">&lt;code>Field.Cardinality&lt;/code>&lt;/a> (enum)&lt;/li>
-&lt;li>&lt;a href="#field-kind">&lt;code>Field.Kind&lt;/code>&lt;/a> (enum)&lt;/li>
-&lt;li>&lt;a href="#field-mask">&lt;code>FieldMask&lt;/code>&lt;/a> (message)&lt;/li>
-&lt;li>&lt;a href="#float-value">&lt;code>FloatValue&lt;/code>&lt;/a> (message)&lt;/li>
-&lt;li>&lt;a href="#int32-value">&lt;code>Int32Value&lt;/code>&lt;/a> (message)&lt;/li>
-&lt;li>&lt;a href="#int64-value">&lt;code>Int64Value&lt;/code>&lt;/a> (message)&lt;/li>
-&lt;li>&lt;a href="#list-value">&lt;code>ListValue&lt;/code>&lt;/a> (message)&lt;/li>
-&lt;li>&lt;a href="#method">&lt;code>Method&lt;/code>&lt;/a> (message)&lt;/li>
-&lt;li>&lt;a href="#mixin">&lt;code>Mixin&lt;/code>&lt;/a> (message)&lt;/li>
-&lt;li>&lt;a href="#null-value">&lt;code>NullValue&lt;/code>&lt;/a> (enum)&lt;/li>
-&lt;li>&lt;a href="#option">&lt;code>Option&lt;/code>&lt;/a> (message)&lt;/li>
-&lt;li>&lt;a href="#source-context">&lt;code>SourceContext&lt;/code>&lt;/a> (message)&lt;/li>
-&lt;li>&lt;a href="#string-value">&lt;code>StringValue&lt;/code>&lt;/a> (message)&lt;/li>
-&lt;li>&lt;a href="#struct">&lt;code>Struct&lt;/code>&lt;/a> (message)&lt;/li>
-&lt;li>&lt;a href="#syntax">&lt;code>Syntax&lt;/code>&lt;/a> (enum)&lt;/li>
-&lt;li>&lt;a href="#timestamp">&lt;code>Timestamp&lt;/code>&lt;/a> (message)&lt;/li>
-&lt;li>&lt;a href="#type">&lt;code>Type&lt;/code>&lt;/a> (message)&lt;/li>
-&lt;li>&lt;a href="#uint32-value">&lt;code>UInt32Value&lt;/code>&lt;/a> (message)&lt;/li>
-&lt;li>&lt;a href="#uint64-value">&lt;code>UInt64Value&lt;/code>&lt;/a> (message)&lt;/li>
-&lt;li>&lt;a href="#value">&lt;code>Value&lt;/code>&lt;/a> (message)&lt;/li>
+&lt;li>&lt;a href="https://protobuf.dev/reference/protobuf/google.protobuf/#any">&lt;code>Any&lt;/code>&lt;/a> (message)&lt;/li>
+&lt;li>&lt;a href="https://protobuf.dev/reference/protobuf/google.protobuf/#api">&lt;code>Api&lt;/code>&lt;/a> (message)&lt;/li>
+&lt;li>&lt;a href="https://protobuf.dev/reference/protobuf/google.protobuf/#bool-value">&lt;code>BoolValue&lt;/code>&lt;/a> (message)&lt;/li>
+&lt;li>&lt;a href="https://protobuf.dev/reference/protobuf/google.protobuf/#bytes-value">&lt;code>BytesValue&lt;/code>&lt;/a> (message)&lt;/li>
+&lt;li>&lt;a href="https://protobuf.dev/reference/protobuf/google.protobuf/#double-value">&lt;code>DoubleValue&lt;/code>&lt;/a> (message)&lt;/li>
+&lt;li>&lt;a href="https://protobuf.dev/reference/protobuf/google.protobuf/#duration">&lt;code>Duration&lt;/code>&lt;/a> (message)&lt;/li>
+&lt;li>&lt;a href="https://protobuf.dev/reference/protobuf/google.protobuf/#empty">&lt;code>Empty&lt;/code>&lt;/a> (message)&lt;/li>
+&lt;li>&lt;a href="https://protobuf.dev/reference/protobuf/google.protobuf/#enum">&lt;code>Enum&lt;/code>&lt;/a> (message)&lt;/li>
+&lt;li>&lt;a href="https://protobuf.dev/reference/protobuf/google.protobuf/#enum-value">&lt;code>EnumValue&lt;/code>&lt;/a> (message)&lt;/li>
+&lt;li>&lt;a href="https://protobuf.dev/reference/protobuf/google.protobuf/#field">&lt;code>Field&lt;/code>&lt;/a> (message)&lt;/li>
+&lt;li>&lt;a href="https://protobuf.dev/reference/protobuf/google.protobuf/#field-cardinality">&lt;code>Field.Cardinality&lt;/code>&lt;/a> (enum)&lt;/li>
+&lt;li>&lt;a href="https://protobuf.dev/reference/protobuf/google.protobuf/#field-kind">&lt;code>Field.Kind&lt;/code>&lt;/a> (enum)&lt;/li>
+&lt;li>&lt;a href="https://protobuf.dev/reference/protobuf/google.protobuf/#field-mask">&lt;code>FieldMask&lt;/code>&lt;/a> (message)&lt;/li>
+&lt;li>&lt;a href="https://protobuf.dev/reference/protobuf/google.protobuf/#float-value">&lt;code>FloatValue&lt;/code>&lt;/a> (message)&lt;/li>
+&lt;li>&lt;a href="https://protobuf.dev/reference/protobuf/google.protobuf/#int32-value">&lt;code>Int32Value&lt;/code>&lt;/a> (message)&lt;/li>
+&lt;li>&lt;a href="https://protobuf.dev/reference/protobuf/google.protobuf/#int64-value">&lt;code>Int64Value&lt;/code>&lt;/a> (message)&lt;/li>
+&lt;li>&lt;a href="https://protobuf.dev/reference/protobuf/google.protobuf/#list-value">&lt;code>ListValue&lt;/code>&lt;/a> (message)&lt;/li>
+&lt;li>&lt;a href="https://protobuf.dev/reference/protobuf/google.protobuf/#method">&lt;code>Method&lt;/code>&lt;/a> (message)&lt;/li>
+&lt;li>&lt;a href="https://protobuf.dev/reference/protobuf/google.protobuf/#mixin">&lt;code>Mixin&lt;/code>&lt;/a> (message)&lt;/li>
+&lt;li>&lt;a href="https://protobuf.dev/reference/protobuf/google.protobuf/#null-value">&lt;code>NullValue&lt;/code>&lt;/a> (enum)&lt;/li>
+&lt;li>&lt;a href="https://protobuf.dev/reference/protobuf/google.protobuf/#option">&lt;code>Option&lt;/code>&lt;/a> (message)&lt;/li>
+&lt;li>&lt;a href="https://protobuf.dev/reference/protobuf/google.protobuf/#source-context">&lt;code>SourceContext&lt;/code>&lt;/a> (message)&lt;/li>
+&lt;li>&lt;a href="https://protobuf.dev/reference/protobuf/google.protobuf/#string-value">&lt;code>StringValue&lt;/code>&lt;/a> (message)&lt;/li>
+&lt;li>&lt;a href="https://protobuf.dev/reference/protobuf/google.protobuf/#struct">&lt;code>Struct&lt;/code>&lt;/a> (message)&lt;/li>
+&lt;li>&lt;a href="https://protobuf.dev/reference/protobuf/google.protobuf/#syntax">&lt;code>Syntax&lt;/code>&lt;/a> (enum)&lt;/li>
+&lt;li>&lt;a href="https://protobuf.dev/reference/protobuf/google.protobuf/#timestamp">&lt;code>Timestamp&lt;/code>&lt;/a> (message)&lt;/li>
+&lt;li>&lt;a href="https://protobuf.dev/reference/protobuf/google.protobuf/#type">&lt;code>Type&lt;/code>&lt;/a> (message)&lt;/li>
+&lt;li>&lt;a href="https://protobuf.dev/reference/protobuf/google.protobuf/#uint32-value">&lt;code>UInt32Value&lt;/code>&lt;/a> (message)&lt;/li>
+&lt;li>&lt;a href="https://protobuf.dev/reference/protobuf/google.protobuf/#uint64-value">&lt;code>UInt64Value&lt;/code>&lt;/a> (message)&lt;/li>
+&lt;li>&lt;a href="https://protobuf.dev/reference/protobuf/google.protobuf/#value">&lt;code>Value&lt;/code>&lt;/a> (message)&lt;/li>
 &lt;/ul>
 &lt;h2 id="any">Any&lt;/h2>
 &lt;p>&lt;code>Any&lt;/code> contains an arbitrary serialized message along with a URL that describes

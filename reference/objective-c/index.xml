@@ -3,7 +3,7 @@
 differences between proto2 and proto3 generated code are highlighted. You should
 read the
 &lt;a href="https://protobuf.dev/programming-guides/proto">proto2 language guide&lt;/a> and/or
-&lt;a href="https://protobuf.dev/programming-guides/proto3">proto3 language guide&lt;/a>
+&lt;a href="https://protobuf.dev/programming-guides/proto3/">proto3 language guide&lt;/a>
 before reading this document.&lt;/p>
 &lt;h2 id="invocation">Compiler invocation&lt;/h2>
 &lt;p>The protocol buffer compiler produces Objective-C output when invoked with the
@@ -35,7 +35,7 @@ no language-enforced namespacing. Instead, Objective-C class names are
 distinguished using prefixes, which you can find out about in the next section.&lt;/p>
 &lt;h2 id="prefix">Class prefix&lt;/h2>
 &lt;p>Given the following
-&lt;a href="https://protobuf.dev/programming-guides/proto3#options">file option&lt;/a>:&lt;/p>
+&lt;a href="https://protobuf.dev/programming-guides/proto3/#options">file option&lt;/a>:&lt;/p>
 &lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-proto" data-lang="proto">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#204a87;font-weight:bold">option&lt;/span> &lt;span style="color:#000">objc_class_prefix&lt;/span> &lt;span style="color:#ce5c00;font-weight:bold">=&lt;/span> &lt;span style="color:#4e9a06">&amp;#34;CGOOP&amp;#34;&lt;/span>&lt;span style="color:#000;font-weight:bold">;&lt;/span>&lt;span style="color:#a40000">
 &lt;/span>&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>The specified string - in this case, &lt;code>CGOOP&lt;/code> - is prefixed in front of all
 Objective-C classes generated for this &lt;code>.proto&lt;/code> file. Use prefixes that are 3 or
@@ -62,14 +62,14 @@ following letter is capitalized.&lt;/li>
 &lt;p>Given a simple message declaration:&lt;/p>
 &lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-proto" data-lang="proto">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#204a87;font-weight:bold">message&lt;/span> &lt;span style="color:#000">Foo&lt;/span> &lt;span style="color:#000;font-weight:bold">{}&lt;/span>&lt;span style="color:#a40000">
 &lt;/span>&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>The protocol buffer compiler generates a class called &lt;code>Foo&lt;/code>. If you specify an
-&lt;a href="#prefix">&lt;code>objc_class_prefix&lt;/code> file option&lt;/a>, the value of this option is
+&lt;a href="https://protobuf.dev/reference/objective-c/objective-c-generated/#prefix">&lt;code>objc_class_prefix&lt;/code> file option&lt;/a>, the value of this option is
 prepended to the generated class name.&lt;/p>
 &lt;p>In the case of outer messages that have names matching any C/C++ or Objective-C
 keywords:&lt;/p>
 &lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-proto" data-lang="proto">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#204a87;font-weight:bold">message&lt;/span> &lt;span style="color:#000">static&lt;/span> &lt;span style="color:#000;font-weight:bold">{}&lt;/span>&lt;span style="color:#a40000">
 &lt;/span>&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>the generated interfaces are suffixed by &lt;code>_Class&lt;/code>, as follows:&lt;/p>
 &lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-objc" data-lang="objc">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#204a87;font-weight:bold">@interface&lt;/span> &lt;span style="color:#000">static_Class&lt;/span> &lt;span style="color:#000;font-weight:bold">{}&lt;/span>
-&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>Note that as per the &lt;a href="#case">camel case conversion rules&lt;/a> the name &lt;code>static&lt;/code> is
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>Note that as per the &lt;a href="https://protobuf.dev/reference/objective-c/objective-c-generated/#case">camel case conversion rules&lt;/a> the name &lt;code>static&lt;/code> is
 &lt;em>not&lt;/em> converted. In the case of an inner message that has a camel cased name
 that is &lt;code>FieldNumber&lt;/code> or &lt;code>OneOfCase&lt;/code>, the generated interface will be the camel
 cased name suffixed by &lt;code>_Class&lt;/code> to make sure that the generated names do not
@@ -196,7 +196,7 @@ unique, and stands for &amp;quot;property&amp;quot;).&lt;/p>
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#204a87;font-weight:bold">@property&lt;/span>&lt;span style="color:#000;font-weight:bold">(&lt;/span>&lt;span style="color:#204a87;font-weight:bold">nonatomic&lt;/span>&lt;span style="color:#000;font-weight:bold">,&lt;/span> &lt;span style="color:#204a87;font-weight:bold">readwrite&lt;/span>&lt;span style="color:#000;font-weight:bold">)&lt;/span> &lt;span style="color:#000">int32_t&lt;/span> &lt;span style="color:#000">id_p&lt;/span>&lt;span style="color:#000;font-weight:bold">;&lt;/span>
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#204a87;font-weight:bold">@end&lt;/span>
 &lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h4 id="default">Default values&lt;/h4>
-&lt;p>The &lt;a href="https://protobuf.dev/programming-guides/proto3#default">default value&lt;/a>
+&lt;p>The &lt;a href="https://protobuf.dev/programming-guides/proto3/#default">default value&lt;/a>
 for numeric types is &lt;code>0&lt;/code>.&lt;/p>
 &lt;p>The default value for strings is &lt;code>@&amp;quot;&amp;quot;&lt;/code>, and the default value for bytes is
 &lt;code>[NSData data]&lt;/code>.&lt;/p>
@@ -344,7 +344,7 @@ returning a default message instead of &lt;code>nil&lt;/code> is that in the cas
 &lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>where &lt;code>a&lt;/code> will be automatically created via the accessors if necessary. If
 &lt;code>foo.a&lt;/code> returned &lt;code>nil&lt;/code>, the &lt;code>foo.a.b&lt;/code> setter pattern would not work.&lt;/p>
 &lt;h3 id="repeated">Repeated fields&lt;/h3>
-&lt;p>Like singular fields(&lt;a href="#singular2">proto2&lt;/a> &lt;a href="#singular3">proto3&lt;/a>), the protocol
+&lt;p>Like singular fields(&lt;a href="https://protobuf.dev/reference/objective-c/objective-c-generated/#singular2">proto2&lt;/a> &lt;a href="https://protobuf.dev/reference/objective-c/objective-c-generated/#singular3">proto3&lt;/a>), the protocol
 buffer compiler generates one data property for each repeated field. This data
 property is a &lt;code>GPB&amp;lt;VALUE&amp;gt;Array&lt;/code> depending on the field type where &lt;code>&amp;lt;VALUE&amp;gt;&lt;/code> can
 be one of &lt;code>UInt32&lt;/code>, &lt;code>Int32&lt;/code>, &lt;code>UInt64&lt;/code>, &lt;code>Int64&lt;/code>, &lt;code>Bool&lt;/code>, &lt;code>Float&lt;/code>, &lt;code>Double&lt;/code>, or
@@ -393,7 +393,7 @@ to support in the compiler.&lt;/p>
 &lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>For string, bytes and message fields, elements of the array are &lt;code>NSString*&lt;/code>,
 &lt;code>NSData*&lt;/code> and pointers to subclasses of &lt;code>GPBMessage&lt;/code> respectively.&lt;/p>
 &lt;h4 id="repeateddefault">Default values&lt;/h4>
-&lt;p>The &lt;a href="https://protobuf.dev/programming-guides/proto3#default">default value&lt;/a>
+&lt;p>The &lt;a href="https://protobuf.dev/programming-guides/proto3/#default">default value&lt;/a>
 for a repeated field is to be empty. In Objective-C generated code, this is an
 empty &lt;code>GPB&amp;lt;VALUE&amp;gt;Array&lt;/code>. If you access an empty repeated field, you&amp;rsquo;ll get back
 an empty array that you can update like any other repeated field array.&lt;/p>
@@ -511,7 +511,7 @@ function and to access raw values.&lt;/p>
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#204a87;font-weight:bold">@end&lt;/span>
 &lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h3 id="oneof">Oneof fields&lt;/h3>
 &lt;p>Given a message with
-&lt;a href="https://protobuf.dev/programming-guides/proto3#oneof">oneof&lt;/a> field
+&lt;a href="https://protobuf.dev/programming-guides/proto3/#oneof">oneof&lt;/a> field
 definitions:&lt;/p>
 &lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-proto" data-lang="proto">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#204a87;font-weight:bold">message&lt;/span> &lt;span style="color:#000">Order&lt;/span> &lt;span style="color:#000;font-weight:bold">{&lt;/span>&lt;span style="color:#a40000">
 &lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#a40000">&lt;/span> &lt;span style="color:#204a87;font-weight:bold">oneof&lt;/span> &lt;span style="color:#000">OrderID&lt;/span> &lt;span style="color:#000;font-weight:bold">{&lt;/span>&lt;span style="color:#a40000">
@@ -578,7 +578,7 @@ cut down on the number of classes and is in line with how Objective-C works
 with &lt;code>NSMutableDictionary&lt;/code>.&lt;/li>
 &lt;/ul>
 &lt;h4 id="repeateddefault">Default values&lt;/h4>
-&lt;p>The &lt;a href="https://protobuf.dev/programming-guides/proto3#default">default value&lt;/a>
+&lt;p>The &lt;a href="https://protobuf.dev/programming-guides/proto3/#default">default value&lt;/a>
 for a map field is empty. In Objective-C generated code, this is an empty
 &lt;code>GBP&amp;lt;KEY&amp;gt;&amp;lt;VALUE&amp;gt;Dictionary&lt;/code>. If you access an empty map field, you&amp;rsquo;ll get back
 an empty dictionary that you can update like any other map field.&lt;/p>
@@ -839,7 +839,7 @@ Protocol buffer-generated enumerations support Objective-C to Swift conversions.
 just use their proto definitions in generated Objective-C code, though we supply
 some basic conversion methods in categories to make using them simpler. Note
 that we do not have special APIs for all well-known types yet, including
-&lt;a href="https://protobuf.dev/programming-guides/proto3#any">&lt;code>Any&lt;/code>&lt;/a> (there is
+&lt;a href="https://protobuf.dev/programming-guides/proto3/#any">&lt;code>Any&lt;/code>&lt;/a> (there is
 currently no helper method to convert an &lt;code>Any&lt;/code>&amp;rsquo;s message value into a message of
 the appropriate type).&lt;/p>
 &lt;h3 id="time-stamps">Time Stamps&lt;/h3>

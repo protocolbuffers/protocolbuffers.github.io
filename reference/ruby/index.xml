@@ -1,8 +1,8 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Protocol Buffers Documentation – Ruby Reference</title><link>https://protobuf.dev/reference/ruby/</link><description>Recent content in Ruby Reference on Protocol Buffers Documentation</description><generator>Hugo -- gohugo.io</generator><language>en</language><atom:link href="https://protobuf.dev/reference/ruby/index.xml" rel="self" type="application/rss+xml"/><item><title>Reference: Ruby Generated Code Guide</title><link>https://protobuf.dev/reference/ruby/ruby-generated/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://protobuf.dev/reference/ruby/ruby-generated/</guid><description>
 &lt;p>You should
 read the language guides for
-&lt;a href="https://protobuf.dev/programming-guides/proto2">proto2&lt;/a> or
-&lt;a href="https://protobuf.dev/programming-guides/proto3">proto3&lt;/a> before reading this
+&lt;a href="https://protobuf.dev/programming-guides/proto2/">proto2&lt;/a> or
+&lt;a href="https://protobuf.dev/programming-guides/proto3/">proto3&lt;/a> before reading this
 document.&lt;/p>
 &lt;p>The protocol compiler for Ruby emits Ruby source files that use a DSL to define
 the message schema. However the DSL is still subject to change. In this guide we
@@ -273,7 +273,7 @@ none was found.&lt;/li>
 &lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#a40000">&lt;/span> &lt;span style="color:#000;font-weight:bold">}&lt;/span>&lt;span style="color:#a40000">
 &lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#a40000">&lt;/span>&lt;span style="color:#000;font-weight:bold">}&lt;/span>&lt;span style="color:#a40000">
 &lt;/span>&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>The Ruby class corresponding to &lt;code>Foo&lt;/code> will have members called &lt;code>name&lt;/code> and
-&lt;code>serial_number&lt;/code> with accessor methods just like regular &lt;a href="#fields">fields&lt;/a>.
+&lt;code>serial_number&lt;/code> with accessor methods just like regular &lt;a href="https://protobuf.dev/reference/ruby/ruby-generated/#fields">fields&lt;/a>.
 However, unlike regular fields, at most one of the fields in a oneof can be set
 at a time, so setting one field will clear the others.&lt;/p>
 &lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-ruby" data-lang="ruby">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#000">message&lt;/span> &lt;span style="color:#ce5c00;font-weight:bold">=&lt;/span> &lt;span style="color:#000">Foo&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">.&lt;/span>&lt;span style="color:#000">new&lt;/span>
