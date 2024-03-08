@@ -43,9 +43,10 @@ the protocol buffer type definitions.
 
 ## Message and Field Names {#message-field-names}
 
-Use PascalCase (with an initial capital) for message names – for example,
-`SongServerRequest`. Use lower_snake_case for field names (including oneof field
-and extension names) – for example, `song_name`.
+Use PascalCase (with an initial capital) for message names: `SongServerRequest`.
+Prefer to capitalize abbreviations as single words: `GetDnsRequest` rather than
+`GetDNSRequest`. Use lower_snake_case for field names, including oneof field and
+extension names: `song_name`.
 
 ```proto
 message SongServerRequest {
