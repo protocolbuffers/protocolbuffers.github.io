@@ -338,7 +338,7 @@ service SearchService {
 ## Proto File {#proto_file}
 
 ```
-proto = syntax { import | package | option | topLevelDef | emptyStatement }
+proto = [syntax] { import | package | option | topLevelDef | emptyStatement }
 topLevelDef = message | enum | service
 ```
 
