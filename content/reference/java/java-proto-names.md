@@ -58,10 +58,9 @@ java_api_version | java_multiple_files | java_alt_api_package | java_package | j
 
 ### Recommendation { #recommendation }
 
-The recommended set of options to use is:
+The recommended option to use is:
 
 ```proto
-option java_api_version = 2;
 option java_multiple_files = true;
 ```
 
@@ -70,3 +69,6 @@ will be placed in a separate `.java` file. This makes it much easier to move
 messages from one `.proto` file to another. There is also an outer Java class
 generated for the `.proto` file itself. (The legend above explains how this
 outer class name is generated.)
+
+The `java_api_version` option defaults to `2`, but you can manually set it to
+`1` when necessary.

@@ -39,6 +39,22 @@ platform, and library support policies to be a breaking change. For example, a
 release may drop support for an EOL language version without bumping major
 versions.
 
+## What Changes in a Release? {#changes}
+
+Each release may include one or more of the following:
+
+*   updates to the code that is generated for a language binding, and updates to
+    the runtime that supports the binding language. In a minor or patch release,
+    updates will be additive only (we do not remove deprecated/dead code or
+    otherwise make destructive changes)
+*   bug fixes
+*   new [features](/editions/features) or updates to
+    their default values (including new default values)
+
+The wire format does not change from release to release. You will continue to be
+able to read old proto data from newer versions of Protocol Buffers. This is a
+fundamental design principle of Protocol Buffers.
+
 ## Support Duration {#duration}
 
 The most recent release is always supported. Support for earlier minor versions
@@ -83,7 +99,12 @@ This table provides specific dates for support duration.
   <tr>
     <td class="gray">4.25.x</td>
     <td>1 Nov 2023</td>
-    <td>TBD, projected to be<br/>31 Mar 2025</td>
+    <td>31 Mar 2025</td>
+  </tr>
+  <tr>
+    <td class="gray">5.26.x</td>
+    <td>13 Mar 2024</td>
+    <td>TBD</td>
   </tr>
 </table>
 
@@ -95,80 +116,79 @@ C++ will target making major version bumps annually in Q1 of each year.
   <tr>
     <th>protoc</th>
     <th>C++</th>
-    <th>22Q2</th>
-    <th>22Q3</th>
-    <th>22Q4</th>
     <th>23Q1</th>
     <th>23Q2</th>
     <th>23Q3</th>
     <th>23Q4</th>
     <th>24Q1</th>
     <th>24Q2</th>
+    <th>24Q3</th>
   </tr>
   <tr>
     <td class="gray">21.x</td>
     <td class="gray">3.21.x</td>
-    <td title=22Q2 class="blue">IR</td>
-    <td title=22Q3 class="green">PS</td>
-    <td title=22Q4 class="green">PS</td>
     <td title=23Q1 class="green">PS</td>
     <td title=23Q2 class="green">PS</td>
     <td title=23Q3 class="green">PS</td>
     <td title=23Q4 class="green">PS</td>
     <td title=24Q1 class="red">SE</td>
     <td title=24Q2></td>
+    <td title=24Q3></td>
   </tr>
   <tr>
     <td class="gray">22.x</td>
     <td class="gray">4.22.x</td>
-    <td title=22Q2></td>
-    <td title=22Q3></td>
-    <td title=22Q4></td>
     <td title=23Q1 class="blue">IR</td>
     <td title=23Q2></td>
     <td title=23Q3></td>
     <td title=23Q4></td>
     <td title=24Q1></td>
     <td title=24Q2></td>
+    <td title=24Q3></td>
   </tr>
   <tr>
     <td class="gray">23.x</td>
     <td class="gray">4.23.x</td>
-    <td title=22Q2></td>
-    <td title=22Q3></td>
-    <td title=22Q4></td>
     <td title=23Q1></td>
     <td title=23Q2 class="blue">IR</td>
     <td title=23Q3></td>
     <td title=23Q4></td>
     <td title=24Q1></td>
     <td title=22Q2></td>
+    <td title=22Q3></td>
   </tr>
   <tr>
     <td class="gray">24.x</td>
     <td class="gray">4.24.x</td>
-    <td title=22Q2></td>
-    <td title=22Q3></td>
-    <td title=22Q4></td>
     <td title=23Q1></td>
     <td title=23Q2></td>
     <td title=23Q3 class="blue">IR</td>
     <td title=23Q4></td>
     <td title=24Q1></td>
     <td title=24Q2></td>
+    <td title=24Q3></td>
   </tr>
   <tr>
     <td class="gray">25.x</td>
     <td class="gray">4.25.x</td>
-    <td title=22Q2></td>
-    <td title=22Q3></td>
-    <td title=22Q4></td>
     <td title=23Q1></td>
     <td title=23Q2></td>
     <td title=23Q3></td>
     <td title=23Q4 class="blue">IR</td>
     <td title=24Q1 class="green">PS</td>
     <td title=24Q2 class="green">PS</td>
+    <td title=24Q3 class="green">PS</td>
+  </tr>
+  <tr>
+    <td class="gray">26.x</td>
+    <td class="gray">5.26.x</td>
+    <td title=23Q1></td>
+    <td title=23Q2></td>
+    <td title=23Q3></td>
+    <td title=23Q4></td>
+    <td title=24Q1 class="blue">IR</td>
+    <td title=24Q2 class="green">PS</td>
+    <td title=24Q3 class="green">PS</td>
   </tr>
   <tr>
     <td colspan="13">
@@ -178,30 +198,26 @@ C++ will target making major version bumps annually in Q1 of each year.
     </td>
   </tr>
   <tr>
-    <td class="gray">26.x</td>
-    <td class="gray">5.26.x</td>
-    <td title=22Q2></td>
-    <td title=22Q3></td>
-    <td title=22Q4></td>
-    <td title=23Q1></td>
-    <td title=23Q2></td>
-    <td title=23Q3></td>
-    <td title=23Q4></td>
-    <td title=24Q1 class="blue">IR</td>
-    <td title=24Q2></td>
-  </tr>
-  <tr>
     <td class="gray">27.x</td>
-    <td class="gray">5.27.x</td>
-    <td title=22Q2></td>
-    <td title=22Q3></td>
-    <td title=22Q4></td>
+    <td class="gray"></td>
     <td title=23Q1></td>
     <td title=23Q2></td>
     <td title=23Q3></td>
     <td title=23Q4></td>
     <td title=24Q1></td>
     <td title=24Q2 class="blue">IR</td>
+    <td title=24Q3></td>
+  </tr>
+  <tr>
+    <td class="gray">28.x</td>
+    <td class="gray"></td>
+    <td title=23Q1></td>
+    <td title=23Q2></td>
+    <td title=23Q3></td>
+    <td title=23Q4></td>
+    <td title=24Q1></td>
+    <td title=24Q2></td>
+    <td title=24Q3 class="blue">IR</td>
   </tr>
 </table>
 
@@ -263,7 +279,12 @@ This table provides specific dates for support duration.
   </tr>
   <tr>
     <td class="gray">3.25.x</td>
-    <td>1 Nov 2023</td>
+    <td class="gray">1 Nov 2023</td>
+    <td class="gray"><s>13 Mar 2024</s></td>
+  </tr>
+  <tr>
+    <td class="gray">3.26.x</td>
+    <td>13 Mar 2024</td>
     <td>TBD</td>
   </tr>
 </table>
@@ -280,6 +301,7 @@ This table graphically shows support durations.
     <th>23Q4</th>
     <th>24Q1</th>
     <th>24Q2</th>
+    <th>24Q3</th>
   </tr>
   <tr>
     <td class="gray">22.x</td>
@@ -290,6 +312,7 @@ This table graphically shows support durations.
     <td title=23Q4></td>
     <td title=24Q1></td>
     <td title=24Q2></td>
+    <td title=24Q3></td>
   </tr>
   <tr>
     <td class="gray">23.x</td>
@@ -300,6 +323,7 @@ This table graphically shows support durations.
     <td title=23Q4></td>
     <td title=24Q1></td>
     <td title=24Q2></td>
+    <td title=24Q3></td>
   </tr>
   <tr>
     <td class="gray">24.x</td>
@@ -310,6 +334,7 @@ This table graphically shows support durations.
     <td title=23Q4></td>
     <td title=24Q1></td>
     <td title=24Q2></td>
+    <td title=24Q3></td>
   </tr>
   <tr>
     <td class="gray">25.x</td>
@@ -318,8 +343,20 @@ This table graphically shows support durations.
     <td title=23Q2></td>
     <td title=23Q3></td>
     <td title=23Q4 class="blue">IR</td>
-    <td title=24Q1 class="green">PS</td>
+    <td title=24Q1></td>
+    <td title=24Q2></td>
+    <td title=24Q3></td>
+  </tr>
+  <tr>
+    <td class="gray">26.x</td>
+    <td class="gray">3.26.x</td>
+    <td title=23Q1></td>
+    <td title=23Q2></td>
+    <td title=23Q3></td>
+    <td title=23Q4></td>
+    <td title=24Q1 class="blue">IR</td>
     <td title=24Q2 class="green">PS</td>
+    <td title=24Q3 class="green">PS</td>
   </tr>
   <tr>
     <td colspan="12">
@@ -327,16 +364,6 @@ This table graphically shows support durations.
       <br/>that those releases will happen, or that they will happen on that
       schedule.
     </td>
-  </tr>
-  <tr>
-    <td class="gray">26.x</td>
-    <td class="gray"></td>
-    <td title=23Q1></td>
-    <td title=23Q2></td>
-    <td title=23Q3></td>
-    <td title=23Q4></td>
-    <td title=24Q1 class="blue">IR</td>
-    <td title=24Q2></td>
   </tr>
   <tr>
     <td class="gray">27.x</td>
@@ -347,6 +374,18 @@ This table graphically shows support durations.
     <td title=23Q4></td>
     <td title=24Q1></td>
     <td title=24Q2 class="blue">IR</td>
+    <td title=24Q3></td>
+  </tr>
+  <tr>
+    <td class="gray">28.x</td>
+    <td class="gray"></td>
+    <td title=23Q1></td>
+    <td title=23Q2></td>
+    <td title=23Q3></td>
+    <td title=23Q4></td>
+    <td title=24Q1></td>
+    <td title=24Q2></td>
+    <td title=24Q3 class="blue">IR</td>
   </tr>
 </table>
 
@@ -424,7 +463,12 @@ This table provides specific dates for support duration.
   <tr>
     <td class="gray">3.25.x</td>
     <td>1 Nov 2023</td>
-    <td>TBD, projected to be<br/>31 Mar 2025</td>
+    <td>31 Mar 2025</td>
+  </tr>
+  <tr>
+    <td class="gray">4.26.x</td>
+    <td>13 Mar 2024</td>
+    <td>TBD</td>
   </tr>
 </table>
 
@@ -436,86 +480,80 @@ Java will target making major version bumps annually in Q1 of each year.
   <tr>
     <th>protoc</th>
     <th>Java</th>
-    <th>22Q2</th>
-    <th>22Q3</th>
-    <th>22Q4</th>
-    <th>23Q1</th>
     <th>23Q2</th>
     <th>23Q3</th>
     <th>23Q4</th>
     <th>24Q1</th>
     <th>24Q2</th>
     <th>24Q3</th>
-  </tr>
-  <tr>
-    <td class="gray">21.x</td>
-    <td class="gray">3.21.x</td>
-    <td title=22Q2 class="blue">IR</td>
-    <td title=22Q3 class="green">PS</td>
-    <td title=22Q4 class="green">PS</td>
-    <td title=23Q1></td>
-    <td title=23Q2></td>
-    <td title=23Q3></td>
-    <td title=23Q4></td>
-    <td title=24Q1></td>
-    <td title=24Q2></td>
-    <td title=24Q3></td>
+    <th>24Q4</th>
+    <th>25Q1</th>
+    <th>25Q2</th>
   </tr>
   <tr>
     <td class="gray">22.x</td>
     <td class="gray">3.22.x</td>
-    <td title=22Q2></td>
-    <td title=22Q3></td>
-    <td title=22Q4></td>
-    <td title=23Q1 class="blue">IR</td>
     <td title=23Q2></td>
     <td title=23Q3></td>
     <td title=23Q4></td>
     <td title=24Q1></td>
     <td title=24Q2></td>
     <td title=24Q3></td>
+    <td title=24Q4></td>
+    <td title=25Q1></td>
+    <td title=25Q2></td>
   </tr>
   <tr>
     <td class="gray">23.x</td>
     <td class="gray">3.23.x</td>
-    <td title=22Q2></td>
-    <td title=22Q3></td>
-    <td title=22Q4></td>
-    <td title=23Q1></td>
     <td title=23Q2 class="blue">IR</td>
     <td title=23Q3></td>
     <td title=23Q4></td>
     <td title=24Q1></td>
     <td title=24Q2></td>
     <td title=24Q3></td>
+    <td title=24Q4></td>
+    <td title=25Q1></td>
+    <td title=25Q2></td>
   </tr>
   <tr>
     <td class="gray">24.x</td>
     <td class="gray">3.24.x</td>
-    <td title=22Q2></td>
-    <td title=22Q3></td>
-    <td title=22Q4></td>
-    <td title=23Q1></td>
     <td title=23Q2></td>
     <td title=23Q3 class="blue">IR</td>
     <td title=23Q4>
     <td title=24Q1>
     <td title=24Q2>
     <td title=24Q3>
+    <td title=24Q4></td>
+    <td title=25Q1></td>
+    <td title=25Q2></td>
   </tr>
   <tr>
     <td class="gray">25.x</td>
     <td class="gray">3.25.x</td>
-    <td title=22Q2></td>
-    <td title=22Q3></td>
-    <td title=22Q4></td>
-    <td title=23Q1></td>
     <td title=23Q2></td>
     <td title=23Q3></td>
     <td title=23Q4 class="blue">IR</td>
     <td title=24Q1 class="green">PS</td>
     <td title=24Q2 class="green">PS</td>
     <td title=24Q3 class="green">PS</td>
+    <td title=24Q4 class="green">PS</td>
+    <td title=25Q1 class="green">PS</td>
+    <td title=25Q2 class="red">SE</td>
+  </tr>
+  <tr>
+    <td class="gray">26.x</td>
+    <td class="gray">4.26.x</td>
+    <td title=23Q2></td>
+    <td title=23Q3></td>
+    <td title=23Q4></td>
+    <td title=24Q1 class="blue">IR</td>
+    <td title=24Q2 class="green">PS</td>
+    <td title=24Q3 class="green">PS</td>
+    <td title=24Q4 class="green">PS</td>
+    <td title=25Q1 class="green">PS</td>
+    <td title=25Q2 class="green">PS</td>
   </tr>
   <tr>
     <td colspan="12">
@@ -525,32 +563,30 @@ Java will target making major version bumps annually in Q1 of each year.
     </td>
   </tr>
   <tr>
-    <td class="gray">26.x</td>
-    <td class="gray">4.26.x</td>
-    <td title=22Q2></td>
-    <td title=22Q3></td>
-    <td title=22Q4></td>
-    <td title=23Q1></td>
-    <td title=23Q2></td>
-    <td title=23Q3></td>
-    <td title=23Q4></td>
-    <td title=24Q1 class="blue">IR</td>
-    <td title=24Q2></td>
-    <td title=24Q3></td>
-  </tr>
-  <tr>
     <td class="gray">27.x</td>
-    <td class="gray">4.27.x</td>
-    <td title=22Q2></td>
-    <td title=22Q3></td>
-    <td title=22Q4></td>
-    <td title=23Q1></td>
+    <td class="gray"></td>
     <td title=23Q2></td>
     <td title=23Q3></td>
     <td title=23Q4></td>
     <td title=24Q1></td>
     <td title=24Q2 class="blue">IR</td>
     <td title=24Q3></td>
+    <td title=24Q4></td>
+    <td title=25Q1></td>
+    <td title=25Q2></td>
+  </tr>
+  <tr>
+    <td class="gray">28.x</td>
+    <td class="gray"></td>
+    <td title=23Q2></td>
+    <td title=23Q3></td>
+    <td title=23Q4></td>
+    <td title=24Q1></td>
+    <td title=24Q2></td>
+    <td title=24Q3 class="blue">IR</td>
+    <td title=24Q4></td>
+    <td title=25Q1></td>
+    <td title=25Q2></td>
   </tr>
 </table>
 
@@ -612,7 +648,12 @@ This table provides specific dates for support duration.
   </tr>
   <tr>
     <td class="gray">3.25.x</td>
-    <td>1 Nov 2023</td>
+    <td class="gray">1 Nov 2023</td>
+    <td class="gray"><s>13 Mar 2024</s></td>
+  </tr>
+  <tr>
+    <td class="gray">3.26.x</td>
+    <td>13 Mar 2024</td>
     <td>TBD</td>
   </tr>
 </table>
@@ -629,6 +670,7 @@ This table graphically shows support durations.
     <th>23Q4</th>
     <th>24Q1</th>
     <th>24Q2</th>
+    <th>24Q3</th>
   </tr>
   <tr>
     <td class="gray">22.x</td>
@@ -639,6 +681,7 @@ This table graphically shows support durations.
     <td title=23Q4></td>
     <td title=24Q1></td>
     <td title=24Q2></td>
+    <td title=24Q3></td>
   </tr>
   <tr>
     <td class="gray">23.x</td>
@@ -649,6 +692,7 @@ This table graphically shows support durations.
     <td title=23Q4></td>
     <td title=24Q1></td>
     <td title=24Q2></td>
+    <td title=24Q3></td>
   </tr>
   <tr>
     <td class="gray">24.x</td>
@@ -659,6 +703,7 @@ This table graphically shows support durations.
     <td title=23Q4></td>
     <td title=24Q1></td>
     <td title=24Q2></td>
+    <td title=24Q3></td>
   </tr>
   <tr>
     <td class="gray">25.x</td>
@@ -667,8 +712,20 @@ This table graphically shows support durations.
     <td title=23Q2></td>
     <td title=23Q3></td>
     <td title=23Q4 class="blue">IR</td>
-    <td title=24Q1 class="green">PS</td>
+    <td title=24Q1></td>
+    <td title=24Q2></td>
+    <td title=24Q3></td>
+  </tr>
+  <tr>
+    <td class="gray">26.x</td>
+    <td class="gray">3.26.x</td>
+    <td title=23Q1></td>
+    <td title=23Q2></td>
+    <td title=23Q3></td>
+    <td title=23Q4></td>
+    <td title=24Q1 class="blue">IR</td>
     <td title=24Q2 class="green">PS</td>
+    <td title=24Q3 class="green">PS</td>
   </tr>
   <tr>
     <td colspan="12">
@@ -676,16 +733,6 @@ This table graphically shows support durations.
       <br/>that those releases will happen, or that they will happen on that
       schedule.
     </td>
-  </tr>
-  <tr>
-    <td class="gray">26.x</td>
-    <td class="gray"></td>
-    <td title=23Q1></td>
-    <td title=23Q2></td>
-    <td title=23Q3></td>
-    <td title=23Q4></td>
-    <td title=24Q1 class="blue">IR</td>
-    <td title=24Q2></td>
   </tr>
   <tr>
     <td class="gray">27.x</td>
@@ -696,6 +743,18 @@ This table graphically shows support durations.
     <td title=23Q4></td>
     <td title=24Q1></td>
     <td title=24Q2 class="blue">IR</td>
+    <td title=24Q3></td>
+  </tr>
+  <tr>
+    <td class="gray">28.x</td>
+    <td class="gray"></td>
+    <td title=23Q1></td>
+    <td title=23Q2></td>
+    <td title=23Q3></td>
+    <td title=23Q4></td>
+    <td title=24Q1></td>
+    <td title=24Q2></td>
+    <td title=24Q3 class="blue">IR</td>
   </tr>
 </table>
 
@@ -750,7 +809,12 @@ This table provides specific dates for support duration.
   <tr>
     <td class="gray">3.25.x</td>
     <td>1 Nov 2023</td>
-    <td>TBD, projected to be<br/>31 Mar 2025</td>
+    <td>31 Mar 2025</td>
+  </tr>
+  <tr>
+    <td class="gray">4.26.x</td>
+    <td>13 Mar 2024</td>
+    <td>TBD</td>
   </tr>
 </table>
 
@@ -766,6 +830,10 @@ This table graphically shows support durations.
     <th>23Q4</th>
     <th>24Q1</th>
     <th>24Q2</th>
+    <th>24Q3</th>
+    <th>24Q4</th>
+    <th>25Q1</th>
+    <th>25Q2</th>
   </tr>
   <tr>
     <td class="gray">22.x</td>
@@ -776,6 +844,10 @@ This table graphically shows support durations.
     <td title=23Q4></td>
     <td title=24Q1></td>
     <td title=24Q2></td>
+    <td title=24Q3></td>
+    <td title=24Q4></td>
+    <td title=25Q1></td>
+    <td title=25Q2></td>
   </tr>
   <tr>
     <td class="gray">23.x</td>
@@ -786,6 +858,10 @@ This table graphically shows support durations.
     <td title=23Q4></td>
     <td title=24Q1></td>
     <td title=24Q2></td>
+    <td title=24Q3></td>
+    <td title=24Q4></td>
+    <td title=25Q1></td>
+    <td title=25Q2></td>
   </tr>
   <tr>
     <td class="gray">24.x</td>
@@ -796,6 +872,10 @@ This table graphically shows support durations.
     <td title=23Q4></td>
     <td title=24Q1></td>
     <td title=24Q2></td>
+    <td title=24Q3></td>
+    <td title=24Q4></td>
+    <td title=25Q1></td>
+    <td title=25Q2></td>
   </tr>
   <tr>
     <td class="gray">25.x</td>
@@ -806,13 +886,10 @@ This table graphically shows support durations.
     <td title=23Q4 class="blue">IR</td>
     <td title=24Q1 class="green">PS</td>
     <td title=24Q2 class="green">PS</td>
-  </tr>
-  <tr>
-    <td colspan="12">
-      The cells below are projections of future releases, but are not guarantees
-      <br/>that those releases will happen, or that they will happen on that
-      schedule.
-    </td>
+    <td title=24Q3 class="green">PS</td>
+    <td title=24Q4 class="green">PS</td>
+    <td title=25Q1 class="green">PS</td>
+    <td title=25Q2 class="red">SE</td>
   </tr>
   <tr>
     <td class="gray">26.x</td>
@@ -822,17 +899,46 @@ This table graphically shows support durations.
     <td title=23Q3></td>
     <td title=23Q4></td>
     <td title=24Q1 class="blue">IR</td>
-    <td title=24Q2></td>
+    <td title=24Q2 class="green">PS</td>
+    <td title=24Q3 class="green">PS</td>
+    <td title=24Q4 class="green">PS</td>
+    <td title=25Q1 class="green">PS</td>
+    <td title=25Q2 class="green">PS</td>
+  </tr>
+  <tr>
+    <td colspan="12">
+      The cells below are projections of future releases, but are not guarantees
+      <br/>that those releases will happen, or that they will happen on that
+      schedule.
+    </td>
   </tr>
   <tr>
     <td class="gray">27.x</td>
-    <td class="gray">4.27.x</td>
+    <td class="gray"></td>
     <td title=23Q1></td>
     <td title=23Q2></td>
     <td title=23Q3></td>
     <td title=23Q4></td>
     <td title=24Q1></td>
     <td title=24Q2 class="blue">IR</td>
+    <td title=24Q3></td>
+    <td title=24Q4></td>
+    <td title=25Q1></td>
+    <td title=25Q2></td>
+  </tr>
+  <tr>
+    <td class="gray">28.x</td>
+    <td class="gray"></td>
+    <td title=23Q1></td>
+    <td title=23Q2></td>
+    <td title=23Q3></td>
+    <td title=23Q4></td>
+    <td title=24Q1></td>
+    <td title=24Q2></td>
+    <td title=24Q3 class="blue">IR</td>
+    <td title=24Q4></td>
+    <td title=25Q1></td>
+    <td title=25Q2></td>
   </tr>
 </table>
 
@@ -905,7 +1011,12 @@ This table provides specific dates for support duration.
   <tr>
     <td class="gray">4.25.x</td>
     <td>1 Nov 2023</td>
-    <td>TBD, projected to be<br/>31 Mar 2025</td>
+    <td>31 Mar 2025</td>
+  </tr>
+  <tr>
+    <td class="gray">5.26.x</td>
+    <td>13 Mar 2024</td>
+    <td>TBD</td>
   </tr>
 </table>
 
@@ -923,6 +1034,10 @@ This table graphically shows support durations.
     <th>23Q4</th>
     <th>24Q1</th>
     <th>24Q2</th>
+    <th>24Q3</th>
+    <th>24Q4</th>
+    <th>25Q1</th>
+    <th>25Q2</th>
   </tr>
   <tr>
     <td class="gray">20.x</td>
@@ -935,6 +1050,10 @@ This table graphically shows support durations.
     <td title=23Q4></td>
     <td title=24Q1></td>
     <td title=24Q2></td>
+    <td title=24Q3></td>
+    <td title=24Q4></td>
+    <td title=25Q1></td>
+    <td title=25Q2></td>
   </tr>
   <tr>
     <td class="gray">21.x</td>
@@ -947,6 +1066,10 @@ This table graphically shows support durations.
     <td title=23Q4></td>
     <td title=24Q1></td>
     <td title=24Q2></td>
+    <td title=24Q3></td>
+    <td title=24Q4></td>
+    <td title=25Q1></td>
+    <td title=25Q2></td>
   </tr>
   <tr>
     <td class="gray">22.x</td>
@@ -959,6 +1082,10 @@ This table graphically shows support durations.
     <td title=23Q4></td>
     <td title=24Q1></td>
     <td title=24Q2></td>
+    <td title=24Q3></td>
+    <td title=24Q4></td>
+    <td title=25Q1></td>
+    <td title=25Q2></td>
   </tr>
   <tr>
     <td class="gray">23.x</td>
@@ -971,6 +1098,10 @@ This table graphically shows support durations.
     <td title=23Q4></td>
     <td title=24Q1></td>
     <td title=24Q2></td>
+    <td title=24Q3></td>
+    <td title=24Q4></td>
+    <td title=25Q1></td>
+    <td title=25Q2></td>
   </tr>
   <tr>
     <td class="gray">24.x</td>
@@ -983,6 +1114,10 @@ This table graphically shows support durations.
     <td title=23Q4></td>
     <td title=24Q1></td>
     <td title=24Q2></td>
+    <td title=24Q3></td>
+    <td title=24Q4></td>
+    <td title=25Q1></td>
+    <td title=25Q2></td>
   </tr>
   <tr>
     <td class="gray">25.x</td>
@@ -995,13 +1130,10 @@ This table graphically shows support durations.
     <td title=23Q4 class="blue">IR</td>
     <td title=24Q1 class="green">PS</td>
     <td title=24Q2 class="green">PS</td>
-  </tr>
-  <tr>
-    <td colspan="12">
-      The cells below are projections of future releases, but are not guarantees
-      <br/>that those releases will happen, or that they will happen on that
-      schedule.
-    </td>
+    <td title=24Q3 class="green">PS</td>
+    <td title=24Q4 class="green">PS</td>
+    <td title=25Q1 class="green">PS</td>
+    <td title=25Q2 class="red">SE</td>
   </tr>
   <tr>
     <td class="gray">26.x</td>
@@ -1013,11 +1145,22 @@ This table graphically shows support durations.
     <td title=23Q3></td>
     <td title=23Q4></td>
     <td title=24Q1 class="blue">IR</td>
-    <td title=24Q2></td>
+    <td title=24Q2 class="green">PS</td>
+    <td title=24Q3 class="green">PS</td>
+    <td title=24Q4 class="green">PS</td>
+    <td title=25Q1 class="green">PS</td>
+    <td title=25Q2 class="green">PS</td>
+  </tr>
+  <tr>
+    <td colspan="14">
+      The cells below are projections of future releases, but are not guarantees
+      <br/>that those releases will happen, or that they will happen on that
+      schedule.
+    </td>
   </tr>
   <tr>
     <td class="gray">27.x</td>
-    <td class="gray">5.27.x</td>
+    <td class="gray"></td>
     <td title=22Q3></td>
     <td title=22Q4></td>
     <td title=23Q1></td>
@@ -1026,6 +1169,26 @@ This table graphically shows support durations.
     <td title=23Q4></td>
     <td title=24Q1></td>
     <td title=24Q2 class="blue">IR</td>
+    <td title=24Q3></td>
+    <td title=24Q4></td>
+    <td title=25Q1></td>
+    <td title=25Q2></td>
+  </tr>
+  <tr>
+    <td class="gray">28.x</td>
+    <td class="gray"></td>
+    <td title=22Q3></td>
+    <td title=22Q4></td>
+    <td title=23Q1></td>
+    <td title=23Q2></td>
+    <td title=23Q3></td>
+    <td title=23Q4></td>
+    <td title=24Q1></td>
+    <td title=24Q2></td>
+    <td title=24Q3 class="blue">IR</td>
+    <td title=24Q4></td>
+    <td title=25Q1></td>
+    <td title=25Q2></td>
   </tr>
 </table>
 
@@ -1093,7 +1256,12 @@ This table provides specific dates for support duration.
   <tr>
     <td class="gray">3.25.x</td>
     <td>1 Nov 2023</td>
-    <td>TBD, projected to be<br/>31 Mar 2025</td>
+    <td>31 Mar 2025</td>
+  </tr>
+  <tr>
+    <td class="gray">4.26.x</td>
+    <td>13 Mar 2024</td>
+    <td>TBD</td>
   </tr>
 </table>
 
@@ -1103,113 +1271,121 @@ This table graphically shows support durations.
   <tr>
     <th>protoc</th>
     <th>Ruby</th>
-    <th>22Q2</th>
-    <th>22Q3</th>
-    <th>22Q4</th>
     <th>23Q1</th>
     <th>23Q2</th>
     <th>23Q3</th>
     <th>23Q4</th>
     <th>24Q1</th>
     <th>24Q2</th>
-  </tr>
-  <tr>
-    <td class="gray">21.x</td>
-    <td class="gray">3.21.x</td>
-    <td title=22Q2 class="blue">IR</td>
-    <td title=22Q3 class="green">PS</td>
-    <td title=22Q4 class="green">PS</td>
-    <td title=23Q1></td>
-    <td title=23Q2></td>
-    <td title=23Q3></td>
-    <td title=23Q4></td>
-    <td title=24Q1></td>
-    <td title=24Q2></td>
+    <th>24Q3</th>
+    <th>24Q4</th>
+    <th>25Q1</th>
+    <th>25Q2</th>
   </tr>
   <tr>
     <td class="gray">22.x</td>
     <td class="gray">3.22.x</td>
-    <td title=22Q2></td>
-    <td title=22Q3></td>
-    <td title=22Q4></td>
     <td title=23Q1 class="blue">IR</td>
     <td title=23Q2></td>
     <td title=23Q3></td>
     <td title=23Q4></td>
     <td title=24Q1></td>
     <td title=24Q2></td>
+    <td title=24Q3></td>
+    <td title=24Q4></td>
+    <td title=25Q1></td>
+    <td title=25Q2></td>
   </tr>
   <tr>
     <td class="gray">23.x</td>
     <td class="gray">3.23.x</td>
-    <td title=22Q2></td>
-    <td title=22Q3></td>
-    <td title=22Q4></td>
     <td title=23Q1></td>
     <td title=23Q2 class="blue">IR</td>
     <td title=23Q3></td>
     <td title=23Q4></td>
     <td title=24Q1></td>
     <td title=24Q2></td>
+    <td title=24Q3></td>
+    <td title=24Q4></td>
+    <td title=25Q1></td>
+    <td title=25Q2></td>
   </tr>
   <tr>
     <td class="gray">24.x</td>
     <td class="gray">3.24.x</td>
-    <td title=22Q2></td>
-    <td title=22Q3></td>
-    <td title=22Q4></td>
     <td title=23Q1></td>
     <td title=23Q2></td>
     <td title=23Q3 class="blue">IR</td>
     <td title=23Q4></td>
     <td title=24Q1></td>
     <td title=24Q2></td>
+    <td title=24Q3></td>
+    <td title=24Q4></td>
+    <td title=25Q1></td>
+    <td title=25Q2></td>
   </tr>
   <tr>
     <td class="gray">25.x</td>
     <td class="gray">3.25.x</td>
-    <td title=22Q2></td>
-    <td title=22Q3></td>
-    <td title=22Q4></td>
     <td title=23Q1></td>
     <td title=23Q2></td>
     <td title=23Q3></td>
     <td title=23Q4 class="blue">IR</td>
     <td title=24Q1 class="green">PS</td>
     <td title=24Q2 class="green">PS</td>
+    <td title=24Q3 class="green">PS</td>
+    <td title=24Q4 class="green">PS</td>
+    <td title=25Q1 class="green">PS</td>
+    <td title=25Q2 class="red">SE</td>
   </tr>
   <tr>
-    <td colspan="10">
+    <td class="gray">26.x</td>
+    <td class="gray">4.26.x</td>
+    <td title=23Q1></td>
+    <td title=23Q2></td>
+    <td title=23Q3></td>
+    <td title=23Q4></td>
+    <td title=24Q1 class="blue">IR</td>
+    <td title=24Q2 class="green">PS</td>
+    <td title=24Q3 class="green">PS</td>
+    <td title=24Q4 class="green">PS</td>
+    <td title=25Q1 class="green">PS</td>
+    <td title=25Q2 class="green">PS</td>
+  </tr>
+  <tr>
+    <td colspan="12">
       The cells below are projections of future releases, but are not guarantees
       <br/>that those releases will happen, or that they will happen on that
       schedule.
     </td>
   </tr>
   <tr>
-    <td class="gray">26.x</td>
-    <td class="gray">4.26.x</td>
-    <td title=22Q2></td>
-    <td title=22Q3></td>
-    <td title=22Q4></td>
-    <td title=23Q1></td>
-    <td title=23Q2></td>
-    <td title=23Q3></td>
-    <td title=23Q4></td>
-    <td title=24Q1 class="blue">IR</td>
-    <td title=24Q2></td>
-  </tr>
-  <tr>
     <td class="gray">27.x</td>
-    <td class="gray">4.27.x</td>
-    <td title=22Q2></td>
-    <td title=22Q3></td>
-    <td title=22Q4></td>
+    <td class="gray"></td>
     <td title=23Q1></td>
     <td title=23Q2></td>
     <td title=23Q3></td>
     <td title=23Q4></td>
     <td title=24Q1></td>
     <td title=24Q2 class="blue">IR</td>
+    <td title=24Q3></td>
+    <td title=24Q4></td>
+    <td title=25Q1></td>
+    <td title=25Q2></td>
+  </tr>
+  <tr>
+    <td class="gray">28.x</td>
+    <td class="gray"></td>
+    <td title=23Q1></td>
+    <td title=23Q2></td>
+    <td title=23Q3></td>
+    <td title=23Q4></td>
+    <td title=24Q1></td>
+    <td title=24Q2></td>
+    <td title=24Q3 class="blue">IR</td>
+    <td title=24Q4></td>
+    <td title=25Q1></td>
+    <td title=25Q2></td>
   </tr>
 </table>
 
