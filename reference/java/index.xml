@@ -966,14 +966,15 @@ defined in the proto file.&lt;/p>
 &lt;/li>
 &lt;/ul>
 &lt;h3 id="recommendation">Recommendation&lt;/h3>
-&lt;p>The recommended set of options to use is:&lt;/p>
-&lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-proto" data-lang="proto">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#204a87;font-weight:bold">option&lt;/span> &lt;span style="color:#000">java_api_version&lt;/span> &lt;span style="color:#ce5c00;font-weight:bold">=&lt;/span> &lt;span style="color:#0000cf;font-weight:bold">2&lt;/span>&lt;span style="color:#000;font-weight:bold">;&lt;/span>&lt;span style="color:#a40000">
-&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#a40000">&lt;/span>&lt;span style="color:#204a87;font-weight:bold">option&lt;/span> &lt;span style="color:#000">java_multiple_files&lt;/span> &lt;span style="color:#ce5c00;font-weight:bold">=&lt;/span> &lt;span style="color:#204a87;font-weight:bold">true&lt;/span>&lt;span style="color:#000;font-weight:bold">;&lt;/span>&lt;span style="color:#a40000">
+&lt;p>The recommended option to use is:&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-proto" data-lang="proto">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#204a87;font-weight:bold">option&lt;/span> &lt;span style="color:#000">java_multiple_files&lt;/span> &lt;span style="color:#ce5c00;font-weight:bold">=&lt;/span> &lt;span style="color:#204a87;font-weight:bold">true&lt;/span>&lt;span style="color:#000;font-weight:bold">;&lt;/span>&lt;span style="color:#a40000">
 &lt;/span>&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>With &lt;code>java_multiple_files = true&lt;/code>, the generated Java class for each message
 will be placed in a separate &lt;code>.java&lt;/code> file. This makes it much easier to move
 messages from one &lt;code>.proto&lt;/code> file to another. There is also an outer Java class
 generated for the &lt;code>.proto&lt;/code> file itself. (The legend above explains how this
-outer class name is generated.)&lt;/p></description></item><item><title>Reference:</title><link>https://protobuf.dev/reference/java/api-docs-link/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://protobuf.dev/reference/java/api-docs-link/</guid><description>
+outer class name is generated.)&lt;/p>
+&lt;p>The &lt;code>java_api_version&lt;/code> option defaults to &lt;code>2&lt;/code>, but you can manually set it to
+&lt;code>1&lt;/code> when necessary.&lt;/p></description></item><item><title>Reference:</title><link>https://protobuf.dev/reference/java/api-docs-link/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://protobuf.dev/reference/java/api-docs-link/</guid><description>
 &lt;!-- mdformat global-off -->
 &lt;hr>
 &lt;h2 id="weight-660">title: &amp;ldquo;Java API&amp;rdquo;
