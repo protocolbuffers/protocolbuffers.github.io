@@ -351,7 +351,7 @@ Person john =
       Person.PhoneNumber.newBuilder()
         .setNumber("555-4321")
         .setType(Person.PhoneType.PHONE_TYPE_HOME)
-        .build());
+        .build())
     .build();
 ```
 
@@ -495,7 +495,7 @@ class AddPerson {
     }
 
     // Add an address.
-    addressBook.addPerson(
+    addressBook.addPeople(
       PromptForAddress(new BufferedReader(new InputStreamReader(System.in)),
                        System.out));
 
