@@ -13,8 +13,9 @@ of data streams and using a variety of languages.
 
 Protocol buffers are a combination of the definition language (created in
 `.proto` files), the code that the proto compiler generates to interface with
-data, language-specific runtime libraries, and the serialization format for data
-that is written to a file (or sent across a network connection).
+data, language-specific runtime libraries, the serialization format for data
+that is written to a file (or sent across a network connection), and the
+serialized data.
 
 ## What Problems do Protocol Buffers Solve? {#solve}
 
