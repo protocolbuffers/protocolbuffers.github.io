@@ -78,8 +78,8 @@ This table provides specific dates for support duration.
   </tr>
   <tr>
     <td class="gray">3.21.x</td>
-    <td>25 May 2022</td>
-    <td>31 Mar 2024</td>
+    <td class="gray">25 May 2022</td>
+    <td class="gray"><s>31 Mar 2024</s></td>
   </tr>
   <tr>
     <td class="gray">4.22.x</td>

@@ -195,7 +195,10 @@ compiler `protoc` on your `.proto`:
     Because you want Python classes, you use the `--python_out` option --
     similar options are provided for other supported languages.
 
-This generates `addressbook_pb2.py` in your specified destination directory.
+    Protoc is also able to generate python stubs (`.pyi`) with `--pyi_out`.
+
+This generates `addressbook_pb2.py` (or `addressbook_pb2.pyi`) in your specified
+destination directory.
 
 ## The Protocol Buffer API {#protobuf-api}
 

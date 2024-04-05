@@ -24,6 +24,36 @@ act like proto2 or proto3 files. For more information on how Editions and
 Features work together to set behavior, see
 [Protobuf Editions Overview](/editions/overview).
 
+Each of the following sections has an entry for what scope the feature applies
+to. This can include file, enum, message, or field. The following sample shows a
+mock feature applied to each scope:
+
+```proto
+edition = "2023";
+
+// File-scope definition
+option features.bar = BAZ;
+
+enum Foo {
+  // Enum-scope definition
+  option features.bar = QUX;
+
+  A = 1;
+  B = 2;
+}
+
+message Corge {
+  // Message-scope definition
+  option features.bar = QUUX;
+
+  // Field-scope definition
+  Foo A = 1 [features.bar = GRAULT];
+}
+```
+
+In this example, the setting `GRAULT` in the field-scope feature definition
+overrides the message-scope QUUX setting.
+
 ### `features.enum_type` {#enum_type}
 
 This feature sets the behavior for how enum values that aren't contained within
@@ -38,7 +68,7 @@ and after of a proto3 file.
     unknown field set.
 *   `OPEN:` Open enums parse out of range values into their fields directly.
 
-**Applicable to the following elements:** File, Enum
+**Applicable to the following scopes:** File, Enum
 
 **Default behavior in Edition 2023:** `OPEN`
 
@@ -90,7 +120,7 @@ whether a protobuf field has a value.
     serialized onto the wire (even if it is explicitly set). `has_*` functions
     are not generated for fields set to `IMPLICIT`.
 
-**Applicable to the following elements:** File, Field
+**Applicable to the following scopes:** File, Field
 
 **Default value in the Edition 2023:** `EXPLICIT`
 
@@ -169,7 +199,7 @@ and after of a proto3 file. Editions behavior matches the behavior in proto3.
     JSON. Certain protos are allowed that can result in unspecified behavior at
     runtime (such as many:1 or 1:many mappings).
 
-**Applicable to the following elements:** File, Message, Enum
+**Applicable to the following scopes:** File, Message, Enum
 
 **Default behavior in Edition 2023:** `ALLOW`
 
@@ -215,7 +245,7 @@ and after of a proto3 file.
 *   `DELIMITED`: Message-typed fields are encoded as
     [groups](/programming-guides/proto2#groups).
 
-**Applicable to the following elements:** File, Field
+**Applicable to the following scopes:** File, Field
 
 **Default behavior in Edition 2023:** `LENGTH_PREFIXED`
 
@@ -264,7 +294,7 @@ for `repeated` fields has been migrated to in Editions.
 *   `EXPANDED`: `Repeated` fields are each encoded with the field number for
     each value.
 
-**Applicable to the following elements:** File, Field
+**Applicable to the following scopes:** File, Field
 
 **Default behavior in Edition 2023:** `PACKED`
 
@@ -335,7 +365,7 @@ and after of a proto3 file.
     Parsers may handle this type of field in an unpredictable way, such as
     replacing invalid characters. This is the default proto2 behavior.
 
-**Applicable to the following elements:** File, Field
+**Applicable to the following scopes:** File, Field
 
 **Default behavior in Edition 2023:** `VERIFY`
 
@@ -387,7 +417,7 @@ before and after of a proto3 file.
 *   `true`: Treats the enum as closed regardless of [`enum_type`](#enum_type).
 *   `false`: Respect whatever is set in the `enum_type`.
 
-**Applicable to the following elements:** File, Field
+**Applicable to the following scopes:** File, Field
 
 **Default behavior in Edition 2023:** `false`
 
@@ -442,7 +472,7 @@ before and after of a proto3 file.
 *   `VERIFY`: Overrides the file-level `features.utf8_validation` setting to
     force it to `VERIFY` for Java only.
 
-**Applicable to the following elements:** Field, File
+**Applicable to the following scopes:** Field, File
 
 **Default behavior in Edition 2023:** `DEFAULT`
 
