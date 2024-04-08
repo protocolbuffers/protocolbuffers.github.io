@@ -22,6 +22,9 @@ jobs:
         with:
           node-version: 20
 
+      # Enable verbose logging
+      - run: set -x 
+
       - name: Setup Hugo
         uses: peaceiris/actions-hugo@v3
         with:
