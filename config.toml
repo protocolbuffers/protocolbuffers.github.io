@@ -26,7 +26,9 @@ enableGitInfo = false
 ignoreFiles = [
   "/reference/cpp/api-docs/.*",
   "/reference/csharp/api-docs/.*",
-  "/reference/dart/api-docs/.*"
+  "/reference/dart/api-docs/.*",
+  "/reference/go/api-docs/.*",
+  "/reference/java/api-docs/.*"
 ]
 
 [taxonomies]
