@@ -41,6 +41,7 @@ jobs:
         uses: peaceiris/actions-gh-pages@v3
         # if: github.ref == 'refs/heads/main'
         with:
+          node-version: 20
           github_token: ${{ secrets.GITHUB_TOKEN }}
           publish_dir: ./public
           cname: protobuf.dev
