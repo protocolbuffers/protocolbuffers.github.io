@@ -39,17 +39,19 @@ allow for optimization opportunities.
 ## Inherent Barriers to Stable Serialization
 
 Protobuf objects preserve unknown fields to provide forward and backward
-compatibility. Unknown fields cannot be canonically serialized:
+compatibility. The handling of unknown fields is a primary obstacle to canonical
+serialization.
 
-1.  Unknown fields can't distinguish between bytes and sub-messages, as both
-    have the same wire type. This makes it impossible to canonicalize messages
-    stored in the unknown field set. If we were going to canonicalize, we would
-    need to recurse into unknown submessages to sort their fields by field
-    number, but we don't have enough information to do this.
-1.  Unknown fields are always serialized after known fields, for efficiency. But
-    canonical serialization would require interleaving unknown fields with known
-    fields by field number. This would cause efficiency and code size overheads
-    for everybody, even people who do not use the feature.
+In the wire format, bytes fields and nested sub-messages use the same wire type.
+This ambiguity makes it impossible to correctly canonicalize messages stored in
+the unknown field set. Since the exact same contents may be either one, it is
+impossible to know whether to treat it as a message and recurse down or not.
+
+For efficiency, implementations typically serialize unknown fields after known
+fields. Canonical serialization, however, would require interleaving unknown
+fields with known fields according to field number. This would impose
+significant efficiency and code size costs on all users, even those not
+requiring this feature.
 
 ## Things Intentionally Left Undefined
 
@@ -66,4 +68,3 @@ allow for more optimization opportunities:
 To leave room for optimizations like this, we want to intentionally scramble
 field order in some configurations, so that applications do not inappropriately
 depend on field order.
-
