@@ -22,15 +22,6 @@ enableMissingTranslationPlaceholders = true
 enableRobotsTXT = true
 enableGitInfo = false
 
-# Exempt these topics from appearing in the TOC
-ignoreFiles = [
-  "/reference/cpp/api-docs/.*",
-  "/reference/csharp/api-docs/.*",
-  "/reference/dart/api-docs/.*",
-  "/reference/go/api-docs/.*",
-  "/reference/java/api-docs/.*"
-]
-
 [taxonomies]
 tag = "tags"
 category = "categories"
