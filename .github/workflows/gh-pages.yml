@@ -7,8 +7,11 @@ on:
     branches:
       - main
   workflow_dispatch:
+
 jobs:
   deploy:
+    permissions:
+      contents: write
     runs-on: ubuntu-22.04
     steps:
       - uses: actions/checkout@v3
@@ -21,8 +24,10 @@ jobs:
         with:
           hugo-version: 0.121.2
           extended: true
+
       - name: Install Dependencies
         run: npm install autoprefixer postcss postcss-cli
+
       - name: Build
         run: hugo --minify
 
