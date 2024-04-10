@@ -7,6 +7,7 @@ on:
     branches:
       - main
   workflow_dispatch:
+
 jobs:
   deploy:
     runs-on: ubuntu-22.04
@@ -19,10 +20,12 @@ jobs:
       - name: Setup Hugo
         uses: peaceiris/actions-hugo@v2
         with:
-          hugo-version: 0.121.2
+          hugo-version: 'latest'
           extended: true
+
       - name: Install Dependencies
         run: npm install autoprefixer postcss postcss-cli
+
       - name: Build
         run: hugo --minify
 
