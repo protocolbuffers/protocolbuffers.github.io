@@ -11,7 +11,8 @@ differences between proto2 and proto3 generated code are highlighted - note that
 these differences are in the generated code as described in this document, not
 the base message classes/interfaces, which are the same in both versions. You
 should read the
-[proto2 language guide](/programming-guides/proto) and/or
+[proto2 language guide](/programming-guides/proto2)
+and/or
 [proto3 language guide](/programming-guides/proto3)
 before reading this document.
 

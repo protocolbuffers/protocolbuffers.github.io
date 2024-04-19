@@ -10,8 +10,9 @@ Any differences between
 proto2 and proto3 generated code are highlighted - note that these differences
 are in the generated code as described in this document, not the base API, which
 are the same in both versions. You should read the
-[proto2 language guide](/programming-guides/proto) and/or
-the [proto3 language guide](/programming-guides/proto3)
+[proto2 language guide](/programming-guides/proto2)
+and/or the
+[proto3 language guide](/programming-guides/proto3)
 before reading this document.
 
 ## Compiler Invocation {#invocation}
@@ -129,7 +130,7 @@ The compiler will generate the following accessor methods in the message class:
 
 For other simple field types, the corresponding Dart type is chosen according to
 the
-[scalar value types table](/programming-guides/proto#scalar).
+[scalar value types table](/programming-guides/proto2#scalar).
 For message and enum types, the value type is replaced with the message or enum
 class.
 
@@ -394,7 +395,7 @@ The protocol buffer compiler will generate a class called `Bar`, which extends
 ## Extensions (proto2 only) {#extension}
 
 Given a file `foo_test.proto` including a message with an
-[extension range](/programming-guides/proto#extensions)
+[extension range](/programming-guides/proto2#extensions)
 and a top-level extension definition:
 
 ```proto

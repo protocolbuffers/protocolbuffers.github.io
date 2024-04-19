@@ -14,7 +14,7 @@ before reading this document.
 {{% alert title="Note" color="note" %}}
 The protobuf compiler can generate C\# interfaces for definitions using `proto2`
 syntax starting from release 3.10. Refer to the
-[proto2 language guide](/programming-guides/proto) for
+[proto2 language guide](/programming-guides/proto2) for
 details of the semantics of `proto2` definitions, and see
 `docs/csharp/proto2.md`
 ([view on GitHub](https://github.com/protocolbuffers/protobuf/blob/master/docs/csharp/proto2.md))

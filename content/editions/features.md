@@ -238,6 +238,15 @@ This feature sets the behavior for encoding fields when serializing.
 This feature doesn't impact proto3 files, so this section doesn't have a before
 and after of a proto3 file.
 
+Depending on the language, fields that are "group-like" may have some unexpected
+capitalization in generated code and in text-format, in order to provide
+backwards compatibility with proto2. Message fields are "group-like" if all of
+the following conditions are met:
+
+*   Has `DELIMITED` message encoding specified
+*   Message type is defined in the same scope as the field
+*   Field name is exactly the lowercased type name
+
 **Values available:**
 
 *   `LENGTH_PREFIXED`: Fields are encoded using the LEN wire type described in
@@ -452,6 +461,78 @@ message Msg {
     features.(pb.cpp).legacy_closed_enum = true,
     features.(pb.java).legacy_closed_enum = true
   ];
+}
+```
+
+#### `features.(pb.cpp).string_type` {#string_type}
+
+**Languages:** C++
+
+This feature determines how generated code should treat string fields. This
+replaces the `ctype` option from proto2 and proto3, and offers a new
+`string_view` feature. In Edition 2023, either `ctype` or `string_view` may be
+specified on a field, but not both.
+
+**Values available:**
+
+*   `VIEW`: Generates `string_view` accessors for the field. This will be the
+    default in a future edition.
+*   `CORD`: Generates `Cord` accessors for the field.
+*   `STRING`: Generates `string` accessors for the field.
+
+**Applicable to the following scopes:** File, Field
+
+**Default behavior in Edition 2023:** `STRING`
+
+**Behavior in proto2:** `STRING`
+
+**Behavior in proto3:** `STRING`
+
+The following code sample shows a proto2 file:
+
+```proto
+syntax = "proto2";
+
+message Foo {
+  optional string bar = 6;
+  optional string baz = 7 [ctype = CORD];
+}
+```
+
+After running Prototiller, the equivalent code might look like this:
+
+```proto
+edition = "2023";
+
+import "google/protobuf/cpp_features.proto";
+
+message Foo {
+  optional string bar = 6;
+  optional string baz = 7 [features.(pb.cpp).string_type = CORD];
+}
+```
+
+The following shows a proto3 file:
+
+```proto
+syntax = "proto3"
+
+message Foo {
+  string bar = 6;
+  string baz = 7 [ctype = CORD];
+}
+```
+
+After running Prototiller, the equivalent code might look like this:
+
+```proto
+edition = "2023";
+
+import "google/protobuf/cpp_features.proto";
+
+message Foo {
+  string bar = 6;
+  string baz = 7 [features.(pb.cpp).string_type = CORD];
 }
 ```
 

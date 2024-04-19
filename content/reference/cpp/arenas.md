@@ -11,7 +11,7 @@ buffer compiler generates in addition to the code described in the
 [C++ Generated Code Guide](/reference/cpp/cpp-generated)
 when arena allocation is enabled. It assumes that you are familiar with the
 material in the
-[language guide](/programming-guides/proto) and the
+[language guide](/programming-guides/proto2) and the
 [C++ Generated Code Guide](/reference/cpp/cpp-generated).
 
 ## Why Use Arena Allocation? {#why}

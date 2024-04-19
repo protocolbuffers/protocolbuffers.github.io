@@ -29,9 +29,15 @@ released at the same time were released as 3.21.0.
 
 ## Release Cadence {#cadence}
 
-Protobuf does not officially have a release cadence; however, we strive to
-release updates quarterly, on a best-effort basis. Our support windows are
-defined by our
+Protobuf strives to release updates quarterly. We may add a release if there is
+an urgent need such as a security fix that requires new APIs. Skipping a release
+should be a very rare event.
+
+Major (breaking) releases will be targeted to the Q1 release. We may introduce a
+major breaking change at any time if there is an urgent need, but this should be
+very rare.
+
+Our support windows are defined by our
 [library breaking change policy](https://opensource.google/documentation/policies/library-breaking-change).
 
 Protobuf does *not* consider enforcement of its documented language, tooling,
@@ -41,19 +47,46 @@ versions.
 
 ## What Changes in a Release? {#changes}
 
-Each release may include one or more of the following:
+**The binary wire format does not change** even in major version updates. You
+will continue to be able to read old binary wire format proto data from newer
+versions of Protocol Buffers. Newly generated protobuf bindings serialized to
+binary wire format will be parseable by older binaries. This is a fundamental
+design principle of Protocol Buffers. Note that JSON and textproto formats *do
+not* offer the same stability guarantees.
 
-*   updates to the code that is generated for a language binding, and updates to
-    the runtime that supports the binding language. In a minor or patch release,
-    updates will be additive only (we do not remove deprecated/dead code or
-    otherwise make destructive changes)
-*   bug fixes
-*   new [features](/editions/features) or updates to
-    their default values (including new default values)
+**The descriptor.proto schema can change.** In minor or patch releases, we may
+add new message, fields, enums, enum values, editions, editions
+[features](/editions/features) etc. We may also mark
+existing elements as deprecated. In a major release, we may remove deprecated
+options, enums, enum values, messages, fields, etc.
 
-The wire format does not change from release to release. You will continue to be
-able to read old proto data from newer versions of Protocol Buffers. This is a
-fundamental design principle of Protocol Buffers.
+**The .proto language grammar can change.** In minor or patch releases, we may
+add new language constructs and alternative syntax for existing features. We may
+also mark certain features as deprecated. This could result in new warnings that
+were not previously emitted by `protoc`. In a major release, we may remove
+support for obsolete features, syntax, editions in a way that will require
+updates to client code.
+
+**Gencode and runtime APIs can change.** In minor or patch releases, changes
+will either be purely additive for new functionality or source-compatible
+updates. Simply recompiling code should work. In a major release, the gencode or
+runtime API can change in incompatible ways that require callsite changes. We
+try to minimize these. Changes fixing or otherwise affecting undefined behavior
+are not considered breaking, and do not require a major release.
+
+**Operating system, programming language, and tooling version support can
+change.** In a minor or patch release, we may add or drop support for particular
+versions of an operating system, programming language, or tooling. See
+[foundational support matrices](https://github.com/google/oss-policies-info/tree/main)
+for our supported languages.
+
+In general:
+
+*   Minor or patch releases should only contain purely additive or
+    source-compatible updates per our
+    [Cross Version Runtime Guarantee](https://protobuf.dev/support/cross-version-runtime-guarantee/#minor)
+*   Major releases may remove functionality, features, or change APIs in ways
+    that require updates to callsites.
 
 ## Support Duration {#duration}
 

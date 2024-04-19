@@ -61,7 +61,7 @@ Document the constraints, expectations and interpretation of each field in as
 few words as possible.
 
 You can use custom proto annotations.
-See [Custom Options](/programming-guides/proto#options)
+See [Custom Options](/programming-guides/proto2#options)
 to define cross-language constants like `max_length` in the example above.
 Supported in proto2 and proto3.
 
@@ -291,7 +291,7 @@ worse—write one.
 
 More generally, choose the right primitive type. See the Scalar Value Types
 table in the
-[Protocol Buffer Language Guide](/programming-guides/proto#scalar).
+[Protocol Buffer Language Guide](/programming-guides/proto2#scalar).
 
 ### Returning HTML in a Front-End Proto {#returning-html}
 

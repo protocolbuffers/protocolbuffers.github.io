@@ -10,8 +10,9 @@ Any differences between
 proto2 and proto3 generated code are highlighted - note that these differences
 are in the generated code as described in this document, not the base API, which
 are the same in both versions. You should read the
-[proto2 language guide](/programming-guides/proto) and/or
-the [proto3 language guide](/programming-guides/proto3)
+[proto2 language guide](/programming-guides/proto2)
+and/or the
+[proto3 language guide](/programming-guides/proto3)
 before reading this document.
 
 ## Compiler Invocation {#invocation}
@@ -199,7 +200,7 @@ type is used instead (`0` for numbers, the empty string for strings).
 
 For other scalar field types (including `bool`, `bytes`, and `string`), `*int32`
 is replaced with the corresponding Go type according to the
-[scalar value types table](/programming-guides/proto#scalar).
+[scalar value types table](/programming-guides/proto2#scalar).
 
 ### Singular Scalar Fields (proto3) {#singular-scalar-proto3}
 

@@ -9,7 +9,7 @@ Enums behave differently in different language libraries. This topic covers the
 different behaviors as well as the plans to move protobufs to a state where they
 are consistent across all languages. If you're looking for information on how to
 use enums in general, see the corresponding sections in the
-[proto2](/programming-guides/proto#enum) and
+[proto2](/programming-guides/proto2#enum) and
 [proto3](/programming-guides/proto3#enum) language guide
 topics.
 
