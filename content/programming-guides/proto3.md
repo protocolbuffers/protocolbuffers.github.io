@@ -1194,7 +1194,8 @@ about, see the
 
 Proto3 supports a canonical encoding in JSON, making it easier to share data
 between systems. The encoding is described on a type-by-type basis in the table
-below.
+below. [ProtobufJson](https://github.com/hq6/ProtobufJson) is a tool that can
+convert between proto and json encodings.
 
 When parsing JSON-encoded data into a protocol buffer, if a value is missing or
 if its value is `null`, it will be interpreted as the corresponding
