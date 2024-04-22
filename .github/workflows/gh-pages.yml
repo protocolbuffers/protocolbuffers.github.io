@@ -18,6 +18,9 @@ jobs:
           submodules: true  # Fetch Hugo themes (true OR recursive)
           fetch-depth: 0    # Fetch all history for .GitInfo and .Lastmod
 
+      - name: Update Docsy Theme
+        run: git submodule update --init --recursive 
+
       - uses: actions/setup-node@v4
         with:
           node-version: 20
