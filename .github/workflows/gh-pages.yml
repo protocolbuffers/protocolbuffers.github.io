@@ -19,7 +19,7 @@ jobs:
           fetch-depth: 0    # Fetch all history for .GitInfo and .Lastmod
 
       - name: Update Docsy Theme
-        run: git submodule update --init --recursive 
+        run: git submodule update --init --recursive --remote themes/docsy
 
       - uses: actions/setup-node@v4
         with:
