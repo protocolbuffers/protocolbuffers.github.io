@@ -496,7 +496,7 @@ This table provides specific dates for support duration.
   <tr>
     <td class="gray">3.25.x</td>
     <td>1 Nov 2023</td>
-    <td>31 Mar 2025</td>
+    <td>31 Mar 2026*</td>
   </tr>
   <tr>
     <td class="gray">4.26.x</td>
@@ -504,6 +504,12 @@ This table provides specific dates for support duration.
     <td>TBD</td>
   </tr>
 </table>
+
+**NOTE:** the support window for the Java 3.25.x release will be 24 months
+rather than the typical 12 months for the final release in a major version line.
+Future major version updates (5.x+) will adopt an improved
+["rolling compatibility window"](/support/cross-version-runtime-guarantee/#major)
+that should allow a return to 12-month support windows.
 
 This table graphically shows support durations.
 
@@ -567,13 +573,14 @@ Java will target making major version bumps annually in Q1 of each year.
     <td class="gray">3.25.x</td>
     <td title=23Q2></td>
     <td title=23Q3></td>
+<!--3.25.x is special and will be publicly supported until end of 26Q1-->
     <td title=23Q4 class="blue">IR</td>
     <td title=24Q1 class="green">PS</td>
     <td title=24Q2 class="green">PS</td>
     <td title=24Q3 class="green">PS</td>
     <td title=24Q4 class="green">PS</td>
     <td title=25Q1 class="green">PS</td>
-    <td title=25Q2 class="red">SE</td>
+    <td title=25Q2 class="green">PS</td>
   </tr>
   <tr>
     <td class="gray">26.x</td>
@@ -597,7 +604,7 @@ Java will target making major version bumps annually in Q1 of each year.
   </tr>
   <tr>
     <td class="gray">27.x</td>
-    <td class="gray"></td>
+    <td class="gray">4.27.x</td>
     <td title=23Q2></td>
     <td title=23Q3></td>
     <td title=23Q4></td>
@@ -610,7 +617,7 @@ Java will target making major version bumps annually in Q1 of each year.
   </tr>
   <tr>
     <td class="gray">28.x</td>
-    <td class="gray"></td>
+    <td class="gray">4.28.x</td>
     <td title=23Q2></td>
     <td title=23Q3></td>
     <td title=23Q4></td>
@@ -619,6 +626,32 @@ Java will target making major version bumps annually in Q1 of each year.
     <td title=24Q3 class="blue">IR</td>
     <td title=24Q4></td>
     <td title=25Q1></td>
+    <td title=25Q2></td>
+  </tr>
+  <tr>
+    <td class="gray">29.x</td>
+    <td class="gray">4.29.x</td>
+    <td title=23Q2></td>
+    <td title=23Q3></td>
+    <td title=23Q4></td>
+    <td title=24Q1></td>
+    <td title=24Q2></td>
+    <td title=24Q3></td>
+    <td title=24Q4 class="blue">IR</td>
+    <td title=25Q1></td>
+    <td title=25Q2></td>
+  </tr>
+  <tr>
+    <td class="gray">30.x</td>
+    <td class="gray">5.30.x</td>
+    <td title=23Q2></td>
+    <td title=23Q3></td>
+    <td title=23Q4></td>
+    <td title=24Q1></td>
+    <td title=24Q2></td>
+    <td title=24Q3></td>
+    <td title=24Q4></td>
+    <td title=25Q1 class="blue">IR</td>
     <td title=25Q2></td>
   </tr>
 </table>

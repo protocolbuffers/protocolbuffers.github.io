@@ -347,8 +347,19 @@ enum Color {
 
 The protocol buffer compiler will generate a class called `Color`, which extends
 the `ProtobufEnum` class. The class will include a `static const Color` for each
-of the three values defined as well as a `static const List<Color>` containing
-all the three non-unspecified values. It will also include the following method:
+of the four values, as well as a `static const List<Color>` that contains the
+values.
+
+```dart
+static const List<Color> values = <Color> [
+  COLOR_UNSPECIFIED,
+  COLOR_RED,
+  COLOR_GREEN,
+  COLOR_BLUE,
+];
+```
+
+It will also include the following method:
 
 -   `static Color? valueOf(int value)`: Returns the `Color` corresponding to the
     given numeric value.

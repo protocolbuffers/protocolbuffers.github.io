@@ -11,6 +11,10 @@ Buffers, and plans for upcoming changes. The information is available both
 chronologically and per-release. Note that not everything is included in the
 per-release topics, as some content is not tied to a version.
 
+New news topics will also be published to the
+[protobuf@](https://groups.google.com/g/protobuf) mailing list under the subject
+\[Announcement\].
+
 ## Chronological {#chronological}
 
 The following news topics provide information in the reverse order in which it
