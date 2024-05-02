@@ -228,19 +228,39 @@ number in the future.
 You should also reserve the field name to allow JSON and TextFormat encodings of
 your message to continue to parse.
 
-### Reserved Fields {#fieldreserved}
+<a id="fieldreserved"></a>
+
+### Reserved Field Numbers {#reserved-field-numbers}
 
 If you [update](#updating) a message type by entirely deleting a field, or
 commenting it out, future developers can reuse the field number when making
 their own updates to the type. This can cause severe issues, as described in
-[Consequences of Reusing Field Numbers](#consequences).
+[Consequences of Reusing Field Numbers](#consequences). To make sure this
+doesn't happen, add your deleted field number to the `reserved` list.
 
-To make sure this doesn't happen, add your deleted field number to the
-`reserved` list. To make sure JSON and TextFormat instances of your message can
-still be parsed, also add the deleted field name to a `reserved` list.
+The protoc compiler will generate error messages if any future developers try to
+use these reserved field numbers.
 
-The protocol buffer compiler will complain if any future developers try to use
-these reserved field numbers or names.
+```proto
+message Foo {
+  reserved 2, 15, 9 to 11;
+}
+```
+
+Reserved field number ranges are inclusive (`9 to 11` is the same as `9, 10,
+11`).
+
+#### Reserved Field Names {#reserved-field-names}
+
+Reusing an old field name later is generally safe, except when using TextProto
+or JSON encodings where the field name is serialized. To avoid this risk, you
+can add the deleted field name to the `reserved` list.
+
+Reserved names affect only the protoc compiler behavior and not runtime
+behavior, with one exception: TextProto implementations may discard unknown
+fields (without raising an error like with other unknown fields) with reserved
+names at parse time (only the C++ and Go implementations do so today). Runtime
+JSON parsing is not affected by reserved names.
 
 ```proto
 message Foo {
@@ -249,9 +269,8 @@ message Foo {
 }
 ```
 
-Reserved field number ranges are inclusive (`9 to 11` is the same as `9, 10,
-11`). Note that you can't mix field names and field numbers in the same
-`reserved` statement.
+Note that you can't mix field names and field numbers in the same `reserved`
+statement.
 
 ### What's Generated from Your `.proto`? {#generated}
 
