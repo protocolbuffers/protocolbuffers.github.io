@@ -19,7 +19,7 @@ jobs:
       - name: Setup Hugo
         uses: peaceiris/actions-hugo@v2
         with:
-          hugo-version: 'latest'
+          hugo-version: 0.121.2
           extended: true
       - name: Install Dependencies
         run: npm install autoprefixer postcss postcss-cli
