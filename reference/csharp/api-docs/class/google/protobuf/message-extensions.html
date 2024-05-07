@@ -1,0 +1,452 @@
+<!DOCTYPE html>
+<html devsite>
+<head>
+  <title>Google.Protobuf.MessageExtensions Class Reference</title>
+  <link rel="stylesheet" href="/reference/csharp/api-docs/includes/stylesheet.css">
+</head>
+<body>
+  <div id="top"><!-- do not remove this div --></div>
+  <h1>Google.<wbr/>Protobuf.<wbr/>MessageExtensions</h1>
+  <p>Extension methods on <a href="/reference/csharp/api-docs/interface/google/protobuf/i-message.html#interface_google_1_1_protobuf_1_1_i_message">IMessage</a> and IMessage{T}. </p>
+  <h2>Summary</h2>
+  <table class="methods responsive">
+    <tr>
+      <th colspan="2">
+        <h3>Public static functions</h3>
+      </th>
+    </tr>
+    <tr>
+      <td>
+        <code><a href="#class_google_1_1_protobuf_1_1_message_extensions_1a4d9a2fb167c590cfc22cb5699177bc69">MergeDelimitedFrom</a>(this <a href="/reference/csharp/api-docs/interface/google/protobuf/i-message.html#interface_google_1_1_protobuf_1_1_i_message">IMessage</a> message, Stream input)</code>
+      </td>
+      <td>
+        <div>
+          <code>void</code>
+        </div>
+        <div>Merges length-delimited data from the given stream into an existing message. </div>
+      </td>
+    </tr>
+    <tr>
+      <td>
+        <code><a href="#class_google_1_1_protobuf_1_1_message_extensions_1a4ad30e7ab2403ebf2f73bb86c0344c0f">MergeFrom</a>(this <a href="/reference/csharp/api-docs/interface/google/protobuf/i-message.html#interface_google_1_1_protobuf_1_1_i_message">IMessage</a> message, byte[] data)</code>
+      </td>
+      <td>
+        <div>
+          <code>void</code>
+        </div>
+        <div>Merges data from the given byte array into an existing message. </div>
+      </td>
+    </tr>
+    <tr>
+      <td>
+        <code><a href="#class_google_1_1_protobuf_1_1_message_extensions_1a44a26044fb9e9f86311ab364c6868ca0">MergeFrom</a>(this <a href="/reference/csharp/api-docs/interface/google/protobuf/i-message.html#interface_google_1_1_protobuf_1_1_i_message">IMessage</a> message, <a href="/reference/csharp/api-docs/class/google/protobuf/byte-string.html#class_google_1_1_protobuf_1_1_byte_string">ByteString</a> data)</code>
+      </td>
+      <td>
+        <div>
+          <code>void</code>
+        </div>
+        <div>Merges data from the given byte string into an existing message. </div>
+      </td>
+    </tr>
+    <tr>
+      <td>
+        <code><a href="#class_google_1_1_protobuf_1_1_message_extensions_1a5a75de47877afe97d3f0fb987f92e865">MergeFrom</a>(this <a href="/reference/csharp/api-docs/interface/google/protobuf/i-message.html#interface_google_1_1_protobuf_1_1_i_message">IMessage</a> message, Stream input)</code>
+      </td>
+      <td>
+        <div>
+          <code>void</code>
+        </div>
+        <div>Merges data from the given stream into an existing message. </div>
+      </td>
+    </tr>
+    <tr>
+      <td>
+        <code><a href="#class_google_1_1_protobuf_1_1_message_extensions_1a047a63d80d41db1cd28b2a7b597414ab">ToByteArray</a>(this <a href="/reference/csharp/api-docs/interface/google/protobuf/i-message.html#interface_google_1_1_protobuf_1_1_i_message">IMessage</a> message)</code>
+      </td>
+      <td>
+        <div>
+          <code>byte[]</code>
+        </div>
+        <div>Converts the given message into a byte array in protobuf encoding. </div>
+      </td>
+    </tr>
+    <tr>
+      <td>
+        <code><a href="#class_google_1_1_protobuf_1_1_message_extensions_1a3d7849007cc9a85747586e2a935ae5c2">ToByteString</a>(this <a href="/reference/csharp/api-docs/interface/google/protobuf/i-message.html#interface_google_1_1_protobuf_1_1_i_message">IMessage</a> message)</code>
+      </td>
+      <td>
+        <div>
+          <code><a href="/reference/csharp/api-docs/class/google/protobuf/byte-string.html#class_google_1_1_protobuf_1_1_byte_string">ByteString</a></code>
+        </div>
+        <div>Converts the given message into a byte string in protobuf encoding. </div>
+      </td>
+    </tr>
+    <tr>
+      <td>
+        <code><a href="#class_google_1_1_protobuf_1_1_message_extensions_1a99a4de2ce4de5bc1da1e1f5c367f4c7c">WriteDelimitedTo</a>(this <a href="/reference/csharp/api-docs/interface/google/protobuf/i-message.html#interface_google_1_1_protobuf_1_1_i_message">IMessage</a> message, Stream output)</code>
+      </td>
+      <td>
+        <div>
+          <code>void</code>
+        </div>
+        <div>Writes the length and then data of the given message to a stream. </div>
+      </td>
+    </tr>
+    <tr>
+      <td>
+        <code><a href="#class_google_1_1_protobuf_1_1_message_extensions_1a300d15667bbc37572e927170b4673feb">WriteTo</a>(this <a href="/reference/csharp/api-docs/interface/google/protobuf/i-message.html#interface_google_1_1_protobuf_1_1_i_message">IMessage</a> message, Stream output)</code>
+      </td>
+      <td>
+        <div>
+          <code>void</code>
+        </div>
+        <div>Writes the given message data to the given stream in protobuf encoding. </div>
+      </td>
+    </tr>
+  </table>
+  <h2>Public static functions</h2>
+  <div id="class_google_1_1_protobuf_1_1_message_extensions_1a4d9a2fb167c590cfc22cb5699177bc69">
+    <h3>MergeDelimitedFrom</h3>
+    <pre class="prettyprint">void MergeDelimitedFrom(
+  this <a href="/reference/csharp/api-docs/interface/google/protobuf/i-message.html#interface_google_1_1_protobuf_1_1_i_message">IMessage</a> message,
+  Stream input
+)</pre>
+    <div>
+      <p>Merges length-delimited data from the given stream into an existing message. </p>
+      <p>The stream is expected to contain a length and then the data. Only the amount of data specified by the length will be consumed. </p>
+      <p />
+      <table class="details responsive">
+        <thead>
+          <th colspan="2">Details</th>
+        </thead>
+        <tbody>
+          <tr>
+            <td>Parameters</td>
+            <td>
+              <table class="function param responsive">
+                <tbody>
+                  <tr>
+                    <td>
+                      <code>message</code>
+                    </td>
+                    <td>
+                      <div>The message to merge the data into.</div>
+                    </td>
+                  </tr>
+                  <tr>
+                    <td>
+                      <code>input</code>
+                    </td>
+                    <td>
+                      <div>Stream containing the data to merge, which must be protobuf-encoded binary data.</div>
+                    </td>
+                  </tr>
+                </tbody>
+              </table>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+  <div id="class_google_1_1_protobuf_1_1_message_extensions_1a4ad30e7ab2403ebf2f73bb86c0344c0f">
+    <h3>MergeFrom</h3>
+    <pre class="prettyprint">void MergeFrom(
+  this <a href="/reference/csharp/api-docs/interface/google/protobuf/i-message.html#interface_google_1_1_protobuf_1_1_i_message">IMessage</a> message,
+  byte[] data
+)</pre>
+    <div>
+      <p>Merges data from the given byte array into an existing message. </p>
+      <p />
+      <table class="details responsive">
+        <thead>
+          <th colspan="2">Details</th>
+        </thead>
+        <tbody>
+          <tr>
+            <td>Parameters</td>
+            <td>
+              <table class="function param responsive">
+                <tbody>
+                  <tr>
+                    <td>
+                      <code>message</code>
+                    </td>
+                    <td>
+                      <div>The message to merge the data into.</div>
+                    </td>
+                  </tr>
+                  <tr>
+                    <td>
+                      <code>data</code>
+                    </td>
+                    <td>
+                      <div>The data to merge, which must be protobuf-encoded binary data.</div>
+                    </td>
+                  </tr>
+                </tbody>
+              </table>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+  <div id="class_google_1_1_protobuf_1_1_message_extensions_1a44a26044fb9e9f86311ab364c6868ca0">
+    <h3>MergeFrom</h3>
+    <pre class="prettyprint">void MergeFrom(
+  this <a href="/reference/csharp/api-docs/interface/google/protobuf/i-message.html#interface_google_1_1_protobuf_1_1_i_message">IMessage</a> message,
+  <a href="/reference/csharp/api-docs/class/google/protobuf/byte-string.html#class_google_1_1_protobuf_1_1_byte_string">ByteString</a> data
+)</pre>
+    <div>
+      <p>Merges data from the given byte string into an existing message. </p>
+      <p />
+      <table class="details responsive">
+        <thead>
+          <th colspan="2">Details</th>
+        </thead>
+        <tbody>
+          <tr>
+            <td>Parameters</td>
+            <td>
+              <table class="function param responsive">
+                <tbody>
+                  <tr>
+                    <td>
+                      <code>message</code>
+                    </td>
+                    <td>
+                      <div>The message to merge the data into.</div>
+                    </td>
+                  </tr>
+                  <tr>
+                    <td>
+                      <code>data</code>
+                    </td>
+                    <td>
+                      <div>The data to merge, which must be protobuf-encoded binary data.</div>
+                    </td>
+                  </tr>
+                </tbody>
+              </table>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+  <div id="class_google_1_1_protobuf_1_1_message_extensions_1a5a75de47877afe97d3f0fb987f92e865">
+    <h3>MergeFrom</h3>
+    <pre class="prettyprint">void MergeFrom(
+  this <a href="/reference/csharp/api-docs/interface/google/protobuf/i-message.html#interface_google_1_1_protobuf_1_1_i_message">IMessage</a> message,
+  Stream input
+)</pre>
+    <div>
+      <p>Merges data from the given stream into an existing message. </p>
+      <p />
+      <table class="details responsive">
+        <thead>
+          <th colspan="2">Details</th>
+        </thead>
+        <tbody>
+          <tr>
+            <td>Parameters</td>
+            <td>
+              <table class="function param responsive">
+                <tbody>
+                  <tr>
+                    <td>
+                      <code>message</code>
+                    </td>
+                    <td>
+                      <div>The message to merge the data into.</div>
+                    </td>
+                  </tr>
+                  <tr>
+                    <td>
+                      <code>input</code>
+                    </td>
+                    <td>
+                      <div>Stream containing the data to merge, which must be protobuf-encoded binary data.</div>
+                    </td>
+                  </tr>
+                </tbody>
+              </table>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+  <div id="class_google_1_1_protobuf_1_1_message_extensions_1a047a63d80d41db1cd28b2a7b597414ab">
+    <h3>ToByteArray</h3>
+    <pre class="prettyprint">byte[] ToByteArray(
+  this <a href="/reference/csharp/api-docs/interface/google/protobuf/i-message.html#interface_google_1_1_protobuf_1_1_i_message">IMessage</a> message
+)</pre>
+    <div>
+      <p>Converts the given message into a byte array in protobuf encoding. </p>
+      <p />
+      <table class="details responsive">
+        <thead>
+          <th colspan="2">Details</th>
+        </thead>
+        <tbody>
+          <tr>
+            <td>Parameters</td>
+            <td>
+              <table class="function param responsive">
+                <tbody>
+                  <tr>
+                    <td>
+                      <code>message</code>
+                    </td>
+                    <td>
+                      <div>The message to convert.</div>
+                    </td>
+                  </tr>
+                </tbody>
+              </table>
+            </td>
+          </tr>
+          <tr>
+            <td>
+              <b>Returns</b>
+            </td>
+            <td>
+              <div>The message data as a byte array.</div>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+  <div id="class_google_1_1_protobuf_1_1_message_extensions_1a3d7849007cc9a85747586e2a935ae5c2">
+    <h3>ToByteString</h3>
+    <pre class="prettyprint"><a href="/reference/csharp/api-docs/class/google/protobuf/byte-string.html#class_google_1_1_protobuf_1_1_byte_string">ByteString</a> ToByteString(
+  this <a href="/reference/csharp/api-docs/interface/google/protobuf/i-message.html#interface_google_1_1_protobuf_1_1_i_message">IMessage</a> message
+)</pre>
+    <div>
+      <p>Converts the given message into a byte string in protobuf encoding. </p>
+      <p />
+      <table class="details responsive">
+        <thead>
+          <th colspan="2">Details</th>
+        </thead>
+        <tbody>
+          <tr>
+            <td>Parameters</td>
+            <td>
+              <table class="function param responsive">
+                <tbody>
+                  <tr>
+                    <td>
+                      <code>message</code>
+                    </td>
+                    <td>
+                      <div>The message to convert.</div>
+                    </td>
+                  </tr>
+                </tbody>
+              </table>
+            </td>
+          </tr>
+          <tr>
+            <td>
+              <b>Returns</b>
+            </td>
+            <td>
+              <div>The message data as a byte string.</div>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+  <div id="class_google_1_1_protobuf_1_1_message_extensions_1a99a4de2ce4de5bc1da1e1f5c367f4c7c">
+    <h3>WriteDelimitedTo</h3>
+    <pre class="prettyprint">void WriteDelimitedTo(
+  this <a href="/reference/csharp/api-docs/interface/google/protobuf/i-message.html#interface_google_1_1_protobuf_1_1_i_message">IMessage</a> message,
+  Stream output
+)</pre>
+    <div>
+      <p>Writes the length and then data of the given message to a stream. </p>
+      <p />
+      <table class="details responsive">
+        <thead>
+          <th colspan="2">Details</th>
+        </thead>
+        <tbody>
+          <tr>
+            <td>Parameters</td>
+            <td>
+              <table class="function param responsive">
+                <tbody>
+                  <tr>
+                    <td>
+                      <code>message</code>
+                    </td>
+                    <td>
+                      <div>The message to write.</div>
+                    </td>
+                  </tr>
+                  <tr>
+                    <td>
+                      <code>output</code>
+                    </td>
+                    <td>
+                      <div>The output stream to write to.</div>
+                    </td>
+                  </tr>
+                </tbody>
+              </table>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+  <div id="class_google_1_1_protobuf_1_1_message_extensions_1a300d15667bbc37572e927170b4673feb">
+    <h3>WriteTo</h3>
+    <pre class="prettyprint">void WriteTo(
+  this <a href="/reference/csharp/api-docs/interface/google/protobuf/i-message.html#interface_google_1_1_protobuf_1_1_i_message">IMessage</a> message,
+  Stream output
+)</pre>
+    <div>
+      <p>Writes the given message data to the given stream in protobuf encoding. </p>
+      <p />
+      <table class="details responsive">
+        <thead>
+          <th colspan="2">Details</th>
+        </thead>
+        <tbody>
+          <tr>
+            <td>Parameters</td>
+            <td>
+              <table class="function param responsive">
+                <tbody>
+                  <tr>
+                    <td>
+                      <code>message</code>
+                    </td>
+                    <td>
+                      <div>The message to write to the stream.</div>
+                    </td>
+                  </tr>
+                  <tr>
+                    <td>
+                      <code>output</code>
+                    </td>
+                    <td>
+                      <div>The stream to write to.</div>
+                    </td>
+                  </tr>
+                </tbody>
+              </table>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</body>
+</html>

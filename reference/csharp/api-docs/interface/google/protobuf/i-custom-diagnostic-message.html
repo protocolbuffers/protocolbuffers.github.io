@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html devsite>
+<head>
+  <title>Google.Protobuf.ICustomDiagnosticMessage Interface Reference</title>
+  <link rel="stylesheet" href="/reference/csharp/api-docs/includes/stylesheet.css">
+</head>
+<body><div id="top"><!-- do not remove this div --></div><h1>Google.<wbr/>Protobuf.<wbr/>ICustomDiagnosticMessage</h1><p>A message type that has a custom string format for diagnostic purposes. </p><h2>Summary</h2><p>Calling object.ToString on a generated message type normally returns the JSON representation. If a message type implements this interface, then the <a href="/reference/csharp/api-docs/interface/google/protobuf/i-custom-diagnostic-message.html#interface_google_1_1_protobuf_1_1_i_custom_diagnostic_message_1a3b24fcb9d9656debf5e32160b2a5af5a">ToDiagnosticString</a> method will be called instead of the regular JSON formatting code, but only when <code>ToString()</code> is called either on the message itself or on another message which contains it. This does not affect the normal JSON formatting of the message. </p><p>For example, if you create a proto message representing a GUID, the internal representation may be a <code>bytes</code> field or four <code>fixed32</code> fields. However, when debugging it may be more convenient to see a result in the same format as System.Guid provides. </p><p>This interface extends <a href="/reference/csharp/api-docs/interface/google/protobuf/i-message.html#interface_google_1_1_protobuf_1_1_i_message">IMessage</a> to avoid it accidentally being implemented on types other than messages, where it would not be used by anything in the framework.</p><h3>Inheritance</h3>Inherits from: <a href="/reference/csharp/api-docs/interface/google/protobuf/i-message">Google.Protobuf.IMessage</a><br />Direct Known Subclasses:<a href="/reference/csharp/api-docs/class/google/protobuf/well-known-types/duration.html">Google.Protobuf.WellKnownTypes.Duration</a>, <a href="/reference/csharp/api-docs/class/google/protobuf/well-known-types/field-mask.html">Google.Protobuf.WellKnownTypes.FieldMask</a>, <a href="/reference/csharp/api-docs/class/google/protobuf/well-known-types/timestamp.html">Google.Protobuf.WellKnownTypes.Timestamp</a><table class="methods responsive">
+    <tr>
+      <th colspan="2">
+        <h3>Public functions</h3>
+      </th>
+    </tr>
+    <tr>
+      <td>
+        <code><a href="#interface_google_1_1_protobuf_1_1_i_custom_diagnostic_message_1a3b24fcb9d9656debf5e32160b2a5af5a">ToDiagnosticString</a>()</code>
+      </td>
+      <td>
+        <div>
+          <code>string</code>
+        </div>
+        <div>Returns a string representation of this object, for diagnostic purposes. </div>
+      </td>
+    </tr>
+  </table><h2>Public functions</h2><div id="interface_google_1_1_protobuf_1_1_i_custom_diagnostic_message_1a3b24fcb9d9656debf5e32160b2a5af5a">
+    <h3>ToDiagnosticString</h3>
+    <pre class="prettyprint">string ToDiagnosticString()</pre>
+    <div>
+      <p>Returns a string representation of this object, for diagnostic purposes. </p>
+      <p>This method is called when a message is formatted as part of a object.ToString call. It does not affect the JSON representation used by <a href="/reference/csharp/api-docs/class/google/protobuf/json-formatter.html#class_google_1_1_protobuf_1_1_json_formatter">JsonFormatter</a> other than in calls to <a href="/reference/csharp/api-docs/class/google/protobuf/json-formatter.html#class_google_1_1_protobuf_1_1_json_formatter_1a504ed720aadede8f3a37bffae1587a3e">JsonFormatter.ToDiagnosticString(IMessage)</a>. While it is recommended that the result is valid JSON, this is never assumed by the <a href="/reference/csharp/api-docs/namespace/google/protobuf.html#namespace_google_1_1_protobuf">Protobuf</a> library. </p>
+      <p />
+      <table class="details responsive">
+        <thead>
+          <th colspan="2">Details</th>
+        </thead>
+        <tbody>
+          <tr>
+            <td>
+              <b>Returns</b>
+            </td>
+            <td>
+              <div>A string representation of this object, for diagnostic purposes.</div>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div></body>
+</html>

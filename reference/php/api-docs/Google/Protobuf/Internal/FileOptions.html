@@ -1,0 +1,4919 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="robots" content="index, follow, all" />
+    <title>Google\Protobuf\Internal\FileOptions | Google Protobuf - v3.21.10</title>
+
+            <link rel="stylesheet" type="text/css" href="../../../css/bootstrap.min.css">
+        <link rel="stylesheet" type="text/css" href="../../../css/bootstrap-theme.min.css">
+        <link rel="stylesheet" type="text/css" href="../../../css/doctum.css">
+        <link rel="stylesheet" type="text/css" href="../../../fonts/doctum-font.css">
+        <script src="../../../js/jquery-3.5.1.slim.min.js"></script>
+        <script async defer src="../../../doctum.js"></script>
+        <script async defer src="../../../js/bootstrap.min.js"></script>
+        <script async defer src="../../../js/autocomplete.min.js"></script>
+        <meta name="MobileOptimized" content="width">
+        <meta name="HandheldFriendly" content="true">
+        <meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1">
+
+    </head>
+
+    <body id="class" data-name="class:Google_Protobuf_Internal_FileOptions" data-root-path="../../../" data-search-index-url="../../../doctum-search.json">
+            <div id="content">
+        <div id="left-column">
+                <div id="control-panel">
+                <div class="search-bar hidden" id="search-progress-bar-container">
+            <div class="progress">
+                <div class="progress-bar" role="progressbar" id="search-progress-bar"
+                    aria-valuenow="0" aria-valuemin="0" aria-valuemax="100" style="width: 0%"></div>
+            </div>
+        </div>
+        <form id="search-form" action="../../../search.html">
+            <span class="icon icon-search"></span>
+            <input name="search"
+                   id="doctum-search-auto-complete"
+                   class="typeahead form-control"
+                   type="search"
+                   placeholder="Search"
+                   spellcheck="false"
+                   autocorrect="off"
+                   autocomplete="off"
+                   autocapitalize="off">
+            <div class="auto-complete-results" id="auto-complete-results"></div>
+        </form>
+    </div>
+
+                <div id="api-tree"></div>
+
+        </div>
+        <div id="right-column">
+                <nav id="site-nav" class="navbar navbar-default" role="navigation">
+        <div class="container-fluid">
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#navbar-elements">
+                    <span class="sr-only">Toggle navigation</span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                <a class="navbar-brand" href="../../../index.html">Google Protobuf - v3.21.10</a>
+            </div>
+            <div class="collapse navbar-collapse" id="navbar-elements">
+                <ul class="nav navbar-nav">
+                    <li><a href="../../../classes.html">Classes</a></li>
+                    <li><a href="../../../namespaces.html">Namespaces</a></li>
+                    <li><a href="../../../interfaces.html">Interfaces</a></li>
+                    <li><a href="../../../traits.html">Traits</a></li>
+                    <li><a href="../../../doc-index.html">Index</a></li>
+                    <li><a href="../../../search.html">Search</a></li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+                        <div class="namespace-breadcrumbs">
+            <ol class="breadcrumb">
+                <li><span class="label label-default">class</span></li>
+                        <li><a href="../../../Google.html">Google</a></li><li class="backslash">\</li><li><a href="../../../Google/Protobuf.html">Protobuf</a></li><li class="backslash">\</li><li><a href="../../../Google/Protobuf/Internal.html">Internal</a></li><li class="backslash">\</li><li>FileOptions</li>
+            </ol>
+        </div>
+                <div id="page-content">
+    <div class="page-header">
+        <h1>FileOptions    
+            </h1>
+    </div>
+
+    
+    <p>        class
+    <strong>FileOptions</strong>        extends <a href="../../../Google/Protobuf/Internal/Message.html"><abbr title="Google\Protobuf\Internal\Message">Message</abbr></a>        (<a href="https://github.com/protocolbuffers/protobuf-php/blob/v3.21.10/src/Google/Protobuf/Internal/FileOptions.php">View source</a>)
+</p>
+
+        
+    
+        
+
+            <div class="description">
+            <p><p>Generated from protobuf message <code>google.protobuf.FileOptions</code></p></p>                    </div>
+            
+        
+    
+            <h2>Properties</h2>
+
+            <table class="table table-condensed">
+                    <tr>
+                <td class="type" id="property_java_package">
+                                        protected                                        
+                                                                                
+                                    </td>
+                <td>$java_package</td>
+                <td class="last"><p>Sets the Java package where classes generated from this .proto will be
+placed.  By default, the proto package is used, but this is often
+inappropriate because proto packages do not normally start with backwards
+domain names.</p></td>
+                <td></td>
+            </tr>
+                    <tr>
+                <td class="type" id="property_java_outer_classname">
+                                        protected                                        
+                                                                                
+                                    </td>
+                <td>$java_outer_classname</td>
+                <td class="last"><p>Controls the name of the wrapper Java class generated for the .proto file.</p></td>
+                <td></td>
+            </tr>
+                    <tr>
+                <td class="type" id="property_java_multiple_files">
+                                        protected                                        
+                                                                                
+                                    </td>
+                <td>$java_multiple_files</td>
+                <td class="last"><p>If enabled, then the Java code generator will generate a separate .java
+file for each top-level message, enum, and service defined in the .proto
+file.  Thus, these types will <em>not</em> be nested inside the wrapper class
+named by java_outer_classname.  However, the wrapper class will still be
+generated to contain the file's getDescriptor() method as well as any
+top-level extensions defined in the file.</p></td>
+                <td></td>
+            </tr>
+                    <tr>
+                <td class="type" id="property_java_generate_equals_and_hash">
+                                        protected                                        
+                                        <span class="label label-danger">deprecated</span>                                        
+                                    </td>
+                <td>$java_generate_equals_and_hash</td>
+                <td class="last"><p>This option does nothing.</p></td>
+                <td></td>
+            </tr>
+                    <tr>
+                <td class="type" id="property_java_string_check_utf8">
+                                        protected                                        
+                                                                                
+                                    </td>
+                <td>$java_string_check_utf8</td>
+                <td class="last"><p>If set true, then the Java2 code generator will generate code that
+throws an exception whenever an attempt is made to assign a non-UTF-8
+byte sequence to a string field.</p></td>
+                <td></td>
+            </tr>
+                    <tr>
+                <td class="type" id="property_optimize_for">
+                                        protected                                        
+                                                                                
+                                    </td>
+                <td>$optimize_for</td>
+                <td class="last"><p>Generated from protobuf field <code>optional .google.protobuf.FileOptions.OptimizeMode optimize_for = 9 [default = SPEED];</code></p></td>
+                <td></td>
+            </tr>
+                    <tr>
+                <td class="type" id="property_go_package">
+                                        protected                                        
+                                                                                
+                                    </td>
+                <td>$go_package</td>
+                <td class="last"><p>Sets the Go package where structs generated from this .proto will be
+placed. If omitted, the Go package will be derived from the following:</p>
+<ul>
+<li>The basename of the package import path, if provided.</li>
+</ul></td>
+                <td></td>
+            </tr>
+                    <tr>
+                <td class="type" id="property_cc_generic_services">
+                                        protected                                        
+                                                                                
+                                    </td>
+                <td>$cc_generic_services</td>
+                <td class="last"><p>Should generic services be generated in each language?  &quot;Generic&quot; services
+are not specific to any particular RPC system.  They are generated by the
+main code generators in each language (without additional plugins).</p></td>
+                <td></td>
+            </tr>
+                    <tr>
+                <td class="type" id="property_java_generic_services">
+                                        protected                                        
+                                                                                
+                                    </td>
+                <td>$java_generic_services</td>
+                <td class="last"><p>Generated from protobuf field <code>optional bool java_generic_services = 17 [default = false];</code></p></td>
+                <td></td>
+            </tr>
+                    <tr>
+                <td class="type" id="property_py_generic_services">
+                                        protected                                        
+                                                                                
+                                    </td>
+                <td>$py_generic_services</td>
+                <td class="last"><p>Generated from protobuf field <code>optional bool py_generic_services = 18 [default = false];</code></p></td>
+                <td></td>
+            </tr>
+                    <tr>
+                <td class="type" id="property_php_generic_services">
+                                        protected                                        
+                                                                                
+                                    </td>
+                <td>$php_generic_services</td>
+                <td class="last"><p>Generated from protobuf field <code>optional bool php_generic_services = 42 [default = false];</code></p></td>
+                <td></td>
+            </tr>
+                    <tr>
+                <td class="type" id="property_deprecated">
+                                        protected                                        
+                                                                                
+                                    </td>
+                <td>$deprecated</td>
+                <td class="last"><p>Is this file deprecated?
+Depending on the target platform, this can emit Deprecated annotations
+for everything in the file, or it will be completely ignored; in the very
+least, this is a formalization for deprecating files.</p></td>
+                <td></td>
+            </tr>
+                    <tr>
+                <td class="type" id="property_cc_enable_arenas">
+                                        protected                                        
+                                                                                
+                                    </td>
+                <td>$cc_enable_arenas</td>
+                <td class="last"><p>Enables the use of arenas for the proto messages in this file. This applies
+only to generated classes for C++.</p></td>
+                <td></td>
+            </tr>
+                    <tr>
+                <td class="type" id="property_objc_class_prefix">
+                                        protected                                        
+                                                                                
+                                    </td>
+                <td>$objc_class_prefix</td>
+                <td class="last"><p>Sets the objective c class prefix which is prepended to all objective c
+generated classes from this .proto. There is no default.</p></td>
+                <td></td>
+            </tr>
+                    <tr>
+                <td class="type" id="property_csharp_namespace">
+                                        protected                                        
+                                                                                
+                                    </td>
+                <td>$csharp_namespace</td>
+                <td class="last"><p>Namespace for generated classes; defaults to the package.</p></td>
+                <td></td>
+            </tr>
+                    <tr>
+                <td class="type" id="property_swift_prefix">
+                                        protected                                        
+                                                                                
+                                    </td>
+                <td>$swift_prefix</td>
+                <td class="last"><p>By default Swift generators will take the proto package and CamelCase it
+replacing '.' with underscore and use that to prefix the types/symbols
+defined. When this options is provided, they will use this value instead
+to prefix the types/symbols defined.</p></td>
+                <td></td>
+            </tr>
+                    <tr>
+                <td class="type" id="property_php_class_prefix">
+                                        protected                                        
+                                                                                
+                                    </td>
+                <td>$php_class_prefix</td>
+                <td class="last"><p>Sets the php class prefix which is prepended to all php generated classes
+from this .proto. Default is empty.</p></td>
+                <td></td>
+            </tr>
+                    <tr>
+                <td class="type" id="property_php_namespace">
+                                        protected                                        
+                                                                                
+                                    </td>
+                <td>$php_namespace</td>
+                <td class="last"><p>Use this option to change the namespace of php generated classes. Default
+is empty. When this option is empty, the package name will be used for
+determining the namespace.</p></td>
+                <td></td>
+            </tr>
+                    <tr>
+                <td class="type" id="property_php_metadata_namespace">
+                                        protected                                        
+                                                                                
+                                    </td>
+                <td>$php_metadata_namespace</td>
+                <td class="last"><p>Use this option to change the namespace of php generated metadata classes.</p></td>
+                <td></td>
+            </tr>
+                    <tr>
+                <td class="type" id="property_ruby_package">
+                                        protected                                        
+                                                                                
+                                    </td>
+                <td>$ruby_package</td>
+                <td class="last"><p>Use this option to change the package of ruby generated classes. Default
+is empty. When this option is not set, the package name will be used for
+determining the ruby package.</p></td>
+                <td></td>
+            </tr>
+            </table>
+
+    
+            <h2>Methods</h2>
+
+            <div class="container-fluid underlined">
+                    <div class="row">
+                <div class="col-md-2 type">
+                    
+                </div>
+                <div class="col-md-8">
+                    <a href="#method___construct">__construct</a>($data = NULL)
+        
+                                            <p>Constructor.</p>                </div>
+                <div class="col-md-2"></div>
+            </div>
+                    <div class="row">
+                <div class="col-md-2 type">
+                    
+                </div>
+                <div class="col-md-8">
+                    <a href="#method_readWrapperValue">readWrapperValue</a>($member)
+        
+                                            <p class="no-description">No description</p>
+                                    </div>
+                <div class="col-md-2"><small>from&nbsp;<a href="../../../Google/Protobuf/Internal/Message.html#method_readWrapperValue">
+<abbr title="Google\Protobuf\Internal\Message">Message</abbr></a></small></div>
+            </div>
+                    <div class="row">
+                <div class="col-md-2 type">
+                    
+                </div>
+                <div class="col-md-8">
+                    <a href="#method_writeWrapperValue">writeWrapperValue</a>($member, $value)
+        
+                                            <p class="no-description">No description</p>
+                                    </div>
+                <div class="col-md-2"><small>from&nbsp;<a href="../../../Google/Protobuf/Internal/Message.html#method_writeWrapperValue">
+<abbr title="Google\Protobuf\Internal\Message">Message</abbr></a></small></div>
+            </div>
+                    <div class="row">
+                <div class="col-md-2 type">
+                    
+                </div>
+                <div class="col-md-8">
+                    <a href="#method_readOneof">readOneof</a>($number)
+        
+                                            <p class="no-description">No description</p>
+                                    </div>
+                <div class="col-md-2"><small>from&nbsp;<a href="../../../Google/Protobuf/Internal/Message.html#method_readOneof">
+<abbr title="Google\Protobuf\Internal\Message">Message</abbr></a></small></div>
+            </div>
+                    <div class="row">
+                <div class="col-md-2 type">
+                    
+                </div>
+                <div class="col-md-8">
+                    <a href="#method_hasOneof">hasOneof</a>($number)
+        
+                                            <p class="no-description">No description</p>
+                                    </div>
+                <div class="col-md-2"><small>from&nbsp;<a href="../../../Google/Protobuf/Internal/Message.html#method_hasOneof">
+<abbr title="Google\Protobuf\Internal\Message">Message</abbr></a></small></div>
+            </div>
+                    <div class="row">
+                <div class="col-md-2 type">
+                    
+                </div>
+                <div class="col-md-8">
+                    <a href="#method_writeOneof">writeOneof</a>($number, $value)
+        
+                                            <p class="no-description">No description</p>
+                                    </div>
+                <div class="col-md-2"><small>from&nbsp;<a href="../../../Google/Protobuf/Internal/Message.html#method_writeOneof">
+<abbr title="Google\Protobuf\Internal\Message">Message</abbr></a></small></div>
+            </div>
+                    <div class="row">
+                <div class="col-md-2 type">
+                    
+                </div>
+                <div class="col-md-8">
+                    <a href="#method_whichOneof">whichOneof</a>($oneof_name)
+        
+                                            <p class="no-description">No description</p>
+                                    </div>
+                <div class="col-md-2"><small>from&nbsp;<a href="../../../Google/Protobuf/Internal/Message.html#method_whichOneof">
+<abbr title="Google\Protobuf\Internal\Message">Message</abbr></a></small></div>
+            </div>
+                    <div class="row">
+                <div class="col-md-2 type">
+                    
+                </div>
+                <div class="col-md-8">
+                    <a href="#method_clear">clear</a>()
+        
+                                            <p><p>Clear all containing fields.</p></p>                </div>
+                <div class="col-md-2"><small>from&nbsp;<a href="../../../Google/Protobuf/Internal/Message.html#method_clear">
+<abbr title="Google\Protobuf\Internal\Message">Message</abbr></a></small></div>
+            </div>
+                    <div class="row">
+                <div class="col-md-2 type">
+                    
+                </div>
+                <div class="col-md-8">
+                    <a href="#method_discardUnknownFields">discardUnknownFields</a>()
+        
+                                            <p><p>Clear all unknown fields previously parsed.</p></p>                </div>
+                <div class="col-md-2"><small>from&nbsp;<a href="../../../Google/Protobuf/Internal/Message.html#method_discardUnknownFields">
+<abbr title="Google\Protobuf\Internal\Message">Message</abbr></a></small></div>
+            </div>
+                    <div class="row">
+                <div class="col-md-2 type">
+                    
+                </div>
+                <div class="col-md-8">
+                    <a href="#method_mergeFrom">mergeFrom</a>(object $msg)
+        
+                                            <p><p>Merges the contents of the specified message into current message.</p></p>                </div>
+                <div class="col-md-2"><small>from&nbsp;<a href="../../../Google/Protobuf/Internal/Message.html#method_mergeFrom">
+<abbr title="Google\Protobuf\Internal\Message">Message</abbr></a></small></div>
+            </div>
+                    <div class="row">
+                <div class="col-md-2 type">
+                    
+                </div>
+                <div class="col-md-8">
+                    <a href="#method_mergeFromString">mergeFromString</a>(string $data)
+        
+                                            <p><p>Parses a protocol buffer contained in a string.</p></p>                </div>
+                <div class="col-md-2"><small>from&nbsp;<a href="../../../Google/Protobuf/Internal/Message.html#method_mergeFromString">
+<abbr title="Google\Protobuf\Internal\Message">Message</abbr></a></small></div>
+            </div>
+                    <div class="row">
+                <div class="col-md-2 type">
+                    
+                </div>
+                <div class="col-md-8">
+                    <a href="#method_mergeFromJsonString">mergeFromJsonString</a>(string $data, $ignore_unknown = false)
+        
+                                            <p><p>Parses a json string to protobuf message.</p></p>                </div>
+                <div class="col-md-2"><small>from&nbsp;<a href="../../../Google/Protobuf/Internal/Message.html#method_mergeFromJsonString">
+<abbr title="Google\Protobuf\Internal\Message">Message</abbr></a></small></div>
+            </div>
+                    <div class="row">
+                <div class="col-md-2 type">
+                    
+                </div>
+                <div class="col-md-8">
+                    <a href="#method_parseFromStream">parseFromStream</a>($input)
+        
+                                            <p class="no-description">No description</p>
+                                    </div>
+                <div class="col-md-2"><small>from&nbsp;<a href="../../../Google/Protobuf/Internal/Message.html#method_parseFromStream">
+<abbr title="Google\Protobuf\Internal\Message">Message</abbr></a></small></div>
+            </div>
+                    <div class="row">
+                <div class="col-md-2 type">
+                    
+                </div>
+                <div class="col-md-8">
+                    <a href="#method_mergeFromArray">mergeFromArray</a>(array $array)
+        
+                                            <p><p>Populates the message from a user-supplied PHP array. Array keys
+correspond to Message properties and nested message properties.</p></p>                </div>
+                <div class="col-md-2"><small>from&nbsp;<a href="../../../Google/Protobuf/Internal/Message.html#method_mergeFromArray">
+<abbr title="Google\Protobuf\Internal\Message">Message</abbr></a></small></div>
+            </div>
+                    <div class="row">
+                <div class="col-md-2 type">
+                    
+                </div>
+                <div class="col-md-8">
+                    <a href="#method_mergeFromJsonArray">mergeFromJsonArray</a>($array, $ignore_unknown)
+        
+                                            <p class="no-description">No description</p>
+                                    </div>
+                <div class="col-md-2"><small>from&nbsp;<a href="../../../Google/Protobuf/Internal/Message.html#method_mergeFromJsonArray">
+<abbr title="Google\Protobuf\Internal\Message">Message</abbr></a></small></div>
+            </div>
+                    <div class="row">
+                <div class="col-md-2 type">
+                    
+                </div>
+                <div class="col-md-8">
+                    <a href="#method_parseFromJsonStream">parseFromJsonStream</a>($input, $ignore_unknown)
+        
+                                            <p class="no-description">No description</p>
+                                    </div>
+                <div class="col-md-2"><small>from&nbsp;<a href="../../../Google/Protobuf/Internal/Message.html#method_parseFromJsonStream">
+<abbr title="Google\Protobuf\Internal\Message">Message</abbr></a></small></div>
+            </div>
+                    <div class="row">
+                <div class="col-md-2 type">
+                    
+                </div>
+                <div class="col-md-8">
+                    <a href="#method_serializeToStream">serializeToStream</a>($output)
+        
+                                            <p class="no-description">No description</p>
+                                    </div>
+                <div class="col-md-2"><small>from&nbsp;<a href="../../../Google/Protobuf/Internal/Message.html#method_serializeToStream">
+<abbr title="Google\Protobuf\Internal\Message">Message</abbr></a></small></div>
+            </div>
+                    <div class="row">
+                <div class="col-md-2 type">
+                    
+                </div>
+                <div class="col-md-8">
+                    <a href="#method_serializeToJsonStream">serializeToJsonStream</a>($output)
+        
+                                            <p class="no-description">No description</p>
+                                    </div>
+                <div class="col-md-2"><small>from&nbsp;<a href="../../../Google/Protobuf/Internal/Message.html#method_serializeToJsonStream">
+<abbr title="Google\Protobuf\Internal\Message">Message</abbr></a></small></div>
+            </div>
+                    <div class="row">
+                <div class="col-md-2 type">
+                    string
+                </div>
+                <div class="col-md-8">
+                    <a href="#method_serializeToString">serializeToString</a>()
+        
+                                            <p><p>Serialize the message to string.</p></p>                </div>
+                <div class="col-md-2"><small>from&nbsp;<a href="../../../Google/Protobuf/Internal/Message.html#method_serializeToString">
+<abbr title="Google\Protobuf\Internal\Message">Message</abbr></a></small></div>
+            </div>
+                    <div class="row">
+                <div class="col-md-2 type">
+                    string
+                </div>
+                <div class="col-md-8">
+                    <a href="#method_serializeToJsonString">serializeToJsonString</a>()
+        
+                                            <p><p>Serialize the message to json string.</p></p>                </div>
+                <div class="col-md-2"><small>from&nbsp;<a href="../../../Google/Protobuf/Internal/Message.html#method_serializeToJsonString">
+<abbr title="Google\Protobuf\Internal\Message">Message</abbr></a></small></div>
+            </div>
+                    <div class="row">
+                <div class="col-md-2 type">
+                    
+                </div>
+                <div class="col-md-8">
+                    <a href="#method_byteSize">byteSize</a>()
+        
+                                            <p class="no-description">No description</p>
+                                    </div>
+                <div class="col-md-2"><small>from&nbsp;<a href="../../../Google/Protobuf/Internal/Message.html#method_byteSize">
+<abbr title="Google\Protobuf\Internal\Message">Message</abbr></a></small></div>
+            </div>
+                    <div class="row">
+                <div class="col-md-2 type">
+                    
+                </div>
+                <div class="col-md-8">
+                    <a href="#method_jsonByteSize">jsonByteSize</a>()
+        
+                                            <p class="no-description">No description</p>
+                                    </div>
+                <div class="col-md-2"><small>from&nbsp;<a href="../../../Google/Protobuf/Internal/Message.html#method_jsonByteSize">
+<abbr title="Google\Protobuf\Internal\Message">Message</abbr></a></small></div>
+            </div>
+                    <div class="row">
+                <div class="col-md-2 type">
+                    string
+                </div>
+                <div class="col-md-8">
+                    <a href="#method_getJavaPackage">getJavaPackage</a>()
+        
+                                            <p><p>Sets the Java package where classes generated from this .proto will be
+placed.  By default, the proto package is used, but this is often
+inappropriate because proto packages do not normally start with backwards
+domain names.</p></p>                </div>
+                <div class="col-md-2"></div>
+            </div>
+                    <div class="row">
+                <div class="col-md-2 type">
+                    
+                </div>
+                <div class="col-md-8">
+                    <a href="#method_hasJavaPackage">hasJavaPackage</a>()
+        
+                                            <p class="no-description">No description</p>
+                                    </div>
+                <div class="col-md-2"></div>
+            </div>
+                    <div class="row">
+                <div class="col-md-2 type">
+                    
+                </div>
+                <div class="col-md-8">
+                    <a href="#method_clearJavaPackage">clearJavaPackage</a>()
+        
+                                            <p class="no-description">No description</p>
+                                    </div>
+                <div class="col-md-2"></div>
+            </div>
+                    <div class="row">
+                <div class="col-md-2 type">
+                    $this
+                </div>
+                <div class="col-md-8">
+                    <a href="#method_setJavaPackage">setJavaPackage</a>(string $var)
+        
+                                            <p><p>Sets the Java package where classes generated from this .proto will be
+placed.  By default, the proto package is used, but this is often
+inappropriate because proto packages do not normally start with backwards
+domain names.</p></p>                </div>
+                <div class="col-md-2"></div>
+            </div>
+                    <div class="row">
+                <div class="col-md-2 type">
+                    string
+                </div>
+                <div class="col-md-8">
+                    <a href="#method_getJavaOuterClassname">getJavaOuterClassname</a>()
+        
+                                            <p><p>Controls the name of the wrapper Java class generated for the .proto file.</p></p>                </div>
+                <div class="col-md-2"></div>
+            </div>
+                    <div class="row">
+                <div class="col-md-2 type">
+                    
+                </div>
+                <div class="col-md-8">
+                    <a href="#method_hasJavaOuterClassname">hasJavaOuterClassname</a>()
+        
+                                            <p class="no-description">No description</p>
+                                    </div>
+                <div class="col-md-2"></div>
+            </div>
+                    <div class="row">
+                <div class="col-md-2 type">
+                    
+                </div>
+                <div class="col-md-8">
+                    <a href="#method_clearJavaOuterClassname">clearJavaOuterClassname</a>()
+        
+                                            <p class="no-description">No description</p>
+                                    </div>
+                <div class="col-md-2"></div>
+            </div>
+                    <div class="row">
+                <div class="col-md-2 type">
+                    $this
+                </div>
+                <div class="col-md-8">
+                    <a href="#method_setJavaOuterClassname">setJavaOuterClassname</a>(string $var)
+        
+                                            <p><p>Controls the name of the wrapper Java class generated for the .proto file.</p></p>                </div>
+                <div class="col-md-2"></div>
+            </div>
+                    <div class="row">
+                <div class="col-md-2 type">
+                    bool
+                </div>
+                <div class="col-md-8">
+                    <a href="#method_getJavaMultipleFiles">getJavaMultipleFiles</a>()
+        
+                                            <p><p>If enabled, then the Java code generator will generate a separate .java
+file for each top-level message, enum, and service defined in the .proto
+file.  Thus, these types will <em>not</em> be nested inside the wrapper class
+named by java_outer_classname.  However, the wrapper class will still be
+generated to contain the file's getDescriptor() method as well as any
+top-level extensions defined in the file.</p></p>                </div>
+                <div class="col-md-2"></div>
+            </div>
+                    <div class="row">
+                <div class="col-md-2 type">
+                    
+                </div>
+                <div class="col-md-8">
+                    <a href="#method_hasJavaMultipleFiles">hasJavaMultipleFiles</a>()
+        
+                                            <p class="no-description">No description</p>
+                                    </div>
+                <div class="col-md-2"></div>
+            </div>
+                    <div class="row">
+                <div class="col-md-2 type">
+                    
+                </div>
+                <div class="col-md-8">
+                    <a href="#method_clearJavaMultipleFiles">clearJavaMultipleFiles</a>()
+        
+                                            <p class="no-description">No description</p>
+                                    </div>
+                <div class="col-md-2"></div>
+            </div>
+                    <div class="row">
+                <div class="col-md-2 type">
+                    $this
+                </div>
+                <div class="col-md-8">
+                    <a href="#method_setJavaMultipleFiles">setJavaMultipleFiles</a>(bool $var)
+        
+                                            <p><p>If enabled, then the Java code generator will generate a separate .java
+file for each top-level message, enum, and service defined in the .proto
+file.  Thus, these types will <em>not</em> be nested inside the wrapper class
+named by java_outer_classname.  However, the wrapper class will still be
+generated to contain the file's getDescriptor() method as well as any
+top-level extensions defined in the file.</p></p>                </div>
+                <div class="col-md-2"></div>
+            </div>
+                    <div class="row">
+                <div class="col-md-2 type">
+                    bool
+                </div>
+                <div class="col-md-8">
+                    <a href="#method_getJavaGenerateEqualsAndHash">getJavaGenerateEqualsAndHash</a>()
+        <small><span class="label label-danger">deprecated</span></small>
+                                            <p><p>This option does nothing.</p></p>                </div>
+                <div class="col-md-2"></div>
+            </div>
+                    <div class="row">
+                <div class="col-md-2 type">
+                    
+                </div>
+                <div class="col-md-8">
+                    <a href="#method_hasJavaGenerateEqualsAndHash">hasJavaGenerateEqualsAndHash</a>()
+        
+                                            <p class="no-description">No description</p>
+                                    </div>
+                <div class="col-md-2"></div>
+            </div>
+                    <div class="row">
+                <div class="col-md-2 type">
+                    
+                </div>
+                <div class="col-md-8">
+                    <a href="#method_clearJavaGenerateEqualsAndHash">clearJavaGenerateEqualsAndHash</a>()
+        
+                                            <p class="no-description">No description</p>
+                                    </div>
+                <div class="col-md-2"></div>
+            </div>
+                    <div class="row">
+                <div class="col-md-2 type">
+                    $this
+                </div>
+                <div class="col-md-8">
+                    <a href="#method_setJavaGenerateEqualsAndHash">setJavaGenerateEqualsAndHash</a>(bool $var)
+        <small><span class="label label-danger">deprecated</span></small>
+                                            <p><p>This option does nothing.</p></p>                </div>
+                <div class="col-md-2"></div>
+            </div>
+                    <div class="row">
+                <div class="col-md-2 type">
+                    bool
+                </div>
+                <div class="col-md-8">
+                    <a href="#method_getJavaStringCheckUtf8">getJavaStringCheckUtf8</a>()
+        
+                                            <p><p>If set true, then the Java2 code generator will generate code that
+throws an exception whenever an attempt is made to assign a non-UTF-8
+byte sequence to a string field.</p></p>                </div>
+                <div class="col-md-2"></div>
+            </div>
+                    <div class="row">
+                <div class="col-md-2 type">
+                    
+                </div>
+                <div class="col-md-8">
+                    <a href="#method_hasJavaStringCheckUtf8">hasJavaStringCheckUtf8</a>()
+        
+                                            <p class="no-description">No description</p>
+                                    </div>
+                <div class="col-md-2"></div>
+            </div>
+                    <div class="row">
+                <div class="col-md-2 type">
+                    
+                </div>
+                <div class="col-md-8">
+                    <a href="#method_clearJavaStringCheckUtf8">clearJavaStringCheckUtf8</a>()
+        
+                                            <p class="no-description">No description</p>
+                                    </div>
+                <div class="col-md-2"></div>
+            </div>
+                    <div class="row">
+                <div class="col-md-2 type">
+                    $this
+                </div>
+                <div class="col-md-8">
+                    <a href="#method_setJavaStringCheckUtf8">setJavaStringCheckUtf8</a>(bool $var)
+        
+                                            <p><p>If set true, then the Java2 code generator will generate code that
+throws an exception whenever an attempt is made to assign a non-UTF-8
+byte sequence to a string field.</p></p>                </div>
+                <div class="col-md-2"></div>
+            </div>
+                    <div class="row">
+                <div class="col-md-2 type">
+                    int
+                </div>
+                <div class="col-md-8">
+                    <a href="#method_getOptimizeFor">getOptimizeFor</a>()
+        
+                                            <p><p>Generated from protobuf field <code>optional .google.protobuf.FileOptions.OptimizeMode optimize_for = 9 [default = SPEED];</code></p></p>                </div>
+                <div class="col-md-2"></div>
+            </div>
+                    <div class="row">
+                <div class="col-md-2 type">
+                    
+                </div>
+                <div class="col-md-8">
+                    <a href="#method_hasOptimizeFor">hasOptimizeFor</a>()
+        
+                                            <p class="no-description">No description</p>
+                                    </div>
+                <div class="col-md-2"></div>
+            </div>
+                    <div class="row">
+                <div class="col-md-2 type">
+                    
+                </div>
+                <div class="col-md-8">
+                    <a href="#method_clearOptimizeFor">clearOptimizeFor</a>()
+        
+                                            <p class="no-description">No description</p>
+                                    </div>
+                <div class="col-md-2"></div>
+            </div>
+                    <div class="row">
+                <div class="col-md-2 type">
+                    $this
+                </div>
+                <div class="col-md-8">
+                    <a href="#method_setOptimizeFor">setOptimizeFor</a>(int $var)
+        
+                                            <p><p>Generated from protobuf field <code>optional .google.protobuf.FileOptions.OptimizeMode optimize_for = 9 [default = SPEED];</code></p></p>                </div>
+                <div class="col-md-2"></div>
+            </div>
+                    <div class="row">
+                <div class="col-md-2 type">
+                    string
+                </div>
+                <div class="col-md-8">
+                    <a href="#method_getGoPackage">getGoPackage</a>()
+        
+                                            <p><p>Sets the Go package where structs generated from this .proto will be
+placed. If omitted, the Go package will be derived from the following:</p>
+<ul>
+<li>The basename of the package import path, if provided.</li>
+</ul></p>                </div>
+                <div class="col-md-2"></div>
+            </div>
+                    <div class="row">
+                <div class="col-md-2 type">
+                    
+                </div>
+                <div class="col-md-8">
+                    <a href="#method_hasGoPackage">hasGoPackage</a>()
+        
+                                            <p class="no-description">No description</p>
+                                    </div>
+                <div class="col-md-2"></div>
+            </div>
+                    <div class="row">
+                <div class="col-md-2 type">
+                    
+                </div>
+                <div class="col-md-8">
+                    <a href="#method_clearGoPackage">clearGoPackage</a>()
+        
+                                            <p class="no-description">No description</p>
+                                    </div>
+                <div class="col-md-2"></div>
+            </div>
+                    <div class="row">
+                <div class="col-md-2 type">
+                    $this
+                </div>
+                <div class="col-md-8">
+                    <a href="#method_setGoPackage">setGoPackage</a>(string $var)
+        
+                                            <p><p>Sets the Go package where structs generated from this .proto will be
+placed. If omitted, the Go package will be derived from the following:</p>
+<ul>
+<li>The basename of the package import path, if provided.</li>
+</ul></p>                </div>
+                <div class="col-md-2"></div>
+            </div>
+                    <div class="row">
+                <div class="col-md-2 type">
+                    bool
+                </div>
+                <div class="col-md-8">
+                    <a href="#method_getCcGenericServices">getCcGenericServices</a>()
+        
+                                            <p><p>Should generic services be generated in each language?  &quot;Generic&quot; services
+are not specific to any particular RPC system.  They are generated by the
+main code generators in each language (without additional plugins).</p></p>                </div>
+                <div class="col-md-2"></div>
+            </div>
+                    <div class="row">
+                <div class="col-md-2 type">
+                    
+                </div>
+                <div class="col-md-8">
+                    <a href="#method_hasCcGenericServices">hasCcGenericServices</a>()
+        
+                                            <p class="no-description">No description</p>
+                                    </div>
+                <div class="col-md-2"></div>
+            </div>
+                    <div class="row">
+                <div class="col-md-2 type">
+                    
+                </div>
+                <div class="col-md-8">
+                    <a href="#method_clearCcGenericServices">clearCcGenericServices</a>()
+        
+                                            <p class="no-description">No description</p>
+                                    </div>
+                <div class="col-md-2"></div>
+            </div>
+                    <div class="row">
+                <div class="col-md-2 type">
+                    $this
+                </div>
+                <div class="col-md-8">
+                    <a href="#method_setCcGenericServices">setCcGenericServices</a>(bool $var)
+        
+                                            <p><p>Should generic services be generated in each language?  &quot;Generic&quot; services
+are not specific to any particular RPC system.  They are generated by the
+main code generators in each language (without additional plugins).</p></p>                </div>
+                <div class="col-md-2"></div>
+            </div>
+                    <div class="row">
+                <div class="col-md-2 type">
+                    bool
+                </div>
+                <div class="col-md-8">
+                    <a href="#method_getJavaGenericServices">getJavaGenericServices</a>()
+        
+                                            <p><p>Generated from protobuf field <code>optional bool java_generic_services = 17 [default = false];</code></p></p>                </div>
+                <div class="col-md-2"></div>
+            </div>
+                    <div class="row">
+                <div class="col-md-2 type">
+                    
+                </div>
+                <div class="col-md-8">
+                    <a href="#method_hasJavaGenericServices">hasJavaGenericServices</a>()
+        
+                                            <p class="no-description">No description</p>
+                                    </div>
+                <div class="col-md-2"></div>
+            </div>
+                    <div class="row">
+                <div class="col-md-2 type">
+                    
+                </div>
+                <div class="col-md-8">
+                    <a href="#method_clearJavaGenericServices">clearJavaGenericServices</a>()
+        
+                                            <p class="no-description">No description</p>
+                                    </div>
+                <div class="col-md-2"></div>
+            </div>
+                    <div class="row">
+                <div class="col-md-2 type">
+                    $this
+                </div>
+                <div class="col-md-8">
+                    <a href="#method_setJavaGenericServices">setJavaGenericServices</a>(bool $var)
+        
+                                            <p><p>Generated from protobuf field <code>optional bool java_generic_services = 17 [default = false];</code></p></p>                </div>
+                <div class="col-md-2"></div>
+            </div>
+                    <div class="row">
+                <div class="col-md-2 type">
+                    bool
+                </div>
+                <div class="col-md-8">
+                    <a href="#method_getPyGenericServices">getPyGenericServices</a>()
+        
+                                            <p><p>Generated from protobuf field <code>optional bool py_generic_services = 18 [default = false];</code></p></p>                </div>
+                <div class="col-md-2"></div>
+            </div>
+                    <div class="row">
+                <div class="col-md-2 type">
+                    
+                </div>
+                <div class="col-md-8">
+                    <a href="#method_hasPyGenericServices">hasPyGenericServices</a>()
+        
+                                            <p class="no-description">No description</p>
+                                    </div>
+                <div class="col-md-2"></div>
+            </div>
+                    <div class="row">
+                <div class="col-md-2 type">
+                    
+                </div>
+                <div class="col-md-8">
+                    <a href="#method_clearPyGenericServices">clearPyGenericServices</a>()
+        
+                                            <p class="no-description">No description</p>
+                                    </div>
+                <div class="col-md-2"></div>
+            </div>
+                    <div class="row">
+                <div class="col-md-2 type">
+                    $this
+                </div>
+                <div class="col-md-8">
+                    <a href="#method_setPyGenericServices">setPyGenericServices</a>(bool $var)
+        
+                                            <p><p>Generated from protobuf field <code>optional bool py_generic_services = 18 [default = false];</code></p></p>                </div>
+                <div class="col-md-2"></div>
+            </div>
+                    <div class="row">
+                <div class="col-md-2 type">
+                    bool
+                </div>
+                <div class="col-md-8">
+                    <a href="#method_getPhpGenericServices">getPhpGenericServices</a>()
+        
+                                            <p><p>Generated from protobuf field <code>optional bool php_generic_services = 42 [default = false];</code></p></p>                </div>
+                <div class="col-md-2"></div>
+            </div>
+                    <div class="row">
+                <div class="col-md-2 type">
+                    
+                </div>
+                <div class="col-md-8">
+                    <a href="#method_hasPhpGenericServices">hasPhpGenericServices</a>()
+        
+                                            <p class="no-description">No description</p>
+                                    </div>
+                <div class="col-md-2"></div>
+            </div>
+                    <div class="row">
+                <div class="col-md-2 type">
+                    
+                </div>
+                <div class="col-md-8">
+                    <a href="#method_clearPhpGenericServices">clearPhpGenericServices</a>()
+        
+                                            <p class="no-description">No description</p>
+                                    </div>
+                <div class="col-md-2"></div>
+            </div>
+                    <div class="row">
+                <div class="col-md-2 type">
+                    $this
+                </div>
+                <div class="col-md-8">
+                    <a href="#method_setPhpGenericServices">setPhpGenericServices</a>(bool $var)
+        
+                                            <p><p>Generated from protobuf field <code>optional bool php_generic_services = 42 [default = false];</code></p></p>                </div>
+                <div class="col-md-2"></div>
+            </div>
+                    <div class="row">
+                <div class="col-md-2 type">
+                    bool
+                </div>
+                <div class="col-md-8">
+                    <a href="#method_getDeprecated">getDeprecated</a>()
+        
+                                            <p><p>Is this file deprecated?
+Depending on the target platform, this can emit Deprecated annotations
+for everything in the file, or it will be completely ignored; in the very
+least, this is a formalization for deprecating files.</p></p>                </div>
+                <div class="col-md-2"></div>
+            </div>
+                    <div class="row">
+                <div class="col-md-2 type">
+                    
+                </div>
+                <div class="col-md-8">
+                    <a href="#method_hasDeprecated">hasDeprecated</a>()
+        
+                                            <p class="no-description">No description</p>
+                                    </div>
+                <div class="col-md-2"></div>
+            </div>
+                    <div class="row">
+                <div class="col-md-2 type">
+                    
+                </div>
+                <div class="col-md-8">
+                    <a href="#method_clearDeprecated">clearDeprecated</a>()
+        
+                                            <p class="no-description">No description</p>
+                                    </div>
+                <div class="col-md-2"></div>
+            </div>
+                    <div class="row">
+                <div class="col-md-2 type">
+                    $this
+                </div>
+                <div class="col-md-8">
+                    <a href="#method_setDeprecated">setDeprecated</a>(bool $var)
+        
+                                            <p><p>Is this file deprecated?
+Depending on the target platform, this can emit Deprecated annotations
+for everything in the file, or it will be completely ignored; in the very
+least, this is a formalization for deprecating files.</p></p>                </div>
+                <div class="col-md-2"></div>
+            </div>
+                    <div class="row">
+                <div class="col-md-2 type">
+                    bool
+                </div>
+                <div class="col-md-8">
+                    <a href="#method_getCcEnableArenas">getCcEnableArenas</a>()
+        
+                                            <p><p>Enables the use of arenas for the proto messages in this file. This applies
+only to generated classes for C++.</p></p>                </div>
+                <div class="col-md-2"></div>
+            </div>
+                    <div class="row">
+                <div class="col-md-2 type">
+                    
+                </div>
+                <div class="col-md-8">
+                    <a href="#method_hasCcEnableArenas">hasCcEnableArenas</a>()
+        
+                                            <p class="no-description">No description</p>
+                                    </div>
+                <div class="col-md-2"></div>
+            </div>
+                    <div class="row">
+                <div class="col-md-2 type">
+                    
+                </div>
+                <div class="col-md-8">
+                    <a href="#method_clearCcEnableArenas">clearCcEnableArenas</a>()
+        
+                                            <p class="no-description">No description</p>
+                                    </div>
+                <div class="col-md-2"></div>
+            </div>
+                    <div class="row">
+                <div class="col-md-2 type">
+                    $this
+                </div>
+                <div class="col-md-8">
+                    <a href="#method_setCcEnableArenas">setCcEnableArenas</a>(bool $var)
+        
+                                            <p><p>Enables the use of arenas for the proto messages in this file. This applies
+only to generated classes for C++.</p></p>                </div>
+                <div class="col-md-2"></div>
+            </div>
+                    <div class="row">
+                <div class="col-md-2 type">
+                    string
+                </div>
+                <div class="col-md-8">
+                    <a href="#method_getObjcClassPrefix">getObjcClassPrefix</a>()
+        
+                                            <p><p>Sets the objective c class prefix which is prepended to all objective c
+generated classes from this .proto. There is no default.</p></p>                </div>
+                <div class="col-md-2"></div>
+            </div>
+                    <div class="row">
+                <div class="col-md-2 type">
+                    
+                </div>
+                <div class="col-md-8">
+                    <a href="#method_hasObjcClassPrefix">hasObjcClassPrefix</a>()
+        
+                                            <p class="no-description">No description</p>
+                                    </div>
+                <div class="col-md-2"></div>
+            </div>
+                    <div class="row">
+                <div class="col-md-2 type">
+                    
+                </div>
+                <div class="col-md-8">
+                    <a href="#method_clearObjcClassPrefix">clearObjcClassPrefix</a>()
+        
+                                            <p class="no-description">No description</p>
+                                    </div>
+                <div class="col-md-2"></div>
+            </div>
+                    <div class="row">
+                <div class="col-md-2 type">
+                    $this
+                </div>
+                <div class="col-md-8">
+                    <a href="#method_setObjcClassPrefix">setObjcClassPrefix</a>(string $var)
+        
+                                            <p><p>Sets the objective c class prefix which is prepended to all objective c
+generated classes from this .proto. There is no default.</p></p>                </div>
+                <div class="col-md-2"></div>
+            </div>
+                    <div class="row">
+                <div class="col-md-2 type">
+                    string
+                </div>
+                <div class="col-md-8">
+                    <a href="#method_getCsharpNamespace">getCsharpNamespace</a>()
+        
+                                            <p><p>Namespace for generated classes; defaults to the package.</p></p>                </div>
+                <div class="col-md-2"></div>
+            </div>
+                    <div class="row">
+                <div class="col-md-2 type">
+                    
+                </div>
+                <div class="col-md-8">
+                    <a href="#method_hasCsharpNamespace">hasCsharpNamespace</a>()
+        
+                                            <p class="no-description">No description</p>
+                                    </div>
+                <div class="col-md-2"></div>
+            </div>
+                    <div class="row">
+                <div class="col-md-2 type">
+                    
+                </div>
+                <div class="col-md-8">
+                    <a href="#method_clearCsharpNamespace">clearCsharpNamespace</a>()
+        
+                                            <p class="no-description">No description</p>
+                                    </div>
+                <div class="col-md-2"></div>
+            </div>
+                    <div class="row">
+                <div class="col-md-2 type">
+                    $this
+                </div>
+                <div class="col-md-8">
+                    <a href="#method_setCsharpNamespace">setCsharpNamespace</a>(string $var)
+        
+                                            <p><p>Namespace for generated classes; defaults to the package.</p></p>                </div>
+                <div class="col-md-2"></div>
+            </div>
+                    <div class="row">
+                <div class="col-md-2 type">
+                    string
+                </div>
+                <div class="col-md-8">
+                    <a href="#method_getSwiftPrefix">getSwiftPrefix</a>()
+        
+                                            <p><p>By default Swift generators will take the proto package and CamelCase it
+replacing '.' with underscore and use that to prefix the types/symbols
+defined. When this options is provided, they will use this value instead
+to prefix the types/symbols defined.</p></p>                </div>
+                <div class="col-md-2"></div>
+            </div>
+                    <div class="row">
+                <div class="col-md-2 type">
+                    
+                </div>
+                <div class="col-md-8">
+                    <a href="#method_hasSwiftPrefix">hasSwiftPrefix</a>()
+        
+                                            <p class="no-description">No description</p>
+                                    </div>
+                <div class="col-md-2"></div>
+            </div>
+                    <div class="row">
+                <div class="col-md-2 type">
+                    
+                </div>
+                <div class="col-md-8">
+                    <a href="#method_clearSwiftPrefix">clearSwiftPrefix</a>()
+        
+                                            <p class="no-description">No description</p>
+                                    </div>
+                <div class="col-md-2"></div>
+            </div>
+                    <div class="row">
+                <div class="col-md-2 type">
+                    $this
+                </div>
+                <div class="col-md-8">
+                    <a href="#method_setSwiftPrefix">setSwiftPrefix</a>(string $var)
+        
+                                            <p><p>By default Swift generators will take the proto package and CamelCase it
+replacing '.' with underscore and use that to prefix the types/symbols
+defined. When this options is provided, they will use this value instead
+to prefix the types/symbols defined.</p></p>                </div>
+                <div class="col-md-2"></div>
+            </div>
+                    <div class="row">
+                <div class="col-md-2 type">
+                    string
+                </div>
+                <div class="col-md-8">
+                    <a href="#method_getPhpClassPrefix">getPhpClassPrefix</a>()
+        
+                                            <p><p>Sets the php class prefix which is prepended to all php generated classes
+from this .proto. Default is empty.</p></p>                </div>
+                <div class="col-md-2"></div>
+            </div>
+                    <div class="row">
+                <div class="col-md-2 type">
+                    
+                </div>
+                <div class="col-md-8">
+                    <a href="#method_hasPhpClassPrefix">hasPhpClassPrefix</a>()
+        
+                                            <p class="no-description">No description</p>
+                                    </div>
+                <div class="col-md-2"></div>
+            </div>
+                    <div class="row">
+                <div class="col-md-2 type">
+                    
+                </div>
+                <div class="col-md-8">
+                    <a href="#method_clearPhpClassPrefix">clearPhpClassPrefix</a>()
+        
+                                            <p class="no-description">No description</p>
+                                    </div>
+                <div class="col-md-2"></div>
+            </div>
+                    <div class="row">
+                <div class="col-md-2 type">
+                    $this
+                </div>
+                <div class="col-md-8">
+                    <a href="#method_setPhpClassPrefix">setPhpClassPrefix</a>(string $var)
+        
+                                            <p><p>Sets the php class prefix which is prepended to all php generated classes
+from this .proto. Default is empty.</p></p>                </div>
+                <div class="col-md-2"></div>
+            </div>
+                    <div class="row">
+                <div class="col-md-2 type">
+                    string
+                </div>
+                <div class="col-md-8">
+                    <a href="#method_getPhpNamespace">getPhpNamespace</a>()
+        
+                                            <p><p>Use this option to change the namespace of php generated classes. Default
+is empty. When this option is empty, the package name will be used for
+determining the namespace.</p></p>                </div>
+                <div class="col-md-2"></div>
+            </div>
+                    <div class="row">
+                <div class="col-md-2 type">
+                    
+                </div>
+                <div class="col-md-8">
+                    <a href="#method_hasPhpNamespace">hasPhpNamespace</a>()
+        
+                                            <p class="no-description">No description</p>
+                                    </div>
+                <div class="col-md-2"></div>
+            </div>
+                    <div class="row">
+                <div class="col-md-2 type">
+                    
+                </div>
+                <div class="col-md-8">
+                    <a href="#method_clearPhpNamespace">clearPhpNamespace</a>()
+        
+                                            <p class="no-description">No description</p>
+                                    </div>
+                <div class="col-md-2"></div>
+            </div>
+                    <div class="row">
+                <div class="col-md-2 type">
+                    $this
+                </div>
+                <div class="col-md-8">
+                    <a href="#method_setPhpNamespace">setPhpNamespace</a>(string $var)
+        
+                                            <p><p>Use this option to change the namespace of php generated classes. Default
+is empty. When this option is empty, the package name will be used for
+determining the namespace.</p></p>                </div>
+                <div class="col-md-2"></div>
+            </div>
+                    <div class="row">
+                <div class="col-md-2 type">
+                    string
+                </div>
+                <div class="col-md-8">
+                    <a href="#method_getPhpMetadataNamespace">getPhpMetadataNamespace</a>()
+        
+                                            <p><p>Use this option to change the namespace of php generated metadata classes.</p></p>                </div>
+                <div class="col-md-2"></div>
+            </div>
+                    <div class="row">
+                <div class="col-md-2 type">
+                    
+                </div>
+                <div class="col-md-8">
+                    <a href="#method_hasPhpMetadataNamespace">hasPhpMetadataNamespace</a>()
+        
+                                            <p class="no-description">No description</p>
+                                    </div>
+                <div class="col-md-2"></div>
+            </div>
+                    <div class="row">
+                <div class="col-md-2 type">
+                    
+                </div>
+                <div class="col-md-8">
+                    <a href="#method_clearPhpMetadataNamespace">clearPhpMetadataNamespace</a>()
+        
+                                            <p class="no-description">No description</p>
+                                    </div>
+                <div class="col-md-2"></div>
+            </div>
+                    <div class="row">
+                <div class="col-md-2 type">
+                    $this
+                </div>
+                <div class="col-md-8">
+                    <a href="#method_setPhpMetadataNamespace">setPhpMetadataNamespace</a>(string $var)
+        
+                                            <p><p>Use this option to change the namespace of php generated metadata classes.</p></p>                </div>
+                <div class="col-md-2"></div>
+            </div>
+                    <div class="row">
+                <div class="col-md-2 type">
+                    string
+                </div>
+                <div class="col-md-8">
+                    <a href="#method_getRubyPackage">getRubyPackage</a>()
+        
+                                            <p><p>Use this option to change the package of ruby generated classes. Default
+is empty. When this option is not set, the package name will be used for
+determining the ruby package.</p></p>                </div>
+                <div class="col-md-2"></div>
+            </div>
+                    <div class="row">
+                <div class="col-md-2 type">
+                    
+                </div>
+                <div class="col-md-8">
+                    <a href="#method_hasRubyPackage">hasRubyPackage</a>()
+        
+                                            <p class="no-description">No description</p>
+                                    </div>
+                <div class="col-md-2"></div>
+            </div>
+                    <div class="row">
+                <div class="col-md-2 type">
+                    
+                </div>
+                <div class="col-md-8">
+                    <a href="#method_clearRubyPackage">clearRubyPackage</a>()
+        
+                                            <p class="no-description">No description</p>
+                                    </div>
+                <div class="col-md-2"></div>
+            </div>
+                    <div class="row">
+                <div class="col-md-2 type">
+                    $this
+                </div>
+                <div class="col-md-8">
+                    <a href="#method_setRubyPackage">setRubyPackage</a>(string $var)
+        
+                                            <p><p>Use this option to change the package of ruby generated classes. Default
+is empty. When this option is not set, the package name will be used for
+determining the ruby package.</p></p>                </div>
+                <div class="col-md-2"></div>
+            </div>
+                    <div class="row">
+                <div class="col-md-2 type">
+                    <a href="../../../Google/Protobuf/Internal/RepeatedField.html"><abbr title="Google\Protobuf\Internal\RepeatedField">RepeatedField</abbr></a>
+                </div>
+                <div class="col-md-8">
+                    <a href="#method_getUninterpretedOption">getUninterpretedOption</a>()
+        
+                                            <p><p>The parser stores options it doesn't recognize here.</p></p>                </div>
+                <div class="col-md-2"></div>
+            </div>
+                    <div class="row">
+                <div class="col-md-2 type">
+                    $this
+                </div>
+                <div class="col-md-8">
+                    <a href="#method_setUninterpretedOption">setUninterpretedOption</a>(<a href="../../../Google/Protobuf/Internal/UninterpretedOption.html"><abbr title="Google\Protobuf\Internal\UninterpretedOption">UninterpretedOption</abbr></a>[]|<a href="../../../Google/Protobuf/Internal/RepeatedField.html"><abbr title="Google\Protobuf\Internal\RepeatedField">RepeatedField</abbr></a> $var)
+        
+                                            <p><p>The parser stores options it doesn't recognize here.</p></p>                </div>
+                <div class="col-md-2"></div>
+            </div>
+            </div>
+
+
+        <h2>Details</h2>
+
+            <div id="method-details">
+                    <div class="method-item">
+                    <h3 id="method___construct">
+        <div class="location"><a href="https://github.com/protocolbuffers/protobuf-php/blob/v3.21.10/src/Google/Protobuf/Internal/FileOptions.php#L274">at line 274</a></div>
+        <code>                    
+    <strong>__construct</strong>($data = NULL)
+        </code>
+    </h3>
+    <div class="details">    
+    
+            
+
+        <div class="method-description">
+                            <p>Constructor.</p>                        
+        </div>
+        <div class="tags">
+                            <h4>Parameters</h4>
+
+                    <table class="table table-condensed">
+                    <tr>
+                <td></td>
+                <td>$data</td>
+                <td></td>
+            </tr>
+            </table>
+
+            
+            
+            
+            
+                    </div>
+    </div>
+
+            </div>
+                    <div class="method-item">
+                    <h3 id="method_readWrapperValue">
+        <div class="location">in <a href="../../../Google/Protobuf/Internal/Message.html#method_readWrapperValue">
+<abbr title="Google\Protobuf\Internal\Message">Message</abbr></a> <a href="https://github.com/protocolbuffers/protobuf-php/blob/v3.21.10/src/Google/Protobuf/Internal/Message.php#L180">at line 180</a></div>
+        <code>            protected        
+    <strong>readWrapperValue</strong>($member)
+        </code>
+    </h3>
+    <div class="details">    
+    
+            
+
+        <div class="method-description">
+                            <p class="no-description">No description</p>
+                    
+        </div>
+        <div class="tags">
+                            <h4>Parameters</h4>
+
+                    <table class="table table-condensed">
+                    <tr>
+                <td></td>
+                <td>$member</td>
+                <td></td>
+            </tr>
+            </table>
+
+            
+            
+            
+            
+                    </div>
+    </div>
+
+            </div>
+                    <div class="method-item">
+                    <h3 id="method_writeWrapperValue">
+        <div class="location">in <a href="../../../Google/Protobuf/Internal/Message.html#method_writeWrapperValue">
+<abbr title="Google\Protobuf\Internal\Message">Message</abbr></a> <a href="https://github.com/protocolbuffers/protobuf-php/blob/v3.21.10/src/Google/Protobuf/Internal/Message.php#L197">at line 197</a></div>
+        <code>            protected        
+    <strong>writeWrapperValue</strong>($member, $value)
+        </code>
+    </h3>
+    <div class="details">    
+    
+            
+
+        <div class="method-description">
+                            <p class="no-description">No description</p>
+                    
+        </div>
+        <div class="tags">
+                            <h4>Parameters</h4>
+
+                    <table class="table table-condensed">
+                    <tr>
+                <td></td>
+                <td>$member</td>
+                <td></td>
+            </tr>
+                    <tr>
+                <td></td>
+                <td>$value</td>
+                <td></td>
+            </tr>
+            </table>
+
+            
+            
+            
+            
+                    </div>
+    </div>
+
+            </div>
+                    <div class="method-item">
+                    <h3 id="method_readOneof">
+        <div class="location">in <a href="../../../Google/Protobuf/Internal/Message.html#method_readOneof">
+<abbr title="Google\Protobuf\Internal\Message">Message</abbr></a> <a href="https://github.com/protocolbuffers/protobuf-php/blob/v3.21.10/src/Google/Protobuf/Internal/Message.php#L216">at line 216</a></div>
+        <code>            protected        
+    <strong>readOneof</strong>($number)
+        </code>
+    </h3>
+    <div class="details">    
+    
+            
+
+        <div class="method-description">
+                            <p class="no-description">No description</p>
+                    
+        </div>
+        <div class="tags">
+                            <h4>Parameters</h4>
+
+                    <table class="table table-condensed">
+                    <tr>
+                <td></td>
+                <td>$number</td>
+                <td></td>
+            </tr>
+            </table>
+
+            
+            
+            
+            
+                    </div>
+    </div>
+
+            </div>
+                    <div class="method-item">
+                    <h3 id="method_hasOneof">
+        <div class="location">in <a href="../../../Google/Protobuf/Internal/Message.html#method_hasOneof">
+<abbr title="Google\Protobuf\Internal\Message">Message</abbr></a> <a href="https://github.com/protocolbuffers/protobuf-php/blob/v3.21.10/src/Google/Protobuf/Internal/Message.php#L229">at line 229</a></div>
+        <code>            protected        
+    <strong>hasOneof</strong>($number)
+        </code>
+    </h3>
+    <div class="details">    
+    
+            
+
+        <div class="method-description">
+                            <p class="no-description">No description</p>
+                    
+        </div>
+        <div class="tags">
+                            <h4>Parameters</h4>
+
+                    <table class="table table-condensed">
+                    <tr>
+                <td></td>
+                <td>$number</td>
+                <td></td>
+            </tr>
+            </table>
+
+            
+            
+            
+            
+                    </div>
+    </div>
+
+            </div>
+                    <div class="method-item">
+                    <h3 id="method_writeOneof">
+        <div class="location">in <a href="../../../Google/Protobuf/Internal/Message.html#method_writeOneof">
+<abbr title="Google\Protobuf\Internal\Message">Message</abbr></a> <a href="https://github.com/protocolbuffers/protobuf-php/blob/v3.21.10/src/Google/Protobuf/Internal/Message.php#L238">at line 238</a></div>
+        <code>            protected        
+    <strong>writeOneof</strong>($number, $value)
+        </code>
+    </h3>
+    <div class="details">    
+    
+            
+
+        <div class="method-description">
+                            <p class="no-description">No description</p>
+                    
+        </div>
+        <div class="tags">
+                            <h4>Parameters</h4>
+
+                    <table class="table table-condensed">
+                    <tr>
+                <td></td>
+                <td>$number</td>
+                <td></td>
+            </tr>
+                    <tr>
+                <td></td>
+                <td>$value</td>
+                <td></td>
+            </tr>
+            </table>
+
+            
+            
+            
+            
+                    </div>
+    </div>
+
+            </div>
+                    <div class="method-item">
+                    <h3 id="method_whichOneof">
+        <div class="location">in <a href="../../../Google/Protobuf/Internal/Message.html#method_whichOneof">
+<abbr title="Google\Protobuf\Internal\Message">Message</abbr></a> <a href="https://github.com/protocolbuffers/protobuf-php/blob/v3.21.10/src/Google/Protobuf/Internal/Message.php#L253">at line 253</a></div>
+        <code>            protected        
+    <strong>whichOneof</strong>($oneof_name)
+        </code>
+    </h3>
+    <div class="details">    
+    
+            
+
+        <div class="method-description">
+                            <p class="no-description">No description</p>
+                    
+        </div>
+        <div class="tags">
+                            <h4>Parameters</h4>
+
+                    <table class="table table-condensed">
+                    <tr>
+                <td></td>
+                <td>$oneof_name</td>
+                <td></td>
+            </tr>
+            </table>
+
+            
+            
+            
+            
+                    </div>
+    </div>
+
+            </div>
+                    <div class="method-item">
+                    <h3 id="method_clear">
+        <div class="location">in <a href="../../../Google/Protobuf/Internal/Message.html#method_clear">
+<abbr title="Google\Protobuf\Internal\Message">Message</abbr></a> <a href="https://github.com/protocolbuffers/protobuf-php/blob/v3.21.10/src/Google/Protobuf/Internal/Message.php#L548">at line 548</a></div>
+        <code>                    
+    <strong>clear</strong>()
+        </code>
+    </h3>
+    <div class="details">    
+    
+            
+
+        <div class="method-description">
+                            <p><p>Clear all containing fields.</p></p>                        
+        </div>
+        <div class="tags">
+            
+            
+            
+            
+                    </div>
+    </div>
+
+            </div>
+                    <div class="method-item">
+                    <h3 id="method_discardUnknownFields">
+        <div class="location">in <a href="../../../Google/Protobuf/Internal/Message.html#method_discardUnknownFields">
+<abbr title="Google\Protobuf\Internal\Message">Message</abbr></a> <a href="https://github.com/protocolbuffers/protobuf-php/blob/v3.21.10/src/Google/Protobuf/Internal/Message.php#L658">at line 658</a></div>
+        <code>                    
+    <strong>discardUnknownFields</strong>()
+        </code>
+    </h3>
+    <div class="details">    
+    
+            
+
+        <div class="method-description">
+                            <p><p>Clear all unknown fields previously parsed.</p></p>                        
+        </div>
+        <div class="tags">
+            
+            
+            
+            
+                    </div>
+    </div>
+
+            </div>
+                    <div class="method-item">
+                    <h3 id="method_mergeFrom">
+        <div class="location">in <a href="../../../Google/Protobuf/Internal/Message.html#method_mergeFrom">
+<abbr title="Google\Protobuf\Internal\Message">Message</abbr></a> <a href="https://github.com/protocolbuffers/protobuf-php/blob/v3.21.10/src/Google/Protobuf/Internal/Message.php#L704">at line 704</a></div>
+        <code>                    
+    <strong>mergeFrom</strong>(object $msg)
+        </code>
+    </h3>
+    <div class="details">    
+    
+            
+
+        <div class="method-description">
+                            <p><p>Merges the contents of the specified message into current message.</p></p>                <p><p>This method merges the contents of the specified message into the
+current message. Singular fields that are set in the specified message
+overwrite the corresponding fields in the current message.  Repeated
+fields are appended. Map fields key-value pairs are overwritten.
+Singular/Oneof sub-messages are recursively merged. All overwritten
+sub-messages are deep-copied.</p></p>        
+        </div>
+        <div class="tags">
+                            <h4>Parameters</h4>
+
+                    <table class="table table-condensed">
+                    <tr>
+                <td>object</td>
+                <td>$msg</td>
+                <td><p>Protobuf message to be merged from.</p></td>
+            </tr>
+            </table>
+
+            
+            
+            
+            
+                    </div>
+    </div>
+
+            </div>
+                    <div class="method-item">
+                    <h3 id="method_mergeFromString">
+        <div class="location">in <a href="../../../Google/Protobuf/Internal/Message.html#method_mergeFromString">
+<abbr title="Google\Protobuf\Internal\Message">Message</abbr></a> <a href="https://github.com/protocolbuffers/protobuf-php/blob/v3.21.10/src/Google/Protobuf/Internal/Message.php#L772">at line 772</a></div>
+        <code>                    
+    <strong>mergeFromString</strong>(string $data)
+        </code>
+    </h3>
+    <div class="details">    
+    
+            
+
+        <div class="method-description">
+                            <p><p>Parses a protocol buffer contained in a string.</p></p>                <p><p>This function takes a string in the (non-human-readable) binary wire
+format, matching the encoding output by serializeToString().
+See mergeFrom() for merging behavior, if the field is already set in the
+specified message.</p></p>        
+        </div>
+        <div class="tags">
+                            <h4>Parameters</h4>
+
+                    <table class="table table-condensed">
+                    <tr>
+                <td>string</td>
+                <td>$data</td>
+                <td><p>Binary protobuf data.</p></td>
+            </tr>
+            </table>
+
+            
+            
+                            <h4>Exceptions</h4>
+
+                    <table class="table table-condensed">
+                    <tr>
+                <td><a target="_blank" rel="noopener" href="https://www.php.net/Exception">Exception</a></td>
+                <td></td>
+            </tr>
+            </table>
+
+            
+            
+                    </div>
+    </div>
+
+            </div>
+                    <div class="method-item">
+                    <h3 id="method_mergeFromJsonString">
+        <div class="location">in <a href="../../../Google/Protobuf/Internal/Message.html#method_mergeFromJsonString">
+<abbr title="Google\Protobuf\Internal\Message">Message</abbr></a> <a href="https://github.com/protocolbuffers/protobuf-php/blob/v3.21.10/src/Google/Protobuf/Internal/Message.php#L790">at line 790</a></div>
+        <code>                    
+    <strong>mergeFromJsonString</strong>(string $data, $ignore_unknown = false)
+        </code>
+    </h3>
+    <div class="details">    
+    
+            
+
+        <div class="method-description">
+                            <p><p>Parses a json string to protobuf message.</p></p>                <p><p>This function takes a string in the json wire format, matching the
+encoding output by serializeToJsonString().
+See mergeFrom() for merging behavior, if the field is already set in the
+specified message.</p></p>        
+        </div>
+        <div class="tags">
+                            <h4>Parameters</h4>
+
+                    <table class="table table-condensed">
+                    <tr>
+                <td>string</td>
+                <td>$data</td>
+                <td><p>Json protobuf data.</p></td>
+            </tr>
+                    <tr>
+                <td></td>
+                <td>$ignore_unknown</td>
+                <td></td>
+            </tr>
+            </table>
+
+            
+            
+                            <h4>Exceptions</h4>
+
+                    <table class="table table-condensed">
+                    <tr>
+                <td><a target="_blank" rel="noopener" href="https://www.php.net/Exception">Exception</a></td>
+                <td></td>
+            </tr>
+            </table>
+
+            
+            
+                    </div>
+    </div>
+
+            </div>
+                    <div class="method-item">
+                    <h3 id="method_parseFromStream">
+        <div class="location">in <a href="../../../Google/Protobuf/Internal/Message.html#method_parseFromStream">
+<abbr title="Google\Protobuf\Internal\Message">Message</abbr></a> <a href="https://github.com/protocolbuffers/protobuf-php/blob/v3.21.10/src/Google/Protobuf/Internal/Message.php#L799">at line 799</a></div>
+        <code>                    
+    <strong>parseFromStream</strong>($input)
+        </code>
+    </h3>
+    <div class="details">    
+    
+            
+
+        <div class="method-description">
+                            <p class="no-description">No description</p>
+                    
+        </div>
+        <div class="tags">
+                            <h4>Parameters</h4>
+
+                    <table class="table table-condensed">
+                    <tr>
+                <td></td>
+                <td>$input</td>
+                <td></td>
+            </tr>
+            </table>
+
+            
+            
+            
+            
+                    </div>
+    </div>
+
+            </div>
+                    <div class="method-item">
+                    <h3 id="method_mergeFromArray">
+        <div class="location">in <a href="../../../Google/Protobuf/Internal/Message.html#method_mergeFromArray">
+<abbr title="Google\Protobuf\Internal\Message">Message</abbr></a> <a href="https://github.com/protocolbuffers/protobuf-php/blob/v3.21.10/src/Google/Protobuf/Internal/Message.php#L1057">at line 1057</a></div>
+        <code>            protected        
+    <strong>mergeFromArray</strong>(array $array)
+        </code>
+    </h3>
+    <div class="details">    
+    
+            
+
+        <div class="method-description">
+                            <p><p>Populates the message from a user-supplied PHP array. Array keys
+correspond to Message properties and nested message properties.</p></p>                <p><p>Example:</p>
+<pre><code>$message-&gt;mergeFromArray([
+    'name' =&gt; 'This is a message name',
+    'interval' =&gt; [
+         'startTime' =&gt; time() - 60,
+         'endTime' =&gt; time(),
+    ]
+]);</code></pre>
+<p>This method will trigger an error if it is passed data that cannot
+be converted to the correct type. For example, a StringValue field
+must receive data that is either a string or a StringValue object.</p></p>        
+        </div>
+        <div class="tags">
+                            <h4>Parameters</h4>
+
+                    <table class="table table-condensed">
+                    <tr>
+                <td>array</td>
+                <td>$array</td>
+                <td><p>An array containing message properties and values.</p></td>
+            </tr>
+            </table>
+
+            
+            
+            
+            
+                    </div>
+    </div>
+
+            </div>
+                    <div class="method-item">
+                    <h3 id="method_mergeFromJsonArray">
+        <div class="location">in <a href="../../../Google/Protobuf/Internal/Message.html#method_mergeFromJsonArray">
+<abbr title="Google\Protobuf\Internal\Message">Message</abbr></a> <a href="https://github.com/protocolbuffers/protobuf-php/blob/v3.21.10/src/Google/Protobuf/Internal/Message.php#L1146">at line 1146</a></div>
+        <code>            protected        
+    <strong>mergeFromJsonArray</strong>($array, $ignore_unknown)
+        </code>
+    </h3>
+    <div class="details">    
+    
+            
+
+        <div class="method-description">
+                            <p class="no-description">No description</p>
+                    
+        </div>
+        <div class="tags">
+                            <h4>Parameters</h4>
+
+                    <table class="table table-condensed">
+                    <tr>
+                <td></td>
+                <td>$array</td>
+                <td></td>
+            </tr>
+                    <tr>
+                <td></td>
+                <td>$ignore_unknown</td>
+                <td></td>
+            </tr>
+            </table>
+
+            
+            
+            
+            
+                    </div>
+    </div>
+
+            </div>
+                    <div class="method-item">
+                    <h3 id="method_parseFromJsonStream">
+        <div class="location">in <a href="../../../Google/Protobuf/Internal/Message.html#method_parseFromJsonStream">
+<abbr title="Google\Protobuf\Internal\Message">Message</abbr></a> <a href="https://github.com/protocolbuffers/protobuf-php/blob/v3.21.10/src/Google/Protobuf/Internal/Message.php#L1320">at line 1320</a></div>
+        <code>                    
+    <strong>parseFromJsonStream</strong>($input, $ignore_unknown)
+        </code>
+    </h3>
+    <div class="details">    
+    
+            
+
+        <div class="method-description">
+                            <p class="no-description">No description</p>
+                    
+        </div>
+        <div class="tags">
+                            <h4>Parameters</h4>
+
+                    <table class="table table-condensed">
+                    <tr>
+                <td></td>
+                <td>$input</td>
+                <td></td>
+            </tr>
+                    <tr>
+                <td></td>
+                <td>$ignore_unknown</td>
+                <td></td>
+            </tr>
+            </table>
+
+            
+            
+            
+            
+                    </div>
+    </div>
+
+            </div>
+                    <div class="method-item">
+                    <h3 id="method_serializeToStream">
+        <div class="location">in <a href="../../../Google/Protobuf/Internal/Message.html#method_serializeToStream">
+<abbr title="Google\Protobuf\Internal\Message">Message</abbr></a> <a href="https://github.com/protocolbuffers/protobuf-php/blob/v3.21.10/src/Google/Protobuf/Internal/Message.php#L1453">at line 1453</a></div>
+        <code>                    
+    <strong>serializeToStream</strong>($output)
+        </code>
+    </h3>
+    <div class="details">    
+    
+            
+
+        <div class="method-description">
+                            <p class="no-description">No description</p>
+                    
+        </div>
+        <div class="tags">
+                            <h4>Parameters</h4>
+
+                    <table class="table table-condensed">
+                    <tr>
+                <td></td>
+                <td>$output</td>
+                <td></td>
+            </tr>
+            </table>
+
+            
+            
+            
+            
+                    </div>
+    </div>
+
+            </div>
+                    <div class="method-item">
+                    <h3 id="method_serializeToJsonStream">
+        <div class="location">in <a href="../../../Google/Protobuf/Internal/Message.html#method_serializeToJsonStream">
+<abbr title="Google\Protobuf\Internal\Message">Message</abbr></a> <a href="https://github.com/protocolbuffers/protobuf-php/blob/v3.21.10/src/Google/Protobuf/Internal/Message.php#L1468">at line 1468</a></div>
+        <code>                    
+    <strong>serializeToJsonStream</strong>($output)
+        </code>
+    </h3>
+    <div class="details">    
+    
+            
+
+        <div class="method-description">
+                            <p class="no-description">No description</p>
+                    
+        </div>
+        <div class="tags">
+                            <h4>Parameters</h4>
+
+                    <table class="table table-condensed">
+                    <tr>
+                <td></td>
+                <td>$output</td>
+                <td></td>
+            </tr>
+            </table>
+
+            
+            
+            
+            
+                    </div>
+    </div>
+
+            </div>
+                    <div class="method-item">
+                    <h3 id="method_serializeToString">
+        <div class="location">in <a href="../../../Google/Protobuf/Internal/Message.html#method_serializeToString">
+<abbr title="Google\Protobuf\Internal\Message">Message</abbr></a> <a href="https://github.com/protocolbuffers/protobuf-php/blob/v3.21.10/src/Google/Protobuf/Internal/Message.php#L1560">at line 1560</a></div>
+        <code>                    string
+    <strong>serializeToString</strong>()
+        </code>
+    </h3>
+    <div class="details">    
+    
+            
+
+        <div class="method-description">
+                            <p><p>Serialize the message to string.</p></p>                        
+        </div>
+        <div class="tags">
+            
+                            <h4>Return Value</h4>
+
+                    <table class="table table-condensed">
+        <tr>
+            <td>string</td>
+            <td><p>Serialized binary protobuf data.</p></td>
+        </tr>
+    </table>
+
+            
+            
+            
+                    </div>
+    </div>
+
+            </div>
+                    <div class="method-item">
+                    <h3 id="method_serializeToJsonString">
+        <div class="location">in <a href="../../../Google/Protobuf/Internal/Message.html#method_serializeToJsonString">
+<abbr title="Google\Protobuf\Internal\Message">Message</abbr></a> <a href="https://github.com/protocolbuffers/protobuf-php/blob/v3.21.10/src/Google/Protobuf/Internal/Message.php#L1571">at line 1571</a></div>
+        <code>                    string
+    <strong>serializeToJsonString</strong>()
+        </code>
+    </h3>
+    <div class="details">    
+    
+            
+
+        <div class="method-description">
+                            <p><p>Serialize the message to json string.</p></p>                        
+        </div>
+        <div class="tags">
+            
+                            <h4>Return Value</h4>
+
+                    <table class="table table-condensed">
+        <tr>
+            <td>string</td>
+            <td><p>Serialized json protobuf data.</p></td>
+        </tr>
+    </table>
+
+            
+            
+            
+                    </div>
+    </div>
+
+            </div>
+                    <div class="method-item">
+                    <h3 id="method_byteSize">
+        <div class="location">in <a href="../../../Google/Protobuf/Internal/Message.html#method_byteSize">
+<abbr title="Google\Protobuf\Internal\Message">Message</abbr></a> <a href="https://github.com/protocolbuffers/protobuf-php/blob/v3.21.10/src/Google/Protobuf/Internal/Message.php#L1923">at line 1923</a></div>
+        <code>                    
+    <strong>byteSize</strong>()
+        </code>
+    </h3>
+    <div class="details">    
+    
+            
+
+        <div class="method-description">
+                            <p class="no-description">No description</p>
+                    
+        </div>
+        <div class="tags">
+            
+            
+            
+            
+                    </div>
+    </div>
+
+            </div>
+                    <div class="method-item">
+                    <h3 id="method_jsonByteSize">
+        <div class="location">in <a href="../../../Google/Protobuf/Internal/Message.html#method_jsonByteSize">
+<abbr title="Google\Protobuf\Internal\Message">Message</abbr></a> <a href="https://github.com/protocolbuffers/protobuf-php/blob/v3.21.10/src/Google/Protobuf/Internal/Message.php#L1964">at line 1964</a></div>
+        <code>                    
+    <strong>jsonByteSize</strong>()
+        </code>
+    </h3>
+    <div class="details">    
+    
+            
+
+        <div class="method-description">
+                            <p class="no-description">No description</p>
+                    
+        </div>
+        <div class="tags">
+            
+            
+            
+            
+                    </div>
+    </div>
+
+            </div>
+                    <div class="method-item">
+                    <h3 id="method_getJavaPackage">
+        <div class="location"><a href="https://github.com/protocolbuffers/protobuf-php/blob/v3.21.10/src/Google/Protobuf/Internal/FileOptions.php#L288">at line 288</a></div>
+        <code>                    string
+    <strong>getJavaPackage</strong>()
+        </code>
+    </h3>
+    <div class="details">    
+    
+            
+
+        <div class="method-description">
+                            <p><p>Sets the Java package where classes generated from this .proto will be
+placed.  By default, the proto package is used, but this is often
+inappropriate because proto packages do not normally start with backwards
+domain names.</p></p>                <p><p>Generated from protobuf field <code>optional string java_package = 1;</code></p></p>        
+        </div>
+        <div class="tags">
+            
+                            <h4>Return Value</h4>
+
+                    <table class="table table-condensed">
+        <tr>
+            <td>string</td>
+            <td></td>
+        </tr>
+    </table>
+
+            
+            
+            
+                    </div>
+    </div>
+
+            </div>
+                    <div class="method-item">
+                    <h3 id="method_hasJavaPackage">
+        <div class="location"><a href="https://github.com/protocolbuffers/protobuf-php/blob/v3.21.10/src/Google/Protobuf/Internal/FileOptions.php#L293">at line 293</a></div>
+        <code>                    
+    <strong>hasJavaPackage</strong>()
+        </code>
+    </h3>
+    <div class="details">    
+    
+            
+
+        <div class="method-description">
+                            <p class="no-description">No description</p>
+                    
+        </div>
+        <div class="tags">
+            
+            
+            
+            
+                    </div>
+    </div>
+
+            </div>
+                    <div class="method-item">
+                    <h3 id="method_clearJavaPackage">
+        <div class="location"><a href="https://github.com/protocolbuffers/protobuf-php/blob/v3.21.10/src/Google/Protobuf/Internal/FileOptions.php#L298">at line 298</a></div>
+        <code>                    
+    <strong>clearJavaPackage</strong>()
+        </code>
+    </h3>
+    <div class="details">    
+    
+            
+
+        <div class="method-description">
+                            <p class="no-description">No description</p>
+                    
+        </div>
+        <div class="tags">
+            
+            
+            
+            
+                    </div>
+    </div>
+
+            </div>
+                    <div class="method-item">
+                    <h3 id="method_setJavaPackage">
+        <div class="location"><a href="https://github.com/protocolbuffers/protobuf-php/blob/v3.21.10/src/Google/Protobuf/Internal/FileOptions.php#L313">at line 313</a></div>
+        <code>                    $this
+    <strong>setJavaPackage</strong>(string $var)
+        </code>
+    </h3>
+    <div class="details">    
+    
+            
+
+        <div class="method-description">
+                            <p><p>Sets the Java package where classes generated from this .proto will be
+placed.  By default, the proto package is used, but this is often
+inappropriate because proto packages do not normally start with backwards
+domain names.</p></p>                <p><p>Generated from protobuf field <code>optional string java_package = 1;</code></p></p>        
+        </div>
+        <div class="tags">
+                            <h4>Parameters</h4>
+
+                    <table class="table table-condensed">
+                    <tr>
+                <td>string</td>
+                <td>$var</td>
+                <td></td>
+            </tr>
+            </table>
+
+            
+                            <h4>Return Value</h4>
+
+                    <table class="table table-condensed">
+        <tr>
+            <td>$this</td>
+            <td></td>
+        </tr>
+    </table>
+
+            
+            
+            
+                    </div>
+    </div>
+
+            </div>
+                    <div class="method-item">
+                    <h3 id="method_getJavaOuterClassname">
+        <div class="location"><a href="https://github.com/protocolbuffers/protobuf-php/blob/v3.21.10/src/Google/Protobuf/Internal/FileOptions.php#L331">at line 331</a></div>
+        <code>                    string
+    <strong>getJavaOuterClassname</strong>()
+        </code>
+    </h3>
+    <div class="details">    
+    
+            
+
+        <div class="method-description">
+                            <p><p>Controls the name of the wrapper Java class generated for the .proto file.</p></p>                <p><p>That class will always contain the .proto file's getDescriptor() method as
+well as any top-level extensions defined in the .proto file.
+If java_multiple_files is disabled, then all the other classes from the
+.proto file will be nested inside the single wrapper outer class.</p>
+<p>Generated from protobuf field <code>optional string java_outer_classname = 8;</code></p></p>        
+        </div>
+        <div class="tags">
+            
+                            <h4>Return Value</h4>
+
+                    <table class="table table-condensed">
+        <tr>
+            <td>string</td>
+            <td></td>
+        </tr>
+    </table>
+
+            
+            
+            
+                    </div>
+    </div>
+
+            </div>
+                    <div class="method-item">
+                    <h3 id="method_hasJavaOuterClassname">
+        <div class="location"><a href="https://github.com/protocolbuffers/protobuf-php/blob/v3.21.10/src/Google/Protobuf/Internal/FileOptions.php#L336">at line 336</a></div>
+        <code>                    
+    <strong>hasJavaOuterClassname</strong>()
+        </code>
+    </h3>
+    <div class="details">    
+    
+            
+
+        <div class="method-description">
+                            <p class="no-description">No description</p>
+                    
+        </div>
+        <div class="tags">
+            
+            
+            
+            
+                    </div>
+    </div>
+
+            </div>
+                    <div class="method-item">
+                    <h3 id="method_clearJavaOuterClassname">
+        <div class="location"><a href="https://github.com/protocolbuffers/protobuf-php/blob/v3.21.10/src/Google/Protobuf/Internal/FileOptions.php#L341">at line 341</a></div>
+        <code>                    
+    <strong>clearJavaOuterClassname</strong>()
+        </code>
+    </h3>
+    <div class="details">    
+    
+            
+
+        <div class="method-description">
+                            <p class="no-description">No description</p>
+                    
+        </div>
+        <div class="tags">
+            
+            
+            
+            
+                    </div>
+    </div>
+
+            </div>
+                    <div class="method-item">
+                    <h3 id="method_setJavaOuterClassname">
+        <div class="location"><a href="https://github.com/protocolbuffers/protobuf-php/blob/v3.21.10/src/Google/Protobuf/Internal/FileOptions.php#L357">at line 357</a></div>
+        <code>                    $this
+    <strong>setJavaOuterClassname</strong>(string $var)
+        </code>
+    </h3>
+    <div class="details">    
+    
+            
+
+        <div class="method-description">
+                            <p><p>Controls the name of the wrapper Java class generated for the .proto file.</p></p>                <p><p>That class will always contain the .proto file's getDescriptor() method as
+well as any top-level extensions defined in the .proto file.
+If java_multiple_files is disabled, then all the other classes from the
+.proto file will be nested inside the single wrapper outer class.</p>
+<p>Generated from protobuf field <code>optional string java_outer_classname = 8;</code></p></p>        
+        </div>
+        <div class="tags">
+                            <h4>Parameters</h4>
+
+                    <table class="table table-condensed">
+                    <tr>
+                <td>string</td>
+                <td>$var</td>
+                <td></td>
+            </tr>
+            </table>
+
+            
+                            <h4>Return Value</h4>
+
+                    <table class="table table-condensed">
+        <tr>
+            <td>$this</td>
+            <td></td>
+        </tr>
+    </table>
+
+            
+            
+            
+                    </div>
+    </div>
+
+            </div>
+                    <div class="method-item">
+                    <h3 id="method_getJavaMultipleFiles">
+        <div class="location"><a href="https://github.com/protocolbuffers/protobuf-php/blob/v3.21.10/src/Google/Protobuf/Internal/FileOptions.php#L376">at line 376</a></div>
+        <code>                    bool
+    <strong>getJavaMultipleFiles</strong>()
+        </code>
+    </h3>
+    <div class="details">    
+    
+            
+
+        <div class="method-description">
+                            <p><p>If enabled, then the Java code generator will generate a separate .java
+file for each top-level message, enum, and service defined in the .proto
+file.  Thus, these types will <em>not</em> be nested inside the wrapper class
+named by java_outer_classname.  However, the wrapper class will still be
+generated to contain the file's getDescriptor() method as well as any
+top-level extensions defined in the file.</p></p>                <p><p>Generated from protobuf field <code>optional bool java_multiple_files = 10 [default = false];</code></p></p>        
+        </div>
+        <div class="tags">
+            
+                            <h4>Return Value</h4>
+
+                    <table class="table table-condensed">
+        <tr>
+            <td>bool</td>
+            <td></td>
+        </tr>
+    </table>
+
+            
+            
+            
+                    </div>
+    </div>
+
+            </div>
+                    <div class="method-item">
+                    <h3 id="method_hasJavaMultipleFiles">
+        <div class="location"><a href="https://github.com/protocolbuffers/protobuf-php/blob/v3.21.10/src/Google/Protobuf/Internal/FileOptions.php#L381">at line 381</a></div>
+        <code>                    
+    <strong>hasJavaMultipleFiles</strong>()
+        </code>
+    </h3>
+    <div class="details">    
+    
+            
+
+        <div class="method-description">
+                            <p class="no-description">No description</p>
+                    
+        </div>
+        <div class="tags">
+            
+            
+            
+            
+                    </div>
+    </div>
+
+            </div>
+                    <div class="method-item">
+                    <h3 id="method_clearJavaMultipleFiles">
+        <div class="location"><a href="https://github.com/protocolbuffers/protobuf-php/blob/v3.21.10/src/Google/Protobuf/Internal/FileOptions.php#L386">at line 386</a></div>
+        <code>                    
+    <strong>clearJavaMultipleFiles</strong>()
+        </code>
+    </h3>
+    <div class="details">    
+    
+            
+
+        <div class="method-description">
+                            <p class="no-description">No description</p>
+                    
+        </div>
+        <div class="tags">
+            
+            
+            
+            
+                    </div>
+    </div>
+
+            </div>
+                    <div class="method-item">
+                    <h3 id="method_setJavaMultipleFiles">
+        <div class="location"><a href="https://github.com/protocolbuffers/protobuf-php/blob/v3.21.10/src/Google/Protobuf/Internal/FileOptions.php#L403">at line 403</a></div>
+        <code>                    $this
+    <strong>setJavaMultipleFiles</strong>(bool $var)
+        </code>
+    </h3>
+    <div class="details">    
+    
+            
+
+        <div class="method-description">
+                            <p><p>If enabled, then the Java code generator will generate a separate .java
+file for each top-level message, enum, and service defined in the .proto
+file.  Thus, these types will <em>not</em> be nested inside the wrapper class
+named by java_outer_classname.  However, the wrapper class will still be
+generated to contain the file's getDescriptor() method as well as any
+top-level extensions defined in the file.</p></p>                <p><p>Generated from protobuf field <code>optional bool java_multiple_files = 10 [default = false];</code></p></p>        
+        </div>
+        <div class="tags">
+                            <h4>Parameters</h4>
+
+                    <table class="table table-condensed">
+                    <tr>
+                <td>bool</td>
+                <td>$var</td>
+                <td></td>
+            </tr>
+            </table>
+
+            
+                            <h4>Return Value</h4>
+
+                    <table class="table table-condensed">
+        <tr>
+            <td>$this</td>
+            <td></td>
+        </tr>
+    </table>
+
+            
+            
+            
+                    </div>
+    </div>
+
+            </div>
+                    <div class="method-item">
+                    <h3 id="method_getJavaGenerateEqualsAndHash">
+        <div class="location"><a href="https://github.com/protocolbuffers/protobuf-php/blob/v3.21.10/src/Google/Protobuf/Internal/FileOptions.php#L418">at line 418</a></div>
+        <code>                    bool
+    <strong>getJavaGenerateEqualsAndHash</strong>()
+        <small><span class="label label-danger">deprecated</span></small></code>
+    </h3>
+    <div class="details">    
+            <p>
+                <small><span class="label label-danger">deprecated</span></small>
+                            <tr>
+                    <td></td>
+                    <td></td>
+                </tr>
+                    </p>
+    
+            
+
+        <div class="method-description">
+                            <p><p>This option does nothing.</p></p>                <p><p>Generated from protobuf field <code>optional bool java_generate_equals_and_hash = 20 [deprecated = true];</code></p></p>        
+        </div>
+        <div class="tags">
+            
+                            <h4>Return Value</h4>
+
+                    <table class="table table-condensed">
+        <tr>
+            <td>bool</td>
+            <td></td>
+        </tr>
+    </table>
+
+            
+            
+            
+                    </div>
+    </div>
+
+            </div>
+                    <div class="method-item">
+                    <h3 id="method_hasJavaGenerateEqualsAndHash">
+        <div class="location"><a href="https://github.com/protocolbuffers/protobuf-php/blob/v3.21.10/src/Google/Protobuf/Internal/FileOptions.php#L424">at line 424</a></div>
+        <code>                    
+    <strong>hasJavaGenerateEqualsAndHash</strong>()
+        </code>
+    </h3>
+    <div class="details">    
+    
+            
+
+        <div class="method-description">
+                            <p class="no-description">No description</p>
+                    
+        </div>
+        <div class="tags">
+            
+            
+            
+            
+                    </div>
+    </div>
+
+            </div>
+                    <div class="method-item">
+                    <h3 id="method_clearJavaGenerateEqualsAndHash">
+        <div class="location"><a href="https://github.com/protocolbuffers/protobuf-php/blob/v3.21.10/src/Google/Protobuf/Internal/FileOptions.php#L430">at line 430</a></div>
+        <code>                    
+    <strong>clearJavaGenerateEqualsAndHash</strong>()
+        </code>
+    </h3>
+    <div class="details">    
+    
+            
+
+        <div class="method-description">
+                            <p class="no-description">No description</p>
+                    
+        </div>
+        <div class="tags">
+            
+            
+            
+            
+                    </div>
+    </div>
+
+            </div>
+                    <div class="method-item">
+                    <h3 id="method_setJavaGenerateEqualsAndHash">
+        <div class="location"><a href="https://github.com/protocolbuffers/protobuf-php/blob/v3.21.10/src/Google/Protobuf/Internal/FileOptions.php#L444">at line 444</a></div>
+        <code>                    $this
+    <strong>setJavaGenerateEqualsAndHash</strong>(bool $var)
+        <small><span class="label label-danger">deprecated</span></small></code>
+    </h3>
+    <div class="details">    
+            <p>
+                <small><span class="label label-danger">deprecated</span></small>
+                            <tr>
+                    <td></td>
+                    <td></td>
+                </tr>
+                    </p>
+    
+            
+
+        <div class="method-description">
+                            <p><p>This option does nothing.</p></p>                <p><p>Generated from protobuf field <code>optional bool java_generate_equals_and_hash = 20 [deprecated = true];</code></p></p>        
+        </div>
+        <div class="tags">
+                            <h4>Parameters</h4>
+
+                    <table class="table table-condensed">
+                    <tr>
+                <td>bool</td>
+                <td>$var</td>
+                <td></td>
+            </tr>
+            </table>
+
+            
+                            <h4>Return Value</h4>
+
+                    <table class="table table-condensed">
+        <tr>
+            <td>$this</td>
+            <td></td>
+        </tr>
+    </table>
+
+            
+            
+            
+                    </div>
+    </div>
+
+            </div>
+                    <div class="method-item">
+                    <h3 id="method_getJavaStringCheckUtf8">
+        <div class="location"><a href="https://github.com/protocolbuffers/protobuf-php/blob/v3.21.10/src/Google/Protobuf/Internal/FileOptions.php#L464">at line 464</a></div>
+        <code>                    bool
+    <strong>getJavaStringCheckUtf8</strong>()
+        </code>
+    </h3>
+    <div class="details">    
+    
+            
+
+        <div class="method-description">
+                            <p><p>If set true, then the Java2 code generator will generate code that
+throws an exception whenever an attempt is made to assign a non-UTF-8
+byte sequence to a string field.</p></p>                <p><p>Message reflection will do the same.
+However, an extension field still accepts non-UTF-8 byte sequences.
+This option has no effect on when used with the lite runtime.</p>
+<p>Generated from protobuf field <code>optional bool java_string_check_utf8 = 27 [default = false];</code></p></p>        
+        </div>
+        <div class="tags">
+            
+                            <h4>Return Value</h4>
+
+                    <table class="table table-condensed">
+        <tr>
+            <td>bool</td>
+            <td></td>
+        </tr>
+    </table>
+
+            
+            
+            
+                    </div>
+    </div>
+
+            </div>
+                    <div class="method-item">
+                    <h3 id="method_hasJavaStringCheckUtf8">
+        <div class="location"><a href="https://github.com/protocolbuffers/protobuf-php/blob/v3.21.10/src/Google/Protobuf/Internal/FileOptions.php#L469">at line 469</a></div>
+        <code>                    
+    <strong>hasJavaStringCheckUtf8</strong>()
+        </code>
+    </h3>
+    <div class="details">    
+    
+            
+
+        <div class="method-description">
+                            <p class="no-description">No description</p>
+                    
+        </div>
+        <div class="tags">
+            
+            
+            
+            
+                    </div>
+    </div>
+
+            </div>
+                    <div class="method-item">
+                    <h3 id="method_clearJavaStringCheckUtf8">
+        <div class="location"><a href="https://github.com/protocolbuffers/protobuf-php/blob/v3.21.10/src/Google/Protobuf/Internal/FileOptions.php#L474">at line 474</a></div>
+        <code>                    
+    <strong>clearJavaStringCheckUtf8</strong>()
+        </code>
+    </h3>
+    <div class="details">    
+    
+            
+
+        <div class="method-description">
+                            <p class="no-description">No description</p>
+                    
+        </div>
+        <div class="tags">
+            
+            
+            
+            
+                    </div>
+    </div>
+
+            </div>
+                    <div class="method-item">
+                    <h3 id="method_setJavaStringCheckUtf8">
+        <div class="location"><a href="https://github.com/protocolbuffers/protobuf-php/blob/v3.21.10/src/Google/Protobuf/Internal/FileOptions.php#L491">at line 491</a></div>
+        <code>                    $this
+    <strong>setJavaStringCheckUtf8</strong>(bool $var)
+        </code>
+    </h3>
+    <div class="details">    
+    
+            
+
+        <div class="method-description">
+                            <p><p>If set true, then the Java2 code generator will generate code that
+throws an exception whenever an attempt is made to assign a non-UTF-8
+byte sequence to a string field.</p></p>                <p><p>Message reflection will do the same.
+However, an extension field still accepts non-UTF-8 byte sequences.
+This option has no effect on when used with the lite runtime.</p>
+<p>Generated from protobuf field <code>optional bool java_string_check_utf8 = 27 [default = false];</code></p></p>        
+        </div>
+        <div class="tags">
+                            <h4>Parameters</h4>
+
+                    <table class="table table-condensed">
+                    <tr>
+                <td>bool</td>
+                <td>$var</td>
+                <td></td>
+            </tr>
+            </table>
+
+            
+                            <h4>Return Value</h4>
+
+                    <table class="table table-condensed">
+        <tr>
+            <td>$this</td>
+            <td></td>
+        </tr>
+    </table>
+
+            
+            
+            
+                    </div>
+    </div>
+
+            </div>
+                    <div class="method-item">
+                    <h3 id="method_getOptimizeFor">
+        <div class="location"><a href="https://github.com/protocolbuffers/protobuf-php/blob/v3.21.10/src/Google/Protobuf/Internal/FileOptions.php#L503">at line 503</a></div>
+        <code>                    int
+    <strong>getOptimizeFor</strong>()
+        </code>
+    </h3>
+    <div class="details">    
+    
+            
+
+        <div class="method-description">
+                            <p><p>Generated from protobuf field <code>optional .google.protobuf.FileOptions.OptimizeMode optimize_for = 9 [default = SPEED];</code></p></p>                        
+        </div>
+        <div class="tags">
+            
+                            <h4>Return Value</h4>
+
+                    <table class="table table-condensed">
+        <tr>
+            <td>int</td>
+            <td></td>
+        </tr>
+    </table>
+
+            
+            
+            
+                    </div>
+    </div>
+
+            </div>
+                    <div class="method-item">
+                    <h3 id="method_hasOptimizeFor">
+        <div class="location"><a href="https://github.com/protocolbuffers/protobuf-php/blob/v3.21.10/src/Google/Protobuf/Internal/FileOptions.php#L508">at line 508</a></div>
+        <code>                    
+    <strong>hasOptimizeFor</strong>()
+        </code>
+    </h3>
+    <div class="details">    
+    
+            
+
+        <div class="method-description">
+                            <p class="no-description">No description</p>
+                    
+        </div>
+        <div class="tags">
+            
+            
+            
+            
+                    </div>
+    </div>
+
+            </div>
+                    <div class="method-item">
+                    <h3 id="method_clearOptimizeFor">
+        <div class="location"><a href="https://github.com/protocolbuffers/protobuf-php/blob/v3.21.10/src/Google/Protobuf/Internal/FileOptions.php#L513">at line 513</a></div>
+        <code>                    
+    <strong>clearOptimizeFor</strong>()
+        </code>
+    </h3>
+    <div class="details">    
+    
+            
+
+        <div class="method-description">
+                            <p class="no-description">No description</p>
+                    
+        </div>
+        <div class="tags">
+            
+            
+            
+            
+                    </div>
+    </div>
+
+            </div>
+                    <div class="method-item">
+                    <h3 id="method_setOptimizeFor">
+        <div class="location"><a href="https://github.com/protocolbuffers/protobuf-php/blob/v3.21.10/src/Google/Protobuf/Internal/FileOptions.php#L523">at line 523</a></div>
+        <code>                    $this
+    <strong>setOptimizeFor</strong>(int $var)
+        </code>
+    </h3>
+    <div class="details">    
+    
+            
+
+        <div class="method-description">
+                            <p><p>Generated from protobuf field <code>optional .google.protobuf.FileOptions.OptimizeMode optimize_for = 9 [default = SPEED];</code></p></p>                        
+        </div>
+        <div class="tags">
+                            <h4>Parameters</h4>
+
+                    <table class="table table-condensed">
+                    <tr>
+                <td>int</td>
+                <td>$var</td>
+                <td></td>
+            </tr>
+            </table>
+
+            
+                            <h4>Return Value</h4>
+
+                    <table class="table table-condensed">
+        <tr>
+            <td>$this</td>
+            <td></td>
+        </tr>
+    </table>
+
+            
+            
+            
+                    </div>
+    </div>
+
+            </div>
+                    <div class="method-item">
+                    <h3 id="method_getGoPackage">
+        <div class="location"><a href="https://github.com/protocolbuffers/protobuf-php/blob/v3.21.10/src/Google/Protobuf/Internal/FileOptions.php#L541">at line 541</a></div>
+        <code>                    string
+    <strong>getGoPackage</strong>()
+        </code>
+    </h3>
+    <div class="details">    
+    
+            
+
+        <div class="method-description">
+                            <p><p>Sets the Go package where structs generated from this .proto will be
+placed. If omitted, the Go package will be derived from the following:</p>
+<ul>
+<li>The basename of the package import path, if provided.</li>
+</ul></p>                <p><ul>
+<li>Otherwise, the package statement in the .proto file, if present.
+<ul>
+<li>Otherwise, the basename of the .proto file, without extension.</li>
+</ul></li>
+</ul>
+<p>Generated from protobuf field <code>optional string go_package = 11;</code></p></p>        
+        </div>
+        <div class="tags">
+            
+                            <h4>Return Value</h4>
+
+                    <table class="table table-condensed">
+        <tr>
+            <td>string</td>
+            <td></td>
+        </tr>
+    </table>
+
+            
+            
+            
+                    </div>
+    </div>
+
+            </div>
+                    <div class="method-item">
+                    <h3 id="method_hasGoPackage">
+        <div class="location"><a href="https://github.com/protocolbuffers/protobuf-php/blob/v3.21.10/src/Google/Protobuf/Internal/FileOptions.php#L546">at line 546</a></div>
+        <code>                    
+    <strong>hasGoPackage</strong>()
+        </code>
+    </h3>
+    <div class="details">    
+    
+            
+
+        <div class="method-description">
+                            <p class="no-description">No description</p>
+                    
+        </div>
+        <div class="tags">
+            
+            
+            
+            
+                    </div>
+    </div>
+
+            </div>
+                    <div class="method-item">
+                    <h3 id="method_clearGoPackage">
+        <div class="location"><a href="https://github.com/protocolbuffers/protobuf-php/blob/v3.21.10/src/Google/Protobuf/Internal/FileOptions.php#L551">at line 551</a></div>
+        <code>                    
+    <strong>clearGoPackage</strong>()
+        </code>
+    </h3>
+    <div class="details">    
+    
+            
+
+        <div class="method-description">
+                            <p class="no-description">No description</p>
+                    
+        </div>
+        <div class="tags">
+            
+            
+            
+            
+                    </div>
+    </div>
+
+            </div>
+                    <div class="method-item">
+                    <h3 id="method_setGoPackage">
+        <div class="location"><a href="https://github.com/protocolbuffers/protobuf-php/blob/v3.21.10/src/Google/Protobuf/Internal/FileOptions.php#L567">at line 567</a></div>
+        <code>                    $this
+    <strong>setGoPackage</strong>(string $var)
+        </code>
+    </h3>
+    <div class="details">    
+    
+            
+
+        <div class="method-description">
+                            <p><p>Sets the Go package where structs generated from this .proto will be
+placed. If omitted, the Go package will be derived from the following:</p>
+<ul>
+<li>The basename of the package import path, if provided.</li>
+</ul></p>                <p><ul>
+<li>Otherwise, the package statement in the .proto file, if present.
+<ul>
+<li>Otherwise, the basename of the .proto file, without extension.</li>
+</ul></li>
+</ul>
+<p>Generated from protobuf field <code>optional string go_package = 11;</code></p></p>        
+        </div>
+        <div class="tags">
+                            <h4>Parameters</h4>
+
+                    <table class="table table-condensed">
+                    <tr>
+                <td>string</td>
+                <td>$var</td>
+                <td></td>
+            </tr>
+            </table>
+
+            
+                            <h4>Return Value</h4>
+
+                    <table class="table table-condensed">
+        <tr>
+            <td>$this</td>
+            <td></td>
+        </tr>
+    </table>
+
+            
+            
+            
+                    </div>
+    </div>
+
+            </div>
+                    <div class="method-item">
+                    <h3 id="method_getCcGenericServices">
+        <div class="location"><a href="https://github.com/protocolbuffers/protobuf-php/blob/v3.21.10/src/Google/Protobuf/Internal/FileOptions.php#L589">at line 589</a></div>
+        <code>                    bool
+    <strong>getCcGenericServices</strong>()
+        </code>
+    </h3>
+    <div class="details">    
+    
+            
+
+        <div class="method-description">
+                            <p><p>Should generic services be generated in each language?  &quot;Generic&quot; services
+are not specific to any particular RPC system.  They are generated by the
+main code generators in each language (without additional plugins).</p></p>                <p><p>Generic services were the only kind of service generation supported by
+early versions of google.protobuf.
+Generic services are now considered deprecated in favor of using plugins
+that generate code specific to your particular RPC system.  Therefore,
+these default to false.  Old code which depends on generic services should
+explicitly set them to true.</p>
+<p>Generated from protobuf field <code>optional bool cc_generic_services = 16 [default = false];</code></p></p>        
+        </div>
+        <div class="tags">
+            
+                            <h4>Return Value</h4>
+
+                    <table class="table table-condensed">
+        <tr>
+            <td>bool</td>
+            <td></td>
+        </tr>
+    </table>
+
+            
+            
+            
+                    </div>
+    </div>
+
+            </div>
+                    <div class="method-item">
+                    <h3 id="method_hasCcGenericServices">
+        <div class="location"><a href="https://github.com/protocolbuffers/protobuf-php/blob/v3.21.10/src/Google/Protobuf/Internal/FileOptions.php#L594">at line 594</a></div>
+        <code>                    
+    <strong>hasCcGenericServices</strong>()
+        </code>
+    </h3>
+    <div class="details">    
+    
+            
+
+        <div class="method-description">
+                            <p class="no-description">No description</p>
+                    
+        </div>
+        <div class="tags">
+            
+            
+            
+            
+                    </div>
+    </div>
+
+            </div>
+                    <div class="method-item">
+                    <h3 id="method_clearCcGenericServices">
+        <div class="location"><a href="https://github.com/protocolbuffers/protobuf-php/blob/v3.21.10/src/Google/Protobuf/Internal/FileOptions.php#L599">at line 599</a></div>
+        <code>                    
+    <strong>clearCcGenericServices</strong>()
+        </code>
+    </h3>
+    <div class="details">    
+    
+            
+
+        <div class="method-description">
+                            <p class="no-description">No description</p>
+                    
+        </div>
+        <div class="tags">
+            
+            
+            
+            
+                    </div>
+    </div>
+
+            </div>
+                    <div class="method-item">
+                    <h3 id="method_setCcGenericServices">
+        <div class="location"><a href="https://github.com/protocolbuffers/protobuf-php/blob/v3.21.10/src/Google/Protobuf/Internal/FileOptions.php#L619">at line 619</a></div>
+        <code>                    $this
+    <strong>setCcGenericServices</strong>(bool $var)
+        </code>
+    </h3>
+    <div class="details">    
+    
+            
+
+        <div class="method-description">
+                            <p><p>Should generic services be generated in each language?  &quot;Generic&quot; services
+are not specific to any particular RPC system.  They are generated by the
+main code generators in each language (without additional plugins).</p></p>                <p><p>Generic services were the only kind of service generation supported by
+early versions of google.protobuf.
+Generic services are now considered deprecated in favor of using plugins
+that generate code specific to your particular RPC system.  Therefore,
+these default to false.  Old code which depends on generic services should
+explicitly set them to true.</p>
+<p>Generated from protobuf field <code>optional bool cc_generic_services = 16 [default = false];</code></p></p>        
+        </div>
+        <div class="tags">
+                            <h4>Parameters</h4>
+
+                    <table class="table table-condensed">
+                    <tr>
+                <td>bool</td>
+                <td>$var</td>
+                <td></td>
+            </tr>
+            </table>
+
+            
+                            <h4>Return Value</h4>
+
+                    <table class="table table-condensed">
+        <tr>
+            <td>$this</td>
+            <td></td>
+        </tr>
+    </table>
+
+            
+            
+            
+                    </div>
+    </div>
+
+            </div>
+                    <div class="method-item">
+                    <h3 id="method_getJavaGenericServices">
+        <div class="location"><a href="https://github.com/protocolbuffers/protobuf-php/blob/v3.21.10/src/Google/Protobuf/Internal/FileOptions.php#L631">at line 631</a></div>
+        <code>                    bool
+    <strong>getJavaGenericServices</strong>()
+        </code>
+    </h3>
+    <div class="details">    
+    
+            
+
+        <div class="method-description">
+                            <p><p>Generated from protobuf field <code>optional bool java_generic_services = 17 [default = false];</code></p></p>                        
+        </div>
+        <div class="tags">
+            
+                            <h4>Return Value</h4>
+
+                    <table class="table table-condensed">
+        <tr>
+            <td>bool</td>
+            <td></td>
+        </tr>
+    </table>
+
+            
+            
+            
+                    </div>
+    </div>
+
+            </div>
+                    <div class="method-item">
+                    <h3 id="method_hasJavaGenericServices">
+        <div class="location"><a href="https://github.com/protocolbuffers/protobuf-php/blob/v3.21.10/src/Google/Protobuf/Internal/FileOptions.php#L636">at line 636</a></div>
+        <code>                    
+    <strong>hasJavaGenericServices</strong>()
+        </code>
+    </h3>
+    <div class="details">    
+    
+            
+
+        <div class="method-description">
+                            <p class="no-description">No description</p>
+                    
+        </div>
+        <div class="tags">
+            
+            
+            
+            
+                    </div>
+    </div>
+
+            </div>
+                    <div class="method-item">
+                    <h3 id="method_clearJavaGenericServices">
+        <div class="location"><a href="https://github.com/protocolbuffers/protobuf-php/blob/v3.21.10/src/Google/Protobuf/Internal/FileOptions.php#L641">at line 641</a></div>
+        <code>                    
+    <strong>clearJavaGenericServices</strong>()
+        </code>
+    </h3>
+    <div class="details">    
+    
+            
+
+        <div class="method-description">
+                            <p class="no-description">No description</p>
+                    
+        </div>
+        <div class="tags">
+            
+            
+            
+            
+                    </div>
+    </div>
+
+            </div>
+                    <div class="method-item">
+                    <h3 id="method_setJavaGenericServices">
+        <div class="location"><a href="https://github.com/protocolbuffers/protobuf-php/blob/v3.21.10/src/Google/Protobuf/Internal/FileOptions.php#L651">at line 651</a></div>
+        <code>                    $this
+    <strong>setJavaGenericServices</strong>(bool $var)
+        </code>
+    </h3>
+    <div class="details">    
+    
+            
+
+        <div class="method-description">
+                            <p><p>Generated from protobuf field <code>optional bool java_generic_services = 17 [default = false];</code></p></p>                        
+        </div>
+        <div class="tags">
+                            <h4>Parameters</h4>
+
+                    <table class="table table-condensed">
+                    <tr>
+                <td>bool</td>
+                <td>$var</td>
+                <td></td>
+            </tr>
+            </table>
+
+            
+                            <h4>Return Value</h4>
+
+                    <table class="table table-condensed">
+        <tr>
+            <td>$this</td>
+            <td></td>
+        </tr>
+    </table>
+
+            
+            
+            
+                    </div>
+    </div>
+
+            </div>
+                    <div class="method-item">
+                    <h3 id="method_getPyGenericServices">
+        <div class="location"><a href="https://github.com/protocolbuffers/protobuf-php/blob/v3.21.10/src/Google/Protobuf/Internal/FileOptions.php#L663">at line 663</a></div>
+        <code>                    bool
+    <strong>getPyGenericServices</strong>()
+        </code>
+    </h3>
+    <div class="details">    
+    
+            
+
+        <div class="method-description">
+                            <p><p>Generated from protobuf field <code>optional bool py_generic_services = 18 [default = false];</code></p></p>                        
+        </div>
+        <div class="tags">
+            
+                            <h4>Return Value</h4>
+
+                    <table class="table table-condensed">
+        <tr>
+            <td>bool</td>
+            <td></td>
+        </tr>
+    </table>
+
+            
+            
+            
+                    </div>
+    </div>
+
+            </div>
+                    <div class="method-item">
+                    <h3 id="method_hasPyGenericServices">
+        <div class="location"><a href="https://github.com/protocolbuffers/protobuf-php/blob/v3.21.10/src/Google/Protobuf/Internal/FileOptions.php#L668">at line 668</a></div>
+        <code>                    
+    <strong>hasPyGenericServices</strong>()
+        </code>
+    </h3>
+    <div class="details">    
+    
+            
+
+        <div class="method-description">
+                            <p class="no-description">No description</p>
+                    
+        </div>
+        <div class="tags">
+            
+            
+            
+            
+                    </div>
+    </div>
+
+            </div>
+                    <div class="method-item">
+                    <h3 id="method_clearPyGenericServices">
+        <div class="location"><a href="https://github.com/protocolbuffers/protobuf-php/blob/v3.21.10/src/Google/Protobuf/Internal/FileOptions.php#L673">at line 673</a></div>
+        <code>                    
+    <strong>clearPyGenericServices</strong>()
+        </code>
+    </h3>
+    <div class="details">    
+    
+            
+
+        <div class="method-description">
+                            <p class="no-description">No description</p>
+                    
+        </div>
+        <div class="tags">
+            
+            
+            
+            
+                    </div>
+    </div>
+
+            </div>
+                    <div class="method-item">
+                    <h3 id="method_setPyGenericServices">
+        <div class="location"><a href="https://github.com/protocolbuffers/protobuf-php/blob/v3.21.10/src/Google/Protobuf/Internal/FileOptions.php#L683">at line 683</a></div>
+        <code>                    $this
+    <strong>setPyGenericServices</strong>(bool $var)
+        </code>
+    </h3>
+    <div class="details">    
+    
+            
+
+        <div class="method-description">
+                            <p><p>Generated from protobuf field <code>optional bool py_generic_services = 18 [default = false];</code></p></p>                        
+        </div>
+        <div class="tags">
+                            <h4>Parameters</h4>
+
+                    <table class="table table-condensed">
+                    <tr>
+                <td>bool</td>
+                <td>$var</td>
+                <td></td>
+            </tr>
+            </table>
+
+            
+                            <h4>Return Value</h4>
+
+                    <table class="table table-condensed">
+        <tr>
+            <td>$this</td>
+            <td></td>
+        </tr>
+    </table>
+
+            
+            
+            
+                    </div>
+    </div>
+
+            </div>
+                    <div class="method-item">
+                    <h3 id="method_getPhpGenericServices">
+        <div class="location"><a href="https://github.com/protocolbuffers/protobuf-php/blob/v3.21.10/src/Google/Protobuf/Internal/FileOptions.php#L695">at line 695</a></div>
+        <code>                    bool
+    <strong>getPhpGenericServices</strong>()
+        </code>
+    </h3>
+    <div class="details">    
+    
+            
+
+        <div class="method-description">
+                            <p><p>Generated from protobuf field <code>optional bool php_generic_services = 42 [default = false];</code></p></p>                        
+        </div>
+        <div class="tags">
+            
+                            <h4>Return Value</h4>
+
+                    <table class="table table-condensed">
+        <tr>
+            <td>bool</td>
+            <td></td>
+        </tr>
+    </table>
+
+            
+            
+            
+                    </div>
+    </div>
+
+            </div>
+                    <div class="method-item">
+                    <h3 id="method_hasPhpGenericServices">
+        <div class="location"><a href="https://github.com/protocolbuffers/protobuf-php/blob/v3.21.10/src/Google/Protobuf/Internal/FileOptions.php#L700">at line 700</a></div>
+        <code>                    
+    <strong>hasPhpGenericServices</strong>()
+        </code>
+    </h3>
+    <div class="details">    
+    
+            
+
+        <div class="method-description">
+                            <p class="no-description">No description</p>
+                    
+        </div>
+        <div class="tags">
+            
+            
+            
+            
+                    </div>
+    </div>
+
+            </div>
+                    <div class="method-item">
+                    <h3 id="method_clearPhpGenericServices">
+        <div class="location"><a href="https://github.com/protocolbuffers/protobuf-php/blob/v3.21.10/src/Google/Protobuf/Internal/FileOptions.php#L705">at line 705</a></div>
+        <code>                    
+    <strong>clearPhpGenericServices</strong>()
+        </code>
+    </h3>
+    <div class="details">    
+    
+            
+
+        <div class="method-description">
+                            <p class="no-description">No description</p>
+                    
+        </div>
+        <div class="tags">
+            
+            
+            
+            
+                    </div>
+    </div>
+
+            </div>
+                    <div class="method-item">
+                    <h3 id="method_setPhpGenericServices">
+        <div class="location"><a href="https://github.com/protocolbuffers/protobuf-php/blob/v3.21.10/src/Google/Protobuf/Internal/FileOptions.php#L715">at line 715</a></div>
+        <code>                    $this
+    <strong>setPhpGenericServices</strong>(bool $var)
+        </code>
+    </h3>
+    <div class="details">    
+    
+            
+
+        <div class="method-description">
+                            <p><p>Generated from protobuf field <code>optional bool php_generic_services = 42 [default = false];</code></p></p>                        
+        </div>
+        <div class="tags">
+                            <h4>Parameters</h4>
+
+                    <table class="table table-condensed">
+                    <tr>
+                <td>bool</td>
+                <td>$var</td>
+                <td></td>
+            </tr>
+            </table>
+
+            
+                            <h4>Return Value</h4>
+
+                    <table class="table table-condensed">
+        <tr>
+            <td>$this</td>
+            <td></td>
+        </tr>
+    </table>
+
+            
+            
+            
+                    </div>
+    </div>
+
+            </div>
+                    <div class="method-item">
+                    <h3 id="method_getDeprecated">
+        <div class="location"><a href="https://github.com/protocolbuffers/protobuf-php/blob/v3.21.10/src/Google/Protobuf/Internal/FileOptions.php#L732">at line 732</a></div>
+        <code>                    bool
+    <strong>getDeprecated</strong>()
+        </code>
+    </h3>
+    <div class="details">    
+    
+            
+
+        <div class="method-description">
+                            <p><p>Is this file deprecated?
+Depending on the target platform, this can emit Deprecated annotations
+for everything in the file, or it will be completely ignored; in the very
+least, this is a formalization for deprecating files.</p></p>                <p><p>Generated from protobuf field <code>optional bool deprecated = 23 [default = false];</code></p></p>        
+        </div>
+        <div class="tags">
+            
+                            <h4>Return Value</h4>
+
+                    <table class="table table-condensed">
+        <tr>
+            <td>bool</td>
+            <td></td>
+        </tr>
+    </table>
+
+            
+            
+            
+                    </div>
+    </div>
+
+            </div>
+                    <div class="method-item">
+                    <h3 id="method_hasDeprecated">
+        <div class="location"><a href="https://github.com/protocolbuffers/protobuf-php/blob/v3.21.10/src/Google/Protobuf/Internal/FileOptions.php#L737">at line 737</a></div>
+        <code>                    
+    <strong>hasDeprecated</strong>()
+        </code>
+    </h3>
+    <div class="details">    
+    
+            
+
+        <div class="method-description">
+                            <p class="no-description">No description</p>
+                    
+        </div>
+        <div class="tags">
+            
+            
+            
+            
+                    </div>
+    </div>
+
+            </div>
+                    <div class="method-item">
+                    <h3 id="method_clearDeprecated">
+        <div class="location"><a href="https://github.com/protocolbuffers/protobuf-php/blob/v3.21.10/src/Google/Protobuf/Internal/FileOptions.php#L742">at line 742</a></div>
+        <code>                    
+    <strong>clearDeprecated</strong>()
+        </code>
+    </h3>
+    <div class="details">    
+    
+            
+
+        <div class="method-description">
+                            <p class="no-description">No description</p>
+                    
+        </div>
+        <div class="tags">
+            
+            
+            
+            
+                    </div>
+    </div>
+
+            </div>
+                    <div class="method-item">
+                    <h3 id="method_setDeprecated">
+        <div class="location"><a href="https://github.com/protocolbuffers/protobuf-php/blob/v3.21.10/src/Google/Protobuf/Internal/FileOptions.php#L757">at line 757</a></div>
+        <code>                    $this
+    <strong>setDeprecated</strong>(bool $var)
+        </code>
+    </h3>
+    <div class="details">    
+    
+            
+
+        <div class="method-description">
+                            <p><p>Is this file deprecated?
+Depending on the target platform, this can emit Deprecated annotations
+for everything in the file, or it will be completely ignored; in the very
+least, this is a formalization for deprecating files.</p></p>                <p><p>Generated from protobuf field <code>optional bool deprecated = 23 [default = false];</code></p></p>        
+        </div>
+        <div class="tags">
+                            <h4>Parameters</h4>
+
+                    <table class="table table-condensed">
+                    <tr>
+                <td>bool</td>
+                <td>$var</td>
+                <td></td>
+            </tr>
+            </table>
+
+            
+                            <h4>Return Value</h4>
+
+                    <table class="table table-condensed">
+        <tr>
+            <td>$this</td>
+            <td></td>
+        </tr>
+    </table>
+
+            
+            
+            
+                    </div>
+    </div>
+
+            </div>
+                    <div class="method-item">
+                    <h3 id="method_getCcEnableArenas">
+        <div class="location"><a href="https://github.com/protocolbuffers/protobuf-php/blob/v3.21.10/src/Google/Protobuf/Internal/FileOptions.php#L772">at line 772</a></div>
+        <code>                    bool
+    <strong>getCcEnableArenas</strong>()
+        </code>
+    </h3>
+    <div class="details">    
+    
+            
+
+        <div class="method-description">
+                            <p><p>Enables the use of arenas for the proto messages in this file. This applies
+only to generated classes for C++.</p></p>                <p><p>Generated from protobuf field <code>optional bool cc_enable_arenas = 31 [default = true];</code></p></p>        
+        </div>
+        <div class="tags">
+            
+                            <h4>Return Value</h4>
+
+                    <table class="table table-condensed">
+        <tr>
+            <td>bool</td>
+            <td></td>
+        </tr>
+    </table>
+
+            
+            
+            
+                    </div>
+    </div>
+
+            </div>
+                    <div class="method-item">
+                    <h3 id="method_hasCcEnableArenas">
+        <div class="location"><a href="https://github.com/protocolbuffers/protobuf-php/blob/v3.21.10/src/Google/Protobuf/Internal/FileOptions.php#L777">at line 777</a></div>
+        <code>                    
+    <strong>hasCcEnableArenas</strong>()
+        </code>
+    </h3>
+    <div class="details">    
+    
+            
+
+        <div class="method-description">
+                            <p class="no-description">No description</p>
+                    
+        </div>
+        <div class="tags">
+            
+            
+            
+            
+                    </div>
+    </div>
+
+            </div>
+                    <div class="method-item">
+                    <h3 id="method_clearCcEnableArenas">
+        <div class="location"><a href="https://github.com/protocolbuffers/protobuf-php/blob/v3.21.10/src/Google/Protobuf/Internal/FileOptions.php#L782">at line 782</a></div>
+        <code>                    
+    <strong>clearCcEnableArenas</strong>()
+        </code>
+    </h3>
+    <div class="details">    
+    
+            
+
+        <div class="method-description">
+                            <p class="no-description">No description</p>
+                    
+        </div>
+        <div class="tags">
+            
+            
+            
+            
+                    </div>
+    </div>
+
+            </div>
+                    <div class="method-item">
+                    <h3 id="method_setCcEnableArenas">
+        <div class="location"><a href="https://github.com/protocolbuffers/protobuf-php/blob/v3.21.10/src/Google/Protobuf/Internal/FileOptions.php#L795">at line 795</a></div>
+        <code>                    $this
+    <strong>setCcEnableArenas</strong>(bool $var)
+        </code>
+    </h3>
+    <div class="details">    
+    
+            
+
+        <div class="method-description">
+                            <p><p>Enables the use of arenas for the proto messages in this file. This applies
+only to generated classes for C++.</p></p>                <p><p>Generated from protobuf field <code>optional bool cc_enable_arenas = 31 [default = true];</code></p></p>        
+        </div>
+        <div class="tags">
+                            <h4>Parameters</h4>
+
+                    <table class="table table-condensed">
+                    <tr>
+                <td>bool</td>
+                <td>$var</td>
+                <td></td>
+            </tr>
+            </table>
+
+            
+                            <h4>Return Value</h4>
+
+                    <table class="table table-condensed">
+        <tr>
+            <td>$this</td>
+            <td></td>
+        </tr>
+    </table>
+
+            
+            
+            
+                    </div>
+    </div>
+
+            </div>
+                    <div class="method-item">
+                    <h3 id="method_getObjcClassPrefix">
+        <div class="location"><a href="https://github.com/protocolbuffers/protobuf-php/blob/v3.21.10/src/Google/Protobuf/Internal/FileOptions.php#L810">at line 810</a></div>
+        <code>                    string
+    <strong>getObjcClassPrefix</strong>()
+        </code>
+    </h3>
+    <div class="details">    
+    
+            
+
+        <div class="method-description">
+                            <p><p>Sets the objective c class prefix which is prepended to all objective c
+generated classes from this .proto. There is no default.</p></p>                <p><p>Generated from protobuf field <code>optional string objc_class_prefix = 36;</code></p></p>        
+        </div>
+        <div class="tags">
+            
+                            <h4>Return Value</h4>
+
+                    <table class="table table-condensed">
+        <tr>
+            <td>string</td>
+            <td></td>
+        </tr>
+    </table>
+
+            
+            
+            
+                    </div>
+    </div>
+
+            </div>
+                    <div class="method-item">
+                    <h3 id="method_hasObjcClassPrefix">
+        <div class="location"><a href="https://github.com/protocolbuffers/protobuf-php/blob/v3.21.10/src/Google/Protobuf/Internal/FileOptions.php#L815">at line 815</a></div>
+        <code>                    
+    <strong>hasObjcClassPrefix</strong>()
+        </code>
+    </h3>
+    <div class="details">    
+    
+            
+
+        <div class="method-description">
+                            <p class="no-description">No description</p>
+                    
+        </div>
+        <div class="tags">
+            
+            
+            
+            
+                    </div>
+    </div>
+
+            </div>
+                    <div class="method-item">
+                    <h3 id="method_clearObjcClassPrefix">
+        <div class="location"><a href="https://github.com/protocolbuffers/protobuf-php/blob/v3.21.10/src/Google/Protobuf/Internal/FileOptions.php#L820">at line 820</a></div>
+        <code>                    
+    <strong>clearObjcClassPrefix</strong>()
+        </code>
+    </h3>
+    <div class="details">    
+    
+            
+
+        <div class="method-description">
+                            <p class="no-description">No description</p>
+                    
+        </div>
+        <div class="tags">
+            
+            
+            
+            
+                    </div>
+    </div>
+
+            </div>
+                    <div class="method-item">
+                    <h3 id="method_setObjcClassPrefix">
+        <div class="location"><a href="https://github.com/protocolbuffers/protobuf-php/blob/v3.21.10/src/Google/Protobuf/Internal/FileOptions.php#L833">at line 833</a></div>
+        <code>                    $this
+    <strong>setObjcClassPrefix</strong>(string $var)
+        </code>
+    </h3>
+    <div class="details">    
+    
+            
+
+        <div class="method-description">
+                            <p><p>Sets the objective c class prefix which is prepended to all objective c
+generated classes from this .proto. There is no default.</p></p>                <p><p>Generated from protobuf field <code>optional string objc_class_prefix = 36;</code></p></p>        
+        </div>
+        <div class="tags">
+                            <h4>Parameters</h4>
+
+                    <table class="table table-condensed">
+                    <tr>
+                <td>string</td>
+                <td>$var</td>
+                <td></td>
+            </tr>
+            </table>
+
+            
+                            <h4>Return Value</h4>
+
+                    <table class="table table-condensed">
+        <tr>
+            <td>$this</td>
+            <td></td>
+        </tr>
+    </table>
+
+            
+            
+            
+                    </div>
+    </div>
+
+            </div>
+                    <div class="method-item">
+                    <h3 id="method_getCsharpNamespace">
+        <div class="location"><a href="https://github.com/protocolbuffers/protobuf-php/blob/v3.21.10/src/Google/Protobuf/Internal/FileOptions.php#L847">at line 847</a></div>
+        <code>                    string
+    <strong>getCsharpNamespace</strong>()
+        </code>
+    </h3>
+    <div class="details">    
+    
+            
+
+        <div class="method-description">
+                            <p><p>Namespace for generated classes; defaults to the package.</p></p>                <p><p>Generated from protobuf field <code>optional string csharp_namespace = 37;</code></p></p>        
+        </div>
+        <div class="tags">
+            
+                            <h4>Return Value</h4>
+
+                    <table class="table table-condensed">
+        <tr>
+            <td>string</td>
+            <td></td>
+        </tr>
+    </table>
+
+            
+            
+            
+                    </div>
+    </div>
+
+            </div>
+                    <div class="method-item">
+                    <h3 id="method_hasCsharpNamespace">
+        <div class="location"><a href="https://github.com/protocolbuffers/protobuf-php/blob/v3.21.10/src/Google/Protobuf/Internal/FileOptions.php#L852">at line 852</a></div>
+        <code>                    
+    <strong>hasCsharpNamespace</strong>()
+        </code>
+    </h3>
+    <div class="details">    
+    
+            
+
+        <div class="method-description">
+                            <p class="no-description">No description</p>
+                    
+        </div>
+        <div class="tags">
+            
+            
+            
+            
+                    </div>
+    </div>
+
+            </div>
+                    <div class="method-item">
+                    <h3 id="method_clearCsharpNamespace">
+        <div class="location"><a href="https://github.com/protocolbuffers/protobuf-php/blob/v3.21.10/src/Google/Protobuf/Internal/FileOptions.php#L857">at line 857</a></div>
+        <code>                    
+    <strong>clearCsharpNamespace</strong>()
+        </code>
+    </h3>
+    <div class="details">    
+    
+            
+
+        <div class="method-description">
+                            <p class="no-description">No description</p>
+                    
+        </div>
+        <div class="tags">
+            
+            
+            
+            
+                    </div>
+    </div>
+
+            </div>
+                    <div class="method-item">
+                    <h3 id="method_setCsharpNamespace">
+        <div class="location"><a href="https://github.com/protocolbuffers/protobuf-php/blob/v3.21.10/src/Google/Protobuf/Internal/FileOptions.php#L869">at line 869</a></div>
+        <code>                    $this
+    <strong>setCsharpNamespace</strong>(string $var)
+        </code>
+    </h3>
+    <div class="details">    
+    
+            
+
+        <div class="method-description">
+                            <p><p>Namespace for generated classes; defaults to the package.</p></p>                <p><p>Generated from protobuf field <code>optional string csharp_namespace = 37;</code></p></p>        
+        </div>
+        <div class="tags">
+                            <h4>Parameters</h4>
+
+                    <table class="table table-condensed">
+                    <tr>
+                <td>string</td>
+                <td>$var</td>
+                <td></td>
+            </tr>
+            </table>
+
+            
+                            <h4>Return Value</h4>
+
+                    <table class="table table-condensed">
+        <tr>
+            <td>$this</td>
+            <td></td>
+        </tr>
+    </table>
+
+            
+            
+            
+                    </div>
+    </div>
+
+            </div>
+                    <div class="method-item">
+                    <h3 id="method_getSwiftPrefix">
+        <div class="location"><a href="https://github.com/protocolbuffers/protobuf-php/blob/v3.21.10/src/Google/Protobuf/Internal/FileOptions.php#L886">at line 886</a></div>
+        <code>                    string
+    <strong>getSwiftPrefix</strong>()
+        </code>
+    </h3>
+    <div class="details">    
+    
+            
+
+        <div class="method-description">
+                            <p><p>By default Swift generators will take the proto package and CamelCase it
+replacing '.' with underscore and use that to prefix the types/symbols
+defined. When this options is provided, they will use this value instead
+to prefix the types/symbols defined.</p></p>                <p><p>Generated from protobuf field <code>optional string swift_prefix = 39;</code></p></p>        
+        </div>
+        <div class="tags">
+            
+                            <h4>Return Value</h4>
+
+                    <table class="table table-condensed">
+        <tr>
+            <td>string</td>
+            <td></td>
+        </tr>
+    </table>
+
+            
+            
+            
+                    </div>
+    </div>
+
+            </div>
+                    <div class="method-item">
+                    <h3 id="method_hasSwiftPrefix">
+        <div class="location"><a href="https://github.com/protocolbuffers/protobuf-php/blob/v3.21.10/src/Google/Protobuf/Internal/FileOptions.php#L891">at line 891</a></div>
+        <code>                    
+    <strong>hasSwiftPrefix</strong>()
+        </code>
+    </h3>
+    <div class="details">    
+    
+            
+
+        <div class="method-description">
+                            <p class="no-description">No description</p>
+                    
+        </div>
+        <div class="tags">
+            
+            
+            
+            
+                    </div>
+    </div>
+
+            </div>
+                    <div class="method-item">
+                    <h3 id="method_clearSwiftPrefix">
+        <div class="location"><a href="https://github.com/protocolbuffers/protobuf-php/blob/v3.21.10/src/Google/Protobuf/Internal/FileOptions.php#L896">at line 896</a></div>
+        <code>                    
+    <strong>clearSwiftPrefix</strong>()
+        </code>
+    </h3>
+    <div class="details">    
+    
+            
+
+        <div class="method-description">
+                            <p class="no-description">No description</p>
+                    
+        </div>
+        <div class="tags">
+            
+            
+            
+            
+                    </div>
+    </div>
+
+            </div>
+                    <div class="method-item">
+                    <h3 id="method_setSwiftPrefix">
+        <div class="location"><a href="https://github.com/protocolbuffers/protobuf-php/blob/v3.21.10/src/Google/Protobuf/Internal/FileOptions.php#L911">at line 911</a></div>
+        <code>                    $this
+    <strong>setSwiftPrefix</strong>(string $var)
+        </code>
+    </h3>
+    <div class="details">    
+    
+            
+
+        <div class="method-description">
+                            <p><p>By default Swift generators will take the proto package and CamelCase it
+replacing '.' with underscore and use that to prefix the types/symbols
+defined. When this options is provided, they will use this value instead
+to prefix the types/symbols defined.</p></p>                <p><p>Generated from protobuf field <code>optional string swift_prefix = 39;</code></p></p>        
+        </div>
+        <div class="tags">
+                            <h4>Parameters</h4>
+
+                    <table class="table table-condensed">
+                    <tr>
+                <td>string</td>
+                <td>$var</td>
+                <td></td>
+            </tr>
+            </table>
+
+            
+                            <h4>Return Value</h4>
+
+                    <table class="table table-condensed">
+        <tr>
+            <td>$this</td>
+            <td></td>
+        </tr>
+    </table>
+
+            
+            
+            
+                    </div>
+    </div>
+
+            </div>
+                    <div class="method-item">
+                    <h3 id="method_getPhpClassPrefix">
+        <div class="location"><a href="https://github.com/protocolbuffers/protobuf-php/blob/v3.21.10/src/Google/Protobuf/Internal/FileOptions.php#L926">at line 926</a></div>
+        <code>                    string
+    <strong>getPhpClassPrefix</strong>()
+        </code>
+    </h3>
+    <div class="details">    
+    
+            
+
+        <div class="method-description">
+                            <p><p>Sets the php class prefix which is prepended to all php generated classes
+from this .proto. Default is empty.</p></p>                <p><p>Generated from protobuf field <code>optional string php_class_prefix = 40;</code></p></p>        
+        </div>
+        <div class="tags">
+            
+                            <h4>Return Value</h4>
+
+                    <table class="table table-condensed">
+        <tr>
+            <td>string</td>
+            <td></td>
+        </tr>
+    </table>
+
+            
+            
+            
+                    </div>
+    </div>
+
+            </div>
+                    <div class="method-item">
+                    <h3 id="method_hasPhpClassPrefix">
+        <div class="location"><a href="https://github.com/protocolbuffers/protobuf-php/blob/v3.21.10/src/Google/Protobuf/Internal/FileOptions.php#L931">at line 931</a></div>
+        <code>                    
+    <strong>hasPhpClassPrefix</strong>()
+        </code>
+    </h3>
+    <div class="details">    
+    
+            
+
+        <div class="method-description">
+                            <p class="no-description">No description</p>
+                    
+        </div>
+        <div class="tags">
+            
+            
+            
+            
+                    </div>
+    </div>
+
+            </div>
+                    <div class="method-item">
+                    <h3 id="method_clearPhpClassPrefix">
+        <div class="location"><a href="https://github.com/protocolbuffers/protobuf-php/blob/v3.21.10/src/Google/Protobuf/Internal/FileOptions.php#L936">at line 936</a></div>
+        <code>                    
+    <strong>clearPhpClassPrefix</strong>()
+        </code>
+    </h3>
+    <div class="details">    
+    
+            
+
+        <div class="method-description">
+                            <p class="no-description">No description</p>
+                    
+        </div>
+        <div class="tags">
+            
+            
+            
+            
+                    </div>
+    </div>
+
+            </div>
+                    <div class="method-item">
+                    <h3 id="method_setPhpClassPrefix">
+        <div class="location"><a href="https://github.com/protocolbuffers/protobuf-php/blob/v3.21.10/src/Google/Protobuf/Internal/FileOptions.php#L949">at line 949</a></div>
+        <code>                    $this
+    <strong>setPhpClassPrefix</strong>(string $var)
+        </code>
+    </h3>
+    <div class="details">    
+    
+            
+
+        <div class="method-description">
+                            <p><p>Sets the php class prefix which is prepended to all php generated classes
+from this .proto. Default is empty.</p></p>                <p><p>Generated from protobuf field <code>optional string php_class_prefix = 40;</code></p></p>        
+        </div>
+        <div class="tags">
+                            <h4>Parameters</h4>
+
+                    <table class="table table-condensed">
+                    <tr>
+                <td>string</td>
+                <td>$var</td>
+                <td></td>
+            </tr>
+            </table>
+
+            
+                            <h4>Return Value</h4>
+
+                    <table class="table table-condensed">
+        <tr>
+            <td>$this</td>
+            <td></td>
+        </tr>
+    </table>
+
+            
+            
+            
+                    </div>
+    </div>
+
+            </div>
+                    <div class="method-item">
+                    <h3 id="method_getPhpNamespace">
+        <div class="location"><a href="https://github.com/protocolbuffers/protobuf-php/blob/v3.21.10/src/Google/Protobuf/Internal/FileOptions.php#L965">at line 965</a></div>
+        <code>                    string
+    <strong>getPhpNamespace</strong>()
+        </code>
+    </h3>
+    <div class="details">    
+    
+            
+
+        <div class="method-description">
+                            <p><p>Use this option to change the namespace of php generated classes. Default
+is empty. When this option is empty, the package name will be used for
+determining the namespace.</p></p>                <p><p>Generated from protobuf field <code>optional string php_namespace = 41;</code></p></p>        
+        </div>
+        <div class="tags">
+            
+                            <h4>Return Value</h4>
+
+                    <table class="table table-condensed">
+        <tr>
+            <td>string</td>
+            <td></td>
+        </tr>
+    </table>
+
+            
+            
+            
+                    </div>
+    </div>
+
+            </div>
+                    <div class="method-item">
+                    <h3 id="method_hasPhpNamespace">
+        <div class="location"><a href="https://github.com/protocolbuffers/protobuf-php/blob/v3.21.10/src/Google/Protobuf/Internal/FileOptions.php#L970">at line 970</a></div>
+        <code>                    
+    <strong>hasPhpNamespace</strong>()
+        </code>
+    </h3>
+    <div class="details">    
+    
+            
+
+        <div class="method-description">
+                            <p class="no-description">No description</p>
+                    
+        </div>
+        <div class="tags">
+            
+            
+            
+            
+                    </div>
+    </div>
+
+            </div>
+                    <div class="method-item">
+                    <h3 id="method_clearPhpNamespace">
+        <div class="location"><a href="https://github.com/protocolbuffers/protobuf-php/blob/v3.21.10/src/Google/Protobuf/Internal/FileOptions.php#L975">at line 975</a></div>
+        <code>                    
+    <strong>clearPhpNamespace</strong>()
+        </code>
+    </h3>
+    <div class="details">    
+    
+            
+
+        <div class="method-description">
+                            <p class="no-description">No description</p>
+                    
+        </div>
+        <div class="tags">
+            
+            
+            
+            
+                    </div>
+    </div>
+
+            </div>
+                    <div class="method-item">
+                    <h3 id="method_setPhpNamespace">
+        <div class="location"><a href="https://github.com/protocolbuffers/protobuf-php/blob/v3.21.10/src/Google/Protobuf/Internal/FileOptions.php#L989">at line 989</a></div>
+        <code>                    $this
+    <strong>setPhpNamespace</strong>(string $var)
+        </code>
+    </h3>
+    <div class="details">    
+    
+            
+
+        <div class="method-description">
+                            <p><p>Use this option to change the namespace of php generated classes. Default
+is empty. When this option is empty, the package name will be used for
+determining the namespace.</p></p>                <p><p>Generated from protobuf field <code>optional string php_namespace = 41;</code></p></p>        
+        </div>
+        <div class="tags">
+                            <h4>Parameters</h4>
+
+                    <table class="table table-condensed">
+                    <tr>
+                <td>string</td>
+                <td>$var</td>
+                <td></td>
+            </tr>
+            </table>
+
+            
+                            <h4>Return Value</h4>
+
+                    <table class="table table-condensed">
+        <tr>
+            <td>$this</td>
+            <td></td>
+        </tr>
+    </table>
+
+            
+            
+            
+                    </div>
+    </div>
+
+            </div>
+                    <div class="method-item">
+                    <h3 id="method_getPhpMetadataNamespace">
+        <div class="location"><a href="https://github.com/protocolbuffers/protobuf-php/blob/v3.21.10/src/Google/Protobuf/Internal/FileOptions.php#L1005">at line 1005</a></div>
+        <code>                    string
+    <strong>getPhpMetadataNamespace</strong>()
+        </code>
+    </h3>
+    <div class="details">    
+    
+            
+
+        <div class="method-description">
+                            <p><p>Use this option to change the namespace of php generated metadata classes.</p></p>                <p><p>Default is empty. When this option is empty, the proto file name will be
+used for determining the namespace.</p>
+<p>Generated from protobuf field <code>optional string php_metadata_namespace = 44;</code></p></p>        
+        </div>
+        <div class="tags">
+            
+                            <h4>Return Value</h4>
+
+                    <table class="table table-condensed">
+        <tr>
+            <td>string</td>
+            <td></td>
+        </tr>
+    </table>
+
+            
+            
+            
+                    </div>
+    </div>
+
+            </div>
+                    <div class="method-item">
+                    <h3 id="method_hasPhpMetadataNamespace">
+        <div class="location"><a href="https://github.com/protocolbuffers/protobuf-php/blob/v3.21.10/src/Google/Protobuf/Internal/FileOptions.php#L1010">at line 1010</a></div>
+        <code>                    
+    <strong>hasPhpMetadataNamespace</strong>()
+        </code>
+    </h3>
+    <div class="details">    
+    
+            
+
+        <div class="method-description">
+                            <p class="no-description">No description</p>
+                    
+        </div>
+        <div class="tags">
+            
+            
+            
+            
+                    </div>
+    </div>
+
+            </div>
+                    <div class="method-item">
+                    <h3 id="method_clearPhpMetadataNamespace">
+        <div class="location"><a href="https://github.com/protocolbuffers/protobuf-php/blob/v3.21.10/src/Google/Protobuf/Internal/FileOptions.php#L1015">at line 1015</a></div>
+        <code>                    
+    <strong>clearPhpMetadataNamespace</strong>()
+        </code>
+    </h3>
+    <div class="details">    
+    
+            
+
+        <div class="method-description">
+                            <p class="no-description">No description</p>
+                    
+        </div>
+        <div class="tags">
+            
+            
+            
+            
+                    </div>
+    </div>
+
+            </div>
+                    <div class="method-item">
+                    <h3 id="method_setPhpMetadataNamespace">
+        <div class="location"><a href="https://github.com/protocolbuffers/protobuf-php/blob/v3.21.10/src/Google/Protobuf/Internal/FileOptions.php#L1029">at line 1029</a></div>
+        <code>                    $this
+    <strong>setPhpMetadataNamespace</strong>(string $var)
+        </code>
+    </h3>
+    <div class="details">    
+    
+            
+
+        <div class="method-description">
+                            <p><p>Use this option to change the namespace of php generated metadata classes.</p></p>                <p><p>Default is empty. When this option is empty, the proto file name will be
+used for determining the namespace.</p>
+<p>Generated from protobuf field <code>optional string php_metadata_namespace = 44;</code></p></p>        
+        </div>
+        <div class="tags">
+                            <h4>Parameters</h4>
+
+                    <table class="table table-condensed">
+                    <tr>
+                <td>string</td>
+                <td>$var</td>
+                <td></td>
+            </tr>
+            </table>
+
+            
+                            <h4>Return Value</h4>
+
+                    <table class="table table-condensed">
+        <tr>
+            <td>$this</td>
+            <td></td>
+        </tr>
+    </table>
+
+            
+            
+            
+                    </div>
+    </div>
+
+            </div>
+                    <div class="method-item">
+                    <h3 id="method_getRubyPackage">
+        <div class="location"><a href="https://github.com/protocolbuffers/protobuf-php/blob/v3.21.10/src/Google/Protobuf/Internal/FileOptions.php#L1045">at line 1045</a></div>
+        <code>                    string
+    <strong>getRubyPackage</strong>()
+        </code>
+    </h3>
+    <div class="details">    
+    
+            
+
+        <div class="method-description">
+                            <p><p>Use this option to change the package of ruby generated classes. Default
+is empty. When this option is not set, the package name will be used for
+determining the ruby package.</p></p>                <p><p>Generated from protobuf field <code>optional string ruby_package = 45;</code></p></p>        
+        </div>
+        <div class="tags">
+            
+                            <h4>Return Value</h4>
+
+                    <table class="table table-condensed">
+        <tr>
+            <td>string</td>
+            <td></td>
+        </tr>
+    </table>
+
+            
+            
+            
+                    </div>
+    </div>
+
+            </div>
+                    <div class="method-item">
+                    <h3 id="method_hasRubyPackage">
+        <div class="location"><a href="https://github.com/protocolbuffers/protobuf-php/blob/v3.21.10/src/Google/Protobuf/Internal/FileOptions.php#L1050">at line 1050</a></div>
+        <code>                    
+    <strong>hasRubyPackage</strong>()
+        </code>
+    </h3>
+    <div class="details">    
+    
+            
+
+        <div class="method-description">
+                            <p class="no-description">No description</p>
+                    
+        </div>
+        <div class="tags">
+            
+            
+            
+            
+                    </div>
+    </div>
+
+            </div>
+                    <div class="method-item">
+                    <h3 id="method_clearRubyPackage">
+        <div class="location"><a href="https://github.com/protocolbuffers/protobuf-php/blob/v3.21.10/src/Google/Protobuf/Internal/FileOptions.php#L1055">at line 1055</a></div>
+        <code>                    
+    <strong>clearRubyPackage</strong>()
+        </code>
+    </h3>
+    <div class="details">    
+    
+            
+
+        <div class="method-description">
+                            <p class="no-description">No description</p>
+                    
+        </div>
+        <div class="tags">
+            
+            
+            
+            
+                    </div>
+    </div>
+
+            </div>
+                    <div class="method-item">
+                    <h3 id="method_setRubyPackage">
+        <div class="location"><a href="https://github.com/protocolbuffers/protobuf-php/blob/v3.21.10/src/Google/Protobuf/Internal/FileOptions.php#L1069">at line 1069</a></div>
+        <code>                    $this
+    <strong>setRubyPackage</strong>(string $var)
+        </code>
+    </h3>
+    <div class="details">    
+    
+            
+
+        <div class="method-description">
+                            <p><p>Use this option to change the package of ruby generated classes. Default
+is empty. When this option is not set, the package name will be used for
+determining the ruby package.</p></p>                <p><p>Generated from protobuf field <code>optional string ruby_package = 45;</code></p></p>        
+        </div>
+        <div class="tags">
+                            <h4>Parameters</h4>
+
+                    <table class="table table-condensed">
+                    <tr>
+                <td>string</td>
+                <td>$var</td>
+                <td></td>
+            </tr>
+            </table>
+
+            
+                            <h4>Return Value</h4>
+
+                    <table class="table table-condensed">
+        <tr>
+            <td>$this</td>
+            <td></td>
+        </tr>
+    </table>
+
+            
+            
+            
+                    </div>
+    </div>
+
+            </div>
+                    <div class="method-item">
+                    <h3 id="method_getUninterpretedOption">
+        <div class="location"><a href="https://github.com/protocolbuffers/protobuf-php/blob/v3.21.10/src/Google/Protobuf/Internal/FileOptions.php#L1084">at line 1084</a></div>
+        <code>                    <a href="../../../Google/Protobuf/Internal/RepeatedField.html"><abbr title="Google\Protobuf\Internal\RepeatedField">RepeatedField</abbr></a>
+    <strong>getUninterpretedOption</strong>()
+        </code>
+    </h3>
+    <div class="details">    
+    
+            
+
+        <div class="method-description">
+                            <p><p>The parser stores options it doesn't recognize here.</p></p>                <p><p>See the documentation for the &quot;Options&quot; section above.</p>
+<p>Generated from protobuf field <code>repeated .google.protobuf.UninterpretedOption uninterpreted_option = 999;</code></p></p>        
+        </div>
+        <div class="tags">
+            
+                            <h4>Return Value</h4>
+
+                    <table class="table table-condensed">
+        <tr>
+            <td><a href="../../../Google/Protobuf/Internal/RepeatedField.html"><abbr title="Google\Protobuf\Internal\RepeatedField">RepeatedField</abbr></a></td>
+            <td></td>
+        </tr>
+    </table>
+
+            
+            
+            
+                    </div>
+    </div>
+
+            </div>
+                    <div class="method-item">
+                    <h3 id="method_setUninterpretedOption">
+        <div class="location"><a href="https://github.com/protocolbuffers/protobuf-php/blob/v3.21.10/src/Google/Protobuf/Internal/FileOptions.php#L1097">at line 1097</a></div>
+        <code>                    $this
+    <strong>setUninterpretedOption</strong>(<a href="../../../Google/Protobuf/Internal/UninterpretedOption.html"><abbr title="Google\Protobuf\Internal\UninterpretedOption">UninterpretedOption</abbr></a>[]|<a href="../../../Google/Protobuf/Internal/RepeatedField.html"><abbr title="Google\Protobuf\Internal\RepeatedField">RepeatedField</abbr></a> $var)
+        </code>
+    </h3>
+    <div class="details">    
+    
+            
+
+        <div class="method-description">
+                            <p><p>The parser stores options it doesn't recognize here.</p></p>                <p><p>See the documentation for the &quot;Options&quot; section above.</p>
+<p>Generated from protobuf field <code>repeated .google.protobuf.UninterpretedOption uninterpreted_option = 999;</code></p></p>        
+        </div>
+        <div class="tags">
+                            <h4>Parameters</h4>
+
+                    <table class="table table-condensed">
+                    <tr>
+                <td><a href="../../../Google/Protobuf/Internal/UninterpretedOption.html"><abbr title="Google\Protobuf\Internal\UninterpretedOption">UninterpretedOption</abbr></a>[]|<a href="../../../Google/Protobuf/Internal/RepeatedField.html"><abbr title="Google\Protobuf\Internal\RepeatedField">RepeatedField</abbr></a></td>
+                <td>$var</td>
+                <td></td>
+            </tr>
+            </table>
+
+            
+                            <h4>Return Value</h4>
+
+                    <table class="table table-condensed">
+        <tr>
+            <td>$this</td>
+            <td></td>
+        </tr>
+    </table>
+
+            
+            
+            
+                    </div>
+    </div>
+
+            </div>
+            </div>
+
+    
+</div><div id="footer">
+        Generated by <a href="https://github.com/code-lts/doctum">Doctum, a API Documentation generator and fork of Sami</a>.</div></div>
+    </div>
+    </body>
+
+</html>

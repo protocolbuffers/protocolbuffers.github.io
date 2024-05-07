@@ -1,0 +1,347 @@
+<!DOCTYPE html>
+<html devsite>
+<head>
+  <title>Google.Protobuf.Reflection.FileDescriptor Class Reference</title>
+  <link rel="stylesheet" href="/reference/csharp/api-docs/includes/stylesheet.css">
+</head>
+<body><div id="top"><!-- do not remove this div --></div><h1>Google.<wbr/>Protobuf.<wbr/>Reflection.<wbr/>FileDescriptor</h1><p>Describes a .proto file, including everything defined within. </p><h2>Summary</h2><p><a href="/reference/csharp/api-docs/interface/google/protobuf/reflection/i-descriptor.html#interface_google_1_1_protobuf_1_1_reflection_1_1_i_descriptor">IDescriptor</a> is implemented such that the File property returns this descriptor, and the FullName is the same as the Name. </p><h3>Inheritance</h3>Inherits from: <a href="/reference/csharp/api-docs/interface/google/protobuf/reflection/i-descriptor">Google.Protobuf.Reflection.IDescriptor</a><table class="properties responsive">
+    <tr>
+      <th colspan="2">
+        <h3>Properties</h3>
+      </th>
+    </tr>
+    <tr>
+      <td>
+        <code><a href="#class_google_1_1_protobuf_1_1_reflection_1_1_file_descriptor_1a4e6528d935aef99ce3f4df56f3558d0a">Dependencies</a></code>
+      </td>
+      <td>
+        <div>
+          <code>IList< <a href="/reference/csharp/api-docs/class/google/protobuf/reflection/file-descriptor.html#class_google_1_1_protobuf_1_1_reflection_1_1_file_descriptor">FileDescriptor</a> ></code>
+        </div>
+        <div>Unmodifiable list of this file's dependencies (imports). </div>
+      </td>
+    </tr>
+    <tr>
+      <td>
+        <code><a href="#class_google_1_1_protobuf_1_1_reflection_1_1_file_descriptor_1a51ea4aeecd4e28dfa59cf7c7c5dbd09f">DescriptorPool</a></code>
+      </td>
+      <td>
+        <div>
+          <code>DescriptorPool</code>
+        </div>
+        <div>Pool containing symbol descriptors. </div>
+      </td>
+    </tr>
+    <tr>
+      <td>
+        <code><a href="#class_google_1_1_protobuf_1_1_reflection_1_1_file_descriptor_1a40f233602ec37abc3070d33ec1b627e3">DescriptorProtoFileDescriptor</a></code>
+      </td>
+      <td>
+        <div>
+          <code><a href="/reference/csharp/api-docs/class/google/protobuf/reflection/file-descriptor.html#class_google_1_1_protobuf_1_1_reflection_1_1_file_descriptor">FileDescriptor</a></code>
+        </div>
+        <div>Returns the file descriptor for descriptor.proto. </div>
+      </td>
+    </tr>
+    <tr>
+      <td>
+        <code><a href="#class_google_1_1_protobuf_1_1_reflection_1_1_file_descriptor_1a658c3420509d852ffda6b44df5b4e845">EnumTypes</a></code>
+      </td>
+      <td>
+        <div>
+          <code>IList< <a href="/reference/csharp/api-docs/class/google/protobuf/reflection/enum-descriptor.html#class_google_1_1_protobuf_1_1_reflection_1_1_enum_descriptor">EnumDescriptor</a> ></code>
+        </div>
+        <div>Unmodifiable list of top-level enum types declared in this file. </div>
+      </td>
+    </tr>
+    <tr>
+      <td>
+        <code><a href="#class_google_1_1_protobuf_1_1_reflection_1_1_file_descriptor_1a7151b118766781e5fc057fef1c600e1b">MessageTypes</a></code>
+      </td>
+      <td>
+        <div>
+          <code>IList< <a href="/reference/csharp/api-docs/class/google/protobuf/reflection/message-descriptor.html#class_google_1_1_protobuf_1_1_reflection_1_1_message_descriptor">MessageDescriptor</a> ></code>
+        </div>
+        <div>Unmodifiable list of top-level message types declared in this file. </div>
+      </td>
+    </tr>
+    <tr>
+      <td>
+        <code><a href="#class_google_1_1_protobuf_1_1_reflection_1_1_file_descriptor_1a9bf680fe7f77e094b68f33c03f0234ad">Proto</a></code>
+      </td>
+      <td>
+        <div>
+          <code>FileDescriptorProto</code>
+        </div>
+        <div>The descriptor in its protocol message representation. </div>
+      </td>
+    </tr>
+    <tr>
+      <td>
+        <code><a href="#class_google_1_1_protobuf_1_1_reflection_1_1_file_descriptor_1a968947d7772c637216964fdb8e155f2b">PublicDependencies</a></code>
+      </td>
+      <td>
+        <div>
+          <code>IList< <a href="/reference/csharp/api-docs/class/google/protobuf/reflection/file-descriptor.html#class_google_1_1_protobuf_1_1_reflection_1_1_file_descriptor">FileDescriptor</a> ></code>
+        </div>
+        <div>Unmodifiable list of this file's public dependencies (public imports). </div>
+      </td>
+    </tr>
+    <tr>
+      <td>
+        <code><a href="#class_google_1_1_protobuf_1_1_reflection_1_1_file_descriptor_1a01f8ade14a1286541df90c1831b4f8bc">SerializedData</a></code>
+      </td>
+      <td>
+        <div>
+          <code><a href="/reference/csharp/api-docs/class/google/protobuf/byte-string.html#class_google_1_1_protobuf_1_1_byte_string">ByteString</a></code>
+        </div>
+        <div>The original serialized binary form of this descriptor. </div>
+      </td>
+    </tr>
+    <tr>
+      <td>
+        <code><a href="#class_google_1_1_protobuf_1_1_reflection_1_1_file_descriptor_1a6783a8a48715f78879e9664db7057b35">Services</a></code>
+      </td>
+      <td>
+        <div>
+          <code>IList< <a href="/reference/csharp/api-docs/class/google/protobuf/reflection/service-descriptor.html#class_google_1_1_protobuf_1_1_reflection_1_1_service_descriptor">ServiceDescriptor</a> ></code>
+        </div>
+        <div>Unmodifiable list of top-level services declared in this file. </div>
+      </td>
+    </tr>
+  </table><table class="properties responsive">
+    <tr>
+      <th colspan="2">
+        <h3>Public attributes</h3>
+      </th>
+    </tr>
+    <tr>
+      <td>
+        <code><a href="#class_google_1_1_protobuf_1_1_reflection_1_1_file_descriptor_1a7c88dbe86c55337d8bd23ab04493be47">Name</a> => Proto.Name</code>
+      </td>
+      <td>
+        <div>
+          <code>string</code>
+        </div>
+        <div>The file name. </div>
+      </td>
+    </tr>
+    <tr>
+      <td>
+        <code><a href="#class_google_1_1_protobuf_1_1_reflection_1_1_file_descriptor_1ad332de10a9fde9475b9fb2ad3cb94bce">Package</a> => Proto.Package</code>
+      </td>
+      <td>
+        <div>
+          <code>string</code>
+        </div>
+        <div>The package as declared in the .proto file. </div>
+      </td>
+    </tr>
+  </table><table class="methods responsive">
+    <tr>
+      <th colspan="2">
+        <h3>Public functions</h3>
+      </th>
+    </tr>
+    <tr>
+      <td>
+        <code><a href="#class_google_1_1_protobuf_1_1_reflection_1_1_file_descriptor_1a2f69b4ae5da18e4242f1496a11eb1fa1">FindTypeByName< T ></a>(<a href="/reference/csharp/api-docs/namespace/google/protobuf/reflection.html#namespace_google_1_1_protobuf_1_1_reflection_1a876322e8bb522484f05e4ec542dd7904a27118326006d3829667a400ad23d5d98">String</a> name)</code>
+      </td>
+      <td>
+        <div>
+          <code>T</code>
+        </div>
+        <div>Finds a type (message, enum, service or extension) in the file by name. </div>
+      </td>
+    </tr>
+    <tr>
+      <td>
+        <code><a href="#class_google_1_1_protobuf_1_1_reflection_1_1_file_descriptor_1a75e80d5f413a6c5b6b87c43dd89db6eb">ToString</a>()</code>
+      </td>
+      <td>
+        <div>
+          <code>override string</code>
+        </div>
+        <div>Returns a System.String that represents this instance. </div>
+      </td>
+    </tr>
+  </table><table class="methods responsive">
+    <tr>
+      <th colspan="2">
+        <h3>Public static functions</h3>
+      </th>
+    </tr>
+    <tr>
+      <td>
+        <code><a href="#class_google_1_1_protobuf_1_1_reflection_1_1_file_descriptor_1a60f045476a821f2562666e88852f1585">FromGeneratedCode</a>(byte[] descriptorData, <a href="/reference/csharp/api-docs/class/google/protobuf/reflection/file-descriptor.html#class_google_1_1_protobuf_1_1_reflection_1_1_file_descriptor">FileDescriptor</a>[] dependencies, <a href="/reference/csharp/api-docs/class/google/protobuf/reflection/generated-clr-type-info.html#class_google_1_1_protobuf_1_1_reflection_1_1_generated_clr_type_info">GeneratedClrTypeInfo</a> generatedCodeInfo)</code>
+      </td>
+      <td>
+        <div>
+          <code><a href="/reference/csharp/api-docs/class/google/protobuf/reflection/file-descriptor.html#class_google_1_1_protobuf_1_1_reflection_1_1_file_descriptor">FileDescriptor</a></code>
+        </div>
+        <div>Creates a descriptor for generated code. </div>
+      </td>
+    </tr>
+  </table><h2>Properties</h2><div id="class_google_1_1_protobuf_1_1_reflection_1_1_file_descriptor_1a4e6528d935aef99ce3f4df56f3558d0a">
+    <h3>Dependencies</h3>
+    <pre class="prettyprint">IList< <a href="/reference/csharp/api-docs/class/google/protobuf/reflection/file-descriptor.html#class_google_1_1_protobuf_1_1_reflection_1_1_file_descriptor">FileDescriptor</a> > Dependencies</pre>
+    <div>
+      <p>Unmodifiable list of this file's dependencies (imports). </p>
+    </div>
+  </div><div id="class_google_1_1_protobuf_1_1_reflection_1_1_file_descriptor_1a51ea4aeecd4e28dfa59cf7c7c5dbd09f">
+    <h3>DescriptorPool</h3>
+    <pre class="prettyprint">DescriptorPool DescriptorPool</pre>
+    <div>
+      <p>Pool containing symbol descriptors. </p>
+    </div>
+  </div><div id="class_google_1_1_protobuf_1_1_reflection_1_1_file_descriptor_1a40f233602ec37abc3070d33ec1b627e3">
+    <h3>DescriptorProtoFileDescriptor</h3>
+    <pre class="prettyprint"><a href="/reference/csharp/api-docs/class/google/protobuf/reflection/file-descriptor.html#class_google_1_1_protobuf_1_1_reflection_1_1_file_descriptor">FileDescriptor</a> DescriptorProtoFileDescriptor</pre>
+    <div>
+      <p>Returns the file descriptor for descriptor.proto. </p>
+      <p>This is used for protos which take a direct dependency on <code>descriptor.proto</code>, typically for annotations. While <code>descriptor.proto</code> is a proto2 file, it is built into the <a href="/reference/csharp/api-docs/namespace/google/protobuf.html#namespace_google_1_1_protobuf">Google.Protobuf</a> runtime for reflection purposes. The messages are internal to the runtime as they would require proto2 semantics for full support, but the file descriptor is available via this property. The C# codegen in protoc automatically uses this property when it detects a dependency on <code>descriptor.proto</code>. </p>
+      <p>The file descriptor for <code>descriptor.proto</code>. </p>
+    </div>
+  </div><div id="class_google_1_1_protobuf_1_1_reflection_1_1_file_descriptor_1a658c3420509d852ffda6b44df5b4e845">
+    <h3>EnumTypes</h3>
+    <pre class="prettyprint">IList< <a href="/reference/csharp/api-docs/class/google/protobuf/reflection/enum-descriptor.html#class_google_1_1_protobuf_1_1_reflection_1_1_enum_descriptor">EnumDescriptor</a> > EnumTypes</pre>
+    <div>
+      <p>Unmodifiable list of top-level enum types declared in this file. </p>
+    </div>
+  </div><div id="class_google_1_1_protobuf_1_1_reflection_1_1_file_descriptor_1a7151b118766781e5fc057fef1c600e1b">
+    <h3>MessageTypes</h3>
+    <pre class="prettyprint">IList< <a href="/reference/csharp/api-docs/class/google/protobuf/reflection/message-descriptor.html#class_google_1_1_protobuf_1_1_reflection_1_1_message_descriptor">MessageDescriptor</a> > MessageTypes</pre>
+    <div>
+      <p>Unmodifiable list of top-level message types declared in this file. </p>
+    </div>
+  </div><div id="class_google_1_1_protobuf_1_1_reflection_1_1_file_descriptor_1a9bf680fe7f77e094b68f33c03f0234ad">
+    <h3>Proto</h3>
+    <pre class="prettyprint">FileDescriptorProto Proto</pre>
+    <div>
+      <p>The descriptor in its protocol message representation. </p>
+    </div>
+  </div><div id="class_google_1_1_protobuf_1_1_reflection_1_1_file_descriptor_1a968947d7772c637216964fdb8e155f2b">
+    <h3>PublicDependencies</h3>
+    <pre class="prettyprint">IList< <a href="/reference/csharp/api-docs/class/google/protobuf/reflection/file-descriptor.html#class_google_1_1_protobuf_1_1_reflection_1_1_file_descriptor">FileDescriptor</a> > PublicDependencies</pre>
+    <div>
+      <p>Unmodifiable list of this file's public dependencies (public imports). </p>
+    </div>
+  </div><div id="class_google_1_1_protobuf_1_1_reflection_1_1_file_descriptor_1a01f8ade14a1286541df90c1831b4f8bc">
+    <h3>SerializedData</h3>
+    <pre class="prettyprint"><a href="/reference/csharp/api-docs/class/google/protobuf/byte-string.html#class_google_1_1_protobuf_1_1_byte_string">ByteString</a> SerializedData</pre>
+    <div>
+      <p>The original serialized binary form of this descriptor. </p>
+    </div>
+  </div><div id="class_google_1_1_protobuf_1_1_reflection_1_1_file_descriptor_1a6783a8a48715f78879e9664db7057b35">
+    <h3>Services</h3>
+    <pre class="prettyprint">IList< <a href="/reference/csharp/api-docs/class/google/protobuf/reflection/service-descriptor.html#class_google_1_1_protobuf_1_1_reflection_1_1_service_descriptor">ServiceDescriptor</a> > Services</pre>
+    <div>
+      <p>Unmodifiable list of top-level services declared in this file. </p>
+    </div>
+  </div><h2>Public attributes</h2><div id="class_google_1_1_protobuf_1_1_reflection_1_1_file_descriptor_1a7c88dbe86c55337d8bd23ab04493be47">
+    <h3>Name</h3>
+    <pre class="prettyprint">string Name => Proto.Name</pre>
+    <div>
+      <p>The file name. </p>
+    </div>
+  </div><div id="class_google_1_1_protobuf_1_1_reflection_1_1_file_descriptor_1ad332de10a9fde9475b9fb2ad3cb94bce">
+    <h3>Package</h3>
+    <pre class="prettyprint">string Package => Proto.Package</pre>
+    <div>
+      <p>The package as declared in the .proto file. </p>
+      <p>This may or may not be equivalent to the .NET namespace of the generated classes. </p>
+    </div>
+  </div><h2>Public functions</h2><div id="class_google_1_1_protobuf_1_1_reflection_1_1_file_descriptor_1a2f69b4ae5da18e4242f1496a11eb1fa1">
+    <h3>FindTypeByName< T ></h3>
+    <pre class="prettyprint">T FindTypeByName< T >(
+  <a href="/reference/csharp/api-docs/namespace/google/protobuf/reflection.html#namespace_google_1_1_protobuf_1_1_reflection_1a876322e8bb522484f05e4ec542dd7904a27118326006d3829667a400ad23d5d98">String</a> name
+)</pre>
+    <div>
+      <p>Finds a type (message, enum, service or extension) in the file by name. </p>
+      <p>Does not find nested types. </p>
+      <p />
+      <table class="details responsive">
+        <thead>
+          <th colspan="2">Details</th>
+        </thead>
+        <tbody>
+          <tr>
+            <td>Parameters</td>
+            <td>
+              <table class="function param responsive">
+                <tbody>
+                  <tr>
+                    <td>
+                      <code>name</code>
+                    </td>
+                    <td>
+                      <div>The unqualified type name to look for.</div>
+                    </td>
+                  </tr>
+                </tbody>
+              </table>
+            </td>
+          </tr>
+          <tr>
+            <td>Template Parameters</td>
+            <td>
+              <table class="function param responsive">
+                <tbody>
+                  <tr>
+                    <td>
+                      <code>T</code>
+                    </td>
+                    <td>
+                      <div>The type of descriptor to look for</div>
+                    </td>
+                  </tr>
+                </tbody>
+              </table>
+            </td>
+          </tr>
+          <tr>
+            <td>
+              <b>Returns</b>
+            </td>
+            <td>
+              <div>The type's descriptor, or null if not found.</div>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div><div id="class_google_1_1_protobuf_1_1_reflection_1_1_file_descriptor_1a75e80d5f413a6c5b6b87c43dd89db6eb">
+    <h3>ToString</h3>
+    <pre class="prettyprint">override string ToString()</pre>
+    <div>
+      <p>Returns a System.String that represents this instance. </p>
+      <p />
+      <table class="details responsive">
+        <thead>
+          <th colspan="2">Details</th>
+        </thead>
+        <tbody>
+          <tr>
+            <td>
+              <b>Returns</b>
+            </td>
+            <td>
+              <div>A System.String that represents this instance. </div>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div><h2>Public static functions</h2><div id="class_google_1_1_protobuf_1_1_reflection_1_1_file_descriptor_1a60f045476a821f2562666e88852f1585">
+    <h3>FromGeneratedCode</h3>
+    <pre class="prettyprint"><a href="/reference/csharp/api-docs/class/google/protobuf/reflection/file-descriptor.html#class_google_1_1_protobuf_1_1_reflection_1_1_file_descriptor">FileDescriptor</a> FromGeneratedCode(
+  byte[] descriptorData,
+  <a href="/reference/csharp/api-docs/class/google/protobuf/reflection/file-descriptor.html#class_google_1_1_protobuf_1_1_reflection_1_1_file_descriptor">FileDescriptor</a>[] dependencies,
+  <a href="/reference/csharp/api-docs/class/google/protobuf/reflection/generated-clr-type-info.html#class_google_1_1_protobuf_1_1_reflection_1_1_generated_clr_type_info">GeneratedClrTypeInfo</a> generatedCodeInfo
+)</pre>
+    <div>
+      <p>Creates a descriptor for generated code. </p>
+      <p>This method is only designed to be used by the results of generating code with protoc, which creates the appropriate dependencies etc. It has to be public because the generated code is "external", but should not be called directly by end users. </p>
+    </div>
+  </div></body>
+</html>
