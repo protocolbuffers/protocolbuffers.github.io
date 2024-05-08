@@ -1076,6 +1076,8 @@ map<string, Project> projects = 3;
     field is serialized is language-dependent. In C++, Java, Kotlin, and Python
     the default value for the type is serialized, while in other languages
     nothing is serialized.
+*   No symbol `FooEntry` can exist in the same scope as a map `foo`, because
+    `FooEntry` is already used by the implementation of the map.
 
 The generated map API is currently available for all supported languages. You
 can find out more about the map API for your chosen language in the relevant

@@ -261,7 +261,7 @@ no_whitespace: "first""second"'third''fourth'
 
 Fields that are part of the containing message use simple `Identifiers` as
 names.
-[`Extension`](/programming-guides/proto#extensions) and
+[`Extension`](/programming-guides/proto2#extensions) and
 [`Any`](/programming-guides/proto3#any) field names are
 wrapped in square brackets and fully-qualified. `Any` field names are prefixed
 with a qualifying domain name, such as `type.googleapis.com/`.
@@ -580,7 +580,7 @@ optional.
 ## `map` Fields {#map}
 
 Text format does not provide a custom syntax for specifying map field entries.
-When a [`map`](/programming-guides/proto#maps) field is
+When a [`map`](/programming-guides/proto2#maps) field is
 defined in a *.proto* file, an implicit `Entry` message is defined containing
 `key` and `value` fields. Map fields are always repeated, accepting multiple
 key/value entries. Example:

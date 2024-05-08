@@ -462,7 +462,7 @@ automatically generated class:
       </tr>
       <tr>
         <td>string</td>
-        <td>A string must always contain UTF-8 encoded or 7-bit ASCII text, and
+        <td>A string must always contain UTF-8 encoded<sup>[5]</sup> or 7-bit ASCII text, and
         cannot be longer than 2<sup>32</sup>.</td>
         <td>string</td>
         <td>String</td>
@@ -501,6 +501,10 @@ checking to make sure it is valid.
 <sup>[4]</sup> 64-bit or unsigned 32-bit integers are always represented as long
 when decoded, but can be an int if an int is given when setting the field. In
 all cases, the value must fit in the type represented when set. See [2].
+
+<sup>[5]</sup> Proto2 typically doesn't ever check the UTF-8 validity of string
+fields. Behavior varies between languages though, and invalid UTF-8 data should
+not be stored in string fields.
 
 You can find out more about how these types are encoded when you serialize your
 message in

@@ -10,7 +10,8 @@ Any differences between proto2 and proto3 generated code
 are highlighted&mdash;note that these differences are in the generated code as
 described in this document, not the base message classes/interfaces, which are
 the same in both versions. You should read the
-[proto2 language guide](/programming-guides/proto) and/or
+[proto2 language guide](/programming-guides/proto2)
+and/or
 [proto3 language guide](/programming-guides/proto3)
 before reading this document.
 
@@ -145,7 +146,7 @@ The compiler will generate the following accessors in the DSL:
 
 For other simple field types, the corresponding Java type is chosen according to
 the
-[scalar value types table](/programming-guides/proto#scalar).
+[scalar value types table](/programming-guides/proto2#scalar).
 For message and enum types, the value type is replaced with the message or enum
 class. As the message type is still defined in Java, unsigned types in the
 message are represented using the standard corresponding signed types in the
@@ -189,7 +190,7 @@ The compiler will generate the following property in the DSL:
 
 For other simple field types, the corresponding Java type is chosen according to
 the
-[scalar value types table](/programming-guides/proto#scalar).
+[scalar value types table](/programming-guides/proto2#scalar).
 For message and enum types, the value type is replaced with the message or enum
 class. As the message type is still defined in Java, unsigned types in the
 message are represented using the standard corresponding signed types in the
@@ -255,7 +256,7 @@ could cause confusing side effects.
 
 For other simple field types, the corresponding Java type is chosen according to
 the
-[scalar value types table](/programming-guides/proto#scalar).
+[scalar value types table](/programming-guides/proto2#scalar).
 For message and enum types, the type is the message or enum class.
 
 ### Oneof Fields
@@ -282,7 +283,7 @@ The compiler will generate the following accessor methods in the DSL:
 
 For other simple field types, the corresponding Java type is chosen according to
 the
-[scalar value types table](/programming-guides/proto#scalar).
+[scalar value types table](/programming-guides/proto2#scalar).
 For message and enum types, the value type is replaced with the message or enum
 class.
 

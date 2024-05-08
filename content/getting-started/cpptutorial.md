@@ -16,7 +16,7 @@ shows you how to
 
 This isn't a comprehensive guide to using protocol buffers in C++. For more
 detailed reference information, see the
-[Protocol Buffer Language Guide (proto2)](/programming-guides/proto),
+[Protocol Buffer Language Guide (proto2)](/programming-guides/proto2),
 the
 [Protocol Buffer Language Guide (proto3)](/programming-guides/proto3),
 the [C++ API Reference](/reference/cpp/api-docs), the
@@ -169,7 +169,7 @@ most messages defined in proto2 syntax use `optional` and `repeated` only.
 
 You'll find a complete guide to writing `.proto` files -- including all the
 possible field types -- in the
-[Protocol Buffer Language Guide](/programming-guides/proto).
+[Protocol Buffer Language Guide](/programming-guides/proto2).
 Don't go looking for facilities similar to class inheritance, though -- protocol
 buffers don't do that.
 
@@ -557,7 +557,7 @@ some rules you need to follow. In the new version of the protocol buffer:
     buffer, not even by deleted fields).
 
 (There are
-[some exceptions](/programming-guides/proto#updating) to
+[some exceptions](/programming-guides/proto2#updating) to
 these rules, but they are rarely used.)
 
 If you follow these rules, old code will happily read new messages and simply

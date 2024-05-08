@@ -12,27 +12,49 @@ produced from `protoc`) and the runtime libraries that must be included when
 using the generated code. When these come from different releases of protobuf,
 we are in a "cross version runtime" situation.
 
-Historically, protobuf has not documented its cross-version runtime
-compatibility guarantees and has been inconsistent about enforcing what
-guarantees it provides. Moving forward, we intend to offer the following
-guarantees across all languages except C++. These are the default guarantees;
-however, owners of protobuf code generators and runtimes may explicitly override
-them with more specific guarantees for that language.
+We intend to offer the following guarantees across all languages except
+[C++](#cpp). These are the default guarantees; however, owners of protobuf code
+generators and runtimes may explicitly override them with more specific
+guarantees for that language.
+
+Protobuf cross-version usages outside the guarantees are **error-prone and not
+supported**. Version skews can lead to *flakes and undefined behaviors* that are
+hard to diagnose, even if it can often *seem* to work as long as nothing has
+changed in a source-incompatible way. For Protobuf, the proliferation of tools
+and services that rely on using unsupported Protobuf language bindings prevents
+the protobuf team from updating the protobuf implementation in response to bug
+reports or security vulnerabilities.
+
+## New Gencode + Old Runtime = Never Allowed {#backwards}
+
+We may add new runtime APIs in any kind of release (Major, Minor, or Patch).
+Gencode in that release is allowed to use those new APIs. The consequence is
+that gencode should never be paired with a runtime that predates the `protoc`
+and plugin that was used to generate those bindings.
+
+We will add “poison pills” where possible to prevent attempts to pair newer
+gencode with an older runtime.
 
 ## Major Versions {#major}
 
-Protobuf will not support mixing generated code and runtimes across major
-version boundaries. We will add “poison pills” where possible to detect these
-mismatches.
+Starting with the 2025Q1 release, the protobuf project will adopt a rolling
+compatibility window for major versions. Code generated for a major version V
+(full version: V.x.y) will be supported by protobuf runtimes of version V and
+V+1.
+
+Protobuf will not support using gencode from version V with runtime &gt;= V+2
+and will be using a "poison pill" mechanism to fail with a clear error message
+when a software assembly attempts to use such a configuration.
 
 ## Minor Versions {#minor}
 
 Within a single major runtime version, generated code from an older version of
 `protoc` will run on a newer runtime.
 
-Within a single major runtime version, generated code from a newer version of
-`protoc` is not guaranteed to run on an older runtime. We will add “poison
-pills” where possible to detect these mismatches.
+## Cross-domain {#cross-domain}
+
+Mixing Protobuf gencode and runtime across the boundary between open source and
+Google-internal will not be supported.
 
 ## Security Exception {#exception}
 

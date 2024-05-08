@@ -29,9 +29,15 @@ released at the same time were released as 3.21.0.
 
 ## Release Cadence {#cadence}
 
-Protobuf does not officially have a release cadence; however, we strive to
-release updates quarterly, on a best-effort basis. Our support windows are
-defined by our
+Protobuf strives to release updates quarterly. We may add a release if there is
+an urgent need such as a security fix that requires new APIs. Skipping a release
+should be a very rare event.
+
+Major (breaking) releases will be targeted to the Q1 release. We may introduce a
+major breaking change at any time if there is an urgent need, but this should be
+very rare.
+
+Our support windows are defined by our
 [library breaking change policy](https://opensource.google/documentation/policies/library-breaking-change).
 
 Protobuf does *not* consider enforcement of its documented language, tooling,
@@ -41,19 +47,46 @@ versions.
 
 ## What Changes in a Release? {#changes}
 
-Each release may include one or more of the following:
+**The binary wire format does not change** even in major version updates. You
+will continue to be able to read old binary wire format proto data from newer
+versions of Protocol Buffers. Newly generated protobuf bindings serialized to
+binary wire format will be parseable by older binaries. This is a fundamental
+design principle of Protocol Buffers. Note that JSON and textproto formats *do
+not* offer the same stability guarantees.
 
-*   updates to the code that is generated for a language binding, and updates to
-    the runtime that supports the binding language. In a minor or patch release,
-    updates will be additive only (we do not remove deprecated/dead code or
-    otherwise make destructive changes)
-*   bug fixes
-*   new [features](/editions/features) or updates to
-    their default values (including new default values)
+**The descriptor.proto schema can change.** In minor or patch releases, we may
+add new message, fields, enums, enum values, editions, editions
+[features](/editions/features) etc. We may also mark
+existing elements as deprecated. In a major release, we may remove deprecated
+options, enums, enum values, messages, fields, etc.
 
-The wire format does not change from release to release. You will continue to be
-able to read old proto data from newer versions of Protocol Buffers. This is a
-fundamental design principle of Protocol Buffers.
+**The .proto language grammar can change.** In minor or patch releases, we may
+add new language constructs and alternative syntax for existing features. We may
+also mark certain features as deprecated. This could result in new warnings that
+were not previously emitted by `protoc`. In a major release, we may remove
+support for obsolete features, syntax, editions in a way that will require
+updates to client code.
+
+**Gencode and runtime APIs can change.** In minor or patch releases, changes
+will either be purely additive for new functionality or source-compatible
+updates. Simply recompiling code should work. In a major release, the gencode or
+runtime API can change in incompatible ways that require callsite changes. We
+try to minimize these. Changes fixing or otherwise affecting undefined behavior
+are not considered breaking, and do not require a major release.
+
+**Operating system, programming language, and tooling version support can
+change.** In a minor or patch release, we may add or drop support for particular
+versions of an operating system, programming language, or tooling. See
+[foundational support matrices](https://github.com/google/oss-policies-info/tree/main)
+for our supported languages.
+
+In general:
+
+*   Minor or patch releases should only contain purely additive or
+    source-compatible updates per our
+    [Cross Version Runtime Guarantee](https://protobuf.dev/support/cross-version-runtime-guarantee/#minor)
+*   Major releases may remove functionality, features, or change APIs in ways
+    that require updates to callsites.
 
 ## Support Duration {#duration}
 
@@ -463,7 +496,7 @@ This table provides specific dates for support duration.
   <tr>
     <td class="gray">3.25.x</td>
     <td>1 Nov 2023</td>
-    <td>31 Mar 2025</td>
+    <td>31 Mar 2026*</td>
   </tr>
   <tr>
     <td class="gray">4.26.x</td>
@@ -471,6 +504,12 @@ This table provides specific dates for support duration.
     <td>TBD</td>
   </tr>
 </table>
+
+**NOTE:** the support window for the Java 3.25.x release will be 24 months
+rather than the typical 12 months for the final release in a major version line.
+Future major version updates (5.x+) will adopt an improved
+["rolling compatibility window"](/support/cross-version-runtime-guarantee/#major)
+that should allow a return to 12-month support windows.
 
 This table graphically shows support durations.
 
@@ -534,13 +573,14 @@ Java will target making major version bumps annually in Q1 of each year.
     <td class="gray">3.25.x</td>
     <td title=23Q2></td>
     <td title=23Q3></td>
+<!--3.25.x is special and will be publicly supported until end of 26Q1-->
     <td title=23Q4 class="blue">IR</td>
     <td title=24Q1 class="green">PS</td>
     <td title=24Q2 class="green">PS</td>
     <td title=24Q3 class="green">PS</td>
     <td title=24Q4 class="green">PS</td>
     <td title=25Q1 class="green">PS</td>
-    <td title=25Q2 class="red">SE</td>
+    <td title=25Q2 class="green">PS</td>
   </tr>
   <tr>
     <td class="gray">26.x</td>
@@ -564,7 +604,7 @@ Java will target making major version bumps annually in Q1 of each year.
   </tr>
   <tr>
     <td class="gray">27.x</td>
-    <td class="gray"></td>
+    <td class="gray">4.27.x</td>
     <td title=23Q2></td>
     <td title=23Q3></td>
     <td title=23Q4></td>
@@ -577,7 +617,7 @@ Java will target making major version bumps annually in Q1 of each year.
   </tr>
   <tr>
     <td class="gray">28.x</td>
-    <td class="gray"></td>
+    <td class="gray">4.28.x</td>
     <td title=23Q2></td>
     <td title=23Q3></td>
     <td title=23Q4></td>
@@ -586,6 +626,32 @@ Java will target making major version bumps annually in Q1 of each year.
     <td title=24Q3 class="blue">IR</td>
     <td title=24Q4></td>
     <td title=25Q1></td>
+    <td title=25Q2></td>
+  </tr>
+  <tr>
+    <td class="gray">29.x</td>
+    <td class="gray">4.29.x</td>
+    <td title=23Q2></td>
+    <td title=23Q3></td>
+    <td title=23Q4></td>
+    <td title=24Q1></td>
+    <td title=24Q2></td>
+    <td title=24Q3></td>
+    <td title=24Q4 class="blue">IR</td>
+    <td title=25Q1></td>
+    <td title=25Q2></td>
+  </tr>
+  <tr>
+    <td class="gray">30.x</td>
+    <td class="gray">5.30.x</td>
+    <td title=23Q2></td>
+    <td title=23Q3></td>
+    <td title=23Q4></td>
+    <td title=24Q1></td>
+    <td title=24Q2></td>
+    <td title=24Q3></td>
+    <td title=24Q4></td>
+    <td title=25Q1 class="blue">IR</td>
     <td title=25Q2></td>
   </tr>
 </table>

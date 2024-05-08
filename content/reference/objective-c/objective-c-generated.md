@@ -9,7 +9,8 @@ type = "docs"
 Any
 differences between proto2 and proto3 generated code are highlighted. You should
 read the
-[proto2 language guide](/programming-guides/proto) and/or
+[proto2 language guide](/programming-guides/proto2)
+and/or
 [proto3 language guide](/programming-guides/proto3)
 before reading this document.
 
@@ -168,7 +169,7 @@ The behaviors for this interface are as follows:
 ### Unknown fields (proto2 only)
 
 If a message created with an
-[older version](/programming-guides/proto#updating) of
+[older version](/programming-guides/proto2#updating) of
 your .proto definition is parsed with code generated from a newer version (or
 vice versa), the message may contain optional or repeated fields that the
 \"new\" code does not recognize. In proto2 generated code, these fields are not
@@ -440,7 +441,7 @@ typedef GPB_ENUM(Foo_FieldNumber) {
 
 #### Default values (optional fields only) {#default}
 
-The [default value](/programming-guides/proto#optional)
+The [default value](/programming-guides/proto2#optional)
 for numeric types, if no explicit default was specified by the user, is `0`.
 
 The default value for strings is `@""`, and the default value for bytes is
@@ -1127,7 +1128,7 @@ the appropriate type).
 ## Extensions (proto2 only) {#extensions}
 
 Given a message with an
-[extension range](/programming-guides/proto#extensions):
+[extension range](/programming-guides/proto2#extensions):
 
 ```proto
 message Foo {
