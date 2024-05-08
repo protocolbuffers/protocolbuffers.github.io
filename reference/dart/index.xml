@@ -3,8 +3,9 @@
 proto2 and proto3 generated code are highlighted - note that these differences
 are in the generated code as described in this document, not the base API, which
 are the same in both versions. You should read the
-&lt;a href="https://protobuf.dev/programming-guides/proto">proto2 language guide&lt;/a> and/or
-the &lt;a href="https://protobuf.dev/programming-guides/proto3">proto3 language guide&lt;/a>
+&lt;a href="https://protobuf.dev/programming-guides/proto2">proto2 language guide&lt;/a>
+and/or the
+&lt;a href="https://protobuf.dev/programming-guides/proto3">proto3 language guide&lt;/a>
 before reading this document.&lt;/p>
 &lt;h2 id="invocation">Compiler Invocation&lt;/h2>
 &lt;p>The protocol buffer compiler requires a
@@ -94,7 +95,7 @@ set, returns the default value.&lt;/li>
 &lt;/ul>
 &lt;p>For other simple field types, the corresponding Dart type is chosen according to
 the
-&lt;a href="https://protobuf.dev/programming-guides/proto#scalar">scalar value types table&lt;/a>.
+&lt;a href="https://protobuf.dev/programming-guides/proto2#scalar">scalar value types table&lt;/a>.
 For message and enum types, the value type is replaced with the message or enum
 class.&lt;/p>
 &lt;h3 id="singular-primitive-fields-proto3">Singular Primitive Fields (proto3)&lt;/h3>
@@ -252,8 +253,15 @@ this, &lt;code>get name&lt;/code> will return the default value and &lt;code>whi
 &lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#a40000">&lt;/span>&lt;span style="color:#000;font-weight:bold">}&lt;/span>&lt;span style="color:#a40000">
 &lt;/span>&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>The protocol buffer compiler will generate a class called &lt;code>Color&lt;/code>, which extends
 the &lt;code>ProtobufEnum&lt;/code> class. The class will include a &lt;code>static const Color&lt;/code> for each
-of the three values defined as well as a &lt;code>static const List&amp;lt;Color&amp;gt;&lt;/code> containing
-all the three non-unspecified values. It will also include the following method:&lt;/p>
+of the four values, as well as a &lt;code>static const List&amp;lt;Color&amp;gt;&lt;/code> that contains the
+values.&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-dart" data-lang="dart">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#204a87;font-weight:bold">static&lt;/span> &lt;span style="color:#204a87;font-weight:bold">const&lt;/span> &lt;span style="color:#000">List&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">&amp;lt;&lt;/span>&lt;span style="color:#000">Color&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">&amp;gt;&lt;/span> &lt;span style="color:#000">values&lt;/span> &lt;span style="color:#ce5c00;font-weight:bold">=&lt;/span> &lt;span style="color:#ce5c00;font-weight:bold">&amp;lt;&lt;/span>&lt;span style="color:#000">Color&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">&amp;gt;&lt;/span> &lt;span style="color:#000;font-weight:bold">[&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#000">COLOR_UNSPECIFIED&lt;/span>&lt;span style="color:#000;font-weight:bold">,&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#000">COLOR_RED&lt;/span>&lt;span style="color:#000;font-weight:bold">,&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#000">COLOR_GREEN&lt;/span>&lt;span style="color:#000;font-weight:bold">,&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#000">COLOR_BLUE&lt;/span>&lt;span style="color:#000;font-weight:bold">,&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#000;font-weight:bold">];&lt;/span>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>It will also include the following method:&lt;/p>
 &lt;ul>
 &lt;li>&lt;code>static Color? valueOf(int value)&lt;/code>: Returns the &lt;code>Color&lt;/code> corresponding to the
 given numeric value.&lt;/li>
@@ -286,7 +294,7 @@ definition like:&lt;/p>
 &lt;code>ProtobufEnum&lt;/code>.&lt;/p>
 &lt;h2 id="extension">Extensions (proto2 only)&lt;/h2>
 &lt;p>Given a file &lt;code>foo_test.proto&lt;/code> including a message with an
-&lt;a href="https://protobuf.dev/programming-guides/proto#extensions">extension range&lt;/a>
+&lt;a href="https://protobuf.dev/programming-guides/proto2#extensions">extension range&lt;/a>
 and a top-level extension definition:&lt;/p>
 &lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-proto" data-lang="proto">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#204a87;font-weight:bold">message&lt;/span> &lt;span style="color:#000">Foo&lt;/span> &lt;span style="color:#000;font-weight:bold">{&lt;/span>&lt;span style="color:#a40000">
 &lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#a40000">&lt;/span> &lt;span style="color:#204a87;font-weight:bold">extensions&lt;/span> &lt;span style="color:#0000cf;font-weight:bold">100&lt;/span> &lt;span style="color:#204a87;font-weight:bold">to&lt;/span> &lt;span style="color:#0000cf;font-weight:bold">199&lt;/span>&lt;span style="color:#000;font-weight:bold">;&lt;/span>&lt;span style="color:#a40000">

@@ -2,7 +2,8 @@
 &lt;p>Any
 differences between proto2 and proto3 generated code are highlighted. You should
 read the
-&lt;a href="https://protobuf.dev/programming-guides/proto">proto2 language guide&lt;/a> and/or
+&lt;a href="https://protobuf.dev/programming-guides/proto2">proto2 language guide&lt;/a>
+and/or
 &lt;a href="https://protobuf.dev/programming-guides/proto3">proto3 language guide&lt;/a>
 before reading this document.&lt;/p>
 &lt;h2 id="invocation">Compiler invocation&lt;/h2>
@@ -105,7 +106,7 @@ to support a superset of the following interface:&lt;/p>
 &lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#8f5902;font-style:italic">&lt;/span>&lt;span style="color:#000;font-weight:bold">-&lt;/span> &lt;span style="color:#000;font-weight:bold">(&lt;/span>&lt;span style="color:#204a87;font-weight:bold">BOOL&lt;/span>&lt;span style="color:#000;font-weight:bold">)&lt;/span>&lt;span style="color:#000">isEqual:&lt;/span>&lt;span style="color:#000;font-weight:bold">(&lt;/span>&lt;span style="color:#204a87;font-weight:bold">id&lt;/span>&lt;span style="color:#000;font-weight:bold">)&lt;/span>&lt;span style="color:#000">value&lt;/span>&lt;span style="color:#000;font-weight:bold">;&lt;/span>
 &lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h3 id="unknown-fields-proto2-only">Unknown fields (proto2 only)&lt;/h3>
 &lt;p>If a message created with an
-&lt;a href="https://protobuf.dev/programming-guides/proto#updating">older version&lt;/a> of
+&lt;a href="https://protobuf.dev/programming-guides/proto2#updating">older version&lt;/a> of
 your .proto definition is parsed with code generated from a newer version (or
 vice versa), the message may contain optional or repeated fields that the
 &amp;quot;new&amp;quot; code does not recognize. In proto2 generated code, these fields are not
@@ -318,7 +319,7 @@ unique, and stands for &amp;quot;property&amp;quot;).&lt;/p>
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#204a87;font-weight:bold">@property&lt;/span>&lt;span style="color:#000;font-weight:bold">(&lt;/span>&lt;span style="color:#204a87;font-weight:bold">nonatomic&lt;/span>&lt;span style="color:#000;font-weight:bold">,&lt;/span> &lt;span style="color:#204a87;font-weight:bold">readwrite&lt;/span>&lt;span style="color:#000;font-weight:bold">)&lt;/span> &lt;span style="color:#000">int32_t&lt;/span> &lt;span style="color:#000">id_p&lt;/span>&lt;span style="color:#000;font-weight:bold">;&lt;/span>
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#204a87;font-weight:bold">@end&lt;/span>
 &lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h4 id="default">Default values (optional fields only)&lt;/h4>
-&lt;p>The &lt;a href="https://protobuf.dev/programming-guides/proto#optional">default value&lt;/a>
+&lt;p>The &lt;a href="https://protobuf.dev/programming-guides/proto2#optional">default value&lt;/a>
 for numeric types, if no explicit default was specified by the user, is &lt;code>0&lt;/code>.&lt;/p>
 &lt;p>The default value for strings is &lt;code>@&amp;quot;&amp;quot;&lt;/code>, and the default value for bytes is
 &lt;code>[NSData data]&lt;/code>.&lt;/p>
@@ -858,7 +859,7 @@ the appropriate type).&lt;/p>
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#204a87;font-weight:bold">@end&lt;/span>
 &lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h2 id="extensions">Extensions (proto2 only)&lt;/h2>
 &lt;p>Given a message with an
-&lt;a href="https://protobuf.dev/programming-guides/proto#extensions">extension range&lt;/a>:&lt;/p>
+&lt;a href="https://protobuf.dev/programming-guides/proto2#extensions">extension range&lt;/a>:&lt;/p>
 &lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-proto" data-lang="proto">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#204a87;font-weight:bold">message&lt;/span> &lt;span style="color:#000">Foo&lt;/span> &lt;span style="color:#000;font-weight:bold">{&lt;/span>&lt;span style="color:#a40000">
 &lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#a40000">&lt;/span> &lt;span style="color:#204a87;font-weight:bold">extensions&lt;/span> &lt;span style="color:#0000cf;font-weight:bold">100&lt;/span> &lt;span style="color:#204a87;font-weight:bold">to&lt;/span> &lt;span style="color:#0000cf;font-weight:bold">199&lt;/span>&lt;span style="color:#000;font-weight:bold">;&lt;/span>&lt;span style="color:#a40000">
 &lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#a40000">&lt;/span>&lt;span style="color:#000;font-weight:bold">}&lt;/span>&lt;span style="color:#a40000">

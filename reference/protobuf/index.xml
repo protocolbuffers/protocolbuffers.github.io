@@ -891,7 +891,7 @@ whitespace. Example:&lt;/p>
 &lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h3 id="field-names">Field Names&lt;/h3>
 &lt;p>Fields that are part of the containing message use simple &lt;code>Identifiers&lt;/code> as
 names.
-&lt;a href="https://protobuf.dev/programming-guides/proto#extensions">&lt;code>Extension&lt;/code>&lt;/a> and
+&lt;a href="https://protobuf.dev/programming-guides/proto2#extensions">&lt;code>Extension&lt;/code>&lt;/a> and
 &lt;a href="https://protobuf.dev/programming-guides/proto3#any">&lt;code>Any&lt;/code>&lt;/a> field names are
 wrapped in square brackets and fully-qualified. &lt;code>Any&lt;/code> field names are prefixed
 with a qualifying domain name, such as &lt;code>type.googleapis.com/&lt;/code>.&lt;/p>
@@ -1150,7 +1150,7 @@ implicit lowercased field name. Example:&lt;/p>
 optional.&lt;/p>
 &lt;h2 id="map">&lt;code>map&lt;/code> Fields&lt;/h2>
 &lt;p>Text format does not provide a custom syntax for specifying map field entries.
-When a &lt;a href="https://protobuf.dev/programming-guides/proto#maps">&lt;code>map&lt;/code>&lt;/a> field is
+When a &lt;a href="https://protobuf.dev/programming-guides/proto2#maps">&lt;code>map&lt;/code>&lt;/a> field is
 defined in a &lt;em>.proto&lt;/em> file, an implicit &lt;code>Entry&lt;/code> message is defined containing
 &lt;code>key&lt;/code> and &lt;code>value&lt;/code> fields. Map fields are always repeated, accepting multiple
 key/value entries. Example:&lt;/p>

@@ -1099,7 +1099,7 @@ buffer compiler generates in addition to the code described in the
 &lt;a href="https://protobuf.dev/reference/cpp/cpp-generated">C++ Generated Code Guide&lt;/a>
 when arena allocation is enabled. It assumes that you are familiar with the
 material in the
-&lt;a href="https://protobuf.dev/programming-guides/proto">language guide&lt;/a> and the
+&lt;a href="https://protobuf.dev/programming-guides/proto2">language guide&lt;/a> and the
 &lt;a href="https://protobuf.dev/reference/cpp/cpp-generated">C++ Generated Code Guide&lt;/a>.&lt;/p>
 &lt;h2 id="why">Why Use Arena Allocation?&lt;/h2>
 &lt;p>Memory allocation and deallocation constitutes a significant fraction of CPU

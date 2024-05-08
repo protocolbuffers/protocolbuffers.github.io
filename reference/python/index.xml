@@ -4,7 +4,8 @@ differences between proto2 and proto3 generated code are highlighted - note that
 these differences are in the generated code as described in this document, not
 the base message classes/interfaces, which are the same in both versions. You
 should read the
-&lt;a href="https://protobuf.dev/programming-guides/proto">proto2 language guide&lt;/a> and/or
+&lt;a href="https://protobuf.dev/programming-guides/proto2">proto2 language guide&lt;/a>
+and/or
 &lt;a href="https://protobuf.dev/programming-guides/proto3">proto3 language guide&lt;/a>
 before reading this document.&lt;/p>
 &lt;p>The Python Protocol Buffers implementation is a little different from C++ and

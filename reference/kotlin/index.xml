@@ -16,7 +16,8 @@
 are highlighted—note that these differences are in the generated code as
 described in this document, not the base message classes/interfaces, which are
 the same in both versions. You should read the
-&lt;a href="https://protobuf.dev/programming-guides/proto">proto2 language guide&lt;/a> and/or
+&lt;a href="https://protobuf.dev/programming-guides/proto2">proto2 language guide&lt;/a>
+and/or
 &lt;a href="https://protobuf.dev/programming-guides/proto3">proto3 language guide&lt;/a>
 before reading this document.&lt;/p>
 &lt;h2 id="invocation">Compiler Invocation&lt;/h2>
@@ -109,7 +110,7 @@ returns the default value.&lt;/li>
 &lt;/ul>
 &lt;p>For other simple field types, the corresponding Java type is chosen according to
 the
-&lt;a href="https://protobuf.dev/programming-guides/proto#scalar">scalar value types table&lt;/a>.
+&lt;a href="https://protobuf.dev/programming-guides/proto2#scalar">scalar value types table&lt;/a>.
 For message and enum types, the value type is replaced with the message or enum
 class. As the message type is still defined in Java, unsigned types in the
 message are represented using the standard corresponding signed types in the
@@ -137,7 +138,7 @@ set, returns the default value for the field&amp;rsquo;s type.&lt;/li>
 &lt;/ul>
 &lt;p>For other simple field types, the corresponding Java type is chosen according to
 the
-&lt;a href="https://protobuf.dev/programming-guides/proto#scalar">scalar value types table&lt;/a>.
+&lt;a href="https://protobuf.dev/programming-guides/proto2#scalar">scalar value types table&lt;/a>.
 For message and enum types, the value type is replaced with the message or enum
 class. As the message type is still defined in Java, unsigned types in the
 message are represented using the standard corresponding signed types in the
@@ -185,7 +186,7 @@ underlying builder, while preventing mutability from &amp;quot;escaping&amp;quot
 could cause confusing side effects.&lt;/p>
 &lt;p>For other simple field types, the corresponding Java type is chosen according to
 the
-&lt;a href="https://protobuf.dev/programming-guides/proto#scalar">scalar value types table&lt;/a>.
+&lt;a href="https://protobuf.dev/programming-guides/proto2#scalar">scalar value types table&lt;/a>.
 For message and enum types, the type is the message or enum class.&lt;/p>
 &lt;h3 id="oneof-fields">Oneof Fields&lt;/h3>
 &lt;p>For this oneof field definition:&lt;/p>
@@ -206,7 +207,7 @@ is &lt;code>FOO&lt;/code>. Otherwise, returns the default value of this field.&l
 &lt;/ul>
 &lt;p>For other simple field types, the corresponding Java type is chosen according to
 the
-&lt;a href="https://protobuf.dev/programming-guides/proto#scalar">scalar value types table&lt;/a>.
+&lt;a href="https://protobuf.dev/programming-guides/proto2#scalar">scalar value types table&lt;/a>.
 For message and enum types, the value type is replaced with the message or enum
 class.&lt;/p>
 &lt;h3 id="map-fields">Map Fields&lt;/h3>

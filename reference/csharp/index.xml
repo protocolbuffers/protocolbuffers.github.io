@@ -7,7 +7,7 @@ before reading this document.&lt;/p>
 &lt;h4 class="alert-heading">Note&lt;/h4>
 The protobuf compiler can generate C# interfaces for definitions using &lt;code>proto2&lt;/code>
 syntax starting from release 3.10. Refer to the
-&lt;a href="https://protobuf.dev/programming-guides/proto">proto2 language guide&lt;/a> for
+&lt;a href="https://protobuf.dev/programming-guides/proto2">proto2 language guide&lt;/a> for
 details of the semantics of &lt;code>proto2&lt;/code> definitions, and see
 &lt;code>docs/csharp/proto2.md&lt;/code>
 (&lt;a href="https://github.com/protocolbuffers/protobuf/blob/master/docs/csharp/proto2.md">view on GitHub&lt;/a>)
