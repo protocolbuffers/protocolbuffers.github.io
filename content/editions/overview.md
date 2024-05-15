@@ -229,16 +229,16 @@ message Person {
   int32 id = 2 [features.presence = IMPLICIT];
 
   enum Pay_Type {
-    PAY_TYPE_UNSPECIFIED = 1,
-    PAY_TYPE_SALARY = 2,
-    PAY_TYPE_HOURLY = 3
+    PAY_TYPE_UNSPECIFIED = 1;
+    PAY_TYPE_SALARY = 2;
+    PAY_TYPE_HOURLY = 3;
   }
 
   enum Employment {
     option features.enum_type = OPEN;
-    EMPLOYMENT_UNSPECIFIED = 0,
-    EMPLOYMENT_FULLTIME = 1,
-    EMPLOYMENT_PARTTIME = 2,
+    EMPLOYMENT_UNSPECIFIED = 0;
+    EMPLOYMENT_FULLTIME = 1;
+    EMPLOYMENT_PARTTIME = 2;
   }
   Employment employment = 4;
 }
@@ -270,9 +270,9 @@ definition files, and vice versa:
 syntax = "proto2";
 
 enum Employment {
-  EMPLOYMENT_UNSPECIFIED = 0,
-  EMPLOYMENT_FULLTIME = 1,
-  EMPLOYMENT_PARTTIME = 2,
+  EMPLOYMENT_UNSPECIFIED = 0;
+  EMPLOYMENT_FULLTIME = 1;
+  EMPLOYMENT_PARTTIME = 2;
 }
 ```
 
