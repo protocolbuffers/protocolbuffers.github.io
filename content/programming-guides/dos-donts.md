@@ -109,52 +109,40 @@ using macro constants such as "`NULL`," "`NAN`," and "`DOMAIN`" as enum values.
 
 ## **Do** Use Well-Known Types and Common Types {#well-known-common}
 
-Embedding the following common, shared types is strongly encouraged. Do not use
-`int32 timestamp_seconds_since_epoch` or `int64 timeout_millis` in your code
+Using the following common, shared types is strongly encouraged. E.g., do not
+use `int32 timestamp_seconds_since_epoch` or `int64 timeout_millis` in your code
 when a perfectly suitable common type already exists!
 
-<a id="well-known-types"></a>
+<a id="well-known-types"></a><a id="common-types"></a>
 
-### Well-Known Types {#well-known}
-
-*   [duration](https://github.com/protocolbuffers/protobuf/blob/main/src/google/protobuf/duration.proto)
+*   [`duration`](https://github.com/protocolbuffers/protobuf/blob/main/src/google/protobuf/duration.proto)
     is a signed, fixed-length span of time (for example, 42s).
-*   [timestamp](https://github.com/protocolbuffers/protobuf/blob/main/src/google/protobuf/timestamp.proto)
+*   [`timestamp`](https://github.com/protocolbuffers/protobuf/blob/main/src/google/protobuf/timestamp.proto)
     is a point in time independent of any time zone or calendar (for example,
     2017-01-15T01:30:15.01Z).
-*   [field_mask](https://github.com/protocolbuffers/protobuf/blob/main/src/google/protobuf/field_mask.proto)
-    is a set of symbolic field paths (for example, f.b.d).
-
-<a id="common-types"></a>
-
-### Common Types {#common}
-
-*   [`Duration`](https://github.com/protocolbuffers/protobuf/blob/master/src/google/protobuf/duration.proto)
-    is a signed, fixed-length span of time, such as 42s.
-*   [`Timestamp`](https://github.com/protocolbuffers/protobuf/blob/master/src/google/protobuf/timestamp.proto)
-    is a point in time independent of any time zone or calendar, such as
-    2017-01-15T01:30:15.01Z.
 *   [`interval`](https://github.com/googleapis/googleapis/blob/master/google/type/interval.proto)
     is a time interval independent of time zone or calendar (for example,
     2017-01-15T01:30:15.01Z - 2017-01-16T02:30:15.01Z).
 *   [`date`](https://github.com/googleapis/googleapis/blob/master/google/type/date.proto)
     is a whole calendar date (for example, 2005-09-19).
+*   [`month`](https://github.com/googleapis/googleapis/blob/master/google/type/month.proto)
+    is a month of year (for example, April).
 *   [`dayofweek`](https://github.com/googleapis/googleapis/blob/master/google/type/dayofweek.proto)
     is a day of week (for example, Monday).
 *   [`timeofday`](https://github.com/googleapis/googleapis/blob/master/google/type/timeofday.proto)
     is a time of day (for example, 10:42:23).
-*   [`latlng`](https://github.com/googleapis/googleapis/blob/master/google/type/latlng.proto)
-    is a latitude/longitude pair (for example, 37.386051 latitude and
-    -122.083855 longitude).
-*   [`money`](https://github.com/googleapis/googleapis/blob/master/google/type/money.proto)
-    is an amount of money with its currency type (for example, 42 USD).
+*   [`field_mask`](https://github.com/protocolbuffers/protobuf/blob/main/src/google/protobuf/field_mask.proto)
+    is a set of symbolic field paths (for example, f.b.d).
 *   [`postal_address`](https://github.com/googleapis/googleapis/blob/master/google/type/postal_address.proto)
     is a postal address (for example, 1600 Amphitheatre Parkway Mountain View,
     CA 94043 USA).
+*   [`money`](https://github.com/googleapis/googleapis/blob/master/google/type/money.proto)
+    is an amount of money with its currency type (for example, 42 USD).
+*   [`latlng`](https://github.com/googleapis/googleapis/blob/master/google/type/latlng.proto)
+    is a latitude/longitude pair (for example, 37.386051 latitude and
+    -122.083855 longitude).
 *   [`color`](https://github.com/googleapis/googleapis/blob/master/google/type/color.proto)
     is a color in the RGBA color space.
-*   [`month`](https://github.com/googleapis/googleapis/blob/master/google/type/month.proto)
-    is a month of year (for example, April).
 
 <a id="do-define-widely-used-message-types-in-separate-files"></a>
 
