@@ -501,6 +501,11 @@ This table provides specific dates for support duration.
   <tr>
     <td class="gray">4.26.x</td>
     <td>13 Mar 2024</td>
+    <td><s>23 May 2024</s>s></td>
+  </tr>
+  <tr>
+    <td class="gray">4.27.x</td>
+    <td>23 May 2024</td>
     <td>TBD</td>
   </tr>
 </table>
@@ -596,13 +601,6 @@ Java will target making major version bumps annually in Q1 of each year.
     <td title=25Q2 class="green">PS</td>
   </tr>
   <tr>
-    <td colspan="12">
-      The cells below are projections of future releases, but are not guarantees
-      <br/>that those releases will happen, or that they will happen on that
-      schedule.
-    </td>
-  </tr>
-  <tr>
     <td class="gray">27.x</td>
     <td class="gray">4.27.x</td>
     <td title=23Q2></td>
@@ -614,6 +612,13 @@ Java will target making major version bumps annually in Q1 of each year.
     <td title=24Q4></td>
     <td title=25Q1></td>
     <td title=25Q2></td>
+  </tr>
+  <tr>
+    <td colspan="12">
+      The cells below are projections of future releases, but are not guarantees
+      <br/>that those releases will happen, or that they will happen on that
+      schedule.
+    </td>
   </tr>
   <tr>
     <td class="gray">28.x</td>
