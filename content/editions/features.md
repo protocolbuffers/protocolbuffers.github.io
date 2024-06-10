@@ -57,7 +57,9 @@ overrides the message-scope QUUX setting.
 ### `features.enum_type` {#enum_type}
 
 This feature sets the behavior for how enum values that aren't contained within
-the defined set are handled.
+the defined set are handled. See
+[Enum Behavior](/programming-guides/enum) for more
+information on open and closed enums.
 
 This feature doesn't impact proto3 files, so this section doesn't have a before
 and after of a proto3 file.
