@@ -124,37 +124,48 @@ when a perfectly suitable common type already exists!
     2017-01-15T01:30:15.01Z).
 *   [field_mask](https://github.com/protocolbuffers/protobuf/blob/main/src/google/protobuf/field_mask.proto)
     is a set of symbolic field paths (for example, f.b.d).
+*   [empty](https://github.com/protocolbuffers/protobuf/blob/main/src/google/protobuf/empty.proto)
+    is an empty message that you can re-use to avoid defining duplicated empty messages in your APIs.
+*   [struct](https://github.com/protocolbuffers/protobuf/blob/main/src/google/protobuf/struct.proto)
+    is a structured data value, consisting of fields which map to dynamically typed values.
 
 <a id="common-types"></a>
 
 ### Common Types {#common}
 
-*   [`Duration`](https://github.com/protocolbuffers/protobuf/blob/master/src/google/protobuf/duration.proto)
-    is a signed, fixed-length span of time, such as 42s.
-*   [`Timestamp`](https://github.com/protocolbuffers/protobuf/blob/master/src/google/protobuf/timestamp.proto)
-    is a point in time independent of any time zone or calendar, such as
-    2017-01-15T01:30:15.01Z.
-*   [`interval`](https://github.com/googleapis/googleapis/blob/master/google/type/interval.proto)
+*   [calendar_period](https://github.com/googleapis/googleapis/blob/master/google/type/calendar_period.proto)
+    is an abstract concept of a time period that has a canonical start.
+*   [color](https://github.com/googleapis/googleapis/blob/master/google/type/color.proto)
+    is a color in the RGBA color space.
+*   [date](https://github.com/googleapis/googleapis/blob/master/google/type/date.proto)
+    is a whole calendar date (for example, 2005-09-19).
+*   [datetime](https://github.com/googleapis/googleapis/blob/master/google/type/datetime.proto)
+    is a civil time with timezone (for examole, 2005-09-19T13:35:50.123Z).
+*   [dayofweek](https://github.com/googleapis/googleapis/blob/master/google/type/dayofweek.proto)
+    is a day of week (for example, Monday).
+*   [decimal](https://github.com/googleapis/googleapis/blob/master/google/type/decimal.proto)
+    is a decimal value, such as 2.5.
+*   [fraction](https://github.com/googleapis/googleapis/blob/master/google/type/fraction.proto)
+    is a fraction in terms of a numerator divided by a denominator.
+*   [interval](https://github.com/googleapis/googleapis/blob/master/google/type/interval.proto)
     is a time interval independent of time zone or calendar (for example,
     2017-01-15T01:30:15.01Z - 2017-01-16T02:30:15.01Z).
-*   [`date`](https://github.com/googleapis/googleapis/blob/master/google/type/date.proto)
-    is a whole calendar date (for example, 2005-09-19).
-*   [`dayofweek`](https://github.com/googleapis/googleapis/blob/master/google/type/dayofweek.proto)
-    is a day of week (for example, Monday).
-*   [`timeofday`](https://github.com/googleapis/googleapis/blob/master/google/type/timeofday.proto)
-    is a time of day (for example, 10:42:23).
-*   [`latlng`](https://github.com/googleapis/googleapis/blob/master/google/type/latlng.proto)
+*   [latlng](https://github.com/googleapis/googleapis/blob/master/google/type/latlng.proto)
     is a latitude/longitude pair (for example, 37.386051 latitude and
     -122.083855 longitude).
-*   [`money`](https://github.com/googleapis/googleapis/blob/master/google/type/money.proto)
+*   [localized_text](https://github.com/googleapis/googleapis/blob/master/google/type/localized_text.proto)
+    is a variant of a text in a particular language.
+*   [money](https://github.com/googleapis/googleapis/blob/master/google/type/money.proto)
     is an amount of money with its currency type (for example, 42 USD).
-*   [`postal_address`](https://github.com/googleapis/googleapis/blob/master/google/type/postal_address.proto)
+*   [month](https://github.com/googleapis/googleapis/blob/master/google/type/month.proto)
+    is a month of year (for example, April).
+*   [phone_number](https://github.com/googleapis/googleapis/blob/master/google/type/phone_number.proto)
+    is a phone number. Suitable to work with google/libphonenumber.
+*   [postal_address](https://github.com/googleapis/googleapis/blob/master/google/type/postal_address.proto)
     is a postal address (for example, 1600 Amphitheatre Parkway Mountain View,
     CA 94043 USA).
-*   [`color`](https://github.com/googleapis/googleapis/blob/master/google/type/color.proto)
-    is a color in the RGBA color space.
-*   [`month`](https://github.com/googleapis/googleapis/blob/master/google/type/month.proto)
-    is a month of year (for example, April).
+*   [timeofday](https://github.com/googleapis/googleapis/blob/master/google/type/timeofday.proto)
+    is a time of day (for example, 10:42:23).
 
 <a id="do-define-widely-used-message-types-in-separate-files"></a>
 
