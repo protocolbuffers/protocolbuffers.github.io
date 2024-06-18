@@ -285,7 +285,7 @@ edition = "2023";
 
 message Foo {
   message Bar {
-    optional int32 x = 1;
+    int32 x = 1;
     repeated int32 y = 2;
   }
   Bar bar = 1 [features.message_encoding = DELIMITED];
@@ -509,8 +509,8 @@ edition = "2023";
 import "google/protobuf/cpp_features.proto";
 
 message Foo {
-  optional string bar = 6;
-  optional string baz = 7 [features.(pb.cpp).string_type = CORD];
+  string bar = 6;
+  string baz = 7 [features.(pb.cpp).string_type = CORD];
 }
 ```
 

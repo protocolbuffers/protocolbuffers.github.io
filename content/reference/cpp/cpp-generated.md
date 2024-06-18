@@ -679,22 +679,20 @@ oneof example_name {
 
 The compiler will generate the following accessor methods:
 
--   `bool has_foo() const` (proto2 only): Returns `true` if oneof case is
-    `kFoo`.
+-   `bool has_foo() const`: Returns `true` if oneof case is `kFoo`.
 -   `int32 foo() const`: Returns the current value of the field if oneof case is
     `kFoo`. Otherwise, returns the default value.
 -   `void set_foo(int32 value)`:
     -   If any other oneof field in the same oneof is set, calls
         `clear_example_name()`.
     -   Sets the value of this field and sets the oneof case to `kFoo`.
-    -   `has_foo()` (proto2 only) will return true, `foo()` will return `value`,
-        and `example_name_case()` will return `kFoo`.
+    -   `has_foo()` will return true, `foo()` will return `value`, and
+        `example_name_case()` will return `kFoo`.
 -   `void clear_foo()`:
     -   Nothing will be changed if oneof case is not `kFoo`.
     -   If oneof case is `kFoo`, clears the value of the field and oneof case.
-        `has_foo()` (proto2 only) will return `false`, `foo()` will return the
-        default value and `example_name_case()` will return
-        `EXAMPLE_NAME_NOT_SET`.
+        `has_foo()` will return `false`, `foo()` will return the default value
+        and `example_name_case()` will return `EXAMPLE_NAME_NOT_SET`.
 
 For other numeric field types (including `bool`),`int32` is replaced with the
 corresponding C++ type according to the
@@ -790,24 +788,22 @@ oneof example_name {
 
 The compiler will generate the following accessor methods:
 
--   `bool has_foo() const` (proto2 only): Returns `true` if oneof case is
-    `kFoo`.
+-   `bool has_foo() const`: Returns `true` if oneof case is `kFoo`.
 -   `Bar foo() const`: Returns the current value of the field if oneof case is
     `kFoo`. Otherwise, returns the default value.
 -   `void set_foo(Bar value)`:
     -   If any other oneof field in the same oneof is set, calls
         `clear_example_name()`.
     -   Sets the value of this field and sets the oneof case to `kFoo`.
-    -   `has_foo()` (proto2 only) will return `true`, `foo()` will return
-        `value` and `example_name_case()` will return `kFoo`.
+    -   `has_foo()` will return `true`, `foo()` will return `value` and
+        `example_name_case()` will return `kFoo`.
     -   In debug mode (i.e. NDEBUG is not defined), if `value` does not match
         any of the values defined for `Bar`, this method will abort the process.
 -   `void clear_foo()`:
     -   Nothing will be changed if the oneof case is not `kFoo`.
     -   If the oneof case is `kFoo`, clears the value of the field and the oneof
-        case. `has_foo()` (proto2 only) will return `false`, `foo()` will return
-        the default value and `example_name_case()` will return
-        `EXAMPLE_NAME_NOT_SET`.
+        case. `has_foo()` will return `false`, `foo()` will return the default
+        value and `example_name_case()` will return `EXAMPLE_NAME_NOT_SET`.
 
 ### Oneof Embedded Message Fields {#oneof-embedded}
 

@@ -8,7 +8,7 @@ type = "docs"
 
 <p><code>#include &lt;google/protobuf/compiler/plugin.h&gt;<br>namespace <a href="#google.protobuf.compiler">google::protobuf::compiler</a></code></p><p>Front-end for protoc code generator plugins written in C++. </p><p>To implement a protoc plugin in C++, simply write an implementation of <a href='google.protobuf.compiler.code_generator#CodeGenerator'>CodeGenerator</a>, then create a main() function like: </p>
 
-<pre>int main(int argc, char* argv[[]]) {
+<pre>int main(int argc, char* argv[]) {
   MyCodeGenerator generator;
   return google::protobuf::compiler::PluginMain(argc, argv, &amp;generator);
 }</pre>

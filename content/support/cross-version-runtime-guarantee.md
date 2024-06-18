@@ -51,11 +51,6 @@ when a software assembly attempts to use such a configuration.
 Within a single major runtime version, generated code from an older version of
 `protoc` will run on a newer runtime.
 
-## Cross-domain {#cross-domain}
-
-Mixing Protobuf gencode and runtime across the boundary between open source and
-Google-internal will not be supported.
-
 ## Security Exception {#exception}
 
 We reserve the right to violate the above promises if needed for security

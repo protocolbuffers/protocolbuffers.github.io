@@ -56,6 +56,15 @@ message MyMessage {}
 The protocol compiler generates an output message with the name
 `FooBar::Baz::MyMessage`.
 
+However, if the `.proto` file contains the `ruby_package` option, like this:
+
+```proto
+option ruby_package = "Foo::Bar";
+```
+
+then the generated output will give precedence to the `ruby_package` option
+instead and generate `Foo::Bar::MyMessage`.
+
 ## Messages {#message}
 
 Given a simple message declaration:
