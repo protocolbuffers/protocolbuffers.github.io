@@ -196,6 +196,9 @@ For example:
     https://google.github.io/styleguide/cppguide.html#Namespace_Names.
     If these style guides conflict, use `java_package` for Java.
 
+*   `ruby_package` should be in the form `Foo::Bar::Baz` rather than
+    `Foo.Bar.Baz`.
+
 <a id="never-use-text-format-messages-for-interchange"></a>
 
 ## **Don't** use Text Format Messages for Interchange {#text-format-interchange}

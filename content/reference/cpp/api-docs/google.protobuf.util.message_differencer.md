@@ -48,12 +48,12 @@ type = "docs"
 </div> <hr><h3 id="MessageDifferencer.TreatAsMapWithMultipleFieldPathsAsKey.details"><code>void MessageDifferencer::TreatAsMapWithMultipleFieldPathsAsKey(<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;const <a href='google.protobuf.descriptor#FieldDescriptor'>FieldDescriptor</a> * field,<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;const std::vector&lt; std::vector&lt; const <a href='google.protobuf.descriptor#FieldDescriptor'>FieldDescriptor</a> * &gt; &gt; &amp; key_field_paths)</code></h3><div style="margin-left: 16px"><p>Same as TreatAsMapWithMultipleFieldsAsKey, except that each of the field do not necessarily need to be a direct subfield. </p><p>Each element in key_field_paths indicate a path from the message being compared, listing successive subfield to reach the key field.</p>
 <p>REQUIRES: </p>
 <pre>for key_field_path in key_field_paths:
-  key_field_path[[]0]-&gt;containing_type() == field-&gt;message_type()
-  for i in [[]0, key_field_path.size() - 1):
-    key_field_path[[]i+1]-&gt;containing_type() ==
-        key_field_path[[]i]-&gt;message_type()
-    key_field_path[[]i]-&gt;cpp_type() == FieldDescriptor::CPPTYPE_MESSAGE
-    !key_field_path[[]i]-&gt;is_repeated()</pre>
+  key_field_path[0]-&gt;containing_type() == field-&gt;message_type()
+  for i in [0, key_field_path.size() - 1):
+    key_field_path[i+1]-&gt;containing_type() ==
+        key_field_path[i]-&gt;message_type()
+    key_field_path[i]-&gt;cpp_type() == FieldDescriptor::CPPTYPE_MESSAGE
+    !key_field_path[i]-&gt;is_repeated()</pre>
 </div> <hr><h3 id="MessageDifferencer.TreatAsMapUsingKeyComparator.details"><code>void MessageDifferencer::TreatAsMapUsingKeyComparator(<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;const <a href='google.protobuf.descriptor#FieldDescriptor'>FieldDescriptor</a> * field,<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;const <a href='#MessageDifferencer.MapKeyComparator'>MapKeyComparator</a> * key_comparator)</code></h3><div style="margin-left: 16px"><p>Uses a custom <a href='#MessageDifferencer.MapKeyComparator'>MapKeyComparator</a> to determine if two elements have the same key when comparing a repeated field as a map. </p><p>The caller is responsible to delete the key_comparator. This method varies from TreatAsMapWithMultipleFieldsAsKey only in the first key matching step. Rather than comparing some specified fields, it will invoke the IsMatch method of the given 'key_comparator' to decide if two elements have the same key. </p>
 </div> <hr><h3 id="MessageDifferencer.AddIgnoreCriteria.details"><code>void MessageDifferencer::AddIgnoreCriteria(<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href='#MessageDifferencer.IgnoreCriteria'>IgnoreCriteria</a> * ignore_criteria)</code></h3><div style="margin-left: 16px"><p>Add a custom ignore criteria that is evaluated in addition to the ignored fields added with IgnoreField. </p><p>Takes ownership of ignore_criteria. </p>
 </div> <hr><h3 id="MessageDifferencer.IgnoreField.details"><code>void MessageDifferencer::IgnoreField(<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;const <a href='google.protobuf.descriptor#FieldDescriptor'>FieldDescriptor</a> * field)</code></h3><div style="margin-left: 16px"><p>Indicates that any field with the given descriptor should be ignored for the purposes of comparing two messages. </p><p>This applies to fields nested in the message structure as well as top level ones. When the <a href='#MessageDifferencer'>MessageDifferencer</a> encounters an ignored field, ReportIgnored is called on the reporter, if one is specified.</p>

@@ -305,3 +305,4 @@ protobuf developers and users,
 ## Additional Resources {#additional-resources}
 
 *   [Protocol Buffers GitHub](https://github.com/protocolbuffers/protobuf/)
+*   [Codelabs](/getting-started/codelabs)

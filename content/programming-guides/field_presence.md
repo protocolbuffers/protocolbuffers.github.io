@@ -157,13 +157,13 @@ for generated APIs and using dynamic reflection):
 Field type                                   | `optional` | Explicit Presence
 -------------------------------------------- | ---------- | -----------------
 Singular numeric (integer or floating point) | No         |
-Singular enum                                | No         |
-Singular string or bytes                     | No         |
 Singular numeric (integer or floating point) | Yes        | ✔️
+Singular enum                                | No         |
 Singular enum                                | Yes        | ✔️
+Singular string or bytes                     | No         |
 Singular string or bytes                     | Yes        | ✔️
-Singular message                             | Yes        | ✔️
 Singular message                             | No         | ✔️
+Singular message                             | Yes        | ✔️
 Repeated                                     | N/A        |
 Oneofs                                       | N/A        | ✔️
 Maps                                         | N/A        |

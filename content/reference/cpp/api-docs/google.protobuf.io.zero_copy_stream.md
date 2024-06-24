@@ -12,7 +12,7 @@ type = "docs"
 
 <p>As an example, consider the common case in which you are reading bytes from an array that is already in memory (or perhaps an mmap()ed file). With classic I/O streams, you would do something like: </p>
 
-<pre>char buffer[[]BUFFER_SIZE];
+<pre>char buffer[BUFFER_SIZE];
 input-&gt;Read(buffer, BUFFER_SIZE);
 DoSomething(buffer, BUFFER_SIZE);</pre>
 

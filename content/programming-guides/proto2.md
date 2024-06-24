@@ -1939,8 +1939,8 @@ Here are a few of the most commonly used options:
         message types. This code is highly optimized.
     *   `CODE_SIZE`: The protocol buffer compiler will generate minimal classes
         and will rely on shared, reflection-based code to implement
-        serialialization, parsing, and various other operations. The generated
-        code will thus be much smaller than with `SPEED`, but operations will be
+        serialization, parsing, and various other operations. The generated code
+        will thus be much smaller than with `SPEED`, but operations will be
         slower. Classes will still implement exactly the same public API as they
         do in `SPEED` mode. This mode is most useful in apps that contain a very
         large number of `.proto` files and do not need all of them to be

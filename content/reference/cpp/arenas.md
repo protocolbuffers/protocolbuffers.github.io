@@ -295,10 +295,7 @@ allocation is enabled. Otherwise, accessor methods just use the
 
 ### String Fields {#arenastring}
 
-Currently, string fields store their data on the heap even when their parent
-message is on the arena. Because of this, string accessor methods use the
-[default behavior](/reference/cpp/cpp-generated#string)
-even when arena allocation is enabled.
+String fields store their data on the heap even when their parent message is on the arena. Because of this, string accessor methods use the [default behavior](/reference/cpp/cpp-generated#string) even when arena allocation is enabled.
 
 ### Repeated Fields {#arenarepeated}
 

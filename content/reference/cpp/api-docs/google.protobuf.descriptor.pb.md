@@ -312,9 +312,9 @@ message MethodDescriptorProto {
   optional MethodOptions options = 4;
 
   // Identifies if client streams multiple client messages
-  optional bool client_streaming = 5 [[]default = false];
+  optional bool client_streaming = 5 [default = false];
   // Identifies if server streams multiple server messages
-  optional bool server_streaming = 6 [[]default = false];
+  optional bool server_streaming = 6 [default = false];
 }
 
 // ===================================================================
@@ -370,10 +370,10 @@ message FileOptions {
   // named by java_outer_classname.  However, the wrapper class will still be
   // generated to contain the file's getDescriptor() method as well as any
   // top-level extensions defined in the file.
-  optional bool java_multiple_files = 10 [[]default = false];
+  optional bool java_multiple_files = 10 [default = false];
 
   // This option does nothing.
-  optional bool java_generate_equals_and_hash = 20 [[]deprecated=true];
+  optional bool java_generate_equals_and_hash = 20 [deprecated=true];
 
   // If set true, then the Java2 code generator will generate code that
   // throws an exception whenever an attempt is made to assign a non-UTF-8
@@ -381,7 +381,7 @@ message FileOptions {
   // Message reflection will do the same.
   // However, an extension field still accepts non-UTF-8 byte sequences.
   // This option has no effect on when used with the lite runtime.
-  optional bool java_string_check_utf8 = 27 [[]default = false];
+  optional bool java_string_check_utf8 = 27 [default = false];
 
   // Generated classes can be optimized for speed or code size.
   enum OptimizeMode {
@@ -390,7 +390,7 @@ message FileOptions {
     CODE_SIZE = 2;     // Use ReflectionOps to implement these methods.
     LITE_RUNTIME = 3;  // Generate code using MessageLite and the lite runtime.
   }
-  optional OptimizeMode optimize_for = 9 [[]default = SPEED];
+  optional OptimizeMode optimize_for = 9 [default = SPEED];
 
   // Sets the Go package where structs generated from this .proto will be
   // placed. If omitted, the Go package will be derived from the following:
@@ -409,20 +409,20 @@ message FileOptions {
   // that generate code specific to your particular RPC system.  Therefore,
   // these default to false.  Old code which depends on generic services should
   // explicitly set them to true.
-  optional bool cc_generic_services = 16 [[]default = false];
-  optional bool java_generic_services = 17 [[]default = false];
-  optional bool py_generic_services = 18 [[]default = false];
-  optional bool php_generic_services = 42 [[]default = false];
+  optional bool cc_generic_services = 16 [default = false];
+  optional bool java_generic_services = 17 [default = false];
+  optional bool py_generic_services = 18 [default = false];
+  optional bool php_generic_services = 42 [default = false];
 
   // Is this file deprecated?
   // Depending on the target platform, this can emit Deprecated annotations
   // for everything in the file, or it will be completely ignored; in the very
   // least, this is a formalization for deprecating files.
-  optional bool deprecated = 23 [[]default = false];
+  optional bool deprecated = 23 [default = false];
 
   // Enables the use of arenas for the proto messages in this file. This applies
   // only to generated classes for C++.
-  optional bool cc_enable_arenas = 31 [[]default = true];
+  optional bool cc_enable_arenas = 31 [default = true];
 
   // Sets the objective c class prefix which is prepended to all objective c
   // generated classes from this .proto. There is no default.
@@ -486,18 +486,18 @@ message MessageOptions {
   //
   // Because this is an option, the above two restrictions are not enforced by
   // the protocol compiler.
-  optional bool message_set_wire_format = 1 [[]default = false];
+  optional bool message_set_wire_format = 1 [default = false];
 
   // Disables the generation of the standard "descriptor()" accessor, which can
   // conflict with a field of the same name.  This is meant to make migration
   // from proto1 easier; new code should avoid fields named "descriptor".
-  optional bool no_standard_descriptor_accessor = 2 [[]default = false];
+  optional bool no_standard_descriptor_accessor = 2 [default = false];
 
   // Is this message deprecated?
   // Depending on the target platform, this can emit Deprecated annotations
   // for the message, or it will be completely ignored; in the very least,
   // this is a formalization for deprecating messages.
-  optional bool deprecated = 3 [[]default = false];
+  optional bool deprecated = 3 [default = false];
 
   reserved 4, 5, 6;
 
@@ -539,7 +539,7 @@ message FieldOptions {
   // representation of the field than it normally would.  See the specific
   // options below.  This option is not yet implemented in the open source
   // release -- sorry, we'll try to include it in a future version!
-  optional CType ctype = 1 [[]default = STRING];
+  optional CType ctype = 1 [default = STRING];
   enum CType {
     // Default mode.
     STRING = 0;
@@ -567,7 +567,7 @@ STRING_PIECE = 2;
   //
   // This option is an enum to permit additional types to be added, e.g.
   // goog.math.Integer.
-  optional JSType jstype = 6 [[]default = JS_NORMAL];
+  optional JSType jstype = 6 [default = JS_NORMAL];
   enum JSType {
     // Use the default type.
     JS_NORMAL = 0;
@@ -608,16 +608,16 @@ JS_NUMBER = 2;
   // implementation must either *always* check its required fields, or *never*
   // check its required fields, regardless of whether or not the message has
   // been parsed.
-  optional bool lazy = 5 [[]default = false];
+  optional bool lazy = 5 [default = false];
 
   // Is this field deprecated?
   // Depending on the target platform, this can emit Deprecated annotations
   // for accessors, or it will be completely ignored; in the very least, this
   // is a formalization for deprecating fields.
-  optional bool deprecated = 3 [[]default = false];
+  optional bool deprecated = 3 [default = false];
 
   // For Google-internal migration only. Do not use.
-  optional bool weak = 10 [[]default = false];
+  optional bool weak = 10 [default = false];
 
   // The parser stores options it doesn't recognize here. See above.
   repeated UninterpretedOption uninterpreted_option = 999;
@@ -646,7 +646,7 @@ message EnumOptions {
   // Depending on the target platform, this can emit Deprecated annotations
   // for the enum, or it will be completely ignored; in the very least, this
   // is a formalization for deprecating enums.
-  optional bool deprecated = 3 [[]default = false];
+  optional bool deprecated = 3 [default = false];
 
   reserved 5;  // javanano_as_lite
 
@@ -662,7 +662,7 @@ message EnumValueOptions {
   // Depending on the target platform, this can emit Deprecated annotations
   // for the enum value, or it will be completely ignored; in the very least,
   // this is a formalization for deprecating enum values.
-  optional bool deprecated = 1 [[]default = false];
+  optional bool deprecated = 1 [default = false];
 
   // The parser stores options it doesn't recognize here. See above.
   repeated UninterpretedOption uninterpreted_option = 999;
@@ -682,7 +682,7 @@ message ServiceOptions {
   // Depending on the target platform, this can emit Deprecated annotations
   // for the service, or it will be completely ignored; in the very least,
   // this is a formalization for deprecating services.
-  optional bool deprecated = 33 [[]default = false];
+  optional bool deprecated = 33 [default = false];
 
   // The parser stores options it doesn't recognize here. See above.
   repeated UninterpretedOption uninterpreted_option = 999;
@@ -702,7 +702,7 @@ message MethodOptions {
   // Depending on the target platform, this can emit Deprecated annotations
   // for the method, or it will be completely ignored; in the very least,
   // this is a formalization for deprecating methods.
-  optional bool deprecated = 33 [[]default = false];
+  optional bool deprecated = 33 [default = false];
 
   // Is this method side-effect-free (or safe in HTTP parlance), or idempotent,
   // or neither? HTTP based RPC implementation may choose GET verb for safe
@@ -713,7 +713,7 @@ message MethodOptions {
     IDEMPOTENT = 2;       // idempotent, but may have side effects
   }
   optional IdempotencyLevel idempotency_level = 34
-      [[]default = IDEMPOTENCY_UNKNOWN];
+      [default = IDEMPOTENCY_UNKNOWN];
 
   // The parser stores options it doesn't recognize here. See above.
   repeated UninterpretedOption uninterpreted_option = 999;
@@ -732,7 +732,7 @@ message UninterpretedOption {
   // The name of the uninterpreted option.  Each string represents a segment in
   // a dot-separated name.  is_extension is true iff a segment represents an
   // extension (denoted with parentheses in options specs in .proto files).
-  // E.g.,{ [[]"foo", false], [[]"bar.baz", true], [[]"qux", false] } represents
+  // E.g.,{ ["foo", false], ["bar.baz", true], ["qux", false] } represents
   // "foo.(bar.baz).qux".
   message NamePart {
     required string name_part = 1;
@@ -771,11 +771,11 @@ message SourceCodeInfo {
   //   a       bc     de  f  ghi
   // We have the following locations:
   //   span   path               represents
-  //   [[]a,i)  [[] 4, 0, 2, 0 ]     The whole field definition.
-  //   [[]a,b)  [[] 4, 0, 2, 0, 4 ]  The label (optional).
-  //   [[]c,d)  [[] 4, 0, 2, 0, 5 ]  The type (string).
-  //   [[]e,f)  [[] 4, 0, 2, 0, 1 ]  The name (foo).
-  //   [[]g,h)  [[] 4, 0, 2, 0, 3 ]  The number (1).
+  //   [a,i)  [ 4, 0, 2, 0 ]     The whole field definition.
+  //   [a,b)  [ 4, 0, 2, 0, 4 ]  The label (optional).
+  //   [c,d)  [ 4, 0, 2, 0, 5 ]  The type (string).
+  //   [e,f)  [ 4, 0, 2, 0, 1 ]  The name (foo).
+  //   [g,h)  [ 4, 0, 2, 0, 3 ]  The number (1).
   //
   // Notes:
   // - A location may refer to a repeated field itself (i.e. not to any
@@ -807,7 +807,7 @@ message SourceCodeInfo {
     // Each element is a field number or an index.  They form a path from
     // the root FileDescriptorProto to the place where the definition.  For
     // example, this path:
-    //   [[] 4, 3, 2, 7, 1 ]
+    //   [ 4, 3, 2, 7, 1 ]
     // refers to:
     //   file.message_type(3)  // 4, 3
     //       .field(7)         // 2, 7
@@ -821,17 +821,17 @@ message SourceCodeInfo {
     //
     // Thus, the above path gives the location of a field name.  If we removed
     // the last element:
-    //   [[] 4, 3, 2, 7 ]
+    //   [ 4, 3, 2, 7 ]
     // this path refers to the whole field declaration (from the beginning
     // of the label to the terminating semicolon).
-    repeated int32 path = 1 [[]packed = true];
+    repeated int32 path = 1 [packed = true];
 
 // Always has exactly three or four elements: start line, start column,
 // end line (optional, otherwise assumed same as start line), end column.
 // These are packed into a single field for efficiency.  Note that line
 // and column numbers are zero-based -- typically you will want to add
 // 1 to each before displaying to a user.
-repeated int32 span = 2 [[]packed = true];
+repeated int32 span = 2 [packed = true];
 
 // If this SourceCodeInfo represents a complete declaration, these are any
 // comments appearing before and after the declaration which appear to be
@@ -896,7 +896,7 @@ message GeneratedCodeInfo {
   message Annotation {
     // Identifies the element in the original source .proto file. This field
     // is formatted the same as SourceCodeInfo.Location.path.
-    repeated int32 path = 1 [[]packed = true];
+    repeated int32 path = 1 [packed = true];
 
 // Identifies the filesystem path to the original source .proto.
 optional string source_file = 2;

@@ -21,7 +21,7 @@ ZeroCopyOutputStream* raw_output = new FileOutputStream(fd);
 CodedOutputStream* coded_output = new CodedOutputStream(raw_output);
 
 int magic_number = 1234;
-char text[[]] = "Hello world!";
+char text[] = "Hello world!";
 coded_output-&gt;WriteLittleEndian32(magic_number);
 coded_output-&gt;WriteVarint32(strlen(text));
 coded_output-&gt;WriteRaw(text, strlen(text));
@@ -46,16 +46,16 @@ if (magic_number != 1234) {
 uint32 size;
 coded_input-&gt;ReadVarint32(&amp;size);
 
-char* text = new char[[]size + 1];
+char* text = new char[size + 1];
 coded_input-&gt;ReadRaw(buffer, size);
-text[[]size] = '\0';
+text[size] = '\0';
 
 delete coded_input;
 delete raw_input;
 close(fd);
 
 cout &lt;&lt; "Text is: " &lt;&lt; text &lt;&lt; endl;
-delete [[]] text;</pre>
+delete [] text;</pre>
 
 <p>For those who are interested, varint encoding is defined as follows:</p>
 
@@ -86,7 +86,7 @@ delete [[]] text;</pre>
 <p>The value from the wire is interpreted as unsigned. If its value exceeds the representable value of an integer on this platform, instead of truncating we return false. Truncating (as performed by <a href='#CodedInputStream.ReadVarint32'>ReadVarint32()</a> above) is an acceptable approach for fields representing an integer, but when we are parsing a size from the wire, truncating the value would result in us misparsing the payload. </p>
 </div> <hr><h3 id="CodedInputStream.ReadTag.details"><code>uint32 CodedInputStream::ReadTag()</code></h3><div style="margin-left: 16px"><p>Read a tag. </p><p>This calls <a href='#CodedInputStream.ReadVarint32'>ReadVarint32()</a> and returns the result, or returns zero (which is not a valid tag) if <a href='#CodedInputStream.ReadVarint32'>ReadVarint32()</a> fails. Also, ReadTag (but not ReadTagNoLastTag) updates the last tag value, which can be checked with <a href='#CodedInputStream.LastTagWas'>LastTagWas()</a>.</p>
 <p>Always inline because this is only called in one place per parse loop but it is called for every iteration of said loop, so it should be fast. GCC doesn't want to inline this by default. </p>
-</div> <hr><h3 id="CodedInputStream.ReadTagWithCutoff.details"><code>std::pair&lt; uint32, bool &gt; <br>&nbsp;&nbsp;&nbsp;&nbsp;CodedInputStream::ReadTagWithCutoff(<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;uint32 cutoff)</code></h3><div style="margin-left: 16px"><p>This usually a faster alternative to <a href='#CodedInputStream.ReadTag'>ReadTag()</a> when cutoff is a manifest constant. </p><p>It does particularly well for cutoff &gt;= 127. The first part of the return value is the tag that was read, though it can also be 0 in the cases where <a href='#CodedInputStream.ReadTag'>ReadTag()</a> would return 0. If the second part is true then the tag is known to be in [[]0, cutoff]. If not, the tag either is above cutoff or is 0. (There's intentional wiggle room when tag is 0, because that can arise in several ways, and for best performance we want to avoid an extra "is tag == 0?" check here.) </p>
+</div> <hr><h3 id="CodedInputStream.ReadTagWithCutoff.details"><code>std::pair&lt; uint32, bool &gt; <br>&nbsp;&nbsp;&nbsp;&nbsp;CodedInputStream::ReadTagWithCutoff(<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;uint32 cutoff)</code></h3><div style="margin-left: 16px"><p>This usually a faster alternative to <a href='#CodedInputStream.ReadTag'>ReadTag()</a> when cutoff is a manifest constant. </p><p>It does particularly well for cutoff &gt;= 127. The first part of the return value is the tag that was read, though it can also be 0 in the cases where <a href='#CodedInputStream.ReadTag'>ReadTag()</a> would return 0. If the second part is true then the tag is known to be in [0, cutoff]. If not, the tag either is above cutoff or is 0. (There's intentional wiggle room when tag is 0, because that can arise in several ways, and for best performance we want to avoid an extra "is tag == 0?" check here.) </p>
 </div> <hr><h3 id="CodedInputStream.ExpectTag.details"><code>bool CodedInputStream::ExpectTag(<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;uint32 expected)</code></h3><div style="margin-left: 16px"><p>Usually returns true if calling <a href='#CodedInputStream.ReadVarint32'>ReadVarint32()</a> now would produce the given value. </p><p>Will always return false if <a href='#CodedInputStream.ReadVarint32'>ReadVarint32()</a> would not return the given value. If <a href='#CodedInputStream.ExpectTag'>ExpectTag()</a> returns true, it also advances past the varint. For best performance, use a compile-time constant as the parameter. Always inline because this collapses to a small number of instructions when given a constant parameter, but GCC doesn't want to inline by default. </p>
 </div> <hr><h3 id="CodedInputStream.ExpectAtEnd.details"><code>bool CodedInputStream::ExpectAtEnd()</code></h3><div style="margin-left: 16px"><p>Usually returns true if no more bytes can be read. </p><p>Always returns false if more bytes can be read. If <a href='#CodedInputStream.ExpectAtEnd'>ExpectAtEnd()</a> returns true, a subsequent call to <a href='#CodedInputStream.LastTagWas'>LastTagWas()</a> will act as if <a href='#CodedInputStream.ReadTag'>ReadTag()</a> had been called and returned zero, and <a href='#CodedInputStream.ConsumedEntireMessage'>ConsumedEntireMessage()</a> will return true. </p>
 </div> <hr><h3 id="CodedInputStream.LastTagWas.details"><code>bool CodedInputStream::LastTagWas(<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;uint32 expected)</code></h3><div style="margin-left: 16px"><p>If the last call to <a href='#CodedInputStream.ReadTag'>ReadTag()</a> or <a href='#CodedInputStream.ReadTagWithCutoff'>ReadTagWithCutoff()</a> returned the given value, returns true. </p><p>Otherwise, returns false. ReadTagNoLastTag/ReadTagWithCutoffNoLastTag do not preserve the last returned value.</p>
@@ -139,7 +139,7 @@ information about underlays.</pre>
 <p>Note that every method of <a href='#CodedOutputStream'>CodedOutputStream</a> which writes some data has a corresponding static "ToArray" version. These versions write directly to the provided buffer, returning a pointer past the last written byte. They require that the buffer has sufficient capacity for the encoded data. This allows an optimization where we check if an output stream has enough space for an entire message before we start writing and, if there is, we call only the ToArray methods to avoid doing bound checks for each individual value. i.e., in the example above:</p>
 <pre>CodedOutputStream* coded_output = new CodedOutputStream(raw_output);
 int magic_number = 1234;
-char text[[]] = "Hello world!";
+char text[] = "Hello world!";
 
 int coded_size = sizeof(magic_number) +
                  CodedOutputStream::VarintSize32(strlen(text)) +

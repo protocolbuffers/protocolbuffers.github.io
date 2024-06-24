@@ -9,7 +9,7 @@ type = "docs"
 Protobuf Editions replace the proto2 and proto3 designations that we have used
 for Protocol Buffers. Instead of adding `syntax = "proto2"` or `syntax =
 "proto3"` at the top of proto definition files, you use an edition number, such
-as `edition = "2024"`, to specify the default behaviors your file will have.
+as `edition = "2023"`, to specify the default behaviors your file will have.
 Editions enable the language to evolve incrementally over time.
 
 Instead of the hardcoded behaviors that older versions have had, editions
@@ -21,6 +21,8 @@ those different levels (file, message, field, ...) when your needs don't match
 the default behavior for the edition you've selected. You can also override your
 overrides. The [section later in this topic on lexical scoping](#scoping) goes
 into more detail on that.
+
+*The latest released edition is 2023.*
 
 ## Lifecycle of a Feature {#lifecycles}
 
@@ -93,6 +95,8 @@ Prototiller tool to change the definition files to use Protobuf Editions syntax.
 // proto2 file
 syntax = "proto2";
 
+package com.example;
+
 message Player {
   // in proto2, optional fields have explicit presence
   optional string name = 1;
@@ -110,6 +114,8 @@ message Player {
 
   // in proto2 enums are closed
   optional Handed handed = 4;
+
+  reserved "gender";
 }
 ```
 
@@ -118,6 +124,8 @@ message Player {
 ```proto
 // Edition version of proto2 file
 edition = "2023";
+
+package com.example;
 
 message Player {
   // fields have explicit presence, so no explicit setting needed
@@ -137,6 +145,8 @@ message Player {
   }
 
   Handed handed = 4;
+
+  reserved gender;
 }
 ```
 
@@ -155,6 +165,8 @@ Prototiller tool to change the definition files to use Protobuf Editions syntax.
 // proto3 file
 syntax = "proto3";
 
+package com.example;
+
 message Player {
   // in proto3, optional fields have explicit presence
   optional string name = 1;
@@ -172,6 +184,8 @@ message Player {
 
   // in proto3 enums are open
   optional Handed handed = 4;
+
+  reserved "gender";
 }
 ```
 
@@ -180,6 +194,8 @@ message Player {
 ```proto
 // Editions version of proto3 file
 edition = "2023";
+
+package com.example;
 
 message Player {
   // fields have explicit presence, so no explicit setting needed
@@ -197,6 +213,8 @@ message Player {
   }
 
   Handed handed = 4;
+
+  reserved gender;
 }
 ```
 
@@ -229,16 +247,16 @@ message Person {
   int32 id = 2 [features.presence = IMPLICIT];
 
   enum Pay_Type {
-    PAY_TYPE_UNSPECIFIED = 1,
-    PAY_TYPE_SALARY = 2,
-    PAY_TYPE_HOURLY = 3
+    PAY_TYPE_UNSPECIFIED = 1;
+    PAY_TYPE_SALARY = 2;
+    PAY_TYPE_HOURLY = 3;
   }
 
   enum Employment {
     option features.enum_type = OPEN;
-    EMPLOYMENT_UNSPECIFIED = 0,
-    EMPLOYMENT_FULLTIME = 1,
-    EMPLOYMENT_PARTTIME = 2,
+    EMPLOYMENT_UNSPECIFIED = 0;
+    EMPLOYMENT_FULLTIME = 1;
+    EMPLOYMENT_PARTTIME = 2;
   }
   Employment employment = 4;
 }
@@ -270,9 +288,9 @@ definition files, and vice versa:
 syntax = "proto2";
 
 enum Employment {
-  EMPLOYMENT_UNSPECIFIED = 0,
-  EMPLOYMENT_FULLTIME = 1,
-  EMPLOYMENT_PARTTIME = 2,
+  EMPLOYMENT_UNSPECIFIED = 0;
+  EMPLOYMENT_FULLTIME = 1;
+  EMPLOYMENT_PARTTIME = 2;
 }
 ```
 
