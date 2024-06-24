@@ -646,8 +646,8 @@ third-party generators) in the following ways:</p><ul><li><code>SPEED</code> (de
 serializing, parsing, and performing other common operations on your
 message types. This code is highly optimized.</li><li><code>CODE_SIZE</code>: The protocol buffer compiler will generate minimal classes
 and will rely on shared, reflection-based code to implement
-serialialization, parsing, and various other operations. The generated
-code will thus be much smaller than with <code>SPEED</code>, but operations will be
+serialization, parsing, and various other operations. The generated code
+will thus be much smaller than with <code>SPEED</code>, but operations will be
 slower. Classes will still implement exactly the same public API as they
 do in <code>SPEED</code> mode. This mode is most useful in apps that contain a very
 large number of <code>.proto</code> files and do not need all of them to be

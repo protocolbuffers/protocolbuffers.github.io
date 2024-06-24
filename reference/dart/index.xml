@@ -305,7 +305,7 @@ and a top-level extension definition:&lt;/p>
 &lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#a40000">&lt;/span>&lt;span style="color:#000;font-weight:bold">}&lt;/span>&lt;span style="color:#a40000">
 &lt;/span>&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>The protocol buffer compiler will generate, in addition to the &lt;code>Foo&lt;/code> class, a
 class &lt;code>Foo_test&lt;/code> which will contain a &lt;code>static Extension&lt;/code> for each extension
-field in the file along with a method for registering all the exensions in an
+field in the file along with a method for registering all the extensions in an
 &lt;code>ExtensionRegistry&lt;/code> :&lt;/p>
 &lt;ul>
 &lt;li>&lt;code>static final Extension bar&lt;/code>&lt;/li>

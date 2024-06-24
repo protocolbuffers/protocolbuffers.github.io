@@ -526,8 +526,7 @@ class provides STL-like iterators and other methods.&lt;/li>
 &lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#a40000">&lt;/span>&lt;span style="color:#000;font-weight:bold">}&lt;/span>&lt;span style="color:#a40000">
 &lt;/span>&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>The compiler will generate the following accessor methods:&lt;/p>
 &lt;ul>
-&lt;li>&lt;code>bool has_foo() const&lt;/code> (proto2 only): Returns &lt;code>true&lt;/code> if oneof case is
-&lt;code>kFoo&lt;/code>.&lt;/li>
+&lt;li>&lt;code>bool has_foo() const&lt;/code>: Returns &lt;code>true&lt;/code> if oneof case is &lt;code>kFoo&lt;/code>.&lt;/li>
 &lt;li>&lt;code>int32 foo() const&lt;/code>: Returns the current value of the field if oneof case is
 &lt;code>kFoo&lt;/code>. Otherwise, returns the default value.&lt;/li>
 &lt;li>&lt;code>void set_foo(int32 value)&lt;/code>:
@@ -535,17 +534,16 @@ class provides STL-like iterators and other methods.&lt;/li>
 &lt;li>If any other oneof field in the same oneof is set, calls
 &lt;code>clear_example_name()&lt;/code>.&lt;/li>
 &lt;li>Sets the value of this field and sets the oneof case to &lt;code>kFoo&lt;/code>.&lt;/li>
-&lt;li>&lt;code>has_foo()&lt;/code> (proto2 only) will return true, &lt;code>foo()&lt;/code> will return &lt;code>value&lt;/code>,
-and &lt;code>example_name_case()&lt;/code> will return &lt;code>kFoo&lt;/code>.&lt;/li>
+&lt;li>&lt;code>has_foo()&lt;/code> will return true, &lt;code>foo()&lt;/code> will return &lt;code>value&lt;/code>, and
+&lt;code>example_name_case()&lt;/code> will return &lt;code>kFoo&lt;/code>.&lt;/li>
 &lt;/ul>
 &lt;/li>
 &lt;li>&lt;code>void clear_foo()&lt;/code>:
 &lt;ul>
 &lt;li>Nothing will be changed if oneof case is not &lt;code>kFoo&lt;/code>.&lt;/li>
 &lt;li>If oneof case is &lt;code>kFoo&lt;/code>, clears the value of the field and oneof case.
-&lt;code>has_foo()&lt;/code> (proto2 only) will return &lt;code>false&lt;/code>, &lt;code>foo()&lt;/code> will return the
-default value and &lt;code>example_name_case()&lt;/code> will return
-&lt;code>EXAMPLE_NAME_NOT_SET&lt;/code>.&lt;/li>
+&lt;code>has_foo()&lt;/code> will return &lt;code>false&lt;/code>, &lt;code>foo()&lt;/code> will return the default value
+and &lt;code>example_name_case()&lt;/code> will return &lt;code>EXAMPLE_NAME_NOT_SET&lt;/code>.&lt;/li>
 &lt;/ul>
 &lt;/li>
 &lt;/ul>
@@ -646,8 +644,7 @@ return &lt;code>EXAMPLE_NAME_NOT_SET&lt;/code>.&lt;/li>
 &lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#a40000">&lt;/span>&lt;span style="color:#000;font-weight:bold">}&lt;/span>&lt;span style="color:#a40000">
 &lt;/span>&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>The compiler will generate the following accessor methods:&lt;/p>
 &lt;ul>
-&lt;li>&lt;code>bool has_foo() const&lt;/code> (proto2 only): Returns &lt;code>true&lt;/code> if oneof case is
-&lt;code>kFoo&lt;/code>.&lt;/li>
+&lt;li>&lt;code>bool has_foo() const&lt;/code>: Returns &lt;code>true&lt;/code> if oneof case is &lt;code>kFoo&lt;/code>.&lt;/li>
 &lt;li>&lt;code>Bar foo() const&lt;/code>: Returns the current value of the field if oneof case is
 &lt;code>kFoo&lt;/code>. Otherwise, returns the default value.&lt;/li>
 &lt;li>&lt;code>void set_foo(Bar value)&lt;/code>:
@@ -655,8 +652,8 @@ return &lt;code>EXAMPLE_NAME_NOT_SET&lt;/code>.&lt;/li>
 &lt;li>If any other oneof field in the same oneof is set, calls
 &lt;code>clear_example_name()&lt;/code>.&lt;/li>
 &lt;li>Sets the value of this field and sets the oneof case to &lt;code>kFoo&lt;/code>.&lt;/li>
-&lt;li>&lt;code>has_foo()&lt;/code> (proto2 only) will return &lt;code>true&lt;/code>, &lt;code>foo()&lt;/code> will return
-&lt;code>value&lt;/code> and &lt;code>example_name_case()&lt;/code> will return &lt;code>kFoo&lt;/code>.&lt;/li>
+&lt;li>&lt;code>has_foo()&lt;/code> will return &lt;code>true&lt;/code>, &lt;code>foo()&lt;/code> will return &lt;code>value&lt;/code> and
+&lt;code>example_name_case()&lt;/code> will return &lt;code>kFoo&lt;/code>.&lt;/li>
 &lt;li>In debug mode (i.e. NDEBUG is not defined), if &lt;code>value&lt;/code> does not match
 any of the values defined for &lt;code>Bar&lt;/code>, this method will abort the process.&lt;/li>
 &lt;/ul>
@@ -665,9 +662,8 @@ any of the values defined for &lt;code>Bar&lt;/code>, this method will abort the
 &lt;ul>
 &lt;li>Nothing will be changed if the oneof case is not &lt;code>kFoo&lt;/code>.&lt;/li>
 &lt;li>If the oneof case is &lt;code>kFoo&lt;/code>, clears the value of the field and the oneof
-case. &lt;code>has_foo()&lt;/code> (proto2 only) will return &lt;code>false&lt;/code>, &lt;code>foo()&lt;/code> will return
-the default value and &lt;code>example_name_case()&lt;/code> will return
-&lt;code>EXAMPLE_NAME_NOT_SET&lt;/code>.&lt;/li>
+case. &lt;code>has_foo()&lt;/code> will return &lt;code>false&lt;/code>, &lt;code>foo()&lt;/code> will return the default
+value and &lt;code>example_name_case()&lt;/code> will return &lt;code>EXAMPLE_NAME_NOT_SET&lt;/code>.&lt;/li>
 &lt;/ul>
 &lt;/li>
 &lt;/ul>
@@ -1372,10 +1368,7 @@ ownership checking. See &lt;a href="#set-allocated">allocated/release patterns&l
 details on safe ways to use this.&lt;/li>
 &lt;/ul>
 &lt;h3 id="arenastring">String Fields&lt;/h3>
-&lt;p>Currently, string fields store their data on the heap even when their parent
-message is on the arena. Because of this, string accessor methods use the
-&lt;a href="https://protobuf.dev/reference/cpp/cpp-generated#string">default behavior&lt;/a>
-even when arena allocation is enabled.&lt;/p>
+&lt;p>String fields store their data on the heap even when their parent message is on the arena. Because of this, string accessor methods use the &lt;a href="https://protobuf.dev/reference/cpp/cpp-generated#string">default behavior&lt;/a> even when arena allocation is enabled.&lt;/p>
 &lt;h3 id="arenarepeated">Repeated Fields&lt;/h3>
 &lt;p>Repeated fields allocate their internal array storage on the arena when the
 containing message is arena-allocated, and also allocate their elements on the
