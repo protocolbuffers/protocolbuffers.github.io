@@ -148,7 +148,8 @@ language guide.
 
 ```
 option = "option" optionName  "=" constant ";"
-optionName = ( ident | "(" ["."] fullIdent ")" )
+optionName = ( ident | bracedFullIdent ) { "." ( ident | bracedFullIdent ) }
+bracedFullIdent = "(" ["."] fullIdent ")"
 ```
 
 For examples:

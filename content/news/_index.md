@@ -20,6 +20,8 @@ New news topics will also be published to the
 The following news topics provide information in the reverse order in which it
 was released.
 
+*   [June 26, 2024](/news/2024-06-26) - Dropping support
+    for building Protobuf Java from source with Maven
 *   [February 27, 2024](/news/2024-02-27) - Dropping
     support for older versions of Ruby
 *   [February 5, 2024](/news/2024-02-05) - Breaking

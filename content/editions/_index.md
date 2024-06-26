@@ -7,3 +7,4 @@ type = "docs"
 
 *   [Protocol Buffers Overview](/editions/overview)
 *   [Feature Settings for Editions](/editions/features)
+*   [Implementing Editions Support](/editions/implementation)

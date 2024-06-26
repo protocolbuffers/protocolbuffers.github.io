@@ -151,7 +151,8 @@ language guide.
 
 ```
 option = "option" optionName  "=" constant ";"
-optionName = optionNamePart { "." optionNamePart }
+optionName = ( ident | bracedFullIdent ) { "." ( ident | bracedFullIdent ) }
+bracedFullIdent = "(" ["."] fullIdent ")"
 optionNamePart = { ident | "(" ["."] fullIdent ")" }
 ```
 
