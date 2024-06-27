@@ -260,7 +260,7 @@ encoding of `"testing"`. The int32 varint means that the max length of a string
 is 2GB.
 
 In Protoscope, this is written as `2:LEN 7 "testing"`. However, it can be
-incovenient to repeat the length of the string (which, in Protoscope text, is
+inconvenient to repeat the length of the string (which, in Protoscope text, is
 already quote-delimited). Wrapping Protoscope content in braces will generate a
 length prefix for it: `{"testing"}` is a shorthand for `7 "testing"`. `{}` is
 always inferred by fields to be a `LEN` record, so we can write this record
