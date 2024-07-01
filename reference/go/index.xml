@@ -23,13 +23,15 @@ the &lt;code>.proto&lt;/code> extension with &lt;code>.pb.go&lt;/code>.&lt;/p>
 the compiler flags. There are several output modes:&lt;/p>
 &lt;ul>
 &lt;li>If the &lt;code>paths=import&lt;/code> flag is specified, the output file is placed in a
-directory named after the Go package&amp;rsquo;s import path. For example, an input
+directory named after the Go package&amp;rsquo;s import path (such as one provided by
+the &lt;code>go_package&lt;/code> option within the &lt;code>.proto&lt;/code> file). For example, an input
 file &lt;code>protos/buzz.proto&lt;/code> with a Go import path of
 &lt;code>example.com/project/protos/fizz&lt;/code> results in an output file at
 &lt;code>example.com/project/protos/fizz/buzz.pb.go&lt;/code>. This is the default output
 mode if a &lt;code>paths&lt;/code> flag is not specified.&lt;/li>
 &lt;li>If the &lt;code>module=$PREFIX&lt;/code> flag is specified, the output file is placed in a
-directory named after the Go package&amp;rsquo;s import path, but with the specified
+directory named after the Go package&amp;rsquo;s import path (such as one provided by
+the &lt;code>go_package&lt;/code> option within the &lt;code>.proto&lt;/code> file), but with the specified
 directory prefix removed from the output filename. For example, an input
 file &lt;code>protos/buzz.proto&lt;/code> with a Go import path of
 &lt;code>example.com/project/protos/fizz&lt;/code> and &lt;code>example.com/project&lt;/code> specified as the
