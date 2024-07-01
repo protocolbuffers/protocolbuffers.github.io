@@ -151,6 +151,31 @@ parser will accept the input, but only uses the last field. So, the "bytes" may
 not be "well-formed" but the resulting message would have only one and would be
 "well-formed" (but would not roundtrip the same).
 
+#### Message Type Fields Have Field Presence {#field-presence}
+
+In proto3, message-type fields already have field presence. Because of this,
+adding the `optional` modifier doesn't change the field presence for the field.
+
+The definitions for `Message2` and `Message3` in the following code sample
+generate the same code for all languages, and there is no difference in
+representation in binary, JSON, and TextFormat:
+
+```proto
+syntax="proto3";
+
+package foo.bar;
+
+message Message1 {}
+
+message Message2 {
+  Message1 foo = 1;
+}
+
+message Message3 {
+  optional Message1 bar = 1;
+}
+```
+
 ### Adding More Message Types {#adding-types}
 
 Multiple message types can be defined in a single `.proto` file. This is useful

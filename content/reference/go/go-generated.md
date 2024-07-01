@@ -38,13 +38,15 @@ Where in the output directory the generated `.pb.go` file is placed depends on
 the compiler flags. There are several output modes:
 
 -   If the `paths=import` flag is specified, the output file is placed in a
-    directory named after the Go package's import path. For example, an input
+    directory named after the Go package's import path (such as one provided by
+    the `go_package` option within the `.proto` file). For example, an input
     file `protos/buzz.proto` with a Go import path of
     `example.com/project/protos/fizz` results in an output file at
     `example.com/project/protos/fizz/buzz.pb.go`. This is the default output
     mode if a `paths` flag is not specified.
 -   If the `module=$PREFIX` flag is specified, the output file is placed in a
-    directory named after the Go package's import path, but with the specified
+    directory named after the Go package's import path (such as one provided by
+    the `go_package` option within the `.proto` file), but with the specified
     directory prefix removed from the output filename. For example, an input
     file `protos/buzz.proto` with a Go import path of
     `example.com/project/protos/fizz` and `example.com/project` specified as the
