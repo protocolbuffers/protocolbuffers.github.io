@@ -249,10 +249,9 @@ corresponding C++ type according to the
 
 ### Implicit Presence Numeric Fields (proto3) {#implicit-numeric}
 
-For these field definitions:
+For the below field definition:
 
 ```proto
-optional int32 foo = 1;
 int32 foo = 1;  // no field label specified, defaults to implicit presence.
 ```
 
@@ -322,12 +321,10 @@ The compiler will generate the following accessor methods:
 
 ### Implicit Presence String/Bytes Fields (proto3) {#implicit-string}
 
-For any of these field definitions:
+For either of these field definitions:
 
 ```proto
-optional string foo = 1;
 string foo = 1;  // no field label specified, defaults to implicit presence.
-optional bytes foo = 1;
 bytes foo = 1;
 ```
 
@@ -440,10 +437,9 @@ enum Bar {
 }
 ```
 
-For these field definitions:
+For this field definition:
 
 ```proto
-optional Bar foo = 1;
 Bar foo = 1;  // no field label specified, defaults to implicit presence.
 ```
 
