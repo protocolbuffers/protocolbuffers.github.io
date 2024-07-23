@@ -209,17 +209,40 @@ descriptors for all your messages, enums, and fields, and some mysteriously
 empty classes, one for each message type:
 
 ```python
-class Person(message.Message):
-  __metaclass__ = reflection.GeneratedProtocolMessageType
+import google3
+from google.protobuf import descriptor as _descriptor
+from google.protobuf import descriptor_pool as _descriptor_pool
+from google.protobuf import runtime_version as _runtime_version
+from google.protobuf import symbol_database as _symbol_database
+from google.protobuf.internal import builder as _builder
+_runtime_version.ValidateProtobufRuntimeVersion(
+    _runtime_version.Domain.GOOGLE_INTERNAL,
+    0,
+    20240502,
+    0,
+    '',
+    'main.proto'
+)
+# @@protoc_insertion_point(imports)
 
-  class PhoneNumber(message.Message):
-    __metaclass__ = reflection.GeneratedProtocolMessageType
-    DESCRIPTOR = _PERSON_PHONENUMBER
-  DESCRIPTOR = _PERSON
+_sym_db = _symbol_database.Default()
 
-class AddressBook(message.Message):
-  __metaclass__ = reflection.GeneratedProtocolMessageType
-  DESCRIPTOR = _ADDRESSBOOK
+DESCRIPTOR = _descriptor_pool.Default().AddSerializedFile(b'\n\nmain.proto\x12\x08tutorial\"\xa3\x02\n\x06Person\x12\x0c\n\x04name\x18\x01 \x01(\t\x12\n\n\x02id\x18\x02 \x01(\x05\x12\r\n\x05\x65mail\x18\x03 \x01(\t\x12,\n\x06phones\x18\x04 \x03(\x0b\x32\x1c.tutorial.Person.PhoneNumber\x1aX\n\x0bPhoneNumber\x12\x0e\n\x06number\x18\x01 \x01(\t\x12\x39\n\x04type\x18\x02 \x01(\x0e\x32\x1a.tutorial.Person.PhoneType:\x0fPHONE_TYPE_HOME\"h\n\tPhoneType\x12\x1a\n\x16PHONE_TYPE_UNSPECIFIED\x10\x00\x12\x15\n\x11PHONE_TYPE_MOBILE\x10\x01\x12\x13\n\x0fPHONE_TYPE_HOME\x10\x02\x12\x13\n\x0fPHONE_TYPE_WORK\x10\x03\"/\n\x0b\x41\x64\x64ressBook\x12 \n\x06people\x18\x01 \x03(\x0b\x32\x10.tutorial.Person')
+
+_globals = globals()
+_builder.BuildMessageAndEnumDescriptors(DESCRIPTOR, _globals)
+_builder.BuildTopDescriptorsAndMessages(DESCRIPTOR, 'google3.main_pb2', _globals)
+if not _descriptor._USE_C_DESCRIPTORS:
+  DESCRIPTOR._loaded_options = None
+  _globals['_PERSON']._serialized_start=25
+  _globals['_PERSON']._serialized_end=316
+  _globals['_PERSON_PHONENUMBER']._serialized_start=122
+  _globals['_PERSON_PHONENUMBER']._serialized_end=210
+  _globals['_PERSON_PHONETYPE']._serialized_start=212
+  _globals['_PERSON_PHONETYPE']._serialized_end=316
+  _globals['_ADDRESSBOOK']._serialized_start=318
+  _globals['_ADDRESSBOOK']._serialized_end=365
+# @@protoc_insertion_point(module_scope)
 ```
 
 The important line in each class is `__metaclass__ =

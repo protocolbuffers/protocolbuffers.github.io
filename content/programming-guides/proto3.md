@@ -335,6 +335,7 @@ automatically generated class:
         <th>C# Type</th>
         <th>PHP Type</th>
         <th>Dart Type</th>
+        <th>Rust Type</th>
       </tr>
       <tr>
         <td>double</td>
@@ -347,6 +348,7 @@ automatically generated class:
         <td>double</td>
         <td>float</td>
         <td>double</td>
+        <td>f64</td>
       </tr>
       <tr>
         <td>float</td>
@@ -359,6 +361,7 @@ automatically generated class:
         <td>float</td>
         <td>float</td>
         <td>double</td>
+        <td>f32</td>
       </tr>
       <tr>
         <td>int32</td>
@@ -373,6 +376,7 @@ automatically generated class:
         <td>int</td>
         <td>integer</td>
         <td>int</td>
+        <td>i32</td>
       </tr>
       <tr>
         <td>int64</td>
@@ -387,6 +391,7 @@ automatically generated class:
         <td>long</td>
         <td>integer/string<sup>[6]</sup></td>
         <td>Int64</td>
+        <td>i64</td>
       </tr>
       <tr>
         <td>uint32</td>
@@ -399,6 +404,7 @@ automatically generated class:
         <td>uint</td>
         <td>integer</td>
         <td>int</td>
+        <td>u32</td>
       </tr>
       <tr>
         <td>uint64</td>
@@ -411,6 +417,7 @@ automatically generated class:
         <td>ulong</td>
         <td>integer/string<sup>[6]</sup></td>
         <td>Int64</td>
+        <td>u64</td>
       </tr>
       <tr>
         <td>sint32</td>
@@ -424,6 +431,7 @@ automatically generated class:
         <td>int</td>
         <td>integer</td>
         <td>int</td>
+        <td>i32</td>
       </tr>
       <tr>
         <td>sint64</td>
@@ -437,6 +445,7 @@ automatically generated class:
         <td>long</td>
         <td>integer/string<sup>[6]</sup></td>
         <td>Int64</td>
+        <td>i64</td>
       </tr>
       <tr>
         <td>fixed32</td>
@@ -450,6 +459,7 @@ automatically generated class:
         <td>uint</td>
         <td>integer</td>
         <td>int</td>
+        <td>u32</td>
       </tr>
       <tr>
         <td>fixed64</td>
@@ -463,6 +473,7 @@ automatically generated class:
         <td>ulong</td>
         <td>integer/string<sup>[6]</sup></td>
         <td>Int64</td>
+        <td>u64</td>
       </tr>
       <tr>
         <td>sfixed32</td>
@@ -475,6 +486,7 @@ automatically generated class:
         <td>int</td>
         <td>integer</td>
         <td>int</td>
+        <td>i32</td>
       </tr>
       <tr>
         <td>sfixed64</td>
@@ -487,6 +499,7 @@ automatically generated class:
         <td>long</td>
         <td>integer/string<sup>[6]</sup></td>
         <td>Int64</td>
+        <td>i64</td>
       </tr>
       <tr>
         <td>bool</td>
@@ -498,6 +511,7 @@ automatically generated class:
         <td>TrueClass/FalseClass</td>
         <td>bool</td>
         <td>boolean</td>
+        <td>bool</td>
         <td>bool</td>
       </tr>
       <tr>
@@ -512,6 +526,7 @@ automatically generated class:
         <td>string</td>
         <td>string</td>
         <td>String</td>
+        <td>ProtoString</td>
       </tr>
       <tr>
         <td>bytes</td>
@@ -524,6 +539,7 @@ automatically generated class:
         <td>ByteString</td>
         <td>string</td>
         <td>List<int></td>
+        <td>ProtoBytes</td>
       </tr>
     </tbody>
   </table>
@@ -924,6 +940,24 @@ unknown fields in the old binary.
 
 Proto3 messages preserve unknown fields and includes them during parsing and in
 the serialized output, which matches proto2 behavior.
+
+### Retaining Unknown Fields {#retaining}
+
+Some actions can cause unknown fields to be lost. For example, if you do one of
+the following, unknown fields are lost:
+
+*   Serialize a proto to JSON.
+*   Iterate over all of the fields in a message to populate a new message.
+
+To avoid losing unknown fields, do the following:
+
+*   Use binary; avoid using text formats for data exchange.
+*   Use message-oriented APIs, such as `CopyFrom()` and `MergeFrom()`, to copy data
+    rather than copying field-by-field
+
+TextFormat is a bit of a special case. Serializing to TextFormat prints unknown
+fields using their field numbers. But parsing TextFormat data back into a binary
+proto fails if there are entries that use field numbers.
 
 ## Any {#any}
 

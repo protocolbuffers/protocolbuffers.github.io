@@ -947,6 +947,24 @@ in version 3.5 we reintroduced the preservation of unknown fields to match the
 proto2 behavior. In versions 3.5 and later, unknown fields are retained during
 parsing and included in the serialized output.
 
+### Retaining Unknown Fields {#retaining}
+
+Some actions can cause unknown fields to be lost. For example, if you do one of
+the following, unknown fields are lost:
+
+*   Serialize a proto to JSON.
+*   Iterate over all of the fields in a message to populate a new message.
+
+To avoid losing unknown fields, do the following:
+
+*   Use binary; avoid using text formats for data exchange.
+*   Use message-oriented APIs, such as `CopyFrom()` and `MergeFrom()`, to copy data
+    rather than copying field-by-field
+
+TextFormat is a bit of a special case. Serializing to TextFormat prints unknown
+fields using their field numbers. But parsing TextFormat data back into a binary
+proto fails if there are entries that use field numbers.
+
 ## Extensions {#extensions}
 
 An extension is a field defined outside of its container message; usually in a
