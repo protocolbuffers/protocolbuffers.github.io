@@ -146,12 +146,20 @@ when a perfectly suitable common type already exists!
 
 <a id="do-define-widely-used-message-types-in-separate-files"></a>
 
-## **Do** Define Widely-used Message Types in Separate Files {#separate-files}
+## **Do** Define Message Types in Separate Files {#separate-files}
 
-If you're defining message types or enums that you hope/fear/expect to be widely
-used outside your immediate team, consider putting them in their own file with
-no dependencies. Then it's easy for anyone to use those types without
-introducing the transitive dependencies in your other proto files.
+When defining a proto schema, you should have a single message, enum, extension,
+service, or group of cyclic dependencies per file. This makes refactoring
+easier. Moving files when they're separated is much easier than extracting
+messages from a file with other messages. Following this practice also helps to
+keep the proto schema files smaller, which enhances maintainability.
+
+If they will be widely used outside of your project, consider putting them in
+their own file with no dependencies. Then it's easy for anyone to use those
+types without introducing the transitive dependencies in your other proto files.
+
+For more on this topic, see
+[1-1-1 Rule](/programming-guides/1-1-1.md).
 
 <a id="dont-change-the-default-value-of-a-field"></a>
 

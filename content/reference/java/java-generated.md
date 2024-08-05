@@ -25,7 +25,7 @@ The protocol buffer compiler produces Java output when invoked with the
 `--java_out=` command-line flag. The parameter to the `--java_out=` option is
 the directory where you want the compiler to write your Java output. For each
 `.proto` file input, the compiler creates a wrapper `.java` file containing a
-Java class which represents the `.proto` file itself.
+Java class that represents the `.proto` file itself.
 
 If the `.proto` file contains a line like the following:
 
@@ -37,12 +37,12 @@ Then the compiler will also create separate `.java` files for each of the
 classes/enums which it will generate for each top-level message, enumeration,
 and service declared in the `.proto` file.
 
-Otherwise (i.e. when the `java_multiple_files` option is disabled; which is the
+Otherwise (when the `java_multiple_files` option is disabled, which is the
 default), the aforementioned wrapper class will also be used as an outer class,
 and the generated classes/enums for each top-level message, enumeration, and
 service declared in the `.proto` file will all be nested within the outer
 wrapper class. Thus the compiler will only generate a single `.java` file for
-the entire `.proto` file.
+the entire `.proto` file, and it will have an extra layer in the package
 
 The wrapper class's name is chosen as follows: If the `.proto` file contains a
 line like the following:
