@@ -8,6 +8,11 @@ type = "docs"
 This topic documents the limits to the number of supported elements (fields,
 enum values, and so on) in proto schemas.
 
+This information is a collection of discovered limitations by many engineers,
+but is not exhaustive and may be incorrect/outdated in some areas. As you
+discover limitations in your work, contribute those to this document to help
+others.
+
 ## Number of Fields {#fields}
 
 Message with only singular proto fields (such as Boolean):
@@ -28,8 +33,8 @@ specs.
 
 ## Number of Values in an Enum {#enum}
 
-The lowest limit is ~1700 values, in Java. Other languages have different
-limits.
+The lowest limit is ~1700 values, in Java (fix available
+go/java-large-enum-support). Other languages have different limits.
 
 ## Total Size of the Message {#total}
 
