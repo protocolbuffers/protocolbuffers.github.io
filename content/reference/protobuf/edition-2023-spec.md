@@ -164,7 +164,7 @@ fields, group fields, oneof fields, or map fields. A field has a label, type and
 field number.
 
 ```
-label = "required" | "optional" | "repeated"
+label = [ "repeated" ]
 type = "double" | "float" | "int32" | "int64" | "uint32" | "uint64"
       | "sint32" | "sint64" | "fixed32" | "fixed64" | "sfixed32" | "sfixed64"
       | "bool" | "string" | "bytes" | messageType | enumType
@@ -173,10 +173,10 @@ fieldNumber = intLit;
 
 ### Normal field {#normal_field}
 
-Each field has label, type, name and field number. It may have field options.
+Each field has a label, type, name, and field number. It may have field options.
 
 ```
-field = label type fieldName "=" fieldNumber [ "[" fieldOptions "]" ] ";"
+field = [label] type fieldName "=" fieldNumber [ "[" fieldOptions "]" ] ";"
 fieldOptions = fieldOption { ","  fieldOption }
 fieldOption = optionName "=" constant
 ```
@@ -184,7 +184,7 @@ fieldOption = optionName "=" constant
 Examples:
 
 ```proto
-optional foo.bar nested_message = 2;
+foo.bar nested_message = 2;
 repeated int32 samples = 4 [packed=true];
 ```
 
