@@ -15,18 +15,18 @@ otherwise specified.&lt;/p>
 &lt;code>--java_out=&lt;/code> command-line flag. The parameter to the &lt;code>--java_out=&lt;/code> option is
 the directory where you want the compiler to write your Java output. For each
 &lt;code>.proto&lt;/code> file input, the compiler creates a wrapper &lt;code>.java&lt;/code> file containing a
-Java class which represents the &lt;code>.proto&lt;/code> file itself.&lt;/p>
+Java class that represents the &lt;code>.proto&lt;/code> file itself.&lt;/p>
 &lt;p>If the &lt;code>.proto&lt;/code> file contains a line like the following:&lt;/p>
 &lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-proto" data-lang="proto">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#204a87;font-weight:bold">option&lt;/span> &lt;span style="color:#000">java_multiple_files&lt;/span> &lt;span style="color:#ce5c00;font-weight:bold">=&lt;/span> &lt;span style="color:#204a87;font-weight:bold">true&lt;/span>&lt;span style="color:#000;font-weight:bold">;&lt;/span>&lt;span style="color:#a40000">
 &lt;/span>&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>Then the compiler will also create separate &lt;code>.java&lt;/code> files for each of the
 classes/enums which it will generate for each top-level message, enumeration,
 and service declared in the &lt;code>.proto&lt;/code> file.&lt;/p>
-&lt;p>Otherwise (i.e. when the &lt;code>java_multiple_files&lt;/code> option is disabled; which is the
+&lt;p>Otherwise (when the &lt;code>java_multiple_files&lt;/code> option is disabled, which is the
 default), the aforementioned wrapper class will also be used as an outer class,
 and the generated classes/enums for each top-level message, enumeration, and
 service declared in the &lt;code>.proto&lt;/code> file will all be nested within the outer
 wrapper class. Thus the compiler will only generate a single &lt;code>.java&lt;/code> file for
-the entire &lt;code>.proto&lt;/code> file.&lt;/p>
+the entire &lt;code>.proto&lt;/code> file, and it will have an extra layer in the package&lt;/p>
 &lt;p>The wrapper class&amp;rsquo;s name is chosen as follows: If the &lt;code>.proto&lt;/code> file contains a
 line like the following:&lt;/p>
 &lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-proto" data-lang="proto">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#204a87;font-weight:bold">option&lt;/span> &lt;span style="color:#000">java_outer_classname&lt;/span> &lt;span style="color:#ce5c00;font-weight:bold">=&lt;/span> &lt;span style="color:#4e9a06">&amp;#34;Foo&amp;#34;&lt;/span>&lt;span style="color:#000;font-weight:bold">;&lt;/span>&lt;span style="color:#a40000">
