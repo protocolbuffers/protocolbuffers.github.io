@@ -110,6 +110,7 @@ open, and when importing from another editions file it uses the feature setting.
 
 All known C++ releases are out of conformance. When a `proto2` file imports an
 enum defined in a `proto3` file, C++ treats that field as a **closed** enum.
+
 Under editions, this behavior is represented by the deprecated field feature
 [`features.(pb.cpp).legacy_closed_enum`](/editions/features#legacy_closed_enum).
 There are two options for moving to conformant behavior:
@@ -121,7 +122,7 @@ There are two options for moving to conformant behavior:
 *   Change the enum to closed. This is discouraged, and can cause runtime
     behavior changes if *anybody else* is using the enum. Unrecognized integers
     will end up in the unknown field set instead of those fields.
-
+    
 ### C&#35; {#csharp}
 
 All known C# releases are out of conformance. C# treats all enums as **open**.
