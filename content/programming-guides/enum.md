@@ -110,6 +110,17 @@ open, and when importing from another editions file it uses the feature setting.
 
 All known C++ releases are out of conformance. When a `proto2` file imports an
 enum defined in a `proto3` file, C++ treats that field as a **closed** enum.
+Under editions, this behavior is represented by the deprecated field feature
+[`features.(pb.cpp).legacy_closed_enum`](/editions/features#legacy_closed_enum).
+There are two options for moving to conformant behavior:
+
+*   Remove the field feature. This is the recommended approach, but may cause
+    runtime behavior changes. Without the feature, unrecognized integers will
+    end up stored in the field cast to the enum type instead of being put into
+    the unknown field set.
+*   Change the enum to closed. This is discouraged, and can cause runtime
+    behavior if *anybody else* is using the enum. Unrecognized integers will end
+    up in the unknown field set instead of those fields.
 
 Under editions, this behavior is represented by the deprecated field feature
 [`features.(pb.cpp).legacy_closed_enum`](/editions/features#legacy_closed_enum).
