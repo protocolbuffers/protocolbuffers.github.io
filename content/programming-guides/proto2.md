@@ -634,8 +634,9 @@ symbolic constants with integer values in the runtime-generated class.
 
 {{% alert title="Important" color="warning" %}} The
 generated code may be subject to language-specific limitations on the number of
-enumerators (low thousands for one language). Review the limitations for the
-languages you plan to use. {{% /alert %}}
+enumerators (low thousands for one language). Review the
+limitations for the languages you plan to use.
+{{% /alert %}}
 
 {{% alert title="Important" color="warning" %}} For
 information on how enums should work contrasted with how they currently work in

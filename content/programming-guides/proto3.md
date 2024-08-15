@@ -684,8 +684,9 @@ symbolic constants with integer values in the runtime-generated class.
 
 {{% alert title="Important" color="warning" %}} The
 generated code may be subject to language-specific limitations on the number of
-enumerators (low thousands for one language). Review the limitations for the
-languages you plan to use. {{% /alert %}}
+enumerators (low thousands for one language). Review the
+limitations for the languages you plan to use.
+{{% /alert %}}
 
 During deserialization, unrecognized enum values will be preserved in the
 message, though how this is represented when the message is deserialized is

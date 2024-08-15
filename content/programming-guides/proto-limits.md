@@ -44,8 +44,10 @@ sizes.
 
 ## Depth Limit for Proto Unmarshaling {#depth}
 
-*   Java: 100
-*   C++: 100
+*   Java:
+    100
+*   C++:
+    100
 *   Go:
     10000
     (there is a plan to reduce this to 100)

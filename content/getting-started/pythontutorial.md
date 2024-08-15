@@ -189,7 +189,7 @@ compiler `protoc` on your `.proto`:
     `.proto`. In this case, you...:
 
     ```shell
-    protoc -I=$SRC_DIR --python_out=$DST_DIR $SRC_DIR/addressbook.proto
+    protoc --proto_path=$SRC_DIR --python_out=$DST_DIR $SRC_DIR/addressbook.proto
     ```
 
     Because you want Python classes, you use the `--python_out` option --
