@@ -205,7 +205,8 @@ implements the `Message.Builder` interface. It extends the
 `GeneratedMessage.Builder` class, but, again, this should be considered an
 implementation detail. Like `Foo`, `Foo.Builder` may rely on generic method
 implementations in `GeneratedMessage.Builder` or, when the `optimize_for` option
-is used, generated custom code that is much faster.
+is used, generated custom code that is much faster. You can get a `Foo.Builder`
+by calling the static method `Foo.newBuilder()`.
 
 `Foo.Builder` does not define any static methods. Its interface is exactly as
 defined by the `Message.Builder` interface, with the exception that return types

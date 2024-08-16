@@ -357,12 +357,12 @@ end
 
 An enum module also defines the following utility methods:
 
--   `Enum#lookup(number)`: Looks up the given number and returns its name, or
-    `nil` if none was found. If more than one name has this number, returns the
-    first that was defined.
--   `Enum#resolve(symbol)`: Returns the number for this enum name, or `nil` if
-    none was found.
--   `Enum#descriptor`: Returns the descriptor for this enum.
+-   `Foo::SomeEnum.lookup(number)`: Looks up the given number and returns its
+    name, or `nil` if none was found. If more than one name has this number,
+    returns the first that was defined.
+-   `Foo::SomeEnum.resolve(symbol)`: Returns the number for this enum name, or
+    `nil` if none was found.
+-   `Foo::SomeEnum.descriptor`: Returns the descriptor for this enum.
 
 ## Oneof
 
