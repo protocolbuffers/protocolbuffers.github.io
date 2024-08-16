@@ -255,8 +255,8 @@ generated code will have a corresponding <code>enum</code> for Java, Kotlin, or 
 special <code>EnumDescriptor</code> class for Python that&rsquo;s used to create a set of
 symbolic constants with integer values in the runtime-generated class.</p><div class="alert alert-warning" role=alert><h4 class=alert-heading>Important</h4>The
 generated code may be subject to language-specific limitations on the number of
-enumerators (low thousands for one language). Review the limitations for the
-languages you plan to use.</div><p>During deserialization, unrecognized enum values will be preserved in the
+enumerators (low thousands for one language). Review the
+limitations for the languages you plan to use.</div><p>During deserialization, unrecognized enum values will be preserved in the
 message, though how this is represented when the message is deserialized is
 language-dependent. In languages that support open enum types with values
 outside the range of specified symbols, such as C++ and Go, the unknown enum

@@ -261,12 +261,12 @@ to an enum field, even if it was not defined in the enum.&lt;/p>
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#204a87;font-weight:bold">end&lt;/span>
 &lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>An enum module also defines the following utility methods:&lt;/p>
 &lt;ul>
-&lt;li>&lt;code>Enum#lookup(number)&lt;/code>: Looks up the given number and returns its name, or
-&lt;code>nil&lt;/code> if none was found. If more than one name has this number, returns the
-first that was defined.&lt;/li>
-&lt;li>&lt;code>Enum#resolve(symbol)&lt;/code>: Returns the number for this enum name, or &lt;code>nil&lt;/code> if
-none was found.&lt;/li>
-&lt;li>&lt;code>Enum#descriptor&lt;/code>: Returns the descriptor for this enum.&lt;/li>
+&lt;li>&lt;code>Foo::SomeEnum.lookup(number)&lt;/code>: Looks up the given number and returns its
+name, or &lt;code>nil&lt;/code> if none was found. If more than one name has this number,
+returns the first that was defined.&lt;/li>
+&lt;li>&lt;code>Foo::SomeEnum.resolve(symbol)&lt;/code>: Returns the number for this enum name, or
+&lt;code>nil&lt;/code> if none was found.&lt;/li>
+&lt;li>&lt;code>Foo::SomeEnum.descriptor&lt;/code>: Returns the descriptor for this enum.&lt;/li>
 &lt;/ul>
 &lt;h2 id="oneof">Oneof&lt;/h2>
 &lt;p>Given a message with a oneof:&lt;/p>
