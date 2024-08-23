@@ -94,7 +94,7 @@ For example, <code>-500z</code> is the same as the varint <code>999</code>.</p><
 <code>I64</code>, which tells the parser to expect a fixed eight-byte lump of data. We can
 specify a <code>double</code> record by writing <code>5: 25.4</code>, or a <code>fixed64</code> record with <code>6: 200i64</code>. In both cases, omitting an explicit wire type implies the <code>I64</code> wire
 type.</p><p>Similarly <code>float</code> and <code>fixed32</code> have wire type <code>I32</code>, which tells it to expect
-four bytes instead. The syntax for these consists of adding an <code>i32</code> prefix.
+four bytes instead. The syntax for these consists of adding an <code>i32</code> suffix.
 <code>25.4i32</code> will emit four bytes, as will <code>200i32</code>. Tag types are inferred as
 <code>I32</code>.</p><h2 id=length-types>Length-Delimited Records</h2><p><em>Length prefixes</em> are another major concept in the wire format. The <code>LEN</code> wire
 type has a dynamic length, specified by a varint immediately after the tag,
@@ -109,7 +109,7 @@ up the bytes,</p><div class=highlight><pre tabindex=0 style=background-color:#f8
 follows is the int32 varint <code>7</code>, and the next seven bytes are the UTF-8
 encoding of <code>"testing"</code>. The int32 varint means that the max length of a string
 is 2GB.</p><p>In Protoscope, this is written as <code>2:LEN 7 "testing"</code>. However, it can be
-incovenient to repeat the length of the string (which, in Protoscope text, is
+inconvenient to repeat the length of the string (which, in Protoscope text, is
 already quote-delimited). Wrapping Protoscope content in braces will generate a
 length prefix for it: <code>{"testing"}</code> is a shorthand for <code>7 "testing"</code>. <code>{}</code> is
 always inferred by fields to be a <code>LEN</code> record, so we can write this record

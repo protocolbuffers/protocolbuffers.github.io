@@ -72,7 +72,7 @@ messages from a file with other messages. Following this practice also helps to
 keep the proto schema files smaller, which enhances maintainability.</p><p>If they will be widely used outside of your project, consider putting them in
 their own file with no dependencies. Then it&rsquo;s easy for anyone to use those
 types without introducing the transitive dependencies in your other proto files.</p><p>For more on this topic, see
-<a href=/programming-guides/1-1-1.md>1-1-1 Rule</a>.</p><p><a id=dont-change-the-default-value-of-a-field></a></p><h2 id=change-default-value><strong>Don&rsquo;t</strong> Change the Default Value of a Field</h2><p>Almost never change the default value of a proto field. This causes version skew
+<a href=/programming-guides/1-1-1>1-1-1 Rule</a>.</p><p><a id=dont-change-the-default-value-of-a-field></a></p><h2 id=change-default-value><strong>Don&rsquo;t</strong> Change the Default Value of a Field</h2><p>Almost never change the default value of a proto field. This causes version skew
 between clients and servers. A client reading an unset value will see a
 different result than a server reading the same unset value when their builds
 straddle the proto change. Proto3 removed the ability to
