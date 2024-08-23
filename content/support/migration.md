@@ -138,14 +138,13 @@ After:
 
 ```cpp
 #include <google/protobuf/util/time_util.h>
-#ifdef GetCurrent
+#ifdef GetCurrentTime
 #undef GetCurrentTime
 #endif
 
 void F() {
   auto time = google::protobuf::util::TimeUtil::GetCurrentTime();
 }
-
 ```
 
 **Example 2: Preventing macro expansion**
