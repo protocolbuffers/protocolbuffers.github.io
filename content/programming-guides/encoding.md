@@ -227,7 +227,7 @@ specify a `double` record by writing `5: 25.4`, or a `fixed64` record with `6:
 type.
 
 Similarly `float` and `fixed32` have wire type `I32`, which tells it to expect
-four bytes instead. The syntax for these consists of adding an `i32` prefix.
+four bytes instead. The syntax for these consists of adding an `i32` suffix.
 `25.4i32` will emit four bytes, as will `200i32`. Tag types are inferred as
 `I32`.
 
@@ -260,7 +260,7 @@ encoding of `"testing"`. The int32 varint means that the max length of a string
 is 2GB.
 
 In Protoscope, this is written as `2:LEN 7 "testing"`. However, it can be
-incovenient to repeat the length of the string (which, in Protoscope text, is
+inconvenient to repeat the length of the string (which, in Protoscope text, is
 already quote-delimited). Wrapping Protoscope content in braces will generate a
 length prefix for it: `{"testing"}` is a shorthand for `7 "testing"`. `{}` is
 always inferred by fields to be a `LEN` record, so we can write this record
