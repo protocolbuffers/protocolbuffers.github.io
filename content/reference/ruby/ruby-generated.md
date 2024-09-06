@@ -274,8 +274,8 @@ int_repeatedfield.clear
 raise unless int_repeatedfield.empty?
 ```
 
-For repeated fields that contain messages the constructor for
-`Google::Protobuf::RepeatedField`, support a variant with three arguments:
+For repeated fields that contain messages, the constructor for
+`Google::Protobuf::RepeatedField` supports a variant with three arguments:
 `:message`, the class of the submessage, and the values to set:
 
 ```ruby
