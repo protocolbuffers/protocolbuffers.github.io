@@ -307,3 +307,32 @@ import "myproject/foo.proto";
 While the generated code changes when you move from proto2 or proto3 to
 editions, the wire format does not. You'll still be able to access proto2 and
 proto3 data files or file streams using your editions-syntax proto definitions.
+
+### Grammar Changes {#syntax}
+
+There are some grammar changes in editions compared to proto2 and proto3.
+
+**Syntax description.** Instead of the `syntax` element, you use an `edition`
+element:
+
+```proto
+syntax = "proto2";
+syntax = "proto3";
+edition = "2028";
+```
+
+**Reserved names.** You no longer put field names and enum value names in
+quotation marks when reserving them:
+
+```proto
+reserved foo, bar;
+```
+
+**Group syntax.** Group syntax, available in proto2, is removed in editions. The
+special wire-format that groups used is still available by using `DELIMITED`
+message encoding.
+
+**Required label.** The `required` label, available only in proto2, is
+unavailable in editions. The underlying functionality is still available (but
+[discouraged](/programming-guides/required-considered-harmful))
+by using `features.field_presence=LEGACY_REQUIRED`.
