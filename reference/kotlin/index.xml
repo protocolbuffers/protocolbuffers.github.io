@@ -275,4 +275,47 @@ extensions have &amp;quot;natural&amp;quot; list syntax that works similarly to
 &lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#a40000">&lt;/span> &lt;span style="color:#204a87;font-weight:bold">optional&lt;/span> &lt;span style="color:#204a87;font-weight:bold">int32&lt;/span> &lt;span style="color:#000">bar&lt;/span> &lt;span style="color:#ce5c00;font-weight:bold">=&lt;/span> &lt;span style="color:#0000cf;font-weight:bold">123&lt;/span>&lt;span style="color:#000;font-weight:bold">;&lt;/span>&lt;span style="color:#a40000">
 &lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#a40000">&lt;/span>&lt;span style="color:#000;font-weight:bold">}&lt;/span>&lt;span style="color:#a40000">
 &lt;/span>&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>Java generates the &amp;quot;extension identifier&amp;quot; &lt;code>bar&lt;/code>, which is used to &amp;quot;key&amp;quot;
-extension operations above.&lt;/p></description></item></channel></rss>
+extension operations above.&lt;/p>
+&lt;h2 id="nullable-setters-getters">Why Doesn&amp;rsquo;t Protobuf Support Nullable Setters/Getters?&lt;/h2>
+&lt;p>We have heard feedback that some folks would like protobuf to support nullable
+getters/setters in their null-friendly language of choice (particularly Kotlin,
+C#, and Rust). While this does seem to be a helpful feature for folks using
+those languages, the design choice has tradeoffs which have led to the Protobuf
+team choosing not to implement them.&lt;/p>
+&lt;p>The biggest reason not to have nullable fields is the intended behavior of
+default values specified in a &lt;code>.proto&lt;/code> file. By design, calling a getter on an
+unset field will return the default value of that field.&lt;/p>
+&lt;p>As an example, consider this &lt;code>.proto&lt;/code> file:&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-proto" data-lang="proto">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#204a87;font-weight:bold">message&lt;/span> &lt;span style="color:#000">Msg&lt;/span> &lt;span style="color:#000;font-weight:bold">{&lt;/span> &lt;span style="color:#204a87;font-weight:bold">optional&lt;/span> &lt;span style="color:#000">Child&lt;/span> &lt;span style="color:#000">child&lt;/span> &lt;span style="color:#ce5c00;font-weight:bold">=&lt;/span> &lt;span style="color:#0000cf;font-weight:bold">1&lt;/span>&lt;span style="color:#000;font-weight:bold">;&lt;/span> &lt;span style="color:#000;font-weight:bold">}&lt;/span>&lt;span style="color:#a40000">
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#a40000">&lt;/span>&lt;span style="color:#204a87;font-weight:bold">message&lt;/span> &lt;span style="color:#000">Child&lt;/span> &lt;span style="color:#000;font-weight:bold">{&lt;/span> &lt;span style="color:#204a87;font-weight:bold">optional&lt;/span> &lt;span style="color:#000">Grandchild&lt;/span> &lt;span style="color:#000">grandchild&lt;/span> &lt;span style="color:#ce5c00;font-weight:bold">=&lt;/span> &lt;span style="color:#0000cf;font-weight:bold">1&lt;/span>&lt;span style="color:#000;font-weight:bold">;&lt;/span> &lt;span style="color:#000;font-weight:bold">}&lt;/span>&lt;span style="color:#a40000">
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#a40000">&lt;/span>&lt;span style="color:#204a87;font-weight:bold">message&lt;/span> &lt;span style="color:#000">Grandchild&lt;/span> &lt;span style="color:#000;font-weight:bold">{&lt;/span> &lt;span style="color:#204a87;font-weight:bold">optional&lt;/span> &lt;span style="color:#204a87;font-weight:bold">int32&lt;/span> &lt;span style="color:#000">foo&lt;/span> &lt;span style="color:#ce5c00;font-weight:bold">=&lt;/span> &lt;span style="color:#0000cf;font-weight:bold">1&lt;/span> &lt;span style="color:#000;font-weight:bold">[&lt;/span>&lt;span style="color:#204a87;font-weight:bold">default&lt;/span> &lt;span style="color:#ce5c00;font-weight:bold">=&lt;/span> &lt;span style="color:#0000cf;font-weight:bold">72&lt;/span>&lt;span style="color:#000;font-weight:bold">];&lt;/span> &lt;span style="color:#000;font-weight:bold">}&lt;/span>&lt;span style="color:#a40000">
+&lt;/span>&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>and corresponding Kotlin getters:&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-kotlin" data-lang="kotlin">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#8f5902;font-style:italic">// With our API where getters are always non-nullable:
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#8f5902;font-style:italic">&lt;/span>&lt;span style="color:#000">msg&lt;/span>&lt;span style="color:#000;font-weight:bold">.&lt;/span>&lt;span style="color:#000">child&lt;/span>&lt;span style="color:#000;font-weight:bold">.&lt;/span>&lt;span style="color:#000">grandchild&lt;/span>&lt;span style="color:#000;font-weight:bold">.&lt;/span>&lt;span style="color:#000">foo&lt;/span> &lt;span style="color:#ce5c00;font-weight:bold">==&lt;/span> &lt;span style="color:#0000cf;font-weight:bold">72&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#8f5902;font-style:italic">// With nullable submessages the ?. operator fails to get the default value:
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#8f5902;font-style:italic">&lt;/span>&lt;span style="color:#000">msg&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">?.&lt;/span>&lt;span style="color:#000">child&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">?.&lt;/span>&lt;span style="color:#000">grandchild&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">?.&lt;/span>&lt;span style="color:#000">foo&lt;/span> &lt;span style="color:#ce5c00;font-weight:bold">==&lt;/span> &lt;span style="color:#204a87;font-weight:bold">null&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#8f5902;font-style:italic">// Or verbosely duplicating the default value at the usage site:
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#8f5902;font-style:italic">&lt;/span>&lt;span style="color:#000;font-weight:bold">(&lt;/span>&lt;span style="color:#000">msg&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">?.&lt;/span>&lt;span style="color:#000">child&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">?.&lt;/span>&lt;span style="color:#000">grandchild&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">?.&lt;/span>&lt;span style="color:#000">foo&lt;/span> &lt;span style="color:#ce5c00;font-weight:bold">?:&lt;/span> &lt;span style="color:#0000cf;font-weight:bold">72&lt;/span>&lt;span style="color:#000;font-weight:bold">)&lt;/span>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>If a nullable getter existed, it would necessarily ignore the user-specified
+defaults (to return null instead) which would lead to surprising and
+inconsistent behavior. If users of nullable getters want to access the default
+value of the field, they would have to write their own custom handling to use
+the default if null is returned, which removes the supposed benefit of
+cleaner/easier code with null getters.&lt;/p>
+&lt;p>Similarly, we do not provide nullable setters as the behavior would be
+unintuitive. Performing a set and then get would not always give the same value
+back, and calling a set would only sometimes affect the has-bit for the field.&lt;/p>
+&lt;p>Note that message-typed fields are always explicit presence fields (with
+hazzers). Proto3 defaults to scalar fields having implicit presence (without
+hazzers) unless they are explicitly marked &lt;code>optional&lt;/code>, while Proto2 does not
+support implicit presence. With
+&lt;a href="https://protobuf.dev/editions/features#field_presence">Editions&lt;/a>, explicit
+presence is the default behavior unless an implicit presence feature is used.
+With the forward expectation that almost all fields will have explicit presence,
+the ergonomic concerns that come with nullable getters are expected to be more
+of a concern than they may have been for Proto3 users.&lt;/p>
+&lt;p>Due to these issues, nullable setters/getters would radically change the way
+default values can be used. While we understand the possible utility, we have
+decided it’s not worth the inconsistencies and difficulty it introduces.&lt;/p></description></item></channel></rss>
