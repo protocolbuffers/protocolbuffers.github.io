@@ -20,6 +20,10 @@ New news topics will also be published to the
 The following news topics provide information in the reverse order in which it
 was released.
 
+*   [October 2, 2024](/news/2024-10-02) - Breaking
+    changes in the upcoming 30.x release
+*   [October 1, 2024](/news/2024-10-01) - Changes to
+    Bazel builds
 *   [June 26, 2024](/news/2024-06-26) - Dropping support
     for building Protobuf Java from source with Maven
 *   [February 27, 2024](/news/2024-02-27) - Dropping
@@ -80,6 +84,7 @@ release notes will be more complete. Also, not everything from the chronological
 listing will be in these topics, as some content is not specific to a particular
 release.
 
+*   [Version 29.x](/news/v29)
 *   [Version 26.x](/news/v26)
 *   [Version 25.x](/news/v25)
 *   [Version 24.x](/news/v24)
