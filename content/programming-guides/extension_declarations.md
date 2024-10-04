@@ -7,7 +7,7 @@ type = "docs"
 
 <!--*
 # Document freshness: For more information, see go/fresh-source.
-freshness: { owner: 'shaod' reviewed: '2023-09-06' }
+freshness: { owner: 'shaod' reviewed: '2024-09-16' }
 *-->
 
 ## Introduction {#intro}
@@ -15,9 +15,9 @@ freshness: { owner: 'shaod' reviewed: '2023-09-06' }
 This page describes in detail what extension declarations are, why we need them,
 and how we use them.
 
-**NOTE:** Extension declarations are mostly used in proto2, as proto3 does not
-support extensions at this time (except for
+**NOTE:** Proto3 does not support extensions (except for
 [declaring custom options](/programming-guides/proto3/#customoptions)).
+Extensions are fully supported in proto2 and editions though.
 
 If you need an introduction to extensions, read this
 [extensions guide](https://protobuf.dev/programming-guides/proto2/#extensions)
@@ -160,9 +160,15 @@ declarations to declare the field
 number and type for each extension in the parent message. The extension
 declarations serve as a registry of all the parent message's extensions, and
 protoc will enforce that there are no field number conflicts. When you add a new
-extension, choose the number by just incrementing by one the previously added
-extension number. Whenever you delete an extension, make sure to mark the field
-number `reserved` to eliminate the risk of accidentally reusing
+extension, choose the next available number usually by just incrementing by one
+the previously added extension number.
+
+**TIP:** There is a [special guidance](#message-set) for
+`MessageSet` which provides a script to help pick
+the next available number.
+
+Whenever you delete an extension, make sure to mark the field number `reserved`
+to eliminate the risk of accidentally reusing
 it.
 
 This convention is only a recommendation--the protobuf team does not have the
