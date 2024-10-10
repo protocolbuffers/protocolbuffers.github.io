@@ -1,15 +1,20 @@
 +++
 title = "Language Guide (proto 2)"
-weight = 30
-description = "Covers how to use the version 2 of Protocol Buffers in your project."
+weight = 40
+description = "Covers how to use the proto2 revision of Protocol Buffers language in your project."
 aliases = "/programming-guides/proto/"
 type = "docs"
 +++
 
 This guide describes how to use the protocol buffer language to structure your
 protocol buffer data, including `.proto` file syntax and how to generate data
-access classes from your `.proto` files. It covers the **proto2** version of the
-protocol buffers language; for information on **proto3** syntax, see the
+access classes from your `.proto` files. It covers the **proto2** revision of
+the protocol buffers language.
+
+For information on **editions** syntax, see the
+[Protobuf Editions Language Guide](/programming-guides/editions).
+
+For information on **proto3** syntax, see the
 [Proto3 Language Guide](/programming-guides/proto3).
 
 This is a reference guide – for a step by step example that uses many of the
@@ -34,8 +39,15 @@ message SearchRequest {
 }
 ```
 
-*   The first line of the file specifies that you're using `proto2` syntax. This
-    must be the first non-empty, non-comment line of the file.
+*   The first line of the file specifies that you're using the proto2 revision
+    of the protobuf language spec.
+
+    *   The `edition` (or `syntax` for proto2/proto3) must be the first
+        non-empty, non-comment line of the file.
+    *   If no `edition` or `syntax` is specified, the protocol buffer compiler
+        will assume you are using
+        [proto2](/programming-guides/proto2).
+
 *   The `SearchRequest` message definition specifies three fields (name/value
     pairs), one for each piece of data that you want to include in this type of
     message. Each field has a name and a type.
@@ -99,29 +111,42 @@ Common causes of field number reuse:
     the fields involved in the renumbering, resulting in incompatible
     wire-format changes.
 -   deleting a field and not [reserving](#fieldreserved) the number to prevent
-    future reuse. This has been a very easy mistake to make with
-    [extension fields](#extensions) for several reasons.
-    [Extension Declarations](/programming-guides/extension_declarations)
-    provide a mechanism for reserving extension fields.
+    future reuse.
 
-The max field is 29 bits instead of the more-typical 32 bits because three lower
-bits are used for the wire format. For more on this, see the
+    -   This has been a very easy mistake to make with
+        [extension fields](#extensions) for several reasons.
+        [Extension Declarations](/programming-guides/extension_declarations)
+        provide a mechanism for reserving extension fields.
+
+The field number is limited to 29 bits rather than 32 bits because three bits
+are used to specify the field's wire format. For more on this, see the
 [Encoding topic](/programming-guides/encoding#structure).
 
 <a id="specifying-rules"></a>
 
-### Specifying Field Labels {#field-labels}
+### Specifying Field Cardinality {#field-labels}
 
 Message fields can be one of the following:
 
-*   `optional`: An `optional` field is in one of two possible states:
+*   *Singular*:
 
-    *   the field is set, and contains a value that was explicitly set or parsed
-        from the wire. It will be serialized to the wire.
-    *   the field is unset, and will return the default value. It will not be
-        serialized to the wire.
+    In proto2, there are two types of singular fields:
 
-    You can check to see if the value was explicitly set.
+    *   `optional`: (recommended) An `optional` field is in one of two possible
+        states:
+
+        *   the field is set, and contains a value that was explicitly set or
+            parsed from the wire. It will be serialized to the wire.
+        *   the field is unset, and will return the default value. It will not
+            be serialized to the wire.
+
+        You can check to see if the value was explicitly set.
+
+    *   `required`: **Do not use.** Required fields are so problematic they were
+        removed from proto3 and editions. Semantics for required field should be
+        implemented at the application layer.
+        When it *is* used, a
+        well-formed message must have exactly one of this field.
 
 *   `repeated`: this field type can be repeated zero or more times in a
     well-formed message. The order of the repeated values will be preserved.
@@ -130,10 +155,7 @@ Message fields can be one of the following:
     [Maps](/programming-guides/encoding#maps) for more on
     this field type.
 
-*   `required`: **Do not use.** Required fields are so problematic they were
-    removed from proto3. Semantics for required field should be implemented at
-    the application layer. When it *is* used, a
-    well-formed message must have exactly one of this field.
+#### Use Packed Encoding for New Repeated Fields {#use-packed}
 
 For historical reasons, `repeated` fields of scalar numeric types (for example,
 `int32`, `int64`, `enum`) aren't encoded as efficiently as they could be. New
@@ -147,6 +169,8 @@ repeated ProtoEnum results = 5 [packed = true];
 
 You can find out more about `packed` encoding in
 [Protocol Buffer Encoding](/programming-guides/encoding#packed).
+
+#### Required is Strongly Deprecated {#required-deprecated}
 
 {{% alert title="Important" color="warning" %}} **Required Is Forever**
 As mentioned earlier **`required` must not be used for new fields**. Semantics
@@ -167,10 +191,11 @@ The term "well-formed," when applied to protobuf messages, refers to the bytes
 serialized/deserialized. The protoc parser validates that a given proto
 definition file is parseable.
 
-In the case of `optional` fields that have more than one value, the protoc
-parser will accept the input, but only uses the last field. So, the "bytes" may
-not be "well-formed" but the resulting message would have only one and would be
-"well-formed" (but would not roundtrip the same).
+Singular fields can appear more than once in wire-format bytes. The parser will
+accept the input, but only the last instance of that field will be accessible
+through the generated bindings. See
+[Last One Wins](/programming-guides/encoding#last-one-wins)
+for more on this topic.
 
 ### Adding More Message Types {#adding-types}
 
@@ -199,17 +224,27 @@ message types per `.proto` file as possible.
 
 ### Adding Comments {#adding-comments}
 
-To add comments to your `.proto` files, use C/C++-style `//` and `/* ... */`
-syntax.
+To add comments to your `.proto` files:
+
+*   Prefer C/C++/Java line-end-style comments '//' on the line before the .proto
+    code element
+*   C-style inline/multi-line comments `/* ... */` are also accepted.
+
+    *   When using multi-line comments, a margin line of '*' is preferred.
 
 ```proto
-/* SearchRequest represents a search query, with pagination options to
- * indicate which results to include in the response. */
-
+/**
+ * SearchRequest represents a search query, with pagination options to
+ * indicate which results to include in the response.
+ */
 message SearchRequest {
   optional string query = 1;
-  optional int32 page_number = 2;  // Which page number do we want?
-  optional int32 results_per_page = 3;  // Number of results to return per page.
+
+  // Which page number do we want?
+  optional int32 page_number = 2;
+
+  // Number of results to return per page.
+  optional int32 results_per_page = 3;
 }
 ```
 
@@ -219,18 +254,18 @@ Deleting fields can cause serious problems if not done properly.
 
 **Do not delete** `required` fields. This is almost impossible to do safely.
 
-When you no longer need a non-required field and all references have been
-deleted from client code, you may delete the field definition from the message.
-However, you **must** [reserve the deleted field number](#fieldreserved). If you
-do not reserve the field number, it is possible for a developer to reuse that
-number in the future.
+When you no longer need a field and all references have been deleted from client
+code, you may delete the field definition from the message. However, you
+**must** [reserve the deleted field number](#fieldreserved). If you do not
+reserve the field number, it is possible for a developer to reuse that number in
+the future.
 
 You should also reserve the field name to allow JSON and TextFormat encodings of
 your message to continue to parse.
 
 <a id="fieldreserved"></a>
 
-### Reserved Field Numbers {#reserved-field-numbers}
+#### Reserved Field Numbers {#reserved-field-numbers}
 
 If you [update](#updating) a message type by entirely deleting a field, or
 commenting it out, future developers can reuse the field number when making
@@ -286,8 +321,9 @@ from an input stream.
     message type, as well as a special `Builder` class for creating message
     class instances.
 *   For **Kotlin**, in addition to the Java generated code, the compiler
-    generates a `.kt` file for each message type, containing a DSL which can be
-    used to simplify creating message instances.
+    generates a `.kt` file for each message type with an improved Kotlin API.
+    This includes a DSL that simplifies creating message instances, a nullable
+    field accessor, and a copy function.
 *   **Python** is a little different — the Python compiler generates a module
     with a static descriptor of each message type in your `.proto`, which is
     then used with a *metaclass* to create the necessary Python data access
@@ -301,6 +337,10 @@ from an input stream.
     file.
 *   For **C#**, the compiler generates a `.cs` file from each `.proto`, with a
     class for each message type described in your file.
+*   For **PHP**, the compiler generates a `.php` message file for each message
+    type described in your file, and a `.php` metadata file for each `.proto`
+    file you compile. The metadata file is used to load the valid message types
+    into the descriptor pool.
 *   For **Dart**, the compiler generates a `.pb.dart` file with a class for each
     message type in your file.
 
@@ -326,7 +366,9 @@ automatically generated class:
         <th>Go Type</th>
         <th>Ruby Type</th>
         <th>C# Type</th>
+        <th>PHP Type</th>
         <th>Dart Type</th>
+        <th>Rust Type</th>
       </tr>
       <tr>
         <td>double</td>
@@ -337,7 +379,9 @@ automatically generated class:
         <td>*float64</td>
         <td>Float</td>
         <td>double</td>
+        <td>float</td>
         <td>double</td>
+        <td>f64</td>
       </tr>
       <tr>
         <td>float</td>
@@ -348,7 +392,9 @@ automatically generated class:
         <td>*float32</td>
         <td>Float</td>
         <td>float</td>
+        <td>float</td>
         <td>double</td>
+        <td>f32</td>
       </tr>
       <tr>
         <td>int32</td>
@@ -361,7 +407,9 @@ automatically generated class:
         <td>int32</td>
         <td>Fixnum or Bignum (as required)</td>
         <td>int</td>
+        <td>integer</td>
         <td>*int32</td>
+        <td>i32</td>
       </tr>
       <tr>
         <td>int64</td>
@@ -374,7 +422,9 @@ automatically generated class:
         <td>*int64</td>
         <td>Bignum</td>
         <td>long</td>
+        <td>integer/string<sup>[6]</sup></td>
         <td>Int64</td>
+        <td>i64</td>
       </tr>
       <tr>
         <td>uint32</td>
@@ -385,7 +435,9 @@ automatically generated class:
         <td>*uint32</td>
         <td>Fixnum or Bignum (as required)</td>
         <td>uint</td>
+        <td>integer</td>
         <td>int</td>
+        <td>u32</td>
       </tr>
       <tr>
         <td>uint64</td>
@@ -396,7 +448,9 @@ automatically generated class:
         <td>*uint64</td>
         <td>Bignum</td>
         <td>ulong</td>
+        <td>integer/string<sup>[6]</sup></td>
         <td>Int64</td>
+        <td>u64</td>
       </tr>
       <tr>
         <td>sint32</td>
@@ -408,7 +462,9 @@ automatically generated class:
         <td>int32</td>
         <td>Fixnum or Bignum (as required)</td>
         <td>int</td>
+        <td>integer</td>
         <td>*int32</td>
+        <td>i32</td>
       </tr>
       <tr>
         <td>sint64</td>
@@ -420,7 +476,9 @@ automatically generated class:
         <td>*int64</td>
         <td>Bignum</td>
         <td>long</td>
+        <td>integer/string<sup>[6]</sup></td>
         <td>Int64</td>
+        <td>i64</td>
       </tr>
       <tr>
         <td>fixed32</td>
@@ -432,7 +490,9 @@ automatically generated class:
         <td>*uint32</td>
         <td>Fixnum or Bignum (as required)</td>
         <td>uint</td>
+        <td>integer</td>
         <td>int</td>
+        <td>u32</td>
       </tr>
       <tr>
         <td>fixed64</td>
@@ -444,7 +504,9 @@ automatically generated class:
         <td>*uint64</td>
         <td>Bignum</td>
         <td>ulong</td>
+        <td>integer/string<sup>[6]</sup></td>
         <td>Int64</td>
+        <td>u64</td>
       </tr>
       <tr>
         <td>sfixed32</td>
@@ -455,7 +517,9 @@ automatically generated class:
         <td>*int32</td>
         <td>Fixnum or Bignum (as required)</td>
         <td>int</td>
+        <td>integer</td>
         <td>int</td>
+        <td>i32</td>
       </tr>
       <tr>
         <td>sfixed64</td>
@@ -466,7 +530,9 @@ automatically generated class:
         <td>*int64</td>
         <td>Bignum</td>
         <td>long</td>
+        <td>integer/string<sup>[6]</sup></td>
         <td>Int64</td>
+        <td>i64</td>
       </tr>
       <tr>
         <td>bool</td>
@@ -477,31 +543,36 @@ automatically generated class:
         <td>*bool</td>
         <td>TrueClass/FalseClass</td>
         <td>bool</td>
+        <td>boolean</td>
+        <td>bool</td>
         <td>bool</td>
       </tr>
       <tr>
         <td>string</td>
-        <td>A string must always contain UTF-8 encoded<sup>[5]</sup> or 7-bit ASCII text, and
-        cannot be longer than 2<sup>32</sup>.</td>
+        <td>A string must always contain UTF-8 encoded or 7-bit ASCII text, and cannot
+        be longer than 2<sup>32</sup>.</td>
         <td>string</td>
         <td>String</td>
         <td>unicode (Python 2) or str (Python 3)</td>
         <td>*string</td>
         <td>String (UTF-8)</td>
         <td>string</td>
+        <td>string</td>
         <td>String</td>
+        <td>ProtoString</td>
       </tr>
       <tr>
         <td>bytes</td>
-        <td>May contain any arbitrary sequence of bytes no longer than
-        2<sup>32</sup>.</td>
+        <td>May contain any arbitrary sequence of bytes no longer than 2<sup>32</sup>.</td>
         <td>string</td>
         <td>ByteString</td>
         <td>bytes</td>
         <td>[]byte</td>
         <td>String (ASCII-8BIT)</td>
         <td>ByteString</td>
+        <td>string</td>
         <td>List<int></td>
+        <td>ProtoBytes</td>
       </tr>
     </tbody>
   </table>
@@ -525,32 +596,59 @@ all cases, the value must fit in the type represented when set. See [2].
 fields. Behavior varies between languages though, and invalid UTF-8 data should
 not be stored in string fields.
 
+<sup>[6]</sup> Integer is used on 64-bit machines and string is used on 32-bit
+machines.
+
 You can find out more about how these types are encoded when you serialize your
 message in
 [Protocol Buffer Encoding](/programming-guides/encoding).
 
-## Optional Fields and Default Values {#optional}
+## Default Field Values {#default}
 
-As mentioned earlier, elements in a message description can be labeled
-`optional`. A well-formed message may or may not contain an optional element.
-When a message is parsed, if the encoded message does not contain an optional
-element, accessing the corresponding field in the parsed object returns the
-default value for that field. The default value can be specified as part of the
-message description. For example, let's say you want to provide a default value
-of 10 for a `SearchRequest`'s `result_per_page` value.
-
-```proto
-optional int32 result_per_page = 3 [default = 10];
-```
-
-If the default value is not specified for an optional element, a type-specific
-default value is used instead:
+When a message is parsed, if the encoded message bytes do not contain a
+particular field, accessing that field in the parsed object returns the default
+value for that field. The default values are type-specific:
 
 *   For strings, the default value is the empty string.
 *   For bytes, the default value is empty bytes.
 *   For bools, the default value is false.
 *   For numeric types, the default value is zero.
-*   For enums, the default value is the **first defined enum value**.
+*   For message fields, the field is not set. Its exact value is
+    language-dependent. See the
+    [generated code guide](/reference/) for your language
+    for details.
+*   For enums, the default value is the **first defined enum value**, which
+    should be 0 (recommended for compatibility with proto3). See
+    [Enum Default Value](#enum-default).
+
+The default value for repeated fields is empty (generally an empty list in the
+appropriate language).
+
+The default value for map fields is empty (generally an empty map in the
+appropriate language).
+
+### Overriding Default Scalar Values {#explicit-default}
+
+In proto2, you can specify explicit default values for singular non-message
+fields. For example, let's say you want to provide a default value of 10 for the
+`SearchRequest.result_per_page` field:
+
+```proto
+optional int32 result_per_page = 3 [default = 10];
+```
+
+If the sender does not specify `result_per_page`, the receiver will observe the
+following state:
+
+*   The result_per_page field is not present. That is, the
+    `has_result_per_page()` (hazzer method) method would return `false`.
+*   The value of `result_per_page` (returned from the "getter") is `10`.
+
+If the sender does send a value for `result_per_page` the default value of 10 is
+ignored and the sender's value is returned from the "getter".
+
+See the [generated code guide](/reference/) for your
+chosen language for more details about how defaults work in generated code.
 
 Because the default value for enums is the first defined enum value, take care
 when adding a value to the beginning of an enum value list. See the
@@ -563,9 +661,8 @@ When you're defining a message type, you might want one of its fields to only
 have one of a predefined list of values. For example, let's say you want to add
 a `corpus` field for each `SearchRequest`, where the corpus can be `UNIVERSAL`,
 `WEB`, `IMAGES`, `LOCAL`, `NEWS`, `PRODUCTS` or `VIDEO`. You can do this very
-simply by adding an `enum` to your message definition - a field with an `enum`
-type can only have one of a specified set of constants as its value (if you try
-to provide a different value, the parser will treat it like an unknown field).
+simply by adding an `enum` to your message definition with a constant for each
+possible value.
 
 In the following example we've added an `enum` called `Corpus` with all the
 possible values, and a field of type `Corpus`:
@@ -585,16 +682,31 @@ enum Corpus {
 message SearchRequest {
   optional string query = 1;
   optional int32 page_number = 2;
-  optional int32 results_per_page = 3 [default = 10];
-  optional Corpus corpus = 4 [default = CORPUS_UNIVERSAL];
+  optional int32 results_per_page = 3;
+  optional Corpus corpus = 4;
 }
 ```
 
-Because `SearchRequest` sets a default for the value of the `corpus` field, the
-`CORPUS_UNSPECIFIED` value will not be used as a default. It will still be used
-if a value of 0 is encountered on the wire. Other instances of the `Corpus` type
-that **don't** set a default would use the `CORPUS_UNSPECIFIED` value as the
-default.
+### Enum Default Value {#enum-default}
+
+The default value for the `SearchRequest.corpus` field is `CORPUS_UNSPECIFIED`
+because that is the first value defined in the enum.
+
+It is strongly recommended to define the first value of every enum as
+`ENUM_TYPE_NAME_UNSPECIFIED = 0;` or `ENUM_TYPE_NAME_UNKNOWN = 0;`. This is
+because of the way proto2 handles unknown values for enum fields.
+
+It is also recommended that this first, default value have no semantic meaning
+other than "this value was unspecified".
+
+The default value for an enum field like `SearchRequest.corpus` field can be
+explicitly overridden like this:
+
+```
+  optional Corpus corpus = 4 [default = CORPUS_UNIVERSAL];
+```
+
+### Enum Value Aliases {#enum-aliases}
 
 You can define aliases by assigning the same value to different enum constants.
 To do this you need to set the `allow_alias` option to `true`. Otherwise, the
@@ -610,6 +722,7 @@ enum EnumAllowingAlias {
   EAA_RUNNING = 1;
   EAA_FINISHED = 2;
 }
+
 enum EnumNotAllowingAlias {
   ENAA_UNSPECIFIED = 0;
   ENAA_STARTED = 1;
@@ -668,7 +781,7 @@ for your chosen language.
 If you [update](#updating) an enum type by entirely removing an enum entry, or
 commenting it out, future users can reuse the numeric value when making their
 own updates to the type. This can cause severe issues if they later load old
-versions of the same `.proto`, including data corruption, privacy bugs, and so
+instances of the same `.proto`, including data corruption, privacy bugs, and so
 on. One way to make sure this doesn't happen is to specify that the numeric
 values (and/or names, which can also cause issues for JSON serialization) of
 your deleted entries are `reserved`. The protocol buffer compiler will complain
@@ -725,7 +838,9 @@ Instead of moving the `.proto` file directly and updating all the call sites in
 a single change, you can put a placeholder `.proto` file in the old location to
 forward all the imports to the new location using the `import public` notion.
 
-**Note that the public import functionality is not available in Java.**
+**Note that the public import functionality is not available in Java, Kotlin,
+TypeScript, JavaScript, GCL, as well as C++ targets that use protobuf static
+reflection.**
 
 `import public` dependencies can be transitively relied upon by any code
 importing the proto containing the `import public` statement. For example:
@@ -759,7 +874,8 @@ project and use fully qualified names for all imports.
 It's possible to import
 [proto3](/programming-guides/proto3) message types and
 use them in your proto2 messages, and vice versa. However, proto2 enums cannot
-be used in proto3 syntax.
+be used directly in proto3 syntax (it's okay if an imported proto2 message uses
+them).
 
 ## Nested Types {#nested}
 
@@ -884,16 +1000,16 @@ the following rules:
     compatible with the other integer types.
 *   `string` and `bytes` are compatible as long as the bytes are valid UTF-8.
 *   Embedded messages are compatible with `bytes` if the bytes contain an
-    encoded version of the message.
+    encoded instance of the message.
 *   `fixed32` is compatible with `sfixed32`, and `fixed64` with `sfixed64`.
-*   For `string`, `bytes`, and message fields, `optional` is compatible with
+*   For `string`, `bytes`, and message fields, singular is compatible with
     `repeated`. Given serialized data of a repeated field as input, clients that
-    expect this field to be `optional` will take the last input value if it's a
-    scalar type field or merge all input elements if it's a message type field.
-    Note that this is **not** generally safe for numeric types, including bools
-    and enums. Repeated fields of numeric types can be serialized in the
+    expect this field to be singular will take the last input value if it's a
+    primitive type field or merge all input elements if it's a message type
+    field. Note that this is **not** generally safe for numeric types, including
+    bools and enums. Repeated fields of numeric types may be serialized in the
     [packed](/programming-guides/encoding#packed) format,
-    which will not be parsed correctly when an `optional` field is expected.
+    which will not be parsed correctly when a singular field is expected.
 *   Changing a default value is generally OK, as long as you remember that
     default values are never sent over the wire. Thus, if a program receives a
     message in which a particular field isn't set, the program will see the
@@ -1329,9 +1445,6 @@ for (const google::protobuf::Any& detail : status.details()) {
 }
 ```
 
-**Currently the runtime libraries for working with `Any` types are under
-development**.
-
 If you want to limit contained messages to a small number of types and to
 require permission before adding new types to the list, consider using
 [extensions](#extensions) with
@@ -1386,7 +1499,7 @@ for your chosen language in the relevant
     oneof. So if you set several oneof fields, only the *last* field you set
     will still have a value.
 
-    ```cpp
+    ```c++
     SampleMessage message;
     message.set_name("name");
     CHECK(message.has_name());
@@ -1451,8 +1564,8 @@ wire is a member of the oneof.
     set. See [Updating A Message Type](#updating) for further details.
 *   **Delete a oneof field and add it back**: This may clear your currently set
     oneof field after the message is serialized and parsed.
-*   **Split or merge oneof**: This has similar issues to moving regular
-    `optional` fields.
+*   **Split or merge oneof**: This has similar issues to moving `optional`
+    fields.
 
 ## Maps {#maps}
 
@@ -1465,8 +1578,8 @@ map<key_type, value_type> map_field = N;
 
 ...where the `key_type` can be any integral or string type (so, any
 [scalar](#scalar) type except for floating point types and `bytes`). Note that
-enum is not a valid `key_type`. The `value_type` can be any type except another
-map.
+neither enum nor proto messages are valid for `key_type`.
+The `value_type` can be any type except another map.
 
 So, for example, if you wanted to create a map of projects where each `Project`
 message is associated with a string key, you could define it like this:
@@ -1486,6 +1599,12 @@ map<string, Project> projects = 3;
 *   When parsing from the wire or when merging, if there are duplicate map keys
     the last key seen is used. When parsing a map from text format, parsing may
     fail if there are duplicate keys.
+*   If you provide a key but no value for a map field, the behavior when the
+    field is serialized is language-dependent. In C++, Java, Kotlin, and Python
+    the default value for the type is serialized, while in other languages
+    nothing is serialized.
+*   No symbol `FooEntry` can exist in the same scope as a map `foo`, because
+    `FooEntry` is already used by the implementation of the map.
 
 The generated map API is currently available for all supported languages. You
 can find out more about the map API for your chosen language in the relevant
@@ -1545,6 +1664,9 @@ language:
     namespaces, converted to the required Ruby capitalization style (first
     letter capitalized; if the first character is not a letter, `PB_` is
     prepended). For example, `Open` would be in the namespace `Foo::Bar`.
+*   In **PHP** the package is used as the namespace after converting to
+    PascalCase, unless you explicitly provide an `option php_namespace` in your
+    `.proto` file. For example, `Open` would be in the namespace `Foo\Bar`.
 *   In **C#** the package is used as the namespace after converting to
     PascalCase, unless you explicitly provide an `option csharp_namespace` in
     your `.proto` file. For example, `Open` would be in the namespace `Foo.Bar`.
@@ -1680,7 +1802,7 @@ projects we know about, see the
 
 ## JSON Mapping {#json}
 
-Proto2 supports a canonical encoding in JSON, making it easier to share data
+Protobuf supports a canonical encoding in JSON, making it easier to share data
 between systems. The encoding is described on a type-by-type basis in the table
 below.
 
@@ -1688,8 +1810,7 @@ When parsing JSON-encoded data into a protocol buffer, if a value is missing or
 if its value is `null`, it will be interpreted as the corresponding
 [default value](#optional).
 
-A proto2 field that is defined with the `optional` keyword supports field
-presence. Fields that have a value set and that support field presence always
+Singular fields that have a value set and that support field presence always
 include the field value in the JSON-encoded output, even if it is the default
 value.
 
@@ -1866,7 +1987,7 @@ value.
 
 ### JSON Options {#json-options}
 
-A proto2 JSON implementation may provide the following options:
+A protobuf JSON implementation may provide the following options:
 
 *   **Always emit fields without presence**: Fields that don't support presence
     and that have their default value are omitted by default in JSON output (for
@@ -1879,14 +2000,16 @@ A proto2 JSON implementation may provide the following options:
     this flag affects proto2 `optional` fields but not proto3 `optional` fields.
     A fix is planned for a future release.
 
-*   **Ignore unknown fields**: Proto2 JSON parser should reject unknown fields
-    by default but may provide an option to ignore unknown fields in parsing.
+*   **Ignore unknown fields**: The protobuf JSON parser should reject unknown
+    fields by default but may provide an option to ignore unknown fields in
+    parsing.
 
-*   **Use proto field name instead of lowerCamelCase name**: By default proto2
-    JSON printer should convert the field name to lowerCamelCase and use that as
-    the JSON name. An implementation may provide an option to use proto field
-    name as the JSON name instead. Proto2 JSON parsers are required to accept
-    both the converted lowerCamelCase name and the proto field name.
+*   **Use proto field name instead of lowerCamelCase name**: By default the
+    protobuf JSON printer should convert the field name to lowerCamelCase and
+    use that as the JSON name. An implementation may provide an option to use
+    proto field name as the JSON name instead. Protobuf JSON parsers are
+    required to accept both the converted lowerCamelCase name and the proto
+    field name.
 
 *   **Emit enum values as integers instead of strings**: The name of an enum
     value is used by default in JSON output. An option may be provided to use
@@ -2022,15 +2145,15 @@ Here are a few of the most commonly used options:
     ```
 
 *   `packed` (field option): If set to `true` on a repeated field of a basic
-    numeric type, a more compact
-    [encoding](/programming-guides/encoding#packed) is
-    used. There is no downside to using this option. However, note that prior to
-    version 2.3.0, parsers that received packed data when not expected would
-    ignore it. Therefore, it was not possible to change an existing field to
-    packed format without breaking wire compatibility. In 2.3.0 and later, this
-    change is safe, as parsers for packable fields will always accept both
-    formats, but be careful if you have to deal with old programs using old
-    protobuf versions.
+    numeric type, it causes a more compact
+    [encoding](/programming-guides/encoding#packed) to be
+    used. The only reason to not use this option is if you need compatibility
+    with parsers prior to version 2.3.0. When these older parsers would ignore
+    packed data when it was not expected. Therefore, it was not possible to
+    change an existing field to packed format without breaking wire
+    compatibility. In 2.3.0 and later, this change is safe, as parsers for
+    packable fields will always accept both formats, but be careful if you have
+    to deal with old programs using old protobuf versions.
 
     ```proto
     repeated int32 samples = 4 [packed = true];
@@ -2396,6 +2519,9 @@ protoc --proto_path=IMPORT_PATH --cpp_out=DST_DIR --java_out=DST_DIR --python_ou
         for more.
     *   `--csharp_out` generates C# code in `DST_DIR`. See the
         [C# generated code reference](/reference/csharp/csharp-generated)
+        for more.
+    *   `--php_out` generates PHP code in `DST_DIR`. See the
+        [PHP generated code reference](/reference/php/php-generated)
         for more.
 
     As an extra convenience, if the `DST_DIR` ends in `.zip` or `.jar`, the
