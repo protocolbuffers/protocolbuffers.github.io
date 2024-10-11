@@ -1,20 +1,22 @@
 +++
-title = "Language Guide (proto 3)"
+title = "Language Guide (editions)"
 weight = 40
-description = "Covers how to use the proto3 revision of the Protocol Buffers language in your project."
+description = "Covers how to use the edition 2023 revision of the Protocol Buffers language in your project."
 type = "docs"
 +++
 
 This guide describes how to use the protocol buffer language to structure your
 protocol buffer data, including `.proto` file syntax and how to generate data
-access classes from your `.proto` files. It covers the **proto3** revision of
-the protocol buffers language.
-
-For information on **editions** syntax, see the
-[Protobuf Editions Language Guide](/programming-guides/editions).
+access classes from your `.proto` files. It covers **edition 2023** of the
+protocol buffers language. For information about how editions differ from proto2
+and proto3 conceptually, see
+[Protobuf Editions Overview](/editions/overview).
 
 For information on the **proto2** syntax, see the
 [Proto2 Language Guide](/programming-guides/proto2).
+
+For information on **proto3** syntax, see the
+[Proto3 Language Guide](/programming-guides/proto3).
 
 This is a reference guide – for a step by step example that uses many of the
 features described in this document, see the
@@ -29,7 +31,7 @@ particular page of results you are interested in, and a number of results per
 page. Here's the `.proto` file you use to define the message type.
 
 ```proto
-syntax = "proto3";
+edition = "2023";
 
 message SearchRequest {
   string query = 1;
@@ -38,8 +40,8 @@ message SearchRequest {
 }
 ```
 
-*   The first line of the file specifies that you're using the proto3 revision
-    of the protobuf language spec.
+*   The first line of the file specifies that you're using edition 2023 of the
+    protobuf language spec.
 
     *   The `edition` (or `syntax` for proto2/proto3) must be the first
         non-empty, non-comment line of the file.
@@ -112,6 +114,11 @@ Common causes of field number reuse:
 -   deleting a field and not [reserving](#fieldreserved) the number to prevent
     future reuse.
 
+    -   This has been a very easy mistake to make with
+        [extension fields](#extensions) for several reasons.
+        [Extension Declarations](/programming-guides/extension_declarations)
+        provide a mechanism for reserving extension fields.
+
 The field number is limited to 29 bits rather than 32 bits because three bits
 are used to specify the field's wire format. For more on this, see the
 [Encoding topic](/programming-guides/encoding#structure).
@@ -124,36 +131,21 @@ Message fields can be one of the following:
 
 *   *Singular*:
 
-    In proto3, there are two types of singular fields:
+    A singular field has no explicit cardinality label. It has two possible
+    states:
 
-    *   `optional`: (recommended) An `optional` field is in one of two possible
-        states:
+    *   the field is set, and contains a value that was explicitly set or parsed
+        from the wire. It will be serialized to the wire.
+    *   the field is unset, and will return the default value. It will not be
+        serialized to the wire.
 
-        *   the field is set, and contains a value that was explicitly set or
-            parsed from the wire. It will be serialized to the wire.
-        *   the field is unset, and will return the default value. It will not
-            be serialized to the wire.
+    You can check to see if the value was explicitly set.
 
-        You can check to see if the value was explicitly set.
+    Proto3 *implicit* fields that have been migrated to editions will use the
+    `field_presence` feature set to the `IMPLICIT` value.
 
-        `optional` is recommended over *implicit* fields for maximum
-        compatibility with protobuf editions and proto2.
-
-    *   *implicit*: (not recommended) An implicit field has no explicit
-        cardinality label and behaves as follows:
-
-        *   if the field is a message type, it behaves just like an `optional`
-            field.
-        *   if the field is not a message, it has two states:
-
-            *   the field is set to a non-default (non-zero) value that was
-                explicitly set or parsed from the wire. It will be serialized to
-                the wire.
-            *   the field is set to the default (zero) value. It will not be
-                serialized to the wire. In fact, you cannot determine whether
-                the default (zero) value was set or parsed from the wire or not
-                provided at all. For more on this subject, see
-                [Field Presence](/programming-guides/field_presence).
+    Proto2 `required` fields that have been migrated to editions will also use
+    the `field_presence` feature, but set to `LEGACY_REQUIRED`.
 
 *   `repeated`: this field type can be repeated zero or more times in a
     well-formed message. The order of the repeated values will be preserved.
@@ -164,36 +156,11 @@ Message fields can be one of the following:
 
 #### Repeated Fields are Packed by Default {#use-packed}
 
-In proto3, `repeated` fields of scalar numeric types use `packed` encoding by
-default.
+In proto editions, `repeated` fields of scalar numeric types use `packed`
+encoding by default.
 
 You can find out more about `packed` encoding in
 [Protocol Buffer Encoding](/programming-guides/encoding#packed).
-
-#### Message Type Fields Always Have Field Presence {#field-presence}
-
-In proto3, message-type fields already have field presence. Because of this,
-adding the `optional` modifier doesn't change the field presence for the field.
-
-The definitions for `Message2` and `Message3` in the following code sample
-generate the same code for all languages, and there is no difference in
-representation in binary, JSON, and TextFormat:
-
-```proto
-syntax="proto3";
-
-package foo.bar;
-
-message Message1 {}
-
-message Message2 {
-  Message1 foo = 1;
-}
-
-message Message3 {
-  optional Message1 bar = 1;
-}
-```
 
 #### Well-formed Messages {#well-formed}
 
@@ -308,7 +275,7 @@ JSON parsing is not affected by reserved names.
 ```proto
 message Foo {
   reserved 2, 15, 9 to 11;
-  reserved "foo", "bar";
+  reserved foo, bar;
 }
 ```
 
@@ -632,18 +599,31 @@ appropriate language).
 The default value for map fields is empty (generally an empty map in the
 appropriate language).
 
-Note that for implicit-presence scalar fields, once a message is parsed there's
-no way of telling whether that field was explicitly set to the default value
-(for example whether a boolean was set to `false`) or just not set at all: you
-should bear this in mind when defining your message types. For example, don't
-have a boolean that switches on some behavior when set to `false` if you don't
-want that behavior to also happen by default. Also note that if a scalar message
-field **is** set to its default, the value will not be serialized on the wire.
-If a float or double value is set to +0 it will not be serialized, but -0 is
-considered distinct and will be serialized.
+### Overriding Default Scalar Values {#explicit-default}
+
+In protobuf editions, you can specify explicit default values for singular
+non-message fields. For example, let's say you want to provide a default value
+of 10 for the `SearchRequest.result_per_page` field:
+
+```proto
+int32 result_per_page = 3 [default = 10];
+```
+
+If the sender does not specify `result_per_page`, the receiver will observe the
+following state:
+
+*   The result_per_page field is not present. That is, the
+    `has_result_per_page()` (hazzer method) method would return `false`.
+*   The value of `result_per_page` (returned from the "getter") is `10`.
+
+If the sender does send a value for `result_per_page` the default value of 10 is
+ignored and the sender's value is returned from the "getter".
 
 See the [generated code guide](/reference/) for your
 chosen language for more details about how defaults work in generated code.
+
+Explicit default values cannot be specified for fields that have the
+`field_presence` feature set to `IMPLICIT`.
 
 ## Enumerations {#enum}
 
@@ -682,19 +662,34 @@ message SearchRequest {
 The default value for the `SearchRequest.corpus` field is `CORPUS_UNSPECIFIED`
 because that is the first value defined in the enum.
 
-In proto3, the first value defined in an enum definition **must** have the value
-zero and should have the name `ENUM_TYPE_NAME_UNSPECIFIED` or
+In edition 2023, the first value defined in an enum definition **must** have the
+value zero and should have the name `ENUM_TYPE_NAME_UNSPECIFIED` or
 `ENUM_TYPE_NAME_UNKNOWN`. This is because:
 
-*   There must be a zero value, so that we can use 0 as a numeric
-    [default value](#default).
-*   The zero value needs to be the first element, for compatibility with the
-    [proto2](/programming-guides/proto2) semantics where
-    the first enum value is the default unless a different value is explicitly
-    specified.
+*   The zero value needs to be the first element for compatibility with
+    [proto2](/programming-guides/proto2#enum-default)
+    semantics, where the first enum value is the default unless a different
+    value is explicitly specified.
+*   There must be a zero value for compatibility with
+    [proto3](/programming-guides/proto3#enum-default)
+    semantics, where the zero value is used as the default value for all
+    implicit-presence fields using this enum type.
 
 It is also recommended that this first, default value have no semantic meaning
 other than "this value was unspecified".
+
+The default value for an enum field like `SearchRequest.corpus` field can be
+explicitly overridden like this:
+
+```
+  Corpus corpus = 4 [default = CORPUS_UNIVERSAL];
+```
+
+If an enum type has been migrated from proto2 using `option features.enum_type =
+CLOSED;` there is no restriction on the first value in the enum. It is not
+recommended to change the first value of these types of enums because it will
+change the default value for any fields using that enum type without an explicit
+field default.
 
 ### Enum Value Aliases {#enum-aliases}
 
@@ -777,7 +772,7 @@ reserved numeric value range goes up to the maximum possible value using the
 ```proto
 enum Foo {
   reserved 2, 15, 9 to 11, 40 to max;
-  reserved "FOO", "BAR";
+  reserved FOO, BAR;
 }
 ```
 
@@ -854,13 +849,12 @@ flag. If no flag was given, it looks in the directory in which the compiler was
 invoked. In general you should set the `--proto_path` flag to the root of your
 project and use fully qualified names for all imports.
 
-### Using proto2 Message Types {#proto2}
+### Using proto2 and proto3 Message Types {#proto2}
 
 It's possible to import
-[proto2](/programming-guides/proto2) message types and
-use them in your proto3 messages, and vice versa. However, proto2 enums cannot
-be used directly in proto3 syntax (it's okay if an imported proto2 message uses
-them).
+[proto2](/programming-guides/proto2) and
+[proto3](/programming-guides/proto3) message types and
+use them in your editions 2023 messages, and vice versa.
 
 ## Nested Types {#nested}
 
@@ -967,8 +961,8 @@ the following rules:
 *   `enum` is compatible with `int32`, `uint32`, `int64`, and `uint64` in terms
     of wire format (note that values will be truncated if they don't fit).
     However, be aware that client code may treat them differently when the
-    message is deserialized: for example, unrecognized proto3 `enum` values will
-    be preserved in the message, but how this is represented when the message is
+    message is deserialized: for example, unrecognized `enum` values will be
+    preserved in the message, but how this is represented when the message is
     deserialized is language-dependent. Int fields always just preserve their
     value.
 *   Changing a single `optional` field or extension into a member of a **new**
@@ -995,8 +989,8 @@ fields that the parser does not recognize. For example, when an old binary
 parses data sent by a new binary with new fields, those new fields become
 unknown fields in the old binary.
 
-Proto3 messages preserve unknown fields and includes them during parsing and in
-the serialized output, which matches proto2 behavior.
+Editions messages preserve unknown fields and includes them during parsing and
+in the serialized output, which matches proto2 and proto3 behavior.
 
 ### Retaining Unknown Fields {#retaining}
 
@@ -1015,6 +1009,327 @@ To avoid losing unknown fields, do the following:
 TextFormat is a bit of a special case. Serializing to TextFormat prints unknown
 fields using their field numbers. But parsing TextFormat data back into a binary
 proto fails if there are entries that use field numbers.
+
+## Extensions {#extensions}
+
+An extension is a field defined outside of its container message; usually in a
+`.proto` file separate from the container message's `.proto` file.
+
+### Why Use Extensions? {#why-ext}
+
+There are two main reasons to use extensions:
+
+*   The container message's `.proto` file will have fewer imports/dependencies.
+    This can improve build times, break circular dependencies, and otherwise
+    promote loose coupling. Extensions are very good for this.
+*   Allow systems to attach data to a container message with minimal dependency
+    and coordination. Extensions are not a great solution for this because of
+    the limited field number space and the
+    [Consequences of Reusing Field Numbers](#consequences). If your use case
+    requires very low coordination for a large number of extensions, consider
+    using the
+    [`Any` message type](/reference/protobuf/google.protobuf#any)
+    instead.
+
+### Example Extension {#ext-example}
+
+Let's look at an example extension:
+
+```proto
+// file kittens/video_ext.proto
+
+import "kittens/video.proto";
+import "media/user_content.proto";
+
+package kittens;
+
+// This extension allows kitten videos in a media.UserContent message.
+extend media.UserContent {
+  // Video is a message imported from kittens/video.proto
+  repeated Video kitten_videos = 126;
+}
+```
+
+Note that the file defining the extension (`kittens/video_ext.proto`) imports
+the container message's file (`media/user_content.proto`).
+
+The container message must reserve a subset of its field numbers for extensions.
+
+```proto
+// file media/user_content.proto
+
+package media;
+
+// A container message to hold stuff that a user has created.
+message UserContent {
+  // Set verification to `DECLARATION` to enforce extension declarations for all
+  // extensions in this range.
+  extensions 100 to 199 [verification = DECLARATION];
+}
+```
+
+The container message's file (`media/user_content.proto`) defines the message
+`UserContent`, which reserves field numbers [100 to 199] for extensions. It is
+recommended to set `verification = DECLARATION` for the range to require
+declarations for all its extensions.
+
+When the new extension (`kittens/video_ext.proto`) is added, a corresponding
+declaration should be added to `UserContent` and `verification` should be
+removed.
+
+```
+// A container message to hold stuff that a user has created.
+message UserContent {
+  extensions 100 to 199 [
+    declaration = {
+      number: 126,
+      full_name: ".kittens.kitten_videos",
+      type: ".kittens.Video",
+      repeated: true
+    },
+    // Ensures all field numbers in this extension range are declarations.
+    verification = DECLARATION
+  ];
+}
+```
+
+`UserContent` declares that field number `126` will be used by a `repeated`
+extension field with the fully-qualified name `.kittens.kitten_videos` and the
+fully-qualified type `.kittens.Video`. To learn more about extension
+declarations see
+[Extension Declarations](/programming-guides/extension_declarations).
+
+Note that the container message's file (`media/user_content.proto`) **does not**
+import the kitten_video extension definition (`kittens/video_ext.proto`)
+
+There is no difference in the wire-format encoding of extension fields as
+compared to a standard field with the same field number, type, and cardinality.
+Therefore, it is safe to move a standard field out of its container to be an
+extension or to move an extension field into its container message as a standard
+field so long as the field number, type, and cardinality remain constant.
+
+However, because extensions are defined outside of the container message, no
+specialized accessors are generated to get and set specific extension fields.
+For our example, the protobuf compiler **will not generate** `AddKittenVideos()`
+or `GetKittenVideos()` accessors. Instead, extensions are accessed through
+parameterized functions like: `HasExtension()`, `ClearExtension()`,
+`GetExtension()`, `MutableExtension()`, and `AddExtension()`.
+
+In C++, it would look something like:
+
+```cpp
+UserContent user_content;
+user_content.AddExtension(kittens::kitten_videos, new kittens::Video());
+assert(1 == user_content.GetExtensionCount(kittens::kitten_videos));
+user_content.GetExtension(kittens::kitten_videos, 0);
+```
+
+### Defining Extension Ranges {#defining-ranges}
+
+If you are the owner of a container message, you will need to define an
+extension range for the extensions to your message.
+
+Field numbers allocated to extension fields cannot be reused for standard
+fields.
+
+It is safe to expand an extension range after it is defined. A good default is
+to allocate 1000 relatively small numbers, and densely populate that space using
+extension declarations:
+
+```proto
+message ModernExtendableMessage {
+  // All extensions in this range should use extension declarations.
+  extensions 1000 to 2000 [verification = DECLARATION];
+}
+```
+
+When adding a range for extension declarations before the actual extensions, you
+should add `verification = DECLARATION` to enforce that declarations are used
+for this new range. This placeholder can be removed once an actual declaration
+is added.
+
+It is safe to split an existing extension range into separate ranges that cover
+the same total range. This might be necessary for migrating a legacy message
+type to
+[Extension Declarations](/programming-guides/extension_declarations).
+For example, before migration, the range might be defined as:
+
+```proto
+message LegacyMessage {
+  extensions 1000 to max;
+}
+```
+
+And after migration (splitting the range) it can be:
+
+```proto
+message LegacyMessage {
+  // Legacy range that was using an unverified allocation scheme.
+  extensions 1000 to 524999999 [verification = UNVERIFIED];
+  // Current range that uses extension declarations.
+  extensions 525000000 to max  [verification = DECLARATION];
+}
+```
+
+It is not safe to increase the start field number nor decrease the end field
+number to move or shrink an extension range. These changes can invalidate an
+existing extension.
+
+Prefer using field numbers 1 to 15 for standard fields that are populated in
+most instances of your proto. It is not recommended to use these numbers for
+extensions.
+
+If your numbering convention might involve extensions having very large field
+numbers, you can specify that your extension range goes up to the maximum
+possible field number using the `max` keyword:
+
+```proto
+message Foo {
+  extensions 1000 to max;
+}
+```
+
+`max` is 2<sup>29</sup> - 1, or 536,870,911.
+
+### Choosing Extension Numbers {#choosing}
+
+Extensions are just fields that can be specified outside of their container
+messages. All the same rules for [Assigning Field Numbers](#assigning) apply to
+extension field numbers. The same
+[Consequences of Reusing Field Numbers](#consequences) also apply to reusing
+extension field numbers.
+
+Choosing unique extension field numbers is simple if the container message uses
+[extension declarations](/programming-guides/extension_declarations).
+When defining a new extension, choose the lowest field number above all other
+declarations from the highest extension range defined in the container message.
+For example, if a container message is defined like this:
+
+```proto
+message Container {
+  // Legacy range that was using an unverified allocation scheme
+  extensions 1000 to 524999999;
+  // Current range that uses extension declarations. (highest extension range)
+  extensions 525000000 to max  [
+    declaration = {
+      number: 525000001,
+      full_name: ".bar.baz_ext",
+      type: ".bar.Baz"
+    }
+    // 525,000,002 is the lowest field number above all other declarations
+  ];
+}
+```
+
+The next extension of `Container` should add a new declaration with the number
+`525000002`.
+
+#### Unverified Extension Number Allocation (not recommended) {#unverified}
+
+The owner of a container message may choose to forgo extension declarations in
+favor of their own unverified extension number allocation strategy.
+
+An unverified allocation scheme uses a mechanism external to the protobuf
+ecosystem to allocate extension field numbers within the selected extension
+range. One example could be using a monorepo's commit number. This system is
+"unverified" from the protobuf compiler's point of view since there is no way to
+check that an extension is using a properly acquired extension field number.
+
+The benefit of an unverified system over a verified system like extension
+declarations is the ability to define an extension without coordinating with the
+container message owner.
+
+The downside of an unverified system is that the protobuf compiler cannot
+protect participants from reusing extension field numbers.
+
+**Unverified extension field number allocation strategies are not recommended**
+because the [Consequences of Reusing Field Numbers](#consequences) fall on all
+extenders of a message (not just the developer that didn't follow the
+recommendations). If your use case requires very low coordination, consider
+using the
+[`Any` message](/reference/protobuf/google.protobuf#any)
+instead.
+
+Unverified extension field number allocation strategies are limited to the range
+1 to 524,999,999. Field numbers 525,000,000 and above can only be used with
+extension declarations.
+
+### Specifying Extension Types {#specifying-extension-types}
+
+Extensions can be of any field type except `oneof`s and `map`s.
+
+### Nested Extensions (not recommended) {#nested-exts}
+
+You can declare extensions in the scope of another message:
+
+```proto
+import "common/user_profile.proto";
+
+package puppies;
+
+message Photo {
+  extend common.UserProfile {
+    int32 likes_count = 111;
+  }
+  ...
+}
+```
+
+In this case, the C++ code to access this extension is:
+
+```cpp
+UserProfile user_profile;
+user_profile.SetExtension(puppies::Photo::likes_count, 42);
+```
+
+In other words, the only effect is that `likes_count` is defined within the
+scope of `puppies.Photo`.
+
+This is a common source of confusion: Declaring an `extend` block nested inside
+a message type *does not* imply any relationship between the outer type and the
+extended type. In particular, the earlier example *does not* mean that `Photo`
+is any sort of subclass of `UserProfile`. All it means is that the symbol
+`likes_count` is declared inside the scope of `Photo`; it's simply a static
+member.
+
+A common pattern is to define extensions inside the scope of the extension's
+field type - for example, here's an extension to `media.UserContent` of type
+`puppies.Photo`, where the extension is defined as part of `Photo`:
+
+```proto
+import "media/user_content.proto";
+
+package puppies;
+
+message Photo {
+  extend media.UserContent {
+    Photo puppy_photo = 127;
+  }
+  ...
+}
+```
+
+However, there is no requirement that an extension with a message type be
+defined inside that type. You can also use the standard definition pattern:
+
+```proto
+import "media/user_content.proto";
+
+package puppies;
+
+message Photo {
+  ...
+}
+
+// This can even be in a different file.
+extend media.UserContent {
+  Photo puppy_photo = 127;
+}
+```
+
+This **standard (file-level) syntax is preferred** to avoid confusion. The
+nested syntax is often mistaken for subclassing by users who are not already
+familiar with extensions.
 
 ## Any {#any}
 
@@ -1058,13 +1373,19 @@ for (const google::protobuf::Any& detail : status.details()) {
 }
 ```
 
+If you want to limit contained messages to a small number of types and to
+require permission before adding new types to the list, consider using
+[extensions](#extensions) with
+[extension declarations](/programming-guides/extension_declarations)
+instead of `Any` message types.
+
 ## Oneof {#oneof}
 
 If you have a message with many singular fields and where at most one field will
 be set at the same time, you can enforce this behavior and save memory by using
 the oneof feature.
 
-Oneof fields are like optional fields except all the fields in a oneof share
+Oneof fields are like singular fields except all the fields in a oneof share
 memory, and at most one field can be set at the same time. Setting any member of
 the oneof automatically clears all the other members. You can check which value
 in a oneof is set (if any) using a special `case()` or `WhichOneof()` method,
@@ -1107,15 +1428,17 @@ language in the relevant [API reference](/reference/).
     ```c++
     SampleMessage message;
     message.set_name("name");
-    CHECK_EQ(message.name(), "name");
+    CHECK(message.has_name());
     // Calling mutable_sub_message() will clear the name field and will set
     // sub_message to a new instance of SubMessage with none of its fields set.
     message.mutable_sub_message();
-    CHECK(message.name().empty());
+    CHECK(!message.has_name());
     ```
 
 *   If the parser encounters multiple members of the same oneof on the wire,
     only the last member seen is used in the parsed message.
+
+*   Extensions are not supported for oneof.
 
 *   A oneof cannot be `repeated`.
 
@@ -1147,7 +1470,7 @@ language in the relevant [API reference](/reference/).
     msg2.mutable_sub_message();
     msg1.swap(&msg2);
     CHECK(msg1.has_sub_message());
-    CHECK_EQ(msg2.name(), "name");
+    CHECK(msg2.has_name());
     ```
 
 ### Backwards-compatibility issues {#backward}
@@ -1192,6 +1515,7 @@ map<string, Project> projects = 3;
 
 ### Maps Features {#maps-features}
 
+*   Extensions are not supported for maps.
 *   Map fields cannot be `repeated`.
 *   Wire format ordering and map iteration ordering of map values is undefined,
     so you cannot rely on your map items being in a particular order.
@@ -1333,15 +1657,14 @@ has the default value and if the field doesn't support field presence, it will
 be omitted from the output by default. An implementation may provide options to
 include fields with default values in the output.
 
-A proto3 field that is defined with the `optional` keyword supports field
-presence. Fields that have a value set and that support field presence always
+Singular fields that have a value set and that support field presence always
 include the field value in the JSON-encoded output, even if it is the default
 value.
 
 <table>
   <tbody>
     <tr>
-      <th>proto3</th>
+      <th>Editions</th>
       <th>JSON</th>
       <th>JSON example</th>
       <th>Notes</th>
@@ -1655,15 +1978,13 @@ Here are a few of the most commonly used options:
     [recommended by Apple](https://developer.apple.com/library/ios/documentation/Cocoa/Conceptual/ProgrammingWithObjectiveC/Conventions/Conventions.html#//apple_ref/doc/uid/TP40011210-CH10-SW4).
     Note that all 2 letter prefixes are reserved by Apple.
 
-*   `packed` (field option): Defaults to `true` on a repeated field of a basic
-    numeric type, causing a more compact
-    [encoding](/programming-guides/encoding#packed) to be
-    used. To use unpacked wireformat, it can be set to `false`. This provides
-    compatibility with parsers prior to version 2.3.0 (rarely needed) as shown
-    in the following example:
+*   `packed` (field option): In protobuf editions, this option is locked to
+    `true`. To use unpacked wireformat, you can override this option using an
+    editions feature. This provides compatibility with parsers prior to version
+    2.3.0 (rarely needed) as shown in the following example:
 
     ```proto
-    repeated int32 samples = 4 [packed = false];
+    repeated int32 samples = 4 [features.repeated_field_encoding = EXPANDED];
     ```
 
 *   `deprecated` (field option): If set to `true`, indicates that the field is
@@ -1693,7 +2014,7 @@ The following example shows the syntax for adding these options:
 import "google/protobuf/descriptor.proto";
 
 extend google.protobuf.EnumValueOptions {
-  optional string string_name = 123456789;
+  string string_name = 123456789;
 }
 
 enum Data {
@@ -1722,8 +2043,7 @@ this is an **advanced feature** which most people don't need. If you do think
 you need to create your own options, see the
 [Proto2 Language Guide](/programming-guides/proto2#customoptions)
 for details. Note that creating custom options uses
-[extensions](/programming-guides/proto2#extensions),
-which are permitted only for custom options in proto3.
+[extensions](/programming-guides/proto2#extensions).
 
 ### Option Retention {#option-retention}
 
@@ -1744,7 +2064,7 @@ Retention can be set directly on an option, like this:
 
 ```proto
 extend google.protobuf.FileOptions {
-  optional int32 source_retention_option = 1234
+  int32 source_retention_option = 1234
       [retention = RETENTION_SOURCE];
 }
 ```
@@ -1792,15 +2112,15 @@ message MyOptions {
 }
 
 extend google.protobuf.FileOptions {
-  optional MyOptions file_options = 50000;
+  MyOptions file_options = 50000;
 }
 
 extend google.protobuf.MessageOptions {
-  optional MyOptions message_options = 50000;
+  MyOptions message_options = 50000;
 }
 
 extend google.protobuf.EnumOptions {
-  optional MyOptions enum_options = 50000;
+  MyOptions enum_options = 50000;
 }
 
 // OK: this field is allowed on file options
