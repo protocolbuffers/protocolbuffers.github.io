@@ -323,26 +323,26 @@ of the following are prohibited:
 
 ```
 message MyMessage {
-  optional string foo = 1;
+  string foo = 1;
   message foo {}
 }
 
 message MyMessage {
-  optional string foo = 1;
+  string foo = 1;
   oneof foo {
     string bar = 2;
   }
 }
 
 message MyMessage {
-  optional string foo = 1;
+  string foo = 1;
   extend Extendable {
-    optional string foo = 2;
+    string foo = 2;
   }
 }
 
 message MyMessage {
-  optional string foo = 1;
+  string foo = 1;
   enum E {
     foo = 0;
   }
@@ -362,7 +362,7 @@ Example:
 
 ```proto
 extend Foo {
-  optional int32 bar = 126;
+  int32 bar = 126;
 }
 ```
 
@@ -415,7 +415,7 @@ message Outer {
 }
 message Foo {
   message GroupMessage {
-    optional bool a = 1;
+    bool a = 1;
   }
   GroupMessage groupmessage = [features.message_encoding = DELIMITED];
 }
