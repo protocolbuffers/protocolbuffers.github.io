@@ -60,9 +60,6 @@ other programming languages:
     )
     ```
 
-See google3/devtools/rust/examples/protobuf/ for the full example.
-
 **Note:** Don't use `rust_upb_proto_library` or `rust_cc_proto_library`
 directly. `rust_proto_library` checks the global build flag to choose the
-appropriate backend for you. See go/switching-rust-proto-library-backends if you
-want to learn more.
+appropriate backend for you.

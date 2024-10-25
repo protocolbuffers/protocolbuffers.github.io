@@ -68,7 +68,8 @@ You must give each field in your message definition a number between `1` and
     implementation. The protocol buffer compiler will complain if you use one of
     these reserved field numbers in your message.
 -   You cannot use any previously [reserved](#fieldreserved) field numbers or
-    any field numbers that have been allocated to [extensions](#extensions).
+    any field numbers that have been allocated to
+    [extensions](/programming-guides/proto2#extensions).
 
 This number **cannot be changed once your message type is in use** because it
 identifies the field in the

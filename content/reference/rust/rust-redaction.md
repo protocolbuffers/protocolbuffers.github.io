@@ -18,9 +18,7 @@ use cases. The output of this debug info is not intended to be machine-readable
 (unlike `TextFormat` and `JSON` which are
 [not be used for debug output](/programming-guides/dos-donts#text-format-interchange)).
 
-Using `fmt::Debug` enables redaction of some sensitive fields. See
-go/proto-stringify-redaction for specifics about this redaction.
+Using `fmt::Debug` enables redaction of some sensitive fields.
 
 Note that under upb kernel this redaction is not yet implemented, but is
-expected to be added. We expect almost all users in Google3 to use the default
-cpp kernel; reach out to protobuf-team@ if you intend to use upb kernel.
+expected to be added.

@@ -19,35 +19,15 @@ before reading this document.
 
 ## Protobuf Rust {#rust}
 
-Protobuf Rust is not a pure Rust implementation of protocol buffers, but a Rust
-API on top of existing protocol buffer implementations, or as we call these
-implementations: kernels. Protobuf Rust is designed to be usable in existing
-google3 binaries that already use C++ or other Protobuf implementations. By
-default, the generated code is ABI-compatible with the C++ Protobuf generated
-code and therefore it is possible to pass Protobuf messages across the language
-boundary (FFI) as plain pointers, without the need to serialize in one language,
-pass the byte array across the boundary, and deserialize in the other language.
-
-Protobuf Rust currently supports three kernels:
-
-*   C++ kernel - the generated code is backed by C++ Protocol Buffers (the
-    "full" implementation, typically used for servers). This kernel offers
-    in-memory interoperability with C++ code that uses the C++ runtime. This is
-    the default in google3.
-*   C++ Lite kernel - the generated code is backed by C++ Lite Protocol Buffers
-    (typically used for mobile). This kernel offers in-memory interoperability
-    with C++ code that uses the C++ Lite runtime. This is the default for
-    Android in google3.
-*   upb kernel - the generated code is backed by [upb](http://go/upb), a highly
-    performant and small binary size Protobuf library written in C. upb is
-    designed to be used as an implementation detail by Protobuf runtimes in
-    other languages.
+Protobuf Rust is an implementation of protocol buffers designed to be able to
+sit on top of other existing protocol buffer implementations that we refer to as
+'kernels'.
 
 The decision to support multiple non-Rust kernels has significantly influenced
-our public API. Rust's string types must be valid UTF-8 but C++ Protobuf and
-C++'s `std::string` type make no such guarantees. Thus, in Protobuf Rust we
-couldn't use Rust's `str`/`String` type but introduced custom types `ProtoStr`
-and `ProtoString` instead.
+our public API, including the choice to use custom types like `ProtoStr` over
+Rust std types like `str`. See
+[Rust Proto Design Decisions](/reference/rust/rust-design-decisions.md)
+for more on this topic.
 
 ## Generated Filenames {#filenames}
 
@@ -134,7 +114,9 @@ and `Mut`s. These situations are shared and mutable references to:
 For example, the compiler emits structs `FooView<'a>` and `FooMut<'msg>`
 alongside `Foo`. These types are used in place of `&Foo` and `&mut Foo`, and
 they behave the same as native Rust references in terms of borrow checker
-behavior.
+behavior. Just like native borrows, Views are `Copy` and the borrow checker will
+enforce that you can either have any number of Views or at most one Mut live at
+a given time.
 
 For the purposes of this documentation, we focus on describing all methods
 emitted for the owned message type (`Foo`). A subset of these functions with
@@ -179,7 +161,7 @@ Following Rust style, the methods are in lower-case/snake-case, such as
 `has_foo()` and `clear_foo()`. Note that the capitalization of the field name
 portion of the accessor maintains the style from the original .proto file, which
 in turn should be lower-case/snake-case per the
-[.proto file style guide](http://go/proto-style).
+[.proto file style guide](/programming-guides/style).
 
 ### Optional Numeric Fields (proto2 and proto3) {#optional-numeric}
 
@@ -286,8 +268,8 @@ instead.
 `[ctype = CORD]` enables bytes and strings to be stored as an
 [absl::Cord](https://github.com/abseil/abseil-cpp/blob/master/absl/strings/cord.h)
 in C++ Protobufs. `absl::Cord` currently does not have an equivalent type in
-Rust (add a +1 to b/355371173 if you need this). Protobuf Rust uses an enum to
-represent a cord field:
+Rust . Protobuf Rust uses an enum to represent a cord
+field:
 
 ```proto
 enum ProtoStringCow<'a> {
@@ -302,9 +284,6 @@ contiguous string. In this case cord accessors return
 the accessor copies the data from the cord into an owned `ProtoString` and
 returns `ProtoStringCow::Owned`. The `ProtoStringCow` implements
 `Deref<Target=ProtoStr>`.
-
-If you need first-class support for the `absl::Cord` type in Protobuf Rust, add
-a comment to this bug: b/355371173.
 
 For any of these field definitions:
 
@@ -325,8 +304,7 @@ The compiler generates the following accessor methods:
 *   `fn has_foo(&self) -> bool`: Returns `true` if the field is set.
 *   `fn clear_foo(&mut self)`: Clears the value of the field. After calling
     this, `has_foo()` returns `false` and `foo()` returns the default value.
-    Cords have not been implemented yet. Support for them is tracked as
-    b/308792377.
+    Cords have not been implemented yet.
 
 For fields of type `bytes` the compiler generates the `ProtoBytesCow` type
 instead.
@@ -353,7 +331,6 @@ impl Bar {
   pub const Value: Bar = Bar(1);
   pub const OtherValue: Bar = Bar(2);
 }
-
 ```
 
 For either of these field definitions:
@@ -571,8 +548,8 @@ The compiler will generate:
 
 ## Extensions (proto2 only) {#extensions}
 
-A Rust API for extensions is currently a work in progress. Follow this bug to
-track the progress: b/334153030. Extension fields will be maintained through
+A Rust API for extensions is currently a work in progress.
+Extension fields will be maintained through
 parse/serialize, and in a C++ interop case any extensions set will be retained
 if the message is accessed from Rust (and propagated in the case of a message
 copy or merge).
