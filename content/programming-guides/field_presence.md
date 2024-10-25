@@ -9,20 +9,24 @@ type = "docs"
 ## Background
 
 *Field presence* is the notion of whether a protobuf field has a value. There
-are two different manifestations of presence for protobufs: *no presence*, where
-the generated message API stores field values (only), and *explicit presence*,
-where the API also stores whether or not a field has been set.
+are two different manifestations of presence for protobufs: *implicit presence*,
+where the generated message API stores field values (only), and *explicit
+presence*, where the API also stores whether or not a field has been set.
 
 Historically, proto2 has mostly followed *explicit presence*, while proto3
-exposes only *no presence* semantics. Singular proto3 fields of basic types
-(numeric, string, bytes, and enums) which are defined with the `optional` label
-have *explicit presence*, like proto2 (this feature is enabled by default as
-release 3.15).
+exposes only *implicit presence* semantics. Singular proto3 fields of basic
+types (numeric, string, bytes, and enums) which are defined with the `optional`
+label have *explicit presence*, like proto2 (this feature is enabled by default
+as release 3.15).
+
+**NOTE:** We recommend always adding the `optional` label for proto3 basic
+types. This provides a smoother path to editions, which uses explicit presence
+by default.
 
 ### Presence Disciplines
 
 *Presence disciplines* define the semantics for translating between the *API
-representation* and the *serialized representation*. The *no presence*
+representation* and the *serialized representation*. The *implicit presence*
 discipline relies upon the field value itself to make decisions at
 (de)serialization time, while the *explicit presence* discipline relies upon the
 explicit tracking state instead.
@@ -41,7 +45,7 @@ backward-compatible across changes to the message definition; however, this
 compatibility introduces some (perhaps surprising) considerations when
 deserializing wire-formatted messages:
 
--   When serializing, fields with *no presence* are not serialized if they
+-   When serializing, fields with *implicit presence* are not serialized if they
     contain their default value.
     -   For numeric types, the default is 0.
     -   For enums, the default is the zero-valued enumerator.
@@ -87,8 +91,8 @@ semantics of the wire format or TextFormat.
 -   Notably, JSON *elements* are semantically unordered, and each member must
     have a unique name. This is different from TextFormat rules for repeated
     fields.
--   JSON may include fields that are "not present," unlike the *no presence*
-    discipline for other formats:
+-   JSON may include fields that are "not present," unlike the *implicit
+    presence* discipline for other formats:
     -   JSON defines a `null` value, which may be used to represent a *defined
         but not-present field*.
     -   Repeated field values may be included in the formatted output, even if
@@ -174,24 +178,24 @@ basic types (numeric, string, bytes, and enums), either. Oneof fields
 affirmatively expose presence, although the same set of hazzer methods may not
 generated as in proto2 APIs.
 
-Under the *no presence* discipline, the default value is synonymous with "not
-present" for purposes of serialization. To notionally "clear" a field (so it
-won't be serialized), an API user would set it to the default value.
+Under the *implicit presence* discipline, the default value is synonymous with
+"not present" for purposes of serialization. To notionally "clear" a field (so
+it won't be serialized), an API user would set it to the default value.
 
-The default value for enum-typed fields under *no presence* is the corresponding
-0-valued enumerator. Under proto3 syntax rules, all enum types are required to
-have an enumerator value which maps to 0. By convention, this is an `UNKNOWN` or
-similarly-named enumerator. If the zero value is notionally outside the domain
-of valid values for the application, this behavior can be thought of as
-tantamount to *explicit presence*.
+The default value for enum-typed fields under *implicit presence* is the
+corresponding 0-valued enumerator. Under proto3 syntax rules, all enum types are
+required to have an enumerator value which maps to 0. By convention, this is an
+`UNKNOWN` or similarly-named enumerator. If the zero value is notionally outside
+the domain of valid values for the application, this behavior can be thought of
+as tantamount to *explicit presence*.
 
-## Semantic Differences
+## Semantic Differences {#semantic-differences}
 
-The *no presence* serialization discipline results in visible differences from
-the *explicit presence* tracking discipline, when the default value is set. For
-a singular field with numeric, enum, or string type:
+The *implicit presence* serialization discipline results in visible differences
+from the *explicit presence* tracking discipline, when the default value is set.
+For a singular field with numeric, enum, or string type:
 
--   *No presence* discipline:
+-   *Implicit presence* discipline:
     -   Default values are not serialized.
     -   Default values are *not* merged-from.
     -   To "clear" a field, it is set to its default value.
@@ -200,6 +204,7 @@ a singular field with numeric, enum, or string type:
             the application-specific domain of values;
         -   the field was notionally "cleared" by setting its default; or
         -   the field was never set.
+    -   `has_` methods are not generated (but see note after this list)
 -   *Explicit presence* discipline:
     -   Explicitly set values are always serialized, including default values.
     -   Un-set fields are never merged-from.
@@ -209,13 +214,17 @@ a singular field with numeric, enum, or string type:
     -   A generated `clear_foo` method must be used to clear (i.e., un-set) the
         value.
 
+**Note:** `Has_` methods are not generated for implicit members in most cases.
+The exception to this behavior is Dart, which generates `has_` methods with
+proto3 proto schema files.
+
 ### Considerations for Merging
 
-Under the *no presence* rules, it is effectively impossible for a target field
-to merge-from its default value (using the protobuf's API merging functions).
-This is because default values are skipped, similar to the *no presence*
-serialization discipline. Merging only updates the target (merged-to) message
-using the non-skipped values from the update (merged-from) message.
+Under the *implicit presence* rules, it is effectively impossible for a target
+field to merge-from its default value (using the protobuf's API merging
+functions). This is because default values are skipped, similar to the *implicit
+presence* serialization discipline. Merging only updates the target (merged-to)
+message using the non-skipped values from the update (merged-from) message.
 
 The difference in merging behavior has further implications for protocols which
 rely on partial "patch" updates. If field presence is not tracked, then an
@@ -228,14 +237,14 @@ values -- even default values -- will be merged into the target.
 
 ### Considerations for change-compatibility
 
-Changing a field between *explicit presence* and *no presence* is a
+Changing a field between *explicit presence* and *implicit presence* is a
 binary-compatible change for serialized values in wire format. However, the
 serialized representation of the message may differ, depending on which version
 of the message definition was used for serialization. Specifically, when a
 "sender" explicitly sets a field to its default value:
 
--   The serialized value following *no presence* discipline does not contain the
-    default value, even though it was explicitly set.
+-   The serialized value following *implicit presence* discipline does not
+    contain the default value, even though it was explicitly set.
 -   The serialized value following *explicit presence* discipline contains every
     "present" field, even if it contains the default value.
 
@@ -324,7 +333,7 @@ syntax = "proto3";
 package example;
 
 message MyMessage {
-  // No presence:
+  // implicit presence:
   int32 not_tracked = 1;
 
   // Explicit presence:
@@ -346,7 +355,7 @@ tracking with protoc.
 The generated code for proto3 fields with *explicit presence* (the `optional`
 label) will be the same as it would be in a proto2 file.
 
-This is the definition used in the "no presence" examples below:
+This is the definition used in the "implicit presence" examples below:
 
 ```protobuf
 syntax = "proto3";
@@ -371,9 +380,9 @@ In the examples, a function `GetProto` constructs and returns a message of type
 
 #### C++ Example
 
-No presence:
+Implicit presence:
 
-```c++
+```cpp
 Msg m = GetProto();
 if (m.foo() != 0) {
   // "Clear" the field:
@@ -399,7 +408,7 @@ if (m.has_foo()) {
 
 #### C# Example
 
-No presence:
+Implicit presence:
 
 ```c#
 var m = GetProto();
@@ -427,7 +436,7 @@ if (m.HasFoo) {
 
 #### Go Example
 
-No presence:
+Implicit presence:
 
 ```go
 m := GetProto()
@@ -458,7 +467,7 @@ if m.Foo != nil {
 These examples use a `Builder` to demonstrate clearing. Simply checking presence
 and getting values from a `Builder` follows the same API as the message type.
 
-No presence:
+Implicit presence:
 
 ```java
 Msg.Builder m = GetProto().toBuilder();
@@ -486,7 +495,7 @@ if (m.hasFoo()) {
 
 #### Python Example
 
-No presence:
+Implicit presence:
 
 ```python
 m = example.Msg()
@@ -512,7 +521,7 @@ else:
 
 #### Ruby Example
 
-No presence:
+Implicit presence:
 
 ```ruby
 m = Msg.new
@@ -540,7 +549,7 @@ end
 
 #### Javascript Example
 
-No presence:
+Implicit presence:
 
 ```js
 var m = new Msg();
@@ -568,7 +577,7 @@ if (m.hasFoo()) {
 
 #### Objective-C Example
 
-No presence:
+Implicit presence:
 
 ```objective-c
 Msg *m = [[Msg alloc] init];
