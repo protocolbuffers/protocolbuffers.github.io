@@ -1,6 +1,6 @@
 +++
 title = "Rust Proto Design Decisions"
-weight = 782
+weight = 785
 linkTitle = "Design Decisions"
 description = "Explains some of the design choices that the Rust Proto implementation makes."
 type = "docs"
@@ -23,7 +23,7 @@ implemented on top of existing protobuf implementations, or as we call these
 implementations: kernels.
 
 The biggest factor that goes into this decision was to enable zero-cost of
-adding Rust to a preexisting binary which already uses non-Rust Protobuf. Bby
+adding Rust to a preexisting binary which already uses non-Rust Protobuf. By
 enabling the implementation to be ABI-compatible with the C++ Protobuf generated
 code, it is possible to share Protobuf messages across the language boundary
 (FFI) as plain pointers, avoiding the need to serialize in one language, pass
