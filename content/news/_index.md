@@ -20,6 +20,8 @@ New news topics will also be published to the
 The following news topics provide information in the reverse order in which it
 was released.
 
+*   [November 7, 2024](/news/2024-11-07) - More breaking
+    changes in the upcoming 30.x release
 *   [October 2, 2024](/news/2024-10-02) - Breaking
     changes in the upcoming 30.x release
 *   [October 1, 2024](/news/2024-10-01) - Changes to
@@ -84,6 +86,7 @@ release notes will be more complete. Also, not everything from the chronological
 listing will be in these topics, as some content is not specific to a particular
 release.
 
+*   [Version 30.x](/news/v30)
 *   [Version 29.x](/news/v29)
 *   [Version 26.x](/news/v26)
 *   [Version 25.x](/news/v25)

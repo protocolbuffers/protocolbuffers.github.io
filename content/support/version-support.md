@@ -8,6 +8,9 @@ type = "docs"
 
 <link rel="stylesheet" href="/includes/version-tables.css">
 
+<!-- version-chart: quarter to highlight as latest release -->
+<!--#set var="y24q3" value="latest-release"-->
+
 Support windows for protoc and the various languages are covered in the tables
 later in this topic. Version numbers throughout this topic use
 [SemVer](https://semver.org) conventions; in the version "3.21.7," we say that
@@ -93,241 +96,154 @@ In general:
 The most recent release is always supported. Support for earlier minor versions
 ends when a new minor version under the same major version is released. Support
 for earlier major versions ends four quarters beyond the quarter that the
-breaking release is introduced. For example, when Python 4.21.0 was released in
-May of 2022, that set the end of public support of Python 3.20.1 at the
-[end of 2023 Q2](#python).
+breaking release is introduced. For example, when Protobuf Python 5.26.0 was
+released in Q1 of 2024, that set the end of support of Protobuf Python 4.25.x at
+the [end of Q1 2025](#python).
 
 The following sections provide a guide to the support for each language.
 
 ## C++ {#cpp}
 
-This table provides specific dates for support duration.
-
-<table>
-  <tr>
-    <th>Branch</th>
-    <th>Initial Release</th>
-    <th>Public Support Until</th>
-  </tr>
-  <tr>
-    <td class="gray">3.21.x</td>
-    <td class="gray">25 May 2022</td>
-    <td class="gray"><s>31 Mar 2024</s></td>
-  </tr>
-  <tr>
-    <td class="gray">4.22.x</td>
-    <td class="gray">16 Feb 2023</td>
-    <td class="gray"><s>8 May 2023</s></td>
-  </tr>
-  <tr>
-    <td class="gray">4.23.x</td>
-    <td class="gray">8 May 2023</td>
-    <td class="gray"><s>8 Aug 2023</s></td>
-  </tr>
-  <tr>
-    <td class="gray">4.24.x</td>
-    <td class="gray">8 Aug 2023</td>
-    <td class="gray"><s>1 Nov 2023</s></td>
-  </tr>
-  <tr>
-    <td class="gray">4.25.x</td>
-    <td>1 Nov 2023</td>
-    <td>31 Mar 2025</td>
-  </tr>
-  <tr>
-    <td class="gray">5.26.x</td>
-    <td class="gray">13 Mar 2024</td>
-    <td class="gray"><s>23 May 2024</s></td>
-  </tr>
-  <tr>
-    <td class="gray">5.27.x</td>
-    <td class="gray">23 May 2024</td>
-    <td class="gray"><s>28 Aug 2024</s></td>
-  </tr>
-  <tr>
-    <td class="gray">5.28.x</td>
-    <td>28 Aug 2024</td>
-    <td>TBD</td>
-  </tr>
-</table>
-
-This table graphically shows support durations.
-
 C++ will target making major version bumps annually in Q1 of each year.
 
-<table>
+The protoc version can be inferred from the Protobuf C++ minor version number.
+Example: Protobuf C++ version 4.25.x uses protoc version 25.x.
+
+Future plans are shown in *italics* and are subject to change.
+
+**Release support dates**
+
+<table class="version-table">
   <tr>
-    <th>protoc</th>
-    <th>C++</th>
-    <th>23Q1</th>
-    <th>23Q2</th>
-    <th>23Q3</th>
-    <th>23Q4</th>
-    <th>24Q1</th>
-    <th>24Q2</th>
-    <th>24Q3</th>
-    <th>24Q4</th>
-    <th>25Q1</th>
+    <th>Protobuf C++</th>
+    <th>Release date</th>
+    <th>End of support</th>
   </tr>
-  <tr>
-    <td class="gray">21.x</td>
-    <td class="gray">3.21.x</td>
-    <td title=23Q1 class="green">PS</td>
-    <td title=23Q2 class="green">PS</td>
-    <td title=23Q3 class="green">PS</td>
-    <td title=23Q4 class="green">PS</td>
-    <td title=24Q1 class="red">SE</td>
-    <td title=24Q2></td>
-    <td title=24Q3></td>
-    <td title=24Q4></td>
-    <td title=25Q1></td>
+  <tr class="end-of-life">
+    <th>3.x</th>
+    <td>25 May 2022</td>
+    <td>31 Mar 2024</td>
   </tr>
-  <tr>
-    <td class="gray">22.x</td>
-    <td class="gray">4.22.x</td>
-    <td title=23Q1 class="blue">IR</td>
-    <td title=23Q2></td>
-    <td title=23Q3></td>
-    <td title=23Q4></td>
-    <td title=24Q1></td>
-    <td title=24Q2></td>
-    <td title=24Q3></td>
-    <td title=24Q4></td>
-    <td title=25Q1></td>
+  <tr class="maintenance">
+    <th>4.x</th>
+    <td>16 Feb 2023</td>
+    <td>31 Mar 2025</td>
   </tr>
-  <tr>
-    <td class="gray">23.x</td>
-    <td class="gray">4.23.x</td>
-    <td title=23Q1></td>
-    <td title=23Q2 class="blue">IR</td>
-    <td title=23Q3></td>
-    <td title=23Q4></td>
-    <td title=24Q1></td>
-    <td title=22Q2></td>
-    <td title=22Q3></td>
-    <td title=24Q4></td>
-    <td title=25Q1></td>
+  <tr class="active">
+    <th>5.x</th>
+    <td>13 Mar 2024</td>
+    <td>31 Mar 2026</td>
   </tr>
-  <tr>
-    <td class="gray">24.x</td>
-    <td class="gray">4.24.x</td>
-    <td title=23Q1></td>
-    <td title=23Q2></td>
-    <td title=23Q3 class="blue">IR</td>
-    <td title=23Q4></td>
-    <td title=24Q1></td>
-    <td title=24Q2></td>
-    <td title=24Q3></td>
-    <td title=24Q4></td>
-    <td title=25Q1></td>
-  </tr>
-  <tr>
-    <td class="gray">25.x</td>
-    <td class="gray">4.25.x</td>
-    <td title=23Q1></td>
-    <td title=23Q2></td>
-    <td title=23Q3></td>
-    <td title=23Q4 class="blue">IR</td>
-    <td title=24Q1 class="green">PS</td>
-    <td title=24Q2 class="green">PS</td>
-    <td title=24Q3 class="green">PS</td>
-    <td title=24Q4 class="green">PS</td>
-    <td title=25Q1 class="red">SE</td>
-  </tr>
-  <tr>
-    <td class="gray">26.x</td>
-    <td class="gray">5.26.x</td>
-    <td title=23Q1></td>
-    <td title=23Q2></td>
-    <td title=23Q3></td>
-    <td title=23Q4></td>
-    <td title=24Q1 class="blue">IR</td>
-    <td title=24Q2></td>
-    <td title=24Q3></td>
-    <td title=24Q4></td>
-    <td title=25Q1></td>
-  </tr>
-  <tr>
-    <td class="gray">27.x</td>
-    <td class="gray">5.27.x</td>
-    <td title=23Q1></td>
-    <td title=23Q2></td>
-    <td title=23Q3></td>
-    <td title=23Q4></td>
-    <td title=24Q1></td>
-    <td title=24Q2 class="blue">IR</td>
-    <td title=24Q3></td>
-    <td title=24Q4</td>
-    <td title=25Q1></td>
-  </tr>
-  <tr>
-    <td class="gray">28.x</td>
-    <td class="gray">5.28.x</td>
-    <td title=23Q1></td>
-    <td title=23Q2></td>
-    <td title=23Q3></td>
-    <td title=23Q4></td>
-    <td title=24Q1></td>
-    <td title=24Q2></td>
-    <td title=24Q3 class="blue">IR</td>
-    <td title=24Q4></td>
-    <td title=25Q1></td>
-  </tr>
-  <tr>
-    <td colspan="13">
-      The cells below are projections of future releases, but are not guarantees
-      <br/>that those releases will happen, or that they will happen on that
-      schedule.
-    </td>
-  </tr>
-  <tr>
-    <td class="gray">29.x</td>
-    <td class="gray">5.29.x</td>
-    <td title=23Q1></td>
-    <td title=23Q2></td>
-    <td title=23Q3></td>
-    <td title=23Q4></td>
-    <td title=24Q1></td>
-    <td title=24Q2></td>
-    <td title=24Q3></td>
-    <td title=24Q4 class="blue">IR</td>
-    <td title=25Q1 class="green">PS</td>
-  </tr>
-  <tr>
-    <td class="gray">30.x</td>
-    <td class="gray">6.30.x</td>
-    <td title=23Q1></td>
-    <td title=23Q2></td>
-    <td title=23Q3></td>
-    <td title=23Q4></td>
-    <td title=24Q1></td>
-    <td title=24Q2></td>
-    <td title=24Q3></td>
-    <td title=24Q4></td>
-    <td title=25Q1 class="blue">IR</td>
+  <tr class="future">
+    <th>6.x</th>
+    <td>Q1 2025</td>
+    <td>31 Mar 2027</td>
   </tr>
 </table>
 
-<table>
+**Release support chart**
+
+<table class="version-chart">
   <tr>
-    <td class="gray">
-      <b>Legend</b>
-    </td>
+    <th>Protobuf C++</th>
+    <th>protoc</th>
+    <th class="<!--#echo var="y23q1"-->"><span>23Q1</span></th>
+    <th class="<!--#echo var="y23q2"-->"><span>23Q2</span></th>
+    <th class="<!--#echo var="y23q3"-->"><span>23Q3</span></th>
+    <th class="<!--#echo var="y23q4"-->"><span>23Q4</span></th>
+    <th class="<!--#echo var="y24q1"-->"><span>24Q1</span></th>
+    <th class="<!--#echo var="y24q2"-->"><span>24Q2</span></th>
+    <th class="<!--#echo var="y24q3"-->"><span>24Q3</span></th>
+    <th class="<!--#echo var="y24q4"-->"><span>24Q4</span></th>
+    <th class="<!--#echo var="y25q1"-->"><span>25Q1</span></th>
+    <th class="<!--#echo var="y25q2"-->"><span>25Q2</span></th>
+    <th class="<!--#echo var="y25q3"-->"><span>25Q3</span></th>
+    <th class="<!--#echo var="y25q4"-->"><span>25Q4</span></th>
   </tr>
-  <tr>
-    <td class="blue">
-      Initial release (IR)
-    </td>
+  <tr class="end-of-life">
+    <th>3.x</th>
+    <td>21.x</td>
+    <td class="<!--#echo var="y23q1"--> maintenance">3.21</td>
+    <td class="<!--#echo var="y23q2"--> maintenance">3.21</td>
+    <td class="<!--#echo var="y23q3"--> maintenance">3.21</td>
+    <td class="<!--#echo var="y23q4"--> maintenance">3.21</td>
+    <td class="<!--#echo var="y24q1"--> maintenance">3.21</td>
+    <td class="<!--#echo var="y24q2"-->"></td>
+    <td class="<!--#echo var="y24q3"-->"></td>
+    <td class="<!--#echo var="y24q4"-->"></td>
+    <td class="<!--#echo var="y25q1"-->"></td>
+    <td class="<!--#echo var="y25q2"-->"></td>
+    <td class="<!--#echo var="y25q3"-->"></td>
+    <td class="<!--#echo var="y25q4"-->"></td>
   </tr>
-  <tr>
-    <td class="green">
-      Public support (PS)
-    </td>
+  <tr class="maintenance">
+    <th>4.x</th>
+    <td>22.x-25.x</td>
+    <td class="<!--#echo var="y23q1"--> active">4.22</td>
+    <td class="<!--#echo var="y23q2"--> active">4.23</td>
+    <td class="<!--#echo var="y23q3"--> active">4.24</td>
+    <td class="<!--#echo var="y23q4"--> active">4.25</td>
+    <td class="<!--#echo var="y24q1"--> maintenance">4.25</td>
+    <td class="<!--#echo var="y24q2"--> maintenance">4.25</td>
+    <td class="<!--#echo var="y24q3"--> maintenance">4.25</td>
+    <td class="<!--#echo var="y24q4"--> maintenance">4.25</td>
+    <td class="<!--#echo var="y25q1"--> maintenance">4.25</td>
+    <td class="<!--#echo var="y25q2"-->"></td>
+    <td class="<!--#echo var="y25q3"-->"></td>
+    <td class="<!--#echo var="y25q4"-->"></td>
   </tr>
-  <tr>
-    <td class="red">
-      Support ends (SE)
-    </td>
+  <tr class="active">
+    <th>5.x</th>
+    <td>26.x-29.x</td>
+    <td class="<!--#echo var="y23q1"-->"></td>
+    <td class="<!--#echo var="y23q2"-->"></td>
+    <td class="<!--#echo var="y23q3"-->"></td>
+    <td class="<!--#echo var="y23q4"-->"></td>
+    <td class="<!--#echo var="y24q1"--> active">5.26</td>
+    <td class="<!--#echo var="y24q2"--> active">5.27</td>
+    <td class="<!--#echo var="y24q3"--> active">5.28</td>
+    <td class="<!--#echo var="y24q4"--> active">5.29</td>
+    <td class="<!--#echo var="y25q1"--> maintenance">5.29</td>
+    <td class="<!--#echo var="y25q2"--> maintenance">5.29</td>
+    <td class="<!--#echo var="y25q3"--> maintenance">5.29</td>
+    <td class="<!--#echo var="y25q4"--> maintenance">5.29</td>
+  </tr>
+  <tr class="future">
+    <th>6.x</th>
+    <td>30.x-33.x</td>
+    <td class="<!--#echo var="y23q1"-->"></td>
+    <td class="<!--#echo var="y23q2"-->"></td>
+    <td class="<!--#echo var="y23q3"-->"></td>
+    <td class="<!--#echo var="y23q4"-->"></td>
+    <td class="<!--#echo var="y24q1"-->"></td>
+    <td class="<!--#echo var="y24q2"-->"></td>
+    <td class="<!--#echo var="y24q3"-->"></td>
+    <td class="<!--#echo var="y24q4"-->"></td>
+    <td class="<!--#echo var="y25q1"--> active">6.30</td>
+    <td class="<!--#echo var="y25q2"--> active">6.31</td>
+    <td class="<!--#echo var="y25q3"--> active">6.32</td>
+    <td class="<!--#echo var="y25q4"--> active">6.33</td>
+  </tr>
+</table>
+
+**Legend**
+
+<table class="legend">
+  <tr class="active">
+    <th>Active</th>
+    <td>Minor and patch releases with new features, compatible changes and bug fixes.</td>
+  </tr>
+  <tr class="maintenance">
+    <th>Maintenance</th>
+    <td>Patch releases with critical bug fixes.</td>
+  </tr>
+  <tr class="end-of-life">
+    <th>End of life</th>
+    <td>Release is unsupported. Users should upgrade to a supported release.</td>
+  </tr>
+  <tr class="future">
+    <th>Future</th>
+    <td>Projected release. Shown for planning purposes.</td>
   </tr>
 </table>
 
@@ -341,213 +257,81 @@ For specific versions supported, see
 
 ## C&#35; {#csharp}
 
-This table provides specific dates for support duration.
+The protoc version can be inferred from the Protobuf C# minor version number.
+Example: Protobuf C# version 3.25.x uses protoc version 25.x.
 
-<table>
+Future plans are shown in *italics* and are subject to change.
+
+**Release support dates**
+
+<table class="version-table">
   <tr>
-    <th>Branch</th>
-    <th>Initial Release</th>
-    <th>Public Support Until</th>
+    <th>Protobuf C#</th>
+    <th>Release date</th>
+    <th>End of support</th>
   </tr>
-  <tr>
-    <td class="gray">3.22.x</td>
-    <td class="gray">16 Feb 2023</td>
-    <td class="gray"><s>8 May 2023</s></td>
-  </tr>
-  <tr>
-    <td class="gray">3.23.x</td>
-    <td class="gray">8 May 2023</td>
-    <td class="gray"><s>8 Aug 2023</s></td>
-  </tr>
-  <tr>
-    <td class="gray">3.24.x</td>
-    <td class="gray">8 Aug 2023</td>
-    <td class="gray"><s>1 Nov 2023</s></td>
-  </tr>
-  <tr>
-    <td class="gray">3.25.x</td>
-    <td class="gray">1 Nov 2023</td>
-    <td class="gray"><s>13 Mar 2024</s></td>
-  </tr>
-  <tr>
-    <td class="gray">3.26.x</td>
-    <td class="gray">13 Mar 2024</td>
-    <td class="gray"><s>23 May 2024</s></td>
-  </tr>
-  <tr>
-    <td class="gray">3.27.x</td>
-    <td class="gray">23 May 2024</td>
-    <td class="gray"><s>28 Aug 2024</s></td>
-  </tr>
-  <tr>
-    <td class="gray">3.28.x</td>
-    <td>28 Aug 2024</td>
+  <tr class="active">
+    <th>3.x</th>
+    <td>16 Feb 2023</td>
     <td>TBD</td>
   </tr>
 </table>
 
-This table graphically shows support durations.
+**Release support chart**
 
-<table>
+<table class="version-chart">
   <tr>
+    <th>Protobuf C#</th>
     <th>protoc</th>
-    <th>C#</th>
-    <th>23Q1</th>
-    <th>23Q2</th>
-    <th>23Q3</th>
-    <th>23Q4</th>
-    <th>24Q1</th>
-    <th>24Q2</th>
-    <th>24Q3</th>
-    <th>24Q4</th>
-    <th>25Q1</th>
+    <th class="<!--#echo var="y23q1"-->"><span>23Q1</span></th>
+    <th class="<!--#echo var="y23q2"-->"><span>23Q2</span></th>
+    <th class="<!--#echo var="y23q3"-->"><span>23Q3</span></th>
+    <th class="<!--#echo var="y23q4"-->"><span>23Q4</span></th>
+    <th class="<!--#echo var="y24q1"-->"><span>24Q1</span></th>
+    <th class="<!--#echo var="y24q2"-->"><span>24Q2</span></th>
+    <th class="<!--#echo var="y24q3"-->"><span>24Q3</span></th>
+    <th class="<!--#echo var="y24q4"-->"><span>24Q4</span></th>
+    <th class="<!--#echo var="y25q1"-->"><span>25Q1</span></th>
+    <th class="<!--#echo var="y25q2"-->"><span>25Q2</span></th>
+    <th class="<!--#echo var="y25q3"-->"><span>25Q3</span></th>
+    <th class="<!--#echo var="y25q4"-->"><span>25Q4</span></th>
   </tr>
-  <tr>
-    <td class="gray">22.x</td>
-    <td class="gray">3.22.x</td>
-    <td title=23Q1 class="blue">IR</td>
-    <td title=23Q2></td>
-    <td title=23Q3></td>
-    <td title=23Q4></td>
-    <td title=24Q1></td>
-    <td title=24Q2></td>
-    <td title=24Q3></td>
-    <td title=24Q4></td>
-    <td title=25Q1></td>
-  </tr>
-  <tr>
-    <td class="gray">23.x</td>
-    <td class="gray">3.23.x</td>
-    <td title=23Q1></td>
-    <td title=23Q2 class="blue">IR</td>
-    <td title=23Q3></td>
-    <td title=23Q4></td>
-    <td title=24Q1></td>
-    <td title=24Q2></td>
-    <td title=24Q3></td>
-    <td title=24Q4></td>
-    <td title=25Q1></td>
-  </tr>
-  <tr>
-    <td class="gray">24.x</td>
-    <td class="gray">3.24.x</td>
-    <td title=23Q1></td>
-    <td title=23Q2></td>
-    <td title=23Q3 class="blue">IR</td>
-    <td title=23Q4></td>
-    <td title=24Q1></td>
-    <td title=24Q2></td>
-    <td title=24Q3></td>
-    <td title=24Q4></td>
-    <td title=25Q1></td>
-  </tr>
-  <tr>
-    <td class="gray">25.x</td>
-    <td class="gray">3.25.x</td>
-    <td title=23Q1></td>
-    <td title=23Q2></td>
-    <td title=23Q3></td>
-    <td title=23Q4 class="blue">IR</td>
-    <td title=24Q1></td>
-    <td title=24Q2></td>
-    <td title=24Q3></td>
-    <td title=24Q4></td>
-    <td title=25Q1></td>
-  </tr>
-  <tr>
-    <td class="gray">26.x</td>
-    <td class="gray">3.26.x</td>
-    <td title=23Q1></td>
-    <td title=23Q2></td>
-    <td title=23Q3></td>
-    <td title=23Q4></td>
-    <td title=24Q1 class="blue">IR</td>
-    <td title=24Q2></td>
-    <td title=24Q3></td>
-    <td title=24Q4></td>
-    <td title=25Q1></td>
-  </tr>
-  <tr>
-    <td class="gray">27.x</td>
-    <td class="gray">3.27.x</td>
-    <td title=23Q1></td>
-    <td title=23Q2></td>
-    <td title=23Q3></td>
-    <td title=23Q4></td>
-    <td title=24Q1></td>
-    <td title=24Q2 class="blue">IR</td>
-    <td title=24Q3></td>
-    <td title=24Q4></td>
-    <td title=25Q1></td>
-  </tr>
-  <tr>
-    <td class="gray">28.x</td>
-    <td class="gray">3.28.x</td>
-    <td title=23Q1></td>
-    <td title=23Q2></td>
-    <td title=23Q3></td>
-    <td title=23Q4></td>
-    <td title=24Q1></td>
-    <td title=24Q2></td>
-    <td title=24Q3 class="blue">IR</td>
-    <td title=24Q4></td>
-    <td title=25Q1></td>
-  </tr>
-  <tr>
-    <td colspan="12">
-      The cells below are projections of future releases, but are not guarantees
-      <br/>that those releases will happen, or that they will happen on that
-      schedule.
-    </td>
-  </tr>
-  <tr>
-    <td class="gray">29.x</td>
-    <td class="gray"></td>
-    <td title=23Q1></td>
-    <td title=23Q2></td>
-    <td title=23Q3></td>
-    <td title=23Q4></td>
-    <td title=24Q1></td>
-    <td title=24Q2></td>
-    <td title=24Q3></td>
-    <td title=24Q4 class="blue">IR</td>
-    <td title=25Q1></td>
-  </tr>
-  <tr>
-    <td class="gray">30.x</td>
-    <td class="gray"></td>
-    <td title=23Q1></td>
-    <td title=23Q2></td>
-    <td title=23Q3></td>
-    <td title=23Q4></td>
-    <td title=24Q1></td>
-    <td title=24Q2></td>
-    <td title=24Q3></td>
-    <td title=24Q4></td>
-    <td title=25Q1 class="blue">IR</td>
+  <tr class="active">
+    <th>3.x</th>
+    <td>22.x-33.x</td>
+    <td class="<!--#echo var="y23q1"--> active">3.22</td>
+    <td class="<!--#echo var="y23q2"--> active">3.23</td>
+    <td class="<!--#echo var="y23q3"--> active">3.24</td>
+    <td class="<!--#echo var="y23q4"--> active">3.25</td>
+    <td class="<!--#echo var="y24q1"--> active">3.26</td>
+    <td class="<!--#echo var="y24q2"--> active">3.27</td>
+    <td class="<!--#echo var="y24q3"--> active">3.28</td>
+    <td class="<!--#echo var="y24q4"--> active">3.29</td>
+    <td class="<!--#echo var="y25q1"--> active">3.30</td>
+    <td class="<!--#echo var="y25q2"--> active">3.31</td>
+    <td class="<!--#echo var="y25q3"--> active">3.32</td>
+    <td class="<!--#echo var="y25q4"--> active">3.33</td>
   </tr>
 </table>
 
-<table>
-  <tr>
-    <td class="gray">
-      <b>Legend</b>
-    </td>
+**Legend**
+
+<table class="legend">
+  <tr class="active">
+    <th>Active</th>
+    <td>Minor and patch releases with new features, compatible changes and bug fixes.</td>
   </tr>
-  <tr>
-    <td class="blue">
-      Initial release (IR)
-    </td>
+  <tr class="maintenance">
+    <th>Maintenance</th>
+    <td>Patch releases with critical bug fixes.</td>
   </tr>
-  <tr>
-    <td class="green">
-      Public support (PS)
-    </td>
+  <tr class="end-of-life">
+    <th>End of life</th>
+    <td>Release is unsupported. Users should upgrade to a supported release.</td>
   </tr>
-  <tr>
-    <td class="red">
-      Support ends (SE)
-    </td>
+  <tr class="future">
+    <th>Future</th>
+    <td>Projected release. Shown for planning purposes.</td>
   </tr>
 </table>
 
@@ -561,227 +345,117 @@ For specific versions supported, see
 
 ## Java {#java}
 
-This table provides specific dates for support duration.
-
-<table>
-  <tr>
-    <th>Branch</th>
-    <th>Initial Release</th>
-    <th>Public Support Until</th>
-  </tr>
-  <tr>
-    <td class="gray">3.19.x</td>
-    <td class="gray">20 Oct 2021</td>
-    <td class="gray"><s>25 Mar 2022</s></td>
-  </tr>
-  <tr>
-    <td class="gray">3.20.x</td>
-    <td class="gray">25 Mar 2022</td>
-    <td class="gray"><s>25 May 2022</s></td>
-  </tr>
-  <tr>
-    <td class="gray">3.21.x</td>
-    <td class="gray">25 May 2022</td>
-    <td class="gray"><s>16 Feb 2023</s></td>
-  </tr>
-  <tr>
-    <td class="gray">3.22.x</td>
-    <td class="gray">16 Feb 2023</td>
-    <td class="gray"><s>8 May 2023</s></td>
-  </tr>
-  <tr>
-    <td class="gray">3.23.x</td>
-    <td class="gray">8 May 2023</td>
-    <td class="gray"><s>8 Aug 2023</s></td>
-  </tr>
-  <tr>
-    <td class="gray">3.24.x</td>
-    <td class="gray">8 Aug 2023</td>
-    <td class="gray"><s>1 Nov 2023</s></td>
-  </tr>
-  <tr>
-    <td class="gray">3.25.x</td>
-    <td>1 Nov 2023</td>
-    <td>31 Mar 2026*</td>
-  </tr>
-  <tr>
-    <td class="gray">4.26.x</td>
-    <td class="gray">13 Mar 2024</td>
-    <td class="gray"><s>23 May 2024</s></td>
-  </tr>
-  <tr>
-    <td class="gray">4.27.x</td>
-    <td class="gray">23 May 2024</td>
-    <td class="gray"><s>28 Aug 2024</s></td>
-  </tr>
-  <tr>
-    <td class="gray">4.28.x</td>
-    <td>28 Aug 2024</td>
-    <td>TBD</td>
-  </tr>
-</table>
-
-**NOTE:** The support window for the Java 3.25.x release will be 24 months
-rather than the typical 12 months for the final release in a major version line.
-Future major version updates (5.x+) will adopt an improved
-["rolling compatibility window"](/support/cross-version-runtime-guarantee/#major)
-that should allow a return to 12-month support windows.
-
-This table graphically shows support durations.
-
 Java will target making major version bumps annually in Q1 of each year.
 
-<table>
+The protoc version can be inferred from the Protobuf Java minor version number.
+Example: Protobuf Java version 3.25.x uses protoc version 25.x.
+
+Future plans are shown in *italics* and are subject to change.
+
+**Release support dates**
+
+<table class="version-table">
   <tr>
-    <th>protoc</th>
-    <th>Java</th>
-    <th>23Q2</th>
-    <th>23Q3</th>
-    <th>23Q4</th>
-    <th>24Q1</th>
-    <th>24Q2</th>
-    <th>24Q3</th>
-    <th>24Q4</th>
-    <th>25Q1</th>
+    <th>Protobuf Java</th>
+    <th>Release date</th>
+    <th>End of support</th>
   </tr>
-  <tr>
-    <td class="gray">22.x</td>
-    <td class="gray">3.22.x</td>
-    <td title=23Q2></td>
-    <td title=23Q3></td>
-    <td title=23Q4></td>
-    <td title=24Q1></td>
-    <td title=24Q2></td>
-    <td title=24Q3></td>
-    <td title=24Q4></td>
-    <td title=25Q1></td>
+  <tr class="maintenance">
+    <th>3.x</th>
+    <td>16 Feb 2023</td>
+    <td>31 Mar 2026*</td>
   </tr>
-  <tr>
-    <td class="gray">23.x</td>
-    <td class="gray">3.23.x</td>
-    <td title=23Q2 class="blue">IR</td>
-    <td title=23Q3></td>
-    <td title=23Q4></td>
-    <td title=24Q1></td>
-    <td title=24Q2></td>
-    <td title=24Q3></td>
-    <td title=24Q4></td>
-    <td title=25Q1></td>
+  <tr class="active">
+    <th>4.x</th>
+    <td>13 Mar 2024</td>
+    <td>31 Mar 2027</td>
   </tr>
-  <tr>
-    <td class="gray">24.x</td>
-    <td class="gray">3.24.x</td>
-    <td title=23Q2></td>
-    <td title=23Q3 class="blue">IR</td>
-    <td title=23Q4></td>
-    <td title=24Q1></td>
-    <td title=24Q2></td>
-    <td title=24Q3></td>
-    <td title=24Q4></td>
-    <td title=25Q1></td>
-  </tr>
-  <tr>
-    <td class="gray">25.x</td>
-    <td class="gray">3.25.x</td>
-    <td title=23Q2></td>
-    <td title=23Q3></td>
-<!--3.25.x is special and will be publicly supported until end of 26Q1-->
-    <td title=23Q4 class="blue">IR</td>
-    <td title=24Q1 class="green">PS</td>
-    <td title=24Q2 class="green">PS</td>
-    <td title=24Q3 class="green">PS</td>
-    <td title=24Q4 class="green">PS</td>
-    <td title=25Q1 class="green">PS</td>
-  </tr>
-  <tr>
-    <td class="gray">26.x</td>
-    <td class="gray">4.26.x</td>
-    <td title=23Q2></td>
-    <td title=23Q3></td>
-    <td title=23Q4></td>
-    <td title=24Q1 class="blue">IR</td>
-    <td title=24Q2></td>
-    <td title=24Q3></td>
-    <td title=24Q4></td>
-    <td title=25Q1></td>
-  </tr>
-  <tr>
-    <td class="gray">27.x</td>
-    <td class="gray">4.27.x</td>
-    <td title=23Q2></td>
-    <td title=23Q3></td>
-    <td title=23Q4></td>
-    <td title=24Q1></td>
-    <td title=24Q2 class="blue">IR</td>
-    <td title=24Q3></td>
-    <td title=24Q4></td>
-    <td title=25Q1></td>
-  </tr>
-  <tr>
-    <td class="gray">28.x</td>
-    <td class="gray">4.28.x</td>
-    <td title=23Q2></td>
-    <td title=23Q3></td>
-    <td title=23Q4></td>
-    <td title=24Q1></td>
-    <td title=24Q2></td>
-    <td title=24Q3 class="blue">IR</td>
-    <td title=24Q4></td>
-    <td title=25Q1></td>
-  </tr>
-  <tr>
-    <td colspan="12">
-      The cells below are projections of future releases, but are not guarantees
-      <br/>that those releases will happen, or that they will happen on that
-      schedule.
-    </td>
-  </tr>
-  <tr>
-    <td class="gray">29.x</td>
-    <td class="gray">4.29.x</td>
-    <td title=23Q2></td>
-    <td title=23Q3></td>
-    <td title=23Q4></td>
-    <td title=24Q1></td>
-    <td title=24Q2></td>
-    <td title=24Q3></td>
-    <td title=24Q4 class="blue">IR</td>
-    <td title=25Q1></td>
-  </tr>
-  <tr>
-    <td class="gray">30.x</td>
-    <td class="gray">4.30.x</td>
-    <td title=23Q2></td>
-    <td title=23Q3></td>
-    <td title=23Q4></td>
-    <td title=24Q1></td>
-    <td title=24Q2></td>
-    <td title=24Q3></td>
-    <td title=24Q4></td>
-    <td title=25Q1 class="blue">IR</td>
+  <tr class="future">
+    <th>5.x</th>
+    <td>Q1 2026*</td>
+    <td>31 Mar 2028</td>
   </tr>
 </table>
 
-<table>
+**NOTE:** The maintenance support window for the Protobuf Java 3.x release will
+be 24 months rather than the typical 12 months for the final release in a major
+version line. Future major version updates (5.x, planned for Q1 2026) will adopt
+an improved
+["rolling compatibility window"](/support/cross-version-runtime-guarantee/#major)
+that should allow a return to 12-month support windows. There will be no major
+version bump in Q1 2025.
+
+**Release support chart**
+
+<table class="version-chart">
   <tr>
-    <td class="gray">
-      <b>Legend</b>
-    </td>
+    <th>Protobuf Java</th>
+    <th>protoc</th>
+    <th class="<!--#echo var="y23q1"-->"><span>23Q1</span></th>
+    <th class="<!--#echo var="y23q2"-->"><span>23Q2</span></th>
+    <th class="<!--#echo var="y23q3"-->"><span>23Q3</span></th>
+    <th class="<!--#echo var="y23q4"-->"><span>23Q4</span></th>
+    <th class="<!--#echo var="y24q1"-->"><span>24Q1</span></th>
+    <th class="<!--#echo var="y24q2"-->"><span>24Q2</span></th>
+    <th class="<!--#echo var="y24q3"-->"><span>24Q3</span></th>
+    <th class="<!--#echo var="y24q4"-->"><span>24Q4</span></th>
+    <th class="<!--#echo var="y25q1"-->"><span>25Q1</span></th>
+    <th class="<!--#echo var="y25q2"-->"><span>25Q2</span></th>
+    <th class="<!--#echo var="y25q3"-->"><span>25Q3</span></th>
+    <th class="<!--#echo var="y25q4"-->"><span>25Q4</span></th>
   </tr>
-  <tr>
-    <td class="blue">
-      Initial release (IR)
-    </td>
+  <tr class="maintenance">
+    <th>3.x</th>
+    <td>22.x-25.x</td>
+    <td class="<!--#echo var="y23q1"--> active">3.22</td>
+    <td class="<!--#echo var="y23q2"--> active">3.23</td>
+    <td class="<!--#echo var="y23q3"--> active">3.24</td>
+    <td class="<!--#echo var="y23q4"--> active">3.25</td>
+    <td class="<!--#echo var="y24q1"--> maintenance">3.25</td>
+    <td class="<!--#echo var="y24q2"--> maintenance">3.25</td>
+    <td class="<!--#echo var="y24q3"--> maintenance">3.25</td>
+    <td class="<!--#echo var="y24q4"--> maintenance">3.25</td>
+    <td class="<!--#echo var="y25q1"--> maintenance">3.25</td>
+    <td class="<!--#echo var="y25q2"--> maintenance">3.25</td>
+    <td class="<!--#echo var="y25q3"--> maintenance">3.25</td>
+    <td class="<!--#echo var="y25q4"--> maintenance">3.25</td>
   </tr>
-  <tr>
-    <td class="green">
-      Public support (PS)
-    </td>
+  <tr class="active">
+    <th>4.x</th>
+    <td>26.x-33.x</td>
+    <td class="<!--#echo var="y23q1"-->"></td>
+    <td class="<!--#echo var="y23q2"-->"></td>
+    <td class="<!--#echo var="y23q3"-->"></td>
+    <td class="<!--#echo var="y23q4"-->"></td>
+    <td class="<!--#echo var="y24q1"--> active">4.26</td>
+    <td class="<!--#echo var="y24q2"--> active">4.27</td>
+    <td class="<!--#echo var="y24q3"--> active">4.28</td>
+    <td class="<!--#echo var="y24q4"--> active">4.29</td>
+    <td class="<!--#echo var="y25q1"--> active">4.30</td>
+    <td class="<!--#echo var="y25q2"--> active">4.31</td>
+    <td class="<!--#echo var="y25q3"--> active">4.32</td>
+    <td class="<!--#echo var="y25q4"--> active">4.33</td>
   </tr>
-  <tr>
-    <td class="red">
-      Support ends (SE)
-    </td>
+</table>
+
+**Legend**
+
+<table class="legend">
+  <tr class="active">
+    <th>Active</th>
+    <td>Minor and patch releases with new features, compatible changes and bug fixes.</td>
+  </tr>
+  <tr class="maintenance">
+    <th>Maintenance</th>
+    <td>Patch releases with critical bug fixes.</td>
+  </tr>
+  <tr class="end-of-life">
+    <th>End of life</th>
+    <td>Release is unsupported. Users should upgrade to a supported release.</td>
+  </tr>
+  <tr class="future">
+    <th>Future</th>
+    <td>Projected release. Shown for planning purposes.</td>
   </tr>
 </table>
 
@@ -795,425 +469,203 @@ For specific versions supported, see
 
 ## Objective-C {#objc}
 
-This table provides specific dates for support duration.
+The protoc version can be inferred from the Protobuf Objective-C minor version
+number. Example: Protobuf Objective-C version 3.25.x uses protoc version 25.x.
 
-<table>
+Future plans are shown in *italics* and are subject to change.
+
+**Release support dates**
+
+<table class="version-table">
   <tr>
-    <th>Branch</th>
-    <th>Initial Release</th>
-    <th>Public Support Until</th>
+    <th>Protobuf Objective-C</th>
+    <th>Release date</th>
+    <th>End of support</th>
   </tr>
-  <tr>
-    <td class="gray">3.22.x</td>
-    <td class="gray">16 Feb 2023</td>
-    <td class="gray"><s>8 May 2023</s></td>
+  <tr class="active">
+    <th>3.x</th>
+    <td>16 Feb 2023</td>
+    <td>31 Mar 2026</td>
   </tr>
-  <tr>
-    <td class="gray">3.23.x</td>
-    <td class="gray">8 May 2023</td>
-    <td class="gray"><s>8 Aug 2023</s></td>
-  </tr>
-  <tr>
-    <td class="gray">3.24.x</td>
-    <td class="gray">8 Aug 2023</td>
-    <td class="gray"><s>1 Nov 2023</s></td>
-  </tr>
-  <tr>
-    <td class="gray">3.25.x</td>
-    <td class="gray">1 Nov 2023</td>
-    <td class="gray"><s>13 Mar 2024</s></td>
-  </tr>
-  <tr>
-    <td class="gray">3.26.x</td>
-    <td class="gray">13 Mar 2024</td>
-    <td class="gray"><s>23 May 2024</s></td>
-  </tr>
-  <tr>
-    <td class="gray">3.27.x</td>
-    <td class="gray">23 May 2024</td>
-    <td class="gray"><s>28 Aug 2024</s></td>
-  </tr>
-  <tr>
-    <td class="gray">3.28.x</td>
-    <td>28 Aug 2024</td>
+  <tr class="future">
+    <th>4.x</th>
+    <td>Q1 2025</td>
     <td>TBD</td>
   </tr>
 </table>
 
-This table graphically shows support durations.
+**Release support chart**
 
-<table>
+<table class="version-chart">
   <tr>
+    <th>Protobuf Objective-C</th>
     <th>protoc</th>
-    <th>ObjC</th>
-    <th>23Q1</th>
-    <th>23Q2</th>
-    <th>23Q3</th>
-    <th>23Q4</th>
-    <th>24Q1</th>
-    <th>24Q2</th>
-    <th>24Q3</th>
-    <th>24Q4</th>
-    <th>25Q1</th>
+    <th class="<!--#echo var="y23q1"-->"><span>23Q1</span></th>
+    <th class="<!--#echo var="y23q2"-->"><span>23Q2</span></th>
+    <th class="<!--#echo var="y23q3"-->"><span>23Q3</span></th>
+    <th class="<!--#echo var="y23q4"-->"><span>23Q4</span></th>
+    <th class="<!--#echo var="y24q1"-->"><span>24Q1</span></th>
+    <th class="<!--#echo var="y24q2"-->"><span>24Q2</span></th>
+    <th class="<!--#echo var="y24q3"-->"><span>24Q3</span></th>
+    <th class="<!--#echo var="y24q4"-->"><span>24Q4</span></th>
+    <th class="<!--#echo var="y25q1"-->"><span>25Q1</span></th>
+    <th class="<!--#echo var="y25q2"-->"><span>25Q2</span></th>
+    <th class="<!--#echo var="y25q3"-->"><span>25Q3</span></th>
+    <th class="<!--#echo var="y25q4"-->"><span>25Q4</span></th>
   </tr>
-  <tr>
-    <td class="gray">22.x</td>
-    <td class="gray">3.22.x</td>
-    <td title=23Q1 class="blue">IR</td>
-    <td title=23Q2></td>
-    <td title=23Q3></td>
-    <td title=23Q4></td>
-    <td title=24Q1></td>
-    <td title=24Q2></td>
-    <td title=24Q3></td>
-    <td title=24Q4></td>
-    <td title=25Q1></td>
+  <tr class="active">
+    <th>3.x</th>
+    <td>22.x-29.x</td>
+    <td class="<!--#echo var="y23q1"--> active">3.22</td>
+    <td class="<!--#echo var="y23q2"--> active">3.23</td>
+    <td class="<!--#echo var="y23q3"--> active">3.24</td>
+    <td class="<!--#echo var="y23q4"--> active">3.25</td>
+    <td class="<!--#echo var="y24q1"--> active">3.26</td>
+    <td class="<!--#echo var="y24q2"--> active">3.27</td>
+    <td class="<!--#echo var="y24q3"--> active">3.28</td>
+    <td class="<!--#echo var="y24q4"--> active">3.29</td>
+    <td class="<!--#echo var="y25q1"--> maintenance">3.29</td>
+    <td class="<!--#echo var="y25q2"--> maintenance">3.29</td>
+    <td class="<!--#echo var="y25q3"--> maintenance">3.29</td>
+    <td class="<!--#echo var="y25q4"--> maintenance">3.29</td>
   </tr>
-  <tr>
-    <td class="gray">23.x</td>
-    <td class="gray">3.23.x</td>
-    <td title=23Q1></td>
-    <td title=23Q2 class="blue">IR</td>
-    <td title=23Q3></td>
-    <td title=23Q4></td>
-    <td title=24Q1></td>
-    <td title=24Q2></td>
-    <td title=24Q3></td>
-    <td title=24Q4></td>
-    <td title=25Q1></td>
-  </tr>
-  <tr>
-    <td class="gray">24.x</td>
-    <td class="gray">3.24.x</td>
-    <td title=23Q1></td>
-    <td title=23Q2></td>
-    <td title=23Q3 class="blue">IR</td>
-    <td title=23Q4></td>
-    <td title=24Q1></td>
-    <td title=24Q2></td>
-    <td title=24Q3></td>
-    <td title=24Q4></td>
-    <td title=25Q1></td>
-  </tr>
-  <tr>
-    <td class="gray">25.x</td>
-    <td class="gray">3.25.x</td>
-    <td title=23Q1></td>
-    <td title=23Q2></td>
-    <td title=23Q3></td>
-    <td title=23Q4 class="blue">IR</td>
-    <td title=24Q1></td>
-    <td title=24Q2></td>
-    <td title=24Q3></td>
-    <td title=24Q4></td>
-    <td title=25Q1></td>
-  </tr>
-  <tr>
-    <td class="gray">26.x</td>
-    <td class="gray">3.26.x</td>
-    <td title=23Q1></td>
-    <td title=23Q2></td>
-    <td title=23Q3></td>
-    <td title=23Q4></td>
-    <td title=24Q1 class="blue">IR</td>
-    <td title=24Q2></td>
-    <td title=24Q3></td>
-    <td title=24Q4></td>
-    <td title=25Q1></td>
-  </tr>
-  <tr>
-    <td class="gray">27.x</td>
-    <td class="gray">3.27.x</td>
-    <td title=23Q1></td>
-    <td title=23Q2></td>
-    <td title=23Q3></td>
-    <td title=23Q4></td>
-    <td title=24Q1></td>
-    <td title=24Q2 class="blue">IR</td>
-    <td title=24Q3></td>
-    <td title=24Q4></td>
-    <td title=25Q1></td>
-  </tr>
-  <tr>
-    <td class="gray">28.x</td>
-    <td class="gray">3.28.x</td>
-    <td title=23Q1></td>
-    <td title=23Q2></td>
-    <td title=23Q3></td>
-    <td title=23Q4></td>
-    <td title=24Q1></td>
-    <td title=24Q2></td>
-    <td title=24Q3 class="blue">IR</td>
-    <td title=24Q4></td>
-    <td title=25Q1></td>
-  </tr>
-  <tr>
-    <td colspan="12">
-      The cells below are projections of future releases, but are not guarantees
-      <br/>that those releases will happen, or that they will happen on that
-      schedule.
-    </td>
-  </tr>
-  <tr>
-    <td class="gray">29.x</td>
-    <td class="gray">3.29.x</td>
-    <td title=23Q1></td>
-    <td title=23Q2></td>
-    <td title=23Q3></td>
-    <td title=23Q4></td>
-    <td title=24Q1></td>
-    <td title=24Q2></td>
-    <td title=24Q3></td>
-    <td title=24Q4 class="blue">IR</td>
-    <td title=25Q1 class="green">PS</td>
-  </tr>
-  <tr>
-    <td class="gray">30.x</td>
-    <td class="gray">4.30.x</td>
-    <td title=23Q1></td>
-    <td title=23Q2></td>
-    <td title=23Q3></td>
-    <td title=23Q4></td>
-    <td title=24Q1></td>
-    <td title=24Q2></td>
-    <td title=24Q3></td>
-    <td title=24Q4></td>
-    <td title=25Q1 class="blue">IR</td>
+  <tr class="future">
+    <th>4.x</th>
+    <td>30.x+</td>
+    <td class="<!--#echo var="y23q1"-->"></td>
+    <td class="<!--#echo var="y23q2"-->"></td>
+    <td class="<!--#echo var="y23q3"-->"></td>
+    <td class="<!--#echo var="y23q4"-->"></td>
+    <td class="<!--#echo var="y24q1"-->"></td>
+    <td class="<!--#echo var="y24q2"-->"></td>
+    <td class="<!--#echo var="y24q3"-->"></td>
+    <td class="<!--#echo var="y24q4"-->"></td>
+    <td class="<!--#echo var="y25q1"--> active">4.30</td>
+    <td class="<!--#echo var="y25q2"--> active">4.31</td>
+    <td class="<!--#echo var="y25q3"--> active">4.32</td>
+    <td class="<!--#echo var="y25q4"--> active">4.33</td>
   </tr>
 </table>
 
-<table>
-  <tr>
-    <td class="gray">
-      <b>Legend</b>
-    </td>
+**Legend**
+
+<table class="legend">
+  <tr class="active">
+    <th>Active</th>
+    <td>Minor and patch releases with new features, compatible changes and bug fixes.</td>
   </tr>
-  <tr>
-    <td class="blue">
-      Initial release (IR)
-    </td>
+  <tr class="maintenance">
+    <th>Maintenance</th>
+    <td>Patch releases with critical bug fixes.</td>
   </tr>
-  <tr>
-    <td class="green">
-      Public support (PS)
-    </td>
+  <tr class="end-of-life">
+    <th>End of life</th>
+    <td>Release is unsupported. Users should upgrade to a supported release.</td>
   </tr>
-  <tr>
-    <td class="red">
-      Support ends (SE)
-    </td>
+  <tr class="future">
+    <th>Future</th>
+    <td>Projected release. Shown for planning purposes.</td>
   </tr>
 </table>
 
 ## PHP {#php}
 
-This table provides specific dates for support duration.
+The protoc version can be inferred from the Protobuf PHP minor version number.
+Example: Protobuf PHP version 3.25.x uses protoc version 25.x.
 
-<table>
+Future plans are shown in *italics* and are subject to change.
+
+**Release support dates**
+
+<table class="version-table">
   <tr>
-    <th>Branch</th>
-    <th>Initial Release</th>
-    <th>Public Support Until</th>
+    <th>Protobuf PHP</th>
+    <th>Release date</th>
+    <th>End of support</th>
   </tr>
-  <tr>
-    <td class="gray">3.22.x</td>
-    <td class="gray">16 Feb 2023</td>
-    <td class="gray"><s>8 May 2023</s></td>
-  </tr>
-  <tr>
-    <td class="gray">3.23.x</td>
-    <td class="gray">8 May 2023</td>
-    <td class="gray"><s>8 Aug 2023</s></td>
-  </tr>
-  <tr>
-    <td class="gray">3.24.x</td>
-    <td class="gray">8 Aug 2023</td>
-    <td class="gray"><s>1 Nov 2023</s></td>
-  </tr>
-  <tr>
-    <td class="gray">3.25.x</td>
-    <td>1 Nov 2023</td>
+  <tr class="maintenance">
+    <th>3.x</th>
+    <td>16 Feb 2023</td>
     <td>31 Mar 2025</td>
   </tr>
-  <tr>
-    <td class="gray">4.26.x</td>
-    <td class="gray">13 Mar 2024</td>
-    <td class="gray"><s>23 May 2024</s></td>
-  </tr>
-  <tr>
-    <td class="gray">4.27.x</td>
-    <td class="gray">23 May 2024</td>
-    <td class="gray"><s>28 Aug 2024</s></td>
-  </tr>
-  <tr>
-    <td class="gray">4.28.x</td>
-    <td>28 Aug 2024</td>
+  <tr class="active">
+    <th>4.x</th>
+    <td>13 Mar 2024</td>
     <td>TBD</td>
   </tr>
 </table>
 
-This table graphically shows support durations.
+**Release support chart**
 
-<table>
+<table class="version-chart">
   <tr>
+    <th>Protobuf PHP</th>
     <th>protoc</th>
-    <th>PHP</th>
-    <th>23Q1</th>
-    <th>23Q2</th>
-    <th>23Q3</th>
-    <th>23Q4</th>
-    <th>24Q1</th>
-    <th>24Q2</th>
-    <th>24Q3</th>
-    <th>24Q4</th>
-    <th>25Q1</th>
+    <th class="<!--#echo var="y23q1"-->"><span>23Q1</span></th>
+    <th class="<!--#echo var="y23q2"-->"><span>23Q2</span></th>
+    <th class="<!--#echo var="y23q3"-->"><span>23Q3</span></th>
+    <th class="<!--#echo var="y23q4"-->"><span>23Q4</span></th>
+    <th class="<!--#echo var="y24q1"-->"><span>24Q1</span></th>
+    <th class="<!--#echo var="y24q2"-->"><span>24Q2</span></th>
+    <th class="<!--#echo var="y24q3"-->"><span>24Q3</span></th>
+    <th class="<!--#echo var="y24q4"-->"><span>24Q4</span></th>
+    <th class="<!--#echo var="y25q1"-->"><span>25Q1</span></th>
+    <th class="<!--#echo var="y25q2"-->"><span>25Q2</span></th>
+    <th class="<!--#echo var="y25q3"-->"><span>25Q3</span></th>
+    <th class="<!--#echo var="y25q4"-->"><span>25Q4</span></th>
   </tr>
-  <tr>
-    <td class="gray">22.x</td>
-    <td class="gray">3.22.x</td>
-    <td title=23Q1 class="blue">IR</td>
-    <td title=23Q2></td>
-    <td title=23Q3></td>
-    <td title=23Q4></td>
-    <td title=24Q1></td>
-    <td title=24Q2></td>
-    <td title=24Q3></td>
-    <td title=24Q4></td>
-    <td title=25Q1></td>
+  <tr class="maintenance">
+    <th>3.x</th>
+    <td>22.x-25.x</td>
+    <td class="<!--#echo var="y23q1"--> active">3.22</td>
+    <td class="<!--#echo var="y23q2"--> active">3.23</td>
+    <td class="<!--#echo var="y23q3"--> active">3.24</td>
+    <td class="<!--#echo var="y23q4"--> active">3.25</td>
+    <td class="<!--#echo var="y24q1"--> maintenance">3.25</td>
+    <td class="<!--#echo var="y24q2"--> maintenance">3.25</td>
+    <td class="<!--#echo var="y24q3"--> maintenance">3.25</td>
+    <td class="<!--#echo var="y24q4"--> maintenance">3.25</td>
+    <td class="<!--#echo var="y25q1"--> maintenance">3.25</td>
+    <td class="<!--#echo var="y25q2"-->"></td>
+    <td class="<!--#echo var="y25q3"-->"></td>
+    <td class="<!--#echo var="y25q4"-->"></td>
   </tr>
-  <tr>
-    <td class="gray">23.x</td>
-    <td class="gray">3.23.x</td>
-    <td title=23Q1></td>
-    <td title=23Q2 class="blue">IR</td>
-    <td title=23Q3></td>
-    <td title=23Q4></td>
-    <td title=24Q1></td>
-    <td title=24Q2></td>
-    <td title=24Q3></td>
-    <td title=24Q4></td>
-    <td title=25Q1></td>
-  </tr>
-  <tr>
-    <td class="gray">24.x</td>
-    <td class="gray">3.24.x</td>
-    <td title=23Q1></td>
-    <td title=23Q2></td>
-    <td title=23Q3 class="blue">IR</td>
-    <td title=23Q4></td>
-    <td title=24Q1></td>
-    <td title=24Q2></td>
-    <td title=24Q3></td>
-    <td title=24Q4></td>
-    <td title=25Q1></td>
-  </tr>
-  <tr>
-    <td class="gray">25.x</td>
-    <td class="gray">3.25.x</td>
-    <td title=23Q1></td>
-    <td title=23Q2></td>
-    <td title=23Q3></td>
-    <td title=23Q4 class="blue">IR</td>
-    <td title=24Q1 class="green">PS</td>
-    <td title=24Q2 class="green">PS</td>
-    <td title=24Q3 class="green">PS</td>
-    <td title=24Q4 class="green">PS</td>
-    <td title=25Q1 class="red">SE</td>
-  </tr>
-  <tr>
-    <td class="gray">26.x</td>
-    <td class="gray">4.26.x</td>
-    <td title=23Q1></td>
-    <td title=23Q2></td>
-    <td title=23Q3></td>
-    <td title=23Q4></td>
-    <td title=24Q1 class="blue">IR</td>
-    <td title=24Q2></td>
-    <td title=24Q3></td>
-    <td title=24Q4></td>
-    <td title=25Q1></td>
-  </tr>
-  <tr>
-    <td class="gray">27.x</td>
-    <td class="gray">4.27.x</td>
-    <td title=23Q1></td>
-    <td title=23Q2></td>
-    <td title=23Q3></td>
-    <td title=23Q4></td>
-    <td title=24Q1></td>
-    <td title=24Q2 class="blue">IR</td>
-    <td title=24Q3></td>
-    <td title=24Q4></td>
-    <td title=25Q1></td>
-  </tr>
-  <tr>
-    <td class="gray">28.x</td>
-    <td class="gray">4.28.x</td>
-    <td title=23Q1></td>
-    <td title=23Q2></td>
-    <td title=23Q3></td>
-    <td title=23Q4></td>
-    <td title=24Q1></td>
-    <td title=24Q2></td>
-    <td title=24Q3 class="blue">IR</td>
-    <td title=24Q4></td>
-    <td title=25Q1></td>
-  <tr>
-    <td colspan="12">
-      The cells below are projections of future releases, but are not guarantees
-      <br/>that those releases will happen, or that they will happen on that
-      schedule.
-    </td>
-  </tr>
-  </tr>
-  <tr>
-    <td class="gray">29.x</td>
-    <td class="gray"></td>
-    <td title=23Q1></td>
-    <td title=23Q2></td>
-    <td title=23Q3></td>
-    <td title=23Q4></td>
-    <td title=24Q1></td>
-    <td title=24Q2></td>
-    <td title=24Q3></td>
-    <td title=24Q4 class="blue">IR</td>
-    <td title=25Q1></td>
-  </tr>
-  <tr>
-    <td class="gray">30.x</td>
-    <td class="gray"></td>
-    <td title=23Q1></td>
-    <td title=23Q2></td>
-    <td title=23Q3></td>
-    <td title=23Q4></td>
-    <td title=24Q1></td>
-    <td title=24Q2></td>
-    <td title=24Q3></td>
-    <td title=24Q4></td>
-    <td title=25Q1 class="blue">IR</td>
+  <tr class="active">
+    <th>4.x</th>
+    <td>26.x+</td>
+    <td class="<!--#echo var="y23q1"-->"></td>
+    <td class="<!--#echo var="y23q2"-->"></td>
+    <td class="<!--#echo var="y23q3"-->"></td>
+    <td class="<!--#echo var="y23q4"-->"></td>
+    <td class="<!--#echo var="y24q1"--> active">4.26</td>
+    <td class="<!--#echo var="y24q2"--> active">4.27</td>
+    <td class="<!--#echo var="y24q3"--> active">4.28</td>
+    <td class="<!--#echo var="y24q4"--> active">4.29</td>
+    <td class="<!--#echo var="y25q1"--> active">4.30</td>
+    <td class="<!--#echo var="y25q2"--> active">4.31</td>
+    <td class="<!--#echo var="y25q3"--> active">4.32</td>
+    <td class="<!--#echo var="y25q4"--> active">4.33</td>
   </tr>
 </table>
 
-<table>
-  <tr>
-    <td class="gray">
-      <b>Legend</b>
-    </td>
+**Legend**
+
+<table class="legend">
+  <tr class="active">
+    <th>Active</th>
+    <td>Minor and patch releases with new features, compatible changes and bug fixes.</td>
   </tr>
-  <tr>
-    <td class="blue">
-      Initial release (IR)
-    </td>
+  <tr class="maintenance">
+    <th>Maintenance</th>
+    <td>Patch releases with critical bug fixes.</td>
   </tr>
-  <tr>
-    <td class="green">
-      Public support (PS)
-    </td>
+  <tr class="end-of-life">
+    <th>End of life</th>
+    <td>Release is unsupported. Users should upgrade to a supported release.</td>
   </tr>
-  <tr>
-    <td class="red">
-      Support ends (SE)
-    </td>
+  <tr class="future">
+    <th>Future</th>
+    <td>Projected release. Shown for planning purposes.</td>
   </tr>
 </table>
 
@@ -1227,213 +679,123 @@ For specific versions supported, see
 
 ## Python {#python}
 
-This table provides specific dates for support duration.
+The protoc version can be inferred from the Protobuf Python minor version
+number. Example: Protobuf Python version 4.25.x uses protoc version 25.x.
 
-<table>
+Future plans are shown in *italics* and are subject to change.
+
+**Release support dates**
+
+<table class="version-table">
   <tr>
-    <th>Branch</th>
-    <th>Initial Release</th>
-    <th>Public Support Until</th>
+    <th>Protobuf Python</th>
+    <th>Release date</th>
+    <th>End of support</th>
   </tr>
-  <tr>
-    <td class="gray">4.22.x</td>
-    <td class="gray">16 Feb 2023</td>
-    <td class="gray"><s>8 May 2023</s></td>
-  </tr>
-  <tr>
-    <td class="gray">4.23.x</td>
-    <td class="gray">8 May 2023</td>
-    <td class="gray"><s>8 Aug 2023</s></td>
-  </tr>
-  <tr>
-    <td class="gray">4.24.x</td>
-    <td class="gray">8 Aug 2023</td>
-    <td class="gray"><s>1 Nov 2023</s></td>
-  </tr>
-  <tr>
-    <td class="gray">4.25.x</td>
-    <td>1 Nov 2023</td>
+  <tr class="maintenance">
+    <th>4.x</th>
+    <td>16 Feb 2023</td>
     <td>31 Mar 2025</td>
   </tr>
-  <tr>
-    <td class="gray">5.26.x</td>
-    <td class="gray">13 Mar 2024</td>
-    <td class="gray"><s>23 May 2024</s></td>
+  <tr class="active">
+    <th>5.x</th>
+    <td>13 Mar 2024</td>
+    <td>31 Mar 2026</td>
   </tr>
-  <tr>
-    <td class="gray">5.27.x</td>
-    <td class="gray">23 May 2024</td>
-    <td class="gray"><s>28 Aug 2024</s></td>
-  </tr>
-  <tr>
-    <td class="gray">5.28.x</td>
-    <td>28 Aug 2024</td>
+  <tr class="future">
+    <th>6.x</th>
+    <td>Q1 2025</td>
     <td>TBD</td>
   </tr>
 </table>
 
-This table graphically shows support durations.
+**Release support chart**
 
-<table>
+<table class="version-chart">
   <tr>
+    <th>Protobuf Python</th>
     <th>protoc</th>
-    <th>Python</th>
-    <th>23Q1</th>
-    <th>23Q2</th>
-    <th>23Q3</th>
-    <th>23Q4</th>
-    <th>24Q1</th>
-    <th>24Q2</th>
-    <th>24Q3</th>
-    <th>24Q4</th>
-    <th>25Q1</th>
+    <th class="<!--#echo var="y23q1"-->"><span>23Q1</span></th>
+    <th class="<!--#echo var="y23q2"-->"><span>23Q2</span></th>
+    <th class="<!--#echo var="y23q3"-->"><span>23Q3</span></th>
+    <th class="<!--#echo var="y23q4"-->"><span>23Q4</span></th>
+    <th class="<!--#echo var="y24q1"-->"><span>24Q1</span></th>
+    <th class="<!--#echo var="y24q2"-->"><span>24Q2</span></th>
+    <th class="<!--#echo var="y24q3"-->"><span>24Q3</span></th>
+    <th class="<!--#echo var="y24q4"-->"><span>24Q4</span></th>
+    <th class="<!--#echo var="y25q1"-->"><span>25Q1</span></th>
+    <th class="<!--#echo var="y25q2"-->"><span>25Q2</span></th>
+    <th class="<!--#echo var="y25q3"-->"><span>25Q3</span></th>
+    <th class="<!--#echo var="y25q4"-->"><span>25Q4</span></th>
   </tr>
-  <tr>
-    <td class="gray">22.x</td>
-    <td class="gray">4.22.x</td>
-    <td title=23Q1 class="blue">IR</td>
-    <td title=23Q2></td>
-    <td title=23Q3></td>
-    <td title=23Q4></td>
-    <td title=24Q1></td>
-    <td title=24Q2></td>
-    <td title=24Q3></td>
-    <td title=24Q4></td>
-    <td title=25Q1></td>
+  <tr class="maintenance">
+    <th>4.x</th>
+    <td>22.x-25.x</td>
+    <td class="<!--#echo var="y23q1"--> active">4.22</td>
+    <td class="<!--#echo var="y23q2"--> active">4.23</td>
+    <td class="<!--#echo var="y23q3"--> active">4.24</td>
+    <td class="<!--#echo var="y23q4"--> active">4.25</td>
+    <td class="<!--#echo var="y24q1"--> maintenance">4.25</td>
+    <td class="<!--#echo var="y24q2"--> maintenance">4.25</td>
+    <td class="<!--#echo var="y24q3"--> maintenance">4.25</td>
+    <td class="<!--#echo var="y24q4"--> maintenance">4.25</td>
+    <td class="<!--#echo var="y25q1"--> maintenance">4.25</td>
+    <td class="<!--#echo var="y25q2"-->"></td>
+    <td class="<!--#echo var="y25q3"-->"></td>
+    <td class="<!--#echo var="y25q4"-->"></td>
   </tr>
-  <tr>
-    <td class="gray">23.x</td>
-    <td class="gray">4.23.x</td>
-    <td title=23Q1></td>
-    <td title=23Q2 class="blue">IR</td>
-    <td title=23Q3></td>
-    <td title=23Q4></td>
-    <td title=24Q1></td>
-    <td title=24Q2></td>
-    <td title=24Q3></td>
-    <td title=24Q4></td>
-    <td title=25Q1></td>
+  <tr class="active">
+    <th>5.x</th>
+    <td>26.x-29.x</td>
+    <td class="<!--#echo var="y23q1"-->"></td>
+    <td class="<!--#echo var="y23q2"-->"></td>
+    <td class="<!--#echo var="y23q3"-->"></td>
+    <td class="<!--#echo var="y23q4"-->"></td>
+    <td class="<!--#echo var="y24q1"--> active">5.26</td>
+    <td class="<!--#echo var="y24q2"--> active">5.27</td>
+    <td class="<!--#echo var="y24q3"--> active">5.28</td>
+    <td class="<!--#echo var="y24q4"--> active">5.29</td>
+    <td class="<!--#echo var="y25q1"--> maintenance">5.29</td>
+    <td class="<!--#echo var="y25q2"--> maintenance">5.29</td>
+    <td class="<!--#echo var="y25q3"--> maintenance">5.29</td>
+    <td class="<!--#echo var="y25q4"--> maintenance">5.29</td>
   </tr>
-  <tr>
-    <td class="gray">24.x</td>
-    <td class="gray">4.24.x</td>
-    <td title=23Q1></td>
-    <td title=23Q2></td>
-    <td title=23Q3 class="blue">IR</td>
-    <td title=23Q4></td>
-    <td title=24Q1></td>
-    <td title=24Q2></td>
-    <td title=24Q3></td>
-    <td title=24Q4></td>
-    <td title=25Q1></td>
-  </tr>
-  <tr>
-    <td class="gray">25.x</td>
-    <td class="gray">4.25.x</td>
-    <td title=23Q1></td>
-    <td title=23Q2></td>
-    <td title=23Q3></td>
-    <td title=23Q4 class="blue">IR</td>
-    <td title=24Q1 class="green">PS</td>
-    <td title=24Q2 class="green">PS</td>
-    <td title=24Q3 class="green">PS</td>
-    <td title=24Q4 class="green">PS</td>
-    <td title=25Q1 class="red">SE</td>
-  </tr>
-  <tr>
-    <td class="gray">26.x</td>
-    <td class="gray">5.26.x</td>
-    <td title=23Q1></td>
-    <td title=23Q2></td>
-    <td title=23Q3></td>
-    <td title=23Q4></td>
-    <td title=24Q1 class="blue">IR</td>
-    <td title=24Q2></td>
-    <td title=24Q3></td>
-    <td title=24Q4></td>
-    <td title=25Q1></td>
-  </tr>
-  <tr>
-    <td class="gray">27.x</td>
-    <td class="gray">5.27.x</td>
-    <td title=23Q1></td>
-    <td title=23Q2></td>
-    <td title=23Q3></td>
-    <td title=23Q4></td>
-    <td title=24Q1></td>
-    <td title=24Q2 class="blue">IR</td>
-    <td title=24Q3></td>
-    <td title=24Q4></td>
-    <td title=25Q1></td>
-  </tr>
-  <tr>
-    <td class="gray">28.x</td>
-    <td class="gray">5.28.x</td>
-    <td title=23Q1></td>
-    <td title=23Q2></td>
-    <td title=23Q3></td>
-    <td title=23Q4></td>
-    <td title=24Q1></td>
-    <td title=24Q2></td>
-    <td title=24Q3 class="blue">IR</td>
-    <td title=24Q4></td>
-    <td title=25Q1></td>
-  </tr>
-  <tr>
-    <td colspan="11">
-      The cells below are projections of future releases, but are not guarantees
-      <br/>that those releases will happen, or that they will happen on that
-      schedule.
-    </td>
-  </tr>
-  <tr>
-    <td class="gray">29.x</td>
-    <td class="gray">5.29.x</td>
-    <td title=23Q1></td>
-    <td title=23Q2></td>
-    <td title=23Q3></td>
-    <td title=23Q4></td>
-    <td title=24Q1></td>
-    <td title=24Q2></td>
-    <td title=24Q3></td>
-    <td title=24Q4 class="blue">IR</td>
-    <td title=25Q1 class="green">PS</td>
-  </tr>
-  <tr>
-    <td class="gray">30.x</td>
-    <td class="gray">6.30.x</td>
-    <td title=23Q1></td>
-    <td title=23Q2></td>
-    <td title=23Q3></td>
-    <td title=23Q4></td>
-    <td title=24Q1></td>
-    <td title=24Q2></td>
-    <td title=24Q3></td>
-    <td title=24Q4></td>
-    <td title=25Q1 class="blue">IR</td>
+  <tr class="future">
+    <th>6.x</th>
+    <td>30.x+</td>
+    <td class="<!--#echo var="y23q1"-->"></td>
+    <td class="<!--#echo var="y23q2"-->"></td>
+    <td class="<!--#echo var="y23q3"-->"></td>
+    <td class="<!--#echo var="y23q4"-->"></td>
+    <td class="<!--#echo var="y24q1"-->"></td>
+    <td class="<!--#echo var="y24q2"-->"></td>
+    <td class="<!--#echo var="y24q3"-->"></td>
+    <td class="<!--#echo var="y24q4"-->"></td>
+    <td class="<!--#echo var="y25q1"--> active">6.30</td>
+    <td class="<!--#echo var="y25q2"--> active">6.31</td>
+    <td class="<!--#echo var="y25q3"--> active">6.32</td>
+    <td class="<!--#echo var="y25q4"--> active">6.33</td>
   </tr>
 </table>
 
-<table>
-  <tr>
-    <td class="gray">
-      <b>Legend</b>
-    </td>
+**Legend**
+
+<table class="legend">
+  <tr class="active">
+    <th>Active</th>
+    <td>Minor and patch releases with new features, compatible changes and bug fixes.</td>
   </tr>
-  <tr>
-    <td class="blue">
-      Initial release (IR)
-    </td>
+  <tr class="maintenance">
+    <th>Maintenance</th>
+    <td>Patch releases with critical bug fixes.</td>
   </tr>
-  <tr>
-    <td class="green">
-      Public support (PS)
-    </td>
+  <tr class="end-of-life">
+    <th>End of life</th>
+    <td>Release is unsupported. Users should upgrade to a supported release.</td>
   </tr>
-  <tr>
-    <td class="red">
-      Support ends (SE)
-    </td>
+  <tr class="future">
+    <th>Future</th>
+    <td>Projected release. Shown for planning purposes.</td>
   </tr>
 </table>
 
@@ -1447,218 +809,102 @@ For specific versions supported, see
 
 ## Ruby {#ruby}
 
-This table provides specific dates for support duration.
+The protoc version can be inferred from the Protobuf Ruby minor version number.
+Example: Protobuf Ruby version 3.25.x uses protoc version 25.x.
 
-<table>
+Future plans are shown in *italics* and are subject to change.
+
+**Release support dates**
+
+<table class="version-table">
   <tr>
-    <th>Branch</th>
-    <th>Initial Release</th>
-    <th>Public Support Until</th>
+    <th>Protobuf Ruby</th>
+    <th>Release date</th>
+    <th>End of support</th>
   </tr>
-  <tr>
-    <td class="gray">3.21.x</td>
-    <td class="gray">25 May 2022</td>
-    <td class="gray"><s>16 Feb 2023</s></td>
-  </tr>
-  <tr>
-    <td class="gray">3.22.x</td>
-    <td class="gray">16 Feb 2023</td>
-    <td class="gray"><s>8 May 2023</s></td>
-  </tr>
-  <tr>
-    <td class="gray">3.23.x</td>
-    <td class="gray">8 May 2023</td>
-    <td class="gray"><s>8 Aug 2023</s></td>
-  </tr>
-  <tr>
-    <td class="gray">3.24.x</td>
-    <td class="gray">8 Aug 2023</td>
-    <td class="gray"><s>1 Nov 2023</s></td>
-  </tr>
-  <tr>
-    <td class="gray">3.25.x</td>
-    <td>1 Nov 2023</td>
+  <tr class="maintenance">
+    <th>3.x</th>
+    <td>16 Feb 2023</td>
     <td>31 Mar 2025</td>
   </tr>
-  <tr>
-    <td class="gray">4.26.x</td>
-    <td class="gray">13 Mar 2024</td>
-    <td class="gray"><s>23 May 2024</s></td>
-  </tr>
-  <tr>
-    <td class="gray">4.27.x</td>
-    <td class="gray">23 May 2024</td>
-    <td class="gray"><s>28 Aug 2024</s></td>
-  </tr>
-  <tr>
-    <td class="gray">4.28.x</td>
-    <td>28 Aug 2024</td>
+  <tr class="active">
+    <th>4.x</th>
+    <td>13 Mar 2024</td>
     <td>TBD</td>
   </tr>
 </table>
 
-This table graphically shows support durations.
+**Release support chart**
 
-<table>
+<table class="version-chart">
   <tr>
+    <th>Protobuf Ruby</th>
     <th>protoc</th>
-    <th>Ruby</th>
-    <th>23Q1</th>
-    <th>23Q2</th>
-    <th>23Q3</th>
-    <th>23Q4</th>
-    <th>24Q1</th>
-    <th>24Q2</th>
-    <th>24Q3</th>
-    <th>24Q4</th>
-    <th>25Q1</th>
+    <th class="<!--#echo var="y23q1"-->"><span>23Q1</span></th>
+    <th class="<!--#echo var="y23q2"-->"><span>23Q2</span></th>
+    <th class="<!--#echo var="y23q3"-->"><span>23Q3</span></th>
+    <th class="<!--#echo var="y23q4"-->"><span>23Q4</span></th>
+    <th class="<!--#echo var="y24q1"-->"><span>24Q1</span></th>
+    <th class="<!--#echo var="y24q2"-->"><span>24Q2</span></th>
+    <th class="<!--#echo var="y24q3"-->"><span>24Q3</span></th>
+    <th class="<!--#echo var="y24q4"-->"><span>24Q4</span></th>
+    <th class="<!--#echo var="y25q1"-->"><span>25Q1</span></th>
+    <th class="<!--#echo var="y25q2"-->"><span>25Q2</span></th>
+    <th class="<!--#echo var="y25q3"-->"><span>25Q3</span></th>
+    <th class="<!--#echo var="y25q4"-->"><span>25Q4</span></th>
   </tr>
-  <tr>
-    <td class="gray">22.x</td>
-    <td class="gray">3.22.x</td>
-    <td title=23Q1 class="blue">IR</td>
-    <td title=23Q2></td>
-    <td title=23Q3></td>
-    <td title=23Q4></td>
-    <td title=24Q1></td>
-    <td title=24Q2></td>
-    <td title=24Q3></td>
-    <td title=24Q4></td>
-    <td title=25Q1></td>
+  <tr class="maintenance">
+    <th>3.x</th>
+    <td>22.x-25.x</td>
+    <td class="<!--#echo var="y23q1"--> active">3.22</td>
+    <td class="<!--#echo var="y23q2"--> active">3.23</td>
+    <td class="<!--#echo var="y23q3"--> active">3.24</td>
+    <td class="<!--#echo var="y23q4"--> active">3.25</td>
+    <td class="<!--#echo var="y24q1"--> maintenance">3.25</td>
+    <td class="<!--#echo var="y24q2"--> maintenance">3.25</td>
+    <td class="<!--#echo var="y24q3"--> maintenance">3.25</td>
+    <td class="<!--#echo var="y24q4"--> maintenance">3.25</td>
+    <td class="<!--#echo var="y25q1"--> maintenance">3.25</td>
+    <td class="<!--#echo var="y25q2"-->"></td>
+    <td class="<!--#echo var="y25q3"-->"></td>
+    <td class="<!--#echo var="y25q4"-->"></td>
   </tr>
-  <tr>
-    <td class="gray">23.x</td>
-    <td class="gray">3.23.x</td>
-    <td title=23Q1></td>
-    <td title=23Q2 class="blue">IR</td>
-    <td title=23Q3></td>
-    <td title=23Q4></td>
-    <td title=24Q1></td>
-    <td title=24Q2></td>
-    <td title=24Q3></td>
-    <td title=24Q4></td>
-    <td title=25Q1></td>
-  </tr>
-  <tr>
-    <td class="gray">24.x</td>
-    <td class="gray">3.24.x</td>
-    <td title=23Q1></td>
-    <td title=23Q2></td>
-    <td title=23Q3 class="blue">IR</td>
-    <td title=23Q4></td>
-    <td title=24Q1></td>
-    <td title=24Q2></td>
-    <td title=24Q3></td>
-    <td title=24Q4></td>
-    <td title=25Q1></td>
-  </tr>
-  <tr>
-    <td class="gray">25.x</td>
-    <td class="gray">3.25.x</td>
-    <td title=23Q1></td>
-    <td title=23Q2></td>
-    <td title=23Q3></td>
-    <td title=23Q4 class="blue">IR</td>
-    <td title=24Q1 class="green">PS</td>
-    <td title=24Q2 class="green">PS</td>
-    <td title=24Q3 class="green">PS</td>
-    <td title=24Q4 class="green">PS</td>
-    <td title=25Q1 class="red">SE</td>
-  </tr>
-  <tr>
-    <td class="gray">26.x</td>
-    <td class="gray">4.26.x</td>
-    <td title=23Q1></td>
-    <td title=23Q2></td>
-    <td title=23Q3></td>
-    <td title=23Q4></td>
-    <td title=24Q1 class="blue">IR</td>
-    <td title=24Q2></td>
-    <td title=24Q3></td>
-    <td title=24Q4></td>
-    <td title=25Q1></td>
-  </tr>
-  <tr>
-    <td class="gray">27.x</td>
-    <td class="gray">4.27.x</td>
-    <td title=23Q1></td>
-    <td title=23Q2></td>
-    <td title=23Q3></td>
-    <td title=23Q4></td>
-    <td title=24Q1></td>
-    <td title=24Q2 class="blue">IR</td>
-    <td title=24Q3></td>
-    <td title=24Q4></td>
-    <td title=25Q1></td>
-  </tr>
-  <tr>
-    <td class="gray">28.x</td>
-    <td class="gray">4.28.x</td>
-    <td title=23Q1></td>
-    <td title=23Q2></td>
-    <td title=23Q3></td>
-    <td title=23Q4></td>
-    <td title=24Q1></td>
-    <td title=24Q2></td>
-    <td title=24Q3 class="blue">IR</td>
-    <td title=24Q4></td>
-    <td title=25Q1></td>
-  </tr>
-  <tr>
-    <td colspan="11">
-      The cells below are projections of future releases, but are not guarantees
-      <br/>that those releases will happen, or that they will happen on that
-      schedule.
-    </td>
-  </tr>
-  <tr>
-    <td class="gray">29.x</td>
-    <td class="gray"></td>
-    <td title=23Q1></td>
-    <td title=23Q2></td>
-    <td title=23Q3></td>
-    <td title=23Q4></td>
-    <td title=24Q1></td>
-    <td title=24Q2></td>
-    <td title=24Q3></td>
-    <td title=24Q4 class="blue">IR</td>
-    <td title=25Q1></td>
-  </tr>
-  <tr>
-    <td class="gray">30.x</td>
-    <td class="gray"></td>
-    <td title=23Q1></td>
-    <td title=23Q2></td>
-    <td title=23Q3></td>
-    <td title=23Q4></td>
-    <td title=24Q1></td>
-    <td title=24Q2></td>
-    <td title=24Q3></td>
-    <td title=24Q4></td>
-    <td title=25Q1 class="blue">IR</td>
+  <tr class="active">
+    <th>4.x</th>
+    <td>26.x+</td>
+    <td class="<!--#echo var="y23q1"-->"></td>
+    <td class="<!--#echo var="y23q2"-->"></td>
+    <td class="<!--#echo var="y23q3"-->"></td>
+    <td class="<!--#echo var="y23q4"-->"></td>
+    <td class="<!--#echo var="y24q1"--> active">4.26</td>
+    <td class="<!--#echo var="y24q2"--> active">4.27</td>
+    <td class="<!--#echo var="y24q3"--> active">4.28</td>
+    <td class="<!--#echo var="y24q4"--> active">4.29</td>
+    <td class="<!--#echo var="y25q1"--> active">4.30</td>
+    <td class="<!--#echo var="y25q2"--> active">4.31</td>
+    <td class="<!--#echo var="y25q3"--> active">4.32</td>
+    <td class="<!--#echo var="y25q4"--> active">4.33</td>
   </tr>
 </table>
 
-<table>
-  <tr>
-    <td class="gray">
-      <b>Legend</b>
-    </td>
+**Legend**
+
+<table class="legend">
+  <tr class="active">
+    <th>Active</th>
+    <td>Minor and patch releases with new features, compatible changes and bug fixes.</td>
   </tr>
-  <tr>
-    <td class="blue">
-      Initial release (IR)
-    </td>
+  <tr class="maintenance">
+    <th>Maintenance</th>
+    <td>Patch releases with critical bug fixes.</td>
   </tr>
-  <tr>
-    <td class="green">
-      Public support (PS)
-    </td>
+  <tr class="end-of-life">
+    <th>End of life</th>
+    <td>Release is unsupported. Users should upgrade to a supported release.</td>
   </tr>
-  <tr>
-    <td class="red">
-      Support ends (SE)
-    </td>
+  <tr class="future">
+    <th>Future</th>
+    <td>Projected release. Shown for planning purposes.</td>
   </tr>
 </table>
 

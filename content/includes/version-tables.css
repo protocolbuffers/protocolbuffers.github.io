@@ -32,3 +32,119 @@ tbody td.gray {
 tbody td.yellow {
   background: #fff2cc;
 }
+
+/* version-table */
+
+table.version-table tr.end-of-life th {
+  background: #f4cccc;
+}
+table.version-table tr.internal-support th {
+  background: #fce5cd;
+}
+table.version-table tr.maintenance th {
+  background: #fff2cc;
+}
+table.version-table tr.active th {
+  background: #d9ead3;
+  text-decoration: underline;
+}
+table.version-table tr.future th {
+  background: #fff;
+}
+table.version-table tr.future td {
+  font-style: italic;
+}
+
+table.version-table td:nth-child(4) {
+  text-align: start;
+}
+
+/* version-chart */
+
+table.version-chart tr.end-of-life th {
+  background: #f4cccc;
+}
+table.version-chart tr.internal-support th {
+  background: #fce5cd;
+}
+table.version-chart tr.maintenance th {
+  background: #fff2cc;
+}
+table.version-chart tr.active th {
+  background: #d9ead3;
+  text-decoration: underline;
+}
+table.version-chart tr.future th {
+  background: #fff;
+}
+table.version-chart tr.future td {
+  font-style: italic;
+}
+
+table.version-chart td.internal-support {
+  background: #fce5cd;
+}
+table.version-chart td.maintenance {
+  background: #fff2cc;
+}
+table.version-chart td.active {
+  background: #d9ead3;
+  text-decoration: underline;
+}
+
+/* latest release column */
+
+/* visually replace 'yyQq' heading with string 'Latest' */
+table.version-chart th.latest-release span {
+  display: none;
+}
+table.version-chart th.latest-release::after {
+  content: "Latest"
+}
+
+/* draw a focus rectangle around the latest release column */
+table.version-chart th.latest-release {
+  border-top: 2px solid #e06666 !important;
+  border-left: 2px solid #e06666 !important;
+  border-right: 2px solid #e06666 !important;
+}
+table.version-chart td.latest-release {
+  font-weight: bold;
+  border-left: 2px solid #e06666 !important;
+  border-right: 2px solid #e06666 !important;
+}
+table.version-chart tr:last-child td.latest-release {
+  border-bottom: 2px solid #e06666 !important;
+}
+
+/* future release columns */
+table.version-chart td:not(:has(~ .latest-release)):not(.latest-release) {
+  font-style: italic;
+}
+
+/* legend */
+
+table.legend th {
+  font-weight: normal;
+}
+
+table.legend tr.end-of-life th {
+  background: #f4cccc;
+}
+table.legend tr.internal-support th {
+  background: #fce5cd;
+}
+table.legend tr.maintenance th {
+  background: #fff2cc;
+}
+table.legend tr.active th {
+  background: #d9ead3;
+  text-decoration: underline;
+}
+table.legend tr.future th {
+  background: #fff;
+}
+
+table.legend td:nth-child(2) {
+  text-align: start;
+}
