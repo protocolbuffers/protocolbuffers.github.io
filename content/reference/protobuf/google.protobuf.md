@@ -39,6 +39,19 @@ type = "docs"
 -   [`UInt64Value`](#uint64-value) (message)
 -   [`Value`](#value) (message)
 
+Well-Known Types that end in "`Value`" are wrapper messages for other types,
+such as `BoolValue` and `EnumValue`. These are now obsolete. The only reasons to
+use wrappers today would be:
+
+*   Wire compatibility with messages that already use them.
+*   If you want to put a scalar value into an `Any` message.
+
+In most cases, there are better options:
+
+*   For new messages, it's better to use regular explicit-presence fields
+    (`optional` in proto2/proto3, regular field in edition >= 2023).
+*   Extensions are generally a better option than `Any` fields.
+
 ## Any {#any}
 
 `Any` contains an arbitrary serialized message along with a URL that describes

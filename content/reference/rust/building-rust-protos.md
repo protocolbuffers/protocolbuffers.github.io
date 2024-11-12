@@ -1,6 +1,6 @@
 +++
 title = "Building Rust Protos"
-weight = 783
+weight = 784
 linkTitle = "Building Rust Protos"
 description = "Describes using Blaze to build Rust protos."
 type = "docs"

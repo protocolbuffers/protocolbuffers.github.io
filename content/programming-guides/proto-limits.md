@@ -33,8 +33,9 @@ specs.
 
 ## Number of Values in an Enum {#enum}
 
-The lowest limit is ~1700 values, in Java (fix available
-go/java-large-enum-support). Other languages have different limits.
+The lowest limit is ~1700 values, in Java
+. Other languages have different
+limits.
 
 ## Total Size of the Message {#total}
 

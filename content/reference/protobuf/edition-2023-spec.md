@@ -105,7 +105,7 @@ The edition statement replaces the legacy `syntax` keyword, and is used to
 define the edition that this file is using.
 
 ```
-edition = "edition" "=" ("'" decimalLit '"') ";"
+edition = "edition" "=" [ ( "'" decimalLit "'" ) | ( '"' decimalLit '"' ) ] ";"
 ```
 
 ## Import Statement {#import_statement}

@@ -1,6 +1,6 @@
 +++
 title = "Redaction in Rust"
-weight = 785
+weight = 783
 linkTitle = "Redaction in Rust"
 description = "Describes redaction in Rust."
 type = "docs"
