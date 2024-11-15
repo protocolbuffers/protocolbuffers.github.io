@@ -93,32 +93,38 @@ table.version-chart td.active {
 }
 
 /* latest release column */
+/*
+ * How to advance the selection of the latest release:
+ * Replace class 'y24q3' in the following selectors with 'y24q4' (the class
+ * referring to the quarter of the next release). Please also update this
+ * instruction as a courtesy to the next maintainer.
+ */
 
 /* visually replace 'yyQq' heading with string 'Latest' */
-table.version-chart th.latest-release span {
+table.version-chart th.y24q3 span {
   display: none;
 }
-table.version-chart th.latest-release::after {
+table.version-chart th.y24q3::after {
   content: "Latest"
 }
 
 /* draw a focus rectangle around the latest release column */
-table.version-chart th.latest-release {
+table.version-chart th.y24q3 {
   border-top: 2px solid #e06666 !important;
   border-left: 2px solid #e06666 !important;
   border-right: 2px solid #e06666 !important;
 }
-table.version-chart td.latest-release {
+table.version-chart td.y24q3 {
   font-weight: bold;
   border-left: 2px solid #e06666 !important;
   border-right: 2px solid #e06666 !important;
 }
-table.version-chart tr:last-child td.latest-release {
+table.version-chart tr:last-child td.y24q3 {
   border-bottom: 2px solid #e06666 !important;
 }
 
 /* future release columns */
-table.version-chart td:not(:has(~ .latest-release)):not(.latest-release) {
+table.version-chart td:not(:has(~ .y24q3)):not(.y24q3) {
   font-style: italic;
 }
 
