@@ -2,9 +2,9 @@
 title = "Rust Generated Code Guide"
 weight = 782
 linkTitle = "Generated Code Guide"
+toc_hide = true
 description = "Describes the API of message objects that the protocol buffer compiler generates for any given protocol definition."
 type = "docs"
-toc_hide = "true"
 +++
 
 This page describes exactly what Rust code the protocol buffer compiler
