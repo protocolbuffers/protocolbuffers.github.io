@@ -8,9 +8,6 @@ type = "docs"
 
 <link rel="stylesheet" href="/includes/version-tables.css">
 
-<!-- version-chart: quarter to highlight as latest release -->
-<!--#set var="y24q3" value="latest-release"-->
-
 Support windows for protoc and the various languages are covered in the tables
 later in this topic. Version numbers throughout this topic use
 [SemVer](https://semver.org) conventions; in the version "3.21.7," we say that
@@ -147,82 +144,82 @@ Future plans are shown in *italics* and are subject to change.
   <tr>
     <th>Protobuf C++</th>
     <th>protoc</th>
-    <th class="<!--#echo var="y23q1"-->"><span>23Q1</span></th>
-    <th class="<!--#echo var="y23q2"-->"><span>23Q2</span></th>
-    <th class="<!--#echo var="y23q3"-->"><span>23Q3</span></th>
-    <th class="<!--#echo var="y23q4"-->"><span>23Q4</span></th>
-    <th class="<!--#echo var="y24q1"-->"><span>24Q1</span></th>
-    <th class="<!--#echo var="y24q2"-->"><span>24Q2</span></th>
-    <th class="<!--#echo var="y24q3"-->"><span>24Q3</span></th>
-    <th class="<!--#echo var="y24q4"-->"><span>24Q4</span></th>
-    <th class="<!--#echo var="y25q1"-->"><span>25Q1</span></th>
-    <th class="<!--#echo var="y25q2"-->"><span>25Q2</span></th>
-    <th class="<!--#echo var="y25q3"-->"><span>25Q3</span></th>
-    <th class="<!--#echo var="y25q4"-->"><span>25Q4</span></th>
+    <th class="y23q1"><span>23Q1</span></th>
+    <th class="y23q2"><span>23Q2</span></th>
+    <th class="y23q3"><span>23Q3</span></th>
+    <th class="y23q4"><span>23Q4</span></th>
+    <th class="y24q1"><span>24Q1</span></th>
+    <th class="y24q2"><span>24Q2</span></th>
+    <th class="y24q3"><span>24Q3</span></th>
+    <th class="y24q4"><span>24Q4</span></th>
+    <th class="y25q1"><span>25Q1</span></th>
+    <th class="y25q2"><span>25Q2</span></th>
+    <th class="y25q3"><span>25Q3</span></th>
+    <th class="y25q4"><span>25Q4</span></th>
   </tr>
   <tr class="end-of-life">
     <th>3.x</th>
     <td>21.x</td>
-    <td class="<!--#echo var="y23q1"--> maintenance">3.21</td>
-    <td class="<!--#echo var="y23q2"--> maintenance">3.21</td>
-    <td class="<!--#echo var="y23q3"--> maintenance">3.21</td>
-    <td class="<!--#echo var="y23q4"--> maintenance">3.21</td>
-    <td class="<!--#echo var="y24q1"--> maintenance">3.21</td>
-    <td class="<!--#echo var="y24q2"-->"></td>
-    <td class="<!--#echo var="y24q3"-->"></td>
-    <td class="<!--#echo var="y24q4"-->"></td>
-    <td class="<!--#echo var="y25q1"-->"></td>
-    <td class="<!--#echo var="y25q2"-->"></td>
-    <td class="<!--#echo var="y25q3"-->"></td>
-    <td class="<!--#echo var="y25q4"-->"></td>
+    <td class="y23q1 maintenance">3.21</td>
+    <td class="y23q2 maintenance">3.21</td>
+    <td class="y23q3 maintenance">3.21</td>
+    <td class="y23q4 maintenance">3.21</td>
+    <td class="y24q1 maintenance">3.21</td>
+    <td class="y24q2"></td>
+    <td class="y24q3"></td>
+    <td class="y24q4"></td>
+    <td class="y25q1"></td>
+    <td class="y25q2"></td>
+    <td class="y25q3"></td>
+    <td class="y25q4"></td>
   </tr>
   <tr class="maintenance">
     <th>4.x</th>
     <td>22.x-25.x</td>
-    <td class="<!--#echo var="y23q1"--> active">4.22</td>
-    <td class="<!--#echo var="y23q2"--> active">4.23</td>
-    <td class="<!--#echo var="y23q3"--> active">4.24</td>
-    <td class="<!--#echo var="y23q4"--> active">4.25</td>
-    <td class="<!--#echo var="y24q1"--> maintenance">4.25</td>
-    <td class="<!--#echo var="y24q2"--> maintenance">4.25</td>
-    <td class="<!--#echo var="y24q3"--> maintenance">4.25</td>
-    <td class="<!--#echo var="y24q4"--> maintenance">4.25</td>
-    <td class="<!--#echo var="y25q1"--> maintenance">4.25</td>
-    <td class="<!--#echo var="y25q2"-->"></td>
-    <td class="<!--#echo var="y25q3"-->"></td>
-    <td class="<!--#echo var="y25q4"-->"></td>
+    <td class="y23q1 active">4.22</td>
+    <td class="y23q2 active">4.23</td>
+    <td class="y23q3 active">4.24</td>
+    <td class="y23q4 active">4.25</td>
+    <td class="y24q1 maintenance">4.25</td>
+    <td class="y24q2 maintenance">4.25</td>
+    <td class="y24q3 maintenance">4.25</td>
+    <td class="y24q4 maintenance">4.25</td>
+    <td class="y25q1 maintenance">4.25</td>
+    <td class="y25q2"></td>
+    <td class="y25q3"></td>
+    <td class="y25q4"></td>
   </tr>
   <tr class="active">
     <th>5.x</th>
     <td>26.x-29.x</td>
-    <td class="<!--#echo var="y23q1"-->"></td>
-    <td class="<!--#echo var="y23q2"-->"></td>
-    <td class="<!--#echo var="y23q3"-->"></td>
-    <td class="<!--#echo var="y23q4"-->"></td>
-    <td class="<!--#echo var="y24q1"--> active">5.26</td>
-    <td class="<!--#echo var="y24q2"--> active">5.27</td>
-    <td class="<!--#echo var="y24q3"--> active">5.28</td>
-    <td class="<!--#echo var="y24q4"--> active">5.29</td>
-    <td class="<!--#echo var="y25q1"--> maintenance">5.29</td>
-    <td class="<!--#echo var="y25q2"--> maintenance">5.29</td>
-    <td class="<!--#echo var="y25q3"--> maintenance">5.29</td>
-    <td class="<!--#echo var="y25q4"--> maintenance">5.29</td>
+    <td class="y23q1"></td>
+    <td class="y23q2"></td>
+    <td class="y23q3"></td>
+    <td class="y23q4"></td>
+    <td class="y24q1 active">5.26</td>
+    <td class="y24q2 active">5.27</td>
+    <td class="y24q3 active">5.28</td>
+    <td class="y24q4 active">5.29</td>
+    <td class="y25q1 maintenance">5.29</td>
+    <td class="y25q2 maintenance">5.29</td>
+    <td class="y25q3 maintenance">5.29</td>
+    <td class="y25q4 maintenance">5.29</td>
   </tr>
   <tr class="future">
     <th>6.x</th>
     <td>30.x-33.x</td>
-    <td class="<!--#echo var="y23q1"-->"></td>
-    <td class="<!--#echo var="y23q2"-->"></td>
-    <td class="<!--#echo var="y23q3"-->"></td>
-    <td class="<!--#echo var="y23q4"-->"></td>
-    <td class="<!--#echo var="y24q1"-->"></td>
-    <td class="<!--#echo var="y24q2"-->"></td>
-    <td class="<!--#echo var="y24q3"-->"></td>
-    <td class="<!--#echo var="y24q4"-->"></td>
-    <td class="<!--#echo var="y25q1"--> active">6.30</td>
-    <td class="<!--#echo var="y25q2"--> active">6.31</td>
-    <td class="<!--#echo var="y25q3"--> active">6.32</td>
-    <td class="<!--#echo var="y25q4"--> active">6.33</td>
+    <td class="y23q1"></td>
+    <td class="y23q2"></td>
+    <td class="y23q3"></td>
+    <td class="y23q4"></td>
+    <td class="y24q1"></td>
+    <td class="y24q2"></td>
+    <td class="y24q3"></td>
+    <td class="y24q4"></td>
+    <td class="y25q1 active">6.30</td>
+    <td class="y25q2 active">6.31</td>
+    <td class="y25q3 active">6.32</td>
+    <td class="y25q4 active">6.33</td>
   </tr>
 </table>
 
@@ -283,34 +280,34 @@ Future plans are shown in *italics* and are subject to change.
   <tr>
     <th>Protobuf C#</th>
     <th>protoc</th>
-    <th class="<!--#echo var="y23q1"-->"><span>23Q1</span></th>
-    <th class="<!--#echo var="y23q2"-->"><span>23Q2</span></th>
-    <th class="<!--#echo var="y23q3"-->"><span>23Q3</span></th>
-    <th class="<!--#echo var="y23q4"-->"><span>23Q4</span></th>
-    <th class="<!--#echo var="y24q1"-->"><span>24Q1</span></th>
-    <th class="<!--#echo var="y24q2"-->"><span>24Q2</span></th>
-    <th class="<!--#echo var="y24q3"-->"><span>24Q3</span></th>
-    <th class="<!--#echo var="y24q4"-->"><span>24Q4</span></th>
-    <th class="<!--#echo var="y25q1"-->"><span>25Q1</span></th>
-    <th class="<!--#echo var="y25q2"-->"><span>25Q2</span></th>
-    <th class="<!--#echo var="y25q3"-->"><span>25Q3</span></th>
-    <th class="<!--#echo var="y25q4"-->"><span>25Q4</span></th>
+    <th class="y23q1"><span>23Q1</span></th>
+    <th class="y23q2"><span>23Q2</span></th>
+    <th class="y23q3"><span>23Q3</span></th>
+    <th class="y23q4"><span>23Q4</span></th>
+    <th class="y24q1"><span>24Q1</span></th>
+    <th class="y24q2"><span>24Q2</span></th>
+    <th class="y24q3"><span>24Q3</span></th>
+    <th class="y24q4"><span>24Q4</span></th>
+    <th class="y25q1"><span>25Q1</span></th>
+    <th class="y25q2"><span>25Q2</span></th>
+    <th class="y25q3"><span>25Q3</span></th>
+    <th class="y25q4"><span>25Q4</span></th>
   </tr>
   <tr class="active">
     <th>3.x</th>
     <td>22.x-33.x</td>
-    <td class="<!--#echo var="y23q1"--> active">3.22</td>
-    <td class="<!--#echo var="y23q2"--> active">3.23</td>
-    <td class="<!--#echo var="y23q3"--> active">3.24</td>
-    <td class="<!--#echo var="y23q4"--> active">3.25</td>
-    <td class="<!--#echo var="y24q1"--> active">3.26</td>
-    <td class="<!--#echo var="y24q2"--> active">3.27</td>
-    <td class="<!--#echo var="y24q3"--> active">3.28</td>
-    <td class="<!--#echo var="y24q4"--> active">3.29</td>
-    <td class="<!--#echo var="y25q1"--> active">3.30</td>
-    <td class="<!--#echo var="y25q2"--> active">3.31</td>
-    <td class="<!--#echo var="y25q3"--> active">3.32</td>
-    <td class="<!--#echo var="y25q4"--> active">3.33</td>
+    <td class="y23q1 active">3.22</td>
+    <td class="y23q2 active">3.23</td>
+    <td class="y23q3 active">3.24</td>
+    <td class="y23q4 active">3.25</td>
+    <td class="y24q1 active">3.26</td>
+    <td class="y24q2 active">3.27</td>
+    <td class="y24q3 active">3.28</td>
+    <td class="y24q4 active">3.29</td>
+    <td class="y25q1 active">3.30</td>
+    <td class="y25q2 active">3.31</td>
+    <td class="y25q3 active">3.32</td>
+    <td class="y25q4 active">3.33</td>
   </tr>
 </table>
 
@@ -391,50 +388,50 @@ version bump in Q1 2025.
   <tr>
     <th>Protobuf Java</th>
     <th>protoc</th>
-    <th class="<!--#echo var="y23q1"-->"><span>23Q1</span></th>
-    <th class="<!--#echo var="y23q2"-->"><span>23Q2</span></th>
-    <th class="<!--#echo var="y23q3"-->"><span>23Q3</span></th>
-    <th class="<!--#echo var="y23q4"-->"><span>23Q4</span></th>
-    <th class="<!--#echo var="y24q1"-->"><span>24Q1</span></th>
-    <th class="<!--#echo var="y24q2"-->"><span>24Q2</span></th>
-    <th class="<!--#echo var="y24q3"-->"><span>24Q3</span></th>
-    <th class="<!--#echo var="y24q4"-->"><span>24Q4</span></th>
-    <th class="<!--#echo var="y25q1"-->"><span>25Q1</span></th>
-    <th class="<!--#echo var="y25q2"-->"><span>25Q2</span></th>
-    <th class="<!--#echo var="y25q3"-->"><span>25Q3</span></th>
-    <th class="<!--#echo var="y25q4"-->"><span>25Q4</span></th>
+    <th class="y23q1"><span>23Q1</span></th>
+    <th class="y23q2"><span>23Q2</span></th>
+    <th class="y23q3"><span>23Q3</span></th>
+    <th class="y23q4"><span>23Q4</span></th>
+    <th class="y24q1"><span>24Q1</span></th>
+    <th class="y24q2"><span>24Q2</span></th>
+    <th class="y24q3"><span>24Q3</span></th>
+    <th class="y24q4"><span>24Q4</span></th>
+    <th class="y25q1"><span>25Q1</span></th>
+    <th class="y25q2"><span>25Q2</span></th>
+    <th class="y25q3"><span>25Q3</span></th>
+    <th class="y25q4"><span>25Q4</span></th>
   </tr>
   <tr class="maintenance">
     <th>3.x</th>
     <td>22.x-25.x</td>
-    <td class="<!--#echo var="y23q1"--> active">3.22</td>
-    <td class="<!--#echo var="y23q2"--> active">3.23</td>
-    <td class="<!--#echo var="y23q3"--> active">3.24</td>
-    <td class="<!--#echo var="y23q4"--> active">3.25</td>
-    <td class="<!--#echo var="y24q1"--> maintenance">3.25</td>
-    <td class="<!--#echo var="y24q2"--> maintenance">3.25</td>
-    <td class="<!--#echo var="y24q3"--> maintenance">3.25</td>
-    <td class="<!--#echo var="y24q4"--> maintenance">3.25</td>
-    <td class="<!--#echo var="y25q1"--> maintenance">3.25</td>
-    <td class="<!--#echo var="y25q2"--> maintenance">3.25</td>
-    <td class="<!--#echo var="y25q3"--> maintenance">3.25</td>
-    <td class="<!--#echo var="y25q4"--> maintenance">3.25</td>
+    <td class="y23q1 active">3.22</td>
+    <td class="y23q2 active">3.23</td>
+    <td class="y23q3 active">3.24</td>
+    <td class="y23q4 active">3.25</td>
+    <td class="y24q1 maintenance">3.25</td>
+    <td class="y24q2 maintenance">3.25</td>
+    <td class="y24q3 maintenance">3.25</td>
+    <td class="y24q4 maintenance">3.25</td>
+    <td class="y25q1 maintenance">3.25</td>
+    <td class="y25q2 maintenance">3.25</td>
+    <td class="y25q3 maintenance">3.25</td>
+    <td class="y25q4 maintenance">3.25</td>
   </tr>
   <tr class="active">
     <th>4.x</th>
     <td>26.x-33.x</td>
-    <td class="<!--#echo var="y23q1"-->"></td>
-    <td class="<!--#echo var="y23q2"-->"></td>
-    <td class="<!--#echo var="y23q3"-->"></td>
-    <td class="<!--#echo var="y23q4"-->"></td>
-    <td class="<!--#echo var="y24q1"--> active">4.26</td>
-    <td class="<!--#echo var="y24q2"--> active">4.27</td>
-    <td class="<!--#echo var="y24q3"--> active">4.28</td>
-    <td class="<!--#echo var="y24q4"--> active">4.29</td>
-    <td class="<!--#echo var="y25q1"--> active">4.30</td>
-    <td class="<!--#echo var="y25q2"--> active">4.31</td>
-    <td class="<!--#echo var="y25q3"--> active">4.32</td>
-    <td class="<!--#echo var="y25q4"--> active">4.33</td>
+    <td class="y23q1"></td>
+    <td class="y23q2"></td>
+    <td class="y23q3"></td>
+    <td class="y23q4"></td>
+    <td class="y24q1 active">4.26</td>
+    <td class="y24q2 active">4.27</td>
+    <td class="y24q3 active">4.28</td>
+    <td class="y24q4 active">4.29</td>
+    <td class="y25q1 active">4.30</td>
+    <td class="y25q2 active">4.31</td>
+    <td class="y25q3 active">4.32</td>
+    <td class="y25q4 active">4.33</td>
   </tr>
 </table>
 
@@ -500,50 +497,50 @@ Future plans are shown in *italics* and are subject to change.
   <tr>
     <th>Protobuf Objective-C</th>
     <th>protoc</th>
-    <th class="<!--#echo var="y23q1"-->"><span>23Q1</span></th>
-    <th class="<!--#echo var="y23q2"-->"><span>23Q2</span></th>
-    <th class="<!--#echo var="y23q3"-->"><span>23Q3</span></th>
-    <th class="<!--#echo var="y23q4"-->"><span>23Q4</span></th>
-    <th class="<!--#echo var="y24q1"-->"><span>24Q1</span></th>
-    <th class="<!--#echo var="y24q2"-->"><span>24Q2</span></th>
-    <th class="<!--#echo var="y24q3"-->"><span>24Q3</span></th>
-    <th class="<!--#echo var="y24q4"-->"><span>24Q4</span></th>
-    <th class="<!--#echo var="y25q1"-->"><span>25Q1</span></th>
-    <th class="<!--#echo var="y25q2"-->"><span>25Q2</span></th>
-    <th class="<!--#echo var="y25q3"-->"><span>25Q3</span></th>
-    <th class="<!--#echo var="y25q4"-->"><span>25Q4</span></th>
+    <th class="y23q1"><span>23Q1</span></th>
+    <th class="y23q2"><span>23Q2</span></th>
+    <th class="y23q3"><span>23Q3</span></th>
+    <th class="y23q4"><span>23Q4</span></th>
+    <th class="y24q1"><span>24Q1</span></th>
+    <th class="y24q2"><span>24Q2</span></th>
+    <th class="y24q3"><span>24Q3</span></th>
+    <th class="y24q4"><span>24Q4</span></th>
+    <th class="y25q1"><span>25Q1</span></th>
+    <th class="y25q2"><span>25Q2</span></th>
+    <th class="y25q3"><span>25Q3</span></th>
+    <th class="y25q4"><span>25Q4</span></th>
   </tr>
   <tr class="active">
     <th>3.x</th>
     <td>22.x-29.x</td>
-    <td class="<!--#echo var="y23q1"--> active">3.22</td>
-    <td class="<!--#echo var="y23q2"--> active">3.23</td>
-    <td class="<!--#echo var="y23q3"--> active">3.24</td>
-    <td class="<!--#echo var="y23q4"--> active">3.25</td>
-    <td class="<!--#echo var="y24q1"--> active">3.26</td>
-    <td class="<!--#echo var="y24q2"--> active">3.27</td>
-    <td class="<!--#echo var="y24q3"--> active">3.28</td>
-    <td class="<!--#echo var="y24q4"--> active">3.29</td>
-    <td class="<!--#echo var="y25q1"--> maintenance">3.29</td>
-    <td class="<!--#echo var="y25q2"--> maintenance">3.29</td>
-    <td class="<!--#echo var="y25q3"--> maintenance">3.29</td>
-    <td class="<!--#echo var="y25q4"--> maintenance">3.29</td>
+    <td class="y23q1 active">3.22</td>
+    <td class="y23q2 active">3.23</td>
+    <td class="y23q3 active">3.24</td>
+    <td class="y23q4 active">3.25</td>
+    <td class="y24q1 active">3.26</td>
+    <td class="y24q2 active">3.27</td>
+    <td class="y24q3 active">3.28</td>
+    <td class="y24q4 active">3.29</td>
+    <td class="y25q1 maintenance">3.29</td>
+    <td class="y25q2 maintenance">3.29</td>
+    <td class="y25q3 maintenance">3.29</td>
+    <td class="y25q4 maintenance">3.29</td>
   </tr>
   <tr class="future">
     <th>4.x</th>
     <td>30.x+</td>
-    <td class="<!--#echo var="y23q1"-->"></td>
-    <td class="<!--#echo var="y23q2"-->"></td>
-    <td class="<!--#echo var="y23q3"-->"></td>
-    <td class="<!--#echo var="y23q4"-->"></td>
-    <td class="<!--#echo var="y24q1"-->"></td>
-    <td class="<!--#echo var="y24q2"-->"></td>
-    <td class="<!--#echo var="y24q3"-->"></td>
-    <td class="<!--#echo var="y24q4"-->"></td>
-    <td class="<!--#echo var="y25q1"--> active">4.30</td>
-    <td class="<!--#echo var="y25q2"--> active">4.31</td>
-    <td class="<!--#echo var="y25q3"--> active">4.32</td>
-    <td class="<!--#echo var="y25q4"--> active">4.33</td>
+    <td class="y23q1"></td>
+    <td class="y23q2"></td>
+    <td class="y23q3"></td>
+    <td class="y23q4"></td>
+    <td class="y24q1"></td>
+    <td class="y24q2"></td>
+    <td class="y24q3"></td>
+    <td class="y24q4"></td>
+    <td class="y25q1 active">4.30</td>
+    <td class="y25q2 active">4.31</td>
+    <td class="y25q3 active">4.32</td>
+    <td class="y25q4 active">4.33</td>
   </tr>
 </table>
 
@@ -601,50 +598,50 @@ Future plans are shown in *italics* and are subject to change.
   <tr>
     <th>Protobuf PHP</th>
     <th>protoc</th>
-    <th class="<!--#echo var="y23q1"-->"><span>23Q1</span></th>
-    <th class="<!--#echo var="y23q2"-->"><span>23Q2</span></th>
-    <th class="<!--#echo var="y23q3"-->"><span>23Q3</span></th>
-    <th class="<!--#echo var="y23q4"-->"><span>23Q4</span></th>
-    <th class="<!--#echo var="y24q1"-->"><span>24Q1</span></th>
-    <th class="<!--#echo var="y24q2"-->"><span>24Q2</span></th>
-    <th class="<!--#echo var="y24q3"-->"><span>24Q3</span></th>
-    <th class="<!--#echo var="y24q4"-->"><span>24Q4</span></th>
-    <th class="<!--#echo var="y25q1"-->"><span>25Q1</span></th>
-    <th class="<!--#echo var="y25q2"-->"><span>25Q2</span></th>
-    <th class="<!--#echo var="y25q3"-->"><span>25Q3</span></th>
-    <th class="<!--#echo var="y25q4"-->"><span>25Q4</span></th>
+    <th class="y23q1"><span>23Q1</span></th>
+    <th class="y23q2"><span>23Q2</span></th>
+    <th class="y23q3"><span>23Q3</span></th>
+    <th class="y23q4"><span>23Q4</span></th>
+    <th class="y24q1"><span>24Q1</span></th>
+    <th class="y24q2"><span>24Q2</span></th>
+    <th class="y24q3"><span>24Q3</span></th>
+    <th class="y24q4"><span>24Q4</span></th>
+    <th class="y25q1"><span>25Q1</span></th>
+    <th class="y25q2"><span>25Q2</span></th>
+    <th class="y25q3"><span>25Q3</span></th>
+    <th class="y25q4"><span>25Q4</span></th>
   </tr>
   <tr class="maintenance">
     <th>3.x</th>
     <td>22.x-25.x</td>
-    <td class="<!--#echo var="y23q1"--> active">3.22</td>
-    <td class="<!--#echo var="y23q2"--> active">3.23</td>
-    <td class="<!--#echo var="y23q3"--> active">3.24</td>
-    <td class="<!--#echo var="y23q4"--> active">3.25</td>
-    <td class="<!--#echo var="y24q1"--> maintenance">3.25</td>
-    <td class="<!--#echo var="y24q2"--> maintenance">3.25</td>
-    <td class="<!--#echo var="y24q3"--> maintenance">3.25</td>
-    <td class="<!--#echo var="y24q4"--> maintenance">3.25</td>
-    <td class="<!--#echo var="y25q1"--> maintenance">3.25</td>
-    <td class="<!--#echo var="y25q2"-->"></td>
-    <td class="<!--#echo var="y25q3"-->"></td>
-    <td class="<!--#echo var="y25q4"-->"></td>
+    <td class="y23q1 active">3.22</td>
+    <td class="y23q2 active">3.23</td>
+    <td class="y23q3 active">3.24</td>
+    <td class="y23q4 active">3.25</td>
+    <td class="y24q1 maintenance">3.25</td>
+    <td class="y24q2 maintenance">3.25</td>
+    <td class="y24q3 maintenance">3.25</td>
+    <td class="y24q4 maintenance">3.25</td>
+    <td class="y25q1 maintenance">3.25</td>
+    <td class="y25q2"></td>
+    <td class="y25q3"></td>
+    <td class="y25q4"></td>
   </tr>
   <tr class="active">
     <th>4.x</th>
     <td>26.x+</td>
-    <td class="<!--#echo var="y23q1"-->"></td>
-    <td class="<!--#echo var="y23q2"-->"></td>
-    <td class="<!--#echo var="y23q3"-->"></td>
-    <td class="<!--#echo var="y23q4"-->"></td>
-    <td class="<!--#echo var="y24q1"--> active">4.26</td>
-    <td class="<!--#echo var="y24q2"--> active">4.27</td>
-    <td class="<!--#echo var="y24q3"--> active">4.28</td>
-    <td class="<!--#echo var="y24q4"--> active">4.29</td>
-    <td class="<!--#echo var="y25q1"--> active">4.30</td>
-    <td class="<!--#echo var="y25q2"--> active">4.31</td>
-    <td class="<!--#echo var="y25q3"--> active">4.32</td>
-    <td class="<!--#echo var="y25q4"--> active">4.33</td>
+    <td class="y23q1"></td>
+    <td class="y23q2"></td>
+    <td class="y23q3"></td>
+    <td class="y23q4"></td>
+    <td class="y24q1 active">4.26</td>
+    <td class="y24q2 active">4.27</td>
+    <td class="y24q3 active">4.28</td>
+    <td class="y24q4 active">4.29</td>
+    <td class="y25q1 active">4.30</td>
+    <td class="y25q2 active">4.31</td>
+    <td class="y25q3 active">4.32</td>
+    <td class="y25q4 active">4.33</td>
   </tr>
 </table>
 
@@ -715,66 +712,66 @@ Future plans are shown in *italics* and are subject to change.
   <tr>
     <th>Protobuf Python</th>
     <th>protoc</th>
-    <th class="<!--#echo var="y23q1"-->"><span>23Q1</span></th>
-    <th class="<!--#echo var="y23q2"-->"><span>23Q2</span></th>
-    <th class="<!--#echo var="y23q3"-->"><span>23Q3</span></th>
-    <th class="<!--#echo var="y23q4"-->"><span>23Q4</span></th>
-    <th class="<!--#echo var="y24q1"-->"><span>24Q1</span></th>
-    <th class="<!--#echo var="y24q2"-->"><span>24Q2</span></th>
-    <th class="<!--#echo var="y24q3"-->"><span>24Q3</span></th>
-    <th class="<!--#echo var="y24q4"-->"><span>24Q4</span></th>
-    <th class="<!--#echo var="y25q1"-->"><span>25Q1</span></th>
-    <th class="<!--#echo var="y25q2"-->"><span>25Q2</span></th>
-    <th class="<!--#echo var="y25q3"-->"><span>25Q3</span></th>
-    <th class="<!--#echo var="y25q4"-->"><span>25Q4</span></th>
+    <th class="y23q1"><span>23Q1</span></th>
+    <th class="y23q2"><span>23Q2</span></th>
+    <th class="y23q3"><span>23Q3</span></th>
+    <th class="y23q4"><span>23Q4</span></th>
+    <th class="y24q1"><span>24Q1</span></th>
+    <th class="y24q2"><span>24Q2</span></th>
+    <th class="y24q3"><span>24Q3</span></th>
+    <th class="y24q4"><span>24Q4</span></th>
+    <th class="y25q1"><span>25Q1</span></th>
+    <th class="y25q2"><span>25Q2</span></th>
+    <th class="y25q3"><span>25Q3</span></th>
+    <th class="y25q4"><span>25Q4</span></th>
   </tr>
   <tr class="maintenance">
     <th>4.x</th>
     <td>22.x-25.x</td>
-    <td class="<!--#echo var="y23q1"--> active">4.22</td>
-    <td class="<!--#echo var="y23q2"--> active">4.23</td>
-    <td class="<!--#echo var="y23q3"--> active">4.24</td>
-    <td class="<!--#echo var="y23q4"--> active">4.25</td>
-    <td class="<!--#echo var="y24q1"--> maintenance">4.25</td>
-    <td class="<!--#echo var="y24q2"--> maintenance">4.25</td>
-    <td class="<!--#echo var="y24q3"--> maintenance">4.25</td>
-    <td class="<!--#echo var="y24q4"--> maintenance">4.25</td>
-    <td class="<!--#echo var="y25q1"--> maintenance">4.25</td>
-    <td class="<!--#echo var="y25q2"-->"></td>
-    <td class="<!--#echo var="y25q3"-->"></td>
-    <td class="<!--#echo var="y25q4"-->"></td>
+    <td class="y23q1 active">4.22</td>
+    <td class="y23q2 active">4.23</td>
+    <td class="y23q3 active">4.24</td>
+    <td class="y23q4 active">4.25</td>
+    <td class="y24q1 maintenance">4.25</td>
+    <td class="y24q2 maintenance">4.25</td>
+    <td class="y24q3 maintenance">4.25</td>
+    <td class="y24q4 maintenance">4.25</td>
+    <td class="y25q1 maintenance">4.25</td>
+    <td class="y25q2"></td>
+    <td class="y25q3"></td>
+    <td class="y25q4"></td>
   </tr>
   <tr class="active">
     <th>5.x</th>
     <td>26.x-29.x</td>
-    <td class="<!--#echo var="y23q1"-->"></td>
-    <td class="<!--#echo var="y23q2"-->"></td>
-    <td class="<!--#echo var="y23q3"-->"></td>
-    <td class="<!--#echo var="y23q4"-->"></td>
-    <td class="<!--#echo var="y24q1"--> active">5.26</td>
-    <td class="<!--#echo var="y24q2"--> active">5.27</td>
-    <td class="<!--#echo var="y24q3"--> active">5.28</td>
-    <td class="<!--#echo var="y24q4"--> active">5.29</td>
-    <td class="<!--#echo var="y25q1"--> maintenance">5.29</td>
-    <td class="<!--#echo var="y25q2"--> maintenance">5.29</td>
-    <td class="<!--#echo var="y25q3"--> maintenance">5.29</td>
-    <td class="<!--#echo var="y25q4"--> maintenance">5.29</td>
+    <td class="y23q1"></td>
+    <td class="y23q2"></td>
+    <td class="y23q3"></td>
+    <td class="y23q4"></td>
+    <td class="y24q1 active">5.26</td>
+    <td class="y24q2 active">5.27</td>
+    <td class="y24q3 active">5.28</td>
+    <td class="y24q4 active">5.29</td>
+    <td class="y25q1 maintenance">5.29</td>
+    <td class="y25q2 maintenance">5.29</td>
+    <td class="y25q3 maintenance">5.29</td>
+    <td class="y25q4 maintenance">5.29</td>
   </tr>
   <tr class="future">
     <th>6.x</th>
     <td>30.x+</td>
-    <td class="<!--#echo var="y23q1"-->"></td>
-    <td class="<!--#echo var="y23q2"-->"></td>
-    <td class="<!--#echo var="y23q3"-->"></td>
-    <td class="<!--#echo var="y23q4"-->"></td>
-    <td class="<!--#echo var="y24q1"-->"></td>
-    <td class="<!--#echo var="y24q2"-->"></td>
-    <td class="<!--#echo var="y24q3"-->"></td>
-    <td class="<!--#echo var="y24q4"-->"></td>
-    <td class="<!--#echo var="y25q1"--> active">6.30</td>
-    <td class="<!--#echo var="y25q2"--> active">6.31</td>
-    <td class="<!--#echo var="y25q3"--> active">6.32</td>
-    <td class="<!--#echo var="y25q4"--> active">6.33</td>
+    <td class="y23q1"></td>
+    <td class="y23q2"></td>
+    <td class="y23q3"></td>
+    <td class="y23q4"></td>
+    <td class="y24q1"></td>
+    <td class="y24q2"></td>
+    <td class="y24q3"></td>
+    <td class="y24q4"></td>
+    <td class="y25q1 active">6.30</td>
+    <td class="y25q2 active">6.31</td>
+    <td class="y25q3 active">6.32</td>
+    <td class="y25q4 active">6.33</td>
   </tr>
 </table>
 
@@ -840,50 +837,50 @@ Future plans are shown in *italics* and are subject to change.
   <tr>
     <th>Protobuf Ruby</th>
     <th>protoc</th>
-    <th class="<!--#echo var="y23q1"-->"><span>23Q1</span></th>
-    <th class="<!--#echo var="y23q2"-->"><span>23Q2</span></th>
-    <th class="<!--#echo var="y23q3"-->"><span>23Q3</span></th>
-    <th class="<!--#echo var="y23q4"-->"><span>23Q4</span></th>
-    <th class="<!--#echo var="y24q1"-->"><span>24Q1</span></th>
-    <th class="<!--#echo var="y24q2"-->"><span>24Q2</span></th>
-    <th class="<!--#echo var="y24q3"-->"><span>24Q3</span></th>
-    <th class="<!--#echo var="y24q4"-->"><span>24Q4</span></th>
-    <th class="<!--#echo var="y25q1"-->"><span>25Q1</span></th>
-    <th class="<!--#echo var="y25q2"-->"><span>25Q2</span></th>
-    <th class="<!--#echo var="y25q3"-->"><span>25Q3</span></th>
-    <th class="<!--#echo var="y25q4"-->"><span>25Q4</span></th>
+    <th class="y23q1"><span>23Q1</span></th>
+    <th class="y23q2"><span>23Q2</span></th>
+    <th class="y23q3"><span>23Q3</span></th>
+    <th class="y23q4"><span>23Q4</span></th>
+    <th class="y24q1"><span>24Q1</span></th>
+    <th class="y24q2"><span>24Q2</span></th>
+    <th class="y24q3"><span>24Q3</span></th>
+    <th class="y24q4"><span>24Q4</span></th>
+    <th class="y25q1"><span>25Q1</span></th>
+    <th class="y25q2"><span>25Q2</span></th>
+    <th class="y25q3"><span>25Q3</span></th>
+    <th class="y25q4"><span>25Q4</span></th>
   </tr>
   <tr class="maintenance">
     <th>3.x</th>
     <td>22.x-25.x</td>
-    <td class="<!--#echo var="y23q1"--> active">3.22</td>
-    <td class="<!--#echo var="y23q2"--> active">3.23</td>
-    <td class="<!--#echo var="y23q3"--> active">3.24</td>
-    <td class="<!--#echo var="y23q4"--> active">3.25</td>
-    <td class="<!--#echo var="y24q1"--> maintenance">3.25</td>
-    <td class="<!--#echo var="y24q2"--> maintenance">3.25</td>
-    <td class="<!--#echo var="y24q3"--> maintenance">3.25</td>
-    <td class="<!--#echo var="y24q4"--> maintenance">3.25</td>
-    <td class="<!--#echo var="y25q1"--> maintenance">3.25</td>
-    <td class="<!--#echo var="y25q2"-->"></td>
-    <td class="<!--#echo var="y25q3"-->"></td>
-    <td class="<!--#echo var="y25q4"-->"></td>
+    <td class="y23q1 active">3.22</td>
+    <td class="y23q2 active">3.23</td>
+    <td class="y23q3 active">3.24</td>
+    <td class="y23q4 active">3.25</td>
+    <td class="y24q1 maintenance">3.25</td>
+    <td class="y24q2 maintenance">3.25</td>
+    <td class="y24q3 maintenance">3.25</td>
+    <td class="y24q4 maintenance">3.25</td>
+    <td class="y25q1 maintenance">3.25</td>
+    <td class="y25q2"></td>
+    <td class="y25q3"></td>
+    <td class="y25q4"></td>
   </tr>
   <tr class="active">
     <th>4.x</th>
     <td>26.x+</td>
-    <td class="<!--#echo var="y23q1"-->"></td>
-    <td class="<!--#echo var="y23q2"-->"></td>
-    <td class="<!--#echo var="y23q3"-->"></td>
-    <td class="<!--#echo var="y23q4"-->"></td>
-    <td class="<!--#echo var="y24q1"--> active">4.26</td>
-    <td class="<!--#echo var="y24q2"--> active">4.27</td>
-    <td class="<!--#echo var="y24q3"--> active">4.28</td>
-    <td class="<!--#echo var="y24q4"--> active">4.29</td>
-    <td class="<!--#echo var="y25q1"--> active">4.30</td>
-    <td class="<!--#echo var="y25q2"--> active">4.31</td>
-    <td class="<!--#echo var="y25q3"--> active">4.32</td>
-    <td class="<!--#echo var="y25q4"--> active">4.33</td>
+    <td class="y23q1"></td>
+    <td class="y23q2"></td>
+    <td class="y23q3"></td>
+    <td class="y23q4"></td>
+    <td class="y24q1 active">4.26</td>
+    <td class="y24q2 active">4.27</td>
+    <td class="y24q3 active">4.28</td>
+    <td class="y24q4 active">4.29</td>
+    <td class="y25q1 active">4.30</td>
+    <td class="y25q2 active">4.31</td>
+    <td class="y25q3 active">4.32</td>
+    <td class="y25q4 active">4.33</td>
   </tr>
 </table>
 
