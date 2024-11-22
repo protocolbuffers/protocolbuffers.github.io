@@ -252,13 +252,18 @@ message SearchRequest {
 
 Deleting fields can cause serious problems if not done properly.
 
-**Do not delete** `required` fields. This is almost impossible to do safely.
+**Do not delete** `required` fields. This is almost impossible to do safely. If
+you must delete a `required` field, you should first mark the field `optional`
+and `deprecated` and ensure that all systems which in any way observe the
+message have been deployed with the new schema. Then you can consider removing
+the field (but note that this is still an error-prone process).
 
-When you no longer need a field and all references have been deleted from client
-code, you may delete the field definition from the message. However, you
-**must** [reserve the deleted field number](#fieldreserved). If you do not
-reserve the field number, it is possible for a developer to reuse that number in
-the future.
+When you no longer need a field that is not `required`, first delete all
+references to the field from client code, and then delete the field definition
+from the message. However, you **must**
+[reserve the deleted field number](#fieldreserved). If you do not reserve the
+field number, it is possible for a developer to reuse that number in the future
+and cause a breakage.
 
 You should also reserve the field name to allow JSON and TextFormat encodings of
 your message to continue to parse.
