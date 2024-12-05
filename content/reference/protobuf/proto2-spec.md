@@ -272,6 +272,9 @@ extensions 100 to 199;
 extensions 4, 20 to max;
 ```
 
+For more on this topic, see
+[Extension Declarations](/programming-guides/extension_declarations).
+
 ### Reserved
 
 Reserved declares a range of field numbers or field names in a message that can

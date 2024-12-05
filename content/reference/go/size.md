@@ -44,8 +44,8 @@ quick fix to your pipeline:
 ```go {highlight="context:1,proto.Size,1"}
 func (*beamFn) ProcessElement(key string, value []byte, emit func(proto.Message)) {
   task := produceWorkTask(value)
-  if proto.Size(task) > 100 * 1024 * 1024 {
-    // Skip every work task over 100 MB to not overwhelm
+  if proto.Size(task) > 500 * 1024 * 1024 {
+    // Skip every work task over 500 MB to not overwhelm
     // the brittle downstream system.
     return
   }
