@@ -20,6 +20,8 @@ New news topics will also be published to the
 The following news topics provide information in the reverse order in which it
 was released.
 
+*   [December 4, 2024](/news/2024-12-04) - `DebugString`
+    replaced
 *   [November 7, 2024](/news/2024-11-07) - More breaking
     changes in the upcoming 30.x release
 *   [October 2, 2024](/news/2024-10-02) - Breaking

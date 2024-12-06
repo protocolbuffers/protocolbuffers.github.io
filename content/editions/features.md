@@ -472,7 +472,7 @@ message Msg {
 
 This feature determines how generated code should treat string fields. This
 replaces the `ctype` option from proto2 and proto3, and offers a new
-`string_view` feature. In Edition 2023, either `ctype` or `string_view` may be
+`string_view` feature. In Edition 2023, either `ctype` or `string_type` may be
 specified on a field, but not both.
 
 **Values available:**

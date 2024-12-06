@@ -409,21 +409,21 @@ enum Bar {
 For either of these field definitions:
 
 ```proto
-optional Bar foo = 1;
-required Bar foo = 1;
+optional Bar bar = 1;
+required Bar bar = 1;
 ```
 
 The compiler will generate the following accessor methods:
 
--   `bool has_foo() const`: Returns `true` if the field is set.
--   `Bar foo() const`: Returns the current value of the field. If the field is
+-   `bool has_bar() const`: Returns `true` if the field is set.
+-   `Bar bar() const`: Returns the current value of the field. If the field is
     not set, returns the default value.
--   `void set_foo(Bar value)`: Sets the value of the field. After calling this,
-    `has_foo()` will return `true` and `foo()` will return `value`. In debug
+-   `void set_bar(Bar value)`: Sets the value of the field. After calling this,
+    `has_bar()` will return `true` and `bar()` will return `value`. In debug
     mode (i.e. NDEBUG is not defined), if `value` does not match any of the
     values defined for `Bar`, this method will abort the process.
--   `void clear_foo()`: Clears the value of the field. After calling this,
-    `has_foo()` will return `false` and `foo()` will return the default value.
+-   `void clear_bar()`: Clears the value of the field. After calling this,
+    `has_bar()` will return `false` and `bar()` will return the default value.
 
 ### Implicit Presence Enum Fields (proto3) {#implicit-enum}
 
@@ -440,17 +440,17 @@ enum Bar {
 For this field definition:
 
 ```proto
-Bar foo = 1;  // no field label specified, defaults to implicit presence.
+Bar bar = 1;  // no field label specified, defaults to implicit presence.
 ```
 
 The compiler will generate the following accessor methods:
 
--   `Bar foo() const`: Returns the current value of the field. If the field is
+-   `Bar bar() const`: Returns the current value of the field. If the field is
     not set, returns the default value (0).
--   `void set_foo(Bar value)`: Sets the value of the field. After calling this,
-    `foo()` will return `value`.
--   `void clear_foo()`: Clears the value of the field. After calling this,
-    `foo()` will return the default value.
+-   `void set_bar(Bar value)`: Sets the value of the field. After calling this,
+    `bar()` will return `value`.
+-   `void clear_bar()`: Clears the value of the field. After calling this,
+    `bar()` will return the default value.
 
 ### Optional Embedded Message Fields (proto2 and proto3) {#embeddedmessage}
 
@@ -464,35 +464,35 @@ For any of these field definitions:
 
 ```proto
 //proto2
-optional Bar foo = 1;
-required Bar foo = 1;
+optional Bar bar = 1;
+required Bar bar = 1;
 
 //proto3
-Bar foo = 1;
+Bar bar = 1;
 ```
 
 The compiler will generate the following accessor methods:
 
--   `bool has_foo() const`: Returns `true` if the field is set.
--   `const Bar& foo() const`: Returns the current value of the field. If the
+-   `bool has_bar() const`: Returns `true` if the field is set.
+-   `const Bar& bar() const`: Returns the current value of the field. If the
     field is not set, returns a `Bar` with none of its fields set (possibly
     `Bar::default_instance()`).
--   `Bar* mutable_foo()`: Returns a pointer to the mutable `Bar` object that
+-   `Bar* mutable_bar()`: Returns a pointer to the mutable `Bar` object that
     stores the field's value. If the field was not set prior to the call, then
     the returned `Bar` will have none of its fields set (i.e. it will be
-    identical to a newly-allocated `Bar`). After calling this, `has_foo()` will
-    return `true` and `foo()` will return a reference to the same instance of
+    identical to a newly-allocated `Bar`). After calling this, `has_bar()` will
+    return `true` and `bar()` will return a reference to the same instance of
     `Bar`.
--   `void clear_foo()`: Clears the value of the field. After calling this,
-    `has_foo()` will return `false` and `foo()` will return the default value.
--   `void set_allocated_foo(Bar* bar)`: Sets the `Bar` object to the field and
+-   `void clear_bar()`: Clears the value of the field. After calling this,
+    `has_bar()` will return `false` and `bar()` will return the default value.
+-   `void set_allocated_bar(Bar* bar)`: Sets the `Bar` object to the field and
     frees the previous field value if it exists. If the `Bar` pointer is not
     `NULL`, the message takes ownership of the allocated `Bar` object and
-    `has_foo()` will return `true`. Otherwise, if the `Bar` is `NULL`, the
-    behavior is the same as calling `clear_foo()`.
--   `Bar* release_foo()`: Releases the ownership of the field and returns the
+    `has_bar()` will return `true`. Otherwise, if the `Bar` is `NULL`, the
+    behavior is the same as calling `clear_bar()`.
+-   `Bar* release_bar()`: Releases the ownership of the field and returns the
     pointer of the `Bar` object. After calling this, caller takes the ownership
-    of the allocated `Bar` object, `has_foo()` will return `false`, and `foo()`
+    of the allocated `Bar` object, `has_bar()` will return `false`, and `bar()`
     will return the default value.
 
 ### Repeated Numeric Fields {#repeatednumeric}
@@ -593,33 +593,33 @@ enum Bar {
 For this field definition:
 
 ```proto
-repeated Bar foo = 1;
+repeated Bar bar = 1;
 ```
 
 The compiler will generate the following accessor methods:
 
--   `int foo_size() const`: Returns the number of elements currently in the
+-   `int bar_size() const`: Returns the number of elements currently in the
     field. To check for an empty set, consider using the
     [`empty()`](/reference/cpp/api-docs/google.protobuf.repeated_field#RepeatedPtrField)
     method in the underlying `RepeatedField` instead of this method.
--   `Bar foo(int index) const`: Returns the element at the given zero-based
-    index. Calling this method with index outside of [0, foo_size()) yields
+-   `Bar bar(int index) const`: Returns the element at the given zero-based
+    index. Calling this method with index outside of [0, bar_size()) yields
     undefined behavior.
--   `void set_foo(int index, Bar value)`: Sets the value of the element at the
+-   `void set_bar(int index, Bar value)`: Sets the value of the element at the
     given zero-based index. In debug mode (i.e. NDEBUG is not defined), if
     `value` does not match any of the values defined for `Bar`, this method will
     abort the process.
--   `void add_foo(Bar value)`: Appends a new element to the end of the field
+-   `void add_bar(Bar value)`: Appends a new element to the end of the field
     with the given value. In debug mode (i.e. NDEBUG is not defined), if `value`
     does not match any of the values defined for `Bar`, this method will abort
     the process.
--   `void clear_foo()`: Removes all elements from the field. After calling this,
-    `foo_size()` will return zero.
--   `const RepeatedField<int>& foo() const`: Returns the underlying
+-   `void clear_bar()`: Removes all elements from the field. After calling this,
+    `bar_size()` will return zero.
+-   `const RepeatedField<int>& bar() const`: Returns the underlying
     [`RepeatedField`](/reference/cpp/api-docs/google.protobuf.repeated_field#RepeatedField)
     that stores the field's elements. This container class provides STL-like
     iterators and other methods.
--   `RepeatedField<int>* mutable_foo()`: Returns a pointer to the underlying
+-   `RepeatedField<int>* mutable_bar()`: Returns a pointer to the underlying
     mutable `RepeatedField` that stores the field's elements. This container
     class provides STL-like iterators and other methods.
 
@@ -634,27 +634,27 @@ message Bar {}
 For this field definitions:
 
 ```proto
-repeated Bar foo = 1;
+repeated Bar bar = 1;
 ```
 
 The compiler will generate the following accessor methods:
 
--   `int foo_size() const`: Returns the number of elements currently in the
+-   `int bar_size() const`: Returns the number of elements currently in the
     field. To check for an empty set, consider using the
     [`empty()`](/reference/cpp/api-docs/google.protobuf.repeated_field#RepeatedPtrField)
     method in the underlying `RepeatedField` instead of this method.
--   `const Bar& foo(int index) const`: Returns the element at the given
-    zero-based index. Calling this method with index outside of [0, foo_size())
+-   `const Bar& bar(int index) const`: Returns the element at the given
+    zero-based index. Calling this method with index outside of [0, bar_size())
     yields undefined behavior.
--   `Bar* mutable_foo(int index)`: Returns a pointer to the mutable `Bar` object
+-   `Bar* mutable_bar(int index)`: Returns a pointer to the mutable `Bar` object
     that stores the value of the element at the given zero-based index. Calling
-    this method with index outside of [0, foo_size()) yields undefined behavior.
--   `Bar* add_foo()`: Adds a new element to the end of the field and returns a
+    this method with index outside of [0, bar_size()) yields undefined behavior.
+-   `Bar* add_bar()`: Adds a new element to the end of the field and returns a
     pointer to it. The returned `Bar` is mutable and will have none of its
     fields set (i.e. it will be identical to a newly-allocated `Bar`).
--   `void clear_foo()`: Removes all elements from the field. After calling this,
-    `foo_size()` will return zero.
--   `const RepeatedPtrField<Bar>& foo() const`: Returns the underlying
+-   `void clear_bar()`: Removes all elements from the field. After calling this,
+    `bar_size()` will return zero.
+-   `const RepeatedPtrField<Bar>& bar() const`: Returns the underlying
     [`RepeatedPtrField`](/reference/cpp/api-docs/google.protobuf.repeated_field#RepeatedPtrField)
     that stores the field's elements. This container class provides STL-like
     iterators and other methods.
@@ -777,28 +777,28 @@ For the [oneof](#oneof) field definition:
 
 ```proto
 oneof example_name {
-    Bar foo = 1;
+    Bar bar = 1;
     ...
 }
 ```
 
 The compiler will generate the following accessor methods:
 
--   `bool has_foo() const`: Returns `true` if oneof case is `kFoo`.
--   `Bar foo() const`: Returns the current value of the field if oneof case is
-    `kFoo`. Otherwise, returns the default value.
--   `void set_foo(Bar value)`:
+-   `bool has_bar() const`: Returns `true` if oneof case is `kBar`.
+-   `Bar bar() const`: Returns the current value of the field if oneof case is
+    `kBar`. Otherwise, returns the default value.
+-   `void set_bar(Bar value)`:
     -   If any other oneof field in the same oneof is set, calls
         `clear_example_name()`.
-    -   Sets the value of this field and sets the oneof case to `kFoo`.
-    -   `has_foo()` will return `true`, `foo()` will return `value` and
-        `example_name_case()` will return `kFoo`.
+    -   Sets the value of this field and sets the oneof case to `kBar`.
+    -   `has_bar()` will return `true`, `bar()` will return `value` and
+        `example_name_case()` will return `kBar`.
     -   In debug mode (i.e. NDEBUG is not defined), if `value` does not match
         any of the values defined for `Bar`, this method will abort the process.
--   `void clear_foo()`:
-    -   Nothing will be changed if the oneof case is not `kFoo`.
-    -   If the oneof case is `kFoo`, clears the value of the field and the oneof
-        case. `has_foo()` will return `false`, `foo()` will return the default
+-   `void clear_bar()`:
+    -   Nothing will be changed if the oneof case is not `kBar`.
+    -   If the oneof case is `kBar`, clears the value of the field and the oneof
+        case. `has_bar()` will return `false`, `bar()` will return the default
         value and `example_name_case()` will return `EXAMPLE_NAME_NOT_SET`.
 
 ### Oneof Embedded Message Fields {#oneof-embedded}
@@ -813,47 +813,47 @@ For the [oneof](#oneof) field definition:
 
 ```proto
 oneof example_name {
-    Bar foo = 1;
+    Bar bar = 1;
     ...
 }
 ```
 
 The compiler will generate the following accessor methods:
 
--   `bool has_foo() const`: Returns true if oneof case is `kFoo`.
--   `const Bar& foo() const`: Returns the current value of the field if oneof
-    case is `kFoo`. Otherwise, returns a Bar with none of its fields set
+-   `bool has_bar() const`: Returns true if oneof case is `kBar`.
+-   `const Bar& bar() const`: Returns the current value of the field if oneof
+    case is `kBar`. Otherwise, returns a Bar with none of its fields set
     (possibly `Bar::default_instance()`).
--   `Bar* mutable_foo()`:
+-   `Bar* mutable_bar()`:
     -   If any other oneof field in the same oneof is set, calls
         `clear_example_name()`.
-    -   Sets the oneof case to `kFoo` and returns a pointer to the mutable Bar
-        object that stores the field's value. If the oneof case was not `kFoo`
+    -   Sets the oneof case to `kBar` and returns a pointer to the mutable Bar
+        object that stores the field's value. If the oneof case was not `kBar`
         prior to the call, then the returned Bar will have none of its fields
         set (i.e. it will be identical to a newly-allocated Bar).
-    -   After calling this, `has_foo()` will return `true`, `foo()` will return
+    -   After calling this, `has_bar()` will return `true`, `bar()` will return
         a reference to the same instance of `Bar` and `example_name_case()` will
-        return `kFoo`.
--   `void clear_foo()`:
-    -   Nothing will be changed if the oneof case is not `kFoo`.
-    -   If the oneof case equals `kFoo`, frees the field and clears the oneof
-        case. `has_foo()` will return `false`, `foo()` will return the default
+        return `kBar`.
+-   `void clear_bar()`:
+    -   Nothing will be changed if the oneof case is not `kBar`.
+    -   If the oneof case equals `kBar`, frees the field and clears the oneof
+        case. `has_bar()` will return `false`, `bar()` will return the default
         value and `example_name_case()` will return `EXAMPLE_NAME_NOT_SET`.
--   `void set_allocated_foo(Bar* bar)`:
+-   `void set_allocated_bar(Bar* bar)`:
     -   Calls `clear_example_name()`.
     -   If the `Bar` pointer is not `NULL`: Sets the `Bar` object to the field
-        and sets the oneof case to `kFoo`. The message takes ownership of the
-        allocated `Bar` object, has_foo() will return true and
-        `example_name_case()` will return `kFoo`.
-    -   If the pointer is `NULL`, `has_foo()` will return `false` and
+        and sets the oneof case to `kBar`. The message takes ownership of the
+        allocated `Bar` object, has_bar() will return true and
+        `example_name_case()` will return `kBar`.
+    -   If the pointer is `NULL`, `has_bar()` will return `false` and
         `example_name_case()` will return `EXAMPLE_NAME_NOT_SET`. (The behavior
         is like calling `clear_example_name()`)
--   `Bar* release_foo()`:
-    -   Returns `NULL` if oneof case is not `kFoo`.
-    -   If the oneof case is `kFoo`, clears the oneof case, releases the
+-   `Bar* release_bar()`:
+    -   Returns `NULL` if oneof case is not `kBar`.
+    -   If the oneof case is `kBar`, clears the oneof case, releases the
         ownership of the field and returns the pointer of the `Bar` object.
         After calling this, caller takes the ownership of the allocated `Bar`
-        object, `has_foo()` will return `false`, `foo()` will return the default
+        object, `has_bar()` will return `false`, `bar()` will return the default
         value and `example_name_case()` will return `EXAMPLE_NAME_NOT_SET`.
 
 ### Map Fields {#map}

@@ -183,7 +183,7 @@ from repeated to scalar will result in the last deserialized value "winning."
 
 Going from scalar to repeated is OK in proto2 and in proto3 with
 `[packed=false]` because for binary serialization the scalar value becomes a
-one-element list .
+one-element list.
 
 <a id="do-follow-the-style-guide-for-generated-code"></a>
 
