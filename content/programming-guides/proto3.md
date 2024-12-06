@@ -1193,7 +1193,7 @@ map<string, Project> projects = 3;
 
 ### Maps Features {#maps-features}
 
-*   Map fields cannot be `repeated`.
+*   Map fields cannot be `repeated` or `optional`.
 *   Wire format ordering and map iteration ordering of map values is undefined,
     so you cannot rely on your map items being in a particular order.
 *   When generating text format for a `.proto`, maps are sorted by key. Numeric
