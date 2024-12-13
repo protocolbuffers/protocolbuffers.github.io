@@ -132,6 +132,9 @@ are not expected to start with a backwards domain name.
 
 ## Messages {#message}
 
+If you are designing a new protocol buffer schema, see
+[the recommendations for Java proto names](/reference/java/java-proto-names).
+
 Given a simple message declaration:
 
 ```proto

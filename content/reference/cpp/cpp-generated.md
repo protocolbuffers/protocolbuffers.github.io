@@ -658,7 +658,7 @@ The compiler will generate the following accessor methods:
     [`RepeatedPtrField`](/reference/cpp/api-docs/google.protobuf.repeated_field#RepeatedPtrField)
     that stores the field's elements. This container class provides STL-like
     iterators and other methods.
--   `RepeatedPtrField<Bar>* mutable_foo()`: Returns a pointer to the underlying
+-   `RepeatedPtrField<Bar>* mutable_bar()`: Returns a pointer to the underlying
     mutable `RepeatedPtrField` that stores the field's elements. This container
     class provides STL-like iterators and other methods.
 

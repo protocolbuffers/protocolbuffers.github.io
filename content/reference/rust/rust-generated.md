@@ -525,9 +525,10 @@ Additionally, it will generate the two accessors:
 Given an enum definition like:
 
 ```proto
-enum Foo {
-  VALUE_A = 0;
-  VALUE_B = 5;
+enum FooBar {
+  FOO_BAR_UNKNOWN = 0;
+  FOO_BAR_A = 1;
+  FOO_B = 5;
   VALUE_C = 1234;
 }
 ```
@@ -536,15 +537,23 @@ The compiler will generate:
 
 ```rust
   #[derive(Clone, Copy, PartialEq, Eq)]
-
   pub struct Foo(i32);
 
-  impl Foo {
-    pub const ValueA: Foo = Foo(0);
-    pub const ValueB: Foo = Foo(5);
+  impl FooBar {
+    pub const Unknown: Foo = Foo(0);
+    pub const A: Foo = Foo(1);
+    pub const FooB: Foo = Foo(5);
     pub const ValueC: Foo = Foo(1234);
   }
 ```
+
+Note that for values with a prefix that matches the enum, the prefix will be
+stripped; this is done to improve ergonomics. Enum values are commonly prefixed
+with the enum name to avoid name collisions between sibling enums (which follow
+the semantics of C++ enums where the values are not scoped by their containing
+enum). Since the generated Rust consts are scoped within the `impl`, the
+additional prefix, which is beneficial to add in .proto files, would be
+redundant in Rust.
 
 ## Extensions (proto2 only) {#extensions}
 
