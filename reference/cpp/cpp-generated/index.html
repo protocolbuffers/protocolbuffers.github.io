@@ -313,7 +313,7 @@ fields set (i.e. it will be identical to a newly-allocated <code>Bar</code>).</l
 <code>bar_size()</code> will return zero.</li><li><code>const RepeatedPtrField&lt;Bar>& bar() const</code>: Returns the underlying
 <a href=/reference/cpp/api-docs/google.protobuf.repeated_field#RepeatedPtrField><code>RepeatedPtrField</code></a>
 that stores the field&rsquo;s elements. This container class provides STL-like
-iterators and other methods.</li><li><code>RepeatedPtrField&lt;Bar>* mutable_foo()</code>: Returns a pointer to the underlying
+iterators and other methods.</li><li><code>RepeatedPtrField&lt;Bar>* mutable_bar()</code>: Returns a pointer to the underlying
 mutable <code>RepeatedPtrField</code> that stores the field&rsquo;s elements. This container
 class provides STL-like iterators and other methods.</li></ul><h3 id=oneof-numeric>Oneof Numeric Fields</h3><p>For this <a href=#oneof>oneof</a> field definition:</p><div class=highlight><pre tabindex=0 style=background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-proto data-lang=proto><span style=display:flex><span><span style=color:#204a87;font-weight:700>oneof</span> <span style=color:#000>example_name</span> <span style=color:#000;font-weight:700>{</span><span style=color:#a40000>
 </span></span></span><span style=display:flex><span><span style=color:#a40000></span>    <span style=color:#204a87;font-weight:700>int32</span> <span style=color:#000>foo</span> <span style=color:#ce5c00;font-weight:700>=</span> <span style=color:#0000cf;font-weight:700>1</span><span style=color:#000;font-weight:700>;</span><span style=color:#a40000>
