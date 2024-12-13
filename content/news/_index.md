@@ -20,6 +20,8 @@ New news topics will also be published to the
 The following news topics provide information in the reverse order in which it
 was released.
 
+*   [December 13, 2024](/news/2024-12-13) - Removing
+    `MutableRepeatedFieldRef<T>::Reserve()` in v30
 *   [December 4, 2024](/news/2024-12-04) - `DebugString`
     replaced
 *   [November 7, 2024](/news/2024-11-07) - More breaking
