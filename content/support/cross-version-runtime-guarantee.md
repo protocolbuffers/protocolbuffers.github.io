@@ -42,6 +42,10 @@ compatibility window for major versions. Code generated for a major version V
 (full version: V.x.y) will be supported by protobuf runtimes of version V and
 V+1.
 
+Prior to this policy, code generated for 3.22.x+ (release ~1 year prior to major
+version 4) will still be supported by protobuf runtimes of version 3 and 4.
+Users with older gencode should upgrade to the latest gencode from 3.25.x.
+
 Protobuf will not support using gencode from version V with runtime &gt;= V+2
 and will be using a "poison pill" mechanism to fail with a clear error message
 when a software assembly attempts to use such a configuration.

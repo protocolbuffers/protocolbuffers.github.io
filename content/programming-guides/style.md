@@ -98,10 +98,18 @@ enum FooBar {
 }
 ```
 
-Each enum value should end with a semicolon, not a comma. Prefer prefixing enum
-values instead of surrounding them in an enclosing message. Since some languages
-don't support an enum being defined inside a "struct" type, this ensures a
-consistent approach across binding languages.
+Each enum value should end with a semicolon, not a comma.
+
+Since the enum values are semantically not scoped by their containing enum name,
+the same value name in two sibling enums is not allowed. A name collision issue
+is especially a risk for top level enums, since in that case their siblings may
+be defined in another file which has the same package. To avoid these risks, it
+is strongly recommended to either prefix every value with the enum name or to
+nest the enum inside a containing message.
+
+Prefer using top-level enums with prefixed values over nesting them inside a
+message. Since some languages don't support an enum being defined inside a
+"struct" type, this ensures a consistent approach across binding languages.
 
 The zero value enum should have the suffix `UNSPECIFIED`, because a server or
 application that gets an unexpected enum value will mark the field as unset in
