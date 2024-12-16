@@ -1,7 +1,7 @@
 +++
-title = "Go Generated Code Guide (Open)"
-weight = 610
-linkTitle = "Generated Code Guide (Open)"
+title = "Go Generated Code Guide (Opaque)"
+weight = 615
+linkTitle = "Generated Code Guide (Opaque)"
 description = "Describes exactly what Go code the protocol buffer compiler generates for any given protocol definition."
 type = "docs"
 +++
@@ -16,10 +16,11 @@ and/or the
 before reading this document.
 
 {{% alert title="Note" color="warning" %}}You are
-looking at documentation for the old generated code API (Open Struct API).
-See
-[Go Generated Code (Opaque)](/reference/go/go-generated-opaque)
-for the corresponding documentation of the (new) Opaque API. See
+looking at documentation for the Opaque API, which is the current version. If
+you are working with .proto files that use the older Open Struct API (you can
+tell by the API level setting in the respective .proto files), see
+[Go Generated Code (Open)](/reference/go/go-generated)
+for the corresponding documentation. See
 [Go Protobuf: The new Opaque API](https://go.dev/blog/protobuf-opaque) for the
 introduction of the Opaque API. {{% /alert %}}
 
@@ -224,22 +225,21 @@ In this case, the compiler generates two structs: `Artist` and `Artist_Name`.
 
 ## Fields
 
-The protocol buffer compiler generates a struct field for each field defined
-within a message. The exact nature of this field depends on its type and whether
-it is a singular, repeated, map, or oneof field.
+The protocol buffer compiler generates accessor methods (setters and getters)
+for each field defined within a message.
 
-Note that the generated Go field names always use camel-case naming, even if the
-field name in the `.proto` file uses lower-case with underscores
-([as it should](/programming-guides/style#message-field-names)).
-The case-conversion works as follows:
+Note that the generated Go accessor methods always use camel-case naming, even
+if the field name in the `.proto` file uses lower-case with underscores
+([as it should](/programming-guides/style)). The
+case-conversion works as follows:
 
 1.  The first letter is capitalized for export. If the first character is an
     underscore, it is removed and a capital X is prepended.
 2.  If an interior underscore is followed by a lower-case letter, the underscore
     is removed, and the following letter is capitalized.
 
-Thus, the proto field `birth_year` becomes `BirthYear` in Go, and
-`_birth_year_2` becomes `XBirthYear_2`.
+Thus, you can access the proto field `birth_year` using the `GetBirthYear()`
+method in Go, and `_birth_year_2` using `GetXBirthYear_2()`.
 
 ### Singular Scalar Fields (proto2) {#singular-scalar-proto2}
 
@@ -250,13 +250,21 @@ optional int32 birth_year = 1;
 required int32 birth_year = 1;
 ```
 
-the compiler generates a struct with an `*int32` field named `BirthYear` and an
-accessor method `GetBirthYear()` which returns the `int32` value in `Artist` or
-the default value if the field is unset. If the default is not explicitly set,
-the [zero value](https://golang.org/ref/spec#The_zero_value) of that
-type is used instead (`0` for numbers, the empty string for strings).
+the compiler generates the following accessor methods:
 
-For other scalar field types (including `bool`, `bytes`, and `string`), `*int32`
+```go
+func (m *Artist) GetBirthYear() int32 { ... }
+func (m *Artist) SetBirthYear(v int32) { ... }
+func (m *Artist) HasBirthYear() bool { ... }
+func (m *Artist) ClearBirthYear() { ... }
+```
+
+The accessor method `GetBirthYear()` returns the `int32` value in `birth_year`
+or the default value if the field is unset. If the default is not explicitly
+set, the [zero value](https://golang.org/ref/spec#The_zero_value) of
+that type is used instead (`0` for numbers, the empty string for strings).
+
+For other scalar field types (including `bool`, `bytes`, and `string`), `int32`
 is replaced with the corresponding Go type according to the
 [scalar value types table](/programming-guides/proto2#scalar).
 
@@ -269,14 +277,24 @@ int32 birth_year = 1;
 optional int32 first_active_year = 2;
 ```
 
-The compiler will generate a struct with an `int32` field named `BirthYear` and
-an accessor method `GetBirthYear()` which returns the `int32` value in
-`birth_year` or the
-[zero value](https://golang.org/ref/spec#The_zero_value) of that type
-if the field is unset (`0` for numbers, the empty string for strings).
+the compiler generates the following accessor methods:
 
-The `FirstActiveYear` struct field will be of type `*int32`, because it is
-marked `optional`.
+```go
+func (m *Artist) GetBirthYear() int32 { ... }
+func (m *Artist) SetBirthYear(v int32) { ... }
+// NOTE: No HasBirthYear() or ClearBirthYear() methods;
+// proto3 fields only have presence when declared as optional:
+// /programming-guides/field_presence.md
+
+func (m *Artist) GetFirstActiveYear() int32 { ... }
+func (m *Artist) SetFirstActiveYear(v int32) { ... }
+func (m *Artist) HasFirstActiveYear() bool { ... }
+func (m *Artist) ClearFirstActiveYear() { ... }
+```
+
+The accessor method `GetBirthYear()` returns the `int32` value in `birth_year`
+or the [zero value](https://golang.org/ref/spec#The_zero_value) of
+that type if the field is unset (`0` for numbers, the empty string for strings).
 
 For other scalar field types (including `bool`, `bytes`, and `string`), `int32`
 is replaced with the corresponding Go type according to the
@@ -308,32 +326,35 @@ message Concert {
 }
 ```
 
-The compiler will generate a Go struct
+The compiler will generate a Go struct with the following accessor methods:
 
 ```go
-type Concert struct {
-    Headliner *Band
-}
+type Concert struct { ... }
+
+func (m *Concert) GetHeadliner() *Band { ... }
+func (m *Concert) SetHeadliner(v *Band) { ... }
+func (m *Concert) HasHeadliner() bool { ... }
+func (m *Concert) ClearHeadliner() { ... }
 ```
 
-Message fields can be set to `nil`, which means that the field is unset,
-effectively clearing the field. This is not equivalent to setting the value to
-an \"empty\" instance of the message struct.
-
-The compiler also generates a `func (m *Concert) GetHeadliner() *Band` helper
-function. This function returns a `nil` `*Band` if `m` is nil or `headliner` is
-unset. This makes it possible to chain get calls without intermediate `nil`
-checks:
+The `GetHeadliner()` accessor method is safe to call even if `m` is nil. This
+makes it possible to chain get calls without intermediate `nil` checks:
 
 ```go
 var m *Concert // defaults to nil
 log.Infof("GetFoundingYear() = %d (no panic!)", m.GetHeadliner().GetFoundingYear())
 ```
 
+If the field is unset, the getter will return the default value of the field.
+For messages, the default value is a nil pointer.
+
+Contrary to getters, setters do not perform nil checks for you. Therefore, you
+cannot safely call setters on possibly-nil messages.
+
 ### Repeated Fields {#repeated}
 
-Each repeated field generates a slice of `T` field in the struct in Go, where
-`T` is the field's element type. For this message with a repeated field:
+For repeated fields, the accessor methods use a slice type. For this message
+with a repeated field:
 
 ```proto
 message Concert {
@@ -343,29 +364,40 @@ message Concert {
 }
 ```
 
-the compiler generates the Go struct:
+the compiler generates a Go struct with the following accessor methods:
 
 ```go
-type Concert struct {
-    SupportActs []*Band
-}
+type Concert struct { ... }
+
+func (m *Concert) GetSupportActs() []*Band { ... }
+func (m *Concert) SetSupportActs(v []*Band) { ... }
 ```
 
 Likewise, for the field definition `repeated bytes band_promo_images = 1;` the
-compiler will generate a Go struct with a `[][]byte` field named
-`BandPromoImage`. For a repeated [enumeration](#enum) like `repeated MusicGenre
-genres = 2;`, the compiler generates a struct with a `[]MusicGenre` field called
-`Genre`.
+compiler will generate accessors working with the `[][]byte` type. For a
+repeated [enumeration](#enum) `repeated MusicGenre genres = 2;`, the compiler
+generates accessors working with the `[]MusicGenre` type.
 
-The following example shows how to set the field:
+The following example shows how to construct a `Concert` message using a
+[builder](#builders).
 
 ```go
-concert := &Concert{
+concert := Concert_builder{
   SupportActs: []*Band{
     {}, // First element.
     {}, // Second element.
   },
-}
+}.Build()
+```
+
+Alternatively, you can use setters:
+
+```go
+concert := &Concert{}
+concert.SetSupportActs([]*Band{
+    {}, // First element.
+    {}, // Second element.
+})
 ```
 
 To access the field, you can do the following:
@@ -377,7 +409,7 @@ b1 := support[0] // b1 type is *Band, the first element in support_acts.
 
 ### Map Fields {#map}
 
-Each map field generates a field in the struct of type `map[TKey]TValue` where
+Each map field generates accessors working with type `map[TKey]TValue` where
 `TKey` is the field's key type and `TValue` is the field's value type. For this
 message with a map field:
 
@@ -391,20 +423,19 @@ message MerchBooth {
 }
 ```
 
-the compiler generates the Go struct:
+the compiler generates a Go struct with the following accessor methods:
 
 ```go
-type MerchBooth struct {
-    Items map[string]*MerchItem
-}
+type MerchBooth struct { ... }
+
+func (m *MerchBooth) GetItems() map[string]*MerchItem { ... }
+func (m *MerchBooth) SetItems(v map[string]*MerchItem) { ... }
 ```
 
 ### Oneof Fields {#oneof}
 
-For a oneof field, the protobuf compiler generates a single field with an
-interface type `isMessageName_MyField`. It also generates a struct for each of
-the [singular fields](#singular-scalar-proto2) within the oneof. These all
-implement this `isMessageName_MyField` interface.
+For a oneof field, the protobuf compiler generates accessors for each of the
+[singular fields](#singular-scalar-proto2) within the oneof.
 
 For this message with a oneof field:
 
@@ -418,62 +449,74 @@ message Profile {
 }
 ```
 
-the compiler generates the structs:
+the compiler generates a Go struct with the following accessor methods:
 
 ```go
-type Profile struct {
-    // Types that are valid to be assigned to Avatar:
-    //  *Profile_ImageUrl
-    //  *Profile_ImageData
-    Avatar isProfile_Avatar `protobuf_oneof:"avatar"`
-}
+type Profile struct { ... }
 
-type Profile_ImageUrl struct {
-        ImageUrl string
-}
-type Profile_ImageData struct {
-        ImageData []byte
-}
+func (m *Profile) WhichAvatar() case_Profile_Avatar { ... }
+func (m *Profile) GetImageUrl() string { ... }
+func (m *Profile) GetImageData() []byte { ... }
+
+func (m *Profile) SetImageUrl(v string) { ... }
+func (m *Profile) SetImageData(v []byte) { ... }
+
+func (m *Profile) HasAvatar() bool { ... }
+func (m *Profile) HasImageUrl() bool { ... }
+func (m *Profile) HasImageData() bool { ... }
+
+func (m *Profile) ClearAvatar() { ... }
+func (m *Profile) ClearImageUrl() { ... }
+func (m *Profile) ClearImageData() { ... }
 ```
 
-Both `*Profile_ImageUrl` and `*Profile_ImageData` implement `isProfile_Avatar`
-by providing an empty `isProfile_Avatar()` method.
-
-The following example shows how to set the field:
+The following example shows how to set the field using a [builder](#builders):
 
 ```go
-p1 := &account.Profile{
-  Avatar: &account.Profile_ImageUrl{ImageUrl: "http://example.com/image.png"},
-}
+p1 := accountpb.Profile_builder{
+  ImageUrl: proto.String("https://example.com/image.png"),
+}.Build()
+```
 
+...or, equivalently, using a setter:
+
+```go
 // imageData is []byte
 imageData := getImageData()
-p2 := &account.Profile{
-  Avatar: &account.Profile_ImageData{ImageData: imageData},
-}
+p2 := &accountpb.Profile{}
+p2.SetImageData(imageData)
 ```
 
-To access the field, you can use a type switch on the value to handle the
-different message types.
+To access the field, you can use a switch statement on the `WhichAvatar()`
+result:
 
 ```go
-switch x := m.Avatar.(type) {
-case *account.Profile_ImageUrl:
+switch m.WhichAvatar() {
+case accountpb.Profile_ImageUrl_case:
     // Load profile image based on URL
-    // using x.ImageUrl
-case *account.Profile_ImageData:
+    // using m.GetImageUrl()
+
+case accountpb.Profile_ImageData_case:
     // Load profile image based on bytes
-    // using x.ImageData
-case nil:
+    // using m.GetImageData()
+
+case accountpb.Profile_Avatar_not_set_case:
     // The field is not set.
+
 default:
-    return fmt.Errorf("Profile.Avatar has unexpected type %T", x)
+    return fmt.Errorf("Profile.Avatar has an unexpected new oneof field %v", x)
 }
 ```
 
-The compiler also generates get methods `func (m *Profile) GetImageUrl() string`
-and `func (m *Profile) GetImageData() []byte`. Each get function returns the
-value for that field or the zero value if it is not set.
+### Builders {#builders}
+
+Builders are a convenient way to construct and initialize a message within a
+single expression, especially when working with nested messages like unit tests.
+
+Contrary to builders in other languages (like Java), Go protobuf builders are
+not meant to be passed around between functions. Instead, call `Build()`
+immediately and pass the resulting proto message instead, using setters to
+modify fields.
 
 ## Enumerations {#enum}
 

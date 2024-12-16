@@ -184,7 +184,8 @@ PHP is conformant.
 
 ### Python {#python}
 
-After 4.22.0, Python is conformant.
+After [4.22.0](https://pypi.org/project/protobuf/4.22.0/) which was released
+~2023-02-16, Python is conformant.
 
 In 4.21.x, Python is conformant by default, but setting
 `PROTOCOL_BUFFERS_PYTHON_IMPLEMENTATION=python` will cause it to be out of
