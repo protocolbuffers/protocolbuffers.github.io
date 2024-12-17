@@ -266,7 +266,7 @@ person.name = "John Doe"
 person.email = "jdoe@example.com"
 phone = person.phones.add()
 phone.number = "555-4321"
-phone.type = addressbook_pb2.Person.PHONE_TYPE_HOME
+phone.type = addressbook_pb2.Person.PhoneType.PHONE_TYPE_HOME
 ```
 
 Note that these assignments are not just adding arbitrary new fields to a
