@@ -20,6 +20,8 @@ New news topics will also be published to the
 The following news topics provide information in the reverse order in which it
 was released.
 
+*   [December 18, 2024](/news/2024-12-18) - Go Protobuf:
+    The new Opaque API
 *   [December 13, 2024](/news/2024-12-13) - Removing
     `MutableRepeatedFieldRef<T>::Reserve()` in v30
 *   [December 4, 2024](/news/2024-12-04) - `DebugString`
