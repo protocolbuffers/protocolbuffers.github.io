@@ -124,6 +124,9 @@ emitted for the owned message type (`Foo`). A subset of these functions with
 functions with either `&self` or `&mut self` will also be included on the
 `FooMut<'msg>`.
 
+To create an owned message type from a View / Mut type call `to_owned()`, which
+creates a deep copy.
+
 ## Nested Types {#nested-types}
 
 Given the message declaration:
@@ -324,6 +327,8 @@ enum Bar {
 The compiler generates a struct where each variant is an associated constant:
 
 ```rust
+#[derive(Clone, Copy, PartialEq, Eq, Hash)]
+#[repr(transparent)]
 pub struct Bar(i32);
 
 impl Bar {
@@ -363,6 +368,20 @@ enum Bar {
   BAR_UNSPECIFIED = 0;
   BAR_VALUE = 1;
   BAR_OTHER_VALUE = 2;
+}
+```
+
+The compiler generates a struct where each variant is an associated constant:
+
+```rust
+#[derive(Clone, Copy, PartialEq, Eq, Hash)]
+#[repr(transparent)]
+pub struct Bar(i32);
+
+impl Bar {
+  pub const Unspecified: Bar = Bar(0);
+  pub const Value: Bar = Bar(1);
+  pub const OtherValue: Bar = Bar(2);
 }
 ```
 
@@ -536,14 +555,15 @@ enum FooBar {
 The compiler will generate:
 
 ```rust
-  #[derive(Clone, Copy, PartialEq, Eq)]
-  pub struct Foo(i32);
+  #[derive(Clone, Copy, PartialEq, Eq, Hash)]
+  #[repr(transparent)]
+  pub struct FooBar(i32);
 
   impl FooBar {
-    pub const Unknown: Foo = Foo(0);
-    pub const A: Foo = Foo(1);
-    pub const FooB: Foo = Foo(5);
-    pub const ValueC: Foo = Foo(1234);
+    pub const Unknown: FooBar = FooBar(0);
+    pub const A: FooBar = FooBar(1);
+    pub const FooB: FooBar = FooBar(5);
+    pub const ValueC: FooBar = FooBar(1234);
   }
 ```
 

@@ -159,7 +159,7 @@ their own file with no dependencies. Then it's easy for anyone to use those
 types without introducing the transitive dependencies in your other proto files.
 
 For more on this topic, see
-[1-1-1 Rule](/programming-guides/1-1-1).
+[1-1-1 Rule](/best-practices/1-1-1).
 
 <a id="dont-change-the-default-value-of-a-field"></a>
 
@@ -259,4 +259,4 @@ problems.
 
 This document lists only changes that are extremely likely to cause breakage.
 For higher-level guidance on how to craft proto APIs that grow gracefully see
-[API Best Practices](/programming-guides/api).
+[API Best Practices](/best-practices/api).

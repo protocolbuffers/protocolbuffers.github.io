@@ -116,7 +116,7 @@ application that gets an unexpected enum value will mark the field as unset in
 the proto instance. The field accessor will then return the default value, which
 for enum fields is the first enum value. For more information on the unspecified
 enum value, see
-[the Proto Best Practices page](/programming-guides/dos-donts#unspecified-enum).
+[the Proto Best Practices page](/best-practices/dos-donts#unspecified-enum).
 
 ## Services {#services}
 
@@ -131,11 +131,11 @@ service FooService {
 ```
 
 For more service-related guidance, see
-[Create Unique Protos per Method](/programming-guides/api#unique-protos)
+[Create Unique Protos per Method](/best-practices/api#unique-protos)
 and
 [Don't Include Primitive Types in a Top-level Request or Response Proto](/programming-guides/api#dont-include-primitive-types)
 in the API Best Practices topic, and
-[Define Messages in Separate Files](/programming-guides/dos-donts.md#separate-files)
+[Define Messages in Separate Files](/best-practices/dos-donts.md#separate-files)
 in Proto Best Practices.
 
 ## Things to Avoid {#avoid}
