@@ -60,6 +60,7 @@ other programming languages:
     )
     ```
 
-**Note:** Don't use `rust_upb_proto_library` or `rust_cc_proto_library`
-directly. `rust_proto_library` checks the global build flag to choose the
-appropriate backend for you.
+{{% alert title="Note" color="note" %}} Don't use
+`rust_upb_proto_library` or `rust_cc_proto_library` directly.
+`rust_proto_library` checks the global build flag to choose the appropriate
+backend for you. {{% /alert %}}

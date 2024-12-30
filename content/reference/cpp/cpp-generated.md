@@ -877,7 +877,9 @@ is a special container type used in protocol buffers to store map fields. As you
 can see from its interface below, it uses a commonly-used subset of `std::map`
 and `std::unordered_map` methods.
 
-**NOTE:** These maps are unordered.
+{{% alert title="Note" color="note" %}} These maps
+are
+unordered.{{% /alert %}}
 
 ```cpp
 template<typename Key, typename T> {

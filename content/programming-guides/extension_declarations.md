@@ -15,9 +15,11 @@ freshness: { owner: 'shaod' reviewed: '2024-09-16' }
 This page describes in detail what extension declarations are, why we need them,
 and how we use them.
 
-**NOTE:** Proto3 does not support extensions (except for
+{{% alert title="Note" color="note" %}}
+Proto3 does not support extensions (except for
 [declaring custom options](/programming-guides/proto3/#customoptions)).
-Extensions are fully supported in proto2 and editions though.
+Extensions are fully supported in proto2 and editions
+though.{{% /alert %}}
 
 If you need an introduction to extensions, read this
 [extensions guide](https://protobuf.dev/programming-guides/proto2/#extensions)
@@ -74,9 +76,11 @@ This syntax has the following semantics:
     (`Foo`) with this name or number, we enforce that the number, type, and full
     name of the extension match what is forward-declared here.
 
-**WARNING:** Avoid using declarations for extension range groups such as
-`extensions 4, 999`. It is unclear which extension range the declarations apply
-to, and it is currently unsupported.
+{{% alert title="Warning" color="warning" %}}
+Avoid using declarations for extension range groups such as `extensions 4, 999`.
+It is unclear which extension range the declarations apply to, and it is
+currently
+unsupported.{{% /alert %}}
 
 The extension declarations expect two extension fields with different packages:
 

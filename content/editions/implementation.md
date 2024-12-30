@@ -188,11 +188,12 @@ language-appropriate naming:
     delimited encoding
 *   `EnumDescriptor::is_closed` - Whether or not a field is closed
 
-**Note:** In most languages, the message encoding feature is still currently
-signaled by `TYPE_GROUP` and required fields still have `LABEL_REQUIRED` set.
-This is not ideal, and was done to make downstream migrations easier.
-Eventually, these should be migrated to the appropriate helpers and
-`TYPE_MESSAGE/LABEL_OPTIONAL`.
+{{% alert title="Note" color="note" %}} In
+most languages, the message encoding feature is still currently signaled by
+`TYPE_GROUP` and required fields still have `LABEL_REQUIRED` set. This is not
+ideal, and was done to make downstream migrations easier. Eventually, these
+should be migrated to the appropriate helpers and
+`TYPE_MESSAGE/LABEL_OPTIONAL`.{{% /alert %}}
 
 Downstream users should migrate to these new helpers instead of using syntax
 directly. The following class of existing descriptor APIs should ideally be

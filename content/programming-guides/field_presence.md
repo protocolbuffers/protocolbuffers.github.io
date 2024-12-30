@@ -19,9 +19,10 @@ types (numeric, string, bytes, and enums) which are defined with the `optional`
 label have *explicit presence*, like proto2 (this feature is enabled by default
 as release 3.15).
 
-**NOTE:** We recommend always adding the `optional` label for proto3 basic
-types. This provides a smoother path to editions, which uses explicit presence
-by default.
+{{% alert title="Note" color="note" %}} We
+recommend always adding the `optional` label for proto3 basic types. This
+provides a smoother path to editions, which uses explicit presence by
+default.{{% /alert %}}
 
 ### Presence Disciplines
 
@@ -214,9 +215,10 @@ For a singular field with numeric, enum, or string type:
     -   A generated `clear_foo` method must be used to clear (i.e., un-set) the
         value.
 
-**Note:** `Has_` methods are not generated for implicit members in most cases.
-The exception to this behavior is Dart, which generates `has_` methods with
-proto3 proto schema files.
+{{% alert title="Note" color="note" %}}
+`Has_` methods are not generated for implicit members in most cases. The
+exception to this behavior is Dart, which generates `has_` methods with proto3
+proto schema files.{{% /alert %}}
 
 ### Considerations for Merging
 
