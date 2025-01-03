@@ -37,7 +37,7 @@ ways to solve this problem:
 
 -   Use kotlinx.serialization. This does not work very well if you need to share
     data with applications written in C++ or Python. kotlinx.serialization has a
-    [protobuf mode](https://github.com/Kotlin/kotlinx.serialization/blob/master/docs/formats.md#protobuf-experimental),
+    [protobuf mode](https://github.com/Kotlin/kotlinx.serialization/blob/master/docs/formats#protobuf-experimental),
     but this does not offer the full features of protocol buffers.
 -   You can invent an ad-hoc way to encode the data items into a single
     string -- such as encoding 4 ints as "12:3:-23:67". This is a simple and
