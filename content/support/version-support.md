@@ -374,13 +374,14 @@ Future plans are shown in *italics* and are subject to change.
   </tr>
 </table>
 
-**NOTE:** The maintenance support window for the Protobuf Java 3.x release will
-be 24 months rather than the typical 12 months for the final release in a major
+{{% alert title="Note" color="note" %}}
+The maintenance support window for the Protobuf Java 3.x release will be 24
+months rather than the typical 12 months for the final release in a major
 version line. Future major version updates (5.x, planned for Q1 2026) will adopt
 an improved
 ["rolling compatibility window"](/support/cross-version-runtime-guarantee/#major)
 that should allow a return to 12-month support windows. There will be no major
-version bump in Q1 2025.
+version bump in Q1 2025.{{% /alert %}}
 
 **Release support chart**
 

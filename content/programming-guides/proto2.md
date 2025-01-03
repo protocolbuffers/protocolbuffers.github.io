@@ -406,7 +406,7 @@ automatically generated class:
         <td>Uses variable-length encoding. Inefficient for encoding negative
         numbers – if your field is likely to have negative values, use sint32
         instead.</td>
-        <td>int32</td>
+        <td>int32_t</td>
         <td>int</td>
         <td>int</td>
         <td>int32</td>
@@ -421,7 +421,7 @@ automatically generated class:
         <td>Uses variable-length encoding. Inefficient for encoding negative
         numbers – if your field is likely to have negative values, use sint64
         instead.</td>
-        <td>int64</td>
+        <td>int64_t</td>
         <td>long</td>
         <td>int/long<sup>[4]</sup></td>
         <td>*int64</td>
@@ -434,7 +434,7 @@ automatically generated class:
       <tr>
         <td>uint32</td>
         <td>Uses variable-length encoding.</td>
-        <td>uint32</td>
+        <td>uint32_t</td>
         <td>int<sup>[2]</sup></td>
         <td>int/long<sup>[4]</sup></td>
         <td>*uint32</td>
@@ -447,7 +447,7 @@ automatically generated class:
       <tr>
         <td>uint64</td>
         <td>Uses variable-length encoding.</td>
-        <td>uint64</td>
+        <td>uint64_t</td>
         <td>long<sup>[2]</sup></td>
         <td>int/long<sup>[4]</sup></td>
         <td>*uint64</td>
@@ -461,7 +461,7 @@ automatically generated class:
         <td>sint32</td>
         <td>Uses variable-length encoding. Signed int value. These more
         efficiently encode negative numbers than regular int32s.</td>
-        <td>int32</td>
+        <td>int32_t</td>
         <td>int</td>
         <td>int</td>
         <td>int32</td>
@@ -475,7 +475,7 @@ automatically generated class:
         <td>sint64</td>
         <td>Uses variable-length encoding. Signed int value. These more
         efficiently encode negative numbers than regular int64s.</td>
-        <td>int64</td>
+        <td>int64_t</td>
         <td>long</td>
         <td>int/long<sup>[4]</sup></td>
         <td>*int64</td>
@@ -489,7 +489,7 @@ automatically generated class:
         <td>fixed32</td>
         <td>Always four bytes. More efficient than uint32 if values are often
         greater than 2<sup>28</sup>.</td>
-        <td>uint32</td>
+        <td>uint32_t</td>
         <td>int<sup>[2]</sup></td>
         <td>int/long<sup>[4]</sup></td>
         <td>*uint32</td>
@@ -503,7 +503,7 @@ automatically generated class:
         <td>fixed64</td>
         <td>Always eight bytes. More efficient than uint64 if values are often
         greater than 2<sup>56</sup>.</td>
-        <td>uint64</td>
+        <td>uint64_t</td>
         <td>long<sup>[2]</sup></td>
         <td>int/long<sup>[4]</sup></td>
         <td>*uint64</td>
@@ -516,7 +516,7 @@ automatically generated class:
       <tr>
         <td>sfixed32</td>
         <td>Always four bytes.</td>
-        <td>int32</td>
+        <td>int32_t</td>
         <td>int</td>
         <td>int</td>
         <td>*int32</td>
@@ -529,7 +529,7 @@ automatically generated class:
       <tr>
         <td>sfixed64</td>
         <td>Always eight bytes.</td>
-        <td>int64</td>
+        <td>int64_t</td>
         <td>long</td>
         <td>int/long<sup>[4]</sup></td>
         <td>*int64</td>

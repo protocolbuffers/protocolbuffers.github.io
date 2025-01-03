@@ -179,7 +179,7 @@ fieldNumber = intLit;
 Each field has type, name and field number. It may have field options.
 
 ```
-field = [ "repeated" ] type fieldName "=" fieldNumber [ "[" fieldOptions "]" ] ";"
+field = [ "repeated" | "optional" ] type fieldName "=" fieldNumber [ "[" fieldOptions "]" ] ";"
 fieldOptions = fieldOption { ","  fieldOption }
 fieldOption = optionName "=" constant
 ```

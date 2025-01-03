@@ -57,16 +57,16 @@ messages in your file, as used in the following example.
 #include <google/protobuf/arena.h>
 {
   google::protobuf::Arena arena;
-  MyMessage* message = google::protobuf::Arena::CreateMessage<MyMessage>(&arena);
+  MyMessage* message = google::protobuf::Arena::Create<MyMessage>(&arena);
   // ...
 }
 ```
 
-The message object created by `CreateMessage()` exists for as long as `arena`
-exists, and you should not `delete` the returned message pointer. All of the
-message object's internal storage (with a few exceptions[^1]) and submessages
-(for example, submessages in a repeated field within `MyMessage`) are allocated
-on the arena as well.
+The message object created by `Create()` exists for as long as `arena` exists,
+and you should not `delete` the returned message pointer. All of the message
+object's internal storage (with a few exceptions[^1]) and submessages (for
+example, submessages in a repeated field within `MyMessage`) are allocated on
+the arena as well.
 
 For the most part, the rest of your code will be the same as if you weren't
 using arena allocation.
@@ -98,40 +98,41 @@ class. This class implements the following public methods.
 
 ### Allocation Methods {#allocation}
 
--   `template<typename T> static T* CreateMessage(Arena* arena)`: Creates a new
-    protocol buffer object of message type `T` on the arena.
+*   `template<typename T> static T* Create(Arena* arena)` or `template<typename
+    T> static T* Create(Arena* arena, args...)`
 
-    If `arena` is not NULL, the returned message object is allocated on the
-    arena, its internal storage and submessages (if any) will be allocated on
-    the same arena, and its lifetime is the same as that of the arena. The
-    object must not be deleted/freed manually: the arena owns the message object
-    for lifetime purposes.
+    *   If `T` is fully compatible[^footnote], then the method creates a new
+        protocol buffer object of type `T` and its subobjects on the arena.
 
-    If `arena` is NULL, the returned message object is allocated on the heap,
-    and the caller owns the object upon return.
+        If `arena` is not NULL, the returned object is allocated on the arena,
+        its internal storage and sub-types (if any) will be allocated on the
+        same arena, and its lifetime is the same as that of the arena. The
+        object must not be deleted/freed manually: the arena owns the object for
+        lifetime purposes.
 
--   `template<typename T> static T* Create(Arena* arena, args...)`: Similar to
-    `CreateMessage()` but lets you create an object of any class on the arena,
-    not just protocol buffer message types. For example, let's say you have this
-    C++ class:
+        If `arena` is NULL, the returned object is allocated on the heap, and
+        the caller owns the object upon return.
 
-    ```cpp
-    class MyCustomClass {
-        MyCustomClass(int arg1, int arg2);
-        // ...
-    };
-    ```
+    *   If `T` is a user-type, the method lets you create an object but not the
+        subobjects on the arena. For example, let's say you have this C++ class:
 
-    ...you can create an instance of it on the arena like this:
+        ```cpp
+        class MyCustomClass {
+            MyCustomClass(int arg1, int arg2);
+            // ...
+        };
+        ```
 
-    ```cpp
-    void func() {
-        // ...
-        google::protobuf::Arena arena;
-        MyCustomClass* c = google::protobuf::Arena::Create<MyCustomClass>(&arena, constructor_arg1, constructor_arg2);
-        // ...
-    }
-    ```
+        ...you can create an instance of it on the arena like this:
+
+        ```cpp
+        void func() {
+            // ...
+            google::protobuf::Arena arena;
+            MyCustomClass* c = google::protobuf::Arena::Create<MyCustomClass>(&arena, constructor_arg1, constructor_arg2);
+            // ...
+        }
+        ```
 
 -   `template<typename T> static T* CreateArray(Arena* arena, size_t n)`: If
     `arena` is not NULL, this method allocates raw storage for `n` elements of
@@ -141,6 +142,9 @@ class. This class implements the following public methods.
 
     `T` must have a trivial constructor: constructors are not called when the
     array is created on the arena.
+
+[^footnote]: What it takes to be a "fully compatible" type is internal to the
+    protobuf library, and should not be assumed to be reliable.
 
 ### "Owned list" Methods {#owned-list}
 
@@ -220,8 +224,8 @@ allocation.
     use-after-free bugs.
 -   `Message* New(Arena* arena)`: An alternate override for the standard `New()`
     method. It allows a new message object of this type to be created on the
-    given arena. Its semantics are identical to `Arena::CreateMessage<T>(arena)`
-    if the concrete message type on which it is called is generated with arena
+    given arena. Its semantics are identical to `Arena::Create<T>(arena)` if the
+    concrete message type on which it is called is generated with arena
     allocation enabled. If the message type is not generated with arena
     allocation enabled, then it is equivalent to an ordinary allocation followed
     by `arena->Own(message)` if `arena` is not NULL.
@@ -459,11 +463,11 @@ Let's say you have created the following messages on an arena.
 ```cpp
 Arena* arena = new google::protobuf::Arena();
 MyFeatureMessage* arena_message_1 =
-  google::protobuf::Arena::CreateMessage<MyFeatureMessage>(arena);
+  google::protobuf::Arena::Create<MyFeatureMessage>(arena);
 arena_message_1->mutable_nested_message()->set_feature_id(11);
 
 MyFeatureMessage* arena_message_2 =
-  google::protobuf::Arena::CreateMessage<MyFeatureMessage>(arena);
+  google::protobuf::Arena::Create<MyFeatureMessage>(arena);
 ```
 
 The following code makes inefficient usage of the `release_...()` API:
@@ -499,7 +503,7 @@ For example, the following code incurs a copy in the `Swap()` call:
 
 ```cpp
 MyFeatureMessage* message_1 =
-  google::protobuf::Arena::CreateMessage<MyFeatureMessage>(arena);
+  google::protobuf::Arena::Create<MyFeatureMessage>(arena);
 message_1->mutable_nested_message()->set_feature_id(11);
 
 MyFeatureMessage* message_2 = new MyFeatureMessage;
@@ -513,7 +517,7 @@ To avoid the copy in this code, you allocate `message_2` on the same arena as
 
 ```cpp
 MyFeatureMessage* message_2 =
-   google::protobuf::Arena::CreateMessage<MyFeatureMessage>(arena);
+   google::protobuf::Arena::Create<MyFeatureMessage>(arena);
 ```
 
 ### Granularity {#granularity}
@@ -569,7 +573,7 @@ Message construction and deallocation:
 Arena arena;
 
 MyFeatureMessage* arena_message =
-   google::protobuf::Arena::CreateMessage<MyFeatureMessage>(&arena);
+   google::protobuf::Arena::Create<MyFeatureMessage>(&arena);
 
 arena_message->set_feature_name("Proto2 Arena");
 arena_message->mutable_feature_data()->Add(2);

@@ -151,12 +151,15 @@ The compiler will generate the following accessor methods in the message class:
 -   `void clearFoo()`: Clears the value of the field. After calling this,`get
     foo` will return the default value.
 
-**NOTE:** Due to a quirk in the Dart proto3 implementation, the following
-methods are generated even if the `optional` modifier, used to request
-[presence semantics](/programming-guides/field_presence#presence-in-proto3-apis),
-isn't in the proto definition.
+    {{% alert title="Note" color="note" %}} Due to a
+    quirk in the Dart proto3 implementation, the following methods are generated
+    even if the `optional` modifier, used to request
+    [presence semantics](/programming-guides/field_presence#presence-in-proto3-apis),
+    isn't in the proto
+    definition.{{% /alert %}}
 
 -   `bool hasFoo()`: Returns `true` if the field is set.
+
 -   `void clearFoo()`: Clears the value of the field. After calling this,
     `hasFoo()` will return `false` and `get foo` will return the default value.
 

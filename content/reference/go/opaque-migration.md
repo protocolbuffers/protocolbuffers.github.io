@@ -102,10 +102,12 @@ Protocol Buffers and Go Protobuf:
     go get google.golang.org/protobuf@latest
     ```
 
-    **Note:** if you are not yet importing `google.golang.org/protobuf`, you
-    might still be on an older module. See
+    {{% alert title="Note" color="note" %}} If you
+    are not yet importing `google.golang.org/protobuf`, you might still be on an
+    older module. See
     [the `google.golang.org/protobuf` announcement (from 2020)](https://go.dev/blog/protobuf-apiv2)
-    and migrate your code before returning to this page.
+    and migrate your code before returning to this
+    page.{{% /alert %}}
 
 ### Step 1. Switch to the Hybrid API {#setup}
 

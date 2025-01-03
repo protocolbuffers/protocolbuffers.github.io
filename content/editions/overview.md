@@ -99,7 +99,7 @@ package com.example;
 
 message Player {
   // in proto2, optional fields have explicit presence
-  optional string name = 1;
+  optional string name = 1 [default = "N/A"];
   // proto2 still supports the problematic "required" field rule
   required int32 id = 2;
   // in proto2 this is not packed by default
@@ -129,7 +129,7 @@ package com.example;
 
 message Player {
   // fields have explicit presence, so no explicit setting needed
-  string name = 1;
+  string name = 1 [default = "N/A"];
   // to match the proto2 behavior, LEGACY_REQUIRED is set at the field level
   int32 id = 2 [features.field_presence = LEGACY_REQUIRED];
   // to match the proto2 behavior, EXPANDED is set at the field level
@@ -169,7 +169,7 @@ package com.example;
 
 message Player {
   // in proto3, optional fields have explicit presence
-  optional string name = 1;
+  optional string name = 1 [default = "N/A"];
   // in proto3 no specified field rule defaults to implicit presence
   int32 id = 2;
   // in proto3 this is packed by default
@@ -199,7 +199,7 @@ package com.example;
 
 message Player {
   // fields have explicit presence, so no explicit setting needed
-  string name = 1;
+  string name = 1 [default = "N/A"];
   // to match the proto3 behavior, IMPLICIT is set at the field level
   int32 id = 2 [features.field_presence = IMPLICIT];
   // PACKED is the default state, and is provided just for illustration

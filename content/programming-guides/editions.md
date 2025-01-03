@@ -376,7 +376,7 @@ automatically generated class:
         <td>Uses variable-length encoding. Inefficient for encoding negative
         numbers – if your field is likely to have negative values, use sint32
         instead.</td>
-        <td>int32</td>
+        <td>int32_t</td>
         <td>int</td>
         <td>int</td>
         <td>int32</td>
@@ -391,7 +391,7 @@ automatically generated class:
         <td>Uses variable-length encoding. Inefficient for encoding negative
         numbers – if your field is likely to have negative values, use sint64
         instead.</td>
-        <td>int64</td>
+        <td>int64_t</td>
         <td>long</td>
         <td>int/long<sup>[4]</sup></td>
         <td>int64</td>
@@ -404,7 +404,7 @@ automatically generated class:
       <tr>
         <td>uint32</td>
         <td>Uses variable-length encoding.</td>
-        <td>uint32</td>
+        <td>uint32_t</td>
         <td>int<sup>[2]</sup></td>
         <td>int/long<sup>[4]</sup></td>
         <td>uint32</td>
@@ -417,7 +417,7 @@ automatically generated class:
       <tr>
         <td>uint64</td>
         <td>Uses variable-length encoding.</td>
-        <td>uint64</td>
+        <td>uint64_t</td>
         <td>long<sup>[2]</sup></td>
         <td>int/long<sup>[4]</sup></td>
         <td>uint64</td>
@@ -431,7 +431,7 @@ automatically generated class:
         <td>sint32</td>
         <td>Uses variable-length encoding. Signed int value. These more
         efficiently encode negative numbers than regular int32s.</td>
-        <td>int32</td>
+        <td>int32_t</td>
         <td>int</td>
         <td>int</td>
         <td>int32</td>
@@ -445,7 +445,7 @@ automatically generated class:
         <td>sint64</td>
         <td>Uses variable-length encoding. Signed int value. These more
         efficiently encode negative numbers than regular int64s.</td>
-        <td>int64</td>
+        <td>int64_t</td>
         <td>long</td>
         <td>int/long<sup>[4]</sup></td>
         <td>int64</td>
@@ -459,7 +459,7 @@ automatically generated class:
         <td>fixed32</td>
         <td>Always four bytes. More efficient than uint32 if values are often
         greater than 2<sup>28</sup>.</td>
-        <td>uint32</td>
+        <td>uint32_t</td>
         <td>int<sup>[2]</sup></td>
         <td>int/long<sup>[4]</sup></td>
         <td>uint32</td>
@@ -473,7 +473,7 @@ automatically generated class:
         <td>fixed64</td>
         <td>Always eight bytes. More efficient than uint64 if values are often
         greater than 2<sup>56</sup>.</td>
-        <td>uint64</td>
+        <td>uint64_t</td>
         <td>long<sup>[2]</sup></td>
         <td>int/long<sup>[4]</sup></td>
         <td>uint64</td>
@@ -486,7 +486,7 @@ automatically generated class:
       <tr>
         <td>sfixed32</td>
         <td>Always four bytes.</td>
-        <td>int32</td>
+        <td>int32_t</td>
         <td>int</td>
         <td>int</td>
         <td>int32</td>
@@ -499,7 +499,7 @@ automatically generated class:
       <tr>
         <td>sfixed64</td>
         <td>Always eight bytes.</td>
-        <td>int64</td>
+        <td>int64_t</td>
         <td>long</td>
         <td>int/long<sup>[4]</sup></td>
         <td>int64</td>
@@ -696,8 +696,8 @@ field default.
 You can define aliases by assigning the same value to different enum constants.
 To do this you need to set the `allow_alias` option to `true`. Otherwise, the
 protocol buffer compiler generates a warning message when aliases are
-found. Though all alias values are valid during deserialization, the first value
-is always used when serializing.
+found. Though all alias values are valid for serialization, only the first value
+is used when deserializing.
 
 ```proto
 enum EnumAllowingAlias {
@@ -716,6 +716,8 @@ enum EnumNotAllowingAlias {
 }
 ```
 
+### Enum Constants {#enum-constants}
+
 Enumerator constants must be in the range of a 32-bit integer. Since `enum`
 values use
 [varint encoding](/programming-guides/encoding) on the
@@ -724,6 +726,8 @@ wire, negative values are inefficient and thus not recommended. You can define
 these `enum`s can be reused in any message definition in your `.proto` file. You
 can also use an `enum` type declared in one message as the type of a field in a
 different message, using the syntax `_MessageType_._EnumType_`.
+
+### Language-specific Enum Implementations {#enum-language}
 
 When you run the protocol buffer compiler on a `.proto` that uses an `enum`, the
 generated code will have a corresponding `enum` for Java, Kotlin, or C++, or a
