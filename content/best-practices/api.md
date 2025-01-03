@@ -1,5 +1,3 @@
-<!-- go/markdown -->
-
 +++
 title = "API Best Practices"
 weight = 100
