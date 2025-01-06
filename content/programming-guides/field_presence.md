@@ -179,6 +179,12 @@ basic types (numeric, string, bytes, and enums), either. Oneof fields
 affirmatively expose presence, although the same set of hazzer methods may not
 generated as in proto2 APIs.
 
+This default behavior of not tracking presence without the `optional` label is
+different from the proto2 behavior. We reintroduced
+[explicit presence](/editions/features#field_presence) as
+the default in edition 2023. We recommend using the `optional` field with proto3
+unless you have a specific reason not to.
+
 Under the *implicit presence* discipline, the default value is synonymous with
 "not present" for purposes of serialization. To notionally "clear" a field (so
 it won't be serialized), an API user would set it to the default value.

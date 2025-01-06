@@ -175,7 +175,7 @@ protoc […] --go_opt=default_api_level=API_HYBRID
 
 To override the default API level for a specific file (instead of all files),
 use the `apilevelM` mapping flag (similar to [the `M` flag for import
-paths](/reference/go/go-generated/#package)):
+paths](#package)):
 
 ```
 protoc […] --go_opt=apilevelMhello.proto=API_HYBRID
