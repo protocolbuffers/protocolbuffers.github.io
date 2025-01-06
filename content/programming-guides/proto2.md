@@ -1570,9 +1570,9 @@ for your chosen language in the relevant
     ```
 
 *   If the parser encounters multiple members of the same oneof on the wire,
-    only the last run of the last member seen is used in the parsed message.
-    When parsing data on the wire, starting at the beginning of the bytes,
-    evaluate the next value, and apply the following parsing rules:
+    only the last member seen is used in the parsed message. When parsing data
+    on the wire, starting at the beginning of the bytes, evaluate the next
+    value, and apply the following parsing rules:
 
     *   First, check if a *different* field in the same oneof is currently set,
         and if so clear it.
