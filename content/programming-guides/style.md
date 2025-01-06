@@ -135,7 +135,7 @@ For more service-related guidance, see
 and
 [Don't Include Primitive Types in a Top-level Request or Response Proto](/programming-guides/api#dont-include-primitive-types)
 in the API Best Practices topic, and
-[Define Messages in Separate Files](/best-practices/dos-donts.md#separate-files)
+[Define Messages in Separate Files](/best-practices/dos-donts#separate-files)
 in Proto Best Practices.
 
 ## Things to Avoid {#avoid}

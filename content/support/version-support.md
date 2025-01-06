@@ -468,7 +468,7 @@ For specific versions supported, see
 On Android, Protobuf supports the minimum SDK version that is supported by
 [Google Play services](https://developers.google.com/android/guides/setup) and
 is the default in
-[Jetpack](https://android.googlesource.com/platform/frameworks/support/+/refs/heads/androidx-main/docs/api_guidelines/modules.md#module-minsdkversion).
+[Jetpack](https://android.googlesource.com/platform/frameworks/support/+/refs/heads/androidx-main/docs/api_guidelines/modules#module-minsdkversion).
 If both versions differ, the lower version is supported.
 
 ## Objective-C {#objc}

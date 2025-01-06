@@ -24,8 +24,7 @@ Empty message extended by singular fields (such as Boolean):
 
 *   ~4100 fields (proto2)
 
-Extensions are supported
-[only by proto2](/programming-guides/version-comparison#extensionsany).
+Extensions are not supported in proto3.
 
 To test this limitation, create a proto message with more than the upper bound
 number of fields and compile using a Java proto rule. The limit comes from JVM

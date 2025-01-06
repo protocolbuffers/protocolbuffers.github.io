@@ -41,7 +41,7 @@ In v22.0, we removed all Autotools support from the protobuf compiler and the
 C++ runtime. If you're using Autotools to build either of these, you must
 migrate to [CMake](http://cmake.org) or
 [Bazel](http://bazel.build). We have some
-[dedicated instructions](https://github.com/protocolbuffers/protobuf/blob/main/cmake/README.md)
+[dedicated instructions](https://github.com/protocolbuffers/protobuf/blob/main/cmake/README)
 for setting up protobuf with CMake.
 
 ### Abseil Dependency {#abseil}
@@ -94,7 +94,7 @@ notable changes include:
 
     *   For CMake builds, we will first look for an existing Abseil installation
         pulled in by the top-level CMake configuration (see
-        [instructions](https://github.com/abseil/abseil-cpp/blob/master/CMake/README.md#traditional-cmake-set-up)).
+        [instructions](https://github.com/abseil/abseil-cpp/blob/master/CMake/README#traditional-cmake-set-up)).
         Otherwise, if `protobuf_ABSL_PROVIDER` is set to `module` (its default)
         we will attempt to build and link Abseil from our git
         [submodule](https://github.com/protocolbuffers/protobuf/tree/main/third_party).
@@ -109,7 +109,7 @@ Prior to v22.x, Protobuf incorrectly removed the macro definition for
 including `<protobuf/util/time_util.h>`. Starting with v22.x, Protobuf preserves
 the macro definition. This may break customer code relying on the previous
 behavior, such as if they use the expression
-[`google::protobuf::util::TimeUtil::GetCurrentTime()`](/reference/cpp/api-docs/google.protobuf.util.time_util.md#TimeUtil).
+[`google::protobuf::util::TimeUtil::GetCurrentTime()`](/reference/cpp/api-docs/google.protobuf.util.time_util#TimeUtil).
 
 To migrate your app to the new behavior, change your code to do one of the
 following:
