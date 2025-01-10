@@ -90,6 +90,13 @@ you need to migrate said file to editions first.
 1.  Run your unit and integration tests, and then roll out to a staging
     environment.
 
+## Are Errors Ignored with Lazy Decoding? {#lazydecodingerrors}
+
+No.
+[`proto.Marshal`](https://pkg.go.dev/google.golang.org/protobuf/proto?tab=doc#Marshal)
+will always validate the wire format data, even when decoding is deferred until
+first access.
+
 ## Where Can I Ask Questions or Report Issues? {#questions}
 
 If you found an issue with the `open2opaque` migration tool (such as incorrectly

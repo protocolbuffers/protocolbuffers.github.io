@@ -279,7 +279,7 @@ Protocol buffers support many scalar value types, including integers that use
 both variable-length encoding and fixed sizes. You can also create your own
 composite data types by defining messages that are, themselves, data types that
 you can assign to a field. In addition to the simple and composite value types,
-several [common types](/programming-guides/dos-donts#common)
+several [common types](/best-practices/dos-donts#common)
 are published.
 
 ## History {#history}

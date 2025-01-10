@@ -127,6 +127,8 @@ edition = "2023";
 
 package com.example;
 
+option features.utf8_validation = NONE;
+
 message Player {
   // fields have explicit presence, so no explicit setting needed
   string name = 1 [default = "N/A"];

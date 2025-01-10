@@ -3,13 +3,14 @@ title = "API Best Practices"
 weight = 100
 description = "A future-proof API is surprisingly hard to get right. The suggestions in this document make trade-offs to favor long-term, bug-free evolution."
 type = "docs"
+aliases = "/programming-guides/api"
 +++
 
 Updated for proto3. Patches welcome!
 
 This doc is a complement to
-[Proto Best Practices](/programming-guides/dos-donts).
-It's not a prescription for Java/C++/Go and other APIs.
+[Proto Best Practices](/best-practices/dos-donts). It's
+not a prescription for Java/C++/Go and other APIs.
 
 If you see a proto straying from these guidelines in a code review, point the
 author to this topic and help spread the word.
@@ -729,31 +730,6 @@ For this reason, it makes sense to take steps to prevent naming conflicts on
 your service name, even if it is defined inside a specific package. For example,
 a service named `Watcher` is likely to cause problems; something like
 `MyProjectWatcher` would be better.
-
-## Ensure Every RPC Specifies and Enforces a (Permissive) Deadline {#every-rpc-deadline}
-
-By default, an RPC does not have a timeout. Since a request may tie up backend
-resources that are only released on completion, setting a default deadline that
-allows all well-behaving requests to finish is a good defensive practice. Not
-enforcing one has in the past caused
-severe problems for major services . RPC clients
-should still set a deadline on outgoing RPCs and will typically do so by default
-when they use standard frameworks. A deadline may and typically will be
-overwritten by a shorter deadline attached to a request.
-
-Setting the `deadline` option clearly communicates the RPC
-deadline to your clients, and is respected and enforced by standard frameworks:
-
-```proto
-rpc Foo(FooRequest) returns (FooResponse) {
-  option deadline = x; // there is no globally good default
-}
-```
-
-Choosing a deadline value will especially impact how your system acts under
-load. For existing services, it is critical to evaluate existing client behavior
-before enforcing new deadlines to avoid breaking clients (consult SRE). In some
-cases, it may not be possible to enforce a shorter deadline after the fact.
 
 ## Bound Request and Response Sizes {#bound-req-res-sizes}
 

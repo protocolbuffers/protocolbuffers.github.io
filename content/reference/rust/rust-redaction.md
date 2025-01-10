@@ -16,7 +16,7 @@ Use the standard `fmt::Debug` ("`{:?}`" in format strings) on Protobuf messages
 for human-readable strings for logging, error messages, exceptions, and similar
 use cases. The output of this debug info is not intended to be machine-readable
 (unlike `TextFormat` and `JSON` which are
-[not be used for debug output](/programming-guides/dos-donts#text-format-interchange)).
+[not be used for debug output](/best-practices/dos-donts#text-format-interchange)).
 
 Using `fmt::Debug` enables redaction of some sensitive fields.
 
