@@ -3,6 +3,7 @@ title = "Proto Best Practices"
 weight = 90
 description = "Shares vetted best practices for authoring Protocol Buffers."
 type = "docs"
+aliases = "/programming-guides/dos-donts"
 +++
 
 Clients and servers are never updated at exactly the same time - even when you
