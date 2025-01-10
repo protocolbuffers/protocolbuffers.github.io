@@ -378,8 +378,8 @@ you use JSON or
 <a href=/reference/protobuf/textformat-spec>proto text format</a>
 to store your protocol buffer messages, the changes that you can make in your
 proto definition are different.</div><p>Check
-<a href=/programming-guides/dos-donts>Proto Best Practices</a> and
-the following rules:</p><ul><li>Don&rsquo;t change the field numbers for any existing fields. &ldquo;Changing&rdquo; the field
+<a href=/best-practices/dos-donts>Proto Best Practices</a> and the
+following rules:</p><ul><li>Don&rsquo;t change the field numbers for any existing fields. &ldquo;Changing&rdquo; the field
 number is equivalent to deleting the field and adding a new field with the
 same type. If you want to renumber a field, see the instructions for
 <a href=#deleting>deleting a field</a>.</li><li>If you add new fields, any messages serialized by code using your &ldquo;old&rdquo;
