@@ -258,7 +258,7 @@ Meanwhile, `Person.Builder` has the same getters plus setters:
 ```java
 // required string name = 1;
 public boolean hasName();
-public java.lang.String getName();
+public String getName();
 public Builder setName(String value);
 public Builder clearName();
 

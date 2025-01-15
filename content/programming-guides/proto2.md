@@ -42,11 +42,9 @@ message SearchRequest {
 *   The first line of the file specifies that you're using the proto2 revision
     of the protobuf language spec.
 
-    *   The `edition` (or `syntax` for proto2/proto3) must be the first
-        non-empty, non-comment line of the file.
-    *   If no `edition` or `syntax` is specified, the protocol buffer compiler
-        will assume you are using
-        [proto2](/programming-guides/proto2).
+    *   The `syntax` must be the first non-empty, non-comment line of the file.
+    *   If no `syntax` is specified, the protocol buffer compiler will assume
+        you are using proto2.
 
 *   The `SearchRequest` message definition specifies three fields (name/value
     pairs), one for each piece of data that you want to include in this type of
@@ -691,21 +689,21 @@ appropriate language).
 
 In proto2, you can specify explicit default values for singular non-message
 fields. For example, let's say you want to provide a default value of 10 for the
-`SearchRequest.result_per_page` field:
+`SearchRequest.results_per_page` field:
 
 ```proto
-optional int32 result_per_page = 3 [default = 10];
+optional int32 results_per_page = 3 [default = 10];
 ```
 
-If the sender does not specify `result_per_page`, the receiver will observe the
+If the sender does not specify `results_per_page`, the receiver will observe the
 following state:
 
-*   The result_per_page field is not present. That is, the
-    `has_result_per_page()` (hazzer method) method would return `false`.
-*   The value of `result_per_page` (returned from the "getter") is `10`.
+*   The `results_per_page` field is not present. That is, the
+    `has_results_per_page()` (hazzer method) method would return `false`.
+*   The value of `results_per_page` (returned from the "getter") is `10`.
 
-If the sender does send a value for `result_per_page` the default value of 10 is
-ignored and the sender's value is returned from the "getter".
+If the sender does send a value for `results_per_page` the default value of 10
+is ignored and the sender's value is returned from the "getter".
 
 See the [generated code guide](/reference/) for your
 chosen language for more details about how defaults work in generated code.
@@ -771,8 +769,8 @@ explicitly overridden like this:
 You can define aliases by assigning the same value to different enum constants.
 To do this you need to set the `allow_alias` option to `true`. Otherwise, the
 protocol buffer compiler generates a warning message when aliases are
-found. Though all alias values are valid during deserialization, the first value
-is always used when serializing.
+found. Though all alias values are valid for serialization, only the first value
+is used when deserializing.
 
 ```proto
 enum EnumAllowingAlias {
@@ -2371,7 +2369,7 @@ protoc --proto_path=IMPORT_PATH --cpp_out=DST_DIR --java_out=DST_DIR --python_ou
         [Python generated code reference](/reference/python/python-generated)
         for more.
     *   `--go_out` generates Go code in `DST_DIR`. See the
-        [Go generated code reference](/reference/go/go-generated)
+        [Go generated code reference](/reference/go/go-generated-opaque)
         for more.
     *   `--ruby_out` generates Ruby code in `DST_DIR`. See the
         [Ruby generated code reference](/reference/ruby/ruby-generated)

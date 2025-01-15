@@ -2033,7 +2033,7 @@ protoc --proto_path=IMPORT_PATH --cpp_out=DST_DIR --java_out=DST_DIR --python_ou
         [Python generated code reference](/reference/python/python-generated)
         for more.
     *   `--go_out` generates Go code in `DST_DIR`. See the
-        [Go generated code reference](/reference/go/go-generated)
+        [Go generated code reference](/reference/go/go-generated-opaque)
         for more.
     *   `--ruby_out` generates Ruby code in `DST_DIR`. See the
         [Ruby generated code reference](/reference/ruby/ruby-generated)
