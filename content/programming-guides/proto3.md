@@ -755,8 +755,8 @@ other than "this value was unspecified".
 You can define aliases by assigning the same value to different enum constants.
 To do this you need to set the `allow_alias` option to `true`. Otherwise, the
 protocol buffer compiler generates a warning message when aliases are
-found. Though all alias values are valid during deserialization, the first value
-is always used when serializing.
+found. Though all alias values are valid for serialization, only the first value
+is used when deserializing.
 
 ```proto
 enum EnumAllowingAlias {
@@ -1706,7 +1706,7 @@ protoc --proto_path=IMPORT_PATH --cpp_out=DST_DIR --java_out=DST_DIR --python_ou
         [Python generated code reference](/reference/python/python-generated)
         for more.
     *   `--go_out` generates Go code in `DST_DIR`. See the
-        [Go generated code reference](/reference/go/go-generated)
+        [Go generated code reference](/reference/go/go-generated-opaque)
         for more.
     *   `--ruby_out` generates Ruby code in `DST_DIR`. See the
         [Ruby generated code reference](/reference/ruby/ruby-generated)

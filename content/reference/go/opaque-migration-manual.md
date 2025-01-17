@@ -20,7 +20,8 @@ are looking at the manual migration guide. Typically you’re better off using t
 [Opaque API Migration](/reference/go/opaque-migration)
 instead. {{% /alert %}}
 
-The [Generated Code Guide](/reference/go/go-generated)
+The
+[Generated Code Guide](/reference/go/go-generated-opaque)
 provides more detail. This guide compares the old and new API side-by-side.
 
 ### Message Construction
