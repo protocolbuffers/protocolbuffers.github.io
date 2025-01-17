@@ -243,8 +243,8 @@ specified.</li></ul><p>It is also recommended that this first, default value hav
 other than &ldquo;this value was unspecified&rdquo;.</p><h3 id=enum-aliases>Enum Value Aliases</h3><p>You can define aliases by assigning the same value to different enum constants.
 To do this you need to set the <code>allow_alias</code> option to <code>true</code>. Otherwise, the
 protocol buffer compiler generates a warning message when aliases are
-found. Though all alias values are valid during deserialization, the first value
-is always used when serializing.</p><div class=highlight><pre tabindex=0 style=background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-proto data-lang=proto><span style=display:flex><span><span style=color:#204a87;font-weight:700>enum</span> <span style=color:#000>EnumAllowingAlias</span> <span style=color:#000;font-weight:700>{</span><span style=color:#a40000>
+found. Though all alias values are valid for serialization, only the first value
+is used when deserializing.</p><div class=highlight><pre tabindex=0 style=background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-proto data-lang=proto><span style=display:flex><span><span style=color:#204a87;font-weight:700>enum</span> <span style=color:#000>EnumAllowingAlias</span> <span style=color:#000;font-weight:700>{</span><span style=color:#a40000>
 </span></span></span><span style=display:flex><span><span style=color:#a40000></span>  <span style=color:#204a87;font-weight:700>option</span> <span style=color:#000>allow_alias</span> <span style=color:#ce5c00;font-weight:700>=</span> <span style=color:#204a87;font-weight:700>true</span><span style=color:#000;font-weight:700>;</span><span style=color:#a40000>
 </span></span></span><span style=display:flex><span><span style=color:#a40000></span>  <span style=color:#000>EAA_UNSPECIFIED</span> <span style=color:#ce5c00;font-weight:700>=</span> <span style=color:#0000cf;font-weight:700>0</span><span style=color:#000;font-weight:700>;</span><span style=color:#a40000>
 </span></span></span><span style=display:flex><span><span style=color:#a40000></span>  <span style=color:#000>EAA_STARTED</span> <span style=color:#ce5c00;font-weight:700>=</span> <span style=color:#0000cf;font-weight:700>1</span><span style=color:#000;font-weight:700>;</span><span style=color:#a40000>
@@ -795,7 +795,7 @@ for more.</li><li><code>--kotlin_out</code> generates additional Kotlin code in 
 for more.</li><li><code>--python_out</code> generates Python code in <code>DST_DIR</code>. See the
 <a href=/reference/python/python-generated>Python generated code reference</a>
 for more.</li><li><code>--go_out</code> generates Go code in <code>DST_DIR</code>. See the
-<a href=/reference/go/go-generated>Go generated code reference</a>
+<a href=/reference/go/go-generated-opaque>Go generated code reference</a>
 for more.</li><li><code>--ruby_out</code> generates Ruby code in <code>DST_DIR</code>. See the
 <a href=/reference/ruby/ruby-generated>Ruby generated code reference</a>
 for more.</li><li><code>--objc_out</code> generates Objective-C code in <code>DST_DIR</code>. See the

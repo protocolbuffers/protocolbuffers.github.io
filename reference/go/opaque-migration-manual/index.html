@@ -11,7 +11,8 @@ API to the new Opaque API.</p><div class="alert alert-warning" role=alert><h4 cl
 are looking at the manual migration guide. Typically you’re better off using the
 <code>open2opaque</code> tool to automate the migration. See
 <a href=/reference/go/opaque-migration>Opaque API Migration</a>
-instead.</div><p>The <a href=/reference/go/go-generated>Generated Code Guide</a>
+instead.</div><p>The
+<a href=/reference/go/go-generated-opaque>Generated Code Guide</a>
 provides more detail. This guide compares the old and new API side-by-side.</p><h3 id=message-construction>Message Construction</h3><p>Suppose there is a protobuf message defined like this:</p><div class=highlight><pre tabindex=0 style=background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-proto data-lang=proto><span style=display:flex><span><span style=color:#204a87;font-weight:700>message</span> <span style=color:#000>Foo</span> <span style=color:#000;font-weight:700>{</span><span style=color:#a40000>
 </span></span></span><span style=display:flex><span><span style=color:#a40000></span>  <span style=color:#204a87;font-weight:700>uint32</span> <span style=color:#204a87;font-weight:700>uint32</span> <span style=color:#ce5c00;font-weight:700>=</span> <span style=color:#0000cf;font-weight:700>1</span><span style=color:#000;font-weight:700>;</span><span style=color:#a40000>
 </span></span></span><span style=display:flex><span><span style=color:#a40000></span>  <span style=color:#204a87;font-weight:700>bytes</span> <span style=color:#204a87;font-weight:700>bytes</span> <span style=color:#ce5c00;font-weight:700>=</span> <span style=color:#0000cf;font-weight:700>2</span><span style=color:#000;font-weight:700>;</span><span style=color:#a40000>
