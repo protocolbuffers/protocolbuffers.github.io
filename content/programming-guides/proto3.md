@@ -532,6 +532,7 @@ automatically generated class:
       </tr>
       <tr>
         <td>sint32</td>
+        <td>int32_t</td>
         <td>int</td>
         <td>int</td>
         <td>int32</td>
@@ -543,6 +544,7 @@ automatically generated class:
       </tr>
       <tr>
         <td>sint64</td>
+        <td>int64_t</td>
         <td>long</td>
         <td>int/long<sup>[4]</sup></td>
         <td>int64</td>
