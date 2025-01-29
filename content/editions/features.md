@@ -590,6 +590,29 @@ message MyMessage {
 }
 ```
 
+#### `features.(pb.java).large_enum` {#java-large_enum}
+
+**Languages:** Java
+
+This language-specific feature enables you to adopt new functionality that
+handles large enums in Java without causing compiler errors.
+
+This is new behavior, so doesn't affect proto2 or proto3 schema definition
+files.
+
+**Values available:**
+
+*   `true`: Java enums will use the new functionality.
+*   `false`: Java enums will continue to use Java enums.
+
+**Applicable to the following scopes:** Enum
+
+**Default behavior in Edition 2023:** `false`
+
+**Behavior in proto2:** `false`
+
+**Behavior in proto3:** `false`
+
 ## Preserving proto2 or proto3 Behavior {#preserving}
 
 You may want to move to the editions format but not deal with updates to the way

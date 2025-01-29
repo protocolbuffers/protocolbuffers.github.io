@@ -20,6 +20,8 @@ New news topics will also be published to the
 The following news topics provide information in the reverse order in which it
 was released.
 
+*   [January 23, 2025](/news/2025-01-23) - Poison Java
+    gencode
 *   [December 18, 2024](/news/2024-12-18) - Go Protobuf:
     The new Opaque API
 *   [December 13, 2024](/news/2024-12-13) - Removing
