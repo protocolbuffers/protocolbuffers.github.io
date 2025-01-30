@@ -233,9 +233,7 @@ std::string email = john.email();
 When defining `.proto` files, you can specify that a field is either `optional`
 or `repeated` (proto2 and proto3) or leave it set to the default, implicit
 presence, in proto3. (The option to set a field to `required` is absent in
-proto3 and strongly discouraged in proto2. For more on this, see "Required is
-Forever" in
-[Specifying Field Rules](/programming-guides/proto3#specifying-field-rules).)
+proto3 and strongly discouraged in proto2. For more on this, see [Required Fields Considered Harmful](/programming-guides/required-considered-harmful.md).)
 
 After setting the optionality/repeatability of a field, you specify the data
 type. Protocol buffers support the usual primitive data types, such as integers,

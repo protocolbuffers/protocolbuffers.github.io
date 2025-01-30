@@ -271,11 +271,9 @@ as it applies the file-level setting. The `Employment` `enum`, though, will be
 
 ### Prototiller {#prototiller}
 
-Currently, all conversions to editions format are handled by the Protobuf team.
-
-When this shifts to a self-serve model, we will provide both a migration guide
-and migration tooling to ease the migration to and between editions. The tool,
-called Prototiller, will enable you to:
+When the Prototiller tool is launched, we will
+provide both a migration guide and migration tooling to ease the migration to
+and between editions. The tool will enable you to:
 
 *   convert proto2 and proto3 definition files to the new editions syntax, at
     scale

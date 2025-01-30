@@ -405,6 +405,11 @@ assert foo.HasField("bar")
 
 ### Repeated Fields {#repeated-fields}
 
+There are three types of repeated fields: scalar, enum, and message. Map fields
+and oneof fields cannot be repeated.
+
+### Repeated Scalar and Enum Fields {#repeated-scalar}
+
 Repeated fields are represented as an object that acts like a Python sequence.
 As with embedded messages, you cannot assign the field directly, but you can
 manipulate it. For example, given this message definition:

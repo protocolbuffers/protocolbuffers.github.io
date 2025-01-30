@@ -23,7 +23,7 @@ and a randomized-length whitespace sequence. The new debugging format looks as
 follows:
 
 ```none
-go/nodeserialize
+goo.gle/nodeserialize
 spii_field: [REDACTED]
 normal_field: "value"
 ```
