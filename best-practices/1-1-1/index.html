@@ -21,7 +21,7 @@ definitions. The following set of proto files shows modular structure.</p><p><st
 </span></span></span><span style=display:flex><span><span style=color:#a40000>
 </span></span></span><span style=display:flex><span><span style=color:#a40000></span><span style=color:#204a87;font-weight:700>package</span> <span style=color:#000>my</span><span style=color:#ce5c00;font-weight:700>.</span><span style=color:#000>package</span><span style=color:#000;font-weight:700>;</span><span style=color:#a40000>
 </span></span></span><span style=display:flex><span><span style=color:#a40000>
-</span></span></span><span style=display:flex><span><span style=color:#a40000></span><span style=color:#204a87;font-weight:700>message</span> <span style=color:#000>StudentID</span> <span style=color:#000;font-weight:700>{</span><span style=color:#a40000>
+</span></span></span><span style=display:flex><span><span style=color:#a40000></span><span style=color:#204a87;font-weight:700>message</span> <span style=color:#000>StudentId</span> <span style=color:#000;font-weight:700>{</span><span style=color:#a40000>
 </span></span></span><span style=display:flex><span><span style=color:#a40000></span>  <span style=color:#204a87;font-weight:700>string</span> <span style=color:#000>value</span> <span style=color:#ce5c00;font-weight:700>=</span> <span style=color:#0000cf;font-weight:700>1</span><span style=color:#000;font-weight:700>;</span><span style=color:#a40000>
 </span></span></span><span style=display:flex><span><span style=color:#a40000></span><span style=color:#000;font-weight:700>}</span><span style=color:#a40000>
 </span></span></span></code></pre></div><p><strong>full_name.proto</strong></p><div class=highlight><pre tabindex=0 style=background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-proto data-lang=proto><span style=display:flex><span><span style=color:#000>edition</span> <span style=color:#ce5c00;font-weight:700>=</span> <span style=color:#4e9a06>&#34;2023&#34;</span><span style=color:#000;font-weight:700>;</span><span style=color:#a40000>
@@ -68,7 +68,7 @@ definitions. The following set of proto files shows modular structure.</p><p><st
 </span></span></span><span style=display:flex><span><span style=color:#a40000></span><span style=color:#204a87;font-weight:700>import</span> <span style=color:#4e9a06>&#34;student_id.proto&#34;</span><span style=color:#000;font-weight:700>;</span><span style=color:#a40000>
 </span></span></span><span style=display:flex><span><span style=color:#a40000>
 </span></span></span><span style=display:flex><span><span style=color:#a40000></span><span style=color:#204a87;font-weight:700>message</span> <span style=color:#000>GetStudentRequest</span> <span style=color:#000;font-weight:700>{</span><span style=color:#a40000>
-</span></span></span><span style=display:flex><span><span style=color:#a40000></span>  <span style=color:#000>StudentID</span> <span style=color:#000>id</span> <span style=color:#ce5c00;font-weight:700>=</span> <span style=color:#0000cf;font-weight:700>1</span><span style=color:#000;font-weight:700>;</span><span style=color:#a40000>
+</span></span></span><span style=display:flex><span><span style=color:#a40000></span>  <span style=color:#000>StudentId</span> <span style=color:#000>id</span> <span style=color:#ce5c00;font-weight:700>=</span> <span style=color:#0000cf;font-weight:700>1</span><span style=color:#000;font-weight:700>;</span><span style=color:#a40000>
 </span></span></span><span style=display:flex><span><span style=color:#a40000></span><span style=color:#000;font-weight:700>}</span><span style=color:#a40000>
 </span></span></span></code></pre></div><p><strong>get_student_response.proto</strong></p><div class=highlight><pre tabindex=0 style=background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-proto data-lang=proto><span style=display:flex><span><span style=color:#000>edition</span> <span style=color:#ce5c00;font-weight:700>=</span> <span style=color:#4e9a06>&#34;2023&#34;</span><span style=color:#000;font-weight:700>;</span><span style=color:#a40000>
 </span></span></span><span style=display:flex><span><span style=color:#a40000>
@@ -94,13 +94,13 @@ definitions. The following set of proto files shows modular structure.</p><p><st
 </span></span></span><span style=display:flex><span><span style=color:#a40000></span><span style=color:#000;font-weight:700>}</span><span style=color:#a40000>
 </span></span></span></code></pre></div><p>The service definition and each of the message definitions are each in their own
 file, and you use includes to give access to the messages from other schema
-files.</p><p>In this example, <code>Student</code>, <code>StudentID</code>, and <code>FullName</code> are domain types that
+files.</p><p>In this example, <code>Student</code>, <code>StudentId</code>, and <code>FullName</code> are domain types that
 are reusable across requests and responses. The top-level request and response
 protos are unique to each service+method.</p><p>If you later need to add a <code>middle_name</code> field to the <code>FullName</code> message, you
 won&rsquo;t need to update every individual top-level message with that new field.
 Likewise, if you need to update <code>Student</code> with more information, all the
-requests and responses get the update. Further, <code>StudentID</code> might update to be a
-multi-part ID.</p><p>Lastly, having even simple types like <code>StudentID</code> wrapped as a message means
+requests and responses get the update. Further, <code>StudentId</code> might update to be a
+multi-part ID.</p><p>Lastly, having even simple types like <code>StudentId</code> wrapped as a message means
 that you have created a type that has semantics and consolidated documentation.
 For something like <code>FullName</code> you&rsquo;ll need to be careful with where this PII gets
 logged; this is another advantage of not repeating these fields in multiple
