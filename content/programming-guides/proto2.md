@@ -2008,12 +2008,12 @@ Here are a few of the most commonly used options:
     numeric type, it causes a more compact
     [encoding](/programming-guides/encoding#packed) to be
     used. The only reason to not use this option is if you need compatibility
-    with parsers prior to version 2.3.0. When these older parsers would ignore
-    packed data when it was not expected. Therefore, it was not possible to
-    change an existing field to packed format without breaking wire
-    compatibility. In 2.3.0 and later, this change is safe, as parsers for
-    packable fields will always accept both formats, but be careful if you have
-    to deal with old programs using old protobuf versions.
+    with parsers prior to version 2.3.0. These older parsers would ignore packed
+    data when it was not expected. Therefore, it was not possible to change an
+    existing field to packed format without breaking wire compatibility. In
+    2.3.0 and later, this change is safe, as parsers for packable fields will
+    always accept both formats, but be careful if you have to deal with old
+    programs using old protobuf versions.
 
     ```proto
     repeated int32 samples = 4 [packed = true];

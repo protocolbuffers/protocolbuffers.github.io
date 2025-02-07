@@ -3,6 +3,7 @@ title = "No Nullable Setters/Getters Support"
 weight = 89
 description = "Covers why Protobuf doesn't support nullable setters and getters"
 type = "docs"
+aliases = "/programming-guides/nullable-getters-setters/"
 +++
 
 We have heard feedback that some folks would like protobuf to support nullable
@@ -14,6 +15,11 @@ team choosing not to implement them.
 The biggest reason not to have nullable fields is the intended behavior of
 default values specified in a `.proto` file. By design, calling a getter on an
 unset field will return the default value of that field.
+
+**Note:** C# does treat *message* fields as nullable. This inconsistency with
+other languages stems from the lack of immutable messages, which makes it
+impossible to create shared immutable default instances. Because message fields
+can't have defaults, there's no functional problem with this.
 
 As an example, consider this `.proto` file:
 

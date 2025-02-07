@@ -38,6 +38,29 @@ no one accidentally re-uses it in the future. Just `reserved 2, 3;` is enough.
 You can also reserve names to avoid recycling now-deleted value names: `reserved
 "FOO", "BAR";`.
 
+<a id="do-put-new-enum-aliases-last"></a>
+
+## **Do** Put New Enum Aliases Last {#enum-aliases-last}
+
+When you add a new enum alias, put the new name last to give
+services time to pick it up.
+
+To safely remove the original name (if it's being used for interchange, which it
+[shouldn't](#text-format-interchange)), you must do the following:
+
+*   Add the new name below the old name and deprecate the old one (serializers
+    will continue to use the old name)
+
+*   After every parser has the schema rolled out, swap the order of the two
+    names (serializers will begin using the new name, parsers accept both)
+
+*   After every serializer has that version of the schema, you can delete the
+    deprecated name.
+
+> **Note:** While in theory clients shouldn't be using the old name for
+> interchange, it's still polite to follow the above steps, especially for
+> widely-used enum names.
+
 <a id="dont-change-the-type-of-a-field"></a>
 
 ## **Don't** Change the Type of a Field {#change-type}

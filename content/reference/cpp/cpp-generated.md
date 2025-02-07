@@ -102,8 +102,8 @@ The `Message` interface defines methods that let you check, manipulate, read, or
 write the entire message, including parsing from and serializing to binary
 strings.
 
--   `bool ParseFromString(const string& data)`: Parse the message from the given
-    serialized binary string (also known as wire format).
+-   `bool ParseFromString(::absl::string_view data)`: Parse the message from the
+    given serialized binary string (also known as wire format).
 -   `bool SerializeToString(string* output) const`: Serialize the given message
     to a binary string.
 -   `string DebugString()`: Return a string giving the `text_format`
@@ -270,6 +270,12 @@ corresponding C++ type according to the
 
 ### Optional String/Bytes Fields (proto2 and proto3) {#string}
 
+**Note:** As of edition 2023, if
+[`features.(pb.cpp).string_type`](/editions/features#string_type)
+is set to `VIEW`,
+[string_view](/reference/cpp/string-view#singular-view)
+APIs will be generated instead.
+
 For any of these field definitions:
 
 ```proto
@@ -284,18 +290,22 @@ The compiler will generate the following accessor methods:
 -   `bool has_foo() const`: Returns `true` if the field is set.
 -   `const string& foo() const`: Returns the current value of the field. If the
     field is not set, returns the default value.
+-   `void set_foo(::absl::string_view value)`: Sets the value of the field.
+    After calling this, `has_foo()` will return `true` and `foo()` will return a
+    copy of `value`.
 -   `void set_foo(const string& value)`: Sets the value of the field. After
     calling this, `has_foo()` will return `true` and `foo()` will return a copy
     of `value`.
--   `void set_foo(string&& value)` (C++11 and beyond): Sets the value of the
-    field, moving from the passed string. After calling this, `has_foo()` will
-    return `true` and `foo()` will return a copy of `value`.
+-   `void set_foo(string&& value)`: Sets the value of the field, moving from the
+    passed string. After calling this, `has_foo()` will return `true` and
+    `foo()` will return a copy of `value`.
 -   `void set_foo(const char* value)`: Sets the value of the field using a
     C-style null-terminated string. After calling this, `has_foo()` will return
     `true` and `foo()` will return a copy of `value`.
--   `void set_foo(const char* value, int size)`: Like above, but the string size
-    is given explicitly rather than determined by looking for a null-terminator
-    byte.
+-   `void set_foo(const char* value, int size)`: Sets the value of the field
+    using a string with an explicit size specified, rather than determined by
+    looking for a null-terminator byte. After calling this, `has_foo()` will
+    return `true` and `foo()` will return a copy of `value`.
 -   `string* mutable_foo()`: Returns a pointer to the mutable `string` object
     that stores the field's value. If the field was not set prior to the call,
     then the returned string will be empty (*not* the default value). After
@@ -321,6 +331,12 @@ The compiler will generate the following accessor methods:
 
 ### Implicit Presence String/Bytes Fields (proto3) {#implicit-string}
 
+**Note:** As of edition 2023, if
+[`features.(pb.cpp).string_type`](/editions/features#string_type)
+is set to `VIEW`,
+[string_view](/reference/cpp/string-view#singular-view)
+APIs will be generated instead.
+
 For either of these field definitions:
 
 ```proto
@@ -332,17 +348,19 @@ The compiler will generate the following accessor methods:
 
 -   `const string& foo() const`: Returns the current value of the field. If the
     field is not set, returns the empty string/empty bytes.
+-   `void set_foo(::absl::string_view value)`: Sets the value of the field.
+    After calling this, `foo()` will return a copy of `value`.
 -   `void set_foo(const string& value)`: Sets the value of the field. After
     calling this, `foo()` will return a copy of `value`.
--   `void set_foo(string&& value)` (C++11 and beyond): Sets the value of the
-    field, moving from the passed string. After calling this, `foo()` will
-    return a copy of `value`.
+-   `void set_foo(string&& value)`: Sets the value of the field, moving from the
+    passed string. After calling this, `foo()` will return a copy of `value`.
 -   `void set_foo(const char* value)`: Sets the value of the field using a
     C-style null-terminated string. After calling this, `foo()` will return a
     copy of `value`.
--   `void set_foo(const char* value, int size)`: Like above, but the string size
-    is given explicitly rather than determined by looking for a null-terminator
-    byte.
+-   `void set_foo(const char* value, int size)`: Sets the value of the field
+    using a string with an explicit size specified, rather than determined by
+    looking for a null-terminator byte. After calling this, `foo()` will return
+    a copy of `value`.
 -   `string* mutable_foo()`: Returns a pointer to the mutable `string` object
     that stores the field's value. If the field was not set prior to the call,
     then the returned string will be empty. After calling this, `foo()` will
@@ -532,6 +550,12 @@ corresponding C++ type according to the
 
 ### Repeated String Fields {#repeatedstring}
 
+**Note:** As of edition 2023, if
+[`features.(pb.cpp).string_type`](/editions/features#string_type)
+is set to `VIEW`,
+[string_view](/reference/cpp/string-view#singular-view)
+APIs will be generated instead.
+
 For either of these field definitions:
 
 ```proto
@@ -548,24 +572,33 @@ The compiler will generate the following accessor methods:
 -   `const string& foo(int index) const`: Returns the element at the given
     zero-based index. Calling this method with index outside of [0,
     foo_size()-1] yields undefined behavior.
+-   `void set_foo(int index, ::absl::string_view value)`: Sets the value of the
+    element at the given zero-based index.
 -   `void set_foo(int index, const string& value)`: Sets the value of the
     element at the given zero-based index.
+-   `void set_foo(int index, string&& value)`: Sets the value of the element at
+    the given zero-based index, moving from the passed string.
 -   `void set_foo(int index, const char* value)`: Sets the value of the element
     at the given zero-based index using a C-style null-terminated string.
--   `void set_foo(int index, const char* value, int size)`: Like above, but the
-    string size is given explicitly rather than determined by looking for a
+-   `void set_foo(int index, const char* value, int size)`: Sets the value of
+    the element at the given zero-based index using a C-style string with an
+    explicit size specified, rather than determined by looking for a
     null-terminator byte.
 -   `string* mutable_foo(int index)`: Returns a pointer to the mutable `string`
     object that stores the value of the element at the given zero-based index.
     Calling this method with index outside of [0, foo_size()) yields undefined
     behavior.
+-   `void add_foo(::absl::string_view value)`: Appends a new element to the end
+    of the element at the given zero-based index.
 -   `void add_foo(const string& value)`: Appends a new element to the end of the
     field with the given value.
+-   `void add_foo(string&& value)`: Appends a new element to the end of the
+    field, moving from the passed string.
 -   `void add_foo(const char* value)`: Appends a new element to the end of the
     field using a C-style null-terminated string.
--   `void add_foo(const char* value, int size)`: Like above, but the string size
-    is given explicitly rather than determined by looking for a null-terminator
-    byte.
+-   `void add_foo(const char* value, int size)`: Appends a new element to the
+    end of the field using a string with an explicit size specified, rather than
+    determined by looking for a null-terminator byte.
 -   `string* add_foo()`: Adds a new empty string element to the end of the field
     and returns a pointer to it.
 -   `void clear_foo()`: Removes all elements from the field. After calling this,
@@ -696,6 +729,10 @@ corresponding C++ type according to the
 
 ### Oneof String Fields {#oneof-string}
 
+**Note:** As of edition 2023
+[string_view](/reference/cpp/string-view#oneof-view) APIs
+may be generated instead
+
 For any of these [oneof](#oneof) field definitions:
 
 ```proto
@@ -714,22 +751,21 @@ The compiler will generate the following accessor methods:
 -   `bool has_foo() const`: Returns `true` if the oneof case is `kFoo`.
 -   `const string& foo() const`: Returns the current value of the field if the
     oneof case is `kFoo`. Otherwise, returns the default value.
--   `void set_foo(const string& value)`:
+-   `void set_foo(::absl::string_view value)`:
     -   If any other oneof field in the same oneof is set, calls
         `clear_example_name()`.
     -   Sets the value of this field and sets the oneof case to `kFoo`.
     -   `has_foo()` will return `true`, `foo()` will return a copy of `value`
         and `example_name_case()` will return `kFoo`.
--   `void set_foo(const char* value)`:
-    -   If any other oneof field in the same oneof is set, calls
-        `clear_example_name()`.
-    -   Sets the value of the field using a C-style null-terminated string and
-        set the oneof case to `kFoo`.
-    -   `has_foo()` will return `true`, `foo()` will return a copy of `value`
-        and `example_name_case()` will return `kFoo`.
--   `void set_foo(const char* value, int size)`: Like above, but the string size
-    is given explicitly rather than determined by looking for a null-terminator
-    byte.
+-   `void set_foo(const string& value)`: Like the first `set_foo()`, but copies
+    from a const string reference.
+-   `void set_foo(string&& value)`: Like the first `set_foo()`, but moving from
+    the passed string.
+-   `void set_foo(const char* value)`: Like the first `set_foo()`, but copies
+    from a C-style null-terminated string.
+-   `void set_foo(const char* value, int size)`: Like the first `set_foo()`, but
+    copies from a string with an explicit size specified, rather than determined
+    by looking for a null-terminator byte.
 -   `string* mutable_foo()`:
     -   If any other oneof field in the same oneof is set, calls
         `clear_example_name()`.
@@ -1005,7 +1041,7 @@ class Any {
   // Packs the given message into this Any using the given type URL
   // prefix. Returns false if serializing the message failed.
   bool PackFrom(const google::protobuf::Message& message,
-                const string& type_url_prefix);
+                ::absl::string_view type_url_prefix);
 
   // Unpacks this Any to a Message. Returns false if this Any
   // represents a different protobuf type or parsing fails.
@@ -1048,6 +1084,10 @@ In addition, it will generate these methods:
 
 ## Enumerations {#enum}
 
+**Note:** As of edition 2024
+[string_view](/reference/cpp/string-view#enum-name) APIs
+may be generated instead
+
 Given an enum definition like:
 
 ```proto
@@ -1071,8 +1111,8 @@ functions:
     value. Returns an empty string if no such value exists. If multiple values
     have this number, the first one defined is returned. In the above example,
     `Foo_Name(5)` would return `"VALUE_B"`.
--   `bool Foo_Parse(const string& name, Foo* value)`: If `name` is a valid value
-    name for this enum, assigns that value into `value` and returns true.
+-   `bool Foo_Parse(::absl::string_view name, Foo* value)`: If `name` is a valid
+    value name for this enum, assigns that value into `value` and returns true.
     Otherwise returns false. In the above example, `Foo_Parse("VALUE_C",
     &some_foo)` would return true and set `some_foo` to 1234.
 -   `const Foo Foo_MIN`: the smallest valid value of the enum (VALUE_A in the

@@ -294,7 +294,7 @@ More generally, choose the right primitive type. See the Scalar Value Types
 table in the
 [Protocol Buffer Language Guide](/programming-guides/proto2#scalar).
 
-### Returning HTML in a Front-End Proto {#returning-html}
+### Don't Return HTML in a Front-End Proto {#returning-html}
 
 With a JavaScript client, it's tempting to return HTML or
 JSON in a field of your API. This is a slippery
@@ -408,7 +408,7 @@ message InternalPaginationToken {
 }
 ```
 
-## Group Related Fields into a New Message. Nest Only Fields with High Cohesion {#group-related-fields}
+## Group Related Fields into a new `message`. Nest Only Fields with High Cohesion {#group-related-fields}
 
 ```proto
 message Foo {

@@ -5,13 +5,14 @@ description = "How to log debugging information in Protocol Buffers."
 type = "docs"
 +++
 
-From version 29.x, `DebugString` APIs (`proto2::DebugString`,
-`proto2::ShortDebugString`, `proto2::Utf8DebugString`) are deprecated.
-DebugString users should migrate to some Abseil string functions (such as
-`absl::StrCat`, `absl::StrFormat`, `absl::StrAppend`, AND `absl::Substitute`),
-Abseil logging API, and some Protobuf APIs (`proto2::ShortFormat`,
-`proto2::Utf8Format`) to automatically convert proto arguments into a new
-debugging format .
+From version 30.x, Protobuf `DebugString` APIs (`Message::DebugString`,
+`Message::ShortDebugString`, `Message::Utf8DebugString`), additional Protobuf
+APIs (`proto2::ShortFormat`, `proto2::Utf8Format`), Abseil string functions
+(such as `absl::StrCat`, `absl::StrFormat`, `absl::StrAppend`, and
+`absl::Substitute`), and Abseil logging API will begin to automatically convert
+proto arguments into a new debugging format
+. See the related announcement
+[here](/news/2024-12-04/).
 
 Unlike the Protobuf DebugString output format, the new debugging format
 automatically redacts sensitive fields by replacing their values with the string
@@ -36,8 +37,7 @@ DebugString format in two ways:
     "[REDACTED]" (without the quotes)
 
 The new debugging format never removes any field names; it only replaces the
-value with
-"[REDACTED]" if the field is considered sensitive.
+value with "[REDACTED]" if the field is considered sensitive.
 **If you don't see certain fields in the output, it is because those fields are
 not set in the proto.**
 
@@ -83,8 +83,8 @@ systems can change and code gets re-used.
 This is intentional. Don't attempt to parse the output of this debug format. We
 reserve the right to change the syntax without notice. The debug format syntax
 randomly changes per process to prevent inadvertent dependencies. If a syntactic
-change in the debug format would break your system, chances are you shouldn't
-use the debug representation of a proto.
+change in the debug format would break your system, chances are you should be
+using a TextFormat API rather than using the debug representation of a proto.
 
 ## FAQ
 
