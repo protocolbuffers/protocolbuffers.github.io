@@ -1,8 +1,7 @@
 +++
 title = "String View APIs"
 weight = 510
-linkTitle = "Generated Code Guide"
-description = "Describes exactly what C++ code the protocol buffer compiler generates for any given protocol definition. "
+description = "Covers various string_view migrations"
 type = "docs"
 +++
 

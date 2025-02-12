@@ -1084,9 +1084,10 @@ In addition, it will generate these methods:
 
 ## Enumerations {#enum}
 
-**Note:** As of edition 2024
-[string_view](/reference/cpp/string-view#enum-name) APIs
-may be generated instead
+**Note:** As of edition 2024, `string_view` APIs may be generated with certain
+feature settings. See
+[Enumeration Name Helper](/reference/cpp/string-view#enum-name)
+for more on this topic.
 
 Given an enum definition like:
 
