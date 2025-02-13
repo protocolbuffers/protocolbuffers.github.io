@@ -52,7 +52,6 @@ deserializing wire-formatted messages:
     -   For enums, the default is the zero-valued enumerator.
     -   For strings, bytes, and repeated fields, the default is the zero-length
         value.
-    -   For messages, the default is the language-specific null value.
 -   "Empty" length-delimited values (such as empty strings) can be validly
     represented in serialized values: the field is "present," in the sense that
     it appears in the wire format. However, if the generated API does not track
@@ -588,7 +587,7 @@ if (m.hasFoo()) {
 Implicit presence:
 
 ```objective-c
-Msg *m = [[Msg alloc] init];
+Msg *m = [Msg message];
 if (m.foo != 0) {
   // "Clear" the field:
   m.foo = 0;
@@ -601,13 +600,13 @@ if (m.foo != 0) {
 Explicit presence:
 
 ```objective-c
-Msg *m = [[Msg alloc] init];
-if (m.hasFoo()) {
+Msg *m = [Msg message];
+if ([m hasFoo]) {
   // Clear the field:
   [m clearFoo];
 } else {
   // Field is not present, so set it.
-  [m setFoo:1];
+  m.foo = 1;
 }
 ```
 
@@ -639,9 +638,9 @@ Repeated field & map   | no
 
 Is field presence tracked?
 
-Field type                                         | Tracked?
--------------------------------------------------- | --------
-Default                                            | yes
-`features.field_presence` set to `LEGACY_REQUIRED` | yes
-`features.field_presence` set to `IMPLICIT`        | no
-Repeated field & map                               | no
+Field type (in descending prescendence)                              | Tracked?
+-------------------------------------------------------------------- | --------
+Repeated field & map                                                 | no
+Message and Oneof fields                                             | yes
+Other singular fields if `features.field_presence` set to `IMPLICIT` | no
+All other fields                                                     | yes

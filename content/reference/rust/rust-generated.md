@@ -514,7 +514,7 @@ emitted for the `oneof` block:
   #[non_exhaustive]
   #[derive(Debug, Clone, Copy)]
 
-  pub enum ExampleName<'msg> {
+  pub enum ExampleNameOneof<'msg> {
     FooInt(i32) = 4,
     FooString(&'msg protobuf::ProtoStr) = 9,
     not_set(std::marker::PhantomData<&'msg ()>) = 0
@@ -533,7 +533,7 @@ emitted for the `oneof` block:
 
 Additionally, it will generate the two accessors:
 
-*   `fn example_name(&self) -> ExampleName<_>`: Returns the enum variant
+*   `fn example_name(&self) -> ExampleNameOneof<_>`: Returns the enum variant
     indicating which field is set and the field's value. Returns `not_set` if no
     field is set.
 *   `fn example_name_case(&self) -> ExampleNameCase`: Returns the enum variant
