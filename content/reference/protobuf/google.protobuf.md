@@ -119,6 +119,75 @@ custom JSON in addition to the `@type` field. Example (for message
   </tbody>
 </table>
 
+#### CBOR {#cbor}
+
+The CBOR representation of an `Any` value uses the generic serialized value tag #6.27 with the type identifier and regular representation of the deserialized, embedded message.
+A type identifier is either a URL to a binary representation of the protocol buffer type, or an integer representing a well-known type that doesn't have a different specialized encoding in CBOR.
+If the value has a special representation with major type 6, or is a value type with presence, the value itself is used without the #6.27 wrapper.
+
+```proto
+package google.profile;
+message Person {
+  string first_name = 1;
+  string last_name = 2;
+}
+```
+
+```cbor-diag
+27(["type.googleapis.com/google.profile.Person", {1: <string>, 2: <string>}])
+```
+
+The rules of the type URL are the same as ProtoJSON.
+
+The following table provides the type identifiers for other well-known types.
+
+| Identifier | Type |
+--
+| 0x0 | Api               |
+| 0x1 | Empty             |
+| 0x2 | Enum              |
+| 0x3 | EnumValue         |
+| 0x4 | Field             |
+| 0x5 | Field.Cardinality |
+| 0x6 | Field.Kind        |
+| 0x7 | FieldMask         |
+| 0x8 | Method            |
+| 0x9 | Mixin             |
+| 0xa | Option            |
+| 0xb | SourceContext     |
+| 0xc | Syntax            |
+| 0xd | Type              |
+
+The Field.Cardinality and Field.Kind enumerations are assigned the following values and representations in the Any type.
+
+| Cardinality enum | Literal value | CBOR Any encoding |
+| `CARDINALITY_UNKNOWN` | 0 | 0xd5_1a82_0500 |
+| `CARDINALITY_OPTIONAL` | 1 | 0xd5_1a82_0501 |
+| `CARDINALITY_REQUIRED` | 2 | 0xd5_1a82_0502 |
+| `CARDINALITY_REPEATED` | 3 | 0xd5_1a82_0503 |
+
+| Kind enum | Literal value | CBOR Any encoding |
+| `TYPE_UNKNOWN` | 0x00 | 0xd5_1a82_0600 |
+| `TYPE_DOUBLE` | 0x01 | 0xd5_1a82_0601 |
+| `TYPE_FLOAT` | 0x02 | 0xd5_1a82_0602 |
+| `TYPE_INT64` | 0x03 | 0xd5_1a82_0603 |
+| `TYPE_UINT64` | 0x04 | 0xd5_1a82_0604 |
+| `TYPE_INT32` | 0x05 | 0xd5_1a82_0605 |
+| `TYPE_UINT32` | 0x06 | 0xd5_1a82_0606 |
+| `TYPE_FIXED64` | 0x08 | 0xd5_1a82_0608 |
+| `TYPE_FIXED32` | 0x09 | 0xd5_1a82_0609 |
+| `TYPE_BOOL` | 0x0a | 0xd5_1a82_060a |
+| `TYPE_STRING` | 0x0b | 0xd5_1a82_060b |
+| `TYPE_GROUP` | 0x0c | 0xd5_1a82_060c |
+| `TYPE_MESSAGE` | 0x0d | 0xd5_1a82_060d |
+| `TYPE_BYTES` | 0x0e | 0xd5_1a82_060e |
+| `TYPE_UINT32` | 0x0f | 0xd5_1a82_060f |
+| `TYPE_ENUM` | 0x10 | 0xd5_1a82_0610 |
+| `TYPE_SFIXED32` | 0x11 | 0xd5_1a82_0611 |
+| `TYPE_SFIXED64` | 0x12 | 0xd5_1a82_0612 |
+| `TYPE_SINT32` | 0x13 | 0xd5_1a82_0613 |
+| `TYPE_SINT64` | 0x14 | 0xd5_1a82_0614 |
+
 ## Api {#api}
 
 Api is a light-weight descriptor for a protocol buffer service.
@@ -127,6 +196,7 @@ Api is a light-weight descriptor for a protocol buffer service.
   <thead>
     <tr>
       <th>Field name</th>
+      <th>CBOR map key</th>
       <th>Type</th>
       <th>Description</th>
     </tr>
@@ -134,6 +204,7 @@ Api is a light-weight descriptor for a protocol buffer service.
   <tbody>
     <tr>
       <td><code>name</code></td>
+      <td><code>1</code></td>
       <td><code>string</code></td>
       <td>
         The fully qualified name of this api, including package name followed by
@@ -142,6 +213,7 @@ Api is a light-weight descriptor for a protocol buffer service.
     </tr>
     <tr>
       <td><code>methods</code></td>
+      <td>2</td>
       <td>
         <code><a href="#method">Method</a></code>
       </td>
@@ -149,6 +221,7 @@ Api is a light-weight descriptor for a protocol buffer service.
     </tr>
     <tr>
       <td><code>options</code></td>
+      <td>3</td>
       <td>
 <code><a href="#option">Option</a></code>
       </td>
@@ -156,6 +229,7 @@ Api is a light-weight descriptor for a protocol buffer service.
     </tr>
     <tr>
       <td><code>version</code></td>
+      <td>4</td>
       <td><code>string</code></td>
       <td>
         <p>
@@ -186,6 +260,7 @@ Api is a light-weight descriptor for a protocol buffer service.
     </tr>
     <tr>
       <td><code>source_context</code></td>
+      <td>5</td>
       <td>
         <code
           ><code
@@ -200,6 +275,7 @@ Api is a light-weight descriptor for a protocol buffer service.
     </tr>
     <tr>
       <td><code>mixins</code></td>
+      <td>6</td>
       <td>
         <code
           ><code><a href="#mixin">Mixin</a></code></code
@@ -212,6 +288,7 @@ Api is a light-weight descriptor for a protocol buffer service.
     </tr>
     <tr>
       <td><code>syntax</code></td>
+      <td>7</td>
       <td>
         <code><a href="#syntax">Syntax</a></code>
       </td>
@@ -225,6 +302,7 @@ Api is a light-weight descriptor for a protocol buffer service.
 Wrapper message for `bool`.
 
 The JSON representation for `BoolValue` is JSON `true` and `false`.
+The CBOR representation for `BoolValue` is CBOR `true` and `false`.
 
 <table>
   <thead>
@@ -248,6 +326,7 @@ The JSON representation for `BoolValue` is JSON `true` and `false`.
 Wrapper message for `bytes`.
 
 The JSON representation for `BytesValue` is JSON string.
+The CBOR representation for `BytesValue` is a CBOR byte string.
 
 <table>
   <thead>
@@ -271,6 +350,7 @@ The JSON representation for `BytesValue` is JSON string.
 Wrapper message for `double`.
 
 The JSON representation for `DoubleValue` is JSON number.
+The CBOR representation for `DoubleValue` is a CBOR major type 7 value.
 
 <table>
   <thead>
@@ -373,6 +453,33 @@ expressed as fractional seconds.
   </tbody>
 </table>
 
+The CBOR representation for `Duration` is in the RFC9581 format of a #6.1002-tagged map limited to the representation capacity of a `google.protobuf.Duration`.
+Note that the nanoseconds are `uint` and not `int`, so negative durations are represented with different second and nanosecond values.
+A duration below -2<sup>63</sup>s + 0.999999999s is illegal.
+A duration above 2<sup>63</sup>s - 0.999999999s is illegal.
+
+<table>
+  <thead>
+    <tr>
+      <th>Key</th>
+      <th>Value Type</th>
+      <th>Description</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td><code>&(seconds: 1)</code></td>
+      <td><code>int</code></td>
+      <td>Time in seconds.</td>
+    </tr>
+    <tr>
+      <td><code>&(nanoseconds: -9)</code></td>
+      <td><code>uint</code></td>
+      <td>Fractional time in 1e-9s added to the given seconds. Must be between 0 and 999,999,999.</td>
+    </tr>
+  </tbody>
+</table>
+
 ## Empty {#empty}
 
 A generic empty message that you can re-use to avoid defining duplicated empty
@@ -387,6 +494,8 @@ service Foo {
 
 The JSON representation for `Empty` is empty JSON object `{}`.
 
+The CBOR representation for `Empty` is an empty CBOR map `{}`.
+
 ## Enum {#enum}
 
 Enum type definition
@@ -395,6 +504,7 @@ Enum type definition
   <thead>
     <tr>
       <th>Field name</th>
+      <th>CBOR map key</th>
       <th>Type</th>
       <th>Description</th>
     </tr>
@@ -402,11 +512,13 @@ Enum type definition
   <tbody>
     <tr>
       <td><code>name</code></td>
+      <td>1</td>
       <td><code>string</code></td>
       <td>Enum type name.</td>
     </tr>
     <tr>
       <td><code>enumvalue</code></td>
+      <td>2</td>
       <td>
         <code><a href="#enum-value">EnumValue</a></code>
       </td>
@@ -414,6 +526,7 @@ Enum type definition
     </tr>
     <tr>
       <td><code>options</code></td>
+      <td>3</td>
       <td>
         <code><a href="#option">Option</a></code>
       </td>
@@ -421,6 +534,7 @@ Enum type definition
     </tr>
     <tr>
       <td><code>source_context</code></td>
+      <td>4</td>
       <td>
         <code><a href="#source-context">SourceContext</a></code>
       </td>
@@ -428,10 +542,17 @@ Enum type definition
     </tr>
     <tr>
       <td><code>syntax</code></td>
+      <td>5</td>
       <td>
         <code><a href="#syntax">Syntax</a></code>
       </td>
       <td>The source syntax.</td>
+    </tr>
+    <tr>
+      <td><code>edition</code></td>
+      <td>6</td>
+      <td><code>>string</code></td>
+      <td>The syntax edition.</td>
     </tr>
   </tbody>
 </table>
@@ -444,6 +565,7 @@ Enum value definition.
   <thead>
     <tr>
       <th>Field name</th>
+      <th>CBOR map key</th>
       <th>Type</th>
       <th>Description</th>
     </tr>
@@ -451,16 +573,19 @@ Enum value definition.
   <tbody>
     <tr>
       <td><code>name</code></td>
+      <td>1</td>
       <td><code>string</code></td>
       <td>Enum value name.</td>
     </tr>
     <tr>
       <td><code>number</code></td>
+      <td>2</td>
       <td><code>int32</code></td>
       <td>Enum value number.</td>
     </tr>
     <tr>
       <td><code>options</code></td>
+      <td>3</td>
       <td>
         <code><a href="#option">Option</a></code>
       </td>
@@ -822,6 +947,8 @@ Wrapper message for `float`.
 
 The JSON representation for `FloatValue` is JSON number.
 
+The CBOR representation for `FloatValue` is a CBOR major type 7 value.
+
 <table>
   <thead>
     <tr>
@@ -844,6 +971,8 @@ The JSON representation for `FloatValue` is JSON number.
 Wrapper message for `int32`.
 
 The JSON representation for `Int32Value` is JSON number.
+
+The CBOR representation for `Int32Value` is a CBOR major type 0 or 1 value.
 
 <table>
   <thead>
@@ -868,6 +997,8 @@ Wrapper message for `int64`.
 
 The JSON representation for `Int64Value` is JSON string.
 
+The CBOR representation for `Int32Value` is a CBOR major type 0 or 1 value.
+
 <table>
   <thead>
     <tr>
@@ -890,6 +1021,8 @@ The JSON representation for `Int64Value` is JSON string.
 `ListValue` is a wrapper around a repeated field of values.
 
 The JSON representation for `ListValue` is JSON array.
+
+The CBOR representation for `ListValue` is a CBOR definite-length array.
 
 <table>
   <thead>
@@ -918,6 +1051,7 @@ Method represents a method of an api.
   <thead>
     <tr>
       <th>Field name</th>
+      <th>CBOR map key</th>
       <th>Type</th>
       <th>Description</th>
     </tr>
@@ -925,31 +1059,37 @@ Method represents a method of an api.
   <tbody>
     <tr>
       <td><code>name</code></td>
+      <td>1</td>
       <td><code>string</code></td>
       <td>The simple name of this method.</td>
     </tr>
     <tr>
       <td><code>request_type_url</code></td>
+      <td>2</td>
       <td><code>string</code></td>
       <td>A URL of the input message type.</td>
     </tr>
     <tr>
       <td><code>request_streaming</code></td>
+      <td>3</td>
       <td><code>bool</code></td>
       <td>If true, the request is streamed.</td>
     </tr>
     <tr>
       <td><code>response_type_url</code></td>
+      <td>4</td>
       <td><code>string</code></td>
       <td>The URL of the output message type.</td>
     </tr>
     <tr>
       <td><code>response_streaming</code></td>
+      <td>5</td>
       <td><code>bool</code></td>
       <td>If true, the response is streamed.</td>
     </tr>
     <tr>
       <td><code>options</code></td>
+      <td>6</td>
       <td>
         <code><a href="#option">Option</a></code>
       </td>
@@ -957,6 +1097,7 @@ Method represents a method of an api.
     </tr>
     <tr>
       <td><code>syntax</code></td>
+      <td>7</td>
       <td>
         <code><a href="#syntax">Syntax</a></code>
       </td>
@@ -1056,6 +1197,7 @@ service Storage {
   <thead>
     <tr>
       <th>Field name</th>
+      <th>CBOR map key</th>
       <th>Type</th>
       <th>Description</th>
     </tr>
@@ -1063,11 +1205,13 @@ service Storage {
   <tbody>
     <tr>
       <td><code>name</code></td>
+      <td>1</td>
       <td><code>string</code></td>
       <td>The fully qualified name of the API which is included.</td>
     </tr>
     <tr>
       <td><code>root</code></td>
+      <td>2</td>
       <td><code>string</code></td>
       <td>
         If non-empty specifies a path under which inherited HTTP paths are
@@ -1083,6 +1227,8 @@ service Storage {
 `Value` type union.
 
 The JSON representation for `NullValue` is JSON `null`.
+
+The CBOR representation for `NullValue` is CBOR `null`.
 
 <table>
   <thead>
@@ -1108,6 +1254,7 @@ enumeration, etc.
   <thead>
     <tr>
       <th>Field name</th>
+      <th>CBOR map key</th>
       <th>Type</th>
       <th>Description</th>
     </tr>
@@ -1115,6 +1262,7 @@ enumeration, etc.
   <tbody>
     <tr>
       <td><code>name</code></td>
+      <td>1</td>
       <td><code>string</code></td>
       <td>
         The option's name. For example, <code>&quot;java_package&quot;</code>.
@@ -1122,6 +1270,7 @@ enumeration, etc.
     </tr>
     <tr>
       <td><code>value</code></td>
+      <td>2</td>
       <td>
         <code><a href="#any">Any</a></code>
       </td>
@@ -1159,11 +1308,15 @@ like the file in which it is defined.
   </tbody>
 </table>
 
+The CBOR representation for `SourceContext` with `file_name` _f_ uses the Any representation, `27([0xb, `_f_`])`.
+
 ## StringValue {#string-value}
 
 Wrapper message for `string`.
 
 The JSON representation for `StringValue` is JSON string.
+
+The CBOR representation for `StringValue` is a CBOR UTF-8 string (major type 3).
 
 <table>
   <thead>
@@ -1191,6 +1344,8 @@ represented as an object. The details of that representation are described
 together with the proto support for the language.
 
 The JSON representation for `Struct` is JSON object.
+
+The CBOR representation for `Struct` is an int-keyed map.
 
 <table>
   <thead>
@@ -1389,6 +1544,8 @@ Wrapper message for `uint32`.
 
 The JSON representation for `UInt32Value` is JSON number.
 
+The CBOR representation for `UInt32Value` is a major type 0 value.
+
 <table>
   <thead>
     <tr>
@@ -1411,6 +1568,8 @@ The JSON representation for `UInt32Value` is JSON number.
 Wrapper message for `uint64`.
 
 The JSON representation for `UInt64Value` is JSON string.
+
+The CBOR representation for `UInt64Value` is a major type 0 value.
 
 <table>
   <thead>
@@ -1437,6 +1596,14 @@ of value is expected to set one of that variants, absence of any variant
 indicates an error.
 
 The JSON representation for `Value` is JSON value.
+
+The CBOR representation for `Value` validates against the following CDDL.
+
+```cddl
+value /= null / int / float / tstr / bool
+value /= { * int => value }
+value /= [ * value ]
+```
 
 <table>
   <thead>
