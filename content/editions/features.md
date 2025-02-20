@@ -9,6 +9,11 @@ This topic provides an overview of the features that are included in Edition
 2023. Each subsequent edition's features will be added to this topic. We
 announce new editions in [the News section](/news).
 
+Before configuring feature settings in your new schema definition content, make
+sure you understand why you are using them. Avoid
+[cargo-culting](/best-practices/no-cargo-cults) with
+features.
+
 ## Prototiller {#prototiller}
 
 Prototiller is a command-line tool that converts proto2 and proto3 definition
