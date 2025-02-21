@@ -24,10 +24,12 @@ Objective-C, Python, and Ruby. With proto3, you can also work with PHP.
 ## Example Implementation
 
 ```proto
+edition = "2023";
+
 message Person {
-  optional string name = 1;
-  optional int32 id = 2;
-  optional string email = 3;
+  string name = 1;
+  int32 id = 2;
+  string email = 3;
 }
 ```
 

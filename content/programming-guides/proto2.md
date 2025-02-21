@@ -676,7 +676,7 @@ value for that field. The default values are type-specific:
     [generated code guide](/reference/) for your language
     for details.
 *   For enums, the default value is the **first defined enum value**, which
-    should be 0 (recommended for compatibility with proto3). See
+    should be 0 (recommended for compatibility with open enums). See
     [Enum Default Value](#enum-default).
 
 The default value for repeated fields is empty (generally an empty list in the
@@ -930,10 +930,11 @@ project and use fully qualified names for all imports.
 ### Using proto3 Message Types {#proto3}
 
 It's possible to import
-[proto3](/programming-guides/proto3) message types and
-use them in your proto2 messages, and vice versa. However, proto2 enums cannot
-be used directly in proto3 syntax (it's okay if an imported proto2 message uses
-them).
+[proto3](/programming-guides/proto3) and
+[edition 2023](/programming-guides/editions) message
+types and use them in your proto2 messages, and vice versa. However, proto2
+enums cannot be used directly in proto3 syntax (it's okay if an imported proto2
+message uses them).
 
 ## Nested Types {#nested}
 
@@ -1857,11 +1858,11 @@ open source RPC system developed at Google. gRPC works particularly well with
 protocol buffers and lets you generate the relevant RPC code directly from your
 `.proto` files using a special protocol buffer compiler plugin. However, as
 there are potential compatibility issues between clients and servers generated
-with proto2 and proto3, we recommend that you use proto3 for defining gRPC
-services. You can find out more about proto3 syntax in the
-[Proto3 Language Guide](/programming-guides/proto3). If
-you do want to use proto2 with gRPC, you need to use version 3.0.0 or higher of
-the protocol buffers compiler and libraries.
+with proto2 and proto3, we recommend that you use proto3 or edition 2023 for
+defining gRPC services. You can find out more about proto3 syntax in the
+[Proto3 Language Guide](/programming-guides/proto3) and
+about edition 2023 in
+[Edition 2023 Language Guide](/programming-guides/editions).
 
 In addition to gRPC, there are also a number of ongoing third-party projects to
 develop RPC implementations for Protocol Buffers. For a list of links to

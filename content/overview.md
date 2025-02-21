@@ -31,10 +31,12 @@ data on disk. Protocol buffer *messages* and *services* are described by
 engineer-authored `.proto` files. The following shows an example `message`:
 
 ```proto
+edition = "2023";
+
 message Person {
-  optional string name = 1;
-  optional int32 id = 2;
-  optional string email = 3;
+  string name = 1;
+  int32 id = 2;
+  string email = 3;
 }
 ```
 
@@ -103,10 +105,8 @@ The following languages are supported by Google, but the projects' source code
 resides in GitHub repositories. The protoc compiler uses plugins for these
 languages:
 
-<!-- mdformat off(mdformat adds a space between the ) and the {) -->
 *   [Dart](https://github.com/google/protobuf.dart)
 *   [Go](https://github.com/protocolbuffers/protobuf-go)
-<!-- mdformat on -->
 
 Additional languages are not directly supported by Google, but rather by other
 GitHub projects. These languages are covered in
@@ -127,9 +127,9 @@ and
 
 ### Updating Proto Definitions Without Updating Code {#updating-defs}
 
-It’s standard for software products to be backward compatible, but it is less
+It's standard for software products to be backward compatible, but it is less
 common for them to be forward compatible. As long as you follow some
-[simple practices](/programming-guides/proto3/#updating)
+[simple practices](/programming-guides/proto3#updating)
 when updating `.proto` definitions, old code will read new messages without
 issues, ignoring any newly added fields. To the old code, fields that were
 deleted will have their default value, and deleted repeated fields will be
@@ -159,8 +159,8 @@ Protocol buffers do not fit all data. In particular:
 *   Protocol buffer messages are less than maximally efficient in both size and
     speed for many scientific and engineering uses that involve large,
     multi-dimensional arrays of floating point numbers. For these applications,
-    [FITS](https://en.wikipedia.org/wiki/FITS) and similar formats
-    have less overhead.
+    [FITS](https://en.wikipedia.org/wiki/FITS) and similar formats have less
+    overhead.
 *   Protocol buffers are not well supported in non-object-oriented languages
     popular in scientific computing, such as Fortran and IDL.
 *   Protocol buffer messages don't inherently self-describe their data, but they
@@ -175,11 +175,9 @@ Protocol buffers do not fit all data. In particular:
 
 Many projects use protocol buffers, including the following:
 
-<!-- mdformat off(mdformat adds a space between the ) and the {) -->
-
 +   [gRPC](https://grpc.io)
 +   [Google Cloud](https://cloud.google.com)
-+   [Envoy Proxy](https://www.envoyproxy.io) <!-- mdformat on -->
++   [Envoy Proxy](https://www.envoyproxy.io)
 
 ## How do Protocol Buffers Work? {#work}
 
@@ -197,9 +195,9 @@ earlier, this is a `.proto` definition:
 
 ```proto
 message Person {
-  optional string name = 1;
-  optional int32 id = 2;
-  optional string email = 3;
+  string name = 1;
+  int32 id = 2;
+  string email = 3;
 }
 ```
 
@@ -230,14 +228,14 @@ std::string email = john.email();
 
 ## Protocol Buffers Definition Syntax {#syntax}
 
-When defining `.proto` files, you can specify that a field is either `optional`
-or `repeated` (proto2 and proto3) or leave it set to the default, implicit
-presence, in proto3. (The option to set a field to `required` is absent in
-proto3 and strongly discouraged in proto2. For more on this, see [Required Fields Considered Harmful](/programming-guides/required-considered-harmful.md).)
+When defining `.proto` files, you can specify cardinality (singular or
+repeated). In proto2 and proto3, you can also specify if the field is optional.
+In proto3, setting a field to optional
+[changes it from implicit presence to explicit presence](/programming-guides/field_presence).
 
-After setting the optionality/repeatability of a field, you specify the data
-type. Protocol buffers support the usual primitive data types, such as integers,
-booleans, and floats. For the full list, see
+After setting the cardinality of a field, you specify the data type. Protocol
+buffers support the usual primitive data types, such as integers, booleans, and
+floats. For the full list, see
 [Scalar Value Types](/programming-guides/proto3#scalar).
 
 A field can also be of:
@@ -249,16 +247,17 @@ A field can also be of:
     and at most one field will be set at the same time.
 *   A `map` type, to add key-value pairs to your definition.
 
-In proto2, messages can allow **extensions** to define fields outside of the
-message, itself. For example, the protobuf library's internal message schema
-allows extensions for custom, usage-specific options.
+Messages can allow **extensions** to define fields outside of the message,
+itself. For example, the protobuf library's internal message schema allows
+extensions for custom, usage-specific options.
 
 For more information about the options available, see the language guide for
-[proto2](/programming-guides/proto2) or
-[proto3](/programming-guides/proto3).
+[proto2](/programming-guides/proto2),
+[proto3](/programming-guides/proto3), or
+[edition 2023](/programming-guides/editions).
 
-After setting optionality and field type, you choose a name for the field.
-There are some things to keep in mind when setting field names:
+After setting cardinality and data type, you choose a name for the field. There
+are some things to keep in mind when setting field names:
 
 *   It can sometimes be difficult, or even impossible, to change field names
     after they've been used in production.
@@ -303,4 +302,4 @@ protobuf developers and users,
 ## Additional Resources {#additional-resources}
 
 *   [Protocol Buffers GitHub](https://github.com/protocolbuffers/protobuf/)
-*   [Codelabs](/getting-started/codelabs)
+    * [Tutorials](https://protobuf.dev/getting-started/)
