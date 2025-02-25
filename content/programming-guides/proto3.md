@@ -616,7 +616,7 @@ automatically generated class:
       </tr>
       <tr>
         <td>string</td>
-        <td>string</td>
+        <td>std::string</td>
         <td>String</td>
         <td>str/unicode<sup>[5]</sup></td>
         <td>string</td>
@@ -628,7 +628,7 @@ automatically generated class:
       </tr>
       <tr>
         <td>bytes</td>
-        <td>string</td>
+        <td>std::string</td>
         <td>ByteString</td>
         <td>str (Python 2), bytes (Python 3)</td>
         <td>[]byte</td>

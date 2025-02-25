@@ -210,6 +210,21 @@ which provides a reflection-based view of the message.
 
 The `optimize_for` option does not affect the output of the Go code generator.
 
+When multiple goroutines concurrently access the same message, the following
+rules apply:
+
+*   Accessing (reading) fields concurrently is safe, with one exception:
+    *   Accessing a [lazy field](https://github.com/protocolbuffers/protobuf/blob/cacb096002994000f8ccc6d9b8e1b5b0783ee561/src/google/protobuf/descriptor.proto#L609)
+        for the first time is a modification.
+*   Modifying different fields in the same message is safe.
+*   Modifying a field concurrently is not safe.
+*   Modifying a message in any way concurrently with functions of the
+    [`proto` package](https://pkg.go.dev/google.golang.org/protobuf/proto?tab=doc),
+    such as
+    [`proto.Marshal`](https://pkg.go.dev/google.golang.org/protobuf/proto#Marshal)
+    or [`proto.Size`](https://pkg.go.dev/google.golang.org/protobuf/proto#Size)
+    is not safe.
+
 ### Nested Types
 
 A message can be declared inside another message. For example:
