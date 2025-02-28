@@ -124,7 +124,7 @@ The following are exceptions to the rule:
     opaquely as possible so that you don't create a dependency nexus. Consider
     using extensions or [Encode Opaque Data in Strings by Web-safe Encoding
     Binary Proto
-    Serialization](/programming-guides/api#encode-opaque-data-in-strings).
+    Serialization](/best-practices/api#encode-opaque-data-in-strings).
 
 ## For Mutations, Support Partial Updates or Append-Only Updates, Not Full Replaces {#support-partial-updates}
 
