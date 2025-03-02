@@ -433,6 +433,12 @@ Enum type definition
       </td>
       <td>The source syntax.</td>
     </tr>
+    <tr>
+      <td><code>edition</code></td>
+      <td><code>string</code>
+      </td>
+      <td>The source edition if <code>syntax</code> is <code>SYNTAX_EDITIONS</code>.</td>
+    </tr>
   </tbody>
 </table>
 
@@ -1230,6 +1236,10 @@ The syntax in which a protocol buffer element is defined.
     <tr>
       <td><code>SYNTAX_PROTO3</code></td>
       <td>Syntax <code>proto3</code>.</td>
+    </tr>
+    <tr>
+      <td><code>SYNTAX_EDITIONS</code></td>
+      <td>Syntax uses the <code>edition</code> construct.</td>
     </tr>
   </tbody>
 </table>
