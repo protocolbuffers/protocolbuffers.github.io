@@ -31,13 +31,6 @@ subdirectories of the specified directory. The compiler creates a single source
 file for each `.proto` file input, defaulting to an extension of `.cs` but
 configurable via compiler options.
 
-Only `proto3` messages are supported by the C\# code generator. Ensure that each
-`.proto` file begins with a declaration of:
-
-```proto
-syntax = "proto3";
-```
-
 ### C\#-specific Options {#compiler_options}
 
 You can provide further C\# options to the protocol buffer compiler using the
