@@ -18,7 +18,12 @@ syntax starting from release 3.10. Refer to the
 details of the semantics of `proto2` definitions, and see
 `docs/csharp/proto2.md`
 ([view on GitHub](https://github.com/protocolbuffers/protobuf/blob/master/docs/csharp/proto2.md))
-for details on the generated C\# code for proto2.
+for details on the generated C\# code for proto2.  
+
+Starting from release 3.27, the protobuf compiler can generate C\# interfaces
+for definitions using `editions`. Refer to the
+[editions language guide](/programming-guides/editions) for
+details of the semantics of `editions` definitions.
 {{% /alert %}}
 
 ## Compiler Invocation {#invocation}
