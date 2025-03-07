@@ -269,14 +269,15 @@ for the oneof case, as follows:</p><div class=highlight><pre tabindex=0 style=ba
 .proto file.</li><li><code>static ChoiceCase forNumber(int value)</code>: Returns the enum object
 corresponding to the given numeric value (or <code>null</code> for other numeric
 values).</li></ul><p>The compiler will generate the following accessor methods in both the message
-class and its builder:</p><ul><li><code>boolean hasFooInt()</code>: Returns <code>true</code> if the oneof case is <code>FOO</code>.</li><li><code>int getFooInt()</code>: Returns the current value of <code>foo</code> if the oneof case is
-<code>FOO</code>. Otherwise, returns the default value of this field.</li><li><code>ChoiceCase getChoiceCase()</code>: Returns the enum indicating which field is
+class and its builder:</p><ul><li><code>boolean hasFooInt()</code>: Returns <code>true</code> if the oneof case is <code>FOO_INT</code>.</li><li><code>int getFooInt()</code>: Returns the current value of <code>foo</code> if the oneof case is
+<code>FOO_INT</code>. Otherwise, returns the default value of this field.</li><li><code>ChoiceCase getChoiceCase()</code>: Returns the enum indicating which field is
 set. Returns <code>CHOICE_NOT_SET</code> if none of them is set.</li></ul><p>The compiler will generate the following methods only in the message&rsquo;s builder:</p><ul><li><code>Builder setFooInt(int value)</code>: Sets <code>Foo</code> to this value and sets the oneof
-case to <code>FOO</code>. After calling this, <code>hasFooInt()</code> will return <code>true</code>,
-<code>getFooInt()</code> will return <code>value</code> and <code>getChoiceCase()</code> will return <code>FOO</code>.</li><li><code>Builder clearFooInt()</code>:<ul><li>Nothing will be changed if the oneof case is not <code>FOO</code>.</li><li>If the oneof case is <code>FOO</code>, sets <code>Foo</code> to null and the oneof case to
-<code>FOO_NOT_SET</code>. After calling this, <code>hasFooInt()</code> will return <code>false</code>,
+case to <code>FOO_INT</code>. After calling this, <code>hasFooInt()</code> will return <code>true</code>,
+<code>getFooInt()</code> will return <code>value</code> and <code>getChoiceCase()</code> will return
+<code>FOO_INT</code>.</li><li><code>Builder clearFooInt()</code>:<ul><li>Nothing will be changed if the oneof case is not <code>FOO_INT</code>.</li><li>If the oneof case is <code>FOO_INT</code>, sets <code>Foo</code> to null and the oneof case to
+<code>CHOICE_NOT_SET</code>. After calling this, <code>hasFooInt()</code> will return <code>false</code>,
 <code>getFooInt()</code> will return the default value and <code>getChoiceCase()</code> will
-return <code>FOO_NOT_SET</code>.</li></ul></li><li><code>Builder.clearChoice()</code>: Resets the value for <code>choice</code>, returning the
+return <code>CHOICE_NOT_SET</code>.</li></ul></li><li><code>Builder.clearChoice()</code>: Resets the value for <code>choice</code>, returning the
 builder.</li></ul><p>For other simple field types, the corresponding Java type is chosen according to
 the
 <a href=/programming-guides/proto2#scalar>scalar value types table</a>.
