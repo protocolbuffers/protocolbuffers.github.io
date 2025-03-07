@@ -587,23 +587,24 @@ The values of this enum type have the following special methods:
 The compiler will generate the following accessor methods in both the message
 class and its builder:
 
--   `boolean hasFooInt()`: Returns `true` if the oneof case is `FOO`.
+-   `boolean hasFooInt()`: Returns `true` if the oneof case is `FOO_INT`.
 -   `int getFooInt()`: Returns the current value of `foo` if the oneof case is
-    `FOO`. Otherwise, returns the default value of this field.
+    `FOO_INT`. Otherwise, returns the default value of this field.
 -   `ChoiceCase getChoiceCase()`: Returns the enum indicating which field is
     set. Returns `CHOICE_NOT_SET` if none of them is set.
 
 The compiler will generate the following methods only in the message's builder:
 
 -   `Builder setFooInt(int value)`: Sets `Foo` to this value and sets the oneof
-    case to `FOO`. After calling this, `hasFooInt()` will return `true`,
-    `getFooInt()` will return `value` and `getChoiceCase()` will return `FOO`.
+    case to `FOO_INT`. After calling this, `hasFooInt()` will return `true`,
+    `getFooInt()` will return `value` and `getChoiceCase()` will return
+    `FOO_INT`.
 -   `Builder clearFooInt()`:
-    -   Nothing will be changed if the oneof case is not `FOO`.
-    -   If the oneof case is `FOO`, sets `Foo` to null and the oneof case to
-        `FOO_NOT_SET`. After calling this, `hasFooInt()` will return `false`,
+    -   Nothing will be changed if the oneof case is not `FOO_INT`.
+    -   If the oneof case is `FOO_INT`, sets `Foo` to null and the oneof case to
+        `CHOICE_NOT_SET`. After calling this, `hasFooInt()` will return `false`,
         `getFooInt()` will return the default value and `getChoiceCase()` will
-        return `FOO_NOT_SET`.
+        return `CHOICE_NOT_SET`.
 -   `Builder.clearChoice()`: Resets the value for `choice`, returning the
     builder.
 
