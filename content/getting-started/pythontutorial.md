@@ -314,8 +314,7 @@ of your chosen type using the protocol buffer
 include:
 
 -   `SerializeToString()`: serializes the message and returns it as a string.
-    Note that the bytes are binary, not text; we only use the `str` type as a
-    convenient container.
+    Note that the return value is `bytes` (binary), not `str` (text).
 -   `ParseFromString(data)`: parses a message from the given string.
 
 These are just a couple of the options provided for parsing and serialization.
