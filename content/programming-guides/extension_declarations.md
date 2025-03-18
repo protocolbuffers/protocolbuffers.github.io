@@ -45,7 +45,7 @@ declarations in C++, you can declare the field type, field name, and cardinality
 containing the full extension definition:
 
 ```proto
-syntax = "proto2";
+edition = "2023";
 
 message Foo {
   extensions 4 to 1000 [
@@ -108,7 +108,7 @@ This `reserved` tag is separate from the reserved keyword for regular fields and
 **does not require breaking up the extension range**.
 
 ```proto {highlight="context:reserved"}
-syntax = "proto2";
+edition = "2023";
 
 message Foo {
   extensions 4 to 1000 [

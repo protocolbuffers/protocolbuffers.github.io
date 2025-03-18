@@ -5,7 +5,9 @@ description = "Avoid using features where they are not needed."
 type = "docs"
 +++
 
-Do not [cargo cult](http://go/cargocult-definition) settings in proto files. If
+Do not
+[cargo cult](https://en.wikipedia.org/wiki/Cargo_cult_programming)
+settings in proto files. If \
 you are creating a new proto file based on existing schema definitions, don't
 apply option settings except for those that you understand the need for.
 

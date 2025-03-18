@@ -348,7 +348,10 @@ class.
 
 For message types, `setFoo()` also accepts an instance of the message's builder
 type as the parameter. This is just a shortcut which is equivalent to calling
-`.build()` on the builder and passing the result to the method.
+`.build()` on the builder and passing the result to the method. Further
+modifying the sub-builder passed to `setFoo` will **not** be reflected in the
+message class's builder. The message class's builder "takes ownership" of the
+sub-message.
 
 If the field is not set, `getFoo()` will return a Foo instance with none of its
 fields set (possibly the instance returned by `Foo.getDefaultInstance()`).

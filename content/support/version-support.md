@@ -126,15 +126,20 @@ Future plans are shown in *italics* and are subject to change.
     <td>16 Feb 2023</td>
     <td>31 Mar 2025</td>
   </tr>
-  <tr class="active">
+  <tr class="maintenance">
     <th>5.x</th>
     <td>13 Mar 2024</td>
     <td>31 Mar 2026</td>
   </tr>
-  <tr class="future">
+  <tr class="active">
     <th>6.x</th>
-    <td>Q1 2025</td>
+    <td>4 Mar 2025</td>
     <td>31 Mar 2027</td>
+  </tr>
+  <tr class="future">
+    <th>7.x</th>
+    <td>Q1 2026</td>
+    <td>31 Mar 2028</td>
   </tr>
 </table>
 
@@ -486,14 +491,14 @@ Future plans are shown in *italics* and are subject to change.
     <th>Release date</th>
     <th>End of support</th>
   </tr>
-  <tr class="active">
+  <tr class="maintenance">
     <th>3.x</th>
     <td>16 Feb 2023</td>
     <td>31 Mar 2026</td>
   </tr>
-  <tr class="future">
+  <tr class="active">
     <th>4.x</th>
-    <td>Q1 2025</td>
+    <td>4 Mar 2025</td>
     <td>TBD</td>
   </tr>
 </table>
@@ -701,14 +706,14 @@ Future plans are shown in *italics* and are subject to change.
     <td>16 Feb 2023</td>
     <td>31 Mar 2025</td>
   </tr>
-  <tr class="active">
+  <tr class="maintenance">
     <th>5.x</th>
     <td>13 Mar 2024</td>
     <td>31 Mar 2026</td>
   </tr>
-  <tr class="future">
+  <tr class="active">
     <th>6.x</th>
-    <td>Q1 2025</td>
+    <td>4 Mar 2025</td>
     <td>TBD</td>
   </tr>
 </table>
