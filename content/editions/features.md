@@ -78,12 +78,10 @@ message Corge {
 }
 ```
 
-<<<<<<< HEAD
 In this example, the setting "`GRAULT"` in the lowest-level scope feature
 definition overrides the non-nested-scope "`QUUX`" setting. And within the
 Garply message, "`WALDO`" overrides "`QUUX`."
 
-<<<<<<< HEAD
 ### `features.default_symbol_visibility` {#symbol-vis}
 
 This feature enables setting the default visibility for messages and enums,
@@ -159,7 +157,7 @@ message ImportedMessage {
 }
 ```
 
-### `features.enforce_naming_style` {#enforce-naming}
+### `features.enforce_naming_style` {#enforce_naming}
 
 Introduced in Edition 2024, this feature enables strict naming style enforcement
 as defined in
@@ -201,148 +199,7 @@ message Foo {
 }
 ```
 
-Edition 2025 defaults to `STYLE2024`, so an override is needed to keep the
-non-conformant field name:
-
-```proto
-edition = "2024";
-
-// To keep the non-conformant field name, override the STYLE2024 setting
-option features.enforce_naming_style = "STYLE_LEGACY";
-
-message Foo {
-  int64 bar_1 = 1;
-}
-```
-||||||| parent of dcf50a2 (This documentation change includes the following:)
-In this example, the setting `GRAULT` in the field-scope feature definition
-overrides the message-scope QUUX setting.
-=======
-In this example, the setting "`GRAULT"` in the lowest-level scope feature
-definition overrides the non-nested-scope "`QUUX`" setting. And within the
-Garply message, "`WALDO`" overrides "`QUUX`."
->>>>>>> dcf50a2 (This documentation change includes the following:)
-
-||||||| parent of 81fd217 (This documentation change includes the following:)
-=======
-### `features.default_symbol_visibility` {#symbol-vis}
-
-This feature enables setting the default visibility for messages and enums,
-making them available or unavailable when imported by other protos. Use of this
-feature will reduce dead symbols in order to create smaller binaries.
-
-In addition to setting the defaults for the entire file, you can use the `local`
-and `export` keywords to set per-field behavior. Read more about this at
-[`export` / `local` Keywords](/editions/overview#export-local).
-
-**Values available:**
-
-*   `EXPORT_ALL`: This is the default prior to Edition 2024. All messages and
-    enums are exported by default.
-*   `EXPORT_TOP_LEVEL`: All top-level symbols default to export; nested default
-    to local.
-*   `LOCAL_ALL`: All symbols default to local.
-*   `STRICT`: All symbols local by default. Nested types cannot be exported,
-    except for a special-case caveat for message `{ enum {} reserved 1 to max;
-    }`. This is the recommended setting for new protos.
-
-**Applicable to the following scope:** Enum, Message
-
-**Added in:** Edition 2024
-
-**Default behavior per syntax/edition:**
-
-Syntax/edition | Default
--------------- | ------------------
-2024           | `EXPORT_TOP_LEVEL`
-2023           | `EXPORT_ALL`
-proto3         | `EXPORT_ALL`
-proto2         | `EXPORT_ALL`
-
-**Note:** Feature settings on different schema elements
-[have different scopes](#cascading).
-
-The following sample shows how you can apply the feature to elements in your
-proto schema definition files:
-
-```proto
-// foo.proto
-edition = "2024";
-
-// Symbol visibility defaults to EXPORT_TOP_LEVEL. Setting
-// default_symbol_visibility overrides these defaults
-option features.default_symbol_visibility = LOCAL_ALL;
-
-// Top-level symbols are exported by default in Edition 2024; applying the local
-// keyword overrides this
-export message LocalMessage {
-  int32 baz = 1;
-  // Nested symbols are local by default in Edition 2024; applying the export
-  // keyword overrides this
-  enum ExportedNestedEnum {
-    UNKNOWN_EXPORTED_NESTED_ENUM_VALUE = 0;
-  }
-}
-
-// bar.proto
-edition = "2024";
-
-import "foo.proto";
-
-message ImportedMessage {
-  // The following is valid because the imported message explicitly overrides
-  // the visibility setting in foo.proto
-  LocalMessage bar = 1;
-
-  // The following is not valid because default_symbol_visibility is set to
-  // `LOCAL_ALL`
-  // LocalMessage.ExportedNestedEnum qux = 2;
-}
-```
-
-### `features.enforce_naming_style` {#enforce-naming}
-
-Introduced in Edition 2024, this feature enables strict naming style enforcement
-as defined in
-[the style guide](/programming-guides/style) to ensure
-protos are round-trippable by default with a feature value to opt-out to use
-
-**Values available:**
-
-*   `STYLE2024`: Enforces strict adherence to the style guide for naming.
-*   `STYLE_LEGACY`: Applies the pre-Edition 2024 level of style guide
-    enforcement.
-
-**Applicable to the following scope:** File
-
-**Added in:** 2024
-
-**Default behavior per syntax/edition:**
-
-Syntax/edition | Default
--------------- | --------------
-2024           | `STYLE2024`
-2023           | `STYLE_LEGACY`
-proto3         | `STYLE_LEGACY`
-proto2         | `STYLE_LEGACY`
-
-**Note:** Feature settings on different schema elements
-[have different scopes](#cascading).
-
-The following code sample shows an Edition 2023 file:
-
-Edition 2023 defaults to `STYLE_LEGACY`, so a non-conformant field name is fine:
-
-```proto
-edition = "2023";
-
-message Foo {
-  // A non-conforming field name is not a problem
-  int64 bar_1 = 1;
-}
-```
-
-Edition 2025 defaults to `STYLE2024`, so an override is needed to keep the
+Edition 2024 defaults to `STYLE2024`, so an override is needed to keep the
 non-conformant field name:
 
 ```proto
@@ -356,7 +213,6 @@ message Foo {
 }
 ```
 
->>>>>>> 81fd217 (This documentation change includes the following:)
 ### `features.enum_type` {#enum_type}
 
 This feature sets the behavior for how enum values that aren't contained within
@@ -379,26 +235,12 @@ and after of a proto3 file.
 
 **Default behavior per syntax/edition:**
 
-<<<<<<< HEAD
 Syntax/edition | Default
 -------------- | --------
 2024           | `OPEN`
 2023           | `OPEN`
 proto3         | `OPEN`
 proto2         | `CLOSED`
-
-**Note:** Feature settings on different schema elements
-[have different scopes](#cascading).
-||||||| parent of 81fd217 (This documentation change includes the following:)
-**Behavior in proto3:** `OPEN`
-=======
-Syntax/edition | Default
--------------- | --------
-2024           | `OPEN`
-2023           | `OPEN`
-proto3         | `OPEN`
-proto2         | `CLOSED`
->>>>>>> 81fd217 (This documentation change includes the following:)
 
 **Note:** Feature settings on different schema elements
 [have different scopes](#cascading).
@@ -450,19 +292,7 @@ whether a protobuf field has a value.
 
 **Applicable to the following scopes:** File, Field
 
-<<<<<<< HEAD
-<<<<<<< HEAD
 **Added in:** 2023
-||||||| parent of dcf50a2 (This documentation change includes the following:)
-**Default value in the Edition 2023:** `EXPLICIT`
-=======
-**Default behavior in the Edition 2023:** `EXPLICIT`
->>>>>>> dcf50a2 (This documentation change includes the following:)
-||||||| parent of 81fd217 (This documentation change includes the following:)
-**Default behavior in the Edition 2023:** `EXPLICIT`
-=======
-**Added in:** 2023
->>>>>>> 81fd217 (This documentation change includes the following:)
 
 **Default behavior per syntax/edition:**
 
@@ -521,21 +351,8 @@ message Bar {
 After running Prototiller, the equivalent code might look like this:
 
 ```proto
-<<<<<<< HEAD
-<<<<<<< HEAD
 edition = "2024";
 // Setting the file-level field_presence feature matches the proto3 implicit default
-||||||| parent of dcf50a2 (This documentation change includes the following:)
-edition = "2023";
-=======
-edition = "2023";
-||||||| parent of 81fd217 (This documentation change includes the following:)
-edition = "2023";
-=======
-edition = "2024";
->>>>>>> 81fd217 (This documentation change includes the following:)
-// Setting the file-level field_presence feature matches the proto3 implicit default
->>>>>>> dcf50a2 (This documentation change includes the following:)
 option features.field_presence = IMPLICIT;
 
 message Bar {
@@ -572,26 +389,12 @@ and after of a proto3 file. Editions behavior matches the behavior in proto3.
 
 **Default behavior per syntax/edition:**
 
-<<<<<<< HEAD
 Syntax/edition | Default
 -------------- | --------------------
 2024           | `ALLOW`
 2023           | `ALLOW`
 proto3         | `ALLOW`
 proto2         | `LEGACY_BEST_EFFORT`
-
-**Note:** Feature settings on different schema elements
-[have different scopes](#cascading).
-||||||| parent of 81fd217 (This documentation change includes the following:)
-**Behavior in proto3:** `ALLOW`
-=======
-Syntax/edition | Default
--------------- | --------------------
-2024           | `ALLOW`
-2023           | `ALLOW`
-proto3         | `ALLOW`
-proto2         | `LEGACY_BEST_EFFORT`
->>>>>>> 81fd217 (This documentation change includes the following:)
 
 **Note:** Feature settings on different schema elements
 [have different scopes](#cascading).
@@ -611,22 +414,8 @@ message Foo {
 After running Prototiller, the equivalent code might look like this:
 
 ```proto
-<<<<<<< HEAD
-<<<<<<< HEAD
 edition = "2024";
 option features.json_format = LEGACY_BEST_EFFORT;
-||||||| parent of dcf50a2 (This documentation change includes the following:)
-edition = "2023";
-features.json_format = LEGACY_BEST_EFFORT;
-=======
-edition = "2023";
-||||||| parent of 81fd217 (This documentation change includes the following:)
-edition = "2023";
-=======
-edition = "2024";
->>>>>>> 81fd217 (This documentation change includes the following:)
-option features.json_format = LEGACY_BEST_EFFORT;
->>>>>>> dcf50a2 (This documentation change includes the following:)
 
 message Foo {
   string bar = 1;
@@ -663,26 +452,12 @@ the following conditions are met:
 
 **Default behavior per syntax/edition:**
 
-<<<<<<< HEAD
 Syntax/edition | Default
 -------------- | -----------------
 2024           | `LENGTH_PREFIXED`
 2023           | `LENGTH_PREFIXED`
 proto3         | `LENGTH_PREFIXED`
 proto2         | `LENGTH_PREFIXED`
-
-**Note:** Feature settings on different schema elements
-[have different scopes](#cascading).
-||||||| parent of 81fd217 (This documentation change includes the following:)
-**Behavior in proto3:** `LENGTH_PREFIXED`. Proto3 doesn't support `DELIMITED`.
-=======
-Syntax/edition | Default
--------------- | -----------------
-2024           | `LENGTH_PREFIXED`
-2023           | `LENGTH_PREFIXED`
-proto3         | `LENGTH_PREFIXED`
-proto2         | `LENGTH_PREFIXED`
->>>>>>> 81fd217 (This documentation change includes the following:)
 
 **Note:** Feature settings on different schema elements
 [have different scopes](#cascading).
@@ -733,26 +508,12 @@ for `repeated` fields has been migrated to in Editions.
 
 **Default behavior per syntax/edition:**
 
-<<<<<<< HEAD
 Syntax/edition | Default
 -------------- | ----------
 2024           | `PACKED`
 2023           | `PACKED`
 proto3         | `PACKED`
 proto2         | `EXPANDED`
-
-**Note:** Feature settings on different schema elements
-[have different scopes](#cascading).
-||||||| parent of 81fd217 (This documentation change includes the following:)
-**Behavior in proto3:** `PACKED`
-=======
-Syntax/edition | Default
--------------- | ----------
-2024           | `PACKED`
-2023           | `PACKED`
-proto3         | `PACKED`
-proto2         | `EXPANDED`
->>>>>>> 81fd217 (This documentation change includes the following:)
 
 **Note:** Feature settings on different schema elements
 [have different scopes](#cascading).
@@ -826,26 +587,12 @@ and after of a proto3 file.
 
 **Default behavior per syntax/edition:**
 
-<<<<<<< HEAD
 Syntax/edition | Default
 -------------- | --------
 2024           | `VERIFY`
 2023           | `VERIFY`
 proto3         | `VERIFY`
 proto2         | `NONE`
-
-**Note:** Feature settings on different schema elements
-[have different scopes](#cascading).
-||||||| parent of 81fd217 (This documentation change includes the following:)
-**Behavior in proto3:** `VERIFY`
-=======
-Syntax/edition | Default
--------------- | --------
-2024           | `VERIFY`
-2023           | `VERIFY`
-proto3         | `VERIFY`
-proto2         | `NONE`
->>>>>>> 81fd217 (This documentation change includes the following:)
 
 **Note:** Feature settings on different schema elements
 [have different scopes](#cascading).
@@ -1150,26 +897,12 @@ before and after of a proto3 file.
 
 **Default behavior per syntax/edition:**
 
-<<<<<<< HEAD
 Syntax/edition | Default
 -------------- | ---------
 2024           | `DEFAULT`
 2023           | `DEFAULT`
 proto3         | `DEFAULT`
 proto2         | `DEFAULT`
-
-**Note:** Feature settings on different schema elements
-[have different scopes](#cascading).
-||||||| parent of 81fd217 (This documentation change includes the following:)
-**Behavior in proto3:** `DEFAULT`
-=======
-Syntax/edition | Default
--------------- | ---------
-2024           | `DEFAULT`
-2023           | `DEFAULT`
-proto3         | `DEFAULT`
-proto2         | `DEFAULT`
->>>>>>> 81fd217 (This documentation change includes the following:)
 
 **Note:** Feature settings on different schema elements
 [have different scopes](#cascading).
@@ -1202,12 +935,89 @@ message MyMessage {
 }
 ```
 
-## Preserving proto2 or proto3 Behavior {#preserving}
+### `features.(pb.go).strip_enum_prefix` {#go-strip_enum_prefix}
+
+**Languages:** Go
+
+Enum values are not scoped by their containing enum name, so
+[prefixing every value with the enum name is recommended](/programming-guides/style#enums):
+
+```proto
+edition = "2024";
+
+enum Strip {
+  STRIP_ZERO = 0;
+  STRIP_ONE = 1;
+}
+```
+
+However, the generated Go code will now contain two prefixes!
+
+```go
+type Strip int32
+
+const (
+    Strip_STRIP_ZERO Strip = 0
+    Strip_STRIP_ONE  Strip = 1
+)
+```
+
+The language-specific `strip_enum_prefix` feature determines whether the Go code
+generator strips the repetitive prefix or not.
+
+**Values available:**
+
+*   `STRIP_ENUM_PREFIX_KEEP`: Keep the name as-is, even if repetitive.
+*   `STRIP_ENUM_PREFIX_GENERATE_BOTH`: Generate both, a full name and a stripped
+    name (to help with migrating your Go code).
+*   `STRIP_ENUM_PREFIX_STRIP`: Strip the enum name prefix from enum value names.
+
+**Applicable to the following scopes:** Enum, File
+
+**Added in:** 2024
+
+**Default behavior per syntax/edition:**
+
+Syntax/edition | Default
+-------------- | ------------------------
+2024           | `STRIP_ENUM_PREFIX_KEEP`
+
+**Note:** Feature settings on different schema elements
+[have different scopes](#cascading).
+
+You can set the `strip_enum_prefix` feature in edition 2024 (or newer) .proto
+files:
+
+```proto
+edition = "2024";
+
+import "third_party/golang/protobuf/v2/src/google/protobuf/go_features.proto";
+
+option features.(pb.go).strip_enum_prefix = STRIP_ENUM_PREFIX_STRIP;
+
+enum Strip {
+  STRIP_ZERO = 0;
+  STRIP_ONE = 1;
+}
+```
+
+The generated Go code will now strip the `STRIP` prefix:
+
+```go
+type Strip int32
+
+const (
+    Strip_ZERO Strip = 0
+    Strip_ONE  Strip = 1
+)
+```
+
+## Preserving proto2 or proto3 Behavior in Edition 2023 {#preserving}
 
 You may want to move to the editions format but not deal with updates to the way
 that generated code behaves yet. This section shows the changes that the
-Prototiller tool makes to your .proto files to make editions-based protos behave
-like a proto2 or proto3 file.
+Prototiller tool makes to your .proto files to make edition-2023-based protos
+behave like a proto2 or proto3 file.
 
 After these changes are made at the file level, you get the proto2 or proto3
 defaults. You can override at lower levels (message level, field level) to
