@@ -78,6 +78,7 @@ message Corge {
 }
 ```
 
+<<<<<<< HEAD
 In this example, the setting "`GRAULT"` in the lowest-level scope feature
 definition overrides the non-nested-scope "`QUUX`" setting. And within the
 Garply message, "`WALDO`" overrides "`QUUX`."
@@ -212,6 +213,14 @@ message Foo {
   int64 bar_1 = 1;
 }
 ```
+||||||| parent of dcf50a2 (This documentation change includes the following:)
+In this example, the setting `GRAULT` in the field-scope feature definition
+overrides the message-scope QUUX setting.
+=======
+In this example, the setting "`GRAULT"` in the lowest-level scope feature
+definition overrides the non-nested-scope "`QUUX`" setting. And within the
+Garply message, "`WALDO`" overrides "`QUUX`."
+>>>>>>> dcf50a2 (This documentation change includes the following:)
 
 ### `features.enum_type` {#enum_type}
 
@@ -241,6 +250,9 @@ Syntax/edition | Default
 2023           | `OPEN`
 proto3         | `OPEN`
 proto2         | `CLOSED`
+
+**Note:** Feature settings on different schema elements
+[have different scopes](#cascading).
 
 **Note:** Feature settings on different schema elements
 [have different scopes](#cascading).
@@ -292,7 +304,13 @@ whether a protobuf field has a value.
 
 **Applicable to the following scopes:** File, Field
 
+<<<<<<< HEAD
 **Added in:** 2023
+||||||| parent of dcf50a2 (This documentation change includes the following:)
+**Default value in the Edition 2023:** `EXPLICIT`
+=======
+**Default behavior in the Edition 2023:** `EXPLICIT`
+>>>>>>> dcf50a2 (This documentation change includes the following:)
 
 **Default behavior per syntax/edition:**
 
@@ -351,8 +369,15 @@ message Bar {
 After running Prototiller, the equivalent code might look like this:
 
 ```proto
+<<<<<<< HEAD
 edition = "2024";
 // Setting the file-level field_presence feature matches the proto3 implicit default
+||||||| parent of dcf50a2 (This documentation change includes the following:)
+edition = "2023";
+=======
+edition = "2023";
+// Setting the file-level field_presence feature matches the proto3 implicit default
+>>>>>>> dcf50a2 (This documentation change includes the following:)
 option features.field_presence = IMPLICIT;
 
 message Bar {
@@ -399,6 +424,9 @@ proto2         | `LEGACY_BEST_EFFORT`
 **Note:** Feature settings on different schema elements
 [have different scopes](#cascading).
 
+**Note:** Feature settings on different schema elements
+[have different scopes](#cascading).
+
 The following code sample shows a proto2 file:
 
 ```proto
@@ -414,8 +442,16 @@ message Foo {
 After running Prototiller, the equivalent code might look like this:
 
 ```proto
+<<<<<<< HEAD
 edition = "2024";
 option features.json_format = LEGACY_BEST_EFFORT;
+||||||| parent of dcf50a2 (This documentation change includes the following:)
+edition = "2023";
+features.json_format = LEGACY_BEST_EFFORT;
+=======
+edition = "2023";
+option features.json_format = LEGACY_BEST_EFFORT;
+>>>>>>> dcf50a2 (This documentation change includes the following:)
 
 message Foo {
   string bar = 1;
@@ -458,6 +494,9 @@ Syntax/edition | Default
 2023           | `LENGTH_PREFIXED`
 proto3         | `LENGTH_PREFIXED`
 proto2         | `LENGTH_PREFIXED`
+
+**Note:** Feature settings on different schema elements
+[have different scopes](#cascading).
 
 **Note:** Feature settings on different schema elements
 [have different scopes](#cascading).
@@ -514,6 +553,9 @@ Syntax/edition | Default
 2023           | `PACKED`
 proto3         | `PACKED`
 proto2         | `EXPANDED`
+
+**Note:** Feature settings on different schema elements
+[have different scopes](#cascading).
 
 **Note:** Feature settings on different schema elements
 [have different scopes](#cascading).
@@ -593,6 +635,9 @@ Syntax/edition | Default
 2023           | `VERIFY`
 proto3         | `VERIFY`
 proto2         | `NONE`
+
+**Note:** Feature settings on different schema elements
+[have different scopes](#cascading).
 
 **Note:** Feature settings on different schema elements
 [have different scopes](#cascading).
@@ -727,6 +772,9 @@ proto2         | `true`
 **Note:** Feature settings on different schema elements
 [have different scopes](#cascading).
 
+**Note:** Feature settings on different schema elements
+[have different scopes](#cascading).
+
 The following code sample shows a proto2 file:
 
 ```proto
@@ -826,6 +874,9 @@ proto2         | `STRING`
 **Note:** Feature settings on different schema elements
 [have different scopes](#cascading).
 
+**Note:** Feature settings on different schema elements
+[have different scopes](#cascading).
+
 The following code sample shows a proto2 file:
 
 ```proto
@@ -907,6 +958,9 @@ proto2         | `DEFAULT`
 **Note:** Feature settings on different schema elements
 [have different scopes](#cascading).
 
+**Note:** Feature settings on different schema elements
+[have different scopes](#cascading).
+
 The following code sample shows a proto2 file:
 
 ```proto
@@ -934,6 +988,32 @@ message MyMessage {
   string bar = 2;
 }
 ```
+
+#### `features.(pb.java).large_enum` {#java-large_enum}
+
+**Languages:** Java
+
+This language-specific feature enables you to adopt new functionality that
+handles large enums in Java without causing compiler errors.
+
+This is new behavior, so doesn't affect proto2 or proto3 schema definition
+files.
+
+**Values available:**
+
+*   `true`: Java enums will use the new functionality.
+*   `false`: Java enums will continue to use Java enums.
+
+**Applicable to the following scopes:** Enum
+
+**Default behavior in Edition 2023:** `false`
+
+**Behavior in proto2:** `false`
+
+**Behavior in proto3:** `false`
+
+**Note:** Feature settings on different schema elements
+[have different scopes](#cascading).
 
 ## Preserving proto2 or proto3 Behavior {#preserving}
 
