@@ -810,7 +810,7 @@ with Abseil and STL. Notably, we've replaced the `MapPair` class with an alias
 to `std::pair`. This should be transparent for most users, but if you were using
 the class directly you may need to update your code.
 
-### New JSON Parser {:#json-parser}
+### New JSON Parser {#json-parser}
 
 Source of changes: [PR #10729](https://github.com/protocolbuffers/protobuf/pull/10729)
 

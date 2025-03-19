@@ -274,6 +274,22 @@ int_repeatedfield.clear
 raise unless int_repeatedfield.empty?
 ```
 
+For repeated fields that contain messages, the constructor for
+`Google::Protobuf::RepeatedField` supports a variant with three arguments:
+`:message`, the class of the submessage, and the values to set:
+
+```ruby
+first_message = MySubMessage.new(:foo => 42)
+second_message = MySubMessage.new(:foo => 79)
+
+repeated_field = Google::Protobuf::RepeatedField.new(
+    :message,
+    MySubMessage,
+    [first_message, second_message]
+)
+message.sub_message_repeated_field = repeated_field
+```
+
 The `RepeatedField` type supports all of the same methods as a regular Ruby
 `Array`. You can convert it to a regular Ruby Array with `repeated_field.to_a`.
 

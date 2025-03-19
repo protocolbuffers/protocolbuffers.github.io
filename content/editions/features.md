@@ -29,18 +29,33 @@ act like proto2 or proto3 files. For more information on how Editions and
 Features work together to set behavior, see
 [Protobuf Editions Overview](/editions/overview).
 
-Each of the following sections has an entry for what scope the feature applies
-to. This can include file, enum, message, or field. The following sample shows a
-mock feature applied to each scope:
+<span id="cascading"> Feature settings apply at different levels:</span>
+
+**File-level:** These settings apply to all elements (messages, fields, enums,
+and so on) that don't have an overriding setting.
+
+**Non-nested:** Messages, enums, and services can override settings made at the
+file level. They apply to everything within them (message fields, enum values)
+that aren't overridden, but don't apply to other parallel messages and enums.
+
+**Nested:** Oneofs, messages, and enums can override settings from the message
+they're nested in.
+
+**Lowest-level:** Fields, extensions, enum values, extension ranges, and methods
+are the lowest level at which you can override settings.
+
+Each of the following sections has a comment that states what scope the feature
+can be applied to. The following sample shows a mock feature applied to each
+scope:
 
 ```proto
 edition = "2023";
 
-// File-scope definition
+// File-level scope definition
 option features.bar = BAZ;
 
 enum Foo {
-  // Enum-scope definition
+  // Enum (non-nested scope) definition
   option features.bar = QUX;
 
   A = 1;
@@ -48,16 +63,23 @@ enum Foo {
 }
 
 message Corge {
-  // Message-scope definition
+  // Message (non-nested scope) definition
   option features.bar = QUUX;
 
-  // Field-scope definition
+  message Garply {
+    // Message (nested scope) definition
+    option features.bar = WALDO;
+    string id = 1;
+  }
+
+  // Field (lowest-level scope) definition
   Foo A = 1 [features.bar = GRAULT];
 }
 ```
 
-In this example, the setting `GRAULT` in the field-scope feature definition
-overrides the message-scope QUUX setting.
+In this example, the setting "`GRAULT"` in the lowest-level scope feature
+definition overrides the non-nested-scope "`QUUX`" setting. And within the
+Garply message, "`WALDO`" overrides "`QUUX`."
 
 ### `features.enum_type` {#enum_type}
 
@@ -83,6 +105,9 @@ and after of a proto3 file.
 
 **Behavior in proto3:** `OPEN`
 
+**Note:** Feature settings on different schema elements
+[have different scopes](#cascading).
+
 The following code sample shows a proto2 file:
 
 ```proto
@@ -102,6 +127,7 @@ this:
 edition = "2023";
 
 enum Foo {
+  // Setting the enum_type feature overrides the default OPEN enum
   option features.enum_type = CLOSED;
   A = 2;
   B = 4;
@@ -129,7 +155,7 @@ whether a protobuf field has a value.
 
 **Applicable to the following scopes:** File, Field
 
-**Default value in the Edition 2023:** `EXPLICIT`
+**Default behavior in the Edition 2023:** `EXPLICIT`
 
 **Behavior in proto2:** `EXPLICIT`
 
@@ -137,6 +163,9 @@ whether a protobuf field has a value.
 which case it behaves like `EXPLICIT`. See
 [Presence in Proto3 APIs](/programming-guides/field_presence#presence-in-proto3-apis)
 for more information.
+
+**Note:** Feature settings on different schema elements
+[have different scopes](#cascading).
 
 The following code sample shows a proto2 file:
 
@@ -156,6 +185,7 @@ After running Prototiller, the equivalent code might look like this:
 edition = "2023";
 
 message Foo {
+  // Setting the field_presence feature retains the proto2 required behavior
   int32 x = 1 [features.field_presence = LEGACY_REQUIRED];
   int32 y = 2;
   repeated int32 z = 3;
@@ -178,10 +208,13 @@ After running Prototiller, the equivalent code might look like this:
 
 ```proto
 edition = "2023";
+// Setting the file-level field_presence feature matches the proto3 implicit default
 option features.field_presence = IMPLICIT;
 
 message Bar {
   int32 x = 1;
+  // Setting the field_presence here retains the explicit state that the proto3
+  // field has because of the optional syntax
   int32 y = 2 [features.field_presence = EXPLICIT];
   repeated int32 z = 3;
 }
@@ -214,6 +247,9 @@ and after of a proto3 file. Editions behavior matches the behavior in proto3.
 
 **Behavior in proto3:** `ALLOW`
 
+**Note:** Feature settings on different schema elements
+[have different scopes](#cascading).
+
 The following code sample shows a proto2 file:
 
 ```proto
@@ -230,7 +266,7 @@ After running Prototiller, the equivalent code might look like this:
 
 ```proto
 edition = "2023";
-features.json_format = LEGACY_BEST_EFFORT;
+option features.json_format = LEGACY_BEST_EFFORT;
 
 message Foo {
   string bar = 1;
@@ -269,6 +305,9 @@ the following conditions are met:
 `DELIMITED`
 
 **Behavior in proto3:** `LENGTH_PREFIXED`. Proto3 doesn't support `DELIMITED`.
+
+**Note:** Feature settings on different schema elements
+[have different scopes](#cascading).
 
 The following code sample shows a proto2 file:
 
@@ -317,6 +356,9 @@ for `repeated` fields has been migrated to in Editions.
 **Behavior in proto2:** `EXPANDED`
 
 **Behavior in proto3:** `PACKED`
+
+**Note:** Feature settings on different schema elements
+[have different scopes](#cascading).
 
 The following code sample shows a proto2 file:
 
@@ -389,6 +431,9 @@ and after of a proto3 file.
 
 **Behavior in proto3:** `VERIFY`
 
+**Note:** Feature settings on different schema elements
+[have different scopes](#cascading).
+
 The following code sample shows a proto2 file:
 
 ```proto
@@ -440,6 +485,9 @@ before and after of a proto3 file.
 **Behavior in proto2:** `true`
 
 **Behavior in proto3:** `false`
+
+**Note:** Feature settings on different schema elements
+[have different scopes](#cascading).
 
 The following code sample shows a proto2 file:
 
@@ -494,6 +542,9 @@ specified on a field, but not both.
 **Behavior in proto2:** `STRING`
 
 **Behavior in proto3:** `STRING`
+
+**Note:** Feature settings on different schema elements
+[have different scopes](#cascading).
 
 The following code sample shows a proto2 file:
 
@@ -568,6 +619,9 @@ before and after of a proto3 file.
 
 **Behavior in proto3:** `DEFAULT`
 
+**Note:** Feature settings on different schema elements
+[have different scopes](#cascading).
+
 The following code sample shows a proto2 file:
 
 ```proto
@@ -592,6 +646,7 @@ option features.utf8_validation = NONE;
 option features.(pb.java).utf8_validation = VERIFY;
 message MyMessage {
   string foo = 1;
+  string bar = 2;
 }
 ```
 
@@ -617,6 +672,9 @@ files.
 **Behavior in proto2:** `false`
 
 **Behavior in proto3:** `false`
+
+**Note:** Feature settings on different schema elements
+[have different scopes](#cascading).
 
 ## Preserving proto2 or proto3 Behavior {#preserving}
 

@@ -79,7 +79,7 @@ later used in a language where names are transformed to TitleCase where they
 collide.
 
 When applied, this style rule means that you should use `XYZ2` or `XYZ_V2`
-rather than `XYZ_2`.
+rather than `XYZ_2` or `XYZ_2V`.
 
 ## Packages {#packages}
 
@@ -198,7 +198,7 @@ For more service-related guidance, see
 and
 [Don't Include Primitive Types in a Top-level Request or Response Proto](/programming-guides/api#dont-include-primitive-types)
 in the API Best Practices topic, and
-[Define Messages in Separate Files](/best-practices/dos-donts#separate-files)
+[Define Message Types in Separate Files](/best-practices/dos-donts#separate-files)
 in Proto Best Practices.
 
 ## Things to Avoid {#avoid}

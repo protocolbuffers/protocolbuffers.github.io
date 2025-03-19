@@ -277,6 +277,16 @@ example, see
 You should also avoid using keywords in your file paths, as this can also cause
 problems.
 
+## **Do** Use java_outer_classname {#java-outer-classname}
+
+Every proto schema definition file should set option `java_outer_classname` to
+the `.proto` file name converted to TitleCase with the '.' removed. For example,
+the file `student_record_request.proto` should set:
+
+```java
+option java_outer_classname = "StudentRecordRequestProto";
+```
+
 ## Appendix {#appendix}
 
 ### API Best Practices {#api-best-practices}
