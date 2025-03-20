@@ -29,13 +29,15 @@ discuss aspects of the wire format.
 The Protoscope tool can also dump encoded protocol buffers as text. See
 https://github.com/protocolbuffers/protoscope/tree/main/testdata for examples.
 
+All examples in this topic assume that you are using Edition 2023 or later.
+
 ## A Simple Message {#simple}
 
 Let's say you have the following very simple message definition:
 
 ```proto
 message Test1 {
-  optional int32 a = 1;
+  int32 a = 1;
 }
 ```
 
@@ -241,7 +243,7 @@ Consider this message schema:
 
 ```proto
 message Test2 {
-  optional string b = 2;
+  string b = 2;
 }
 ```
 
@@ -275,7 +277,7 @@ an embedded message of our original example message, `Test1`:
 
 ```proto
 message Test3 {
-  optional Test1 c = 3;
+  Test1 c = 3;
 }
 ```
 
@@ -293,36 +295,49 @@ and a length of 3, exactly the same way as strings are encoded.
 In Protoscope, submessages are quite succinct. ` ``1a03089601`` ` can be written
 as `3: {1: 150}`.
 
-## Optional and Repeated Elements {#optional}
+## Missing Elements {#optional}
 
-Missing `optional` fields are easy to encode: we just leave out the record if
+Missing fields are easy to encode: we just leave out the record if
 it's not present. This means that "huge" protos with only a few fields set are
 quite sparse.
 
-`repeated` fields are a bit more complicated. Ordinary (not [packed](#packed))
-repeated fields emit one record for every element of the field. Thus, if we have
+<span id="packed"></span>
+
+## Repeated Elements {#repeated}
+
+Starting in Edition 2023, `repeated` fields of a primitive type
+(any [scalar type](/programming-guides/proto2#scalar)
+that is not `string` or `bytes`) are ["packed"](/editions/features#repeated_field_encoding) by default.
+
+Packed `repeated` fields, instead of being encoded as one
+record per entry, are encoded as a single `LEN` record that contains each
+element concatenated. To decode, elements are decoded from the `LEN` record one
+by one until the payload is exhausted. The start of the next element is
+determined by the length of the previous, which itself depends on the type of
+the field. Thus, if we have:
 
 ```proto
 message Test4 {
-  optional string d = 4;
-  repeated int32 e = 5;
+  string d = 4;
+  repeated int32 e = 6;
 }
 ```
 
 and we construct a `Test4` message with `d` set to `"hello"`, and `e` set to
-`1`, `2`, and `3`, this *could* be encoded as `` `220568656c6c6f280128022803`
-``, or written out as Protoscope,
+`1`, `2`, and `3`, this *could* be encoded as `` `3206038e029ea705` ``, or
+written out as Protoscope,
 
 ```proto
 4: {"hello"}
-5: 1
-5: 2
-5: 3
+6: {3 270 86942}
 ```
 
-However, records for `e` do not need to appear consecutively, and can be
-interleaved with other fields; only the order of records for the same field with
-respect to each other is preserved. Thus, this could also have been encoded as
+However, if the repeated field is set to expanded (overriding the default packed
+state) or is not packable (strings and messages) then an entry for each
+individual value is encoded. Also, records for `e` do not need to appear
+consecutively, and can be interleaved with other fields; only the order of
+records for the same field with respect to each other is preserved. Thus, this
+could look like the following:
 
 ```proto
 5: 1
@@ -330,6 +345,24 @@ respect to each other is preserved. Thus, this could also have been encoded as
 4: {"hello"}
 5: 3
 ```
+
+Only repeated fields of primitive numeric types can be declared "packed". These
+are types that would normally use the `VARINT`, `I32`, or `I64` wire types.
+
+Note that although there's usually no reason to encode more than one key-value
+pair for a packed repeated field, parsers must be prepared to accept multiple
+key-value pairs. In this case, the payloads should be concatenated. Each pair
+must contain a whole number of elements. The following is a valid encoding of
+the same message above that parsers must accept:
+
+```proto
+6: {3 270}
+6: {86942}
+```
+
+Protocol buffer parsers must be able to parse repeated fields that were compiled
+as `packed` as if they were not packed, and vice versa. This permits adding
+`[packed=true]` to existing fields in a forward- and backward-compatible way.
 
 ### Oneofs {#oneofs}
 
@@ -368,53 +401,6 @@ message.MergeFrom(message2);
 This property is occasionally useful, as it allows you to merge two messages (by
 concatenation) even if you do not know their types.
 
-### Packed Repeated Fields {#packed}
-
-Starting in v2.1.0, `repeated` fields of a primitive type
-(any [scalar type](/programming-guides/proto2#scalar)
-that is not `string` or `bytes`) can be declared as "packed". In proto2 this is
-done using the field option `[packed=true]`. In proto3 it is the default.
-
-Instead of being encoded as one record per entry, they are encoded as a single
-`LEN` record that contains each element concatenated. To decode, elements are
-decoded from the `LEN` record one by one until the payload is exhausted. The
-start of the next element is determined by the length of the previous, which
-itself depends on the type of the field.
-
-For example, imagine you have the message type:
-
-```proto
-message Test5 {
-  repeated int32 f = 6 [packed=true];
-}
-```
-
-Now let's say you construct a `Test5`, providing the values 3, 270, and 86942
-for the repeated field `f`. Encoded, this gives us `` `3206038e029ea705` ``, or
-as Protoscope text,
-
-```proto
-6: {3 270 86942}
-```
-
-Only repeated fields of primitive numeric types can be declared "packed". These
-are types that would normally use the `VARINT`, `I32`, or `I64` wire types.
-
-Note that although there's usually no reason to encode more than one key-value
-pair for a packed repeated field, parsers must be prepared to accept multiple
-key-value pairs. In this case, the payloads should be concatenated. Each pair
-must contain a whole number of elements. The following is a valid encoding of
-the same message above that parsers must accept:
-
-```proto
-6: {3 270}
-6: {86942}
-```
-
-Protocol buffer parsers must be able to parse repeated fields that were compiled
-as `packed` as if they were not packed, and vice versa. This permits adding
-`[packed=true]` to existing fields in a forward- and backward-compatible way.
-
 ### Maps {#maps}
 
 Map fields are just a shorthand for a special kind of repeated field. If we have
@@ -430,8 +416,8 @@ this is actually the same as
 ```proto
 message Test6 {
   message g_Entry {
-    optional string key = 1;
-    optional int32 value = 2;
+    string key = 1;
+    int32 value = 2;
   }
   repeated g_Entry g = 7;
 }

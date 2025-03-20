@@ -7,9 +7,9 @@ type = "docs"
 
 Do not
 [cargo cult](https://en.wikipedia.org/wiki/Cargo_cult_programming)
-settings in proto files. If \
-you are creating a new proto file based on existing schema definitions, don't
-apply option settings except for those that you understand the need for.
+settings in proto files. If you are creating a new proto file based on existing
+schema definitions, don't apply option settings except for those that you
+understand the need for.
 
 ## Best Practices Specific to Editions {#editions}
 

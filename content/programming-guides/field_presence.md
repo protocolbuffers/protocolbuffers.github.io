@@ -13,12 +13,6 @@ are two different manifestations of presence for protobufs: *implicit presence*,
 where the generated message API stores field values (only), and *explicit
 presence*, where the API also stores whether or not a field has been set.
 
-Historically, proto2 has mostly followed *explicit presence*, while proto3
-exposes only *implicit presence* semantics. Singular proto3 fields of basic
-types (numeric, string, bytes, and enums) which are defined with the `optional`
-label have *explicit presence*, like proto2 (this feature is enabled by default
-as release 3.15).
-
 {{% alert title="Note" color="note" %}} We
 recommend always adding the `optional` label for proto3 basic types. This
 provides a smoother path to editions, which uses explicit presence by
@@ -179,10 +173,8 @@ affirmatively expose presence, although the same set of hazzer methods may not
 generated as in proto2 APIs.
 
 This default behavior of not tracking presence without the `optional` label is
-different from the proto2 behavior. We reintroduced
-[explicit presence](/editions/features#field_presence) as
-the default in edition 2023. We recommend using the `optional` field with proto3
-unless you have a specific reason not to.
+different from the proto2 behavior. We recommend using the `optional` label with
+proto3 unless you have a specific reason not to.
 
 Under the *implicit presence* discipline, the default value is synonymous with
 "not present" for purposes of serialization. To notionally "clear" a field (so
@@ -194,6 +186,28 @@ required to have an enumerator value which maps to 0. By convention, this is an
 `UNKNOWN` or similarly-named enumerator. If the zero value is notionally outside
 the domain of valid values for the application, this behavior can be thought of
 as tantamount to *explicit presence*.
+
+### Presence in Editions APIs
+
+This table outlines whether presence is tracked for fields in editions APIs
+(both for generated APIs and using dynamic reflection):
+
+Field type                                   | Explicit Presence
+-------------------------------------------- | -----------------
+Singular numeric (integer or floating point) | ✔️
+Singular enum                                | ✔️
+Singular string or bytes                     | ✔️
+Singular message&#8224;                      | ✔️
+Repeated                                     |
+Oneofs&#8224;                                | ✔️
+Maps                                         |
+
+&#8224; Messages and oneofs have never had implicit presence, and editions
+doesn't allow you to set `field_presence = IMPLICIT`.
+
+Editions-based APIs track field presence explicitly, similarly to proto2, unless
+`features.field_presence` is set to `IMPLICIT`. Similar to proto2 APIs,
+editions-based APIs do not track presence explicitly for repeated fields.
 
 ## Semantic Differences {#semantic-differences}
 

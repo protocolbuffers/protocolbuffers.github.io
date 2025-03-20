@@ -40,6 +40,13 @@ field in any edition of protobuf supports field presence and if set will appear
 in the output. Proto3 implicit-presence scalar fields will only appear in the
 JSON output if they are not set to the default value for that type.
 
+When representing numerical data in a JSON file, if the number that is is parsed
+from the wire doesn't fit in the corresponding type, you will get the same
+effect as if you had cast the number to that type in C++ (for example, if a
+64-bit number is read as an int32, it will be truncated to 32 bits).
+
+The following table shows how data is represented in JSON files.
+
 <table>
   <tbody>
     <tr>
