@@ -121,7 +121,7 @@ Future plans are shown in *italics* and are subject to change.
     <td>25 May 2022</td>
     <td>31 Mar 2024</td>
   </tr>
-  <tr class="maintenance">
+  <tr class="end-of-life">
     <th>4.x</th>
     <td>16 Feb 2023</td>
     <td>31 Mar 2025</td>
@@ -178,7 +178,7 @@ Future plans are shown in *italics* and are subject to change.
     <td class="y25q3"></td>
     <td class="y25q4"></td>
   </tr>
-  <tr class="maintenance">
+  <tr class="end-of-life">
     <th>4.x</th>
     <td>22.x-25.x</td>
     <td class="y23q1 active">4.22</td>
@@ -194,7 +194,7 @@ Future plans are shown in *italics* and are subject to change.
     <td class="y25q3"></td>
     <td class="y25q4"></td>
   </tr>
-  <tr class="active">
+  <tr class="maintenance">
     <th>5.x</th>
     <td>26.x-29.x</td>
     <td class="y23q1"></td>
@@ -210,7 +210,7 @@ Future plans are shown in *italics* and are subject to change.
     <td class="y25q3 maintenance">5.29</td>
     <td class="y25q4 maintenance">5.29</td>
   </tr>
-  <tr class="future">
+  <tr class="active">
     <th>6.x</th>
     <td>30.x-33.x</td>
     <td class="y23q1"></td>
@@ -365,28 +365,28 @@ Future plans are shown in *italics* and are subject to change.
   <tr class="maintenance">
     <th>3.x</th>
     <td>16 Feb 2023</td>
-    <td>31 Mar 2026*</td>
+    <td>31 Mar 2027*</td>
   </tr>
   <tr class="active">
     <th>4.x</th>
     <td>13 Mar 2024</td>
-    <td>31 Mar 2027</td>
+    <td>31 Mar 2028</td>
   </tr>
   <tr class="future">
     <th>5.x</th>
-    <td>Q1 2026*</td>
-    <td>31 Mar 2028</td>
+    <td>Q1 2027*</td>
+    <td>31 Mar 2029</td>
   </tr>
 </table>
 
 {{% alert title="Note" color="note" %}}
-The maintenance support window for the Protobuf Java 3.x release will be 24
+The maintenance support window for the Protobuf Java 3.x release will be 36
 months rather than the typical 12 months for the final release in a major
-version line. Future major version updates (5.x, planned for Q1 2026) will adopt
+version line. Future major version updates (5.x, planned for Q1 2027) will adopt
 an improved
 ["rolling compatibility window"](/support/cross-version-runtime-guarantee/#major)
 that should allow a return to 12-month support windows. There will be no major
-version bump in Q1 2025.{{% /alert %}}
+version bumps in Q1 2025 and Q1 2026.{{% /alert %}}
 
 **Release support chart**
 
@@ -522,7 +522,7 @@ Future plans are shown in *italics* and are subject to change.
     <th class="y25q3"><span>25Q3</span></th>
     <th class="y25q4"><span>25Q4</span></th>
   </tr>
-  <tr class="active">
+  <tr class="maintenance">
     <th>3.x</th>
     <td>22.x-29.x</td>
     <td class="y23q1 active">3.22</td>
@@ -538,7 +538,7 @@ Future plans are shown in *italics* and are subject to change.
     <td class="y25q3 maintenance">3.29</td>
     <td class="y25q4 maintenance">3.29</td>
   </tr>
-  <tr class="future">
+  <tr class="active">
     <th>4.x</th>
     <td>30.x+</td>
     <td class="y23q1"></td>
@@ -592,7 +592,7 @@ Future plans are shown in *italics* and are subject to change.
     <th>Release date</th>
     <th>End of support</th>
   </tr>
-  <tr class="maintenance">
+  <tr class="end-of-life">
     <th>3.x</th>
     <td>16 Feb 2023</td>
     <td>31 Mar 2025</td>
@@ -623,7 +623,7 @@ Future plans are shown in *italics* and are subject to change.
     <th class="y25q3"><span>25Q3</span></th>
     <th class="y25q4"><span>25Q4</span></th>
   </tr>
-  <tr class="maintenance">
+  <tr class="end-of-life">
     <th>3.x</th>
     <td>22.x-25.x</td>
     <td class="y23q1 active">3.22</td>
@@ -701,7 +701,7 @@ Future plans are shown in *italics* and are subject to change.
     <th>Release date</th>
     <th>End of support</th>
   </tr>
-  <tr class="maintenance">
+  <tr class="end-of-life">
     <th>4.x</th>
     <td>16 Feb 2023</td>
     <td>31 Mar 2025</td>
@@ -737,7 +737,7 @@ Future plans are shown in *italics* and are subject to change.
     <th class="y25q3"><span>25Q3</span></th>
     <th class="y25q4"><span>25Q4</span></th>
   </tr>
-  <tr class="maintenance">
+  <tr class="end-of-life">
     <th>4.x</th>
     <td>22.x-25.x</td>
     <td class="y23q1 active">4.22</td>
@@ -753,7 +753,7 @@ Future plans are shown in *italics* and are subject to change.
     <td class="y25q3"></td>
     <td class="y25q4"></td>
   </tr>
-  <tr class="active">
+  <tr class="maintenance">
     <th>5.x</th>
     <td>26.x-29.x</td>
     <td class="y23q1"></td>
@@ -769,7 +769,7 @@ Future plans are shown in *italics* and are subject to change.
     <td class="y25q3 maintenance">5.29</td>
     <td class="y25q4 maintenance">5.29</td>
   </tr>
-  <tr class="future">
+  <tr class="active">
     <th>6.x</th>
     <td>30.x+</td>
     <td class="y23q1"></td>
@@ -831,7 +831,7 @@ Future plans are shown in *italics* and are subject to change.
     <th>Release date</th>
     <th>End of support</th>
   </tr>
-  <tr class="maintenance">
+  <tr class="end-of-life">
     <th>3.x</th>
     <td>16 Feb 2023</td>
     <td>31 Mar 2025</td>
@@ -862,7 +862,7 @@ Future plans are shown in *italics* and are subject to change.
     <th class="y25q3"><span>25Q3</span></th>
     <th class="y25q4"><span>25Q4</span></th>
   </tr>
-  <tr class="maintenance">
+  <tr class="end-of-life">
     <th>3.x</th>
     <td>22.x-25.x</td>
     <td class="y23q1 active">3.22</td>

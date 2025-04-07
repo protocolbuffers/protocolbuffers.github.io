@@ -23,14 +23,15 @@ binaries, follow these instructions:
 
     ```sh
     PB_REL="https://github.com/protocolbuffers/protobuf/releases"
-    curl -LO $PB_REL/download/v< param protoc-version >/protoc-< param protoc-version >-linux-x86_64.zip
+    curl -LO $PB_REL/download/v30.2/protoc-30.2-linux-x86_64.zip
+
     ```
 
 2.  Unzip the file under `$HOME/.local` or a directory of your choice. For
     example:
 
     ```sh
-    unzip protoc-< param protoc-version >-linux-x86_64.zip -d $HOME/.local
+    unzip protoc-30.2-linux-x86_64.zip -d $HOME/.local
     ```
 
 3.  Update your environment's path variable to include the path to the `protoc`

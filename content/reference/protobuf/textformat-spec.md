@@ -171,12 +171,12 @@ escape = "\a"                        (* ASCII #7  (bell)                 *)
 
 Octal escape sequences consume up to three octal digits. Additional digits are
 passed through without escaping. For example, when unescaping the input `\1234`,
-the parser consumes three octal digits (123) to unescape the byte value 0x83
-(ASCII 'S') and the subsequent '4' passes through as the byte value 0x34 (ASCII
-'4'). To ensure correct parsing, express octal escape sequences with 3 octal
-digits, using leading zeros as needed, such as: `\000`, `\001`, `\063`, `\377`.
-Fewer than three digits are consumed when a non-numeric character follows the
-numeric characters, such as `\5Hello`.
+the parser consumes three octal digits (123) to unescape the byte value 0x53
+(ASCII 'S', 83 in decimal) and the subsequent '4' passes through as the byte
+value 0x34 (ASCII '4'). To ensure correct parsing, express octal escape
+sequences with 3 octal digits, using leading zeros as needed, such as: `\000`,
+`\001`, `\063`, `\377`. Fewer than three digits are consumed when a non-numeric
+character follows the numeric characters, such as `\5Hello`.
 
 Hexadecimal escape sequences consume up to two hexadecimal digits. For example,
 when unescaping `\x213`, the parser consumes only the first two digits (21) to
