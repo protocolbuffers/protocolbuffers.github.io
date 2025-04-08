@@ -5,8 +5,9 @@
 <a href="https://github.com/protocolbuffers/protocolbuffers.github.io/issues/new?title=Avoid%20Cargo%20Culting" class=td-page-meta--issue target=_blank rel=noopener><i class="fa-solid fa-list-check fa-fw"></i> Create documentation issue</a>
 <a href=https://github.com/protocolbuffers/protobuf/issues/new class=td-page-meta--project-issue target=_blank rel=noopener><i class="fa-solid fa-list-check fa-fw"></i> Create project issue</a></div><div class=td-toc><nav id=TableOfContents><ul><li><a href=#editions>Best Practices Specific to Editions</a></li></ul></nav></div></aside><main class="col-12 col-md-9 col-xl-8 ps-md-5" role=main><nav aria-label=breadcrumb class=td-breadcrumbs><ol class=breadcrumb><li class=breadcrumb-item><a href=/best-practices/>Proto Best Practices</a></li><li class="breadcrumb-item active" aria-current=page>Avoid Cargo Culting</li></ol></nav><div class=td-content><h1>Avoid Cargo Culting</h1><div class=lead>Avoid using features where they are not needed.</div><header class=article-meta></header><p>Do not
 <a href=https://en.wikipedia.org/wiki/Cargo_cult_programming>cargo cult</a>
-settings in proto files. If<br>you are creating a new proto file based on existing schema definitions, don&rsquo;t
-apply option settings except for those that you understand the need for.</p><h2 id=editions>Best Practices Specific to Editions</h2><p>Avoid applying <a href=/editions/features>editions features</a>
+settings in proto files. If you are creating a new proto file based on existing
+schema definitions, don&rsquo;t apply option settings except for those that you
+understand the need for.</p><h2 id=editions>Best Practices Specific to Editions</h2><p>Avoid applying <a href=/editions/features>editions features</a>
 except when they&rsquo;re actually necessary. Features in <code>.proto</code> files signal the
 use of either experimental future behaviors or deprecated past behaviors. Best
 practices for the latest edition will always be the default. New proto schema
