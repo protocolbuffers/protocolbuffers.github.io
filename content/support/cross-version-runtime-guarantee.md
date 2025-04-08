@@ -13,9 +13,9 @@ using the generated code. When these come from different releases of protobuf,
 we are in a "cross version runtime" situation.
 
 We intend to offer the following guarantees across all languages except
-[C++](#cpp). These are the default guarantees; however, owners of protobuf code
-generators and runtimes may explicitly override them with more specific
-guarantees for that language.
+[C++ and Rust](#cpp). These are the default guarantees; however, owners of
+protobuf code generators and runtimes may explicitly override them with more
+specific guarantees for that language.
 
 Protobuf cross-version usages outside the guarantees are **error-prone and not
 supported**. Version skews can lead to *flakes and undefined behaviors* that are
@@ -120,9 +120,10 @@ matrix:
 
 Coexistence of multiple major versions in the same process is **not** supported.
 
-## C++ Specific Guarantees {#cpp}
+## C++ and Rust Specific Guarantees {#cpp}
 
-Protobuf C++ disclaims all cross-runtime support and requires an exact match
-between its generated code version and its runtime version at all times.
+Protobuf C++ and Rust disclaim all cross-runtime support and require an exact
+match between the generated code version and the runtime version at all times.
+
 Additionally, Protobuf C++ makes no guarantees about ABI stability across any
 releases (major, minor, or micro).

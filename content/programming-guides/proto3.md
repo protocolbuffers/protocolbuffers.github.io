@@ -879,9 +879,14 @@ Instead of moving the `.proto` file directly and updating all the call sites in
 a single change, you can put a placeholder `.proto` file in the old location to
 forward all the imports to the new location using the `import public` notion.
 
-**Note that the public import functionality is not available in Java, Kotlin,
-TypeScript, JavaScript, GCL, as well as C++ targets that use protobuf static
-reflection.**
+**Note:** The public import functionality available in Java is most effective
+when moving an entire .proto file or when using `java_multiple_files = true`. In
+these cases, generated names remain stable, avoiding the need to update
+references in your code. While technically functional when moving a subset of a
+.proto file without `java_multiple_files = true`, doing so requires simultaneous
+updates to many references, thus might not significantly ease migration. The
+functionality is not available in Kotlin, TypeScript, JavaScript, GCL, or with
+C++ targets that use protobuf static reflection.
 
 `import public` dependencies can be transitively relied upon by any code
 importing the proto containing the `import public` statement. For example:
@@ -1006,7 +1011,11 @@ following rules:
     effect as if you had cast the number to that type in C++ (for example, if a
     64-bit number is read as an int32, it will be truncated to 32 bits).
 *   `sint32` and `sint64` are compatible with each other but are *not*
-    compatible with the other integer types.
+    compatible with the other integer types. If the value written was between
+    INT_MIN and INT_MAX inclusive it will parse as the same value with either
+    type. If an sint64 value was written outside of that range and parsed as an
+    sint32, the varint is truncated to 32 bits and then zigzag decoding occurs
+    (which will cause a different value to be observed).
 *   `string` and `bytes` are compatible as long as the bytes are valid UTF-8.
 *   Embedded messages are compatible with `bytes` if the bytes contain an
     encoded instance of the message.

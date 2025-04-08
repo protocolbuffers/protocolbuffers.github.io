@@ -1003,7 +1003,11 @@ following rules:
     effect as if you had cast the number to that type in C++ (for example, if a
     64-bit number is read as an int32, it will be truncated to 32 bits).
 *   `sint32` and `sint64` are compatible with each other but are *not*
-    compatible with the other integer types.
+    compatible with the other integer types. If the value written was between
+    INT_MIN and INT_MAX inclusive it will parse as the same value with either
+    type. If an sint64 value was written outside of that range and parsed as an
+    sint32, the varint is truncated to 32 bits and then zigzag decoding occurs
+    (which will cause a different value to be observed).
 *   `string` and `bytes` are compatible as long as the bytes are valid UTF-8.
 *   Embedded messages are compatible with `bytes` if the bytes contain an
     encoded instance of the message.

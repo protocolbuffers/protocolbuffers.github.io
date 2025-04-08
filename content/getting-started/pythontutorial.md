@@ -76,14 +76,16 @@ each field in the message. Here is the `.proto` file that defines your messages,
 `addressbook.proto`.
 
 ```proto
-syntax = "proto2";
+edition = "2023";
 
 package tutorial;
 
+option features.field_presence = EXPLICIT;
+
 message Person {
-  optional string name = 1;
-  optional int32 id = 2;
-  optional string email = 3;
+  string name = 1;
+  int32 id = 2;
+  string email = 3;
 
   enum PhoneType {
     PHONE_TYPE_UNSPECIFIED = 0;
@@ -93,8 +95,8 @@ message Person {
   }
 
   message PhoneNumber {
-    optional string number = 1;
-    optional PhoneType type = 2 [default = PHONE_TYPE_HOME];
+    string number = 1;
+    PhoneType type = 2 [default = PHONE_TYPE_HOME];
   }
 
   repeated PhoneNumber phones = 4;
@@ -135,39 +137,9 @@ less-commonly used optional elements. Each element in a repeated field requires
 re-encoding the tag number, so repeated fields are particularly good candidates
 for this optimization.
 
-Each field must be annotated with one of the following modifiers:
-
--   `optional`: the field may or may not be set. If an optional field value
-    isn't set, a default value is used. For simple types, you can specify your
-    own default value, as we've done for the phone number `type` in the example.
-    Otherwise, a system default is used: zero for numeric types, the empty
-    string for strings, false for bools. For embedded messages, the default
-    value is always the "default instance" or "prototype" of the message, which
-    has none of its fields set. Calling the accessor to get the value of an
-    optional (or required) field which has not been explicitly set always
-    returns that field's default value.
--   `repeated`: the field may be repeated any number of times (including zero).
-    The order of the repeated values will be preserved in the protocol buffer.
-    Think of repeated fields as dynamically sized arrays.
--   `required`: a value for the field must be provided, otherwise the message
-    will be considered "uninitialized". Serializing an uninitialized message
-    will raise an exception. Parsing an uninitialized message will fail. Other
-    than this, a required field behaves exactly like an optional field.
-
-{{% alert title="Important" color="warning" %}} **Required Is Forever**
-You should be very careful about marking fields as `required`. If at some point
-you wish to stop writing or sending a required field, it will be problematic to
-change the field to an optional field -- old readers will consider messages
-without this field to be incomplete and may reject or drop them unintentionally.
-You should consider writing application-specific custom validation routines for
-your buffers instead. Within Google, `required` fields are strongly disfavored;
-most messages defined in proto2 syntax use `optional` and `repeated` only.
-(Proto3 does not support `required` fields at all.)
-{{% /alert %}}
-
 You'll find a complete guide to writing `.proto` files -- including all the
 possible field types -- in the
-[Protocol Buffer Language Guide](/programming-guides/proto2).
+[Protocol Buffer Language Guide](/programming-guides/editions).
 Don't go looking for facilities similar to class inheritance, though -- protocol
 buffers don't do that.
 
