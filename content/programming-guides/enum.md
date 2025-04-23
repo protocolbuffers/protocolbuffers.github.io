@@ -161,7 +161,7 @@ There are two options for moving to conformant behavior:
 > exception when passed `Enum.UNRECOGNIZED`, whereas `setNameValue` will accept
 > `2`.
 
-### Kotlin {#java}
+### Kotlin {#kotlin}
 
 All known Kotlin releases are out of conformance. When a `proto2` file imports
 an enum defined in a `proto3` file, Kotlin treats that field as a **closed**
@@ -184,17 +184,11 @@ PHP is conformant.
 
 ### Python {#python}
 
-After [4.22.0](https://pypi.org/project/protobuf/4.22.0/) which was released
-~2023-02-16, Python is conformant.
+Python is conformant in versions above 4.22.0 (released 2023 Q1).
 
-In 4.21.x, Python is conformant by default, but setting
-`PROTOCOL_BUFFERS_PYTHON_IMPLEMENTATION=python` will cause it to be out of
-conformance.
-
-Before 4.21.0, Python is out of conformance.
-
-When a `proto2` file imports an enum defined in a `proto3` file, non-conformant
-Python versions treat that field as a **closed** enum.
+Older versions which are no longer supported are out of conformance. When a
+`proto2` file imports an enum defined in a `proto3` file, non-conformant Python
+versions treat that field as a **closed** enum.
 
 ### Ruby {#ruby}
 
@@ -203,11 +197,11 @@ All known Ruby releases are out of conformance. Ruby treats all enums as
 
 ### Objective-C {#obj-c}
 
-After 22.0, Objective-C is conformant.
+Objective-C is conformant in versions above 3.22.0 (released 2023 Q1).
 
-Prior to 22.0, Objective-C was out of conformance. When a `proto2` file imported
-an enum defined in a `proto3` file, it would treat that field as a **closed**
-enum.
+Older versions which are no longer supported and are out of conformance. When a
+`proto2` file imports an enum defined in a `proto3` file, non-conformant ObjC
+versions treat that field as a **closed** enum.
 
 ### Swift {#swift}
 

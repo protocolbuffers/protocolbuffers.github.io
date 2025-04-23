@@ -20,6 +20,8 @@ New news topics will also be published to the
 The following news topics provide information in the reverse order in which it
 was released.
 
+*   [March 18, 2025](/news/2025-03-18) - Dropping support
+    for Ruby 3.0
 *   [January 23, 2025](/news/2025-01-23) - Poison Java
     gencode
 *   [December 18, 2024](/news/2024-12-18) - Go Protobuf:

@@ -127,6 +127,15 @@ In addition to these methods, the `Foo` class defines the following methods:
     `option optimize_for = LITE_RUNTIME` is specified in the `.proto` file, then
     the return type changes to `std::string*`.
 
+**Note:** The copy constructor and assignment operator perform a deep copy of
+the message data. This ensures that each message object owns and manages its own
+copy of the data, preventing issues like double frees or use-after-free errors.
+This behavior is consistent with standard C++ practice for objects that own
+their data, such as `std::vector`. For developers coming from languages with
+different copy semantics (such as JavaScript or TypeScript, where shallow copies
+might be more common), it is important to note that modifications to a copied
+message will not affect the original message, and vice-versa.
+
 The class also defines the following static methods:
 
 -   `static const Descriptor* descriptor()`: Returns the type's descriptor. This

@@ -160,6 +160,14 @@ The compiler will generate the following accessor methods in the message class:
 
 -   `bool hasFoo()`: Returns `true` if the field is set.
 
+    {{% alert title="Note" color="note" %}} This
+    value cannot really be trusted if the proto was serialized in another
+    language that supports implicit presence (for example, Java). Even though
+    Dart tracks presence, other languages do not, and round-tripping a
+    zero-valued implicit presence field will make it "disappear" from Dart's
+    perspective.
+    {{% /alert %}}
+
 -   `void clearFoo()`: Clears the value of the field. After calling this,
     `hasFoo()` will return `false` and `get foo` will return the default value.
 

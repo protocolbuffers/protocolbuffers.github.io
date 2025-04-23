@@ -21,11 +21,11 @@ topic.
 
 When parsing JSON-encoded data into a protocol buffer, if a value is missing or
 if its value is `null`, it will be interpreted as the corresponding
-[default value](/programming-guides/editions#default). Multiple values for
-singular fields (using duplicate or equivalent JSON keys) are accepted and the
-last value is retained, as with binary format parsing. Note that not all
-protobuf JSON parser implementations are conformant, and some nonconformant
-implementations may reject duplicate keys instead.
+[default value](/programming-guides/editions#default).
+Multiple values for singular fields (using duplicate or equivalent JSON keys)
+are accepted and the last value is retained, as with binary format parsing. Note
+that not all protobuf JSON parser implementations are conformant, and some
+nonconformant implementations may reject duplicate keys instead.
 
 When generating JSON-encoded output from a protocol buffer, if a protobuf field
 has the default value and if the field doesn't support field presence, it will

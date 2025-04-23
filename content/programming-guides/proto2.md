@@ -2359,6 +2359,20 @@ protoc --proto_path=IMPORT_PATH --cpp_out=DST_DIR --java_out=DST_DIR --python_ou
     Multiple import directories can be specified by passing the `--proto_path`
     option multiple times; they will be searched in order. `-I=_IMPORT_PATH_`
     can be used as a short form of `--proto_path`.
+
+**Note:** File paths relative to their `proto_path` must be globally unique in a
+given binary. For example, if you have `proto/lib1/data.proto` and
+`proto/lib2/data.proto`, those two files cannot be used together with
+`-I=proto/lib1 -I=proto/lib2` because it would be ambiguous which file `import
+"data.proto"` will mean. Instead `-Iproto/` should be used and the global names
+will be `lib1/data.proto` and `lib2/data.proto`.
+
+If you are publishing a library and other users may use your messages directly,
+you should include a unique library name in the path that they are expected to
+be used under to avoid file name collisions. If you have multiple directories in
+one project, it is best practice to prefer setting one `-I` to a top level
+directory of the project.
+
 *   You can provide one or more *output directives*:
 
     *   `--cpp_out` generates C++ code in `DST_DIR`. See the

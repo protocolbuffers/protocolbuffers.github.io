@@ -191,7 +191,7 @@ The compiler will generate the following accessor methods:
     value.
 
 For other numeric field types (including `bool`), `int32` is replaced with the
-corresponding C++ type according to the
+corresponding Rust type according to the
 [scalar value types table](/programming-guides/proto3#scalar).
 
 ### Implicit Presence Numeric Fields (proto3) {#implicit-presence-numeric}
@@ -208,7 +208,7 @@ int32 foo = 1;
     calling this, `foo()` will return value.
 
 For other numeric field types (including `bool`), `int32` is replaced with the
-corresponding C++ type according to the
+corresponding Rust type according to the
 [scalar value types table](/programming-guides/proto3#scalar).
 
 ### Optional String/Bytes Fields (proto2 and proto3) {#optional-string-byte}
