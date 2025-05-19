@@ -6,20 +6,11 @@ description = "Describes exactly what C# code the protocol buffer compiler gener
 type = "docs"
 +++
 
-You should
-read the
-[proto3 language guide](/programming-guides/proto3)
+You should read the
+[proto2 language guide](/programming-guides/proto2),
+[proto3 language guide](/programming-guides/proto3), or
+[editions language guide](/programming-guides/editions)
 before reading this document.
-
-{{% alert title="Note" color="note" %}}
-The protobuf compiler can generate C\# interfaces for definitions using `proto2`
-syntax starting from release 3.10. Refer to the
-[proto2 language guide](/programming-guides/proto2) for
-details of the semantics of `proto2` definitions, and see
-`docs/csharp/proto2.md`
-([view on GitHub](https://github.com/protocolbuffers/protobuf/blob/master/docs/csharp/proto2.md))
-for details on the generated C\# code for proto2.
-{{% /alert %}}
 
 ## Compiler Invocation {#invocation}
 
@@ -30,13 +21,6 @@ depending on [other options](#compiler_options) the compiler may create
 subdirectories of the specified directory. The compiler creates a single source
 file for each `.proto` file input, defaulting to an extension of `.cs` but
 configurable via compiler options.
-
-Only `proto3` messages are supported by the C\# code generator. Ensure that each
-`.proto` file begins with a declaration of:
-
-```proto
-syntax = "proto3";
-```
 
 ### C\#-specific Options {#compiler_options}
 
@@ -123,7 +107,8 @@ is provided as part of Protocol Buffers. A cut down version of `timestamp.proto`
 looks like this:
 
 ```proto
-syntax = "proto3";
+edition = "2023";
+
 package google.protobuf;
 option csharp_namespace = "Google.Protobuf.WellKnownTypes";
 
@@ -331,14 +316,14 @@ method.
 
 ### Wrapper Type Fields {#wrapper_types}
 
-Most of the well-known types in proto3 do not affect code generation, but the
-wrapper types (`StringWrapper`, `Int32Wrapper` etc) change the type and
-behaviour of the properties.
+Most of the well-known types do not affect code generation, but the wrapper
+types (such as `StringWrapper` and `Int32Wrapper`) change the type and behavior
+of the properties.
 
-All of the wrapper types that correspond to C\# value types (`Int32Wrapper`,
-`DoubleWrapper`, `BoolWrapper` etc) are mapped to `Nullable<T>` where `T` is the
-corresponding non-nullable type. For example, a field of type `DoubleValue`
-results in a C\# property of type `Nullable<double>`.
+All of the wrapper types that correspond to C\# value types (such as
+`Int32Wrapper`, `DoubleWrapper`, and `BoolWrapper`) are mapped to `Nullable<T>`
+where `T` is the corresponding non-nullable type. For example, a field of type
+`DoubleValue` results in a C\# property of type `Nullable<double>`.
 
 Fields of type `StringWrapper` or `BytesWrapper` result in C\# properties of
 type `string` and `ByteString` being generated, but with a default value of

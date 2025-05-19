@@ -12,9 +12,9 @@ generates for any given protocol definition.
 
 Any differences between proto2 and proto3 generated code are highlighted. You
 should read the
-[proto2 language guide](/programming-guides/proto2.md)
+[proto2 language guide](/programming-guides/proto2)
 and/or
-[proto3 language guide](/programming-guides/proto3.md)
+[proto3 language guide](/programming-guides/proto3)
 before reading this document.
 
 ## Protobuf Rust {#rust}
@@ -26,7 +26,7 @@ sit on top of other existing protocol buffer implementations that we refer to as
 The decision to support multiple non-Rust kernels has significantly influenced
 our public API, including the choice to use custom types like `ProtoStr` over
 Rust std types like `str`. See
-[Rust Proto Design Decisions](/reference/rust/rust-design-decisions.md)
+[Rust Proto Design Decisions](/reference/rust/rust-design-decisions)
 for more on this topic.
 
 ## Generated Filenames {#filenames}

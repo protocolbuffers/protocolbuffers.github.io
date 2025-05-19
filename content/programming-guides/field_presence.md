@@ -6,7 +6,7 @@ description = "Explains the various presence-tracking disciplines for protobuf f
 type = "docs"
 +++
 
-## Background
+## Background {#background}
 
 *Field presence* is the notion of whether a protobuf field has a value. There
 are two different manifestations of presence for protobufs: *implicit presence*,
@@ -18,7 +18,7 @@ recommend always adding the `optional` label for proto3 basic types. This
 provides a smoother path to editions, which uses explicit presence by
 default.{{% /alert %}}
 
-### Presence Disciplines
+### Presence Disciplines {#disciplines}
 
 *Presence disciplines* define the semantics for translating between the *API
 representation* and the *serialized representation*. The *implicit presence*
@@ -26,7 +26,7 @@ discipline relies upon the field value itself to make decisions at
 (de)serialization time, while the *explicit presence* discipline relies upon the
 explicit tracking state instead.
 
-### Presence in *Tag-value stream* (Wire Format) Serialization
+### Presence in *Tag-value stream* (Wire Format) Serialization {#presence-tag-value}
 
 The wire format is a stream of tagged, *self-delimiting* values. By definition,
 the wire format represents a sequence of *present* values. In other words, every
@@ -66,7 +66,7 @@ deserializing wire-formatted messages:
     APIs. However, out-of-range values may be stored as *unknown fields* in the
     API, even though the wire-format tag was recognized.
 
-### Presence in *Named-field Mapping* Formats
+### Presence in *Named-field Mapping* Formats {#presence-named-field}
 
 Protobufs can be represented in human-readable, textual forms. Two notable
 formats are TextFormat (the output format produced by generated message
@@ -104,7 +104,7 @@ practice, however, presence correctness can vary depending upon implementation
 choices, especially if JSON was chosen as a means to interoperate with clients
 not using protobufs.
 
-### Presence in Proto2 APIs
+### Presence in Proto2 APIs {#presence-proto2}
 
 This table outlines whether presence is tracked for fields in proto2 APIs (both
 for generated APIs and using dynamic reflection):
@@ -147,7 +147,7 @@ several methods:
 Repeated fields and maps do not track presence: there is no distinction between
 an *empty* and a *not-present* repeated field.
 
-### Presence in Proto3 APIs
+### Presence in Proto3 APIs {#presence-proto3}
 
 This table outlines whether presence is tracked for fields in proto3 APIs (both
 for generated APIs and using dynamic reflection):
@@ -187,7 +187,7 @@ required to have an enumerator value which maps to 0. By convention, this is an
 the domain of valid values for the application, this behavior can be thought of
 as tantamount to *explicit presence*.
 
-### Presence in Editions APIs
+### Presence in Editions APIs {#presence-editions}
 
 This table outlines whether presence is tracked for fields in editions APIs
 (both for generated APIs and using dynamic reflection):
@@ -239,7 +239,7 @@ For a singular field with numeric, enum, or string type:
 exception to this behavior is Dart, which generates `has_` methods with proto3
 proto schema files.{{% /alert %}}
 
-### Considerations for Merging
+### Considerations for Merging {#merging}
 
 Under the *implicit presence* rules, it is effectively impossible for a target
 field to merge-from its default value (using the protobuf's API merging
@@ -256,7 +256,7 @@ Updating to set a default value in this case requires some external mechanism,
 such as `FieldMask`. However, if presence *is* tracked, then all explicitly-set
 values -- even default values -- will be merged into the target.
 
-### Considerations for change-compatibility
+### Considerations for change-compatibility {#change-compatibility}
 
 Changing a field between *explicit presence* and *implicit presence* is a
 binary-compatible change for serialized values in wire format. However, the
@@ -334,7 +334,7 @@ this is not a safe change: client A requires (by `assert`) that the field is
 present; even without any modifications through the API, that requirement fails
 in a value- and peer-dependent case.
 
-## How to Enable *Explicit Presence* in Proto3
+## How to Enable *Explicit Presence* in Proto3 {#enable-explicit-proto3}
 
 These are the general steps to use field tracking support for proto3:
 
@@ -344,7 +344,7 @@ These are the general steps to use field tracking support for proto3:
 1.  Use the generated "hazzer" methods and "clear" methods in application code,
     instead of comparing or setting default values.
 
-### `.proto` File Changes
+### `.proto` File Changes {#proto-file-changes}
 
 This is an example of a proto3 message with fields which follow both *no
 presence* and *explicit presence* semantics:
@@ -362,7 +362,7 @@ message MyMessage {
 }
 ```
 
-### `protoc` Invocation
+### `protoc` Invocation {#protoc-invocation}
 
 Presence tracking for proto3 messages is enabled by default
 [since v3.15.0](https://github.com/protocolbuffers/protobuf/releases/tag/v3.15.0)
@@ -399,7 +399,7 @@ message Msg {
 In the examples, a function `GetProto` constructs and returns a message of type
 `Msg` with unspecified contents.
 
-#### C++ Example
+#### C++ Example {#cpp-example}
 
 Implicit presence:
 
@@ -427,7 +427,7 @@ if (m.has_foo()) {
 }
 ```
 
-#### C# Example
+#### C# Example {#csharp-example}
 
 Implicit presence:
 
@@ -455,7 +455,7 @@ if (m.HasFoo) {
 }
 ```
 
-#### Go Example
+#### Go Example {#go-example}
 
 Implicit presence:
 
@@ -483,7 +483,7 @@ if m.Foo != nil {
 }
 ```
 
-#### Java Example
+#### Java Example {#java-example}
 
 These examples use a `Builder` to demonstrate clearing. Simply checking presence
 and getting values from a `Builder` follows the same API as the message type.
@@ -514,7 +514,7 @@ if (m.hasFoo()) {
 }
 ```
 
-#### Python Example
+#### Python Example {#python-example}
 
 Implicit presence:
 
@@ -540,7 +540,7 @@ else:
   m.foo = 1
 ```
 
-#### Ruby Example
+#### Ruby Example {#ruby-example}
 
 Implicit presence:
 
@@ -568,7 +568,7 @@ else
 end
 ```
 
-#### Javascript Example
+#### Javascript Example {#js-example}
 
 Implicit presence:
 
@@ -596,7 +596,7 @@ if (m.hasFoo()) {
 }
 ```
 
-#### Objective-C Example
+#### Objective-C Example {#objc-example}
 
 Implicit presence:
 
