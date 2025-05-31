@@ -324,7 +324,7 @@ message Test4 {
 ```
 
 and we construct a `Test4` message with `d` set to `"hello"`, and `e` set to
-`1`, `2`, and `3`, this *could* be encoded as `` `3206038e029ea705` ``, or
+`3`, `270`, and `86942`, this *could* be encoded as `` `3206038e029ea705` ``, or
 written out as Protoscope,
 
 ```proto
@@ -340,10 +340,10 @@ records for the same field with respect to each other is preserved. Thus, this
 could look like the following:
 
 ```proto
-6: 1
-6: 2
-4: {"hello"}
 6: 3
+6: 270
+4: {"hello"}
+6: 86942
 ```
 
 Only repeated fields of primitive numeric types can be declared "packed". These
