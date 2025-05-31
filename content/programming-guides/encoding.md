@@ -340,10 +340,10 @@ records for the same field with respect to each other is preserved. Thus, this
 could look like the following:
 
 ```proto
-5: 1
-5: 2
+6: 1
+6: 2
 4: {"hello"}
-5: 3
+6: 3
 ```
 
 Only repeated fields of primitive numeric types can be declared "packed". These
