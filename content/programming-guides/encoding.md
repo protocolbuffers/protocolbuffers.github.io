@@ -423,8 +423,9 @@ message Test6 {
 }
 ```
 
-Thus, maps are encoded exactly like a `repeated` message field: as a sequence of
-`LEN`-typed records, with two fields each.
+Thus, maps are encoded almost exactly like a `repeated` message field: as a
+sequence of `LEN`-typed records, with two fields each. The exception is that
+order is not guaranteed to be preserved with maps during serialization.
 
 ## Groups {#groups}
 

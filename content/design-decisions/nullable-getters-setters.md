@@ -12,6 +12,12 @@ C#, and Rust). While this does seem to be a helpful feature for folks using
 those languages, the design choice has tradeoffs which have led to the Protobuf
 team choosing not to implement them.
 
+Explicit presence is not a concept that directly maps to the traditional notion
+of nullability. It is subtle, but explicit presence philosophy is closer to "the
+fields are not nullable, but you can detect if the field was explicitly assigned
+a value or not. Normal access will see some default value if it is not assigned,
+but you can check if the field was actively written to or not, when needed."
+
 The biggest reason not to have nullable fields is the intended behavior of
 default values specified in a `.proto` file. By design, calling a getter on an
 unset field will return the default value of that field.
