@@ -11,7 +11,7 @@ buffer compiler generates in addition to the code described in the
 [C++ Generated Code Guide](/reference/cpp/cpp-generated)
 when arena allocation is enabled. It assumes that you are familiar with the
 material in the
-[language guide](/programming-guides/proto2) and the
+[language guide](/programming-guides/editions) and the
 [C++ Generated Code Guide](/reference/cpp/cpp-generated).
 
 ## Why Use Arena Allocation? {#why}
@@ -81,7 +81,7 @@ can see a more extensive [example](#example) at the end of the document.
 ## Arena Class API {#arenaclass}
 
 You create message objects on the arena using the
-[`google::protobuf::Arena`](/reference/cpp/api-docs/google.protobuf.arena.md)
+[`google::protobuf::Arena`](/reference/cpp/api-docs/google.protobuf.arena)
 class. This class implements the following public methods.
 
 ### Constructors {#constructors}
@@ -253,11 +253,10 @@ message objects are allocated depends on where they are defined:
     arena. This means that when the arena is destroyed, the object will be freed
     along with the objects on the arena itself.
 
-For either of these field definitions:
+For the field definition:
 
 ```proto
-optional Bar foo = 1;
-required Bar foo = 1;
+Bar foo = 1;
 ```
 
 The following methods are added or have some special behavior when arena
@@ -538,30 +537,29 @@ allocation API.
 
 ```proto
 // my_feature.proto
+edition = "2023";
 
-syntax = "proto2";
 import "nested_message.proto";
 
 package feature_package;
 
 // NEXT Tag to use: 4
 message MyFeatureMessage {
-  optional string feature_name = 1;
+  string feature_name = 1;
   repeated int32 feature_data = 2;
-  optional NestedMessage nested_message = 3;
+  NestedMessage nested_message = 3;
 };
 ```
 
 ```proto
 // nested_message.proto
-
-syntax = "proto2";
+edition = "2023";
 
 package feature_package;
 
 // NEXT Tag to use: 2
 message NestedMessage {
-  optional int32 feature_id = 1;
+  int32 feature_id = 1;
 };
 ```
 
@@ -575,7 +573,7 @@ Arena arena;
 MyFeatureMessage* arena_message =
    google::protobuf::Arena::Create<MyFeatureMessage>(&arena);
 
-arena_message->set_feature_name("Proto2 Arena");
+arena_message->set_feature_name("Editions Arena");
 arena_message->mutable_feature_data()->Add(2);
 arena_message->mutable_feature_data()->Add(4);
 arena_message->mutable_nested_message()->set_feature_id(247);
