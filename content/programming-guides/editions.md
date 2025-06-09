@@ -1028,15 +1028,16 @@ following rules:
     preserved in the message, but how this is represented when the message is
     deserialized is language-dependent. Int fields always just preserve their
     value.
-*   Changing a single `optional` field or extension into a member of a **new**
+*   Changing a *single* `optional` field or extension into a member of a **new**
     `oneof` is binary compatible, however for some languages (notably, Go) the
     generated code's API will change in incompatible ways. For this reason,
     Google does not make such changes in its public APIs, as documented in
     [AIP-180](https://google.aip.dev/180#moving-into-oneofs). With
-    the same caveat about source-compatibility, moving multiple fields into a
-    new `oneof` may be safe if you are sure that no code sets more than one at a
-    time. Moving fields into an existing `oneof` is not safe. Likewise, changing
-    a single field `oneof` to an `optional` field or extension is safe.
+    the same caveat about source-compatibility, moving *multiple* fields into a
+    **new** `oneof` may be safe if you are sure that no code sets more than one
+    at a time. Likewise, changing a *single* field `oneof` to an `optional`
+    field or extension is safe. Moving *any* fields into an **existing** `oneof`
+    is **not** safe.
 *   Changing a field between a `map<K, V>` and the corresponding `repeated`
     message field is binary compatible (see [Maps](#maps), below, for the
     message layout and other restrictions). However, the safety of the change is
@@ -1183,8 +1184,8 @@ In C++, it would look something like:
 ```cpp
 UserContent user_content;
 user_content.AddExtension(kittens::kitten_videos, new kittens::Video());
-assert(1 == user_content.GetExtensionCount(kittens::kitten_videos));
-user_content.GetExtension(kittens::kitten_videos, 0);
+assert(1 == user_content.GetRepeatedExtension(kittens::kitten_videos).size());
+user_content.GetRepeatedExtension(kittens::kitten_videos)[0];
 ```
 
 ### Defining Extension Ranges {#defining-ranges}
