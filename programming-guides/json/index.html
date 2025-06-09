@@ -13,11 +13,11 @@ error. In short, there are many good reasons why Google prefers to use the
 standard wire format for virtually everything rather than ProtoJSON format.</p><p>The encoding is described on a type-by-type basis in the table later in this
 topic.</p><p>When parsing JSON-encoded data into a protocol buffer, if a value is missing or
 if its value is <code>null</code>, it will be interpreted as the corresponding
-<a href=/programming-guides/editions#default>default value</a>.
-Multiple values for singular fields (using duplicate or equivalent JSON keys)
-are accepted and the last value is retained, as with binary format parsing. Note
-that not all protobuf JSON parser implementations are conformant, and some
-nonconformant implementations may reject duplicate keys instead.</p><p>When generating JSON-encoded output from a protocol buffer, if a protobuf field
+<a href=/programming-guides/editions#default>default value</a>. Multiple values for
+singular fields (using duplicate or equivalent JSON keys) are accepted and the
+last value is retained, as with binary format parsing. Note that not all
+protobuf JSON parser implementations are conformant, and some nonconformant
+implementations may reject duplicate keys instead.</p><p>When generating JSON-encoded output from a protocol buffer, if a protobuf field
 has the default value and if the field doesn&rsquo;t support field presence, it will
 be omitted from the output by default. An implementation may provide options to
 include fields with default values in the output.</p><p>Fields that have a value set and that support field presence always include the
