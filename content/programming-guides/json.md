@@ -117,7 +117,8 @@ The following table shows how data is represented in JSON files.
       <td>number</td>
       <td><code>1, -10, 0</code></td>
       <td>JSON value will be a decimal number. Either numbers or strings are
-        accepted. Empty strings are invalid.
+        accepted. Empty strings are invalid. Exponent notation (such as `1e2`) is
+        accepted in both quoted and unquoted forms.
       </td>
     </tr>
     <tr>
@@ -125,7 +126,8 @@ The following table shows how data is represented in JSON files.
       <td>string</td>
       <td><code>"1", "-10"</code></td>
       <td>JSON value will be a decimal string. Either numbers or strings are
-        accepted. Empty strings are invalid.
+        accepted. Empty strings are invalid. Exponent notation (such as `1e2`) is
+        accepted in both quoted and unquoted forms.
       </td>
     </tr>
     <tr>
@@ -152,7 +154,7 @@ The following table shows how data is represented in JSON files.
         <td>Timestamp</td>
         <td>string</td>
         <td><code>"1972-01-01T10:00:20.021Z"</code></td>
-        <td>Uses RFC 3339, where generated output will always be Z-normalized
+        <td>Uses RFC 3339 (see <a href="#rfc3339">clarification</a>), where generated output will always be Z-normalized
           and uses 0, 3, 6 or 9 fractional digits. Offsets other than "Z" are
           also accepted.
       </td>
@@ -218,7 +220,136 @@ The following table shows how data is represented in JSON files.
   </tbody>
 </table>
 
-### JSON Options {#json-options}
+## ProtoJSON Wire Safety {#json-wire-safety}
+
+When using ProtoJSON, only some schema changes are safe to make in a distributed
+system. This contrasts with the same concepts applied to the
+[the binary wire format](/programming-guides/editions#updating).
+
+### JSON Wire-unsafe Changes {#wire-unsafe}
+
+Wire-unsafe changes are schema changes that will break if you parse data that
+was serialized using the old schema with a parser that is using the new schema
+(or vice versa). You should almost never do this shape of schema change.
+
+*   Changing a field to or from an extension of same number and type is not
+    safe.
+*   Changing a field between `string` and `bytes` is not safe.
+*   Changing a field between a message type and `bytes` is not safe.
+*   Changing any field from `optional` to `repeated` is not safe.
+*   Changing a field between a `map<K, V>` and the corresponding `repeated`
+    message field is not safe.
+*   Moving fields into an existing `oneof` is not safe.
+
+### JSON Wire-safe Changes {#wire-safe}
+
+Wire-safe changes are ones where it is fully safe to evolve the schema in this
+way without risk of data loss or new parse failures.
+
+Note that nearly all wire-safe changes may be a breaking change to application
+code. For example, adding a value to a preexisting enum would be a compilation
+break for any code with an exhaustive switch on that enum. For that reason,
+Google may avoid making some of these types of changes on public messages. The
+AIPs contain guidance for which of these changes are safe to make there.
+
+*   Changing a single `optional` field into a member of a **new** `oneof` is
+    safe.
+*   Changing a `oneof` which contains only one field to an `optional` field is
+    safe.
+*   Changing a field between any of `int32`, `sint32`, `sfixed32`, `fixed32` is
+    safe.
+*   Changing a field between any of `int64`, `sint64`, `sfixed64`, `fixed64` is
+    safe.
+*   Changing a field number is safe (as the field numbers are not used in the
+    ProtoJSON format), but still strongly discouraged since it is very unsafe in
+    the binary wire format.
+*   Adding values to an enum is safe if the "Emit enum values as integers" is
+    set on all relevant clients (see [options](#json-options))
+
+### JSON Wire-compatible Changes (Conditionally safe) {#conditionally-safe}
+
+Unlike wire-safe changes, wire-compatible means that the same data can be parsed
+both before and after a given change. However, a client that reads it will get
+lossy data under this shape of change. For example, changing an int32 to an
+int64 is a compatible change, but if a value larger than INT32_MAX is written, a
+client that reads it as an int32 will discard the high order bits.
+
+You can make compatible changes to your schema only if you manage the roll out
+to your system carefully. For example, you may change an int32 to an int64 but
+ensure you continue to only write legal int32 values until the new schema is
+deployed to all endpoints, and then start writing larger values after that.
+
+#### Compatible But With Unknown Field Handling Problems {#compatible-ish}
+
+Unlike the binary wire format, ProtoJSON implementations generally do not
+propagate unknown fields. This means that adding to schemas is generally
+compatible but will result in parse failures if a client using the old schema
+observes the new content.
+
+This means you can add to your schema, but you cannot safely start writing them
+until you know the schema has been deployed to the relevant client or server (or
+that the relevant clients set an Ignore Unknown Fields flag, discussed
+[below](#json-options)).
+
+*   Adding and removing fields is considered compatible with this caveat.
+*   Removing enum values is considered compatible with this caveat.
+
+#### Compatible But Potentially Lossy {#compatible-lossy}
+
+*   Changing between any of the 32-bit integers (`int32`, `uint32`, `sint32`,
+    `sfixed32`, `fixed32`) and any of the 64-bit integers ( `int64`, `uint64`,
+    `sint64`, `sfixed32`) is a compatible change.
+    *   If a number is parsed from the wire that doesn't fit in the
+        corresponding type, you will get the same effect as if you had cast the
+        number to that type in C++ (for example, if a 64-bit number is read as
+        an int32, it will be truncated to 32 bits).
+    *   Unlike binary wire format, `bool` is not compatible with integers.
+    *   Note that the int64 types are quoted by default to avoid precision loss
+        when handled as a double or JavaScript number, and the 32 bit types are
+        unquoted by default. Conformant implementations will accept either case
+        for all integer types, but nonconformant implementations may mishandle
+        this case and not handle quoted int32s or unquoted int64s which may
+        break under this change.
+*   `enum` may be conditionally compatible with `string`
+    *   If "enums-as-ints" flag is used by any client, then enums will instead
+        be compatible with the integer types instead.
+
+## RFC 3339 Clarification {#rfc3339}
+
+[RFC 3339](https://www.rfc-editor.org/rfc/rfc3339) intends to declare a strict
+subset of ISO-8601 format, and unfortunately some ambiguity was created since
+RFC 3339 was published in 2002 and then ISO-8601 was subsequently revised
+without any corresponding revisions of RFC 3339.
+
+Most notably, ISO-8601-1988 contains this note:
+
+> In date and time representations lower case characters may be used when upper
+> case characters are not available.
+
+It is ambiguous whether this note is suggesting that parsers should accept
+lowercase letters in general, or if it is only suggesting that lowercase letters
+may be used as a substitute in environments where uppercase cannot be
+technically used. RFC 3339 contains a note that intends to clarify the
+interpretation to be that lowercase letters should be accepted in general.
+
+ISO-8601-2019 does not contain the corresponding note and is unambiguous that
+lowercase letters are not allowed. This created some confusion for all libraries
+that declare they support RFC 3339: today RFC 3339 declares it is a profile of
+ISO-8601 but contains a note that is in reference to something that is no longer
+in the latest ISO-8601 spec.
+
+ProtoJSON spec takes the decision that the timestamp format is the stricter
+definition of "RFC 3339 as a profile of ISO-8601-2019". Some Protobuf
+implementations may be non-conformant by using a timestamp parsing
+implementation that is implemented as "RFC 3339 as a profile of ISO-8601-1988,"
+which will accept a few additional edge cases.
+
+For consistent interoperability, parsers should only accept the stricter subset
+format where possible. When using a non-conformant implementation that accepts
+the laxer definition, strongly avoid relying on the additional edge cases being
+accepted.
+
+## JSON Options {#json-options}
 
 A conformant protobuf JSON implementation may provide the following options:
 

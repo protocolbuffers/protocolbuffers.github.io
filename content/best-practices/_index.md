@@ -12,3 +12,4 @@ topics:
 *   [Proto Best Practices](/best-practices/dos-donts)
 *   [API Best Practices](/best-practices/api)
 *   [1-1-1 Rule](/best-practices/1-1-1)
+*   [Avoid Cargo Culting](/best-practices/no-cargo-cults)

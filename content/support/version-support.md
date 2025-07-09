@@ -14,7 +14,7 @@ later in this topic. Version numbers throughout this topic use
 "3" is the major version, "21" is the minor version, and "7" is the micro or
 patch number.
 
-Starting with the v20.x protoc release, we changed our versioning scheme to
+Starting with the v21.x protoc release, we changed our versioning scheme to
 enable nimbler updates to language-specific parts of Protocol Buffers. In the
 new scheme, each language has its own major version that can be incremented
 independently of other languages. The minor and patch versions, however, remain
@@ -23,9 +23,10 @@ without requiring a bump of the major version in languages that do not
 experience a breaking change. For example, a single release might include protoc
 version 24.0, Java runtime version 4.24.0 and C# runtime version 3.24.0.
 
-The first instance of this new versioning scheme was the 4.21.0 version of the
-Python API, which followed the preceding version, 3.20.1. Other language APIs
-released at the same time were released as 3.21.0.
+Prior to this versioning scheme, all languages had major version 3. The first
+instance of this new versioning scheme was the 4.21.0 version of the Python API,
+which followed the preceding version, 3.20.1. Other language APIs released at
+the same time were released as 3.21.0.
 
 ## Release Cadence {#cadence}
 
@@ -274,7 +275,7 @@ Future plans are shown in *italics* and are subject to change.
   </tr>
   <tr class="active">
     <th>3.x</th>
-    <td>16 Feb 2023</td>
+    <td>25 May 2022</td>
     <td>TBD</td>
   </tr>
 </table>
@@ -300,7 +301,7 @@ Future plans are shown in *italics* and are subject to change.
   </tr>
   <tr class="active">
     <th>3.x</th>
-    <td>22.x-33.x</td>
+    <td>21.x-33.x</td>
     <td class="y23q1 active">3.22</td>
     <td class="y23q2 active">3.23</td>
     <td class="y23q3 active">3.24</td>
@@ -364,7 +365,7 @@ Future plans are shown in *italics* and are subject to change.
   </tr>
   <tr class="maintenance">
     <th>3.x</th>
-    <td>16 Feb 2023</td>
+    <td>25 May 2022</td>
     <td>31 Mar 2027*</td>
   </tr>
   <tr class="active">
@@ -409,7 +410,7 @@ version bumps in Q1 2025 and Q1 2026.{{% /alert %}}
   </tr>
   <tr class="maintenance">
     <th>3.x</th>
-    <td>22.x-25.x</td>
+    <td>21.x-25.x</td>
     <td class="y23q1 active">3.22</td>
     <td class="y23q2 active">3.23</td>
     <td class="y23q3 active">3.24</td>
@@ -493,7 +494,7 @@ Future plans are shown in *italics* and are subject to change.
   </tr>
   <tr class="maintenance">
     <th>3.x</th>
-    <td>16 Feb 2023</td>
+    <td>25 May 2022</td>
     <td>31 Mar 2026</td>
   </tr>
   <tr class="active">
@@ -524,7 +525,7 @@ Future plans are shown in *italics* and are subject to change.
   </tr>
   <tr class="maintenance">
     <th>3.x</th>
-    <td>22.x-29.x</td>
+    <td>21.x-29.x</td>
     <td class="y23q1 active">3.22</td>
     <td class="y23q2 active">3.23</td>
     <td class="y23q3 active">3.24</td>
@@ -594,7 +595,7 @@ Future plans are shown in *italics* and are subject to change.
   </tr>
   <tr class="end-of-life">
     <th>3.x</th>
-    <td>16 Feb 2023</td>
+    <td>25 May 2022</td>
     <td>31 Mar 2025</td>
   </tr>
   <tr class="active">
@@ -625,7 +626,7 @@ Future plans are shown in *italics* and are subject to change.
   </tr>
   <tr class="end-of-life">
     <th>3.x</th>
-    <td>22.x-25.x</td>
+    <td>21.x-25.x</td>
     <td class="y23q1 active">3.22</td>
     <td class="y23q2 active">3.23</td>
     <td class="y23q3 active">3.24</td>
@@ -703,7 +704,7 @@ Future plans are shown in *italics* and are subject to change.
   </tr>
   <tr class="end-of-life">
     <th>4.x</th>
-    <td>16 Feb 2023</td>
+    <td>25 May 2022</td>
     <td>31 Mar 2025</td>
   </tr>
   <tr class="maintenance">
@@ -739,7 +740,7 @@ Future plans are shown in *italics* and are subject to change.
   </tr>
   <tr class="end-of-life">
     <th>4.x</th>
-    <td>22.x-25.x</td>
+    <td>21.x-25.x</td>
     <td class="y23q1 active">4.22</td>
     <td class="y23q2 active">4.23</td>
     <td class="y23q3 active">4.24</td>
@@ -833,7 +834,7 @@ Future plans are shown in *italics* and are subject to change.
   </tr>
   <tr class="end-of-life">
     <th>3.x</th>
-    <td>16 Feb 2023</td>
+    <td>25 May 2022</td>
     <td>31 Mar 2025</td>
   </tr>
   <tr class="active">
@@ -864,7 +865,7 @@ Future plans are shown in *italics* and are subject to change.
   </tr>
   <tr class="end-of-life">
     <th>3.x</th>
-    <td>22.x-25.x</td>
+    <td>21.x-25.x</td>
     <td class="y23q1 active">3.22</td>
     <td class="y23q2 active">3.23</td>
     <td class="y23q3 active">3.24</td>

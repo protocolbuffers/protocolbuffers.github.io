@@ -2,10 +2,17 @@
 title = "Building Rust Protos"
 weight = 784
 linkTitle = "Building Rust Protos"
-description = "Describes using Blaze to build Rust protos."
+description = "Describes how to build Rust protos using Cargo or Bazel."
 type = "docs"
-toc_hide = "true"
 +++
+
+## Cargo
+
+See the
+[protobuf-example](https://docs.rs/crate/protobuf-example/latest/source/) crate
+for an example of how to set up your build.
+
+## Bazel
 
 The process of building a Rust library for a Protobuf definition is similar to
 other programming languages:

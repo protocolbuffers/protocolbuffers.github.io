@@ -6,14 +6,9 @@ type = "docs"
 aliases = "/programming-guides/api"
 +++
 
-Updated for proto3. Patches welcome!
-
 This doc is a complement to
 [Proto Best Practices](/best-practices/dos-donts). It's
 not a prescription for Java/C++/Go and other APIs.
-
-If you see a proto straying from these guidelines in a code review, point the
-author to this topic and help spread the word.
 
 {{% alert title="Note" color="note" %}}
 These guidelines are just that and many have documented exceptions. For example,

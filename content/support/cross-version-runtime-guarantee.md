@@ -12,10 +12,11 @@ produced from `protoc`) and the runtime libraries that must be included when
 using the generated code. When these come from different releases of protobuf,
 we are in a "cross version runtime" situation.
 
-We intend to offer the following guarantees across all languages except
-[C++ and Rust](#cpp). These are the default guarantees; however, owners of
-protobuf code generators and runtimes may explicitly override them with more
-specific guarantees for that language.
+We intend to offer the following guarantees across most languages. These are the
+default guarantees; however, owners of protobuf code generators and runtimes may
+explicitly override them with more specific guarantees for that language.
+[C++ and Rust](#cpp) have stricter guarantees than typical, and
+[Python](#python) has looser ones.
 
 Protobuf cross-version usages outside the guarantees are **error-prone and not
 supported**. Version skews can lead to *flakes and undefined behaviors* that are
@@ -50,10 +51,16 @@ Protobuf will not support using gencode from version V with runtime &gt;= V+2
 and will be using a "poison pill" mechanism to fail with a clear error message
 when a software assembly attempts to use such a configuration.
 
+**Note:** [C++ and Rust](#cpp) do not support compatibility windows, and
+[Python](#python) supports much longer ones.
+
 ## Minor Versions {#minor}
 
 Within a single major runtime version, generated code from an older version of
 `protoc` will run on a newer runtime.
+
+**Note:** [C++ and Rust](#cpp) do not support compatibility across minor
+versions.
 
 ## Security Exception {#exception}
 
@@ -120,10 +127,22 @@ matrix:
 
 Coexistence of multiple major versions in the same process is **not** supported.
 
-## C++ and Rust Specific Guarantees {#cpp}
+## C++ and Rust-specific Guarantees {#cpp}
 
 Protobuf C++ and Rust disclaim all cross-runtime support and require an exact
 match between the generated code version and the runtime version at all times.
 
 Additionally, Protobuf C++ makes no guarantees about ABI stability across any
 releases (major, minor, or micro).
+
+## Python-specific Guarantees {#python}
+
+Since the 3.20.0 release, the Protobuf Python generated code became a thin
+wrapper around an embedded `FileDescriptorProto`. Because these protos are
+supported on extremely long timeframes, our usual
+[major version compatibility windows](#major) aren't typically necessary.
+
+Python may break generated code compatibility in specific future major version
+releases, but it will be coupled with poison pill warnings and errors in
+advance. As of 6.32.0, all generated code since 3.20.0 will be supported until
+at least 8.x.y.

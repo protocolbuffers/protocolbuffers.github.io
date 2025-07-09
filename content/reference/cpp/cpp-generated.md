@@ -6,13 +6,13 @@ description = "Describes exactly what C++ code the protocol buffer compiler gene
 type = "docs"
 +++
 
-Any differences between proto2 and proto3 generated code are highlighted - note
-that these differences are in the generated code as described in this document,
-not the base message classes/interfaces, which are the same in both versions.
-You should read the
-[proto2 language guide](/programming-guides/proto2)
-and/or
-[proto3 language guide](/programming-guides/proto3)
+Any differences between proto2, proto3, and editions generated code are
+highlighted. Note that these differences are in the generated code as described
+in this document, not the base message classes/interfaces, which are the same in
+all versions. You should read the
+[proto2 language guide](/programming-guides/proto2),
+[proto3 language guide](/programming-guides/proto3), or
+[edition 2023 language guide](/programming-guides/editions)
 before reading this document.
 
 ## Compiler Invocation {#invocation}
@@ -233,51 +233,52 @@ any method inherited from `Message` or accessing the message through other ways
 Correspondingly, the value of the returned pointer is never guaranteed to be the
 same across two different invocations of the accessor.
 
-### Optional Numeric Fields (proto2 and proto3) {#numeric}
+### Explicit Presence Numeric Fields {#numeric}
 
-For either of these field definitions:
+For field definitions for numeric fields with
+[explicit presence](/programming-guides/field_presence#presence-in-proto2-apis):
 
 ```proto
-optional int32 foo = 1;
-required int32 foo = 1;
+int32 foo = 1;
 ```
 
 The compiler will generate the following accessor methods:
 
 -   `bool has_foo() const`: Returns `true` if the field is set.
--   `int32 foo() const`: Returns the current value of the field. If the field is
-    not set, returns the default value.
--   `void set_foo(int32 value)`: Sets the value of the field. After calling
+-   `int32_t foo() const`: Returns the current value of the field. If the field
+    is not set, returns the default value.
+-   `void set_foo(::int32_t value)`: Sets the value of the field. After calling
     this, `has_foo()` will return `true` and `foo()` will return `value`.
 -   `void clear_foo()`: Clears the value of the field. After calling this,
     `has_foo()` will return `false` and `foo()` will return the default value.
 
-For other numeric field types (including `bool`), `int32` is replaced with the
+For other numeric field types (including `bool`), `int32_t` is replaced with the
 corresponding C++ type according to the
-[scalar value types table](/programming-guides/proto3#scalar).
+[scalar value types table](/programming-guides/editions#scalar).
 
-### Implicit Presence Numeric Fields (proto3) {#implicit-numeric}
+### Implicit Presence Numeric Fields {#implicit-numeric}
 
-For the below field definition:
+For field definitions for numeric fields with
+[implicit presence](/programming-guides/field_presence#presence-in-proto2-apis):
 
 ```proto
-int32 foo = 1;  // no field label specified, defaults to implicit presence.
+int32 foo = 1;
 ```
 
 The compiler will generate the following accessor methods:
 
--   `int32 foo() const`: Returns the current value of the field. If the field is
-    not set, returns 0.
--   `void set_foo(int32 value)`: Sets the value of the field. After calling
+-   `::int32_t foo() const`: Returns the current value of the field. If the
+    field is not set, returns 0.
+-   `void set_foo(::int32_t value)`: Sets the value of the field. After calling
     this, `foo()` will return `value`.
 -   `void clear_foo()`: Clears the value of the field. After calling this,
     `foo()` will return 0.
 
-For other numeric field types (including `bool`), `int32` is replaced with the
+For other numeric field types (including `bool`), `int32_t` is replaced with the
 corresponding C++ type according to the
-[scalar value types table](/programming-guides/proto3#scalar).
+[scalar value types table](/programming-guides/editions#scalar).
 
-### Optional String/Bytes Fields (proto2 and proto3) {#string}
+### Explicit Presence String/Bytes Fields {#string}
 
 **Note:** As of edition 2023, if
 [`features.(pb.cpp).string_type`](/editions/features#string_type)
@@ -285,13 +286,12 @@ is set to `VIEW`,
 [string_view](/reference/cpp/string-view#singular-view)
 APIs will be generated instead.
 
-For any of these field definitions:
+For these field definitions with
+[explicit presence](/programming-guides/field_presence#presence-in-proto2-apis):
 
 ```proto
-optional string foo = 1;
-required string foo = 1;
-optional bytes foo = 1;
-required bytes foo = 1;
+string foo = 1;
+bytes foo = 2;
 ```
 
 The compiler will generate the following accessor methods:
@@ -299,29 +299,19 @@ The compiler will generate the following accessor methods:
 -   `bool has_foo() const`: Returns `true` if the field is set.
 -   `const string& foo() const`: Returns the current value of the field. If the
     field is not set, returns the default value.
--   `void set_foo(::absl::string_view value)`: Sets the value of the field.
-    After calling this, `has_foo()` will return `true` and `foo()` will return a
-    copy of `value`.
--   `void set_foo(const string& value)`: Sets the value of the field. After
-    calling this, `has_foo()` will return `true` and `foo()` will return a copy
-    of `value`.
--   `void set_foo(string&& value)`: Sets the value of the field, moving from the
-    passed string. After calling this, `has_foo()` will return `true` and
-    `foo()` will return a copy of `value`.
--   `void set_foo(const char* value)`: Sets the value of the field using a
-    C-style null-terminated string. After calling this, `has_foo()` will return
-    `true` and `foo()` will return a copy of `value`.
--   `void set_foo(const char* value, int size)`: Sets the value of the field
-    using a string with an explicit size specified, rather than determined by
-    looking for a null-terminator byte. After calling this, `has_foo()` will
-    return `true` and `foo()` will return a copy of `value`.
+-   `void set_foo(...)`: Sets the value of the field. After calling this,
+    `has_foo()` will return `true` and `foo()` will return a copy of `value`.
 -   `string* mutable_foo()`: Returns a pointer to the mutable `string` object
     that stores the field's value. If the field was not set prior to the call,
     then the returned string will be empty (*not* the default value). After
     calling this, `has_foo()` will return `true` and `foo()` will return
     whatever value is written into the given string.
+
+    **Note:** This method will be removed in the new `string_view` APIs.
+
 -   `void clear_foo()`: Clears the value of the field. After calling this,
     `has_foo()` will return `false` and `foo()` will return the default value.
+
 -   `void set_allocated_foo(string* value)`:
     Sets the `string`
     object to the field and frees the previous field value if it exists. If the
@@ -330,6 +320,7 @@ The compiler will generate the following accessor methods:
     delete the allocated `string` object at any time, so references to the
     object may be invalidated. Otherwise, if the `value` is `NULL`, the behavior
     is the same as calling `clear_foo()`.
+
 -   `string* release_foo()`:
     Releases the
     ownership of the field and returns the pointer of the `string` object. After
@@ -338,7 +329,7 @@ The compiler will generate the following accessor methods:
 
 <a id="proto3_string"></a>
 
-### Implicit Presence String/Bytes Fields (proto3) {#implicit-string}
+### Implicit Presence String/Bytes Fields {#implicit-string}
 
 **Note:** As of edition 2023, if
 [`features.(pb.cpp).string_type`](/editions/features#string_type)
@@ -346,30 +337,20 @@ is set to `VIEW`,
 [string_view](/reference/cpp/string-view#singular-view)
 APIs will be generated instead.
 
-For either of these field definitions:
+For these field definitions with
+[implicit presence](/programming-guides/field_presence#presence-in-proto2-apis):
 
 ```proto
-string foo = 1;  // no field label specified, defaults to implicit presence.
-bytes foo = 1;
+string foo = 1 [features.field_presence = IMPLICIT];
+bytes foo = 1 [features.field_presence = IMPLICIT];
 ```
 
 The compiler will generate the following accessor methods:
 
 -   `const string& foo() const`: Returns the current value of the field. If the
     field is not set, returns the empty string/empty bytes.
--   `void set_foo(::absl::string_view value)`: Sets the value of the field.
+-   `void set_foo(Arg_&& arg, Args_... args)`: Sets the value of the field.
     After calling this, `foo()` will return a copy of `value`.
--   `void set_foo(const string& value)`: Sets the value of the field. After
-    calling this, `foo()` will return a copy of `value`.
--   `void set_foo(string&& value)`: Sets the value of the field, moving from the
-    passed string. After calling this, `foo()` will return a copy of `value`.
--   `void set_foo(const char* value)`: Sets the value of the field using a
-    C-style null-terminated string. After calling this, `foo()` will return a
-    copy of `value`.
--   `void set_foo(const char* value, int size)`: Sets the value of the field
-    using a string with an explicit size specified, rather than determined by
-    looking for a null-terminator byte. After calling this, `foo()` will return
-    a copy of `value`.
 -   `string* mutable_foo()`: Returns a pointer to the mutable `string` object
     that stores the field's value. If the field was not set prior to the call,
     then the returned string will be empty. After calling this, `foo()` will
@@ -401,8 +382,9 @@ To set a singular `bytes` field to store data using `absl::Cord`, use the
 following syntax:
 
 ```proto
-optional bytes foo = 25 [ctype=CORD];
-bytes bar = 26 [ctype=CORD];
+// edition (default settings)
+bytes foo = 25 [ctype=CORD];
+bytes foo = 26 [ctype=CORD, features.field_presence = IMPLICIT];
 ```
 
 Using `cord` is not available for `repeated bytes` fields. Protoc ignores
@@ -412,16 +394,18 @@ The compiler will generate the following accessor methods:
 
 -   `const ::absl::Cord& foo() const`: Returns the current value of the field.
     If the field is not set, returns an empty `Cord` (proto3) or the default
-    value (proto2).
+    value (proto2 and editions).
 -   `void set_foo(const ::absl::Cord& value)`: Sets the value of the field.
     After calling this, `foo()` will return `value`.
 -   `void set_foo(::absl::string_view value)`: Sets the value of the field.
     After calling this, `foo()` will return `value` as an `absl::Cord`.
 -   `void clear_foo()`: Clears the value of the field. After calling this,
-    `foo()` will return an empty `Cord` (proto3) or the default value (proto2).
--   `bool has_foo()`: Returns `true` if the field is set.
+    `foo()` will return an empty `Cord` (proto3) or the default value (proto2
+    and editions).
+-   `bool has_foo()`: Returns `true` if the field is set. Only applies for the
+    `optional` field in proto3 and the explicit presence field in editions.
 
-### Optional Enum Fields (proto2 and proto3) {#enum_field}
+### Explicit Presence Enum Fields {#enum_field}
 
 Given the enum type:
 
@@ -433,11 +417,11 @@ enum Bar {
 }
 ```
 
-For either of these field definitions:
+For this field definition with
+[explicit presence](/programming-guides/field_presence#presence-in-proto2-apis):
 
 ```proto
-optional Bar bar = 1;
-required Bar bar = 1;
+Bar bar = 1;
 ```
 
 The compiler will generate the following accessor methods:
@@ -452,7 +436,7 @@ The compiler will generate the following accessor methods:
 -   `void clear_bar()`: Clears the value of the field. After calling this,
     `has_bar()` will return `false` and `bar()` will return the default value.
 
-### Implicit Presence Enum Fields (proto3) {#implicit-enum}
+### Implicit Presence Enum Fields {#implicit-enum}
 
 Given the enum type:
 
@@ -464,10 +448,11 @@ enum Bar {
 }
 ```
 
-For this field definition:
+For this field definition with
+[implicit presence](/programming-guides/field_presence#presence-in-proto2-apis):
 
 ```proto
-Bar bar = 1;  // no field label specified, defaults to implicit presence.
+Bar bar = 1;
 ```
 
 The compiler will generate the following accessor methods:
@@ -479,7 +464,7 @@ The compiler will generate the following accessor methods:
 -   `void clear_bar()`: Clears the value of the field. After calling this,
     `bar()` will return the default value.
 
-### Optional Embedded Message Fields (proto2 and proto3) {#embeddedmessage}
+### Explicit Presence Embedded Message Fields {#embeddedmessage}
 
 Given the message type:
 
@@ -487,14 +472,10 @@ Given the message type:
 message Bar {}
 ```
 
-For any of these field definitions:
+For this field definition with
+[explicit presence](/programming-guides/field_presence#presence-in-proto2-apis):
 
 ```proto
-//proto2
-optional Bar bar = 1;
-required Bar bar = 1;
-
-//proto3
 Bar bar = 1;
 ```
 
@@ -512,7 +493,7 @@ The compiler will generate the following accessor methods:
     `Bar`.
 -   `void clear_bar()`: Clears the value of the field. After calling this,
     `has_bar()` will return `false` and `bar()` will return the default value.
--   `void set_allocated_bar(Bar* bar)`: Sets the `Bar` object to the field and
+-   `void set_allocated_bar(Bar* value)`: Sets the `Bar` object to the field and
     frees the previous field value if it exists. If the `Bar` pointer is not
     `NULL`, the message takes ownership of the allocated `Bar` object and
     `has_bar()` will return `true`. Otherwise, if the `Bar` is `NULL`, the
@@ -536,26 +517,26 @@ The compiler will generate the following accessor methods:
     field. To check for an empty set, consider using the
     [`empty()`](/reference/cpp/api-docs/google.protobuf.repeated_field#RepeatedPtrField)
     method in the underlying `RepeatedField` instead of this method.
--   `int32 foo(int index) const`: Returns the element at the given zero-based
+-   `int32_t foo(int index) const`: Returns the element at the given zero-based
     index. Calling this method with index outside of [0, foo_size()) yields
     undefined behavior.
--   `void set_foo(int index, int32 value)`: Sets the value of the element at the
-    given zero-based index.
--   `void add_foo(int32 value)`: Appends a new element to the end of the field
+-   `void set_foo(int index, int32_t value)`: Sets the value of the element at
+    the given zero-based index.
+-   `void add_foo(int32_t value)`: Appends a new element to the end of the field
     with the given value.
 -   `void clear_foo()`: Removes all elements from the field. After calling this,
     `foo_size()` will return zero.
--   `const RepeatedField<int32>& foo() const`: Returns the underlying
+-   `const RepeatedField<int32_t>& foo() const`: Returns the underlying
     [`RepeatedField`](/reference/cpp/api-docs/google.protobuf.repeated_field#RepeatedField)
     that stores the field's elements. This container class provides STL-like
     iterators and other methods.
--   `RepeatedField<int32>* mutable_foo()`: Returns a pointer to the underlying
+-   `RepeatedField<int32_t>* mutable_foo()`: Returns a pointer to the underlying
     mutable `RepeatedField` that stores the field's elements. This container
     class provides STL-like iterators and other methods.
 
-For other numeric field types (including `bool`), `int32` is replaced with the
+For other numeric field types (including `bool`), `int32_t` is replaced with the
 corresponding C++ type according to the
-[scalar value types table](/programming-guides/proto2#scalar).
+[scalar value types table](/programming-guides/editions#scalar).
 
 ### Repeated String Fields {#repeatedstring}
 
@@ -649,8 +630,8 @@ The compiler will generate the following accessor methods:
     undefined behavior.
 -   `void set_bar(int index, Bar value)`: Sets the value of the element at the
     given zero-based index. In debug mode (i.e. NDEBUG is not defined), if
-    `value` does not match any of the values defined for `Bar`, this method will
-    abort the process.
+    `value` does not match any of the values defined for `Bar` and it is a
+    closed enum, this method will abort the process.
 -   `void add_bar(Bar value)`: Appends a new element to the end of the field
     with the given value. In debug mode (i.e. NDEBUG is not defined), if `value`
     does not match any of the values defined for `Bar`, this method will abort
@@ -732,15 +713,15 @@ The compiler will generate the following accessor methods:
         `has_foo()` will return `false`, `foo()` will return the default value
         and `example_name_case()` will return `EXAMPLE_NAME_NOT_SET`.
 
-For other numeric field types (including `bool`),`int32` is replaced with the
+For other numeric field types (including `bool`),`int32_t` is replaced with the
 corresponding C++ type according to the
-[scalar value types table](/programming-guides/proto3#scalar).
+[scalar value types table](/programming-guides/editions#scalar).
 
 ### Oneof String Fields {#oneof-string}
 
-**Note:** As of edition 2023
+**Note:** As of edition 2023,
 [string_view](/reference/cpp/string-view#oneof-view) APIs
-may be generated instead
+may be generated instead.
 
 For any of these [oneof](#oneof) field definitions:
 
@@ -786,8 +767,8 @@ The compiler will generate the following accessor methods:
         written into the given string and `example_name_case()` will return
         `kFoo`.
 -   `void clear_foo()`:
-    -   If the oneof case is not `kFoo`, nothing will be changed .
-    -   If the oneof case is `kFoo`, frees the field and clears the oneof case .
+    -   If the oneof case is not `kFoo`, nothing will be changed.
+    -   If the oneof case is `kFoo`, frees the field and clears the oneof case.
         `has_foo()` will return `false`, `foo()` will return the default value,
         and `example_name_case()` will return `EXAMPLE_NAME_NOT_SET`.
 -   `void set_allocated_foo(string* value)`:
@@ -800,7 +781,7 @@ The compiler will generate the following accessor methods:
         `example_name_case()` will return `EXAMPLE_NAME_NOT_SET`.
 -   `string* release_foo()`:
     -   Returns `NULL` if oneof case is not `kFoo`.
-    -   Clears the oneof case, releases the ownership of the field and returns
+    -   Clears the oneof case, releases the ownership of the field, and returns
         the pointer of the string object. After calling this, caller takes the
         ownership of the allocated string object, `has_foo()` will return false,
         `foo()` will return the default value, and `example_name_case()` will
@@ -838,8 +819,9 @@ The compiler will generate the following accessor methods:
     -   Sets the value of this field and sets the oneof case to `kBar`.
     -   `has_bar()` will return `true`, `bar()` will return `value` and
         `example_name_case()` will return `kBar`.
-    -   In debug mode (i.e. NDEBUG is not defined), if `value` does not match
-        any of the values defined for `Bar`, this method will abort the process.
+    -   In debug mode (that is, NDEBUG is not defined), if `value` does not
+        match any of the values defined for `Bar` and it is a closed enum, this
+        method will abort the process.
 -   `void clear_bar()`:
     -   Nothing will be changed if the oneof case is not `kBar`.
     -   If the oneof case is `kBar`, clears the value of the field and the oneof
@@ -875,7 +857,7 @@ The compiler will generate the following accessor methods:
     -   Sets the oneof case to `kBar` and returns a pointer to the mutable Bar
         object that stores the field's value. If the oneof case was not `kBar`
         prior to the call, then the returned Bar will have none of its fields
-        set (i.e. it will be identical to a newly-allocated Bar).
+        set (that is, it will be identical to a newly-allocated Bar).
     -   After calling this, `has_bar()` will return `true`, `bar()` will return
         a reference to the same instance of `Bar` and `example_name_case()` will
         return `kBar`.
@@ -899,7 +881,7 @@ The compiler will generate the following accessor methods:
         ownership of the field and returns the pointer of the `Bar` object.
         After calling this, caller takes the ownership of the allocated `Bar`
         object, `has_bar()` will return `false`, `bar()` will return the default
-        value and `example_name_case()` will return `EXAMPLE_NAME_NOT_SET`.
+        value, and `example_name_case()` will return `EXAMPLE_NAME_NOT_SET`.
 
 ### Map Fields {#map}
 
@@ -1018,9 +1000,11 @@ If there are unknown fields in the wire format of a map entry message, they will
 be discarded.
 
 If there is an unknown enum value in the wire format of a map entry message,
-it's handled differently in proto2 and proto3. In proto2, the whole map entry
-message is put into the unknown field set of the containing message. In proto3,
-it is put into a map field as if it is a known enum value.
+it's handled differently in proto2, proto3, and editions. In proto2, the whole
+map entry message is put into the unknown field set of the containing message.
+In proto3, it is put into a map field as if it is a known enum value. With
+editions, by default it mirrors the proto3 behavior. If `features.enum_type` is
+set to `CLOSED`, then it mirrors the proto2 behavior.
 
 ## Any {#any}
 
@@ -1142,13 +1126,15 @@ These semantics have been changed in proto3. It's safe to cast any integer to a
 proto3 enum value as long as it fits into int32. Invalid enum values will also
 be kept when parsing a proto3 message and returned by enum field accessors.
 
-**Be careful when using proto3 enums in switch statements.** Proto3 enums are
-open enum types with possible values outside the range of specified symbols.
-Unrecognized enum values will be kept when parsing a proto3 message and returned
-by the enum field accessors. A switch statement on a proto3 enum without a
-default case will not be able to catch all cases even if all the known fields
-are listed. This could lead to unexpected behavior including data corruption and
-runtime crashes. **Always add a default case or explicitly call
+**Be careful when using proto3 and editions enums in switch statements.** Proto3
+and editions enums are open enum types with possible values outside the range of
+specified symbols. (Editions enums may be set to closed enums using the
+[`enum_type`](/editions/features#enum_type) feature.)
+Unrecognized enum values for open enums types will be kept when parsing a
+message and returned by the enum field accessors. A switch statement on an open
+enum without a default case will not be able to catch all cases, even if all the
+known fields are listed. This could lead to unexpected behavior, including data
+corruption and runtime crashes. **Always add a default case or explicitly call
 `Foo_IsValid(int)` outside of the switch to handle unknown enum values.**
 
 You can define an enum inside a message type. In this case, the protocol buffer
@@ -1156,12 +1142,12 @@ compiler generates code that makes it appear that the enum type itself was
 declared nested inside the message's class. The `Foo_descriptor()` and
 `Foo_IsValid()` functions are declared as static methods. In reality, the enum
 type itself and its values are declared at the global scope with mangled names,
-and are imported into the class's scope with a typedef and a series of constant
-definitions. This is done only to get around problems with declaration ordering.
-Do not depend on the mangled top-level names; pretend the enum really is nested
-in the message class.
+and are imported into the class's scope with a `typedef` and a series of
+constant definitions. This is done only to get around problems with declaration
+ordering. Do not depend on the mangled top-level names; pretend the enum really
+is nested in the message class.
 
-## Extensions (proto2 only) {#extension}
+## Extensions (proto2 and editions only) {#extension}
 
 Given a message with an extension range:
 
@@ -1175,12 +1161,12 @@ The protocol buffer compiler will generate some additional methods for `Foo`:
 `HasExtension()`, `ExtensionSize()`, `ClearExtension()`, `GetExtension()`,
 `SetExtension()`, `MutableExtension()`, `AddExtension()`,
 `SetAllocatedExtension()` and `ReleaseExtension()`. Each of these methods takes,
-as its first parameter, an extension identifier (described below), which
-identifies an extension field. The remaining parameters and the return value are
-exactly the same as those for the corresponding accessor methods that would be
-generated for a normal (non-extension) field of the same type as the extension
-identifier. (`GetExtension()` corresponds to the accessors with no special
-prefix.)
+as its first parameter, an extension identifier (described later in this
+section), which identifies an extension field. The remaining parameters and the
+return value are exactly the same as those for the corresponding accessor
+methods that would be generated for a normal (non-extension) field of the same
+type as the extension identifier. (`GetExtension()` corresponds to the accessors
+with no special prefix.)
 
 Given an extension definition:
 
@@ -1339,9 +1325,9 @@ The following static method is also generated:
 
 The protocol buffer compiler also generates a "stub" implementation of every
 service interface, which is used by clients wishing to send requests to servers
-implementing the service. For the `Foo` service (above), the stub implementation
-`Foo_Stub` will be defined. As with nested message types, a typedef is used so
-that `Foo_Stub` can also be referred to as `Foo::Stub`.
+implementing the service. For the `Foo` service (described earlier), the stub
+implementation `Foo_Stub` will be defined. As with nested message types, a
+`typedef` is used so that `Foo_Stub` can also be referred to as `Foo::Stub`.
 
 `Foo_Stub` is a subclass of `Foo` which also implements the following methods:
 
@@ -1383,9 +1369,9 @@ appears in both the `.pb.cc` file and the `.pb.h` file unless otherwise noted.
 -   `global_scope`: Declarations that belong at the top level, outside of the
     file's namespace. Appears at the very end of the file.
 -   `class_scope:TYPENAME`: Member declarations that belong in a message class.
-    `TYPENAME` is the full proto name, e.g. `package.MessageType`. Appears after
-    all other public declarations in the class. This insertion point appears
-    only in the `.pb.h` file.
+    `TYPENAME` is the full proto name, such as `package.MessageType`. Appears
+    after all other public declarations in the class. This insertion point
+    appears only in the `.pb.h` file.
 
 Do not generate code which relies on private class members declared by the
 standard code generator, as these implementation details may change in future

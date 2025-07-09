@@ -4,7 +4,6 @@ weight = 785
 linkTitle = "Design Decisions"
 description = "Explains some of the design choices that the Rust Proto implementation makes."
 type = "docs"
-toc_hide = "true"
 +++
 
 As with any library, Rust Protobuf is designed considering the needs of both
@@ -48,9 +47,9 @@ Protobuf Rust currently supports three kernels:
     other languages. This is the default in open source builds where we expect
     static linking with code already using C++ Protobuf to be more rare.
 
-The decision to support multiple non-Rust kernels significantly influences the
-our public API decisions, including the types used on getters (discussed later
-in this document).
+The decision to support multiple non-Rust kernels significantly influences our
+public API decisions, including the types used on getters (discussed later in
+this document).
 
 ### No Pure Rust Kernel {#no-pure-rust}
 
@@ -153,11 +152,11 @@ memory for those instances ahead of time.
 In some cases the Rust Protobuf API may choose to create our own types where a
 corresponding std type exists with the same name, where the current
 implementation may even simply wrap the std type, for example
-`proto::UTF-8Error`.
+`protobuf::UTF8Error`.
 
 Using these types rather than std types gives us more flexibility in optimizing
 the implementation in the future. While our current implementation uses the Rust
-std UTF-8 validation today, by creating our own `proto::Utf8Error` type it
+std UTF-8 validation today, by creating our own `protobuf::Utf8Error` type it
 enables us to change the implementation to use the highly optimized C++
 implementation of UTF-8 validation that we use from C++ Protobuf which is faster
 than Rust's std UTF-8 validation.

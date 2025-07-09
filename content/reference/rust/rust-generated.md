@@ -2,7 +2,6 @@
 title = "Rust Generated Code Guide"
 weight = 782
 linkTitle = "Generated Code Guide"
-toc_hide = true
 description = "Describes the API of message objects that the protocol buffer compiler generates for any given protocol definition."
 type = "docs"
 +++
@@ -48,14 +47,11 @@ Generated files:
 *   C++ Lite kernel:
     *   &lt;same as C++ kernel&gt;
 *   UPB kernel
-    *   `.u.pb.rs` - generated Rust code. \
-        (However, `rust_proto_library` relies on the `.thunks.c` file produced
-        by `upb_proto_aspect`.)
+    *   `.u.pb.rs` - generated Rust code.
 
-If the `proto_library` contains more than one file, the first file is declared a
-"primary" file and is treated as the entry point for the crate; that file will
-contain both the gencode corresponding to the `.proto` file, and also re-exports
-for all symbols defined in the files corresponding to all "secondary" files.
+Each `proto_library` will also have a `generated.rs` file which is treated as
+the entry point for the crate. That file will re-export the symbols from all the
+other Rust files in the crate.
 
 ## Packages {#packages}
 
