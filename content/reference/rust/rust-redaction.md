@@ -4,7 +4,6 @@ weight = 783
 linkTitle = "Redaction in Rust"
 description = "Describes redaction in Rust."
 type = "docs"
-toc_hide = "true"
 +++
 
 <!--*

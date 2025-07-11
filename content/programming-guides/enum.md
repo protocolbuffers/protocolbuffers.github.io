@@ -112,8 +112,8 @@ There are two options for moving to conformant behavior:
     end up stored in the field cast to the enum type instead of being put into
     the unknown field set.
 *   Change the enum to closed. This is discouraged, and can cause runtime
-    behavior if *anybody else* is using the enum. Unrecognized integers will end
-    up in the unknown field set instead of those fields.
+    behavior changes if *anybody else* is using the enum. Unrecognized integers
+    will end up in the unknown field set instead of those fields.
 
 ### C&#35; {#csharp}
 

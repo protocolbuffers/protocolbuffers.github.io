@@ -150,7 +150,7 @@ enum name, so the same name in two sibling enums is not allowed. For example,
 the following would be rejected by protoc since the `SET` value defined in the
 two enums are considered to be in the same scope:
 
-```proto
+```proto {.bad}
 enum CollectionType {
   COLLECTION_TYPE_UNSPECIFIED = 0;
   SET = 1;
@@ -158,6 +158,8 @@ enum CollectionType {
   ARRAY = 3;
 }
 
+// Won't compile - `SET` enum name will clash
+// with the one defined in `CollectionType` enum.
 enum TennisVictoryType {
   TENNIS_VICTORY_TYPE_UNSPECIFIED = 0;
   GAME = 1;
