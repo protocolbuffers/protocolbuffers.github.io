@@ -6,13 +6,13 @@ description = "Describes exactly what Kotlin code the protocol buffer compiler g
 type = "docs"
 +++
 
-Any differences between proto2 and proto3 generated code
-are highlighted&mdash;note that these differences are in the generated code as
-described in this document, not the base message classes/interfaces, which are
-the same in both versions. You should read the
-[proto2 language guide](/programming-guides/proto2)
-and/or
-[proto3 language guide](/programming-guides/proto3)
+Any differences between proto2, proto3, and editions
+generated code are highlighted&mdash;note that these differences are in the
+generated code as described in this document, not the base message
+classes/interfaces, which are the same in both versions. You should read the
+[proto2 language guide](/programming-guides/proto2),
+[proto3 language guide](/programming-guides/proto3),
+and/or the [Editions guide](/programming-guides/editions)
 before reading this document.
 
 ## Compiler Invocation {#invocation}
@@ -127,18 +127,18 @@ In a few special cases in which a field name conflicts with reserved words in
 Kotlin or methods already defined in the protobuf library, an extra underscore
 is appended. For instance, the clearer for a field named `in` is `clearIn_()`.
 
-### Singular Fields (proto2)
+### Singular Fields
 
-For any of these field definitions:
+For this field definition:
 
 ```proto
-optional int32 foo = 1;
-required int32 foo = 1;
+int32 foo = 1;
 ```
 
 The compiler will generate the following accessors in the DSL:
 
--   `fun hasFoo(): Boolean`: Returns `true` if the field is set.
+-   `fun hasFoo(): Boolean`: Returns `true` if the field is set. This is not
+    generated for fields using implicit presence.
 -   `var foo: Int`: The current value of the field. If the field is not set,
     returns the default value.
 -   `fun clearFoo()`: Clears the value of the field. After calling this,
@@ -159,54 +159,6 @@ a field
 
 ```proto
 optional Foo my_foo = 1;
-```
-
-you must write
-
-```kotlin
-myFoo = foo {
-  ...
-}
-```
-
-In general, this is because the compiler does not know whether `Foo` has a
-Kotlin DSL at all, or e.g. only has the Java APIs generated. This means that you
-do not have to wait for messages you depend on to add Kotlin code generation.
-
-### Singular Fields (proto3)
-
-For this field definition:
-
-```proto
-int32 foo = 1;
-```
-
-The compiler will generate the following property in the DSL:
-
--   `var foo: Int`: Returns the current value of the field. If the field is not
-    set, returns the default value for the field's type.
--   `fun clearFoo()`: Clears the value of the field. After calling this,
-    `getFoo()` will return the default value for the field's type.
-
-For other simple field types, the corresponding Java type is chosen according to
-the
-[scalar value types table](/programming-guides/proto2#scalar).
-For message and enum types, the value type is replaced with the message or enum
-class. As the message type is still defined in Java, unsigned types in the
-message are represented using the standard corresponding signed types in the
-DSL, for compatibility with Java and older versions of Kotlin.
-
-#### Embedded Message Fields
-
-For message field types, an additional accessor method is generated in the DSL:
-
--   `boolean hasFoo()`: Returns `true` if the field has been set.
-
-Note that there is no shortcut for setting a submessage based on a DSL. For
-example, if you have a field
-
-```proto
-Foo my_foo = 1;
 ```
 
 you must write
@@ -276,8 +228,7 @@ The compiler will generate the following accessor methods in the DSL:
     fields are set; see the
     [Java code reference](/reference/java/java-generated#oneof)
     for the return type
--   `fun hasFoo(): Boolean` (proto2 only): Returns `true` if the oneof case is
-    `FOO`.
+-   `fun hasFoo(): Boolean`: Returns `true` if the oneof case is `FOO`.
 -   `val foo: Int`: Returns the current value of `oneof_name` if the oneof case
     is `FOO`. Otherwise, returns the default value of this field.
 
@@ -313,9 +264,9 @@ The compiler will generate the following members in the DSL class:
 -   `fun DslMap<Int, Int, WeightProxy>.clear()`: clears all entries from this
     map field
 
-## Extensions (proto2 only) {#extension}
+## Extensions {#extension}
 
-Given a message with an extension range:
+Given a proto2 or editions message with an extension range:
 
 ```proto
 message Foo {
@@ -363,7 +314,7 @@ Given an extension definition:
 
 ```proto
 extend Foo {
-  optional int32 bar = 123;
+  int32 bar = 123;
 }
 ```
 

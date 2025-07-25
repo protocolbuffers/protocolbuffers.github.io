@@ -12,30 +12,28 @@ the [Go Protobuf: Releasing the Opaque API](https://go.dev/blog/protobuf-opaque)
 blog post for an introduction.
 
 The migration to the Opaque API happens incrementally, on a per-proto-message or
-per-`.proto`-file basis, by setting the Protobuf Editions feature `api_level`
-option to one of its possible values:
+per-`.proto`-file basis, by setting the `api_level` feature to one of its
+possible values:
 
-*   `API_OPEN` selects the Open Struct API; this was the only API before
-    December 2024.
+*   `API_OPEN` selects the Open Struct API. This was backported into edition
+    2023, so older versions of the Go plugin may not honor it.
 *   `API_HYBRID` is a step between Open and Opaque: The Hybrid API also includes
     accessor methods (so you can update your code), but still exports the struct
     fields as before. There is no performance difference; this API level only
     helps with the migration.
-*   `API_OPAQUE` selects the Opaque API.
+*   `API_OPAQUE` selects the Opaque API; this is the default for Edition 2024
+    and newer.
 
-Today, the default is `API_OPEN`, but the upcoming
-[Protobuf Edition 2024](/editions/overview) will change
-the default to `API_OPAQUE`.
-
-To use the Opaque API before Edition 2024, set the `api_level` like so:
+To override the default for a specific `.proto` file, set the `api_level`
+feature:
 
 ```proto
-edition = "2023";
+edition = "2024";
 
 package log;
 
 import "google/protobuf/go_features.proto";
-option features.(pb.go).api_level = API_OPAQUE;
+option features.(pb.go).api_level = API_OPEN;
 
 message LogEntry { … }
 ```
@@ -48,7 +46,7 @@ For your convenience, you can also override the default API level with a
 `protoc` command-line flag:
 
 ```
-protoc […] --go_opt=default_api_level=API_OPAQUE
+protoc […] --go_opt=default_api_level=API_OPEN
 ```
 
 To override the default API level for a specific file (instead of all files),
@@ -56,12 +54,8 @@ use the `apilevelM` mapping flag (similar to
 [the `M` flag for import paths](/reference/go/go-generated/#package)):
 
 ```
-protoc […] --go_opt=apilevelMhello.proto=API_OPAQUE
+protoc […] --go_opt=apilevelMhello.proto=API_OPEN
 ```
-
-The command-line flags also work for `.proto` files still using proto2 or proto3
-syntax, but if you want to select the API level from within the `.proto` file,
-you need to migrate said file to editions first.
 
 ## Automated migration {#automated}
 

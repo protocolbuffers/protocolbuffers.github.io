@@ -1,8 +1,8 @@
 +++
-title = "Protocol Buffers Version 3 Language Specification"
+title = "Protocol Buffers Language Specification (Proto3)"
 weight = 810
-linkTitle = "Version 3 Language Specification"
-description = "Language specification reference for version 3 of the Protocol Buffers language (proto3)."
+linkTitle = "Language Specification (Proto3)"
+description = "Language specification reference for the Protocol Buffers language (Proto3)."
 type = "docs"
 +++
 

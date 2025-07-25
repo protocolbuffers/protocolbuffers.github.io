@@ -166,17 +166,19 @@ than Rust's std UTF-8 validation.
 Rust's `str` and `std::string::String` types maintain a strict invariant that
 they only contain valid UTF-8, but C++ Protobuf and C++'s `std::string` type
 generally do not enforce any such guarantee. `string` typed Protobuf fields are
-intended to only ever contain valid UTF-8, but the enforcement of this has many
-holes where a `string` field may end up containing invalid UTF-8 contents at
-runtime.
+intended to only ever contain valid UTF-8, and C++ Protobuf uses a correct and
+highly optimized UTF8 validator. C++ Protobuf's API surface is not set up to
+strictly enforce a runtime invariant that `string` fields always contain valid
+UTF-8 (instead, it defers any validation to serialize or subsequent parse time).
 
-To deliver on zero-cost message sharing between C++ and Rust while minimizing
-costly validations or risk of undefined behavior in Rust, we chose not to using
-the `str`/`String` types for `string` field getters, and introduced the types
-`ProtoStr` and `ProtoString` instead which are equivalent types except they
-could contain invalid UTF-8 in rare situations. Those types let the application
-code choose if they wish to perform the validation on-demand to get a `&str`, or
-operate on the raw bytes to avoid any validation.
+To enable integrating Rust into preexisting codebases that use C++ Protobuf
+while minimizing unnecessary validations or risk of undefined behavior in Rust,
+we chose not to use the `str`/`String` types for `string` field getters. We
+introduced the types `ProtoStr` and `ProtoString` instead, which are equivalent
+types, except that they may contain invalid UTF-8 in rare situations. Those
+types let the application code choose if they wish to perform the validation
+on-demand to observe the fields as a `Result<&str>`, or operate on the raw bytes
+to avoid any runtime validation.
 
 We are aware that vocabulary types like `str` are very important to idiomatic
 usage, and intend to keep an eye on if this decision is the right one as usage
