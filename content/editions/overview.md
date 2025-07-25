@@ -22,7 +22,7 @@ the default behavior for the edition you've selected. You can also override your
 overrides. The [section later in this topic on lexical scoping](#scoping) goes
 into more detail on that.
 
-*The latest released edition is 2023.*
+*The latest released edition is 2024.*
 
 The examples in this topic show edition 2024 features, but edition 2024 is
 currently in **pre-release review** and is not yet recommended for production
