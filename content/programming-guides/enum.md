@@ -9,9 +9,10 @@ Enums behave differently in different language libraries. This topic covers the
 different behaviors as well as the plans to move protobufs to a state where they
 are consistent across all languages. If you're looking for information on how to
 use enums in general, see the corresponding sections in the
-[proto2](/programming-guides/proto2#enum) and
-[proto3](/programming-guides/proto3#enum) language guide
-topics.
+[proto2](/programming-guides/proto2#enum),
+[proto3](/programming-guides/proto3#enum), and
+[editions 2023](/programming-guides/editions#enum)
+language guide topics.
 
 ## Definitions {#definitions}
 
@@ -20,8 +21,8 @@ except in their handling of unknown values. Practically, this means that simple
 cases work the same, but some corner cases have interesting implications.
 
 For the purpose of explanation, let us assume we have the following `.proto`
-file (we are deliberately not specifying if this is a `syntax = "proto2"` or
-`syntax = "proto3"` file right now):
+file (we are deliberately not specifying if this is a `syntax = "proto2"`,
+`syntax = "proto3"`, or `edition = "2023"` file right now):
 
 ```
 enum Enum {
@@ -78,8 +79,10 @@ Similarly, maps with *closed* enums for their value will place entire entries
 ## History {#history}
 
 Prior to the introduction of `syntax = "proto3"` all enums were *closed*. Proto3
-introduced *open* enums specifically because of the unexpected behavior that
-*closed* enums cause.
+and editions use *open* enums specifically because of the unexpected behavior
+that *closed* enums cause. You can use
+[`features.enum_type`](/editions/features#enum_type) to
+explicitly set editions enums to open, if needed.
 
 ## Specification {#spec}
 
@@ -96,6 +99,10 @@ behave.
     `protoc` compiler will produce an error.
 *   When a `proto2` file imports an enum defined in a `proto3` file, that enum
     should be treated as **open**.
+
+Editions honor whatever behavior the enum had in the file being imported from.
+Proto2 enums are always treated as closed, proto3 enums are always treated as
+open, and when importing from another editions file it uses the feature setting.
 
 ## Known Issues {#known-issues}
 

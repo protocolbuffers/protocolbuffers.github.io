@@ -7,13 +7,13 @@ type = "docs"
 +++
 
 Any
-differences between proto2 and proto3 generated code are highlighted - note that
-these differences are in the generated code as described in this document, not
-the base message classes/interfaces, which are the same in both versions. You
-should read the
-[proto2 language guide](/programming-guides/proto2)
-and/or
-[proto3 language guide](/programming-guides/proto3)
+differences between proto2, proto3, and Editions generated code are
+highlighted - note that these differences are in the generated code as described
+in this document, not the base message classes/interfaces, which are the same
+across all versions. You should read the
+[proto2 language guide](/programming-guides/proto2),
+[proto3 language guide](/programming-guides/proto3),
+and/or [Editions guide](/programming-guides/editions)
 before reading this document.
 
 The Python Protocol Buffers implementation is a little different from C++ and
@@ -70,8 +70,8 @@ find parts of it included in other Python code that was released before Protocol
 Buffers. Since version 2 of Python Protocol Buffers has a completely different
 interface, and since Python does not have compile-time type checking to catch
 mistakes, we chose to make the version number be a prominent part of generated
-Python file names. Currently both proto2 and proto3 use `_pb2.py` for their
-generated files. {{% /alert %}}
+Python file names. Currently proto2, proto3, and Editions all use `_pb2.py` for
+their generated files. {{% /alert %}}
 
 ## Packages {#package}
 
@@ -96,7 +96,7 @@ size.
 
 If the message's name is a Python keyword, then its class will only be
 accessible via `getattr()`, as described in the
-[*Names which conflict with Python keywords*](#keyword-conflicts) section.
+[Names that conflict with Python keywords](#keyword-conflicts) section.
 
 You should *not* create your own `Foo` subclasses. Generated classes are not
 designed for subclassing and may lead to \"fragile base class\" problems.
@@ -131,7 +131,7 @@ message Foo {
 In this case, the `Bar` class is declared as a static member of `Foo`, so you
 can refer to it as `Foo.Bar`.
 
-## Well Known Types {#wkt}
+## Well-known Types {#wkt}
 
 Protocol buffers provides a number of
 [well-known types](/reference/protobuf/google.protobuf)
@@ -276,19 +276,25 @@ type.
 
 As well as a property, the compiler generates an integer constant for each field
 containing its field number. The constant name is the field name converted to
-upper-case followed by `_FIELD_NUMBER`. For example, given the field `optional
-int32 foo_bar = 5;`, the compiler will generate the constant
-`FOO_BAR_FIELD_NUMBER = 5`.
+upper-case followed by `_FIELD_NUMBER`. For example, given the field `int32
+foo_bar = 5;`, the compiler will generate the constant `FOO_BAR_FIELD_NUMBER =
+5`.
 
 If the field's name is a Python keyword, then its property will only be
 accessible via `getattr()` and `setattr()`, as described in the
-[*Names which conflict with Python keywords*](#keyword-conflicts) section.
+[Names that conflict with Python keywords](#keyword-conflicts) section.
 
-### Singular Fields (proto2) {#singular-fields-proto2}
+Protocol buffers defines two modes of field presence: `explicit` and `implicit`.
+Each of these is described in the following sections.
 
-If you have a singular (optional or required) field `foo` of any non-message
-type, you can manipulate the field `foo` as if it were a regular field. For
-example, if `foo`'s type is `int32`, you can say:
+### Singular Fields with Explicit Presence {#singular-explicit}
+
+Singular fields with `explicit` presence are always able to differentiate
+between the field being unset and the field being set to its default value.
+
+If you have a singular field `foo` of any non-message type, you can manipulate
+the field `foo` as if it were a regular field. For example, if `foo`'s type is
+`int32`, you can say:
 
 ```python
 message.foo = 123
@@ -311,7 +317,22 @@ message.ClearField("foo")
 assert not message.HasField("foo")
 ```
 
-### Singular Fields (proto3) {#singular-fields-proto3}
+In Editions, fields have `explicit` presence by default. The following is an
+example of an `explicit` field in an Editions `.proto` file:
+
+```proto
+edition = "2023";
+message MyMessage {
+  int32 foo = 1;
+}
+```
+
+### Singular Fields with Implicit Presence {#singular-implicit}
+
+Singular fields with `implicit` presence do not have a `HasField()` method. An
+`implicit` field is always "set" and reading the field will always return a
+value. Reading an `implicit` field that has not been assigned a value will
+return the default value for that type.
 
 If you have a singular field `foo` of any non-message type, you can manipulate
 the field `foo` as if it were a regular field. For example, if `foo`'s type is
@@ -339,18 +360,20 @@ message.ClearField("foo")
 
 Message types work slightly differently. You cannot assign a value to an
 embedded message field. Instead, assigning a value to any field within the child
-message implies setting the message field in the parent. You can also use the
+message implies setting the message field in the parent. Submessages always have
+[explicit presence](#fields-with-explicit-presence), so you can also use the
 parent message's `HasField()` method to check if a message type field value has
 been set.
 
 So, for example, let's say you have the following `.proto` definition:
 
 ```proto
+edition = "2023";
 message Foo {
-  optional Bar bar = 1;
+  Bar bar = 1;
 }
 message Bar {
-  optional int32 i = 1;
+  int32 i = 1;
 }
 ```
 
@@ -465,12 +488,13 @@ the object's `extend()` method appends an entire list of messages, but makes a
 For example, given this message definition:
 
 ```proto
+edition = "2023";
 message Foo {
   repeated Bar bars = 1;
 }
 message Bar {
-  optional int32 i = 1;
-  optional int32 j = 2;
+  int32 i = 1;
+  int32 j = 2;
 }
 ```
 
@@ -551,7 +575,9 @@ foo.bars.extend([Bar(i=15), Bar(i=17)])
 ### Groups (proto2) {#groups-proto2}
 
 **Note that groups are deprecated and should not be used when creating new
-message types -- use nested message types instead.**
+message types -- use nested message types (proto2, proto3) or
+[delimited fields](/editions/features#message_encoding)
+(editions) instead.**
 
 A group combines a nested message type and a field into a single declaration,
 and uses a different
@@ -562,7 +588,7 @@ field's name is the **lowercased** name of the group.
 For example, except for wire format, the following two message definitions are
 equivalent:
 
-```python
+```proto
 // Version 1: Using groups
 message SearchResponse {
   repeated group SearchResult = 1 {
@@ -709,7 +735,7 @@ message Foo {
     VALUE_B = 5;
     VALUE_C = 1234;
   }
-  optional SomeEnum bar = 1;
+  SomeEnum bar = 1;
 }
 ```
 
@@ -723,9 +749,9 @@ following enum in a proto:
 
 ```proto
 enum SomeEnum {
-    VALUE_A = 0;
-    VALUE_B = 5;
-    VALUE_C = 1234;
+  VALUE_A = 0;
+  VALUE_B = 5;
+  VALUE_C = 1234;
 }
 ```
 
@@ -748,16 +774,17 @@ assert foo.bar == Foo.VALUE_A
 
 If the enum's name (or an enum value) is a Python keyword, then its object (or
 the enum value's property) will only be accessible via `getattr()`, as described
-in the [*Names which conflict with Python keywords*](#keyword-conflicts)
-section.
+in the [Names that conflict with Python keywords](#keyword-conflicts) section.
 
-The values you can set in an enum depend on your protocol buffers version:
+With proto2, enums are closed, and with proto3, enums are open. In Editions, the
+`enum_type` feature determines the behavior of an enum.
 
--   In **proto2**, an enum cannot contain a numeric value other than those
-    defined for the enum type. If you assign a value that is not in the enum,
-    the generated code will throw an exception.
--   **proto3** uses open enum semantics: enum fields can contain any `int32`
-    value.
+-   `OPEN` enums can have any `int32` value, even if it is not specified in the
+    enum definition. This is the default in Editions.
+-   `CLOSED` enums cannot contain a numeric value other than those defined for
+    the enum type. If you assign a value that is not in the enum, the generated
+    code will throw an exception. This is equivalent to the behavior of enums in
+    proto2.
 
 Enums have a number of utility methods for getting field names from values and
 vice versa, lists of fields, and so on - these are defined in
@@ -767,9 +794,9 @@ following standalone enum in `myproto.proto`:
 
 ```proto
 enum SomeEnum {
-    VALUE_A = 0;
-    VALUE_B = 5;
-    VALUE_C = 1234;
+  VALUE_A = 0;
+  VALUE_B = 5;
+  VALUE_C = 1234;
 }
 ```
 
@@ -793,11 +820,11 @@ defined is returned.
 
 ```proto
 enum SomeEnum {
-    option allow_alias = true;
-    VALUE_A = 0;
-    VALUE_B = 5;
-    VALUE_C = 1234;
-    VALUE_B_ALIAS = 5;
+  option allow_alias = true;
+  VALUE_A = 0;
+  VALUE_B = 5;
+  VALUE_C = 1234;
+  VALUE_B_ALIAS = 5;
 }
 ```
 
@@ -855,7 +882,7 @@ assert not message.HasField("serial_number")
 
 Note that calling `ClearField` on a oneof just clears the currently set field.
 
-## Names which conflict with Python keywords {#keyword-conflicts}
+## Names that conflict with Python keywords {#keyword-conflicts}
 
 If the name of a message, field, enum, or enum value is a
 [Python keyword](https://docs.python.org/3/reference/lexical_analysis#keywords),
@@ -894,11 +921,12 @@ baz.in  # SyntaxError: invalid syntax
 baz.from  # SyntaxError: invalid syntax
 ```
 
-## Extensions (proto2 only) {#extension}
+## Extensions {#extension}
 
-Given a message with an extension range:
+Given a proto2 or editions message with an extension range:
 
 ```proto
+edition = "2023";
 message Foo {
   extensions 100 to 199;
 }
@@ -911,7 +939,7 @@ Given an extension definition:
 
 ```proto
 extend Foo {
-  optional int32 bar = 123;
+  int32 bar = 123;
 }
 ```
 
@@ -966,7 +994,7 @@ RPC systems based on `.proto`-language service definitions should provide
 [plugins](/reference/cpp/api-docs/google.protobuf.compiler.plugin.pb)
 to generate code appropriate for the system. These plugins are likely to require
 that abstract services are disabled, so that they can generate their own classes
-of the same names. Plugins are new in version 2.3.0 (January 2010).
+of the same names.
 
 The remainder of this section describes what the protocol buffer compiler
 generates when abstract services are enabled.

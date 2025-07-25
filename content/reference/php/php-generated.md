@@ -7,9 +7,10 @@ type = "docs"
 +++
 
 You should read the
-[proto3 language guide](/programming-guides/proto3)
+[proto3 language guide](/programming-guides/proto3) or
+[Editions language guide](/programming-guides/editions)
 before reading this document. Note that the protocol buffer compiler currently
-only supports proto3 code generation for PHP.
+only supports proto3 and editions code generation for PHP.
 
 ## Compiler Invocation {#invocation}
 
@@ -37,6 +38,7 @@ protoc --proto_path=src --php_out=build/gen src/example.proto
 And `src/example.proto` is defined as:
 
 ```proto
+edition = "2023";
 package foo.bar;
 message MyMessage {}
 ```
@@ -87,7 +89,12 @@ to Pascal case.*
 Given a simple message declaration:
 
 ```proto
-message Foo {}
+message Foo {
+  int32 int32_value = 1;
+  string string_value = 2;
+  repeated int32 repeated_int32_value = 3;
+  map<int32, int32> map_int32_int32_value = 4;
+}
 ```
 
 The protocol buffer compiler generates a PHP class called `Foo`. This class
@@ -97,11 +104,12 @@ following example:
 
 ```php
 $from = new Foo();
-$from->setInt32(1);
-$from->setString('a');
-$from->getRepeatedInt32()[] = 1;
-$from->getMapInt32Int32()[1] = 1;
+$from->setInt32Value(1);
+$from->setStringValue('a');
+$from->getRepeatedInt32Value()[] = 1;
+$from->getMapInt32Int32Value()[1] = 1;
 $data = $from->serializeToString();
+$to = new Foo();
 try {
   $to->mergeFromString($data);
 } catch (Exception $e) {
@@ -119,20 +127,21 @@ classes. So, for example, if you have this in your `.proto`:
 
 ```proto
 message TestMessage {
-  optional int32 a = 1;
-  message NestedMessage {...}
+  message NestedMessage {
+    int32 a = 1;
+  }
 }
 ```
 
-The compiler will generate the following classes:
+The compiler will generate the following class:
 
 ```php
-class TestMessage {
-  public a;
-}
-
 // PHP doesn’t support nested classes.
-class TestMessage_NestedMessage {...}
+class TestMessage_NestedMessage {
+  public function __construct($data = NULL) {...}
+  public function getA() {...}
+  public function setA($var) {...}
+}
 ```
 
 If the message class name is reserved (for example, `Empty`), the prefix `PB` is
@@ -147,16 +156,21 @@ specified, it is prepended to all generated message classes.
 
 ## Fields
 
-For each field in a message type, there are accessor methods to set and get the
-field. So given a field `x` you can write:
+For each field in a message type, the protocol buffer compiler generates a set
+of accessor methods to set and get the field. The accessor methods are named
+using `snake_case` field names converted to `PascalCase`. So, given a field
+`field_name`, the accessor methods will be `getFieldName` and `setFieldName`.
 
 ```php
-$m = new MyMessage();
-$m->setX(1);
-$val = $m->getX();
+// optional MyEnum optional_enum
+$m->getOptionalEnum();
+$m->setOptionalEnum(MyEnum->FOO);
+$m->hasOptionalEnum();
+$m->clearOptionalEnum();
 
-$a = 1;
-$m->setX($a);
+// MyEnum implicit_enum
+$m->getImplicitEnum();
+$m->setImplicitEnum(MyEnum->FOO);
 ```
 
 Whenever you set a field, the value is type-checked against the declared type of
@@ -171,9 +185,24 @@ You can see the corresponding PHP type for each scalar protocol buffers type in
 the
 [scalar value types table](/programming-guides/proto3#scalar).
 
+### `has...` and `clear...`
+
+For fields with explicit presence, the compiler generates a `has...()` method.
+This method returns `true` if the field is set.
+
+The compiler also generates a `clear...()` method. This method unsets the field.
+After calling this method, `has...()` will return `false`.
+
+For fields with implicit presence, the compiler does not generate `has...()` or
+`clear...()` methods. For these fields, you can check for presence by comparing
+the field value with the default value.
+
 ### Singular Message Fields {#embedded_message}
 
-A field with a message type defaults to nil, and is not automatically created
+For a field with a message type, the compiler generates the same accessor
+methods as for scalar types.
+
+A field with a message type defaults to `null`, and is not automatically created
 when the field is accessed. Thus you need to explicitly create sub messages, as
 in the following:
 
@@ -265,10 +294,10 @@ specified, it is prepended to all generated enum classes.
 
 ## Oneof
 
-For a [oneof](/programming-guides/proto3#oneof)s, the
-protocol buffer compiler generates the same code as it would for regular
-singular fields, but also adds a special accessor method that lets you find out
-which oneof field (if any) is set. So, given this message:
+For a [oneof](/programming-guides/editions#oneof), the
+protocol buffer compiler generates a `has` and `clear` method for each field in
+the oneof, as well as a special accessor method that lets you find out which
+oneof field (if any) is set. So, given this message:
 
 ```proto
 message TestMessage {
@@ -293,5 +322,16 @@ class TestMessage {
 }
 ```
 
-The accessor method's name is based on the oneof's name, and returns an enum
-value representing the field in the oneof that is currently set.
+The accessor method's name is based on the oneof's name, and returns a string
+representing the field in the oneof that is currently set. If the oneof is not
+set, the method returns an empty string.
+
+When you set a field in a oneof, it automatically clears all other fields in the
+oneof. If you want to set multiple fields in a oneof, you must do so in separate
+statements.
+
+```php
+$m = new TestMessage();
+$m->setOneofInt32(42); // $m->hasOneofInt32() is true
+$m->setOneofInt64(123); // $m->hasOneofInt32() is now false
+```

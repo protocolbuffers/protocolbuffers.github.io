@@ -7,12 +7,12 @@ type = "docs"
 +++
 
 Any differences between
-proto2 and proto3 generated code are highlighted - note that these differences
-are in the generated code as described in this document, not the base API, which
-are the same in both versions. You should read the
-[proto2 language guide](/programming-guides/proto2)
-and/or the
-[proto3 language guide](/programming-guides/proto3)
+proto2, proto3, and editions generated code are highlighted - note that these
+differences are in the generated code as described in this document, not the
+base API, which are the same in both versions. You should read the
+[proto2 language guide](/programming-guides/proto2),
+[proto3 language guide](/programming-guides/proto3), or
+[editions language guide](/programming-guides/editions)
 before reading this document.
 
 {{% alert title="Note" color="warning" %}}You are
@@ -256,13 +256,14 @@ The case-conversion works as follows:
 Thus, the proto field `birth_year` becomes `BirthYear` in Go, and
 `_birth_year_2` becomes `XBirthYear_2`.
 
-### Singular Scalar Fields (proto2) {#singular-scalar-proto2}
+<a id="singular-scalar-proto2"></a>
 
-For either of these field definitions:
+### Singular Explicit Presence Scalar Fields {#singular-explicit}
+
+For the field definition:
 
 ```proto
-optional int32 birth_year = 1;
-required int32 birth_year = 1;
+int32 birth_year = 1;
 ```
 
 the compiler generates a struct with an `*int32` field named `BirthYear` and an
@@ -275,13 +276,14 @@ For other scalar field types (including `bool`, `bytes`, and `string`), `*int32`
 is replaced with the corresponding Go type according to the
 [scalar value types table](/programming-guides/proto2#scalar).
 
-### Singular Scalar Fields (proto3) {#singular-scalar-proto3}
+<a id="singular-scalar-proto3"></a>
+
+### Singular Implicit Presence Scalar Fields {#singular-implicit}
 
 For this field definition:
 
 ```proto
 int32 birth_year = 1;
-optional int32 first_active_year = 2;
 ```
 
 The compiler will generate a struct with an `int32` field named `BirthYear` and
@@ -297,8 +299,8 @@ For other scalar field types (including `bool`, `bytes`, and `string`), `int32`
 is replaced with the corresponding Go type according to the
 [scalar value types table](/programming-guides/proto3#scalar).
 Unset values in the proto will be represented as the
-[zero value](https://golang.org/ref/spec#The_zero_value) of that type
-(`0` for numbers, the empty string for strings).
+[zero value](https://golang.org/ref/spec#The_zero_value) of that type (`0` for
+numbers, the empty string for strings).
 
 ### Singular Message Fields {#singular-message}
 
@@ -319,6 +321,11 @@ message Concert {
 
 // proto3
 message Concert {
+  Band headliner = 1;
+}
+
+// editions
+message Concer {
   Band headliner = 1;
 }
 ```
@@ -606,13 +613,13 @@ represented in Go in exactly the same way, with multiple names corresponding to
 the same numeric value. The reverse mapping contains a single entry for the
 numeric value to the name which appears first in the .proto file.
 
-## Extensions (proto2) {#extensions}
+## Extensions {#extensions}
 
 Given an extension definition:
 
 ```proto
 extend Concert {
-  optional int32 promo_id = 123;
+  int32 promo_id = 123;
 }
 ```
 
@@ -642,9 +649,9 @@ For example, given the following definition:
 
 ```proto
 extend Concert {
-  optional int32 singular_int32 = 1;
+  int32 singular_int32 = 1;
   repeated bytes repeated_strings = 2;
-  optional Band singular_message = 3;
+  Band singular_message = 3;
 }
 ```
 
@@ -667,7 +674,7 @@ pattern is to do something like this:
 ```proto
 message Promo {
   extend Concert {
-    optional int32 promo_id = 124;
+    int32 promo_id = 124;
   }
 }
 ```

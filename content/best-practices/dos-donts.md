@@ -103,10 +103,10 @@ there is a hard limit on the size of a method
 ## **Do** Include an Unspecified Value in an Enum {#unspecified-enum}
 
 Enums should include a default `FOO_UNSPECIFIED` value as the first value in the
-declaration . When new values
-are added to a proto2 enum, old clients will see the field as unset and the
-getter will return the default value or the first-declared value if no default
-exists . For consistent behavior with [proto enums][proto-enums],
+declaration.
+When new values are added to an enum, old clients will see the field as unset
+and the getter will return the default value or the first-declared value if no
+default exists . For consistent behavior with [proto enums][proto-enums],
 the first declared enum value should be a default `FOO_UNSPECIFIED` value and
 should use tag 0. It may be tempting to declare this default as a semantically
 meaningful value but as a general rule, do not, to aid in the evolution of your
@@ -277,6 +277,37 @@ example, see
 You should also avoid using keywords in your file paths, as this can also cause
 problems.
 
+## **Do** Use Different Messages For RPC APIs and Storage {#separate-types-for-storage}
+
+Reusing the same messages for APIs and long-term storage may seem convenient,
+reducing boilerplate and overhead of coversion between messages.
+
+However, the needs of long-term storage and live RPC services tend to later
+diverge. Using separate types even if they are largely duplicative initially
+gives freedom to change your storage format without impacting your external
+clients. Layer your code so that modules deal either with client protos, storage
+protos, or translation.
+
+There is a cost in maintaining the translation layer, but it quickly pays off
+once you have clients and have to do your first storage changes.
+
+## **Don't** Use Booleans for Something That Has Two States Now, but Might Have More Later {#bad-bools}
+
+If you are using boolean for a field, make sure that the field is indeed
+describing just two possible states (for all time, not just now and the near
+future). The future flexibility of using an enum is often worth it, even if it
+only has two values when it is first introduced.
+
+```
+message Photo {
+  // Bad: True if it's a GIF.
+  optional bool gif;
+
+  // Good: File format of the referenced photo (for example, GIF, WebP, PNG).
+  optional PhotoType type;
+}
+```
+
 ## **Do** Use java_outer_classname {#java-outer-classname}
 
 Every proto schema definition file should set option `java_outer_classname` to
@@ -286,11 +317,3 @@ the file `student_record_request.proto` should set:
 ```java
 option java_outer_classname = "StudentRecordRequestProto";
 ```
-
-## Appendix {#appendix}
-
-### API Best Practices {#api-best-practices}
-
-This document lists only changes that are extremely likely to cause breakage.
-For higher-level guidance on how to craft proto APIs that grow gracefully see
-[API Best Practices](/best-practices/api).

@@ -444,14 +444,14 @@ ignore any new fields. To the old code, optional fields that were deleted will
 simply have their default value, and deleted repeated fields will be empty. New
 code will also transparently read old messages. However, keep in mind that new
 optional fields will not be present in old messages, so you will need to either
-check explicitly whether they're set with `has_`, or provide a reasonable
-default value in your `.proto` file with `[default = value]` after the tag
-number. If the default value is not specified for an optional element, a
+check explicitly whether they're set with `HasField('field_name')`, or provide a
+reasonable default value in your `.proto` file with `[default = value]` after
+the tag number. If the default value is not specified for an optional element, a
 type-specific default value is used instead: for strings, the default value is
 the empty string. For booleans, the default value is false. For numeric types,
 the default value is zero. Note also that if you added a new repeated field,
 your new code will not be able to tell whether it was left empty (by new code)
-or never set at all (by old code) since there is no `has_` flag for it.
+or never set at all (by old code) since there is no `HasField` check for it.
 
 ## Advanced Usage {#advanced-usage}
 

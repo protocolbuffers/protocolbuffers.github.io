@@ -256,67 +256,46 @@ case-conversion works as follows:
 Thus, you can access the proto field `birth_year` using the `GetBirthYear()`
 method in Go, and `_birth_year_2` using `GetXBirthYear_2()`.
 
-### Singular Scalar Fields (proto2) {#singular-scalar-proto2}
-
-For either of these field definitions:
-
-```proto
-optional int32 birth_year = 1;
-required int32 birth_year = 1;
-```
-
-the compiler generates the following accessor methods:
-
-```go
-func (m *Artist) GetBirthYear() int32 { ... }
-func (m *Artist) SetBirthYear(v int32) { ... }
-func (m *Artist) HasBirthYear() bool { ... }
-func (m *Artist) ClearBirthYear() { ... }
-```
-
-The accessor method `GetBirthYear()` returns the `int32` value in `birth_year`
-or the default value if the field is unset. If the default is not explicitly
-set, the [zero value](https://golang.org/ref/spec#The_zero_value) of
-that type is used instead (`0` for numbers, the empty string for strings).
-
-For other scalar field types (including `bool`, `bytes`, and `string`), `int32`
-is replaced with the corresponding Go type according to the
-[scalar value types table](/programming-guides/proto2#scalar).
-
-### Singular Scalar Fields (proto3) {#singular-scalar-proto3}
+### Singular Fields
 
 For this field definition:
 
 ```proto
-int32 birth_year = 1;
-optional int32 first_active_year = 2;
+// proto2 and proto3
+message Artist {
+  optional int32 birth_year = 1;
+}
+
+// editions
+message Artist {
+  int32 birth_year = 1 [features.field_presence = EXPLICIT];
+}
 ```
 
-the compiler generates the following accessor methods:
+the compiler generates a Go struct with the following accessor methods:
 
 ```go
-func (m *Artist) GetBirthYear() int32 { ... }
-func (m *Artist) SetBirthYear(v int32) { ... }
-// NOTE: No HasBirthYear() or ClearBirthYear() methods;
-// proto3 fields only have presence when declared as optional:
-// /programming-guides/field_presence.md
-
-func (m *Artist) GetFirstActiveYear() int32 { ... }
-func (m *Artist) SetFirstActiveYear(v int32) { ... }
-func (m *Artist) HasFirstActiveYear() bool { ... }
-func (m *Artist) ClearFirstActiveYear() { ... }
+func (m *Artist) GetBirthYear() int32
+func (m *Artist) SetBirthYear(v int32)
 ```
 
-The accessor method `GetBirthYear()` returns the `int32` value in `birth_year`
-or the [zero value](https://golang.org/ref/spec#The_zero_value) of
-that type if the field is unset (`0` for numbers, the empty string for strings).
+With implicit presence, the getter returns the `int32` value in `birth_year` or
+the [zero value](https://golang.org/ref/spec#The_zero_value) of that
+type if the field is unset (`0` for numbers, the empty string for strings). With
+explicit presence, the getter returns the `int32` value in `birth_year` or the
+default value if the field is unset. If the default is not explicitly set, the
+zero value is used instead.
 
 For other scalar field types (including `bool`, `bytes`, and `string`), `int32`
 is replaced with the corresponding Go type according to the
 [scalar value types table](/programming-guides/proto3#scalar).
-Unset values in the proto will be represented as the
-[zero value](https://golang.org/ref/spec#The_zero_value) of that type
-(`0` for numbers, the empty string for strings).
+
+In fields with explicit presence, you can also use these methods:
+
+```go
+func (m *Artist) HasBirthYear() bool
+func (m *Artist) ClearBirthYear()
+```
 
 ### Singular Message Fields {#singular-message}
 
@@ -335,7 +314,7 @@ message Concert {
   // The generated code is the same result if required instead of optional.
 }
 
-// proto3
+// proto3 and editions
 message Concert {
   Band headliner = 1;
 }

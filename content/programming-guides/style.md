@@ -195,14 +195,6 @@ service FooService {
 }
 ```
 
-For more service-related guidance, see
-[Create Unique Protos per Method](/best-practices/api#unique-protos)
-and
-[Don't Include Primitive Types in a Top-level Request or Response Proto](/programming-guides/api#dont-include-primitive-types)
-in the API Best Practices topic, and
-[Define Message Types in Separate Files](/best-practices/dos-donts#separate-files)
-in Proto Best Practices.
-
 ## Things to Avoid {#avoid}
 
 ### Required Fields {#required}
@@ -210,7 +202,9 @@ in Proto Best Practices.
 Required fields are a way to enforce that a given field must be set when parsing
 wire bytes, and otherwise refuse to parse the message. The required invariant is
 generally not enforced on messages constructed in memory. Required fields were
-removed in proto3.
+removed in proto3. Proto2 `required` fields that have been migrated to editions
+2023 can use the `field_presence` feature set to `LEGACY_REQUIRED` to
+accommodate.
 
 While enforcement of required fields at the schema level is intuitively
 desirable, one of the primary design goals of protobuf is to support long term
@@ -228,8 +222,10 @@ See
 ### Groups {#groups}
 
 Groups is an alternate syntax and wire format for nested messages. Groups are
-considered deprecated in proto2 and were removed from proto3. You should use a
-nested message definition and field of that type instead of using the group
-syntax.
+considered deprecated in proto2, were removed from proto3, and are converted to
+a delimited representation in edition 2023. You can use a nested message
+definition and field of that type instead of using the group syntax, using the
+[`message_encoding`](/editions/features#message_encoding)
+feature for wire-compatibility.
 
 See [groups](/programming-guides/proto2#groups).

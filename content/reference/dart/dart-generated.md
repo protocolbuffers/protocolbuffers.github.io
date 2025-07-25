@@ -7,12 +7,12 @@ type = "docs"
 +++
 
 Any differences between
-proto2 and proto3 generated code are highlighted - note that these differences
-are in the generated code as described in this document, not the base API, which
-are the same in both versions. You should read the
-[proto2 language guide](/programming-guides/proto2)
-and/or the
-[proto3 language guide](/programming-guides/proto3)
+proto2, proto3, and editions generated code are highlighted - note that these
+differences are in the generated code as described in this document, not the
+base API, which are the same in both versions. You should read the
+[proto2 language guide](/programming-guides/proto2),
+[proto3 language guide](/programming-guides/proto3), or
+[editions language guide](/programming-guides/editions)
 before reading this document.
 
 ## Compiler Invocation {#invocation}
@@ -109,13 +109,16 @@ case-conversion works as follows:
 Thus, for the field `foo_bar_baz`, the getter becomes `get fooBarBaz` and a
 method prefixed with `has` would be `hasFooBarBaz`.
 
-### Singular Primitive Fields (proto2)
+### Singular Primitive Fields
 
-For any of these field definitions:
+All fields have
+[explicit presence](/programming-guides/field_presence#presence-proto2)
+in the Dart implementation.
+
+For the following field definition:
 
 ```proto
-optional int32 foo = 1;
-required int32 foo = 1;
+int32 foo = 1;
 ```
 
 The compiler will generate the following accessor methods in the message class:
@@ -128,35 +131,10 @@ The compiler will generate the following accessor methods in the message class:
 -   `void clearFoo()`: Clears the value of the field. After calling this,
     `hasFoo()` will return `false` and `get foo` will return the default value.
 
-For other simple field types, the corresponding Dart type is chosen according to
-the
-[scalar value types table](/programming-guides/proto2#scalar).
-For message and enum types, the value type is replaced with the message or enum
-class.
-
-### Singular Primitive Fields (proto3)
-
-For this field definition:
-
-```proto
-int32 foo = 1;
-```
-
-The compiler will generate the following accessor methods in the message class:
-
--   `int get foo`: Returns the current value of the field. If the field is not
-    set, returns the default value.
--   `set foo(int value)`: Sets the value of the field. After calling this, `get
-    foo` will return `value`.
--   `void clearFoo()`: Clears the value of the field. After calling this,`get
-    foo` will return the default value.
-
     {{% alert title="Note" color="note" %}} Due to a
     quirk in the Dart proto3 implementation, the following methods are generated
-    even if the `optional` modifier, used to request
-    [presence semantics](/programming-guides/field_presence#presence-in-proto3-apis),
-    isn't in the proto
-    definition.{{% /alert %}}
+    even if implicit presence is
+    configured.{{% /alert %}}
 
 -   `bool hasFoo()`: Returns `true` if the field is set.
 
@@ -170,6 +148,12 @@ The compiler will generate the following accessor methods in the message class:
 
 -   `void clearFoo()`: Clears the value of the field. After calling this,
     `hasFoo()` will return `false` and `get foo` will return the default value.
+
+For other simple field types, the corresponding Dart type is chosen according to
+the
+[scalar value types table](/programming-guides/editions#scalar).
+For message and enum types, the value type is replaced with the message or enum
+class.
 
 ### Singular Message Fields {#singular-message}
 
@@ -188,7 +172,7 @@ message Baz {
   // The generated code is the same result if required instead of optional.
 }
 
-// proto3
+// proto3 and editions
 message Baz {
   Bar bar = 1;
 }
@@ -226,10 +210,6 @@ The compiler will generate:
 For this field definition:
 
 ```proto
-// proto2
-optional int64 bar = 1;
-
-// proto3
 int64 bar = 1;
 ```
 
@@ -246,7 +226,7 @@ import 'package:fixnum/fixnum.dart';
 
 ### Map Fields
 
-Given a [`map`](/programming-guides/proto3#maps) field
+Given a [`map`](/programming-guides/editions#maps) field
 definition like this:
 
 ```proto
@@ -259,9 +239,9 @@ The compiler will generate the following getter:
     field is not set, returns an empty map. Modifications to the map are
     reflected in the field.
 
-## Any
+### Any
 
-Given an [`Any`](/programming-guides/proto3#any) field
+Given an [`Any`](/programming-guides/editions#any) field
 like this:
 
 ```proto
@@ -303,9 +283,9 @@ and unpack the `Any`'s values:
         {String typeUrlPrefix = 'type.googleapis.com'});
 ```
 
-## Oneof
+### Oneof
 
-Given a [`oneof`](/programming-guides/proto3#oneof)
+Given a [`oneof`](/programming-guides/editions#oneof)
 definition like this:
 
 ```proto
@@ -319,7 +299,7 @@ message Foo {
 
 The compiler will generate the following Dart enum type:
 
-```proto
+```dart
  enum Foo_Test { name, subMessage, notSet }
 ```
 
@@ -343,7 +323,7 @@ are generated. For instance for `name`:
     this, `get name` will return the default value and `whichTest()` will return
     `Foo_Test.notSet`.
 
-## Enumerations {#enum}
+### Enumerations {#enum}
 
 Given an enum definition like:
 
@@ -414,10 +394,10 @@ The protocol buffer compiler will generate a class called `Bar`, which extends
 `GeneratedMessage`, and a class called `Bar_Color`, which extends
 `ProtobufEnum`.
 
-## Extensions (proto2 only) {#extension}
+## Extensions (not available in proto3) {#extension}
 
 Given a file `foo_test.proto` including a message with an
-[extension range](/programming-guides/proto2#extensions)
+[extension range](/programming-guides/editions#extensions)
 and a top-level extension definition:
 
 ```proto
@@ -453,7 +433,7 @@ Extensions can also be declared nested inside of another message:
 ```proto
 message Baz {
   extend Foo {
-    optional int32 bar = 124;
+    int32 bar = 124;
   }
 }
 ```

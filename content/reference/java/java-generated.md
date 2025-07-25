@@ -897,7 +897,7 @@ RPC systems based on `.proto`-language service definitions should provide
 [plugins](/reference/cpp/api-docs/google.protobuf.compiler.plugin.pb)
 to generate code appropriate for the system. These plugins are likely to require
 that abstract services are disabled, so that they can generate their own classes
-of the same names. Plugins are new in version 2.3.0 (January 2010).
+of the same names.
 
 The remainder of this section describes what the protocol buffer compiler
 generates when abstract services are enabled.

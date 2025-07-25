@@ -20,6 +20,10 @@ New news topics will also be published to the
 The following news topics provide information in the reverse order in which it
 was released.
 
+*   [July 16, 2025](/news/2025-07-16) - Resuming support
+    for Bazel with MSVC
+*   [July 14, 2025](/news/2025-07-14) - Deprecating
+    FieldDescriptor labels
 *   [June 27, 2025](/news/2025-06-27) - Edition 2024
 *   [March 18, 2025](/news/2025-03-18) - Dropping support
     for Ruby 3.0
@@ -97,8 +101,6 @@ release notes will be more complete. Also, not everything from the chronological
 listing will be in these topics, as some content is not specific to a particular
 release.
 
-*   [Version 32.x](/news/v32)
-*   [Version 31.x](/news/v31)
 *   [Version 30.x](/news/v30)
 *   [Version 29.x](/news/v29)
 *   [Version 26.x](/news/v26)
