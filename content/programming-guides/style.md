@@ -195,14 +195,6 @@ service FooService {
 }
 ```
 
-For more service-related guidance, see
-[Create Unique Protos per Method](/best-practices/api#unique-protos)
-and
-[Don't Include Primitive Types in a Top-level Request or Response Proto](/programming-guides/api#dont-include-primitive-types)
-in the API Best Practices topic, and
-[Define Message Types in Separate Files](/best-practices/dos-donts#separate-files)
-in Proto Best Practices.
-
 ## Things to Avoid {#avoid}
 
 ### Required Fields {#required}
