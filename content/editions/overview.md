@@ -28,10 +28,6 @@ The examples in this topic show edition 2024 features, but edition 2024 is
 currently in **pre-release review** and is not yet recommended for production
 code.
 
-The examples in this topic show edition 2024 features, but edition 2024 is
-currently in **pre-release review** and is not yet recommended for production
-code.
-
 ## Lifecycle of a Feature {#lifecycles}
 
 Editions provide the fundamental increments for the lifecycle of a feature.
@@ -369,7 +365,7 @@ Edition 2024 added support for option imports using the syntax `import option`.
 
 Option imports must come after any other `import` statements.
 
-Unlike normal `import` statements, option imports import only custom options
+Unlike normal `import` statements, `import option` only imports custom options
 defined in a `.proto` file, without importing other symbols.
 
 This means that messages and enums are excluded from the option import. In the
