@@ -1138,52 +1138,28 @@ There are two main reasons to use extensions:
 
 ### Example Extension {#ext-example}
 
-Let's look at an example extension:
+Using an extension is a two-step process. First, in the message you want to
+extend (the "container"), you must reserve a range of field numbers for
+extensions. Then, in a separate file, you define the extension field itself.
+
+Here is an example that shows how to add an extension for kitten videos to a
+generic `UserContent` message.
+
+**Step 1: Reserve an extension range in the container message.**
+
+The container message must use the `extensions` keyword to reserve a range of
+field numbers for others to use. It is a best practice to also add a
+`declaration` for the specific extension you plan to add. This declaration acts
+as a forward-declaration, making it easier for developers to discover extensions
+and avoid reusing field numbers.
 
 ```proto
-// file kittens/video_ext.proto
-
-import "kittens/video.proto";
-import "media/user_content.proto";
-
-package kittens;
-
-// This extension allows kitten videos in a media.UserContent message.
-extend media.UserContent {
-  // Video is a message imported from kittens/video.proto
-  repeated Video kitten_videos = 126;
-}
-```
-
-Note that the file defining the extension (`kittens/video_ext.proto`) imports
-the container message's file (`media/user_content.proto`).
-
-The container message must reserve a subset of its field numbers for extensions.
-
-```proto
-// file media/user_content.proto
+// media/user_content.proto
+edition = "2023";
 
 package media;
 
-// A container message to hold stuff that a user has created.
-message UserContent {
-  // Set verification to `DECLARATION` to enforce extension declarations for all
-  // extensions in this range.
-  extensions 100 to 199 [verification = DECLARATION];
-}
-```
-
-The container message's file (`media/user_content.proto`) defines the message
-`UserContent`, which reserves field numbers [100 to 199] for extensions. It is
-recommended to set `verification = DECLARATION` for the range to require
-declarations for all its extensions.
-
-When the new extension (`kittens/video_ext.proto`) is added, a corresponding
-declaration should be added to `UserContent` and `verification` should be
-removed.
-
-```
-// A container message to hold stuff that a user has created.
+// A container for user-created content.
 message UserContent {
   extensions 100 to 199 [
     declaration = {
@@ -1191,21 +1167,38 @@ message UserContent {
       full_name: ".kittens.kitten_videos",
       type: ".kittens.Video",
       repeated: true
-    },
-    // Ensures all field numbers in this extension range are declarations.
-    verification = DECLARATION
+    }
   ];
 }
 ```
 
-`UserContent` declares that field number `126` will be used by a `repeated`
-extension field with the fully-qualified name `.kittens.kitten_videos` and the
-fully-qualified type `.kittens.Video`. To learn more about extension
-declarations see
-[Extension Declarations](/programming-guides/extension_declarations).
+This declaration specifies the field number, full name, type, and cardinality of
+the extension that will be defined elsewhere.
 
-Note that the container message's file (`media/user_content.proto`) **does not**
-import the kitten_video extension definition (`kittens/video_ext.proto`)
+**Step 2: Define the extension in a separate file.**
+
+The extension itself is defined in a different `.proto` file, which typically
+focuses on a specific feature (like kitten videos). This avoids adding a
+dependency from the generic container to the specific feature.
+
+```proto
+// kittens/video_ext.proto
+edition = "2023";
+
+import "media/user_content.proto"; // Imports the container message
+import "kittens/video.proto";      // Imports the extension's message type
+
+package kittens;
+
+// This defines the extension field.
+extend media.UserContent {
+  repeated Video kitten_videos = 126;
+}
+```
+
+The `extend` block ties the new `kitten_videos` field back to the
+`media.UserContent` message, using the field number `126` that was reserved in
+the container.
 
 There is no difference in the wire-format encoding of extension fields as
 compared to a standard field with the same field number, type, and cardinality.

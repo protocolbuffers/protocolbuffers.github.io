@@ -222,16 +222,15 @@ For example, `-500z` is the same as the varint `999`.
 
 ### Non-varint Numbers {#non-varints}
 
-Non-varint numeric types are simple -- `double` and `fixed64` have wire type
-`I64`, which tells the parser to expect a fixed eight-byte lump of data. We can
-specify a `double` record by writing `5: 25.4`, or a `fixed64` record with `6:
-200i64`. In both cases, omitting an explicit wire type implies the `I64` wire
-type.
+Non-varint numeric types are simple. `double` and `fixed64` have wire type
+`I64`, which tells the parser to expect a fixed eight-byte lump of data.
+`double` values are encoded in IEEE 754 double-precision format. We can specify
+a `double` record by writing `5: 25.4`, or a `fixed64` record with `6: 200i64`.
 
 Similarly `float` and `fixed32` have wire type `I32`, which tells it to expect
-four bytes instead. The syntax for these consists of adding an `i32` suffix.
-`25.4i32` will emit four bytes, as will `200i32`. Tag types are inferred as
-`I32`.
+four bytes instead. `float` values are encoded in IEEE 754 single-precision
+format. The syntax for these consists of adding an `i32` suffix. `25.4i32` will
+emit four bytes, as will `200i32`. Tag types are inferred as `I32`.
 
 ## Length-Delimited Records {#length-types}
 
@@ -529,11 +528,13 @@ value      := varint      for wire_type == VARINT,
 varint     := int32 | int64 | uint32 | uint64 | bool | enum | sint32 | sint64;
                 encoded as varints (sintN are ZigZag-encoded first)
 i32        := sfixed32 | fixed32 | float;
-                encoded as 4-byte little-endian;
-                memcpy of the equivalent C types (u?int32_t, float)
+                encoded as 4-byte little-endian (float is IEEE 754
+                single-precision); memcpy of the equivalent C types (u?int32_t,
+                float)
 i64        := sfixed64 | fixed64 | double;
-                encoded as 8-byte little-endian;
-                memcpy of the equivalent C types (u?int64_t, double)
+                encoded as 8-byte little-endian (double is IEEE 754
+                double-precision); memcpy of the equivalent C types (u?int64_t,
+                double)
 
 len-prefix := size (message | string | bytes | packed);
                 size encoded as int32 varint

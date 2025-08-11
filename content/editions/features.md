@@ -1052,15 +1052,15 @@ proto2         | `LEGACY`
 
 This feature determines how generated code should treat string fields. This
 replaces the `ctype` option from proto2 and proto3, and offers a new
-`string_view` feature. In Edition 2023, you can specify either `ctype` or
+`string_type` feature. In Edition 2023, you can specify either `ctype` or
 `string_type` on a field, but not both. In Edition 2024, the `ctype` option is
 removed.
 
 **Values available:**
 
-*   `VIEW`: Generates `string_view` accessors for the field. This will be the
-    default in a future edition.
-*   `CORD`: Generates `Cord` accessors for the field.
+*   `VIEW`: Generates `string_view` accessors for the field.
+*   `CORD`: Generates `Cord` accessors for the field. Not supported on extension
+    fields.
 *   `STRING`: Generates `string` accessors for the field.
 
 **Applicable to the following scopes:** File, Field

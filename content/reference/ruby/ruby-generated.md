@@ -8,9 +8,10 @@ type = "docs"
 
 You should
 read the language guides for
-[proto2](/programming-guides/proto2) or
-[proto3](/programming-guides/proto3) before reading this
-document.
+[proto2](/programming-guides/proto2),
+[proto3](/programming-guides/proto3), or
+[editions](/programming-guides/editions) before reading
+this document.
 
 The protocol compiler for Ruby emits Ruby source files that use a DSL to define
 the message schema. However the DSL is still subject to change. In this guide we
@@ -114,10 +115,10 @@ When you create a message, you can conveniently initialize fields in the
 constructor. Here is an example of constructing and using a message:
 
 ```ruby
-message = MyMessage.new(:int_field => 1,
-                        :string_field => "String",
-                        :repeated_int_field => [1, 2, 3, 4],
-                        :submessage_field => SubMessage.new(:foo => 42))
+message = MyMessage.new(int_field: 1,
+                        string_field: "String",
+                        repeated_int_field: [1, 2, 3, 4],
+                        submessage_field: MyMessage::SubMessage.new(foo: 42))
 serialized = MyMessage.encode(message)
 
 message2 = MyMessage.decode(serialized)
@@ -174,24 +175,37 @@ conversion. You should convert values yourself first, if necessary.
 
 #### Checking Presence
 
-When using `optional` fields, field presence is checked by calling a generated
-`has_...?` method. Setting any value&mdash;even the default value&mdash;marks
-the field as present. Fields can be cleared by calling a different generated
-`clear_...` method. For example, for a message `MyMessage` with an int32 field
-`foo`:
+Explicit field presence is determined by the `field_presence` feature (in
+editions), the `optional` keyword (in proto2/proto3), and the field type
+(message and oneof fields always have explicit presence). When a field has
+presence, you can check whether the field is set on a message by calling a
+generated `has_...?` method. Setting any value&mdash;even the default
+value&mdash;marks the field as present. Fields can be cleared by calling a
+different generated `clear_...` method.
+
+For example, for a message `MyMessage` with an int32 field `foo`:
+
+```proto
+message MyMessage {
+  int32 foo = 1;
+}
+```
+
+The presence of `foo` can be checked as follows:
 
 ```ruby
 m = MyMessage.new
-raise unless !m.has_foo?
+raise if m.has_foo?
 m.foo = 0
 raise unless m.has_foo?
 m.clear_foo
-raise unless !m.has_foo?
+raise if m.has_foo?
 ```
 
 ### Singular Message Fields {#embedded_message}
 
-For submessages, unset fields will return `nil`, so you can always tell if the
+Submessage fields always have presence, regardless of whether they're marked as
+`optional`. Unset submessage fields return `nil`, so you can always tell if the
 message was explicitly set or not. To clear a submessage field, set its value
 explicitly to `nil`.
 
@@ -208,13 +222,11 @@ In addition to comparing and assigning `nil`, generated messages have `has_...`
 and `clear_...` methods, which behave the same as for basic types:
 
 ```ruby
-if message.has_submessage_field?
-  raise unless message.submessage_field == nil
+if !message.has_submessage_field?
   puts "Submessage field is unset."
 else
-  raise unless message.submessage_field != nil
   message.clear_submessage_field
-  raise unless message.submessage_field == nil
+  raise if message.has_submessage_field?
   puts "Cleared submessage field."
 end
 ```
@@ -232,10 +244,9 @@ message RecursiveMessage {
 }
 
 # test.rb
-
 require 'foo'
 
-message = RecursiveSubmessage.new
+message = RecursiveMessage.new
 message.submessage = message
 ```
 
@@ -279,8 +290,8 @@ For repeated fields that contain messages, the constructor for
 `:message`, the class of the submessage, and the values to set:
 
 ```ruby
-first_message = MySubMessage.new(:foo => 42)
-second_message = MySubMessage.new(:foo => 79)
+first_message = MySubMessage.new(foo: 42)
+second_message = MySubMessage.new(foo: 79)
 
 repeated_field = Google::Protobuf::RepeatedField.new(
     :message,
@@ -331,7 +342,7 @@ message Foo {
     VALUE_B = 5;
     VALUE_C = 1234;
   }
-  optional SomeEnum bar = 1;
+  SomeEnum bar = 1;
 }
 ```
 
@@ -344,8 +355,10 @@ message.bar = Foo::SomeEnum::VALUE_A
 
 You may assign either a number or a symbol to an enum field. When reading the
 value back, it will be a symbol if the enum value is known, or a number if it is
-unknown. Since **proto3** uses open enum semantics, any number may be assigned
-to an enum field, even if it was not defined in the enum.
+not.
+
+With `OPEN` enums, which proto3 uses, any integer value can be assigned to the
+enum, even if that value is not defined in the enum.
 
 ```ruby
 message.bar = 0
@@ -436,4 +449,5 @@ raise unless message.has_test_oneof?
 raise unless message.has_name?
 raise unless !message.has_serial_number?
 raise unless !message.has_test_oneof?
+
 ```

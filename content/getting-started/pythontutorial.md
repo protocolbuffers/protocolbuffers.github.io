@@ -293,6 +293,31 @@ Again, see the
 [`Message` API reference](https://googleapis.dev/python/protobuf/latest/google/protobuf/message.html#google.protobuf.message.Message)
 for a complete list.
 
+You can also easily serialize messages to and from JSON. The `json_format`
+module provides helpers for this:
+
+-   `MessageToJson(message)`: serializes the message to a JSON string.
+-   `Parse(json_string, message)`: parses a JSON string into the given message.
+
+For example:
+
+```python
+from google.protobuf import json_format
+import addressbook_pb2
+
+person = addressbook_pb2.Person()
+person.id = 1234
+person.name = "John Doe"
+person.email = "jdoe@example.com"
+
+# Serialize to JSON
+json_string = json_format.MessageToJson(person)
+
+# Parse from JSON
+new_person = addressbook_pb2.Person()
+json_format.Parse(json_string, new_person)
+```
+
 {{% alert title="Important" color="warning" %}} **Protocol Buffers and Object Oriented Design**
 Protocol buffer classes are basically data holders (like structs in C) that
 don't provide additional functionality; they don't make good first class
@@ -464,12 +489,12 @@ One key feature provided by protocol message classes is *reflection*. You can
 iterate over the fields of a message and manipulate their values without writing
 your code against any specific message type. One very useful way to use
 reflection is for converting protocol messages to and from other encodings, such
-as XML or JSON. A more advanced use of reflection might be to find differences
-between two messages of the same type, or to develop a sort of "regular
-expressions for protocol messages" in which you can write expressions that match
-certain message contents. If you use your imagination, it's possible to apply
-Protocol Buffers to a much wider range of problems than you might initially
-expect!
+as XML or JSON (see [Parsing and Serialization](#parsing-serialization) for an
+example). A more advanced use of reflection might be to find differences between
+two messages of the same type, or to develop a sort of "regular expressions for
+protocol messages" in which you can write expressions that match certain message
+contents. If you use your imagination, it's possible to apply Protocol Buffers
+to a much wider range of problems than you might initially expect!
 
 Reflection is provided as part of the
 [`Message` interface](https://googleapis.dev/python/protobuf/latest/google/protobuf/message.html#google.protobuf.message.Message).

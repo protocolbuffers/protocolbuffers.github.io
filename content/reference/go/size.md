@@ -8,10 +8,18 @@ type = "docs"
 
 The [`proto.Size`](https://pkg.go.dev/google.golang.org/protobuf/proto#Size)
 function returns the size in bytes of the wire-format encoding of a
-proto.Message by traversing all its fields (including submessages).
+`proto.Message` by traversing all its fields (including submessages).
 
 In particular, it returns the size of **how Go Protobuf will encode the
 message**.
+
+## A note on Protobuf Editions
+
+With Protobuf Editions, `.proto` files can enable features that change
+serialization behavior. This can affect the value returned by `proto.Size`. For
+example, setting `features.field_presence = IMPLICIT` will cause scalar fields
+that are set to their defaults to not be serialized, and therefore don't
+contribute to the size of the message.
 
 ## Typical usages
 
@@ -19,12 +27,12 @@ message**.
 
 Checking if
 [`proto.Size`](https://pkg.go.dev/google.golang.org/protobuf/proto#Size) returns
-0 is an easy way to recognize empty messages:
+0 is a common way to check for empty messages:
 
 ```go
 if proto.Size(m) == 0 {
-    // No fields set (or, in proto3, all fields matching the default);
-    // skip processing this message, or return an error, or similar.
+    // No fields set; skip processing this message,
+    // or return an error, or similar.
 }
 ```
 
