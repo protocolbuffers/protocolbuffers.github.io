@@ -9,12 +9,13 @@ type = "docs"
 This page describes exactly what Rust code the protocol buffer compiler
 generates for any given protocol definition.
 
-Any differences between proto2 and proto3 generated code are highlighted. You
-should read the
-[proto2 language guide](/programming-guides/proto2)
-and/or
-[proto3 language guide](/programming-guides/proto3)
-before reading this document.
+This document covers how the protocol buffer compiler generates Rust code for
+proto2, proto3, and protobuf editions. Any differences between proto2, proto3,
+and editions generated code are highlighted. You should read the
+[proto2 language guide](/programming-guides/proto2),
+[proto3 language guide](/programming-guides/proto3), or
+[editions guide](/programming-guides/editions) before
+reading this document.
 
 ## Protobuf Rust {#rust}
 
@@ -162,16 +163,24 @@ portion of the accessor maintains the style from the original .proto file, which
 in turn should be lower-case/snake-case per the
 [.proto file style guide](/programming-guides/style).
 
-### Optional Numeric Fields (proto2 and proto3) {#optional-numeric}
+### Fields with Explicit Presence {#explicit-presence}
 
-For either of these field definitions:
+Explicit presence means that a field distinguishes between the default value and
+no value set. In proto2, `optional` fields have explicit presence. In proto3,
+only message fields and `oneof` or `optional` fields have explicit presence.
+Presence is set using the
+[`features.field_presence`](/editions/features#field_presence)
+option in editions.
+
+#### Numeric Fields {#numeric-fields}
+
+For this field definition:
 
 ```proto
-optional int32 foo = 1;
-required int32 foo = 1;
+int32 foo = 1;
 ```
 
-The compiler will generate the following accessor methods:
+The compiler generates the following accessor methods:
 
 *   `fn has_foo(&self) -> bool`: Returns `true` if the field is set.
 *   `fn foo(&self) -> i32`: Returns the current value of the field. If the field
@@ -190,35 +199,16 @@ For other numeric field types (including `bool`), `int32` is replaced with the
 corresponding Rust type according to the
 [scalar value types table](/programming-guides/proto3#scalar).
 
-### Implicit Presence Numeric Fields (proto3) {#implicit-presence-numeric}
+#### String and Bytes Fields {#string-byte-fields}
 
 For these field definitions:
 
 ```proto
-int32 foo = 1;
+string foo = 1;
+bytes foo = 1;
 ```
 
-*   `fn foo(&self) -> i32`: Returns the current value of the field. If the field
-    is not set, returns `0`.
-*   `fn set_foo(&mut self, val: i32)`: Sets the value of the field. After
-    calling this, `foo()` will return value.
-
-For other numeric field types (including `bool`), `int32` is replaced with the
-corresponding Rust type according to the
-[scalar value types table](/programming-guides/proto3#scalar).
-
-### Optional String/Bytes Fields (proto2 and proto3) {#optional-string-byte}
-
-For any of these field definitions:
-
-```proto
-optional string foo = 1;
-required string foo = 1;
-optional bytes foo = 1;
-required bytes foo = 1;
-```
-
-The compiler will generate the following accessor methods:
+The compiler generates the following accessor methods:
 
 *   `fn has_foo(&self) -> bool`: Returns `true` if the field is set.
 *   `fn foo(&self) -> &protobuf::ProtoStr`: Returns the current value of the
@@ -226,6 +216,8 @@ The compiler will generate the following accessor methods:
 *   `fn foo_opt(&self) -> protobuf::Optional<&ProtoStr>`: Returns an optional
     with the variant `Set(value)` if the field is set or `Unset(default value)`
     if it's unset.
+*   `fn set_foo(&mut self, val: impl IntoProxied<ProtoString>)`: Sets the value
+    of the field.
 *   `fn clear_foo(&mut self)`: Clears the value of the field. After calling
     this, `has_foo()` will return `false` and `foo()` will return the default
     value.
@@ -233,31 +225,136 @@ The compiler will generate the following accessor methods:
 For fields of type `bytes` the compiler will generate the `ProtoBytes` type
 instead.
 
-### Implicit Presence String/Bytes Fields (proto3) {#implicit-presence-string-byte}
+#### Enum Fields {#enum-fields}
+
+Given this enum definition in any proto syntax version:
+
+```proto
+enum Bar {
+  BAR_UNSPECIFIED = 0;
+  BAR_VALUE = 1;
+  BAR_OTHER_VALUE = 2;
+}
+```
+
+The compiler generates a struct where each variant is an associated constant:
+
+```rust
+#[derive(Clone, Copy, PartialEq, Eq, Hash)]
+#[repr(transparent)]
+pub struct Bar(i32);
+
+impl Bar {
+  pub const Unspecified: Bar = Bar(0);
+  pub const Value: Bar = Bar(1);
+  pub const OtherValue: Bar = Bar(2);
+}
+```
+
+For this field definition:
+
+```proto
+Bar foo = 1;
+```
+
+The compiler generates the following accessor methods:
+
+*   `fn has_foo(&self) -> bool`: Returns `true` if the field is set.
+*   `fn foo(&self) -> Bar`: Returns the current value of the field. If the field
+    is not set, it returns the default value.
+*   `fn foo_opt(&self) -> Optional<Bar>`: Returns an optional with the variant
+    `Set(value)` if the field is set or `Unset(default value)` if it's unset.
+*   `fn set_foo(&mut self, val: Bar)`: Sets the value of the field. After
+    calling this, `has_foo()` will return `true` and `foo()` will return
+    `value`.
+*   `fn clear_foo(&mut self)`: Clears the value of the field. After calling
+    this, `has_foo()` will return false and `foo()` will return the default
+    value.
+
+#### Embedded Message Fields {#embedded-message-fields}
+
+Given the message type `Bar` from any proto syntax version:
+
+```proto
+message Bar {}
+```
+
+For any of these field definitions:
+
+```proto
+
+message MyMessage {
+  Bar foo = 1;
+}
+```
+
+The compiler will generate the following accessor methods:
+
+*   `fn foo(&self) -> BarView<'_>`: Returns a view of the current value of the
+    field. If the field is not set it returns an empty message.
+*   `fn foo_mut(&mut self) -> BarMut<'_>`: Returns a mutable handle to the
+    current value of the field. Sets the field if it is not set. After calling
+    this method, `has_foo()` returns true.
+*   `fn foo_opt(&self) -> protobuf::Optional<BarView>`: If the field is set,
+    returns the variant `Set` with its `value`. Else returns the variant `Unset`
+    with the default value.
+*   `fn set_foo(&mut self, value: impl protobuf::IntoProxied<Bar>)`: Sets the
+    field to `value`. After calling this method, `has_foo()` returns `true`.
+*   `fn has_foo(&self) -> bool`: Returns `true` if the field is set.
+*   `fn clear_foo(&mut self)`: Clears the field. After calling this method
+    `has_foo()` returns `false`.
+
+### Fields with Implicit Presence (proto3 and Editions) {#implicit-presence}
+
+Implicit presence means that a field does not distinguish between the default
+value and no value set. In proto3, fields have implicit presence by default. In
+editions, you can declare a field with implicit presence by setting the
+`field_presence` feature to `IMPLICIT`.
+
+#### Numeric Fields {#implicit-numeric-fields}
 
 For these field definitions:
 
 ```proto
-optional string foo = 1;
+// proto3
+int32 foo = 1;
+
+// editions
+message MyMessage {
+  int32 foo = 1 [features.field_presence = IMPLICIT];
+}
+```
+
+The compiler generates the following accessor methods:
+
+*   `fn foo(&self) -> i32`: Returns the current value of the field. If the field
+    is not set, it returns `0`.
+*   `fn set_foo(&mut self, val: i32)`: Sets the value of the field.
+
+For other numeric field types (including `bool`), `int32` is replaced with the
+corresponding Rust type according to the
+[scalar value types table](/programming-guides/proto3#scalar).
+
+#### String and Bytes Fields {#implicit-string-byte-fields}
+
+For these field definitions:
+
+```proto
+// proto3
 string foo = 1;
-optional bytes foo = 1;
 bytes foo = 1;
+
+// editions
+string foo = 1 [features.field_presence = IMPLICIT];
+bytes bar = 2 [features.field_presence = IMPLICIT];
 ```
 
 The compiler will generate the following accessor methods:
 
 *   `fn foo(&self) -> &ProtoStr`: Returns the current value of the field. If the
     field is not set, returns the empty string/empty bytes.
-*   `fn foo_opt(&self) -> Optional<&ProtoStr>`: Returns an optional with the
-    variant `Set(value)` if the field is set or `Unset(default value)` if it's
-    unset.
 *   `fn set_foo(&mut self, value: IntoProxied<ProtoString>)`: Sets the field to
-    `value`. After calling this function `foo()` will return `value` and
-    `has_foo()` will return `true`.
-*   `fn has_foo(&self) -> bool`: Returns `true` if the field is set.
-*   `fn clear_foo(&mut self)`: Clears the value of the field. After calling
-    this, `has_foo()` will return `false` and `foo()` will return the default
-    value.
+    `value`.
 
 For fields of type `bytes` the compiler will generate the `ProtoBytes` type
 instead.
@@ -308,54 +405,14 @@ The compiler generates the following accessor methods:
 For fields of type `bytes` the compiler generates the `ProtoBytesCow` type
 instead.
 
-### Optional Enum Fields (proto2 and proto3) {#optional-enum}
+The compiler generates the following accessor methods:
 
-Given the enum type:
+*   `fn foo(&self) -> &ProtoStr`: Returns the current value of the field. If the
+    field is not set, returns the empty string/empty bytes.
+*   `fn set_foo(&mut self, value: impl IntoProxied<ProtoString>)`: Sets the
+    field to `value`.
 
-```proto
-enum Bar {
-  BAR_UNSPECIFIED = 0;
-  BAR_VALUE = 1;
-  BAR_OTHER_VALUE = 2;
-}
-```
-
-The compiler generates a struct where each variant is an associated constant:
-
-```rust
-#[derive(Clone, Copy, PartialEq, Eq, Hash)]
-#[repr(transparent)]
-pub struct Bar(i32);
-
-impl Bar {
-  pub const Unspecified: Bar = Bar(0);
-  pub const Value: Bar = Bar(1);
-  pub const OtherValue: Bar = Bar(2);
-}
-```
-
-For either of these field definitions:
-
-```proto
-optional Bar foo = 1;
-required Bar foo = 1;
-```
-
-The compiler will generate the following accessor methods:
-
-*   `fn has_foo(&self) -> bool`: Returns `true` if the field is set.
-*   `fn foo(&self) -> Bar`: Returns the current value of the field. If the field
-    is not set, it returns the default value.
-*   `fn foo_opt(&self) -> Optional<Bar>`: Returns an optional with the variant
-    `Set(value)` if the field is set or `Unset(default value)` if it's unset.
-*   `fn set_foo(&mut self, val: Bar)`: Sets the value of the field. After
-    calling this, `has_foo()` will return `true` and `foo()` will return
-    `value`.
-*   `fn clear_foo(&mut self)`: Clears the value of the field. After calling
-    this, `has_foo()` will return false and `foo()` will return the default
-    value.
-
-### Implicit Presence Enum Fields (proto3) {#implicit-presence-enum}
+#### Enum Fields {#implicit-presence-enum}
 
 Given the enum type:
 
@@ -384,7 +441,13 @@ impl Bar {
 For these field definitions:
 
 ```proto
+// proto3
 Bar foo = 1;
+
+// editions
+message MyMessage {
+ Bar foo = 1 [features.field_presence = IMPLICIT];
+}
 ```
 
 The compiler will generate the following accessor methods:
@@ -395,53 +458,30 @@ The compiler will generate the following accessor methods:
     calling this, `has_foo()` will return `true` and `foo()` will return
     `value`.
 
-### Optional Embedded Message Fields (proto2 and proto3) {#optional-embedded-message}
-
-Given the message type:
-
-```proto
-message Bar {}
-```
-
-For any of these field definitions:
-
-```proto
-//proto2
-optional Bar foo = 1;
-
-//proto3
-Bar foo = 1;
-optional Bar foo = 1;
-```
-
-The compiler will generate the following accessor methods:
-
-*   `fn foo(&self) -> BarView<'_>`: Returns a view of the current value of the
-    field. If the field is not set it returns an empty message.
-*   `fn foo_mut(&mut self) -> BarMut<'_>`: Returns a mutable handle to the
-    current value of the field. Sets the field if it is not set. After calling
-    this method, `has_foo()` returns true.
-*   `fn foo_opt(&self) -> protobuf::Optional<BarView>`: If the field is set,
-    returns the variant `Set` with its `value`. Else returns the variant `Unset`
-    with the default value.
-*   `fn set_foo(&mut self, value: impl protobuf::IntoProxied<Bar>)`: Sets the
-    field to `value`. After calling this method, `has_foo()` returns `true`.
-*   `fn has_foo(&self) -> bool`: Returns `true` if the field is set.
-*   `fn clear_foo(&mut self)`: Clears the field. After calling this method
-    `has_foo()` returns `false`.
-
-### Repeated Fields {#repeated}
+### Repeated Fields {#repeated-fields}
 
 For any repeated field definition the compiler will generate the same three
 accessor methods that deviate only in the field type.
 
-For example, given the below field definition:
+In editions, you can control the wire format encoding of repeated primitive
+fields using the
+[`repeated_field_encoding`](/editions/features#repeated_field_encoding)
+feature.
 
 ```proto
-repeated int32 foo = 1;
+// proto2
+repeated int32 foo = 1; // EXPANDED by default
+
+// proto3
+repeated int32 foo = 1; // PACKED by default
+
+// editions
+repeated int32 foo = 1 [features.repeated_field_encoding = PACKED];
+repeated int32 bar = 2 [features.repeated_field_encoding = EXPANDED];
 ```
 
-The compiler will generate the following accessor methods:
+Given any of the above field definitions, the compiler generates the following
+accessor methods:
 
 *   `fn foo(&self) -> RepeatedView<'_, i32>`: Returns a view of the underlying
     repeated field.
@@ -484,7 +524,7 @@ it was a simple message with this definition:
 ```proto
 message Any {
   string type_url = 1;
-  bytes value = 2  [ctype = CORD];
+  bytes value = 2;
 }
 ```
 

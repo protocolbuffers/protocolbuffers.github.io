@@ -372,11 +372,17 @@ automatically generated class:
       </tr>
       <tr>
         <td>double</td>
-        <td></td>
-      </tr>
-      <tr>
+        <td>
+          Uses <a href="https://en.wikipedia.org/wiki/IEEE_754">IEEE 754</a>
+          double-precision format.
+        </td>
+       </tr>
+       <tr>
         <td>float</td>
-        <td></td>
+        <td>
+          Uses <a href="https://en.wikipedia.org/wiki/IEEE_754">IEEE 754</a>
+          single-precision format.
+        </td>
       </tr>
       <tr>
         <td>int32</td>

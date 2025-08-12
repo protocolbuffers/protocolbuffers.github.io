@@ -8,42 +8,47 @@ type = "docs"
 Protobuf supports a canonical encoding in JSON, making it easier to share data
 with systems that do not support the standard protobuf binary wire format.
 
-ProtoJSON Format is not as efficient as protobuf wire format. The converter uses
-more CPU to encode and decode messages and (except in rare cases) encoded
-messages consume more space. Furthermore, ProtoJSON format puts your field and
-enum value names into encoded messages making it much harder to change those
+This page specifies the format, but a number of additional edge cases which
+define a conformant ProtoJSON parser are covered in the Protobuf Conformance
+Test Suite and are not exhaustively detailed here.
+
+# Non-goals of the Format {#non-goals}
+
+## Cannot Represent Some JSON schemas {#non-goals-arbitrary-json-schema}
+
+The ProtoJSON format is designed to be a JSON representation of schemas which
+are expressible in the Protobuf schema language.
+
+It may be possible to represent many pre-existing JSON schemas as a Protobuf
+schema and parse it using ProtoJSON, but it is not designed to be able to
+represent arbitrary JSON schemas.
+
+For example, there is no way to express in Protobuf schema to write types that
+may be common in JSON schemas like `number[][]` or `number|string`.
+
+It is possible to use `google.protobuf.Struct` and `google.protobuf.Value` types
+to allow arbitrary JSON to be parsed into a Protobuf schema, but these only
+allow you to capture the values as schemaless unordered key-value maps.
+
+## Not as efficient as the binary wire format {#non-goals-highly-efficient}
+
+ProtoJSON Format is not as efficient as binary wire format and never will be.
+
+The converter uses more CPU to encode and decode messages and (except in rare
+cases) encoded messages consume more space.
+
+## Does not have as good schema-evolution guarantees as binary wire format {#non-goals-optimal-schema-evolution}
+
+ProtoJSON format does not support unknown fields, and it puts field and enum
+value names into encoded messages which makes it much harder to change those
 names later. Removing fields is a breaking change that will trigger a parsing
-error. In short, there are many good reasons why Google prefers to use the
-standard wire format for virtually everything rather than ProtoJSON format.
+error.
 
-The encoding is described on a type-by-type basis in the table later in this
-topic.
+See [JSON Wire Safety](#json-wire-safety) below for more details.
 
-When parsing JSON-encoded data into a protocol buffer, if a value is missing or
-if its value is `null`, it will be interpreted as the corresponding
-[default value](/programming-guides/editions#default). Multiple values for
-singular fields (using duplicate or equivalent JSON keys) are accepted and the
-last value is retained, as with binary format parsing. Note that not all
-protobuf JSON parser implementations are conformant, and some nonconformant
-implementations may reject duplicate keys instead.
+# Format Description {#format}
 
-When generating JSON-encoded output from a protocol buffer, if a protobuf field
-has the default value and if the field doesn't support field presence, it will
-be omitted from the output by default. An implementation may provide options to
-include fields with default values in the output.
-
-Fields that have a value set and that support field presence always include the
-field value in the JSON-encoded output, even if it is the default value. For
-example, a proto3 field that is defined with the `optional` keyword supports
-field presence and if set, will always appear in the JSON output. A message type
-field in any edition of protobuf supports field presence and if set will appear
-in the output. Proto3 implicit-presence scalar fields will only appear in the
-JSON output if they are not set to the default value for that type.
-
-When representing numerical data in a JSON file, if the number that is is parsed
-from the wire doesn't fit in the corresponding type, you will get the same
-effect as if you had cast the number to that type in C++ (for example, if a
-64-bit number is read as an int32, it will be truncated to 32 bits).
+## Representation of each type {#field-representation}
 
 The following table shows how data is represented in JSON files.
 
@@ -65,9 +70,8 @@ The following table shows how data is represented in JSON files.
         will be used as the key instead. Parsers accept both the lowerCamelCase
         name (or the one specified by the <code>json_name</code> option) and the
         original proto field name. <code>null</code> is an accepted value for
-        all field types and treated as the default value of the corresponding
-        field type. However, <code>null</code> cannot be used for the
-        <code>json_name</code> value. For more on why, see
+        all field types and leaves the field unset. <code>\0 (nul)</code> cannot
+        be used within a <code>json_name</code> value. For more on why, see
         <a href="/news/2023-04-28#json-name">Stricter validation for json_name</a>.
       </td>
     </tr>
@@ -83,7 +87,7 @@ The following table shows how data is represented in JSON files.
       <td>map&lt;K,V&gt;</td>
       <td>object</td>
       <td><code>{"k": v, ...}</code></td>
-      <td>All keys are converted to strings.</td>
+      <td>All keys are converted to strings (keys in JSON spec can only be strings).</td>
     </tr>
     <tr>
       <td>repeated V</td>
@@ -166,7 +170,7 @@ The following table shows how data is represented in JSON files.
       <td>Generated output always contains 0, 3, 6, or 9 fractional digits,
         depending on required precision, followed by the suffix "s". Accepted
         are any fractional digits (also none) as long as they fit into
-        nano-seconds precision and the suffix "s" is required.
+        nanoseconds precision and the suffix "s" is required.
       </td>
     </tr>
     <tr>
@@ -209,7 +213,7 @@ The following table shows how data is represented in JSON files.
       <td>NullValue</td>
       <td>null</td>
       <td></td>
-      <td>JSON null</td>
+      <td>JSON null. Special case of the [null parsing behavior](#null-values).</td>
     </tr>
     <tr>
       <td>Empty</td>
@@ -219,6 +223,59 @@ The following table shows how data is represented in JSON files.
     </tr>
   </tbody>
 </table>
+
+## Presence and default-values {#presence}
+
+When generating JSON-encoded output from a protocol buffer, if a field supports
+presence, serializers must emit the field value if and only if the corresponding
+hasser would return true.
+
+If the field doesn't support field presence and has the default value (for
+example any empty repeated field) serializers should omit it from the output. An
+implementation may provide options to include fields with default values in the
+output.
+
+## Null values {#null-values}
+
+Serializers should not emit `null` values.
+
+Parsers should accept `null` as a legal value for any field, with the behavior:
+
+*   Any key validity checking should still occur (disallowing unknown fields)
+*   The field should remain unset, as though it was not present in the input at
+    all (hassers should still return false where applicable).
+
+`null` values are not allowed within repeated fields.
+
+`google.protobuf.NullValue` is a special exception to this behavior: `null` is
+handled as a sentinel-present value for this type, and so a field of this type
+must be handled by serializers and parsers under the standard presence behavior.
+This behavior correspondingly allows `google.protobuf.Struct` and
+`google.protobuf.Value` to losslessly round trip arbitrary JSON.
+
+## Duplicate values {#duplicate-values}
+
+Serializers must never serialize the same field multiple times, nor multiple
+different cases in the same oneof in the same JSON object.
+
+Parsers should accept the same field being duplicated, and the last value
+provided should be retained. This also applies to "alternate spellings" of the
+same field name.
+
+If implementations cannot maintain the necessary information about field order
+it is preferred to reject inputs with duplicate keys rather than have an
+arbitrary value win. In some implementations maintaining field order of objects
+may be impractical or infeasible, so it is strongly recommended that systems
+avoid relying on specific behavior for duplicate fields in ProtoJSON where
+possible.
+
+## Out of range numeric values
+
+When parsing a numeric value, if the number that is is parsed from the wire
+doesn't fit in the corresponding type, the parser should coerce the value to the
+appropriate type. This has the same behavior as a simple cast in C++ or Java
+(for example, if a number larger than 2^32 is read as for an int32 field, it
+will be truncated to 32 bits).
 
 ## ProtoJSON Wire Safety {#json-wire-safety}
 

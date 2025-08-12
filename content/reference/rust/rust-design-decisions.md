@@ -76,8 +76,8 @@ no concrete roadmap for it at this time.
 
 ## View/Mut Proxy Types {#view-mut-proxy-types}
 
-The Rust Proto API is designed with opaque "Proxy" types. For a .proto file that
-defines `message SomeMsg {}`, we generate the Rust types `SomeMsg`,
+The Rust Proto API is designed with opaque "Proxy" types. For a `.proto` file
+that defines `message SomeMsg {}`, we generate the Rust types `SomeMsg`,
 `SomeMsgView<'_>` and `SomeMsgMut<'_>`. The simple rule of thumb is that we
 expect the View and Mut types to stand in for `&SomeMsg` and `&mut SomeMsg` in
 all usages by default, while still getting all of the borrow checking/Send/etc.

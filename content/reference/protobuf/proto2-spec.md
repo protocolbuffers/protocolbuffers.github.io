@@ -1,8 +1,8 @@
 +++
-title = "Protocol Buffers Version 2 Language Specification"
+title = "Protocol Buffers Language Specification (Proto2 Syntax)"
 weight = 800
-linkTitle = "Version 2 Language Specification"
-description = "Language specification reference for version 2 of the Protocol Buffers language (proto2)."
+linkTitle = "Language Specification (Proto2 Syntax)"
+description = "Language specification reference for the proto2 syntax and its relationship to Protobuf Editions."
 type = "docs"
 +++
 
@@ -104,7 +104,10 @@ constant = fullIdent | ( [ "-" | "+" ] intLit ) | ( [ "-" | "+" ] floatLit ) |
 
 ## Syntax
 
-The syntax statement is used to define the protobuf version.
+The syntax statement is used to define the protobuf version. If `syntax` is
+omitted, the protocol compiler will use `proto2`. For the sake of clarity, it's
+recommended to always explicitly include a `syntax` statement in your `.proto`
+files.
 
 ```
 syntax = "syntax" "=" ("'" "proto2" "'" | '"' "proto2" '"') ";"
@@ -161,8 +164,9 @@ option java_package = "com.example.foo";
 ## Fields
 
 Fields are the basic elements of a protocol buffer message. Fields can be normal
-fields, group fields, oneof fields, or map fields. A field has a label, type and
-field number.
+fields, group fields, oneof fields, or map fields. A field has a type, name, and
+field number. In proto2, fields also have a label (`required`, `optional`, or
+`repeated`).
 
 ```
 label = "required" | "optional" | "repeated"
@@ -174,10 +178,11 @@ fieldNumber = intLit;
 
 ### Normal field {#normal_field}
 
-Each field has label, type, name and field number. It may have field options.
+Each field has a type, name and field number. It may have field options. Note
+that labels are optional only for oneof fields.
 
 ```
-field = label type fieldName "=" fieldNumber [ "[" fieldOptions "]" ] ";"
+field = [ label ] type fieldName "=" fieldNumber [ "[" fieldOptions "]" ] ";"
 fieldOptions = fieldOption { ","  fieldOption }
 fieldOption = optionName "=" constant
 ```
@@ -192,7 +197,7 @@ repeated int32 samples = 4 [packed=true];
 ### Group field {#group_field}
 
 **Note that this feature is deprecated and should not be used when creating new
-message types -- use nested message types instead.**
+message types. Use nested message types instead.**
 
 Groups are one way to nest information in message definitions. The group name
 must begin with capital letter.
@@ -416,7 +421,7 @@ proto = [syntax] { import | package | option | topLevelDef | emptyStatement }
 topLevelDef = message | enum | extend | service
 ```
 
-An example .proto file:
+An example `.proto` file:
 
 ```proto
 syntax = "proto2";

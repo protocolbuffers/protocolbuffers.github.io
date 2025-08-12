@@ -579,7 +579,7 @@ The compiler will generate the following accessor methods:
     Calling this method with index outside of [0, foo_size()) yields undefined
     behavior.
 -   `void add_foo(::absl::string_view value)`: Appends a new element to the end
-    of the element at the given zero-based index.
+    of the field with the given value.
 -   `void add_foo(const string& value)`: Appends a new element to the end of the
     field with the given value.
 -   `void add_foo(string&& value)`: Appends a new element to the end of the

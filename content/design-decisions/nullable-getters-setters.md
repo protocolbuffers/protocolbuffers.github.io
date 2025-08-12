@@ -30,9 +30,9 @@ can't have defaults, there's no functional problem with this.
 As an example, consider this `.proto` file:
 
 ```proto
-message Msg { optional Child child = 1; }
-message Child { optional Grandchild grandchild = 1; }
-message Grandchild { optional int32 foo = 1 [default = 72]; }
+message Msg { Child child = 1; }
+message Child { Grandchild grandchild = 1; }
+message Grandchild { int32 foo = 1 [default = 72]; }
 ```
 
 and corresponding Kotlin getters:

@@ -65,7 +65,7 @@ underscore).
 The motivation for this rule is that each protobuf language implementation may
 convert identifiers into the local language style: a name of `song_id` in a
 .proto file may end up having accessors for the field which are capitalized as
-as `SongId`, `songId` or `song_id` depending on the language.
+`SongId`, `songId` or `song_id` depending on the language.
 
 By using underscores only before letters, it avoids situations where names may
 be distinct in one style, but would collide after they are transformed into one

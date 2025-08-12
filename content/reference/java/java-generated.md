@@ -7,13 +7,14 @@ type = "docs"
 +++
 
 Any
-differences between proto2 and proto3 generated code are highlighted&mdash;note
-that these differences are in the generated code as described in this document,
-not the base message classes/interfaces, which are the same in both versions.
-You should read the
-[proto2 language guide](/programming-guides/proto2)
+differences between proto2, proto3, and Editions generated code are
+highlighted&mdash;note that these differences are in the generated code as
+described in this document, not the base message classes/interfaces, which are
+the same in all versions. You should read the
+[proto2 language guide](/programming-guides/proto2),
+[proto3 language guide](/programming-guides/proto3),
 and/or
-[proto3 language guide](/programming-guides/proto3)
+[Editions language guide](/programming-guides/editions)
 before reading this document.
 
 Note that no Java protocol buffer methods accept or return nulls unless
@@ -240,17 +241,17 @@ them. For example:
 
 ```proto
 message Foo {
-  optional int32 val = 1;
+  int32 val = 1;
   // some other fields.
 }
 
 message Bar {
-  optional Foo foo = 1;
+  Foo foo = 1;
   // some other fields.
 }
 
 message Baz {
-  optional Bar bar = 1;
+  Bar bar = 1;
   // some other fields.
 }
 ```
@@ -311,11 +312,18 @@ would be `getFooBarBaz`. And `foo_ba23r_baz` becomes `fooBa23RBaz`.
 
 As well as accessor methods, the compiler generates an integer constant for each
 field containing its field number. The constant name is the field name converted
-to upper-case followed by `_FIELD_NUMBER`. For example, given the field
-`optional int32 foo_bar = 5;`, the compiler will generate the constant `public
-static final int FOO_BAR_FIELD_NUMBER = 5;`.
+to upper-case followed by `_FIELD_NUMBER`. For example, given the field `int32
+foo_bar = 5;`, the compiler will generate the constant `public static final int
+FOO_BAR_FIELD_NUMBER = 5;`.
 
-### Singular Fields (proto2) {#singular-proto2}
+The following sections are divided between explicit and implicit presence.
+Proto2 has explicit presence and proto3 defaults to implicit presence. Editions
+defaults to explicit presence, but you can override that using
+[`features.field_presence`](/editions/features#field_presence).
+
+<a id="singular-proto2"></a>
+
+### Singular Fields with Explicit Presence {#singular-explicit}
 
 For any of these field definitions:
 
@@ -368,7 +376,9 @@ The compiler generates the following method only in the message's builder.
 
 -   `Builder getFooBuilder()`: Returns the builder for the field.
 
-### Singular Fields (proto3) {#singular-proto3}
+<a id="singular-proto3"></a>
+
+### Singular Fields with Implicit Presence {#singular-implicit}
 
 For this field definition:
 
@@ -394,32 +404,6 @@ the
 [scalar value types table](/programming-guides/proto2#scalar).
 For message and enum types, the value type is replaced with the message or enum
 class.
-
-#### Embedded Message Fields {#embedded-message-proto3}
-
-For message field types, an additional accessor method is generated in both the
-message class and its builder:
-
--   `boolean hasFoo()`: Returns `true` if the field has been set.
-
-`setFoo()` also accepts an instance of the message's builder type as the
-parameter. This is just a shortcut which is equivalent to calling `.build()` on
-the builder and passing the result to the method.
-
-If the field is not set, `getFoo()` will return a Foo instance with none of its
-fields set (possibly the instance returned by `Foo.getDefaultInstance()`).
-
-In addition, the compiler generates two accessor methods that allow you to
-access the relevant sub-builders for message types. The following method is
-generated in both the message class and its builder:
-
--   `FooOrBuilder getFooOrBuilder()`: Returns the builder for the field, if it
-    already exists, or the message if not. Calling this method on builders will
-    not create a sub-builder for the field.
-
-The compiler generates the following method only in the message's builder.
-
--   `Builder getFooBuilder()`: Returns the builder for the field.
 
 #### Enum Fields {#enum-proto3}
 
@@ -711,8 +695,9 @@ enum Foo {
 
 The protocol buffer compiler will generate a Java enum type called `Foo` with
 the same set of values. If you are using proto3, it also adds the special value
-`UNRECOGNIZED` to the enum type. The values of the generated enum type have the
-following special methods:
+`UNRECOGNIZED` to the enum type. In Editions, `OPEN` enums also have a
+`UNRECOGNIZED` value, while `CLOSED` enums do not. The values of the generated
+enum type have the following special methods:
 
 -   `int getNumber()`: Returns the object's numeric value as defined in the
     `.proto` file.
@@ -731,8 +716,8 @@ Additionally, the `Foo` enum type contains the following static methods:
     `forNumber(int value)` and will be removed in an upcoming release.
 -   `static Foo valueOf(EnumValueDescriptor descriptor)`: Returns the enum
     object corresponding to the given value descriptor. May be faster than
-    `valueOf(int)`. In proto3 returns `UNRECOGNIZED` if passed an unknown value
-    descriptor.
+    `valueOf(int)`. In proto3 and `OPEN` enums, returns `UNRECOGNIZED` if passed
+    an unknown value descriptor.
 -   `EnumDescriptor getDescriptor()`: Returns the enum type's descriptor, which
     contains e.g. information about each defined value. (This differs from
     `getDescriptorForType()` only in that it is a static method.)
@@ -771,11 +756,13 @@ over 1,700 values. This limit is due to per-method size limits for Java
 bytecode, and it varies across Java implementations, different versions of the
 protobuf suite, and any options set on the enum in the `.proto` file.
 
-## Extensions (proto2 only) {#extension}
+## Extensions {#extension}
 
 Given a message with an extension range:
 
 ```proto
+edition = "2023";
+
 message Foo {
   extensions 100 to 199;
 }
@@ -800,8 +787,12 @@ identifier.
 Given an extension definition:
 
 ```proto
+edition = "2023";
+
+import "foo.proto";
+
 extend Foo {
-  optional int32 bar = 123;
+  int32 bar = 123;
 }
 ```
 
@@ -831,9 +822,13 @@ generated symbol names. For example, a common pattern is to extend a message by
 a field *inside* the declaration of the field's type:
 
 ```proto
+edition = "2023";
+
+import "foo.proto";
+
 message Baz {
   extend Foo {
-    optional Baz foo_ext = 124;
+    Baz foo_ext = 124;
   }
 }
 ```
