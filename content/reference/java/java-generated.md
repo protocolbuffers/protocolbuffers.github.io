@@ -674,9 +674,18 @@ class Any {
   // Checks whether this Any message’s payload is the given type.
   public <T extends Message> boolean is(class<T> clazz);
 
+  // Checks whether this Any message’s payload has the same type as the given
+  // message.
+  public boolean isSameTypeAs(Message message);
+
   // Unpacks Any into the given message type. Throws exception if
   // the type doesn’t match or parsing the payload has failed.
   public <T extends Message> T unpack(class<T> clazz)
+      throws InvalidProtocolBufferException;
+
+  // Unpacks Any into a message with the same type as the given messsage.
+  // Throws exception if the type doesn’t match or parsing the payload fails.
+  public <T extends Message> T unpackSameTypeAs(T message)
       throws InvalidProtocolBufferException;
 }
 ```
