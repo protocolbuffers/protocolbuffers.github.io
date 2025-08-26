@@ -1487,7 +1487,7 @@ Here are a few of the most commonly used options:
     classes/enums/etc. If not generating Java code, this option has no effect.
 
     ```proto
-    option java_outer_classname = "Ponycopter";
+    option java_outer_classname = "PonycopterProto";
     ```
 
 *   `java_multiple_files` (file option): If false, only a single `.java` file
