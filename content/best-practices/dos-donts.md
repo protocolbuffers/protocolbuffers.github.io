@@ -168,6 +168,11 @@ when a perfectly suitable common type already exists!
 *   [`color`](https://github.com/googleapis/googleapis/blob/master/google/type/color.proto)
     is a color in the RGBA color space.
 
+**Note:** While the "Well-Known Types" (such as `Duration` and `Timestamp`) are
+included with the Protocol Buffers compiler, the "Common Types" (such as `Date`
+and `Money`) are not. To use the Common Types, you may need to add a dependency
+on the [googleapis repository](https://github.com/googleapis/googleapis).
+
 <a id="do-define-widely-used-message-types-in-separate-files"></a>
 
 ## **Do** Define Message Types in Separate Files {#separate-files}

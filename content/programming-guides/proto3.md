@@ -879,6 +879,34 @@ file:
 import "myproject/other_protos.proto";
 ```
 
+The protobuf compiler searches for imported files in a set of directories
+specified using the `-I`/`--proto_path` flag. The path given in an `import`
+statement is resolved relative to these directories. For more information on
+using the compiler, see [Generating Your Classes](#generating).
+
+For example, consider the following directory structure:
+
+```
+my_project/
+├── protos/
+│   ├── main.proto
+│   └── common/
+│       └── timestamp.proto
+```
+
+To use definitions from `timestamp.proto` within `main.proto`, you would run the
+compiler from the `my_project` directory and set `--proto_path=protos`. The
+`import` statement in `main.proto` would then be:
+
+```proto
+// Located in my_project/protos/main.proto
+import "common/timestamp.proto";
+```
+
+In general you should set the `--proto_path` flag to the highest-level directory
+that contains protos. This is often the root of the project, but in this example
+it's in a separate `/protos` directory.
+
 By default, you can use definitions only from directly imported `.proto` files.
 However, sometimes you may need to move a `.proto` file to a new location.
 Instead of moving the `.proto` file directly and updating all the call sites in
@@ -914,12 +942,6 @@ import "other.proto";
 import "old.proto";
 // You use definitions from old.proto and new.proto, but not other.proto
 ```
-
-The protocol compiler searches for imported files in a set of directories
-specified on the protocol compiler command line using the `-I`/`--proto_path`
-flag. If no flag was given, it looks in the directory in which the compiler was
-invoked. In general you should set the `--proto_path` flag to the root of your
-project and use fully qualified names for all imports.
 
 ### Using proto2 Message Types {#proto2}
 
@@ -1739,7 +1761,7 @@ generator plugin for the compiler; you can find this and installation
 instructions in the [golang/protobuf](https://github.com/golang/protobuf/)
 repository on GitHub.
 
-The Protocol Compiler is invoked as follows:
+The protobuf compiler is invoked as follows:
 
 ```sh
 protoc --proto_path=IMPORT_PATH --cpp_out=DST_DIR --java_out=DST_DIR --python_out=DST_DIR --go_out=DST_DIR --ruby_out=DST_DIR --objc_out=DST_DIR --csharp_out=DST_DIR path/to/file.proto

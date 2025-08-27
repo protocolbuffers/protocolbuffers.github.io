@@ -15,6 +15,8 @@ others.
 
 ## Number of Fields {#fields}
 
+All messages are limited to 65,535 fields.
+
 Message with only singular proto fields (such as Boolean):
 
 *   ~2100 fields (proto2)

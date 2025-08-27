@@ -9,6 +9,9 @@ This document provides a style guide for `.proto` files. By following these
 conventions, you'll make your protocol buffer message definitions and their
 corresponding classes consistent and easy to read.
 
+Enforcement of the following style guidelines is controlled via
+[enforce_naming_style](/editions/features#enforce-naming).
+
 ## Standard File Formatting {#standard-file-formatting}
 
 *   Keep the line length to 80 characters.
