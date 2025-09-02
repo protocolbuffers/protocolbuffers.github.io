@@ -28,10 +28,6 @@ The examples in this topic show edition 2024 features, but edition 2024 is
 currently in **pre-release review** and is not yet recommended for production
 code.
 
-The examples in this topic show edition 2024 features, but edition 2024 is
-currently in **pre-release review** and is not yet recommended for production
-code.
-
 ## Lifecycle of a Feature {#lifecycles}
 
 Editions provide the fundamental increments for the lifecycle of a feature.
