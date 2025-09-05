@@ -16,9 +16,7 @@ shows you how to
 
 This isn't a comprehensive guide to using protocol buffers in C++. For more
 detailed reference information, see the
-[Protocol Buffer Language Guide (proto2)](/programming-guides/proto2),
-the
-[Protocol Buffer Language Guide (proto3)](/programming-guides/proto3),
+[Protocol Buffer Language Guide](/programming-guides/editions),
 the [C++ API Reference](/reference/cpp/api-docs), the
 [C++ Generated Code Guide](/reference/cpp/cpp-generated),
 and the
@@ -78,14 +76,14 @@ each field in the message. Here is the `.proto` file that defines your messages,
 `addressbook.proto`.
 
 ```proto
-syntax = "proto2";
+edition = "2023";
 
 package tutorial;
 
 message Person {
-  optional string name = 1;
-  optional int32 id = 2;
-  optional string email = 3;
+  string name = 1;
+  int32 id = 2;
+  string email = 3;
 
   enum PhoneType {
     PHONE_TYPE_UNSPECIFIED = 0;
@@ -95,8 +93,8 @@ message Person {
   }
 
   message PhoneNumber {
-    optional string number = 1;
-    optional PhoneType type = 2 [default = PHONE_TYPE_HOME];
+    string number = 1;
+    PhoneType type = 2;
   }
 
   repeated PhoneNumber phones = 4;
@@ -105,71 +103,58 @@ message Person {
 message AddressBook {
   repeated Person people = 1;
 }
+
 ```
 
 As you can see, the syntax is similar to C++ or Java. Let's go through each part
 of the file and see what it does.
 
-The `.proto` file starts with a package declaration, which helps to prevent
-naming conflicts between different projects. In C++, your generated classes will
-be placed in a namespace matching the package name.
+The `.proto` file starts with an `edition` declaration. Editions replace the
+older `syntax = "proto2"` and `syntax = "proto3"` declarations and provide a
+more flexible way to evolve the language over time.
 
-Next, you have your message definitions. A message is just an aggregate
-containing a set of typed fields. Many standard simple data types are available
-as field types, including `bool`, `int32`, `float`, `double`, and `string`. You
-can also add further structure to your messages by using other message types as
-field types -- in the above example the `Person` message contains `PhoneNumber`
-messages, while the `AddressBook` message contains `Person` messages. You can
-even define message types nested inside other messages -- as you can see, the
-`PhoneNumber` type is defined inside `Person`. You can also define `enum` types
-if you want one of your fields to have one of a predefined list of values --
-here you want to specify that a phone number can be one of the following phone
-types: `PHONE_TYPE_MOBILE`, `PHONE_TYPE_HOME`, or `PHONE_TYPE_WORK`.
+Next is a package declaration, which helps to prevent naming conflicts between
+different projects. In C++, your generated classes will be placed in a namespace
+matching the package name.
+
+Following the package declaration are your message definitions. A message is
+just an aggregate containing a set of typed fields. Many standard simple data
+types are available as field types, including `bool`, `int32`, `float`,
+`double`, and `string`. You can also add further structure to your messages by
+using other message types as field types -- in the above example the `Person`
+message contains `PhoneNumber` messages, while the `AddressBook` message
+contains `Person` messages. You can even define message types nested inside
+other messages -- as you can see, the `PhoneNumber` type is defined inside
+`Person`. You can also define enum types if you want one of your fields to have
+one of a predefined list of values -- here you want to specify that a phone
+number can be one of several types.
 
 The " = 1", " = 2" markers on each element identify the unique field number that
 field uses in the binary encoding. Field numbers 1-15 require one less byte to
 encode than higher numbers, so as an optimization you can decide to use those
 numbers for the commonly used or repeated elements, leaving field numbers 16 and
-higher for less-commonly used optional elements. Each element in a repeated
-field requires re-encoding the field number, so repeated fields are particularly
-good candidates for this optimization.
+higher for less-commonly used elements.
 
-Each field must be annotated with one of the following modifiers:
+Fields can be one of the following:
 
--   `optional`: the field may or may not be set. If an optional field value
-    isn't set, a default value is used. For simple types, you can specify your
-    own default value, as we've done for the phone number `type` in the example.
-    Otherwise, a system default is used: zero for numeric types, the empty
-    string for strings, false for bools. For embedded messages, the default
-    value is always the "default instance" or "prototype" of the message, which
-    has none of its fields set. Calling the accessor to get the value of an
-    optional (or required) field which has not been explicitly set always
-    returns that field's default value.
--   `repeated`: the field may be repeated any number of times (including zero).
-    The order of the repeated values will be preserved in the protocol buffer.
-    Think of repeated fields as dynamically sized arrays.
--   `required`: a value for the field must be provided, otherwise the message
-    will be considered "uninitialized". If `libprotobuf` is compiled in debug
-    mode, serializing an uninitialized message will cause an assertion failure.
-    In optimized builds, the check is skipped and the message will be written
-    anyway. However, parsing an uninitialized message will always fail (by
-    returning `false` from the parse method). Other than this, a required field
-    behaves exactly like an optional field.
+*   singular: By default, fields are optional, meaning the field may or may not
+    be set. If a singular field is not set, a type-specific default is used:
+    zero for numeric types, the empty string for strings, false for bools, and
+    the first defined enum value for enums (which must be 0). Note that you
+    cannot explicitly set a field to `singular`. This is a description of a
+    non-repeated field.
 
-{{% alert title="Important" color="warning" %}} **Required Is Forever**
-You should be very careful about marking fields as `required`. If at some point
-you wish to stop writing or sending a required field, it will be problematic to
-change the field to an optional field -- old readers will consider messages
-without this field to be incomplete and may reject or drop them unintentionally.
-You should consider writing application-specific custom validation routines for
-your buffers instead. Within Google, `required` fields are strongly disfavored;
-most messages defined in proto2 syntax use `optional` and `repeated` only.
-(Proto3 does not support `required` fields at all.)
-{{% /alert %}}
+*   **`repeated`**: The field may be repeated any number of times (including
+    zero). The order of the repeated values will be preserved. Think of repeated
+    fields as dynamically sized arrays.
+
+In older versions of protobuf, a `required` keyword existed, but it has been
+found to be brittle and is not supported in modern protobufs (though editions
+does have a feature you can use to enable it, for backward compatibility).
 
 You'll find a complete guide to writing `.proto` files -- including all the
 possible field types -- in the
-[Protocol Buffer Language Guide](/programming-guides/proto2).
+[Protocol Buffer Language Guide](/programming-guides/editions).
 Don't go looking for facilities similar to class inheritance, though -- protocol
 buffers don't do that.
 
@@ -180,15 +165,14 @@ classes you'll need to read and write `AddressBook` (and hence `Person` and
 `PhoneNumber`) messages. To do this, you need to run the protocol buffer
 compiler `protoc` on your `.proto`:
 
-1.  If you haven't installed the compiler,
-    [download the package](/downloads) and follow the
-    instructions in the README.
+1.  If you haven't installed the compiler, follow the instructions in
+    [Protocol Buffer Compiler Installation](/installation/).
 
 2.  Now run the compiler, specifying the source directory (where your
     application's source code lives -- the current directory is used if you
     don't provide a value), the destination directory (where you want the
     generated code to go; often the same as `$SRC_DIR`), and the path to your
-    `.proto`. In this case, you...:
+    `.proto`. In this case:
 
     ```shell
     protoc -I=$SRC_DIR --cpp_out=$DST_DIR $SRC_DIR/addressbook.proto
@@ -213,42 +197,40 @@ and `phones` fields, you have these methods:
 
 ```cpp
   // name
-  inline bool has_name() const;
-  inline void clear_name();
-  inline const ::std::string& name() const;
-  inline void set_name(const ::std::string& value);
-  inline void set_name(const char* value);
-  inline ::std::string* mutable_name();
+  bool has_name() const; // Only for explicit presence
+  void clear_name();
+  const ::std::string& name() const;
+  void set_name(const ::std::string& value);
+  ::std::string* mutable_name();
 
   // id
-  inline bool has_id() const;
-  inline void clear_id();
-  inline int32_t id() const;
-  inline void set_id(int32_t value);
+  bool has_id() const;
+  void clear_id();
+  int32_t id() const;
+  void set_id(int32_t value);
 
   // email
-  inline bool has_email() const;
-  inline void clear_email();
-  inline const ::std::string& email() const;
-  inline void set_email(const ::std::string& value);
-  inline void set_email(const char* value);
-  inline ::std::string* mutable_email();
+  bool has_email() const;
+  void clear_email();
+  const ::std::string& email() const;
+  void set_email(const ::std::string& value);
+  ::std::string* mutable_email();
 
   // phones
-  inline int phones_size() const;
-  inline void clear_phones();
-  inline const ::google::protobuf::RepeatedPtrField< ::tutorial::Person_PhoneNumber >& phones() const;
-  inline ::google::protobuf::RepeatedPtrField< ::tutorial::Person_PhoneNumber >* mutable_phones();
-  inline const ::tutorial::Person_PhoneNumber& phones(int index) const;
-  inline ::tutorial::Person_PhoneNumber* mutable_phones(int index);
-  inline ::tutorial::Person_PhoneNumber* add_phones();
+  int phones_size() const;
+  void clear_phones();
+  const ::google::protobuf::RepeatedPtrField< ::tutorial::Person_PhoneNumber >& phones() const;
+  ::google::protobuf::RepeatedPtrField< ::tutorial::Person_PhoneNumber >* mutable_phones();
+  const ::tutorial::Person_PhoneNumber& phones(int index) const;
+  ::tutorial::Person_PhoneNumber* mutable_phones(int index);
+  ::tutorial::Person_PhoneNumber* add_phones();
 ```
 
 As you can see, the getters have exactly the name as the field in lowercase, and
-the setter methods begin with `set_`. There are also `has_` methods for each
-singular (required or optional) field which return true if that field has been
-set. Finally, each field has a `clear_` method that un-sets the field back to
-its empty state.
+the setter methods begin with `set_`. There are also `has_` methods for singular
+fields that have explicit presence tracking, which return true if that field has
+been set. Finally, each field has a `clear_` method that un-sets the field back
+to its default state.
 
 While the numeric `id` field just has the basic accessor set described above,
 the `name` and `email` fields have a couple of extra methods because they're
@@ -293,8 +275,7 @@ forward-declare `Person_PhoneNumber`.
 Each message class also contains a number of other methods that let you check or
 manipulate the entire message, including:
 
--   `bool IsInitialized() const;`: checks if all the required fields have been
-    set.
+-   `bool IsInitialized() const;`: checks if all required fields have been set.
 -   `string DebugString() const;`: returns a human-readable representation of
     the message, particularly useful for debugging.
 -   `void CopyFrom(const Person& from);`: overwrites the message with the given
@@ -324,7 +305,7 @@ include:
     C++ `istream`.
 
 These are just a couple of the options provided for parsing and serialization.
-Again, see the
+See the
 [`Message` API reference](/reference/cpp/api-docs/google.protobuf.message#Message)
 for a complete list.
 
@@ -334,13 +315,15 @@ don't provide additional functionality; they don't make good first class
 citizens in an object model. If you want to add richer behavior to a generated
 class, the best way to do this is to wrap the generated protocol buffer class in
 an application-specific class. Wrapping protocol buffers is also a good idea if
-you don't have control over the design of the `.proto` file (if, say, you're
+you don't have control over the design of the .proto file (if, say, you're
 reusing one from another project). In that case, you can use the wrapper class
 to craft an interface better suited to the unique environment of your
 application: hiding some data and methods, exposing convenience functions, etc.
-**You should never add behavior to the generated classes by inheriting from
-them**. This will break internal mechanisms and is not good object-oriented
-practice anyway. {{% /alert %}}
+**You cannot add behavior to the generated classes by inheriting from them**, as
+they are final. This prevents breaking internal mechanisms and is not good
+object-oriented practice anyway.
+
+ {{% /alert %}}
 
 ## Writing a Message {#writing-a-message}
 
@@ -349,10 +332,10 @@ address book application to be able to do is write personal details to your
 address book file. To do this, you need to create and populate instances of your
 protocol buffer classes and then write them to an output stream.
 
-Here is a program which reads an `AddressBook` from a file, adds one new
-`Person` to it based on user input, and writes the new `AddressBook` back out to
-the file again. The parts which directly call or reference code generated by the
-protocol compiler are highlighted.
+Here is a program that reads an `AddressBook` from a file, adds one new `Person`
+to it based on user input, and writes the new `AddressBook` back out to the file
+again. The parts which directly call or reference code generated by the protocol
+compiler are highlighted.
 
 ```cpp
 #include <iostream>
@@ -362,21 +345,21 @@ protocol compiler are highlighted.
 using namespace std;
 
 // This function fills in a Person message based on user input.
-void PromptForAddress(tutorial::Person* person) {
+void PromptForAddress(tutorial::Person& person) {
   cout << "Enter person ID number: ";
   int id;
   cin >> id;
-  person->set_id(id);
+  person.set_id(id);
   cin.ignore(256, '\n');
 
   cout << "Enter name: ";
-  getline(cin, *person->mutable_name());
+  getline(cin, *person.mutable_name());
 
   cout << "Enter email address (blank for none): ";
   string email;
   getline(cin, email);
   if (!email.empty()) {
-    person->set_email(email);
+    person.set_email(email);
   }
 
   while (true) {
@@ -387,7 +370,7 @@ void PromptForAddress(tutorial::Person* person) {
       break;
     }
 
-    tutorial::Person::PhoneNumber* phone_number = person->add_phones();
+    tutorial::Person::PhoneNumber* phone_number = person.add_phones();
     phone_number->set_number(number);
 
     cout << "Is this a mobile, home, or work phone? ";
@@ -400,7 +383,7 @@ void PromptForAddress(tutorial::Person* person) {
     } else if (type == "work") {
       phone_number->set_type(tutorial::Person::PHONE_TYPE_WORK);
     } else {
-      cout << "Unknown phone type.  Using default." << endl;
+      cout << "Unknown phone type. Using default." << endl;
     }
   }
 }
@@ -432,7 +415,7 @@ int main(int argc, char* argv[]) {
   }
 
   // Add an address.
-  PromptForAddress(address_book.add_people());
+  PromptForAddress(*address_book.add_people());
 
   {
     // Write the new address book back to disk.
@@ -481,18 +464,14 @@ using namespace std;
 
 // Iterates though all people in the AddressBook and prints info about them.
 void ListPeople(const tutorial::AddressBook& address_book) {
-  for (int i = 0; i < address_book.people_size(); i++) {
-    const tutorial::Person& person = address_book.people(i);
-
+  for (const tutorial::Person& person : address_book.people()) {
     cout << "Person ID: " << person.id() << endl;
     cout << "  Name: " << person.name() << endl;
-    if (person.has_email()) {
+    if (!person.has_email()) {
       cout << "  E-mail address: " << person.email() << endl;
     }
 
-    for (int j = 0; j < person.phones_size(); j++) {
-      const tutorial::Person::PhoneNumber& phone_number = person.phones(j);
-
+    for (const tutorial::Person::PhoneNumber& phone_number : person.phones()) {
       switch (phone_number.type()) {
         case tutorial::Person::PHONE_TYPE_MOBILE:
           cout << "  Mobile phone #: ";
@@ -502,6 +481,10 @@ void ListPeople(const tutorial::AddressBook& address_book) {
           break;
         case tutorial::Person::PHONE_TYPE_WORK:
           cout << "  Work phone #: ";
+          break;
+        case tutorial::Person::PHONE_TYPE_UNSPECIFIED:
+        default:
+          cout << "  Phone #: ";
           break;
       }
       cout << phone_number.number() << endl;
@@ -549,30 +532,23 @@ your new buffers to be backwards-compatible, and your old buffers to be
 forward-compatible -- and you almost certainly do want this -- then there are
 some rules you need to follow. In the new version of the protocol buffer:
 
--   you *must not* change the field numbers of any existing fields.
--   you *must not* add or delete any required fields.
--   you *may* delete optional or repeated fields.
--   you *may* add new optional or repeated fields but you must use fresh field
+*   you *must not* change the field numbers of any existing fields.
+*   you *may* delete singular or repeated fields.
+*   you *may* add new singular or repeated fields but you must use fresh field
     numbers (that is, field numbers that were never used in this protocol
     buffer, not even by deleted fields).
 
 (There are
-[some exceptions](/programming-guides/proto2#updating) to
-these rules, but they are rarely used.)
+[some exceptions](/programming-guides/editions#updating)
+to these rules, but they are rarely used.)
 
 If you follow these rules, old code will happily read new messages and simply
-ignore any new fields. To the old code, optional fields that were deleted will
-simply have their default value, and deleted repeated fields will be empty. New
-code will also transparently read old messages. However, keep in mind that new
-optional fields will not be present in old messages, so you will need to either
-check explicitly whether they're set with `has_`, or provide a reasonable
-default value in your `.proto` file with `[default = value]` after the field
-number. If the default value is not specified for an optional element, a
-type-specific default value is used instead: for strings, the default value is
-the empty string. For booleans, the default value is false. For numeric types,
-the default value is zero. Note also that if you added a new repeated field,
-your new code will not be able to tell whether it was left empty (by new code)
-or never set at all (by old code) since there is no `has_` flag for it.
+ignore any new fields. To the old code, fields that were deleted will simply
+have their default value, and deleted repeated fields will be empty. New code
+will also transparently read old messages. However, keep in mind that new fields
+will not be present in old messages, so you will need to check for their
+presence by checking if they have the default value (e.g., an empty string)
+before use.
 
 ## Optimization Tips {#optimization}
 
@@ -580,15 +556,54 @@ The C++ Protocol Buffers library is extremely heavily optimized. However, proper
 usage can improve performance even more. Here are some tips for squeezing every
 last drop of speed out of the library:
 
--   Reuse message objects when possible. Messages try to keep around any memory
-    they allocate for reuse, even when they are cleared. Thus, if you are
-    handling many messages with the same type and similar structure in
-    succession, it is a good idea to reuse the same message object each time to
-    take load off the memory allocator. However, objects can become bloated over
-    time, especially if your messages vary in "shape" or if you occasionally
-    construct a message that is much larger than usual. You should monitor the
-    sizes of your message objects by calling the `SpaceUsed` method and delete
-    them once they get too big.
+-   **Use Arenas for memory allocation.** When you create many protocol buffer
+    messages in a short-lived operation (like parsing a single request), the
+    system's memory allocator can become a bottleneck. Arenas are designed to
+    mitigate this. By using an arena, you can perform many allocations with low
+    overhead, and a single deallocation for all of them at once. This can
+    significantly improve performance in message-heavy applications.
+
+    To use arenas, you allocate messages on a `google::protobuf::Arena` object:
+
+    ```cpp
+    google::protobuf::Arena arena;
+    tutorial::Person* person = google::protobuf::Arena::Create<tutorial::Person>(&arena);
+    // ... populate person ...
+    ```
+
+    When the arena object is destroyed, all messages allocated on it are freed.
+    For more details, see the [Arenas guide](/arenas).
+
+-   **Reuse non-arena message objects when possible.** Messages try to keep
+    around any memory they allocate for reuse, even when they are cleared. Thus,
+    if you are handling many messages with the same type and similar structure
+    in succession, it is a good idea to reuse the same message object each time
+    to take load off the memory allocator. However, objects can become bloated
+    over time, especially if your messages vary in "shape" or if you
+    occasionally construct a message that is much larger than usual. You should
+    monitor the sizes of your message objects by calling the `SpaceUsed` method
+    and delete them once they get too big.
+
+    Reusing arena messages can lead to unbounded memory growth. Reusing heap
+    messages is safer. Even with heap message, though, you can still experience
+    issues with the high water mark of fields. For example, if you see messages:
+
+    ```none
+    a: [1, 2, 3, 4]
+    b: [1]
+    ```
+
+    and
+
+    ```none
+    a: [1]
+    b: [1, 2, 3, 4]
+    ```
+
+    and reuse the messages, then both fields will have enough memory for the
+    largest they have seen. So if each input only had 5 elements, the reused
+    message will have memory for 8.
+
 -   Your system's memory allocator may not be well-optimized for allocating lots
     of small objects from multiple threads. Try using
     [Google's TCMalloc](https://github.com/google/tcmalloc) instead.
