@@ -5,6 +5,11 @@ description = "Explains how serialization works and why it is not canonical."
 type = "docs"
 +++
 
+<!--*
+# Document freshness: For more information, see go/fresh-source.
+freshness: { owner: 'esrauch' reviewed: '2025-01-09' }
+*-->
+
 Many people want a serialized proto to canonically represent the contents of
 that proto. Use cases include:
 

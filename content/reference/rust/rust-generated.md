@@ -75,50 +75,89 @@ following associated functions and methods:
 ### Associated Functions
 
 *   `fn new() -> Self`: Creates a new instance of `Foo`.
-*   `fn parse(data: &[u8]) -> Result<Self, protobuf::ParseError>`: Parses `data`
-    and returns an instance of `Foo` if `data` holds a valid wire format
-    representation of `Foo`. Otherwise, the function returns an error.
 
-### Methods
+### Traits
 
+For a number of reasons, including gencode size, name collision problems, and
+gencode stability, most common functionality on messages is implemented on
+traits instead of as inherent implementations.
+
+Most users should import our prelude, which only includes traits and our
+`proto!` macro and no other types (`use protobuf::prelude::*`). If you would
+rather avoid preludes, you can always import the specific traits as needed (see
+the
+<!-- TODO: replace `4.32.0-prerelease` with `latest` once we do a stable release -->
+[documentation here](https://docs.rs/protobuf/4.32.0-release/protobuf/trait.Message.html)
+for the names and definitions of the traits if you want to import them
+directly).
+
+*   `fn parse(data: &[u8]) -> Result<Self, ParseError>`: Parses a new instance
+    of a message.
+*   `fn parse_dont_enforce_required(data: &[u8]) -> Result<Self, ParseError>`:
+    Same as `parse` but does not fail on missing proto2 `required` fields.
+*   `fn clear(&mut self)`: Clears message.
 *   `fn clear_and_parse(&mut self, data: &[u8]) -> Result<(), ParseError>`:
-    Clearing and parsing into existing instance (`protobuf::ClearAndParse`
-    trait).
+    Clearing and parsing into an existing instance.
+*   `fn clear_and_parse_dont_enforce_required(&mut self, data: &[u8]) ->
+    Result<(), ParseError>`: Same as `parse` but does not fail on missing proto2
+    `required` fields.
 *   `fn serialize(&self) -> Result<Vec<u8>, SerializeError>`: Serializes the
     message to Protobuf wire format. Serialization can fail but rarely will.
-    Failure reasons include exceeding the maximum message size, insufficient
-    memory, and required fields (proto2) that are unset (`protobuf::Serialize`
-    trait).
-*   `fn clear(&mut self)`: Clears message (`protobuf::Clear` trait).
-*   `fn merge_from(&mut self, other)`: Merges `self` with `other`
-    (`protobuf::MergeFrom` trait).
+    Failure reasons include if the representation exceeds the maximum encoded
+    message size (must be less than 2 GiB), and `required` fields (proto2) that
+    are unset.
+*   `fn take_from(&mut self, other)`: Moves `other` into `self`, discarding any
+    previous state that `self` contained.
+*   `fn copy_from(&mut self, other)`: Copies `other` into `self`, discarding any
+    previous state that `self` contained. `other` is unmodified.
+*   `fn merge_from(&mut self, other)`: Merges `other` into `self`.
 *   `fn as_view(&self) -> FooView<'_>`: Returns an immutable handle (view) to
     `Foo`. This is further covered in the section on proxy types.
 *   `fn as_mut(&mut self) -> FooMut<'_>`: Returns a mutable handle (mut) to
     `Foo`. This is further covered in the section on proxy types.
 
-`Foo` implements the following traits:
+`Foo` additionally implements the following std traits:
 
-*   `protobuf::ClearAndParse`
-*   `protobuf::Clear`
-*   `protobuf::CopyFrom`
-*   `protobuf::MergeFrom`
-*   `protobuf::Parse`
-*   `protobuf::Serialize`
-*   `protobuf::TakeFrom`
 *   `std::fmt::Debug`
 *   `std::default::Default`
 *   `std::clone::Clone`
-*   `std::ops::Drop`
 *   `std::marker::Send`
 *   `std::marker::Sync`
 
-#### Message Proxy Types {#message-proxy-types}
+### Fluently Create New Instances {#proto-macro}
 
-As a consequence of the requirement to support multiple kernels with a single
-Rust API, we cannot in some situations use native Rust references (`&T` and
-`&mut T`), but instead, we need to express these concepts using types - `View`s
-and `Mut`s. These situations are shared and mutable references to:
+The API design of setters follows our established Protobuf idioms, but the
+verbosity when constructing new instances is a mild pain point in certain other
+languages. To mitigate this, we offer a `proto!` macro, which can be used to
+more-succinctly/fluently create new instances.
+
+For example, instead of writing this:
+
+```
+let mut msg = SomeMsg::new();
+msg.set_x(1);
+msg.set_y("hello");
+msg.some_submessage_mut().set_z(42);
+```
+
+This macro can be used to write it as follows:
+
+```
+let msg = proto!(SomeMsg {
+  x: 1,
+  y: "hello",
+  some_submsg: SomeSubmsg {
+    z: 42
+  }
+});
+```
+
+### Message Proxy Types {#message-proxy-types}
+
+For a number of technical reasons, we have chosen to avoid using native Rust
+references (`&T` and `&mut T`) in certain cases. Instead, we need to express
+these concepts using types - `View`s and `Mut`s. These situations are shared and
+mutable references to:
 
 *   Messages
 *   Repeated fields
@@ -139,6 +178,10 @@ functions with either `&self` or `&mut self` will also be included on the
 
 To create an owned message type from a View / Mut type call `to_owned()`, which
 creates a deep copy.
+
+See the corresponding section in our
+[design decisions](/reference/rust/rust-design-decisions#view-mut-proxy-types)
+documentation for more discussion about why this choice was made.
 
 ## Nested Types {#nested-types}
 
