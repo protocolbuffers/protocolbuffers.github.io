@@ -13,10 +13,6 @@ read the language guides for
 [editions](/programming-guides/editions) before reading
 this document.
 
-The protocol compiler for Ruby emits Ruby source files that use a DSL to define
-the message schema. However the DSL is still subject to change. In this guide we
-only describe the API of the generated messages, and not the DSL.
-
 ## Compiler Invocation {#invocation}
 
 The protocol buffer compiler produces Ruby output when invoked with the
