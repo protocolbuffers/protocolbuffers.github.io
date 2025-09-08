@@ -1,15 +1,15 @@
 +++
 title = "Language Guide (editions)"
 weight = 40
-description = "Covers how to use the edition 2023 revision of the Protocol Buffers language in your project."
+description = "Covers how to use the editions revisions of the Protocol Buffers language in your project."
 type = "docs"
 +++
 
 This guide describes how to use the protocol buffer language to structure your
 protocol buffer data, including `.proto` file syntax and how to generate data
-access classes from your `.proto` files. It covers **edition 2023** of the
-protocol buffers language. For information about how editions differ from proto2
-and proto3 conceptually, see
+access classes from your `.proto` files. It covers **edition 2023** to **edition
+2024** of the protocol buffers language. For information about how editions
+differ from proto2 and proto3 conceptually, see
 [Protobuf Editions Overview](/editions/overview).
 
 For information on the **proto2** syntax, see the
@@ -871,6 +871,15 @@ file:
 import "myproject/other_protos.proto";
 ```
 
+As of Edition 2024, you can also use `import option` to use
+[custom option definitions](#customoptions) from other `.proto` files. Unlike
+regular imports, this only allows use of custom options definitions but not
+other message or enum definitions to avoid dependencies in the generated code.
+
+```proto
+import option "myproject/other_protos.proto";
+```
+
 By default, you can use definitions only from directly imported `.proto` files.
 However, sometimes you may need to move a `.proto` file to a new location.
 Instead of moving the `.proto` file directly and updating all the call sites in
@@ -908,12 +917,24 @@ flag. If no flag was given, it looks in the directory in which the compiler was
 invoked. In general you should set the `--proto_path` flag to the root of your
 project and use fully qualified names for all imports.
 
+### Symbol Visibility {#proto2}
+
+Visibility of what symbols are available or unavailable when imported by other
+protos is controlled by the
+[`features.default_symbol_visibility`](/editions/features#symbol-vis)
+feature and the
+[`export` and `local` keywords](/editions/overview#export-local)
+which were added in Edition 2024.
+
+Only symbols that are exported, either via the default symbol visibility or with
+an `export` keyword, can be referenced by the importing file.
+
 ### Using proto2 and proto3 Message Types {#proto2}
 
 It's possible to import
 [proto2](/programming-guides/proto2) and
 [proto3](/programming-guides/proto3) message types and
-use them in your editions 2023 messages, and vice versa.
+use them in your editions messages, and vice versa.
 
 ## Nested Types {#nested}
 
@@ -1809,7 +1830,8 @@ Here are a few of the most commonly used options:
     messages, services, and enumerations, and the wrapper Java class generated
     for this `.proto` file won't contain any nested classes/enums/etc. This is a
     Boolean option which defaults to `false`. If not generating Java code, this
-    option has no effect.
+    option has no effect. This was removed in edition 2024 and replaced with
+    [`features.(pb.java).nest_in_file_class`](/editions/features/#java-nest_in_file)
 
     ```proto
     option java_multiple_files = true;
@@ -1940,6 +1962,9 @@ you need to create your own options, see the
 [Proto2 Language Guide](/programming-guides/proto2#customoptions)
 for details. Note that creating custom options uses
 [extensions](/programming-guides/proto2#extensions).
+
+Starting in edition 2024, import custom option definitions using `import
+option`. See [Importing](#importing).
 
 ### Option Retention {#option-retention}
 

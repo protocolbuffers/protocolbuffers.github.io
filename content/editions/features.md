@@ -100,8 +100,8 @@ and `export` keywords to set per-field behavior. Read more about this at
     to local.
 *   `LOCAL_ALL`: All symbols default to local.
 *   `STRICT`: All symbols local by default. Nested types cannot be exported,
-    except for a special-case caveat for message `{ enum {} reserved 1 to max;
-    }`. This is the recommended setting for new protos.
+    except for a special-case caveat for `message { enum {} reserved 0 to max;
+    }`. This will become the default in a future edition.
 
 **Applicable to the following scope:** Enum, Message
 
@@ -172,7 +172,7 @@ protos are round-trippable by default with a feature value to opt-out to use
 
 **Applicable to the following scope:** File
 
-**Added in:** 2024
+**Added in:** Edition 2024
 
 **Default behavior per syntax/edition:**
 
@@ -231,7 +231,7 @@ and after of a proto3 file.
 
 **Applicable to the following scopes:** File, Enum
 
-**Added in:** 2023
+**Added in:** Edition 2023
 
 **Default behavior per syntax/edition:**
 
@@ -292,7 +292,7 @@ whether a protobuf field has a value.
 
 **Applicable to the following scopes:** File, Field
 
-**Added in:** 2023
+**Added in:** Edition 2023
 
 **Default behavior per syntax/edition:**
 
@@ -385,7 +385,7 @@ and after of a proto3 file. Editions behavior matches the behavior in proto3.
 
 **Applicable to the following scopes:** File, Message, Enum
 
-**Added in:** 2023
+**Added in:** Edition 2023
 
 **Default behavior per syntax/edition:**
 
@@ -448,7 +448,7 @@ the following conditions are met:
 
 **Applicable to the following scopes:** File, Field
 
-**Added in:** 2023
+**Added in:** Edition 2023
 
 **Default behavior per syntax/edition:**
 
@@ -504,7 +504,7 @@ for `repeated` fields has been migrated to in Editions.
 
 **Applicable to the following scopes:** File, Field
 
-**Added in:** 2023
+**Added in:** Edition 2023
 
 **Default behavior per syntax/edition:**
 
@@ -583,7 +583,7 @@ and after of a proto3 file.
 
 **Applicable to the following scopes:** File, Field
 
-**Added in:** 2023
+**Added in:** Edition 2023
 
 **Default behavior per syntax/edition:**
 
@@ -650,7 +650,7 @@ in the migration guide for more on this topic.
 
 **Applicable to the following scopes:** Enum, File
 
-**Added in:** 2024
+**Added in:** Edition 2024
 
 **Default behavior per syntax/edition:**
 
@@ -680,7 +680,7 @@ example, switch statements are not supported.
 
 **Applicable to the following scopes:** Enum
 
-**Added in:** 2024
+**Added in:** Edition 2024
 
 **Default behavior per syntax/edition:**
 
@@ -713,7 +713,7 @@ before and after of a proto3 file.
 
 **Applicable to the following scopes:** File, Field
 
-**Added in:** 2023
+**Added in:** Edition 2023
 
 **Default behavior per syntax/edition:**
 
@@ -762,7 +762,7 @@ message Msg {
 **Languages:** Java
 
 This feature controls whether the Java generator will nest the generated class
-in the Java generated file class. Setting this option to `Yes` is the equivalent
+in the Java generated file class. Setting this option to `NO` is the equivalent
 of setting `java_multiple_files = true` in proto2/proto3/edition 2023.
 
 The default outer classname is also updated to always be the camel-cased .proto
@@ -779,7 +779,7 @@ becomes `BarBazProto`). You can still override this using the
 
 **Applicable to the following scopes:** Message, Enum, Service
 
-**Added in:** 2024
+**Added in:** Edition 2024
 
 **Default behavior per syntax/edition:**
 
@@ -812,7 +812,7 @@ removed.
 
 **Applicable to the following scopes:** File, Field
 
-**Added in:** 2023
+**Added in:** Edition 2023
 
 **Default behavior per syntax/edition:**
 
@@ -893,7 +893,7 @@ before and after of a proto3 file.
 
 **Applicable to the following scopes:** Field, File
 
-**Added in:** 2023
+**Added in:** Edition 2023
 
 **Default behavior per syntax/edition:**
 
@@ -974,7 +974,7 @@ generator strips the repetitive prefix or not.
 
 **Applicable to the following scopes:** Enum, File
 
-**Added in:** 2024
+**Added in:** Edition 2024
 
 **Default behavior per syntax/edition:**
 
@@ -991,7 +991,7 @@ files:
 ```proto
 edition = "2024";
 
-import "third_party/golang/protobuf/v2/src/google/protobuf/go_features.proto";
+import "google/protobuf/go_features.proto";
 
 option features.(pb.go).strip_enum_prefix = STRIP_ENUM_PREFIX_STRIP;
 
@@ -1074,16 +1074,23 @@ The following shows the settings to replicate Edition 2023 behavior with Edition
 2024.
 
 ```proto
+// foo/bar_baz.proto
 edition = "2024";
 
 import option "third_party/protobuf/cpp_features.proto";
 import option "third_party/java/protobuf/java_features.proto";
 
+// If previously relying on edition 2023 default java_outer_classname.
+option java_outer_classname = "BarBaz" // or BarBazOuterClass
+
 option features.(pb.cpp).string_type = STRING;
 option features.enforce_naming_style = STYLE_LEGACY;
 option features.default_symbol_visibility = EXPORT_ALL;
 option features.(pb.cpp).enum_name_uses_string_view = false;
-option features.(pb.java).nest_in_file_class = LEGACY;
+
+message MyMessage {
+  option features.(pb.java).nest_in_file_class = YES;
+}
 ```
 
 ### Caveats and Exceptions {#caveats}

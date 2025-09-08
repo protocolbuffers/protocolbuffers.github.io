@@ -70,19 +70,28 @@ message Foo {}
 ```
 
 The compiler generates a struct named `Foo`. The `Foo` struct defines the
-following methods:
+following associated functions and methods:
+
+### Associated Functions
 
 *   `fn new() -> Self`: Creates a new instance of `Foo`.
 *   `fn parse(data: &[u8]) -> Result<Self, protobuf::ParseError>`: Parses `data`
-    into an instance of `Foo` if `data` holds a valid wire format representation
-    of `Foo`. Otherwise, the function returns an error.
-*   `fn clear_and_parse(&mut self, data: &[u8]) -> Result<(), ParseError>`: Like
-    calling `.clear()` and `parse()` in sequence.
+    and returns an instance of `Foo` if `data` holds a valid wire format
+    representation of `Foo`. Otherwise, the function returns an error.
+
+### Methods
+
+*   `fn clear_and_parse(&mut self, data: &[u8]) -> Result<(), ParseError>`:
+    Clearing and parsing into existing instance (`protobuf::ClearAndParse`
+    trait).
 *   `fn serialize(&self) -> Result<Vec<u8>, SerializeError>`: Serializes the
     message to Protobuf wire format. Serialization can fail but rarely will.
     Failure reasons include exceeding the maximum message size, insufficient
-    memory, and required fields (proto2) that are unset.
-*   `fn merge_from(&mut self, other)`: Merges `self` with `other`.
+    memory, and required fields (proto2) that are unset (`protobuf::Serialize`
+    trait).
+*   `fn clear(&mut self)`: Clears message (`protobuf::Clear` trait).
+*   `fn merge_from(&mut self, other)`: Merges `self` with `other`
+    (`protobuf::MergeFrom` trait).
 *   `fn as_view(&self) -> FooView<'_>`: Returns an immutable handle (view) to
     `Foo`. This is further covered in the section on proxy types.
 *   `fn as_mut(&mut self) -> FooMut<'_>`: Returns a mutable handle (mut) to
@@ -90,6 +99,13 @@ following methods:
 
 `Foo` implements the following traits:
 
+*   `protobuf::ClearAndParse`
+*   `protobuf::Clear`
+*   `protobuf::CopyFrom`
+*   `protobuf::MergeFrom`
+*   `protobuf::Parse`
+*   `protobuf::Serialize`
+*   `protobuf::TakeFrom`
 *   `std::fmt::Debug`
 *   `std::default::Default`
 *   `std::clone::Clone`
