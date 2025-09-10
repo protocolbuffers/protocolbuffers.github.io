@@ -51,7 +51,7 @@ question:
 ## Implications of *Closed* Enums
 
 The behavior of *closed* enums has unexpected consequences when parsing a
-repeated field. When a `repeated Enum` field is parsed all unknown values will
+repeated field. When a `repeated Enum` field is parsed, all unknown values will
 be placed in the
 [unknown field](/programming-guides/proto3/#unknowns)
 set. When it is serialized those unknown values will be written again, *but not
