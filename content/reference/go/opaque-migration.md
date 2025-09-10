@@ -66,6 +66,7 @@ To install the migration tool, use:
 
 ```
 go install google.golang.org/open2opaque@latest
+go install golang.org/x/tools/cmd/goimports@latest
 ```
 
 {{% alert title="Note" color="info" %}}If
