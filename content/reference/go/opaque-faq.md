@@ -35,9 +35,9 @@ make the Opaque API the default.
 
 ## How Do I Enable the New Opaque API for My Messages? {#enable}
 
-With Protobuf Edition 2023 (current at the time of writing), you can select the
-Opaque API by setting the `api_level` editions feature to `API_OPAQUE` in your
-`.proto` file. This can be set per file or per message:
+Starting with Protobuf Edition 2023, you can select the Opaque API by setting
+the `api_level` editions feature to `API_OPAQUE` in your `.proto` file. This can
+be set per file or per message:
 
 ```proto
 edition = "2023";
@@ -50,7 +50,7 @@ option features.(pb.go).api_level = API_OPAQUE;
 message LogEntry { … }
 ```
 
-Protobuf Edition 2024 will default to the Opaque API, meaning you will not need
+Protobuf Edition 2024 defaults to the Opaque API, meaning you will not need
 extra imports or options anymore:
 
 ```proto
@@ -60,8 +60,6 @@ package log;
 
 message LogEntry { … }
 ```
-
-The release date estimate for Protobuf Edition 2024 is early 2025.
 
 For your convenience, you can also override the default API level with a
 `protoc` command-line flag:
