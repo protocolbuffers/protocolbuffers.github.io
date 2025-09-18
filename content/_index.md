@@ -24,7 +24,7 @@ Objective-C, Python, and Ruby. With proto3, you can also work with PHP.
 ## Example Implementation
 
 ```proto
-edition = "2023";
+edition = "2024";
 
 message Person {
   string name = 1;
