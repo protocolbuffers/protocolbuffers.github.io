@@ -624,6 +624,57 @@ languages. Using these features requires you to import the corresponding
 *_features.proto file from the language's runtime. The examples in the following
 sections show these imports.
 
+### `features.(pb.go).api_level` {#go-api_level}
+
+**Languages:** Go
+
+The `api_level` feature enables you to select which API version the Go protobuf
+plugin should generate code for. The Opaque API is the latest version of the
+Protocol Buffers implementation for the Go programming language. The previous
+version is now called Open Struct API. See the
+[Go Protobuf: Releasing the Opaque API](https://go.dev/blog/protobuf-opaque)
+blog post for an introduction.
+
+**Values available:**
+
+*   `API_OPEN`: The Open Struct API generates struct types that are open to
+    direct access.
+*   `API_HYBRID`: Hybrid is a step between Open and Opaque: The Hybrid API also
+    includes accessor methods (so you can update your code), but still exports
+    the struct fields as before. There is no performance difference; this API
+    level only helps with the migration.
+*   `API_OPAQUE`: With the Opaque API, the struct fields are hidden and can no
+    longer be directly accessed. Instead, the new accessor methods allow for
+    getting, setting, or clearing a field.
+
+**Applicable to the following scopes:** Message, File
+
+**Added in:** Edition 2023
+
+**Default behavior per syntax/edition:**
+
+Syntax/edition | Default
+-------------- | ------------
+2023           | `API_OPEN`
+2024           | `API_OPAQUE`
+
+**Note:** Feature settings on different schema elements
+[have different scopes](#cascading).
+
+You can set the `api_level` feature starting in edition 2023:
+
+```proto
+edition = "2023";
+
+import "google/protobuf/go_features.proto";
+
+// Remove this line after migrating the code to the Opaque API.
+option features.(pb.go).api_level = API_HYBRID;
+```
+
+See also:
+[Opaque API: Migration](/reference/go/opaque-migration)
+
 ### `features.(pb.cpp).enum_name_uses_string_view` {#enum-name-string-view}
 
 **Languages:** C++
