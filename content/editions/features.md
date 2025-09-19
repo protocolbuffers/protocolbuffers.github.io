@@ -1079,6 +1079,7 @@ edition = "2024";
 
 import option "third_party/protobuf/cpp_features.proto";
 import option "third_party/java/protobuf/java_features.proto";
+import option "third_party/golang/protobuf/v2/src/google/protobuf/go_features.proto";
 
 // If previously relying on edition 2023 default java_outer_classname.
 option java_outer_classname = "BarBaz" // or BarBazOuterClass
@@ -1087,6 +1088,7 @@ option features.(pb.cpp).string_type = STRING;
 option features.enforce_naming_style = STYLE_LEGACY;
 option features.default_symbol_visibility = EXPORT_ALL;
 option features.(pb.cpp).enum_name_uses_string_view = false;
+option features.(pb.go).api_level = API_OPEN;
 
 message MyMessage {
   option features.(pb.java).nest_in_file_class = YES;
