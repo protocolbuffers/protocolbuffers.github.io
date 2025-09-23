@@ -147,11 +147,12 @@ The following table shows how data is represented in JSON files.
       <td>Any</td>
       <td><code>object</code></td>
       <td><code>{"@type": "url", "f": v, ... }</code></td>
-      <td>If the <code>Any</code> contains a value that has a special JSON
-        mapping, it will be converted as follows: <code>{"@type": xxx, "value":
-        yyy}</code>. Otherwise, the value will be converted into a JSON object,
-        and the <code>"@type"</code> field will be inserted to indicate the
-        actual data type.
+      <td>If the <code>Any</code> contains a well-known type that has a special
+        JSON mapping in this table (for example <code>google.protobuf.Duration</code>)
+        it will be converted as follows: <code>{"@type": xxx, "value":
+        yyy}</code>. Otherwise, the value will be converted into a JSON object
+        as usual, and an additional <code>"@type"</code> field will be inserted
+        with a value of the URL indicating the message's type.
       </td>
     </tr>
     <tr>
