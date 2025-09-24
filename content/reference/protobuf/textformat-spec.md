@@ -362,6 +362,12 @@ repeated_field: 6
 repeated_field: [7, 8, 9]
 ```
 
+is equivalent to:
+
+```textproto
+repeated_field: [1, 2, 3, 4, 5, 6, 7, 8, 9]
+```
+
 Non-`repeated` fields cannot use the list syntax. For example, `[0]` is not
 valid for `optional` or `required` fields. Fields marked `optional` can be
 omitted or specified once. Fields marked `required` must be specified exactly
