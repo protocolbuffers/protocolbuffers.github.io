@@ -20,6 +20,8 @@ New news topics will also be published to the
 The following news topics provide information in the reverse order in which it
 was released.
 
+*   [September 19, 2025](/news/2025-09-19) - Breaking
+    changes in the upcoming 34.x release
 *   [July 16, 2025](/news/2025-07-16) - Resuming support
     for Bazel with MSVC
 *   [July 14, 2025](/news/2025-07-14) - Deprecating
