@@ -28,10 +28,9 @@ This FAQ answers common questions about the new API and the migration process.
 
 ## Which API Should I Use When Creating a New .proto File? {#which}
 
-We recommend you select the Opaque API for new development. Protobuf Edition
-2024 (see
-[Protobuf Editions Overview](/editions/overview/)) will
-make the Opaque API the default.
+We recommend you select the Opaque API for new development.
+
+Protobuf Edition 2024 (see [Protobuf Editions Overview](/editions/overview/)) made the Opaque API the default.
 
 ## How Do I Enable the New Opaque API for My Messages? {#enable}
 
