@@ -371,7 +371,9 @@ repeated_field: [1, 2, 3, 4, 5, 6, 7, 8, 9]
 Non-`repeated` fields cannot use the list syntax. For example, `[0]` is not
 valid for `optional` or `required` fields. Fields marked `optional` can be
 omitted or specified once. Fields marked `required` must be specified exactly
-once.
+once. `required` is a legacy feature of proto2 and is not available in proto3.
+Backward compatibility is available for messages in Editions using
+[`features.field_presence = LEGACY_REQUIRED`](/editions/features#field_presence).
 
 Fields not specified in the associated *.proto* message are not allowed unless
 the field name is present in the message's `reserved` field list. `reserved`
@@ -561,9 +563,10 @@ stores a serialized `com.example.SomeType` message containing `field1: hello`.
 
 In text format, a `group` field uses a normal `MessageValue` element as its
 value, but is specified using the capitalized group name rather than the
-implicit lowercased field name. Example:
+implicit lower-cased field name. Example:
 
 ```proto
+// proto2
 message MessageWithGroup {
   optional group MyGroup = 1 {
     optional int32 my_value = 1;
@@ -583,15 +586,40 @@ MyGroup {
 Similar to Message fields, the `:` delimiter between the group name and value is
 optional.
 
+This functionality is included in Editions for backward-compatibility. Normally
+`DELIMITED` fields will serialize like normal messages. The following shows the
+behavior with Editions:
+
+```proto
+edition = "2024";
+
+message Parent {
+  message GroupLike {
+    int32 foo = 1;
+  }
+  GroupLike grouplike = 1 [features.message_encoding = DELIMITED];
+}
+```
+
+The content of that *.proto* file will be serialized like a proto2 group:
+
+```proto
+GroupLike {
+  foo: 2;
+}
+```
+
 ## `map` Fields {#map}
 
 Text format does not provide a custom syntax for specifying map field entries.
-When a [`map`](/programming-guides/proto2#maps) field is
-defined in a *.proto* file, an implicit `Entry` message is defined containing
-`key` and `value` fields. Map fields are always repeated, accepting multiple
-key/value entries. Example:
+When a `map` field is defined in a *.proto* file, an implicit `Entry` message is
+defined containing `key` and `value` fields. Map fields are always repeated,
+accepting multiple key/value entries. Example:
 
 ```proto
+// Editions
+edition = "2024";
+
 message MessageWithMap {
   map<string, int32> my_map = 1;
 }
@@ -624,9 +652,12 @@ one `oneof` member may be specified at a time. Specifying multiple members
 concurrently is not valid. Example:
 
 ```proto
+// Editions
+edition = "2024";
+
 message OneofExample {
   message MessageWithOneof {
-    optional string not_part_of_oneof = 1;
+    string not_part_of_oneof = 1;
     oneof Example {
       string first_oneof_field = 2;
       string second_oneof_field = 3;
