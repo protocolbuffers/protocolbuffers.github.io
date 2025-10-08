@@ -30,6 +30,13 @@ the byte array across the boundary, and deserialize in the other language. This
 also reduces binary size for these use cases by avoiding having redundant schema
 information embedded in the binary for the same messages for each language.
 
+Google sees Rust as an opportunity to incrementally get memory safety to key
+portions of preexisting brownfield C++ servers; the cost of serialization at the
+language boundaries would prevent adoption of Rust to replace C++ in many of
+these important and performance-sensitive cases. If we pursued a greenfield Rust
+Protobuf implementation that did not have this support, it would end up blocking
+Rust adoption and require that these important cases stay on C++ instead.
+
 Protobuf Rust currently supports three kernels:
 
 *   C++ kernel - the generated code is backed by C++ Protocol Buffers (the
@@ -47,9 +54,12 @@ Protobuf Rust currently supports three kernels:
     other languages. This is the default in open source builds where we expect
     static linking with code already using C++ Protobuf to be more rare.
 
-The decision to support multiple non-Rust kernels significantly influences our
-public API decisions, including the types used on getters (discussed later in
-this document).
+Rust Protobuf is designed to support multiple alternate implementations
+(including multiple different memory layouts) while exposing exactly the same
+API, allowing for the same application code to be recompiled targeting being
+backed by a different implementation. This design constraint significantly
+influences our public API decisions, including the types used on getters
+(discussed later in this document).
 
 ### No Pure Rust Kernel {#no-pure-rust}
 
@@ -61,18 +71,22 @@ While Rust being a memory-safe language can significantly reduce exposure to
 critical security issues, no language is immune to security issues. The Protobuf
 implementations that we support as kernels have been scrutinized and fuzzed to
 the extent that Google is comfortable using those implementations to perform
-unsandboxed parsing of untrusted inputs in our own servers and apps. A
-greenfield binary parser written in Rust at this time would be understood to be
-much more likely to contain critical vulnerabilities than the preexisting C++
-Protobuf parser.
+unsandboxed parsing of untrusted inputs in our own servers and apps.
 
-There are legitimate arguments for long-term supporting a pure Rust
-implementation, including toolchain difficulties for developers using our
-implementation in open source.
+A greenfield binary parser written in Rust at this time would be understood to
+be much more likely to contain critical vulnerabilities than our preexisting C++
+Protobuf or upb parsers, which have been extensively fuzzed, tested, and
+reviewed.
 
-It is a reasonable assumption that Google will support a pure Rust
-implementation at some later date, but we are not investing in it today and have
-no concrete roadmap for it at this time.
+There are legitimate arguments for supporting a pure Rust kernel implementation
+long-term, including the ability for developers to avoid needing to have Clang
+available to compile C code at build time.
+
+We expect that Google will support a pure Rust implementation with the same
+exposed API at some later date, but we have no concrete roadmap for it at this
+time. A second official Rust Protobuf implementation that has a 'better' API by
+avoiding the constraints that come from being backed by C++ Proto and upb is not
+planned, as we wouldn't want to fragment Google's own Protobuf usage.
 
 ## View/Mut Proxy Types {#view-mut-proxy-types}
 
@@ -164,21 +178,23 @@ than Rust's std UTF-8 validation.
 ### ProtoString {#proto-string}
 
 Rust's `str` and `std::string::String` types maintain a strict invariant that
-they only contain valid UTF-8, but C++ Protobuf and C++'s `std::string` type
-generally do not enforce any such guarantee. `string` typed Protobuf fields are
-intended to only ever contain valid UTF-8, and C++ Protobuf uses a correct and
-highly optimized UTF8 validator. C++ Protobuf's API surface is not set up to
-strictly enforce a runtime invariant that `string` fields always contain valid
-UTF-8 (instead, it defers any validation to serialize or subsequent parse time).
+they only contain valid UTF-8, but C++'s `std::string` type does not enforce any
+such guarantee. `string` typed Protobuf fields are intended to only ever contain
+valid UTF-8, and C++ Protobuf does use a correct and highly optimized UTF8
+validator. However, C++ Protobuf's API surface is not set up to strictly enforce
+as a runtime invariant that its `string` fields always contain valid UTF-8,
+instead, in some cases it allows setting of non-UTF8 data into a `string` field
+and validation will only occur at a later time when serialization is happening.
 
 To enable integrating Rust into preexisting codebases that use C++ Protobuf
-while minimizing unnecessary validations or risk of undefined behavior in Rust,
-we chose not to use the `str`/`String` types for `string` field getters. We
-introduced the types `ProtoStr` and `ProtoString` instead, which are equivalent
-types, except that they may contain invalid UTF-8 in rare situations. Those
-types let the application code choose if they wish to perform the validation
-on-demand to observe the fields as a `Result<&str>`, or operate on the raw bytes
-to avoid any runtime validation.
+while allowing for zero-cost boundary crossings with no risk of undefined
+behavior in Rust, we unfortunately have to avoid the `str`/`String` types for
+`string` field getters. Instead, the types `ProtoStr` and `ProtoString` are
+used, which are equivalent types, except that they may contain invalid UTF-8 in
+rare situations. Those types let the application code choose if they wish to
+perform the validation on-demand to observe the fields as a `Result<&str>`, or
+operate on the raw bytes to avoid any runtime validation. All of the setter
+paths are still designed to allow you to pass `&str` or `String` types.
 
 We are aware that vocabulary types like `str` are very important to idiomatic
 usage, and intend to keep an eye on if this decision is the right one as usage
