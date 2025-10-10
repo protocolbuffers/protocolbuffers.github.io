@@ -57,7 +57,7 @@ use the `apilevelM` mapping flag (similar to
 protoc […] --go_opt=apilevelMhello.proto=API_OPEN
 ```
 
-## Automated migration {#automated}
+## Automated Migration {#automated}
 
 We try to make migrating existing projects to the Opaque API as easy as possible
 for you: our open2opaque tool does most of the work!
@@ -69,7 +69,7 @@ go install google.golang.org/open2opaque@latest
 go install golang.org/x/tools/cmd/goimports@latest
 ```
 
-{{% alert title="Note" color="info" %}}If
+{{% alert title="Note" color="info" %}} If
 you encounter any issues with the automated migration approach, refer to the
 [Opaque API: Manual Migration](/reference/go/opaque-migration-manual)
 guide. {{% /alert %}}
@@ -102,7 +102,7 @@ Protocol Buffers and Go Protobuf:
     older module. See
     [the `google.golang.org/protobuf` announcement (from 2020)](https://go.dev/blog/protobuf-apiv2)
     and migrate your code before returning to this
-    page.{{% /alert %}}
+    page. {{% /alert %}}
 
 ### Step 1. Switch to the Hybrid API {#setup}
 
