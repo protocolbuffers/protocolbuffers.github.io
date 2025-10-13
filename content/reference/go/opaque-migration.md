@@ -112,6 +112,10 @@ Use the `open2opaque` tool to switch your `.proto` files to the Hybrid API:
 open2opaque setapi -api HYBRID $(find . -name "*.proto")
 ```
 
+Then,
+[re-compile](/getting-started/gotutorial#compiling-protocol-buffers)
+your protocol buffers.
+
 Your existing code will continue to build. The Hybrid API is a step between the
 Open and Opaque API which adds the new accessor methods but keeps struct fields
 visible.
