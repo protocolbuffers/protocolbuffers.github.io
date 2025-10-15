@@ -271,6 +271,36 @@ A common practice is to generate your protos into a `proto` subpackage in your
 project that **only** contains those protos (that is, no hand-written source
 code).
 
+## **Do** Derive Java Package from the .proto Package (if overridden) {#derive-java-package}
+
+Setting the `java_package` can introduce fully-qualified name collisions in
+generated code that did not exist in the .proto semantics. For example, these
+two files may create collisions in the generated code despite the
+fully-qualified names not colliding in the original schema:
+
+```proto
+package x;
+option java_package = "com.example.proto";
+message Abc {}
+```
+
+```proto
+package y;
+option java_package = "com.example.proto";
+message Abc {}
+```
+
+To avoid these problems, you should never set the same `java_package` in two
+files that have different .proto packages set.
+
+The best practice is to establish a local naming pattern where the package name
+is derived from the .proto package. For example, a best practice file with
+`package y` might consistently set `option java_package =
+"com.example.proto.y"`.
+
+This guidance also applies to any other language-specific options where package
+overrides are possible.
+
 ## Avoid Using Language Keywords for Field Names {#avoid-keywords}
 
 If the name of a message, field, enum, or enum value is a keyword in the
