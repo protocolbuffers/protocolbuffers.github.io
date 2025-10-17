@@ -12,6 +12,17 @@ package you need to import to use that message.
 
 ## Recommendation { #recommendation }
 
+Starting with Edition 2024, best practice is to:
+
+*   Set `option java_package = "com.example.package"`
+*   **Do not set** `java_outer_classname` or
+    `features.(pb.java).nest_in_file_class = YES`.
+
+Starting with Edition 2024, the default behaviors have otherwise been improved
+so that now the default behavior is considered current best practice.
+
+When using Proto2, Proto3, or Edition 2023, best practice is to:
+
 *   Set `option java_multiple_files = true;`
 *   Set `option java_outer_classname = "FileNameProto";`
 *   Set `option java_package = "com.google.package";`
@@ -23,6 +34,10 @@ package you need to import to use that message.
 With `java_multiple_files = true`, the generated Java class for each message
 will be placed in a separate `.java` file. This makes it much easier to move
 messages from one `.proto` file to another.
+
+Starting in Edition 2024 this has been replaced by the feature
+`features.(pb.java).nest_in_file_class` which has default value of `NO`,
+matching the `java_multiple_files = true` behavior in older syntax.
 
 #### Outer Classname {#outer-classname}
 
@@ -37,6 +52,10 @@ The best policy is to explicitly set the `java_outer_classname` option to the
     ```proto
     option java_outer_classname = "StudentRecordRequestProto";
     ```
+
+Starting in Edition 2024, `java_outer_classname` is still available, but the
+default behavior has been changed to match this recommendation and so does not
+need to be set.
 
 #### Java Package {#java-package}
 
