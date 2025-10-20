@@ -2,7 +2,7 @@
 title = "C# Generated Code Guide"
 weight = 550
 linkTitle = "Generated Code Guide"
-description = "Describes exactly what C# code the protocol buffer compiler generates for protocol definitions using proto3 syntax."
+description = "Describes exactly what C# code the protocol buffer compiler generates for protocol definitions using editions syntax."
 type = "docs"
 +++
 
