@@ -206,7 +206,7 @@ non-conformant field name:
 edition = "2024";
 
 // To keep the non-conformant field name, override the STYLE2024 setting
-option features.enforce_naming_style = "STYLE_LEGACY";
+option features.enforce_naming_style = STYLE_LEGACY;
 
 message Foo {
   int64 bar_1 = 1;
