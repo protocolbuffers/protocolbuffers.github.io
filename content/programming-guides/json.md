@@ -159,7 +159,7 @@ The following table shows how data is represented in JSON files.
         <td>Timestamp</td>
         <td>string</td>
         <td><code>"1972-01-01T10:00:20.021Z"</code></td>
-        <td>Uses RFC 3339 (see <a href="#rfc3339">clarification</a>), where generated output will always be Z-normalized
+        <td>Uses RFC 3339 (see <a href="#rfc3339-timestamp">clarification</a>), where generated output will always be Z-normalized
           and uses 0, 3, 6 or 9 fractional digits. Offsets other than "Z" are
           also accepted.
       </td>
@@ -171,7 +171,8 @@ The following table shows how data is represented in JSON files.
       <td>Generated output always contains 0, 3, 6, or 9 fractional digits,
         depending on required precision, followed by the suffix "s". Accepted
         are any fractional digits (also none) as long as they fit into
-        nanoseconds precision and the suffix "s" is required.
+        nanoseconds precision and the suffix "s" is required. This is *not* RFC 3339
+        'duration' format (see <a href="#rfc3339-duration">Durations</a> for clarification).
       </td>
     </tr>
     <tr>
@@ -372,12 +373,18 @@ that the relevant clients set an Ignore Unknown Fields flag, discussed
     *   If "enums-as-ints" flag is used by any client, then enums will instead
         be compatible with the integer types instead.
 
-## RFC 3339 Clarification {#rfc3339}
+## RFC 3339 Clarifications {#rfc3339}
+
+### Timestamps {#rfc3339-timestamp}
+
+ProtoJSON timestamps use the RFC 3339 timestamp format. Unfortunately, some
+ambiguity in the RFC 3339 spec has created a few edge cases where various other
+RFC 3339 implementations do not agree on whether or not the format is legal.
 
 [RFC 3339](https://www.rfc-editor.org/rfc/rfc3339) intends to declare a strict
-subset of ISO-8601 format, and unfortunately some ambiguity was created since
-RFC 3339 was published in 2002 and then ISO-8601 was subsequently revised
-without any corresponding revisions of RFC 3339.
+subset of ISO-8601 format, and some additional ambiguity was created since RFC
+3339 was published in 2002 and then ISO-8601 was subsequently revised without
+any corresponding revisions of RFC 3339.
 
 Most notably, ISO-8601-1988 contains this note:
 
@@ -391,10 +398,12 @@ technically used. RFC 3339 contains a note that intends to clarify the
 interpretation to be that lowercase letters should be accepted in general.
 
 ISO-8601-2019 does not contain the corresponding note and is unambiguous that
-lowercase letters are not allowed. This created some confusion for all libraries
-that declare they support RFC 3339: today RFC 3339 declares it is a profile of
-ISO-8601 but contains a note that is in reference to something that is no longer
-in the latest ISO-8601 spec.
+lowercase letters are not allowed.
+
+This created some confusion for all libraries that declare they support RFC
+3339: today RFC 3339 declares it is a profile of ISO-8601 but contains a
+clarifying note referencing text that is not present in the latest ISO-8601
+spec.
 
 ProtoJSON spec takes the decision that the timestamp format is the stricter
 definition of "RFC 3339 as a profile of ISO-8601-2019". Some Protobuf
@@ -406,6 +415,17 @@ For consistent interoperability, parsers should only accept the stricter subset
 format where possible. When using a non-conformant implementation that accepts
 the laxer definition, strongly avoid relying on the additional edge cases being
 accepted.
+
+### Durations {#rfc3339-duration}
+
+RFC 3339 also defines a duration format, but unfortunately the RFC 3339 duration
+format does not have any way to express sub-second resolution.
+
+The ProtoJSON duration encoding is directly inspired by RFC 3339 `dur-seconds`
+representation, but it is able to encode nanosecond precision. For integer
+number of seconds the two representations may match (like `10s`), but the
+ProtoJSON durations accept fractional values and conformant implementations must
+precisely represent nanosecond precision (like `10.500000001s`).
 
 ## JSON Options {#json-options}
 
