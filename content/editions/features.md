@@ -103,7 +103,7 @@ and `export` keywords to set per-field behavior. Read more about this at
     except for a special-case caveat for `message { enum {} reserved 0 to max;
     }`. This will become the default in a future edition.
 
-**Applicable to the following scope:** Enum, Message
+**Applicable to the following scope:** file
 
 **Added in:** Edition 2024
 
@@ -170,7 +170,8 @@ protos are round-trippable by default with a feature value to opt-out to use
 *   `STYLE_LEGACY`: Applies the pre-Edition 2024 level of style guide
     enforcement.
 
-**Applicable to the following scope:** File
+**Applicable to the following scopes:** file, extension range, message, field,
+oneof, enum, enum value, service, method
 
 **Added in:** Edition 2024
 
@@ -229,7 +230,7 @@ and after of a proto3 file.
     unknown field set.
 *   `OPEN:` Open enums parse out of range values into their fields directly.
 
-**Applicable to the following scopes:** File, Enum
+**Applicable to the following scopes:** file, enum
 
 **Added in:** Edition 2023
 
@@ -290,7 +291,7 @@ whether a protobuf field has a value.
     serialized onto the wire (even if it is explicitly set). `has_*` functions
     are not generated for fields set to `IMPLICIT`.
 
-**Applicable to the following scopes:** File, Field
+**Applicable to the following scopes:** file, field
 
 **Added in:** Edition 2023
 
@@ -383,7 +384,7 @@ and after of a proto3 file. Editions behavior matches the behavior in proto3.
     JSON. Certain protos are allowed that can result in unspecified behavior at
     runtime (such as many:1 or 1:many mappings).
 
-**Applicable to the following scopes:** File, Message, Enum
+**Applicable to the following scopes:** file, message, enum
 
 **Added in:** Edition 2023
 
@@ -446,7 +447,7 @@ the following conditions are met:
 *   `DELIMITED`: Message-typed fields are encoded as
     [groups](/programming-guides/proto2#groups).
 
-**Applicable to the following scopes:** File, Field
+**Applicable to the following scopes:** file, field
 
 **Added in:** Edition 2023
 
@@ -502,7 +503,7 @@ for `repeated` fields has been migrated to in Editions.
 *   `EXPANDED`: `Repeated` fields are each encoded with the field number for
     each value.
 
-**Applicable to the following scopes:** File, Field
+**Applicable to the following scopes:** file, field
 
 **Added in:** Edition 2023
 
@@ -581,7 +582,7 @@ and after of a proto3 file.
     Parsers may handle this type of field in an unpredictable way, such as
     replacing invalid characters. This is the default proto2 behavior.
 
-**Applicable to the following scopes:** File, Field
+**Applicable to the following scopes:** file, field
 
 **Added in:** Edition 2023
 
@@ -647,7 +648,7 @@ blog post for an introduction.
     longer be directly accessed. Instead, the new accessor methods allow for
     getting, setting, or clearing a field.
 
-**Applicable to the following scopes:** Message, File
+**Applicable to the following scopes:** message, file
 
 **Added in:** Edition 2023
 
@@ -699,7 +700,7 @@ in the migration guide for more on this topic.
 *   `true`: The enum uses `string_view` for its values.
 *   `false`: The enum uses `std::string` for its values.
 
-**Applicable to the following scopes:** Enum, File
+**Applicable to the following scopes:** file, enum
 
 **Added in:** Edition 2024
 
@@ -729,7 +730,7 @@ example, switch statements are not supported.
 *   `true`: Java enums will use the new functionality.
 *   `false`: Java enums will continue to use Java enums.
 
-**Applicable to the following scopes:** Enum
+**Applicable to the following scopes:** file, enum
 
 **Added in:** Edition 2024
 
@@ -762,7 +763,7 @@ before and after of a proto3 file.
 *   `true`: Treats the enum as closed regardless of [`enum_type`](#enum_type).
 *   `false`: Respect whatever is set in the `enum_type`.
 
-**Applicable to the following scopes:** File, Field
+**Applicable to the following scopes:** file, field
 
 **Added in:** Edition 2023
 
@@ -828,7 +829,7 @@ becomes `BarBazProto`). You can still override this using the
 *   `YES`: Nest the generated class in the file class.
 *   Legacy: An internal value used when the `java_multiple_files` option is set.
 
-**Applicable to the following scopes:** Message, Enum, Service
+**Applicable to the following scopes:** message, enum, service
 
 **Added in:** Edition 2024
 
@@ -861,7 +862,7 @@ removed.
     fields.
 *   `STRING`: Generates `string` accessors for the field.
 
-**Applicable to the following scopes:** File, Field
+**Applicable to the following scopes:** file, field
 
 **Added in:** Edition 2023
 
@@ -942,7 +943,7 @@ before and after of a proto3 file.
 *   `VERIFY`: Overrides the file-level `features.utf8_validation` setting to
     force it to `VERIFY` for Java only.
 
-**Applicable to the following scopes:** Field, File
+**Applicable to the following scopes:** file, field
 
 **Added in:** Edition 2023
 
@@ -1023,7 +1024,7 @@ generator strips the repetitive prefix or not.
     name (to help with migrating your Go code).
 *   `STRIP_ENUM_PREFIX_STRIP`: Strip the enum name prefix from enum value names.
 
-**Applicable to the following scopes:** Enum, File
+**Applicable to the following scopes:** file, enum, enum value
 
 **Added in:** Edition 2024
 
