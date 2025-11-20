@@ -56,11 +56,11 @@ deserializing wire-formatted messages:
     -   Duplicate `repeated` fields are typically appended to the field's API
         representation. (Note that serializing a *packed* repeated field
         produces only one, length-delimited value in the tag stream.)
-    -   Duplicate `optional` field values follow the rule that "the last one
+    -   Duplicate singular field values follow the rule that "the last one
         wins."
 -   `oneof` fields expose the API-level invariant that only one field is set at
     a time. However, the wire format may include multiple (tag, value) pairs
-    which notionally belong to the `oneof`. Similar to `optional` fields, the
+    which notionally belong to the `oneof`. Similar to singular fields, the
     generated API follows the "last one wins" rule.
 -   Out-of-range values are not returned for enum fields in generated proto2
     APIs. However, out-of-range values may be stored as *unknown fields* in the
