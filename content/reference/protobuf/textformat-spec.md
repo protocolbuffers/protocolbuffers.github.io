@@ -11,10 +11,10 @@ documentation using the syntax specified in
 [ISO/IEC 14977 EBNF](https://en.wikipedia.org/wiki/Extended_Backus%E2%80%93Naur_Form).
 
 {{% alert title="Note" color="note" %}}
-This is a draft spec reverse-engineered from the C++ text format
+This is a draft spec originally reverse-engineered from the C++ text format
 [implementation](https://github.com/protocolbuffers/protobuf/blob/master/src/google/protobuf/text_format.cc)
-and may change based on further discussion and review. While an effort has been
-made to keep text formats consistent across supported languages,
+It has evolved and may change further based on discussion and review. While an
+effort has been made to keep text formats consistent across supported languages,
 incompatibilities are likely to exist. {{% /alert %}}
 
 ## Example {#example}
@@ -96,6 +96,17 @@ dec = "0" | "1" | "2" | "3" | "4" | "5" | "6" | "7" | "8" | "9" ;
 hex = "0" | "1" | "2" | "3" | "4" | "5" | "6" | "7" | "8" | "9"
     | "A" | "B" | "C" | "D" | "E" | "F"
     | "a" | "b" | "c" | "d" | "e" | "f" ;
+```
+
+A limited set of URL characters following
+[RFC 3986: Uniform Resource Identifier (URI)](https://www.rfc-editor.org/rfc/rfc3986#appendix-A):
+
+```
+url_unreserved  = letter | dec | "-" | "." | "~" | "_"
+url_sub_delim   = "!" | "$" | "&" | "'" | "(" | ")"
+                | "*" | "+" | "," | ";" | "="
+url_pct_encoded = "%" hex hex
+url_char        = url_unreserved | url_sub_delim | url_pct_encoded
 ```
 
 ### Whitespace and Comments {#whitespace}
@@ -263,16 +274,21 @@ Fields that are part of the containing message use simple `Identifiers` as
 names.
 [`Extension`](/programming-guides/proto2#extensions) and
 [`Any`](/programming-guides/proto3#any) field names are
-wrapped in square brackets and fully-qualified. `Any` field names are prefixed
-with a qualifying domain name, such as `type.googleapis.com/`.
+wrapped in square brackets and fully-qualified. `Any` field names are URI suffix
+references, meaning that they are prefixed with a qualifying authority and an
+optional path, such as `type.googleapis.com/`.
 
 ```
 FieldName     = ExtensionName | AnyName | IDENT ;
 ExtensionName = "[", TypeName, "]" ;
-AnyName       = "[", Domain, "/", TypeName, "]" ;
+AnyName       = "[", UrlPrefix, "/", TypeName, "]" ;
 TypeName      = IDENT, { ".", IDENT } ;
-Domain        = IDENT, { ".", IDENT } ;
+UrlPrefix     = url_char, { url_char | "/" } ;
 ```
+
+Text format serializers should not write any whitespace characters between the
+brackets of an `ExtensionName` or `AnyName`. Parsers should trim any whitespace
+characters before processing an `ExtensionName` or `AnyName`.
 
 Regular fields and extension fields can have scalar or message values. `Any`
 fields are always messages. Example:
