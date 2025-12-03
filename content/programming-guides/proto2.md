@@ -745,6 +745,30 @@ message SearchRequest {
 }
 ```
 
+### Prefixing Enum Values {#prefixing-values}
+
+When prefixing enum values, the remainder of the name with the prefix stripped
+should still be a legal and style-conformant enum name. For example, avoid the
+following:
+
+```proto
+enum DeviceTier {
+  DEVICE_TIER_UNKNOWN = 0;
+  DEVICE_TIER_1 = 1;
+  DEVICE_TIER_2 = 2;
+}
+```
+
+Instead, use a value name like `DEVICE_TIER_TIER1`, where the `DEVICE_TIER_`
+portion is viewed as scoping the enum value rather than as part of the
+individual enum value name. Some Protobuf implementations automatically strip
+the prefix that matches the containing enum name where it is safe to do so, but
+could not in this example since a bare `1` is not a legal enum value name.
+
+We plan for a future Edition to add support for scoped enums, which will
+eliminate the need to manually prefix each enum value and enable this to be
+written succinctly as `TIER1 = 1`.
+
 ### Enum Default Value {#enum-default}
 
 The default value for the `SearchRequest.corpus` field is `CORPUS_UNSPECIFIED`
