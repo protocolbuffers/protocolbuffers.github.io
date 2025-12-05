@@ -149,7 +149,9 @@ The class also defines the following static methods:
     default instance of a message can be used as a factory by calling its
     `New()` method.
 
-### Generated Filenames {#generated-filenames}
+<a id="generated-filenames"><!-- old anchor name, retained to avoid broken links --></a>
+
+### Generated Fieldnames {#generated-fieldnames}
 
 [Reserved keywords](https://github.com/protocolbuffers/protobuf/blob/main/src/google/protobuf/compiler/cpp/helpers.cc#L4)
 are appended with an underscore in the generated output.
