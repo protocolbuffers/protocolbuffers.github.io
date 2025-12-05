@@ -149,40 +149,6 @@ The class also defines the following static methods:
     default instance of a message can be used as a factory by calling its
     `New()` method.
 
-<a id="generated-filenames"><!-- old anchor name, retained to avoid broken links --></a>
-
-### Generated Fieldnames {#generated-fieldnames}
-
-[Reserved keywords](https://github.com/protocolbuffers/protobuf/blob/main/src/google/protobuf/compiler/cpp/helpers.cc#L4)
-are appended with an underscore in the generated output.
-
-For example, the following proto3 definition syntax:
-
-```proto
-message MyMessage {
-  string false = 1;
-  string myFalse = 2;
-}
-```
-
-generates the following partial output:
-
-```cpp
-  void clear_false_() ;
-  const std::string& false_() const;
-  void set_false_(Arg_&& arg, Args_... args);
-  std::string* mutable_false_();
-  PROTOBUF_NODISCARD std::string* release_false_();
-  void set_allocated_false_(std::string* ptr);
-
-  void clear_myfalse() ;
-  const std::string& myfalse() const;
-  void set_myfalse(Arg_&& arg, Args_... args);
-  std::string* mutable_myfalse();
-  PROTOBUF_NODISCARD std::string* release_myfalse();
-  void set_allocated_myfalse(std::string* ptr);
-```
-
 ### Nested Types {#nested-types}
 
 A message can be declared inside another message. For example:
@@ -234,6 +200,40 @@ any method inherited from `Message` or accessing the message through other ways
 (for example, by copying the message using the copy constructor).
 Correspondingly, the value of the returned pointer is never guaranteed to be the
 same across two different invocations of the accessor.
+
+<a id="generated-filenames"><!-- old anchor name, retained to avoid broken links --></a>
+
+### Generated Fieldnames {#generated-fieldnames}
+
+[Reserved keywords](https://github.com/protocolbuffers/protobuf/blob/main/src/google/protobuf/compiler/cpp/helpers.cc#L4)
+are appended with an underscore in the generated output.
+
+For example, the following proto3 definition syntax:
+
+```proto
+message MyMessage {
+  string false = 1;
+  string myFalse = 2;
+}
+```
+
+generates the following partial output:
+
+```cpp
+  void clear_false_() ;
+  const std::string& false_() const;
+  void set_false_(Arg_&& arg, Args_... args);
+  std::string* mutable_false_();
+  PROTOBUF_NODISCARD std::string* release_false_();
+  void set_allocated_false_(std::string* ptr);
+
+  void clear_myfalse() ;
+  const std::string& myfalse() const;
+  void set_myfalse(Arg_&& arg, Args_... args);
+  std::string* mutable_myfalse();
+  PROTOBUF_NODISCARD std::string* release_myfalse();
+  void set_allocated_myfalse(std::string* ptr);
+```
 
 ### Explicit Presence Numeric Fields {#numeric}
 
