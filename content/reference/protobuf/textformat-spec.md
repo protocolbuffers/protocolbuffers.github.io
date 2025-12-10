@@ -103,7 +103,7 @@ A limited set of URL characters following
 
 ```
 url_unreserved  = letter | dec | "-" | "." | "~" | "_"
-url_sub_delim   = "!" | "$" | "&" | "'" | "(" | ")"
+url_sub_delim   = "!" | "$" | "&" | "(" | ")"
                 | "*" | "+" | "," | ";" | "="
 url_pct_encoded = "%" hex hex
 url_char        = url_unreserved | url_sub_delim | url_pct_encoded
