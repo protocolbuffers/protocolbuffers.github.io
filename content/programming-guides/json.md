@@ -274,10 +274,14 @@ possible.
 ## Out of range numeric values
 
 When parsing a numeric value, if the number that is is parsed from the wire
-doesn't fit in the corresponding type, the parser should coerce the value to the
-appropriate type. This has the same behavior as a simple cast in C++ or Java
-(for example, if a number larger than 2^32 is read as for an int32 field, it
-will be truncated to 32 bits).
+doesn't fit in the corresponding type, the parser should fail to parse.
+
+This includes any negative number for `uint32`, and numbers less than `INT_MIN`
+or larger than `INT_MAX` for `int32`.
+
+Values with nonzero fractional portions are not allowed for integer-typed
+fields. Zero fractional portions are accepted. For example `1.0` is valid for an
+int32 field, but `1.5` is not.
 
 ## ProtoJSON Wire Safety {#json-wire-safety}
 
