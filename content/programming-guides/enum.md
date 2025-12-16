@@ -82,7 +82,7 @@ Prior to the introduction of `syntax = "proto3"` all enums were *closed*. Proto3
 and editions use *open* enums specifically because of the unexpected behavior
 that *closed* enums cause. You can use
 [`features.enum_type`](/editions/features#enum_type) to
-explicitly set editions enums to open, if needed.
+explicitly set editions enums to closed, if needed.
 
 ## Specification {#spec}
 
