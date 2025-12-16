@@ -49,7 +49,7 @@ will correspond to <code>[0, 1, 2, 2]</code>.</p><p>Similarly, maps with <em>clo
 and editions use <em>open</em> enums specifically because of the unexpected behavior
 that <em>closed</em> enums cause. You can use
 <a href=/editions/features#enum_type><code>features.enum_type</code></a> to
-explicitly set editions enums to open, if needed.</p><h2 id=spec>Specification</h2><p>The following specifies the behavior of conformant implementations for protobuf.
+explicitly set editions enums to closed, if needed.</p><h2 id=spec>Specification</h2><p>The following specifies the behavior of conformant implementations for protobuf.
 Because this is subtle, many implementations are out of conformance. See
 <a href=#known-issues>Known Issues</a> for details on how different implementations
 behave.</p><ul><li>When a <code>proto2</code> file imports an enum defined in a <code>proto2</code> file, that enum
