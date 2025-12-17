@@ -439,8 +439,8 @@ clients using the <code>map</code> field definition may reorder entries and drop
 entries with duplicate keys.</li></ul></li></ul><h2 id=unknowns>Unknown Fields</h2><p>Unknown fields are well-formed protocol buffer serialized data representing
 fields that the parser does not recognize. For example, when an old binary
 parses data sent by a new binary with new fields, those new fields become
-unknown fields in the old binary.</p><p>Editions messages preserve unknown fields and includes them during parsing and
-in the serialized output, which matches proto2 and proto3 behavior.</p><h3 id=retaining>Retaining Unknown Fields</h3><p>Some actions can cause unknown fields to be lost. For example, if you do one of
+unknown fields in the old binary.</p><p>Editions messages preserve unknown fields and include them during parsing and in
+the serialized output, which matches proto2 and proto3 behavior.</p><h3 id=retaining>Retaining Unknown Fields</h3><p>Some actions can cause unknown fields to be lost. For example, if you do one of
 the following, unknown fields are lost:</p><ul><li>Serialize a proto to JSON.</li><li>Iterate over all of the fields in a message to populate a new message.</li></ul><p>To avoid losing unknown fields, do the following:</p><ul><li>Use binary; avoid using text formats for data exchange.</li><li>Use message-oriented APIs, such as <code>CopyFrom()</code> and <code>MergeFrom()</code>, to copy data
 rather than copying field-by-field</li></ul><p>TextFormat is a bit of a special case. Serializing to TextFormat prints unknown
 fields using their field numbers. But parsing TextFormat data back into a binary
