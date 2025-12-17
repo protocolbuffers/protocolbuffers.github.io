@@ -1115,8 +1115,8 @@ fields that the parser does not recognize. For example, when an old binary
 parses data sent by a new binary with new fields, those new fields become
 unknown fields in the old binary.
 
-Editions messages preserve unknown fields and includes them during parsing and
-in the serialized output, which matches proto2 and proto3 behavior.
+Editions messages preserve unknown fields and include them during parsing and in
+the serialized output, which matches proto2 and proto3 behavior.
 
 ### Retaining Unknown Fields {#retaining}
 
