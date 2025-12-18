@@ -512,6 +512,19 @@ not meant to be passed around between functions. Instead, call `Build()`
 immediately and pass the resulting proto message instead, using setters to
 modify fields.
 
+Here is an example for using builders to create a `Band` message, which is the
+only repeated field inside the enclosing `Concert` message:
+
+```go
+concert := Concert_builder{
+  SupportActs: []*Band{
+    Band_builder{
+      Name: proto.String("Varint and the Marshals"),
+    }.Build()
+  },
+}.Build()
+```
+
 ## Enumerations {#enum}
 
 Given an enumeration like:
