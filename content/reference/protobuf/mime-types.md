@@ -22,7 +22,7 @@ followed by the following parameters:
         `json`.
     +   Use `+json` for JSON even in HTTP responses that use parser
         breakers as a CORB mitigation.
--   Set `charset` to `utf-8` for all JSONor Text Format encodings, and never set
+-   Set `charset` to `utf-8` for all JSON or Text Format encodings, and never set
     it for binary encodings.
     +   If `charset` is unspecified it is assumed to be UTF-8. It is preferable
         to always specify a `charset` as that may prevent certain attack vectors
