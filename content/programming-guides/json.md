@@ -363,16 +363,14 @@ that the relevant clients set an Ignore Unknown Fields flag, discussed
     `sfixed32`, `fixed32`) and any of the 64-bit integers ( `int64`, `uint64`,
     `sint64`, `sfixed32`) is a compatible change.
     *   If a number is parsed from the wire that doesn't fit in the
-        corresponding type, you will get the same effect as if you had cast the
-        number to that type in C++ (for example, if a 64-bit number is read as
-        an int32, it will be truncated to 32 bits).
+        corresponding type, a parse failure will occur.
     *   Unlike binary wire format, `bool` is not compatible with integers.
-    *   Note that the int64 types are quoted by default to avoid precision loss
-        when handled as a double or JavaScript number, and the 32 bit types are
-        unquoted by default. Conformant implementations will accept either case
-        for all integer types, but nonconformant implementations may mishandle
-        this case and not handle quoted int32s or unquoted int64s which may
-        break under this change.
+    *   Note that the int64 and uint64 types are quoted by default to avoid
+        precision loss when handled as a double or JavaScript number, and the 32
+        bit types are unquoted by default. Conformant parsers will accept either
+        quoted or unquoted for all integer types, but nonconformant
+        implementations may mishandle this case and not handle quoted-int32s or
+        unquoted-int64s, so caution should be taken.
 *   `enum` may be conditionally compatible with `string`
     *   If "enums-as-ints" flag is used by any client, then enums will instead
         be compatible with the integer types instead.
