@@ -827,7 +827,8 @@ becomes `BarBazProto`). You can still override this using the
 
 *   `NO`: Do not nest the generated class in the file class.
 *   `YES`: Nest the generated class in the file class.
-*   Legacy: An internal value used when the `java_multiple_files` option is set.
+*   Legacy: Nesting behavior controlled by `java_multiple_files` option (see
+    go/java-proto-names#immutable-api-message-names).
 
 **Applicable to the following scopes:** message, enum, service
 
@@ -836,11 +837,11 @@ becomes `BarBazProto`). You can still override this using the
 **Default behavior per syntax/edition:**
 
 Syntax/edition | Default
--------------- | --------
+-------------- | -------
 2024           | `NO`
-2023           | `LEGACY`
-proto3         | `LEGACY`
-proto2         | `LEGACY`
+2023           | Legacy
+proto3         | Legacy
+proto2         | Legacy
 
 **Note:** Feature settings on different schema elements
 [have different scopes](#cascading).
