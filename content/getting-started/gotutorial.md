@@ -177,11 +177,12 @@ classes you'll need to read and write `AddressBook` (and hence `Person` and
 `PhoneNumber`) messages. To do this, you need to run the protocol buffer
 compiler `protoc` on your `.proto`:
 
-1.  If you haven't installed the compiler,
-    [download the package](/downloads) and follow the
-    instructions in the README.
+1.  If you haven't installed the protobuf compiler, follow the
+    [installation instructions](/installation) to install it via your
+    package manager, as a pre-compiled binary or from source.
 
-2.  Run the following command to install the Go protocol buffers plugin:
+2.  Install the Go protocol buffers plugin using the `protoc-gen-go` package
+    in your your package manager, or using the following command:
 
     ```shell
     go install google.golang.org/protobuf/cmd/protoc-gen-go@latest
