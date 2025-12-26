@@ -179,7 +179,7 @@ compiler `protoc` on your `.proto`:
 
 1.  If you haven't installed the protobuf compiler, follow the
     [installation instructions](/installation) to install it via your
-    package manager, as a pre-compiled binary or from source.
+    package manager, as a pre-compiled binary, or from source.
 
 2.  Install the Go protocol buffers plugin using the `protoc-gen-go` package
     in your your package manager, or using the following command:
