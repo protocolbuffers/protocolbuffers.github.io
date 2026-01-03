@@ -215,7 +215,7 @@ The following table shows how data is represented in JSON files.
       <td>NullValue</td>
       <td>null</td>
       <td></td>
-      <td>JSON null. Special case of the [null parsing behavior](#null-values).</td>
+      <td>JSON null. Special case of the <a href="#null-values">null parsing behavior</a>.</td>
     </tr>
     <tr>
       <td>Empty</td>
