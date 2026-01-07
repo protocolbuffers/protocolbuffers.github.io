@@ -147,12 +147,7 @@ The following table shows how data is represented in JSON files.
       <td>Any</td>
       <td><code>object</code></td>
       <td><code>{"@type": "url", "f": v, ... }</code></td>
-      <td>If the <code>Any</code> contains a well-known type that has a special
-        JSON mapping in this table (for example <code>google.protobuf.Duration</code>)
-        it will be converted as follows: <code>{"@type": xxx, "value":
-        yyy}</code>. Otherwise, the value will be converted into a JSON object
-        as usual, and an additional <code>"@type"</code> field will be inserted
-        with a value of the URL indicating the message's type.
+      <td>See <a href="#any">Any</a>
       </td>
     </tr>
     <tr>
@@ -220,7 +215,7 @@ The following table shows how data is represented in JSON files.
     <tr>
       <td>Empty</td>
       <td>object</td>
-      <td><code>{}</code></td>
+      <td><code>{} (not special cased)</code></td>
       <td>An empty JSON object</td>
     </tr>
   </tbody>
@@ -282,6 +277,55 @@ or larger than `INT_MAX` for `int32`.
 Values with nonzero fractional portions are not allowed for integer-typed
 fields. Zero fractional portions are accepted. For example `1.0` is valid for an
 int32 field, but `1.5` is not.
+
+## Any {#any}
+
+### Normal messages {#any-normal-messages}
+
+For any message that is not a well-known type with a special JSON
+representation, the message contained inside the `Any` is turned into a JSON
+object with an additional `"@type"` field inserted that contains the `type_url`
+that was set on the `Any`.
+
+For example, if you have this message definition:
+
+```proto
+package x;
+message Child { int32 x = 1; string y = 2; }
+```
+
+When an instance of Child is packed into an `Any`, the JSON representation is:
+
+```json
+{
+  "@type": "type.googleapis.com/x.Child",
+  "x": 1,
+  "y": "hello world"
+}
+```
+
+### Special-cased well-known types {#any-special-cases}
+
+If the `Any` contains a well-known type that has a special JSON mapping, the
+message is converted into the special representation and set as a field with key
+"value".
+
+For example, a `google.protobuf.Duration` that represents 3.1 seconds will be
+represented by the string `"3.1s"` in the special case handling. When that
+`Duration` is packed into an `Any` it will be serialized as:
+
+```
+{
+  "@type": "type.googleapis.com/google.protobuf.Duration",
+  "value": "3.1s"
+}
+```
+
+Note that `google.protobuf.Empty` is not considered to have any special JSON
+mapping; it is simply a normal message that has zero fields. This means the
+expected representation of an `Empty` packed into an `Any` is `{"@type":
+"type.googleapis.com/google.protobuf.Empty"}` and not `{"@type":
+"type.googleapis.com/google.protobuf.Empty", "value": {}}`.
 
 ## ProtoJSON Wire Safety {#json-wire-safety}
 
