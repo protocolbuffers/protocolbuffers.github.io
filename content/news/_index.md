@@ -20,8 +20,6 @@ New news topics will also be published to the
 The following news topics provide information in the reverse order in which it
 was released.
 
-*   [January 20, 2026](/news/2026-01-20) - Efficient
-    headers in C++
 *   [January 16, 2026](/news/2026-01-16) - Prebuilt proto
     compiler (protoc) for Bazel
 *   [September 19, 2025](/news/2025-09-19) - Breaking
