@@ -23,7 +23,7 @@ binaries, follow these instructions:
 
     ```sh
     PB_REL="https://github.com/protocolbuffers/protobuf/releases"
-    curl -LO $PB_REL/download/v30.2/protoc-30.2-linux-x86_64.zip
+    curl -LO $PB_REL/download/v33.3/protoc-33.3-linux-x86_64.zip
 
     ```
 
@@ -31,7 +31,7 @@ binaries, follow these instructions:
     example:
 
     ```sh
-    unzip protoc-30.2-linux-x86_64.zip -d $HOME/.local
+    unzip protoc-33.3-linux-x86_64.zip -d $HOME/.local
     ```
 
 3.  Update your environment's path variable to include the path to the `protoc`
@@ -76,6 +76,15 @@ Linux, macOS, or Windows using the following commands.
     > winget install protobuf
     > protoc --version # Ensure compiler version is 3+
     ```
+    
+### Quick install (current session only)
+```sh
+curl -LO https://github.com/protocolbuffers/protobuf/releases/download/v33.3/protoc-33.3-linux-x86_64.zip && unzip protoc-33.3-linux-x86_64.zip -d $HOME/.local && export PATH="$PATH:$HOME/.local/bin" && rm protoc-33.3-linux-x86_64.zip
+```
+Make it permanent by adding to your shell config:
+- bash:  `echo 'export PATH="$PATH:$HOME/.local/bin"' >> ~/.bashrc`
+- zsh:   `echo 'export PATH="$PATH:$HOME/.local/bin"' >> ~/.zshrc`
+- fish:  `fish_add_path $HOME/.local/bin`
 
 ### Other Installation Options {#other}
 
