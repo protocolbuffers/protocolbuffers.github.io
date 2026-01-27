@@ -286,9 +286,11 @@ TypeName      = IDENT, { ".", IDENT } ;
 UrlPrefix     = url_char, { url_char | "/" } ;
 ```
 
-Text format serializers should not write any whitespace characters between the
-brackets of an `ExtensionName` or `AnyName`. Parsers should trim any whitespace
-characters before processing an `ExtensionName` or `AnyName`.
+Text format serializers should not write any whitespace characters or comments
+between the brackets of an `ExtensionName` or `AnyName`. Parsers should skip any
+whitespace characters and comments between the brackets of an `ExtensionName` or
+`AnyName`. This includes whitespace and comments which split the name into
+multiple segments.
 
 Regular fields and extension fields can have scalar or message values. `Any`
 fields are always messages. Example:
