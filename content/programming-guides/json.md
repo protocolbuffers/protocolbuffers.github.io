@@ -53,26 +53,28 @@ See [JSON Wire Safety](#json-wire-safety) below for more details.
 The following table shows how data is represented in JSON files.
 
 <table>
-  <tbody>
+  <thead>
     <tr>
-      <th>Protobuf</th>
+      <th>Protobuf type</th>
       <th>JSON</th>
       <th>JSON example</th>
       <th>Notes</th>
     </tr>
+  </thead>
+  <tbody>
     <tr>
       <td>message</td>
       <td>object</td>
       <td><code>{"fooBar": v, "g": null, ...}</code></td>
-      <td>Generates JSON objects. Message field names are mapped to
-        lowerCamelCase and become JSON object keys. If the
-        <code>json_name</code> field option is specified, the specified value
-        will be used as the key instead. Parsers accept both the lowerCamelCase
-        name (or the one specified by the <code>json_name</code> option) and the
-        original proto field name. <code>null</code> is an accepted value for
-        all field types and leaves the field unset. <code>\0 (nul)</code> cannot
-        be used within a <code>json_name</code> value. For more on why, see
-        <a href="/news/2023-04-28#json-name">Stricter validation for json_name</a>.
+      <td>Generates JSON objects.
+        <p>
+        Keys are serialized as lowerCamelCase of field name. See
+        <a href="#field-names">Field Names</a> for more special cases regarding mapping of field names
+        to object keys.
+        <p>
+        Well-known types have special representations, as described in the <a href="#wkt">Well-known types table</a>.
+        <p>
+        <code>null</code> is valid for any field and leaves the field unset. See <a href="null-values">Null Values</a> for clarification about the semantic behavior of null values.
       </td>
     </tr>
     <tr>
@@ -87,13 +89,13 @@ The following table shows how data is represented in JSON files.
       <td>map&lt;K,V&gt;</td>
       <td>object</td>
       <td><code>{"k": v, ...}</code></td>
-      <td>All keys are converted to strings (keys in JSON spec can only be strings).</td>
+      <td>All keys are converted to strings (object keys in JSON can only be strings).</td>
     </tr>
     <tr>
       <td>repeated V</td>
       <td>array</td>
       <td><code>[v, ...]</code></td>
-      <td><code>null</code> is accepted as the empty list <code>[]</code>.</td>
+      <td></td>
     </tr>
     <tr>
       <td>bool</td>
@@ -121,7 +123,7 @@ The following table shows how data is represented in JSON files.
       <td>number</td>
       <td><code>1, -10, 0</code></td>
       <td>JSON value will be a decimal number. Either numbers or strings are
-        accepted. Empty strings are invalid. Exponent notation (such as `1e2`) is
+        accepted. Empty strings are invalid. Exponent notation (such as <code>1e2</code>) is
         accepted in both quoted and unquoted forms.
       </td>
     </tr>
@@ -130,7 +132,7 @@ The following table shows how data is represented in JSON files.
       <td>string</td>
       <td><code>"1", "-10"</code></td>
       <td>JSON value will be a decimal string. Either numbers or strings are
-        accepted. Empty strings are invalid. Exponent notation (such as `1e2`) is
+        accepted. Empty strings are invalid. Exponent notation (such as <code>1e2</code>) is
         accepted in both quoted and unquoted forms.
       </td>
     </tr>
@@ -143,19 +145,41 @@ The following table shows how data is represented in JSON files.
         Empty strings are invalid. Exponent notation is also accepted.
       </td>
     </tr>
+  </tbody>
+<table>
+
+<!-- This section html instead of markdown as workaround to bug that escapes all html between the first and last table -->
+<h3 id="wkt">Well-Known Types</h3>
+
+<p>Some messages in the <code>google.protobuf</code> package have a special representation
+when represented in JSON.
+
+<p>No message type outside of the <code>google.protobuf</code> package has a special ProtoJSON
+handling; for example, types in <code>google.types</code> package are represented with the
+neutral representation.
+
+<table>
+  <thead>
+    <tr>
+      <th>Message type</th>
+      <th>JSON</th>
+      <th>JSON example</th>
+      <th>Notes</th>
+    </tr>
+  </thead>
+  <tbody>
     <tr>
       <td>Any</td>
       <td><code>object</code></td>
       <td><code>{"@type": "url", "f": v, ... }</code></td>
-      <td>See <a href="#any">Any</a>
-      </td>
+      <td>See <a href="#any">Any</a></td>
     </tr>
     <tr>
         <td>Timestamp</td>
         <td>string</td>
         <td><code>"1972-01-01T10:00:20.021Z"</code></td>
-        <td>Uses RFC 3339 (see <a href="#rfc3339-timestamp">clarification</a>), where generated output will always be Z-normalized
-          and uses 0, 3, 6 or 9 fractional digits. Offsets other than "Z" are
+        <td>Uses RFC 3339 (see <a href="#rfc3339-timestamp">clarification</a>). Generated output will always be Z-normalized
+          with 0, 3, 6 or 9 fractional digits. Offsets other than "Z" are
           also accepted.
       </td>
     </tr>
@@ -166,7 +190,7 @@ The following table shows how data is represented in JSON files.
       <td>Generated output always contains 0, 3, 6, or 9 fractional digits,
         depending on required precision, followed by the suffix "s". Accepted
         are any fractional digits (also none) as long as they fit into
-        nanoseconds precision and the suffix "s" is required. This is *not* RFC 3339
+        nanoseconds precision and the suffix "s" is required. This is <b>not</b> RFC 3339
         'duration' format (see <a href="#rfc3339-duration">Durations</a> for clarification).
       </td>
     </tr>
@@ -215,17 +239,34 @@ The following table shows how data is represented in JSON files.
     <tr>
       <td>Empty</td>
       <td>object</td>
-      <td><code>{} (not special cased)</code></td>
+      <td><code>{}</code> <b>(not special cased)</b></td>
       <td>An empty JSON object</td>
     </tr>
   </tbody>
 </table>
 
+## Field names as JSON keys {#field-names}
+
+Message field names are mapped to lowerCamelCase to be used as JSON object keys.
+If the `json_name` field option is specified, the specified value will be used
+as the key instead.
+
+Parsers accept both the lowerCamelCase name (or the one specified by the
+`json_name` option) and the original proto field name. This allows for a
+serializer option to choose to print using the original field name (see
+[JSON Options](#json-options)) and have the resulting output still be parsed
+back by all spec parsers.
+
+`\0 (nul)` is not allowed within a `json_name` value. For more on why, see
+<a href="/news/2023-04-28#json-name">Stricter validation
+for json_name</a>. Note that `\0` is still considered a legal character within
+the value of a `string` field.
+
 ## Presence and default-values {#presence}
 
 When generating JSON-encoded output from a protocol buffer, if a field supports
 presence, serializers must emit the field value if and only if the corresponding
-hasser would return true.
+hazzer would return true.
 
 If the field doesn't support field presence and has the default value (for
 example any empty repeated field) serializers should omit it from the output. An
@@ -236,11 +277,18 @@ output.
 
 Serializers should not emit `null` values.
 
-Parsers should accept `null` as a legal value for any field, with the behavior:
+Parsers accept `null` as a legal value for any field, with the following
+behavior:
 
-*   Any key validity checking should still occur (disallowing unknown fields)
+*   Any key validity checking should still occur (disallowing unknown fields).
 *   The field should remain unset, as though it was not present in the input at
-    all (hassers should still return false where applicable).
+    all (hazzers should still return false where applicable).
+
+The implication of this is that a `null` value for an implicit presence field
+will behave the identically to the behavior to the default value of that field,
+since there are no hazzers for those fields. For example, a value of `null` or
+`[]` for a repeated field will cause key-validation checks, but both will
+otherwise behave the same as if the field was not present in the JSON at all.
 
 `null` values are not allowed within repeated fields.
 
