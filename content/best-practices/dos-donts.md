@@ -343,7 +343,7 @@ message Photo {
 }
 ```
 
-## **Do** Use java_outer_classname {#java-outer-classname}
+## **Do** Use java_outer_classname (before Edition 2024) {#java-outer-classname}
 
 Every proto schema definition file should set option `java_outer_classname` to
 the `.proto` file name converted to TitleCase with the '.' removed. For example,
@@ -352,3 +352,6 @@ the file `student_record_request.proto` should set:
 ```java
 option java_outer_classname = "StudentRecordRequestProto";
 ```
+
+The default behavior of Edition 2024 files has been aligned with this
+recommendation, so no option should be set when using Edition 2024 or later.
