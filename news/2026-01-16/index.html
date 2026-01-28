@@ -9,9 +9,9 @@ available to Bazel 7 and later. Using a pre-built protoc also avoids build
 failures from incompatible or non-hermetic C++ compilation toolchain installed
 on your machine.</p><p>To use the prebuilt protoc, upgrade to protobuf version 33.4 or later, and set
 the <code>--incompatible_enable_proto_toolchain_resolution</code> and
-<code>--@protobuf//bazel/toolchains:prefer_prebuilt_protoc</code> flags. The first flag is
-set by default in Bazel 9 onwards.</p><p>In the breaking v34 release, protobuf will change the default of
-<code>--@protobuf//bazel/toolchains:prefer_prebuilt_protoc</code> to true.</p><h3 id=reasons-not-to-use-the-prebuilt-compiler>Reasons not to use the prebuilt compiler</h3><p>There are some use cases in which using the prebuilt protoc is not recommended:</p><ul><li>Your corporate security policy requires all dependencies be built from
+<code>--@protobuf//bazel/flags:prefer_prebuilt_protoc</code> flags. The first flag is set
+by default in Bazel 9 onwards.</p><p>In the breaking v34 release, protobuf will change the default of
+<code>--@protobuf//bazel/flags:prefer_prebuilt_protoc</code> to true.</p><h3 id=reasons-not-to-use-the-prebuilt-compiler>Reasons not to use the prebuilt compiler</h3><p>There are some use cases in which using the prebuilt protoc is not recommended:</p><ul><li>Your corporate security policy requires all dependencies be built from
 source.</li><li>You need to build for the exec platform with a specific compiler or specific
 compiler flags.</li><li>You are making changes to protoc, itself, and want to ensure that those
 changes are tested.</li></ul><h3 id=troubleshooting>Troubleshooting</h3><p>For information on troubleshooting the prebuilt protoc compiler configuration,
