@@ -429,6 +429,6 @@ message Foo {
   message GroupMessage {
     bool a = 1;
   }
-  GroupMessage groupmessage = [features.message_encoding = DELIMITED];
+  GroupMessage groupmessage = 1 [features.message_encoding = DELIMITED];
 }
 ```
