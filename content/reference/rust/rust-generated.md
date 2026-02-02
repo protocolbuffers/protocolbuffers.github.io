@@ -87,7 +87,7 @@ Most users should import our prelude, which only includes traits and our
 rather avoid preludes, you can always import the specific traits as needed (see
 the
 <!-- TODO: replace `4.32.0-prerelease` with `latest` once we do a stable release -->
-[documentation here](https://docs.rs/protobuf/4.32.0-release/protobuf/trait.Message.html)
+[documentation here](https://docs.rs/protobuf/4.33.5-release/protobuf/trait.Message.html)
 for the names and definitions of the traits if you want to import them
 directly).
 
@@ -244,9 +244,10 @@ The compiler generates the following accessor methods:
 *   `fn has_foo(&self) -> bool`: Returns `true` if the field is set.
 *   `fn foo(&self) -> i32`: Returns the current value of the field. If the field
     is not set, it returns the default value.
-*   `fn foo_opt(&self) -> protobuf::Optional<i32>`: Returns an optional with the
-    variant `Set(value)` if the field is set or `Unset(default value)` if it's
-    unset.
+*   fn foo_opt(&self) -> protobuf::Optional<i32>`: Returns an optional with the
+    variant`Set(value)`if the field is set or`Unset(default value)`if it's
+    unset. See [`Optional`
+    rustdoc](https://docs.rs/protobuf/4.33.5-release/protobuf/enum.Optional.html)
 *   `fn set_foo(&mut self, val: i32)`: Sets the value of the field. After
     calling this, `has_foo()` will return `true` and `foo()` will return
     `value`.
@@ -271,12 +272,14 @@ The compiler generates the following accessor methods:
 
 *   `fn has_foo(&self) -> bool`: Returns `true` if the field is set.
 *   `fn foo(&self) -> &protobuf::ProtoStr`: Returns the current value of the
-    field. If the field is not set, it returns the default value.
+    field. If the field is not set, it returns the default value. See
+    [`ProtoStr` rustdoc](https://docs.rs/protobuf/4.33.5-release/protobuf/struct.ProtoStr.html).
 *   `fn foo_opt(&self) -> protobuf::Optional<&ProtoStr>`: Returns an optional
     with the variant `Set(value)` if the field is set or `Unset(default value)`
     if it's unset.
 *   `fn set_foo(&mut self, val: impl IntoProxied<ProtoString>)`: Sets the value
-    of the field.
+    of the field. `&str`, `String`, `&ProtoStr` and `ProtoString` all
+    implelement `IntoProxied` and can be passed to this method.
 *   `fn clear_foo(&mut self)`: Clears the value of the field. After calling
     this, `has_foo()` will return `false` and `foo()` will return the default
     value.
@@ -411,7 +414,8 @@ bytes bar = 2 [features.field_presence = IMPLICIT];
 The compiler will generate the following accessor methods:
 
 *   `fn foo(&self) -> &ProtoStr`: Returns the current value of the field. If the
-    field is not set, returns the empty string/empty bytes.
+    field is not set, returns the empty string/empty bytes. See
+    [`ProtoStr` rustdoc](https://docs.rs/protobuf/4.33.5-release/protobuf/struct.ProtoStr.html).
 *   `fn set_foo(&mut self, value: IntoProxied<ProtoString>)`: Sets the field to
     `value`.
 
@@ -543,11 +547,15 @@ Given any of the above field definitions, the compiler generates the following
 accessor methods:
 
 *   `fn foo(&self) -> RepeatedView<'_, i32>`: Returns a view of the underlying
-    repeated field.
+    repeated field. See
+    [`RepeatedView` rustdoc](https://docs.rs/protobuf/4.33.5-release/protobuf/struct.RepeatedView.html).
 *   `fn foo_mut(&mut self) -> RepeatedMut<'_, i32>`: Returns a mutable handle to
-    the underlying repeated field.
+    the underlying repeated field. See
+    [`RepeatedMut` rustdoc](https://docs.rs/protobuf/4.33.5-release/protobuf/struct.RepeatedMut.html).
 *   `fn set_foo(&mut self, src: impl IntoProxied<Repeated<i32>>)`: Sets the
-    underlying repeated field to a new repeated field provided in `src`.
+    underlying repeated field to a new repeated field provided in `src`. Accepts
+    a `RepeatedView`, `RepeatedMut` or `Repeated`. See
+    [`Repeated` rustdoc](https://docs.rs/protobuf/4.33.5-release/protobuf/struct.Repeated.html).
 
 For different field types only the respective generic types of the
 `RepeatedView`, `RepeatedMut` and `Repeated` types will change. For example,
@@ -565,11 +573,14 @@ map<int32, int32> weight = 1;
 The compiler will generate the following 3 accessor methods:
 
 *   `fn weight(&self) -> protobuf::MapView<'_, i32, i32>`: Returns an immutable
-    view of the underlying map.
+    view of the underlying map. See
+    [`MapView` rustdoc](https://docs.rs/protobuf/4.33.5-release/protobuf/struct.MapView.html).
 *   `fn weight_mut(&mut self) -> protobuf::MapMut<'_, i32, i32>`: Returns a
-    mutable handle to the underlying map.
+    mutable handle to the underlying map. See
+    [`MapMut` rustdoc](https://docs.rs/protobuf/4.33.5-release/protobuf/struct.MapView.html).
 *   `fn set_weight(&mut self, src: protobuf::IntoProxied<Map<i32, i32>>)`: Sets
-    the underlying map to `src`.
+    the underlying map to `src`. Accepts a `MapView`, `MapMut` or `Map`. See
+    [`Map` rustdoc](https://docs.rs/protobuf/4.33.5-release/protobuf/struct.Map.html).
 
 For different field types only the respective generic types of the `MapView`,
 `MapMut` and `Map` types will change. For example, given a field of type
