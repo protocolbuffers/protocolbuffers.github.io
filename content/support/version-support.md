@@ -14,19 +14,24 @@ later in this topic. Version numbers throughout this topic use
 "3" is the major version, "21" is the minor version, and "7" is the micro or
 patch number.
 
-Starting with the v21.x protoc release, we changed our versioning scheme to
-enable nimbler updates to language-specific parts of Protocol Buffers. In the
-new scheme, each language has its own major version that can be incremented
-independently of other languages. The minor and patch versions, however, remain
-coupled. This allows us to introduce breaking changes into some languages
-without requiring a bump of the major version in languages that do not
-experience a breaking change. For example, a single release might include protoc
-version 24.0, Java runtime version 4.24.0 and C# runtime version 3.24.0.
+## Numbering scheme
 
-Prior to this versioning scheme, all languages had major version 3. The first
-instance of this new versioning scheme was the 4.21.0 version of the Python API,
-which followed the preceding version, 3.20.1. Other language APIs released at
-the same time were released as 3.21.0.
+Protobuf releases are numbered with only a `minor.point` number, for example
+`29.5`.
+
+Each individual language runtime is versioned with that same `minor.point` but
+has a language-specific major version number. For example, the `29.5` release
+corresponds to Java runtime version `4.29.5` and C# runtime version `3.29.5`. We
+recommend using protoc `29.5` with Java `4.29.5` and C# `3.29.5`.
+
+This numbering scheme allows a single number for a given release of all
+languages, while avoiding coupling of the major version numbers between
+different languages. For example, the `30.0` release contained breaking changes
+in Python but not Java, so Python version went from `5.29.0` to `6.30.0` while
+the Java version went from `4.29.0` to `4.30.0`.
+
+This versioning scheme was introduced in 2022 with the 21 release. Prior to the
+decoupled versioning scheme being introduced, all languages had major version 3.
 
 ## Release Cadence {#cadence}
 
