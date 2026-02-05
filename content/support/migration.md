@@ -6,6 +6,244 @@ aliases = "/programming-guides/migration/"
 type = "docs"
 +++
 
+## Changes in v34.0 {#v34}
+
+The following is a list of the breaking changes made to versions of the
+libraries, and how to update your code to accommodate the changes.
+
+This covers breaking changes announced in
+[News Announcements for v34.x](/news/2025-09-19) and
+[Release Notes for v34.0](https://github.com/protocolbuffers/protobuf/releases/tag/v34.0).
+
+### Changes in C++ {#v34-cpp}
+
+C++ bumped its major version to 7 with the 7.34.0 release. 6.33 is the final
+minor version release on 6.x.
+
+#### Removal of Future Macros
+
+The following macros, introduced for staged roll-out of breaking changes, were
+removed and their behavior is now the default:
+
+*   `PROTOBUF_FUTURE_RENAME_ADD_UNUSED_IMPORT`
+*   `PROTOBUF_FUTURE_REMOVE_ADD_IGNORE_CRITERIA`
+*   `PROTOBUF_FUTURE_STRING_VIEW_DESCRIPTOR_DATABASE`
+*   `PROTOBUF_FUTURE_NO_RECURSIVE_MESSAGE_COPY`
+*   `PROTOBUF_FUTURE_REMOVE_REPEATED_PTR_FIELD_ARENA_CONSTRUCTOR`
+*   `PROTOBUF_FUTURE_REMOVE_MAP_FIELD_ARENA_CONSTRUCTOR`
+*   `PROTOBUF_FUTURE_REMOVE_REPEATED_FIELD_ARENA_CONSTRUCTOR`
+
+#### New RepeatedPtrField Layout {#cpp-repeatedptrfield-layout}
+
+`RepeatedPtrField` were transitioned to a new internal element layout in which
+elements are stored in contiguous chunks of preallocated memory, similar to
+`std::deque`. This results in some changes to copy/move semantics of some APIs,
+and some `UnsafeArena` APIs may become functional equivalents of their
+arena-safe counterparts and be deprecated.
+
+#### MSB Hardening Check on RepeatedField::Get and RepeatedPtrField::Get {#cpp-repeatedfield-get-hardening}
+
+Protobufs were hardened against OOB errors by adding comprehensive bounds
+checking to repeated field accesses.
+
+#### Remove Arena-enabled constructors from Repeated/Map Fields {#cpp-remove-arena-ctors}
+
+The `RepeatedField(Arena*)`, `RepeatedPtrField(Arena*)`, and `Map(Arena*)`
+constructors were deleted.
+
+#### Remove Deprecated APIs {#cpp-remove-apis}
+
+We removed the following public runtime APIs.
+
+##### AddUnusedImportTrackFile() and ClearUnusedImportTrackFiles()
+
+**API:** `AddUnusedImportTrackFile()`, `ClearUnusedImportTrackFiles()`
+
+**Replacement:** `AddDirectInputFile()` and `ClearDirectInputFiles()`
+
+##### AddIgnoreCriteria from message differencer
+
+`PROTOBUF_FUTURE_REMOVE_ADD_IGNORE_CRITERIA` was added for the breaking change.
+We removed the macro.
+
+**API:** `AddIgnoreCriteria()`
+
+**Replacement:** Wrap the raw pointer in a `unique_ptr`.
+
+##### FieldDescriptor::has_optional_keyword()
+
+**API:** `FieldDescriptor::has_optional_keyword()`
+
+**Replacement:** `has_presence()`
+
+##### FieldDescriptor::label()
+
+**API:** `FieldDescriptor::label()`
+
+**Replacement:** `is_repeated()` or `is_required()`
+
+##### FieldDescriptor::is_optional()
+
+**API:** `FieldDescriptor::is_optional()`
+
+**Replacement:** `!is_required() && !is_repeated()`
+
+##### UseDeprecatedLegacyJsonFieldConflicts()
+
+**API:** `UseDeprecatedLegacyJsonFieldConflicts()`
+
+**Replacement:** No replacement.
+
+#### Stricter Name Length Limits {#cpp-name-limits}
+
+The protobuf compiler enforces stricter limits on the length of symbol names,
+such as field names, to prevent potential issues. If the length of any field
+name is > 2^16, it generates an error.
+
+#### Hide Private Generator Headers in CMake {#cpp-cmake-headers}
+
+The protoc generator headers are no longer installed by CMake. This should not
+affect most users.
+
+#### [[nodiscard]] on Logically Constant Operations {#cpp-nodiscard}
+
+`[[nodiscard]]` was added to several logically constant protobuf APIs where
+failure to consume the returned value indicates a probable bug. This follows
+patterns used commonly in the C++ standard library.
+
+### Changes in Python {#v34-python}
+
+Python bumped its major version to 7 with the 7.34.0 release. 6.33 is the final
+minor version release on 6.x.
+
+#### Dropped Python 3.9 Support
+
+The minimum supported Python version is 3.10. Users should upgrade.
+
+#### Relax Poison Pill Warnings
+
+We relaxed the poison pills. No warnings or errors are raised for old generated
+files for 7.34.x.
+
+#### Raise TypeError on Incorrect Conversion to Timestamp or Duration
+
+We now raise a `TypeError` instead of an `AttributeError` when converting an
+incorrect type to a `Timestamp` or `Duration`.
+
+#### Reject bool to enum and int field
+
+We now reject setting `enum` or `int` fields with boolean values. The API raises
+an error instead of implicitly converting them.
+
+#### Remove float_precision from json_format
+
+We removed the deprecated `float_precision` option from the `json_format`
+serializer. This option does not exist in other ProtoJSON serializers and has
+confusing semantics.
+
+#### Remove float_format/double_format from text_format
+
+We removed the deprecated `float_format` and `double_format` options from
+`text_format`. These options are not available in other proto text format
+serializers.
+
+#### Removed Deprecated APIs {#v34-php-remove-apis}
+
+We removed the following public runtime APIs.
+
+##### FieldDescriptor.label
+
+**API:** `FieldDescriptor.label`
+
+**Replacement:** `is_repeated()` or `is_required()`
+
+### Changes in PHP {#v34-php}
+
+PHP bumped its major version to 5 with the 5.34.0 release. 4.33 is the final
+minor version release on 4.x.
+
+#### Dropped PHP 8.1 Support
+
+The minimum supported PHP version is 8.2. Users should upgrade.
+
+#### Removed Deprecated APIs {#v34-php-remove-apis}
+
+We removed the following public runtime APIs.
+
+##### FieldDescriptor getLabel
+
+**API:** `FieldDescriptor getLabel`
+
+**Replacement:** `isRepeated()` or `isRequired()`
+
+##### Google\Protobuf\Field_Kind
+
+**API:** `Google\Protobuf\Field_Kind`
+
+**Replacement:** `Google\Protobuf\Field\Kind`
+
+##### Google\Protobuf\Field_Cardinality
+
+**API:** `Google\Protobuf\Field_Cardinality`
+
+**Replacement:** `Google\Protobuf\Field\Cardinality`
+
+##### Google\Protobuf\Internal\RepeatedField
+
+**API:** `Google\Protobuf\Internal\RepeatedField`
+
+**Replacement:** `Google\Protobuf\RepeatedField`
+
+#### Fix Silent Ignoring of Default Values
+
+The PHP runtime is fixed to honor default values on scalar fields in proto2 and
+editions, instead of silently ignoring them.
+
+#### Type Checking Alignment
+
+Type checking for pure-PHP and upb-PHP implementations are aligned. Notably,
+pure-PHP now rejects `null` for string fields, matching the behavior of upb-PHP.
+
+### Changes in Objective-C {#v34-objc}
+
+Objective-C bumped its major version to 5 with the 5.34.0 release. 4.33 is the
+final minor version release on 4.x.
+
+#### Nullability Annotations
+
+The nullability annotations for some `GPB*Dictionary` APIs were corrected to
+mark when APIs could return `nil`. This results in Swift code getting a Swift
+`Optional<T>`. For Objective-C callers, the annotation correction is less likely
+to have any impact on the source code.
+
+#### Removed Deprecated API {#v34-objc-remove-apis}
+
+We removed the following public runtime APIs.
+
+##### GPBFieldDescriptor optional
+
+**API:** -[`GPBFieldDescriptor optional`]
+
+**Replacement:** `!required && fieldType == GPBFieldTypeSingle`
+
+### Other Changes {#v34-other}
+
+#### Dropped Bazel 7 Support
+
+The minimum supported Bazel version is 8, which changes the default from
+WORKSPACE to Bzlmod. Users should upgrade to Bazel 8 or higher and migrate to
+Bzlmod.
+
+#### Bazel: Remove deprecated ProtoInfo.transitive_imports
+
+The deprecated `transitive_imports` field in `ProtoInfo` was removed. Users
+should migrate to `transitive_sources`.
+
+#### Remove protobuf_allow_msvc flag and continue support Bazel+MSVC
+
+Due to Bazel’s recent improvements on Windows, we now continue to support
+Bazel+MSVC. The `--define=protobuf_allow_msvc` flag was removed.
+
 ## Changes in v30.0 {#v30}
 
 The following is a list of the breaking changes made to versions of the
@@ -15,7 +253,9 @@ This covers breaking changes announced in
 [News Announcements for v30.x](/news/v30) and
 [Release Notes for v30.0](https://github.com/protocolbuffers/protobuf/releases/tag/v30.0).
 
-### Replaced CMake Submodules with Fetched Deps
+### Changes in C++ {#v30-cpp}
+
+#### Replaced CMake Submodules with Fetched Deps
 
 Previously, our default CMake behavior was to use Git submodules to grab pinned
 dependencies. Specifying `-Dprotobuf_ABSL_PROVIDER=package` would flip our CMake
@@ -38,7 +278,7 @@ behavior), you can call CMake with:
 cmake . -Dprotobuf_FORCE_FETCH_DEPENDENCIES=ON
 ```
 
-### string_view return type
+#### string_view return type
 
 Return types are now `absl::string_view` for the following descriptor APIs,
 which opens up memory savings:
@@ -159,7 +399,7 @@ compatible with `absl::string_view`. Below are some common examples.
 See also [https://abseil.io/tips/1](https://abseil.io/tips/1) for general tips
 around using `absl::string_view`.
 
-### Poison MSVC + Bazel
+#### Poison MSVC + Bazel
 
 Bazel users on Windows should switch to using clang-cl by adding the following
 to their project, like in this
@@ -239,14 +479,14 @@ or by supplying the CMake command-line an MSVC generator. For example:
 cmake -G "Visual Studio 17 2022" -A Win64 .
 ```
 
-### ctype Removed from FieldDescriptor Options {#ctype-removed}
+#### ctype Removed from FieldDescriptor Options {#ctype-removed}
 
 We stopped exposing the `ctype` from `FieldDescriptor` options. You can use the
 `FieldDescriptor::cpp_string_type()` API, added in the
 [v28 release](https://github.com/protocolbuffers/protobuf/releases/tag/v28.0),
 in its place.
 
-### Modified Debug APIs to Redact Sensitive Fields {#debug-redaction}
+#### Modified Debug APIs to Redact Sensitive Fields {#debug-redaction}
 
 The Protobuf C++ debug APIs (including Protobuf AbslStringify,
 `proto2::ShortFormat`, `proto2::Utf8Format`, `Message::DebugString`,
@@ -262,7 +502,7 @@ this does not redact sensitive fields and so should be used with caution.
 Read more about this in the
 [news article released December 4, 2024](/news/2024-12-04.md).
 
-### Removed Deprecated APIs {#remove-deprecated}
+#### Removed Deprecated APIs {#v30-cpp-remove-apis}
 
 We removed the following public runtime APIs, which have been marked deprecated
 (such as `ABSL_DEPRECATED`) for at least one minor or major release and that are
@@ -290,7 +530,7 @@ obsolete or replaced.
 
 **Replacement:** `JsonPrintOptions`
 
-### Dropped C++14 Support {#drop-cpp-14}
+#### Dropped C++14 Support {#drop-cpp-14}
 
 This release dropped C++ 14 as the minimum supported version and raised it to
 17, as per the
@@ -298,7 +538,7 @@ This release dropped C++ 14 as the minimum supported version and raised it to
 
 Users should upgrade to C++17.
 
-### Introduced ASAN Poisoning After Clearing Oneof Messages on Arena
+#### Introduced ASAN Poisoning After Clearing Oneof Messages on Arena
 
 This change added a hardening check that affects C++ protobufs using Arenas.
 Oneof messages allocated on the protobuf arena are now cleared in debug and
@@ -307,14 +547,14 @@ region will cause a crash in ASAN as a use-after-free error.
 
 This implementation requires C++17.
 
-### Dropped our C++ CocoaPods release
+#### Dropped our C++ CocoaPods release
 
 We dropped our C++ CocoaPods release, which has been broken since v4.x.x. C++
 users should use our
 [GitHub release](https://github.com/protocolbuffers/protobuf/releases) directly
 instead.
 
-### Changes in Python {#python}
+### Changes in Python {#v30-python}
 
 Python bumped its major version from 5.29.x to 6.30.x.
 
@@ -344,7 +584,7 @@ removed. It was replaced by the official `py_proto_library` which was moved to
 protobuf in `bazel/py_proto_library` in v29.x. This implementation was
 previously available in `rules_python` prior to v29.x.
 
-#### Remove Deprecated APIs {#python-remove-apis}
+#### Remove Deprecated APIs {#v30-python-remove-apis}
 
 We removed the following public runtime APIs, which had been marked deprecated
 for at least one minor or major release.
@@ -418,7 +658,7 @@ self.assertEqual('Bar', nested.__class__.__name__)
 self.assertEqual('Foo.Bar', nested.__class__.__qualname__) # It was 'Bar' before
 ```
 
-### Changes in Objective-C {#objc}
+### Changes in Objective-C {#v30-objc}
 
 **This is the first breaking release for Objective-C**.
 
@@ -468,7 +708,7 @@ the values for a given field number. The APIs for creating new fields are the
 We also deprecated `-[GPBMessage unknownFields]`. In its place, there are new
 APIs to extract and update the unknown fields of the message.
 
-#### Removed Deprecated APIs {#objc-remove-apis}
+#### Removed Deprecated APIs {#v30-objc-remove-apis}
 
 We removed the following public runtime APIs, which had been marked deprecated
 for at least one minor or major release.
@@ -524,7 +764,7 @@ which includes any unknown fields.
 and
 [-[`GPBMessage clearUnknownFields`]](https://github.com/protocolbuffers/protobuf/blob/224573d66a0cc958c76cb43d8b2eb3aa7cdb89f2/objectivec/GPBMessage.h#L497-L504C9)
 
-#### Removed Deprecated Runtime APIs for Old Gencode {#objc-remove-apis-gencode}
+#### Removed Deprecated Runtime APIs for Old Gencode {#v30-objc-remove-apis-gencode}
 
 This release removed deprecated runtime methods that supported the Objective-C
 gencode from before the 3.22.x release. The library also issues a log message at
@@ -555,20 +795,22 @@ allocDescriptorForName:valueNames:values:count:enumVerifier:extraTextFormatInfo:
 
 **Replacement:** Regenerate with a current version of the library.
 
-### Poison Pill Warnings {#poison}
+### Other Changes {#v30-other}
+
+#### Poison Pill Warnings {#poison}
 
 We updated poison pills to emit warnings for old gencode + new runtime
 combinations that work under the new rolling upgrade policy, but will break in
 the *next* major bump. For example, Python 4.x.x gencode should work against
 5.x.x runtime but warn of upcoming breakage against 6.x.x runtime.
 
-### Changes to UTF-8 Enforcement in C# and Ruby {#utf-8-enforcement}
+#### Changes to UTF-8 Enforcement in C# and Ruby {#utf-8-enforcement}
 
 We included a fix to make UTF-8 enforcement consistent across languages. Users
 with bad non-UTF8 data in string fields may see surfaced UTF-8 enforcement
 errors earlier.
 
-### Ruby and PHP Errors in JSON Parsing
+#### Ruby and PHP Errors in JSON Parsing
 
 We fixed non-conformance in JSON parsing of strings in numeric fields per the
 [JSON spec](https://protobuf.dev/programming-guides/json/).
