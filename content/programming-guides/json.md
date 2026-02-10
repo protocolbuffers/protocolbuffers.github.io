@@ -12,9 +12,9 @@ This page specifies the format, but a number of additional edge cases which
 define a conformant ProtoJSON parser are covered in the Protobuf Conformance
 Test Suite and are not exhaustively detailed here.
 
-# Non-goals of the Format {#non-goals}
+## Non-goals of the Format {#non-goals}
 
-## Cannot Represent Some JSON schemas {#non-goals-arbitrary-json-schema}
+### Cannot Represent Some JSON schemas {#non-goals-arbitrary-json-schema}
 
 The ProtoJSON format is designed to be a JSON representation of schemas which
 are expressible in the Protobuf schema language.
@@ -30,14 +30,14 @@ It is possible to use `google.protobuf.Struct` and `google.protobuf.Value` types
 to allow arbitrary JSON to be parsed into a Protobuf schema, but these only
 allow you to capture the values as schemaless unordered key-value maps.
 
-## Not as efficient as the binary wire format {#non-goals-highly-efficient}
+### Not as efficient as the binary wire format {#non-goals-highly-efficient}
 
 ProtoJSON Format is not as efficient as binary wire format and never will be.
 
 The converter uses more CPU to encode and decode messages and (except in rare
 cases) encoded messages consume more space.
 
-## Does not have as good schema-evolution guarantees as binary wire format {#non-goals-optimal-schema-evolution}
+### Does not have as good schema-evolution guarantees as binary wire format {#non-goals-optimal-schema-evolution}
 
 ProtoJSON format does not support unknown fields, and it puts field and enum
 value names into encoded messages which makes it much harder to change those
@@ -46,9 +46,9 @@ error.
 
 See [JSON Wire Safety](#json-wire-safety) below for more details.
 
-# Format Description {#format}
+## Format Description {#format}
 
-## Representation of each type {#field-representation}
+### Representation of each type {#field-representation}
 
 The following table shows how data is represented in JSON files.
 
@@ -245,7 +245,7 @@ neutral representation.
   </tbody>
 </table>
 
-## Field names as JSON keys {#field-names}
+### Field names as JSON keys {#field-names}
 
 Message field names are mapped to lowerCamelCase to be used as JSON object keys.
 If the `json_name` field option is specified, the specified value will be used
@@ -262,7 +262,7 @@ back by all spec parsers.
 for json_name</a>. Note that `\0` is still considered a legal character within
 the value of a `string` field.
 
-## Presence and default-values {#presence}
+### Presence and default-values {#presence}
 
 When generating JSON-encoded output from a protocol buffer, if a field supports
 presence, serializers must emit the field value if and only if the corresponding
@@ -273,7 +273,7 @@ example any empty repeated field) serializers should omit it from the output. An
 implementation may provide options to include fields with default values in the
 output.
 
-## Null values {#null-values}
+### Null values {#null-values}
 
 Serializers should not emit `null` values.
 
@@ -298,7 +298,7 @@ must be handled by serializers and parsers under the standard presence behavior.
 This behavior correspondingly allows `google.protobuf.Struct` and
 `google.protobuf.Value` to losslessly round trip arbitrary JSON.
 
-## Duplicate values {#duplicate-values}
+### Duplicate values {#duplicate-values}
 
 Serializers must never serialize the same field multiple times, nor multiple
 different cases in the same oneof in the same JSON object.
@@ -314,7 +314,7 @@ may be impractical or infeasible, so it is strongly recommended that systems
 avoid relying on specific behavior for duplicate fields in ProtoJSON where
 possible.
 
-## Out of range numeric values
+### Out of range numeric values
 
 When parsing a numeric value, if the number that is is parsed from the wire
 doesn't fit in the corresponding type, the parser should fail to parse.
