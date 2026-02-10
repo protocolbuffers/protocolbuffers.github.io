@@ -369,6 +369,25 @@ represented by the string `"3.1s"` in the special case handling. When that
 }
 ```
 
+Message types with special JSON encodings include:
+
+-   `google.protobuf.Any`
+-   `google.protobuf.BoolValue`
+-   `google.protobuf.BytesValue`
+-   `google.protobuf.DoubleValue`
+-   `google.protobuf.Duration`
+-   `google.protobuf.FieldMask`
+-   `google.protobuf.FloatValue`
+-   `google.protobuf.Int32Value`
+-   `google.protobuf.Int64Value`
+-   `google.protobuf.ListValue`
+-   `google.protobuf.StringValue`
+-   `google.protobuf.Struct`
+-   `google.protobuf.Timestamp`
+-   `google.protobuf.UInt32Value`
+-   `google.protobuf.UInt64Value`
+-   `google.protobuf.Value`
+
 Note that `google.protobuf.Empty` is not considered to have any special JSON
 mapping; it is simply a normal message that has zero fields. This means the
 expected representation of an `Empty` packed into an `Any` is `{"@type":
