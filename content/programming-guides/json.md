@@ -74,7 +74,7 @@ The following table shows how data is represented in JSON files.
         <p>
         Well-known types have special representations, as described in the <a href="#wkt">Well-known types table</a>.
         <p>
-        <code>null</code> is valid for any field and leaves the field unset. See <a href="null-values">Null Values</a> for clarification about the semantic behavior of null values.
+        <code>null</code> is valid for any field and leaves the field unset. See <a href="#null-values">Null Values</a> for clarification about the semantic behavior of null values.
       </td>
     </tr>
     <tr>
@@ -122,7 +122,7 @@ The following table shows how data is represented in JSON files.
       <td>int32, fixed32, uint32</td>
       <td>number</td>
       <td><code>1, -10, 0</code></td>
-      <td>JSON value will be a decimal number. Either numbers or strings are
+      <td>JSON value will be a number. Either numbers or strings are
         accepted. Empty strings are invalid. Exponent notation (such as <code>1e2</code>) is
         accepted in both quoted and unquoted forms.
       </td>
@@ -133,7 +133,8 @@ The following table shows how data is represented in JSON files.
       <td><code>"1", "-10"</code></td>
       <td>JSON value will be a decimal string. Either numbers or strings are
         accepted. Empty strings are invalid. Exponent notation (such as <code>1e2</code>) is
-        accepted in both quoted and unquoted forms.
+        accepted in both quoted and unquoted forms. See <a href="#int64-strings">Strings for int64s</a>
+        for the explanation why strings are used for int64s.
       </td>
     </tr>
     <tr>
@@ -314,7 +315,7 @@ may be impractical or infeasible, so it is strongly recommended that systems
 avoid relying on specific behavior for duplicate fields in ProtoJSON where
 possible.
 
-### Out of range numeric values
+### Out of range numeric values {#out-of-range-values}
 
 When parsing a numeric value, if the number that is is parsed from the wire
 doesn't fit in the corresponding type, the parser should fail to parse.
@@ -325,6 +326,38 @@ or larger than `INT_MAX` for `int32`.
 Values with nonzero fractional portions are not allowed for integer-typed
 fields. Zero fractional portions are accepted. For example `1.0` is valid for an
 int32 field, but `1.5` is not.
+
+### Strings for int64 {#int64-strings}
+
+Unfortunately, the [json.org](https://json.org) spec does not speak to the
+intended precision limits of numbers. Many implementations follow the original
+JS behavior that JSON was derived from and interpret all numbers as binary64
+(double precision) and are silently lossy if a number is an integer larger than
+2**53. Other implementations may support unlimited precision bigints, int64s, or
+even bigfloats with unlimited fractional precision.
+
+This creates a situation where if the JSON contains a number that is not exactly
+representable by double precision, different parsers will behave differently,
+including silent precision loss in many languages.
+
+To avoid these problems, ProtoJSON serializers emit int64s as strings to ensure
+no precision loss will occur on large int64s by any implementation.
+
+When parsing a bare number when expecting an int64, the implementation should
+coerce that value to double-precision even if the corresponding language's
+built-in JSON parser supports parsing of JSON numbers as bigints. This ensures a
+consistent interpretation of the same data, regardless of language used.
+
+This design follows established best practices in how to handle large numbers in
+JSON when prioritizing interoperability, including:
+
+*   [RFC8259](https://datatracker.ietf.org/doc/html/rfc8259#section-6) includes
+    a note that software that intends good interoperability should only presume
+    double precision on all numbers.
+
+*   [OpenAPI int64](https://spec.openapis.org/registry/format/int64)
+    documentation recommends using a JSON string instead of a number when
+    precision beyond 2**53 is desired.
 
 ## Any {#any}
 
