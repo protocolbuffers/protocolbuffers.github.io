@@ -86,14 +86,18 @@ rather than `XYZ_2` or `XYZ_2V`.
 
 ## Packages {#packages}
 
-Use dot-delimited lower_snake_case names as package names.
+Packages names should be a dot-delimited sequence of lower_snake_case names.
+They should not contain uppercase letters.
 
 Multi-word package names may be lower_snake_case or dot.delimited (dot-delimited
 package names are emitted as nested packages/namespaces in most languages).
 
 Package names should attempt to be a short but unique name based on the project
-name. Package names should not be Java packages (`com.x.y`); instead use `x.y`
-as the package and use the `java_package` option as needed.
+name. The package should not be coupled with the directory path, especially when
+the files are in a deeply nested path.
+
+Package names should not be Java packages (`com.company.x.y`); instead use `x.y`
+as the package and use the `java_package` option.
 
 ## Message Names {#message-names}
 
