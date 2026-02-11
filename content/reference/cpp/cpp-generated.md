@@ -149,6 +149,31 @@ The class also defines the following static methods:
     default instance of a message can be used as a factory by calling its
     `New()` method.
 
+### Abseil flag support {#absl-flags-messages}
+
+`Message` objects have native support for Abseil's flag parse/unparse logic.
+They can be used as the type for `ABSL_FLAG` declarations. The flag syntax is
+`:format,options...:value` where:
+
+-   `format` is one of `text`, `serialized`.
+-   `options` is a possibly-empty list of options. Each format has its supported
+    options.
+-   `value` is the payload in the specified format.
+
+The valid options are:
+
+*   For `text`:
+    -   `base64`: indicates that `value` is encoded as base64.
+    -   `ignore_unknown`: when specified, unknown field/extensions are dropped.
+        Otherwise, they cause a parse failure.
+*   For `serialized`:
+    -   `base64`: indicates that `value` is encoded as base64. It is recommended
+        to use `serialized` with `base64` given that passing binary data in
+        shells is difficult and error prone.
+
+Note that flag support for message types is not provided for `LITE_RUNTIME`
+configurations.
+
 ### Nested Types {#nested-types}
 
 A message can be declared inside another message. For example:
@@ -1148,6 +1173,14 @@ and are imported into the class's scope with a `typedef` and a series of
 constant definitions. This is done only to get around problems with declaration
 ordering. Do not depend on the mangled top-level names; pretend the enum really
 is nested in the message class.
+
+### Abseil flag support {#absl-flags-enums}
+
+Generated `enum` values have native support for Abseil's flag parse/unparse
+logic. They can be used as the type for `ABSL_FLAG` declarations.
+
+The flag parser supports both labels and numbers. Invalid labels/numbers will
+cause a parse failure.
 
 ## Extensions (proto2 and editions only) {#extension}
 
