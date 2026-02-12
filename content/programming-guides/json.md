@@ -1,7 +1,7 @@
 +++
 title = "ProtoJSON Format"
 weight = 62
-description = "Covers how to use the Protobuf to JSON conversion utilities."
+description = "Describes the spec details of the canonical JSON representation for Protobuf messages."
 type = "docs"
 +++
 
