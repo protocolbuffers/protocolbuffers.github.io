@@ -8,13 +8,26 @@ type = "docs"
 
 <link rel="stylesheet" href="/includes/version-tables.css">
 
+## Currently Supported Versions {#currently-supported}
+
+Language | Active Support | Maintenance only
+-------- | -------------- | ---------------------
+Protoc   | 33.x           | 29.x, 25.x (for Java)
+C++      | 6.33.x         | 5.29.x
+C#       | 3.33.x         |
+Java     | 4.33.x         | 3.25.x
+ObjC     | 4.33.x         | 3.29.x
+PHP      | 4.33.x         |
+Python   | 6.33.x         | 5.29.x
+Ruby     | 4.33.x         |
+
+## Numbering Scheme {#numbering}
+
 Support windows for protoc and the various languages are covered in the tables
 later in this topic. Version numbers throughout this topic use
 [SemVer](https://semver.org) conventions; in the version "3.21.7," we say that
 "3" is the major version, "21" is the minor version, and "7" is the micro or
 patch number.
-
-## Numbering scheme
 
 Protobuf releases are numbered with only a `minor.point` number, for example
 `29.5`.
@@ -145,7 +158,7 @@ Future plans are shown in *italics* and are subject to change.
   <tr class="future">
     <th>7.x</th>
     <td>Q1 2026</td>
-    <td>31 Mar 2028</td>
+    <td>TBD</td>
   </tr>
 </table>
 
@@ -155,7 +168,6 @@ Future plans are shown in *italics* and are subject to change.
   <tr>
     <th>Protobuf C++</th>
     <th>protoc</th>
-    <th class="y23q1"><span>23Q1</span></th>
     <th class="y23q2"><span>23Q2</span></th>
     <th class="y23q3"><span>23Q3</span></th>
     <th class="y23q4"><span>23Q4</span></th>
@@ -167,15 +179,13 @@ Future plans are shown in *italics* and are subject to change.
     <th class="y25q2"><span>25Q2</span></th>
     <th class="y25q3"><span>25Q3</span></th>
     <th class="y25q4"><span>25Q4</span></th>
+    <th class="y26q1"><span>26Q1</span></th>
   </tr>
   <tr class="end-of-life">
     <th>3.x</th>
     <td>21.x</td>
-    <td class="y23q1 maintenance">3.21</td>
-    <td class="y23q2 maintenance">3.21</td>
-    <td class="y23q3 maintenance">3.21</td>
-    <td class="y23q4 maintenance">3.21</td>
-    <td class="y24q1 maintenance">3.21</td>
+    <td class="y23q2 maintenance" colspan=3>3.21</td>
+    <td class="y24q1"></td>
     <td class="y24q2"></td>
     <td class="y24q3"></td>
     <td class="y24q4"></td>
@@ -183,27 +193,24 @@ Future plans are shown in *italics* and are subject to change.
     <td class="y25q2"></td>
     <td class="y25q3"></td>
     <td class="y25q4"></td>
+    <td class="y26q1"></td>
   </tr>
   <tr class="end-of-life">
     <th>4.x</th>
     <td>22.x-25.x</td>
-    <td class="y23q1 active">4.22</td>
     <td class="y23q2 active">4.23</td>
     <td class="y23q3 active">4.24</td>
     <td class="y23q4 active">4.25</td>
-    <td class="y24q1 maintenance">4.25</td>
-    <td class="y24q2 maintenance">4.25</td>
-    <td class="y24q3 maintenance">4.25</td>
-    <td class="y24q4 maintenance">4.25</td>
-    <td class="y25q1 maintenance">4.25</td>
+    <td class="y24q1 maintenance" colspan=4>4.25</td>
+    <td class="y25q1"></td>
     <td class="y25q2"></td>
     <td class="y25q3"></td>
     <td class="y25q4"></td>
+    <td class="y26q1"></td>
   </tr>
   <tr class="maintenance">
     <th>5.x</th>
     <td>26.x-29.x</td>
-    <td class="y23q1"></td>
     <td class="y23q2"></td>
     <td class="y23q3"></td>
     <td class="y23q4"></td>
@@ -211,15 +218,12 @@ Future plans are shown in *italics* and are subject to change.
     <td class="y24q2 active">5.27</td>
     <td class="y24q3 active">5.28</td>
     <td class="y24q4 active">5.29</td>
-    <td class="y25q1 maintenance">5.29</td>
-    <td class="y25q2 maintenance">5.29</td>
-    <td class="y25q3 maintenance">5.29</td>
-    <td class="y25q4 maintenance">5.29</td>
+    <td class="y25q1 maintenance" colspan=4>5.29</td>
+    <td class="y26q1"></td>
   </tr>
   <tr class="active">
     <th>6.x</th>
     <td>30.x-33.x</td>
-    <td class="y23q1"></td>
     <td class="y23q2"></td>
     <td class="y23q3"></td>
     <td class="y23q4"></td>
@@ -231,6 +235,23 @@ Future plans are shown in *italics* and are subject to change.
     <td class="y25q2 active">6.31</td>
     <td class="y25q3 active">6.32</td>
     <td class="y25q4 active">6.33</td>
+    <td class="y26q1 maintenance">6.33</td>
+  </tr>
+  <tr class="future">
+    <th>7.x</th>
+    <td>34.x+</td>
+    <td class="y23q2"></td>
+    <td class="y23q3"></td>
+    <td class="y23q4"></td>
+    <td class="y24q1"></td>
+    <td class="y24q2"></td>
+    <td class="y24q3"></td>
+    <td class="y24q4"></td>
+    <td class="y25q1"></td>
+    <td class="y25q2"></td>
+    <td class="y25q3"></td>
+    <td class="y25q4"></td>
+    <td class="y26q1 future">7.34</td>
   </tr>
 </table>
 
@@ -291,7 +312,6 @@ Future plans are shown in *italics* and are subject to change.
   <tr>
     <th>Protobuf C#</th>
     <th>protoc</th>
-    <th class="y23q1"><span>23Q1</span></th>
     <th class="y23q2"><span>23Q2</span></th>
     <th class="y23q3"><span>23Q3</span></th>
     <th class="y23q4"><span>23Q4</span></th>
@@ -303,11 +323,11 @@ Future plans are shown in *italics* and are subject to change.
     <th class="y25q2"><span>25Q2</span></th>
     <th class="y25q3"><span>25Q3</span></th>
     <th class="y25q4"><span>25Q4</span></th>
+    <th class="y26q1"><span>26Q1</span></th>
   </tr>
   <tr class="active">
     <th>3.x</th>
-    <td>21.x-33.x</td>
-    <td class="y23q1 active">3.22</td>
+    <td>21.x+</td>
     <td class="y23q2 active">3.23</td>
     <td class="y23q3 active">3.24</td>
     <td class="y23q4 active">3.25</td>
@@ -319,6 +339,7 @@ Future plans are shown in *italics* and are subject to change.
     <td class="y25q2 active">3.31</td>
     <td class="y25q3 active">3.32</td>
     <td class="y25q4 active">3.33</td>
+    <td class="y26q1 future">3.34</td>
   </tr>
 </table>
 
@@ -400,7 +421,6 @@ version bumps in Q1 2025 and Q1 2026.{{% /alert %}}
   <tr>
     <th>Protobuf Java</th>
     <th>protoc</th>
-    <th class="y23q1"><span>23Q1</span></th>
     <th class="y23q2"><span>23Q2</span></th>
     <th class="y23q3"><span>23Q3</span></th>
     <th class="y23q4"><span>23Q4</span></th>
@@ -412,27 +432,19 @@ version bumps in Q1 2025 and Q1 2026.{{% /alert %}}
     <th class="y25q2"><span>25Q2</span></th>
     <th class="y25q3"><span>25Q3</span></th>
     <th class="y25q4"><span>25Q4</span></th>
+    <th class="y26q1"><span>26Q1</span></th>
   </tr>
   <tr class="maintenance">
     <th>3.x</th>
     <td>21.x-25.x</td>
-    <td class="y23q1 active">3.22</td>
     <td class="y23q2 active">3.23</td>
     <td class="y23q3 active">3.24</td>
     <td class="y23q4 active">3.25</td>
-    <td class="y24q1 maintenance">3.25</td>
-    <td class="y24q2 maintenance">3.25</td>
-    <td class="y24q3 maintenance">3.25</td>
-    <td class="y24q4 maintenance">3.25</td>
-    <td class="y25q1 maintenance">3.25</td>
-    <td class="y25q2 maintenance">3.25</td>
-    <td class="y25q3 maintenance">3.25</td>
-    <td class="y25q4 maintenance">3.25</td>
+    <td class="y24q1 maintenance" colspan=9>3.25</td>
   </tr>
   <tr class="active">
     <th>4.x</th>
-    <td>26.x-33.x</td>
-    <td class="y23q1"></td>
+    <td>26.x+</td>
     <td class="y23q2"></td>
     <td class="y23q3"></td>
     <td class="y23q4"></td>
@@ -444,6 +456,7 @@ version bumps in Q1 2025 and Q1 2026.{{% /alert %}}
     <td class="y25q2 active">4.31</td>
     <td class="y25q3 active">4.32</td>
     <td class="y25q4 active">4.33</td>
+    <td class="y26q1 future">4.34</td>
   </tr>
 </table>
 
@@ -505,6 +518,11 @@ Future plans are shown in *italics* and are subject to change.
   <tr class="active">
     <th>4.x</th>
     <td>4 Mar 2025</td>
+    <td>31 Mar 2027</td>
+  </tr>
+  <tr class="future">
+    <th>5.x</th>
+    <td>Q1 2026</td>
     <td>TBD</td>
   </tr>
 </table>
@@ -515,7 +533,6 @@ Future plans are shown in *italics* and are subject to change.
   <tr>
     <th>Protobuf Objective-C</th>
     <th>protoc</th>
-    <th class="y23q1"><span>23Q1</span></th>
     <th class="y23q2"><span>23Q2</span></th>
     <th class="y23q3"><span>23Q3</span></th>
     <th class="y23q4"><span>23Q4</span></th>
@@ -527,11 +544,11 @@ Future plans are shown in *italics* and are subject to change.
     <th class="y25q2"><span>25Q2</span></th>
     <th class="y25q3"><span>25Q3</span></th>
     <th class="y25q4"><span>25Q4</span></th>
+    <th class="y26q1"><span>26Q1</span></th>
   </tr>
   <tr class="maintenance">
     <th>3.x</th>
     <td>21.x-29.x</td>
-    <td class="y23q1 active">3.22</td>
     <td class="y23q2 active">3.23</td>
     <td class="y23q3 active">3.24</td>
     <td class="y23q4 active">3.25</td>
@@ -539,15 +556,12 @@ Future plans are shown in *italics* and are subject to change.
     <td class="y24q2 active">3.27</td>
     <td class="y24q3 active">3.28</td>
     <td class="y24q4 active">3.29</td>
-    <td class="y25q1 maintenance">3.29</td>
-    <td class="y25q2 maintenance">3.29</td>
-    <td class="y25q3 maintenance">3.29</td>
-    <td class="y25q4 maintenance">3.29</td>
+    <td class="y25q1 maintenance" colspan=4>3.29</td>
+    <td class="y26q1"></td>
   </tr>
   <tr class="active">
     <th>4.x</th>
-    <td>30.x+</td>
-    <td class="y23q1"></td>
+    <td>30.x - 33.x</td>
     <td class="y23q2"></td>
     <td class="y23q3"></td>
     <td class="y23q4"></td>
@@ -559,6 +573,23 @@ Future plans are shown in *italics* and are subject to change.
     <td class="y25q2 active">4.31</td>
     <td class="y25q3 active">4.32</td>
     <td class="y25q4 active">4.33</td>
+    <td class="y26q1 maintenance">4.33</td>
+  </tr>
+  <tr class="future">
+    <th>5.x</th>
+    <td>34.x+</td>
+    <td class="y23q2"></td>
+    <td class="y23q3"></td>
+    <td class="y23q4"></td>
+    <td class="y24q1"></td>
+    <td class="y24q2"></td>
+    <td class="y24q3"></td>
+    <td class="y24q4"></td>
+    <td class="y25q1"></td>
+    <td class="y25q2"></td>
+    <td class="y25q3"></td>
+    <td class="y25q4"></td>
+    <td class="y26q1 future">5.34</td>
   </tr>
 </table>
 
@@ -606,6 +637,11 @@ Future plans are shown in *italics* and are subject to change.
   <tr class="active">
     <th>4.x</th>
     <td>13 Mar 2024</td>
+    <td>31 Mar 2026</td>
+  </tr>
+  <tr class="future">
+    <th>5.x</th>
+    <td>Q1 2026</td>
     <td>TBD</td>
   </tr>
 </table>
@@ -616,7 +652,6 @@ Future plans are shown in *italics* and are subject to change.
   <tr>
     <th>Protobuf PHP</th>
     <th>protoc</th>
-    <th class="y23q1"><span>23Q1</span></th>
     <th class="y23q2"><span>23Q2</span></th>
     <th class="y23q3"><span>23Q3</span></th>
     <th class="y23q4"><span>23Q4</span></th>
@@ -628,27 +663,24 @@ Future plans are shown in *italics* and are subject to change.
     <th class="y25q2"><span>25Q2</span></th>
     <th class="y25q3"><span>25Q3</span></th>
     <th class="y25q4"><span>25Q4</span></th>
+    <th class="y26q1"><span>26Q1</span></th>
   </tr>
   <tr class="end-of-life">
     <th>3.x</th>
     <td>21.x-25.x</td>
-    <td class="y23q1 active">3.22</td>
     <td class="y23q2 active">3.23</td>
     <td class="y23q3 active">3.24</td>
     <td class="y23q4 active">3.25</td>
-    <td class="y24q1 maintenance">3.25</td>
-    <td class="y24q2 maintenance">3.25</td>
-    <td class="y24q3 maintenance">3.25</td>
-    <td class="y24q4 maintenance">3.25</td>
-    <td class="y25q1 maintenance">3.25</td>
+    <td class="y24q1 maintenance" colspan=4>3.25</td>
+    <td class="y25q1"></td>
     <td class="y25q2"></td>
     <td class="y25q3"></td>
     <td class="y25q4"></td>
+    <td class="y26q1"></td>
   </tr>
   <tr class="active">
     <th>4.x</th>
-    <td>26.x+</td>
-    <td class="y23q1"></td>
+    <td>26.x - 33.x</td>
     <td class="y23q2"></td>
     <td class="y23q3"></td>
     <td class="y23q4"></td>
@@ -660,6 +692,23 @@ Future plans are shown in *italics* and are subject to change.
     <td class="y25q2 active">4.31</td>
     <td class="y25q3 active">4.32</td>
     <td class="y25q4 active">4.33</td>
+    <td class="y26q1 maintenance">4.33</td>
+  </tr>
+    <tr class="future">
+    <th>5.x</th>
+    <td>34.x+</td>
+    <td class="y23q2"></td>
+    <td class="y23q3"></td>
+    <td class="y23q4"></td>
+    <td class="y24q1"></td>
+    <td class="y24q2"></td>
+    <td class="y24q3"></td>
+    <td class="y24q4"></td>
+    <td class="y25q1"></td>
+    <td class="y25q2"></td>
+    <td class="y25q3"></td>
+    <td class="y25q4"></td>
+    <td class="y26q1 future">5.34</td>
   </tr>
 </table>
 
@@ -720,6 +769,11 @@ Future plans are shown in *italics* and are subject to change.
   <tr class="active">
     <th>6.x</th>
     <td>4 Mar 2025</td>
+    <td>31 Mar 2027</td>
+  </tr>
+  <tr class="future">
+    <th>7.x</th>
+    <td>Q1 2026</td>
     <td>TBD</td>
   </tr>
 </table>
@@ -730,7 +784,6 @@ Future plans are shown in *italics* and are subject to change.
   <tr>
     <th>Protobuf Python</th>
     <th>protoc</th>
-    <th class="y23q1"><span>23Q1</span></th>
     <th class="y23q2"><span>23Q2</span></th>
     <th class="y23q3"><span>23Q3</span></th>
     <th class="y23q4"><span>23Q4</span></th>
@@ -742,27 +795,24 @@ Future plans are shown in *italics* and are subject to change.
     <th class="y25q2"><span>25Q2</span></th>
     <th class="y25q3"><span>25Q3</span></th>
     <th class="y25q4"><span>25Q4</span></th>
+    <th class="y26q1"><span>26Q1</span></th>
   </tr>
   <tr class="end-of-life">
     <th>4.x</th>
     <td>21.x-25.x</td>
-    <td class="y23q1 active">4.22</td>
     <td class="y23q2 active">4.23</td>
     <td class="y23q3 active">4.24</td>
     <td class="y23q4 active">4.25</td>
-    <td class="y24q1 maintenance">4.25</td>
-    <td class="y24q2 maintenance">4.25</td>
-    <td class="y24q3 maintenance">4.25</td>
-    <td class="y24q4 maintenance">4.25</td>
-    <td class="y25q1 maintenance">4.25</td>
+    <td class="y24q1 maintenance" colspan=4>4.25</td>
+    <td class="y25q1"></td>
     <td class="y25q2"></td>
     <td class="y25q3"></td>
     <td class="y25q4"></td>
+    <td class="y26q1"></td>
   </tr>
   <tr class="maintenance">
     <th>5.x</th>
     <td>26.x-29.x</td>
-    <td class="y23q1"></td>
     <td class="y23q2"></td>
     <td class="y23q3"></td>
     <td class="y23q4"></td>
@@ -770,15 +820,12 @@ Future plans are shown in *italics* and are subject to change.
     <td class="y24q2 active">5.27</td>
     <td class="y24q3 active">5.28</td>
     <td class="y24q4 active">5.29</td>
-    <td class="y25q1 maintenance">5.29</td>
-    <td class="y25q2 maintenance">5.29</td>
-    <td class="y25q3 maintenance">5.29</td>
-    <td class="y25q4 maintenance">5.29</td>
+    <td class="y25q1 maintenance" colspan=4>5.29</td>
+    <td class="y26q1"></td>
   </tr>
   <tr class="active">
     <th>6.x</th>
-    <td>30.x+</td>
-    <td class="y23q1"></td>
+    <td>30.x-33.x</td>
     <td class="y23q2"></td>
     <td class="y23q3"></td>
     <td class="y23q4"></td>
@@ -790,6 +837,23 @@ Future plans are shown in *italics* and are subject to change.
     <td class="y25q2 active">6.31</td>
     <td class="y25q3 active">6.32</td>
     <td class="y25q4 active">6.33</td>
+    <td class="y26q1 maintenance">6.33</td>
+  </tr>
+    <tr class="future">
+    <th>7.x</th>
+    <td>34.x+</td>
+    <td class="y23q2"></td>
+    <td class="y23q3"></td>
+    <td class="y23q4"></td>
+    <td class="y24q1"></td>
+    <td class="y24q2"></td>
+    <td class="y24q3"></td>
+    <td class="y24q4"></td>
+    <td class="y25q1"></td>
+    <td class="y25q2"></td>
+    <td class="y25q3"></td>
+    <td class="y25q4"></td>
+    <td class="y26q1 future">7.34</td>
   </tr>
 </table>
 
@@ -855,7 +919,6 @@ Future plans are shown in *italics* and are subject to change.
   <tr>
     <th>Protobuf Ruby</th>
     <th>protoc</th>
-    <th class="y23q1"><span>23Q1</span></th>
     <th class="y23q2"><span>23Q2</span></th>
     <th class="y23q3"><span>23Q3</span></th>
     <th class="y23q4"><span>23Q4</span></th>
@@ -867,27 +930,24 @@ Future plans are shown in *italics* and are subject to change.
     <th class="y25q2"><span>25Q2</span></th>
     <th class="y25q3"><span>25Q3</span></th>
     <th class="y25q4"><span>25Q4</span></th>
+    <th class="y26q1"><span>26Q1</span></th>
   </tr>
   <tr class="end-of-life">
     <th>3.x</th>
     <td>21.x-25.x</td>
-    <td class="y23q1 active">3.22</td>
     <td class="y23q2 active">3.23</td>
     <td class="y23q3 active">3.24</td>
     <td class="y23q4 active">3.25</td>
-    <td class="y24q1 maintenance">3.25</td>
-    <td class="y24q2 maintenance">3.25</td>
-    <td class="y24q3 maintenance">3.25</td>
-    <td class="y24q4 maintenance">3.25</td>
-    <td class="y25q1 maintenance">3.25</td>
+    <td class="y24q1 maintenance" colspan=4>3.25</td>
+    <td class="y25q1"></td>
     <td class="y25q2"></td>
     <td class="y25q3"></td>
     <td class="y25q4"></td>
+    <td class="y26q1"></td>
   </tr>
   <tr class="active">
     <th>4.x</th>
     <td>26.x+</td>
-    <td class="y23q1"></td>
     <td class="y23q2"></td>
     <td class="y23q3"></td>
     <td class="y23q4"></td>
@@ -899,6 +959,7 @@ Future plans are shown in *italics* and are subject to change.
     <td class="y25q2 active">4.31</td>
     <td class="y25q3 active">4.32</td>
     <td class="y25q4 active">4.33</td>
+    <td class="y26q1 future">4.34</td>
   </tr>
 </table>
 
