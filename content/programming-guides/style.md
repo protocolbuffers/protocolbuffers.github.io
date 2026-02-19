@@ -26,7 +26,7 @@ All files should be ordered in the following manner:
 
 1.  License header (if applicable)
 1.  File overview
-1.  Syntax
+1.  Syntax or edition
 1.  Package
 1.  Imports (sorted)
 1.  File options
