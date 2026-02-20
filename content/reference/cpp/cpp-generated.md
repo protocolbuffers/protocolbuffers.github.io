@@ -174,6 +174,13 @@ The valid options are:
 Note that flag support for message types is not provided for `LITE_RUNTIME`
 configurations.
 
+Example:
+
+```cpp
+ABSL_FLAG(MyProtoType, my_proto_config, {},
+          "This is a proto config description.");
+```
+
 ### Nested Types {#nested-types}
 
 A message can be declared inside another message. For example:
