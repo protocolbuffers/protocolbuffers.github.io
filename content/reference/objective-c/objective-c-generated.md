@@ -1140,6 +1140,16 @@ of the appropriate type).
 
 ## Extensions (proto2 and editions only) {#extensions}
 
+You can control the generation of extensions by using the
+`extension_generation_mode` option. There are three modes:
+
+*   `class_based`: Generates Objective-C classes and methods for extensions
+    (Legacy).
+*   `c_function`: Generates C functions for extensions (New).
+*   `migration`: Generates both.
+
+### Class-based (Legacy) {#extensions-legacy}
+
 Given a message with an
 [extension range](/programming-guides/proto2#extensions):
 
@@ -1220,4 +1230,61 @@ NSAssert([[fooMsg getExtension:[Test2Root repeatedFoo]] count] == 2);
 [fooMsg clearExtension:[Test2Root repeatedFoo]];
 NSAssert(![fooMsg hasExtension:[Test2Root foo]]);
 NSAssert(![fooMsg hasExtension:[Test2Root repeatedFoo]]);
+```
+
+### C-functions (New) {#extensions-c-functions}
+
+When using `c_function` mode, C functions are generated instead of Objective-C
+classes. This reduces binary size and avoids name conflicts.
+
+The naming convention for the generated functions involves the proto package and
+the extension name. If an `objc_class_prefix` is defined, it is prepended.
+
+*   File-scoped registry: `<Prefix><Package>_<File>_Registry()`
+*   File-scoped extension: `<Prefix><Package>_extension_<Field>()`
+*   Message-scoped extension:
+    `<Prefix><Package>_<ScopeMessage>_extension_<Field>()`
+
+(Note: `Package` is the CamelCased proto package name. `File` is the file name.
+`ScopeMessage` is the message containing the extension definition.)
+
+Using the same example as above, but assuming `package my.package;` and file
+`test2.proto`:
+
+The compiler generates C functions declared in the header:
+
+```objc
+// Registry function for the file.
+GPBExtensionRegistry *MyPackage_Test2_Registry(void);
+
+// File-scoped extensions.
+GPBExtensionDescriptor *MyPackage_extension_Foo(void);
+GPBExtensionDescriptor *MyPackage_extension_RepeatedFoo(void);
+
+// Message-scoped extensions (scoped to Bar).
+GPBExtensionDescriptor *MyPackage_Bar_extension_Bar(void);
+GPBExtensionDescriptor *MyPackage_Bar_extension_RepeatedBar(void);
+```
+
+To get and set these extension fields:
+
+```objc
+Foo *fooMsg = [[Foo alloc] init];
+
+// Set the single field extensions
+[fooMsg setExtension:MyPackage_extension_Foo() value:@5];
+NSAssert([fooMsg hasExtension:MyPackage_extension_Foo()]);
+NSAssert([[fooMsg getExtension:MyPackage_extension_Foo()] intValue] == 5);
+
+// Add two things to the repeated extension:
+[fooMsg addExtension:MyPackage_extension_RepeatedFoo() value:@1];
+[fooMsg addExtension:MyPackage_extension_RepeatedFoo() value:@2];
+NSAssert([fooMsg hasExtension:MyPackage_extension_RepeatedFoo()]);
+NSAssert([[fooMsg getExtension:MyPackage_extension_RepeatedFoo()] count] == 2);
+
+// Clearing
+[fooMsg clearExtension:MyPackage_extension_Foo()];
+[fooMsg clearExtension:MyPackage_extension_RepeatedFoo()];
+NSAssert(![fooMsg hasExtension:MyPackage_extension_Foo()]);
+NSAssert(![fooMsg hasExtension:MyPackage_extension_RepeatedFoo()]);
 ```
