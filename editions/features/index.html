@@ -146,7 +146,7 @@ fields set to <code>EXPLICIT</code>.</li><li><code>IMPLICIT</code>: The field ha
 serialized onto the wire (even if it is explicitly set). <code>has_*</code> functions
 are not generated for fields set to <code>IMPLICIT</code>.</li></ul><p><strong>Applicable to the following scopes:</strong> file, field</p><p><strong>Added in:</strong> Edition 2023</p><p><strong>Default behavior per syntax/edition:</strong></p><table><thead><tr><th>Syntax/edition</th><th>Default</th></tr></thead><tbody><tr><td>2024</td><td><code>EXPLICIT</code></td></tr><tr><td>2023</td><td><code>EXPLICIT</code></td></tr><tr><td>proto3</td><td><code>IMPLICIT</code>*</td></tr><tr><td>proto2</td><td><code>EXPLICIT</code></td></tr></tbody></table><p>* proto3 is <code>IMPLICIT</code> unless the field has the <code>optional</code> label, in which case
 it behaves like <code>EXPLICIT</code>. See
-<a href=/programming-guides/field_presence#presence-in-proto3-apis>Presence in Proto3 APIs</a>
+<a href=/programming-guides/field_presence#presence-proto3>Presence in Proto3 APIs</a>
 for more information.</p><p><strong>Note:</strong> Feature settings on different schema elements
 <a href=#cascading>have different scopes</a>.</p><p>The following code sample shows a proto2 file:</p><div class=highlight><pre tabindex=0 style=background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-proto data-lang=proto><span style=display:flex><span><span style=color:#000>syntax</span> <span style=color:#ce5c00;font-weight:700>=</span> <span style=color:#4e9a06>&#34;proto2&#34;</span><span style=color:#000;font-weight:700>;</span><span style=color:#a40000>
 </span></span></span><span style=display:flex><span><span style=color:#a40000>
