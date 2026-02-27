@@ -306,7 +306,7 @@ proto2         | `EXPLICIT`
 
 \* proto3 is `IMPLICIT` unless the field has the `optional` label, in which case
 it behaves like `EXPLICIT`. See
-[Presence in Proto3 APIs](/programming-guides/field_presence#presence-in-proto3-apis)
+[Presence in Proto3 APIs](/programming-guides/field_presence#presence-proto3)
 for more information.
 
 **Note:** Feature settings on different schema elements
