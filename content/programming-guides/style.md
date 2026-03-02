@@ -150,6 +150,10 @@ and should be distinct from any of the semantic values you expect to be
 explicitly set. For more information on the unspecified enum value, see
 [the Proto Best Practices page](/best-practices/dos-donts#unspecified-enum).
 
+Assign the number used for each value densely and sequentially increasing. Gaps
+in numbering should only occur when a previously used enum value is removed.
+Avoid using negative values.
+
 #### Enum Value Prefixing {#enum-value-prefixing}
 
 Enum values are semantically considered to not be scoped by their containing
