@@ -225,10 +225,11 @@ The compiler generates the following accessor methods:
 *   `fn has_foo(&self) -> bool`: Returns `true` if the field is set.
 *   `fn foo(&self) -> i32`: Returns the current value of the field. If the field
     is not set, it returns the default value.
-*   fn foo_opt(&self) -> protobuf::Optional<i32>`: Returns an optional with the
-    variant`Set(value)`if the field is set or`Unset(default value)`if it's
-    unset. See [`Optional`
-    rustdoc](https://docs.rs/protobuf/4.33.5-release/protobuf/enum.Optional.html)
+*   `fn foo_opt(&self) -> protobuf::Optional<i32>`: Returns an optional with the
+    variant `Set(value)` if the field is set or `Unset(default value)` if it's
+    unset. See
+    [`Optional`](https://docs.rs/protobuf/4.33.5-release/protobuf/enum.Optional.html)
+    rustdoc.
 *   `fn set_foo(&mut self, val: i32)`: Sets the value of the field. After
     calling this, `has_foo()` will return `true` and `foo()` will return
     `value`.
