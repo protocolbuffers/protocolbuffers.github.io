@@ -19,7 +19,7 @@ to and from a variety of data streams and using a variety of languages.
 
 Protocol buffers support generated code in C++, C#, Dart, Go, Java,
 Kotlin,
-Objective-C, Python, and Ruby. With proto3, you can also work with PHP.
+Objective-C, Python, Rust, and Ruby. With proto3, you can also work with PHP.
 
 ## Example Implementation
 
