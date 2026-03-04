@@ -105,6 +105,9 @@ release notes will be more complete. Also, not everything from the chronological
 listing will be in these topics, as some content is not specific to a particular
 release.
 
+*   [Version 34.x](/news/v34)
+*   [Version 32.x](/news/v32)
+*   [Version 31.x](/news/v31)
 *   [Version 30.x](/news/v30)
 *   [Version 29.x](/news/v29)
 *   [Version 26.x](/news/v26)
