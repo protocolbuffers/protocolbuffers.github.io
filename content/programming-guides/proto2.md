@@ -921,8 +921,7 @@ a single change, you can put a placeholder `.proto` file in the old location to
 forward all the imports to the new location using the `import public` notion.
 
 **Note that the public import functionality is not available in Java, Kotlin,
-TypeScript, JavaScript, GCL, as well as C++ targets that use protobuf static
-reflection.**
+TypeScript, JavaScript or GCL.**
 
 `import public` dependencies can be transitively relied upon by any code
 importing the proto containing the `import public` statement. For example:

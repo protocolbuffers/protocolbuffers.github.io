@@ -943,8 +943,7 @@ these cases, generated names remain stable, avoiding the need to update
 references in your code. While technically functional when moving a subset of a
 .proto file without `java_multiple_files = true`, doing so requires simultaneous
 updates to many references, thus might not significantly ease migration. The
-functionality is not available in Kotlin, TypeScript, JavaScript, GCL, or with
-C++ targets that use protobuf static reflection.
+functionality is not available in Kotlin, TypeScript, JavaScript, or GCL.
 
 `import public` dependencies can be transitively relied upon by any code
 importing the proto containing the `import public` statement. For example:
