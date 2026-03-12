@@ -129,6 +129,23 @@ in its headers such as `math.h`, may cause compilation errors if the `#include`
 statement for one of those headers appears before the one for `.proto.h`. Avoid
 using macro constants such as "`NULL`," "`NAN`," and "`DOMAIN`" as enum values.
 
+<a id="dont-use-any">
+
+## **Do** prefer extensions over `Any` where possible {#avoid-any}
+
+If you plan to use `Any`, first double-check if extensions can satisfy the use
+case instead. If yes, prefer using extensions.
+
+`Any` was created in Proto3 to replace extensions. However, it has a number of
+design flaws. For most use cases, prefer using extensions.
+
+The main use case that `Any` fulfills is the uncommon scenario in which
+horizontal infrastructure needs to propagate completely arbitrary messages, and
+declaring an extension for each possible legal types would be infeasible.
+
+In the future, Protobuf may introduce a new concept that would satisfy the `Any`
+use cases without the design flaws, but we have no concrete plans at this time.
+
 <a id="do-use-well-known-types-and-common-types"></a>
 
 ## **Do** Use Well-Known Types and Common Types {#well-known-common}
