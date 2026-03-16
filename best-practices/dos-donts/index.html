@@ -54,7 +54,7 @@ less code. Note that <a href=/programming-guides/proto2#enum>proto enums</a> req
 zero and can round-trip (deserialize, serialize) an unknown enum value.</p><p><a id=dont-use-cc-macro-constants-for-enum-values></a></p><h2 id=macro-constants><strong>Don&rsquo;t</strong> Use C/C++ Macro Constants for Enum Values</h2><p>Using words that have already been defined by the C++ language - specifically,
 in its headers such as <code>math.h</code>, may cause compilation errors if the <code>#include</code>
 statement for one of those headers appears before the one for <code>.proto.h</code>. Avoid
-using macro constants such as &ldquo;<code>NULL</code>,&rdquo; &ldquo;<code>NAN</code>,&rdquo; and &ldquo;<code>DOMAIN</code>&rdquo; as enum values.</p><a id=dont-use-any><h2 id=avoid-any><strong>Do</strong> prefer extensions over <code>Any</code> where possible</h2><p>If you plan to use <code>Any</code>, first double-check if extensions can satisfy the use
+using macro constants such as &ldquo;<code>NULL</code>,&rdquo; &ldquo;<code>NAN</code>,&rdquo; and &ldquo;<code>DOMAIN</code>&rdquo; as enum values.</p><p><a id=dont-use-any></a></p><h2 id=avoid-any><strong>Do</strong> prefer extensions over <code>Any</code> where possible</h2><p>If you plan to use <code>Any</code>, first double-check if extensions can satisfy the use
 case instead. If yes, prefer using extensions.</p><p><code>Any</code> was created in Proto3 to replace extensions. However, it has a number of
 design flaws. For most use cases, prefer using extensions.</p><p>The main use case that <code>Any</code> fulfills is the uncommon scenario in which
 horizontal infrastructure needs to propagate completely arbitrary messages, and
