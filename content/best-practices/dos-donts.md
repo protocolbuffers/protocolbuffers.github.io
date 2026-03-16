@@ -129,7 +129,7 @@ in its headers such as `math.h`, may cause compilation errors if the `#include`
 statement for one of those headers appears before the one for `.proto.h`. Avoid
 using macro constants such as "`NULL`," "`NAN`," and "`DOMAIN`" as enum values.
 
-<a id="dont-use-any">
+<a id="dont-use-any"></a>
 
 ## **Do** prefer extensions over `Any` where possible {#avoid-any}
 
