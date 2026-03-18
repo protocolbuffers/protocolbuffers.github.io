@@ -230,6 +230,42 @@ service FooService {
 
 ## Things to Avoid {#avoid}
 
+### Avoid confusing relative packages on field types {#confusing-relative-packages}
+
+The .proto syntax allows you to reference types that are defined in a different
+package in a relative manner. Resolution will search up the parent packages to
+resolve a relative name. For example:
+
+```
+// File: a.proto
+package a.b;
+message C {}
+```
+
+```
+// File: x.proto
+package a.x;
+message SomeMsg {
+  // Since we are in a.x.SomeMsg, this name is searched for in this order:
+  //  .a.x.SomeMsg.b.C
+  //  .a.x.b.C
+  //  .a.b.C
+  //  .b.C
+  b.C field3 = 1;
+}
+```
+
+Relying on the "relative to a parent package" functionality when referencing
+types defined in a different package is supported but can be confusing: in this
+example the spelling `a.b.C` should be used.
+
+Naming other types in the current package (for example, sibling messages)
+without writing the package is idiomatic.
+
+You can write a fully qualified name by using a leading period to avoid any
+ambiguity concerns, but is commonly omitted in most cases even if the package is
+fully written out.
+
 ### Required Fields {#required}
 
 Required fields are a way to enforce that a given field must be set when parsing
