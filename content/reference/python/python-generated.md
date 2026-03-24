@@ -723,6 +723,31 @@ possible message creation more explicit:
 m.message_map.get_or_create(10)
 ```
 
+### Memory management {#clearing-fields}
+
+Note that clearing a field (via `ClearField`, `Clear`, `del` (for lists) or
+`ClearExtension`) doesn't necessarily reclaim memory. It just resets the object
+to look as if things are unset, but the subobjects *may* continue to exist. For
+example, clearing a repeated field sets its size to 0, but does not relinquish
+its capacity (analogous to calling `.clear()` on a `std::vector` in C++).
+
+There are various ways in which to ensure the memory is freed up. One method is
+to make a copy of the proto after clearing the fields, as the unused memory is
+not copied over:
+
+```python
+# Assuming 'my_proto' has a memory-intensive field 'big_field'
+# Clears the field. Memory might still be reserved.
+my_proto.ClearField('big_field')
+
+# Copy to a new instance. This allocates only necessary memory.
+compact_proto = my_proto_pb2.MyProto()
+compact_proto.CopyFrom(my_proto)
+
+# Once all references to the initial proto are gone, it is garbage collected.
+my_proto = compact_proto
+```
+
 ## Enumerations {#enum}
 
 In Python, enums are just integers. A set of integral constants are defined
