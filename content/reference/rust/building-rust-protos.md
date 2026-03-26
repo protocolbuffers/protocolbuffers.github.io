@@ -45,7 +45,7 @@ other programming languages:
 3.  Use the library by including it in a Rust binary:
 
     ```build {highlight="lines:1,14-20"}
-    load("//third_party/bazel_rules/rules_rust/rust:defs.bzl", "rust_binary")
+    load("//devtools/rust/build_defs:rules.bzl", "rust_binary")
     load("//third_party/protobuf/rust:defs.bzl", "rust_proto_library")
 
     proto_library(
