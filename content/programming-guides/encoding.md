@@ -323,7 +323,7 @@ message Test4 {
 ```
 
 and we construct a `Test4` message with `d` set to `"hello"`, and `e` set to
-`1`, `2`, and `3`, this *could* be encoded as `` `3206038e029ea705` ``, or
+`3`, `270`, and `86942`, this *could* be encoded as `` `3206038e029ea705` ``, or
 written out as Protoscope,
 
 ```proto
