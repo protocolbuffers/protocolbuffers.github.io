@@ -18,9 +18,9 @@ before reading this document.
 ## Compiler Invocation {#invocation}
 
 The protocol buffer compiler requires a
-[plugin to generate Dart](https://github.com/dart-lang/dart-protoc-plugin) code.
+[plugin to generate Dart](https://github.com/google/protobuf.dart/tree/master/protoc_plugin) code.
 Installing it following the
-[instructions](https://github.com/dart-lang/dart-protoc-plugin#how-to-build-and-use)
+[instructions](https://github.com/google/protobuf.dart/tree/master/protoc_plugin#how-to-build)
 provides a `protoc-gen-dart` binary which `protoc` uses when invoked with the
 `--dart_out` command-line flag. The `--dart_out` flag tells the compiler where
 to write the Dart source files. For a `.proto` file input, the compiler produces
