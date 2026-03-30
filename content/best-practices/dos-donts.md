@@ -27,7 +27,10 @@ somewhere. Or there could be old code in another server that will break.
 When you delete a field that's no longer used, reserve its tag number so that no
 one accidentally re-uses it in the future. Just `reserved 2, 3;` is enough. No
 type required (lets you trim dependencies!). You can also reserve names to avoid
-recycling now-deleted field names: `reserved "foo", "bar";`.
+recycling now-deleted field names: `reserved foo, bar;`. See the docs on
+[reserved field numbers](/programming-guides/editions#fieldreserved)
+and
+[reserved field names](/programming-guides/editions#reserved-field-names).
 
 <a id="do-reserve-numbers-for-deleted-enum-values"></a>
 
@@ -36,7 +39,8 @@ recycling now-deleted field names: `reserved "foo", "bar";`.
 When you delete an enum value that's no longer used, reserve its number so that
 no one accidentally re-uses it in the future. Just `reserved 2, 3;` is enough.
 You can also reserve names to avoid recycling now-deleted value names: `reserved
-"FOO", "BAR";`.
+FOO, BAR;`. See also
+[enum reserved values](/programming-guides/editions#reserved)
 
 <a id="do-put-new-enum-aliases-last"></a>
 
@@ -67,7 +71,7 @@ To safely remove the original name (if it's being used for interchange, which it
 
 Almost never change the type of a field; it'll mess up deserialization, same as
 re-using a tag number. The
-[protobuf docs](/programming-guides/proto2#updating)
+[protobuf docs](/programming-guides/editions#updating)
 outline a small number of cases that are okay (for example, going between
 `int32`, `uint32`, `int64` and `bool`). However, changing a field’s message type
 **will break** unless the new message is a superset of the old one.
@@ -118,7 +122,7 @@ less code. Note that [proto enums][proto-enums] require the first value to be
 zero and can round-trip (deserialize, serialize) an unknown enum value.
 
 [example-unspecified]: http://cs/#search/&q=file:proto%20%22_UNSPECIFIED%20=%200%22&type=cs
-[proto-enums]: /programming-guides/proto2#enum
+[proto-enums]: /programming-guides/editions#enum
 
 <a id="dont-use-cc-macro-constants-for-enum-values"></a>
 
