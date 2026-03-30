@@ -1186,8 +1186,8 @@ is nested in the message class.
 Generated `enum` values have native support for Abseil's flag parse/unparse
 logic. They can be used as the type for `ABSL_FLAG` declarations.
 
-The flag parser supports both labels and numbers. Invalid labels/numbers will
-cause a parse failure.
+The flag parser supports both labels and numbers. Labels can be lowercase, if
+they are unambiguous. Invalid labels/numbers will cause a parse failure.
 
 ## Extensions (proto2 and editions only) {#extension}
 
