@@ -143,7 +143,7 @@ field name, and may have different ways to access them than normal fields. For
 example, see
 <a href=/reference/python/python-generated#keyword-conflicts>this warning about Python</a>.</p><p>You should also avoid using keywords in your file paths, as this can also cause
 problems.</p><h2 id=separate-types-for-storage><strong>Do</strong> Use Different Messages For RPC APIs and Storage</h2><p>Reusing the same messages for APIs and long-term storage may seem convenient,
-reducing boilerplate and overhead of coversion between messages.</p><p>However, the needs of long-term storage and live RPC services tend to later
+reducing boilerplate and overhead of conversion between messages.</p><p>However, the needs of long-term storage and live RPC services tend to later
 diverge. Using separate types even if they are largely duplicative initially
 gives freedom to change your storage format without impacting your external
 clients. Layer your code so that modules deal either with client protos, storage
