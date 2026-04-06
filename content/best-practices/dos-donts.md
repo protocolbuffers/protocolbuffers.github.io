@@ -336,7 +336,7 @@ problems.
 ## **Do** Use Different Messages For RPC APIs and Storage {#separate-types-for-storage}
 
 Reusing the same messages for APIs and long-term storage may seem convenient,
-reducing boilerplate and overhead of coversion between messages.
+reducing boilerplate and overhead of conversion between messages.
 
 However, the needs of long-term storage and live RPC services tend to later
 diverge. Using separate types even if they are largely duplicative initially
