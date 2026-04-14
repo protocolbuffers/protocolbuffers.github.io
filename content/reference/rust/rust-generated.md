@@ -662,13 +662,74 @@ enum). Since the generated Rust consts are scoped within the `impl`, the
 additional prefix, which is beneficial to add in .proto files, would be
 redundant in Rust.
 
-## Extensions (proto2 only) {#extensions}
+## Extensions {#extensions}
 
-A Rust API for extensions is currently a work in progress.
-Extension fields will be maintained through
-parse/serialize, and in a C++ interop case any extensions set will be retained
-if the message is accessed from Rust (and propagated in the case of a message
-copy or merge).
+Protobuf Rust supports extensions for proto2 messages. Extensions are accessed
+via generated `ExtensionId` constants.
+
+Given a message with extensions defined:
+
+```proto
+package xyz;
+message Foo {
+  extensions 100 to 199;
+}
+
+extend Foo {
+  optional int32 i32_ext = 100;
+  repeated int32 repeated_i32_ext = 101;
+}
+```
+
+The compiler generates constants of type `proto::ExtensionId` named `I32_EXT`
+and `REPEATED_I32_EXT`, which you can use to read and write the extensions on
+the `Foo` type.
+
+### Accessing Extensions {#accessing-exts}
+
+The `ExtensionId` type provides methods to interact with extensions on a
+message. These methods work with owned messages, views, and muts.
+
+*   `fn has(&self, msg: impl AsView<Target = M>) -> bool`: Returns `true` if the
+    extension is set on the message. (Not available for repeated extensions, by
+    design).
+*   `fn get(&self, msg: impl AsView<Target = M>) -> View<'_, E>`: Returns the
+    value of the extension. If not set, returns the default value. For repeated
+    fields, returns a `RepeatedView`.
+*   `fn set(&self, msg: impl AsMut<Target = M>, value: impl IntoProxied<E>)`:
+    Sets the value of the extension.
+*   `fn clear(&self, msg: impl AsMut<Target = M>)`: Clears the extension from
+    the message.
+*   `fn get_mut(&self, msg: impl AsMut<Target = M>) -> Mut<'_, E>`: Returns a
+    mutable handle to the extension. For messages and repeated fields, this will
+    create the field if it doesn't exist.
+
+### Example Usage {#ext-example}
+
+```rust
+use protobuf::prelude::*;
+
+let mut foo = xyz::Foo::new();
+
+// Check and set scalar extension
+assert!(!xyz::INT32_EXT.has(&foo));
+xyz::INT32_EXT.set(&mut foo, 42);
+assert!(xyz::INT32_EXT.has(&foo));
+assert_eq!(xyz::INT32_EXT.get(&foo), 42);
+
+// Clear scalar extension
+xyz::INT32_EXT.clear(&mut foo);
+assert!(!xyz::INT32_EXT.has(&foo));
+
+// Working with repeated extensions
+{
+    let mut rep_mut = xyz::REPEATED_INT32_EXT.get_mut(&mut foo);
+    rep_mut.push(1);
+    rep_mut.push(2);
+}
+assert_eq!(xyz::REPEATED_INT32_EXT.get(&foo).len(), 2);
+assert_eq!(xyz::REPEATED_INT32_EXT.get(&foo).get(0), Some(1));
+```
 
 ## Arena Allocation {#arena}
 
