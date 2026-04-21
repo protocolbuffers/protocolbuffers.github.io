@@ -8,126 +8,153 @@ type = "docs"
 
 <link rel="stylesheet" href="/includes/version-tables.css">
 
-## Currently Supported Versions {#currently-supported}
+## Currently Supported Release Versions {#currently-supported}
 
-Language | Active Support | Maintenance only
--------- | -------------- | ---------------------
-Protoc   | 33.x           | 29.x, 25.x (for Java)
-C++      | 6.33.x         | 5.29.x
-C#       | 3.33.x         |
-Java     | 4.33.x         | 3.25.x
-ObjC     | 4.33.x         | 3.29.x
-PHP      | 4.33.x         |
-Python   | 6.33.x         | 5.29.x
-Ruby     | 4.33.x         |
+Language | Active Support | Maintenance Only      | Minimum Gencode
+-------- | -------------- | --------------------- | ---------------
+protoc   | 34.x           | 29.x, 25.x (for Java) |
+C++      | 7.34.x         | 5.29.x                | Exact Match
+C#       | 3.34.x         |                       | 3.0.0
+Java     | 4.34.x         | 3.25.x                | 3.0.0
+PHP      | 5.34.x         |                       | 4.0.0
+Python   | 7.34.x         | 5.29.x                | [3.20.0](https://protobuf.dev/support/cross-version-runtime-guarantee#python)
+Ruby     | 4.34.x         |                       | 3.0.0
+
+### Minimum Supported Gencode {#min-gencode}
+
+While each language runtime has a minimum supported gencode version, we
+recommend regenerating your gencode with every release update. Support for older
+generated code exists solely to ensure backwards compatibility for existing
+projects, not for new adoption of older gencode versions.
+
+See
+[Cross Version Runtime Guarantee](/support/cross-version-runtime-guarantee)
+for more information.
+
+## Supported Editions {#supported-editions}
+
+Protobuf release versions are independent of edition "versions" (proto2, proto3,
+2023, 2024). All currently supported release versions support all editions.
+
+The current supported editions are:
+
+Edition | Released Version | Date Released
+------- | ---------------- | -------------
+2024    | 32.0             | 23 May 2025
+2023    | 27.0             | 13 Aug 2024
+proto3  | 3.0              | 2016
+proto2  | 2.0              | 2008
 
 ## Numbering Scheme {#numbering}
 
-Support windows for protoc and the various languages are covered in the tables
-later in this topic. Version numbers throughout this topic use
-[SemVer](https://semver.org) conventions; in the version "3.21.7," we say that
-"3" is the major version, "21" is the minor version, and "7" is the micro or
+Version numbers use [SemVer](https://semver.org) conventions. In the version
+"3.21.7", "3" is the major version, "21" is the minor version, and "7" is the
 patch number.
 
-Protobuf releases are numbered with only a `minor.point` number, for example
-`29.5`.
+Protobuf releases use only a `minor.point` format, for example `29.5`.
 
-Each individual language runtime is versioned with that same `minor.point` but
-has a language-specific major version number. For example, the `29.5` release
-corresponds to Java runtime version `4.29.5` and C# runtime version `3.29.5`. We
-recommend using protoc `29.5` with Java `4.29.5` and C# `3.29.5`.
+Each language runtime shares this `minor.point` but uses a language-specific
+major version. For example, Protobuf release `29.5` corresponds to Java runtime
+`4.29.5` and C# runtime `3.29.5`. We recommend using `protoc` `29.5` with Java
+`4.29.5` and C# `3.29.5`.
 
-This numbering scheme allows a single number for a given release of all
-languages, while avoiding coupling of the major version numbers between
-different languages. For example, the `30.0` release contained breaking changes
-in Python but not Java, so Python version went from `5.29.0` to `6.30.0` while
-the Java version went from `4.29.0` to `4.30.0`.
+This scheme unifies release numbers across all languages while decoupling major
+version changes. For example, release `30.0` contained breaking changes for
+Python but not for Java. Therefore, Python advanced from `5.29.0` to `6.30.0`,
+while Java advanced from `4.29.0` to `4.30.0`.
 
-This versioning scheme was introduced in 2022 with the 21 release. Prior to the
-decoupled versioning scheme being introduced, all languages had major version 3.
+We introduced this versioning scheme in 2022 with release 21. Previously, all
+languages used major version 3.
 
 ## Release Cadence {#cadence}
 
-Protobuf strives to release updates quarterly. We may add a release if there is
-an urgent need such as a security fix that requires new APIs. Skipping a release
-should be a very rare event.
+Protobuf releases updates quarterly. We target major (breaking) releases for Q1.
+Security fixes and other urgent needs will require additional releases.
 
-Major (breaking) releases will be targeted to the Q1 release. We may introduce a
-major breaking change at any time if there is an urgent need, but this should be
-very rare.
+Our
+[library breaking change policy](https://opensource.google/documentation/policies/library-breaking-change)
+defines our support windows.
 
-Our support windows are defined by our
-[library breaking change policy](https://opensource.google/documentation/policies/library-breaking-change).
-
-Protobuf does *not* consider enforcement of its documented language, tooling,
-platform, and library support policies to be a breaking change. For example, a
-release may drop support for an EOL language version without bumping major
-versions.
+Enforcing documented language, tooling, platform, and library support policies
+is *not* a breaking change. For example, we might drop support for an
+End-of-Life (EOL) language version without bumping the major version.
 
 ## What Changes in a Release? {#changes}
 
-**The binary wire format does not change** even in major version updates. You
-will continue to be able to read old binary wire format proto data from newer
-versions of Protocol Buffers. Newly generated protobuf bindings serialized to
-binary wire format will be parseable by older binaries. This is a fundamental
-design principle of Protocol Buffers. Note that JSON and textproto formats *do
-not* offer the same stability guarantees.
+**The binary wire format never changes.** You can read old binary wire format
+data with newer Protobuf versions. You can read new binary wire format data with
+older Protobuf versions (as long as the .proto syntax is supported). ProtoJSON
+format offers these same stability guarantees. TextProto is intended to be used
+for configuration use-cases and should not be used as a wire format between two
+servers.
 
-**The descriptor.proto schema can change.** In minor or patch releases, we may
-add new message, fields, enums, enum values, editions, editions
-[features](/editions/features) etc. We may also mark
-existing elements as deprecated. In a major release, we may remove deprecated
-options, enums, enum values, messages, fields, etc.
+**The `descriptor.proto` schema can change.** In minor or patch releases, we
+might add or deprecate elements (messages, fields, enums, enum values, editions,
+or editions [features](/editions/features)). In releases
+with breaking changes (major releases), we might remove deprecated elements.
 
-**The .proto language grammar can change.** In minor or patch releases, we may
-add new language constructs and alternative syntax for existing features. We may
-also mark certain features as deprecated. This could result in new warnings that
-were not previously emitted by `protoc`. In a major release, we may remove
-support for obsolete features, syntax, editions in a way that will require
-updates to client code.
+**The `.proto` language grammar can change with new Editions**. In minor
+release, support for a new Edition may be added, which will add language
+constructs or deprecate existing behaviors. Adopting a new Edition may require
+client code updates. A future release may drop support for an old syntax.
+However, we have no current concrete plans to do so.
 
-**Gencode and runtime APIs can change.** In minor or patch releases, changes
-will either be purely additive for new functionality or source-compatible
-updates. Simply recompiling code should work. In a major release, the gencode or
-runtime API can change in incompatible ways that require callsite changes. We
-try to minimize these. Changes fixing or otherwise affecting undefined behavior
-are not considered breaking, and do not require a major release.
+**Gencode and runtime APIs can change.** Minor and patch releases include purely
+additive or source-compatible updates. You can simply recompile your code.
+Releases with breaking changes (major releases) introduce incompatible API
+changes that require callsite updates. We minimize these changes. Bug fixes for
+undefined behavior do not require a major release.
 
-**Operating system, programming language, and tooling version support can
-change.** In a minor or patch release, we may add or drop support for particular
-versions of an operating system, programming language, or tooling. See
+**Operating system, programming language, and tooling support can change.**
+Minor or patch releases might add or drop support for specific operating
+systems, programming languages, or tools. See the
 [foundational support matrices](https://github.com/google/oss-policies-info/tree/main)
-for our supported languages.
+for supported languages.
 
 In general:
 
-*   Minor or patch releases should only contain purely additive or
-    source-compatible updates per our
-    [Cross Version Runtime Guarantee](https://protobuf.dev/support/cross-version-runtime-guarantee/#minor)
-*   Major releases may remove functionality, features, or change APIs in ways
+*   Minor or patch releases include purely additive or source-compatible updates
+    based on our
+    [Cross Version Runtime Guarantee](https://protobuf.dev/support/cross-version-runtime-guarantee/#minor).
+*   Major releases might remove functionality, features, or change APIs in ways
     that require updates to callsites.
 
 ## Support Duration {#duration}
 
-The most recent release is always supported. Support for earlier minor versions
-ends when a new minor version under the same major version is released. Support
-for earlier major versions ends four quarters beyond the quarter that the
-breaking release is introduced. For example, when Protobuf Python 5.26.0 was
-released in Q1 of 2024, that set the end of support of Protobuf Python 4.25.x at
-the [end of Q1 2025](#python).
+We always support the most recent release. Releasing a new minor version
+immediately ends support for the previous minor version. Releasing a major
+version ends support for the previous major version four quarters later.
 
-The following sections provide a guide to the support for each language.
+For example, Protobuf Python 5.26.0 launched in Q1 2024. Therefore, Protobuf
+Python 4.25.x support ended in [Q1 2025](#python).
+
+The following sections detail support timelines for each language. Future plans
+appear in *italics* and might change.
+
+**Legend**
+
+<table class="legend">
+  <tr class="active">
+    <th>Active</th>
+    <td>Minor and patch releases with new features, compatible changes, and bug fixes.</td>
+  </tr>
+  <tr class="maintenance">
+    <th>Maintenance</th>
+    <td>Patch releases with critical bug and security vulnerability fixes.</td>
+  </tr>
+  <tr class="end-of-life">
+    <th>End of Life</th>
+    <td>Release is unsupported. Users should upgrade to a supported release.</td>
+  </tr>
+  <tr class="future">
+    <th>Future</th>
+    <td>Projected release. Shown for planning purposes.</td>
+  </tr>
+</table>
 
 ## C++ {#cpp}
 
-C++ will target making major version bumps annually in Q1 of each year.
-
-The protoc version can be inferred from the Protobuf C++ minor version number.
-Example: Protobuf C++ version 4.25.x uses protoc version 25.x.
-
-Future plans are shown in *italics* and are subject to change.
-
-**Release support dates**
+**Release Support Dates**
 
 <table class="version-table">
   <tr>
@@ -157,12 +184,12 @@ Future plans are shown in *italics* and are subject to change.
   </tr>
   <tr class="future">
     <th>7.x</th>
-    <td>Q1 2026</td>
+    <td>25 Feb 2026</td>
     <td>TBD</td>
   </tr>
 </table>
 
-**Release support chart**
+**Release Support Chart**
 
 <table class="version-chart">
   <tr>
@@ -255,43 +282,16 @@ Future plans are shown in *italics* and are subject to change.
   </tr>
 </table>
 
-**Legend**
-
-<table class="legend">
-  <tr class="active">
-    <th>Active</th>
-    <td>Minor and patch releases with new features, compatible changes and bug fixes.</td>
-  </tr>
-  <tr class="maintenance">
-    <th>Maintenance</th>
-    <td>Patch releases with critical bug fixes.</td>
-  </tr>
-  <tr class="end-of-life">
-    <th>End of life</th>
-    <td>Release is unsupported. Users should upgrade to a supported release.</td>
-  </tr>
-  <tr class="future">
-    <th>Future</th>
-    <td>Projected release. Shown for planning purposes.</td>
-  </tr>
-</table>
-
 ### C++ Tooling, Platform, and Library Support {#cpp-tooling}
 
-Protobuf is committed to following the tooling, platform, and library support
-policy described in
+Protobuf follows the
 [Foundational C++ Support Policy](https://opensource.google/documentation/policies/cplusplus-support).
-For specific versions supported, see
+For supported versions, see the
 [Foundational C++ Support Matrix](https://github.com/google/oss-policies-info/blob/main/foundational-cxx-support-matrix.md).
 
 ## C&#35; {#csharp}
 
-The protoc version can be inferred from the Protobuf C# minor version number.
-Example: Protobuf C# version 3.25.x uses protoc version 25.x.
-
-Future plans are shown in *italics* and are subject to change.
-
-**Release support dates**
+**Release Support Dates**
 
 <table class="version-table">
   <tr>
@@ -306,7 +306,7 @@ Future plans are shown in *italics* and are subject to change.
   </tr>
 </table>
 
-**Release support chart**
+**Release Support Chart**
 
 <table class="version-chart">
   <tr>
@@ -343,27 +343,6 @@ Future plans are shown in *italics* and are subject to change.
   </tr>
 </table>
 
-**Legend**
-
-<table class="legend">
-  <tr class="active">
-    <th>Active</th>
-    <td>Minor and patch releases with new features, compatible changes and bug fixes.</td>
-  </tr>
-  <tr class="maintenance">
-    <th>Maintenance</th>
-    <td>Patch releases with critical bug fixes.</td>
-  </tr>
-  <tr class="end-of-life">
-    <th>End of life</th>
-    <td>Release is unsupported. Users should upgrade to a supported release.</td>
-  </tr>
-  <tr class="future">
-    <th>Future</th>
-    <td>Projected release. Shown for planning purposes.</td>
-  </tr>
-</table>
-
 ### C&#35; Platform and Library Support {#csharp-support}
 
 Protobuf is committed to following the platform and library support policy
@@ -374,14 +353,7 @@ For specific versions supported, see
 
 ## Java {#java}
 
-Java will target making major version bumps annually in Q1 of each year.
-
-The protoc version can be inferred from the Protobuf Java minor version number.
-Example: Protobuf Java version 3.25.x uses protoc version 25.x.
-
-Future plans are shown in *italics* and are subject to change.
-
-**Release support dates**
+**Release Support Dates**
 
 <table class="version-table">
   <tr>
@@ -406,16 +378,7 @@ Future plans are shown in *italics* and are subject to change.
   </tr>
 </table>
 
-{{% alert title="Note" color="note" %}}
-The maintenance support window for the Protobuf Java 3.x release will be 36
-months rather than the typical 12 months for the final release in a major
-version line. Future major version updates (5.x, planned for Q1 2027) will adopt
-an improved
-["rolling compatibility window"](/support/cross-version-runtime-guarantee/#major)
-that should allow a return to 12-month support windows. There will be no major
-version bumps in Q1 2025 and Q1 2026.{{% /alert %}}
-
-**Release support chart**
+**Release Support Chart**
 
 <table class="version-chart">
   <tr>
@@ -460,168 +423,27 @@ version bumps in Q1 2025 and Q1 2026.{{% /alert %}}
   </tr>
 </table>
 
-**Legend**
-
-<table class="legend">
-  <tr class="active">
-    <th>Active</th>
-    <td>Minor and patch releases with new features, compatible changes and bug fixes.</td>
-  </tr>
-  <tr class="maintenance">
-    <th>Maintenance</th>
-    <td>Patch releases with critical bug fixes.</td>
-  </tr>
-  <tr class="end-of-life">
-    <th>End of life</th>
-    <td>Release is unsupported. Users should upgrade to a supported release.</td>
-  </tr>
-  <tr class="future">
-    <th>Future</th>
-    <td>Projected release. Shown for planning purposes.</td>
-  </tr>
-</table>
+{{% alert title="Note" color="note" %}}
+The maintenance support window for the Protobuf Java 3.x release line is 36
+months instead of the typical 12
+months.{{% /alert %}}
 
 ### Java Platform and Library Support {#java-support}
 
-Protobuf is committed to following the platform and library support policy
-described in
+Protobuf follows the
 [Java Support Policy](https://cloud.google.com/java/docs/supported-java-versions).
-For specific versions supported, see
+For supported versions, see the
 [Foundational Java Support Matrix](https://github.com/google/oss-policies-info/blob/main/foundational-java-support-matrix.md).
 
-On Android, Protobuf supports the minimum SDK version that is supported by
-[Google Play services](https://developers.google.com/android/guides/setup) and
-is the default in
+On Android, Protobuf supports the minimum SDK version defined by
+[Google Play services](https://developers.google.com/android/guides/setup) or
+the default in
 [Jetpack](https://android.googlesource.com/platform/frameworks/support/+/refs/heads/androidx-main/docs/api_guidelines/modules#module-minsdkversion).
-If both versions differ, the lower version is supported.
-
-## Objective-C {#objc}
-
-The protoc version can be inferred from the Protobuf Objective-C minor version
-number. Example: Protobuf Objective-C version 3.25.x uses protoc version 25.x.
-
-Future plans are shown in *italics* and are subject to change.
-
-**Release support dates**
-
-<table class="version-table">
-  <tr>
-    <th>Protobuf Objective-C</th>
-    <th>Release date</th>
-    <th>End of support</th>
-  </tr>
-  <tr class="maintenance">
-    <th>3.x</th>
-    <td>25 May 2022</td>
-    <td>31 Mar 2026</td>
-  </tr>
-  <tr class="active">
-    <th>4.x</th>
-    <td>4 Mar 2025</td>
-    <td>31 Mar 2027</td>
-  </tr>
-  <tr class="future">
-    <th>5.x</th>
-    <td>Q1 2026</td>
-    <td>TBD</td>
-  </tr>
-</table>
-
-**Release support chart**
-
-<table class="version-chart">
-  <tr>
-    <th>Protobuf Objective-C</th>
-    <th>protoc</th>
-    <th class="y23q2"><span>23Q2</span></th>
-    <th class="y23q3"><span>23Q3</span></th>
-    <th class="y23q4"><span>23Q4</span></th>
-    <th class="y24q1"><span>24Q1</span></th>
-    <th class="y24q2"><span>24Q2</span></th>
-    <th class="y24q3"><span>24Q3</span></th>
-    <th class="y24q4"><span>24Q4</span></th>
-    <th class="y25q1"><span>25Q1</span></th>
-    <th class="y25q2"><span>25Q2</span></th>
-    <th class="y25q3"><span>25Q3</span></th>
-    <th class="y25q4"><span>25Q4</span></th>
-    <th class="y26q1"><span>26Q1</span></th>
-  </tr>
-  <tr class="maintenance">
-    <th>3.x</th>
-    <td>21.x-29.x</td>
-    <td class="y23q2 active">3.23</td>
-    <td class="y23q3 active">3.24</td>
-    <td class="y23q4 active">3.25</td>
-    <td class="y24q1 active">3.26</td>
-    <td class="y24q2 active">3.27</td>
-    <td class="y24q3 active">3.28</td>
-    <td class="y24q4 active">3.29</td>
-    <td class="y25q1 maintenance" colspan=4>3.29</td>
-    <td class="y26q1"></td>
-  </tr>
-  <tr class="active">
-    <th>4.x</th>
-    <td>30.x - 33.x</td>
-    <td class="y23q2"></td>
-    <td class="y23q3"></td>
-    <td class="y23q4"></td>
-    <td class="y24q1"></td>
-    <td class="y24q2"></td>
-    <td class="y24q3"></td>
-    <td class="y24q4"></td>
-    <td class="y25q1 active">4.30</td>
-    <td class="y25q2 active">4.31</td>
-    <td class="y25q3 active">4.32</td>
-    <td class="y25q4 active">4.33</td>
-    <td class="y26q1 maintenance">4.33</td>
-  </tr>
-  <tr class="future">
-    <th>5.x</th>
-    <td>34.x+</td>
-    <td class="y23q2"></td>
-    <td class="y23q3"></td>
-    <td class="y23q4"></td>
-    <td class="y24q1"></td>
-    <td class="y24q2"></td>
-    <td class="y24q3"></td>
-    <td class="y24q4"></td>
-    <td class="y25q1"></td>
-    <td class="y25q2"></td>
-    <td class="y25q3"></td>
-    <td class="y25q4"></td>
-    <td class="y26q1 future">5.34</td>
-  </tr>
-</table>
-
-**Legend**
-
-<table class="legend">
-  <tr class="active">
-    <th>Active</th>
-    <td>Minor and patch releases with new features, compatible changes and bug fixes.</td>
-  </tr>
-  <tr class="maintenance">
-    <th>Maintenance</th>
-    <td>Patch releases with critical bug fixes.</td>
-  </tr>
-  <tr class="end-of-life">
-    <th>End of life</th>
-    <td>Release is unsupported. Users should upgrade to a supported release.</td>
-  </tr>
-  <tr class="future">
-    <th>Future</th>
-    <td>Projected release. Shown for planning purposes.</td>
-  </tr>
-</table>
+We support whichever version is lower.
 
 ## PHP {#php}
 
-The protoc version can be inferred from the Protobuf PHP minor version number.
-Example: Protobuf PHP version 3.25.x uses protoc version 25.x.
-
-Future plans are shown in *italics* and are subject to change.
-
-**Release support dates**
+**Release Support Dates**
 
 <table class="version-table">
   <tr>
@@ -641,12 +463,12 @@ Future plans are shown in *italics* and are subject to change.
   </tr>
   <tr class="future">
     <th>5.x</th>
-    <td>Q1 2026</td>
+    <td>25 Feb 2026</td>
     <td>TBD</td>
   </tr>
 </table>
 
-**Release support chart**
+**Release Support Chart**
 
 <table class="version-chart">
   <tr>
@@ -712,43 +534,16 @@ Future plans are shown in *italics* and are subject to change.
   </tr>
 </table>
 
-**Legend**
-
-<table class="legend">
-  <tr class="active">
-    <th>Active</th>
-    <td>Minor and patch releases with new features, compatible changes and bug fixes.</td>
-  </tr>
-  <tr class="maintenance">
-    <th>Maintenance</th>
-    <td>Patch releases with critical bug fixes.</td>
-  </tr>
-  <tr class="end-of-life">
-    <th>End of life</th>
-    <td>Release is unsupported. Users should upgrade to a supported release.</td>
-  </tr>
-  <tr class="future">
-    <th>Future</th>
-    <td>Projected release. Shown for planning purposes.</td>
-  </tr>
-</table>
-
 ### PHP Platform and Library Support {#php-support}
 
-Protobuf is committed to following the platform and library support policy
-described in
+Protobuf follows the
 [PHP Support Policy](https://cloud.google.com/php/getting-started/supported-php-versions).
-For specific versions supported, see
+For supported versions, see the
 [Foundational PHP Support Matrix](https://github.com/google/oss-policies-info/blob/main/foundational-php-support-matrix.md).
 
 ## Python {#python}
 
-The protoc version can be inferred from the Protobuf Python minor version
-number. Example: Protobuf Python version 4.25.x uses protoc version 25.x.
-
-Future plans are shown in *italics* and are subject to change.
-
-**Release support dates**
+**Release Support Dates**
 
 <table class="version-table">
   <tr>
@@ -773,12 +568,12 @@ Future plans are shown in *italics* and are subject to change.
   </tr>
   <tr class="future">
     <th>7.x</th>
-    <td>Q1 2026</td>
+    <td>25 Feb 2026</td>
     <td>TBD</td>
   </tr>
 </table>
 
-**Release support chart**
+**Release Support Chart**
 
 <table class="version-chart">
   <tr>
@@ -857,43 +652,16 @@ Future plans are shown in *italics* and are subject to change.
   </tr>
 </table>
 
-**Legend**
-
-<table class="legend">
-  <tr class="active">
-    <th>Active</th>
-    <td>Minor and patch releases with new features, compatible changes and bug fixes.</td>
-  </tr>
-  <tr class="maintenance">
-    <th>Maintenance</th>
-    <td>Patch releases with critical bug fixes.</td>
-  </tr>
-  <tr class="end-of-life">
-    <th>End of life</th>
-    <td>Release is unsupported. Users should upgrade to a supported release.</td>
-  </tr>
-  <tr class="future">
-    <th>Future</th>
-    <td>Projected release. Shown for planning purposes.</td>
-  </tr>
-</table>
-
 ### Python Platform and Library Support {#python-support}
 
-Protobuf is committed to following the platform and library support policy
-described in
+Protobuf follows the
 [Python Support Policy](https://cloud.google.com/python/docs/supported-python-versions).
-For specific versions supported, see
+For supported versions, see the
 [Foundational Python Support Matrix](https://github.com/google/oss-policies-info/blob/main/foundational-python-support-matrix.md).
 
 ## Ruby {#ruby}
 
-The protoc version can be inferred from the Protobuf Ruby minor version number.
-Example: Protobuf Ruby version 3.25.x uses protoc version 25.x.
-
-Future plans are shown in *italics* and are subject to change.
-
-**Release support dates**
+**Release Support Dates**
 
 <table class="version-table">
   <tr>
@@ -913,7 +681,7 @@ Future plans are shown in *italics* and are subject to change.
   </tr>
 </table>
 
-**Release support chart**
+**Release Support Chart**
 
 <table class="version-chart">
   <tr>
@@ -963,35 +731,13 @@ Future plans are shown in *italics* and are subject to change.
   </tr>
 </table>
 
-**Legend**
-
-<table class="legend">
-  <tr class="active">
-    <th>Active</th>
-    <td>Minor and patch releases with new features, compatible changes and bug fixes.</td>
-  </tr>
-  <tr class="maintenance">
-    <th>Maintenance</th>
-    <td>Patch releases with critical bug fixes.</td>
-  </tr>
-  <tr class="end-of-life">
-    <th>End of life</th>
-    <td>Release is unsupported. Users should upgrade to a supported release.</td>
-  </tr>
-  <tr class="future">
-    <th>Future</th>
-    <td>Projected release. Shown for planning purposes.</td>
-  </tr>
-</table>
-
 ### Ruby Platform and Library Support {#ruby-support}
 
-Protobuf is committed to following the platform and library support policy
-described in
+Protobuf follows the
 [Ruby Support Policy](https://cloud.google.com/ruby/getting-started/supported-ruby-versions).
-For specific versions supported, see
+For supported versions, see the
 [Foundational Ruby Support Matrix](https://github.com/google/oss-policies-info/blob/main/foundational-ruby-support-matrix.md).
 
-JRuby is not officially supported, but we provide unofficial support for the
-latest JRuby version targeting compatibility with our minimum Ruby version or
-above on a best-effort basis.
+We do not officially support JRuby. However, we provide unofficial, best-effort
+support for the latest JRuby version. This targets compatibility with our
+minimum supported Ruby version.
