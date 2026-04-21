@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8" />
     <meta name="robots" content="index, follow, all" />
-    <title>Google\Protobuf\FieldDescriptor | Google Protobuf - v3.21.10</title>
+    <title>Google\Protobuf\FieldDescriptor | Google Protobuf - 4.33.6</title>
 
             <link rel="stylesheet" type="text/css" href="../../css/bootstrap.min.css">
         <link rel="stylesheet" type="text/css" href="../../css/bootstrap-theme.min.css">
@@ -57,7 +57,7 @@
                     <span class="icon-bar"></span>
                     <span class="icon-bar"></span>
                 </button>
-                <a class="navbar-brand" href="../../index.html">Google Protobuf - v3.21.10</a>
+                <a class="navbar-brand" href="../../index.html">Google Protobuf - 4.33.6</a>
             </div>
             <div class="collapse navbar-collapse" id="navbar-elements">
                 <ul class="nav navbar-nav">
@@ -86,7 +86,7 @@
 
     
     <p>        class
-    <strong>FieldDescriptor</strong>        (<a href="https://github.com/protocolbuffers/protobuf-php/blob/v3.21.10/src/Google/Protobuf/FieldDescriptor.php">View source</a>)
+    <strong>FieldDescriptor</strong>        (<a href="https://github.com/protocolbuffers/protobuf-php/blob/4.33.6/src/Google/Protobuf/FieldDescriptor.php">View source</a>)
 </p>
 
         
@@ -149,6 +149,28 @@
                 </div>
                 <div class="col-md-8">
                     <a href="#method_getLabel">getLabel</a>()
+        <small><span class="label label-danger">deprecated</span></small>
+                                            <p class="no-description">No description</p>
+                                    </div>
+                <div class="col-md-2"></div>
+            </div>
+                    <div class="row">
+                <div class="col-md-2 type">
+                    bool
+                </div>
+                <div class="col-md-8">
+                    <a href="#method_isRequired">isRequired</a>()
+        
+                                            <p class="no-description">No description</p>
+                                    </div>
+                <div class="col-md-2"></div>
+            </div>
+                    <div class="row">
+                <div class="col-md-2 type">
+                    bool
+                </div>
+                <div class="col-md-8">
+                    <a href="#method_isRepeated">isRepeated</a>()
         
                                             <p class="no-description">No description</p>
                                     </div>
@@ -238,7 +260,7 @@
             <div id="method-details">
                     <div class="method-item">
                     <h3 id="method___construct">
-        <div class="location"><a href="https://github.com/protocolbuffers/protobuf-php/blob/v3.21.10/src/Google/Protobuf/FieldDescriptor.php#L48">at line 48</a></div>
+        <div class="location"><a href="https://github.com/protocolbuffers/protobuf-php/blob/4.33.6/src/Google/Protobuf/FieldDescriptor.php#L25">at line 25</a></div>
         <code>                    
     <strong>__construct</strong>($internal_desc)
         </code>
@@ -279,7 +301,7 @@
             </div>
                     <div class="method-item">
                     <h3 id="method_getName">
-        <div class="location"><a href="https://github.com/protocolbuffers/protobuf-php/blob/v3.21.10/src/Google/Protobuf/FieldDescriptor.php#L56">at line 56</a></div>
+        <div class="location"><a href="https://github.com/protocolbuffers/protobuf-php/blob/4.33.6/src/Google/Protobuf/FieldDescriptor.php#L33">at line 33</a></div>
         <code>                    string
     <strong>getName</strong>()
         </code>
@@ -312,7 +334,7 @@
             </div>
                     <div class="method-item">
                     <h3 id="method_getNumber">
-        <div class="location"><a href="https://github.com/protocolbuffers/protobuf-php/blob/v3.21.10/src/Google/Protobuf/FieldDescriptor.php#L64">at line 64</a></div>
+        <div class="location"><a href="https://github.com/protocolbuffers/protobuf-php/blob/4.33.6/src/Google/Protobuf/FieldDescriptor.php#L41">at line 41</a></div>
         <code>                    int
     <strong>getNumber</strong>()
         </code>
@@ -345,12 +367,19 @@
             </div>
                     <div class="method-item">
                     <h3 id="method_getLabel">
-        <div class="location"><a href="https://github.com/protocolbuffers/protobuf-php/blob/v3.21.10/src/Google/Protobuf/FieldDescriptor.php#L72">at line 72</a></div>
+        <div class="location"><a href="https://github.com/protocolbuffers/protobuf-php/blob/4.33.6/src/Google/Protobuf/FieldDescriptor.php#L51">at line 51</a></div>
         <code>                    int
     <strong>getLabel</strong>()
-        </code>
+        <small><span class="label label-danger">deprecated</span></small></code>
     </h3>
     <div class="details">    
+            <p>
+                <small><span class="label label-danger">deprecated</span></small>
+                            <tr>
+                    <td>Use</td>
+                    <td>isRepeated() or isRequired() instead.</td>
+                </tr>
+                    </p>
     
             
 
@@ -377,8 +406,74 @@
 
             </div>
                     <div class="method-item">
+                    <h3 id="method_isRequired">
+        <div class="location"><a href="https://github.com/protocolbuffers/protobuf-php/blob/4.33.6/src/Google/Protobuf/FieldDescriptor.php#L59">at line 59</a></div>
+        <code>                    bool
+    <strong>isRequired</strong>()
+        </code>
+    </h3>
+    <div class="details">    
+    
+            
+
+        <div class="method-description">
+                            <p class="no-description">No description</p>
+                    
+        </div>
+        <div class="tags">
+            
+                            <h4>Return Value</h4>
+
+                    <table class="table table-condensed">
+        <tr>
+            <td>bool</td>
+            <td></td>
+        </tr>
+    </table>
+
+            
+            
+            
+                    </div>
+    </div>
+
+            </div>
+                    <div class="method-item">
+                    <h3 id="method_isRepeated">
+        <div class="location"><a href="https://github.com/protocolbuffers/protobuf-php/blob/4.33.6/src/Google/Protobuf/FieldDescriptor.php#L67">at line 67</a></div>
+        <code>                    bool
+    <strong>isRepeated</strong>()
+        </code>
+    </h3>
+    <div class="details">    
+    
+            
+
+        <div class="method-description">
+                            <p class="no-description">No description</p>
+                    
+        </div>
+        <div class="tags">
+            
+                            <h4>Return Value</h4>
+
+                    <table class="table table-condensed">
+        <tr>
+            <td>bool</td>
+            <td></td>
+        </tr>
+    </table>
+
+            
+            
+            
+                    </div>
+    </div>
+
+            </div>
+                    <div class="method-item">
                     <h3 id="method_getType">
-        <div class="location"><a href="https://github.com/protocolbuffers/protobuf-php/blob/v3.21.10/src/Google/Protobuf/FieldDescriptor.php#L80">at line 80</a></div>
+        <div class="location"><a href="https://github.com/protocolbuffers/protobuf-php/blob/4.33.6/src/Google/Protobuf/FieldDescriptor.php#L75">at line 75</a></div>
         <code>                    int
     <strong>getType</strong>()
         </code>
@@ -411,7 +506,7 @@
             </div>
                     <div class="method-item">
                     <h3 id="method_getContainingOneof">
-        <div class="location"><a href="https://github.com/protocolbuffers/protobuf-php/blob/v3.21.10/src/Google/Protobuf/FieldDescriptor.php#L88">at line 88</a></div>
+        <div class="location"><a href="https://github.com/protocolbuffers/protobuf-php/blob/4.33.6/src/Google/Protobuf/FieldDescriptor.php#L83">at line 83</a></div>
         <code>                    <a href="../../Google/Protobuf/OneofDescriptor.html"><abbr title="Google\Protobuf\OneofDescriptor">OneofDescriptor</abbr></a>
     <strong>getContainingOneof</strong>()
         </code>
@@ -444,7 +539,7 @@
             </div>
                     <div class="method-item">
                     <h3 id="method_getRealContainingOneof">
-        <div class="location"><a href="https://github.com/protocolbuffers/protobuf-php/blob/v3.21.10/src/Google/Protobuf/FieldDescriptor.php#L98">at line 98</a></div>
+        <div class="location"><a href="https://github.com/protocolbuffers/protobuf-php/blob/4.33.6/src/Google/Protobuf/FieldDescriptor.php#L93">at line 93</a></div>
         <code>                    null|<a href="../../Google/Protobuf/OneofDescriptor.html"><abbr title="Google\Protobuf\OneofDescriptor">OneofDescriptor</abbr></a>
     <strong>getRealContainingOneof</strong>()
         </code>
@@ -476,7 +571,7 @@
             </div>
                     <div class="method-item">
                     <h3 id="method_hasOptionalKeyword">
-        <div class="location"><a href="https://github.com/protocolbuffers/protobuf-php/blob/v3.21.10/src/Google/Protobuf/FieldDescriptor.php#L106">at line 106</a></div>
+        <div class="location"><a href="https://github.com/protocolbuffers/protobuf-php/blob/4.33.6/src/Google/Protobuf/FieldDescriptor.php#L101">at line 101</a></div>
         <code>                    bool
     <strong>hasOptionalKeyword</strong>()
         </code>
@@ -509,7 +604,7 @@
             </div>
                     <div class="method-item">
                     <h3 id="method_getMessageType">
-        <div class="location"><a href="https://github.com/protocolbuffers/protobuf-php/blob/v3.21.10/src/Google/Protobuf/FieldDescriptor.php#L115">at line 115</a></div>
+        <div class="location"><a href="https://github.com/protocolbuffers/protobuf-php/blob/4.33.6/src/Google/Protobuf/FieldDescriptor.php#L110">at line 110</a></div>
         <code>                    <a href="../../Google/Protobuf/Descriptor.html"><abbr title="Google\Protobuf\Descriptor">Descriptor</abbr></a>
     <strong>getMessageType</strong>()
         </code>
@@ -551,7 +646,7 @@
             </div>
                     <div class="method-item">
                     <h3 id="method_getEnumType">
-        <div class="location"><a href="https://github.com/protocolbuffers/protobuf-php/blob/v3.21.10/src/Google/Protobuf/FieldDescriptor.php#L128">at line 128</a></div>
+        <div class="location"><a href="https://github.com/protocolbuffers/protobuf-php/blob/4.33.6/src/Google/Protobuf/FieldDescriptor.php#L123">at line 123</a></div>
         <code>                    <a href="../../Google/Protobuf/EnumDescriptor.html"><abbr title="Google\Protobuf\EnumDescriptor">EnumDescriptor</abbr></a>
     <strong>getEnumType</strong>()
         </code>
@@ -593,7 +688,7 @@
             </div>
                     <div class="method-item">
                     <h3 id="method_isMap">
-        <div class="location"><a href="https://github.com/protocolbuffers/protobuf-php/blob/v3.21.10/src/Google/Protobuf/FieldDescriptor.php#L140">at line 140</a></div>
+        <div class="location"><a href="https://github.com/protocolbuffers/protobuf-php/blob/4.33.6/src/Google/Protobuf/FieldDescriptor.php#L135">at line 135</a></div>
         <code>                    bool
     <strong>isMap</strong>()
         </code>
