@@ -395,7 +395,7 @@ For example, a `google.protobuf.Duration` that represents 3.1 seconds will be
 represented by the string `"3.1s"` in the special case handling. When that
 `Duration` is packed into an `Any` it will be serialized as:
 
-```
+```json
 {
   "@type": "type.googleapis.com/google.protobuf.Duration",
   "value": "3.1s"
