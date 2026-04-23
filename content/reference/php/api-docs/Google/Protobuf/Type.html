@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8" />
     <meta name="robots" content="index, follow, all" />
-    <title>Google\Protobuf\Type | Google Protobuf - v3.21.10</title>
+    <title>Google\Protobuf\Type | Google Protobuf - 4.33.6</title>
 
             <link rel="stylesheet" type="text/css" href="../../css/bootstrap.min.css">
         <link rel="stylesheet" type="text/css" href="../../css/bootstrap-theme.min.css">
@@ -57,7 +57,7 @@
                     <span class="icon-bar"></span>
                     <span class="icon-bar"></span>
                 </button>
-                <a class="navbar-brand" href="../../index.html">Google Protobuf - v3.21.10</a>
+                <a class="navbar-brand" href="../../index.html">Google Protobuf - 4.33.6</a>
             </div>
             <div class="collapse navbar-collapse" id="navbar-elements">
                 <ul class="nav navbar-nav">
@@ -86,7 +86,7 @@
 
     
     <p>        class
-    <strong>Type</strong>        extends <a href="../../Google/Protobuf/Internal/Message.html"><abbr title="Google\Protobuf\Internal\Message">Message</abbr></a>        (<a href="https://github.com/protocolbuffers/protobuf-php/blob/v3.21.10/src/Google/Protobuf/Type.php">View source</a>)
+    <strong>Type</strong>        extends <a href="../../Google/Protobuf/Internal/Message.html"><abbr title="Google\Protobuf\Internal\Message">Message</abbr></a>        (<a href="https://github.com/protocolbuffers/protobuf-php/blob/4.33.6/src/Google/Protobuf/Type.php">View source</a>)
 </p>
 
         
@@ -94,7 +94,11 @@
         
 
             <div class="description">
-            <p><p>A protocol buffer message type.</p></p>            <p><p>Generated from protobuf message <code>google.protobuf.Type</code></p></p>        </div>
+            <p><p>A protocol buffer message type.</p></p>            <p><p>New usages of this message as an alternative to DescriptorProto are strongly
+discouraged. This message does not reliability preserve all information
+necessary to model the schema and preserve semantics. Instead make use of
+FileDescriptorSet which preserves the necessary information.</p>
+<p>Generated from protobuf message <code>google.protobuf.Type</code></p></p>        </div>
             
         
     
@@ -126,6 +130,15 @@
                                     </td>
                 <td>$syntax</td>
                 <td class="last"><p>The source syntax.</p></td>
+                <td></td>
+            </tr>
+                    <tr>
+                <td class="type" id="property_edition">
+                                        protected                                        
+                                                                                
+                                    </td>
+                <td>$edition</td>
+                <td class="last"><p>The source edition string, only valid when syntax is SYNTAX_EDITIONS.</p></td>
                 <td></td>
             </tr>
             </table>
@@ -218,7 +231,7 @@
             </div>
                     <div class="row">
                 <div class="col-md-2 type">
-                    
+                    null
                 </div>
                 <div class="col-md-8">
                     <a href="#method_clear">clear</a>()
@@ -229,7 +242,7 @@
             </div>
                     <div class="row">
                 <div class="col-md-2 type">
-                    
+                    null
                 </div>
                 <div class="col-md-8">
                     <a href="#method_discardUnknownFields">discardUnknownFields</a>()
@@ -240,7 +253,7 @@
             </div>
                     <div class="row">
                 <div class="col-md-2 type">
-                    
+                    null
                 </div>
                 <div class="col-md-8">
                     <a href="#method_mergeFrom">mergeFrom</a>(object $msg)
@@ -251,7 +264,7 @@
             </div>
                     <div class="row">
                 <div class="col-md-2 type">
-                    
+                    null
                 </div>
                 <div class="col-md-8">
                     <a href="#method_mergeFromString">mergeFromString</a>(string $data)
@@ -262,10 +275,10 @@
             </div>
                     <div class="row">
                 <div class="col-md-2 type">
-                    
+                    null
                 </div>
                 <div class="col-md-8">
-                    <a href="#method_mergeFromJsonString">mergeFromJsonString</a>(string $data, $ignore_unknown = false)
+                    <a href="#method_mergeFromJsonString">mergeFromJsonString</a>(string $data, bool $ignore_unknown = false)
         
                                             <p><p>Parses a json string to protobuf message.</p></p>                </div>
                 <div class="col-md-2"><small>from&nbsp;<a href="../../Google/Protobuf/Internal/Message.html#method_mergeFromJsonString">
@@ -285,7 +298,7 @@
             </div>
                     <div class="row">
                 <div class="col-md-2 type">
-                    
+                    null
                 </div>
                 <div class="col-md-8">
                     <a href="#method_mergeFromArray">mergeFromArray</a>(array $array)
@@ -359,7 +372,7 @@ correspond to Message properties and nested message properties.</p></p>         
                     string
                 </div>
                 <div class="col-md-8">
-                    <a href="#method_serializeToJsonString">serializeToJsonString</a>()
+                    <a href="#method_serializeToJsonString">serializeToJsonString</a>($options = 0)
         
                                             <p><p>Serialize the message to json string.</p></p>                </div>
                 <div class="col-md-2"><small>from&nbsp;<a href="../../Google/Protobuf/Internal/Message.html#method_serializeToJsonString">
@@ -382,11 +395,23 @@ correspond to Message properties and nested message properties.</p></p>         
                     
                 </div>
                 <div class="col-md-8">
-                    <a href="#method_jsonByteSize">jsonByteSize</a>()
+                    <a href="#method_jsonByteSize">jsonByteSize</a>($options = 0)
         
                                             <p class="no-description">No description</p>
                                     </div>
                 <div class="col-md-2"><small>from&nbsp;<a href="../../Google/Protobuf/Internal/Message.html#method_jsonByteSize">
+<abbr title="Google\Protobuf\Internal\Message">Message</abbr></a></small></div>
+            </div>
+                    <div class="row">
+                <div class="col-md-2 type">
+                    
+                </div>
+                <div class="col-md-8">
+                    <a href="#method___debugInfo">__debugInfo</a>()
+        
+                                            <p class="no-description">No description</p>
+                                    </div>
+                <div class="col-md-2"><small>from&nbsp;<a href="../../Google/Protobuf/Internal/Message.html#method___debugInfo">
 <abbr title="Google\Protobuf\Internal\Message">Message</abbr></a></small></div>
             </div>
                     <div class="row">
@@ -411,7 +436,7 @@ correspond to Message properties and nested message properties.</p></p>         
             </div>
                     <div class="row">
                 <div class="col-md-2 type">
-                    <a href="../../Google/Protobuf/Internal/RepeatedField.html"><abbr title="Google\Protobuf\Internal\RepeatedField">RepeatedField</abbr></a>
+                    <abbr title="Google\Protobuf\RepeatedField&lt;\Google\Protobuf\Field&gt;">Field&gt;</abbr>
                 </div>
                 <div class="col-md-8">
                     <a href="#method_getFields">getFields</a>()
@@ -424,14 +449,14 @@ correspond to Message properties and nested message properties.</p></p>         
                     $this
                 </div>
                 <div class="col-md-8">
-                    <a href="#method_setFields">setFields</a>(<a href="../../Google/Protobuf/Field.html"><abbr title="Google\Protobuf\Field">Field</abbr></a>[]|<a href="../../Google/Protobuf/Internal/RepeatedField.html"><abbr title="Google\Protobuf\Internal\RepeatedField">RepeatedField</abbr></a> $var)
+                    <a href="#method_setFields">setFields</a>(<a href="../../Google/Protobuf/Field.html"><abbr title="Google\Protobuf\Field">Field</abbr></a>[] $var)
         
                                             <p><p>The list of fields.</p></p>                </div>
                 <div class="col-md-2"></div>
             </div>
                     <div class="row">
                 <div class="col-md-2 type">
-                    <a href="../../Google/Protobuf/Internal/RepeatedField.html"><abbr title="Google\Protobuf\Internal\RepeatedField">RepeatedField</abbr></a>
+                    <abbr title="Google\Protobuf\RepeatedField&lt;string&gt;">RepeatedField&lt;string&gt;</abbr>
                 </div>
                 <div class="col-md-8">
                     <a href="#method_getOneofs">getOneofs</a>()
@@ -444,14 +469,14 @@ correspond to Message properties and nested message properties.</p></p>         
                     $this
                 </div>
                 <div class="col-md-8">
-                    <a href="#method_setOneofs">setOneofs</a>(string[]|<a href="../../Google/Protobuf/Internal/RepeatedField.html"><abbr title="Google\Protobuf\Internal\RepeatedField">RepeatedField</abbr></a> $var)
+                    <a href="#method_setOneofs">setOneofs</a>(string[] $var)
         
                                             <p><p>The list of types appearing in <code>oneof</code> definitions in this type.</p></p>                </div>
                 <div class="col-md-2"></div>
             </div>
                     <div class="row">
                 <div class="col-md-2 type">
-                    <a href="../../Google/Protobuf/Internal/RepeatedField.html"><abbr title="Google\Protobuf\Internal\RepeatedField">RepeatedField</abbr></a>
+                    <abbr title="Google\Protobuf\RepeatedField&lt;\Google\Protobuf\Option&gt;">Option&gt;</abbr>
                 </div>
                 <div class="col-md-8">
                     <a href="#method_getOptions">getOptions</a>()
@@ -464,7 +489,7 @@ correspond to Message properties and nested message properties.</p></p>         
                     $this
                 </div>
                 <div class="col-md-8">
-                    <a href="#method_setOptions">setOptions</a>(<a href="../../Google/Protobuf/Option.html"><abbr title="Google\Protobuf\Option">Option</abbr></a>[]|<a href="../../Google/Protobuf/Internal/RepeatedField.html"><abbr title="Google\Protobuf\Internal\RepeatedField">RepeatedField</abbr></a> $var)
+                    <a href="#method_setOptions">setOptions</a>(<a href="../../Google/Protobuf/Option.html"><abbr title="Google\Protobuf\Option">Option</abbr></a>[] $var)
         
                                             <p><p>The protocol buffer options.</p></p>                </div>
                 <div class="col-md-2"></div>
@@ -531,6 +556,26 @@ correspond to Message properties and nested message properties.</p></p>         
                                             <p><p>The source syntax.</p></p>                </div>
                 <div class="col-md-2"></div>
             </div>
+                    <div class="row">
+                <div class="col-md-2 type">
+                    string
+                </div>
+                <div class="col-md-8">
+                    <a href="#method_getEdition">getEdition</a>()
+        
+                                            <p><p>The source edition string, only valid when syntax is SYNTAX_EDITIONS.</p></p>                </div>
+                <div class="col-md-2"></div>
+            </div>
+                    <div class="row">
+                <div class="col-md-2 type">
+                    $this
+                </div>
+                <div class="col-md-8">
+                    <a href="#method_setEdition">setEdition</a>(string $var)
+        
+                                            <p><p>The source edition string, only valid when syntax is SYNTAX_EDITIONS.</p></p>                </div>
+                <div class="col-md-2"></div>
+            </div>
             </div>
 
 
@@ -539,7 +584,7 @@ correspond to Message properties and nested message properties.</p></p>         
             <div id="method-details">
                     <div class="method-item">
                     <h3 id="method___construct">
-        <div class="location"><a href="https://github.com/protocolbuffers/protobuf-php/blob/v3.21.10/src/Google/Protobuf/Type.php#L75">at line 75</a></div>
+        <div class="location"><a href="https://github.com/protocolbuffers/protobuf-php/blob/4.33.6/src/Google/Protobuf/Type.php#L88">at line 88</a></div>
         <code>                    
     <strong>__construct</strong>($data = NULL)
         </code>
@@ -573,7 +618,7 @@ correspond to Message properties and nested message properties.</p></p>         
                     <div class="method-item">
                     <h3 id="method_readWrapperValue">
         <div class="location">in <a href="../../Google/Protobuf/Internal/Message.html#method_readWrapperValue">
-<abbr title="Google\Protobuf\Internal\Message">Message</abbr></a> <a href="https://github.com/protocolbuffers/protobuf-php/blob/v3.21.10/src/Google/Protobuf/Internal/Message.php#L180">at line 180</a></div>
+<abbr title="Google\Protobuf\Internal\Message">Message</abbr></a> <a href="https://github.com/protocolbuffers/protobuf-php/blob/4.33.6/src/Google/Protobuf/Internal/Message.php#L158">at line 158</a></div>
         <code>            protected        
     <strong>readWrapperValue</strong>($member)
         </code>
@@ -608,7 +653,7 @@ correspond to Message properties and nested message properties.</p></p>         
                     <div class="method-item">
                     <h3 id="method_writeWrapperValue">
         <div class="location">in <a href="../../Google/Protobuf/Internal/Message.html#method_writeWrapperValue">
-<abbr title="Google\Protobuf\Internal\Message">Message</abbr></a> <a href="https://github.com/protocolbuffers/protobuf-php/blob/v3.21.10/src/Google/Protobuf/Internal/Message.php#L197">at line 197</a></div>
+<abbr title="Google\Protobuf\Internal\Message">Message</abbr></a> <a href="https://github.com/protocolbuffers/protobuf-php/blob/4.33.6/src/Google/Protobuf/Internal/Message.php#L175">at line 175</a></div>
         <code>            protected        
     <strong>writeWrapperValue</strong>($member, $value)
         </code>
@@ -648,7 +693,7 @@ correspond to Message properties and nested message properties.</p></p>         
                     <div class="method-item">
                     <h3 id="method_readOneof">
         <div class="location">in <a href="../../Google/Protobuf/Internal/Message.html#method_readOneof">
-<abbr title="Google\Protobuf\Internal\Message">Message</abbr></a> <a href="https://github.com/protocolbuffers/protobuf-php/blob/v3.21.10/src/Google/Protobuf/Internal/Message.php#L216">at line 216</a></div>
+<abbr title="Google\Protobuf\Internal\Message">Message</abbr></a> <a href="https://github.com/protocolbuffers/protobuf-php/blob/4.33.6/src/Google/Protobuf/Internal/Message.php#L194">at line 194</a></div>
         <code>            protected        
     <strong>readOneof</strong>($number)
         </code>
@@ -683,7 +728,7 @@ correspond to Message properties and nested message properties.</p></p>         
                     <div class="method-item">
                     <h3 id="method_hasOneof">
         <div class="location">in <a href="../../Google/Protobuf/Internal/Message.html#method_hasOneof">
-<abbr title="Google\Protobuf\Internal\Message">Message</abbr></a> <a href="https://github.com/protocolbuffers/protobuf-php/blob/v3.21.10/src/Google/Protobuf/Internal/Message.php#L229">at line 229</a></div>
+<abbr title="Google\Protobuf\Internal\Message">Message</abbr></a> <a href="https://github.com/protocolbuffers/protobuf-php/blob/4.33.6/src/Google/Protobuf/Internal/Message.php#L207">at line 207</a></div>
         <code>            protected        
     <strong>hasOneof</strong>($number)
         </code>
@@ -718,7 +763,7 @@ correspond to Message properties and nested message properties.</p></p>         
                     <div class="method-item">
                     <h3 id="method_writeOneof">
         <div class="location">in <a href="../../Google/Protobuf/Internal/Message.html#method_writeOneof">
-<abbr title="Google\Protobuf\Internal\Message">Message</abbr></a> <a href="https://github.com/protocolbuffers/protobuf-php/blob/v3.21.10/src/Google/Protobuf/Internal/Message.php#L238">at line 238</a></div>
+<abbr title="Google\Protobuf\Internal\Message">Message</abbr></a> <a href="https://github.com/protocolbuffers/protobuf-php/blob/4.33.6/src/Google/Protobuf/Internal/Message.php#L216">at line 216</a></div>
         <code>            protected        
     <strong>writeOneof</strong>($number, $value)
         </code>
@@ -758,7 +803,7 @@ correspond to Message properties and nested message properties.</p></p>         
                     <div class="method-item">
                     <h3 id="method_whichOneof">
         <div class="location">in <a href="../../Google/Protobuf/Internal/Message.html#method_whichOneof">
-<abbr title="Google\Protobuf\Internal\Message">Message</abbr></a> <a href="https://github.com/protocolbuffers/protobuf-php/blob/v3.21.10/src/Google/Protobuf/Internal/Message.php#L253">at line 253</a></div>
+<abbr title="Google\Protobuf\Internal\Message">Message</abbr></a> <a href="https://github.com/protocolbuffers/protobuf-php/blob/4.33.6/src/Google/Protobuf/Internal/Message.php#L231">at line 231</a></div>
         <code>            protected        
     <strong>whichOneof</strong>($oneof_name)
         </code>
@@ -793,8 +838,8 @@ correspond to Message properties and nested message properties.</p></p>         
                     <div class="method-item">
                     <h3 id="method_clear">
         <div class="location">in <a href="../../Google/Protobuf/Internal/Message.html#method_clear">
-<abbr title="Google\Protobuf\Internal\Message">Message</abbr></a> <a href="https://github.com/protocolbuffers/protobuf-php/blob/v3.21.10/src/Google/Protobuf/Internal/Message.php#L548">at line 548</a></div>
-        <code>                    
+<abbr title="Google\Protobuf\Internal\Message">Message</abbr></a> <a href="https://github.com/protocolbuffers/protobuf-php/blob/4.33.6/src/Google/Protobuf/Internal/Message.php#L527">at line 527</a></div>
+        <code>                    null
     <strong>clear</strong>()
         </code>
     </h3>
@@ -807,6 +852,15 @@ correspond to Message properties and nested message properties.</p></p>         
         </div>
         <div class="tags">
             
+                            <h4>Return Value</h4>
+
+                    <table class="table table-condensed">
+        <tr>
+            <td>null</td>
+            <td></td>
+        </tr>
+    </table>
+
             
             
             
@@ -817,8 +871,8 @@ correspond to Message properties and nested message properties.</p></p>         
                     <div class="method-item">
                     <h3 id="method_discardUnknownFields">
         <div class="location">in <a href="../../Google/Protobuf/Internal/Message.html#method_discardUnknownFields">
-<abbr title="Google\Protobuf\Internal\Message">Message</abbr></a> <a href="https://github.com/protocolbuffers/protobuf-php/blob/v3.21.10/src/Google/Protobuf/Internal/Message.php#L658">at line 658</a></div>
-        <code>                    
+<abbr title="Google\Protobuf\Internal\Message">Message</abbr></a> <a href="https://github.com/protocolbuffers/protobuf-php/blob/4.33.6/src/Google/Protobuf/Internal/Message.php#L637">at line 637</a></div>
+        <code>                    null
     <strong>discardUnknownFields</strong>()
         </code>
     </h3>
@@ -831,6 +885,15 @@ correspond to Message properties and nested message properties.</p></p>         
         </div>
         <div class="tags">
             
+                            <h4>Return Value</h4>
+
+                    <table class="table table-condensed">
+        <tr>
+            <td>null</td>
+            <td></td>
+        </tr>
+    </table>
+
             
             
             
@@ -841,8 +904,8 @@ correspond to Message properties and nested message properties.</p></p>         
                     <div class="method-item">
                     <h3 id="method_mergeFrom">
         <div class="location">in <a href="../../Google/Protobuf/Internal/Message.html#method_mergeFrom">
-<abbr title="Google\Protobuf\Internal\Message">Message</abbr></a> <a href="https://github.com/protocolbuffers/protobuf-php/blob/v3.21.10/src/Google/Protobuf/Internal/Message.php#L704">at line 704</a></div>
-        <code>                    
+<abbr title="Google\Protobuf\Internal\Message">Message</abbr></a> <a href="https://github.com/protocolbuffers/protobuf-php/blob/4.33.6/src/Google/Protobuf/Internal/Message.php#L683">at line 683</a></div>
+        <code>                    null
     <strong>mergeFrom</strong>(object $msg)
         </code>
     </h3>
@@ -870,6 +933,15 @@ sub-messages are deep-copied.</p></p>
             </table>
 
             
+                            <h4>Return Value</h4>
+
+                    <table class="table table-condensed">
+        <tr>
+            <td>null</td>
+            <td></td>
+        </tr>
+    </table>
+
             
             
             
@@ -880,8 +952,8 @@ sub-messages are deep-copied.</p></p>
                     <div class="method-item">
                     <h3 id="method_mergeFromString">
         <div class="location">in <a href="../../Google/Protobuf/Internal/Message.html#method_mergeFromString">
-<abbr title="Google\Protobuf\Internal\Message">Message</abbr></a> <a href="https://github.com/protocolbuffers/protobuf-php/blob/v3.21.10/src/Google/Protobuf/Internal/Message.php#L772">at line 772</a></div>
-        <code>                    
+<abbr title="Google\Protobuf\Internal\Message">Message</abbr></a> <a href="https://github.com/protocolbuffers/protobuf-php/blob/4.33.6/src/Google/Protobuf/Internal/Message.php#L751">at line 751</a></div>
+        <code>                    null
     <strong>mergeFromString</strong>(string $data)
         </code>
     </h3>
@@ -907,6 +979,15 @@ specified message.</p></p>
             </table>
 
             
+                            <h4>Return Value</h4>
+
+                    <table class="table table-condensed">
+        <tr>
+            <td>null</td>
+            <td></td>
+        </tr>
+    </table>
+
             
                             <h4>Exceptions</h4>
 
@@ -926,9 +1007,9 @@ specified message.</p></p>
                     <div class="method-item">
                     <h3 id="method_mergeFromJsonString">
         <div class="location">in <a href="../../Google/Protobuf/Internal/Message.html#method_mergeFromJsonString">
-<abbr title="Google\Protobuf\Internal\Message">Message</abbr></a> <a href="https://github.com/protocolbuffers/protobuf-php/blob/v3.21.10/src/Google/Protobuf/Internal/Message.php#L790">at line 790</a></div>
-        <code>                    
-    <strong>mergeFromJsonString</strong>(string $data, $ignore_unknown = false)
+<abbr title="Google\Protobuf\Internal\Message">Message</abbr></a> <a href="https://github.com/protocolbuffers/protobuf-php/blob/4.33.6/src/Google/Protobuf/Internal/Message.php#L770">at line 770</a></div>
+        <code>                    null
+    <strong>mergeFromJsonString</strong>(string $data, bool $ignore_unknown = false)
         </code>
     </h3>
     <div class="details">    
@@ -951,13 +1032,22 @@ specified message.</p></p>
                 <td><p>Json protobuf data.</p></td>
             </tr>
                     <tr>
-                <td></td>
+                <td>bool</td>
                 <td>$ignore_unknown</td>
                 <td></td>
             </tr>
             </table>
 
             
+                            <h4>Return Value</h4>
+
+                    <table class="table table-condensed">
+        <tr>
+            <td>null</td>
+            <td></td>
+        </tr>
+    </table>
+
             
                             <h4>Exceptions</h4>
 
@@ -977,7 +1067,7 @@ specified message.</p></p>
                     <div class="method-item">
                     <h3 id="method_parseFromStream">
         <div class="location">in <a href="../../Google/Protobuf/Internal/Message.html#method_parseFromStream">
-<abbr title="Google\Protobuf\Internal\Message">Message</abbr></a> <a href="https://github.com/protocolbuffers/protobuf-php/blob/v3.21.10/src/Google/Protobuf/Internal/Message.php#L799">at line 799</a></div>
+<abbr title="Google\Protobuf\Internal\Message">Message</abbr></a> <a href="https://github.com/protocolbuffers/protobuf-php/blob/4.33.6/src/Google/Protobuf/Internal/Message.php#L779">at line 779</a></div>
         <code>                    
     <strong>parseFromStream</strong>($input)
         </code>
@@ -1012,8 +1102,8 @@ specified message.</p></p>
                     <div class="method-item">
                     <h3 id="method_mergeFromArray">
         <div class="location">in <a href="../../Google/Protobuf/Internal/Message.html#method_mergeFromArray">
-<abbr title="Google\Protobuf\Internal\Message">Message</abbr></a> <a href="https://github.com/protocolbuffers/protobuf-php/blob/v3.21.10/src/Google/Protobuf/Internal/Message.php#L1057">at line 1057</a></div>
-        <code>            protected        
+<abbr title="Google\Protobuf\Internal\Message">Message</abbr></a> <a href="https://github.com/protocolbuffers/protobuf-php/blob/4.33.6/src/Google/Protobuf/Internal/Message.php#L1037">at line 1037</a></div>
+        <code>            protected        null
     <strong>mergeFromArray</strong>(array $array)
         </code>
     </h3>
@@ -1047,6 +1137,15 @@ must receive data that is either a string or a StringValue object.</p></p>
             </table>
 
             
+                            <h4>Return Value</h4>
+
+                    <table class="table table-condensed">
+        <tr>
+            <td>null</td>
+            <td></td>
+        </tr>
+    </table>
+
             
             
             
@@ -1057,7 +1156,7 @@ must receive data that is either a string or a StringValue object.</p></p>
                     <div class="method-item">
                     <h3 id="method_mergeFromJsonArray">
         <div class="location">in <a href="../../Google/Protobuf/Internal/Message.html#method_mergeFromJsonArray">
-<abbr title="Google\Protobuf\Internal\Message">Message</abbr></a> <a href="https://github.com/protocolbuffers/protobuf-php/blob/v3.21.10/src/Google/Protobuf/Internal/Message.php#L1146">at line 1146</a></div>
+<abbr title="Google\Protobuf\Internal\Message">Message</abbr></a> <a href="https://github.com/protocolbuffers/protobuf-php/blob/4.33.6/src/Google/Protobuf/Internal/Message.php#L1126">at line 1126</a></div>
         <code>            protected        
     <strong>mergeFromJsonArray</strong>($array, $ignore_unknown)
         </code>
@@ -1097,7 +1196,7 @@ must receive data that is either a string or a StringValue object.</p></p>
                     <div class="method-item">
                     <h3 id="method_parseFromJsonStream">
         <div class="location">in <a href="../../Google/Protobuf/Internal/Message.html#method_parseFromJsonStream">
-<abbr title="Google\Protobuf\Internal\Message">Message</abbr></a> <a href="https://github.com/protocolbuffers/protobuf-php/blob/v3.21.10/src/Google/Protobuf/Internal/Message.php#L1320">at line 1320</a></div>
+<abbr title="Google\Protobuf\Internal\Message">Message</abbr></a> <a href="https://github.com/protocolbuffers/protobuf-php/blob/4.33.6/src/Google/Protobuf/Internal/Message.php#L1322">at line 1322</a></div>
         <code>                    
     <strong>parseFromJsonStream</strong>($input, $ignore_unknown)
         </code>
@@ -1137,7 +1236,7 @@ must receive data that is either a string or a StringValue object.</p></p>
                     <div class="method-item">
                     <h3 id="method_serializeToStream">
         <div class="location">in <a href="../../Google/Protobuf/Internal/Message.html#method_serializeToStream">
-<abbr title="Google\Protobuf\Internal\Message">Message</abbr></a> <a href="https://github.com/protocolbuffers/protobuf-php/blob/v3.21.10/src/Google/Protobuf/Internal/Message.php#L1453">at line 1453</a></div>
+<abbr title="Google\Protobuf\Internal\Message">Message</abbr></a> <a href="https://github.com/protocolbuffers/protobuf-php/blob/4.33.6/src/Google/Protobuf/Internal/Message.php#L1455">at line 1455</a></div>
         <code>                    
     <strong>serializeToStream</strong>($output)
         </code>
@@ -1172,7 +1271,7 @@ must receive data that is either a string or a StringValue object.</p></p>
                     <div class="method-item">
                     <h3 id="method_serializeToJsonStream">
         <div class="location">in <a href="../../Google/Protobuf/Internal/Message.html#method_serializeToJsonStream">
-<abbr title="Google\Protobuf\Internal\Message">Message</abbr></a> <a href="https://github.com/protocolbuffers/protobuf-php/blob/v3.21.10/src/Google/Protobuf/Internal/Message.php#L1468">at line 1468</a></div>
+<abbr title="Google\Protobuf\Internal\Message">Message</abbr></a> <a href="https://github.com/protocolbuffers/protobuf-php/blob/4.33.6/src/Google/Protobuf/Internal/Message.php#L1470">at line 1470</a></div>
         <code>                    
     <strong>serializeToJsonStream</strong>($output)
         </code>
@@ -1207,7 +1306,7 @@ must receive data that is either a string or a StringValue object.</p></p>
                     <div class="method-item">
                     <h3 id="method_serializeToString">
         <div class="location">in <a href="../../Google/Protobuf/Internal/Message.html#method_serializeToString">
-<abbr title="Google\Protobuf\Internal\Message">Message</abbr></a> <a href="https://github.com/protocolbuffers/protobuf-php/blob/v3.21.10/src/Google/Protobuf/Internal/Message.php#L1560">at line 1560</a></div>
+<abbr title="Google\Protobuf\Internal\Message">Message</abbr></a> <a href="https://github.com/protocolbuffers/protobuf-php/blob/4.33.6/src/Google/Protobuf/Internal/Message.php#L1562">at line 1562</a></div>
         <code>                    string
     <strong>serializeToString</strong>()
         </code>
@@ -1240,9 +1339,9 @@ must receive data that is either a string or a StringValue object.</p></p>
                     <div class="method-item">
                     <h3 id="method_serializeToJsonString">
         <div class="location">in <a href="../../Google/Protobuf/Internal/Message.html#method_serializeToJsonString">
-<abbr title="Google\Protobuf\Internal\Message">Message</abbr></a> <a href="https://github.com/protocolbuffers/protobuf-php/blob/v3.21.10/src/Google/Protobuf/Internal/Message.php#L1571">at line 1571</a></div>
+<abbr title="Google\Protobuf\Internal\Message">Message</abbr></a> <a href="https://github.com/protocolbuffers/protobuf-php/blob/4.33.6/src/Google/Protobuf/Internal/Message.php#L1573">at line 1573</a></div>
         <code>                    string
-    <strong>serializeToJsonString</strong>()
+    <strong>serializeToJsonString</strong>($options = 0)
         </code>
     </h3>
     <div class="details">    
@@ -1253,6 +1352,16 @@ must receive data that is either a string or a StringValue object.</p></p>
                             <p><p>Serialize the message to json string.</p></p>                        
         </div>
         <div class="tags">
+                            <h4>Parameters</h4>
+
+                    <table class="table table-condensed">
+                    <tr>
+                <td></td>
+                <td>$options</td>
+                <td></td>
+            </tr>
+            </table>
+
             
                             <h4>Return Value</h4>
 
@@ -1273,7 +1382,7 @@ must receive data that is either a string or a StringValue object.</p></p>
                     <div class="method-item">
                     <h3 id="method_byteSize">
         <div class="location">in <a href="../../Google/Protobuf/Internal/Message.html#method_byteSize">
-<abbr title="Google\Protobuf\Internal\Message">Message</abbr></a> <a href="https://github.com/protocolbuffers/protobuf-php/blob/v3.21.10/src/Google/Protobuf/Internal/Message.php#L1923">at line 1923</a></div>
+<abbr title="Google\Protobuf\Internal\Message">Message</abbr></a> <a href="https://github.com/protocolbuffers/protobuf-php/blob/4.33.6/src/Google/Protobuf/Internal/Message.php#L1941">at line 1941</a></div>
         <code>                    
     <strong>byteSize</strong>()
         </code>
@@ -1298,9 +1407,44 @@ must receive data that is either a string or a StringValue object.</p></p>
                     <div class="method-item">
                     <h3 id="method_jsonByteSize">
         <div class="location">in <a href="../../Google/Protobuf/Internal/Message.html#method_jsonByteSize">
-<abbr title="Google\Protobuf\Internal\Message">Message</abbr></a> <a href="https://github.com/protocolbuffers/protobuf-php/blob/v3.21.10/src/Google/Protobuf/Internal/Message.php#L1964">at line 1964</a></div>
+<abbr title="Google\Protobuf\Internal\Message">Message</abbr></a> <a href="https://github.com/protocolbuffers/protobuf-php/blob/4.33.6/src/Google/Protobuf/Internal/Message.php#L1982">at line 1982</a></div>
         <code>                    
-    <strong>jsonByteSize</strong>()
+    <strong>jsonByteSize</strong>($options = 0)
+        </code>
+    </h3>
+    <div class="details">    
+    
+            
+
+        <div class="method-description">
+                            <p class="no-description">No description</p>
+                    
+        </div>
+        <div class="tags">
+                            <h4>Parameters</h4>
+
+                    <table class="table table-condensed">
+                    <tr>
+                <td></td>
+                <td>$options</td>
+                <td></td>
+            </tr>
+            </table>
+
+            
+            
+            
+            
+                    </div>
+    </div>
+
+            </div>
+                    <div class="method-item">
+                    <h3 id="method___debugInfo">
+        <div class="location">in <a href="../../Google/Protobuf/Internal/Message.html#method___debugInfo">
+<abbr title="Google\Protobuf\Internal\Message">Message</abbr></a> <a href="https://github.com/protocolbuffers/protobuf-php/blob/4.33.6/src/Google/Protobuf/Internal/Message.php#L2057">at line 2057</a></div>
+        <code>                    
+    <strong>__debugInfo</strong>()
         </code>
     </h3>
     <div class="details">    
@@ -1322,7 +1466,7 @@ must receive data that is either a string or a StringValue object.</p></p>
             </div>
                     <div class="method-item">
                     <h3 id="method_getName">
-        <div class="location"><a href="https://github.com/protocolbuffers/protobuf-php/blob/v3.21.10/src/Google/Protobuf/Type.php#L86">at line 86</a></div>
+        <div class="location"><a href="https://github.com/protocolbuffers/protobuf-php/blob/4.33.6/src/Google/Protobuf/Type.php#L99">at line 99</a></div>
         <code>                    string
     <strong>getName</strong>()
         </code>
@@ -1354,7 +1498,7 @@ must receive data that is either a string or a StringValue object.</p></p>
             </div>
                     <div class="method-item">
                     <h3 id="method_setName">
-        <div class="location"><a href="https://github.com/protocolbuffers/protobuf-php/blob/v3.21.10/src/Google/Protobuf/Type.php#L98">at line 98</a></div>
+        <div class="location"><a href="https://github.com/protocolbuffers/protobuf-php/blob/4.33.6/src/Google/Protobuf/Type.php#L111">at line 111</a></div>
         <code>                    $this
     <strong>setName</strong>(string $var)
         </code>
@@ -1396,8 +1540,8 @@ must receive data that is either a string or a StringValue object.</p></p>
             </div>
                     <div class="method-item">
                     <h3 id="method_getFields">
-        <div class="location"><a href="https://github.com/protocolbuffers/protobuf-php/blob/v3.21.10/src/Google/Protobuf/Type.php#L112">at line 112</a></div>
-        <code>                    <a href="../../Google/Protobuf/Internal/RepeatedField.html"><abbr title="Google\Protobuf\Internal\RepeatedField">RepeatedField</abbr></a>
+        <div class="location"><a href="https://github.com/protocolbuffers/protobuf-php/blob/4.33.6/src/Google/Protobuf/Type.php#L125">at line 125</a></div>
+        <code>                    <abbr title="Google\Protobuf\RepeatedField&lt;\Google\Protobuf\Field&gt;">Field&gt;</abbr>
     <strong>getFields</strong>()
         </code>
     </h3>
@@ -1414,7 +1558,7 @@ must receive data that is either a string or a StringValue object.</p></p>
 
                     <table class="table table-condensed">
         <tr>
-            <td><a href="../../Google/Protobuf/Internal/RepeatedField.html"><abbr title="Google\Protobuf\Internal\RepeatedField">RepeatedField</abbr></a></td>
+            <td><abbr title="Google\Protobuf\RepeatedField&lt;\Google\Protobuf\Field&gt;">Field&gt;</abbr></td>
             <td></td>
         </tr>
     </table>
@@ -1428,9 +1572,9 @@ must receive data that is either a string or a StringValue object.</p></p>
             </div>
                     <div class="method-item">
                     <h3 id="method_setFields">
-        <div class="location"><a href="https://github.com/protocolbuffers/protobuf-php/blob/v3.21.10/src/Google/Protobuf/Type.php#L124">at line 124</a></div>
+        <div class="location"><a href="https://github.com/protocolbuffers/protobuf-php/blob/4.33.6/src/Google/Protobuf/Type.php#L137">at line 137</a></div>
         <code>                    $this
-    <strong>setFields</strong>(<a href="../../Google/Protobuf/Field.html"><abbr title="Google\Protobuf\Field">Field</abbr></a>[]|<a href="../../Google/Protobuf/Internal/RepeatedField.html"><abbr title="Google\Protobuf\Internal\RepeatedField">RepeatedField</abbr></a> $var)
+    <strong>setFields</strong>(<a href="../../Google/Protobuf/Field.html"><abbr title="Google\Protobuf\Field">Field</abbr></a>[] $var)
         </code>
     </h3>
     <div class="details">    
@@ -1445,7 +1589,7 @@ must receive data that is either a string or a StringValue object.</p></p>
 
                     <table class="table table-condensed">
                     <tr>
-                <td><a href="../../Google/Protobuf/Field.html"><abbr title="Google\Protobuf\Field">Field</abbr></a>[]|<a href="../../Google/Protobuf/Internal/RepeatedField.html"><abbr title="Google\Protobuf\Internal\RepeatedField">RepeatedField</abbr></a></td>
+                <td><a href="../../Google/Protobuf/Field.html"><abbr title="Google\Protobuf\Field">Field</abbr></a>[]</td>
                 <td>$var</td>
                 <td></td>
             </tr>
@@ -1470,8 +1614,8 @@ must receive data that is either a string or a StringValue object.</p></p>
             </div>
                     <div class="method-item">
                     <h3 id="method_getOneofs">
-        <div class="location"><a href="https://github.com/protocolbuffers/protobuf-php/blob/v3.21.10/src/Google/Protobuf/Type.php#L138">at line 138</a></div>
-        <code>                    <a href="../../Google/Protobuf/Internal/RepeatedField.html"><abbr title="Google\Protobuf\Internal\RepeatedField">RepeatedField</abbr></a>
+        <div class="location"><a href="https://github.com/protocolbuffers/protobuf-php/blob/4.33.6/src/Google/Protobuf/Type.php#L151">at line 151</a></div>
+        <code>                    <abbr title="Google\Protobuf\RepeatedField&lt;string&gt;">RepeatedField&lt;string&gt;</abbr>
     <strong>getOneofs</strong>()
         </code>
     </h3>
@@ -1488,7 +1632,7 @@ must receive data that is either a string or a StringValue object.</p></p>
 
                     <table class="table table-condensed">
         <tr>
-            <td><a href="../../Google/Protobuf/Internal/RepeatedField.html"><abbr title="Google\Protobuf\Internal\RepeatedField">RepeatedField</abbr></a></td>
+            <td><abbr title="Google\Protobuf\RepeatedField&lt;string&gt;">RepeatedField&lt;string&gt;</abbr></td>
             <td></td>
         </tr>
     </table>
@@ -1502,9 +1646,9 @@ must receive data that is either a string or a StringValue object.</p></p>
             </div>
                     <div class="method-item">
                     <h3 id="method_setOneofs">
-        <div class="location"><a href="https://github.com/protocolbuffers/protobuf-php/blob/v3.21.10/src/Google/Protobuf/Type.php#L150">at line 150</a></div>
+        <div class="location"><a href="https://github.com/protocolbuffers/protobuf-php/blob/4.33.6/src/Google/Protobuf/Type.php#L163">at line 163</a></div>
         <code>                    $this
-    <strong>setOneofs</strong>(string[]|<a href="../../Google/Protobuf/Internal/RepeatedField.html"><abbr title="Google\Protobuf\Internal\RepeatedField">RepeatedField</abbr></a> $var)
+    <strong>setOneofs</strong>(string[] $var)
         </code>
     </h3>
     <div class="details">    
@@ -1519,7 +1663,7 @@ must receive data that is either a string or a StringValue object.</p></p>
 
                     <table class="table table-condensed">
                     <tr>
-                <td>string[]|<a href="../../Google/Protobuf/Internal/RepeatedField.html"><abbr title="Google\Protobuf\Internal\RepeatedField">RepeatedField</abbr></a></td>
+                <td>string[]</td>
                 <td>$var</td>
                 <td></td>
             </tr>
@@ -1544,8 +1688,8 @@ must receive data that is either a string or a StringValue object.</p></p>
             </div>
                     <div class="method-item">
                     <h3 id="method_getOptions">
-        <div class="location"><a href="https://github.com/protocolbuffers/protobuf-php/blob/v3.21.10/src/Google/Protobuf/Type.php#L164">at line 164</a></div>
-        <code>                    <a href="../../Google/Protobuf/Internal/RepeatedField.html"><abbr title="Google\Protobuf\Internal\RepeatedField">RepeatedField</abbr></a>
+        <div class="location"><a href="https://github.com/protocolbuffers/protobuf-php/blob/4.33.6/src/Google/Protobuf/Type.php#L177">at line 177</a></div>
+        <code>                    <abbr title="Google\Protobuf\RepeatedField&lt;\Google\Protobuf\Option&gt;">Option&gt;</abbr>
     <strong>getOptions</strong>()
         </code>
     </h3>
@@ -1562,7 +1706,7 @@ must receive data that is either a string or a StringValue object.</p></p>
 
                     <table class="table table-condensed">
         <tr>
-            <td><a href="../../Google/Protobuf/Internal/RepeatedField.html"><abbr title="Google\Protobuf\Internal\RepeatedField">RepeatedField</abbr></a></td>
+            <td><abbr title="Google\Protobuf\RepeatedField&lt;\Google\Protobuf\Option&gt;">Option&gt;</abbr></td>
             <td></td>
         </tr>
     </table>
@@ -1576,9 +1720,9 @@ must receive data that is either a string or a StringValue object.</p></p>
             </div>
                     <div class="method-item">
                     <h3 id="method_setOptions">
-        <div class="location"><a href="https://github.com/protocolbuffers/protobuf-php/blob/v3.21.10/src/Google/Protobuf/Type.php#L176">at line 176</a></div>
+        <div class="location"><a href="https://github.com/protocolbuffers/protobuf-php/blob/4.33.6/src/Google/Protobuf/Type.php#L189">at line 189</a></div>
         <code>                    $this
-    <strong>setOptions</strong>(<a href="../../Google/Protobuf/Option.html"><abbr title="Google\Protobuf\Option">Option</abbr></a>[]|<a href="../../Google/Protobuf/Internal/RepeatedField.html"><abbr title="Google\Protobuf\Internal\RepeatedField">RepeatedField</abbr></a> $var)
+    <strong>setOptions</strong>(<a href="../../Google/Protobuf/Option.html"><abbr title="Google\Protobuf\Option">Option</abbr></a>[] $var)
         </code>
     </h3>
     <div class="details">    
@@ -1593,7 +1737,7 @@ must receive data that is either a string or a StringValue object.</p></p>
 
                     <table class="table table-condensed">
                     <tr>
-                <td><a href="../../Google/Protobuf/Option.html"><abbr title="Google\Protobuf\Option">Option</abbr></a>[]|<a href="../../Google/Protobuf/Internal/RepeatedField.html"><abbr title="Google\Protobuf\Internal\RepeatedField">RepeatedField</abbr></a></td>
+                <td><a href="../../Google/Protobuf/Option.html"><abbr title="Google\Protobuf\Option">Option</abbr></a>[]</td>
                 <td>$var</td>
                 <td></td>
             </tr>
@@ -1618,7 +1762,7 @@ must receive data that is either a string or a StringValue object.</p></p>
             </div>
                     <div class="method-item">
                     <h3 id="method_getSourceContext">
-        <div class="location"><a href="https://github.com/protocolbuffers/protobuf-php/blob/v3.21.10/src/Google/Protobuf/Type.php#L190">at line 190</a></div>
+        <div class="location"><a href="https://github.com/protocolbuffers/protobuf-php/blob/4.33.6/src/Google/Protobuf/Type.php#L203">at line 203</a></div>
         <code>                    <a href="../../Google/Protobuf/SourceContext.html"><abbr title="Google\Protobuf\SourceContext">SourceContext</abbr></a>|null
     <strong>getSourceContext</strong>()
         </code>
@@ -1650,7 +1794,7 @@ must receive data that is either a string or a StringValue object.</p></p>
             </div>
                     <div class="method-item">
                     <h3 id="method_hasSourceContext">
-        <div class="location"><a href="https://github.com/protocolbuffers/protobuf-php/blob/v3.21.10/src/Google/Protobuf/Type.php#L195">at line 195</a></div>
+        <div class="location"><a href="https://github.com/protocolbuffers/protobuf-php/blob/4.33.6/src/Google/Protobuf/Type.php#L208">at line 208</a></div>
         <code>                    
     <strong>hasSourceContext</strong>()
         </code>
@@ -1674,7 +1818,7 @@ must receive data that is either a string or a StringValue object.</p></p>
             </div>
                     <div class="method-item">
                     <h3 id="method_clearSourceContext">
-        <div class="location"><a href="https://github.com/protocolbuffers/protobuf-php/blob/v3.21.10/src/Google/Protobuf/Type.php#L200">at line 200</a></div>
+        <div class="location"><a href="https://github.com/protocolbuffers/protobuf-php/blob/4.33.6/src/Google/Protobuf/Type.php#L213">at line 213</a></div>
         <code>                    
     <strong>clearSourceContext</strong>()
         </code>
@@ -1698,7 +1842,7 @@ must receive data that is either a string or a StringValue object.</p></p>
             </div>
                     <div class="method-item">
                     <h3 id="method_setSourceContext">
-        <div class="location"><a href="https://github.com/protocolbuffers/protobuf-php/blob/v3.21.10/src/Google/Protobuf/Type.php#L212">at line 212</a></div>
+        <div class="location"><a href="https://github.com/protocolbuffers/protobuf-php/blob/4.33.6/src/Google/Protobuf/Type.php#L225">at line 225</a></div>
         <code>                    $this
     <strong>setSourceContext</strong>(<a href="../../Google/Protobuf/SourceContext.html"><abbr title="Google\Protobuf\SourceContext">SourceContext</abbr></a> $var)
         </code>
@@ -1740,7 +1884,7 @@ must receive data that is either a string or a StringValue object.</p></p>
             </div>
                     <div class="method-item">
                     <h3 id="method_getSyntax">
-        <div class="location"><a href="https://github.com/protocolbuffers/protobuf-php/blob/v3.21.10/src/Google/Protobuf/Type.php#L226">at line 226</a></div>
+        <div class="location"><a href="https://github.com/protocolbuffers/protobuf-php/blob/4.33.6/src/Google/Protobuf/Type.php#L239">at line 239</a></div>
         <code>                    int
     <strong>getSyntax</strong>()
         </code>
@@ -1772,7 +1916,7 @@ must receive data that is either a string or a StringValue object.</p></p>
             </div>
                     <div class="method-item">
                     <h3 id="method_setSyntax">
-        <div class="location"><a href="https://github.com/protocolbuffers/protobuf-php/blob/v3.21.10/src/Google/Protobuf/Type.php#L238">at line 238</a></div>
+        <div class="location"><a href="https://github.com/protocolbuffers/protobuf-php/blob/4.33.6/src/Google/Protobuf/Type.php#L251">at line 251</a></div>
         <code>                    $this
     <strong>setSyntax</strong>(int $var)
         </code>
@@ -1790,6 +1934,80 @@ must receive data that is either a string or a StringValue object.</p></p>
                     <table class="table table-condensed">
                     <tr>
                 <td>int</td>
+                <td>$var</td>
+                <td></td>
+            </tr>
+            </table>
+
+            
+                            <h4>Return Value</h4>
+
+                    <table class="table table-condensed">
+        <tr>
+            <td>$this</td>
+            <td></td>
+        </tr>
+    </table>
+
+            
+            
+            
+                    </div>
+    </div>
+
+            </div>
+                    <div class="method-item">
+                    <h3 id="method_getEdition">
+        <div class="location"><a href="https://github.com/protocolbuffers/protobuf-php/blob/4.33.6/src/Google/Protobuf/Type.php#L265">at line 265</a></div>
+        <code>                    string
+    <strong>getEdition</strong>()
+        </code>
+    </h3>
+    <div class="details">    
+    
+            
+
+        <div class="method-description">
+                            <p><p>The source edition string, only valid when syntax is SYNTAX_EDITIONS.</p></p>                <p><p>Generated from protobuf field <code>string edition = 7;</code></p></p>        
+        </div>
+        <div class="tags">
+            
+                            <h4>Return Value</h4>
+
+                    <table class="table table-condensed">
+        <tr>
+            <td>string</td>
+            <td></td>
+        </tr>
+    </table>
+
+            
+            
+            
+                    </div>
+    </div>
+
+            </div>
+                    <div class="method-item">
+                    <h3 id="method_setEdition">
+        <div class="location"><a href="https://github.com/protocolbuffers/protobuf-php/blob/4.33.6/src/Google/Protobuf/Type.php#L277">at line 277</a></div>
+        <code>                    $this
+    <strong>setEdition</strong>(string $var)
+        </code>
+    </h3>
+    <div class="details">    
+    
+            
+
+        <div class="method-description">
+                            <p><p>The source edition string, only valid when syntax is SYNTAX_EDITIONS.</p></p>                <p><p>Generated from protobuf field <code>string edition = 7;</code></p></p>        
+        </div>
+        <div class="tags">
+                            <h4>Parameters</h4>
+
+                    <table class="table table-condensed">
+                    <tr>
+                <td>string</td>
                 <td>$var</td>
                 <td></td>
             </tr>
