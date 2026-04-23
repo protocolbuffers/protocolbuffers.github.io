@@ -17,7 +17,7 @@ To install the latest release of the protocol compiler from pre-compiled
 binaries, follow these instructions:
 
 1.  Navigate to the latest
-    [GitHub Release](https://github.com/protocolbuffers/protobuf/releases/tag/v34.1).
+    [GitHub Release](https://github.com/protocolbuffers/protobuf/releases/latest).
 2.  Download the zip file corresponding to your operating system and computer
     architecture (`protoc-<version>-<os>-<arch>.zip`).
 
