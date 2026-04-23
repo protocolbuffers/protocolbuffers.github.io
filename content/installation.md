@@ -16,25 +16,38 @@ to install `protoc`.
 To install the latest release of the protocol compiler from pre-compiled
 binaries, follow these instructions:
 
-1.  From https://github.com/google/protobuf/releases, manually download the zip
-    file corresponding to your operating system and computer architecture
-    (`protoc-<version>-<os>-<arch>.zip`), or fetch the file using commands such
-    as the following:
+1.  Navigate to the latest
+    [GitHub Release](https://github.com/protocolbuffers/protobuf/releases/tag/v34.1).
+2.  Download the zip file corresponding to your operating system and computer
+    architecture (`protoc-<version>-<os>-<arch>.zip`).
+
+    *   For example, for Linux x86-64 on 34.1, the filename would be
+        `protoc-34.1-linux-x86_64.zip`.
+
+    **Alternative: Download using commands**
+
+    Instead of manual download, you can use the following commands to
+    automatically fetch the latest Linux x86_64 asset:
 
     ```sh
-    PB_REL="https://github.com/protocolbuffers/protobuf/releases"
-    curl -LO $PB_REL/download/v30.2/protoc-30.2-linux-x86_64.zip
-
+    # Fetch the download URL for the latest Linux x86_64 asset from GitHub API
+    URL=$(curl -s https://api.github.com/repos/protocolbuffers/protobuf/releases/latest \
+      | jq -r '.assets[] | select(.name | endswith("linux-x86_64.zip")) | .browser_download_url')
+    curl -LO $URL
     ```
 
-2.  Unzip the file under `$HOME/.local` or a directory of your choice. For
+3.  Unzip the file under `$HOME/.local` or a directory of your choice. For
     example:
 
     ```sh
-    unzip protoc-30.2-linux-x86_64.zip -d $HOME/.local
+    # If you used the command above:
+    unzip $(basename $URL) -d $HOME/.local
+
+    # If you downloaded manually (replace <version> with actual version):
+    # unzip protoc-<version>-linux-x86_64.zip -d $HOME/.local
     ```
 
-3.  Update your environment's path variable to include the path to the `protoc`
+4.  Update your environment's path variable to include the path to the `protoc`
     executable. For example:
 
     ```sh
@@ -59,14 +72,14 @@ Linux, macOS, or Windows using the following commands.
 
     ```sh
     apt install -y protobuf-compiler
-    protoc --version  # Ensure compiler version is 3+
+    protoc --version  # Ensure compiler version is 33.0+
     ```
 
 -   MacOS, using [Homebrew](https://brew.sh):
 
     ```sh
     brew install protobuf
-    protoc --version  # Ensure compiler version is 3+
+    protoc --version  # Ensure compiler version is 33.0+
     ```
 
 -   Windows, using
@@ -74,7 +87,7 @@ Linux, macOS, or Windows using the following commands.
 
     ```sh
     > winget install protobuf
-    > protoc --version # Ensure compiler version is 3+
+    > protoc --version # Ensure compiler version is 33.0+
     ```
 
 ### Other Installation Options {#other}
