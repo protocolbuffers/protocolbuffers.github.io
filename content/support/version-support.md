@@ -12,12 +12,12 @@ type = "docs"
 
 Language | Active Support | Maintenance Only      | Minimum Gencode
 -------- | -------------- | --------------------- | ---------------
-protoc   | 34.x           | 29.x, 25.x (for Java) |
-C++      | 7.34.x         | 5.29.x                | Exact Match
+protoc   | 34.x           | 33.x, 25.x (for Java) |
+C++      | 7.34.x         | 6.33.x                | Exact Match
 C#       | 3.34.x         |                       | 3.0.0
 Java     | 4.34.x         | 3.25.x                | 3.0.0
-PHP      | 5.34.x         |                       | 4.0.0
-Python   | 7.34.x         | 5.29.x                | [3.20.0](https://protobuf.dev/support/cross-version-runtime-guarantee#python)
+PHP      | 5.34.x         | 4.33.x                | 4.26.0
+Python   | 7.34.x         | 6.33.x                | [3.20.0](https://protobuf.dev/support/cross-version-runtime-guarantee#python)
 Ruby     | 4.34.x         |                       | 3.0.0
 
 ### Minimum Supported Gencode {#min-gencode}
@@ -33,17 +33,22 @@ for more information.
 
 ## Supported Editions {#supported-editions}
 
-Protobuf release versions are independent of edition "versions" (proto2, proto3,
-2023, 2024). All currently supported release versions support all editions.
+Protobuf release versions are independent of edition "versions" which determine
+the syntax used by a .proto file (proto2, proto3, 2023, 2024).
 
-The current supported editions are:
+Currently, latest protoc supports handling of all cases. At some future time, a
+protoc release may drop support for some set of .proto inputs, but we have no
+concrete plans to do so today.
 
-Edition | Released Version | Date Released
-------- | ---------------- | -------------
-2024    | 32.0             | 23 May 2025
-2023    | 27.0             | 13 Aug 2024
-proto3  | 3.0              | 2016
-proto2  | 2.0              | 2008
+As new Editions are added, a sufficiently new protoc is needed to use files
+which use that Edition:
+
+Edition | Minimum supported protoc | Date Released
+------- | ------------------------ | -------------
+2024    | 32.0                     | 23 May 2025
+2023    | 27.0                     | 13 Aug 2024
+proto3  | 3.0                      | 2016
+proto2  | 2.0                      | 2008
 
 ## Numbering Scheme {#numbering}
 
@@ -51,12 +56,12 @@ Version numbers use [SemVer](https://semver.org) conventions. In the version
 "3.21.7", "3" is the major version, "21" is the minor version, and "7" is the
 patch number.
 
-Protobuf releases use only a `minor.point` format, for example `29.5`.
+Protobuf releases use only a `minor.point` format, for example `34.1`.
 
 Each language runtime shares this `minor.point` but uses a language-specific
-major version. For example, Protobuf release `29.5` corresponds to Java runtime
-`4.29.5` and C# runtime `3.29.5`. We recommend using `protoc` `29.5` with Java
-`4.29.5` and C# `3.29.5`.
+major version. For example, Protobuf release `34.1` corresponds to Java runtime
+`4.34.1` and C# runtime `3.34.1`. We recommend using `protoc` `34.1` with Java
+`4.34.1` and C# `3.34.1`.
 
 This scheme unifies release numbers across all languages while decoupling major
 version changes. For example, release `30.0` contained breaking changes for
@@ -172,17 +177,17 @@ appear in *italics* and might change.
     <td>16 Feb 2023</td>
     <td>31 Mar 2025</td>
   </tr>
-  <tr class="maintenance">
+  <tr class="end-of-life">
     <th>5.x</th>
     <td>13 Mar 2024</td>
     <td>31 Mar 2026</td>
   </tr>
-  <tr class="active">
+  <tr class="maintenance">
     <th>6.x</th>
     <td>4 Mar 2025</td>
     <td>31 Mar 2027</td>
   </tr>
-  <tr class="future">
+  <tr class="active">
     <th>7.x</th>
     <td>25 Feb 2026</td>
     <td>TBD</td>
@@ -195,7 +200,6 @@ appear in *italics* and might change.
   <tr>
     <th>Protobuf C++</th>
     <th>protoc</th>
-    <th class="y23q2"><span>23Q2</span></th>
     <th class="y23q3"><span>23Q3</span></th>
     <th class="y23q4"><span>23Q4</span></th>
     <th class="y24q1"><span>24Q1</span></th>
@@ -207,25 +211,11 @@ appear in *italics* and might change.
     <th class="y25q3"><span>25Q3</span></th>
     <th class="y25q4"><span>25Q4</span></th>
     <th class="y26q1"><span>26Q1</span></th>
-  </tr>
-  <tr class="end-of-life">
-    <th>3.x</th>
-    <td>21.x</td>
-    <td class="y23q2 maintenance" colspan=3>3.21</td>
-    <td class="y24q1"></td>
-    <td class="y24q2"></td>
-    <td class="y24q3"></td>
-    <td class="y24q4"></td>
-    <td class="y25q1"></td>
-    <td class="y25q2"></td>
-    <td class="y25q3"></td>
-    <td class="y25q4"></td>
-    <td class="y26q1"></td>
+    <th class="y26q2"><span>26Q2</span></th>
   </tr>
   <tr class="end-of-life">
     <th>4.x</th>
     <td>22.x-25.x</td>
-    <td class="y23q2 active">4.23</td>
     <td class="y23q3 active">4.24</td>
     <td class="y23q4 active">4.25</td>
     <td class="y24q1 maintenance" colspan=4>4.25</td>
@@ -234,11 +224,11 @@ appear in *italics* and might change.
     <td class="y25q3"></td>
     <td class="y25q4"></td>
     <td class="y26q1"></td>
+    <td class="y26q2"></td>
   </tr>
-  <tr class="maintenance">
+  <tr class="end-of-life">
     <th>5.x</th>
     <td>26.x-29.x</td>
-    <td class="y23q2"></td>
     <td class="y23q3"></td>
     <td class="y23q4"></td>
     <td class="y24q1 active">5.26</td>
@@ -247,11 +237,11 @@ appear in *italics* and might change.
     <td class="y24q4 active">5.29</td>
     <td class="y25q1 maintenance" colspan=4>5.29</td>
     <td class="y26q1"></td>
+    <td class="y26q2"></td>
   </tr>
-  <tr class="active">
+  <tr class="maintenance">
     <th>6.x</th>
     <td>30.x-33.x</td>
-    <td class="y23q2"></td>
     <td class="y23q3"></td>
     <td class="y23q4"></td>
     <td class="y24q1"></td>
@@ -263,11 +253,11 @@ appear in *italics* and might change.
     <td class="y25q3 active">6.32</td>
     <td class="y25q4 active">6.33</td>
     <td class="y26q1 maintenance">6.33</td>
+    <td class="y26q2">6.33</td>
   </tr>
-  <tr class="future">
+  <tr class="active">
     <th>7.x</th>
     <td>34.x+</td>
-    <td class="y23q2"></td>
     <td class="y23q3"></td>
     <td class="y23q4"></td>
     <td class="y24q1"></td>
@@ -278,7 +268,8 @@ appear in *italics* and might change.
     <td class="y25q2"></td>
     <td class="y25q3"></td>
     <td class="y25q4"></td>
-    <td class="y26q1 future">7.34</td>
+    <td class="y26q1 active">7.34</td>
+    <td class="y26q2 future">7.35</td>
   </tr>
 </table>
 
@@ -312,7 +303,6 @@ For supported versions, see the
   <tr>
     <th>Protobuf C#</th>
     <th>protoc</th>
-    <th class="y23q2"><span>23Q2</span></th>
     <th class="y23q3"><span>23Q3</span></th>
     <th class="y23q4"><span>23Q4</span></th>
     <th class="y24q1"><span>24Q1</span></th>
@@ -324,11 +314,11 @@ For supported versions, see the
     <th class="y25q3"><span>25Q3</span></th>
     <th class="y25q4"><span>25Q4</span></th>
     <th class="y26q1"><span>26Q1</span></th>
+    <th class="y26q2"><span>26Q2</span></th>
   </tr>
   <tr class="active">
     <th>3.x</th>
     <td>21.x+</td>
-    <td class="y23q2 active">3.23</td>
     <td class="y23q3 active">3.24</td>
     <td class="y23q4 active">3.25</td>
     <td class="y24q1 active">3.26</td>
@@ -339,7 +329,8 @@ For supported versions, see the
     <td class="y25q2 active">3.31</td>
     <td class="y25q3 active">3.32</td>
     <td class="y25q4 active">3.33</td>
-    <td class="y26q1 future">3.34</td>
+    <td class="y26q1 active">3.34</td>
+    <td class="y26q2 future">3.35</td>
   </tr>
 </table>
 
@@ -384,7 +375,6 @@ For specific versions supported, see
   <tr>
     <th>Protobuf Java</th>
     <th>protoc</th>
-    <th class="y23q2"><span>23Q2</span></th>
     <th class="y23q3"><span>23Q3</span></th>
     <th class="y23q4"><span>23Q4</span></th>
     <th class="y24q1"><span>24Q1</span></th>
@@ -396,19 +386,18 @@ For specific versions supported, see
     <th class="y25q3"><span>25Q3</span></th>
     <th class="y25q4"><span>25Q4</span></th>
     <th class="y26q1"><span>26Q1</span></th>
+    <th class="y26q2"><span>26Q2</span></th>
   </tr>
   <tr class="maintenance">
     <th>3.x</th>
     <td>21.x-25.x</td>
-    <td class="y23q2 active">3.23</td>
     <td class="y23q3 active">3.24</td>
     <td class="y23q4 active">3.25</td>
-    <td class="y24q1 maintenance" colspan=9>3.25</td>
+    <td class="y24q1 maintenance" colspan=10>3.25</td>
   </tr>
   <tr class="active">
     <th>4.x</th>
     <td>26.x+</td>
-    <td class="y23q2"></td>
     <td class="y23q3"></td>
     <td class="y23q4"></td>
     <td class="y24q1 active">4.26</td>
@@ -419,7 +408,8 @@ For specific versions supported, see
     <td class="y25q2 active">4.31</td>
     <td class="y25q3 active">4.32</td>
     <td class="y25q4 active">4.33</td>
-    <td class="y26q1 future">4.34</td>
+    <td class="y26q1 active">4.34</td>
+    <td class="y26q2 future">4.35</td>
   </tr>
 </table>
 
@@ -456,12 +446,12 @@ We support whichever version is lower.
     <td>25 May 2022</td>
     <td>31 Mar 2025</td>
   </tr>
-  <tr class="active">
+  <tr class="maintenance">
     <th>4.x</th>
     <td>13 Mar 2024</td>
     <td>31 Mar 2026</td>
   </tr>
-  <tr class="future">
+  <tr class="active">
     <th>5.x</th>
     <td>25 Feb 2026</td>
     <td>TBD</td>
@@ -474,7 +464,6 @@ We support whichever version is lower.
   <tr>
     <th>Protobuf PHP</th>
     <th>protoc</th>
-    <th class="y23q2"><span>23Q2</span></th>
     <th class="y23q3"><span>23Q3</span></th>
     <th class="y23q4"><span>23Q4</span></th>
     <th class="y24q1"><span>24Q1</span></th>
@@ -486,11 +475,11 @@ We support whichever version is lower.
     <th class="y25q3"><span>25Q3</span></th>
     <th class="y25q4"><span>25Q4</span></th>
     <th class="y26q1"><span>26Q1</span></th>
+    <th class="y26q2"><span>26Q2</span></th>
   </tr>
   <tr class="end-of-life">
     <th>3.x</th>
     <td>21.x-25.x</td>
-    <td class="y23q2 active">3.23</td>
     <td class="y23q3 active">3.24</td>
     <td class="y23q4 active">3.25</td>
     <td class="y24q1 maintenance" colspan=4>3.25</td>
@@ -499,11 +488,11 @@ We support whichever version is lower.
     <td class="y25q3"></td>
     <td class="y25q4"></td>
     <td class="y26q1"></td>
+    <td class="y26q2"></td>
   </tr>
-  <tr class="active">
+  <tr class="maintenance">
     <th>4.x</th>
     <td>26.x - 33.x</td>
-    <td class="y23q2"></td>
     <td class="y23q3"></td>
     <td class="y23q4"></td>
     <td class="y24q1 active">4.26</td>
@@ -515,11 +504,11 @@ We support whichever version is lower.
     <td class="y25q3 active">4.32</td>
     <td class="y25q4 active">4.33</td>
     <td class="y26q1 maintenance">4.33</td>
+    <td class="y26q2">4.33</td>
   </tr>
-    <tr class="future">
+    <tr class="active">
     <th>5.x</th>
     <td>34.x+</td>
-    <td class="y23q2"></td>
     <td class="y23q3"></td>
     <td class="y23q4"></td>
     <td class="y24q1"></td>
@@ -530,7 +519,8 @@ We support whichever version is lower.
     <td class="y25q2"></td>
     <td class="y25q3"></td>
     <td class="y25q4"></td>
-    <td class="y26q1 future">5.34</td>
+    <td class="y26q1 active">5.34</td>
+    <td class="y26q2 future">5.35</td>
   </tr>
 </table>
 
@@ -556,17 +546,17 @@ For supported versions, see the
     <td>25 May 2022</td>
     <td>31 Mar 2025</td>
   </tr>
-  <tr class="maintenance">
+  <tr class="end-of-life">
     <th>5.x</th>
     <td>13 Mar 2024</td>
     <td>31 Mar 2026</td>
   </tr>
-  <tr class="active">
+  <tr class="maintenance">
     <th>6.x</th>
     <td>4 Mar 2025</td>
     <td>31 Mar 2027</td>
   </tr>
-  <tr class="future">
+  <tr class="active">
     <th>7.x</th>
     <td>25 Feb 2026</td>
     <td>TBD</td>
@@ -579,7 +569,6 @@ For supported versions, see the
   <tr>
     <th>Protobuf Python</th>
     <th>protoc</th>
-    <th class="y23q2"><span>23Q2</span></th>
     <th class="y23q3"><span>23Q3</span></th>
     <th class="y23q4"><span>23Q4</span></th>
     <th class="y24q1"><span>24Q1</span></th>
@@ -591,11 +580,11 @@ For supported versions, see the
     <th class="y25q3"><span>25Q3</span></th>
     <th class="y25q4"><span>25Q4</span></th>
     <th class="y26q1"><span>26Q1</span></th>
+    <th class="y26q2"><span>26Q2</span></th>
   </tr>
   <tr class="end-of-life">
     <th>4.x</th>
     <td>21.x-25.x</td>
-    <td class="y23q2 active">4.23</td>
     <td class="y23q3 active">4.24</td>
     <td class="y23q4 active">4.25</td>
     <td class="y24q1 maintenance" colspan=4>4.25</td>
@@ -604,11 +593,11 @@ For supported versions, see the
     <td class="y25q3"></td>
     <td class="y25q4"></td>
     <td class="y26q1"></td>
+    <td class="y26q2"></td>
   </tr>
-  <tr class="maintenance">
+  <tr class="end-of-life">
     <th>5.x</th>
     <td>26.x-29.x</td>
-    <td class="y23q2"></td>
     <td class="y23q3"></td>
     <td class="y23q4"></td>
     <td class="y24q1 active">5.26</td>
@@ -617,11 +606,11 @@ For supported versions, see the
     <td class="y24q4 active">5.29</td>
     <td class="y25q1 maintenance" colspan=4>5.29</td>
     <td class="y26q1"></td>
+    <td class="y26q2"></td>
   </tr>
-  <tr class="active">
+  <tr class="maintenance">
     <th>6.x</th>
     <td>30.x-33.x</td>
-    <td class="y23q2"></td>
     <td class="y23q3"></td>
     <td class="y23q4"></td>
     <td class="y24q1"></td>
@@ -633,11 +622,11 @@ For supported versions, see the
     <td class="y25q3 active">6.32</td>
     <td class="y25q4 active">6.33</td>
     <td class="y26q1 maintenance">6.33</td>
+    <td class="y26q2">6.33</td>
   </tr>
-    <tr class="future">
+    <tr class="active">
     <th>7.x</th>
     <td>34.x+</td>
-    <td class="y23q2"></td>
     <td class="y23q3"></td>
     <td class="y23q4"></td>
     <td class="y24q1"></td>
@@ -648,7 +637,8 @@ For supported versions, see the
     <td class="y25q2"></td>
     <td class="y25q3"></td>
     <td class="y25q4"></td>
-    <td class="y26q1 future">7.34</td>
+    <td class="y26q1 active">7.34</td>
+    <td class="y26q2 future">7.35</td>
   </tr>
 </table>
 
@@ -687,7 +677,6 @@ For supported versions, see the
   <tr>
     <th>Protobuf Ruby</th>
     <th>protoc</th>
-    <th class="y23q2"><span>23Q2</span></th>
     <th class="y23q3"><span>23Q3</span></th>
     <th class="y23q4"><span>23Q4</span></th>
     <th class="y24q1"><span>24Q1</span></th>
@@ -699,11 +688,11 @@ For supported versions, see the
     <th class="y25q3"><span>25Q3</span></th>
     <th class="y25q4"><span>25Q4</span></th>
     <th class="y26q1"><span>26Q1</span></th>
+    <th class="y26q2"><span>26Q2</span></th>
   </tr>
   <tr class="end-of-life">
     <th>3.x</th>
     <td>21.x-25.x</td>
-    <td class="y23q2 active">3.23</td>
     <td class="y23q3 active">3.24</td>
     <td class="y23q4 active">3.25</td>
     <td class="y24q1 maintenance" colspan=4>3.25</td>
@@ -712,11 +701,11 @@ For supported versions, see the
     <td class="y25q3"></td>
     <td class="y25q4"></td>
     <td class="y26q1"></td>
+    <td class="y26q2"></td>
   </tr>
   <tr class="active">
     <th>4.x</th>
     <td>26.x+</td>
-    <td class="y23q2"></td>
     <td class="y23q3"></td>
     <td class="y23q4"></td>
     <td class="y24q1 active">4.26</td>
@@ -727,7 +716,8 @@ For supported versions, see the
     <td class="y25q2 active">4.31</td>
     <td class="y25q3 active">4.32</td>
     <td class="y25q4 active">4.33</td>
-    <td class="y26q1 future">4.34</td>
+    <td class="y26q1 active">4.34</td>
+    <td class="y26q2 future">4.35</td>
   </tr>
 </table>
 
