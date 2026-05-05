@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8" />
     <meta name="robots" content="index, follow, all" />
-    <title>Google\Protobuf\Internal\FieldOptions\CType | Google Protobuf - v3.21.10</title>
+    <title>Google\Protobuf\Internal\FieldOptions\CType | Google Protobuf - 4.33.6</title>
 
             <link rel="stylesheet" type="text/css" href="../../../../css/bootstrap.min.css">
         <link rel="stylesheet" type="text/css" href="../../../../css/bootstrap-theme.min.css">
@@ -57,7 +57,7 @@
                     <span class="icon-bar"></span>
                     <span class="icon-bar"></span>
                 </button>
-                <a class="navbar-brand" href="../../../../index.html">Google Protobuf - v3.21.10</a>
+                <a class="navbar-brand" href="../../../../index.html">Google Protobuf - 4.33.6</a>
             </div>
             <div class="collapse navbar-collapse" id="navbar-elements">
                 <ul class="nav navbar-nav">
@@ -86,7 +86,7 @@
 
     
     <p>        class
-    <strong>CType</strong>        (<a href="https://github.com/protocolbuffers/protobuf-php/blob/v3.21.10/src/Google/Protobuf/Internal/FieldOptions/CType.php">View source</a>)
+    <strong>CType</strong>        (<a href="https://github.com/protocolbuffers/protobuf-php/blob/4.33.6/src/Google/Protobuf/Internal/FieldOptions/CType.php">View source</a>)
 </p>
 
         
@@ -112,8 +112,13 @@
                                                                                                                         CORD
                                     </td>
                 <td class="last">
-                    <p><em><p>Generated from protobuf enum <code>CORD = 1;</code></p></em></p>
-                    <p></p>
+                    <p><em><p>The option [ctype=CORD] may be applied to a non-repeated field of type
+&quot;bytes&quot;. It indicates that in C++, the data should be stored in a Cord
+instead of a string.  For very large strings, this may reduce memory
+fragmentation. It may also allow better performance when parsing from a
+Cord, or when parsing with aliasing enabled, as the parsed Cord may then
+alias the original buffer.</p></em></p>
+                    <p><p>Generated from protobuf enum <code>CORD = 1;</code></p></p>
                 </td>
             </tr>
                     <tr>
@@ -162,7 +167,7 @@
             <div id="method-details">
                     <div class="method-item">
                     <h3 id="method_name">
-        <div class="location"><a href="https://github.com/protocolbuffers/protobuf-php/blob/v3.21.10/src/Google/Protobuf/Internal/FieldOptions/CType.php#L35">at line 35</a></div>
+        <div class="location"><a href="https://github.com/protocolbuffers/protobuf-php/blob/4.33.6/src/Google/Protobuf/Internal/FieldOptions/CType.php#L43">at line 43</a></div>
         <code>        static            
     <strong>name</strong>($value)
         </code>
@@ -196,7 +201,7 @@
             </div>
                     <div class="method-item">
                     <h3 id="method_value">
-        <div class="location"><a href="https://github.com/protocolbuffers/protobuf-php/blob/v3.21.10/src/Google/Protobuf/Internal/FieldOptions/CType.php#L45">at line 45</a></div>
+        <div class="location"><a href="https://github.com/protocolbuffers/protobuf-php/blob/4.33.6/src/Google/Protobuf/Internal/FieldOptions/CType.php#L53">at line 53</a></div>
         <code>        static            
     <strong>value</strong>($name)
         </code>
