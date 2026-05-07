@@ -163,6 +163,7 @@ Introduced in Edition 2024, this feature enables strict naming style enforcement
 as defined in
 [the style guide](/programming-guides/style) to ensure
 protos are round-trippable by default with a feature value to opt-out to use
+legacy naming style.
 
 **Values available:**
 
