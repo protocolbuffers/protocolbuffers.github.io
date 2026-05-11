@@ -1580,23 +1580,15 @@ Here are a few of the most commonly used options:
     option optimize_for = CODE_SIZE;
     ```
 
-*   `cc_generic_services`, `java_generic_services`, `py_generic_services` (file
-    options): **Generic services are deprecated.** Whether or not the protocol
-    buffer compiler should generate abstract service code based on
-    [services definitions](#services) in C++, Java, and Python, respectively.
-    For legacy reasons, these default to `true`. However, as of version 2.3.0
-    (January 2010), it is considered preferable for RPC implementations to
-    provide
+*   **Generic services are deprecated.** `cc_generic_services`,
+    `java_generic_services`, `py_generic_services` (file options): If true, the
+    C++, Java, or Python code generators generate deprecated abstract service
+    code based on [service definitions](#services). This has been deprecated
+    since version 2.3.0 (January 2010) and is disabled by default. RPC
+    implementations should provide
     [code generator plugins](/reference/cpp/api-docs/google.protobuf.compiler.plugin.pb)
-    to generate code more specific to each system, rather than rely on the
-    "abstract" services.
-
-    ```proto
-    // This file relies on plugins to generate service code.
-    option cc_generic_services = false;
-    option java_generic_services = false;
-    option py_generic_services = false;
-    ```
+    to generate code specific to their system instead rather than rely on
+    "abstract" services which will eventually be removed.
 
 *   `cc_enable_arenas` (file option): Enables
     [arena allocation](/reference/cpp/arenas) for C++
