@@ -87,6 +87,8 @@ directly).
     Failure reasons include if the representation exceeds the maximum encoded
     message size (must be less than 2 GiB), and `required` fields (proto2) that
     are unset.
+*   `fn serialized_len(&self) -> usize`: Returns the size in bytes of the
+    serialized message.
 *   `fn take_from(&mut self, other)`: Moves `other` into `self`, discarding any
     previous state that `self` contained.
 *   `fn copy_from(&mut self, other)`: Copies `other` into `self`, discarding any
@@ -96,6 +98,10 @@ directly).
     `Foo`. This is further covered in the section on proxy types.
 *   `fn as_mut(&mut self) -> FooMut<'_>`: Returns a mutable handle (mut) to
     `Foo`. This is further covered in the section on proxy types.
+*   `fn into_view(self) -> FooView<'_>`: Consumes `self` and returns an
+    immutable handle (view) to `Foo` with a shorter lifetime.
+*   `fn into_mut(self) -> FooMut<'_>`: Consumes `self` and returns a mutable
+    handle (mut) to `Foo` with a shorter lifetime.
 
 `Foo` additionally implements the following std traits:
 
@@ -225,10 +231,8 @@ The compiler generates the following accessor methods:
 *   `fn has_foo(&self) -> bool`: Returns `true` if the field is set.
 *   `fn foo(&self) -> i32`: Returns the current value of the field. If the field
     is not set, it returns the default value.
-*   `fn foo_opt(&self) -> protobuf::Optional<i32>`: Returns an optional with the
-    variant `Set(value)` if the field is set or `Unset(default value)` if it's
-    unset. See
-    [`Optional` rustdoc](https://docs.rs/protobuf/4.33.5-release/protobuf/enum.Optional.html)
+*   `fn foo_opt(&self) -> std::option::Option<i32>`: Returns `Some(value)` if
+    the field is set or `None` if it's unset.
 *   `fn set_foo(&mut self, val: i32)`: Sets the value of the field. After
     calling this, `has_foo()` will return `true` and `foo()` will return
     `value`.
@@ -255,9 +259,8 @@ The compiler generates the following accessor methods:
 *   `fn foo(&self) -> &protobuf::ProtoStr`: Returns the current value of the
     field. If the field is not set, it returns the default value. See
     [`ProtoStr` rustdoc](https://docs.rs/protobuf/4.33.5-release/protobuf/struct.ProtoStr.html).
-*   `fn foo_opt(&self) -> protobuf::Optional<&ProtoStr>`: Returns an optional
-    with the variant `Set(value)` if the field is set or `Unset(default value)`
-    if it's unset.
+*   `fn foo_opt(&self) -> std::option::Option<&ProtoStr>`: Returns `Some(value)`
+    if the field is set or `None` if it's unset.
 *   `fn set_foo(&mut self, val: impl IntoProxied<ProtoString>)`: Sets the value
     of the field. `&str`, `String`, `&ProtoStr` and `ProtoString` all
     implelement `IntoProxied` and can be passed to this method.
@@ -305,8 +308,8 @@ The compiler generates the following accessor methods:
 *   `fn has_foo(&self) -> bool`: Returns `true` if the field is set.
 *   `fn foo(&self) -> Bar`: Returns the current value of the field. If the field
     is not set, it returns the default value.
-*   `fn foo_opt(&self) -> Optional<Bar>`: Returns an optional with the variant
-    `Set(value)` if the field is set or `Unset(default value)` if it's unset.
+*   `fn foo_opt(&self) -> std::option::Option<Bar>`: Returns `Some(value)` if
+    the field is set or `None` if it's unset.
 *   `fn set_foo(&mut self, val: Bar)`: Sets the value of the field. After
     calling this, `has_foo()` will return `true` and `foo()` will return
     `value`.
@@ -338,9 +341,8 @@ The compiler will generate the following accessor methods:
 *   `fn foo_mut(&mut self) -> BarMut<'_>`: Returns a mutable handle to the
     current value of the field. Sets the field if it is not set. After calling
     this method, `has_foo()` returns true.
-*   `fn foo_opt(&self) -> protobuf::Optional<BarView>`: If the field is set,
-    returns the variant `Set` with its `value`. Else returns the variant `Unset`
-    with the default value.
+*   `fn foo_opt(&self) -> std::option::Option<BarView<'_>>`: If the field is
+    set, returns `Some` with its view. Else returns `None`.
 *   `fn set_foo(&mut self, value: impl protobuf::IntoProxied<Bar>)`: Sets the
     field to `value`. After calling this method, `has_foo()` returns `true`.
 *   `fn has_foo(&self) -> bool`: Returns `true` if the field is set.
@@ -558,7 +560,7 @@ The compiler will generate the following 3 accessor methods:
     [`MapView` rustdoc](https://docs.rs/protobuf/4.33.5-release/protobuf/struct.MapView.html).
 *   `fn weight_mut(&mut self) -> protobuf::MapMut<'_, i32, i32>`: Returns a
     mutable handle to the underlying map. See
-    [`MapMut` rustdoc](https://docs.rs/protobuf/4.33.5-release/protobuf/struct.MapView.html).
+    [`MapMut` rustdoc](https://docs.rs/protobuf/4.33.5-release/protobuf/struct.MapMut.html).
 *   `fn set_weight(&mut self, src: protobuf::IntoProxied<Map<i32, i32>>)`: Sets
     the underlying map to `src`. Accepts a `MapView`, `MapMut` or `Map`. See
     [`Map` rustdoc](https://docs.rs/protobuf/4.33.5-release/protobuf/struct.Map.html).
