@@ -298,3 +298,28 @@ definition and field of that type instead of using the group syntax, using the
 feature for wire-compatibility.
 
 See [groups](/programming-guides/proto2#groups).
+
+### Avoid Field Names and Oneof Names that Could Potentially Cause Collisions {#collisions}
+
+Using certain names together can cause collisions in generated code, which may
+prevent it from compiling. To reduce the risk of language-specific breakages,
+avoid certain prefixes, suffixes, and names.
+
+#### Prefixes: {#avoid-prefixes}
+
+*   has_
+*   get_
+*   set_
+*   clear_
+
+#### Suffixes: {#avoid-suffixes}
+
+*   _value
+
+#### Names: {#avoid-names}
+
+*   descriptor
+*   Other language keywords and reserved words should be avoided; see
+    [Avoid Using Language Keywords](/best-practices/dos-donts#avoid-keywords)
+    and
+    [Python keyword conflicts](/reference/python/python-generated#keyword-conflicts).
