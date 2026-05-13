@@ -572,6 +572,14 @@ where there's a language-specific `utf8_validation` feature that overrides it.
 See [`features.(pb.java).utf8_validation`](#java-utf8_validation) for the
 Java-language-specific feature.
 
+**Important:** In Java, `map<string, ...>` fields always undergo UTF-8
+validation, even when `utf8_validation = NONE` is configured. Because Java keys
+will be represented as `java.lang.String` objects, disabling validation would
+force the runtime to convert invalid byte sequences *lossily* using replacement
+characters. This lossy conversion can result in unexpected behavior, such as key
+collisions. As a wire-compatible workaround, consider using a `repeated` field
+with a custom "map entry" message instead.
+
 This feature doesn't impact proto3 files, so this section doesn't have a before
 and after of a proto3 file.
 
