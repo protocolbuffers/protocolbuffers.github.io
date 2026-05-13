@@ -6,6 +6,12 @@ description = "Language specification reference for edition 2024 of the Protocol
 type = "docs"
 +++
 
+**Note:** This language specification is known to be incomplete, particularly
+regarding whitespace handling and other lexical nuances. The C++ `protoc`
+compiler implementation serves as the definitive source of truth. This document
+is a best-effort attempt to describe the behavior of the handwritten parser,
+which is not based on a formal grammar.
+
 The syntax is specified using
 [Extended Backus-Naur Form (EBNF)](https://en.wikipedia.org/wiki/Extended_Backus%E2%80%93Naur_Form):
 
@@ -274,7 +280,10 @@ reserved foo, bar;
 Some message and enum definitions can be annotated to override their default
 symbol visibility.
 
-This is controlled by [`features.default_symbol_visibility`](/editions/features/#symbol-vis) and symbol visibility is further documented in [export / local Keywords](/editions/overview/#export-local)
+This is controlled by
+[`features.default_symbol_visibility`](/editions/features/#symbol-vis)
+and symbol visibility is further documented in
+[export / local Keywords](/editions/overview/#export-local)
 
 ```
 symbolVisibility = "export" | "local"
@@ -282,7 +291,8 @@ symbolVisibility = "export" | "local"
 
 ### Enum definition {#enum_definition}
 
-The enum definition consists of a name and an enum body. The enum body can have options, enum fields, and reserved statements.
+The enum definition consists of a name and an enum body. The enum body can have
+options, enum fields, and reserved statements.
 
 ```
 enum = [ symbolVisibility ] "enum" enumName enumBody

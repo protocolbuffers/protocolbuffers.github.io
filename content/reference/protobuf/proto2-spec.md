@@ -6,6 +6,12 @@ description = "Language specification reference for the proto2 syntax and its re
 type = "docs"
 +++
 
+**Note:** This language specification is known to be incomplete, particularly
+regarding whitespace handling and other lexical nuances. The C++ `protoc`
+compiler implementation serves as the definitive source of truth. This document
+is a best-effort attempt to describe the behavior of the handwritten parser,
+which is not based on a formal grammar.
+
 The syntax is specified using
 [Extended Backus-Naur Form (EBNF)](https://en.wikipedia.org/wiki/Extended_Backus%E2%80%93Naur_Form):
 
