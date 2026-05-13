@@ -96,9 +96,14 @@ Package names should attempt to be a short but unique name based on the project
 name. The package should not be coupled with the directory path, especially when
 the files are in a deeply nested path.
 
-Package names should not be Java style packages, even when located in Java or
-Kotlin directory. Do not use any of `com.company.x.y`, `com_company_x_y`, or
-`java_com_company_x_y`. Instead use `x.y` as the package and set `java_package =
+Package names should not use Java-style naming, even when located in a Java or
+Kotlin directory. Do not use any of the following styles:
+
+*   `com.company.x.y`
+*   `com_company_x_y`
+*   `java_com_company_x_y`
+
+Instead, use `x.y` for the `package` name and set `java_package =
 "com.company.x.y"`.
 
 ## Message Names {#message-names}
