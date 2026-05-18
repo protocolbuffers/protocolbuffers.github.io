@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8" />
     <meta name="robots" content="index, follow, all" />
-    <title>Google\Protobuf\Internal\MapFieldIter | Google Protobuf - v3.21.10</title>
+    <title>Google\Protobuf\Internal\MapFieldIter | Google Protobuf - 4.33.6</title>
 
             <link rel="stylesheet" type="text/css" href="../../../css/bootstrap.min.css">
         <link rel="stylesheet" type="text/css" href="../../../css/bootstrap-theme.min.css">
@@ -57,7 +57,7 @@
                     <span class="icon-bar"></span>
                     <span class="icon-bar"></span>
                 </button>
-                <a class="navbar-brand" href="../../../index.html">Google Protobuf - v3.21.10</a>
+                <a class="navbar-brand" href="../../../index.html">Google Protobuf - 4.33.6</a>
             </div>
             <div class="collapse navbar-collapse" id="navbar-elements">
                 <ul class="nav navbar-nav">
@@ -86,7 +86,7 @@
 
     
     <p>        class
-    <strong>MapFieldIter</strong>        implements        <a target="_blank" rel="noopener" href="https://www.php.net/Iterator">Iterator</a>        (<a href="https://github.com/protocolbuffers/protobuf-php/blob/v3.21.10/src/Google/Protobuf/Internal/MapFieldIter.php">View source</a>)
+    <strong>MapFieldIter</strong>        implements        <a target="_blank" rel="noopener" href="https://www.php.net/Iterator">Iterator</a>        (<a href="https://github.com/protocolbuffers/protobuf-php/blob/4.33.6/src/Google/Protobuf/Internal/MapFieldIter.php">View source</a>)
 </p>
 
         
@@ -108,7 +108,7 @@ syntax.</p></p>                    </div>
                     
                 </div>
                 <div class="col-md-8">
-                    <a href="#method___construct">__construct</a>($container, $key_type)
+                    <a href="#method___construct">__construct</a>(array $container, <a href="../../../Google/Protobuf/Internal/GPBType.html"><abbr title="Google\Protobuf\Internal\GPBType">GPBType</abbr></a> $key_type)
         
                                             <p><p>Create iterator instance for MapField.</p></p>                </div>
                 <div class="col-md-2"></div>
@@ -171,9 +171,9 @@ syntax.</p></p>                    </div>
             <div id="method-details">
                     <div class="method-item">
                     <h3 id="method___construct">
-        <div class="location"><a href="https://github.com/protocolbuffers/protobuf-php/blob/v3.21.10/src/Google/Protobuf/Internal/MapFieldIter.php#L60">at line 60</a></div>
+        <div class="location"><a href="https://github.com/protocolbuffers/protobuf-php/blob/4.33.6/src/Google/Protobuf/Internal/MapFieldIter.php#L41">at line 41</a></div>
         <code>                    
-    <strong>__construct</strong>($container, $key_type)
+    <strong>__construct</strong>(array $container, <a href="../../../Google/Protobuf/Internal/GPBType.html"><abbr title="Google\Protobuf\Internal\GPBType">GPBType</abbr></a> $key_type)
         </code>
     </h3>
     <div class="details">    
@@ -188,14 +188,14 @@ syntax.</p></p>                    </div>
 
                     <table class="table table-condensed">
                     <tr>
-                <td></td>
+                <td>array</td>
                 <td>$container</td>
                 <td></td>
             </tr>
                     <tr>
-                <td></td>
+                <td><a href="../../../Google/Protobuf/Internal/GPBType.html"><abbr title="Google\Protobuf\Internal\GPBType">GPBType</abbr></a></td>
                 <td>$key_type</td>
-                <td></td>
+                <td><p>Map key type.</p></td>
             </tr>
             </table>
 
@@ -209,7 +209,7 @@ syntax.</p></p>                    </div>
             </div>
                     <div class="method-item">
                     <h3 id="method_rewind">
-        <div class="location"><a href="https://github.com/protocolbuffers/protobuf-php/blob/v3.21.10/src/Google/Protobuf/Internal/MapFieldIter.php#L72">at line 72</a></div>
+        <div class="location"><a href="https://github.com/protocolbuffers/protobuf-php/blob/4.33.6/src/Google/Protobuf/Internal/MapFieldIter.php#L53">at line 53</a></div>
         <code>                    void
     <strong>rewind</strong>()
         </code>
@@ -248,7 +248,7 @@ syntax.</p></p>                    </div>
             </div>
                     <div class="method-item">
                     <h3 id="method_current">
-        <div class="location"><a href="https://github.com/protocolbuffers/protobuf-php/blob/v3.21.10/src/Google/Protobuf/Internal/MapFieldIter.php#L84">at line 84</a></div>
+        <div class="location"><a href="https://github.com/protocolbuffers/protobuf-php/blob/4.33.6/src/Google/Protobuf/Internal/MapFieldIter.php#L65">at line 65</a></div>
         <code>                    object
     <strong>current</strong>()
         </code>
@@ -287,7 +287,7 @@ syntax.</p></p>                    </div>
             </div>
                     <div class="method-item">
                     <h3 id="method_key">
-        <div class="location"><a href="https://github.com/protocolbuffers/protobuf-php/blob/v3.21.10/src/Google/Protobuf/Internal/MapFieldIter.php#L96">at line 96</a></div>
+        <div class="location"><a href="https://github.com/protocolbuffers/protobuf-php/blob/4.33.6/src/Google/Protobuf/Internal/MapFieldIter.php#L77">at line 77</a></div>
         <code>                    object
     <strong>key</strong>()
         </code>
@@ -326,7 +326,7 @@ syntax.</p></p>                    </div>
             </div>
                     <div class="method-item">
                     <h3 id="method_next">
-        <div class="location"><a href="https://github.com/protocolbuffers/protobuf-php/blob/v3.21.10/src/Google/Protobuf/Internal/MapFieldIter.php#L127">at line 127</a></div>
+        <div class="location"><a href="https://github.com/protocolbuffers/protobuf-php/blob/4.33.6/src/Google/Protobuf/Internal/MapFieldIter.php#L108">at line 108</a></div>
         <code>                    void
     <strong>next</strong>()
         </code>
@@ -365,7 +365,7 @@ syntax.</p></p>                    </div>
             </div>
                     <div class="method-item">
                     <h3 id="method_valid">
-        <div class="location"><a href="https://github.com/protocolbuffers/protobuf-php/blob/v3.21.10/src/Google/Protobuf/Internal/MapFieldIter.php#L138">at line 138</a></div>
+        <div class="location"><a href="https://github.com/protocolbuffers/protobuf-php/blob/4.33.6/src/Google/Protobuf/Internal/MapFieldIter.php#L119">at line 119</a></div>
         <code>                    bool
     <strong>valid</strong>()
         </code>
