@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8" />
     <meta name="robots" content="index, follow, all" />
-    <title>Google\Protobuf\Internal\FieldOptions | Google Protobuf - v3.21.10</title>
+    <title>Google\Protobuf\Internal\FieldOptions | Google Protobuf - 4.33.6</title>
 
             <link rel="stylesheet" type="text/css" href="../../../css/bootstrap.min.css">
         <link rel="stylesheet" type="text/css" href="../../../css/bootstrap-theme.min.css">
@@ -57,7 +57,7 @@
                     <span class="icon-bar"></span>
                     <span class="icon-bar"></span>
                 </button>
-                <a class="navbar-brand" href="../../../index.html">Google Protobuf - v3.21.10</a>
+                <a class="navbar-brand" href="../../../index.html">Google Protobuf - 4.33.6</a>
             </div>
             <div class="collapse navbar-collapse" id="navbar-elements">
                 <ul class="nav navbar-nav">
@@ -86,7 +86,7 @@
 
     
     <p>        class
-    <strong>FieldOptions</strong>        extends <a href="../../../Google/Protobuf/Internal/Message.html"><abbr title="Google\Protobuf\Internal\Message">Message</abbr></a>        (<a href="https://github.com/protocolbuffers/protobuf-php/blob/v3.21.10/src/Google/Protobuf/Internal/FieldOptions.php">View source</a>)
+    <strong>FieldOptions</strong>        extends <a href="../../../Google/Protobuf/Internal/Message.html"><abbr title="Google\Protobuf\Internal\Message">Message</abbr></a>        (<a href="https://github.com/protocolbuffers/protobuf-php/blob/4.33.6/src/Google/Protobuf/Internal/FieldOptions.php">View source</a>)
 </p>
 
         
@@ -107,10 +107,7 @@
                                                                                 
                                     </td>
                 <td>$ctype</td>
-                <td class="last"><p>The ctype option instructs the C++ code generator to use a different
-representation of the field than it normally would.  See the specific
-options below.  This option is not yet implemented in the open source
-release -- sorry, we'll try to include it in a future version!</p></td>
+                <td class="last"><p>NOTE: ctype is deprecated. Use <code>features.(pb.cpp).string_type</code> instead.</p></td>
                 <td></td>
             </tr>
                     <tr>
@@ -123,7 +120,9 @@ release -- sorry, we'll try to include it in a future version!</p></td>
 a more efficient representation on the wire. Rather than repeatedly
 writing the tag and type for each element, the entire array is encoded as
 a single length-delimited blob. In proto3, only explicit setting it to
-false will avoid using packed encoding.</p></td>
+false will avoid using packed encoding.  This option is prohibited in
+Editions, but the <code>repeated_field_encoding</code> feature can be used to control
+the behavior.</p></td>
                 <td></td>
             </tr>
                     <tr>
@@ -177,10 +176,48 @@ is a formalization for deprecating fields.</p></td>
                     <tr>
                 <td class="type" id="property_weak">
                                         protected                                        
-                                                                                
+                                        <span class="label label-danger">deprecated</span>                                        
                                     </td>
                 <td>$weak</td>
-                <td class="last"><p>For Google-internal migration only. Do not use.</p></td>
+                <td class="last"><p>DEPRECATED. DO NOT USE!
+For Google-internal migration only. Do not use.</p></td>
+                <td></td>
+            </tr>
+                    <tr>
+                <td class="type" id="property_debug_redact">
+                                        protected                                        
+                                                                                
+                                    </td>
+                <td>$debug_redact</td>
+                <td class="last"><p>Indicate that the field value should not be printed out when using debug
+formats, e.g. when the field contains sensitive credentials.</p></td>
+                <td></td>
+            </tr>
+                    <tr>
+                <td class="type" id="property_retention">
+                                        protected                                        
+                                                                                
+                                    </td>
+                <td>$retention</td>
+                <td class="last"><p>Generated from protobuf field <code>optional .google.protobuf.FieldOptions.OptionRetention retention = 17;</code></p></td>
+                <td></td>
+            </tr>
+                    <tr>
+                <td class="type" id="property_features">
+                                        protected                                        
+                                                                                
+                                    </td>
+                <td>$features</td>
+                <td class="last"><p>Any features defined in the specific edition.</p></td>
+                <td></td>
+            </tr>
+                    <tr>
+                <td class="type" id="property_feature_support">
+                                        protected                                        
+                                                                                
+                                    </td>
+                <td>$feature_support</td>
+                <td class="last"><p>Generated from protobuf field <code>optional .google.protobuf.FieldOptions.FeatureSupport feature_support = 22;</code></p></td>
                 <td></td>
             </tr>
             </table>
@@ -273,7 +310,7 @@ is a formalization for deprecating fields.</p></td>
             </div>
                     <div class="row">
                 <div class="col-md-2 type">
-                    
+                    null
                 </div>
                 <div class="col-md-8">
                     <a href="#method_clear">clear</a>()
@@ -284,7 +321,7 @@ is a formalization for deprecating fields.</p></td>
             </div>
                     <div class="row">
                 <div class="col-md-2 type">
-                    
+                    null
                 </div>
                 <div class="col-md-8">
                     <a href="#method_discardUnknownFields">discardUnknownFields</a>()
@@ -295,7 +332,7 @@ is a formalization for deprecating fields.</p></td>
             </div>
                     <div class="row">
                 <div class="col-md-2 type">
-                    
+                    null
                 </div>
                 <div class="col-md-8">
                     <a href="#method_mergeFrom">mergeFrom</a>(object $msg)
@@ -306,7 +343,7 @@ is a formalization for deprecating fields.</p></td>
             </div>
                     <div class="row">
                 <div class="col-md-2 type">
-                    
+                    null
                 </div>
                 <div class="col-md-8">
                     <a href="#method_mergeFromString">mergeFromString</a>(string $data)
@@ -317,10 +354,10 @@ is a formalization for deprecating fields.</p></td>
             </div>
                     <div class="row">
                 <div class="col-md-2 type">
-                    
+                    null
                 </div>
                 <div class="col-md-8">
-                    <a href="#method_mergeFromJsonString">mergeFromJsonString</a>(string $data, $ignore_unknown = false)
+                    <a href="#method_mergeFromJsonString">mergeFromJsonString</a>(string $data, bool $ignore_unknown = false)
         
                                             <p><p>Parses a json string to protobuf message.</p></p>                </div>
                 <div class="col-md-2"><small>from&nbsp;<a href="../../../Google/Protobuf/Internal/Message.html#method_mergeFromJsonString">
@@ -340,7 +377,7 @@ is a formalization for deprecating fields.</p></td>
             </div>
                     <div class="row">
                 <div class="col-md-2 type">
-                    
+                    null
                 </div>
                 <div class="col-md-8">
                     <a href="#method_mergeFromArray">mergeFromArray</a>(array $array)
@@ -414,7 +451,7 @@ correspond to Message properties and nested message properties.</p></p>         
                     string
                 </div>
                 <div class="col-md-8">
-                    <a href="#method_serializeToJsonString">serializeToJsonString</a>()
+                    <a href="#method_serializeToJsonString">serializeToJsonString</a>($options = 0)
         
                                             <p><p>Serialize the message to json string.</p></p>                </div>
                 <div class="col-md-2"><small>from&nbsp;<a href="../../../Google/Protobuf/Internal/Message.html#method_serializeToJsonString">
@@ -437,11 +474,23 @@ correspond to Message properties and nested message properties.</p></p>         
                     
                 </div>
                 <div class="col-md-8">
-                    <a href="#method_jsonByteSize">jsonByteSize</a>()
+                    <a href="#method_jsonByteSize">jsonByteSize</a>($options = 0)
         
                                             <p class="no-description">No description</p>
                                     </div>
                 <div class="col-md-2"><small>from&nbsp;<a href="../../../Google/Protobuf/Internal/Message.html#method_jsonByteSize">
+<abbr title="Google\Protobuf\Internal\Message">Message</abbr></a></small></div>
+            </div>
+                    <div class="row">
+                <div class="col-md-2 type">
+                    
+                </div>
+                <div class="col-md-8">
+                    <a href="#method___debugInfo">__debugInfo</a>()
+        
+                                            <p class="no-description">No description</p>
+                                    </div>
+                <div class="col-md-2"><small>from&nbsp;<a href="../../../Google/Protobuf/Internal/Message.html#method___debugInfo">
 <abbr title="Google\Protobuf\Internal\Message">Message</abbr></a></small></div>
             </div>
                     <div class="row">
@@ -451,10 +500,7 @@ correspond to Message properties and nested message properties.</p></p>         
                 <div class="col-md-8">
                     <a href="#method_getCtype">getCtype</a>()
         
-                                            <p><p>The ctype option instructs the C++ code generator to use a different
-representation of the field than it normally would.  See the specific
-options below.  This option is not yet implemented in the open source
-release -- sorry, we'll try to include it in a future version!</p></p>                </div>
+                                            <p><p>NOTE: ctype is deprecated. Use <code>features.(pb.cpp).string_type</code> instead.</p></p>                </div>
                 <div class="col-md-2"></div>
             </div>
                     <div class="row">
@@ -486,10 +532,7 @@ release -- sorry, we'll try to include it in a future version!</p></p>          
                 <div class="col-md-8">
                     <a href="#method_setCtype">setCtype</a>(int $var)
         
-                                            <p><p>The ctype option instructs the C++ code generator to use a different
-representation of the field than it normally would.  See the specific
-options below.  This option is not yet implemented in the open source
-release -- sorry, we'll try to include it in a future version!</p></p>                </div>
+                                            <p><p>NOTE: ctype is deprecated. Use <code>features.(pb.cpp).string_type</code> instead.</p></p>                </div>
                 <div class="col-md-2"></div>
             </div>
                     <div class="row">
@@ -503,7 +546,9 @@ release -- sorry, we'll try to include it in a future version!</p></p>          
 a more efficient representation on the wire. Rather than repeatedly
 writing the tag and type for each element, the entire array is encoded as
 a single length-delimited blob. In proto3, only explicit setting it to
-false will avoid using packed encoding.</p></p>                </div>
+false will avoid using packed encoding.  This option is prohibited in
+Editions, but the <code>repeated_field_encoding</code> feature can be used to control
+the behavior.</p></p>                </div>
                 <div class="col-md-2"></div>
             </div>
                     <div class="row">
@@ -539,7 +584,9 @@ false will avoid using packed encoding.</p></p>                </div>
 a more efficient representation on the wire. Rather than repeatedly
 writing the tag and type for each element, the entire array is encoded as
 a single length-delimited blob. In proto3, only explicit setting it to
-false will avoid using packed encoding.</p></p>                </div>
+false will avoid using packed encoding.  This option is prohibited in
+Editions, but the <code>repeated_field_encoding</code> feature can be used to control
+the behavior.</p></p>                </div>
                 <div class="col-md-2"></div>
             </div>
                     <div class="row">
@@ -740,8 +787,9 @@ is a formalization for deprecating fields.</p></p>                </div>
                 </div>
                 <div class="col-md-8">
                     <a href="#method_getWeak">getWeak</a>()
-        
-                                            <p><p>For Google-internal migration only. Do not use.</p></p>                </div>
+        <small><span class="label label-danger">deprecated</span></small>
+                                            <p><p>DEPRECATED. DO NOT USE!
+For Google-internal migration only. Do not use.</p></p>                </div>
                 <div class="col-md-2"></div>
             </div>
                     <div class="row">
@@ -772,13 +820,224 @@ is a formalization for deprecating fields.</p></p>                </div>
                 </div>
                 <div class="col-md-8">
                     <a href="#method_setWeak">setWeak</a>(bool $var)
-        
-                                            <p><p>For Google-internal migration only. Do not use.</p></p>                </div>
+        <small><span class="label label-danger">deprecated</span></small>
+                                            <p><p>DEPRECATED. DO NOT USE!
+For Google-internal migration only. Do not use.</p></p>                </div>
                 <div class="col-md-2"></div>
             </div>
                     <div class="row">
                 <div class="col-md-2 type">
-                    <a href="../../../Google/Protobuf/Internal/RepeatedField.html"><abbr title="Google\Protobuf\Internal\RepeatedField">RepeatedField</abbr></a>
+                    bool
+                </div>
+                <div class="col-md-8">
+                    <a href="#method_getDebugRedact">getDebugRedact</a>()
+        
+                                            <p><p>Indicate that the field value should not be printed out when using debug
+formats, e.g. when the field contains sensitive credentials.</p></p>                </div>
+                <div class="col-md-2"></div>
+            </div>
+                    <div class="row">
+                <div class="col-md-2 type">
+                    
+                </div>
+                <div class="col-md-8">
+                    <a href="#method_hasDebugRedact">hasDebugRedact</a>()
+        
+                                            <p class="no-description">No description</p>
+                                    </div>
+                <div class="col-md-2"></div>
+            </div>
+                    <div class="row">
+                <div class="col-md-2 type">
+                    
+                </div>
+                <div class="col-md-8">
+                    <a href="#method_clearDebugRedact">clearDebugRedact</a>()
+        
+                                            <p class="no-description">No description</p>
+                                    </div>
+                <div class="col-md-2"></div>
+            </div>
+                    <div class="row">
+                <div class="col-md-2 type">
+                    $this
+                </div>
+                <div class="col-md-8">
+                    <a href="#method_setDebugRedact">setDebugRedact</a>(bool $var)
+        
+                                            <p><p>Indicate that the field value should not be printed out when using debug
+formats, e.g. when the field contains sensitive credentials.</p></p>                </div>
+                <div class="col-md-2"></div>
+            </div>
+                    <div class="row">
+                <div class="col-md-2 type">
+                    int
+                </div>
+                <div class="col-md-8">
+                    <a href="#method_getRetention">getRetention</a>()
+        
+                                            <p><p>Generated from protobuf field <code>optional .google.protobuf.FieldOptions.OptionRetention retention = 17;</code></p></p>                </div>
+                <div class="col-md-2"></div>
+            </div>
+                    <div class="row">
+                <div class="col-md-2 type">
+                    
+                </div>
+                <div class="col-md-8">
+                    <a href="#method_hasRetention">hasRetention</a>()
+        
+                                            <p class="no-description">No description</p>
+                                    </div>
+                <div class="col-md-2"></div>
+            </div>
+                    <div class="row">
+                <div class="col-md-2 type">
+                    
+                </div>
+                <div class="col-md-8">
+                    <a href="#method_clearRetention">clearRetention</a>()
+        
+                                            <p class="no-description">No description</p>
+                                    </div>
+                <div class="col-md-2"></div>
+            </div>
+                    <div class="row">
+                <div class="col-md-2 type">
+                    $this
+                </div>
+                <div class="col-md-8">
+                    <a href="#method_setRetention">setRetention</a>(int $var)
+        
+                                            <p><p>Generated from protobuf field <code>optional .google.protobuf.FieldOptions.OptionRetention retention = 17;</code></p></p>                </div>
+                <div class="col-md-2"></div>
+            </div>
+                    <div class="row">
+                <div class="col-md-2 type">
+                    <abbr title="Google\Protobuf\RepeatedField&lt;int&gt;">RepeatedField&lt;int&gt;</abbr>
+                </div>
+                <div class="col-md-8">
+                    <a href="#method_getTargets">getTargets</a>()
+        
+                                            <p><p>Generated from protobuf field <code>repeated .google.protobuf.FieldOptions.OptionTargetType targets = 19;</code></p></p>                </div>
+                <div class="col-md-2"></div>
+            </div>
+                    <div class="row">
+                <div class="col-md-2 type">
+                    $this
+                </div>
+                <div class="col-md-8">
+                    <a href="#method_setTargets">setTargets</a>(int[] $var)
+        
+                                            <p><p>Generated from protobuf field <code>repeated .google.protobuf.FieldOptions.OptionTargetType targets = 19;</code></p></p>                </div>
+                <div class="col-md-2"></div>
+            </div>
+                    <div class="row">
+                <div class="col-md-2 type">
+                    <abbr title="Google\Protobuf\RepeatedField&lt;\Google\Protobuf\Internal\FieldOptions\EditionDefault&gt;">EditionDefault&gt;</abbr>
+                </div>
+                <div class="col-md-8">
+                    <a href="#method_getEditionDefaults">getEditionDefaults</a>()
+        
+                                            <p><p>Generated from protobuf field <code>repeated .google.protobuf.FieldOptions.EditionDefault edition_defaults = 20;</code></p></p>                </div>
+                <div class="col-md-2"></div>
+            </div>
+                    <div class="row">
+                <div class="col-md-2 type">
+                    $this
+                </div>
+                <div class="col-md-8">
+                    <a href="#method_setEditionDefaults">setEditionDefaults</a>(<a href="../../../Google/Protobuf/Internal/FieldOptions/EditionDefault.html"><abbr title="Google\Protobuf\Internal\FieldOptions\EditionDefault">EditionDefault</abbr></a>[] $var)
+        
+                                            <p><p>Generated from protobuf field <code>repeated .google.protobuf.FieldOptions.EditionDefault edition_defaults = 20;</code></p></p>                </div>
+                <div class="col-md-2"></div>
+            </div>
+                    <div class="row">
+                <div class="col-md-2 type">
+                    <a href="../../../Google/Protobuf/Internal/FeatureSet.html"><abbr title="Google\Protobuf\Internal\FeatureSet">FeatureSet</abbr></a>|null
+                </div>
+                <div class="col-md-8">
+                    <a href="#method_getFeatures">getFeatures</a>()
+        
+                                            <p><p>Any features defined in the specific edition.</p></p>                </div>
+                <div class="col-md-2"></div>
+            </div>
+                    <div class="row">
+                <div class="col-md-2 type">
+                    
+                </div>
+                <div class="col-md-8">
+                    <a href="#method_hasFeatures">hasFeatures</a>()
+        
+                                            <p class="no-description">No description</p>
+                                    </div>
+                <div class="col-md-2"></div>
+            </div>
+                    <div class="row">
+                <div class="col-md-2 type">
+                    
+                </div>
+                <div class="col-md-8">
+                    <a href="#method_clearFeatures">clearFeatures</a>()
+        
+                                            <p class="no-description">No description</p>
+                                    </div>
+                <div class="col-md-2"></div>
+            </div>
+                    <div class="row">
+                <div class="col-md-2 type">
+                    $this
+                </div>
+                <div class="col-md-8">
+                    <a href="#method_setFeatures">setFeatures</a>(<a href="../../../Google/Protobuf/Internal/FeatureSet.html"><abbr title="Google\Protobuf\Internal\FeatureSet">FeatureSet</abbr></a> $var)
+        
+                                            <p><p>Any features defined in the specific edition.</p></p>                </div>
+                <div class="col-md-2"></div>
+            </div>
+                    <div class="row">
+                <div class="col-md-2 type">
+                    <a href="../../../Google/Protobuf/Internal/FieldOptions/FeatureSupport.html"><abbr title="Google\Protobuf\Internal\FieldOptions\FeatureSupport">FeatureSupport</abbr></a>|null
+                </div>
+                <div class="col-md-8">
+                    <a href="#method_getFeatureSupport">getFeatureSupport</a>()
+        
+                                            <p><p>Generated from protobuf field <code>optional .google.protobuf.FieldOptions.FeatureSupport feature_support = 22;</code></p></p>                </div>
+                <div class="col-md-2"></div>
+            </div>
+                    <div class="row">
+                <div class="col-md-2 type">
+                    
+                </div>
+                <div class="col-md-8">
+                    <a href="#method_hasFeatureSupport">hasFeatureSupport</a>()
+        
+                                            <p class="no-description">No description</p>
+                                    </div>
+                <div class="col-md-2"></div>
+            </div>
+                    <div class="row">
+                <div class="col-md-2 type">
+                    
+                </div>
+                <div class="col-md-8">
+                    <a href="#method_clearFeatureSupport">clearFeatureSupport</a>()
+        
+                                            <p class="no-description">No description</p>
+                                    </div>
+                <div class="col-md-2"></div>
+            </div>
+                    <div class="row">
+                <div class="col-md-2 type">
+                    $this
+                </div>
+                <div class="col-md-8">
+                    <a href="#method_setFeatureSupport">setFeatureSupport</a>(<a href="../../../Google/Protobuf/Internal/FieldOptions/FeatureSupport.html"><abbr title="Google\Protobuf\Internal\FieldOptions\FeatureSupport">FeatureSupport</abbr></a> $var)
+        
+                                            <p><p>Generated from protobuf field <code>optional .google.protobuf.FieldOptions.FeatureSupport feature_support = 22;</code></p></p>                </div>
+                <div class="col-md-2"></div>
+            </div>
+                    <div class="row">
+                <div class="col-md-2 type">
+                    <abbr title="Google\Protobuf\RepeatedField&lt;\Google\Protobuf\Internal\UninterpretedOption&gt;">UninterpretedOption&gt;</abbr>
                 </div>
                 <div class="col-md-8">
                     <a href="#method_getUninterpretedOption">getUninterpretedOption</a>()
@@ -791,7 +1050,7 @@ is a formalization for deprecating fields.</p></p>                </div>
                     $this
                 </div>
                 <div class="col-md-8">
-                    <a href="#method_setUninterpretedOption">setUninterpretedOption</a>(<a href="../../../Google/Protobuf/Internal/UninterpretedOption.html"><abbr title="Google\Protobuf\Internal\UninterpretedOption">UninterpretedOption</abbr></a>[]|<a href="../../../Google/Protobuf/Internal/RepeatedField.html"><abbr title="Google\Protobuf\Internal\RepeatedField">RepeatedField</abbr></a> $var)
+                    <a href="#method_setUninterpretedOption">setUninterpretedOption</a>(<a href="../../../Google/Protobuf/Internal/UninterpretedOption.html"><abbr title="Google\Protobuf\Internal\UninterpretedOption">UninterpretedOption</abbr></a>[] $var)
         
                                             <p><p>The parser stores options it doesn't recognize here. See above.</p></p>                </div>
                 <div class="col-md-2"></div>
@@ -804,7 +1063,7 @@ is a formalization for deprecating fields.</p></p>                </div>
             <div id="method-details">
                     <div class="method-item">
                     <h3 id="method___construct">
-        <div class="location"><a href="https://github.com/protocolbuffers/protobuf-php/blob/v3.21.10/src/Google/Protobuf/Internal/FieldOptions.php#L187">at line 187</a></div>
+        <div class="location"><a href="https://github.com/protocolbuffers/protobuf-php/blob/4.33.6/src/Google/Protobuf/Internal/FieldOptions.php#L227">at line 227</a></div>
         <code>                    
     <strong>__construct</strong>($data = NULL)
         </code>
@@ -838,7 +1097,7 @@ is a formalization for deprecating fields.</p></p>                </div>
                     <div class="method-item">
                     <h3 id="method_readWrapperValue">
         <div class="location">in <a href="../../../Google/Protobuf/Internal/Message.html#method_readWrapperValue">
-<abbr title="Google\Protobuf\Internal\Message">Message</abbr></a> <a href="https://github.com/protocolbuffers/protobuf-php/blob/v3.21.10/src/Google/Protobuf/Internal/Message.php#L180">at line 180</a></div>
+<abbr title="Google\Protobuf\Internal\Message">Message</abbr></a> <a href="https://github.com/protocolbuffers/protobuf-php/blob/4.33.6/src/Google/Protobuf/Internal/Message.php#L158">at line 158</a></div>
         <code>            protected        
     <strong>readWrapperValue</strong>($member)
         </code>
@@ -873,7 +1132,7 @@ is a formalization for deprecating fields.</p></p>                </div>
                     <div class="method-item">
                     <h3 id="method_writeWrapperValue">
         <div class="location">in <a href="../../../Google/Protobuf/Internal/Message.html#method_writeWrapperValue">
-<abbr title="Google\Protobuf\Internal\Message">Message</abbr></a> <a href="https://github.com/protocolbuffers/protobuf-php/blob/v3.21.10/src/Google/Protobuf/Internal/Message.php#L197">at line 197</a></div>
+<abbr title="Google\Protobuf\Internal\Message">Message</abbr></a> <a href="https://github.com/protocolbuffers/protobuf-php/blob/4.33.6/src/Google/Protobuf/Internal/Message.php#L175">at line 175</a></div>
         <code>            protected        
     <strong>writeWrapperValue</strong>($member, $value)
         </code>
@@ -913,7 +1172,7 @@ is a formalization for deprecating fields.</p></p>                </div>
                     <div class="method-item">
                     <h3 id="method_readOneof">
         <div class="location">in <a href="../../../Google/Protobuf/Internal/Message.html#method_readOneof">
-<abbr title="Google\Protobuf\Internal\Message">Message</abbr></a> <a href="https://github.com/protocolbuffers/protobuf-php/blob/v3.21.10/src/Google/Protobuf/Internal/Message.php#L216">at line 216</a></div>
+<abbr title="Google\Protobuf\Internal\Message">Message</abbr></a> <a href="https://github.com/protocolbuffers/protobuf-php/blob/4.33.6/src/Google/Protobuf/Internal/Message.php#L194">at line 194</a></div>
         <code>            protected        
     <strong>readOneof</strong>($number)
         </code>
@@ -948,7 +1207,7 @@ is a formalization for deprecating fields.</p></p>                </div>
                     <div class="method-item">
                     <h3 id="method_hasOneof">
         <div class="location">in <a href="../../../Google/Protobuf/Internal/Message.html#method_hasOneof">
-<abbr title="Google\Protobuf\Internal\Message">Message</abbr></a> <a href="https://github.com/protocolbuffers/protobuf-php/blob/v3.21.10/src/Google/Protobuf/Internal/Message.php#L229">at line 229</a></div>
+<abbr title="Google\Protobuf\Internal\Message">Message</abbr></a> <a href="https://github.com/protocolbuffers/protobuf-php/blob/4.33.6/src/Google/Protobuf/Internal/Message.php#L207">at line 207</a></div>
         <code>            protected        
     <strong>hasOneof</strong>($number)
         </code>
@@ -983,7 +1242,7 @@ is a formalization for deprecating fields.</p></p>                </div>
                     <div class="method-item">
                     <h3 id="method_writeOneof">
         <div class="location">in <a href="../../../Google/Protobuf/Internal/Message.html#method_writeOneof">
-<abbr title="Google\Protobuf\Internal\Message">Message</abbr></a> <a href="https://github.com/protocolbuffers/protobuf-php/blob/v3.21.10/src/Google/Protobuf/Internal/Message.php#L238">at line 238</a></div>
+<abbr title="Google\Protobuf\Internal\Message">Message</abbr></a> <a href="https://github.com/protocolbuffers/protobuf-php/blob/4.33.6/src/Google/Protobuf/Internal/Message.php#L216">at line 216</a></div>
         <code>            protected        
     <strong>writeOneof</strong>($number, $value)
         </code>
@@ -1023,7 +1282,7 @@ is a formalization for deprecating fields.</p></p>                </div>
                     <div class="method-item">
                     <h3 id="method_whichOneof">
         <div class="location">in <a href="../../../Google/Protobuf/Internal/Message.html#method_whichOneof">
-<abbr title="Google\Protobuf\Internal\Message">Message</abbr></a> <a href="https://github.com/protocolbuffers/protobuf-php/blob/v3.21.10/src/Google/Protobuf/Internal/Message.php#L253">at line 253</a></div>
+<abbr title="Google\Protobuf\Internal\Message">Message</abbr></a> <a href="https://github.com/protocolbuffers/protobuf-php/blob/4.33.6/src/Google/Protobuf/Internal/Message.php#L231">at line 231</a></div>
         <code>            protected        
     <strong>whichOneof</strong>($oneof_name)
         </code>
@@ -1058,8 +1317,8 @@ is a formalization for deprecating fields.</p></p>                </div>
                     <div class="method-item">
                     <h3 id="method_clear">
         <div class="location">in <a href="../../../Google/Protobuf/Internal/Message.html#method_clear">
-<abbr title="Google\Protobuf\Internal\Message">Message</abbr></a> <a href="https://github.com/protocolbuffers/protobuf-php/blob/v3.21.10/src/Google/Protobuf/Internal/Message.php#L548">at line 548</a></div>
-        <code>                    
+<abbr title="Google\Protobuf\Internal\Message">Message</abbr></a> <a href="https://github.com/protocolbuffers/protobuf-php/blob/4.33.6/src/Google/Protobuf/Internal/Message.php#L527">at line 527</a></div>
+        <code>                    null
     <strong>clear</strong>()
         </code>
     </h3>
@@ -1072,6 +1331,15 @@ is a formalization for deprecating fields.</p></p>                </div>
         </div>
         <div class="tags">
             
+                            <h4>Return Value</h4>
+
+                    <table class="table table-condensed">
+        <tr>
+            <td>null</td>
+            <td></td>
+        </tr>
+    </table>
+
             
             
             
@@ -1082,8 +1350,8 @@ is a formalization for deprecating fields.</p></p>                </div>
                     <div class="method-item">
                     <h3 id="method_discardUnknownFields">
         <div class="location">in <a href="../../../Google/Protobuf/Internal/Message.html#method_discardUnknownFields">
-<abbr title="Google\Protobuf\Internal\Message">Message</abbr></a> <a href="https://github.com/protocolbuffers/protobuf-php/blob/v3.21.10/src/Google/Protobuf/Internal/Message.php#L658">at line 658</a></div>
-        <code>                    
+<abbr title="Google\Protobuf\Internal\Message">Message</abbr></a> <a href="https://github.com/protocolbuffers/protobuf-php/blob/4.33.6/src/Google/Protobuf/Internal/Message.php#L637">at line 637</a></div>
+        <code>                    null
     <strong>discardUnknownFields</strong>()
         </code>
     </h3>
@@ -1096,6 +1364,15 @@ is a formalization for deprecating fields.</p></p>                </div>
         </div>
         <div class="tags">
             
+                            <h4>Return Value</h4>
+
+                    <table class="table table-condensed">
+        <tr>
+            <td>null</td>
+            <td></td>
+        </tr>
+    </table>
+
             
             
             
@@ -1106,8 +1383,8 @@ is a formalization for deprecating fields.</p></p>                </div>
                     <div class="method-item">
                     <h3 id="method_mergeFrom">
         <div class="location">in <a href="../../../Google/Protobuf/Internal/Message.html#method_mergeFrom">
-<abbr title="Google\Protobuf\Internal\Message">Message</abbr></a> <a href="https://github.com/protocolbuffers/protobuf-php/blob/v3.21.10/src/Google/Protobuf/Internal/Message.php#L704">at line 704</a></div>
-        <code>                    
+<abbr title="Google\Protobuf\Internal\Message">Message</abbr></a> <a href="https://github.com/protocolbuffers/protobuf-php/blob/4.33.6/src/Google/Protobuf/Internal/Message.php#L683">at line 683</a></div>
+        <code>                    null
     <strong>mergeFrom</strong>(object $msg)
         </code>
     </h3>
@@ -1135,6 +1412,15 @@ sub-messages are deep-copied.</p></p>
             </table>
 
             
+                            <h4>Return Value</h4>
+
+                    <table class="table table-condensed">
+        <tr>
+            <td>null</td>
+            <td></td>
+        </tr>
+    </table>
+
             
             
             
@@ -1145,8 +1431,8 @@ sub-messages are deep-copied.</p></p>
                     <div class="method-item">
                     <h3 id="method_mergeFromString">
         <div class="location">in <a href="../../../Google/Protobuf/Internal/Message.html#method_mergeFromString">
-<abbr title="Google\Protobuf\Internal\Message">Message</abbr></a> <a href="https://github.com/protocolbuffers/protobuf-php/blob/v3.21.10/src/Google/Protobuf/Internal/Message.php#L772">at line 772</a></div>
-        <code>                    
+<abbr title="Google\Protobuf\Internal\Message">Message</abbr></a> <a href="https://github.com/protocolbuffers/protobuf-php/blob/4.33.6/src/Google/Protobuf/Internal/Message.php#L751">at line 751</a></div>
+        <code>                    null
     <strong>mergeFromString</strong>(string $data)
         </code>
     </h3>
@@ -1172,6 +1458,15 @@ specified message.</p></p>
             </table>
 
             
+                            <h4>Return Value</h4>
+
+                    <table class="table table-condensed">
+        <tr>
+            <td>null</td>
+            <td></td>
+        </tr>
+    </table>
+
             
                             <h4>Exceptions</h4>
 
@@ -1191,9 +1486,9 @@ specified message.</p></p>
                     <div class="method-item">
                     <h3 id="method_mergeFromJsonString">
         <div class="location">in <a href="../../../Google/Protobuf/Internal/Message.html#method_mergeFromJsonString">
-<abbr title="Google\Protobuf\Internal\Message">Message</abbr></a> <a href="https://github.com/protocolbuffers/protobuf-php/blob/v3.21.10/src/Google/Protobuf/Internal/Message.php#L790">at line 790</a></div>
-        <code>                    
-    <strong>mergeFromJsonString</strong>(string $data, $ignore_unknown = false)
+<abbr title="Google\Protobuf\Internal\Message">Message</abbr></a> <a href="https://github.com/protocolbuffers/protobuf-php/blob/4.33.6/src/Google/Protobuf/Internal/Message.php#L770">at line 770</a></div>
+        <code>                    null
+    <strong>mergeFromJsonString</strong>(string $data, bool $ignore_unknown = false)
         </code>
     </h3>
     <div class="details">    
@@ -1216,13 +1511,22 @@ specified message.</p></p>
                 <td><p>Json protobuf data.</p></td>
             </tr>
                     <tr>
-                <td></td>
+                <td>bool</td>
                 <td>$ignore_unknown</td>
                 <td></td>
             </tr>
             </table>
 
             
+                            <h4>Return Value</h4>
+
+                    <table class="table table-condensed">
+        <tr>
+            <td>null</td>
+            <td></td>
+        </tr>
+    </table>
+
             
                             <h4>Exceptions</h4>
 
@@ -1242,7 +1546,7 @@ specified message.</p></p>
                     <div class="method-item">
                     <h3 id="method_parseFromStream">
         <div class="location">in <a href="../../../Google/Protobuf/Internal/Message.html#method_parseFromStream">
-<abbr title="Google\Protobuf\Internal\Message">Message</abbr></a> <a href="https://github.com/protocolbuffers/protobuf-php/blob/v3.21.10/src/Google/Protobuf/Internal/Message.php#L799">at line 799</a></div>
+<abbr title="Google\Protobuf\Internal\Message">Message</abbr></a> <a href="https://github.com/protocolbuffers/protobuf-php/blob/4.33.6/src/Google/Protobuf/Internal/Message.php#L779">at line 779</a></div>
         <code>                    
     <strong>parseFromStream</strong>($input)
         </code>
@@ -1277,8 +1581,8 @@ specified message.</p></p>
                     <div class="method-item">
                     <h3 id="method_mergeFromArray">
         <div class="location">in <a href="../../../Google/Protobuf/Internal/Message.html#method_mergeFromArray">
-<abbr title="Google\Protobuf\Internal\Message">Message</abbr></a> <a href="https://github.com/protocolbuffers/protobuf-php/blob/v3.21.10/src/Google/Protobuf/Internal/Message.php#L1057">at line 1057</a></div>
-        <code>            protected        
+<abbr title="Google\Protobuf\Internal\Message">Message</abbr></a> <a href="https://github.com/protocolbuffers/protobuf-php/blob/4.33.6/src/Google/Protobuf/Internal/Message.php#L1037">at line 1037</a></div>
+        <code>            protected        null
     <strong>mergeFromArray</strong>(array $array)
         </code>
     </h3>
@@ -1312,6 +1616,15 @@ must receive data that is either a string or a StringValue object.</p></p>
             </table>
 
             
+                            <h4>Return Value</h4>
+
+                    <table class="table table-condensed">
+        <tr>
+            <td>null</td>
+            <td></td>
+        </tr>
+    </table>
+
             
             
             
@@ -1322,7 +1635,7 @@ must receive data that is either a string or a StringValue object.</p></p>
                     <div class="method-item">
                     <h3 id="method_mergeFromJsonArray">
         <div class="location">in <a href="../../../Google/Protobuf/Internal/Message.html#method_mergeFromJsonArray">
-<abbr title="Google\Protobuf\Internal\Message">Message</abbr></a> <a href="https://github.com/protocolbuffers/protobuf-php/blob/v3.21.10/src/Google/Protobuf/Internal/Message.php#L1146">at line 1146</a></div>
+<abbr title="Google\Protobuf\Internal\Message">Message</abbr></a> <a href="https://github.com/protocolbuffers/protobuf-php/blob/4.33.6/src/Google/Protobuf/Internal/Message.php#L1126">at line 1126</a></div>
         <code>            protected        
     <strong>mergeFromJsonArray</strong>($array, $ignore_unknown)
         </code>
@@ -1362,7 +1675,7 @@ must receive data that is either a string or a StringValue object.</p></p>
                     <div class="method-item">
                     <h3 id="method_parseFromJsonStream">
         <div class="location">in <a href="../../../Google/Protobuf/Internal/Message.html#method_parseFromJsonStream">
-<abbr title="Google\Protobuf\Internal\Message">Message</abbr></a> <a href="https://github.com/protocolbuffers/protobuf-php/blob/v3.21.10/src/Google/Protobuf/Internal/Message.php#L1320">at line 1320</a></div>
+<abbr title="Google\Protobuf\Internal\Message">Message</abbr></a> <a href="https://github.com/protocolbuffers/protobuf-php/blob/4.33.6/src/Google/Protobuf/Internal/Message.php#L1322">at line 1322</a></div>
         <code>                    
     <strong>parseFromJsonStream</strong>($input, $ignore_unknown)
         </code>
@@ -1402,7 +1715,7 @@ must receive data that is either a string or a StringValue object.</p></p>
                     <div class="method-item">
                     <h3 id="method_serializeToStream">
         <div class="location">in <a href="../../../Google/Protobuf/Internal/Message.html#method_serializeToStream">
-<abbr title="Google\Protobuf\Internal\Message">Message</abbr></a> <a href="https://github.com/protocolbuffers/protobuf-php/blob/v3.21.10/src/Google/Protobuf/Internal/Message.php#L1453">at line 1453</a></div>
+<abbr title="Google\Protobuf\Internal\Message">Message</abbr></a> <a href="https://github.com/protocolbuffers/protobuf-php/blob/4.33.6/src/Google/Protobuf/Internal/Message.php#L1455">at line 1455</a></div>
         <code>                    
     <strong>serializeToStream</strong>($output)
         </code>
@@ -1437,7 +1750,7 @@ must receive data that is either a string or a StringValue object.</p></p>
                     <div class="method-item">
                     <h3 id="method_serializeToJsonStream">
         <div class="location">in <a href="../../../Google/Protobuf/Internal/Message.html#method_serializeToJsonStream">
-<abbr title="Google\Protobuf\Internal\Message">Message</abbr></a> <a href="https://github.com/protocolbuffers/protobuf-php/blob/v3.21.10/src/Google/Protobuf/Internal/Message.php#L1468">at line 1468</a></div>
+<abbr title="Google\Protobuf\Internal\Message">Message</abbr></a> <a href="https://github.com/protocolbuffers/protobuf-php/blob/4.33.6/src/Google/Protobuf/Internal/Message.php#L1470">at line 1470</a></div>
         <code>                    
     <strong>serializeToJsonStream</strong>($output)
         </code>
@@ -1472,7 +1785,7 @@ must receive data that is either a string or a StringValue object.</p></p>
                     <div class="method-item">
                     <h3 id="method_serializeToString">
         <div class="location">in <a href="../../../Google/Protobuf/Internal/Message.html#method_serializeToString">
-<abbr title="Google\Protobuf\Internal\Message">Message</abbr></a> <a href="https://github.com/protocolbuffers/protobuf-php/blob/v3.21.10/src/Google/Protobuf/Internal/Message.php#L1560">at line 1560</a></div>
+<abbr title="Google\Protobuf\Internal\Message">Message</abbr></a> <a href="https://github.com/protocolbuffers/protobuf-php/blob/4.33.6/src/Google/Protobuf/Internal/Message.php#L1562">at line 1562</a></div>
         <code>                    string
     <strong>serializeToString</strong>()
         </code>
@@ -1505,9 +1818,9 @@ must receive data that is either a string or a StringValue object.</p></p>
                     <div class="method-item">
                     <h3 id="method_serializeToJsonString">
         <div class="location">in <a href="../../../Google/Protobuf/Internal/Message.html#method_serializeToJsonString">
-<abbr title="Google\Protobuf\Internal\Message">Message</abbr></a> <a href="https://github.com/protocolbuffers/protobuf-php/blob/v3.21.10/src/Google/Protobuf/Internal/Message.php#L1571">at line 1571</a></div>
+<abbr title="Google\Protobuf\Internal\Message">Message</abbr></a> <a href="https://github.com/protocolbuffers/protobuf-php/blob/4.33.6/src/Google/Protobuf/Internal/Message.php#L1573">at line 1573</a></div>
         <code>                    string
-    <strong>serializeToJsonString</strong>()
+    <strong>serializeToJsonString</strong>($options = 0)
         </code>
     </h3>
     <div class="details">    
@@ -1518,6 +1831,16 @@ must receive data that is either a string or a StringValue object.</p></p>
                             <p><p>Serialize the message to json string.</p></p>                        
         </div>
         <div class="tags">
+                            <h4>Parameters</h4>
+
+                    <table class="table table-condensed">
+                    <tr>
+                <td></td>
+                <td>$options</td>
+                <td></td>
+            </tr>
+            </table>
+
             
                             <h4>Return Value</h4>
 
@@ -1538,7 +1861,7 @@ must receive data that is either a string or a StringValue object.</p></p>
                     <div class="method-item">
                     <h3 id="method_byteSize">
         <div class="location">in <a href="../../../Google/Protobuf/Internal/Message.html#method_byteSize">
-<abbr title="Google\Protobuf\Internal\Message">Message</abbr></a> <a href="https://github.com/protocolbuffers/protobuf-php/blob/v3.21.10/src/Google/Protobuf/Internal/Message.php#L1923">at line 1923</a></div>
+<abbr title="Google\Protobuf\Internal\Message">Message</abbr></a> <a href="https://github.com/protocolbuffers/protobuf-php/blob/4.33.6/src/Google/Protobuf/Internal/Message.php#L1941">at line 1941</a></div>
         <code>                    
     <strong>byteSize</strong>()
         </code>
@@ -1563,9 +1886,44 @@ must receive data that is either a string or a StringValue object.</p></p>
                     <div class="method-item">
                     <h3 id="method_jsonByteSize">
         <div class="location">in <a href="../../../Google/Protobuf/Internal/Message.html#method_jsonByteSize">
-<abbr title="Google\Protobuf\Internal\Message">Message</abbr></a> <a href="https://github.com/protocolbuffers/protobuf-php/blob/v3.21.10/src/Google/Protobuf/Internal/Message.php#L1964">at line 1964</a></div>
+<abbr title="Google\Protobuf\Internal\Message">Message</abbr></a> <a href="https://github.com/protocolbuffers/protobuf-php/blob/4.33.6/src/Google/Protobuf/Internal/Message.php#L1982">at line 1982</a></div>
         <code>                    
-    <strong>jsonByteSize</strong>()
+    <strong>jsonByteSize</strong>($options = 0)
+        </code>
+    </h3>
+    <div class="details">    
+    
+            
+
+        <div class="method-description">
+                            <p class="no-description">No description</p>
+                    
+        </div>
+        <div class="tags">
+                            <h4>Parameters</h4>
+
+                    <table class="table table-condensed">
+                    <tr>
+                <td></td>
+                <td>$options</td>
+                <td></td>
+            </tr>
+            </table>
+
+            
+            
+            
+            
+                    </div>
+    </div>
+
+            </div>
+                    <div class="method-item">
+                    <h3 id="method___debugInfo">
+        <div class="location">in <a href="../../../Google/Protobuf/Internal/Message.html#method___debugInfo">
+<abbr title="Google\Protobuf\Internal\Message">Message</abbr></a> <a href="https://github.com/protocolbuffers/protobuf-php/blob/4.33.6/src/Google/Protobuf/Internal/Message.php#L2057">at line 2057</a></div>
+        <code>                    
+    <strong>__debugInfo</strong>()
         </code>
     </h3>
     <div class="details">    
@@ -1587,7 +1945,7 @@ must receive data that is either a string or a StringValue object.</p></p>
             </div>
                     <div class="method-item">
                     <h3 id="method_getCtype">
-        <div class="location"><a href="https://github.com/protocolbuffers/protobuf-php/blob/v3.21.10/src/Google/Protobuf/Internal/FieldOptions.php#L201">at line 201</a></div>
+        <div class="location"><a href="https://github.com/protocolbuffers/protobuf-php/blob/4.33.6/src/Google/Protobuf/Internal/FieldOptions.php#L244">at line 244</a></div>
         <code>                    int
     <strong>getCtype</strong>()
         </code>
@@ -1597,10 +1955,13 @@ must receive data that is either a string or a StringValue object.</p></p>
             
 
         <div class="method-description">
-                            <p><p>The ctype option instructs the C++ code generator to use a different
+                            <p><p>NOTE: ctype is deprecated. Use <code>features.(pb.cpp).string_type</code> instead.</p></p>                <p><p>The ctype option instructs the C++ code generator to use a different
 representation of the field than it normally would.  See the specific
-options below.  This option is not yet implemented in the open source
-release -- sorry, we'll try to include it in a future version!</p></p>                <p><p>Generated from protobuf field <code>optional .google.protobuf.FieldOptions.CType ctype = 1 [default = STRING];</code></p></p>        
+options below.  This option is only implemented to support use of
+[ctype=CORD] and [ctype=STRING] (the default) on non-repeated fields of
+type &quot;bytes&quot; in the open source release.
+TODO: make ctype actually deprecated.</p>
+<p>Generated from protobuf field <code>optional .google.protobuf.FieldOptions.CType ctype = 1 [default = STRING];</code></p></p>        
         </div>
         <div class="tags">
             
@@ -1622,7 +1983,7 @@ release -- sorry, we'll try to include it in a future version!</p></p>          
             </div>
                     <div class="method-item">
                     <h3 id="method_hasCtype">
-        <div class="location"><a href="https://github.com/protocolbuffers/protobuf-php/blob/v3.21.10/src/Google/Protobuf/Internal/FieldOptions.php#L206">at line 206</a></div>
+        <div class="location"><a href="https://github.com/protocolbuffers/protobuf-php/blob/4.33.6/src/Google/Protobuf/Internal/FieldOptions.php#L249">at line 249</a></div>
         <code>                    
     <strong>hasCtype</strong>()
         </code>
@@ -1646,7 +2007,7 @@ release -- sorry, we'll try to include it in a future version!</p></p>          
             </div>
                     <div class="method-item">
                     <h3 id="method_clearCtype">
-        <div class="location"><a href="https://github.com/protocolbuffers/protobuf-php/blob/v3.21.10/src/Google/Protobuf/Internal/FieldOptions.php#L211">at line 211</a></div>
+        <div class="location"><a href="https://github.com/protocolbuffers/protobuf-php/blob/4.33.6/src/Google/Protobuf/Internal/FieldOptions.php#L254">at line 254</a></div>
         <code>                    
     <strong>clearCtype</strong>()
         </code>
@@ -1670,7 +2031,7 @@ release -- sorry, we'll try to include it in a future version!</p></p>          
             </div>
                     <div class="method-item">
                     <h3 id="method_setCtype">
-        <div class="location"><a href="https://github.com/protocolbuffers/protobuf-php/blob/v3.21.10/src/Google/Protobuf/Internal/FieldOptions.php#L226">at line 226</a></div>
+        <div class="location"><a href="https://github.com/protocolbuffers/protobuf-php/blob/4.33.6/src/Google/Protobuf/Internal/FieldOptions.php#L272">at line 272</a></div>
         <code>                    $this
     <strong>setCtype</strong>(int $var)
         </code>
@@ -1680,10 +2041,13 @@ release -- sorry, we'll try to include it in a future version!</p></p>          
             
 
         <div class="method-description">
-                            <p><p>The ctype option instructs the C++ code generator to use a different
+                            <p><p>NOTE: ctype is deprecated. Use <code>features.(pb.cpp).string_type</code> instead.</p></p>                <p><p>The ctype option instructs the C++ code generator to use a different
 representation of the field than it normally would.  See the specific
-options below.  This option is not yet implemented in the open source
-release -- sorry, we'll try to include it in a future version!</p></p>                <p><p>Generated from protobuf field <code>optional .google.protobuf.FieldOptions.CType ctype = 1 [default = STRING];</code></p></p>        
+options below.  This option is only implemented to support use of
+[ctype=CORD] and [ctype=STRING] (the default) on non-repeated fields of
+type &quot;bytes&quot; in the open source release.
+TODO: make ctype actually deprecated.</p>
+<p>Generated from protobuf field <code>optional .google.protobuf.FieldOptions.CType ctype = 1 [default = STRING];</code></p></p>        
         </div>
         <div class="tags">
                             <h4>Parameters</h4>
@@ -1715,7 +2079,7 @@ release -- sorry, we'll try to include it in a future version!</p></p>          
             </div>
                     <div class="method-item">
                     <h3 id="method_getPacked">
-        <div class="location"><a href="https://github.com/protocolbuffers/protobuf-php/blob/v3.21.10/src/Google/Protobuf/Internal/FieldOptions.php#L244">at line 244</a></div>
+        <div class="location"><a href="https://github.com/protocolbuffers/protobuf-php/blob/4.33.6/src/Google/Protobuf/Internal/FieldOptions.php#L292">at line 292</a></div>
         <code>                    bool
     <strong>getPacked</strong>()
         </code>
@@ -1729,7 +2093,9 @@ release -- sorry, we'll try to include it in a future version!</p></p>          
 a more efficient representation on the wire. Rather than repeatedly
 writing the tag and type for each element, the entire array is encoded as
 a single length-delimited blob. In proto3, only explicit setting it to
-false will avoid using packed encoding.</p></p>                <p><p>Generated from protobuf field <code>optional bool packed = 2;</code></p></p>        
+false will avoid using packed encoding.  This option is prohibited in
+Editions, but the <code>repeated_field_encoding</code> feature can be used to control
+the behavior.</p></p>                <p><p>Generated from protobuf field <code>optional bool packed = 2;</code></p></p>        
         </div>
         <div class="tags">
             
@@ -1751,7 +2117,7 @@ false will avoid using packed encoding.</p></p>                <p><p>Generated f
             </div>
                     <div class="method-item">
                     <h3 id="method_hasPacked">
-        <div class="location"><a href="https://github.com/protocolbuffers/protobuf-php/blob/v3.21.10/src/Google/Protobuf/Internal/FieldOptions.php#L249">at line 249</a></div>
+        <div class="location"><a href="https://github.com/protocolbuffers/protobuf-php/blob/4.33.6/src/Google/Protobuf/Internal/FieldOptions.php#L297">at line 297</a></div>
         <code>                    
     <strong>hasPacked</strong>()
         </code>
@@ -1775,7 +2141,7 @@ false will avoid using packed encoding.</p></p>                <p><p>Generated f
             </div>
                     <div class="method-item">
                     <h3 id="method_clearPacked">
-        <div class="location"><a href="https://github.com/protocolbuffers/protobuf-php/blob/v3.21.10/src/Google/Protobuf/Internal/FieldOptions.php#L254">at line 254</a></div>
+        <div class="location"><a href="https://github.com/protocolbuffers/protobuf-php/blob/4.33.6/src/Google/Protobuf/Internal/FieldOptions.php#L302">at line 302</a></div>
         <code>                    
     <strong>clearPacked</strong>()
         </code>
@@ -1799,7 +2165,7 @@ false will avoid using packed encoding.</p></p>                <p><p>Generated f
             </div>
                     <div class="method-item">
                     <h3 id="method_setPacked">
-        <div class="location"><a href="https://github.com/protocolbuffers/protobuf-php/blob/v3.21.10/src/Google/Protobuf/Internal/FieldOptions.php#L270">at line 270</a></div>
+        <div class="location"><a href="https://github.com/protocolbuffers/protobuf-php/blob/4.33.6/src/Google/Protobuf/Internal/FieldOptions.php#L320">at line 320</a></div>
         <code>                    $this
     <strong>setPacked</strong>(bool $var)
         </code>
@@ -1813,7 +2179,9 @@ false will avoid using packed encoding.</p></p>                <p><p>Generated f
 a more efficient representation on the wire. Rather than repeatedly
 writing the tag and type for each element, the entire array is encoded as
 a single length-delimited blob. In proto3, only explicit setting it to
-false will avoid using packed encoding.</p></p>                <p><p>Generated from protobuf field <code>optional bool packed = 2;</code></p></p>        
+false will avoid using packed encoding.  This option is prohibited in
+Editions, but the <code>repeated_field_encoding</code> feature can be used to control
+the behavior.</p></p>                <p><p>Generated from protobuf field <code>optional bool packed = 2;</code></p></p>        
         </div>
         <div class="tags">
                             <h4>Parameters</h4>
@@ -1845,7 +2213,7 @@ false will avoid using packed encoding.</p></p>                <p><p>Generated f
             </div>
                     <div class="method-item">
                     <h3 id="method_getJstype">
-        <div class="location"><a href="https://github.com/protocolbuffers/protobuf-php/blob/v3.21.10/src/Google/Protobuf/Internal/FieldOptions.php#L293">at line 293</a></div>
+        <div class="location"><a href="https://github.com/protocolbuffers/protobuf-php/blob/4.33.6/src/Google/Protobuf/Internal/FieldOptions.php#L343">at line 343</a></div>
         <code>                    int
     <strong>getJstype</strong>()
         </code>
@@ -1886,7 +2254,7 @@ goog.math.Integer.</p>
             </div>
                     <div class="method-item">
                     <h3 id="method_hasJstype">
-        <div class="location"><a href="https://github.com/protocolbuffers/protobuf-php/blob/v3.21.10/src/Google/Protobuf/Internal/FieldOptions.php#L298">at line 298</a></div>
+        <div class="location"><a href="https://github.com/protocolbuffers/protobuf-php/blob/4.33.6/src/Google/Protobuf/Internal/FieldOptions.php#L348">at line 348</a></div>
         <code>                    
     <strong>hasJstype</strong>()
         </code>
@@ -1910,7 +2278,7 @@ goog.math.Integer.</p>
             </div>
                     <div class="method-item">
                     <h3 id="method_clearJstype">
-        <div class="location"><a href="https://github.com/protocolbuffers/protobuf-php/blob/v3.21.10/src/Google/Protobuf/Internal/FieldOptions.php#L303">at line 303</a></div>
+        <div class="location"><a href="https://github.com/protocolbuffers/protobuf-php/blob/4.33.6/src/Google/Protobuf/Internal/FieldOptions.php#L353">at line 353</a></div>
         <code>                    
     <strong>clearJstype</strong>()
         </code>
@@ -1934,7 +2302,7 @@ goog.math.Integer.</p>
             </div>
                     <div class="method-item">
                     <h3 id="method_setJstype">
-        <div class="location"><a href="https://github.com/protocolbuffers/protobuf-php/blob/v3.21.10/src/Google/Protobuf/Internal/FieldOptions.php#L324">at line 324</a></div>
+        <div class="location"><a href="https://github.com/protocolbuffers/protobuf-php/blob/4.33.6/src/Google/Protobuf/Internal/FieldOptions.php#L374">at line 374</a></div>
         <code>                    $this
     <strong>setJstype</strong>(int $var)
         </code>
@@ -1985,7 +2353,7 @@ goog.math.Integer.</p>
             </div>
                     <div class="method-item">
                     <h3 id="method_getLazy">
-        <div class="location"><a href="https://github.com/protocolbuffers/protobuf-php/blob/v3.21.10/src/Google/Protobuf/Internal/FieldOptions.php#L365">at line 365</a></div>
+        <div class="location"><a href="https://github.com/protocolbuffers/protobuf-php/blob/4.33.6/src/Google/Protobuf/Internal/FieldOptions.php#L406">at line 406</a></div>
         <code>                    bool
     <strong>getLazy</strong>()
         </code>
@@ -2008,20 +2376,11 @@ all method signatures remain the same.  Furthermore, thread-safety of the
 interface is not affected by this option; const methods remain safe to
 call from multiple threads concurrently, while non-const methods continue
 to require exclusive access.
-Note that implementations may choose not to check required fields within
-a lazy sub-message.  That is, calling IsInitialized() on the outer message
-may return true even if the inner message has missing required fields.
-This is necessary because otherwise the inner message would have to be
-parsed in order to perform the check, defeating the purpose of lazy
-parsing.  An implementation which chooses not to check required fields
-must be consistent about it.  That is, for any particular sub-message, the
-implementation must either <em>always</em> check its required fields, or <em>never</em>
-check its required fields, regardless of whether or not the message has
-been parsed.
-As of 2021, lazy does no correctness checks on the byte stream during
-parsing.  This may lead to crashes if and when an invalid byte stream is
-finally parsed upon access.
-TODO(b/211906113):  Enable validation on lazy fields.</p>
+Note that lazy message fields are still eagerly verified to check
+ill-formed wireformat or missing required fields. Calling IsInitialized()
+on the outer message would fail if the inner message has missing required
+fields. Failed verification would result in parsing failure (except when
+uninitialized messages are acceptable).</p>
 <p>Generated from protobuf field <code>optional bool lazy = 5 [default = false];</code></p></p>        
         </div>
         <div class="tags">
@@ -2044,7 +2403,7 @@ TODO(b/211906113):  Enable validation on lazy fields.</p>
             </div>
                     <div class="method-item">
                     <h3 id="method_hasLazy">
-        <div class="location"><a href="https://github.com/protocolbuffers/protobuf-php/blob/v3.21.10/src/Google/Protobuf/Internal/FieldOptions.php#L370">at line 370</a></div>
+        <div class="location"><a href="https://github.com/protocolbuffers/protobuf-php/blob/4.33.6/src/Google/Protobuf/Internal/FieldOptions.php#L411">at line 411</a></div>
         <code>                    
     <strong>hasLazy</strong>()
         </code>
@@ -2068,7 +2427,7 @@ TODO(b/211906113):  Enable validation on lazy fields.</p>
             </div>
                     <div class="method-item">
                     <h3 id="method_clearLazy">
-        <div class="location"><a href="https://github.com/protocolbuffers/protobuf-php/blob/v3.21.10/src/Google/Protobuf/Internal/FieldOptions.php#L375">at line 375</a></div>
+        <div class="location"><a href="https://github.com/protocolbuffers/protobuf-php/blob/4.33.6/src/Google/Protobuf/Internal/FieldOptions.php#L416">at line 416</a></div>
         <code>                    
     <strong>clearLazy</strong>()
         </code>
@@ -2092,7 +2451,7 @@ TODO(b/211906113):  Enable validation on lazy fields.</p>
             </div>
                     <div class="method-item">
                     <h3 id="method_setLazy">
-        <div class="location"><a href="https://github.com/protocolbuffers/protobuf-php/blob/v3.21.10/src/Google/Protobuf/Internal/FieldOptions.php#L414">at line 414</a></div>
+        <div class="location"><a href="https://github.com/protocolbuffers/protobuf-php/blob/4.33.6/src/Google/Protobuf/Internal/FieldOptions.php#L446">at line 446</a></div>
         <code>                    $this
     <strong>setLazy</strong>(bool $var)
         </code>
@@ -2115,20 +2474,11 @@ all method signatures remain the same.  Furthermore, thread-safety of the
 interface is not affected by this option; const methods remain safe to
 call from multiple threads concurrently, while non-const methods continue
 to require exclusive access.
-Note that implementations may choose not to check required fields within
-a lazy sub-message.  That is, calling IsInitialized() on the outer message
-may return true even if the inner message has missing required fields.
-This is necessary because otherwise the inner message would have to be
-parsed in order to perform the check, defeating the purpose of lazy
-parsing.  An implementation which chooses not to check required fields
-must be consistent about it.  That is, for any particular sub-message, the
-implementation must either <em>always</em> check its required fields, or <em>never</em>
-check its required fields, regardless of whether or not the message has
-been parsed.
-As of 2021, lazy does no correctness checks on the byte stream during
-parsing.  This may lead to crashes if and when an invalid byte stream is
-finally parsed upon access.
-TODO(b/211906113):  Enable validation on lazy fields.</p>
+Note that lazy message fields are still eagerly verified to check
+ill-formed wireformat or missing required fields. Calling IsInitialized()
+on the outer message would fail if the inner message has missing required
+fields. Failed verification would result in parsing failure (except when
+uninitialized messages are acceptable).</p>
 <p>Generated from protobuf field <code>optional bool lazy = 5 [default = false];</code></p></p>        
         </div>
         <div class="tags">
@@ -2161,7 +2511,7 @@ TODO(b/211906113):  Enable validation on lazy fields.</p>
             </div>
                     <div class="method-item">
                     <h3 id="method_getUnverifiedLazy">
-        <div class="location"><a href="https://github.com/protocolbuffers/protobuf-php/blob/v3.21.10/src/Google/Protobuf/Internal/FieldOptions.php#L430">at line 430</a></div>
+        <div class="location"><a href="https://github.com/protocolbuffers/protobuf-php/blob/4.33.6/src/Google/Protobuf/Internal/FieldOptions.php#L462">at line 462</a></div>
         <code>                    bool
     <strong>getUnverifiedLazy</strong>()
         </code>
@@ -2195,7 +2545,7 @@ reasons.</p></p>                <p><p>Generated from protobuf field <code>option
             </div>
                     <div class="method-item">
                     <h3 id="method_hasUnverifiedLazy">
-        <div class="location"><a href="https://github.com/protocolbuffers/protobuf-php/blob/v3.21.10/src/Google/Protobuf/Internal/FieldOptions.php#L435">at line 435</a></div>
+        <div class="location"><a href="https://github.com/protocolbuffers/protobuf-php/blob/4.33.6/src/Google/Protobuf/Internal/FieldOptions.php#L467">at line 467</a></div>
         <code>                    
     <strong>hasUnverifiedLazy</strong>()
         </code>
@@ -2219,7 +2569,7 @@ reasons.</p></p>                <p><p>Generated from protobuf field <code>option
             </div>
                     <div class="method-item">
                     <h3 id="method_clearUnverifiedLazy">
-        <div class="location"><a href="https://github.com/protocolbuffers/protobuf-php/blob/v3.21.10/src/Google/Protobuf/Internal/FieldOptions.php#L440">at line 440</a></div>
+        <div class="location"><a href="https://github.com/protocolbuffers/protobuf-php/blob/4.33.6/src/Google/Protobuf/Internal/FieldOptions.php#L472">at line 472</a></div>
         <code>                    
     <strong>clearUnverifiedLazy</strong>()
         </code>
@@ -2243,7 +2593,7 @@ reasons.</p></p>                <p><p>Generated from protobuf field <code>option
             </div>
                     <div class="method-item">
                     <h3 id="method_setUnverifiedLazy">
-        <div class="location"><a href="https://github.com/protocolbuffers/protobuf-php/blob/v3.21.10/src/Google/Protobuf/Internal/FieldOptions.php#L454">at line 454</a></div>
+        <div class="location"><a href="https://github.com/protocolbuffers/protobuf-php/blob/4.33.6/src/Google/Protobuf/Internal/FieldOptions.php#L486">at line 486</a></div>
         <code>                    $this
     <strong>setUnverifiedLazy</strong>(bool $var)
         </code>
@@ -2287,7 +2637,7 @@ reasons.</p></p>                <p><p>Generated from protobuf field <code>option
             </div>
                     <div class="method-item">
                     <h3 id="method_getDeprecated">
-        <div class="location"><a href="https://github.com/protocolbuffers/protobuf-php/blob/v3.21.10/src/Google/Protobuf/Internal/FieldOptions.php#L471">at line 471</a></div>
+        <div class="location"><a href="https://github.com/protocolbuffers/protobuf-php/blob/4.33.6/src/Google/Protobuf/Internal/FieldOptions.php#L503">at line 503</a></div>
         <code>                    bool
     <strong>getDeprecated</strong>()
         </code>
@@ -2322,7 +2672,7 @@ is a formalization for deprecating fields.</p></p>                <p><p>Generate
             </div>
                     <div class="method-item">
                     <h3 id="method_hasDeprecated">
-        <div class="location"><a href="https://github.com/protocolbuffers/protobuf-php/blob/v3.21.10/src/Google/Protobuf/Internal/FieldOptions.php#L476">at line 476</a></div>
+        <div class="location"><a href="https://github.com/protocolbuffers/protobuf-php/blob/4.33.6/src/Google/Protobuf/Internal/FieldOptions.php#L508">at line 508</a></div>
         <code>                    
     <strong>hasDeprecated</strong>()
         </code>
@@ -2346,7 +2696,7 @@ is a formalization for deprecating fields.</p></p>                <p><p>Generate
             </div>
                     <div class="method-item">
                     <h3 id="method_clearDeprecated">
-        <div class="location"><a href="https://github.com/protocolbuffers/protobuf-php/blob/v3.21.10/src/Google/Protobuf/Internal/FieldOptions.php#L481">at line 481</a></div>
+        <div class="location"><a href="https://github.com/protocolbuffers/protobuf-php/blob/4.33.6/src/Google/Protobuf/Internal/FieldOptions.php#L513">at line 513</a></div>
         <code>                    
     <strong>clearDeprecated</strong>()
         </code>
@@ -2370,7 +2720,7 @@ is a formalization for deprecating fields.</p></p>                <p><p>Generate
             </div>
                     <div class="method-item">
                     <h3 id="method_setDeprecated">
-        <div class="location"><a href="https://github.com/protocolbuffers/protobuf-php/blob/v3.21.10/src/Google/Protobuf/Internal/FieldOptions.php#L496">at line 496</a></div>
+        <div class="location"><a href="https://github.com/protocolbuffers/protobuf-php/blob/4.33.6/src/Google/Protobuf/Internal/FieldOptions.php#L528">at line 528</a></div>
         <code>                    $this
     <strong>setDeprecated</strong>(bool $var)
         </code>
@@ -2415,17 +2765,25 @@ is a formalization for deprecating fields.</p></p>                <p><p>Generate
             </div>
                     <div class="method-item">
                     <h3 id="method_getWeak">
-        <div class="location"><a href="https://github.com/protocolbuffers/protobuf-php/blob/v3.21.10/src/Google/Protobuf/Internal/FieldOptions.php#L510">at line 510</a></div>
+        <div class="location"><a href="https://github.com/protocolbuffers/protobuf-php/blob/4.33.6/src/Google/Protobuf/Internal/FieldOptions.php#L544">at line 544</a></div>
         <code>                    bool
     <strong>getWeak</strong>()
-        </code>
+        <small><span class="label label-danger">deprecated</span></small></code>
     </h3>
     <div class="details">    
+            <p>
+                <small><span class="label label-danger">deprecated</span></small>
+                            <tr>
+                    <td></td>
+                    <td></td>
+                </tr>
+                    </p>
     
             
 
         <div class="method-description">
-                            <p><p>For Google-internal migration only. Do not use.</p></p>                <p><p>Generated from protobuf field <code>optional bool weak = 10 [default = false];</code></p></p>        
+                            <p><p>DEPRECATED. DO NOT USE!
+For Google-internal migration only. Do not use.</p></p>                <p><p>Generated from protobuf field <code>optional bool weak = 10 [default = false, deprecated = true];</code></p></p>        
         </div>
         <div class="tags">
             
@@ -2447,7 +2805,7 @@ is a formalization for deprecating fields.</p></p>                <p><p>Generate
             </div>
                     <div class="method-item">
                     <h3 id="method_hasWeak">
-        <div class="location"><a href="https://github.com/protocolbuffers/protobuf-php/blob/v3.21.10/src/Google/Protobuf/Internal/FieldOptions.php#L515">at line 515</a></div>
+        <div class="location"><a href="https://github.com/protocolbuffers/protobuf-php/blob/4.33.6/src/Google/Protobuf/Internal/FieldOptions.php#L552">at line 552</a></div>
         <code>                    
     <strong>hasWeak</strong>()
         </code>
@@ -2471,7 +2829,7 @@ is a formalization for deprecating fields.</p></p>                <p><p>Generate
             </div>
                     <div class="method-item">
                     <h3 id="method_clearWeak">
-        <div class="location"><a href="https://github.com/protocolbuffers/protobuf-php/blob/v3.21.10/src/Google/Protobuf/Internal/FieldOptions.php#L520">at line 520</a></div>
+        <div class="location"><a href="https://github.com/protocolbuffers/protobuf-php/blob/4.33.6/src/Google/Protobuf/Internal/FieldOptions.php#L560">at line 560</a></div>
         <code>                    
     <strong>clearWeak</strong>()
         </code>
@@ -2495,17 +2853,25 @@ is a formalization for deprecating fields.</p></p>                <p><p>Generate
             </div>
                     <div class="method-item">
                     <h3 id="method_setWeak">
-        <div class="location"><a href="https://github.com/protocolbuffers/protobuf-php/blob/v3.21.10/src/Google/Protobuf/Internal/FieldOptions.php#L532">at line 532</a></div>
+        <div class="location"><a href="https://github.com/protocolbuffers/protobuf-php/blob/4.33.6/src/Google/Protobuf/Internal/FieldOptions.php#L575">at line 575</a></div>
         <code>                    $this
     <strong>setWeak</strong>(bool $var)
-        </code>
+        <small><span class="label label-danger">deprecated</span></small></code>
     </h3>
     <div class="details">    
+            <p>
+                <small><span class="label label-danger">deprecated</span></small>
+                            <tr>
+                    <td></td>
+                    <td></td>
+                </tr>
+                    </p>
     
             
 
         <div class="method-description">
-                            <p><p>For Google-internal migration only. Do not use.</p></p>                <p><p>Generated from protobuf field <code>optional bool weak = 10 [default = false];</code></p></p>        
+                            <p><p>DEPRECATED. DO NOT USE!
+For Google-internal migration only. Do not use.</p></p>                <p><p>Generated from protobuf field <code>optional bool weak = 10 [default = false, deprecated = true];</code></p></p>        
         </div>
         <div class="tags">
                             <h4>Parameters</h4>
@@ -2536,9 +2902,653 @@ is a formalization for deprecating fields.</p></p>                <p><p>Generate
 
             </div>
                     <div class="method-item">
+                    <h3 id="method_getDebugRedact">
+        <div class="location"><a href="https://github.com/protocolbuffers/protobuf-php/blob/4.33.6/src/Google/Protobuf/Internal/FieldOptions.php#L591">at line 591</a></div>
+        <code>                    bool
+    <strong>getDebugRedact</strong>()
+        </code>
+    </h3>
+    <div class="details">    
+    
+            
+
+        <div class="method-description">
+                            <p><p>Indicate that the field value should not be printed out when using debug
+formats, e.g. when the field contains sensitive credentials.</p></p>                <p><p>Generated from protobuf field <code>optional bool debug_redact = 16 [default = false];</code></p></p>        
+        </div>
+        <div class="tags">
+            
+                            <h4>Return Value</h4>
+
+                    <table class="table table-condensed">
+        <tr>
+            <td>bool</td>
+            <td></td>
+        </tr>
+    </table>
+
+            
+            
+            
+                    </div>
+    </div>
+
+            </div>
+                    <div class="method-item">
+                    <h3 id="method_hasDebugRedact">
+        <div class="location"><a href="https://github.com/protocolbuffers/protobuf-php/blob/4.33.6/src/Google/Protobuf/Internal/FieldOptions.php#L596">at line 596</a></div>
+        <code>                    
+    <strong>hasDebugRedact</strong>()
+        </code>
+    </h3>
+    <div class="details">    
+    
+            
+
+        <div class="method-description">
+                            <p class="no-description">No description</p>
+                    
+        </div>
+        <div class="tags">
+            
+            
+            
+            
+                    </div>
+    </div>
+
+            </div>
+                    <div class="method-item">
+                    <h3 id="method_clearDebugRedact">
+        <div class="location"><a href="https://github.com/protocolbuffers/protobuf-php/blob/4.33.6/src/Google/Protobuf/Internal/FieldOptions.php#L601">at line 601</a></div>
+        <code>                    
+    <strong>clearDebugRedact</strong>()
+        </code>
+    </h3>
+    <div class="details">    
+    
+            
+
+        <div class="method-description">
+                            <p class="no-description">No description</p>
+                    
+        </div>
+        <div class="tags">
+            
+            
+            
+            
+                    </div>
+    </div>
+
+            </div>
+                    <div class="method-item">
+                    <h3 id="method_setDebugRedact">
+        <div class="location"><a href="https://github.com/protocolbuffers/protobuf-php/blob/4.33.6/src/Google/Protobuf/Internal/FieldOptions.php#L614">at line 614</a></div>
+        <code>                    $this
+    <strong>setDebugRedact</strong>(bool $var)
+        </code>
+    </h3>
+    <div class="details">    
+    
+            
+
+        <div class="method-description">
+                            <p><p>Indicate that the field value should not be printed out when using debug
+formats, e.g. when the field contains sensitive credentials.</p></p>                <p><p>Generated from protobuf field <code>optional bool debug_redact = 16 [default = false];</code></p></p>        
+        </div>
+        <div class="tags">
+                            <h4>Parameters</h4>
+
+                    <table class="table table-condensed">
+                    <tr>
+                <td>bool</td>
+                <td>$var</td>
+                <td></td>
+            </tr>
+            </table>
+
+            
+                            <h4>Return Value</h4>
+
+                    <table class="table table-condensed">
+        <tr>
+            <td>$this</td>
+            <td></td>
+        </tr>
+    </table>
+
+            
+            
+            
+                    </div>
+    </div>
+
+            </div>
+                    <div class="method-item">
+                    <h3 id="method_getRetention">
+        <div class="location"><a href="https://github.com/protocolbuffers/protobuf-php/blob/4.33.6/src/Google/Protobuf/Internal/FieldOptions.php#L626">at line 626</a></div>
+        <code>                    int
+    <strong>getRetention</strong>()
+        </code>
+    </h3>
+    <div class="details">    
+    
+            
+
+        <div class="method-description">
+                            <p><p>Generated from protobuf field <code>optional .google.protobuf.FieldOptions.OptionRetention retention = 17;</code></p></p>                        
+        </div>
+        <div class="tags">
+            
+                            <h4>Return Value</h4>
+
+                    <table class="table table-condensed">
+        <tr>
+            <td>int</td>
+            <td></td>
+        </tr>
+    </table>
+
+            
+            
+            
+                    </div>
+    </div>
+
+            </div>
+                    <div class="method-item">
+                    <h3 id="method_hasRetention">
+        <div class="location"><a href="https://github.com/protocolbuffers/protobuf-php/blob/4.33.6/src/Google/Protobuf/Internal/FieldOptions.php#L631">at line 631</a></div>
+        <code>                    
+    <strong>hasRetention</strong>()
+        </code>
+    </h3>
+    <div class="details">    
+    
+            
+
+        <div class="method-description">
+                            <p class="no-description">No description</p>
+                    
+        </div>
+        <div class="tags">
+            
+            
+            
+            
+                    </div>
+    </div>
+
+            </div>
+                    <div class="method-item">
+                    <h3 id="method_clearRetention">
+        <div class="location"><a href="https://github.com/protocolbuffers/protobuf-php/blob/4.33.6/src/Google/Protobuf/Internal/FieldOptions.php#L636">at line 636</a></div>
+        <code>                    
+    <strong>clearRetention</strong>()
+        </code>
+    </h3>
+    <div class="details">    
+    
+            
+
+        <div class="method-description">
+                            <p class="no-description">No description</p>
+                    
+        </div>
+        <div class="tags">
+            
+            
+            
+            
+                    </div>
+    </div>
+
+            </div>
+                    <div class="method-item">
+                    <h3 id="method_setRetention">
+        <div class="location"><a href="https://github.com/protocolbuffers/protobuf-php/blob/4.33.6/src/Google/Protobuf/Internal/FieldOptions.php#L646">at line 646</a></div>
+        <code>                    $this
+    <strong>setRetention</strong>(int $var)
+        </code>
+    </h3>
+    <div class="details">    
+    
+            
+
+        <div class="method-description">
+                            <p><p>Generated from protobuf field <code>optional .google.protobuf.FieldOptions.OptionRetention retention = 17;</code></p></p>                        
+        </div>
+        <div class="tags">
+                            <h4>Parameters</h4>
+
+                    <table class="table table-condensed">
+                    <tr>
+                <td>int</td>
+                <td>$var</td>
+                <td></td>
+            </tr>
+            </table>
+
+            
+                            <h4>Return Value</h4>
+
+                    <table class="table table-condensed">
+        <tr>
+            <td>$this</td>
+            <td></td>
+        </tr>
+    </table>
+
+            
+            
+            
+                    </div>
+    </div>
+
+            </div>
+                    <div class="method-item">
+                    <h3 id="method_getTargets">
+        <div class="location"><a href="https://github.com/protocolbuffers/protobuf-php/blob/4.33.6/src/Google/Protobuf/Internal/FieldOptions.php#L658">at line 658</a></div>
+        <code>                    <abbr title="Google\Protobuf\RepeatedField&lt;int&gt;">RepeatedField&lt;int&gt;</abbr>
+    <strong>getTargets</strong>()
+        </code>
+    </h3>
+    <div class="details">    
+    
+            
+
+        <div class="method-description">
+                            <p><p>Generated from protobuf field <code>repeated .google.protobuf.FieldOptions.OptionTargetType targets = 19;</code></p></p>                        
+        </div>
+        <div class="tags">
+            
+                            <h4>Return Value</h4>
+
+                    <table class="table table-condensed">
+        <tr>
+            <td><abbr title="Google\Protobuf\RepeatedField&lt;int&gt;">RepeatedField&lt;int&gt;</abbr></td>
+            <td></td>
+        </tr>
+    </table>
+
+            
+            
+            
+                    </div>
+    </div>
+
+            </div>
+                    <div class="method-item">
+                    <h3 id="method_setTargets">
+        <div class="location"><a href="https://github.com/protocolbuffers/protobuf-php/blob/4.33.6/src/Google/Protobuf/Internal/FieldOptions.php#L668">at line 668</a></div>
+        <code>                    $this
+    <strong>setTargets</strong>(int[] $var)
+        </code>
+    </h3>
+    <div class="details">    
+    
+            
+
+        <div class="method-description">
+                            <p><p>Generated from protobuf field <code>repeated .google.protobuf.FieldOptions.OptionTargetType targets = 19;</code></p></p>                        
+        </div>
+        <div class="tags">
+                            <h4>Parameters</h4>
+
+                    <table class="table table-condensed">
+                    <tr>
+                <td>int[]</td>
+                <td>$var</td>
+                <td></td>
+            </tr>
+            </table>
+
+            
+                            <h4>Return Value</h4>
+
+                    <table class="table table-condensed">
+        <tr>
+            <td>$this</td>
+            <td></td>
+        </tr>
+    </table>
+
+            
+            
+            
+                    </div>
+    </div>
+
+            </div>
+                    <div class="method-item">
+                    <h3 id="method_getEditionDefaults">
+        <div class="location"><a href="https://github.com/protocolbuffers/protobuf-php/blob/4.33.6/src/Google/Protobuf/Internal/FieldOptions.php#L680">at line 680</a></div>
+        <code>                    <abbr title="Google\Protobuf\RepeatedField&lt;\Google\Protobuf\Internal\FieldOptions\EditionDefault&gt;">EditionDefault&gt;</abbr>
+    <strong>getEditionDefaults</strong>()
+        </code>
+    </h3>
+    <div class="details">    
+    
+            
+
+        <div class="method-description">
+                            <p><p>Generated from protobuf field <code>repeated .google.protobuf.FieldOptions.EditionDefault edition_defaults = 20;</code></p></p>                        
+        </div>
+        <div class="tags">
+            
+                            <h4>Return Value</h4>
+
+                    <table class="table table-condensed">
+        <tr>
+            <td><abbr title="Google\Protobuf\RepeatedField&lt;\Google\Protobuf\Internal\FieldOptions\EditionDefault&gt;">EditionDefault&gt;</abbr></td>
+            <td></td>
+        </tr>
+    </table>
+
+            
+            
+            
+                    </div>
+    </div>
+
+            </div>
+                    <div class="method-item">
+                    <h3 id="method_setEditionDefaults">
+        <div class="location"><a href="https://github.com/protocolbuffers/protobuf-php/blob/4.33.6/src/Google/Protobuf/Internal/FieldOptions.php#L690">at line 690</a></div>
+        <code>                    $this
+    <strong>setEditionDefaults</strong>(<a href="../../../Google/Protobuf/Internal/FieldOptions/EditionDefault.html"><abbr title="Google\Protobuf\Internal\FieldOptions\EditionDefault">EditionDefault</abbr></a>[] $var)
+        </code>
+    </h3>
+    <div class="details">    
+    
+            
+
+        <div class="method-description">
+                            <p><p>Generated from protobuf field <code>repeated .google.protobuf.FieldOptions.EditionDefault edition_defaults = 20;</code></p></p>                        
+        </div>
+        <div class="tags">
+                            <h4>Parameters</h4>
+
+                    <table class="table table-condensed">
+                    <tr>
+                <td><a href="../../../Google/Protobuf/Internal/FieldOptions/EditionDefault.html"><abbr title="Google\Protobuf\Internal\FieldOptions\EditionDefault">EditionDefault</abbr></a>[]</td>
+                <td>$var</td>
+                <td></td>
+            </tr>
+            </table>
+
+            
+                            <h4>Return Value</h4>
+
+                    <table class="table table-condensed">
+        <tr>
+            <td>$this</td>
+            <td></td>
+        </tr>
+    </table>
+
+            
+            
+            
+                    </div>
+    </div>
+
+            </div>
+                    <div class="method-item">
+                    <h3 id="method_getFeatures">
+        <div class="location"><a href="https://github.com/protocolbuffers/protobuf-php/blob/4.33.6/src/Google/Protobuf/Internal/FieldOptions.php#L707">at line 707</a></div>
+        <code>                    <a href="../../../Google/Protobuf/Internal/FeatureSet.html"><abbr title="Google\Protobuf\Internal\FeatureSet">FeatureSet</abbr></a>|null
+    <strong>getFeatures</strong>()
+        </code>
+    </h3>
+    <div class="details">    
+    
+            
+
+        <div class="method-description">
+                            <p><p>Any features defined in the specific edition.</p></p>                <p><p>WARNING: This field should only be used by protobuf plugins or special
+cases like the proto compiler. Other uses are discouraged and
+developers should rely on the protoreflect APIs for their client language.</p>
+<p>Generated from protobuf field <code>optional .google.protobuf.FeatureSet features = 21;</code></p></p>        
+        </div>
+        <div class="tags">
+            
+                            <h4>Return Value</h4>
+
+                    <table class="table table-condensed">
+        <tr>
+            <td><a href="../../../Google/Protobuf/Internal/FeatureSet.html"><abbr title="Google\Protobuf\Internal\FeatureSet">FeatureSet</abbr></a>|null</td>
+            <td></td>
+        </tr>
+    </table>
+
+            
+            
+            
+                    </div>
+    </div>
+
+            </div>
+                    <div class="method-item">
+                    <h3 id="method_hasFeatures">
+        <div class="location"><a href="https://github.com/protocolbuffers/protobuf-php/blob/4.33.6/src/Google/Protobuf/Internal/FieldOptions.php#L712">at line 712</a></div>
+        <code>                    
+    <strong>hasFeatures</strong>()
+        </code>
+    </h3>
+    <div class="details">    
+    
+            
+
+        <div class="method-description">
+                            <p class="no-description">No description</p>
+                    
+        </div>
+        <div class="tags">
+            
+            
+            
+            
+                    </div>
+    </div>
+
+            </div>
+                    <div class="method-item">
+                    <h3 id="method_clearFeatures">
+        <div class="location"><a href="https://github.com/protocolbuffers/protobuf-php/blob/4.33.6/src/Google/Protobuf/Internal/FieldOptions.php#L717">at line 717</a></div>
+        <code>                    
+    <strong>clearFeatures</strong>()
+        </code>
+    </h3>
+    <div class="details">    
+    
+            
+
+        <div class="method-description">
+                            <p class="no-description">No description</p>
+                    
+        </div>
+        <div class="tags">
+            
+            
+            
+            
+                    </div>
+    </div>
+
+            </div>
+                    <div class="method-item">
+                    <h3 id="method_setFeatures">
+        <div class="location"><a href="https://github.com/protocolbuffers/protobuf-php/blob/4.33.6/src/Google/Protobuf/Internal/FieldOptions.php#L732">at line 732</a></div>
+        <code>                    $this
+    <strong>setFeatures</strong>(<a href="../../../Google/Protobuf/Internal/FeatureSet.html"><abbr title="Google\Protobuf\Internal\FeatureSet">FeatureSet</abbr></a> $var)
+        </code>
+    </h3>
+    <div class="details">    
+    
+            
+
+        <div class="method-description">
+                            <p><p>Any features defined in the specific edition.</p></p>                <p><p>WARNING: This field should only be used by protobuf plugins or special
+cases like the proto compiler. Other uses are discouraged and
+developers should rely on the protoreflect APIs for their client language.</p>
+<p>Generated from protobuf field <code>optional .google.protobuf.FeatureSet features = 21;</code></p></p>        
+        </div>
+        <div class="tags">
+                            <h4>Parameters</h4>
+
+                    <table class="table table-condensed">
+                    <tr>
+                <td><a href="../../../Google/Protobuf/Internal/FeatureSet.html"><abbr title="Google\Protobuf\Internal\FeatureSet">FeatureSet</abbr></a></td>
+                <td>$var</td>
+                <td></td>
+            </tr>
+            </table>
+
+            
+                            <h4>Return Value</h4>
+
+                    <table class="table table-condensed">
+        <tr>
+            <td>$this</td>
+            <td></td>
+        </tr>
+    </table>
+
+            
+            
+            
+                    </div>
+    </div>
+
+            </div>
+                    <div class="method-item">
+                    <h3 id="method_getFeatureSupport">
+        <div class="location"><a href="https://github.com/protocolbuffers/protobuf-php/blob/4.33.6/src/Google/Protobuf/Internal/FieldOptions.php#L744">at line 744</a></div>
+        <code>                    <a href="../../../Google/Protobuf/Internal/FieldOptions/FeatureSupport.html"><abbr title="Google\Protobuf\Internal\FieldOptions\FeatureSupport">FeatureSupport</abbr></a>|null
+    <strong>getFeatureSupport</strong>()
+        </code>
+    </h3>
+    <div class="details">    
+    
+            
+
+        <div class="method-description">
+                            <p><p>Generated from protobuf field <code>optional .google.protobuf.FieldOptions.FeatureSupport feature_support = 22;</code></p></p>                        
+        </div>
+        <div class="tags">
+            
+                            <h4>Return Value</h4>
+
+                    <table class="table table-condensed">
+        <tr>
+            <td><a href="../../../Google/Protobuf/Internal/FieldOptions/FeatureSupport.html"><abbr title="Google\Protobuf\Internal\FieldOptions\FeatureSupport">FeatureSupport</abbr></a>|null</td>
+            <td></td>
+        </tr>
+    </table>
+
+            
+            
+            
+                    </div>
+    </div>
+
+            </div>
+                    <div class="method-item">
+                    <h3 id="method_hasFeatureSupport">
+        <div class="location"><a href="https://github.com/protocolbuffers/protobuf-php/blob/4.33.6/src/Google/Protobuf/Internal/FieldOptions.php#L749">at line 749</a></div>
+        <code>                    
+    <strong>hasFeatureSupport</strong>()
+        </code>
+    </h3>
+    <div class="details">    
+    
+            
+
+        <div class="method-description">
+                            <p class="no-description">No description</p>
+                    
+        </div>
+        <div class="tags">
+            
+            
+            
+            
+                    </div>
+    </div>
+
+            </div>
+                    <div class="method-item">
+                    <h3 id="method_clearFeatureSupport">
+        <div class="location"><a href="https://github.com/protocolbuffers/protobuf-php/blob/4.33.6/src/Google/Protobuf/Internal/FieldOptions.php#L754">at line 754</a></div>
+        <code>                    
+    <strong>clearFeatureSupport</strong>()
+        </code>
+    </h3>
+    <div class="details">    
+    
+            
+
+        <div class="method-description">
+                            <p class="no-description">No description</p>
+                    
+        </div>
+        <div class="tags">
+            
+            
+            
+            
+                    </div>
+    </div>
+
+            </div>
+                    <div class="method-item">
+                    <h3 id="method_setFeatureSupport">
+        <div class="location"><a href="https://github.com/protocolbuffers/protobuf-php/blob/4.33.6/src/Google/Protobuf/Internal/FieldOptions.php#L764">at line 764</a></div>
+        <code>                    $this
+    <strong>setFeatureSupport</strong>(<a href="../../../Google/Protobuf/Internal/FieldOptions/FeatureSupport.html"><abbr title="Google\Protobuf\Internal\FieldOptions\FeatureSupport">FeatureSupport</abbr></a> $var)
+        </code>
+    </h3>
+    <div class="details">    
+    
+            
+
+        <div class="method-description">
+                            <p><p>Generated from protobuf field <code>optional .google.protobuf.FieldOptions.FeatureSupport feature_support = 22;</code></p></p>                        
+        </div>
+        <div class="tags">
+                            <h4>Parameters</h4>
+
+                    <table class="table table-condensed">
+                    <tr>
+                <td><a href="../../../Google/Protobuf/Internal/FieldOptions/FeatureSupport.html"><abbr title="Google\Protobuf\Internal\FieldOptions\FeatureSupport">FeatureSupport</abbr></a></td>
+                <td>$var</td>
+                <td></td>
+            </tr>
+            </table>
+
+            
+                            <h4>Return Value</h4>
+
+                    <table class="table table-condensed">
+        <tr>
+            <td>$this</td>
+            <td></td>
+        </tr>
+    </table>
+
+            
+            
+            
+                    </div>
+    </div>
+
+            </div>
+                    <div class="method-item">
                     <h3 id="method_getUninterpretedOption">
-        <div class="location"><a href="https://github.com/protocolbuffers/protobuf-php/blob/v3.21.10/src/Google/Protobuf/Internal/FieldOptions.php#L546">at line 546</a></div>
-        <code>                    <a href="../../../Google/Protobuf/Internal/RepeatedField.html"><abbr title="Google\Protobuf\Internal\RepeatedField">RepeatedField</abbr></a>
+        <div class="location"><a href="https://github.com/protocolbuffers/protobuf-php/blob/4.33.6/src/Google/Protobuf/Internal/FieldOptions.php#L778">at line 778</a></div>
+        <code>                    <abbr title="Google\Protobuf\RepeatedField&lt;\Google\Protobuf\Internal\UninterpretedOption&gt;">UninterpretedOption&gt;</abbr>
     <strong>getUninterpretedOption</strong>()
         </code>
     </h3>
@@ -2555,7 +3565,7 @@ is a formalization for deprecating fields.</p></p>                <p><p>Generate
 
                     <table class="table table-condensed">
         <tr>
-            <td><a href="../../../Google/Protobuf/Internal/RepeatedField.html"><abbr title="Google\Protobuf\Internal\RepeatedField">RepeatedField</abbr></a></td>
+            <td><abbr title="Google\Protobuf\RepeatedField&lt;\Google\Protobuf\Internal\UninterpretedOption&gt;">UninterpretedOption&gt;</abbr></td>
             <td></td>
         </tr>
     </table>
@@ -2569,9 +3579,9 @@ is a formalization for deprecating fields.</p></p>                <p><p>Generate
             </div>
                     <div class="method-item">
                     <h3 id="method_setUninterpretedOption">
-        <div class="location"><a href="https://github.com/protocolbuffers/protobuf-php/blob/v3.21.10/src/Google/Protobuf/Internal/FieldOptions.php#L558">at line 558</a></div>
+        <div class="location"><a href="https://github.com/protocolbuffers/protobuf-php/blob/4.33.6/src/Google/Protobuf/Internal/FieldOptions.php#L790">at line 790</a></div>
         <code>                    $this
-    <strong>setUninterpretedOption</strong>(<a href="../../../Google/Protobuf/Internal/UninterpretedOption.html"><abbr title="Google\Protobuf\Internal\UninterpretedOption">UninterpretedOption</abbr></a>[]|<a href="../../../Google/Protobuf/Internal/RepeatedField.html"><abbr title="Google\Protobuf\Internal\RepeatedField">RepeatedField</abbr></a> $var)
+    <strong>setUninterpretedOption</strong>(<a href="../../../Google/Protobuf/Internal/UninterpretedOption.html"><abbr title="Google\Protobuf\Internal\UninterpretedOption">UninterpretedOption</abbr></a>[] $var)
         </code>
     </h3>
     <div class="details">    
@@ -2586,7 +3596,7 @@ is a formalization for deprecating fields.</p></p>                <p><p>Generate
 
                     <table class="table table-condensed">
                     <tr>
-                <td><a href="../../../Google/Protobuf/Internal/UninterpretedOption.html"><abbr title="Google\Protobuf\Internal\UninterpretedOption">UninterpretedOption</abbr></a>[]|<a href="../../../Google/Protobuf/Internal/RepeatedField.html"><abbr title="Google\Protobuf\Internal\RepeatedField">RepeatedField</abbr></a></td>
+                <td><a href="../../../Google/Protobuf/Internal/UninterpretedOption.html"><abbr title="Google\Protobuf\Internal\UninterpretedOption">UninterpretedOption</abbr></a>[]</td>
                 <td>$var</td>
                 <td></td>
             </tr>
