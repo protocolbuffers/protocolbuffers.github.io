@@ -12,13 +12,13 @@ type = "docs"
 
 Language | Active Support | Maintenance Only      | Minimum Gencode
 -------- | -------------- | --------------------- | ---------------
-protoc   | 34.x           | 33.x, 25.x (for Java) |
-C++      | 7.34.x         | 6.33.x                | Exact Match
-C#       | 3.34.x         |                       | 3.0.0
-Java     | 4.34.x         | 3.25.x                | 3.0.0
-PHP      | 5.34.x         | 4.33.x                | 4.26.0
-Python   | 7.34.x         | 6.33.x                | [3.20.0](https://protobuf.dev/support/cross-version-runtime-guarantee#python)
-Ruby     | 4.34.x         |                       | 3.0.0
+protoc   | 35.x           | 33.x, 25.x (for Java) |
+C++      | 7.35.x         | 6.33.x                | Exact Match
+C#       | 3.35.x         |                       | 3.0.0
+Java     | 4.35.x         | 3.25.x                | 3.0.0
+PHP      | 5.35.x         | 4.33.x                | 4.26.0
+Python   | 7.35.x         | 6.33.x                | [3.20.0](https://protobuf.dev/support/cross-version-runtime-guarantee#python)
+Ruby     | 4.35.x         |                       | 3.0.0
 
 ### Minimum Supported Gencode {#min-gencode}
 
@@ -253,7 +253,7 @@ appear in *italics* and might change.
     <td class="y25q3 active">6.32</td>
     <td class="y25q4 active">6.33</td>
     <td class="y26q1 maintenance">6.33</td>
-    <td class="y26q2">6.33</td>
+    <td class="y26q2 maintenance">6.33</td>
   </tr>
   <tr class="active">
     <th>7.x</th>
@@ -269,7 +269,7 @@ appear in *italics* and might change.
     <td class="y25q3"></td>
     <td class="y25q4"></td>
     <td class="y26q1 active">7.34</td>
-    <td class="y26q2 future">7.35</td>
+    <td class="y26q2 active">7.35</td>
   </tr>
 </table>
 
@@ -330,7 +330,7 @@ For supported versions, see the
     <td class="y25q3 active">3.32</td>
     <td class="y25q4 active">3.33</td>
     <td class="y26q1 active">3.34</td>
-    <td class="y26q2 future">3.35</td>
+    <td class="y26q2 active">3.35</td>
   </tr>
 </table>
 
@@ -409,7 +409,7 @@ For specific versions supported, see
     <td class="y25q3 active">4.32</td>
     <td class="y25q4 active">4.33</td>
     <td class="y26q1 active">4.34</td>
-    <td class="y26q2 future">4.35</td>
+    <td class="y26q2 active">4.35</td>
   </tr>
 </table>
 
@@ -504,7 +504,7 @@ We support whichever version is lower.
     <td class="y25q3 active">4.32</td>
     <td class="y25q4 active">4.33</td>
     <td class="y26q1 maintenance">4.33</td>
-    <td class="y26q2">4.33</td>
+    <td class="y26q2 maintenance">4.33</td>
   </tr>
     <tr class="active">
     <th>5.x</th>
@@ -520,7 +520,7 @@ We support whichever version is lower.
     <td class="y25q3"></td>
     <td class="y25q4"></td>
     <td class="y26q1 active">5.34</td>
-    <td class="y26q2 future">5.35</td>
+    <td class="y26q2 active">5.35</td>
   </tr>
 </table>
 
@@ -622,7 +622,7 @@ For supported versions, see the
     <td class="y25q3 active">6.32</td>
     <td class="y25q4 active">6.33</td>
     <td class="y26q1 maintenance">6.33</td>
-    <td class="y26q2">6.33</td>
+    <td class="y26q2 maintenance">6.33</td>
   </tr>
     <tr class="active">
     <th>7.x</th>
@@ -638,7 +638,7 @@ For supported versions, see the
     <td class="y25q3"></td>
     <td class="y25q4"></td>
     <td class="y26q1 active">7.34</td>
-    <td class="y26q2 future">7.35</td>
+    <td class="y26q2 active">7.35</td>
   </tr>
 </table>
 
@@ -717,7 +717,7 @@ For supported versions, see the
     <td class="y25q3 active">4.32</td>
     <td class="y25q4 active">4.33</td>
     <td class="y26q1 active">4.34</td>
-    <td class="y26q2 future">4.35</td>
+    <td class="y26q2 active">4.35</td>
   </tr>
 </table>
 
