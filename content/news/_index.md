@@ -20,6 +20,8 @@ New news topics will also be published to the
 The following news topics provide information in the reverse order in which it
 was released.
 
+*   [May 18, 2026](/news/2026-05-18) - Dropping support
+    for older versions of Dotnet
 *   [March 13, 2026](/news/2026-03-13) - Breaking changes
     in Bazel for the upcoming 34.x release
 *   [January 16, 2026](/news/2026-01-16) - Prebuilt proto
