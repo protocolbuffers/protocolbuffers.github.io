@@ -214,7 +214,7 @@ neutral representation.
       <td>FieldMask</td>
       <td>string</td>
       <td><code>"f.fooBar,h"</code></td>
-      <td>See <code>field_mask.proto</code>.</td>
+      <td>See <code>field_mask.proto</code>. Note that some field names cannot be represented in JSON FieldMasks, see <a href="#fieldmask-limitations">FieldMask Round-trip Limitations</a>.</td>
     </tr>
     <tr>
       <td>ListValue</td>
@@ -572,6 +572,54 @@ representation, but it is able to encode nanosecond precision. For integer
 number of seconds the two representations may match (like `10s`), but the
 ProtoJSON durations accept fractional values and conformant implementations must
 precisely represent nanosecond precision (like `10.500000001s`).
+
+## Non-Round Trippable Edge cases of Well-Known Types {#wkt-roundtrip-limitations}
+
+While ProtoJSON defines canonical JSON representations for all Protocol Buffer
+types, under some edge cases Well-Known Types are not supported to round-trip
+cleanly (i.e., deserializing JSON back into proto, or vice versa) due to design
+bugs in the format.
+
+For example, `google.protobuf.Value` has a double field for JSON numbers. JSON
+numbers can represent any double except for `Infinity`, `-Infinity` and `NaN`;
+constructing `Value` message with those three values set will result in a
+message that cannot be round-tripped through the JSON format.
+
+These edge cases are rare. When they occur, implementations may fail to
+serialize, or they may serialize something that does not parse back to exactly
+the same as the original value.
+
+### Non-Round Trippable FieldMasks {#fieldmask-limitations}"
+
+One of the most significant round-trip limitations is that
+`google.protobuf.FieldMask` in JSON representation cannot be used to represent
+field names that are not losslessly convertible between `snake_case` and
+`camelCase`.
+
+When representing a `FieldMask` in JSON, the original field names are converted
+from `snake_case` to `lowerCamelCase`. When parsing the JSON `FieldMask` back,
+the parser has to convert the camelCase path segments back to snake_case.
+
+However, round-tripping to/from camelCase is not lossless. For example:
+
+*   **Field names containing underscores followed by numbers** (e.g., `x_0`,
+    `custom_label_0`): The camelCase representation of `x_0` is `x0`. When
+    converting `x0` back to snake_case, it remains `x0`, failing to restore the
+    underscore.
+*   **Field names with consecutive underscores or leading/trailing underscores**
+    (e.g., `_x`, `__foo_bar`, `foo__bar`): The capitalization and restoration
+    rules cannot differentiate these from standard camelCase.
+
+When processing standard fields, ambiguities can be resolved by looking at the
+field definitions in the specific schema to look for matches. But because
+`FieldMask` paths are not associated with any specific message type during
+parsing, the conversion steps cannot refer to the schema. This means that some
+field names are not round-trip representable.
+
+To avoid issues, follow the standard Protobuf style guide and avoid using
+underscores followed by numbers or consecutive/leading/trailing underscores.
+Starting in Edition 2024, these naming patterns are rejected by `protoc` to
+prevent issues.
 
 ## JSON Options {#json-options}
 
