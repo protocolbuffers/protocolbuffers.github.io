@@ -589,7 +589,7 @@ These edge cases are rare. When they occur, implementations may fail to
 serialize, or they may serialize something that does not parse back to exactly
 the same as the original value.
 
-### Non-Round Trippable FieldMasks {#fieldmask-limitations}"
+### Non-Round Trippable FieldMasks {#fieldmask-limitations}
 
 One of the most significant round-trip limitations is that
 `google.protobuf.FieldMask` in JSON representation cannot be used to represent
