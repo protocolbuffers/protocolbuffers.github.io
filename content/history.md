@@ -55,6 +55,24 @@ refer to a message in an abstract sense, "protocol buffer" to refer to a
 serialized copy of a message, and "protocol message object" to refer to an
 in-memory object representing the parsed message.
 
+## What About Proto3 and Editions? {#proto3}
+
+In 2023, we introduced Protocol Buffers Editions to allow for a more granular
+control over features and to move away from the "all or nothing" approach of
+`proto2` and `proto3`. With Editions, you can now explicitly specify which
+features you want to use in your `.proto` files.
+
+For example, to use the 2023 edition, you would add the following to your
+`.proto` file:
+
+```proto
+edition = "2023";
+```
+
+There will be a transitional period during which `proto2`, `proto3`, and
+Editions coexist. For more information on Editions, see the
+[Protobuf Editions Overview](/editions/overview).
+
 ## Does Google Have Any Patents on Protocol Buffers? {#patents}
 
 Google currently has no issued patents on protocol buffers, and we are happy to
