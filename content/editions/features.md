@@ -100,7 +100,7 @@ and `export` keywords to set per-field behavior. Read more about this at
     to local.
 *   `LOCAL_ALL`: All symbols default to local.
 *   `STRICT`: All symbols local by default. Nested types cannot be exported,
-    except for a special-case caveat for `message { enum {} reserved 0 to max;
+    except for a special-case caveat for `message { enum {} reserved 1 to max;
     }`. This will become the default in a future edition.
 
 **Applicable to the following scope:** file
