@@ -1132,8 +1132,8 @@ option features.(pb.java).legacy_closed_enum = false;
 
 ### Edition 2023 to 2024 {#2023-2024}
 
-The following shows the settings to replicate Edition 2023 behavior with Edition
-2024.
+The following shows the settings to replicate Edition 2023 behavior with
+Edition 2024.
 
 ```proto
 // foo/bar_baz.proto
