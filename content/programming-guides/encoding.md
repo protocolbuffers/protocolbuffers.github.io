@@ -318,17 +318,17 @@ the field. Thus, if we have:
 ```proto
 message Test4 {
   string d = 4;
-  repeated int32 e = 6;
+  repeated int32 e = 5;
 }
 ```
 
 and we construct a `Test4` message with `d` set to `"hello"`, and `e` set to
-`1`, `2`, and `3`, this *could* be encoded as `` `3206038e029ea705` ``, or
-written out as Protoscope,
+`1`, `2`, and `3`, this *could* be encoded as `` `220568656c6c6f2a03010203` ``,
+or written out as Protoscope,
 
 ```proto
 4: {"hello"}
-6: {3 270 86942}
+5: {1 2 3}
 ```
 
 However, if the repeated field is set to expanded (overriding the default packed
@@ -339,10 +339,10 @@ records for the same field with respect to each other is preserved. Thus, this
 could look like the following:
 
 ```proto
-6: 1
-6: 2
+5: 1
+5: 2
 4: {"hello"}
-6: 3
+5: 3
 ```
 
 Only repeated fields of primitive numeric types can be declared "packed". These
@@ -355,8 +355,9 @@ must contain a whole number of elements. The following is a valid encoding of
 the same message above that parsers must accept:
 
 ```proto
-6: {3 270}
-6: {86942}
+5: {1 2}
+4: {"hello"}
+5: {3}
 ```
 
 Protocol buffer parsers must be able to parse repeated fields that were compiled
