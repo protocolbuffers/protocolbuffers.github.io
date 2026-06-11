@@ -1192,7 +1192,7 @@ behaviors in most cases, but there are a few exceptions.
 *   (C++) `ctype`: Remove all instances of the `ctype` option and set the
     [`features.(pb.cpp).string_type`](#string_type) value.
 *   (C++ and Go) `weak`: Remove weak
-    importsimports.. Use
+    imports. Use
     [`import option`](/editions/overview#import-option)
     instead.
 *   (Java) `java_multiple_files`: Remove `java_multiple_files` and use
