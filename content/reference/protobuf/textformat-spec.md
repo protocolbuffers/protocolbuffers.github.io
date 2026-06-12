@@ -360,8 +360,8 @@ messages: [{}, {}]  # Valid
 messages  [{}, {}]  # Valid
 ```
 
-Values of message fields can be surrounded by curly brackets
-or angle brackets:
+Values of message fields can be surrounded by curly
+brackets or angle brackets:
 
 ```textproto
 message: { foo: "bar" }
@@ -524,6 +524,12 @@ integer         = signedInteger | unsignedInteger ;
         issue a warning when a provided number value is not a valid member. Note
         that certain names that are valid keywords in other contexts, such as
         <em>"true"</em> or <em>"infinity"</em>, are also valid enum value names.
+        <p>
+        For enums with <code>allow_aliasing</code>, serializers must print the
+        first listed name for a given numeric value, and parsers must accept
+        any of the names. This enables a safe renaming strategy similar to the one
+        described in the <a href="/programming-guides/json#enum-aliasing">ProtoJSON enum aliasing documentation</a>.
+        </p>
       </td>
     </tr>
     <tr>
@@ -723,8 +729,8 @@ support. Some tooling also
 supports the legacy extensions `.textpb` and `.pbtxt`. All other extensions
 besides the above are **strongly** discouraged; in particular, extensions such
 as `.protoascii` wrongly imply that text format is ascii-only, and others like
-`.pb.txt` are not recognized by common tooling.
-{{% /alert %}}
+`.pb.txt` are not recognized by common
+tooling. {{% /alert %}}
 
 ```textproto
 # This is an example of Protocol Buffer's text format.
@@ -760,8 +766,8 @@ the schema, so they may provide various features.
 
 ## Working with the Format Programmatically
 
-Due to how individual Protocol Buffer implementations emit
-neither a consistent nor canonical text format,
+Due to how individual Protocol Buffer implementations
+emit neither a consistent nor canonical text format,
 tools or libraries that modify TextProto files or emit TextProto output must
 explicitly use
 https://github.com/protocolbuffers/txtpbfmt

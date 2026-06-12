@@ -82,7 +82,9 @@ The following table shows how data is represented in JSON files.
       <td>string</td>
       <td><code>"FOO_BAR"</code></td>
       <td>The name of the enum value as specified in proto is used. Parsers
-        accept both enum names and integer values.
+        accept both enum names and integer values. See
+        <a href="#enum-aliasing">Enum Aliasing</a> for details on enums with
+        aliases.
       </td>
     </tr>
     <tr>
@@ -358,6 +360,85 @@ JSON when prioritizing interoperability, including:
 *   [OpenAPI int64](https://spec.openapis.org/registry/format/int64)
     documentation recommends using a JSON string instead of a number when
     precision beyond 2**53 is desired.
+
+## Enum Aliasing {#enum-aliasing}
+
+When an enum definition has `option allow_aliasing = true;`, multiple enum
+constant names can map to the same numeric value.
+
+### Serialization Behavior
+
+Serializers **must** print the first listed name in the enum definition for a
+given numeric value.
+
+For example, given:
+
+```proto
+enum MyEnum {
+  option allow_alias = true;
+  UNKNOWN = 0;
+  OLD_NAME = 1;
+  NEW_NAME = 1;
+}
+```
+
+If the value is `1`, the serializer will output `"OLD_NAME"`.
+
+### Parsing Behavior
+
+Parsers **must** accept any of the names defined for that numeric value. In the
+example above, the parser will accept both `"OLD_NAME"` and `"NEW_NAME"` as
+mapping to value `1`.
+
+### Safe Renaming Strategy {#safe-renaming}
+
+This behavior enables a safe, multi-step migration path for renaming enum values
+in a distributed system:
+
+1.  **Add the new name as an alias:** Add the new name below the old name,
+    mapping to the same value.
+
+    ```proto
+    enum MyEnum {
+      option allow_aliasing = true;
+      UNKNOWN = 0;
+      OLD_NAME = 1;
+      NEW_NAME = 1; // New name added as alias
+    }
+    ```
+
+2.  **Deploy the schema:** Deploy this schema to all systems. At this point, all
+    parsers will recognize both `OLD_NAME` and `NEW_NAME`, but all serializers
+    will still emit `OLD_NAME` (since it is listed first).
+
+3.  **Swap the order:** Swap the order of the aliases in the proto file.
+
+    ```proto
+    enum MyEnum {
+      option allow_aliasing = true;
+      UNKNOWN = 0;
+      NEW_NAME = 1; // New name is now first
+      OLD_NAME = 1;
+    }
+    ```
+
+4.  **Deploy the schema:** Deploy this updated schema. Now, serializers will
+    begin emitting `NEW_NAME`. Parsers will still accept both names, ensuring
+    that any systems still running the previous version of the schema can safely
+    parse the new name.
+
+5.  **Remove the old name:** Once all systems have been updated and you are sure
+    no old serialized data remains that needs to be parsed by a system that
+    might be rolled back, you can safely remove the old name.
+
+    ```proto
+    enum MyEnum {
+      UNKNOWN = 0;
+      NEW_NAME = 1;
+    }
+    ```
+
+This semantic also matches TextProto for the same reason.
 
 ## Any {#any}
 
