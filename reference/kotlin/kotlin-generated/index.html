@@ -67,7 +67,7 @@ is appended. For instance, the clearer for a field named <code>in</code> is <cod
 </span></span></span></code></pre></div><p>The compiler will generate the following accessors in the DSL:</p><ul><li><code>fun hasFoo(): Boolean</code>: Returns <code>true</code> if the field is set. This is not
 generated for fields using implicit presence.</li><li><code>var foo: Int</code>: The current value of the field. If the field is not set,
 returns the default value.</li><li><code>fun clearFoo()</code>: Clears the value of the field. After calling this,
-<code>hasFoo()</code> will return <code>false</code> and <code>getFoo()</code> will return the default value.</li></ul><p>For other simple field types, the corresponding Java type is chosen according to
+<code>hasFoo()</code> will return <code>false</code> and <code>foo</code> will return the default value.</li></ul><p>For other simple field types, the corresponding Java type is chosen according to
 the
 <a href=/programming-guides/proto2#scalar>scalar value types table</a>.
 For message and enum types, the value type is replaced with the message or enum
