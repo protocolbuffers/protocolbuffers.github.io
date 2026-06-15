@@ -142,7 +142,7 @@ The compiler will generate the following accessors in the DSL:
 -   `var foo: Int`: The current value of the field. If the field is not set,
     returns the default value.
 -   `fun clearFoo()`: Clears the value of the field. After calling this,
-    `hasFoo()` will return `false` and `getFoo()` will return the default value.
+    `hasFoo()` will return `false` and `foo` will return the default value.
 
 For other simple field types, the corresponding Java type is chosen according to
 the
