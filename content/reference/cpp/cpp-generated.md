@@ -109,6 +109,11 @@ strings.
 -   `string DebugString()`: Return a string giving the `text_format`
     representation of the proto (should only be used for debugging).
 
+If parsing fails (methods returning `false`), the message is left in an
+arbitrary but valid state. Similar to a moved-from object in C++, it is safe to
+destroy the message or `Clear()` it, but its contents should otherwise be
+considered unspecified.
+
 In addition to these methods, the `Foo` class defines the following methods:
 
 -   `Foo()`: Default constructor.
