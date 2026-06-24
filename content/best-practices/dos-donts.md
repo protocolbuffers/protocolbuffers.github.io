@@ -72,9 +72,10 @@ To safely remove the original name (if it's being used for interchange, which it
 Almost never change the type of a field; it'll mess up deserialization, same as
 re-using a tag number. The
 [protobuf docs](/programming-guides/editions#updating)
-outline a small number of cases that are okay (for example, going between
-`int32`, `uint32`, `int64` and `bool`). However, changing a field’s message type
-**will break** unless the new message is a superset of the old one.
+outline cases where old binary encoded data may successfully parse under a
+different type (for example, going between `int32`, `uint32`, `int64` and
+`bool`). However, changing a field's type can be difficult to roll out safely
+even when the new schema can successfully parse old data.
 
 <a id="dont-add-a-required-field"></a>
 
