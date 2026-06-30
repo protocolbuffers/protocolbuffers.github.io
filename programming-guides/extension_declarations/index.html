@@ -42,8 +42,7 @@ valid name that could potentially be defined in another <code>.proto</code> file
 (<code>Foo</code>) with this name or number, we enforce that the number, type, and full
 name of the extension match what is forward-declared here.</li></ul><div class="alert alert-warning" role=alert><h4 class=alert-heading>Warning</h4>Avoid using declarations for extension range groups such as <code>extensions 4, 999</code>.
 It is unclear which extension range the declarations apply to, and it is
-currently
-unsupported.</div><p>The extension declarations expect two extension fields with different packages:</p><div class=highlight><pre tabindex=0 style=background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-proto data-lang=proto><span style=display:flex><span><span style=color:#204a87;font-weight:700>package</span> <span style=color:#000>my</span><span style=color:#ce5c00;font-weight:700>.</span><span style=color:#000>package</span><span style=color:#000;font-weight:700>;</span><span style=color:#a40000>
+currently unsupported.</div><p>The extension declarations expect two extension fields with different packages:</p><div class=highlight><pre tabindex=0 style=background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-proto data-lang=proto><span style=display:flex><span><span style=color:#204a87;font-weight:700>package</span> <span style=color:#000>my</span><span style=color:#ce5c00;font-weight:700>.</span><span style=color:#000>package</span><span style=color:#000;font-weight:700>;</span><span style=color:#a40000>
 </span></span></span><span style=display:flex><span><span style=color:#a40000></span><span style=color:#204a87;font-weight:700>extend</span> <span style=color:#000>Foo</span> <span style=color:#000;font-weight:700>{</span><span style=color:#a40000>
 </span></span></span><span style=display:flex><span><span style=color:#a40000></span>  <span style=color:#204a87;font-weight:700>repeated</span> <span style=color:#000>logs.proto.ValidationAnnotations</span> <span style=color:#000>event_annotations</span> <span style=color:#ce5c00;font-weight:700>=</span> <span style=color:#0000cf;font-weight:700>4</span><span style=color:#000;font-weight:700>;</span><span style=color:#a40000>
 </span></span></span><span style=display:flex><span><span style=color:#a40000></span><span style=color:#000;font-weight:700>}</span><span style=color:#a40000>
@@ -92,8 +91,8 @@ number and type for each extension in the parent message. The extension
 declarations serve as a registry of all the parent message&rsquo;s extensions, and
 protoc will enforce that there are no field number conflicts. When you add a new
 extension, choose the next available number usually by just incrementing by one
-the previously added extension number.</p><p><strong>TIP:</strong> There is a <a href=#message-set>special guidance</a> for
-<code>MessageSet</code> which provides a script to help pick
+the previously added extension number.</p><p><strong>TIP:</strong> There is a <a href=#message-set>special guidance</a>
+for <code>MessageSet</code> which provides a script to help pick
 the next available number.</p><p>Whenever you delete an extension, make sure to mark the field number <code>reserved</code>
 to eliminate the risk of accidentally reusing
 it.</p><p>This convention is only a recommendation&ndash;the protobuf team does not have the
@@ -113,8 +112,8 @@ and standard fields. Reusing a field number introduces an ambiguity in how a
 proto should be decoded from the wire format. The protobuf wire format is lean
 and doesn’t provide a good way to detect fields encoded using one definition and
 decoded using another.</p><p>This ambiguity can manifest in a short time frame, such as a client using one
-extension definition and a server using another communicating
-.</p><p>This ambiguity can also manifest over a longer time frame, such as storing data
+extension definition and a server using another
+communicating .</p><p>This ambiguity can also manifest over a longer time frame, such as storing data
 encoded using one extension definition and later retrieving and decoding using
 the second extension definition. This long-term case can be difficult to
 diagnose if the first extension definition was deleted after the data was
@@ -124,10 +123,10 @@ rewritten.</li></ol><p>Data definition ambiguity is almost certainly going to co
 debugging at a minimum. It could also cause data leaks or corruption that takes
 months to clean up.</p><h2 id=usage-tips>Usage Tips</h2><h3 id=never-delete>Never Delete an Extension Declaration</h3><p>Deleting an extension declaration opens the door to accidental reuse in the
 future. If the extension is no longer processed and the definition is deleted,
-the extension declaration can be <a href=#reserved>marked reserved</a>.</p><h3 id=never-reuse-reserved>Never Use a Field Name or Number from the <code>reserved</code> List for a New Extension Declaration</h3><p>Reserved numbers may have been used for fields or other extensions in the past.</p><p>Using the <code>full_name</code> of a reserved field
-is not recommended
-due
-to the possibility of ambiguity when using textproto.</p><h3 id=never-change-type>Never change the type of an existing extension declaration</h3><p>Changing the extension field&rsquo;s type can result in data corruption.</p><p>If the extension field is of an enum or message type, and that enum or message
+the extension declaration can be <a href=#reserved>marked reserved</a>.</p><h3 id=never-reuse-reserved>Never Use a Field Name or Number from the <code>reserved</code> List for a New Extension Declaration</h3><p>Reserved numbers may have been used for fields or other extensions in the past.</p><p>Using the <code>full_name</code> of a reserved
+field is not
+recommended due to the possibility of ambiguity when using
+textproto.</p><h3 id=never-change-type>Never change the type of an existing extension declaration</h3><p>Changing the extension field&rsquo;s type can result in data corruption.</p><p>If the extension field is of an enum or message type, and that enum or message
 type is being renamed, updating the declaration name is required and safe. To
 avoid breakages, the update of the type, the extension field definition, and
 extension declaration should all happen in a single
