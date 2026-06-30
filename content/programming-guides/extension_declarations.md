@@ -79,8 +79,8 @@ This syntax has the following semantics:
 {{% alert title="Warning" color="warning" %}}
 Avoid using declarations for extension range groups such as `extensions 4, 999`.
 It is unclear which extension range the declarations apply to, and it is
-currently
-unsupported.{{% /alert %}}
+currently unsupported.
+{{% /alert %}}
 
 The extension declarations expect two extension fields with different packages:
 
@@ -167,8 +167,8 @@ protoc will enforce that there are no field number conflicts. When you add a new
 extension, choose the next available number usually by just incrementing by one
 the previously added extension number.
 
-**TIP:** There is a [special guidance](#message-set) for
-`MessageSet` which provides a script to help pick
+**TIP:** There is a [special guidance](#message-set)
+for `MessageSet` which provides a script to help pick
 the next available number.
 
 Whenever you delete an extension, make sure to mark the field number `reserved`
@@ -202,8 +202,8 @@ and doesn’t provide a good way to detect fields encoded using one definition a
 decoded using another.
 
 This ambiguity can manifest in a short time frame, such as a client using one
-extension definition and a server using another communicating
-.
+extension definition and a server using another
+communicating .
 
 This ambiguity can also manifest over a longer time frame, such as storing data
 encoded using one extension definition and later retrieving and decoding using
@@ -235,10 +235,10 @@ the extension declaration can be [marked reserved](#reserved).
 
 Reserved numbers may have been used for fields or other extensions in the past.
 
-Using the `full_name` of a reserved field
-is not recommended
-due
-to the possibility of ambiguity when using textproto.
+Using the `full_name` of a reserved
+field is not
+recommended due to the possibility of ambiguity when using
+textproto.
 
 ### Never change the type of an existing extension declaration {#never-change-type}
 
