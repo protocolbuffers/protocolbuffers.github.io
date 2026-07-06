@@ -495,7 +495,7 @@ class AddPerson {
     }
 
     // Add an address.
-    addressBook.addPerson(
+    addressBook.addPeople(
       PromptForAddress(new BufferedReader(new InputStreamReader(System.in)),
                        System.out));
 
