@@ -66,8 +66,8 @@ enum, or message (including nested types) in the file with the same name,
 
 {{% alert title="Note" color="note" %}}If you are
 using the deprecated v1 of the protobuf API, `OuterClass` is added regardless of
-any collisions with message
-names.{{% /alert %}}
+any collisions with message names.
+{{% /alert %}}
 
 In addition to any nested classes, the wrapper class itself will have the
 following API (assuming the wrapper class is named `Foo` and was generated from
@@ -117,7 +117,8 @@ class files.
 ## Packages {#package}
 
 The generated class is placed in a Java package based on the `java_package`
-option. If the option is omitted, the `package` declaration is used instead.
+option. If the option is omitted, the `package` declaration is used
+instead.
 
 For example, if the `.proto` file contains:
 
@@ -125,9 +126,9 @@ For example, if the `.proto` file contains:
 package foo.bar;
 ```
 
-Then the resulting Java class will be placed in Java package
-`foo.bar`. However, if the `.proto` file also
-contains a `java_package` option, like so:
+Then the resulting Java class will be placed in Java
+package `foo.bar`. However, if
+the `.proto` file also contains a `java_package` option, like so:
 
 ```proto
 package foo.bar;
@@ -426,33 +427,36 @@ the generated [enum type](#enum).
 For this field definition:
 
 ```proto
-repeated string foos = 1;
+repeated int32 foos = 1;
 ```
 
 The compiler will generate the following accessor methods in both the message
 class and its builder:
 
--   `int getFoosCount()`: Returns the number of elements currently in the field.
--   `String getFoos(int index)`: Returns the element at the given zero-based
-    index.
--   `ProtocolStringList getFoosList()`: Returns the entire field as a
-    `ProtocolStringList`. If the field is not set, returns an empty list.
+*   `int getFoosCount()`: Returns the number of elements currently in the field.
+*   `int getFoos(int index)`: Returns the element at the given zero-based index.
+*   `java.util.List<java.lang.Integer> getFoosList()`: Returns the entire field
+    as a java.util.List. If the field is not set, returns an empty list.
 
 The compiler will generate the following methods only in the message's builder:
 
--   `Builder setFoos(int index, String value)`: Sets the value of the element at
+*   `Builder setFoos(int index, int value)`: Sets the value of the element at
     the given zero-based index.
--   `Builder addFoos(String value)`: Appends a new element to the field with the
+*   `Builder addFoos(int value)`: Appends a new element to the field with the
     given value.
--   `Builder addAllFoos(Iterable<? extends String> value)`: Appends all elements
-    in the given `Iterable` to the field.
--   `Builder clearFoos()`: Removes all elements from the field. After calling
-    this, `getFoosCount()` will return zero.
+*   `Builder addAllFoos(Iterable<? extends Integer> value)`: Appends all
+    elements in the given Iterable to the field.
+*   `Builder clearFoos()`: Removes all elements from the field. After calling
+    this, getFoosCount() will return zero.
 
 For other simple field types, the corresponding Java type is chosen according to
-the
-[scalar value types table](/programming-guides/proto2#scalar).
-For message and enum types, the type is the message or enum class.
+the scalar value types table. For message and enum types, the type is the
+message or enum class.
+
+For a `repeated string` field, the `getList()` accessor returns a
+`ProtocolStringList`, a special interface that extends `java.util.List<String>`
+but also allows direct access to the underlying `ByteString` representations.
+Other primitive repeated fields return a `java.util.List`.
 
 #### Repeated Embedded Message Fields {#repeated-embedded}
 
