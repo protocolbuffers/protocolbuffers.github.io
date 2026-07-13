@@ -20,6 +20,7 @@ New news topics will also be published to the
 The following news topics provide information in the reverse order in which it
 was released.
 
+*   [July 13, 2026](/news/2026-07-13) - Edition 2026
 *   [June 16, 2026](/news/2026-06-16) - Dropping C# NuGet
     package author signing
 *   [May 18, 2026](/news/2026-05-18) - Dropping support
