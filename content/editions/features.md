@@ -101,7 +101,7 @@ and `export` keywords to set per-field behavior. Read more about this at
 *   `LOCAL_ALL`: All symbols default to local.
 *   `STRICT`: All symbols local by default. Nested types cannot be exported,
     except for a special-case caveat for `message { enum {} reserved 1 to max;
-    }`. This will become the default in a future edition.
+    }`.
 
 **Applicable to the following scope:** file
 
@@ -111,6 +111,7 @@ and `export` keywords to set per-field behavior. Read more about this at
 
 Syntax/edition | Default
 -------------- | ------------------
+2026           | `STRICT`
 2024           | `EXPORT_TOP_LEVEL`
 2023           | `EXPORT_ALL`
 proto3         | `EXPORT_ALL`
@@ -167,6 +168,8 @@ legacy naming style.
 
 **Values available:**
 
+*   `STYLE2026`: Enforces strict adherence to the 2026 style guide for naming to
+    discourage common field-naming collisions.
 *   `STYLE2024`: Enforces strict adherence to the style guide for naming.
 *   `STYLE_LEGACY`: Applies the pre-Edition 2024 level of style guide
     enforcement.
@@ -180,6 +183,7 @@ oneof, enum, enum value, service, method
 
 Syntax/edition | Default
 -------------- | --------------
+2026           | `STYLE2026`
 2024           | `STYLE2024`
 2023           | `STYLE_LEGACY`
 proto3         | `STYLE_LEGACY`
@@ -215,6 +219,107 @@ message Foo {
 }
 ```
 
+The following code sample shows an Edition 2024 file:
+
+Edition 2024 defaults to `STYLE2024`, so collision avoidance is not enforced:
+
+```proto
+edition = "2024";
+
+// Field name collision avoidance is not enforced
+message Bar {
+  int64 x = 1;
+  int64 has_x = 2;
+}
+```
+
+Edition 2026 defaults to `STYLE2026`, so an override is needed to keep the
+colliding field names:
+
+```proto
+edition = "2024";
+
+option features.enforce_naming_style = STYLE2024;
+
+// To keep the colliding field names, override the STYLE2026 setting
+message Bar {
+  int64 x = 1;
+  int64 has_x = 2;
+}
+```
+
+### `features.enforce_proto_limits` {#enforce_proto_limits}
+
+Introduced in Edition 2026, this feature enables structure size limit
+enforcement in the Protobuf compiler when parsing `.proto` files to prevent
+oversize message and enum definitions.
+
+**Values available:**
+
+*   `PROTO_LIMITS2026`: Enforces maximum limit checks:
+    *   Up to 1500 fields per message
+    *   Up to 1000 oneofs per message
+    *   Up to 1200 fields per oneof
+    *   Up to 1700 values per enum
+*   `LEGACY_NO_EXPLICIT_LIMITS`: Opts out of limit checking.
+
+**Applicable to the following scope:** message, oneof, enum
+
+**Added in:** Edition 2026
+
+**Default behavior per syntax/edition:**
+
+Syntax/edition | Default
+-------------- | ---------------------------
+2026           | `PROTO_LIMITS2026`
+2024           | `LEGACY_NO_EXPLICIT_LIMITS`
+2023           | `LEGACY_NO_EXPLICIT_LIMITS`
+proto3         | `LEGACY_NO_EXPLICIT_LIMITS`
+proto2         | `LEGACY_NO_EXPLICIT_LIMITS`
+
+**Note:** Feature settings on different schema elements
+[have different scopes](#cascading).
+
+The following code sample shows an Edition 2024 file:
+
+Edition 2024 defaults to `LEGACY_NO_EXPLICIT_LIMITS`, so a message with 1501
+fields is fine:
+
+```proto
+edition = "2024";
+
+message Foo {
+  // A message with more than 1500 fields
+  int64 one = 1;
+  int64 two = 2;
+  int64 three = 3;
+  # ...
+  int64 one_thousand_five_hundred = 1500;
+  int64 one_thousand_five_hundred_and_one = 1501;
+}
+```
+
+Edition 2026 defaults to `PROTO_LIMITS2026`, so an override is needed to keep
+oversized messages:
+
+```proto
+edition = "2026";
+
+// To keep the colliding field names, override the STYLE2026 setting
+message Foo {
+  // Must be set at the level of the oversized message, enum, or oneof as this
+  // feature is not allowed at the file level.
+  option features.enforce_proto_limits = PROTO_LIMITS2026;
+
+  int64 one = 1;
+  int64 two = 2;
+  int64 three = 3;
+  # ...
+  int64 one_thousand_five_hundred = 1500;
+  int64 one_thousand_five_hundred_and_one = 1501;
+}
+```
+
 ### `features.enum_type` {#enum_type}
 
 This feature sets the behavior for how enum values that aren't contained within
@@ -239,6 +344,7 @@ and after of a proto3 file.
 
 Syntax/edition | Default
 -------------- | --------
+2026           | `OPEN`
 2024           | `OPEN`
 2023           | `OPEN`
 proto3         | `OPEN`
@@ -300,6 +406,7 @@ whether a protobuf field has a value.
 
 Syntax/edition | Default
 -------------- | -----------
+2026           | `EXPLICIT`
 2024           | `EXPLICIT`
 2023           | `EXPLICIT`
 proto3         | `IMPLICIT`*
@@ -393,6 +500,7 @@ and after of a proto3 file. Editions behavior matches the behavior in proto3.
 
 Syntax/edition | Default
 -------------- | --------------------
+2026           | `ALLOW`
 2024           | `ALLOW`
 2023           | `ALLOW`
 proto3         | `ALLOW`
@@ -456,6 +564,7 @@ the following conditions are met:
 
 Syntax/edition | Default
 -------------- | -----------------
+2026           | `LENGTH_PREFIXED`
 2024           | `LENGTH_PREFIXED`
 2023           | `LENGTH_PREFIXED`
 proto3         | `LENGTH_PREFIXED`
@@ -512,6 +621,7 @@ for `repeated` fields has been migrated to in Editions.
 
 Syntax/edition | Default
 -------------- | ----------
+2026           | `PACKED`
 2024           | `PACKED`
 2023           | `PACKED`
 proto3         | `PACKED`
@@ -599,6 +709,7 @@ and after of a proto3 file.
 
 Syntax/edition | Default
 -------------- | --------
+2026           | `VERIFY`
 2024           | `VERIFY`
 2023           | `VERIFY`
 proto3         | `VERIFY`
@@ -665,8 +776,9 @@ blog post for an introduction.
 
 Syntax/edition | Default
 -------------- | ------------
-2023           | `API_OPEN`
+2026           | `API_OPAQUE`
 2024           | `API_OPAQUE`
+2023           | `API_OPEN`
 
 **Note:** Feature settings on different schema elements
 [have different scopes](#cascading).
@@ -717,10 +829,45 @@ in the migration guide for more on this topic.
 
 Syntax/edition | Default
 -------------- | -------
+2026           | `true`
 2024           | `true`
 2023           | `false`
 proto3         | `false`
 proto2         | `false`
+
+**Note:** Feature settings on different schema elements
+[have different scopes](#cascading).
+
+### `features.(pb.cpp).repeated_type` {#cpp-repeated_type}
+
+**Languages:** C++
+
+When set to `PROXY`, repeated field accessors return proxy types
+(`RepeatedFieldProxy`) instead of pointers or references to `RepeatedField` or
+`RepeatedPtrField`. Proxies allow for a more efficient in-memory representation
+of repeated fields in messages.
+
+Importing this feature requires `import option "google/protobuf/cpp_features.proto";`
+
+**Values available:**
+
+*   `PROXY`: Accessors return proxy types.
+*   `LEGACY`: Accessors return legacy `RepeatedField` or `RepeatedPtrField`
+    pointers/references.
+
+**Applicable to the following scopes:** file, field
+
+**Added in:** Edition 2026
+
+**Default behavior per syntax/edition:**
+
+Syntax/edition | Default
+-------------- | --------
+2026           | `LEGACY`
+2024           | `LEGACY`
+2023           | `LEGACY`
+proto3         | `LEGACY`
+proto2         | `LEGACY`
 
 **Note:** Feature settings on different schema elements
 [have different scopes](#cascading).
@@ -747,6 +894,7 @@ example, switch statements are not supported.
 
 Syntax/edition | Default
 -------------- | -------
+2026           | `false`
 2024           | `false`
 2023           | `false`
 proto3         | `false`
@@ -780,6 +928,7 @@ before and after of a proto3 file.
 
 Syntax/edition | Default
 -------------- | -------
+2026           | `false`
 2024           | `false`
 2023           | `false`
 proto3         | `false`
@@ -847,6 +996,7 @@ becomes `BarBazProto`). You can still override this using the
 
 Syntax/edition | Default
 -------------- | -------
+2026           | `NO`
 2024           | `NO`
 2023           | Legacy
 proto3         | Legacy
@@ -880,6 +1030,7 @@ removed.
 
 Syntax/edition | Default
 -------------- | --------
+2026           | `VIEW`
 2024           | `VIEW`
 2023           | `STRING`
 proto3         | `STRING`
@@ -961,6 +1112,7 @@ before and after of a proto3 file.
 
 Syntax/edition | Default
 -------------- | ---------
+2026           | `DEFAULT`
 2024           | `DEFAULT`
 2023           | `DEFAULT`
 proto3         | `DEFAULT`
@@ -1042,6 +1194,7 @@ generator strips the repetitive prefix or not.
 
 Syntax/edition | Default
 -------------- | ------------------------
+2026           | `STRIP_ENUM_PREFIX_KEEP`
 2024           | `STRIP_ENUM_PREFIX_KEEP`
 
 **Note:** Feature settings on different schema elements
@@ -1157,6 +1310,18 @@ message MyMessage {
 }
 ```
 
+### Edition 2024 to 2026 {#2024-2026}
+
+The following shows the settings to replicate Edition 2024 behavior with
+Edition 2026.
+
+```proto
+edition = "2026";
+
+option features.enforce_naming_style = STYLE2024;
+option features.default_symbol_visibility = EXPORT_TOP_LEVEL;
+```
+
 ### Caveats and Exceptions {#caveats}
 
 This section shows the changes that you'll need to make manually if you choose
@@ -1197,3 +1362,12 @@ behaviors in most cases, but there are a few exceptions.
     instead.
 *   (Java) `java_multiple_files`: Remove `java_multiple_files` and use
     [`features.(pb.java).nest_in_file_class`](#java-nest_in_file) instead.
+
+**Edition 2026 and later**
+
+*   (C++) Remove Language-specific options (`cc_api_version`,
+    `cc_utf8_verification`, `cc_enable_arenas`).
+*   Set `features.enforce_proto_limits` to `LEGACY_NO_EXPLICIT_LIMITS` within
+    1.  Messages that have either more than 1500 fields or more than 1000 oneofs
+    1.  Oneofs that have more than 1200 fields
+    1.  Enums that have more than 1700 values
