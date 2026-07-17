@@ -263,6 +263,7 @@ Thus, the proto field `birth_year` becomes `BirthYear` in Go, and
 For the field definition:
 
 ```proto
+// proto2
 int32 birth_year = 1;
 ```
 
@@ -283,6 +284,7 @@ is replaced with the corresponding Go type according to the
 For this field definition:
 
 ```proto
+// proto3
 int32 birth_year = 1;
 ```
 
@@ -292,7 +294,7 @@ an accessor method `GetBirthYear()` which returns the `int32` value in
 [zero value](https://golang.org/ref/spec#The_zero_value) of that type
 if the field is unset (`0` for numbers, the empty string for strings).
 
-The `FirstActiveYear` struct field will be of type `*int32`, because it is
+The `BirthYear` struct field will be of type `*int32`, because it is
 marked `optional`.
 
 For other scalar field types (including `bool`, `bytes`, and `string`), `int32`
@@ -325,7 +327,7 @@ message Concert {
 }
 
 // editions
-message Concer {
+message Concert {
   Band headliner = 1;
 }
 ```
