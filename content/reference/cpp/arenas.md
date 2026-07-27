@@ -474,7 +474,7 @@ The following code makes inefficient usage of the `release_...()` API:
 ```cpp
 arena_message_2->set_allocated_nested_message(arena_message_1->release_nested_message());
 
-arena_message_1->release_message(); // returns a copy of the underlying nested_message and deletes underlying pointer
+arena_message_1->release_nested_message(); // returns a copy of the underlying nested_message and deletes underlying pointer
 ```
 
 Using the "unsafe arena" version instead avoids the copy:
