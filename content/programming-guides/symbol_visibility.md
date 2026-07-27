@@ -9,6 +9,45 @@ type = "docs"
 This document describes the terminology and functionality of the symbol
 visibility system introduced in proto `edition = "2024"`
 
+## TL;DR {#tldr}
+
+In Edition 2024 and later, use explicit `export` keywords on `message` and
+`enum` to make them available outside the file. Most files should use
+`features.default_symbol_visibility = STRICT`, with exceptions for `LOCAL_ALL`
+for supporting existing nested exports.
+
+<!-- copybara:strip_begin(oss_wording_change) -->
+
+**Never use `EXPORT_ALL`** in Edition 2024 and beyond; it exists only for
+compatibility with previous proto editions.
+<!-- copybara:strip_end_and_replace Avoid using `EXPORT_ALL` in Edition 2024 and beyond; it exists only for compatibility with previous proto editions. -->
+
+Example of proper use:
+
+```proto
+edition = "2024";
+
+option features.default_symbol_visibility = STRICT;
+
+export message PublicMessage {
+  // With STRICT nested symbols cannot use `export` and are enfoced `local` .
+  enum NestedEnum {
+    UNKNOWN_VALUE = 0;
+  }
+
+  NestedEnum type = 1;
+}
+
+export enum ExportedEnum {
+  EXP_VALUE = 0;
+}
+
+// STRICT defaults to `local`
+message InternalHelperMessage {
+  string name = 1;
+}
+```
+
 ## Glossary {#glossary}
 
 *   **Symbol**: Any of `message`, `enum`, `service` or `extend <type>`, the
@@ -67,7 +106,9 @@ visibility impacts all `message` and `enum` definitions in the file.
 **Values available:**
 
 *   `EXPORT_ALL`: This is the default prior to Edition 2024. All messages and
-    enums are exported by default.
+    enums are exported by default. This value should never be used in Edition
+    2024 and beyond, and exists only for compatibility with previous proto
+    editions.
 *   `EXPORT_TOP_LEVEL`: All top-level symbols default to `export`; nested
     default to `local`.
 *   `LOCAL_ALL`: All symbols default to `local`.
@@ -280,7 +321,7 @@ import "other/foo_type.proto";
 
 // Exclusively used to bind other.FooType as an extension to
 // expensive.ExtendeeType giving it a useful namespaced name
-for `ext` as `my.pkg.WrapperForFooMsg.ext`
+// for `ext` as `my.pkg.WrapperForFooMsg.ext`
 local message WrapperForFooMsg {
   extend expensive.ExtendeeType {
     other.FooMsg ext = 45678;
