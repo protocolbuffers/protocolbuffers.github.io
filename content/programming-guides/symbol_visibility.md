@@ -16,11 +16,7 @@ In Edition 2024 and later, use explicit `export` keywords on `message` and
 `features.default_symbol_visibility = STRICT`, with exceptions for `LOCAL_ALL`
 for supporting existing nested exports.
 
-<!-- copybara:strip_begin(oss_wording_change) -->
-
-**Never use `EXPORT_ALL`** in Edition 2024 and beyond; it exists only for
-compatibility with previous proto editions.
-<!-- copybara:strip_end_and_replace Avoid using `EXPORT_ALL` in Edition 2024 and beyond; it exists only for compatibility with previous proto editions. -->
+Avoid using `EXPORT_ALL` in Edition 2024 and beyond; it exists only for compatibility with previous proto editions.
 
 Example of proper use:
 
@@ -30,7 +26,7 @@ edition = "2024";
 option features.default_symbol_visibility = STRICT;
 
 export message PublicMessage {
-  // With STRICT nested symbols cannot use `export` and are enfoced `local` .
+  // With STRICT, nested symbols cannot use `export` and are enfoced `local` .
   enum NestedEnum {
     UNKNOWN_VALUE = 0;
   }
@@ -106,20 +102,21 @@ visibility impacts all `message` and `enum` definitions in the file.
 **Values available:**
 
 *   `EXPORT_ALL`: This is the default prior to Edition 2024. All messages and
-    enums are exported by default. This value should never be used in Edition
-    2024 and beyond, and exists only for compatibility with previous proto
-    editions.
-*   `EXPORT_TOP_LEVEL`: All top-level symbols default to `export`; nested
-    default to `local`.
+    enums are exported by default. This value should not be used in Edition 2024
+    and beyond, and exists only for compatibility with previous proto editions.
+*   `EXPORT_TOP_LEVEL`: This is the default in Edition 2024. All top-level
+    symbols default to `export`; nested symbols default to `local`.
 *   `LOCAL_ALL`: All symbols default to `local`.
-*   `STRICT`: All symbols default to `local` and visibility keywords are only
-    valid on top-level `message` and `enum` types. Nested types can no longer
-    use those keywords are are always treated as `local`
+*   `STRICT`: This is the default in Edition 2026 and later. All symbols default
+    to `local` and visibility keywords are only valid on top-level `message` and
+    `enum` types. Nested types can no longer use those keywords and are always
+    treated as `local`, [except in some cases in C++](#strict).
 
 **Default behavior per syntax/edition:**
 
 Syntax/edition | Default
 -------------- | ------------------
+2026           | `STRICT`
 2024           | `EXPORT_TOP_LEVEL`
 2023           | `EXPORT_ALL`
 proto3         | `EXPORT_ALL`
@@ -135,18 +132,18 @@ Example:
 // foo.proto
 edition = "2024";
 
-// Symbol visibility defaults to EXPORT_TOP_LEVEL. Setting
-// default_symbol_visibility overrides these defaults
+// Symbol visibility defaults to EXPORT_TOP_LEVEL in Edition 2024. Setting
+// default_symbol_visibility overrides this default.
 option features.default_symbol_visibility = LOCAL_ALL;
 
-// Top-level symbols are exported by default in Edition 2024; applying the local
-// keyword overrides this
-local message LocalMessage {
+// Setting default_symbol_visibility to LOCAL_ALL makes all symbols local by
+// default. Applying the export keyword explicitly overrides this.
+export message ExportedMessage {
   int32 baz = 1;
-  // Nested symbols are local by default in Edition 2024; applying the export
-  // keyword overrides this
-  enum ExportedNestedEnum {
-    UNKNOWN_EXPORTED_NESTED_ENUM_VALUE = 0;
+  // Nested symbols also default to local under LOCAL_ALL (and under Edition
+  // 2024 defaults). Without an explicit export keyword, this enum remains local.
+  enum LocalNestedEnum {
+    UNKNOWN_LOCAL_NESTED_ENUM_VALUE = 0;
   }
 }
 
@@ -156,22 +153,23 @@ edition = "2024";
 import "foo.proto";
 
 message ImportedMessage {
-  // The following is valid because the imported message explicitly overrides
-  // the visibility setting in foo.proto
-  LocalMessage bar = 1;
+  // The following is valid because ExportedMessage explicitly overrides
+  // the LOCAL_ALL visibility setting in foo.proto.
+  ExportedMessage bar = 1;
 
-  // The following is not valid because default_symbol_visibility is set to
-  // `LOCAL_ALL`
-  // LocalMessage.ExportedNestedEnum qux = 2;
+  // The following is not valid because LocalNestedEnum is local by default,
+  // even though its parent message is exported.
+  // ExportedMessage.LocalNestedEnum qux = 2;
 }
 ```
 
 ### STRICT default_symbol_visibility {#strict}
 
-When `default_symbol_visibility` is set to `STRICT`, more restrictive visibility
-rules are applied to the file. This mode is intended as a more optimal, but
-invasive type of visibility where nested types are not to be used outside their
-own file. In `STRICT` mode:
+When `default_symbol_visibility` is set to `STRICT` (or when using Protobuf
+Edition 2026 or later, where `STRICT` is the default), more restrictive
+visibility rules are applied to the file. This mode is intended as a more
+optimal, but invasive type of visibility where nested types are not to be used
+outside their own file. In `STRICT` mode:
 
 1.  All symbols default to `local`.
 2.  `local` and `export` may be used only on top-level `message` and `enum`
@@ -180,7 +178,7 @@ own file. In `STRICT` mode:
     error.
 
 A single carve-out exception to nested visibility keywords is made for specific
-wrapper `message` types used to address C++ namespace pollution. In this case a
+wrapper `message` types used to address C++ namespace pollution. In this case an
 `export enum` is supported iff:
 
 1.  The top-level `message` is `local`
