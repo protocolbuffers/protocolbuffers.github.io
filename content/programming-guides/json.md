@@ -301,21 +301,46 @@ must be handled by serializers and parsers under the standard presence behavior.
 This behavior correspondingly allows `google.protobuf.Struct` and
 `google.protobuf.Value` to losslessly round trip arbitrary JSON.
 
-### Duplicate values {#duplicate-values}
+### Duplicate keys {#duplicate-keys}
 
-Serializers must never serialize the same field multiple times, nor multiple
-different cases in the same oneof in the same JSON object.
+ProtoJSON is built on top of JSON. Unfortunately, JSON does not have established
+consistent behavior in the face of duplicate keys in one JSON object. For
+example, [RFC 8259](https://datatracker.ietf.org/doc/html/rfc8259#section-4)
+notes that names within a JSON object SHOULD be unique, but notes that behaviors
+diverge when they are not. Some parsers fail, but most have last-wins semantics
+(matching browsers). Furthermore, JSON parsers may or may not preserve the
+original key ordering information.
 
-Parsers should accept the same field being duplicated, and the last value
-provided should be retained. This also applies to "alternate spellings" of the
-same field name.
+ProtoJSON introduces additional complexity because duplicate fields can occur
+not only from verbatim identical keys, but also from:
 
-If implementations cannot maintain the necessary information about field order
-it is preferred to reject inputs with duplicate keys rather than have an
-arbitrary value win. In some implementations maintaining field order of objects
-may be impractical or infeasible, so it is strongly recommended that systems
-avoid relying on specific behavior for duplicate fields in ProtoJSON where
-possible.
+*   Alternate spellings of the same field name (e.g., `camelCase` vs
+    `snake_case`).
+*   Two different fields that belong to the same `oneof`.
+
+To resolve these ambiguities, ProtoJSON defines the following behaviors:
+
+*   **Serializers**: A conforming ProtoJSON serializer **MUST NOT** emit
+    duplicate keys (including multiple fields within the same `oneof`).
+*   **Parsers**:
+    *   "Last wins" behavior should be used in all cases where possible.
+        *   This natural outcome when the implementation builds on top of an
+            off-the-shelf JSON parser that exhibits last-key-wins behavior.
+        *   If using a JSON parser which is able to retain original field order,
+            alternate spellings of keys and two different fields within the same
+            oneof should also be "last wins".
+    *   Wherever it is not practical to implement "last wins", the parse must
+        fail rather than selecting one to win arbitrarily.
+        *   In the common case of a ProtoJSON parser built using a JSON parser
+            which implements "last wins" on exact keys but does not maintain
+            order in the resulting object, the behavior should be "last wins"
+            for exact duplicate keys and parse failure on duplicate alternate
+            spellings or two fields within the same oneof.
+
+Any other behavior (including first-wins or arbitrary-one-wins or merge of the
+fields) should not be used. However, since a range of behaviors is considered
+permissible by the underlying JSON specs, it is strongly recommended that
+systems avoid relying on any specific handling of duplicates in ProtoJSON.
 
 ### Out of range numeric values {#out-of-range-values}
 
