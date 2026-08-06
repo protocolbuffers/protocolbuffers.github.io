@@ -788,11 +788,16 @@ You can set the `api_level` feature starting in edition 2023:
 ```proto
 edition = "2023";
 
-import "google/protobuf/go_features.proto";
+import option "third_party/golang/protobuf/v2/src/google/protobuf/go_features.proto";
 
 // Remove this line after migrating the code to the Opaque API.
 option features.(pb.go).api_level = API_HYBRID;
 ```
+
+NOTE: `import option` feature was added to reduce any impact that these added
+imports may have on runtime reflection behaviors or other descriptor processing.
+Always use `import option` if you are importing another `.proto` file only to
+use it in options.
 
 See also:
 [Opaque API: Migration](/reference/go/opaque-migration)
@@ -956,8 +961,8 @@ edition = "2024";
 
 import "myproject/proto3file.proto";
 
-import "google/protobuf/cpp_features.proto";
-import "google/protobuf/java_features.proto";
+import option "third_party/protobuf/cpp_features.proto";
+import option "third_party/java/protobuf/java_features.proto";
 
 message Msg {
   myproject.proto3file.Proto3Enum name = 1 [
@@ -1055,7 +1060,7 @@ After running Prototiller, the equivalent code might look like this:
 ```proto
 edition = "2024";
 
-import "google/protobuf/cpp_features.proto";
+import option "third_party/protobuf/cpp_features.proto";
 
 message Foo {
   string bar = 6 [features.(pb.cpp).string_type = STRING];
@@ -1079,7 +1084,7 @@ After running Prototiller, the equivalent code might look like this:
 ```proto
 edition = "2024";
 
-import "google/protobuf/cpp_features.proto";
+import option "third_party/protobuf/cpp_features.proto";
 
 message Foo {
   string bar = 6 [features.(pb.cpp).string_type = STRING];
