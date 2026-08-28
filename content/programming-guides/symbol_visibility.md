@@ -11,12 +11,17 @@ visibility system introduced in proto `edition = "2024"`
 
 ## TL;DR {#tldr}
 
+> **Scope**: Symbol visibility controls **only** the Protobuf compiler
+> (`protoc`) import behavior when resolving references between `.proto` files.
+> It has **no impact** on language-specific generated code or consumers of proto
+> descriptors.
+
 In Edition 2024 and later, use explicit `export` keywords on `message` and
 `enum` to make them available outside the file. Most files should use
 `features.default_symbol_visibility = STRICT`, with exceptions for `LOCAL_ALL`
 for supporting existing nested exports.
 
-Avoid using `EXPORT_ALL` in Edition 2024 and beyond; it exists only for compatibility with previous proto editions.
+Avoid using `default_symbol_visibility = EXPORT_ALL` in Edition 2024 and beyond; it exists only for compatibility with previous proto editions.
 
 Example of proper use:
 
@@ -80,8 +85,9 @@ Visibility applies to any `message` or `enum` referenced via:
 *   `service` method request and response types.
 
 Symbol visibility applies **only** to the proto language, controlling the proto
-compiler's ability to reference that symbol from another proto file. Visibility
-must not be reflected into any language-specific generated code.
+compiler's ability to reference that symbol from another proto file via
+`import`. Visibility has **no impact** on language-specific generated code and
+has **no impact** on consumers of proto descriptors or runtime reflection.
 
 ## Detailed Usage {#syntax}
 
@@ -102,8 +108,8 @@ visibility impacts all `message` and `enum` definitions in the file.
 **Values available:**
 
 *   `EXPORT_ALL`: This is the default prior to Edition 2024. All messages and
-    enums are exported by default. This value should not be used in Edition 2024
-    and beyond, and exists only for compatibility with previous proto editions.
+enums are exported by default. This value should not be used in Edition 2024 and beyond, and exists only for compatibility with previous proto editions.
+
 *   `EXPORT_TOP_LEVEL`: This is the default in Edition 2024. All top-level
     symbols default to `export`; nested symbols default to `local`.
 *   `LOCAL_ALL`: All symbols default to `local`.

@@ -199,13 +199,28 @@ on the [googleapis repository](https://github.com/googleapis/googleapis).
 
 ## **Do** Define Message Types in Separate Files {#separate-files}
 
-When defining a proto schema, you should have a single message, enum, extension,
-service, or group of cyclic dependencies per file. This makes refactoring
-easier. Moving files when they're separated is much easier than extracting
-messages from a file with other messages. Following this practice also helps to
-keep the proto schema files smaller, which enhances maintainability.
+When defining a proto schema, you should have a single top-level entry point
+(exported message, exported enum, service, or extension) per file. This makes
+refactoring easier. Moving files when they're separated is much easier than
+extracting messages from a file with other messages. Following this practice
+also helps to keep the proto schema files smaller, which enhances
+maintainability and reduces transitive dependency bloat.
 
-If they will be widely used outside of your project, consider putting them in
+Symbol visibility (`export` / `local`) relaxes strict separation for internal
+helper types: a `.proto` file may contain multiple `local message` or `local
+enum` definitions supporting a single top-level entry point (such as RPC
+request/response messages supporting a `service`), provided those helper types
+remain local and are not imported into other files.
+
+Messages and enums are intended to be **atomic** with regards to reuse. Nested
+types (messages or enums defined inside another message) are inherently private
+to their parent container. With `STRICT` symbol visibility nested entities
+cannot be exported or imported by other `.proto` files at all. You should not
+use another message's nested types as reusable vocabulary. Any symbol intended
+for independent reuse outside its parent file should be defined as a top-level
+`export message` or `export enum` in its own `.proto` file.
+
+If a type will be widely used outside of your project, consider putting them in
 their own file with no dependencies. Then it's easy for anyone to use those
 types without introducing the transitive dependencies in your other proto files.
 

@@ -26,10 +26,10 @@ into more detail on that.
 
 ## Lifecycle of a Feature {#lifecycles}
 
-Editions provide the fundamental increments for the lifecycle of a feature.
-Features have an expected lifecycle: introducing
-it, changing its default behavior, deprecating it, and then removing it. For
-example:
+Editions provide the fundamental increments for the lifecycle of a
+feature. Features have an expected lifecycle:
+introducing it, changing its default behavior, deprecating it, and then removing
+it. For example:
 
 1.  Edition 2031 creates `feature.amazing_new_feature` with a default value of
     `false`. This value maintains the same behavior as all earlier editions.
@@ -129,6 +129,8 @@ package com.example;
 
 option features.utf8_validation = NONE;
 option features.enforce_naming_style = STYLE_LEGACY;
+// NOTE: You should generally avoid setting EXPORT_ALL; it is used here only to
+// illustrate how options can be used to match previous proto2 defaults.
 option features.default_symbol_visibility = EXPORT_ALL;
 
 // Sets the default behavior for C++ strings
@@ -206,6 +208,8 @@ package com.example;
 
 option features.utf8_validation = NONE;
 option features.enforce_naming_style = STYLE_LEGACY;
+// NOTE: Avoid setting EXPORT_ALL; it is used here only to
+// illustrate how options can be used to match previous proto3 defaults.
 option features.default_symbol_visibility = EXPORT_ALL;
 
 // Sets the default behavior for C++ strings
@@ -283,9 +287,9 @@ as it applies the file-level setting. The `Employment` `enum`, though, will be
 
 ### Prototiller {#prototiller}
 
-When the Prototiller tool is launched, we will
-provide both a migration guide and migration tooling to ease the migration to
-and between editions. The tool will enable you to:
+When the Prototiller tool is launched, we
+will provide both a migration guide and migration tooling to ease the migration
+to and between editions. The tool will enable you to:
 
 *   convert proto2 and proto3 definition files to the new editions syntax, at
     scale
@@ -352,8 +356,8 @@ encoding.
 #### Required Label {#required-label}
 
 The `required` label, available only in proto2, is unavailable in editions. The
-underlying functionality is still available
-by using `features.field_presence=LEGACY_REQUIRED`.
+underlying functionality is still
+available by using `features.field_presence=LEGACY_REQUIRED`.
 
 #### `import option` {#import-option}
 

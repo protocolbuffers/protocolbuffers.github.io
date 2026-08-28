@@ -961,6 +961,19 @@ message SomeOtherMessage {
 }
 ```
 
+Nested types are inherently private to their containing message type. While you
+can reference a nested message within its parent or sibling scopes in the same
+file, Edition 2024 and later under `STRICT` symbol visibility **disallows
+exporting nested types** across `.proto` file boundaries (see
+[Symbol Visibility](/programming-guides/symbol_visibility.md)).
+
+Messages are intended to be atomic with regards to reuse. You should not use
+another message's nested types as reusable vocabulary for your own schema
+structure. If a type needs to be reused outside its parent message or imported
+into other `.proto` files, it should be defined as a top-level `export message`
+in its own `.proto` file (see
+[1-1-1 Best Practice](/best-practices/1-1-1)).
+
 You can nest messages as deeply as you like. In the example below, note that the
 two nested types named `Inner` are entirely independent, since they are defined
 within different messages:

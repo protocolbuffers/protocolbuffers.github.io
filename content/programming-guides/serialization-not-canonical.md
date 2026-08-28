@@ -21,6 +21,40 @@ Unfortunately, *protobuf serialization is not (and cannot be) canonical*. There
 are a few notable exceptions, such as MapReduce, but in general you should
 generally think of proto serialization as unstable. This page explains why.
 
+## Implications on Fingerprinting and Cryptographic Hashing {#implications}
+
+While generic fingerprinting methods are attractive to many people, they have
+the problem that it cannot be done in the general case (especially in the face
+of unknown fields). Two different serialized representations will have identical
+semantic meaning if they were known fields, but in the face of unknown fields
+the parser or fingerprinter cannot know that they should be treated the same.
+Since it cannot be correctly done in the general case, core Protobuf runtimes do
+not offer such APIs.
+
+Due to this issue, we recommend against generic fingerprinting on messages: any
+such approach will tend to be correct for an arbitrary period of time until
+unknown fields suddenly make the behavior incorrect despite no code change. Even
+though it is possible for fingerprinting to be done correctly over messages that
+have no unknown fields, code being guaranteed to never hit unknown fields for
+all time going forward is a rare situation, and tends to have weak test coverage
+despite being a common situation in our distributed systems.
+
+Instead, when you need to fingerprint a message, we recommend writing out the
+fingerprinting function yourself naming all fields, the same as you would for
+any other struct. While this is more verbose, the behavior in the face of schema
+evolution is much easier for any reader to realize, notice, and take
+corresponding care.
+
+If you do decide to make a generic fingerprinter, we recommend such generic
+handling still be written and targeted for use as narrowly as possible. A narrow
+use enables you to be responsible for the edge cases yourself, including how to
+handle unknown fields, but also things that have no global obvious choice,
+including string fields with malformed utf8 content, -0, whether NaNs should be
+canonicalized, etc. By keeping the fingerprinter use-specific, it enables you to
+adjust and move fast if you identify undesirable behavior in production, versus
+a widely used library, which typically could not change such details without
+breaking other users.
+
 ## Deterministic is not Canonical
 
 Deterministic serialization is not canonical. The serializer can generate

@@ -191,16 +191,14 @@ file (not nested inside a message definition); in that case the siblings include
 enums defined in other files that set the same package, where protoc may not be
 able to detect the collision has occurred at code generation time.
 
-To avoid these risks, it is strongly recommended to do one of:
+A future Edition will add support for scoped enums, which will eliminate the
+need to manually prefix each enum value and enable this to be written succinctly
+as `TIER1 = 1`.
 
-*   Prefix every value with the enum name (converted to UPPER_SNAKE_CASE)
-*   Nest the enum inside a containing message
+Until then, to avoid these risks, it is strongly recommended to follow one of
+the practices covered in the following sections.
 
-Either option is enough to mitigate collision risks, but prefer top-level enums
-with prefixed values over creating a message simply to mitigate the issue. Since
-some languages don't support an enum being defined inside a "struct" type,
-preferring prefixed values ensures a consistent approach across binding
-languages.
+##### Prefix Every Value With the Enum Name (Converted to UPPER_SNAKE_CASE) {#prefix-value}
 
 When prefixing enum values, the remainder of the name with the prefix stripped
 should still be a legal and style-conformant enum name. For example, avoid the
@@ -220,9 +218,43 @@ individual enum value name. Some Protobuf implementations automatically strip
 the prefix that matches the containing enum name where it is safe to do so, but
 could not in this example since a bare `1` is not a legal enum value name.
 
-A future Edition will add support for scoped enums, which will eliminate the
-need to manually prefix each enum value and enable this to be written succinctly
-as `TIER1 = 1`.
+##### Nest the Enum Inside a Dedicated Containing Message {#nest-enum}
+
+Prefer top-level enums with prefixed values over creating a `message` simply to
+mitigate collision risks. Since some languages don't support an enum being
+defined inside a "struct" type, preferring prefixed values ensures a consistent
+approach across binding languages.
+
+Where nesting an enum inside a containing message is used as a workaround to
+address C++ global namespace pollution (the C++ namespace exception), "nest the
+enum inside a containing message" specifically means defining one `local` empty
+message per enum that acts solely as a namespace wrapper. This containing
+wrapper message must include `reserved 1 to max;` to prevent any fields from
+ever being added to it.
+
+In Edition 2024 and later, when `features.default_symbol_visibility = STRICT` is
+used, nested symbols default to `local`. An `export enum` defined inside a
+`local message` containing `reserved 1 to max;` is the single allowed carve-out
+exception where an exported nested enum is supported in `STRICT` mode. (see
+[Symbol Visibility](/programming-guides/symbol_visibility.md))
+
+Example of a proper namespaced wrapper message in Edition 2024:
+
+```proto
+edition = "2024";
+
+option features.default_symbol_visibility = STRICT;
+
+local message MyEnumNamespace {
+  export enum Enum {
+    ENUM_UNSPECIFIED = 0;
+    ENUM_FIRST_VALUE = 1;
+  }
+
+  // Ensure no fields are ever added to the containing message.
+  reserved 1 to max;
+}
+```
 
 ## Services {#services}
 
