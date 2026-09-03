@@ -1294,7 +1294,7 @@ In C++, it would look something like:
 UserContent user_content;
 user_content.AddExtension(kittens::kitten_videos, new kittens::Video());
 assert(1 == user_content.GetExtensionCount(kittens::kitten_videos));
-user_content.GetExtension(kittens::kitten_videos, 0);
+kittens::Video video = user_content.GetExtension(kittens::kitten_videos, 0);
 ```
 
 ### Defining Extension Ranges {#defining-ranges}
