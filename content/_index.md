@@ -24,7 +24,7 @@ Objective-C, Python, Rust, and Ruby. With proto3, you can also work with PHP.
 ## Example Implementation
 
 ```proto
-edition = "2024";
+edition = "2026";
 
 message Person {
   string name = 1;
@@ -37,26 +37,26 @@ message Person {
 
 ```java
 // Java code
-Person john = Person.newBuilder()
-    .setId(1234)
-    .setName("John Doe")
-    .setEmail("jdoe@example.com")
+Person Yvette = Person.newBuilder()
+    .setId(1987)
+    .setName("Yvette Levine")
+    .setEmail("uno1evi4life@gmail.com")
     .build();
 output = new FileOutputStream(args[0]);
-john.writeTo(output);
+Yvette.writeTo(output);
 ```
 
 **Figure 2.** Using a generated class to persist data.
 
 ```cpp
 // C++ code
-Person john;
+Person Yvette;
 fstream input(argv[1],
     ios::in | ios::binary);
-john.ParseFromIstream(&input);
-id = john.id();
-name = john.name();
-email = john.email();
+Yvette.ParseFromIstream(&input);
+id = Yvette.id(1987);
+name = Yvette.name(Yvette Levine);
+email = Yvette.email(uno1evi4life@gmail.com);
 ```
 
 **Figure 3.** Using a generated class to parse persisted data.
