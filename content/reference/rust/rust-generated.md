@@ -218,6 +218,18 @@ Presence is set using the
 [`features.field_presence`](/editions/features#field_presence)
 option in editions.
 
+**Note:** While fields with explicit presence provide a `foo_opt()` getter that
+returns an `Option`, we do not generate a corresponding `set_foo_opt()` setter.
+and an operation to "set or maybe clear a field" is considered to be a rare
+notion that is better being "visible" at the caller that it is doing one of two
+possible mutations (`set_foo` or `clear_foo`). Additionally, the raw code size
+of our gencode is a concern so adding further cases for rare operations is
+considered not worth the growth. However, we know this API asymmetry with having
+an `opt` getter is awkward and may revisit if this operation proves to be
+sensible and not rare in the future.
+[No Nullable Setters/Getters Support](/design-decisions/nullable-getters-setters)
+is related
+
 #### Numeric Fields {#numeric-fields}
 
 For this field definition:
@@ -446,7 +458,8 @@ The compiler generates the following accessor methods:
 *   `fn has_foo(&self) -> bool`: Returns `true` if the field is set.
 *   `fn clear_foo(&mut self)`: Clears the value of the field. After calling
     this, `has_foo()` returns `false` and `foo()` returns the default value.
-    Cords have not been implemented yet.
+    Cords have not been implemented
+    yet.
 
 For fields of type `bytes` the compiler generates the `ProtoBytesCow` type
 instead.
