@@ -36,17 +36,17 @@ All files should be ordered in the following manner:
 
 Protobuf identifiers use one of the following naming styles:
 
-1.  TitleCase
+-  TitleCase
     *   Contains uppercase letters, lowercase letters, and numbers
     *   The initial character is an uppercase letter
     *   The initial letter of each word is capitalized
-1.  lower_snake_case
+-  lower_snake_case
     *   Contains lowercase letters, underscores, and numbers
     *   Words are separated by a single underscore
-1.  UPPER_SNAKE_CASE
+-  UPPER_SNAKE_CASE
     *   Contains uppercase letters, underscores, and numbers
     *   Words are separated by a single underscore
-1.  camelCase
+-  camelCase
     *   Contains uppercase letters, lowercase letters, and numbers
     *   The initial character is an lowercase letter
     *   The initial letter of each subsequent word is capitalized
