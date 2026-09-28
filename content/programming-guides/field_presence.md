@@ -14,9 +14,12 @@ where the generated message API stores field values (only), and *explicit
 presence*, where the API also stores whether or not a field has been set.
 
 {{% alert title="Note" color="note" %}} We
-recommend always adding the `optional` label for proto3 basic types. This
-provides a smoother path to editions, which uses explicit presence by
-default.{{% /alert %}}
+recommend adding the `optional` label for proto3 basic types by default. This
+provides a smoother path to editions, which uses explicit presence by default.
+See
+[Implicit Presence](/design-decisions/implicit-presence)
+for the reasoning, and for the cases where it doesn't
+apply.{{% /alert %}}
 
 ### Presence Disciplines {#disciplines}
 
@@ -174,7 +177,10 @@ generated as in proto2 APIs.
 
 This default behavior of not tracking presence without the `optional` label is
 different from the proto2 behavior. We recommend using the `optional` label with
-proto3 unless you have a specific reason not to.
+proto3 unless you have a specific reason not to. See
+[Implicit Presence](/design-decisions/implicit-presence)
+for why the Protobuf team regrets implicit presence, and for the cases where
+choosing it is still reasonable.
 
 Under the *implicit presence* discipline, the default value is synonymous with
 "not present" for purposes of serialization. To notionally "clear" a field (so
