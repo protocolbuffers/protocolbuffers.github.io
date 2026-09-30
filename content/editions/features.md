@@ -311,7 +311,6 @@ oversized messages:
 ```proto
 edition = "2026";
 
-// To keep the colliding field names, override the STYLE2026 setting
 message Foo {
   // Must be set at the level of the oversized message, enum, or oneof as this
   // feature is not allowed at the file level.
