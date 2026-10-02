@@ -1887,7 +1887,9 @@ Here are a few of the most commonly used options:
     implementations should provide
     [code generator plugins](/reference/cpp/api-docs/google.protobuf.compiler.plugin.pb)
     to generate code specific to their system instead of relying on "abstract"
-    services that will eventually be removed.
+    services that will eventually be removed. For the reasoning behind the
+    deprecation, see the
+    [design decision on generic services](/design-decisions/insertion-points-and-generic-services#generic-services).
 
 *   `cc_enable_arenas` (file option): Enables
     [arena allocation](/reference/cpp/arenas) for C++

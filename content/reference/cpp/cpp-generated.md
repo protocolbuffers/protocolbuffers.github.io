@@ -1310,7 +1310,8 @@ option cc_generic_services = false;
 
 If neither of the above lines are given, the option defaults to `false`, as
 generic services are deprecated. (Note that prior to 2.4.0, the option defaults
-to `true`)
+to `true`.) For the reasoning behind the deprecation, see the
+[design decision on generic services](/design-decisions/insertion-points-and-generic-services#generic-services).
 
 RPC systems based on `.proto`-language service definitions should provide
 [plugins](/reference/cpp/api-docs/google.protobuf.compiler.plugin.pb)

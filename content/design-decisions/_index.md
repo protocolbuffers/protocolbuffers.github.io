@@ -21,3 +21,5 @@ things develop in the broader ecosystem context.
 *   [Opaque APIs](/design-decisions/opaque-apis)
 *   [Implicit
     Presence](/design-decisions/implicit-presence)
+*   [Insertion Points and Generic
+    Services](/design-decisions/insertion-points-and-generic-services)
