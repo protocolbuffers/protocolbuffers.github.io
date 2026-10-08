@@ -2,7 +2,7 @@
 title = "descriptor_database.h"
 toc_hide = "true"
 linkTitle = "C++"
-description = "This section contains reference documentation for working with protocol buffer classes in C++."
+description = "This section contains reference documentation for working with Protobuf classes in C++."
 type = "docs"
 +++
 

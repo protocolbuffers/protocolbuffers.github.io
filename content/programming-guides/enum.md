@@ -1,12 +1,12 @@
 +++
 title = "Enum Behavior"
 weight = 55
-description = "Explains how enums currently work in Protocol Buffers vs. how they should work."
+description = "Explains how enums currently work in Protobuf vs. how they should work."
 type = "docs"
 +++
 
 Enums behave differently in different language libraries. This topic covers the
-different behaviors as well as the plans to move protobufs to a state where they
+different behaviors as well as the plans to move Protobuf to a state where enums
 are consistent across all languages. If you're looking for information on how to
 use enums in general, see the corresponding sections in the
 [proto2](/programming-guides/proto2#enum),
@@ -86,7 +86,7 @@ explicitly set editions enums to closed, if needed.
 
 ## Specification {#spec}
 
-The following specifies the behavior of conformant implementations for protobuf.
+The following specifies the behavior of conformant implementations for Protobuf.
 Because this is subtle, many implementations are out of conformance. See
 [Known Issues](#known-issues) for details on how different implementations
 behave.

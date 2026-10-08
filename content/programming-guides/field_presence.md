@@ -2,14 +2,14 @@
 title = "Application Note: Field Presence"
 weight = 85
 linkTitle = "Field Presence"
-description = "Explains the various presence-tracking disciplines for protobuf fields. It also explains the behavior of explicit presence-tracking for singular proto3 fields with basic types."
+description = "Explains the various presence-tracking disciplines for Protobuf fields. It also explains the behavior of explicit presence-tracking for singular proto3 fields with basic types."
 type = "docs"
 +++
 
 ## Background {#background}
 
-*Field presence* is the notion of whether a protobuf field has a value. There
-are two different manifestations of presence for protobufs: *implicit presence*,
+*Field presence* is the notion of whether a Protobuf field has a value. There
+are two different manifestations of presence in Protobuf: *implicit presence*,
 where the generated message API stores field values (only), and *explicit
 presence*, where the API also stores whether or not a field has been set.
 
@@ -71,8 +71,8 @@ deserializing wire-formatted messages:
 
 ### Presence in *Named-field Mapping* Formats {#presence-named-field}
 
-Protobufs can be represented in human-readable, textual forms. Two notable
-formats are TextFormat (the output format produced by generated message
+Protobuf messages can be represented in human-readable, textual forms. Two
+notable formats are TextFormat (the output format produced by generated message
 `DebugString` methods) and JSON.
 
 These formats have correctness requirements of their own, and are generally
@@ -105,7 +105,7 @@ semantics of the wire format or TextFormat.
 In theory, JSON *can* represent presence in a semantic-preserving fashion. In
 practice, however, presence correctness can vary depending upon implementation
 choices, especially if JSON was chosen as a means to interoperate with clients
-not using protobufs.
+not using Protobuf.
 
 ### Presence in Proto2 APIs {#presence-proto2}
 
@@ -127,7 +127,7 @@ The generated message interface includes methods to query presence of fields.
 For example, the field `foo` has a corresponding `has_foo` method. (The specific
 name follows the same language-specific naming convention as the field
 accessors.) These methods are sometimes referred to as "hazzers" within the
-protobuf implementation.
+Protobuf implementation.
 
 Similar to singular fields, `oneof` fields explicitly track which one of the
 members, if any, contains a value. For example, consider this example `oneof`:
@@ -247,16 +247,14 @@ proto schema files.{{% /alert %}}
 
 ### Considerations for Merging {#merging}
 
-Under the *implicit presence* rules, it is effectively impossible for a target
-field to merge-from its default value (using the protobuf's API merging
-functions). This is because default values are skipped, similar to the *implicit
-presence* serialization discipline. Merging only updates the target (merged-to)
-message using the non-skipped values from the update (merged-from) message.
+Under the *implicit presence* rules, when merging values any default-valued
+field is skipped; there is no signal to distinguish if the field was never-set
+or if it was set to zero.
 
-The difference in merging behavior has further implications for protocols which
-rely on partial "patch" updates. If field presence is not tracked, then an
-update patch alone cannot represent an update to the default value, because only
-non-default values are merged-from.
+The implication of the merging behavior has implications for protocols which
+rely on partial "patch" updates. Since field presence is not tracked, you can
+signal a field should be replaced for a non-default value (e.g. `42`) but not
+for a default value (e.g. `0`).
 
 Updating to set a default value in this case requires some external mechanism,
 such as `FieldMask`. However, if presence *is* tracked, then all explicitly-set

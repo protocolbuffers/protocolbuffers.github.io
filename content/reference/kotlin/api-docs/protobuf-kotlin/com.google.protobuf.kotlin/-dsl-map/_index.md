@@ -14,9 +14,9 @@ A simple wrapper around a
 with an extra generic parameter that can be used to disambiguate extension
 methods.
 
-<p>This class is used by Kotlin protocol buffer extensions, and its constructor
-is public only because generated message code is in a different compilation
-unit. Others should not use this class directly in any way.
+<p>This class is used by Kotlin Protobuf extensions, and its constructor is
+public only because generated message code is in a different compilation unit.
+Others should not use this class directly in any way.
 
 ## Constructors
 

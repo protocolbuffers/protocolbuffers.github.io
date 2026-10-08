@@ -2,13 +2,13 @@
 title = "coded_stream.h"
 toc_hide = "true"
 linkTitle = "C++"
-description = "This section contains reference documentation for working with protocol buffer classes in C++."
+description = "This section contains reference documentation for working with Protobuf classes in C++."
 type = "docs"
 +++
 
 <p><code>#include &lt;google/protobuf/io/coded_stream.h&gt;<br>namespace <a href="#google.protobuf.io">google::protobuf::io</a></code></p><p>This file contains the <a href='#CodedInputStream'>CodedInputStream</a> and <a href='#CodedOutputStream'>CodedOutputStream</a> classes, which wrap a <a href='google.protobuf.io.zero_copy_stream#ZeroCopyInputStream'>ZeroCopyInputStream</a> or <a href='google.protobuf.io.zero_copy_stream#ZeroCopyOutputStream'>ZeroCopyOutputStream</a>, respectively, and allow you to read or write individual pieces of data in various formats. </p><p>In particular, these implement the varint encoding for integers, a simple variable-length encoding in which smaller numbers take fewer bytes.</p>
 
-<p>Typically these classes will only be used internally by the protocol buffer library in order to encode and decode protocol buffers. Clients of the library only need to know about this class if they wish to write custom message parsing or serialization procedures.</p>
+<p>Typically these classes will only be used internally by the Protobuf library in order to encode and decode Protobuf messages. Clients of the library only need to know about this class if they wish to write custom message parsing or serialization procedures.</p>
 
 <p><a href='#CodedOutputStream'>CodedOutputStream</a> example: </p>
 
@@ -173,7 +173,7 @@ delete coded_output;</pre>
 </div> <hr><h3 id="CodedOutputStream.EnableAliasing.details"><code>void CodedOutputStream::EnableAliasing(<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;bool enabled)</code></h3><div style="margin-left: 16px"><p>Instructs the <a href='#CodedOutputStream'>CodedOutputStream</a> to allow the underlying <a href='google.protobuf.io.zero_copy_stream#ZeroCopyOutputStream'>ZeroCopyOutputStream</a> to hold pointers to the original structure instead of copying, if it supports it (i.e. </p><p>output-&gt;AllowsAliasing() is true). If the underlying stream does not support aliasing, then enabling it has no affect. For now, this only affects the behavior of <a href='#CodedOutputStream.WriteRawMaybeAliased'>WriteRawMaybeAliased()</a>.</p>
 <p>NOTE: It is caller's responsibility to ensure that the chunk of memory remains live until all of the data has been consumed from the stream. </p>
 </div> <hr><h3 id="CodedOutputStream.SetSerializationDeterministic.details"><code>void CodedOutputStream::SetSerializationDeterministic(<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;bool value)</code></h3><div style="margin-left: 16px"><p>Indicate to the serializer whether the user wants derministic serialization. </p><p>The default when this is not called comes from the global default, controlled by SetDefaultSerializationDeterministic.</p>
-<p>What deterministic serialization means is entirely up to the driver of the serialization process (i.e. the caller of methods like WriteVarint32). In the case of serializing a proto buffer message using one of the methods of <a href='google.protobuf.message_lite#MessageLite'>MessageLite</a>, this means that for a given binary equal messages will always be serialized to the same bytes. This implies:</p>
+<p>What deterministic serialization means is entirely up to the driver of the serialization process (i.e. the caller of methods like WriteVarint32). In the case of serializing a Protobuf message using one of the methods of <a href='google.protobuf.message_lite#MessageLite'>MessageLite</a>, this means that for a given binary equal messages will always be serialized to the same bytes. This implies:</p>
 <pre>Repeated serialization of a message will return the same bytes.
 
 Different processes running the same binary (including on different

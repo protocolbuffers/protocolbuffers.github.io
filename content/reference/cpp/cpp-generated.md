@@ -2,7 +2,7 @@
 title = "C++ Generated Code Guide"
 weight = 510
 linkTitle = "Generated Code Guide"
-description = "Describes exactly what C++ code the protocol buffer compiler generates for any given protocol definition. "
+description = "Describes exactly what C++ code the Protobuf compiler generates for any given protocol definition. "
 type = "docs"
 +++
 
@@ -17,7 +17,7 @@ before reading this document.
 
 ## Compiler Invocation {#invocation}
 
-The protocol buffer compiler produces C++ output when invoked with the
+The Protobuf compiler produces C++ output when invoked with the
 `--cpp_out=` command-line flag. The parameter to the `--cpp_out=` option is the
 directory where you want the compiler to write your C++ output. The compiler
 creates a header file and an implementation file for each `.proto` file input.
@@ -62,8 +62,8 @@ Given a simple message declaration:
 message Foo {}
 ```
 
-The protocol buffer compiler generates a class called `Foo`, which publicly
-derives from
+The Protobuf compiler generates a class called `Foo`, which publicly derives
+from
 [`google::protobuf::Message`](/reference/cpp/api-docs/google.protobuf.message).
 The class is a concrete class; no pure-virtual methods are left unimplemented.
 Methods that are virtual in `Message` but not pure-virtual may or may not be
@@ -210,10 +210,10 @@ that declaration, you must identify it as `Foo_Bar`.
 
 ## Fields {#fields}
 
-In addition to the methods described in the previous section, the protocol
-buffer compiler generates a set of accessor methods for each field defined
-within the message in the `.proto` file. These methods are in
-lower-case/snake-case, such as `has_foo()` and `clear_foo()`.
+In addition to the methods described in the previous section, the Protobuf
+compiler generates a set of accessor methods for each field defined within the
+message in the `.proto` file. These methods are in lower-case/snake-case, such
+as `has_foo()` and `clear_foo()`.
 
 As well as accessor methods, the compiler generates an integer constant for each
 field containing its field number. The constant name is the letter `k`, followed
@@ -939,9 +939,9 @@ The compiler will generate the following accessor methods:
 
 A
 [`google::protobuf::Map`](/reference/cpp/api-docs/google.protobuf.map)
-is a special container type used in protocol buffers to store map fields. As you
-can see from its interface below, it uses a commonly-used subset of `std::map`
-and `std::unordered_map` methods.
+is a special container type used in Protobuf to store map fields. As you can see
+from its interface below, it uses a commonly-used subset of `std::map` and
+`std::unordered_map` methods.
 
 {{% alert title="Note" color="note" %}} These maps
 are
@@ -1131,9 +1131,8 @@ enum Foo {
 }
 ```
 
-The protocol buffer compiler will generate a C++ enum type called `Foo` with the
-same set of values. In addition, the compiler will generate the following
-functions:
+The Protobuf compiler will generate a C++ enum type called `Foo` with the same
+set of values. In addition, the compiler will generate the following functions:
 
 -   `const EnumDescriptor* Foo_descriptor()`: Returns the type's descriptor,
     which contains information about what values this enum type defines.
@@ -1176,7 +1175,7 @@ known fields are listed. This could lead to unexpected behavior, including data
 corruption and runtime crashes. **Always add a default case or explicitly call
 `Foo_IsValid(int)` outside of the switch to handle unknown enum values.**
 
-You can define an enum inside a message type. In this case, the protocol buffer
+You can define an enum inside a message type. In this case, the Protobuf
 compiler generates code that makes it appear that the enum type itself was
 declared nested inside the message's class. The `Foo_descriptor()` and
 `Foo_IsValid()` functions are declared as static methods. In reality, the enum
@@ -1204,7 +1203,7 @@ message Foo {
 }
 ```
 
-The protocol buffer compiler will generate some additional methods for `Foo`:
+The Protobuf compiler will generate some additional methods for `Foo`:
 `HasExtension()`, `ExtensionSize()`, `ClearExtension()`, `GetExtension()`,
 `SetExtension()`, `MutableExtension()`, `AddExtension()`,
 `SetAllocatedExtension()` and `ReleaseExtension()`. Each of these methods takes,
@@ -1225,8 +1224,8 @@ extend Foo {
 }
 ```
 
-For the singular extension field `bar`, the protocol buffer compiler generates
-an "extension identifier" called `bar`, which you can use with `Foo`'s extension
+For the singular extension field `bar`, the Protobuf compiler generates an
+"extension identifier" called `bar`, which you can use with `Foo`'s extension
 accessors to access this extension, like so:
 
 ```cpp
@@ -1285,9 +1284,9 @@ FillInMyBaz(baz);
 ## Arena Allocation {#arena}
 
 Arena allocation is a C++-only feature that helps you optimize your memory usage
-and improve performance when working with protocol buffers. Enabling arena
-allocation in your `.proto` adds additional code for working with arenas to your
-C++ generated code. You can find out more about the arena allocation API in the
+and improve performance when working with Protobuf. Enabling arena allocation in
+your `.proto` adds additional code for working with arenas to your C++ generated
+code. You can find out more about the arena allocation API in the
 [Arena Allocation Guide](/reference/cpp/arenas).
 
 ## Services {#service}
@@ -1298,11 +1297,11 @@ If the `.proto` file contains the following line:
 option cc_generic_services = true;
 ```
 
-then the protocol buffer compiler will generate code based on the service
-definitions found in the file as described in this section. However, the
-generated code may be undesirable as it is not tied to any particular RPC
-system, and thus requires more levels of indirection than code tailored to one
-system. If you do NOT want this code to be generated, add this line to the file:
+then the Protobuf compiler will generate code based on the service definitions
+found in the file as described in this section. However, the generated code may
+be undesirable as it is not tied to any particular RPC system, and thus requires
+more levels of indirection than code tailored to one system. If you do NOT want
+this code to be generated, add this line to the file:
 
 ```proto
 option cc_generic_services = false;
@@ -1319,8 +1318,8 @@ to generate code appropriate for the system. These plugins are likely to require
 that abstract services are disabled, so that they can generate their own classes
 of the same names.
 
-The remainder of this section describes what the protocol buffer compiler
-generates when abstract services are enabled.
+The remainder of this section describes what the Protobuf compiler generates
+when abstract services are enabled.
 
 ### Interface
 
@@ -1332,8 +1331,8 @@ service Foo {
 }
 ```
 
-The protocol buffer compiler will generate a class `Foo` to represent this
-service. `Foo` will have a virtual method for each method defined in the service
+The Protobuf compiler will generate a class `Foo` to represent this service.
+`Foo` will have a virtual method for each method defined in the service
 definition. In this case, the method `Bar` is defined as:
 
 ```cpp
@@ -1351,8 +1350,8 @@ indicating that the method is unimplemented, then invoke the `done` callback.
 When implementing your own service, you must subclass this generated service and
 implement its methods as appropriate.
 
-`Foo` subclasses the `Service` interface. The protocol buffer compiler
-automatically generates implementations of the methods of `Service` as follows:
+`Foo` subclasses the `Service` interface. The Protobuf compiler automatically
+generates implementations of the methods of `Service` as follows:
 
 -   `GetDescriptor`: Returns the service's
     [`ServiceDescriptor`](/reference/cpp/api-docs/google.protobuf.descriptor#ServiceDescriptor).
@@ -1371,8 +1370,8 @@ The following static method is also generated:
 
 ### Stub {#stub}
 
-The protocol buffer compiler also generates a "stub" implementation of every
-service interface, which is used by clients wishing to send requests to servers
+The Protobuf compiler also generates a "stub" implementation of every service
+interface, which is used by clients wishing to send requests to servers
 implementing the service. For the `Foo` service (described earlier), the stub
 implementation `Foo_Stub` will be defined. As with nested message types, a
 `typedef` is used so that `Foo_Stub` can also be referred to as `Foo::Stub`.
@@ -1392,7 +1391,7 @@ The stub additionally implements each of the service's methods as a wrapper
 around the channel. Calling one of the methods simply calls
 `channel->CallMethod()`.
 
-The Protocol Buffer library does not include an RPC implementation. However, it
+The Protobuf library does not include an RPC implementation. However, it
 includes all of the tools you need to hook up a generated service class to any
 arbitrary RPC implementation of your choice. You need only provide
 implementations of
@@ -1423,4 +1422,4 @@ appears in both the `.pb.cc` file and the `.pb.h` file unless otherwise noted.
 
 Do not generate code which relies on private class members declared by the
 standard code generator, as these implementation details may change in future
-versions of Protocol Buffers.
+versions of Protobuf.

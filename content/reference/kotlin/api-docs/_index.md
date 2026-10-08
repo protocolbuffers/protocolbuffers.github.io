@@ -2,7 +2,7 @@
 title = "Kotlin Reference"
 weight = 670
 linkTitle = "Kotlin"
-description = "This section contains reference documentation for working with protocol buffers in Kotlin."
+description = "This section contains reference documentation for working with Protobuf in Kotlin."
 type = "docs"
 +++
 

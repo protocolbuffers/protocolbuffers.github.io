@@ -2,12 +2,12 @@
 title = "Go Generated Code Guide (Open)"
 weight = 610
 linkTitle = "Generated Code Guide (Open)"
-description = "Describes exactly what Go code the protocol buffer compiler generates for any given protocol definition."
+description = "Describes exactly what Go code the Protobuf compiler generates for any given protocol definition."
 type = "docs"
 +++
 
-Any differences between
-proto2, proto3, and editions generated code are highlighted - note that these
+Any differences between proto2,
+proto3, and editions generated code are highlighted - note that these
 differences are in the generated code as described in this document, not the
 base API, which are the same in both versions. You should read the
 [proto2 language guide](/programming-guides/proto2),
@@ -25,7 +25,7 @@ introduction of the Opaque API. {{% /alert %}}
 
 ## Compiler Invocation {#invocation}
 
-The protocol buffer compiler requires a plugin to generate Go code. Install it
+The Protobuf compiler requires a plugin to generate Go code. Install it
 using Go 1.16 or higher by running:
 
 ```shell
@@ -34,9 +34,9 @@ go install google.golang.org/protobuf/cmd/protoc-gen-go@latest
 
 This will install a `protoc-gen-go` binary in `$GOBIN`. Set the `$GOBIN`
 environment variable to change the installation location. It must be in your
-`$PATH` for the protocol buffer compiler to find it.
+`$PATH` for the Protobuf compiler to find it.
 
-The protocol buffer compiler produces Go output when invoked with the `go_out`
+The Protobuf compiler produces Go output when invoked with the `go_out`
 flag. The argument to the `go_out` flag is the directory where you want the
 compiler to write your Go output. The compiler creates a single source file for
 each `.proto` file input. The name of the output file is created by replacing
@@ -132,7 +132,7 @@ See the \"Compiler Invocation\" section above for details.
 
 There is no correlation between the Go import path and the
 [`package` specifier](/programming-guides/proto3#packages)
-in the `.proto` file. The latter is only relevant to the protobuf namespace,
+in the `.proto` file. The latter is only relevant to the Protobuf namespace,
 while the former is only relevant to the Go namespace. Also, there is no
 correlation between the Go import path and the `.proto` import path.
 
@@ -192,7 +192,7 @@ Given a simple message declaration:
 message Artist {}
 ```
 
-the protocol buffer compiler generates a struct called `Artist`. An `*Artist`
+the Protobuf compiler generates a struct called `Artist`. An `*Artist`
 implements the
 [`proto.Message`](https://pkg.go.dev/google.golang.org/protobuf/proto?tab=doc#Message)
 interface.
@@ -239,9 +239,9 @@ In this case, the compiler generates two structs: `Artist` and `Artist_Name`.
 
 ## Fields
 
-The protocol buffer compiler generates a struct field for each field defined
-within a message. The exact nature of this field depends on its type and whether
-it is a singular, repeated, map, or oneof field.
+The Protobuf compiler generates a struct field for each field defined within a
+message. The exact nature of this field depends on its type and whether it is a
+singular, repeated, map, or oneof field.
 
 Note that the generated Go field names always use camel-case naming, even if the
 field name in the `.proto` file uses lower-case with underscores
@@ -423,7 +423,7 @@ type MerchBooth struct {
 
 ### Oneof Fields {#oneof}
 
-For a oneof field, the protobuf compiler generates a single field with an
+For a oneof field, the Protobuf compiler generates a single field with an
 interface type `isMessageName_MyField`. It also generates a struct for each of
 the [singular fields](#singular-scalar-proto2) within the oneof. These all
 implement this `isMessageName_MyField` interface.
@@ -515,8 +515,7 @@ message Venue {
 }
 ```
 
-the protocol buffer compiler generates a type and a series of constants with
-that type:
+the Protobuf compiler generates a type and a series of constants with that type:
 
 ```go
 type Venue_Kind int32
@@ -564,9 +563,8 @@ returns the corresponding pointer:
 func (Genre) Enum() *Genre
 ```
 
-The protocol buffer compiler generates a constant for each value in the enum.
-For enums within a message, the constants begin with the enclosing message's
-name:
+The Protobuf compiler generates a constant for each value in the enum. For enums
+within a message, the constants begin with the enclosing message's name:
 
 ```go
 const (
@@ -589,7 +587,7 @@ const (
 )
 ```
 
-The protobuf compiler also generates a map from integer values to the string
+The Protobuf compiler also generates a map from integer values to the string
 names and a map from the names to the values:
 
 ```go
@@ -623,7 +621,7 @@ extend Concert {
 }
 ```
 
-The protocol buffer compiler will generate a
+The Protobuf compiler will generate a
 [`protoreflect.ExtensionType`](https://pkg.go.dev/google.golang.org/protobuf/reflect/protoreflect?tab=doc#ExtensionType)
 value named `E_Promo_id`. This value may be used with the
 [`proto.GetExtension`](https://pkg.go.dev/google.golang.org/protobuf/proto?tab=doc#GetExtension),

@@ -7,16 +7,16 @@ type = "docs"
 +++
 
 Protobuf Editions replace the proto2 and proto3 designations that we have used
-for Protocol Buffers. Instead of adding `syntax = "proto2"` or `syntax =
-"proto3"` at the top of proto definition files, you use an edition number, such
-as `edition = "2024"`, to specify the default behaviors your file will have.
-Editions enable the language to evolve incrementally over time.
+for Protobuf. Instead of adding `syntax = "proto2"` or `syntax = "proto3"` at
+the top of proto definition files, you use an edition number, such as `edition =
+"2024"`, to specify the default behaviors your file will have. Editions enable
+the language to evolve incrementally over time.
 
 Instead of the hardcoded behaviors that older versions have had, editions
 represent a collection of [features](/editions/features)
 with a default value (behavior) per feature. Features are options on a file,
 message, field, enum, and so on, that specify the behavior of protoc, the code
-generators, and protobuf runtimes. You can explicitly override a behavior at
+generators, and Protobuf runtimes. You can explicitly override a behavior at
 those different levels (file, message, field, ...) when your needs don't match
 the default behavior for the edition you've selected. You can also override your
 overrides. The [section later in this topic on lexical scoping](#scoping) goes
@@ -40,7 +40,7 @@ it. For example:
 
 3.  A later edition, such as edition 2033, switches the default of
     `feature.amazing_new_feature` from `false` to `true`. This is the desired
-    behavior for all protos, and the reason that the protobuf team created the
+    behavior for all protos, and the reason that the Protobuf team created the
     feature.
 
     Using the Prototiller tool to migrate earlier versions of proto files to
@@ -413,7 +413,7 @@ proto_library(
 ```
 
 Option imports and `option_deps` are strongly recommended when importing
-protobuf language features and other custom options to avoid generating
+Protobuf language features and other custom options to avoid generating
 unnecessary code.
 
 This replaces `import weak`, which was removed in Edition 2024.

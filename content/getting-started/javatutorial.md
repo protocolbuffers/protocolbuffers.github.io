@@ -1,24 +1,24 @@
 +++
-title = "Protocol Buffer Basics: Java"
+title = "Protobuf Basics: Java"
 weight = 250
 linkTitle = "Java"
-description = "A basic Java programmers introduction to working with protocol buffers."
+description = "A basic Java programmers introduction to working with Protobuf."
 type = "docs"
 +++
 
 This tutorial provides a basic Java programmer's introduction to working with
-protocol buffers. By walking through creating a simple example application, it
-shows you how to
+Protobuf. By walking through creating a simple example application, it shows you
+how to
 
 -   Define message formats in a `.proto` file.
--   Use the protocol buffer compiler.
--   Use the Java protocol buffer API to write and read messages.
+-   Use the Protobuf compiler.
+-   Use the Java Protobuf API to write and read messages.
 
-This isn't a comprehensive guide to using protocol buffers in Java. For more
-detailed reference information, see the
-[Protocol Buffer Language Guide (proto2)](/programming-guides/proto2),
+This isn't a comprehensive guide to using Protobuf in Java. For more detailed
+reference information, see the
+[Protobuf Language Guide (proto2)](/programming-guides/proto2),
 the
-[Protocol Buffer Language Guide (proto3)](/programming-guides/proto3),
+[Protobuf Language Guide (proto3)](/programming-guides/proto3),
 the
 [Java API Reference](/reference/java/api-docs/overview-summary.html),
 the
@@ -53,16 +53,16 @@ ways to solve this problem:
     Also, navigating an XML DOM tree is considerably more complicated than
     navigating simple fields in a class normally would be.
 
-Instead of these options, you can use protocol buffers. Protocol buffers are the
-flexible, efficient, automated solution to solve exactly this problem. With
-protocol buffers, you write a `.proto` description of the data structure you
-wish to store. From that, the protocol buffer compiler creates a class that
-implements automatic encoding and parsing of the protocol buffer data with an
-efficient binary format. The generated class provides getters and setters for
-the fields that make up a protocol buffer and takes care of the details of
-reading and writing the protocol buffer as a unit. Importantly, the protocol
-buffer format supports the idea of extending the format over time in such a way
-that the code can still read data encoded with the old format.
+Instead of these options, you can use Protobuf. Protobuf is the flexible,
+efficient, automated solution to solve exactly this problem. With Protobuf, you
+write a `.proto` description of the data structure you wish to store. From that,
+the Protobuf compiler creates a class that implements automatic encoding and
+parsing of the Protobuf data with an efficient binary format. The generated
+class provides getters and setters for the fields that make up a Protobuf
+message and takes care of the details of reading and writing the message as a
+unit. Importantly, the Protobuf format supports the idea of extending the format
+over time in such a way that the code can still read data encoded with the old
+format.
 
 ## Where to Find the Example Code {#example-code}
 
@@ -118,8 +118,8 @@ The `.proto` file starts with a package declaration, which helps to prevent
 naming conflicts between different projects. In Java, the package name is used
 as the Java package unless you have explicitly specified a `java_package`, as we
 have here. Even if you do provide a `java_package`, you should still define a
-normal `package` as well to avoid name collisions in the Protocol Buffers name
-space as well as in non-Java languages.
+normal `package` as well to avoid name collisions in the Protobuf name space as
+well as in non-Java languages.
 
 After the package declaration, you can see three options that are Java-specific:
 `java_multiple_files`, `java_package`, and `java_outer_classname`.
@@ -168,7 +168,7 @@ Each field must be annotated with one of the following modifiers:
     optional (or required) field which has not been explicitly set always
     returns that field's default value.
 -   `repeated`: the field may be repeated any number of times (including zero).
-    The order of the repeated values will be preserved in the protocol buffer.
+    The order of the repeated values will be preserved in the Protobuf message.
     Think of repeated fields as dynamically sized arrays.
 -   `required`: a value for the field must be provided, otherwise the message
     will be considered "uninitialized". Trying to build an uninitialized message
@@ -189,16 +189,16 @@ most messages defined in proto2 syntax use `optional` and `repeated` only.
 
 You'll find a complete guide to writing `.proto` files -- including all the
 possible field types -- in the
-[Protocol Buffer Language Guide](/programming-guides/proto2).
-Don't go looking for facilities similar to class inheritance, though -- protocol
-buffers don't do that.
+[Protobuf Language Guide](/programming-guides/proto2).
+Don't go looking for facilities similar to class inheritance, though -- Protobuf
+doesn't do that.
 
-## Compiling Your Protocol Buffers {#compiling-protocol-buffers}
+## Compiling Your Protobuf Schema {#compiling-protocol-buffers}
 
 Now that you have a `.proto`, the next thing you need to do is generate the
 classes you'll need to read and write `AddressBook` (and hence `Person` and
-`PhoneNumber`) messages. To do this, you need to run the protocol buffer
-compiler `protoc` on your `.proto`:
+`PhoneNumber`) messages. To do this, you need to run the Protobuf compiler
+`protoc` on your `.proto`:
 
 1.  If you haven't installed the compiler,
     [download the package](/downloads) and follow the
@@ -220,7 +220,7 @@ compiler `protoc` on your `.proto`:
 This generates a `com/example/tutorial/protos/` subdirectory in your specified
 destination directory, containing a few generated `.java` files.
 
-## The Protocol Buffer API {#protobuf-api}
+## The Protobuf API {#protobuf-api}
 
 Let's look at some of the generated code and see what classes and methods the
 compiler has created for you. If you look in `com/example/tutorial/protos/`, you
@@ -297,8 +297,8 @@ the list.
 
 Notice how these accessor methods use camel-case naming, even though the
 `.proto` file uses lowercase-with-underscores. This transformation is done
-automatically by the protocol buffer compiler so that the generated classes
-match standard Java style conventions. You should always use
+automatically by the Protobuf compiler so that the generated classes match
+standard Java style conventions. You should always use
 lowercase-with-underscores for field names in your `.proto` files; this ensures
 good naming practice in all the generated languages. See the
 [style guide](/programming-guides/style) for more on good
@@ -328,11 +328,11 @@ class within `Person`.
 
 ### Builders vs. Messages {#builders-messages}
 
-The message classes generated by the protocol buffer compiler are all
-*immutable*. Once a message object is constructed, it cannot be modified, just
-like a Java `String`. To construct a message, you must first construct a
-builder, set any fields you want to set to your chosen values, then call the
-builder's `build()` method.
+The message classes generated by the Protobuf compiler are all *immutable*. Once
+a message object is constructed, it cannot be modified, just like a Java
+`String`. To construct a message, you must first construct a builder, set any
+fields you want to set to your chosen values, then call the builder's `build()`
+method.
 
 You may have noticed that each method of the builder which modifies the message
 returns another builder. The returned object is actually the same builder on
@@ -374,8 +374,8 @@ all Java messages and builders. For more information, see the
 
 ### Parsing and Serialization {#parsing-serialization}
 
-Finally, each protocol buffer class has methods for writing and reading messages
-of your chosen type using the protocol buffer
+Finally, each Protobuf class has methods for writing and reading messages of
+your chosen type using the Protobuf
 [binary format](/programming-guides/encoding). These
 include:
 
@@ -393,12 +393,12 @@ Again, see the
 [`Message` API reference](/reference/java/api-docs/com/google/protobuf/Message.html)
 for a complete list.
 
-{{% alert title="Important" color="warning" %}} **Protocol Buffers and Object Oriented Design**
-Protocol buffer classes are basically data holders (like structs in C) that
-don't provide additional functionality; they don't make good first class
-citizens in an object model. If you want to add richer behavior to a generated
-class, the best way to do this is to wrap the generated protocol buffer class in
-an application-specific class. Wrapping protocol buffers is also a good idea if
+{{% alert title="Important" color="warning" %}} **Protobuf and Object Oriented Design**
+Protobuf classes are basically data holders (like structs in C) that don't
+provide additional functionality; they don't make good first class citizens in
+an object model. If you want to add richer behavior to a generated class, the
+best way to do this is to wrap the generated Protobuf class in an
+application-specific class. Wrapping Protobuf messages is also a good idea if
 you don't have control over the design of the `.proto` file (if, say, you're
 reusing one from another project). In that case, you can use the wrapper class
 to craft an interface better suited to the unique environment of your
@@ -409,10 +409,10 @@ practice anyway. {{% /alert %}}
 
 ## Writing a Message {#writing-a-message}
 
-Now let's try using your protocol buffer classes. The first thing you want your
-address book application to be able to do is write personal details to your
-address book file. To do this, you need to create and populate instances of your
-protocol buffer classes and then write them to an output stream.
+Now let's try using your Protobuf classes. The first thing you want your address
+book application to be able to do is write personal details to your address book
+file. To do this, you need to create and populate instances of your Protobuf
+classes and then write them to an output stream.
 
 Here is a program which reads an `AddressBook` from a file, adds one new
 `Person` to it based on user input, and writes the new `AddressBook` back out to
@@ -564,20 +564,20 @@ class ListPeople {
 }
 ```
 
-## Extending a Protocol Buffer {#extending-a-protobuf}
+## Extending a Protobuf Message {#extending-a-protobuf}
 
-Sooner or later after you release the code that uses your protocol buffer, you
-will undoubtedly want to "improve" the protocol buffer's definition. If you want
-your new buffers to be backwards-compatible, and your old buffers to be
+Sooner or later after you release the code that uses your Protobuf message, you
+will undoubtedly want to "improve" the message's definition. If you want your
+new messages to be backwards-compatible, and your old messages to be
 forward-compatible -- and you almost certainly do want this -- then there are
-some rules you need to follow. In the new version of the protocol buffer:
+some rules you need to follow. In the new version of the message:
 
 -   you *must not* change the tag numbers of any existing fields.
 -   you *must not* add or delete any required fields.
 -   you *may* delete optional or repeated fields.
 -   you *may* add new optional or repeated fields but you must use fresh tag
-    numbers (that is, tag numbers that were never used in this protocol buffer,
-    not even by deleted fields).
+    numbers (that is, tag numbers that were never used in this message, not even
+    by deleted fields).
 
 (There are
 [some exceptions](/programming-guides/proto2#updating) to
@@ -599,10 +599,10 @@ or never set at all (by old code) since there is no `has_` flag for it.
 
 ## Advanced Usage {#advanced-usage}
 
-Protocol buffers have uses that go beyond simple accessors and serialization. Be
-sure to explore the
+Protobuf has uses that go beyond simple accessors and serialization. Be sure to
+explore the
 [Java API reference](/reference/java/api-docs/index-all.html)
-to see what else you can do with them.
+to see what else you can do with it.
 
 One key feature provided by protocol message classes is *reflection*. You can
 iterate over the fields of a message and manipulate their values without writing
@@ -612,8 +612,7 @@ as XML or JSON. A more advanced use of reflection might be to find differences
 between two messages of the same type, or to develop a sort of "regular
 expressions for protocol messages" in which you can write expressions that match
 certain message contents. If you use your imagination, it's possible to apply
-Protocol Buffers to a much wider range of problems than you might initially
-expect!
+Protobuf to a much wider range of problems than you might initially expect!
 
 Reflection is provided as part of the
 [`Message`](/reference/java/api-docs/com/google/protobuf/Message.html)

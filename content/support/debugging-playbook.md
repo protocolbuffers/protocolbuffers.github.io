@@ -1,11 +1,11 @@
 +++
 title = "Debugging"
 weight = 915
-description = "Debugging common issues in Protocol Buffers."
+description = "Debugging common issues in Protobuf."
 type = "docs"
 +++
 
-Frequently asked questions and debugging scenarios encountered by protobuf
+Frequently asked questions and debugging scenarios encountered by Protobuf
 users.
 
 <!--*

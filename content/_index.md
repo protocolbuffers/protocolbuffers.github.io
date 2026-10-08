@@ -1,25 +1,26 @@
 +++
-title = "Protocol Buffers"
+title = "Protobuf"
 weight = 5
 toc_hide = "true"
-description = "Protocol Buffers are language-neutral, platform-neutral extensible mechanisms for serializing structured data."
+description = "Protobuf is a language-neutral, platform-neutral extensible mechanism for serializing structured data."
 type = "docs"
 no_list = "true"
 +++
 
-## What Are Protocol Buffers?
+## What Is Protobuf?
 
-Protocol buffers are Google's language-neutral, platform-neutral, extensible
-mechanism for serializing structured data – think XML, but smaller, faster, and
-simpler. You define how you want your data to be structured once, then you can
-use special generated source code to easily write and read your structured data
-to and from a variety of data streams and using a variety of languages.
+Protobuf ("Protocol Buffers") is Google's language-neutral, platform-neutral,
+extensible mechanism for serializing structured data – think XML, but smaller,
+faster, and simpler. You define how you want your data to be structured once,
+then you can use special generated source code to easily write and read your
+structured data to and from a variety of data streams and using a variety of
+languages.
 
 ## Pick Your Favorite Language
 
-Protocol buffers support generated code in C++, C#, Dart, Go, Java,
-Kotlin,
-Objective-C, Python, Rust, and Ruby. With proto3, you can also work with PHP.
+Protobuf supports generated code in C++, C#, Dart, Go,
+Java, Kotlin, Objective-C, Python, Rust, and Ruby. With proto3,
+you can also work with PHP.
 
 ## Example Implementation
 
@@ -67,7 +68,7 @@ email = john.email();
 
   <li>
     <a href="https://github.com/protocolbuffers/protobuf#protobuf-compiler-installation">Download
-    and install</a> the protocol buffer compiler.
+    and install</a> the Protobuf compiler.
   </li>
 
   <li>

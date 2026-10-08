@@ -2,12 +2,12 @@
 title = "Dart Generated Code"
 weight = 580
 linkTitle = "Generated Code"
-description = "Describes what Dart code the protocol buffer compiler generates for any given protocol definition."
+description = "Describes what Dart code the Protobuf compiler generates for any given protocol definition."
 type = "docs"
 +++
 
-Any differences between
-proto2, proto3, and editions generated code are highlighted - note that these
+Any differences between proto2,
+proto3, and editions generated code are highlighted - note that these
 differences are in the generated code as described in this document, not the
 base API, which are the same in both versions. You should read the
 [proto2 language guide](/programming-guides/proto2),
@@ -17,7 +17,7 @@ before reading this document.
 
 ## Compiler Invocation {#invocation}
 
-The protocol buffer compiler requires a
+The Protobuf compiler requires a
 [plugin to generate Dart](https://github.com/dart-lang/dart-protoc-plugin) code.
 Installing it following the
 [instructions](https://github.com/dart-lang/dart-protoc-plugin#how-to-build-and-use)
@@ -53,8 +53,8 @@ Given a simple message declaration:
 message Foo {}
 ```
 
-The protocol buffer compiler generates a class called `Foo`, which extends the
-class `GeneratedMessage`.
+The Protobuf compiler generates a class called `Foo`, which extends the class
+`GeneratedMessage`.
 
 The class `GeneratedMessage` defines methods that let you check, manipulate,
 read, or write the entire message. In addition to these methods, the `Foo` class
@@ -62,7 +62,7 @@ defines the following methods and constructors:
 
 -   `Foo()`: Default constructor. Creates an instance where all singular fields
     are unset and repeated fields are empty.
--   `Foo.fromBuffer(...)`: Creates a `Foo` from serialized protocol buffer data
+-   `Foo.fromBuffer(...)`: Creates a `Foo` from serialized Protobuf data
     representing the message.
 -   `Foo.fromJson(...)`: Creates a `Foo` from a JSON string encoding the
     message.
@@ -92,9 +92,9 @@ In this case, the compiler generates two classes: `Foo` and `Foo_Bar`.
 
 ## Fields
 
-In addition to the methods described in the previous section, the protocol
-buffer compiler generates accessor methods for each field defined within the
-message in the `.proto` file.
+In addition to the methods described in the previous section, the Protobuf
+compiler generates accessor methods for each field defined within the message in
+the `.proto` file.
 
 Note that the generated names always use camel-case naming, even if the field
 name in the `.proto` file uses lower-case with underscores
@@ -336,9 +336,9 @@ enum Color {
 }
 ```
 
-The protocol buffer compiler will generate a class called `Color`, which extends
-the `ProtobufEnum` class. The class will include a `static const Color` for each
-of the four values, as well as a `static const List<Color>` that contains the
+The Protobuf compiler will generate a class called `Color`, which extends the
+`ProtobufEnum` class. The class will include a `static const Color` for each of
+the four values, as well as a `static const List<Color>` that contains the
 values.
 
 ```dart
@@ -390,7 +390,7 @@ message Bar {
 }
 ```
 
-The protocol buffer compiler will generate a class called `Bar`, which extends
+The Protobuf compiler will generate a class called `Bar`, which extends
 `GeneratedMessage`, and a class called `Bar_Color`, which extends
 `ProtobufEnum`.
 
@@ -410,9 +410,9 @@ extend Foo {
 }
 ```
 
-The protocol buffer compiler will generate, in addition to the `Foo` class, a
-class `Foo_test` which will contain a `static Extension` for each extension
-field in the file along with a method for registering all the extensions in an
+The Protobuf compiler will generate, in addition to the `Foo` class, a class
+`Foo_test` which will contain a `static Extension` for each extension field in
+the file along with a method for registering all the extensions in an
 `ExtensionRegistry` :
 
 -   `static final Extension bar`
@@ -479,7 +479,7 @@ service Foo {
 }
 ```
 
-The protocol buffer compiler can be invoked with the \`grpc\` option (e.g.
+The Protobuf compiler can be invoked with the \`grpc\` option (e.g.
 `--dart_out=grpc:output_folder`), in which case it will generate code to support
 [gRPC](//www.grpc.io/). See the
 [gRPC Dart Quickstart guide](https://grpc.io/docs/quickstart/dart.html)

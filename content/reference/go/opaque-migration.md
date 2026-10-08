@@ -6,9 +6,9 @@ description = "Describes the automated migration to the Opaque API."
 type = "docs"
 +++
 
-The Opaque API is the latest version of the Protocol Buffers implementation for
-the Go programming language. The old version is now called Open Struct API. See
-the [Go Protobuf: Releasing the Opaque API](https://go.dev/blog/protobuf-opaque)
+The Opaque API is the latest version of the Protobuf implementation for the Go
+programming language. The old version is now called Open Struct API. See the
+[Go Protobuf: Releasing the Opaque API](https://go.dev/blog/protobuf-opaque)
 blog post for an introduction.
 
 The migration to the Opaque API happens incrementally, on a per-proto-message or
@@ -77,20 +77,20 @@ guide. {{% /alert %}}
 ### Project Preparation {#projectprep}
 
 Ensure your build environment and project are using recent-enough versions of
-Protocol Buffers and Go Protobuf:
+Protobuf and Go Protobuf:
 
-1.  Update the protobuf compiler (protoc) from
-    [the protobuf release page](https://github.com/protocolbuffers/protobuf/releases/latest)
+1.  Update the Protobuf compiler (protoc) from
+    [the Protobuf release page](https://github.com/protocolbuffers/protobuf/releases/latest)
     to version 29.0 or newer.
 
-1.  Update the protobuf compiler Go plugin (protoc-gen-go) to version 1.36.0 or
+1.  Update the Protobuf compiler Go plugin (protoc-gen-go) to version 1.36.0 or
     newer:
 
     ```
     go install google.golang.org/protobuf/cmd/protoc-gen-go@latest
     ```
 
-1.  In each project, update the `go.mod` file to use the protobuf module in
+1.  In each project, update the `go.mod` file to use the Protobuf module in
     version 1.36.0 or newer:
 
     ```
@@ -114,7 +114,7 @@ open2opaque setapi -api HYBRID $(find . -name "*.proto")
 
 Then,
 [re-compile](/getting-started/gotutorial#compiling-protocol-buffers)
-your protocol buffers.
+your `.proto` files.
 
 Your existing code will continue to build. The Hybrid API is a step between the
 Open and Opaque API which adds the new accessor methods but keeps struct fields
@@ -152,7 +152,7 @@ if req.HasIPAddress() {
 logEntry.SetBackendServer(host)
 ```
 
-Another common example is to initialize a protobuf message with a struct
+Another common example is to initialize a Protobuf message with a struct
 literal:
 
 ```go

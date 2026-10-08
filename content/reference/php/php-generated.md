@@ -2,25 +2,25 @@
 title = "PHP Generated Code Guide"
 weight = 730
 linkTitle = "Generated Code Guide"
-description = "Describes the PHP code that the protocol buffer compiler generates for any given protocol definition."
+description = "Describes the PHP code that the Protobuf compiler generates for any given protocol definition."
 type = "docs"
 +++
 
 You should read the
 [proto3 language guide](/programming-guides/proto3) or
 [Editions language guide](/programming-guides/editions)
-before reading this document. Note that the protocol buffer compiler currently
-only supports proto3 and editions code generation for PHP.
+before reading this document. Note that the Protobuf compiler currently only
+supports proto3 and editions code generation for PHP.
 
 ## Compiler Invocation {#invocation}
 
-The protocol buffer compiler produces PHP output when invoked with the
-`--php_out=` command-line flag. The parameter to the `--php_out=` option is the
-directory where you want the compiler to write your PHP output. In order to
-conform to PSR-4, the compiler creates a sub-directory corresponding to the
-package defined in the proto file. In addition, for each message in the proto
-file input the compiler creates a separate file in the package's subdirectory.
-The names of the output files of messages are composed of three parts:
+The Protobuf compiler produces PHP output when invoked with the `--php_out=`
+command-line flag. The parameter to the `--php_out=` option is the directory
+where you want the compiler to write your PHP output. In order to conform to
+PSR-4, the compiler creates a sub-directory corresponding to the package defined
+in the proto file. In addition, for each message in the proto file input the
+compiler creates a separate file in the package's subdirectory. The names of the
+output files of messages are composed of three parts:
 
 -   Base directory: The proto path (specified with the `--proto_path=` or `-I`
     command-line flag) is replaced with the output path (specified with the
@@ -97,10 +97,10 @@ message Foo {
 }
 ```
 
-The protocol buffer compiler generates a PHP class called `Foo`. This class
-inherits from a common base class, `Google\Protobuf\Internal\Message`, which
-provides methods for encoding and decoding your message types, as shown in the
-following example:
+The Protobuf compiler generates a PHP class called `Foo`. This class inherits
+from a common base class, `Google\Protobuf\Internal\Message`, which provides
+methods for encoding and decoding your message types, as shown in the following
+example:
 
 ```php
 $from = new Foo();
@@ -156,9 +156,9 @@ specified, it is prepended to all generated message classes.
 
 ## Fields
 
-For each field in a message type, the protocol buffer compiler generates a set
-of accessor methods to set and get the field. The accessor methods are named
-using `snake_case` field names converted to `PascalCase`. So, given a field
+For each field in a message type, the Protobuf compiler generates a set of
+accessor methods to set and get the field. The accessor methods are named using
+`snake_case` field names converted to `PascalCase`. So, given a field
 `field_name`, the accessor methods will be `getFieldName` and `setFieldName`.
 
 ```php
@@ -181,8 +181,7 @@ integer, float, and numeric strings. Conversions that are not permitted include
 all conversions to/from arrays or objects. Float to integer overflow conversions
 are undefined.
 
-You can see the corresponding PHP type for each scalar protocol buffers type in
-the
+You can see the corresponding PHP type for each scalar Protobuf type in the
 [scalar value types table](/programming-guides/proto3#scalar).
 
 ### `has...` and `clear...`
@@ -220,8 +219,8 @@ held elsewhere (for example, as a field value on another message).
 
 ### Repeated Fields
 
-The protocol buffer compiler generates a special `RepeatedField` for each
-repeated field. So, for example, given the following field:
+The Protobuf compiler generates a special `RepeatedField` for each repeated
+field. So, for example, given the following field:
 
 ```proto
 repeated int32 foo = 1;
@@ -236,8 +235,8 @@ $m->setFoo($array);
 
 ### Map Fields
 
-The protocol buffer compiler generates a `MapField` for each map field. So given
-this field:
+The Protobuf compiler generates a `MapField` for each map field. So given this
+field:
 
 ```proto
 map<int32, int32> weight = 1;
@@ -251,8 +250,8 @@ $m->getWeight()[1] = 1;
 
 ## Enumerations {#enum}
 
-PHP doesn't have native enums, so instead the protocol buffer compiler generates
-a PHP class for each enum type in your `.proto` file, just like for
+PHP doesn't have native enums, so instead the Protobuf compiler generates a PHP
+class for each enum type in your `.proto` file, just like for
 [messages](#message), with constants defined for each value. So, given this
 enum:
 
@@ -295,9 +294,9 @@ specified, it is prepended to all generated enum classes.
 ## Oneof
 
 For a [oneof](/programming-guides/editions#oneof), the
-protocol buffer compiler generates a `has` and `clear` method for each field in
-the oneof, as well as a special accessor method that lets you find out which
-oneof field (if any) is set. So, given this message:
+Protobuf compiler generates a `has` and `clear` method for each field in the
+oneof, as well as a special accessor method that lets you find out which oneof
+field (if any) is set. So, given this message:
 
 ```proto
 message TestMessage {

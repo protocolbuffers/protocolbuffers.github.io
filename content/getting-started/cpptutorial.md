@@ -1,22 +1,22 @@
 +++
-title = "Protocol Buffer Basics: C++"
+title = "Protobuf Basics: C++"
 weight = 210
 linkTitle = "C++"
-description = "A basic C++ programmers introduction to working with protocol buffers."
+description = "A basic C++ programmers introduction to working with Protobuf."
 type = "docs"
 +++
 
 This tutorial provides a basic C++ programmers introduction to working with
-protocol buffers. By walking through creating a simple example application, it
-shows you how to
+Protobuf. By walking through creating a simple example application, it shows you
+how to
 
 -   Define message formats in a `.proto` file.
--   Use the protocol buffer compiler.
--   Use the C++ protocol buffer API to write and read messages.
+-   Use the Protobuf compiler.
+-   Use the C++ Protobuf API to write and read messages.
 
-This isn't a comprehensive guide to using protocol buffers in C++. For more
-detailed reference information, see the
-[Protocol Buffer Language Guide](/programming-guides/editions),
+This isn't a comprehensive guide to using Protobuf in C++. For more detailed
+reference information, see the
+[Protobuf Language Guide](/programming-guides/editions),
 the [C++ API Reference](/reference/cpp/api-docs), the
 [C++ Generated Code Guide](/reference/cpp/cpp-generated),
 and the
@@ -51,16 +51,16 @@ ways to solve this problem:
     Also, navigating an XML DOM tree is considerably more complicated than
     navigating simple fields in a class normally would be.
 
-Instead of these options, you can use protocol buffers. Protocol buffers are the
-flexible, efficient, automated solution to solve exactly this problem. With
-protocol buffers, you write a `.proto` description of the data structure you
-wish to store. From that, the protocol buffer compiler creates a class that
-implements automatic encoding and parsing of the protocol buffer data with an
-efficient binary format. The generated class provides getters and setters for
-the fields that make up a protocol buffer and takes care of the details of
-reading and writing the protocol buffer as a unit. Importantly, the protocol
-buffer format supports the idea of extending the format over time in such a way
-that the code can still read data encoded with the old format.
+Instead of these options, you can use Protobuf. Protobuf is the flexible,
+efficient, automated solution to solve exactly this problem. With Protobuf, you
+write a `.proto` description of the data structure you wish to store. From that,
+the Protobuf compiler creates a class that implements automatic encoding and
+parsing of the Protobuf data with an efficient binary format. The generated
+class provides getters and setters for the fields that make up a Protobuf
+message and takes care of the details of reading and writing the message as a
+unit. Importantly, the Protobuf format supports the idea of extending the format
+over time in such a way that the code can still read data encoded with the old
+format.
 
 ## Where to Find the Example Code {#example-code}
 
@@ -148,25 +148,26 @@ Fields can be one of the following:
     zero). The order of the repeated values will be preserved. Think of repeated
     fields as dynamically sized arrays.
 
-In older versions of protobuf, a `required` keyword existed, but it has been
-found to be brittle and is not supported in modern protobufs (though editions
-does have a feature you can use to enable it, for backward compatibility).
+In older versions of Protobuf, a `required` keyword existed, but it has been
+found to be brittle and is not supported in modern versions of Protobuf (though
+editions does have a feature you can use to enable it, for backward
+compatibility).
 
 You'll find a complete guide to writing `.proto` files -- including all the
 possible field types -- in the
-[Protocol Buffer Language Guide](/programming-guides/editions).
-Don't go looking for facilities similar to class inheritance, though -- protocol
-buffers don't do that.
+[Protobuf Language Guide](/programming-guides/editions).
+Don't go looking for facilities similar to class inheritance, though -- Protobuf
+doesn't do that.
 
-## Compiling Your Protocol Buffers {#compiling-protocol-buffers}
+## Compiling Your Protobuf Schema {#compiling-protocol-buffers}
 
 Now that you have a `.proto`, the next thing you need to do is generate the
 classes you'll need to read and write `AddressBook` (and hence `Person` and
-`PhoneNumber`) messages. To do this, you need to run the protocol buffer
-compiler `protoc` on your `.proto`:
+`PhoneNumber`) messages. To do this, you need to run the Protobuf compiler
+`protoc` on your `.proto`:
 
 1.  If you haven't installed the compiler, follow the instructions in
-    [Protocol Buffer Compiler Installation](/installation/).
+    [Protobuf Compiler Installation](/installation/).
 
 2.  Now run the compiler, specifying the source directory (where your
     application's source code lives -- the current directory is used if you
@@ -186,7 +187,7 @@ This generates the following files in your specified destination directory:
 -   `addressbook.pb.h`, the header which declares your generated classes.
 -   `addressbook.pb.cc`, which contains the implementation of your classes.
 
-## The Protocol Buffer API {#protobuf-api}
+## The Protobuf API {#protobuf-api}
 
 Let's look at some of the generated code and see what classes and functions the
 compiler has created for you. If you look in `addressbook.pb.h`, you can see
@@ -283,14 +284,13 @@ manipulate the entire message, including:
 -   `void Clear();`: clears all the elements back to the empty state.
 
 These and the I/O methods described in the following section implement the
-`Message` interface shared by all C++ protocol buffer classes. For more info,
-see the
+`Message` interface shared by all C++ Protobuf classes. For more info, see the
 [complete API documentation for `Message`](/reference/cpp/api-docs/google.protobuf.message#Message).
 
 ### Parsing and Serialization {#parsing-serialization}
 
-Finally, each protocol buffer class has methods for writing and reading messages
-of your chosen type using the protocol buffer
+Finally, each Protobuf class has methods for writing and reading messages of
+your chosen type using the Protobuf
 [binary format](/programming-guides/encoding). These
 include:
 
@@ -309,12 +309,12 @@ See the
 [`Message` API reference](/reference/cpp/api-docs/google.protobuf.message#Message)
 for a complete list.
 
-{{% alert title="Important" color="warning" %}} **Protocol Buffers and Object Oriented Design**
-Protocol buffer classes are basically data holders (like structs in C) that
-don't provide additional functionality; they don't make good first class
-citizens in an object model. If you want to add richer behavior to a generated
-class, the best way to do this is to wrap the generated protocol buffer class in
-an application-specific class. Wrapping protocol buffers is also a good idea if
+{{% alert title="Important" color="warning" %}} **Protobuf and Object Oriented Design**
+Protobuf classes are basically data holders (like structs in C) that don't
+provide additional functionality; they don't make good first class citizens in
+an object model. If you want to add richer behavior to a generated class, the
+best way to do this is to wrap the generated Protobuf class in an
+application-specific class. Wrapping Protobuf messages is also a good idea if
 you don't have control over the design of the .proto file (if, say, you're
 reusing one from another project). In that case, you can use the wrapper class
 to craft an interface better suited to the unique environment of your
@@ -323,14 +323,14 @@ application: hiding some data and methods, exposing convenience functions, etc.
 they are final. This prevents breaking internal mechanisms and is not good
 object-oriented practice anyway.
 
- {{% /alert %}}
+{{% /alert %}}
 
 ## Writing a Message {#writing-a-message}
 
-Now let's try using your protocol buffer classes. The first thing you want your
-address book application to be able to do is write personal details to your
-address book file. To do this, you need to create and populate instances of your
-protocol buffer classes and then write them to an output stream.
+Now let's try using your Protobuf classes. The first thing you want your address
+book application to be able to do is write personal details to your address book
+file. To do this, you need to create and populate instances of your Protobuf
+classes and then write them to an output stream.
 
 Here is a program that reads an `AddressBook` from a file, adds one new `Person`
 to it based on user input, and writes the new `AddressBook` back out to the file
@@ -434,20 +434,20 @@ int main(int argc, char* argv[]) {
 ```
 
 Notice the `GOOGLE_PROTOBUF_VERIFY_VERSION` macro. It is good practice -- though
-not strictly necessary -- to execute this macro before using the C++ Protocol
-Buffer library. It verifies that you have not accidentally linked against a
-version of the library which is incompatible with the version of the headers you
-compiled with. If a version mismatch is detected, the program will abort. Note
-that every `.pb.cc` file automatically invokes this macro on startup.
+not strictly necessary -- to execute this macro before using the C++ Protobuf
+library. It verifies that you have not accidentally linked against a version of
+the library which is incompatible with the version of the headers you compiled
+with. If a version mismatch is detected, the program will abort. Note that every
+`.pb.cc` file automatically invokes this macro on startup.
 
 Also notice the call to `ShutdownProtobufLibrary()` at the end of the program.
-All this does is delete any global objects that were allocated by the Protocol
-Buffer library. This is unnecessary for most programs, since the process is just
-going to exit anyway and the OS will take care of reclaiming all of its memory.
+All this does is delete any global objects that were allocated by the Protobuf
+library. This is unnecessary for most programs, since the process is just going
+to exit anyway and the OS will take care of reclaiming all of its memory.
 However, if you use a memory leak checker that requires that every last object
 be freed, or if you are writing a library which may be loaded and unloaded
-multiple times by a single process, then you may want to force Protocol Buffers
-to clean up everything.
+multiple times by a single process, then you may want to force Protobuf to clean
+up everything.
 
 ## Reading a Message {#reading-a-message}
 
@@ -524,19 +524,19 @@ int main(int argc, char* argv[]) {
 }
 ```
 
-## Extending a Protocol Buffer {#extending-a-protobuf}
+## Extending a Protobuf Message {#extending-a-protobuf}
 
-Sooner or later after you release the code that uses your protocol buffer, you
-will undoubtedly want to "improve" the protocol buffer's definition. If you want
-your new buffers to be backwards-compatible, and your old buffers to be
+Sooner or later after you release the code that uses your Protobuf message, you
+will undoubtedly want to "improve" the message's definition. If you want your
+new messages to be backwards-compatible, and your old messages to be
 forward-compatible -- and you almost certainly do want this -- then there are
-some rules you need to follow. In the new version of the protocol buffer:
+some rules you need to follow. In the new version of the message:
 
 *   you *must not* change the field numbers of any existing fields.
 *   you *may* delete singular or repeated fields.
 *   you *may* add new singular or repeated fields but you must use fresh field
-    numbers (that is, field numbers that were never used in this protocol
-    buffer, not even by deleted fields).
+    numbers (that is, field numbers that were never used in this message, not
+    even by deleted fields).
 
 (There are
 [some exceptions](/programming-guides/editions#updating)
@@ -552,16 +552,16 @@ before use.
 
 ## Optimization Tips {#optimization}
 
-The C++ Protocol Buffers library is extremely heavily optimized. However, proper
-usage can improve performance even more. Here are some tips for squeezing every
-last drop of speed out of the library:
+The C++ Protobuf library is extremely heavily optimized. However, proper usage
+can improve performance even more. Here are some tips for squeezing every last
+drop of speed out of the library:
 
--   **Use Arenas for memory allocation.** When you create many protocol buffer
-    messages in a short-lived operation (like parsing a single request), the
-    system's memory allocator can become a bottleneck. Arenas are designed to
-    mitigate this. By using an arena, you can perform many allocations with low
-    overhead, and a single deallocation for all of them at once. This can
-    significantly improve performance in message-heavy applications.
+-   **Use Arenas for memory allocation.** When you create many Protobuf messages
+    in a short-lived operation (like parsing a single request), the system's
+    memory allocator can become a bottleneck. Arenas are designed to mitigate
+    this. By using an arena, you can perform many allocations with low overhead,
+    and a single deallocation for all of them at once. This can significantly
+    improve performance in message-heavy applications.
 
     To use arenas, you allocate messages on a `google::protobuf::Arena` object:
 
@@ -610,9 +610,9 @@ last drop of speed out of the library:
 
 ## Advanced Usage {#advanced-usage}
 
-Protocol buffers have uses that go beyond simple accessors and serialization. Be
-sure to explore the [C++ API reference](/reference/cpp)
-to see what else you can do with them.
+Protobuf has uses that go beyond simple accessors and serialization. Be sure to
+explore the [C++ API reference](/reference/cpp) to see
+what else you can do with it.
 
 One key feature provided by protocol message classes is *reflection*. You can
 iterate over the fields of a message and manipulate their values without writing
@@ -622,8 +622,7 @@ as XML or JSON. A more advanced use of reflection might be to find differences
 between two messages of the same type, or to develop a sort of "regular
 expressions for protocol messages" in which you can write expressions that match
 certain message contents. If you use your imagination, it's possible to apply
-Protocol Buffers to a much wider range of problems than you might initially
-expect!
+Protobuf to a much wider range of problems than you might initially expect!
 
 Reflection is provided by the
 [`Message::Reflection` interface](/reference/cpp/api-docs/google.protobuf.message#Reflection).

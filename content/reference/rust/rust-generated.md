@@ -2,16 +2,16 @@
 title = "Rust Generated Code Guide"
 weight = 782
 linkTitle = "Generated Code Guide"
-description = "Describes the API of message objects that the protocol buffer compiler generates for any given protocol definition."
+description = "Describes the API of message objects that the Protobuf compiler generates for any given protocol definition."
 type = "docs"
 +++
 
-This page describes exactly what Rust code the protocol buffer compiler
-generates for any given protocol definition.
+This page describes exactly what Rust code the Protobuf compiler generates for
+any given protocol definition.
 
-This document covers how the protocol buffer compiler generates Rust code for
-proto2, proto3, and protobuf editions. Any differences between proto2, proto3,
-and editions generated code are highlighted. You should read the
+This document covers how the Protobuf compiler generates Rust code for proto2,
+proto3, and Protobuf Editions. Any differences between proto2, proto3, and
+editions generated code are highlighted. You should read the
 [proto2 language guide](/programming-guides/proto2),
 [proto3 language guide](/programming-guides/proto3), or
 [editions guide](/programming-guides/editions) before
@@ -19,9 +19,8 @@ reading this document.
 
 ## Protobuf Rust {#rust}
 
-Protobuf Rust is an implementation of protocol buffers designed to be able to
-sit on top of other existing protocol buffer implementations that we refer to as
-'kernels'.
+Protobuf Rust is an implementation of Protobuf designed to be able to sit on top
+of other existing Protobuf implementations that we refer to as 'kernels'.
 
 The decision to support multiple non-Rust kernels has significantly influenced
 our public API, including the choice to use custom types like `ProtoStr` over
@@ -199,9 +198,9 @@ pub mod foo {
 
 ## Fields {#fields}
 
-In addition to the methods described in the previous section, the protocol
-buffer compiler generates a set of accessor methods for each field defined
-within the message in the `.proto` file.
+In addition to the methods described in the previous section, the Protobuf
+compiler generates a set of accessor methods for each field defined within the
+message in the `.proto` file.
 
 Following Rust style, the methods are in lower-case/snake-case, such as
 `has_foo()` and `clear_foo()`. Note that the capitalization of the field name
@@ -421,7 +420,7 @@ instead.
 
 `[ctype = CORD]` enables bytes and strings to be stored as an
 [absl::Cord](https://github.com/abseil/abseil-cpp/blob/master/absl/strings/cord.h)
-in C++ Protobufs. `absl::Cord` currently does not have an equivalent type in
+in C++ Protobuf. `absl::Cord` currently does not have an equivalent type in
 Rust . Protobuf Rust uses an enum to represent a cord
 field:
 

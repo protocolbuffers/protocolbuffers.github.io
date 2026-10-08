@@ -1,15 +1,15 @@
 +++
 title = "News"
 weight = 20
-description = "Get the latest news about Protocol Buffers."
+description = "Get the latest news about Protobuf."
 type = "docs"
 no_list = "true"
 +++
 
-News topics provide information about past events and changes with Protocol
-Buffers, and plans for upcoming changes. The information is available both
-chronologically and per-release. Note that not everything is included in the
-per-release topics, as some content is not tied to a version.
+News topics provide information about past events and changes with Protobuf, and
+plans for upcoming changes. The information is available both chronologically
+and per-release. Note that not everything is included in the per-release topics,
+as some content is not tied to a version.
 
 New news topics will also be published to the
 [protobuf@](https://groups.google.com/g/protobuf) mailing list under the subject

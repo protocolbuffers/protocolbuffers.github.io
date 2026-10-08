@@ -1,14 +1,14 @@
 +++
 title = "Encoding"
 weight = 60
-description = "Explains how Protocol Buffers encodes data to files or to the wire."
+description = "Explains how Protobuf encodes data to files or to the wire."
 type = "docs"
 +++
 
-This document describes the protocol buffer *wire format*, which defines the
-details of how your message is sent on the wire and how much space it consumes
-on disk. You probably don't need to understand this to use protocol buffers in
-your application, but it's useful information for doing optimizations.
+This document describes the Protobuf *wire format*, which defines the details of
+how your message is sent on the wire and how much space it consumes on disk. You
+probably don't need to understand this to use Protobuf in your application, but
+it's useful information for doing optimizations.
 
 If you already know the concepts but want a reference, skip to the
 [Condensed reference card](#cheat-sheet) section.
@@ -26,7 +26,7 @@ denote UTF-8 strings, like `"Hello, Protobuf!"`. This literal is synonymous with
 composed of ASCII bytes). We'll introduce more of the Protoscope language as we
 discuss aspects of the wire format.
 
-The Protoscope tool can also dump encoded protocol buffers as text. See
+The Protoscope tool can also dump encoded Protobuf messages as text. See
 https://github.com/protocolbuffers/protoscope/tree/main/testdata for examples.
 
 All examples in this topic assume that you are using Edition 2023 or later.
@@ -94,13 +94,13 @@ order, concatenate, and interpret as an unsigned 64-bit integer:
  128 + 16 + 4 + 2 = 150  // Interpret as an unsigned 64-bit integer.
 ```
 
-Because varints are so crucial to protocol buffers, in protoscope syntax, we
-refer to them as plain integers. `150` is the same as `` `9601` ``.
+Because varints are so crucial to Protobuf, in protoscope syntax, we refer to
+them as plain integers. `150` is the same as `` `9601` ``.
 
 ## Message Structure {#structure}
 
-A protocol buffer message is a series of key-value pairs. The binary version of
-a message just uses the field's number as the key -- the name and declared type
+A Protobuf message is a series of key-value pairs. The binary version of a
+message just uses the field's number as the key -- the name and declared type
 for each field can only be determined on the decoding end by referencing the
 message type's definition (i.e. the `.proto` file). Protoscope does not have
 access to this information, so it can only provide the field numbers.
@@ -163,10 +163,10 @@ always encode as either `` `00` `` or `` `01` ``. In Protoscope, `false` and
 
 ### Signed Integers {#signed-ints}
 
-As you saw in the previous section, all the protocol buffer types associated
-with wire type 0 are encoded as varints. However, varints are unsigned, so the
-different signed types, `sint32` and `sint64` vs `int32` or `int64`, encode
-negative integers differently.
+As you saw in the previous section, all the Protobuf types associated with wire
+type 0 are encoded as varints. However, varints are unsigned, so the different
+signed types, `sint32` and `sint64` vs `int32` or `int64`, encode negative
+integers differently.
 
 The `intN` types encode negative numbers as two's complement, which means that,
 as unsigned, 64-bit integers, they have their highest bit set. As a result, this
@@ -360,8 +360,8 @@ the same message above that parsers must accept:
 5: {3}
 ```
 
-Protocol buffer parsers must be able to parse repeated fields that were compiled
-as `packed` as if they were not packed, and vice versa. This permits adding
+Protobuf parsers must be able to parse repeated fields that were compiled as
+`packed` as if they were not packed, and vice versa. This permits adding
 `[packed=true]` to existing fields in a forward- and backward-compatible way.
 
 ### Oneofs {#oneofs}
@@ -473,33 +473,33 @@ When a message is serialized, there is no guaranteed order for how its known or
 [unknown fields](/programming-guides/proto2#updating)
 will be written. Serialization order is an implementation detail, and the
 details of any particular implementation may change in the future. Therefore,
-protocol buffer parsers must be able to parse fields in any order.
+Protobuf parsers must be able to parse fields in any order.
 
 ### Implications {#implications}
 
 *   Do not assume the byte output of a serialized message is stable. This is
     especially true for messages with transitive bytes fields representing other
-    serialized protocol buffer messages.
+    serialized Protobuf messages.
 *   By default, repeated invocations of serialization methods on the same
-    protocol buffer message instance may not produce the same byte output. That
-    is, the default serialization is not deterministic.
+    Protobuf message instance may not produce the same byte output. That is, the
+    default serialization is not deterministic.
     *   Deterministic serialization only guarantees the same byte output for a
         particular binary. The byte output may change across different versions
         of the binary.
-*   The following checks may fail for a protocol buffer message instance `foo`:
+*   The following checks may fail for a Protobuf message instance `foo`:
     *   `foo.SerializeAsString() == foo.SerializeAsString()`
     *   `Hash(foo.SerializeAsString()) == Hash(foo.SerializeAsString())`
     *   `CRC(foo.SerializeAsString()) == CRC(foo.SerializeAsString())`
     *   `FingerPrint(foo.SerializeAsString()) ==
         FingerPrint(foo.SerializeAsString())`
-*   Here are a few example scenarios where logically equivalent protocol buffer
+*   Here are a few example scenarios where logically equivalent Protobuf
     messages `foo` and `bar` may serialize to different byte outputs:
     *   `bar` is serialized by an old server that treats some fields as unknown.
     *   `bar` is serialized by a server that is implemented in a different
         programming language and serializes fields in different order.
     *   `bar` has a field that serializes in a non-deterministic manner.
-    *   `bar` has a field that stores a serialized byte output of a protocol
-        buffer message which is serialized differently.
+    *   `bar` has a field that stores a serialized byte output of a Protobuf
+        message which is serialized differently.
     *   `bar` is serialized by a new server that serializes fields in a
         different order due to an implementation change.
     *   `foo` and `bar` are concatenations of the same individual messages in a

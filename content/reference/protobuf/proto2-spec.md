@@ -1,5 +1,5 @@
 +++
-title = "Protocol Buffers Language Specification (Proto2 Syntax)"
+title = "Protobuf Language Specification (Proto2 Syntax)"
 weight = 800
 linkTitle = "Language Specification (Proto2 Syntax)"
 description = "Language specification reference for the proto2 syntax and its relationship to Protobuf Editions."
@@ -110,7 +110,7 @@ constant = fullIdent | ( [ "-" | "+" ] intLit ) | ( [ "-" | "+" ] floatLit ) |
 
 ## Syntax
 
-The syntax statement is used to define the protobuf version. If `syntax` is
+The syntax statement is used to define the Protobuf version. If `syntax` is
 omitted, the protocol compiler will use `proto2`. For the sake of clarity, it's
 recommended to always explicitly include a `syntax` statement in your `.proto`
 files.
@@ -151,7 +151,7 @@ package foo.bar;
 ## Option
 
 Options can be used in proto files, messages, enums and services. An option can
-be a protobuf defined option or a custom option. For more information, see
+be a Protobuf defined option or a custom option. For more information, see
 [Options](/programming-guides/proto2#options) in the
 language guide.
 
@@ -169,7 +169,7 @@ option java_package = "com.example.foo";
 
 ## Fields
 
-Fields are the basic elements of a protocol buffer message. Fields can be normal
+Fields are the basic elements of a Protobuf message. Fields can be normal
 fields, group fields, oneof fields, or map fields. A field has a type, name, and
 field number. In proto2, fields also have a label (`required`, `optional`, or
 `repeated`).

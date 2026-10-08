@@ -1,13 +1,13 @@
 +++
-title = "Protocol Buffer Compiler Installation"
+title = "Protobuf Compiler Installation"
 weight = 15
-description = "How to install the protocol buffer compiler."
+description = "How to install the Protobuf compiler."
 type = "docs"
 no_list = "true"
 linkTitle = "Protoc Installation"
 +++
 
-The protocol buffer compiler, `protoc`, is used to compile `.proto` files, which
+The Protobuf compiler, `protoc`, is used to compile `.proto` files, which
 contain service and message definitions. Choose one of the methods given below
 to install `protoc`.
 
@@ -94,4 +94,4 @@ Linux, macOS, or Windows using the following commands.
 
 If you'd like to build the protocol compiler from sources, or access older
 versions of the pre-compiled binaries, see
-[Download Protocol Buffers](https://protobuf.dev/downloads).
+[Download Protobuf](https://protobuf.dev/downloads).

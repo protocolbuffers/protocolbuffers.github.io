@@ -1,5 +1,5 @@
 +++
-title = "Protocol Buffers Well-Known Types"
+title = "Protobuf Well-Known Types"
 weight = 830
 linkTitle = "Well-Known Types"
 description = "API documentation for the google.protobuf package."
@@ -121,7 +121,7 @@ custom JSON in addition to the `@type` field. Example (for message
 
 ## Api {#api}
 
-Api is a light-weight descriptor for a protocol buffer service.
+Api is a light-weight descriptor for a Protobuf service.
 
 <table>
   <thead>
@@ -194,7 +194,7 @@ Api is a light-weight descriptor for a protocol buffer service.
         >
       </td>
       <td>
-        Source context for the protocol buffer service represented by this
+        Source context for the Protobuf service represented by this
         message.
       </td>
     </tr>
@@ -417,7 +417,7 @@ Enum type definition
       <td>
         <code><a href="#option">Option</a></code>
       </td>
-      <td>Protocol buffer options.</td>
+      <td>Protobuf options.</td>
     </tr>
     <tr>
       <td><code>source_context</code></td>
@@ -470,7 +470,7 @@ Enum value definition.
       <td>
         <code><a href="#option">Option</a></code>
       </td>
-      <td>Protocol buffer options.</td>
+      <td>Protobuf options.</td>
     </tr>
   </tbody>
 </table>
@@ -540,7 +540,7 @@ A single field of a message type.
       <td>
         <code><a href="#option">Option</a></code>
       </td>
-      <td>The protocol buffer options.</td>
+      <td>The Protobuf options.</td>
     </tr>
     <tr>
       <td><code>json_name</code></td>
@@ -1107,8 +1107,7 @@ The JSON representation for `NullValue` is JSON `null`.
 
 ## Option {#option}
 
-A protocol buffer option, which can be attached to a message, field,
-enumeration, etc.
+A Protobuf option, which can be attached to a message, field, enumeration, etc.
 
 <table>
   <thead>
@@ -1141,7 +1140,7 @@ enumeration, etc.
 
 ## SourceContext {#source-context}
 
-`SourceContext` represents information about the source of a protobuf element,
+`SourceContext` represents information about the source of a Protobuf element,
 like the file in which it is defined.
 
 <table>
@@ -1158,7 +1157,7 @@ like the file in which it is defined.
       <td><code>string</code></td>
       <td>
         The path-qualified name of the .proto file that contained the associated
-        protobuf element. For example:
+        Protobuf element. For example:
         <code>&quot;google/protobuf/source.proto&quot;</code>.
       </td>
     </tr>
@@ -1219,7 +1218,7 @@ The JSON representation for `Struct` is JSON object.
 
 ## Syntax {#syntax}
 
-The syntax in which a protocol buffer element is defined.
+The syntax in which a Protobuf element is defined.
 
 <table>
   <thead>
@@ -1348,7 +1347,7 @@ timestamp = Timestamp(seconds=seconds, nanos=nanos)
 
 ## Type {#type}
 
-A protocol buffer message type.
+A Protobuf message type.
 
 <table>
   <thead>
@@ -1384,7 +1383,7 @@ A protocol buffer message type.
       <td>
         <code><a href="#option">Option</a></code>
       </td>
-      <td>The protocol buffer options.</td>
+      <td>The Protobuf options.</td>
     </tr>
     <tr>
       <td><code>source_context</code></td>

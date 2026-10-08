@@ -11,18 +11,18 @@ representation of a proto message instance to determine if its content is the
 same as another instance. A subset of the ways that a wire-format proto message
 instance can vary include the following:
 
-*   The protobuf schema changes in certain ways.
+*   The Protobuf schema changes in certain ways.
 *   A map field stores its values in a different order.
 *   The binary is built with different flags (such as opt vs. debug).
-*   The protobuf library is updated.
+*   The Protobuf library is updated.
 
 Because of these ways that serialized data can vary, determining equality
 involves other methods.
 
 ## Comparison Methods {#methods}
 
-You can compare protocol buffer messages for equality using the standard Python
-`==` operator. Comparing two objects using the `==` operator compares with
+You can compare Protobuf messages for equality using the standard Python `==`
+operator. Comparing two objects using the `==` operator compares with
 `message.ListFields()`. When testing, you can use `self.assertEqual(msg1,
 msg2)`.
 
@@ -74,7 +74,7 @@ be tracked, the field is always compared by its value against the corresponding
 field in the other message.
 
 This behavior, where presence is part of the equality check, is different from
-how some other languages or protobuf libraries might handle equality, where
+how some other languages or Protobuf libraries might handle equality, where
 unset fields and fields set to their default value are sometimes treated as
 equivalent (often for wire-format compatibility). In Python, `==` performs a
 stricter check.

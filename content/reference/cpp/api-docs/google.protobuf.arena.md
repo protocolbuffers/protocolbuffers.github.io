@@ -4,7 +4,7 @@
 title = "arena.h"
 toc_hide = "true"
 linkTitle = "C++"
-description = "This section contains reference documentation for working with protocol buffer classes in C++."
+description = "This section contains reference documentation for working with Protobuf classes in C++."
 type = "docs"
 +++
 
@@ -29,7 +29,7 @@ type = "docs"
   <li>The type T <i>may</i> have the type trait |DestructorSkippable_|. If this type trait is present in the type, then its destructor will not be called if and only if it was passed a non-NULL arena pointer. If this type trait is not present on the type, then its destructor is always called when the containing arena is destroyed.</li>
 </ul>
 
-<p>This protocol is implemented by all arena-enabled proto2 message classes as well as protobuf container types like <a href='../google.protobuf.repeated_field#RepeatedPtrField'>RepeatedPtrField</a> and <a href='../google.protobuf.map#Map'>Map</a>. The protocol is internal to protobuf and is not guaranteed to be stable. Non-proto types should not rely on this protocol. </p>
+<p>This protocol is implemented by all arena-enabled proto2 message classes as well as Protobuf container types like <a href='../google.protobuf.repeated_field#RepeatedPtrField'>RepeatedPtrField</a> and <a href='../google.protobuf.map#Map'>Map</a>. The protocol is internal to Protobuf and is not guaranteed to be stable. Non-proto types should not rely on this protocol. </p>
 
 <table><tr><th colspan="2"><h3 style="margin-top: 4px">Members</h3></th></tr><tr><td style="border-right-width: 0px; text-align: right;"><code>const size_t</code></td><td style="border-left-width: 0px"id="Arena.kBlockOverhead"><div style="padding-left: 16px; text-indent: -16px"><code><b>kBlockOverhead</b> = =
       internal::ThreadSafeArena::kBlockHeaderSize +

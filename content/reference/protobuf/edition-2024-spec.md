@@ -1,8 +1,8 @@
 +++
-title = "Protocol Buffers Edition 2024 Language Specification"
+title = "Protobuf Edition 2024 Language Specification"
 weight = 801
 linkTitle = "2024 Language Specification"
-description = "Language specification reference for edition 2024 of the Protocol Buffers language."
+description = "Language specification reference for edition 2024 of the Protobuf language."
 type = "docs"
 +++
 
@@ -147,7 +147,7 @@ package foo.bar;
 ## Option
 
 Options can be used in proto files, messages, enums and services. An option can
-be a protobuf defined option or a custom option. For more information, see
+be a Protobuf defined option or a custom option. For more information, see
 [Options](/programming-guides/proto2#options) in the
 language guide. Options are also be used to control
 [Feature Settings](/editions/features).
@@ -166,7 +166,7 @@ option features.enum_type = CLOSED;
 
 ## Fields
 
-Fields are the basic elements of a protocol buffer message. Fields can be normal
+Fields are the basic elements of a Protobuf message. Fields can be normal
 fields, group fields, oneof fields, or map fields. A field has a label, type and
 field number.
 

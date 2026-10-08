@@ -2,7 +2,7 @@
 title = "message.h"
 toc_hide = "true"
 linkTitle = "C++"
-description = "This section contains reference documentation for working with protocol buffer classes in C++."
+description = "This section contains reference documentation for working with Protobuf classes in C++."
 type = "docs"
 +++
 
@@ -154,9 +154,9 @@ CPPTYPE_MESSAGE      generated message type or google::protobuf::Message</pre>
 <p>A RepeatedFieldRef object can be copied and the resulted object will point to the same repeated field in the same message. The object can be used as long as the message is not destroyed.</p>
 <p>Note that to use this method users need to include the header file "reflection.h" (which defines the RepeatedFieldRef class templates). </p>
 </div> <hr><h3 id="Reflection.GetRepeatedField.details"><code>template const <a href='google.protobuf.repeated_field#RepeatedField'>RepeatedField</a>&lt; T &gt; &amp; <br>&nbsp;&nbsp;&nbsp;&nbsp;Reflection::GetRepeatedField(<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;const <a href='#Message'>Message</a> &amp; msg,<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;const <a href='google.protobuf.descriptor#FieldDescriptor'>FieldDescriptor</a> * d) const</code></h3><div style="margin-left: 16px"><p>DEPRECATED. </p><p>Please use <a href='#Reflection.GetRepeatedFieldRef'>GetRepeatedFieldRef()</a>.</p>
-<p>for T = Cord and all protobuf scalar types except enums. </p>
+<p>for T = Cord and all Protobuf scalar types except enums. </p>
 </div> <hr><h3 id="Reflection.MutableRepeatedField.details"><code>template <a href='google.protobuf.repeated_field#RepeatedField'>RepeatedField</a>&lt; T &gt; * <br>&nbsp;&nbsp;&nbsp;&nbsp;Reflection::MutableRepeatedField(<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href='#Message'>Message</a> * msg,<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;const <a href='google.protobuf.descriptor#FieldDescriptor'>FieldDescriptor</a> * d) const</code></h3><div style="margin-left: 16px"><p>DEPRECATED. </p><p>Please use <a href='#Reflection.GetMutableRepeatedFieldRef'>GetMutableRepeatedFieldRef()</a>.</p>
-<p>for T = Cord and all protobuf scalar types except enums. </p>
+<p>for T = Cord and all Protobuf scalar types except enums. </p>
 </div> <hr><h3 id="Reflection.GetRepeatedPtrField.details"><code>template const <a href='google.protobuf.repeated_field#RepeatedPtrField'>RepeatedPtrField</a>&lt; T &gt; &amp; <br>&nbsp;&nbsp;&nbsp;&nbsp;Reflection::GetRepeatedPtrField(<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;const <a href='#Message'>Message</a> &amp; msg,<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;const <a href='google.protobuf.descriptor#FieldDescriptor'>FieldDescriptor</a> * d) const</code></h3><div style="margin-left: 16px"><p>DEPRECATED. </p><p>Please use <a href='#Reflection.GetRepeatedFieldRef'>GetRepeatedFieldRef()</a>.</p>
 <p>for T = std::string, google::protobuf::internal::StringPieceField </p>
 <pre>google::protobuf::Message &amp; descendants.</pre>

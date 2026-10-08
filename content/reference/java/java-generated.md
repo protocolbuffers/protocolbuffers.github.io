@@ -2,31 +2,31 @@
 title = "Java Generated Code Guide"
 weight = 650
 linkTitle = "Generated Code Guide"
-description = "Describes exactly what Java code the protocol buffer compiler generates for any given protocol definition."
+description = "Describes exactly what Java code the Protobuf compiler generates for any given protocol definition."
 type = "docs"
 +++
 
-Any
-differences between proto2, proto3, and Editions generated code are
-highlighted&mdash;note that these differences are in the generated code as
-described in this document, not the base message classes/interfaces, which are
-the same in all versions. You should read the
+Any differences between
+proto2, proto3, and Editions generated code are highlighted&mdash;note that
+these differences are in the generated code as described in this document, not
+the base message classes/interfaces, which are the same in all versions. You
+should read the
 [proto2 language guide](/programming-guides/proto2),
 [proto3 language guide](/programming-guides/proto3),
 and/or
 [Editions language guide](/programming-guides/editions)
 before reading this document.
 
-Note that no Java protocol buffer methods accept or return nulls unless
-otherwise specified.
+Note that no Java Protobuf methods accept or return nulls unless otherwise
+specified.
 
 ## Compiler Invocation {#invocation}
 
-The protocol buffer compiler produces Java output when invoked with the
-`--java_out=` command-line flag. The parameter to the `--java_out=` option is
-the directory where you want the compiler to write your Java output. For each
-`.proto` file input, the compiler creates a wrapper `.java` file containing a
-Java class that represents the `.proto` file itself.
+The Protobuf compiler produces Java output when invoked with the `--java_out=`
+command-line flag. The parameter to the `--java_out=` option is the directory
+where you want the compiler to write your Java output. For each `.proto` file
+input, the compiler creates a wrapper `.java` file containing a Java class that
+represents the `.proto` file itself.
 
 If the `.proto` file contains a line like the following:
 
@@ -65,7 +65,7 @@ enum, or message (including nested types) in the file with the same name,
     wrapper class will generate a class name of `FooServiceOuterClass`.
 
 {{% alert title="Note" color="note" %}}If you are
-using the deprecated v1 of the protobuf API, `OuterClass` is added regardless of
+using the deprecated v1 of the Protobuf API, `OuterClass` is added regardless of
 any collisions with message names.
 {{% /alert %}}
 
@@ -99,20 +99,20 @@ protoc --proto_path=src --java_out=build/gen src/foo.proto
 ```
 
 If `foo.proto`'s Java package is `com.example` and it doesn't enable
-`java_multiple_files` and its outer classname is `FooProtos`, then the protocol
-buffer compiler will generate the file `build/gen/com/example/FooProtos.java`.
-The protocol buffer compiler will automatically create the `build/gen/com` and
+`java_multiple_files` and its outer classname is `FooProtos`, then the Protobuf
+compiler will generate the file `build/gen/com/example/FooProtos.java`. The
+Protobuf compiler will automatically create the `build/gen/com` and
 `build/gen/com/example` directories if needed. However, it will not create
 `build/gen` or `build`; they must already exist. You can specify multiple
 `.proto` files in a single invocation; all output files will be generated at
 once.
 
-When outputting Java code, the protocol buffer compiler's ability to output
-directly to JAR archives is particularly convenient, as many Java tools are able
-to read source code directly from JAR files. To output to a JAR file, simply
-provide an output location ending in `.jar`. Note that only the Java source code
-is placed in the archive; you must still compile it separately to produce Java
-class files.
+When outputting Java code, the Protobuf compiler's ability to output directly to
+JAR archives is particularly convenient, as many Java tools are able to read
+source code directly from JAR files. To output to a JAR file, simply provide an
+output location ending in `.jar`. Note that only the Java source code is placed
+in the archive; you must still compile it separately to produce Java class
+files.
 
 ## Packages {#package}
 
@@ -141,7 +141,7 @@ are not expected to start with a backwards domain name.
 
 ## Messages {#message}
 
-If you are designing a new protocol buffer schema, see
+If you are designing a new Protobuf schema, see
 [the recommendations for Java proto names](/reference/java/java-proto-names).
 
 Given a simple message declaration:
@@ -150,9 +150,9 @@ Given a simple message declaration:
 message Foo {}
 ```
 
-The protocol buffer compiler generates a class called `Foo`, which implements
-the `Message` interface. The class is declared `final`; no further subclassing
-is allowed. `Foo` extends `GeneratedMessage`, but this should be considered an
+The Protobuf compiler generates a class called `Foo`, which implements the
+`Message` interface. The class is declared `final`; no further subclassing is
+allowed. `Foo` extends `GeneratedMessage`, but this should be considered an
 implementation detail. By default, `Foo` overrides many methods of
 `GeneratedMessage` with specialized versions for maximum speed. However, if the
 `.proto` file contains the line:
@@ -211,14 +211,14 @@ the following static methods:
 Message objects&mdash;such as instances of the `Foo` class described
 above&mdash;are immutable, just like a Java `String`. To construct a message
 object, you need to use a *builder*. Each message class has its own builder
-class&mdash;so in our `Foo` example, the protocol buffer compiler generates a
-nested class `Foo.Builder` which can be used to build a `Foo`. `Foo.Builder`
-implements the `Message.Builder` interface. It extends the
-`GeneratedMessage.Builder` class, but, again, this should be considered an
-implementation detail. Like `Foo`, `Foo.Builder` may rely on generic method
-implementations in `GeneratedMessage.Builder` or, when the `optimize_for` option
-is used, generated custom code that is much faster. You can get a `Foo.Builder`
-by calling the static method `Foo.newBuilder()`.
+class&mdash;so in our `Foo` example, the Protobuf compiler generates a nested
+class `Foo.Builder` which can be used to build a `Foo`. `Foo.Builder` implements
+the `Message.Builder` interface. It extends the `GeneratedMessage.Builder`
+class, but, again, this should be considered an implementation detail. Like
+`Foo`, `Foo.Builder` may rely on generic method implementations in
+`GeneratedMessage.Builder` or, when the `optimize_for` option is used, generated
+custom code that is much faster. You can get a `Foo.Builder` by calling the
+static method `Foo.newBuilder()`.
 
 `Foo.Builder` does not define any static methods. Its interface is exactly as
 defined by the `Message.Builder` interface, with the exception that return types
@@ -290,11 +290,11 @@ inside `Foo`.
 
 ## Fields {#fields}
 
-In addition to the methods described in the previous section, the protocol
-buffer compiler generates a set of accessor methods for each field defined
-within the message in the `.proto` file. The methods that read the field value
-are defined both in the message class and its corresponding builder; the methods
-that modify the value are defined in the builder only.
+In addition to the methods described in the previous section, the Protobuf
+compiler generates a set of accessor methods for each field defined within the
+message in the `.proto` file. The methods that read the field value are defined
+both in the message class and its corresponding builder; the methods that modify
+the value are defined in the builder only.
 
 Note that method names always use camel-case naming, even if the field name in
 the `.proto` file uses lower-case with underscores
@@ -519,7 +519,7 @@ builder:
 #### Name Conflicts {#conflicts}
 
 If another non-repeated field has a name that conflicts with one of the repeated
-field's generated methods, then both field names will have their protobuf field
+field's generated methods, then both field names will have their Protobuf field
 number appended to the end.
 
 For these field definitions:
@@ -553,8 +553,8 @@ oneof choice {
 ```
 
 All the fields in the `choice` oneof will use a single private field for their
-value. In addition, the protocol buffer compiler will generate a Java enum type
-for the oneof case, as follows:
+value. In addition, the Protobuf compiler will generate a Java enum type for the
+oneof case, as follows:
 
 ```java
 public enum ChoiceCase
@@ -682,7 +682,7 @@ class Any {
   // message.
   public boolean isSameTypeAs(Message message);
 
-  // Unpacks Any into a message with the same type as the given messsage.
+  // Unpacks Any into a message with the same type as the given message.
   // Throws exception if the type doesn’t match or parsing the payload fails.
   public <T extends Message> T unpackSameTypeAs(T message)
       throws InvalidProtocolBufferException;
@@ -706,8 +706,8 @@ enum Foo {
 }
 ```
 
-The protocol buffer compiler will generate a Java enum type called `Foo` with
-the same set of values. If you are using proto3, it also adds the special value
+The Protobuf compiler will generate a Java enum type called `Foo` with the same
+set of values. If you are using proto3, it also adds the special value
 `UNRECOGNIZED` to the enum type. In Editions, `OPEN` enums also have a
 `UNRECOGNIZED` value, while `CLOSED` enums do not. The values of the generated
 enum type have the following special methods:
@@ -763,11 +763,11 @@ symbols with the same number are just aliases.
 An enum can be defined nested within a message type. The compiler generates the
 Java enum definition nested within that message type's class.
 
-**Caution: when generating Java code, the maximum number of values in a protobuf
+**Caution: when generating Java code, the maximum number of values in a Protobuf
 enum may be surprisingly low**&mdash;in the worst case, the maximum is slightly
 over 1,700 values. This limit is due to per-method size limits for Java
 bytecode, and it varies across Java implementations, different versions of the
-protobuf suite, and any options set on the enum in the `.proto` file.
+Protobuf suite, and any options set on the enum in the `.proto` file.
 
 ## Extensions {#extension}
 
@@ -781,7 +781,7 @@ message Foo {
 }
 ```
 
-The protocol buffer compiler will make `Foo` extend
+The Protobuf compiler will make `Foo` extend
 `GeneratedMessage.ExtendableMessage` instead of the usual `GeneratedMessage`.
 Similarly, `Foo`'s builder will extend `GeneratedMessage.ExtendableBuilder`. You
 should never refer to these base types by name (`GeneratedMessage` is considered
@@ -809,9 +809,8 @@ extend Foo {
 }
 ```
 
-The protocol buffer compiler generates an "extension identifier" called `bar`,
-which you can use with `Foo`'s extension accessors to access this extension,
-like so:
+The Protobuf compiler generates an "extension identifier" called `bar`, which
+you can use with `Foo`'s extension accessors to access this extension, like so:
 
 ```java
 Foo foo =
@@ -887,11 +886,11 @@ If the `.proto` file contains the following line:
 option java_generic_services = true;
 ```
 
-Then the protocol buffer compiler will generate code based on the service
-definitions found in the file as described in this section. However, the
-generated code may be undesirable as it is not tied to any particular RPC
-system, and thus requires more levels of indirection than code tailored to one
-system. If you do NOT want this code to be generated, add this line to the file:
+Then the Protobuf compiler will generate code based on the service definitions
+found in the file as described in this section. However, the generated code may
+be undesirable as it is not tied to any particular RPC system, and thus requires
+more levels of indirection than code tailored to one system. If you do NOT want
+this code to be generated, add this line to the file:
 
 ```proto
 option java_generic_services = false;
@@ -908,8 +907,8 @@ to generate code appropriate for the system. These plugins are likely to require
 that abstract services are disabled, so that they can generate their own classes
 of the same names.
 
-The remainder of this section describes what the protocol buffer compiler
-generates when abstract services are enabled.
+The remainder of this section describes what the Protobuf compiler generates
+when abstract services are enabled.
 
 ### Interface {#interface}
 
@@ -921,8 +920,8 @@ service Foo {
 }
 ```
 
-The protocol buffer compiler will generate an abstract class `Foo` to represent
-this service. `Foo` will have an abstract method for each method defined in the
+The Protobuf compiler will generate an abstract class `Foo` to represent this
+service. `Foo` will have an abstract method for each method defined in the
 service definition. In this case, the method `Bar` is defined as:
 
 ```java
@@ -934,8 +933,8 @@ The parameters are equivalent to the parameters of `Service.CallMethod()`,
 except that the `method` argument is implied and `request` and `done` specify
 their exact type.
 
-`Foo` subclasses the `Service` interface. The protocol buffer compiler
-automatically generates implementations of the methods of `Service` as follows:
+`Foo` subclasses the `Service` interface. The Protobuf compiler automatically
+generates implementations of the methods of `Service` as follows:
 
 -   `getDescriptorForType`: Returns the service's `ServiceDescriptor`.
 -   `callMethod`: Determines which method is being called based on the provided
@@ -971,8 +970,8 @@ To recap, when implementing your own service, you have two options:
 
 ### Stub {#stub}
 
-The protocol buffer compiler also generates a "stub" implementation of every
-service interface, which is used by clients wishing to send requests to servers
+The Protobuf compiler also generates a "stub" implementation of every service
+interface, which is used by clients wishing to send requests to servers
 implementing the service. For the `Foo` service (above), the stub implementation
 `Foo.Stub` will be defined as a nested class.
 
@@ -987,7 +986,7 @@ The stub additionally implements each of the service's methods as a wrapper
 around the channel. Calling one of the methods simply calls
 `channel.callMethod()`.
 
-The Protocol Buffer library does not include an RPC implementation. However, it
+The Protobuf library does not include an RPC implementation. However, it
 includes all of the tools you need to hook up a generated service class to any
 arbitrary RPC implementation of your choice. You need only provide
 implementations of `RpcChannel` and `RpcController`.
@@ -998,7 +997,7 @@ The RPC classes described above all have non-blocking semantics: when you call a
 method, you provide a callback object which will be invoked once the method
 completes. Often it is easier (though possibly less scalable) to write code
 using blocking semantics, where the method simply doesn't return until it is
-done. To accommodate this, the protocol buffer compiler also generates blocking
+done. To accommodate this, the Protobuf compiler also generates blocking
 versions of your service class. `Foo.BlockingInterface` is equivalent to
 `Foo.Interface` except that each method simply returns the result rather than
 call a callback. So, for example, `bar` is defined as:
@@ -1046,11 +1045,11 @@ complicated. You should probably look at the `protoc` source code, particularly
 
 Do not generate code which relies on private class members declared by the
 standard code generator, as these implementation details may change in future
-versions of Protocol Buffers.
+versions of Protobuf.
 
 ## Utility Classes {#utility-classes}
 
-Protocol buffer provides
+Protobuf provides
 [utility classes](/reference/java/api-docs/com/google/protobuf/util/package-summary.html)
 for message comparison, JSON conversion and working with
-[well-known types (predefined protocol buffer messages for common use-cases).](/reference/protobuf/google.protobuf)
+[well-known types (predefined Protobuf messages for common use-cases)](/reference/protobuf/google.protobuf).

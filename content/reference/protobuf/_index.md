@@ -1,7 +1,7 @@
 +++
-title = "Protocol Buffers Reference"
+title = "Protobuf Reference"
 weight = 790
-linkTitle = "Protocol Buffers"
-description = "Language-agnostic information about how to use protocol buffers."
+linkTitle = "Protobuf"
+description = "Language-agnostic information about how to use Protobuf."
 type = "docs"
 +++

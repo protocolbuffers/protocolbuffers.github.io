@@ -2,7 +2,7 @@
 title = "Ruby Generated Code Guide"
 weight = 780
 linkTitle = "Generated Code Guide"
-description = "Describes the API of message objects that the protocol buffer compiler generates for any given protocol definition."
+description = "Describes the API of message objects that the Protobuf compiler generates for any given protocol definition."
 type = "docs"
 +++
 
@@ -15,12 +15,11 @@ this document.
 
 ## Compiler Invocation {#invocation}
 
-The protocol buffer compiler produces Ruby output when invoked with the
-`--ruby_out=` command-line flag. The parameter to the `--ruby_out=` option is
-the directory where you want the compiler to write your Ruby output. The
-compiler creates a `.rb` file for each `.proto` file input. The names of the
-output files are computed by taking the name of the `.proto` file and making two
-changes:
+The Protobuf compiler produces Ruby output when invoked with the `--ruby_out=`
+command-line flag. The parameter to the `--ruby_out=` option is the directory
+where you want the compiler to write your Ruby output. The compiler creates a
+`.rb` file for each `.proto` file input. The names of the output files are
+computed by taking the name of the `.proto` file and making two changes:
 
 -   The extension (`.proto`) is replaced with `_pb.rb`.
 -   The proto path (specified with the `--proto_path=` or `-I` command-line
@@ -70,7 +69,7 @@ Given a simple message declaration:
 message Foo {}
 ```
 
-The protocol buffer compiler generates a class called `Foo`. The generated class
+The Protobuf compiler generates a class called `Foo`. The generated class
 derives from the Ruby `Object` class (protos have no common base class). Unlike
 C++ and Java, Ruby generated code is unaffected by the `optimize_for` option in
 the `.proto` file; in effect, all Ruby code is optimized for code size.
@@ -96,8 +95,8 @@ The message classes also define the following methods as static. (In general we
 prefer static methods, since regular methods can conflict with field names you
 defined in your .proto file.)
 
--   `Message.decode(str)`: Decodes a binary protobuf for this message and
-    returns it in a new instance.
+-   `Message.decode(str)`: Decodes binary Protobuf data for this message type
+    and returns it in a new instance.
 -   `Message.encode(proto)`: Serializes a message object of this class to a
     binary string.
 -   `Message.decode_json(str)`: Decodes a JSON text string for this message and
@@ -159,11 +158,11 @@ range:
     assigning `1.0` to an int32 field is ok, but assigning `1.2` is not.
 -   **Boolean fields**: the value must be `true` or `false`. No other values
     will implicitly convert to true/false.
--   **Bytes fields**: the assigned value must be a `String` object. The protobuf
+-   **Bytes fields**: the assigned value must be a `String` object. The Protobuf
     library will duplicate the string, convert it to ASCII-8BIT encoding, and
     freeze it.
 -   **String fields**: the assigned value must be a `String` object. The
-    protobuf library will duplicate the string, convert it to UTF-8 encoding,
+    Protobuf library will duplicate the string, convert it to UTF-8 encoding,
     and freeze it.
 
 No automatic `#to_s`, `#to_i`, etc. calls will happen to perform automatic

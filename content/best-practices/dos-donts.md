@@ -1,7 +1,7 @@
 +++
 title = "Proto Best Practices"
 weight = 90
-description = "Shares vetted best practices for authoring Protocol Buffers."
+description = "Shares vetted best practices for authoring Protobuf schemas."
 type = "docs"
 aliases = "/programming-guides/dos-donts"
 +++
@@ -71,7 +71,7 @@ To safely remove the original name (if it's being used for interchange, which it
 
 Almost never change the type of a field; it'll mess up deserialization, same as
 re-using a tag number. The
-[protobuf docs](/programming-guides/editions#updating)
+[Protobuf docs](/programming-guides/editions#updating)
 outline cases where old binary encoded data may successfully parse under a
 different type (for example, going between `int32`, `uint32`, `int64` and
 `bool`). However, changing a field's type can be difficult to roll out safely
@@ -191,9 +191,9 @@ when a perfectly suitable common type already exists!
     is a color in the RGBA color space.
 
 **Note:** While the "Well-Known Types" (such as `Duration` and `Timestamp`) are
-included with the Protocol Buffers compiler, the "Common Types" (such as `Date`
-and `Money`) are not. To use the Common Types, you may need to add a dependency
-on the [googleapis repository](https://github.com/googleapis/googleapis).
+included with the Protobuf compiler, the "Common Types" (such as `Date` and
+`Money`) are not. To use the Common Types, you may need to add a dependency on
+the [googleapis repository](https://github.com/googleapis/googleapis).
 
 <a id="do-define-widely-used-message-types-in-separate-files"></a>
 
@@ -279,7 +279,7 @@ For example:
 
 Text-based serialization formats like text format and
 JSON represent fields and enum values as strings. As a result, deserialization
-of protocol buffers in these formats using old code will fail when a field or
+of Protobuf messages in these formats using old code will fail when a field or
 enum value is renamed, or when a new field or enum value or extension is added.
 Use binary serialization when possible for data interchange, and use text format
 for human editing and debugging only.
@@ -341,7 +341,7 @@ overrides are possible.
 ## Avoid Using Language Keywords for Field Names {#avoid-keywords}
 
 If the name of a message, field, enum, or enum value is a keyword in the
-language that reads from/writes to that field, then protobuf may change the
+language that reads from/writes to that field, then Protobuf may change the
 field name, and may have different ways to access them than normal fields. For
 example, see
 [this warning about Python](/reference/python/python-generated#keyword-conflicts).

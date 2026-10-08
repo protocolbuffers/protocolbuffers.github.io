@@ -1,15 +1,15 @@
 +++
 title = "Language Guide (editions)"
 weight = 40
-description = "Covers how to use the editions revisions of the Protocol Buffers language in your project."
+description = "Covers how to use the editions revisions of the Protobuf language in your project."
 type = "docs"
 +++
 
-This guide describes how to use the protocol buffer language to structure your
-protocol buffer data, including `.proto` file syntax and how to generate data
-access classes from your `.proto` files. It covers **edition 2023** to **edition
-2024** of the protocol buffers language. For information about how editions
-differ from proto2 and proto3 conceptually, see
+This guide describes how to use the Protobuf language to structure your Protobuf
+data, including `.proto` file syntax and how to generate data access classes
+from your `.proto` files. It covers **edition 2023** to **edition 2024** of the
+Protobuf language. For information about how editions differ from proto2 and
+proto3 conceptually, see
 [Protobuf Editions Overview](/editions/overview).
 
 For information on the **proto2** syntax, see the
@@ -41,12 +41,12 @@ message SearchRequest {
 ```
 
 *   The first line of the file specifies that you're using edition 2023 of the
-    protobuf language spec.
+    Protobuf language spec.
 
     *   The `edition` (or `syntax` for proto2/proto3) must be the first
         non-empty, non-comment line of the file.
-    *   If no `edition` or `syntax` is specified, the protocol buffer compiler
-        will assume you are using
+    *   If no `edition` or `syntax` is specified, the Protobuf compiler will
+        assume you are using
         [proto2](/programming-guides/proto2).
 
 *   The `SearchRequest` message definition specifies three fields (name/value
@@ -66,9 +66,9 @@ You must give each field in your message definition a number between `1` and
 `536,870,911` with the following restrictions:
 
 -   The given number **must be unique** among all fields for that message.
--   Field numbers `19,000` to `19,999` are reserved for the Protocol Buffers
-    implementation. The protocol buffer compiler will complain if you use one of
-    these reserved field numbers in your message.
+-   Field numbers `19,000` to `19,999` are reserved for the Protobuf
+    implementation. The Protobuf compiler will complain if you use one of these
+    reserved field numbers in your message.
 -   You cannot use any previously [reserved](#fieldreserved) field numbers or
     any field numbers that have been allocated to [extensions](#extensions).
 
@@ -88,13 +88,13 @@ fields. Lower field number values take less space in the wire format. For
 example, field numbers in the range 1 through 15 take one byte to encode. Field
 numbers in the range 16 through 2047 take two bytes. You can find out more about
 this in
-[Protocol Buffer Encoding](/programming-guides/encoding#structure).
+[Protobuf Encoding](/programming-guides/encoding#structure).
 
 #### Consequences of Reusing Field Numbers {#consequences}
 
 Reusing a field number makes decoding wire-format messages ambiguous.
 
-The protobuf wire format is lean and doesn't provide a way to detect fields
+The Protobuf wire format is lean and doesn't provide a way to detect fields
 encoded using one definition and decoded using another.
 
 Encoding a field using one definition and then decoding that same field with a
@@ -160,11 +160,11 @@ In proto editions, `repeated` fields of scalar numeric types use `packed`
 encoding by default.
 
 You can find out more about `packed` encoding in
-[Protocol Buffer Encoding](/programming-guides/encoding#packed).
+[Protobuf Encoding](/programming-guides/encoding#packed).
 
 #### Well-formed Messages {#well-formed}
 
-The term "well-formed," when applied to protobuf messages, refers to the bytes
+The term "well-formed," when applied to Protobuf messages, refers to the bytes
 serialized/deserialized. The protoc parser validates that a given proto
 definition file is parseable.
 
@@ -284,11 +284,11 @@ statement.
 
 ### What's Generated from Your `.proto`? {#generated}
 
-When you run the [protocol buffer compiler](#generating) on a `.proto`, the
-compiler generates the code in your chosen language you'll need to work with the
-message types you've described in the file, including getting and setting field
-values, serializing your messages to an output stream, and parsing your messages
-from an input stream.
+When you run the [Protobuf compiler](#generating) on a `.proto`, the compiler
+generates the code in your chosen language you'll need to work with the message
+types you've described in the file, including getting and setting field values,
+serializing your messages to an output stream, and parsing your messages from an
+input stream.
 
 *   For **C++**, the compiler generates a `.h` and `.cc` file from each
     `.proto`, with a class for each message type described in your file.
@@ -630,7 +630,7 @@ machines.
 
 You can find out more about how these types are encoded when you serialize your
 message in
-[Protocol Buffer Encoding](/programming-guides/encoding).
+[Protobuf Encoding](/programming-guides/encoding).
 
 ## Default Field Values {#default}
 
@@ -656,7 +656,7 @@ appropriate language).
 
 ### Overriding Default Scalar Values {#explicit-default}
 
-In protobuf editions, you can specify explicit default values for singular
+In Protobuf editions, you can specify explicit default values for singular
 non-message fields. For example, let's say you want to provide a default value
 of 10 for the `SearchRequest.result_per_page` field:
 
@@ -750,9 +750,9 @@ field default.
 
 You can define aliases by assigning the same value to different enum constants.
 To do this you need to set the `allow_alias` option to `true`. Otherwise, the
-protocol buffer compiler generates a warning message when aliases are
-found. Though all alias values are valid for serialization, only the first value
-is used when deserializing.
+Protobuf compiler generates a warning message when aliases are found.
+Though all alias values are valid for serialization, only the first value is
+used when deserializing.
 
 ```proto
 enum EnumAllowingAlias {
@@ -784,7 +784,7 @@ different message, using the syntax `_MessageType_._EnumType_`.
 
 ### Language-specific Enum Implementations {#enum-language}
 
-When you run the protocol buffer compiler on a `.proto` that uses an `enum`, the
+When you run the Protobuf compiler on a `.proto` that uses an `enum`, the
 generated code will have a corresponding `enum` for Java, Kotlin, or C++, or a
 special `EnumDescriptor` class for Python that's used to create a set of
 symbolic constants with integer values in the runtime-generated class.
@@ -823,10 +823,10 @@ own updates to the type. This can cause severe issues if they later load old
 instances of the same `.proto`, including data corruption, privacy bugs, and so
 on. One way to make sure this doesn't happen is to specify that the numeric
 values (and/or names, which can also cause issues for JSON serialization) of
-your deleted entries are `reserved`. The protocol buffer compiler will complain
-if any future users try to use these identifiers. You can specify that your
-reserved numeric value range goes up to the maximum possible value using the
-`max` keyword.
+your deleted entries are `reserved`. The Protobuf compiler will complain if any
+future users try to use these identifiers. You can specify that your reserved
+numeric value range goes up to the maximum possible value using the `max`
+keyword.
 
 ```proto
 enum Foo {
@@ -1006,9 +1006,8 @@ wire format.
 {{% alert title="Note" color="note" %}} If
 you use ProtoJSON or
 [proto text format](/reference/protobuf/textformat-spec)
-to store your protocol buffer messages, the changes that you can make in your
-proto definition are different. The ProtoJSON wire format safe changes are
-described
+to store your Protobuf messages, the changes that you can make in your proto
+definition are different. The ProtoJSON wire format safe changes are described
 [here](/programming-guides/json#json-wire-safety).
 {{% /alert %}}
 
@@ -1122,10 +1121,10 @@ schema to know when the different range of values may be safe to use.
 
 ## Unknown Fields {#unknowns}
 
-Unknown fields are well-formed protocol buffer serialized data representing
-fields that the parser does not recognize. For example, when an old binary
-parses data sent by a new binary with new fields, those new fields become
-unknown fields in the old binary.
+Unknown fields are well-formed Protobuf serialized data representing fields that
+the parser does not recognize. For example, when an old binary parses data sent
+by a new binary with new fields, those new fields become unknown fields in the
+old binary.
 
 Editions messages preserve unknown fields and include them during parsing and in
 the serialized output, which matches proto2 and proto3 behavior.
@@ -1241,7 +1240,7 @@ field so long as the field number, type, and cardinality remain constant.
 
 However, because extensions are defined outside of the container message, no
 specialized accessors are generated to get and set specific extension fields.
-For our example, the protobuf compiler **will not generate** `AddKittenVideos()`
+For our example, the Protobuf compiler **will not generate** `AddKittenVideos()`
 or `GetKittenVideos()` accessors. Instead, extensions are accessed through
 parameterized functions like: `HasExtension()`, `ClearExtension()`,
 `GetExtension()`, `MutableExtension()`, and `AddExtension()`.
@@ -1360,17 +1359,17 @@ The next extension of `Container` should add a new declaration with the number
 The owner of a container message may choose to forgo extension declarations in
 favor of their own unverified extension number allocation strategy.
 
-An unverified allocation scheme uses a mechanism external to the protobuf
+An unverified allocation scheme uses a mechanism external to the Protobuf
 ecosystem to allocate extension field numbers within the selected extension
 range. One example could be using a monorepo's commit number. This system is
-"unverified" from the protobuf compiler's point of view since there is no way to
+"unverified" from the Protobuf compiler's point of view since there is no way to
 check that an extension is using a properly acquired extension field number.
 
 The benefit of an unverified system over a verified system like extension
 declarations is the ability to define an extension without coordinating with the
 container message owner.
 
-The downside of an unverified system is that the protobuf compiler cannot
+The downside of an unverified system is that the Protobuf compiler cannot
 protect participants from reusing extension field numbers.
 
 **Unverified extension field number allocation strategies are not recommended**
@@ -1636,7 +1635,7 @@ wire is a member of the oneof.
 ## Maps {#maps}
 
 If you want to create an associative map as part of your data definition,
-protocol buffers provides a handy shortcut syntax:
+Protobuf provides a handy shortcut syntax:
 
 ```proto
 map<key_type, value_type> map_field = N;
@@ -1678,7 +1677,7 @@ can find out more about the map API for your chosen language in the relevant
 
 ### Backwards Compatibility {#backwards}
 
-The map syntax is equivalent to the following on the wire, so protocol buffers
+The map syntax is equivalent to the following on the wire, so Protobuf
 implementations that do not support maps can still handle your data:
 
 ```proto
@@ -1690,8 +1689,8 @@ message MapFieldEntry {
 repeated MapFieldEntry map_field = N;
 ```
 
-Any protocol buffers implementation that supports maps must both produce and
-accept data that can be accepted by the earlier definition.
+Any Protobuf implementation that supports maps must both produce and accept data
+that can be accepted by the earlier definition.
 
 ## Packages {#packages}
 
@@ -1744,23 +1743,23 @@ conflicts in descriptors and make the proto not portable for other languages.
 
 ### Packages and Name Resolution {#name-resolution}
 
-Type name resolution in the protocol buffer language works like C++: first the
+Type name resolution in the Protobuf language works like C++: first the
 innermost scope is searched, then the next-innermost, and so on, with each
 package considered to be "inner" to its parent package. A leading '.' (for
 example, `.foo.bar.Baz`) means to start from the outermost scope instead.
 
-The protocol buffer compiler resolves all type names by parsing the imported
-`.proto` files. The code generator for each language knows how to refer to each
-type in that language, even if it has different scoping rules.
+The Protobuf compiler resolves all type names by parsing the imported `.proto`
+files. The code generator for each language knows how to refer to each type in
+that language, even if it has different scoping rules.
 
 ## Defining Services {#services}
 
 If you want to use your message types with an RPC (Remote Procedure Call)
 system, you can define an RPC service interface in a `.proto` file and the
-protocol buffer compiler will generate service interface code and stubs in your
-chosen language. So, for example, if you want to define an RPC service with a
-method that takes your `SearchRequest` and returns a `SearchResponse`, you can
-define it in your `.proto` file as follows:
+Protobuf compiler will generate service interface code and stubs in your chosen
+language. So, for example, if you want to define an RPC service with a method
+that takes your `SearchRequest` and returns a `SearchResponse`, you can define
+it in your `.proto` file as follows:
 
 ```proto
 service SearchService {
@@ -1768,26 +1767,26 @@ service SearchService {
 }
 ```
 
-The most straightforward RPC system to use with protocol buffers is
+The most straightforward RPC system to use with Protobuf is
 [gRPC](https://grpc.io): a language- and platform-neutral open source RPC system
-developed at Google. gRPC works particularly well with protocol buffers and lets
-you generate the relevant RPC code directly from your `.proto` files using a
-special protocol buffer compiler plugin.
+developed at Google. gRPC works particularly well with Protobuf and lets you
+generate the relevant RPC code directly from your `.proto` files using a special
+Protobuf compiler plugin.
 
-If you don't want to use gRPC, it's also possible to use protocol buffers with
-your own RPC implementation. You can find out more about this in the
+If you don't want to use gRPC, it's also possible to use Protobuf with your own
+RPC implementation. You can find out more about this in the
 [Proto2 Language Guide](/programming-guides/proto2#services).
 
 There are also a number of ongoing third-party projects to develop RPC
-implementations for Protocol Buffers. For a list of links to projects we know
-about, see the
+implementations for Protobuf. For a list of links to projects we know about, see
+the
 [third-party add-ons wiki page](https://github.com/protocolbuffers/protobuf/blob/master/docs/third_party.md).
 
 ## JSON Mapping {#json}
 
-The standard protobuf binary wire format is the preferred serialization format
-for communication between two systems that use protobufs. For communicating with
-systems that use JSON rather than protobuf wire format, Protobuf supports a
+The standard Protobuf binary wire format is the preferred serialization format
+for communication between two systems that use Protobuf. For communicating with
+systems that use JSON rather than the Protobuf wire format, Protobuf supports a
 canonical encoding in
 [ProtoJSON](/programming-guides/json).
 
@@ -1853,19 +1852,18 @@ Here are a few of the most commonly used options:
     `LITE_RUNTIME`. This affects the C++ and Java code generators (and possibly
     third-party generators) in the following ways:
 
-    *   `SPEED` (default): The protocol buffer compiler will generate code for
+    *   `SPEED` (default): The Protobuf compiler will generate code for
         serializing, parsing, and performing other common operations on your
         message types. This code is highly optimized.
-    *   `CODE_SIZE`: The protocol buffer compiler will generate minimal classes
-        and will rely on shared, reflection-based code to implement
-        serialization, parsing, and various other operations. The generated code
-        will thus be much smaller than with `SPEED`, but operations will be
-        slower. Classes will still implement exactly the same public API as they
-        do in `SPEED` mode. This mode is most useful in apps that contain a very
-        large number of `.proto` files and do not need all of them to be
-        blindingly fast.
-    *   `LITE_RUNTIME`: The protocol buffer compiler will generate classes that
-        depend only on the "lite" runtime library (`libprotobuf-lite` instead of
+    *   `CODE_SIZE`: The Protobuf compiler will generate minimal classes and
+        will rely on shared, reflection-based code to implement serialization,
+        parsing, and various other operations. The generated code will thus be
+        much smaller than with `SPEED`, but operations will be slower. Classes
+        will still implement exactly the same public API as they do in `SPEED`
+        mode. This mode is most useful in apps that contain a very large number
+        of `.proto` files and do not need all of them to be blindingly fast.
+    *   `LITE_RUNTIME`: The Protobuf compiler will generate classes that depend
+        only on the "lite" runtime library (`libprotobuf-lite` instead of
         `libprotobuf`). The lite runtime is much smaller than the full library
         (around an order of magnitude smaller) but omits certain features like
         descriptors and reflection. This is particularly useful for apps running
@@ -1902,7 +1900,7 @@ Here are a few of the most commonly used options:
     [recommended by Apple](https://developer.apple.com/library/ios/documentation/Cocoa/Conceptual/ProgrammingWithObjectiveC/Conventions/Conventions.html#//apple_ref/doc/uid/TP40011210-CH10-SW4).
     Note that all 2 letter prefixes are reserved by Apple.
 
-*   `packed` (field option): In protobuf editions, this option is locked to
+*   `packed` (field option): In Protobuf editions, this option is locked to
     `true`. To use unpacked wireformat, you can override this option using an
     editions feature. This provides compatibility with parsers prior to version
     2.3.0 (rarely needed) as shown in the following example:
@@ -1962,9 +1960,9 @@ values and to fields.
 
 ### Custom Options {#customoptions}
 
-Protocol Buffers also allows you to define and use your own options. Note that
-this is an **advanced feature** which most people don't need. If you do think
-you need to create your own options, see the
+Protobuf also allows you to define and use your own options. Note that this is
+an **advanced feature** which most people don't need. If you do think you need
+to create your own options, see the
 [Proto2 Language Guide](/programming-guides/proto2#customoptions)
 for details. Note that creating custom options uses
 [extensions](/programming-guides/proto2#extensions).
@@ -2011,10 +2009,10 @@ since it is the default behavior. When a message field is marked
 override that by trying to set `RETENTION_RUNTIME`.
 
 {{% alert title="Note" color="note" %}} As
-of Protocol Buffers 22.0, support for option retention is still in progress and
-only C++ and Java are supported. Go has support starting from 1.29.0. Python
-support is complete but has not made it into a release yet.
-{{% /alert %}}
+of Protobuf 22.0, support for option retention is still in progress and only C++
+and Java are supported. Go has support starting from 1.29.0. Python support is
+complete but has not made it into a release
+yet. {{% /alert %}}
 
 ### Option Targets {#option-targets}
 
@@ -2069,8 +2067,8 @@ enum MyEnum {
 
 To generate the Java, Kotlin, Python, C++, Go, Ruby, Objective-C, or C# code
 that you need to work with the message types defined in a `.proto` file, you
-need to run the protocol buffer compiler `protoc` on the `.proto` file. If you
-haven't installed the compiler,
+need to run the Protobuf compiler `protoc` on the `.proto` file. If you haven't
+installed the compiler,
 [download the package](/downloads) and follow the
 instructions in the README. For Go, you also need to install a special code
 generator plugin for the compiler; you can find this and installation

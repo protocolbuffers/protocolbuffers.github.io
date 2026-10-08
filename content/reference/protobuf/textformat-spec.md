@@ -1,7 +1,7 @@
 +++
 title = "Text Format Language Specification"
 weight = 820
-description = "The protocol buffer Text Format Language specifies a syntax for representation of protobuf data in text form, which is often useful for configurations or tests."
+description = "The Protobuf Text Format Language specifies a syntax for representation of Protobuf data in text form, which is often useful for configurations or tests."
 type = "docs"
 +++
 
@@ -517,7 +517,7 @@ integer         = signedInteger | unsignedInteger ;
         <em>-0x80000000</em> to <em>0x7FFFFFFF</em> containing an enum
         value number. It is not valid to specify a name that is not a
         member of the field's <code>enum</code> type definition. Depending on
-        the particular protobuf runtime implementation, it may or may not be
+        the particular Protobuf runtime implementation, it may or may not be
         valid to specify a number that is not a member of the field's
         <code>enum</code> type definition. Text format processors not tied to a
         particular runtime implementation (such as IDE support) may choose to
@@ -733,7 +733,7 @@ as `.protoascii` wrongly imply that text format is ascii-only, and others like
 tooling. {{% /alert %}}
 
 ```textproto
-# This is an example of Protocol Buffer's text format.
+# This is an example of Protobuf's text format.
 # Unlike .proto files, only shell-style line comments are supported.
 
 name: "John Smith"
@@ -766,7 +766,7 @@ the schema, so they may provide various features.
 
 ## Working with the Format Programmatically
 
-Due to how individual Protocol Buffer implementations
+Due to how individual Protobuf implementations
 emit neither a consistent nor canonical text format,
 tools or libraries that modify TextProto files or emit TextProto output must
 explicitly use

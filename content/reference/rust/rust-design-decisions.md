@@ -17,8 +17,8 @@ implementation makes and the considerations which led to those decisions.
 
 ## Designed to Be ‘Backed’ by Other Protobuf Implementations, Including C++ Protobuf {#backed-by-cpp}
 
-Protobuf Rust is not a pure Rust implementation of protobuf, but a safe Rust API
-implemented on top of existing protobuf implementations, or as we call these
+Protobuf Rust is not a pure Rust implementation of Protobuf, but a safe Rust API
+implemented on top of existing Protobuf implementations, or as we call these
 implementations: kernels.
 
 The biggest factor that goes into this decision was to enable zero-cost of
@@ -39,13 +39,13 @@ Rust adoption and require that these important cases stay on C++ instead.
 
 Protobuf Rust currently supports three kernels:
 
-*   C++ kernel - the generated code is backed by C++ Protocol Buffers (the
-    "full" implementation, typically used for servers). This kernel offers
-    in-memory interoperability with C++ code that uses the C++ runtime. This is
-    the default for servers within Google.
-*   C++ Lite kernel - the generated code is backed by C++ Lite Protocol Buffers
+*   C++ kernel - the generated code is backed by C++ Protobuf (the "full"
+    implementation, typically used for servers). This kernel offers in-memory
+    interoperability with C++ code that uses the C++ runtime. This is the
+    default for servers within Google.
+*   C++ Lite kernel - the generated code is backed by C++ Lite Protobuf
     (typically used for mobile). This kernel offers in-memory interoperability
-    with C++ code that uses the C++ Lite runtime. This is the default for
+    with C++ code that uses the C++ Lite runtime. This is the default
     for mobile apps within Google.
 *   upb kernel - the generated code is backed by
     [upb](https://github.com/protocolbuffers/protobuf/tree/main/upb),

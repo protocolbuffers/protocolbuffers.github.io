@@ -2,7 +2,7 @@
 title = "C# Generated Code Guide"
 weight = 550
 linkTitle = "Generated Code Guide"
-description = "Describes exactly what C# code the protocol buffer compiler generates for protocol definitions using editions syntax."
+description = "Describes exactly what C# code the Protobuf compiler generates for protocol definitions using editions syntax."
 type = "docs"
 +++
 
@@ -14,17 +14,17 @@ before reading this document.
 
 ## Compiler Invocation {#invocation}
 
-The protocol buffer compiler produces C\# output when invoked with the
-`--csharp_out` command-line flag. The parameter to the `--csharp_out` option is
-the directory where you want the compiler to write your C\# output, although
-depending on [other options](#compiler_options) the compiler may create
-subdirectories of the specified directory. The compiler creates a single source
-file for each `.proto` file input, defaulting to an extension of `.cs` but
-configurable via compiler options.
+The Protobuf compiler produces C\# output when invoked with the `--csharp_out`
+command-line flag. The parameter to the `--csharp_out` option is the directory
+where you want the compiler to write your C\# output, although depending on
+[other options](#compiler_options) the compiler may create subdirectories of the
+specified directory. The compiler creates a single source file for each `.proto`
+file input, defaulting to an extension of `.cs` but configurable via compiler
+options.
 
 ### C\#-specific Options {#compiler_options}
 
-You can provide further C\# options to the protocol buffer compiler using the
+You can provide further C\# options to the Protobuf compiler using the
 `--csharp_opt` command-line flag. The supported options are:
 
 -   **file\_extension**: Sets the file extension for generated code. This
@@ -42,13 +42,13 @@ You can provide further C\# options to the protocol buffer compiler using the
     ```
 
     where `player.proto` has a `csharp_namespace` option of `Example.Game` the
-    protocol buffer compiler generates a file `src/Game/Player.cs` being
-    created. This option would usually correspond with the **default namespace**
-    option in a C\# project in Visual Studio. If the option is specified but
-    with an empty value, the full C\# namespace as used in the generated file
-    will be used for the directory hierarchy. If the option is not specified at
-    all, the generated files are simply written into the directory specified by
-    `--csharp_out` without any hierarchy being created.
+    Protobuf compiler generates a file `src/Game/Player.cs`. This option would
+    usually correspond with the **default namespace** option in a C\# project in
+    Visual Studio. If the option is specified but with an empty value, the full
+    C\# namespace as used in the generated file will be used for the directory
+    hierarchy. If the option is not specified at all, the generated files are
+    simply written into the directory specified by `--csharp_out` without any
+    hierarchy being created.
 
 -   **internal\_access**: When this option is specified, the generator creates
     types with the `internal` access modifier instead of `public`.
@@ -103,8 +103,8 @@ descriptor class is placed in a nested `Proto` namespace to avoid colliding with
 the message.
 
 As an example of all of these rules, consider the `timestamp.proto` file which
-is provided as part of Protocol Buffers. A cut down version of `timestamp.proto`
-looks like this:
+is provided as part of Protobuf. A cut down version of `timestamp.proto` looks
+like this:
 
 ```proto
 edition = "2023";
@@ -143,8 +143,8 @@ Given a simple message declaration:
 message Foo {}
 ```
 
-The protocol buffer compiler generates a sealed, partial class called `Foo`,
-which implements the `IMessage<Foo>` interface, as shown below with member
+The Protobuf compiler generates a sealed, partial class called `Foo`, which
+implements the `IMessage<Foo>` interface, as shown below with member
 declarations. See the inline comments for more information.
 
 ```csharp
@@ -232,9 +232,9 @@ same name nested within the same class&mdash;and that would be invalid C\#.
 
 ## Fields
 
-The protocol buffer compiler generates a C\# property for each field defined
-within a message. The exact nature of the property depends on the nature of the
-field: its type, and whether it is singular, repeated, or a map field.
+The Protobuf compiler generates a C\# property for each field defined within a
+message. The exact nature of the property depends on the nature of the field:
+its type, and whether it is singular, repeated, or a map field.
 
 ### Singular Fields {#singular}
 
@@ -345,9 +345,9 @@ enum Color {
 }
 ```
 
-The protocol buffer compiler will generate a C\# enum type called `Color` with
-the same set of values. The names of the enum values are converted to make them
-more idiomatic for C\# developers:
+The Protobuf compiler will generate a C\# enum type called `Color` with the same
+set of values. The names of the enum values are converted to make them more
+idiomatic for C\# developers:
 
 -   If the original name starts with the upper-cased form of the enum name
     itself, that is removed

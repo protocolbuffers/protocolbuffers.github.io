@@ -1,25 +1,24 @@
 +++
 title = "Other Languages"
 weight = 840
-description = "protoc, the Protocol Buffers Compiler, can be extended to support new languages via plugins."
+description = "protoc, the Protobuf Compiler, can be extended to support new languages via plugins."
 type = "docs"
 +++
 
 While the current release includes compilers and APIs for C++, Java, Go, Ruby,
 C\#, and Python, the compiler code is designed so that it's easy to add support
 for other languages. There are several ongoing projects to add new language
-implementations to Protocol Buffers, including C, Haskell, Perl, Rust, and more.
+implementations to Protobuf, including C, Haskell, Perl, Rust, and more.
 
 For a list of links to projects we know about, see the
 [third-party add-ons wiki page](https://github.com/protocolbuffers/protobuf/blob/main/docs/third_party.md).
 
 ## Compiler Plugins {#plugins}
 
-`protoc`, the Protocol Buffers Compiler, can be extended to support new
-languages via plugins. A plugin is just a program which reads a
-`CodeGeneratorRequest` protocol buffer from standard input and then writes a
-`CodeGeneratorResponse` protocol buffer to standard output. These message types
-are defined in
+`protoc`, the Protobuf Compiler, can be extended to support new languages via
+plugins. A plugin is just a program which reads a `CodeGeneratorRequest`
+Protobuf message from standard input and then writes a `CodeGeneratorResponse`
+Protobuf message to standard output. These message types are defined in
 [`plugin.proto`](/reference/cpp/api-docs/google.protobuf.compiler.plugin.pb).
 We recommend that all third-party code generators be written as plugins, as this
 allows all generators to provide a consistent interface and share a single

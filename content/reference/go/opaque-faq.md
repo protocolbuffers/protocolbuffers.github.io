@@ -19,10 +19,10 @@ type = "docs"
 }
 </style>
 
-The Opaque API is the latest version of the Protocol Buffers implementation for
-the Go programming language. The old version is now called Open Struct API. See
-the [Go Protobuf: The new Opaque API](https://go.dev/blog/protobuf-opaque) blog
-post for an introduction.
+The Opaque API is the latest version of the Protobuf implementation for the Go
+programming language. The old version is now called Open Struct API. See the
+[Go Protobuf: The new Opaque API](https://go.dev/blog/protobuf-opaque) blog post
+for an introduction.
 
 This FAQ answers common questions about the new API and the migration process.
 
@@ -216,8 +216,8 @@ later need to be freed by the garbage collector.
 
 ## Should I Use Builders or Setters? {#builders-vs-setters}
 
-When constructing an empty protocol buffer, you should use `new` or an empty
-composite literals. Both are equivalently idiomatic to construct a zero
+When constructing an empty Protobuf message, you should use `new` or an empty
+composite literal. Both are equivalently idiomatic to construct a zero
 initialized value in Go and are more performant than an empty builder.
 
 ```go {.good}
@@ -230,7 +230,7 @@ m2 := &pb.M{}
 m1 := pb.M_builder{}.Build()
 ```
 
-In cases where you need to construct non-empty protocol buffers, you have the
+In cases where you need to construct non-empty Protobuf messages, you have the
 choice between using setters or using builders. Either is fine, but most people
 will find builders more readable. If the code you are writing needs to perform
 well,
@@ -326,7 +326,7 @@ The
 explains:
 
 > This performance improvement [modeling field presence more efficiently]
-> depends heavily on your protobuf message shape: The change only affects
+> depends heavily on your Protobuf message shape: The change only affects
 > elementary fields like integers, booleans, enums and floats, but not strings,
 > repeated fields or submessages.
 

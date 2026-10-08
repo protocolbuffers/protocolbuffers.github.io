@@ -1,24 +1,23 @@
 +++
-title = "Protocol Buffer Basics: C#"
+title = "Protobuf Basics: C#"
 weight = 220
 linkTitle = "C#"
-description = "A basic C# programmers introduction to working with protocol buffers."
+description = "A basic C# programmers introduction to working with Protobuf."
 type = "docs"
 +++
 
 This tutorial provides a basic C# programmer's introduction to working with
-protocol buffers, using the
-[proto3](/programming-guides/proto3) version of the
-protocol buffers language. By walking through creating a simple example
+Protobuf, using the [proto3](/programming-guides/proto3)
+version of the Protobuf language. By walking through creating a simple example
 application, it shows you how to
 
 -   Define message formats in a `.proto` file.
--   Use the protocol buffer compiler.
--   Use the C# protocol buffer API to write and read messages.
+-   Use the Protobuf compiler.
+-   Use the C# Protobuf API to write and read messages.
 
-This isn't a comprehensive guide to using protocol buffers in C#. For more
-detailed reference information, see the
-[Protocol Buffer Language Guide](/programming-guides/proto3),
+This isn't a comprehensive guide to using Protobuf in C#. For more detailed
+reference information, see the
+[Protobuf Language Guide](/programming-guides/proto3),
 the [C# API Reference](/reference/csharp/api-docs), the
 [C# Generated Code Guide](/reference/csharp/csharp-generated),
 and the
@@ -53,21 +52,20 @@ ways to solve this problem:
     Also, navigating an XML DOM tree is considerably more complicated than
     navigating simple fields in a class normally would be.
 
-Protocol buffers are the flexible, efficient, automated solution to solve
-exactly this problem. With protocol buffers, you write a `.proto` description of
-the data structure you wish to store. From that, the protocol buffer compiler
-creates a class that implements automatic encoding and parsing of the protocol
-buffer data with an efficient binary format. The generated class provides
-getters and setters for the fields that make up a protocol buffer and takes care
-of the details of reading and writing the protocol buffer as a unit.
-Importantly, the protocol buffer format supports the idea of extending the
-format over time in such a way that the code can still read data encoded with
-the old format.
+Protobuf is the flexible, efficient, automated solution to solve exactly this
+problem. With Protobuf, you write a `.proto` description of the data structure
+you wish to store. From that, the Protobuf compiler creates a class that
+implements automatic encoding and parsing of the Protobuf data with an efficient
+binary format. The generated class provides getters and setters for the fields
+that make up a Protobuf message and takes care of the details of reading and
+writing the message as a unit. Importantly, the Protobuf format supports the
+idea of extending the format over time in such a way that the code can still
+read data encoded with the old format.
 
 ## Where to Find the Example Code {#example-code}
 
 Our example is a command-line application for managing an address book data
-file, encoded using protocol buffers. The command `AddressBook` (see:
+file, encoded using Protobuf. The command `AddressBook` (see:
 [Program.cs](//github.com/protocolbuffers/protobuf/blob/master/csharp/src/AddressBook/Program.cs))
 can add a new entry to the data file or parse the data file and print the data
 to the console.
@@ -168,20 +166,20 @@ returns that field's default value.
 
 If a field is `repeated`, the field may be repeated any number of times
 (including zero). The order of the repeated values will be preserved in the
-protocol buffer. Think of repeated fields as dynamically sized arrays.
+Protobuf message. Think of repeated fields as dynamically sized arrays.
 
 You'll find a complete guide to writing `.proto` files -- including all the
 possible field types -- in the
-[Protocol Buffer Language Guide](/programming-guides/proto3).
-Don't go looking for facilities similar to class inheritance, though -- protocol
-buffers don't do that.
+[Protobuf Language Guide](/programming-guides/proto3).
+Don't go looking for facilities similar to class inheritance, though -- Protobuf
+doesn't do that.
 
-## Compiling Your Protocol Buffers {#compiling-protocol-buffers}
+## Compiling Your Protobuf Schema {#compiling-protocol-buffers}
 
 Now that you have a `.proto`, the next thing you need to do is generate the
 classes you'll need to read and write `AddressBook` (and hence `Person` and
-`PhoneNumber`) messages. To do this, you need to run the protocol buffer
-compiler `protoc` on your `.proto`:
+`PhoneNumber`) messages. To do this, you need to run the Protobuf compiler
+`protoc` on your `.proto`:
 
 1.  If you haven't installed the compiler,
     [download the package](/downloads) and follow the
@@ -208,8 +206,8 @@ compile this code, you'll need a project with a reference to the
 
 Generating `Addressbook.cs` gives you five useful types:
 
--   A static `Addressbook` class that contains metadata about the protocol
-    buffer messages.
+-   A static `Addressbook` class that contains metadata about the Protobuf
+    messages.
 -   An `AddressBook` class with a read-only `People` property.
 -   A `Person` class with properties for `Name`, `Id`, `Email` and `Phones`.
 -   A `PhoneNumber` class, nested in a static `Person.Types` class.
@@ -250,15 +248,14 @@ Phones = { new PhoneNumber { Number = "555-4321", Type = PhoneType.HOME } }
 
 ## Parsing and Serialization {#parsing-serialization}
 
-The whole purpose of using protocol buffers is to serialize your data so that it
-can be parsed elsewhere. Every generated class has a
-`WriteTo(CodedOutputStream)` method, where `CodedOutputStream` is a class in the
-protocol buffer runtime library. However, usually you'll use one of the
-extension methods to write to a regular `System.IO.Stream` or convert the
-message to a byte array or `ByteString`. These extension messages are in the
-`Google.Protobuf.MessageExtensions` class, so when you want to serialize you'll
-usually want a `using` directive for the `Google.Protobuf` namespace. For
-example:
+The whole purpose of using Protobuf is to serialize your data so that it can be
+parsed elsewhere. Every generated class has a `WriteTo(CodedOutputStream)`
+method, where `CodedOutputStream` is a class in the Protobuf runtime library.
+However, usually you'll use one of the extension methods to write to a regular
+`System.IO.Stream` or convert the message to a byte array or `ByteString`. These
+extension methods are in the `Google.Protobuf.MessageExtensions` class, so when
+you want to serialize you'll usually want a `using` directive for the
+`Google.Protobuf` namespace. For example:
 
 ```csharp
 using Google.Protobuf;
@@ -285,21 +282,20 @@ using (var input = File.OpenRead("john.dat"))
 
 A full example program to maintain an addressbook (adding new entries and
 listing existing ones) using these messages is available
-[in the Github repository](https://github.com/protocolbuffers/protobuf/tree/master/csharp/src/AddressBook).
+[in the GitHub repository](https://github.com/protocolbuffers/protobuf/tree/master/csharp/src/AddressBook).
 
-## Extending a Protocol Buffer {#extending-a-protobuf}
+## Extending a Protobuf Message {#extending-a-protobuf}
 
-Sooner or later after you release the code that uses your protocol buffer, you
-will undoubtedly want to "improve" the protocol buffer's definition. If you want
-your new buffers to be backwards-compatible, and your old buffers to be
+Sooner or later after you release the code that uses your Protobuf message, you
+will undoubtedly want to "improve" the message's definition. If you want your
+new messages to be backwards-compatible, and your old messages to be
 forward-compatible -- and you almost certainly do want this -- then there are
-some rules you need to follow. In the new version of the protocol buffer:
+some rules you need to follow. In the new version of the message:
 
 -   you *must not* change the tag numbers of any existing fields.
 -   you *may* delete fields.
 -   you *may* add new fields but you must use fresh tag numbers (i.e. tag
-    numbers that were never used in this protocol buffer, not even by deleted
-    fields).
+    numbers that were never used in this message, not even by deleted fields).
 
 (There are
 [some exceptions](/programming-guides/proto3#updating) to

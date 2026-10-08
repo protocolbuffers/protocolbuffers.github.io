@@ -1,5 +1,5 @@
 +++
-title = "Protocol Buffer MIME Types"
+title = "Protobuf MIME Types"
 weight = 830
 linkTitle = "MIME Types"
 description = "Standard MIME types for Protobuf Serializations."
@@ -30,7 +30,7 @@ followed by the following parameters:
 -   Protobuf reserves the `version` parameter for potential future versioning of
     our wire formats. Do not set it until a wire format is versioned.
 
-So the standard MIME types for common protobuf encodings are:
+So the standard MIME types for common Protobuf encodings are:
 
 -   `application/protobuf` for serialized binary protos.
 -   `application/protobuf+json; charset=utf-8` for JSON format protos.
@@ -43,7 +43,7 @@ unknown or illegal values.
 
 When binary protos are transacted over HTTP, Protobuf strongly recommends
 Base64-encoding them and setting `X-Content-Type-Options: nosniff` to prevent
-XSS, as it is possible for a Protobuf to parse as active content.
+XSS, as it is possible for a proto to parse as active content.
 
 It is acceptable to pass additional parameters to these MIME types if desired,
 such as a type URL which indicates the content schema; but the MIME type

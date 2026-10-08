@@ -6,7 +6,7 @@ type = "docs"
 +++
 
 Protobuf supports a canonical encoding in JSON, making it easier to share data
-with systems that do not support the standard protobuf binary wire format.
+with systems that do not support the standard Protobuf binary wire format.
 
 This page specifies the format, but a number of additional edge cases which
 define a conformant ProtoJSON parser are covered in the Protobuf Conformance
@@ -267,7 +267,7 @@ the value of a `string` field.
 
 ### Presence and default-values {#presence}
 
-When generating JSON-encoded output from a protocol buffer, if a field supports
+When generating JSON-encoded output from a Protobuf message, if a field supports
 presence, serializers must emit the field value if and only if the corresponding
 hazzer would return true.
 
@@ -681,10 +681,10 @@ precisely represent nanosecond precision (like `10.500000001s`).
 
 ## Non-Round Trippable Edge cases of Well-Known Types {#wkt-roundtrip-limitations}
 
-While ProtoJSON defines canonical JSON representations for all Protocol Buffer
-types, under some edge cases Well-Known Types are not supported to round-trip
-cleanly (i.e., deserializing JSON back into proto, or vice versa) due to design
-bugs in the format.
+While ProtoJSON defines canonical JSON representations for all Protobuf types,
+under some edge cases Well-Known Types are not supported to round-trip cleanly
+(i.e., deserializing JSON back into proto, or vice versa) due to design bugs in
+the format.
 
 For example, `google.protobuf.Value` has a double field for JSON numbers. JSON
 numbers can represent any double except for `Infinity`, `-Infinity` and `NaN`;
@@ -729,7 +729,7 @@ prevent issues.
 
 ## JSON Options {#json-options}
 
-A conformant protobuf JSON implementation may provide the following options:
+A conformant Protobuf JSON implementation may provide the following options:
 
 *   **Always emit fields without presence**: Fields that don't support presence
     and that have their default value are omitted by default in JSON output (for
@@ -742,12 +742,12 @@ A conformant protobuf JSON implementation may provide the following options:
     this flag affects proto2 `optional` fields but not proto3 `optional` fields.
     A fix is planned for a future release.
 
-*   **Ignore unknown fields**: The protobuf JSON parser should reject unknown
+*   **Ignore unknown fields**: The Protobuf JSON parser should reject unknown
     fields by default but may provide an option to ignore unknown fields in
     parsing.
 
 *   **Use proto field name instead of lowerCamelCase name**: By default the
-    protobuf JSON printer should convert the field name to lowerCamelCase and
+    Protobuf JSON printer should convert the field name to lowerCamelCase and
     use that as the JSON name. An implementation may provide an option to use
     proto field name as the JSON name instead. Protobuf JSON parsers are
     required to accept both the converted lowerCamelCase name and the proto

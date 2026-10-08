@@ -1,7 +1,7 @@
 +++
 title = "Feature Settings for Editions"
 weight = 43
-description = "Protobuf Editions features and how they affect protobuf behavior."
+description = "Protobuf Editions features and how they affect Protobuf behavior."
 type = "docs"
 +++
 
@@ -388,7 +388,7 @@ enum Foo {
 ### `features.field_presence` {#field_presence}
 
 This feature sets the behavior for tracking field presence, or the notion of
-whether a protobuf field has a value.
+whether a Protobuf field has a value.
 
 **Values available:**
 
@@ -754,10 +754,10 @@ sections show these imports.
 
 **Languages:** Go
 
-The `api_level` feature enables you to select which API version the Go protobuf
+The `api_level` feature enables you to select which API version the Go Protobuf
 plugin should generate code for. The Opaque API is the latest version of the
-Protocol Buffers implementation for the Go programming language. The previous
-version is now called Open Struct API. See the
+Protobuf implementation for the Go programming language. The previous version is
+now called Open Struct API. See the
 [Go Protobuf: Releasing the Opaque API](https://go.dev/blog/protobuf-opaque)
 blog post for an introduction.
 

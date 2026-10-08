@@ -2,11 +2,11 @@
 title = "zero_copy_stream.h"
 toc_hide = "true"
 linkTitle = "C++"
-description = "This section contains reference documentation for working with protocol buffer classes in C++."
+description = "This section contains reference documentation for working with Protobuf classes in C++."
 type = "docs"
 +++
 
-<p><code>#include &lt;google/protobuf/io/zero_copy_stream.h&gt;<br>namespace <a href="#google.protobuf.io">google::protobuf::io</a></code></p><p>This file contains the <a href='#ZeroCopyInputStream'>ZeroCopyInputStream</a> and <a href='#ZeroCopyOutputStream'>ZeroCopyOutputStream</a> interfaces, which represent abstract I/O streams to and from which protocol buffers can be read and written. </p><p>For a few simple implementations of these interfaces, see <a href='google.protobuf.io.zero_copy_stream_impl'>zero_copy_stream_impl.h</a>.</p>
+<p><code>#include &lt;google/protobuf/io/zero_copy_stream.h&gt;<br>namespace <a href="#google.protobuf.io">google::protobuf::io</a></code></p><p>This file contains the <a href='#ZeroCopyInputStream'>ZeroCopyInputStream</a> and <a href='#ZeroCopyOutputStream'>ZeroCopyOutputStream</a> interfaces, which represent abstract I/O streams to and from which Protobuf messages can be read and written. </p><p>For a few simple implementations of these interfaces, see <a href='google.protobuf.io.zero_copy_stream_impl'>zero_copy_stream_impl.h</a>.</p>
 
 <p>These interfaces are different from classic I/O streams in that they try to minimize the amount of data copying that needs to be done. To accomplish this, responsibility for allocating buffers is moved to the stream object, rather than being the responsibility of the caller. So, the stream can return a buffer which actually points directly into the final data structure where the bytes are to be stored, and the caller can interact directly with that buffer, eliminating an intermediate copy operation.</p>
 

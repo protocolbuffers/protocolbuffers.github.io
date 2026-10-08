@@ -2,12 +2,13 @@
 title = "C++ Arena Allocation Guide"
 weight = 520
 linkTitle = "Arena Allocation Guide"
-description = "Arena allocation is a C++-only feature that helps you optimize your memory usage and improve performance when working with protocol buffers."
+description = "Arena allocation is a C++-only feature that helps you optimize your memory usage and improve performance when working with Protobuf."
 type = "docs"
 +++
 
-This page describes exactly what C++ code the protocol
-buffer compiler generates in addition to the code described in the
+This
+page describes exactly what C++ code the Protobuf compiler generates in addition
+to the code described in the
 [C++ Generated Code Guide](/reference/cpp/cpp-generated)
 when arena allocation is enabled. It assumes that you are familiar with the
 material in the
@@ -17,11 +18,11 @@ material in the
 ## Why Use Arena Allocation? {#why}
 
 Memory allocation and deallocation constitutes a significant fraction of CPU
-time spent in protocol buffers code. By default, protocol buffers performs heap
-allocations for each message object, each of its subobjects, and several field
-types, such as strings. These allocations occur in bulk when parsing a message
-and when building new messages in memory, and associated deallocations happen
-when messages and their subobject trees are freed.
+time spent in Protobuf code. By default, Protobuf performs heap allocations for
+each message object, each of its subobjects, and several field types, such as
+strings. These allocations occur in bulk when parsing a message and when
+building new messages in memory, and associated deallocations happen when
+messages and their subobject trees are freed.
 
 Arena-based allocation has been designed to reduce this performance cost. With
 arena allocation, new objects are allocated out of a large piece of preallocated
@@ -50,8 +51,8 @@ Operation             | Heap-allocated proto messages                           
 
 ## Getting Started {#gettingstarted}
 
-The protocol buffer compiler generates code for arena allocation for the
-messages in your file, as used in the following example.
+The Protobuf compiler generates code for arena allocation for the messages in
+your file, as used in the following example.
 
 ```cpp
 #include <google/protobuf/arena.h>
@@ -102,7 +103,7 @@ class. This class implements the following public methods.
     T> static T* Create(Arena* arena, args...)`
 
     *   If `T` is fully compatible[^footnote], then the method creates a new
-        protocol buffer object of type `T` and its subobjects on the arena.
+        Protobuf message object of type `T` and its subobjects on the arena.
 
         If `arena` is not NULL, the returned object is allocated on the arena,
         its internal storage and sub-types (if any) will be allocated on the
@@ -144,7 +145,7 @@ class. This class implements the following public methods.
     array is created on the arena.
 
 [^footnote]: What it takes to be a "fully compatible" type is internal to the
-    protobuf library, and should not be assumed to be reliable.
+    Protobuf library, and should not be assumed to be reliable.
 
 ### "Owned list" Methods {#owned-list}
 
@@ -164,7 +165,7 @@ itself is deleted
     not attempt to free the underlying memory of object. This method is useful
     when an object is embedded in arena-allocated storage but its destructor
     will not otherwise be called, for example because its containing class is a
-    protobuf message whose destructor won't be called, or because it was
+    Protobuf message whose destructor won't be called, or because it was
     manually constructed in a block allocated by `AllocateArray()`.
 
 ### Other Methods {#other-methods}

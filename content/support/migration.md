@@ -43,8 +43,8 @@ arena-safe counterparts and be deprecated.
 
 #### MSB Hardening Check on RepeatedField::Get and RepeatedPtrField::Get {#cpp-repeatedfield-get-hardening}
 
-Protobufs were hardened against OOB errors by adding comprehensive bounds
-checking to repeated field accesses.
+Protobuf was hardened against OOB errors by adding comprehensive bounds checking
+to repeated field accesses.
 
 #### Remove Arena-enabled constructors from Repeated/Map Fields {#cpp-remove-arena-ctors}
 
@@ -96,7 +96,7 @@ We removed the macro.
 
 #### Stricter Name Length Limits {#cpp-name-limits}
 
-The protobuf compiler enforces stricter limits on the length of symbol names,
+The Protobuf compiler enforces stricter limits on the length of symbol names,
 such as field names, to prevent potential issues. If the length of any field
 name is > 2^16, it generates an error.
 
@@ -107,7 +107,7 @@ affect most users.
 
 #### [[nodiscard]] on Logically Constant Operations {#cpp-nodiscard}
 
-`[[nodiscard]]` was added to several logically constant protobuf APIs where
+`[[nodiscard]]` was added to several logically constant Protobuf APIs where
 failure to consume the returned value indicates a probable bug. This follows
 patterns used commonly in the C++ standard library.
 
@@ -540,10 +540,10 @@ Users should upgrade to C++17.
 
 #### Introduced ASAN Poisoning After Clearing Oneof Messages on Arena
 
-This change added a hardening check that affects C++ protobufs using Arenas.
-Oneof messages allocated on the protobuf arena are now cleared in debug and
-poisoned in ASAN mode. After calling clear, future attempts to use the memory
-region will cause a crash in ASAN as a use-after-free error.
+This change added a hardening check that affects C++ Protobuf messages using
+Arenas. Oneof messages allocated on the Protobuf arena are now cleared in debug
+and poisoned in ASAN mode. After calling clear, future attempts to use the
+memory region will cause a crash in ASAN as a use-after-free error.
 
 This implementation requires C++17.
 
@@ -581,7 +581,7 @@ Closed enum fields updated with invalid values generate errors.
 
 The deprecated internal `py_proto_library` Bazel macro in `protobuf.bzl` was
 removed. It was replaced by the official `py_proto_library` which was moved to
-protobuf in `bazel/py_proto_library` in v29.x. This implementation was
+Protobuf in `bazel/py_proto_library` in v29.x. This implementation was
 previously available in `rules_python` prior to v29.x.
 
 #### Remove Deprecated APIs {#v30-python-remove-apis}
@@ -850,12 +850,12 @@ gives you more time to migrate.
 Source of changes:
 [PR #10132](https://github.com/protocolbuffers/protobuf/pull/10132)
 
-In v22.0, we removed all Autotools support from the protobuf compiler and the
+In v22.0, we removed all Autotools support from the Protobuf compiler and the
 C++ runtime. If you're using Autotools to build either of these, you must
 migrate to [CMake](http://cmake.org) or [Bazel](http://bazel.build). We have
 some
 [dedicated instructions](https://github.com/protocolbuffers/protobuf/blob/main/cmake/README.md)
-for setting up protobuf with CMake.
+for setting up Protobuf with CMake.
 
 ### Abseil Dependency {#abseil}
 
@@ -987,7 +987,7 @@ void F() {
 Source of changes: [PR #10796](https://github.com/protocolbuffers/protobuf/pull/10796)
 
 To support C++20, we've reserved the new
-[keywords](https://en.cppreference.com/w/cpp/keyword) in C++ generated protobuf
+[keywords](https://en.cppreference.com/w/cpp/keyword) in C++ generated Protobuf
 code. As with other reserved keywords, if you use them for any fields, enums, or
 messages, we will add an underscore suffix to make them valid C++. For example,
 a `concept` field will generate a `concept_()` getter. In the scenario where you

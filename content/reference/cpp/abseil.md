@@ -2,16 +2,16 @@
 title = "Abseil Support"
 weight = 530
 linkTitle = "Abseil Support"
-description = "The C++ implementation of Protocol Buffers has an explicit dependency on Abseil."
+description = "The C++ implementation of Protobuf has an explicit dependency on Abseil."
 type = "docs"
 +++
 
-In [version 22.x](/news/v22#abseil-dep), C++ protobuf
+In [version 22.x](/news/v22#abseil-dep), C++ Protobuf
 added an explicit dependency on Abseil.
 
 ## Bazel Support {#bazel}
 
-If you are using Bazel, to determine the version of Abseil that your protobuf
+If you are using Bazel, to determine the version of Abseil that your Protobuf
 version supports, you can use the `bazel mod` command:
 
 ```shell

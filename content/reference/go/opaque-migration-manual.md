@@ -6,9 +6,9 @@ description = "Describes a manual migration to the Opaque API."
 type = "docs"
 +++
 
-The Opaque API is the latest version of the Protocol Buffers implementation for
-the Go programming language. The old version is now called Open Struct API. See
-the [Go Protobuf: Releasing the Opaque API](https://go.dev/blog/protobuf-opaque)
+The Opaque API is the latest version of the Protobuf implementation for the Go
+programming language. The old version is now called Open Struct API. See the
+[Go Protobuf: Releasing the Opaque API](https://go.dev/blog/protobuf-opaque)
 blog post for an introduction.
 
 This is a user guide for migrating Go Protobuf usages from the older Open Struct
@@ -26,7 +26,7 @@ provides more detail. This guide compares the old and new API side-by-side.
 
 ### Message Construction
 
-Suppose there is a protobuf message defined like this:
+Suppose there is a Protobuf message defined like this:
 
 ```proto
 message Foo {
@@ -665,5 +665,5 @@ Some common libraries do use Go `reflect` under the hood, examples are:
         [protobuf/encoding/protojson](https://pkg.go.dev/google.golang.org/protobuf/encoding/protojson).
 *   [pretty](https://pkg.go.dev/github.com/kr/pretty)
 *   [cmp](https://pkg.go.dev/github.com/google/go-cmp/cmp)
-    *   To use `cmp.Equal` properly with protobuf messages, use
+    *   To use `cmp.Equal` properly with Protobuf messages, use
         [protocmp.Transform](https://pkg.go.dev/google.golang.org/protobuf/testing/protocmp#Transform)

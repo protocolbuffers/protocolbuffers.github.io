@@ -17,7 +17,7 @@ that proto. Use cases include:
 *   taking a fingerprint or checksum of a serialized proto
 *   comparing serialized payloads as a way of checking message equality
 
-Unfortunately, *protobuf serialization is not (and cannot be) canonical*. There
+Unfortunately, *Protobuf serialization is not (and cannot be) canonical*. There
 are a few notable exceptions, such as MapReduce, but in general you should
 generally think of proto serialization as unstable. This page explains why.
 
@@ -61,10 +61,10 @@ Deterministic serialization is not canonical. The serializer can generate
 different output for many reasons, including but not limited to the following
 variations:
 
-1.  The protobuf schema changes in any way.
+1.  The Protobuf schema changes in any way.
 1.  The application being built changes in any way.
 1.  The binary is built with different flags (eg. opt vs. debug).
-1.  The protobuf library is updated.
+1.  The Protobuf library is updated.
 
 This means that hashes of serialized protos are fragile and not stable across
 time or space.

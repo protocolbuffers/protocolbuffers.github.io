@@ -1,7 +1,7 @@
 +++
 title = "Downloads"
 weight = 1000
-description = "The downloads page for protocol buffers."
+description = "The downloads page for Protobuf."
 type = "docs"
 +++
 
@@ -9,7 +9,7 @@ type = "docs"
 
 ### Latest Version
 
-The latest release of Protocol Buffers can be found on the
+The latest release of Protobuf can be found on the
 [release page](https://github.com/protocolbuffers/protobuf/releases/latest).
 
 ### Old Versions
@@ -21,5 +21,5 @@ Older versions are available in our historical releases
 
 ### GitHub Repository
 
-Protocol Buffers source code is hosted on
+Protobuf source code is hosted on
 [GitHub](https://github.com/protocolbuffers/protobuf).

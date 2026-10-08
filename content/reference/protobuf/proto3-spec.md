@@ -1,8 +1,8 @@
 +++
-title = "Protocol Buffers Language Specification (Proto3)"
+title = "Protobuf Language Specification (Proto3)"
 weight = 810
 linkTitle = "Language Specification (Proto3)"
-description = "Language specification reference for the Protocol Buffers language (Proto3)."
+description = "Language specification reference for the Protobuf language (Proto3)."
 type = "docs"
 +++
 
@@ -107,7 +107,7 @@ constant = fullIdent | ( [ "-" | "+" ] intLit ) | ( [ "-" | "+" ] floatLit ) |
 
 ## Syntax
 
-The syntax statement is used to define the protobuf version.
+The syntax statement is used to define the Protobuf version.
 
 ```
 syntax = "syntax" "=" ("'" "proto3" "'" | '"' "proto3" '"') ";"
@@ -151,7 +151,7 @@ package foo.bar;
 ## Option
 
 Options can be used in proto files, messages, enums and services. An option can
-be a protobuf defined option or a custom option. For more information, see
+be a Protobuf defined option or a custom option. For more information, see
 [Options](/programming-guides/proto3#options) in the
 language guide.
 
@@ -170,7 +170,7 @@ option java_package = "com.example.foo";
 
 ## Fields
 
-Fields are the basic elements of a protocol buffer message. Fields can be normal
+Fields are the basic elements of a Protobuf message. Fields can be normal
 fields, oneof fields, or map fields. A field has a type and field number.
 
 ```

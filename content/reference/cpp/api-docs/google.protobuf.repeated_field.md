@@ -2,11 +2,11 @@
 title = "repeated_field.h"
 toc_hide = "true"
 linkTitle = "C++"
-description = "This section contains reference documentation for working with protocol buffer classes in C++."
+description = "This section contains reference documentation for working with Protobuf classes in C++."
 type = "docs"
 +++
 
-<p><code>#include &lt;google/protobuf/repeated_field.h&gt;<br>namespace <a href="#google.protobuf">google::protobuf</a></code></p><p><a href='#RepeatedField'>RepeatedField</a> and <a href='#RepeatedPtrField'>RepeatedPtrField</a> are used by generated protocol message classes to manipulate repeated fields. </p><p>These classes are very similar to STL's vector, but include a number of optimizations found to be useful specifically in the case of Protocol Buffers. <a href='#RepeatedPtrField'>RepeatedPtrField</a> is particularly different from STL vector as it manages ownership of the pointers that it contains.</p>
+<p><code>#include &lt;google/protobuf/repeated_field.h&gt;<br>namespace <a href="#google.protobuf">google::protobuf</a></code></p><p><a href='#RepeatedField'>RepeatedField</a> and <a href='#RepeatedPtrField'>RepeatedPtrField</a> are used by generated protocol message classes to manipulate repeated fields. </p><p>These classes are very similar to STL's vector, but include a number of optimizations found to be useful specifically in the case of Protobuf. <a href='#RepeatedPtrField'>RepeatedPtrField</a> is particularly different from STL vector as it manages ownership of the pointers that it contains.</p>
 
 <p>Typically, clients should not need to access <a href='#RepeatedField'>RepeatedField</a> objects directly, but should instead use the accessor functions generated automatically by the protocol compiler. </p>
 

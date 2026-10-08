@@ -10,7 +10,7 @@
 
 annotation class [ProtoDslMarker]()
 
-Indicates an API that is part of a DSL to generate protocol buffer messages.
+Indicates an API that is part of a DSL to generate Protobuf messages.
 
 ## Constructors
 

@@ -6,7 +6,7 @@ type = "docs"
 +++
 
 C++ string field APIs that use `std::string` significantly constrain the
-internal protobuf implementation and its evolution. For example,
+internal Protobuf implementation and its evolution. For example,
 `mutable_string_field()` returns `std::string*` that forces us to use
 `std::string` to store the field. This complicates its interaction on arenas and
 we have to maintain arena donation states to track whether string payload
@@ -160,7 +160,7 @@ enum Foo {
 }
 ```
 
-The protocol buffer compiler, in addition to the `Foo` enum, will generate the
+The Protobuf compiler, in addition to the `Foo` enum, will generate the
 following new function in addition to the standard
 [generated code](/reference/cpp/cpp-generated#enum):
 

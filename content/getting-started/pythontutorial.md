@@ -1,24 +1,24 @@
 +++
-title = "Protocol Buffer Basics: Python"
+title = "Protobuf Basics: Python"
 weight = 270
 linkTitle = "Python"
-description = "A basic Python programmers introduction to working with protocol buffers."
+description = "A basic Python programmers introduction to working with Protobuf."
 type = "docs"
 +++
 
 This tutorial provides a basic Python programmer's introduction to working with
-protocol buffers. By walking through creating a simple example application, it
-shows you how to
+Protobuf. By walking through creating a simple example application, it shows you
+how to
 
 -   Define message formats in a `.proto` file.
--   Use the protocol buffer compiler.
--   Use the Python protocol buffer API to write and read messages.
+-   Use the Protobuf compiler.
+-   Use the Python Protobuf API to write and read messages.
 
-This isn't a comprehensive guide to using protocol buffers in Python. For more
-detailed reference information, see the
-[Protocol Buffer Language Guide (proto2)](/programming-guides/proto2),
+This isn't a comprehensive guide to using Protobuf in Python. For more detailed
+reference information, see the
+[Protobuf Language Guide (proto2)](/programming-guides/proto2),
 the
-[Protocol Buffer Language Guide (proto3)](/programming-guides/proto3),
+[Protobuf Language Guide (proto3)](/programming-guides/proto3),
 the [Python API Reference](https://googleapis.dev/python/protobuf/latest/), the
 [Python Generated Code Guide](/reference/python/python-generated),
 and the
@@ -51,16 +51,16 @@ ways to solve this problem:
     Also, navigating an XML DOM tree is considerably more complicated than
     navigating simple fields in a class normally would be.
 
-Instead of these options, you can use protocol buffers. Protocol buffers are the
-flexible, efficient, automated solution to solve exactly this problem. With
-protocol buffers, you write a `.proto` description of the data structure you
-wish to store. From that, the protocol buffer compiler creates a class that
-implements automatic encoding and parsing of the protocol buffer data with an
-efficient binary format. The generated class provides getters and setters for
-the fields that make up a protocol buffer and takes care of the details of
-reading and writing the protocol buffer as a unit. Importantly, the protocol
-buffer format supports the idea of extending the format over time in such a way
-that the code can still read data encoded with the old format.
+Instead of these options, you can use Protobuf. Protobuf is the flexible,
+efficient, automated solution to solve exactly this problem. With Protobuf, you
+write a `.proto` description of the data structure you wish to store. From that,
+the Protobuf compiler creates a class that implements automatic encoding and
+parsing of the Protobuf data with an efficient binary format. The generated
+class provides getters and setters for the fields that make up a Protobuf
+message and takes care of the details of reading and writing the message as a
+unit. Importantly, the Protobuf format supports the idea of extending the format
+over time in such a way that the code can still read data encoded with the old
+format.
 
 ## Where to Find the Example Code {#example-code}
 
@@ -112,8 +112,8 @@ The `.proto` file starts with a package declaration, which helps to prevent
 naming conflicts between different projects. In Python, packages are normally
 determined by directory structure, so the `package` you define in your `.proto`
 file will have no effect on the generated code. However, you should still
-declare one to avoid name collisions in the Protocol Buffers name space as well
-as in non-Python languages.
+declare one to avoid name collisions in the Protobuf name space as well as in
+non-Python languages.
 
 Next, you have your message definitions. A message is just an aggregate
 containing a set of typed fields. Many standard simple data types are available
@@ -137,16 +137,16 @@ for this optimization.
 
 You'll find a complete guide to writing `.proto` files -- including all the
 possible field types -- in the
-[Protocol Buffer Language Guide](/programming-guides/editions).
-Don't go looking for facilities similar to class inheritance, though -- protocol
-buffers don't do that.
+[Protobuf Language Guide](/programming-guides/editions).
+Don't go looking for facilities similar to class inheritance, though -- Protobuf
+doesn't do that.
 
-## Compiling Your Protocol Buffers {#compiling-protocol-buffers}
+## Compiling Your Protobuf Schema {#compiling-protocol-buffers}
 
 Now that you have a `.proto`, the next thing you need to do is generate the
 classes you'll need to read and write `AddressBook` (and hence `Person` and
-`PhoneNumber`) messages. To do this, you need to run the protocol buffer
-compiler `protoc` on your `.proto`:
+`PhoneNumber`) messages. To do this, you need to run the Protobuf compiler
+`protoc` on your `.proto`:
 
 1.  If you haven't installed the compiler,
     [download the package](/downloads) and follow the
@@ -170,13 +170,13 @@ compiler `protoc` on your `.proto`:
 This generates `addressbook_pb2.py` (or `addressbook_pb2.pyi`) in your specified
 destination directory.
 
-## The Protocol Buffer API {#protobuf-api}
+## The Protobuf API {#protobuf-api}
 
-Unlike when you generate Java and C++ protocol buffer code, the Python protocol
-buffer compiler doesn't generate your data access code for you directly. Instead
-(as you'll see if you look at `addressbook_pb2.py`) it generates special
-descriptors for all your messages, enums, and fields, and some mysteriously
-empty classes, one for each message type:
+Unlike when you generate Java and C++ Protobuf code, the Python Protobuf
+compiler doesn't generate your data access code for you directly. Instead (as
+you'll see if you look at `addressbook_pb2.py`) it generates special descriptors
+for all your messages, enums, and fields, and some mysteriously empty classes,
+one for each message type:
 
 ```python
 import google3
@@ -278,8 +278,8 @@ These methods implement the `Message` interface. For more information, see the
 
 ### Parsing and Serialization {#parsing-serialization}
 
-Finally, each protocol buffer class has methods for writing and reading messages
-of your chosen type using the protocol buffer
+Finally, each Protobuf class has methods for writing and reading messages of
+your chosen type using the Protobuf
 [binary format](/programming-guides/encoding). These
 include:
 
@@ -318,12 +318,12 @@ new_person = addressbook_pb2.Person()
 json_format.Parse(json_string, new_person)
 ```
 
-{{% alert title="Important" color="warning" %}} **Protocol Buffers and Object Oriented Design**
-Protocol buffer classes are basically data holders (like structs in C) that
-don't provide additional functionality; they don't make good first class
-citizens in an object model. If you want to add richer behavior to a generated
-class, the best way to do this is to wrap the generated protocol buffer class in
-an application-specific class. Wrapping protocol buffers is also a good idea if
+{{% alert title="Important" color="warning" %}} **Protobuf and Object Oriented Design**
+Protobuf classes are basically data holders (like structs in C) that don't
+provide additional functionality; they don't make good first class citizens in
+an object model. If you want to add richer behavior to a generated class, the
+best way to do this is to wrap the generated Protobuf class in an
+application-specific class. Wrapping Protobuf messages is also a good idea if
 you don't have control over the design of the `.proto` file (if, say, you're
 reusing one from another project). In that case, you can use the wrapper class
 to craft an interface better suited to the unique environment of your
@@ -334,10 +334,10 @@ practice anyway. {{% /alert %}}
 
 ## Writing a Message {#writing-a-message}
 
-Now let's try using your protocol buffer classes. The first thing you want your
-address book application to be able to do is write personal details to your
-address book file. To do this, you need to create and populate instances of your
-protocol buffer classes and then write them to an output stream.
+Now let's try using your Protobuf classes. The first thing you want your address
+book application to be able to do is write personal details to your address book
+file. To do this, you need to create and populate instances of your Protobuf
+classes and then write them to an output stream.
 
 Here is a program which reads an `AddressBook` from a file, adds one new
 `Person` to it based on user input, and writes the new `AddressBook` back out to
@@ -445,20 +445,20 @@ with open(sys.argv[1], "rb") as f:
 ListPeople(address_book)
 ```
 
-## Extending a Protocol Buffer {#extending-a-protobuf}
+## Extending a Protobuf Message {#extending-a-protobuf}
 
-Sooner or later after you release the code that uses your protocol buffer, you
-will undoubtedly want to "improve" the protocol buffer's definition. If you want
-your new buffers to be backwards-compatible, and your old buffers to be
+Sooner or later after you release the code that uses your Protobuf message, you
+will undoubtedly want to "improve" the message's definition. If you want your
+new messages to be backwards-compatible, and your old messages to be
 forward-compatible -- and you almost certainly do want this -- then there are
-some rules you need to follow. In the new version of the protocol buffer:
+some rules you need to follow. In the new version of the message:
 
 -   you *must not* change the tag numbers of any existing fields.
 -   you *must not* add or delete any required fields.
 -   you *may* delete optional or repeated fields.
 -   you *may* add new optional or repeated fields but you must use fresh tag
-    numbers (that is, tag numbers that were never used in this protocol buffer,
-    not even by deleted fields).
+    numbers (that is, tag numbers that were never used in this message, not even
+    by deleted fields).
 
 (There are
 [some exceptions](/programming-guides/proto2#updating) to
@@ -480,10 +480,10 @@ or never set at all (by old code) since there is no `HasField` check for it.
 
 ## Advanced Usage {#advanced-usage}
 
-Protocol buffers have uses that go beyond simple accessors and serialization. Be
-sure to explore the
+Protobuf has uses that go beyond simple accessors and serialization. Be sure to
+explore the
 [Python API reference](https://googleapis.dev/python/protobuf/latest/) to see
-what else you can do with them.
+what else you can do with it.
 
 One key feature provided by protocol message classes is *reflection*. You can
 iterate over the fields of a message and manipulate their values without writing
@@ -493,8 +493,8 @@ as XML or JSON (see [Parsing and Serialization](#parsing-serialization) for an
 example). A more advanced use of reflection might be to find differences between
 two messages of the same type, or to develop a sort of "regular expressions for
 protocol messages" in which you can write expressions that match certain message
-contents. If you use your imagination, it's possible to apply Protocol Buffers
-to a much wider range of problems than you might initially expect!
+contents. If you use your imagination, it's possible to apply Protobuf to a much
+wider range of problems than you might initially expect!
 
 Reflection is provided as part of the
 [`Message` interface](https://googleapis.dev/python/protobuf/latest/google/protobuf/message.html#google.protobuf.message.Message).

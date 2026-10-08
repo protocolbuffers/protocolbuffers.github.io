@@ -1,7 +1,7 @@
 +++
 title = "Deserializing Debug Proto Representations"
 weight = 89
-description = "How to log debugging information in Protocol Buffers."
+description = "How to log debugging information in Protobuf."
 type = "docs"
 +++
 
@@ -46,14 +46,14 @@ not set in the proto.**
 ## Why is this URL here?
 
 We want to make sure nobody deserializes human-readable representations of a
-protobuf message intended for humans debugging a system. Historically,
+Protobuf message intended for humans debugging a system. Historically,
 `.DebugString()` and `TextFormat` were interchangeable, and existing systems use
 DebugString to transport and store data.
 
 We want to make sure sensitive data does not accidentally end up in logs.
-Therefore, we are transparently redacting some field values from protobuf
-messages before turning them into a string
-("[REDACTED]"). This reduces the security & privacy
+Therefore, we are transparently redacting some field values from Protobuf
+messages before turning them into a
+string ("[REDACTED]"). This reduces the security & privacy
 risk of accidental logging, but risks data loss if other systems deserialize
 your message. To address this risk, we are intentionally splitting the
 machine-readable TextFormat from the human-readable debug format to be used in
@@ -105,7 +105,7 @@ making sure your configuration files don't contain any PII.
 
 ### I Am Writing a Unit Test, and Want to Compare Debugstring in a Test Assertion
 
-If you want to compare protobuf values, use `MessageDifferencer` like in the
+If you want to compare Protobuf values, use `MessageDifferencer` like in the
 following:
 
 ```cpp

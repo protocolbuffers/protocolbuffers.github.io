@@ -6,7 +6,7 @@ type = "docs"
 +++
 
 This document provides a style guide for `.proto` files. By following these
-conventions, you'll make your protocol buffer message definitions and their
+conventions, you'll make your Protobuf message definitions and their
 corresponding classes consistent and easy to read.
 
 Enforcement of the following style guidelines is controlled via
@@ -65,7 +65,7 @@ Don't use underscores as the initial or final character of a name. Any
 underscore should always be followed by a letter (not a number or a second
 underscore).
 
-The motivation for this rule is that each protobuf language implementation may
+The motivation for this rule is that each Protobuf language implementation may
 convert identifiers into the local language style: a name of `song_id` in a
 .proto file may end up having accessors for the field which are capitalized as
 `SongId`, `songId` or `song_id` depending on the language.
@@ -315,7 +315,7 @@ removed in proto3. Proto2 `required` fields that have been migrated to editions
 accommodate.
 
 While enforcement of required fields at the schema level is intuitively
-desirable, one of the primary design goals of protobuf is to support long term
+desirable, one of the primary design goals of Protobuf is to support long term
 schema evolution. No matter how obviously required a given field seems to be
 today, there is a plausible future where the field should no longer be set (e.g.
 an `int64 user_id` may need to migrate to a `UserId user_id` in the future).
