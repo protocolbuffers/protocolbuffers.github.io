@@ -20,6 +20,8 @@ New news topics will also be published to the
 The following news topics provide information in the reverse order in which it
 was released.
 
+*   [October 15, 2026](/news/2026-10-15) - Additional
+    breaking changes in the upcoming 38.x release
 *   [September 22, 2026](/news/2026-09-22) - Breaking
     changes in the upcoming 38.x release
 *   [July 13, 2026](/news/2026-07-13) - Edition 2026
