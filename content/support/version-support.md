@@ -15,6 +15,7 @@ Language | Active Support | Maintenance Only      | Minimum Gencode
 protoc   | 36.x           | 33.x, 25.x (for Java) |
 C++      | 7.36.x         | 6.33.x                | Exact Match
 C#       | 3.36.x         |                       | 3.0.0
+Go       | 1.36.x         |                       | 1.20.0
 Java     | 4.36.x         | 3.25.x                | 3.0.0
 PHP      | 5.36.x         | 4.33.x                | 4.26.0
 Python   | 7.36.x         | 6.33.x                | [3.20.0](https://protobuf.dev/support/cross-version-runtime-guarantee#python)
@@ -342,6 +343,77 @@ described in
 [.NET Support Policy](https://opensource.google/documentation/policies/dotnet-support).
 For specific versions supported, see
 [Foundational .NET Support Matrix](https://github.com/google/oss-policies-info/blob/main/foundational-dotnet-support-matrix.md).
+
+## Go {#go}
+
+**Release Support Dates**
+
+<table class="version-table">
+  <tr>
+    <th>Protobuf Go</th>
+    <th>Release date</th>
+    <th>End of support</th>
+  </tr>
+  <tr class="active">
+    <th>1.x</th>
+    <td>16 Dec 2024</td>
+    <td>TBD</td>
+  </tr>
+</table>
+
+**Release Support Chart**
+
+<table class="version-chart">
+  <tr>
+    <th>Protobuf Go</th>
+    <th>protoc</th>
+    <th class="y23q3"><span>23Q3</span></th>
+    <th class="y23q4"><span>23Q4</span></th>
+    <th class="y24q1"><span>24Q1</span></th>
+    <th class="y24q2"><span>24Q2</span></th>
+    <th class="y24q3"><span>24Q3</span></th>
+    <th class="y24q4"><span>24Q4</span></th>
+    <th class="y25q1"><span>25Q1</span></th>
+    <th class="y25q2"><span>25Q2</span></th>
+    <th class="y25q3"><span>25Q3</span></th>
+    <th class="y25q4"><span>25Q4</span></th>
+    <th class="y26q1"><span>26Q1</span></th>
+    <th class="y26q2"><span>26Q2</span></th>
+    <th class="y26q3"><span>26Q3</span></th>
+  </tr>
+  <tr class="active">
+    <th>1.x</th>
+    <td>36.x+</td>
+    <td class="y23q3 active">1.31</td>
+    <td class="y23q4 active">1.32</td>
+    <td class="y24q1 active">1.33</td>
+    <td class="y24q2 active">1.34</td>
+    <td class="y24q3 active">1.34</td>
+    <td class="y24q4 active">1.36</td>
+    <td class="y25q1 active">1.36</td>
+    <td class="y25q2 active">1.36</td>
+    <td class="y25q3 active">1.36</td>
+    <td class="y25q4 active">1.36</td>
+    <td class="y26q1 active">1.36</td>
+    <td class="y26q2 active">1.36</td>
+    <td class="y26q3 active">1.36</td>
+  </tr>
+</table>
+
+{{% alert title="Note" color="note" %}} Go
+Protobuf began its quarterly release cadence as of 1.37.x. Unlike other Protobuf
+languages, Go Protobuf does not currently use release branches, and only the
+current release is supported. All releases, including patch releases, are
+rollups from `HEAD` rather than true cherry-picks. We intend to change this in
+the future to align with the rest of
+Protobuf.{{% /alert %}}
+
+### Go Platform and Library Support {#go-support}
+
+Protobuf follows the
+[Go Support Policy](https://docs.cloud.google.com/go/getting-started/supported-go-versions).
+For supported versions, see the
+[Foundational Go Support Matrix](https://github.com/google/oss-policies-info/blob/main/foundational-go-support-matrix.md).
 
 ## Java {#java}
 
