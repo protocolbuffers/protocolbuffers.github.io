@@ -32,6 +32,29 @@ To test this limitation, create a proto message with more than the upper bound
 number of fields and compile using a Java proto rule. The limit comes from JVM
 specs.
 
+## Field Numbers {#field-numbers}
+
+Regular fields can use numbers from 1 to 2<sup>29</sup> - 1 (536,870,911),
+because the field number shares a varint-encoded 32-bit tag with the 3-bit wire
+type. For more on this, see the
+[Encoding topic](/programming-guides/encoding#structure).
+
+### MessageSet
+
+Extensions of a message that uses `message_set_wire_format` (MessageSet) do not
+have this limit, because their number is not packed into a tag: it is encoded as
+a separate varint (`type_id`), so the wire format would allow numbers up to
+2<sup>32</sup> - 1. Two limits of the descriptor representation apply instead:
+
+1.  `FieldDescriptorProto.number` is an `int32`, so a number can be at most
+    2<sup>31</sup> - 1 (`INT32_MAX`).
+2.  `DescriptorProto.ExtensionRange.end` is an `int32` and is exclusive, so the
+    largest number that any extension range can contain is 2<sup>31</sup> - 2
+    (`INT32_MAX - 1`). `extensions 4 to max` on a MessageSet message resolves to
+    this, and an explicit `extensions 4 to 2147483647` is rejected.
+
+MessageSet is deprecated: do not use `message_set_wire_format` for new messages.
+
 ## Number of Values in an Enum {#enum}
 
 The lowest limit is ~1700 values, in Java

@@ -1361,7 +1361,10 @@ message Foo {
 }
 ```
 
-`max` is 2<sup>29</sup> - 1, or 536,870,911.
+`max` is 2<sup>29</sup> - 1, or 536,870,911. For a message that uses
+`message_set_wire_format` (MessageSet, which is deprecated), `max` is
+2<sup>31</sup> - 2, or 2,147,483,646; see
+[Proto Limits](/programming-guides/proto-limits#field-numbers).
 
 ### Choosing Extension Numbers {#choosing}
 
