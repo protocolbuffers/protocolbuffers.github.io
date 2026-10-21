@@ -17,6 +17,7 @@ C++      | 7.36.x         | 6.33.x                | Exact Match
 C#       | 3.36.x         |                       | 3.0.0
 Go       | 1.36.x         |                       | 1.20.0
 Java     | 4.36.x         | 3.25.x                | 3.0.0
+ObjC     | 5.36.x         | 4.33.x                | 4.30.0
 PHP      | 5.36.x         | 4.33.x                | 4.26.0
 Python   | 7.36.x         | 6.33.x                | [3.20.0](https://protobuf.dev/support/cross-version-runtime-guarantee#python)
 Ruby     | 4.36.x         |                       | 3.0.0
@@ -502,6 +503,105 @@ On Android, Protobuf supports the minimum SDK version defined by
 the default in
 [Jetpack](https://android.googlesource.com/platform/frameworks/support/+/refs/heads/androidx-main/docs/api_guidelines/modules#module-minsdkversion).
 We support whichever version is lower.
+
+## Objective-C {#objc}
+
+**Release Support Dates**
+
+<table class="version-table">
+  <tr>
+    <th>Protobuf Objective-C</th>
+    <th>Release date</th>
+    <th>End of support</th>
+  </tr>
+  <tr class="end-of-life">
+    <th>3.x</th>
+    <td>25 May 2022</td>
+    <td>31 Mar 2026</td>
+  </tr>
+  <tr class="maintenance">
+    <th>4.x</th>
+    <td>4 Mar 2025</td>
+    <td>31 Mar 2027</td>
+  </tr>
+  <tr class="active">
+    <th>5.x</th>
+    <td>25 Feb 2026</td>
+    <td>Q4 2027</td>
+  </tr>
+</table>
+
+**Release Support Chart**
+
+<table class="version-chart">
+  <tr>
+    <th>Protobuf Objective-C</th>
+    <th>protoc</th>
+    <th class="y23q4"><span>23Q4</span></th>
+    <th class="y24q1"><span>24Q1</span></th>
+    <th class="y24q2"><span>24Q2</span></th>
+    <th class="y24q3"><span>24Q3</span></th>
+    <th class="y24q4"><span>24Q4</span></th>
+    <th class="y25q1"><span>25Q1</span></th>
+    <th class="y25q2"><span>25Q2</span></th>
+    <th class="y25q3"><span>25Q3</span></th>
+    <th class="y25q4"><span>25Q4</span></th>
+    <th class="y26q1"><span>26Q1</span></th>
+    <th class="y26q2"><span>26Q2</span></th>
+    <th class="y26q3"><span>26Q3</span></th>
+  </tr>
+  <tr class="end-of-life">
+    <th>3.x</th>
+    <td>21.x-29.x</td>
+    <td class="y23q4 active">3.25</td>
+    <td class="y24q1 active">3.26</td>
+    <td class="y24q2 active">3.27</td>
+    <td class="y24q3 active">3.28</td>
+    <td class="y24q4 active">3.29</td>
+    <td class="y25q1 maintenance" colspan=4>3.29</td>
+    <td class="y26q1"></td>
+    <td class="y26q2"></td>
+    <td class="y26q3"></td>
+  </tr>
+  <tr class="maintenance">
+    <th>4.x</th>
+    <td>30.x-33.x</td>
+    <td class="y23q4"></td>
+    <td class="y24q1"></td>
+    <td class="y24q2"></td>
+    <td class="y24q3"></td>
+    <td class="y24q4"></td>
+    <td class="y25q1 active">4.30</td>
+    <td class="y25q2 active">4.31</td>
+    <td class="y25q3 active">4.32</td>
+    <td class="y25q4 active">4.33</td>
+    <td class="y26q1 maintenance">4.33</td>
+    <td class="y26q2 maintenance">4.33</td>
+    <td class="y26q3 maintenance">4.33</td>
+  </tr>
+  <tr class="active">
+    <th>5.x</th>
+    <td>34.x-37.x</td>
+    <td class="y23q4"></td>
+    <td class="y24q1"></td>
+    <td class="y24q2"></td>
+    <td class="y24q3"></td>
+    <td class="y24q4"></td>
+    <td class="y25q1"></td>
+    <td class="y25q2"></td>
+    <td class="y25q3"></td>
+    <td class="y25q4"></td>
+    <td class="y26q1 active">5.34</td>
+    <td class="y26q2 active">5.35</td>
+    <td class="y26q3 active">5.36</td>
+  </tr>
+</table>
+
+{{% alert title="Note" color="note" %}}
+Support for Objective-C will be dropped as of the 38.x release. Objective-C will
+continue to maintain support for older branches until their end of support date.
+See the [GitHub issue](https://github.com/protocolbuffers/protobuf/issues/30118)
+for more details.{{% /alert %}}
 
 ## PHP {#php}
 
