@@ -20,6 +20,8 @@ New news topics will also be published to the
 The following news topics provide information in the reverse order in which it
 was released.
 
+*   [October 21, 2026](/news/2026-10-21) - Dropping
+    support for Objective-C
 *   [October 16, 2026](/news/2026-10-16) - Updating Go
     version support policy and release cadence
 *   [October 15, 2026](/news/2026-10-15) - Additional
