@@ -243,7 +243,7 @@ Edition 2026 defaults to `STYLE2026`, so an override is needed to keep the
 colliding field names:
 
 ```proto
-edition = "2024";
+edition = "2026";
 
 option features.enforce_naming_style = STYLE2024;
 
