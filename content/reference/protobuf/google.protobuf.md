@@ -50,7 +50,7 @@ In most cases, there are better options:
 
 *   For new messages, it's better to use regular explicit-presence fields
     (`optional` in proto2/proto3, regular field in edition >= 2023).
-*   Extensions are generally a better option than `Any` fields.
+*   [Extensions are generally a better option than `Any` fields](/design-decisions/extensions-over-any).
 
 ## Any {#any}
 

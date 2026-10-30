@@ -142,7 +142,9 @@ If you plan to use `Any`, first double-check if extensions can satisfy the use
 case instead. If yes, prefer using extensions.
 
 `Any` was created in Proto3 to replace extensions. However, it has a number of
-design flaws. For most use cases, prefer using extensions.
+design flaws (see
+[We Prefer Extensions Over Any](/design-decisions/extensions-over-any)).
+For most use cases, prefer using extensions.
 
 The main use case that `Any` fulfills is the uncommon scenario in which
 horizontal infrastructure needs to propagate completely arbitrary messages, and

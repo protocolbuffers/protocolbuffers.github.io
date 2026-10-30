@@ -1510,7 +1510,8 @@ If you want to limit contained messages to a small number of types and to
 require permission before adding new types to the list, consider using
 [extensions](#extensions) with
 [extension declarations](/programming-guides/extension_declarations)
-instead of `Any` message types.
+instead of `Any` message types. For most use cases,
+[we prefer extensions over `Any`](/design-decisions/extensions-over-any).
 
 ## Oneof {#oneof}
 

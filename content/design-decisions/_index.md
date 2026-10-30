@@ -23,3 +23,5 @@ things develop in the broader ecosystem context.
     Presence](/design-decisions/implicit-presence)
 *   [Insertion Points and Generic
     Services](/design-decisions/insertion-points-and-generic-services)
+*   [Prefer Extensions Over
+    Any](/design-decisions/extensions-over-any)
