@@ -83,9 +83,9 @@ because the presence bit is not reachable from the field expression itself. The
 typical representation ends up being a pointer per field — `*int32`, `*bool`,
 `java.lang.Integer` — which costs a machine word in the parent struct, a
 separate allocation, an extra indirection on every read, and garbage collector
-pressure, all to carry one bit. Even in languages like Rust with Option<T>, the
-Open API precludes maintaining a dense hasbit bitmask over all of the fields,
-and instead spreads out the option bit throughout the struct (including
+pressure, all to carry one bit. Even in languages like Rust with `Option<T>`,
+the Open API precludes maintaining a dense hasbit bitmask over all of the
+fields, and instead spreads out the option bit throughout the struct (including
 typically with a lot of wasting padding per field).
 
 Dense hasbits are not just cheaper to store; they make whole-message operations
