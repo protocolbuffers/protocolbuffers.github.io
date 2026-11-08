@@ -18,8 +18,8 @@ For information on **proto3** syntax, see the
 [Proto3 Language Guide](/programming-guides/proto3).
 
 This is a reference guide – for a step by step example that uses many of the
-features described in this document, see the
-[tutorial](/getting-started)
+features described in this document, see
+the [tutorial](/getting-started)
 for your chosen language.
 
 ## Defining A Message Type {#simple}
