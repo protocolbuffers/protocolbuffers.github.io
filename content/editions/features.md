@@ -886,15 +886,20 @@ proto2         | `LEGACY`
 
 **Languages:** Java
 
-This language-specific feature enables you to adopt new functionality that
-handles large enums in Java without causing compiler errors. Note that this
-feature replicates enum-like behavior but has some notable differences. For
-example, switch statements are not supported.
+When enabled, the Java code generator emits an enum-like class that doesn't
+extend `java.lang.Enum`, so enums with many values don't hit Java compiler and
+classfile limits.
+
+The generated class implements `ProtocolMessageEnum` (or `Internal.EnumLite` for
+the lite runtime). Note that this feature replicates enum-like behavior but has
+some notable differences: Java `switch` statements on the enum type and
+`EnumSet`/`EnumMap` are not supported, and the enum must be an
+[open enum](#enum_type) (`features.enum_type = CLOSED` is not allowed).
 
 **Values available:**
 
-*   `true`: Java enums will use the new functionality.
-*   `false`: Java enums will continue to use Java enums.
+*   `true`: Generates an enum-like final class instead of a `java.lang.Enum`.
+*   `false`: Generates a standard Java `enum`.
 
 **Applicable to the following scopes:** file, enum
 
@@ -912,6 +917,28 @@ proto2         | `false`
 
 **Note:** Feature settings on different schema elements
 [have different scopes](#cascading).
+
+To enable `large_enum` on an enum definition:
+
+```proto
+edition = "2024";
+
+import option "google/protobuf/java_features.proto";
+
+enum MyLargeEnum {
+  option features.(pb.java).large_enum = true;
+
+  MY_LARGE_ENUM_UNSPECIFIED = 0;
+  // ...
+}
+```
+
+In Edition 2026 and later, enums with more than 1,700 values must also set
+`option features.enforce_proto_limits = LEGACY_NO_EXPLICIT_LIMITS;` on the enum
+(see [`features.enforce_proto_limits`](#enforce_proto_limits)). Excessively
+large enums can also cause problems in other programming languages, but Java has
+the lowest underlying language limit, which is why `enforce_proto_limits` limits
+enums to 1,700 values.
 
 ### `features.(pb.cpp/pb.java).legacy_closed_enum` {#legacy_closed_enum}
 
