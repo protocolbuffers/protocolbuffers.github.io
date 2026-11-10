@@ -420,11 +420,11 @@ instead.
 
 `[ctype = CORD]` enables bytes and strings to be stored as an
 [absl::Cord](https://github.com/abseil/abseil-cpp/blob/master/absl/strings/cord.h)
-in C++ Protobuf. `absl::Cord` currently does not have an equivalent type in
-Rust . Protobuf Rust uses an enum to represent a cord
-field:
+in C++ Protobuf. Protobuf Rust does not expose these fields as a Rust Cord
+type. With the C++ kernel,
+Protobuf Rust uses an enum to represent a cord field:
 
-```proto
+```rust
 enum ProtoStringCow<'a> {
   Owned(ProtoString),
   Borrowed(&'a ProtoStr)
@@ -449,21 +449,20 @@ bytes foo = 1 [ctype = CORD];
 
 The compiler generates the following accessor methods:
 
-*   `fn my_field(&self) -> ProtoStringCow<'_>`: Returns the current value of the
+*   `fn foo(&self) -> ProtoStringCow<'_>`: Returns the current value of the
     field. If the field is not set, returns the empty string/empty bytes.
-*   `fn set_my_field(&mut self, value: IntoProxied<ProtoString>)`: Sets the
+*   `fn set_foo(&mut self, value: impl IntoProxied<ProtoString>)`: Sets the
     field to `value`. After calling this function `foo()` returns `value` and
     `has_foo()` returns `true`.
 *   `fn has_foo(&self) -> bool`: Returns `true` if the field is set.
 *   `fn clear_foo(&mut self)`: Clears the value of the field. After calling
     this, `has_foo()` returns `false` and `foo()` returns the default value.
-    Cords have not been implemented
-    yet.
 
 For fields of type `bytes` the compiler generates the `ProtoBytesCow` type
 instead.
 
-The compiler generates the following accessor methods:
+With the upb kernel, `[ctype = CORD]` has no effect, and the compiler generates
+the same accessor methods as for a field without it. For example:
 
 *   `fn foo(&self) -> &ProtoStr`: Returns the current value of the field. If the
     field is not set, returns the empty string/empty bytes.
@@ -695,28 +694,31 @@ extend Foo {
 }
 ```
 
-The compiler generates constants of type `proto::ExtensionId` named `I32_EXT`
+The compiler generates constants of type `protobuf::ExtensionId` named `I32_EXT`
 and `REPEATED_I32_EXT`, which you can use to read and write the extensions on
 the `Foo` type.
 
 ### Accessing Extensions {#accessing-exts}
 
-The `ExtensionId` type provides methods to interact with extensions on a
-message. These methods work with owned messages, views, and muts.
+The `ExtensionId<Extendee, T>` type provides methods to interact with extensions
+on a message, where `Extendee` is the extended message type (`Foo` above) and
+`T` is the type of the extension (`Repeated<E>` for repeated extensions). These
+methods work with owned messages, views, and muts.
 
-*   `fn has(&self, msg: impl AsView<Target = M>) -> bool`: Returns `true` if the
-    extension is set on the message. (Not available for repeated extensions, by
-    design).
-*   `fn get(&self, msg: impl AsView<Target = M>) -> View<'_, E>`: Returns the
-    value of the extension. If not set, returns the default value. For repeated
-    fields, returns a `RepeatedView`.
-*   `fn set(&self, msg: impl AsMut<Target = M>, value: impl IntoProxied<E>)`:
-    Sets the value of the extension.
-*   `fn clear(&self, msg: impl AsMut<Target = M>)`: Clears the extension from
-    the message.
-*   `fn get_mut(&self, msg: impl AsMut<Target = M>) -> Mut<'_, E>`: Returns a
-    mutable handle to the extension. For messages and repeated fields, this will
-    create the field if it doesn't exist.
+*   `fn has(&self, msg: impl AsView<Proxied = Extendee>) -> bool`: Returns
+    `true` if the extension is set on the message. (Not available for repeated
+    extensions, by design).
+*   `fn get<'msg>(&self, msg: impl IntoView<'msg, Proxied = Extendee>) ->
+    View<'msg, T>`: Returns the value of the extension. If not set, returns the
+    default value. For repeated fields, returns a `RepeatedView`.
+*   `fn set(&self, msg: impl AsMut<MutProxied = Extendee>, value: impl
+    IntoProxied<T>)`: Sets the value of the extension.
+*   `fn clear(&self, msg: impl AsMut<MutProxied = Extendee>)`: Clears the
+    extension from the message.
+*   `fn get_mut<'msg>(&self, msg: impl IntoMut<'msg, MutProxied = Extendee>) ->
+    Mut<'msg, T>`: Returns a mutable handle to the extension. Only available for
+    message and repeated extensions; this will create the field if it doesn't
+    exist.
 
 ### Example Usage {#ext-example}
 
@@ -726,23 +728,23 @@ use protobuf::prelude::*;
 let mut foo = xyz::Foo::new();
 
 // Check and set scalar extension
-assert!(!xyz::INT32_EXT.has(&foo));
-xyz::INT32_EXT.set(&mut foo, 42);
-assert!(xyz::INT32_EXT.has(&foo));
-assert_eq!(xyz::INT32_EXT.get(&foo), 42);
+assert!(!xyz::I32_EXT.has(&foo));
+xyz::I32_EXT.set(&mut foo, 42);
+assert!(xyz::I32_EXT.has(&foo));
+assert_eq!(xyz::I32_EXT.get(&foo), 42);
 
 // Clear scalar extension
-xyz::INT32_EXT.clear(&mut foo);
-assert!(!xyz::INT32_EXT.has(&foo));
+xyz::I32_EXT.clear(&mut foo);
+assert!(!xyz::I32_EXT.has(&foo));
 
 // Working with repeated extensions
 {
-    let mut rep_mut = xyz::REPEATED_INT32_EXT.get_mut(&mut foo);
+    let mut rep_mut = xyz::REPEATED_I32_EXT.get_mut(&mut foo);
     rep_mut.push(1);
     rep_mut.push(2);
 }
-assert_eq!(xyz::REPEATED_INT32_EXT.get(&foo).len(), 2);
-assert_eq!(xyz::REPEATED_INT32_EXT.get(&foo).get(0), Some(1));
+assert_eq!(xyz::REPEATED_I32_EXT.get(&foo).len(), 2);
+assert_eq!(xyz::REPEATED_I32_EXT.get(&foo).get(0), Some(1));
 ```
 
 ## Arena Allocation {#arena}
