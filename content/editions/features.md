@@ -793,7 +793,7 @@ You can set the `api_level` feature starting in edition 2023:
 ```proto
 edition = "2023";
 
-import option "third_party/golang/protobuf/v2/src/google/protobuf/go_features.proto";
+import option "google/protobuf/go_features.proto";
 
 // Remove this line after migrating the code to the Opaque API.
 option features.(pb.go).api_level = API_HYBRID;
@@ -993,8 +993,8 @@ edition = "2024";
 
 import "myproject/proto3file.proto";
 
-import option "third_party/protobuf/cpp_features.proto";
-import option "third_party/java/protobuf/java_features.proto";
+import option "google/protobuf/cpp_features.proto";
+import option "google/protobuf/java_features.proto";
 
 message Msg {
   myproject.proto3file.Proto3Enum name = 1 [
@@ -1092,7 +1092,7 @@ After running Prototiller, the equivalent code might look like this:
 ```proto
 edition = "2024";
 
-import option "third_party/protobuf/cpp_features.proto";
+import option "google/protobuf/cpp_features.proto";
 
 message Foo {
   string bar = 6 [features.(pb.cpp).string_type = STRING];
@@ -1116,7 +1116,7 @@ After running Prototiller, the equivalent code might look like this:
 ```proto
 edition = "2024";
 
-import option "third_party/protobuf/cpp_features.proto";
+import option "google/protobuf/cpp_features.proto";
 
 message Foo {
   string bar = 6 [features.(pb.cpp).string_type = STRING];
@@ -1243,7 +1243,7 @@ files:
 ```proto
 edition = "2024";
 
-import "google/protobuf/go_features.proto";
+import option "google/protobuf/go_features.proto";
 
 option features.(pb.go).strip_enum_prefix = STRIP_ENUM_PREFIX_STRIP;
 
@@ -1329,9 +1329,9 @@ Edition 2024.
 // foo/bar_baz.proto
 edition = "2024";
 
-import option "third_party/protobuf/cpp_features.proto";
-import option "third_party/java/protobuf/java_features.proto";
-import option "third_party/golang/protobuf/v2/src/google/protobuf/go_features.proto";
+import option "google/protobuf/cpp_features.proto";
+import option "google/protobuf/java_features.proto";
+import option "google/protobuf/go_features.proto";
 
 // If previously relying on edition 2023 default java_outer_classname.
 option java_outer_classname = "BarBaz" // or BarBazOuterClass
