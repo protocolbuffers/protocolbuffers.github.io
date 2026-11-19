@@ -43,15 +43,3 @@ bazel cquery 'somepath("//...", "@com_google_protobuf//:all")'
 
 **Note:** Prebuilts are only available for our standard set of platforms. Anyone
 on a nonstandard platform will have to build protoc from source.
-
-## Protostats Flume Pipeline
-
-The Protostats pipeline runs on borg through a Plx workflow defined by files in
-google3/net/proto2/tools/internal/protostats and it requires quota to run. The
-quota is taken from the `gpi-flex-pool`. Currently, Borg quota is registered for
-the `protobuf-stats` user in 3 different cells: `yq`, `viatlrb`, and `vibrura`.
-The latter are go/virtual-cells. The cell diversity and the use of virtual cells
-are both intended to provide redundancy against stockouts caused by real
-resource constraints or the occasional DiRT exercise. If registration needs to
-be adjusted, see directions in
-google3/net/proto2/tools/internal/protostats/BUILD.

@@ -17,7 +17,6 @@ type = "docs"
 <p>This class is implemented based on the proto2 reflection. The performance should be good enough for normal usages. However, for places where the performance is extremely sensitive, there are several alternatives:</p>
 <ul>
   <li>Comparing serialized string Downside: false negatives (there are messages that are the same but their serialized strings are different).</li>
-  <li>Equals code generator by compiler plugin (net/proto2/contrib/equals_plugin) Downside: more generated code; maintenance overhead for the additional rule (must be in sync with the original proto_library).</li>
 </ul>
 <p>Note on handling of google.protobuf.Any: <a href='#MessageDifferencer'>MessageDifferencer</a> automatically unpacks Any::value into a <a href='google.protobuf.message#Message'>Message</a> and compares its individual fields. Messages encoded in a repeated Any cannot be compared using TreatAsMap.</p>
 <p>Note on thread-safety: <a href='#MessageDifferencer'>MessageDifferencer</a> is <i>not</i> thread-safe. You need to guard it with a lock to use the same <a href='#MessageDifferencer'>MessageDifferencer</a> instance from multiple threads. Note that it's fine to call static comparison methods (like <a href='#MessageDifferencer.Equals'>MessageDifferencer::Equals</a>) concurrently, but it's not recommended for performance critical code as it leads to extra allocations. </p>
