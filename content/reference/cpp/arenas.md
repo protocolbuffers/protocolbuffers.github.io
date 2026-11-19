@@ -345,19 +345,9 @@ methods when arena allocation is enabled.
     occurs. This means that after the swap, each repeated field object holds an
     array on its own arena or on the heap, as appropriate.
 -   `void AddAllocated(SubMessageType* value)`: Checks that the provided message
-    object is on the same arena as the repeated field's arena pointer.
-
-    *   The source and destination are both arena-allocated and on the same
-        arena: the object pointer is added directly to the underlying array.
-    *   The source and destination are both arena-allocated and on different
-        arenas: a copy is made, the original is freed if it was heap-allocated,
-        and the copy is placed on the array.
-    *   The source is heap-allocated and the destination is arena-allocated: No
-        copy is made.
-    *   The source is arena-allocated and the destination is heap-allocated: A
-        copy is made and placed on the array.
-    *   Both source and destination are heap allocated: The object pointer is
-        added directly to the underlying array.
+    object is on the same arena as the repeated field's arena pointer. If the
+    pointer is added directly, the ownership of the pointer is transferred to
+    the field.
 
     This maintains the invariant that all objects pointed to by a repeated field
     are in the same ownership domain (heap or specific arena) as indicated by
