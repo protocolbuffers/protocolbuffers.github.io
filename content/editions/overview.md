@@ -9,7 +9,7 @@ type = "docs"
 Protobuf Editions replace the proto2 and proto3 designations that we have used
 for Protobuf. Instead of adding `syntax = "proto2"` or `syntax = "proto3"` at
 the top of proto definition files, you use an edition number, such as `edition =
-"2024"`, to specify the default behaviors your file will have. Editions enable
+"2026"`, to specify the default behaviors your file will have. Editions enable
 the language to evolve incrementally over time.
 
 Instead of the hardcoded behaviors that older versions have had, editions
@@ -22,7 +22,7 @@ the default behavior for the edition you've selected. You can also override your
 overrides. The [section later in this topic on lexical scoping](#scoping) goes
 into more detail on that.
 
-**NOTE:** The latest released edition is 2024.
+**NOTE:** The latest released edition is 2026.
 
 ## Lifecycle of a Feature {#lifecycles}
 
